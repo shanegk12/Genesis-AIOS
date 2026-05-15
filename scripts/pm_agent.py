@@ -361,12 +361,9 @@ def main():
             # 2. QC agent
             if not args.skip_qc and os.path.exists(draft_path):
                 qc_passed = run_qc_agent(draft_path, lesson)
+                data = load_manifest()  # reload — QC subprocess writes scores directly to disk
                 if not qc_passed:
                     qc_flagged += 1
-                    m = find_lesson(data, lesson["id"])
-                    if m:
-                        m["qc_status"] = "flagged"
-                    save_manifest(data)
 
             # 3. Media agent
             if not args.skip_media and os.path.exists(draft_path):

@@ -9,7 +9,7 @@ Fills the Creationeering prompt template, calls Gemini, and writes the draft
 directly into the named tab of the target Google Doc.
 """
 
-import argparse, json, os, re, sys, urllib.request, urllib.error
+import argparse, json, os, re, sys, time, urllib.request, urllib.error
 import google.auth
 from googleapiclient.discovery import build
 
@@ -117,38 +117,46 @@ def strip_markdown(text):
 
 
 def call_gemini(api_key, prompt, horstemeyer_uri=None):
-    parts = []
+    req_parts = []
     if horstemeyer_uri:
-        parts.append({"file_data": {"mime_type": "application/pdf", "file_uri": horstemeyer_uri}})
-    parts.append({"text": prompt})
+        req_parts.append({"file_data": {"mime_type": "application/pdf", "file_uri": horstemeyer_uri}})
+    req_parts.append({"text": prompt})
     payload = json.dumps({
-        "contents": [{"parts": parts}],
+        "contents": [{"parts": req_parts}],
         "tools": [{"google_search": {}}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 0}}
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"
-    req = urllib.request.Request(url, data=payload,
-                                  headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=240) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        candidate = data["candidates"][0]
-        if "content" not in candidate:
-            finish = candidate.get("finishReason", "UNKNOWN")
-            print(f"Gemini returned no content (finishReason: {finish})")
+    max_retries = 3
+    for attempt in range(max_retries + 1):
+        req = urllib.request.Request(url, data=payload,
+                                      headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=240) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            candidate = data["candidates"][0]
+            if "content" not in candidate:
+                finish = candidate.get("finishReason", "UNKNOWN")
+                print(f"Gemini returned no content (finishReason: {finish})")
+                sys.exit(1)
+            resp_parts = candidate["content"].get("parts", [])
+            text_parts = [p["text"] for p in resp_parts if not p.get("thought", False) and "text" in p]
+            result = "\n".join(text_parts)
+            if len(result) > 60000:
+                print(f"Error: draft is {len(result):,} chars, exceeds 60K safety limit. Skipping.")
+                sys.exit(1)
+            return strip_markdown(result)
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8")
+            if e.code == 429 and attempt < max_retries:
+                match = re.search(r'retry in (\d+\.?\d*)s', body)
+                delay = float(match.group(1)) + 5 if match else 65 * (attempt + 1)
+                print(f"Rate limited (429). Retrying in {delay:.0f}s (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(delay)
+                continue
+            print(f"Gemini error {e.code}: {body}")
             sys.exit(1)
-        parts = candidate["content"].get("parts", [])
-        text_parts = [p["text"] for p in parts if not p.get("thought", False) and "text" in p]
-        result = "\n".join(text_parts)
-        if len(result) > 60000:
-            print(f"Error: draft is {len(result):,} chars, exceeds 60K safety limit. Possible thinking token leak. Skipping.")
-            sys.exit(1)
-        return strip_markdown(result)
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8")
-        print(f"Gemini error {e.code}: {body}")
-        sys.exit(1)
 
 
 def get_docs_service():
