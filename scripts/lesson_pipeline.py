@@ -9,7 +9,9 @@ Fills the Creationeering prompt template, calls Gemini, and writes the draft
 directly into the named tab of the target Google Doc.
 """
 
-import argparse, json, os, re, subprocess, sys, urllib.request, urllib.error
+import argparse, json, os, re, sys, urllib.request, urllib.error
+import google.auth
+from googleapiclient.discovery import build
 
 # ── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -117,8 +119,7 @@ def strip_markdown(text):
 def call_gemini(api_key, prompt):
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576},
-        "thinkingConfig": {"thinkingBudget": 0}
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 0}}
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"
@@ -145,50 +146,27 @@ def call_gemini(api_key, prompt):
         sys.exit(1)
 
 
-_GWS_EXE = r"C:\Users\Shane\AppData\Roaming\npm\node_modules\@googleworkspace\cli\bin\gws.exe"
-
-
-def gws_run(params_dict, json_dict=None, subcommand=""):
-    """Run a gws command via the Windows gws.exe binary."""
-    cmd = [_GWS_EXE] + subcommand.split()
-    cmd += ["--params", json.dumps(params_dict, ensure_ascii=True)]
-    if json_dict is not None:
-        cmd += ["--json", json.dumps(json_dict, ensure_ascii=True)]
-
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
-    output = "\n".join(l for l in (result.stdout or "").splitlines() if not l.startswith("Using keyring"))
-    if result.returncode != 0:
-        stderr = "\n".join(l for l in (result.stderr or "").splitlines() if not l.startswith("Using keyring"))
-        print(f"gws error: {stderr.strip() or output}")
-        sys.exit(1)
-    return json.loads(output) if output.strip() else {}
+def get_docs_service():
+    creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/documents"])
+    return build("docs", "v1", credentials=creds)
 
 
 def get_tab_id(doc_id, tab_title):
-    """Find the tabId for a tab by title."""
-    data = gws_run({"documentId": doc_id, "includeTabsContent": True},
-                   subcommand="docs documents get")
-    tabs = data.get("tabs", [])
-    for tab in tabs:
+    svc = get_docs_service()
+    doc = svc.documents().get(documentId=doc_id, includeTabsContent=False).execute()
+    for tab in doc.get("tabs", []):
         props = tab.get("tabProperties", {})
         if props.get("title", "").strip().lower() == tab_title.strip().lower():
             return props.get("tabId")
-    available = [t.get("tabProperties", {}).get("title") for t in tabs]
+    available = [t.get("tabProperties", {}).get("title") for t in doc.get("tabs", [])]
     print(f"Tab '{tab_title}' not found. Available tabs:\n" + "\n".join(f"  - {t}" for t in available))
     sys.exit(1)
 
 
 def write_to_tab(doc_id, tab_id, text):
-    """Write text to a tab in chunks to stay under Windows' 32K command-line limit."""
-    CHUNK = 8000
-    chunks = [text[i:i+CHUNK] for i in range(0, len(text), CHUNK)]
-
-    first_body = {"requests": [{"insertText": {"text": chunks[0], "location": {"index": 1, "tabId": tab_id}}}]}
-    gws_run({"documentId": doc_id}, json_dict=first_body, subcommand="docs documents batchUpdate")
-
-    for chunk in chunks[1:]:
-        body = {"requests": [{"insertText": {"text": chunk, "endOfSegmentLocation": {"tabId": tab_id}}}]}
-        gws_run({"documentId": doc_id}, json_dict=body, subcommand="docs documents batchUpdate")
+    svc = get_docs_service()
+    requests = [{"insertText": {"text": text, "location": {"index": 1, "tabId": tab_id}}}]
+    svc.documents().batchUpdate(documentId=doc_id, body={"requests": requests}).execute()
 
 
 def main():

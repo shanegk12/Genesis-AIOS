@@ -10,8 +10,10 @@ Usage:
   python status_report.py --days 3     # show calendar events for next N days (default 7)
 """
 
-import argparse, json, os, subprocess, sys, urllib.request, urllib.error
+import argparse, json, os, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
+import google.auth
+from googleapiclient.discovery import build
 
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 TODOS_PATH    = os.path.join(os.path.dirname(__file__), "todos.json")
@@ -20,18 +22,9 @@ NOTIFY_SCRIPT = os.path.join(os.path.dirname(__file__), "notify.py")
 NTFY_TOPIC = "gk12-pipeline"
 NTFY_URL   = f"https://ntfy.sh/{NTFY_TOPIC}"
 
-_GWS_EXE = r"C:\Users\Shane\AppData\Roaming\npm\node_modules\@googleworkspace\cli\bin\gws.exe"
-
-
-def gws_run(params_dict, subcommand=""):
-    cmd = [_GWS_EXE] + subcommand.split()
-    cmd += ["--params", json.dumps(params_dict, ensure_ascii=True)]
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
-    output = "\n".join(l for l in (result.stdout or "").splitlines()
-                       if not l.startswith("Using keyring"))
-    if result.returncode != 0:
-        raise RuntimeError(result.stderr.strip() or output)
-    return json.loads(output) if output.strip() else {}
+def get_calendar_service():
+    creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/calendar.readonly"])
+    return build("calendar", "v3", credentials=creds)
 
 
 def pipeline_summary(data):
@@ -66,14 +59,11 @@ def calendar_summary(days=7):
     time_max = end.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     try:
-        data   = gws_run({
-            "calendarId":   "primary",
-            "maxResults":   8,
-            "orderBy":      "startTime",
-            "singleEvents": True,
-            "timeMin":      time_min,
-            "timeMax":      time_max,
-        }, subcommand="calendar events list")
+        svc    = get_calendar_service()
+        data   = svc.events().list(
+            calendarId="primary", maxResults=8, orderBy="startTime",
+            singleEvents=True, timeMin=time_min, timeMax=time_max
+        ).execute()
         events = data.get("items", [])
         if not events:
             return f"CALENDAR: no events in next {days} days"
