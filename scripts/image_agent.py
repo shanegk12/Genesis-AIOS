@@ -18,7 +18,10 @@ Usage:
   python image_agent.py --local-only           # save locally, skip Drive upload
 """
 
-import argparse, base64, json, os, re, shutil, subprocess, sys, tempfile, urllib.request, urllib.error
+import argparse, base64, json, os, re, sys, urllib.request, urllib.error
+import google.auth
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 
 MEDIA_PROMPTS_PATH = os.path.join(os.path.dirname(__file__), "media_prompts.json")
 LOCAL_OUTPUT_DIR   = os.path.join(os.path.dirname(__file__), "..", "output", "images")
@@ -44,15 +47,13 @@ ASPECT_RATIO_HINTS = {
     "4:3":  "4:3 horizontal composition",
 }
 
-# Google Drive folder IDs
-MS_CURRICULUM_FOLDER = "1aiPs5WeyJEqL4kPyK5Gt5IAUfG2TSTkH"
-COURSE_FOLDER_NAMES  = {
+COURSE_FOLDER_NAMES = {
     "creationeering": "Creationeering",
     "mousetrap":      "Mousetrap Build",
 }
 
-_BASH     = shutil.which("bash") or r"C:\Program Files\Git\usr\bin\bash.exe"
-_logo_b64 = None   # cached on first load
+_logo_b64    = None   # cached on first load
+_drive_svc   = None   # cached Drive service
 
 
 def _load_logo():
@@ -177,86 +178,60 @@ def qc_image(api_key, img_bytes, prompt, concept):
         return True, f"QC check error (skipped): {e}"
 
 
-def gws_run_bash(cmd):
-    """Run a gws command via bash, return parsed JSON or {}."""
-    result = subprocess.run([_BASH, "-c", cmd], capture_output=True,
-                            text=True, encoding="utf-8", errors="replace")
-    output = "\n".join(l for l in (result.stdout or "").splitlines()
-                       if not l.startswith("Using keyring"))
-    if result.returncode != 0:
-        raise RuntimeError(result.stderr.strip() or output)
-    return json.loads(output) if output.strip() else {}
+def get_drive_service():
+    global _drive_svc
+    if _drive_svc is None:
+        creds, _ = google.auth.default(
+            scopes=["https://www.googleapis.com/auth/drive"]
+        )
+        _drive_svc = build("drive", "v3", credentials=creds)
+    return _drive_svc
 
 
 def get_or_create_folder(name, parent_id):
     """Find a Drive folder by name under parent_id, create it if missing."""
-    tmp = tempfile.gettempdir()
-
-    params_path = os.path.join(tmp, "img_params.json")
-    with open(params_path, "w") as f:
-        q = (f"name='{name}' and mimeType='application/vnd.google-apps.folder'"
-             f" and '{parent_id}' in parents and trashed=false")
-        json.dump({"q": q, "fields": "files(id,name)"}, f)
-
-    params_unix = params_path.replace("\\", "/")
-    cmd = f"gws drive files list --params \"$(cat '{params_unix}')\""
-    try:
-        data = gws_run_bash(cmd)
-        files = data.get("files", [])
-        if files:
-            return files[0]["id"]
-    except Exception as e:
-        print(f"    Warning: folder search failed: {e}")
-
-    body_path    = os.path.join(tmp, "img_body.json")
-    params2_path = os.path.join(tmp, "img_params2.json")
-    with open(body_path, "w") as f:
-        json.dump({"name": name,
-                   "mimeType": "application/vnd.google-apps.folder",
-                   "parents": [parent_id]}, f)
-    with open(params2_path, "w") as f:
-        json.dump({"fields": "id,name"}, f)
-
-    body_unix    = body_path.replace("\\", "/")
-    params2_unix = params2_path.replace("\\", "/")
-    cmd2 = (f"gws drive files create"
-            f" --params \"$(cat '{params2_unix}')\""
-            f" --json \"$(cat '{body_unix}')\"")
-    data = gws_run_bash(cmd2)
-    return data.get("id")
+    svc = get_drive_service()
+    q = (f"name='{name}' and mimeType='application/vnd.google-apps.folder'"
+         f" and '{parent_id}' in parents and trashed=false")
+    resp = svc.files().list(
+        q=q, fields="files(id,name)",
+        includeItemsFromAllDrives=True, supportsAllDrives=True
+    ).execute()
+    files = resp.get("files", [])
+    if files:
+        return files[0]["id"]
+    folder = svc.files().create(
+        body={"name": name,
+              "mimeType": "application/vnd.google-apps.folder",
+              "parents": [parent_id]},
+        fields="id",
+        supportsAllDrives=True
+    ).execute()
+    return folder["id"]
 
 
 def upload_to_drive(local_path, filename, parent_id):
-    """Upload a local file to Google Drive, return (file_id, web_url)."""
-    tmp         = tempfile.gettempdir()
-    params_path = os.path.join(tmp, "upload_params.json")
-    body_path   = os.path.join(tmp, "upload_body.json")
-    upload_unix = local_path.replace("\\", "/")
-
-    with open(params_path, "w") as f:
-        json.dump({"fields": "id,name,webViewLink"}, f)
-    with open(body_path, "w") as f:
-        json.dump({"name": filename, "parents": [parent_id]}, f)
-
-    params_unix = params_path.replace("\\", "/")
-    body_unix   = body_path.replace("\\", "/")
-    cmd = (f"gws drive files create"
-           f" --params \"$(cat '{params_unix}')\""
-           f" --json \"$(cat '{body_unix}')\""
-           f" --upload \"{upload_unix}\""
-           f" --upload-content-type \"image/png\"")
-    data = gws_run_bash(cmd)
-    return data.get("id"), data.get("webViewLink")
+    """Upload a local image file to Google Drive, return (file_id, web_url)."""
+    svc   = get_drive_service()
+    media = MediaFileUpload(local_path, mimetype="image/png", resumable=False)
+    result = svc.files().create(
+        body={"name": filename, "parents": [parent_id]},
+        media_body=media,
+        fields="id,webViewLink",
+        supportsAllDrives=True
+    ).execute()
+    return result.get("id"), result.get("webViewLink")
 
 
-def ensure_drive_folder(doc, lesson_id):
+def ensure_drive_folder(doc, lesson_id, root_folder_id):
     """Return lesson_folder_id, creating the hierarchy if needed."""
-    images_id = get_or_create_folder("Lesson Images", MS_CURRICULUM_FOLDER)
-    course_id = get_or_create_folder(COURSE_FOLDER_NAMES.get(doc, doc), images_id)
-    return get_or_create_folder(lesson_id, course_id)
+    course_id  = get_or_create_folder(COURSE_FOLDER_NAMES.get(doc, doc), root_folder_id)
+    lesson_fid = get_or_create_folder(lesson_id, course_id)
+    return lesson_fid
 
 
-def process_lesson(lesson_id, lesson_data, local_only, dry_run, rework_flagged=False):
+def process_lesson(lesson_id, lesson_data, local_only, dry_run,
+                   rework_flagged=False, root_folder_id=None):
     topic   = lesson_data.get("topic", lesson_id)
     doc     = lesson_data.get("doc", "creationeering")
     prompts = lesson_data.get("prompts", [])
@@ -272,9 +247,9 @@ def process_lesson(lesson_id, lesson_data, local_only, dry_run, rework_flagged=F
     os.makedirs(local_dir, exist_ok=True)
 
     drive_folder_id = None
-    if not local_only and not dry_run:
+    if not local_only and not dry_run and root_folder_id:
         try:
-            drive_folder_id = ensure_drive_folder(doc, lesson_id)
+            drive_folder_id = ensure_drive_folder(doc, lesson_id, root_folder_id)
         except Exception as e:
             print(f"  Drive folder setup failed: {e}. Saving locally only.")
 
@@ -286,8 +261,7 @@ def process_lesson(lesson_id, lesson_data, local_only, dry_run, rework_flagged=F
         prompt       = entry.get("prompt", "")
         concept      = entry.get("concept", "")
         aspect_ratio = entry.get("aspectRatio", "16:9")
-        safe_name    = (section.replace(":", "").replace("/", "-")
-                               .replace(" ", "_")[:40] + ".png")
+        safe_name    = re.sub(r'[\\/:*?"<>|]', "", section).replace(" ", "_")[:40] + ".png"
         local_path   = os.path.join(local_dir, safe_name)
         img_record   = images.get(section, {})
 
@@ -300,6 +274,18 @@ def process_lesson(lesson_id, lesson_data, local_only, dry_run, rework_flagged=F
                 continue
         else:
             if os.path.exists(local_path) and img_record:
+                # If Drive is enabled but upload was skipped previously, upload now
+                if drive_folder_id and not img_record.get("drive_id"):
+                    print(f"  {safe_name}: uploading to Drive...", end=" ", flush=True)
+                    try:
+                        drive_id, drive_url = upload_to_drive(local_path, safe_name, drive_folder_id)
+                        img_record["drive_id"]  = drive_id
+                        img_record["drive_url"] = drive_url
+                        print(f"OK  {drive_url or drive_id}")
+                    except Exception as e:
+                        print(f"FAILED: {e}")
+                    images[section] = img_record
+                    continue
                 print(f"  {safe_name}: already done, skipping.")
                 continue
 
@@ -374,6 +360,12 @@ def main():
         print("Error: GEMINI_API_KEY not found in .env")
         sys.exit(1)
 
+    root_folder_id = (env.get("GOOGLE_DRIVE_MS_CURRICULUM_ID")
+                      or os.environ.get("GOOGLE_DRIVE_MS_CURRICULUM_ID"))
+    if not root_folder_id and not args.local_only:
+        print("Warning: GOOGLE_DRIVE_MS_CURRICULUM_ID not set — saving locally only.")
+        args.local_only = True
+
     media_data = load_media_prompts()
     if not media_data:
         print("No entries in media_prompts.json. Run pm_agent.py first.")
@@ -392,14 +384,14 @@ def main():
     print(f"Model:    {GEMINI_IMAGE_MODEL} ({logo_status})")
     print(f"Mode:     {mode_label}")
     print(f"Lessons:  {len(targets)}")
-    print(f"Drive:    {'disabled (local only)' if args.local_only else 'enabled'}")
+    print(f"Drive:    {'disabled (local only)' if args.local_only else f'Project Content ({root_folder_id})'}")
     if args.dry_run:
         print("          DRY RUN\n")
 
     total_gen = total_flagged = 0
     for lid, ldata in targets.items():
-        gen, flagged = process_lesson(lid, ldata, args.local_only,
-                                      args.dry_run, args.rework_flagged)
+        gen, flagged = process_lesson(lid, ldata, args.local_only, args.dry_run,
+                                      args.rework_flagged, root_folder_id)
         total_gen     += gen
         total_flagged += flagged
 
