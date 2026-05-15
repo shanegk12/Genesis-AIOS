@@ -1,0 +1,26 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args:
+      - 'gcloud'
+      - 'run'
+      - 'jobs'
+      - 'update'
+      - 'gk12-lesson-pipeline'
+      - '--image=us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'
+      - '--region=us-central1'
+      - '--project=genesis-aios'
+
+images:
+  - 'us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'
