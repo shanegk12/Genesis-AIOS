@@ -139,7 +139,10 @@ def qc_image(api_key, img_bytes, prompt, concept):
     qc_text = (
         "You are reviewing an AI-generated educational illustration for Genesis K-12 Academy's "
         "middle school engineering curriculum. Evaluate this image against four criteria:\n"
-        "1. Color palette: navy blue (#1B2A5C) and gold (#C9A84C) are the dominant colors\n"
+        "1. Color palette: the overall look is professional and educational. Navy blue (#1B2A5C) "
+        "and gold (#C9A84C) accents are welcome but NOT required — realistic objects must use "
+        "their real-world colors (red apples, green plants, silver metal, etc.). Only fail this "
+        "criterion if the image uses garish neon colors or a visually chaotic palette.\n"
         "2. Style: clean educational illustration (not photorealistic, not heavy cartoon)\n"
         "3. Concept fit: the image clearly depicts this concept: " + concept + "\n"
         "4. Age-appropriate: suitable for ages 11-14, no inappropriate content\n\n"
