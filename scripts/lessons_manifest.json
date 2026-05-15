@@ -73,8 +73,8 @@
       "prev": "Material Properties and Selection",
       "type": "lesson",
       "status": "failed",
-      "completed_at": "2026-05-15T01:28:52.968622+00:00",
-      "error": "ine 1552, in _execute_child\n    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,\n                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\n                             # no special security\n                             ^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n                             cwd,\n                             ^^^^\n                             startupinfo)\n                             ^^^^^^^^^^^^\nFileNotFoundError: [WinError 206] The filename or extension is too long\n"
+      "completed_at": "2026-05-15T01:36:08.684235+00:00",
+      "error": "iso-8859-1\")\n               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\socket.py\", line 725, in readinto\n    return self._sock.recv_into(b)\n           ~~~~~~~~~~~~~~~~~~~~^^^\n  File \"C:\\Python314\\Lib\\ssl.py\", line 1304, in recv_into\n    return self.read(nbytes, buffer)\n           ~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\ssl.py\", line 1138, in read\n    return self._sslobj.read(len, buffer)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nTimeoutError: The read operation timed out\n"
     },
     {
       "id": "C-033",
@@ -112,9 +112,10 @@
       "phase": "Procurement",
       "prev": "Quality Assurance and Material Inspection",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T01:32:05.204316+00:00",
-      "error": "Drafting: 'Technical Specifications' (Procurement phase)...\nTraceback (most recent call last):\n  File \"D:\\AIOS\\scripts\\lesson_pipeline.py\", line 222, in <module>\n    main()\n    ~~~~^^\n  File \"D:\\AIOS\\scripts\\lesson_pipeline.py\", line 203, in main\n    draft = call_gemini(api_key, prompt)\n  File \"D:\\AIOS\\scripts\\lesson_pipeline.py\", line 116, in call_gemini\n    parts = data[\"candidates\"][0][\"content\"].get(\"parts\", [])\n            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\nKeyError: 'content'\n"
+      "status": "done",
+      "completed_at": "2026-05-15T01:39:37.512065+00:00",
+      "error": null,
+      "qc_status": "flagged"
     },
     {
       "id": "C-036",
