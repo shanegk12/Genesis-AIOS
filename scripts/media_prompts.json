@@ -112,5 +112,53 @@
         "image_retry_count": 0
       }
     }
+  },
+  "C-036": {
+    "topic": "Fabrication",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "From Blueprint to Building Blocks",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A stylized workbench is shown with a partially assembled robot. To the left, a detailed technical drawing of a robot arm component is visible. To the right, a pile of raw materials like metal rods and plastic pellets are depicted, transitioning into neatly arranged, precisely shaped individual robot parts. This visually represents the journey from design to the creation of components.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: Introduction to Fabrication",
+        "concept": "Making the Parts",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A clear, side-by-side comparison illustrating the concept of fabrication. On the left, a pile of raw materials like a block of aluminum and a spool of plastic filament. On the right, the same materials have been transformed into distinct, precisely shaped engineering components, such as a gear, a bracket, and a small housing, ready for assembly.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 2: Additive Manufacturing",
+        "concept": "Building Up Materials",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A detailed cross-section view of a 3D printer nozzle depositing molten plastic layer by layer to build up a complex shape, like a custom bracket. Tiny dots representing the material are clearly visible being added sequentially, showing the additive process in action. The finished part is shown to the side, demonstrating the result.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 3: Subtractive Manufacturing",
+        "concept": "Carving Away Material",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A realistic depiction of a CNC milling machine cutting away material from a solid block of metal. Show a spinning cutting tool precisely removing chips of metal to create a gear. The diagram should clearly illustrate the initial block and the emerging shape, with some removed material shown on the workbench below.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 4: Forming Manufacturing",
+        "concept": "Shaping Without Adding/Subtracting",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A visual representation of forming manufacturing. Show a metal sheet being bent into a specific angle by a press brake, and another example of a metal tube being bent into a curve. The focus is on the application of force to change the material's shape without significant addition or removal of material.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 5: Multiscale Modeling and Fabrication",
+        "concept": "From Atoms to Objects",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A diagram showing a progression from the atomic level to a macroscopic fabricated part. On the far left, a cluster of atoms is shown. This transitions to a microscopic view of material grain structure, then to a close-up of a surface texture on a fabricated component, and finally to the complete component itself, like a small metal bolt.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 6: OCV Method and Optimization",
+        "concept": "Smart Fabrication Choices",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A flow chart or infographic illustrating the OCV method for optimizing fabrication. Show three distinct sections labeled 'Objective' (e.g., making a strong part), 'Constraint' (e.g., limited budget), and 'Variable' (e.g., choice of material or manufacturing process). Arrows connect these to a final 'Optimized Fabrication Process' outcome, perhaps showing two different versions of a part, one clearly superior.",
+        "aspectRatio": "16:9"
+      }
+    ]
   }
 }

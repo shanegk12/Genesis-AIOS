@@ -72,9 +72,9 @@
       "phase": "Procurement",
       "prev": "Material Properties and Selection",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-15T01:18:53.964834+00:00",
+      "error": "der:1049:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)\n    at Module._load (node:internal/modules/cjs/loader:1262:25)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.15.0\n"
     },
     {
       "id": "C-033",
@@ -85,9 +85,9 @@
       "phase": "Procurement",
       "prev": "Procurement: Cost Analysis and Budgeting",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-15T01:20:09.745167+00:00",
+      "error": "der:1049:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)\n    at Module._load (node:internal/modules/cjs/loader:1262:25)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.15.0\n"
     },
     {
       "id": "C-034",
@@ -98,9 +98,9 @@
       "phase": "Procurement",
       "prev": "Standardization vs. Custom Fabrication",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-15T01:20:50.356203+00:00",
+      "error": "der:1049:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)\n    at Module._load (node:internal/modules/cjs/loader:1262:25)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.15.0\n"
     },
     {
       "id": "C-035",
@@ -111,9 +111,9 @@
       "phase": "Procurement",
       "prev": "Quality Assurance and Material Inspection",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-15T01:21:31.359035+00:00",
+      "error": "der:1049:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)\n    at Module._load (node:internal/modules/cjs/loader:1262:25)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.15.0\n"
     },
     {
       "id": "C-036",
@@ -124,9 +124,25 @@
       "phase": "Assembly",
       "prev": "Technical Specifications",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-15T01:22:11.502542+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 2,
+        "overall": 2
+      },
+      "qc_structural": {
+        "word_count": 3342,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson draft is strong, with excellent faith integration and appropriate reading level. The framework use is good, but could be more explicit in connecting Multiscale Modeling and OCV to specific fabrication examples. Analogies are generally good but could be more varied. Ensure all sections are fully developed in the final draft."
     },
     {
       "id": "C-037",
