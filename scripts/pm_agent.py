@@ -23,6 +23,7 @@ import argparse, json, os, subprocess, sys, tempfile
 from datetime import datetime, timezone
 
 MANIFEST_PATH   = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
+REPO_ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PIPELINE_SCRIPT = os.path.join(os.path.dirname(__file__), "lesson_pipeline.py")
 QC_SCRIPT       = os.path.join(os.path.dirname(__file__), "qc_agent.py")
 MEDIA_SCRIPT    = os.path.join(os.path.dirname(__file__), "media_agent.py")
@@ -121,6 +122,33 @@ def run_image_agent(lesson_id=None, rework_flagged=False):
 def notify(message):
     if os.path.exists(NOTIFY_SCRIPT):
         subprocess.run([sys.executable, NOTIFY_SCRIPT, message], check=False)
+
+
+def git_push_manifest():
+    try:
+        subprocess.run(
+            ["git", "add", "scripts/lessons_manifest.json", "scripts/media_prompts.json"],
+            cwd=REPO_ROOT, check=True, capture_output=True
+        )
+        diff = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"],
+            cwd=REPO_ROOT, capture_output=True
+        )
+        if diff.returncode != 0:
+            today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            subprocess.run(
+                ["git", "commit", "-m", f"pipeline: manifest update {today}"],
+                cwd=REPO_ROOT, check=True, capture_output=True
+            )
+            subprocess.run(
+                ["git", "push", "origin", "main"],
+                cwd=REPO_ROOT, check=True, capture_output=True
+            )
+            print("Manifest pushed to GitHub.")
+        else:
+            print("No manifest changes to push.")
+    except subprocess.CalledProcessError as e:
+        print(f"Git push failed (non-fatal): {e}")
 
 
 def print_status(data):
@@ -318,6 +346,9 @@ def main():
     summary = f"GK12 pipeline ({args.course}): " + ", ".join(summary_parts)
     print(f"=== {summary} ===")
     notify(summary)
+
+    if done > 0:
+        git_push_manifest()
 
 
 if __name__ == "__main__":
