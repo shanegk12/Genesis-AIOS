@@ -44,12 +44,12 @@ REQUIRED STRUCTURE (use these exact section headers):
    (4) Optimization Proposal using OCV, (5) Biblical Reflection with a specific scripture passage.
 7. Technical Documentation Requirements — 3 bullet points. End with the Junior Creationeer Signature block: Person / Date of Analysis / Location of Lab.
 8. Summary of Key Concepts — 4 one-line bullets. Each starts with a single word (e.g., Conservation:, Transfer:, Loss:, Analysis:).
-9. Works Cited — Genesis K12 Academy Full Lesson Book, Horstemeyer 2021 Creationeering paper, 2 external sources relevant to the topic.
+9. Works Cited — (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261; (3) two additional external sources with accurate titles, authors, and publication dates relevant to the lesson topic.
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Analogies for every abstract concept. Write as if you are a knowledgeable mentor speaking directly to the student.
 
 FRAMEWORKS TO USE (do not omit these):
-- Creationeering™ phases (name the relevant phase explicitly per Dr. Horstemeyer 2021)
+- Creationeering™ phases (name the relevant phase explicitly per Horstemeyer et al. 2022)
   Phases in order: Design → Analysis/Synthesis → Procurement → Logistics → Assembly → Performance → Sustainability → Death & Recycling
 - Multiscale Modeling — always connect macro-level observation to atomic-level cause
 - OCV Method (Objective, Constraint, Variable) — apply to one design problem per lesson
@@ -79,12 +79,12 @@ REQUIRED STRUCTURE (use these exact section headers):
    (4) Biblical Reflection with a specific scripture passage
 7. Technical Documentation Requirements — 2 bullet points. End with Junior Creationeer Signature block: Person / Date / Location of Lab.
 8. Summary of Key Concepts — 4 one-line bullets each starting with a single word (e.g., Precision:, Efficiency:, Design:, Trade-off:).
-9. Works Cited — Genesis K12 Academy Full Lesson Book, Horstemeyer 2021 Creationeering paper, 2 external sources relevant to the topic.
+9. Works Cited — (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261; (3) two additional external sources with accurate titles, authors, and publication dates relevant to the lesson topic.
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Always connect abstract concepts to the mousetrap car. Write as a knowledgeable mentor speaking directly to the student.
 
 FRAMEWORKS TO USE (do not omit):
-- Creationeering™ phases (Dr. Horstemeyer 2021) — name the current phase explicitly
+- Creationeering™ phases (Horstemeyer et al. 2022) — name the current phase explicitly
 - Multiscale Modeling — connect macro-level observation to atomic-level cause
 - OCV Method (Objective, Constraint, Variable) — apply to one mousetrap car design decision
 - All concepts must connect explicitly to the mousetrap car build project
@@ -116,9 +116,13 @@ def strip_markdown(text):
     return text
 
 
-def call_gemini(api_key, prompt):
+def call_gemini(api_key, prompt, horstemeyer_uri=None):
+    parts = []
+    if horstemeyer_uri:
+        parts.append({"file_data": {"mime_type": "application/pdf", "file_uri": horstemeyer_uri}})
+    parts.append({"text": prompt})
     payload = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}],
+        "contents": [{"parts": parts}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 0}}
     }).encode("utf-8")
 
@@ -182,6 +186,8 @@ def main():
     parser.add_argument("--prev",      required=True, help="Previous lesson topic")
     parser.add_argument("--draft-out", default=None,
                         help="Optional path to write the raw draft text for downstream agents")
+    parser.add_argument("--horstemeyer-uri", default=None,
+                        help="Gemini File API URI for the Horstemeyer 2022 PDF")
     args = parser.parse_args()
 
     env = load_env()
@@ -198,9 +204,15 @@ def main():
         phase=args.phase,
         prev=args.prev
     )
+    if args.horstemeyer_uri:
+        prompt = (
+            "The attached PDF is the Horstemeyer et al. 2022 Creationeering paper — your primary source "
+            "for all framework references and the Works Cited entry. Use it directly; do not paraphrase the citation.\n\n"
+            + prompt
+        )
 
     print(f"Drafting: '{args.topic}' ({args.phase} phase)...")
-    draft = call_gemini(api_key, prompt)
+    draft = call_gemini(api_key, prompt, horstemeyer_uri=args.horstemeyer_uri)
     print(f"Draft received: {len(draft)} chars / ~{len(draft.split()):,} words")
 
     if args.draft_out:

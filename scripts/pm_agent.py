@@ -19,16 +19,64 @@ Usage:
   python pm_agent.py --retry-failed          # re-queue failed lessons
 """
 
-import argparse, json, os, subprocess, sys, tempfile
+import argparse, json, os, subprocess, sys, tempfile, urllib.request, urllib.error
 from datetime import datetime, timezone
 
-MANIFEST_PATH   = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
-REPO_ROOT       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PIPELINE_SCRIPT = os.path.join(os.path.dirname(__file__), "lesson_pipeline.py")
+MANIFEST_PATH      = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
+REPO_ROOT          = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PIPELINE_SCRIPT    = os.path.join(os.path.dirname(__file__), "lesson_pipeline.py")
+HORSTEMEYER_PDF    = os.path.join(REPO_ROOT, "references", "horstemeyer-2022.pdf")
+GEMINI_UPLOAD_URL  = "https://generativelanguage.googleapis.com/upload/v1beta/files"
 QC_SCRIPT       = os.path.join(os.path.dirname(__file__), "qc_agent.py")
 MEDIA_SCRIPT    = os.path.join(os.path.dirname(__file__), "media_agent.py")
 IMAGE_SCRIPT    = os.path.join(os.path.dirname(__file__), "image_agent.py")
 NOTIFY_SCRIPT   = os.path.join(os.path.dirname(__file__), "notify.py")
+
+
+def load_env():
+    env_path = os.path.join(REPO_ROOT, ".env")
+    env = {}
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    env[k.strip()] = v.strip()
+    return env
+
+
+def upload_horstemeyer_to_gemini(api_key):
+    """Upload Horstemeyer 2022 PDF to Gemini File API. Returns file URI (valid 48h)."""
+    if not os.path.exists(HORSTEMEYER_PDF):
+        print(f"Warning: Horstemeyer PDF not found at {HORSTEMEYER_PDF}. Proceeding without file reference.")
+        return None
+    with open(HORSTEMEYER_PDF, "rb") as f:
+        pdf_bytes = f.read()
+    boundary = "boundary_gk12_horstemeyer_2022"
+    metadata = json.dumps({"file": {"display_name": "Horstemeyer 2022 Creationeering"}}).encode("utf-8")
+    body = (
+        f"--{boundary}\r\nContent-Type: application/json; charset=utf-8\r\n\r\n".encode()
+        + metadata
+        + f"\r\n--{boundary}\r\nContent-Type: application/pdf\r\n\r\n".encode()
+        + pdf_bytes
+        + f"\r\n--{boundary}--".encode()
+    )
+    url = f"{GEMINI_UPLOAD_URL}?key={api_key}&uploadType=multipart"
+    req = urllib.request.Request(
+        url, data=body,
+        headers={"Content-Type": f"multipart/related; boundary={boundary}"},
+        method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        uri = result["file"]["uri"]
+        print(f"Horstemeyer PDF uploaded: {uri}")
+        return uri
+    except Exception as e:
+        print(f"Warning: Horstemeyer PDF upload failed ({e}). Proceeding without file reference.")
+        return None
 
 
 def load_manifest():
@@ -57,7 +105,7 @@ def mark(data, lesson_id, status, error=None):
     save_manifest(data)
 
 
-def run_dev_agent(lesson, draft_out_path):
+def run_dev_agent(lesson, draft_out_path, horstemeyer_uri=None):
     cmd = [
         sys.executable, PIPELINE_SCRIPT,
         "--doc",       lesson["doc"],
@@ -67,6 +115,8 @@ def run_dev_agent(lesson, draft_out_path):
         "--prev",      lesson["prev"],
         "--draft-out", draft_out_path,
     ]
+    if horstemeyer_uri:
+        cmd += ["--horstemeyer-uri", horstemeyer_uri]
     result = subprocess.run(cmd, capture_output=True, text=True)
     output = result.stdout + result.stderr
     return result.returncode == 0, output
@@ -249,6 +299,10 @@ def main():
         print(f"{count} failed lessons re-queued as pending.")
         return
 
+    env = load_env()
+    api_key = env.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY", "")
+    horstemeyer_uri = upload_horstemeyer_to_gemini(api_key.strip()) if api_key.strip() else None
+
     queue = build_queue(data, args.course, args.lesson_type, args.batch)
 
     if not queue:
@@ -292,7 +346,7 @@ def main():
 
         try:
             # 1. Dev agent
-            success, output = run_dev_agent(lesson, draft_path)
+            success, output = run_dev_agent(lesson, draft_path, horstemeyer_uri=horstemeyer_uri)
             print(output.strip())
 
             if not success:
