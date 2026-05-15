@@ -153,7 +153,9 @@ def get_docs_service():
 
 def get_tab_id(doc_id, tab_title):
     svc = get_docs_service()
-    doc = svc.documents().get(documentId=doc_id, includeTabsContent=False).execute()
+    req = svc.documents().get(documentId=doc_id)
+    req.uri += "&includeTabsContent=true"
+    doc = req.execute()
     for tab in doc.get("tabs", []):
         props = tab.get("tabProperties", {})
         if props.get("title", "").strip().lower() == tab_title.strip().lower():
