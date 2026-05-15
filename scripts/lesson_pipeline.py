@@ -44,7 +44,7 @@ REQUIRED STRUCTURE (use these exact section headers):
    (4) Optimization Proposal using OCV, (5) Biblical Reflection with a specific scripture passage.
 7. Technical Documentation Requirements — 3 bullet points. End with the Junior Creationeer Signature block: Person / Date of Analysis / Location of Lab.
 8. Summary of Key Concepts — 4 one-line bullets. Each starts with a single word (e.g., Conservation:, Transfer:, Loss:, Analysis:).
-9. Works Cited — (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261; (3) two additional external sources with accurate titles, authors, and publication dates relevant to the lesson topic.
+9. Works Cited — Use Google Search to find 2 real, published, verifiable sources directly relevant to this lesson's topic. Each must include: author(s), full title, publication name or website, year, and URL if available. Do not fabricate or guess sources — only cite what you can verify exists. Also include: (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261.
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Analogies for every abstract concept. Write as if you are a knowledgeable mentor speaking directly to the student.
 
@@ -79,7 +79,7 @@ REQUIRED STRUCTURE (use these exact section headers):
    (4) Biblical Reflection with a specific scripture passage
 7. Technical Documentation Requirements — 2 bullet points. End with Junior Creationeer Signature block: Person / Date / Location of Lab.
 8. Summary of Key Concepts — 4 one-line bullets each starting with a single word (e.g., Precision:, Efficiency:, Design:, Trade-off:).
-9. Works Cited — (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261; (3) two additional external sources with accurate titles, authors, and publication dates relevant to the lesson topic.
+9. Works Cited — Use Google Search to find 2 real, published, verifiable sources directly relevant to this lesson's topic. Each must include: author(s), full title, publication name or website, year, and URL if available. Do not fabricate or guess sources — only cite what you can verify exists. Also include: (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261.
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Always connect abstract concepts to the mousetrap car. Write as a knowledgeable mentor speaking directly to the student.
 
@@ -123,6 +123,7 @@ def call_gemini(api_key, prompt, horstemeyer_uri=None):
     parts.append({"text": prompt})
     payload = json.dumps({
         "contents": [{"parts": parts}],
+        "tools": [{"google_search": {}}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 0}}
     }).encode("utf-8")
 
