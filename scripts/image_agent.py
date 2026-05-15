@@ -25,7 +25,7 @@ from googleapiclient.http import MediaFileUpload
 
 MEDIA_PROMPTS_PATH = os.path.join(os.path.dirname(__file__), "media_prompts.json")
 LOCAL_OUTPUT_DIR   = os.path.join(os.path.dirname(__file__), "..", "output", "images")
-LOGO_PATH          = os.path.join(os.path.dirname(__file__), "..", "references", "gk12-logo.png")
+LOGO_PATH          = os.path.join(os.path.dirname(__file__), "..", "references", "gk12-logo.PNG")
 
 GEMINI_IMAGE_MODEL = "gemini-2.5-flash-image"
 GEMINI_IMAGE_URL   = (
