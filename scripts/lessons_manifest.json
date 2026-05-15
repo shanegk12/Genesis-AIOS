@@ -156,9 +156,9 @@
       "phase": "Assembly",
       "prev": "Fabrication",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T01:53:54.278819+00:00",
-      "error": "Drafting: 'Hazards and Operations' (Assembly phase)...\nDraft received: 16054 chars / ~2,484 words\nLocating tab 'Hazards and Operations'...\ngws error: error: HTTP request failed\n"
+      "status": "done",
+      "completed_at": "2026-05-15T18:30:32.245239+00:00",
+      "error": null
     },
     {
       "id": "C-038",
@@ -169,9 +169,10 @@
       "phase": "Assembly",
       "prev": "Hazards and Operations",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T15:31:19.107632+00:00",
-      "error": "Drafting: 'Resource Management and Loss Prevention' (Assembly phase)...\nDraft received: 23220 chars / ~3,610 words\nLocating tab 'Resource Management and Loss Prevention'...\ngws error: error[auth]: Authentication failed: Failed to get token: Server error: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info\n"
+      "status": "done",
+      "completed_at": "2026-05-15T18:30:59.323425+00:00",
+      "error": null,
+      "qc_status": "flagged"
     },
     {
       "id": "C-039",
@@ -182,9 +183,9 @@
       "phase": "Assembly",
       "prev": "Resource Management and Loss Prevention",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T15:31:55.790756+00:00",
-      "error": "Drafting: 'Precision Measurement and Tolerances' (Assembly phase)...\nDraft received: 24725 chars / ~3,863 words\nLocating tab 'Precision Measurement and Tolerances'...\ngws error: error[auth]: Authentication failed: Failed to get token: Server error: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info\n"
+      "status": "done",
+      "completed_at": "2026-05-15T18:31:31.406459+00:00",
+      "error": null
     },
     {
       "id": "C-040",
@@ -195,9 +196,9 @@
       "phase": "Logistics",
       "prev": "Precision Measurement and Tolerances",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T15:32:34.128702+00:00",
-      "error": "Drafting: 'What is Logistics?' (Logistics phase)...\nDraft received: 22302 chars / ~3,435 words\nLocating tab 'What is Logistics?'...\ngws error: error[auth]: Authentication failed: Failed to get token: Server error: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info\n"
+      "status": "done",
+      "completed_at": "2026-05-15T18:32:07.236088+00:00",
+      "error": null
     },
     {
       "id": "C-041",
@@ -208,9 +209,10 @@
       "phase": "Logistics",
       "prev": "What is Logistics?",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T15:33:02.936100+00:00",
-      "error": "Drafting: 'Timeline Development and Milestones' (Logistics phase)...\nDraft received: 16554 chars / ~2,525 words\nLocating tab 'Timeline Development and Milestones'...\ngws error: error[auth]: Authentication failed: Failed to get token: Server error: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info: invalid_grant: reauth related error (invalid_rapt); See https://support.google.com/a/answer/9368756 for more info\n"
+      "status": "done",
+      "completed_at": "2026-05-15T18:32:37.016065+00:00",
+      "error": null,
+      "qc_status": "flagged"
     },
     {
       "id": "C-042",
@@ -221,9 +223,9 @@
       "phase": "Logistics",
       "prev": "Timeline Development and Milestones",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:34:38.645399+00:00",
-      "error": "s phase)...\nDraft received: 22523 chars / ~3,507 words\nLocating tab 'Critical Path Method (CPM)'...\ngws error: Warning: removing undecryptable credentials file (C:\\Users\\Shane\\.config\\gws\\credentials.enc): Decryption failed. Credentials may have been created on a different machine. Run `gws auth logout` and `gws auth login` to re-authenticate.\nerror[auth]: Access denied. No credentials provided. Run `gws auth login` or set GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE to an OAuth credentials JSON file.\n"
+      "error": null
     },
     {
       "id": "C-043",
@@ -234,9 +236,9 @@
       "phase": "Logistics",
       "prev": "Critical Path Method (CPM)",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:35:14.354871+00:00",
-      "error": "Drafting: 'Risk Assessment' (Logistics phase)...\nDraft received: 22096 chars / ~3,439 words\nLocating tab 'Risk Assessment'...\ngws error: error[auth]: Access denied. No credentials provided. Run `gws auth login` or set GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE to an OAuth credentials JSON file.\n"
+      "error": null
     },
     {
       "id": "C-044",
@@ -247,9 +249,9 @@
       "phase": "Logistics",
       "prev": "Risk Assessment",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:35:44.828241+00:00",
-      "error": "Drafting: 'Planning and Buffer Time' (Logistics phase)...\nDraft received: 19649 chars / ~3,052 words\nLocating tab 'Planning and Buffer Time'...\ngws error: error[auth]: Access denied. No credentials provided. Run `gws auth login` or set GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE to an OAuth credentials JSON file.\n"
+      "error": null
     },
     {
       "id": "C-045",
@@ -260,9 +262,9 @@
       "phase": "Logistics",
       "prev": "Planning and Buffer Time",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:36:21.813019+00:00",
-      "error": "Drafting: 'Global Supply Management' (Logistics phase)...\nDraft received: 24491 chars / ~3,633 words\nLocating tab 'Global Supply Management'...\ngws error: error[auth]: Access denied. No credentials provided. Run `gws auth login` or set GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE to an OAuth credentials JSON file.\n"
+      "error": null
     },
     {
       "id": "C-046",
@@ -273,9 +275,9 @@
       "phase": "Logistics",
       "prev": "Global Supply Management",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:36:24.048108+00:00",
-      "error": "Drafting: 'Inventory and Warehouse Management' (Logistics phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
+      "error": null
     },
     {
       "id": "C-047",
@@ -286,9 +288,9 @@
       "phase": "Logistics",
       "prev": "Inventory and Warehouse Management",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:36:52.597046+00:00",
-      "error": "Drafting: 'Shipping, Transport, and Compliance' (Logistics phase)...\nDraft received: 18384 chars / ~2,813 words\nLocating tab 'Shipping, Transport, and Compliance'...\ngws error: error[auth]: Access denied. No credentials provided. Run `gws auth login` or set GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE to an OAuth credentials JSON file.\n"
+      "error": null
     },
     {
       "id": "C-048",
@@ -299,9 +301,9 @@
       "phase": "Logistics",
       "prev": "Shipping, Transport, and Compliance",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:38:27.640169+00:00",
-      "error": "Drafting: 'Reverse Logistics and End-of-Life Flow' (Logistics phase)...\nError: draft is 679,498 chars, exceeds 60K safety limit. Possible thinking token leak. Skipping.\n"
+      "error": null
     },
     {
       "id": "C-049",
@@ -325,9 +327,9 @@
       "phase": "Assembly",
       "prev": "Just-In-Time vs. Just-In-Case",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:40:22.291644+00:00",
-      "error": "Drafting: 'What is Assembly?' (Assembly phase)...\nError: draft is 105,447 chars, exceeds 60K safety limit. Possible thinking token leak. Skipping.\n"
+      "error": null
     },
     {
       "id": "C-051",
@@ -338,9 +340,9 @@
       "phase": "Assembly",
       "prev": "What is Assembly?",
       "type": "lesson",
-      "status": "failed",
+      "status": "pending",
       "completed_at": "2026-05-15T15:41:24.568202+00:00",
-      "error": "Drafting: 'Fabrication Methods and Integrity' (Assembly phase)...\nError: draft is 120,887 chars, exceeds 60K safety limit. Possible thinking token leak. Skipping.\n"
+      "error": null
     },
     {
       "id": "C-052",
