@@ -72,9 +72,10 @@
       "phase": "Procurement",
       "prev": "Material Properties and Selection",
       "type": "lesson",
-      "status": "failed",
-      "completed_at": "2026-05-15T01:36:08.684235+00:00",
-      "error": "iso-8859-1\")\n               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\socket.py\", line 725, in readinto\n    return self._sock.recv_into(b)\n           ~~~~~~~~~~~~~~~~~~~~^^^\n  File \"C:\\Python314\\Lib\\ssl.py\", line 1304, in recv_into\n    return self.read(nbytes, buffer)\n           ~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\ssl.py\", line 1138, in read\n    return self._sslobj.read(len, buffer)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nTimeoutError: The read operation timed out\n"
+      "status": "done",
+      "completed_at": "2026-05-15T01:52:41.148561+00:00",
+      "error": null,
+      "qc_status": "flagged"
     },
     {
       "id": "C-033",
@@ -155,9 +156,9 @@
       "phase": "Assembly",
       "prev": "Fabrication",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-15T01:53:54.278819+00:00",
+      "error": "Drafting: 'Hazards and Operations' (Assembly phase)...\nDraft received: 16054 chars / ~2,484 words\nLocating tab 'Hazards and Operations'...\ngws error: error: HTTP request failed\n"
     },
     {
       "id": "C-038",
