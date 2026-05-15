@@ -9,7 +9,7 @@ Fills the Creationeering prompt template, calls Gemini, and writes the draft
 directly into the named tab of the target Google Doc.
 """
 
-import argparse, json, os, shutil, subprocess, sys, tempfile, urllib.request, urllib.error
+import argparse, json, os, re, subprocess, sys, urllib.request, urllib.error
 
 # ── CONFIG ──────────────────────────────────────────────────────────────────
 
@@ -53,6 +53,7 @@ FRAMEWORKS TO USE (do not omit these):
 - OCV Method (Objective, Constraint, Variable) — apply to one design problem per lesson
 - Optimization — use this term (not "Pareto Frontier") when discussing finding the best trade-off between variables
 
+DO NOT use markdown formatting (no **, *, #, >, or - bullets). Write in plain prose with clear paragraph breaks.
 DO NOT reference the mousetrap car."""
 
 MOUSETRAP_PROMPT_TEMPLATE = """You are writing a lesson for Genesis K-12 Academy's Middle School Mousetrap Build course, delivered via LearnWorlds. The audience is middle schoolers in homeschool settings (clusters, single families, church groups). Students are designing and building a mousetrap-powered car across an 18-week project course. Write approximately 2,500 words.
@@ -84,7 +85,9 @@ FRAMEWORKS TO USE (do not omit):
 - Creationeering™ phases (Dr. Horstemeyer 2021) — name the current phase explicitly
 - Multiscale Modeling — connect macro-level observation to atomic-level cause
 - OCV Method (Objective, Constraint, Variable) — apply to one mousetrap car design decision
-- All concepts must connect explicitly to the mousetrap car build project"""
+- All concepts must connect explicitly to the mousetrap car build project
+
+DO NOT use markdown formatting (no **, *, #, >, or - bullets). Write in plain prose with clear paragraph breaks."""
 
 
 def load_env():
@@ -100,53 +103,63 @@ def load_env():
     return env
 
 
+def strip_markdown(text):
+    text = re.sub(r'\*\*(.+?)\*\*', lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r'\*(.+?)\*',     lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r'`(.+?)`',       lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r'\[(.+?)\]\(.+?\)', lambda m: m.group(1), text)
+    text = re.sub(r'^#{1,6}\s+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^>+\s?',     '', text, flags=re.MULTILINE)
+    text = re.sub(r'^[*\-]\s+', '',  text, flags=re.MULTILINE)
+    return text
+
+
 def call_gemini(api_key, prompt):
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576}
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576},
+        "thinkingConfig": {"thinkingBudget": 0}
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"
     req = urllib.request.Request(url, data=payload,
                                   headers={"Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
+        with urllib.request.urlopen(req, timeout=240) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-        # Filter out thinking tokens (Gemini 2.5 Flash returns thought=True parts)
-        parts = data["candidates"][0]["content"].get("parts", [])
+        candidate = data["candidates"][0]
+        if "content" not in candidate:
+            finish = candidate.get("finishReason", "UNKNOWN")
+            print(f"Gemini returned no content (finishReason: {finish})")
+            sys.exit(1)
+        parts = candidate["content"].get("parts", [])
         text_parts = [p["text"] for p in parts if not p.get("thought", False) and "text" in p]
-        return "\n".join(text_parts)
+        result = "\n".join(text_parts)
+        if len(result) > 60000:
+            print(f"Error: draft is {len(result):,} chars, exceeds 60K safety limit. Possible thinking token leak. Skipping.")
+            sys.exit(1)
+        return strip_markdown(result)
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8")
         print(f"Gemini error {e.code}: {body}")
         sys.exit(1)
 
 
-_BASH = shutil.which("bash") or r"C:\Program Files\Git\usr\bin\bash.exe"
+_GWS_EXE = r"C:\Users\Shane\AppData\Roaming\npm\node_modules\@googleworkspace\cli\bin\gws.exe"
 
 
 def gws_run(params_dict, json_dict=None, subcommand=""):
-    """Run a gws command via git bash (handles large JSON bodies safely)."""
-    tmp = tempfile.gettempdir()
-
-    params_path = os.path.join(tmp, "gws_params.json")
-    with open(params_path, "w", encoding="utf-8") as f:
-        json.dump(params_dict, f, ensure_ascii=True)
-    params_unix = params_path.replace("\\", "/")
-
+    """Run a gws command via the Windows gws.exe binary."""
+    cmd = [_GWS_EXE] + subcommand.split()
+    cmd += ["--params", json.dumps(params_dict, ensure_ascii=True)]
     if json_dict is not None:
-        body_path = os.path.join(tmp, "gws_body.json")
-        with open(body_path, "w", encoding="utf-8") as f:
-            json.dump(json_dict, f, ensure_ascii=True)
-        body_unix = body_path.replace("\\", "/")
-        cmd = f'gws {subcommand} --params "$(cat \'{params_unix}\')" --json "$(cat \'{body_unix}\')"'
-    else:
-        cmd = f'gws {subcommand} --params "$(cat \'{params_unix}\')"'
+        cmd += ["--json", json.dumps(json_dict, ensure_ascii=True)]
 
-    result = subprocess.run([_BASH, "-c", cmd], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     output = "\n".join(l for l in (result.stdout or "").splitlines() if not l.startswith("Using keyring"))
     if result.returncode != 0:
-        print(f"gws error: {result.stderr.strip() or output}")
+        stderr = "\n".join(l for l in (result.stderr or "").splitlines() if not l.startswith("Using keyring"))
+        print(f"gws error: {stderr.strip() or output}")
         sys.exit(1)
     return json.loads(output) if output.strip() else {}
 
@@ -166,18 +179,16 @@ def get_tab_id(doc_id, tab_title):
 
 
 def write_to_tab(doc_id, tab_id, text):
-    """Write text to a tab, replacing any existing content."""
-    # Insert text at index 1 of the target tab
-    body = {
-        "requests": [{
-            "insertText": {
-                "text": text,
-                "location": {"index": 1, "tabId": tab_id}
-            }
-        }]
-    }
-    gws_run({"documentId": doc_id}, json_dict=body,
-            subcommand="docs documents batchUpdate")
+    """Write text to a tab in chunks to stay under Windows' 32K command-line limit."""
+    CHUNK = 8000
+    chunks = [text[i:i+CHUNK] for i in range(0, len(text), CHUNK)]
+
+    first_body = {"requests": [{"insertText": {"text": chunks[0], "location": {"index": 1, "tabId": tab_id}}}]}
+    gws_run({"documentId": doc_id}, json_dict=first_body, subcommand="docs documents batchUpdate")
+
+    for chunk in chunks[1:]:
+        body = {"requests": [{"insertText": {"text": chunk, "endOfSegmentLocation": {"tabId": tab_id}}}]}
+        gws_run({"documentId": doc_id}, json_dict=body, subcommand="docs documents batchUpdate")
 
 
 def main():
@@ -201,7 +212,6 @@ def main():
 
     doc_id = DOC_IDS[args.doc]
 
-    # 1. Build prompt
     template = CREATIONEERING_PROMPT_TEMPLATE if args.doc == "creationeering" else MOUSETRAP_PROMPT_TEMPLATE
     prompt = template.format(
         topic=args.topic,
@@ -209,7 +219,6 @@ def main():
         prev=args.prev
     )
 
-    # 2. Call Gemini
     print(f"Drafting: '{args.topic}' ({args.phase} phase)...")
     draft = call_gemini(api_key, prompt)
     print(f"Draft received: {len(draft)} chars / ~{len(draft.split()):,} words")
@@ -218,12 +227,10 @@ def main():
         with open(args.draft_out, "w", encoding="utf-8") as f:
             f.write(draft)
 
-    # 3. Find tab ID
     print(f"Locating tab '{args.tab}'...")
     tab_id = get_tab_id(doc_id, args.tab)
     print(f"Found tab ID: {tab_id}")
 
-    # 4. Write to doc
     print("Writing to Google Doc...")
     write_to_tab(doc_id, tab_id, draft)
     print(f"Done. Open the doc and check tab: '{args.tab}'")

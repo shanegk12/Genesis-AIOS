@@ -10,21 +10,23 @@ Usage:
   python status_report.py --days 3     # show calendar events for next N days (default 7)
 """
 
-import argparse, json, os, shutil, subprocess, sys, tempfile, urllib.request, urllib.error
+import argparse, json, os, subprocess, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
+TODOS_PATH    = os.path.join(os.path.dirname(__file__), "todos.json")
 NOTIFY_SCRIPT = os.path.join(os.path.dirname(__file__), "notify.py")
 
 NTFY_TOPIC = "gk12-pipeline"
 NTFY_URL   = f"https://ntfy.sh/{NTFY_TOPIC}"
 
-_BASH = shutil.which("bash") or r"C:\Program Files\Git\usr\bin\bash.exe"
+_GWS_EXE = r"C:\Users\Shane\AppData\Roaming\npm\node_modules\@googleworkspace\cli\bin\gws.exe"
 
 
-def gws_run_bash(cmd):
-    result = subprocess.run([_BASH, "-c", cmd], capture_output=True,
-                            text=True, encoding="utf-8", errors="replace")
+def gws_run(params_dict, subcommand=""):
+    cmd = [_GWS_EXE] + subcommand.split()
+    cmd += ["--params", json.dumps(params_dict, ensure_ascii=True)]
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     output = "\n".join(l for l in (result.stdout or "").splitlines()
                        if not l.startswith("Using keyring"))
     if result.returncode != 0:
@@ -58,38 +60,29 @@ def pipeline_summary(data):
 
 
 def calendar_summary(days=7):
-    now     = datetime.now(timezone.utc)
-    end     = now + timedelta(days=days)
+    now      = datetime.now(timezone.utc)
+    end      = now + timedelta(days=days)
     time_min = now.strftime("%Y-%m-%dT%H:%M:%SZ")
     time_max = end.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    tmp        = tempfile.gettempdir()
-    params_path = os.path.join(tmp, "cal_params.json")
-    with open(params_path, "w") as f:
-        json.dump({
+    try:
+        data   = gws_run({
             "calendarId":   "primary",
             "maxResults":   8,
             "orderBy":      "startTime",
             "singleEvents": True,
             "timeMin":      time_min,
             "timeMax":      time_max,
-        }, f)
-
-    params_unix = params_path.replace("\\", "/")
-    cmd = f"gws calendar events list --params \"$(cat '{params_unix}')\""
-
-    try:
-        data   = gws_run_bash(cmd)
+        }, subcommand="calendar events list")
         events = data.get("items", [])
         if not events:
             return f"CALENDAR: no events in next {days} days"
 
         lines = [f"CALENDAR (next {days} days):"]
         for ev in events:
-            start = ev.get("start", {})
-            dt    = start.get("dateTime", start.get("date", ""))
+            start  = ev.get("start", {})
+            dt     = start.get("dateTime", start.get("date", ""))
             if "T" in dt:
-                # Convert to local-ish display (just show date + time)
                 dt_obj = datetime.fromisoformat(dt.replace("Z", "+00:00"))
                 label  = dt_obj.strftime("%a %b %d %I:%M%p").lstrip("0")
             else:
@@ -101,12 +94,39 @@ def calendar_summary(days=7):
         return f"CALENDAR: error fetching events — {e}"
 
 
+def todos_summary():
+    if not os.path.exists(TODOS_PATH):
+        return ""
+    with open(TODOS_PATH, encoding="utf-8") as f:
+        todos = json.load(f)
+    if not todos:
+        return ""
+    lines = ["TO DO:"]
+    for item in todos:
+        lines.append(f"  [ ] {item['task']}")
+    return "\n".join(lines)
+
+
+def load_ntfy_token():
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("NTFY_TOKEN="):
+                    return line.split("=", 1)[1].strip()
+    return os.environ.get("NTFY_TOKEN")
+
+
 def send_ntfy(message, title="GK12 Daily Status"):
+    token = load_ntfy_token()
     data = message.encode("utf-8")
     req  = urllib.request.Request(NTFY_URL, data=data, method="POST")
     req.add_header("Title",    title)
     req.add_header("Priority", "default")
     req.add_header("Tags",     "bar_chart")
+    if token:
+        req.add_header("Authorization", f"Bearer {token}")
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             print(f"Notification sent (HTTP {resp.status})")
@@ -133,6 +153,9 @@ def main():
     report = f"=== GK12 Status — {today} ===\n"
     report += pipeline_summary(data) + "\n\n"
     report += calendar_summary(args.days)
+    todos  = todos_summary()
+    if todos:
+        report += "\n\n" + todos
 
     print(report)
 
