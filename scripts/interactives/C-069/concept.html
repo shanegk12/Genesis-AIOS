@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Customer Acceptance Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 20px 30px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 1.5em; }
+  header p { font-size: 0.95em; opacity: 0.9; margin-top: 5px; }
+  .stage { padding: 30px; }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+  }
+  .scenario h2 { color: #1e3a5f; margin-bottom: 8px; font-size: 1.1em; }
+  .scenario p { font-size: 0.95em; line-height: 1.5; }
+  .customer-needs {
+    background: #fff8e1;
+    border: 2px dashed #c9a227;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .customer-needs strong { color: #1e3a5f; }
+  .customer-needs ul { margin-top: 6px; padding-left: 22px; }
+  .customer-needs li { padding: 2px 0; font-size: 0.92em; }
+  .question { font-weight: 600; margin-bottom: 12px; font-size: 1.05em; }
+  .options { display: grid; gap: 10px; }
+  .option {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    text-align: left;
+    transition: all 0.2s;
+    color: #1e3a5f;
+  }
+  .option:hover:not(:disabled) {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .option.correct {
+    background: #2e7d32;
+    border-color: #2e7d32;
+    color: #fff;
+  }
+  .option.wrong {
+    background: #c62828;
+    border-color: #c62828;
+    color: #fff;
+  }
+  .option:disabled { cursor: default; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.good { background: #e8f5e9; border-left: 5px solid #2e7d32; }
+  .feedback.bad { background: #ffebee; border-left: 5px solid #c62828; }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .next-btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 22px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    display: none;
+  }
+  .next-btn:hover { background: #b08e1f; }
+  .next-btn.show { display: inline-block; }
+  .progress {
+    font-size: 0.85em;
+    color: #1e3a5f;
+    font-weight: 600;
+  }
+  .progress-bar {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 30px 20px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #c9a227;
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .final {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto;
+    border: 6px solid #c9a227;
+  }
+  .score-circle .num { font-size: 2.5em; font-weight: 700; }
+  .score-circle .label { font-size: 0.8em; color: #fff; }
+  .final h2 { color: #1e3a5f; margin-bottom: 10px; }
+  .final p { line-height: 1.6; margin: 10px auto; max-width: 600px; }
+  .restart {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+  .restart:hover { background: #2a4d7a; }
+  .verdict {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 12px 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🚀 Final Delivery: The Customer Acceptance Challenge</h1>
+    <p>You're a Creationeer™ delivering products. Will your customer say "Very Good"?</p>
+  </header>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="stage" id="stage"></div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    title: "Delivery #1: The Remote-Control Car",
+    story: "You built an RC car for your friend Marcus. Time to hand it over!",
+    needs: ["Must drive fast on grass", "Easy controls a beginner can use", "Bright color so it's easy to find"],
+    question: "Marcus tries the car. It's blue and zippy, but stalls in grass and the controls are complicated. What's the right Customer Acceptance response?",
+    options: [
+      { text: "Tell Marcus the car is done — he just needs to learn the controls.", correct: false, why: "Customer Acceptance means the CUSTOMER decides it's 'very good' — not the builder. You can't blame the user." },
+      { text: "Accept Marcus's feedback. Fix the grass traction and simplify the controls before final delivery.", correct: true, why: "Excellent! Customer Acceptance requires meeting the customer's real needs, not just our technical specs." },
+      { text: "Quickly deliver it anyway — you already spent weeks on it.", correct: false, why: "Time spent doesn't equal success. A product that fails the customer's needs has not been truly delivered." }
+    ]
+  },
+  {
+    title: "Delivery #2: The Classroom Birdhouse",
+    story: "Your team designed a birdhouse for Mrs. Lee's science classroom window.",
+    needs: ["Visible from inside the classroom", "Safe for small songbirds", "Doesn't damage the window"],
+    question: "Before final delivery, what should you do FIRST?",
+    options: [
+      { text: "Paint it bright colors so it looks nice.", correct: false, why: "Looks matter, but they aren't on the customer's needs list. Always check the actual requirements first." },
+      { text: "Walk Mrs. Lee through it and test each need together with her.", correct: true, why: "Right! A delivery review with the customer confirms each need is met BEFORE you declare it done." },
+      { text: "Drop it off in her room after school as a surprise.", correct: false, why: "Customer Acceptance requires the customer to actively agree — surprises skip that crucial step." }
+    ]
+  },
+  {
+    title: "Delivery #3: The School App",
+    story: "You coded an app to help students track homework.",
+    needs: ["Works on school tablets", "Sends reminders before assignments are due", "Easy to add new assignments"],
+    question: "The principal says: 'It works great, BUT students wish they could share homework lists with classmates.' What now?",
+    options: [
+      { text: "Mark it accepted — sharing wasn't in the original needs list.", correct: false, why: "Technically true, but great Creationeers listen to NEW needs and discuss them with the customer." },
+      { text: "Refuse delivery and start over from scratch.", correct: false, why: "That wastes the good work already done. Customer Acceptance is a conversation, not all-or-nothing." },
+      { text: "Confirm acceptance for the agreed needs, then plan sharing as a future update with the customer.", correct: true, why: "Perfect! Final Delivery means meeting the agreed scope, while still respecting and planning for new ideas." }
+    ]
+  },
+  {
+    title: "Delivery #4: The 'Very Good' Moment",
+    story: "Your project — a water filter for a community garden — passes every test you ran.",
+    needs: ["Filters dirt from rainwater", "Lasts at least one season", "Garden volunteers can clean it"],
+    question: "What truly makes this a successful Final Delivery?",
+    options: [
+      { text: "Your team agrees it works in the workshop.", correct: false, why: "Workshop tests are important, but they aren't the same as the customer using it in real life." },
+      { text: "It passes all your engineering specs on paper.", correct: false, why: "Specs are a tool, not the goal. The goal is a happy, served customer." },
+      { text: "The garden volunteers use it, succeed with it, and say it meets their needs.", correct: true, why: "Yes! Just as God called His creation 'very good' because it fulfilled its purpose, our delivery is complete when the customer experiences it working well." }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const stage = document.getElementById('stage');
+const progressFill = document.getElementById('progressFill');
+
+function render() {
+  if (current >= scenarios.length) { renderFinal(); return; }
+  progressFill.style.width = ((current) / scenarios.length * 100) + '%';
+  const s = scenarios[current];
+  answered = false;
+  stage.innerHTML = `
+    <div class="scenario">
+      <h2>${s.title}</h2>
+      <p>${s.story}</p>
+    </div>
+    <div class="customer-needs">
+      <strong>📋 Customer's Needs:</strong>
+      <ul>${s.needs.map(n => `<li>${n}</li>`).join('')}</ul>
+    </div>
+    <p class="question">${s.question}</p>
+    <div class="options" id="options">
+      ${s.options.map((o,i) => `<button class="option" data-i="${i}">${o.text}</button>`).join('')}
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="nav">
+      <span class="progress">Scenario ${current+1} of ${scenarios.length} • Score: ${score}</span>
+      <button class="next-btn" id="nextBtn">${current === scenarios.length-1 ? 'See Results →' : 'Next Delivery →'}</button>
+    </div>
+  `;
+  document.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => handleAnswer(parseInt(btn.dataset.i)));
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => { current++; render(); });
+}
+
+function handleAnswer(i) {
+  if (answered) return;
+  answered = true;
+  const s = scenarios[current];
+  const opts = document.querySelectorAll('.option');
+  const chosen = s.options[i];
+  opts.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (s.options[idx].correct) btn.classList.add('correct');
+    else if (idx === i) btn.classList.add('wrong');
+  });
+  if (chosen.correct) score++;
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show ' + (chosen.correct ? 'good' : 'bad');
+  fb.innerHTML = (chosen.correct ? '✅ <strong>Very Good!</strong> ' : '❌ <strong>Not quite.</strong> ') + chosen.why;
+  document.getElementById('nextBtn').classList.add('show');
+}
+
+function renderFinal() {
+  progressFill.style.width = '100%';
+  let verdict, message;
+  const pct = score / scenarios.length;
+  if (pct === 1) {
+    verdict = "🏆 Master Creationeer!";
+    message = "Perfect score! You understand that Customer Acceptance is about the customer experiencing your work as 'very good' — not just passing your own tests.";
+  } else if (pct >= 0.75) {
+    verdict = "⭐ Skilled Creationeer";
+    message = "Great work! You understand the heart of Final Delivery: meeting the customer's real needs with excellence.";
+  } else if (pct >= 0.5) {
+    verdict = "🔧 Apprentice Creationeer";
+    message = "Good effort! Remember: a product isn't truly delivered until the CUSTOMER agrees it fulfills its purpose.";
+  } else {
+    verdict = "📚 Keep Building!";
+    message = "Review the lesson and try again. The key idea: Customer Acceptance means the user — not the builder — declares the work 'very good.'";
+  }
+  stage.innerHTML = `
+    <div class="final">
+      <h2>Final Delivery Complete!</h2>
+      <div class="score-circle">
+        <div class="num">${score}/${scenarios.length}</div>
+        <div class="label">CORRECT</div>
+      </div>
+      <div class="verdict">${verdict}</div>
+      <p>${message}</p>
+      <p style="font-style:italic; color:#1e3a5f; opacity:0.85; margin-top:18px;">"Then God saw everything that He had made, and indeed it was very good." — Genesis 1:31</p>
+      <button class="restart" onclick="restart()">Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

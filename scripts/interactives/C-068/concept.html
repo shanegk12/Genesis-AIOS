@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Certification Inspector</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 6px;
+    text-align: center;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 18px;
+    font-size: 0.95em;
+  }
+  .progress {
+    background: #e6ebf2;
+    border-radius: 20px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c9a227, #e0bc4a);
+    transition: width 0.4s;
+    width: 0%;
+  }
+  .product-card {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .product-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .product-icon {
+    font-size: 48px;
+  }
+  .product-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #1e3a5f;
+  }
+  .checklist {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .check-item {
+    padding: 8px 10px;
+    margin: 6px 0;
+    border-left: 4px solid #c9a227;
+    background: #f7f9fc;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+  .check-item.pass { border-left-color: #2a9d4a; }
+  .check-item.fail { border-left-color: #d64545; }
+  .check-item .status {
+    float: right;
+    font-weight: bold;
+  }
+  .pass .status { color: #2a9d4a; }
+  .fail .status { color: #d64545; }
+  .question {
+    font-weight: bold;
+    text-align: center;
+    margin: 16px 0 12px;
+    font-size: 1.1em;
+  }
+  .button-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background: #1e3a5f;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+    min-width: 160px;
+  }
+  .btn:hover { background: #2a4f7a; transform: translateY(-2px); }
+  .btn.gold { background: #c9a227; }
+  .btn.gold:hover { background: #b08f1f; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+  }
+  .feedback.correct {
+    background: #e1f5e7;
+    border: 2px solid #2a9d4a;
+    color: #1a5f2a;
+  }
+  .feedback.incorrect {
+    background: #fde8e8;
+    border: 2px solid #d64545;
+    color: #8b1a1a;
+  }
+  .next-btn {
+    display: none;
+    margin: 14px auto 0;
+  }
+  #finalScreen { text-align: center; display: none; }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 20px auto;
+    border: 6px solid #c9a227;
+  }
+  .seal {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #c9a227;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 1.1em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🛡️ Certification Inspector</h1>
+  <p class="subtitle">You are a Junior Creationeer reviewing products. Should each one earn the "Certified Safe" seal?</p>
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div id="gameArea"></div>
+
+  <div id="finalScreen">
+    <h2>Inspection Complete!</h2>
+    <div class="score-circle" id="finalScore">0/5</div>
+    <p id="finalMessage" style="font-size:1.1em; max-width:600px; margin:0 auto 20px;"></p>
+    <div class="seal">🏅 Inspector Badge Earned</div>
+    <p style="color:#555; font-style:italic; margin-top:20px;">"Then God saw everything that He had made, and indeed it was very good." — Genesis 1:31</p>
+    <button class="btn gold" onclick="restart()">Inspect Again</button>
+  </div>
+</div>
+
+<script>
+const products = [
+  {
+    icon: "🚲",
+    name: "Mountain Bike Model X",
+    checks: [
+      {text: "Brakes tested at high speed", pass: true},
+      {text: "Frame supports rider weight up to 250 lbs", pass: true},
+      {text: "Helmet straps meet impact standard", pass: true},
+      {text: "Reflectors visible from 500 ft", pass: true}
+    ],
+    shouldCertify: true,
+    explain: "All safety checks passed! This product meets every standard and earns certification."
+  },
+  {
+    icon: "🧸",
+    name: "Plush Toy 'Buddy Bear'",
+    checks: [
+      {text: "Non-toxic materials confirmed", pass: true},
+      {text: "Stitching strength tested", pass: true},
+      {text: "Small parts test: button eyes detach with 5 lbs of pull", pass: false},
+      {text: "Flammability standard met", pass: true}
+    ],
+    shouldCertify: false,
+    explain: "The button eyes are a choking hazard for young children. Even one failed safety check means NO certification."
+  },
+  {
+    icon: "⛑️",
+    name: "Construction Hard Hat",
+    checks: [
+      {text: "Withstands 8 lb impact from 5 ft", pass: true},
+      {text: "Chin strap holds 50 lbs of force", pass: true},
+      {text: "Heat resistant to 140°F", pass: true},
+      {text: "Electrical insulation tested", pass: true}
+    ],
+    shouldCertify: true,
+    explain: "Excellent! Every required standard was met. Workers can trust this helmet."
+  },
+  {
+    icon: "🔌",
+    name: "Phone Charger Brand Z",
+    checks: [
+      {text: "Voltage output within safe range", pass: true},
+      {text: "Overheating shut-off works", pass: false},
+      {text: "Cable insulation rated", pass: true},
+      {text: "Plug fits standard outlet", pass: true}
+    ],
+    shouldCertify: false,
+    explain: "A charger that doesn't shut off when overheating could cause a fire. This product cannot be certified."
+  },
+  {
+    icon: "🛴",
+    name: "Electric Scooter Pro",
+    checks: [
+      {text: "Speed limited to safe maximum", pass: true},
+      {text: "Battery passes overcharge test", pass: true},
+      {text: "Brakes stop within 10 ft at full speed", pass: true},
+      {text: "Lights work in low visibility", pass: true}
+    ],
+    shouldCertify: true,
+    explain: "All systems checked out. This scooter is safe and reliable — a 'very good' product!"
+  }
+];
+
+let currentIdx = 0;
+let score = 0;
+let answered = false;
+
+function render() {
+  const p = products[currentIdx];
+  document.getElementById('progressFill').style.width = ((currentIdx)/products.length*100) + '%';
+  
+  let html = `
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-icon">${p.icon}</div>
+        <div class="product-name">${p.name}</div>
+      </div>
+      <div class="checklist">
+        ${p.checks.map(c => `
+          <div class="check-item ${c.pass?'pass':'fail'}">
+            ${c.text}
+            <span class="status">${c.pass?'✓ PASS':'✗ FAIL'}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="question">Should this product receive the "Certified Safe" seal?</div>
+      <div class="button-row">
+        <button class="btn gold" onclick="answer(true)">✓ CERTIFY</button>
+        <button class="btn" onclick="answer(false)">✗ REJECT</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <button class="btn next-btn" id="nextBtn" onclick="next()">Next Product →</button>
+    </div>
+  `;
+  document.getElementById('gameArea').innerHTML = html;
+  answered = false;
+}
+
+function answer(certify) {
+  if (answered) return;
+  answered = true;
+  const p = products[currentIdx];
+  const correct = (certify === p.shouldCertify);
+  if (correct) score++;
+  const fb = document.getElementById('feedback');
+  fb.style.display = 'block';
+  fb.className = 'feedback ' + (correct?'correct':'incorrect');
+  fb.innerHTML = (correct?'✓ Correct! ':'✗ Not quite. ') + p.explain;
+  document.getElementById('nextBtn').style.display = 'block';
+}
+
+function next() {
+  currentIdx++;
+  if (currentIdx >= products.length) {
+    showFinal();
+  } else {
+    render();
+  }
+}
+
+function showFinal() {
+  document.getElementById('gameArea').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('finalScreen').style.display = 'block';
+  document.getElementById('finalScore').textContent = score + '/' + products.length;
+  let msg = '';
+  if (score === 5) msg = "Perfect score! You understand that products must meet EVERY standard to be certified. Like God's creation declared 'very good,' true excellence leaves nothing overlooked.";
+  else if (score >= 3) msg = "Good work! Remember: even ONE failed safety check means a product cannot be certified. Standards exist to protect people.";
+  else msg = "Keep practicing! Product certification is strict — a product must pass ALL safety checks, not just most of them. Try again to sharpen your inspector eye.";
+  document.getElementById('finalMessage').textContent = msg;
+}
+
+function restart() {
+  currentIdx = 0;
+  score = 0;
+  document.getElementById('gameArea').style.display = 'block';
+  document.getElementById('finalScreen').style.display = 'none';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

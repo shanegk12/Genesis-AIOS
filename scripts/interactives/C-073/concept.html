@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Safer Treehouse Designer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 { color: #1e3a5f; text-align: center; margin-bottom: 4px; font-size: 1.6em; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 16px; font-size: 0.95em; }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+  }
+  .progress {
+    height: 8px;
+    background: #e0e6ee;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #c9a227;
+    transition: width 0.4s;
+    width: 0%;
+  }
+  .part-title {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+  }
+  .materials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .material-card {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .material-card:hover { background: #1e3a5f; color: #fff; transform: translateY(-2px); }
+  .material-card.selected { background: #c9a227; color: #fff; border-color: #c9a227; }
+  .material-card .name { font-weight: bold; margin-bottom: 4px; }
+  .material-card .desc { font-size: 0.85em; }
+  .feedback {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px 0;
+    display: none;
+  }
+  .feedback.good { background: #e6f4ea; border-left: 4px solid #2d8a4e; }
+  .feedback.bad { background: #fce8e6; border-left: 4px solid #c0392b; }
+  .feedback.show { display: block; }
+  button {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button:hover { background: #a8861d; }
+  button:disabled { background: #aaa; cursor: not-allowed; }
+  .btn-row { text-align: center; margin-top: 10px; }
+  .sort-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .bin {
+    min-height: 160px;
+    border: 3px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 10px;
+    background: #f7f9fc;
+  }
+  .bin h3 { text-align: center; color: #1e3a5f; margin-bottom: 8px; }
+  .bin.safe { border-color: #2d8a4e; }
+  .bin.hazard { border-color: #c0392b; }
+  .item-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #eef2f7;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    min-height: 60px;
+  }
+  .draggable {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: grab;
+    font-size: 0.9em;
+    user-select: none;
+  }
+  .draggable.dragging { opacity: 0.5; }
+  .slider-section { padding: 10px 0; }
+  .slider-section label { display: block; margin-bottom: 8px; font-weight: bold; }
+  input[type=range] {
+    width: 100%;
+    accent-color: #c9a227;
+  }
+  .meters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .meter {
+    background: #f7f9fc;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .meter .label { font-size: 0.85em; color: #555; }
+  .meter .value { font-size: 1.4em; font-weight: bold; color: #1e3a5f; }
+  .bar { height: 10px; background: #e0e6ee; border-radius: 5px; margin-top: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; transition: width 0.3s; }
+  .final-score {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 20px;
+  }
+  .star { color: #c9a227; font-size: 1.8em; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🌳 Safer Treehouse Designer</h1>
+  <p class="subtitle">Choose materials wisely to minimize hazards!</p>
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- PART 1: Material Choice -->
+  <div id="part1">
+    <div class="part-title">Step 1 of 3: Pick Your Material</div>
+    <div class="scenario">
+      🏗️ You're designing a treehouse floor. Which material is the <strong>safest choice</strong> — strong but with the lowest toxicity and hazard risk?
+    </div>
+    <div class="materials" id="materialChoices">
+      <div class="material-card" data-id="treated">
+        <div class="name">Old Treated Wood</div>
+        <div class="desc">Strong, but treated with arsenic chemicals</div>
+      </div>
+      <div class="material-card" data-id="cedar">
+        <div class="name">Natural Cedar</div>
+        <div class="desc">Strong, naturally rot-resistant, low toxicity</div>
+      </div>
+      <div class="material-card" data-id="asbestos">
+        <div class="name">Asbestos Board</div>
+        <div class="desc">Fireproof, but fibers cause lung disease</div>
+      </div>
+      <div class="material-card" data-id="cardboard">
+        <div class="name">Cardboard</div>
+        <div class="desc">Non-toxic, but weak and falls apart</div>
+      </div>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <div class="btn-row"><button id="next1" disabled>Next →</button></div>
+  </div>
+
+  <!-- PART 2: Sort hazards -->
+  <div id="part2" class="hidden">
+    <div class="part-title">Step 2 of 3: Sort the Materials</div>
+    <div class="scenario">
+      🧪 Drag each material into the correct bin: <strong>Safe Choice</strong> or <strong>Hazardous</strong>.
+    </div>
+    <div class="item-pool" id="itemPool"></div>
+    <div class="sort-area">
+      <div class="bin safe" data-type="safe">
+        <h3>✅ Safe Choice</h3>
+      </div>
+      <div class="bin hazard" data-type="hazard">
+        <h3>⚠️ Hazardous</h3>
+      </div>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <div class="btn-row"><button id="check2">Check My Sorting</button> <button id="next2" class="hidden">Next →</button></div>
+  </div>
+
+  <!-- PART 3: Trade-off slider -->
+  <div id="part3" class="hidden">
+    <div class="part-title">Step 3 of 3: Balance the Trade-Off</div>
+    <div class="scenario">
+      🎨 You need paint for your treehouse. Adjust the slider to find the right balance between cost, durability, and toxicity. Find a <strong>good design score</strong>!
+    </div>
+    <div class="slider-section">
+      <label for="paintSlider">Paint Type: <span id="paintLabel">Standard</span></label>
+      <input type="range" id="paintSlider" min="0" max="4" value="2">
+      <div style="display:flex; justify-content:space-between; font-size:0.8em; color:#555;">
+        <span>Cheap & Toxic</span><span>Eco-friendly & Costly</span>
+      </div>
+    </div>
+    <div class="meters">
+      <div class="meter">
+        <div class="label">💵 Cost</div>
+        <div class="value" id="costVal">$$</div>
+        <div class="bar"><div class="bar-fill" id="costBar" style="background:#1e3a5f;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="label">💪 Durability</div>
+        <div class="value" id="durVal">Medium</div>
+        <div class="bar"><div class="bar-fill" id="durBar" style="background:#2d8a4e;"></div></div>
+      </div>
+      <div class="meter">
+        <div class="label">☠️ Toxicity</div>
+        <div class="value" id="toxVal">Medium</div>
+        <div class="bar"><div class="bar-fill" id="toxBar" style="background:#c0392b;"></div></div>
+      </div>
+    </div>
+    <div class="scenario" style="border-left-color:#1e3a5f;">
+      🏆 <strong>Design Score:</strong> <span id="designScore">--</span> / 100
+      <div id="designAdvice" style="margin-top:6px; font-size:0.9em;"></div>
+    </div>
+    <div class="btn-row"><button id="finish3" disabled>Finish Activity</button></div>
+  </div>
+
+  <!-- FINAL -->
+  <div id="final" class="hidden">
+    <div class="part-title">🎉 Activity Complete!</div>
+    <div class="final-score">
+      <div id="stars"></div>
+      <p>You scored <strong id="finalScore">0</strong> / 3 on the design challenges!</p>
+      <p style="font-size:0.95em; margin-top:14px; color:#444;">
+        Great Creationeers identify <strong>toxicity</strong> (how harmful) and <strong>hazards</strong> (how harm happens), then design to minimize both — caring for people and creation.
+      </p>
+      <div class="btn-row"><button onclick="location.reload()">🔄 Try Again</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let score = 0;
+let progress = 0;
+function updateProgress(p) {
+  progress = p;
+  document.getElementById('progressFill').style.width = p + '%';
+}
+
+// PART 1
+const choices = document.querySelectorAll('#materialChoices .material-card');
+const fb1 = document.getElementById('fb1');
+const next1 = document.getElementById('next1');
+let part1Answered = false;
+choices.forEach(card => {
+  card.addEventListener('click', () => {
+    if (part1Answered) return;
+    choices.forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    const id = card.dataset.id;
+    fb1.classList.add('show');
+    if (id === 'cedar') {
+      fb1.className = 'feedback good show';
+      fb1.innerHTML = '✅ <strong>Excellent!</strong> Natural cedar is strong AND has low toxicity. A safe, sustainable choice!';
+      score++;
+    } else {
+      fb1.className = 'feedback bad show';
+      let why = '';
+      if (id === 'treated') why = 'Old treated wood contains arsenic — toxic to humans and the environment.';
+      if (id === 'asbestos') why = 'Asbestos fibers cause serious lung disease — a major hazard!';
+      if (id === 'cardboard') why = 'It\'s non-toxic, but too weak — a structural hazard waiting to happen!';
+      fb1.innerHTML = '❌ <strong>Not the best choice.</strong> ' + why + ' Try thinking about BOTH toxicity AND structural safety.';
+    }
+    part1Answered = true;
+    next1.disabled = false;
+    updateProgress(33);
+  });
+});
+next1.addEventListener('click', () => {
+  document.getElementById('part1').classList.add('hidden');
+  document.getElementById('part2').classList.remove('hidden');
+});
+
+// PART 2 — drag & drop sorting
+const items = [
+  { name: 'Lead Paint', type: 'hazard' },
+  { name: 'Bamboo', type: 'safe' },
+  { name: 'Recycled Plastic', type: 'safe' },
+  { name: 'Mercury Thermometer', type: 'hazard' },
+  { name: 'Cotton Rope', type: 'safe' },
+  { name: 'Rusty Nails', type: 'hazard' }
+];
+const pool = document.getElementById('itemPool');
+items.sort(() => Math.random() - 0.5).forEach((it, i) => {
+  const div = document.createElement('div');
+  div.className = 'draggable';
+  div.draggable = true;
+  div.textContent = it.name;
+  div.dataset.type = it.type;
+  div.id = 'item' + i;
+  pool.appendChild(div);
+});
+
+let dragged = null;
+document.querySelectorAll('.draggable').forEach(el => {
+  el.addEventListener('dragstart', e => {
+    dragged = el;
+    el.classList.add('dragging');
+  });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  // touch support
+  el.addEventListener('touchstart', e => { dragged = el; }, {passive:true});
+});
+
+document.querySelectorAll('.bin, #itemPool').forEach(zone => {
+  zone.addEventListener('dragover', e => e.preventDefault());
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    if (dragged) zone.appendChild(dragged);
+  });
+  zone.addEventListener('click', e => {
+    // tap-to-move alternative: not used, but kept simple
+  });
+});
+
+// click-to-cycle alternative for touch devices
+document.querySelectorAll('.draggable').forEach(el => {
+  el.addEventListener('click', () => {
+    const cur = el.parentElement;
+    const safe = document.querySelector('.bin.safe');
+    const hazard = document.querySelector('.bin.hazard');
+    if (cur === pool) safe.appendChild(el);
+    else if (cur === safe) hazard.appendChild(el);
+    else pool.appendChild(el);
+  });
+});
+
+document.getElementById('check2').addEventListener('click', () => {
+  const fb2 = document.getElementById('fb2');
+  const safeBin = document.querySelector('.bin.safe');
+  const hazardBin = document.querySelector('.bin.hazard');
+  let correct = 0, total = items.length;
+  let unsorted = pool.querySelectorAll('.draggable').length;
+  if (unsorted > 0) {
+    fb2.className = 'feedback bad show';
+    fb2.innerHTML = '⚠️ Please sort all materials into a bin first!';
+    return;
+  }
+  safeBin.querySelectorAll('.draggable').forEach(el => {
+    if (el.dataset.type === 'safe') correct++;
+  });
+  hazardBin.querySelectorAll('.draggable').forEach(el => {
+    if (el.dataset.type === 'hazard') correct++;
+  });
+  fb2.classList.add('show');
+  if (correct === total) {
+    fb2.className = 'feedback good show';
+    fb2.innerHTML = '✅ <strong>Perfect sort!</strong> You correctly identified all hazardous materials.';
+    score++;
+  } else {
+    fb2.className = 'feedback bad show';
+    fb2.innerHTML = `You got <strong>${correct} of ${total}</strong>. Remember: lead, mercury, and rust all cause harm. Bamboo, cotton, and recycled plastic are safer.`;
+  }
+  document.getElementById('check2').classList.add('hidden');
+  document.getElementById('next2').classList.remove('hidden');
+  updateProgress(66);
+});
+document.getElementById('next2').addEventListener('click', () => {
+  document.getElementById('part2').classList.add('hidden');
+  document.getElementById('part3').classList.remove('hidden');
+  updateSlider();
+});
+
+// PART 3 — Trade-off slider
+const paintTypes = [
+  { name: 'Old Lead Paint', cost: 10, dur: 80, tox: 95 },
+  { name: 'Standard Oil Paint', cost: 30, dur: 70, tox: 65 },
+  { name: 'Water-Based Latex', cost: 50, dur: 60, tox: 35 },
+  { name: 'Low-VOC Paint', cost: 70, dur: 65, tox: 15 },
+  { name: 'Plant-Based Eco Paint', cost: 95, dur: 50, tox: 5 }
+];
+const slider = document.getElementById('paintSlider');
+function updateSlider() {
+  const i = parseInt(slider.value);
+  const p = paintTypes[i];
+  document.getElementById('paintLabel').textContent = p.name;
+  document.getElementById('costVal').textContent = '$'.repeat(Math.ceil(p.cost/25)+1);
+  document.getElementById('durVal').textContent = p.dur > 70 ? 'High' : p.dur > 55 ? 'Medium' : 'Low';
+  document.getElementById('toxVal').textContent = p.tox > 60 ? 'High ☠️' : p.tox > 25 ? 'Medium' : 'Low ✓';
+  document.getElementById('costBar').style.width = p.cost + '%';
+  document.getElementById('durBar').style.width = p.dur + '%';
+  document.getElementById('toxBar').style.width = p.tox + '%';
+  // design score = balance: low toxicity weighted highest, decent durability, reasonable cost
+  const ds = Math.round((100 - p.tox)*0.5 + p.dur*0.3 + (100 - p.cost)*0.2);
+  document.getElementById('designScore').textContent = ds;
+  const advice = document.getElementById('designAdvice');
+  const finishBtn = document.getElementById('finish3');
+  if (ds >= 65) {
+    advice.innerHTML = '🌟 Great balance! Safe AND practical.';
+    advice.style.color = '#2d8a4e';
+    finishBtn.disabled = false;
+    finishBtn.dataset.win = 'true';
+  } else {
+    advice.innerHTML = 'Keep adjusting — aim for a score of 65 or higher!';
+    advice.style.color = '#c0392b';
+    finishBtn.disabled = true;
+  }
+}
+slider.addEventListener('input', updateSlider);
+document.getElementById('finish3').addEventListener('click', () => {
+  if (document.getElementById('finish3').dataset.win === 'true') score++;
+  updateProgress(100);
+  document.getElementById('part3').classList.add('hidden');
+  document.getElementById('final').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = score;
+  let stars = '';
+  for (let i = 0; i < 3; i++) stars += i < score ? '⭐' : '☆';
+  document.getElementById('stars').innerHTML = '<div class="star">' + stars + '</div>';
+});
+</script>
+</body>
+</html>

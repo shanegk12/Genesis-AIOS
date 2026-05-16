@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Reduce – Less is More</summary>
+    <div class="panel-body"><p>Plain-language explanation: Reduce means to simply use less. It’s the most effective of the 3 R’s because it prevents waste from being created in the first place. Think about it like this: if you don’t bring a bunch of extra stuff into your house, you won’t have to worry about throwing it away later. In Creationeering™, reducing means designing products and processes that require fewer materials, less energy, and generate less waste throughout their entire lifecycle.</p><p>Engineering analogy with concrete imagery: Imagine you are designing a new school desk. If you can design a desk that uses less wood, fewer screws, and requires less paint, you are practicing reduction. Instead of a bulky, heavy desk, you might design a sleek, lightweight one that is still strong and functional. This lighter desk would require less material to make, less fuel to transport, and eventually, less to dispose of.</p><p>Multiscale Modeling connection (macro-level observation → atomic-level cause): At the macro-level, we observe overflowing landfills and depleted natural resources. This is the big picture problem. When we reduce, we are addressing this problem at its root. At the atomic level, reduction means that fewer atoms and molecules are extracted from the Earth, processed, and eventually discarded. For example, if a product uses less plastic, fewer long-chain polymer molecules (the building blocks of plastic) need to be synthesized from raw petroleum. This directly impacts the amount of crude oil (a complex mixture of hydrocarbon molecules) that needs to be extracted from the ground.</p><p>OCV application where relevant: Let's apply the OCV method to reducing waste in a school cafeteria.
+Objective: To minimize the amount of food waste generated in the cafeteria.
+Constraints: The school must provide nutritious meals; students must have enough to eat; the budget for food procurement cannot increase significantly.
+Variables: Portion sizes; types of food offered; availability of compost bins; educational programs on food waste.
+Optimization: To achieve our objective, we might optimize portion sizes based on student feedback and typical consumption, while also introducing a compost program. This finds a balance between providing enough food and reducing what gets thrown away.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Reuse – A Second Life</summary>
+    <div class="panel-body"><p>Plain-language explanation: Reuse means finding new ways to use something again, instead of throwing it away after its first use. This could be using the same item for its original purpose multiple times, or it could be repurposing an item for something completely different. Reusing extends the life of a product, delaying its journey to the landfill.</p><p>Engineering analogy with concrete imagery: Think about a sturdy glass jar that once held pickles. Instead of tossing it in the recycling bin (which is good, but reuse is better!), you wash it out and use it to store pencils, buttons, or even as a drinking glass. You've given that jar a second life, preventing the need to produce a new container. In engineering, this could mean designing components that can be easily refurbished or used in a different product when their original product reaches the end of its life.</p><p>Multiscale Modeling connection (macro-level observation → atomic-level cause): At the macro-level, we see fewer items in landfills when we reuse. This means that at the atomic level, the complex structures of materials like glass (silicon dioxide molecules arranged in an amorphous solid) or metal (ordered lattices of metal atoms) are preserved and continue to serve a purpose, rather than being broken down and re-formed, which requires energy and can lead to material degradation. Reusing a water bottle, for instance, means the plastic polymers (long chains of carbon, hydrogen, and sometimes oxygen atoms) remain intact and functional for repeated hydration.</p><p>OCV application where relevant: Consider designing a reusable shopping bag.
+Objective: To create a durable and appealing shopping bag that encourages repeated use.
+Constraints: The bag must be affordable to produce; it needs to be easy to clean; it must be able to carry a certain weight of groceries.
+Variables: Material type (e.g., cotton, recycled plastic, jute); handle design; bag size; aesthetic appeal (colors, patterns).
+Optimization: We would optimize for a material that is both durable and cost-effective, with a comfortable handle design that encourages shoppers to choose it over single-use plastic bags.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Recycle – Transforming Waste</summary>
+    <div class="panel-body"><p>Plain-language explanation: Recycling is the process of taking used materials and turning them into new products. This is different from reuse because it usually involves breaking down the original item and reforming its materials. Recycling saves raw materials, reduces energy consumption compared to making new products from scratch, and decreases pollution. It's an important part of the Death/Recycling phase of Creationeering™, where we consider what happens to products at the very end of their useful life.</p><p>Engineering analogy with concrete imagery: Imagine you have an aluminum soda can. When you recycle it, that can is melted down and the aluminum is used to make a brand new can, or perhaps a part for a bicycle, or even a piece of an airplane. The material gets a fresh start, preventing the need to mine new bauxite ore to create virgin aluminum.</p><p>Multiscale Modeling connection (macro-level observation → atomic-level cause): At the macro-level, recycling diverts massive amounts of waste from landfills. At the atomic level, recycling involves breaking the chemical bonds and crystalline structures of materials, like the metallic bonds in aluminum atoms or the covalent bonds in plastic polymers, and then re-forming them into new structures. For example, when plastic bottles are recycled, the polymer chains are broken down into smaller units or melted and re-extruded. While this process does require energy to break and re-form bonds, it is often less energy-intensive than creating new materials from raw resources. Similarly, melting scrap steel (iron atoms in a crystalline lattice) to make new steel is more efficient than extracting iron ore and processing it.</p><p>OCV application where relevant: Let's consider optimizing the recycling process for plastic bottles.
+Objective: To maximize the amount of recycled plastic that can be reprocessed into high-quality new products.
+Constraints: The recycling process must be economically viable; the reprocessed plastic must meet quality standards for new products; contamination levels in collected plastic must be manageable.
+Variables: Sorting technology; washing and shredding methods; polymer blending ratios; market demand for recycled plastic.
+Optimization: We would optimize the sorting and cleaning processes to reduce contaminants, allowing for a higher percentage of the collected plastic (various polymer types) to be successfully transformed into new, valuable products.</p></div>
+  </details>
+</div>
+</body>
+</html>
