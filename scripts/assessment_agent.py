@@ -87,10 +87,24 @@ def read_from_google_doc(lesson):
     raise ValueError(f"Tab '{lesson['tab']}' not found")
 
 
+def _clean_json_text(text):
+    # Strip markdown fences
+    text = re.sub(r"^```json\s*", "", text.strip())
+    text = re.sub(r"\s*```$", "", text)
+    # Find start of JSON array
+    start = text.find("[")
+    if start > 0:
+        text = text[start:]
+    # Replace curly/smart quotes with straight quotes
+    text = text.replace("“", '"').replace("”", '"')
+    text = text.replace("‘", "'").replace("’", "'")
+    return text
+
+
 def call_gemini(api_key, prompt):
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 2048},
+        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 4096},
     }).encode("utf-8")
     url = f"{GEMINI_URL}?key={api_key}"
     req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
@@ -99,12 +113,16 @@ def call_gemini(api_key, prompt):
             data = json.loads(resp.read().decode("utf-8"))
         parts = data["candidates"][0]["content"].get("parts", [])
         text = "\n".join(p["text"] for p in parts if not p.get("thought") and "text" in p).strip()
-        text = re.sub(r"^```json\s*", "", text)
-        text = re.sub(r"\s*```$", "", text)
-        start = text.find("[")
-        if start > 0:
-            text = text[start:]
-        return json.loads(text)
+        text = _clean_json_text(text)
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            # Last resort: truncate at the last complete object
+            last = text.rfind("},")
+            if last > 0:
+                text = text[:last + 1] + "\n]"
+                return json.loads(text)
+            raise
     except Exception as e:
         print(f"  Gemini error: {e}")
         return None

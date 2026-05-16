@@ -1,0 +1,62 @@
+{
+  "lesson_id": "C-086",
+  "topic": "Data Security and System Wipe",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "question": "When you 'delete' a file from your computer, why is it usually NOT truly gone forever right away?",
+      "options": {
+        "A": "The computer saves a backup copy in the cloud automatically.",
+        "B": "The operating system only marks the space as available, but the data remains until overwritten.",
+        "C": "All deleted files are moved to a special hidden folder that anyone can access.",
+        "D": "The computer needs to ask for your permission multiple times before it actually deletes anything."
+      },
+      "answer": "B",
+      "explanation": "Deleting a file typically just removes its pointer, making the space available for new data, but the original data bits often remain on the storage device until new information replaces them."
+    },
+    {
+      "question": "The lesson connects the responsible handling of data during the 'Death & Recycling' phase to the biblical principle of stewardship. Which idea best reflects this connection?",
+      "options": {
+        "A": "We should only create digital systems that last forever, avoiding the need for disposal.",
+        "B": "Just as God gives us a 'clean slate,' we should ensure old data is completely and securely removed before repurposing a system.",
+        "C": "Digital information is not as important as physical possessions, so less care is needed for its disposal.",
+        "D": "We should pray over our old devices before disposing of them to ensure data security."
+      },
+      "answer": "B",
+      "explanation": "The lesson uses the idea of a 'clean slate' from Ecclesiastes to emphasize the importance of completely and securely removing old data, aligning with responsible stewardship of digital information."
+    },
+    {
+      "question": "In the 'Death & Recycling' phase of Creationeering, ensuring that sensitive customer information is completely unrecoverable from an old computer before disposal is an example of what?",
+      "options": {
+        "A": "A Variable, because the amount of data changes.",
+        "B": "A Constraint, because it limits how quickly you can dispose of the computer.",
+        "C": "An Objective, because it's a desired outcome for data security.",
+        "D": "A Decommissioning Procedure, which is a general term, but not the specific OCV term."
+      },
+      "answer": "C",
+      "explanation": "An objective is a desired outcome or goal in an engineering problem, and securely removing sensitive data is a key goal during the Death & Recycling phase."
+    },
+    {
+      "question": "Why is it especially critical to ensure data security during the 'Death & Recycling' phase of a product's life?",
+      "options": {
+        "A": "New software updates require all old data to be removed first.",
+        "B": "The system is most vulnerable to physical damage during this phase.",
+        "C": "If sensitive data isn't securely wiped, it could be recovered by unauthorized individuals and lead to identity theft or fraud.",
+        "D": "It helps to make the system lighter and easier to transport for recycling."
+      },
+      "answer": "C",
+      "explanation": "During the Death & Recycling phase, if sensitive data is not securely wiped, it risks falling into the wrong hands, leading to serious consequences like identity theft or fraud."
+    },
+    {
+      "question": "The lesson explains that simply deleting a file doesn't remove the data at the 'atomic level.' What method uses a strong magnetic field to disrupt these atomic-level magnetic charges on a hard drive, making data unrecoverable?",
+      "options": {
+        "A": "Encryption",
+        "B": "Overwriting",
+        "C": "Degaussing",
+        "D": "Multiscale Modeling"
+      },
+      "answer": "C",
+      "explanation": "Degaussing is a method that uses a powerful magnetic field to scramble the magnetic patterns on a hard drive, thereby destroying the data at a fundamental level."
+    }
+  ]
+}
