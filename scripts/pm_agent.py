@@ -199,7 +199,10 @@ def notify(message):
 def git_push_manifest():
     try:
         subprocess.run(
-            ["git", "add", "scripts/lessons_manifest.json", "scripts/media_prompts.json"],
+            ["git", "add",
+             "scripts/lessons_manifest.json",
+             "scripts/media_prompts.json",
+             "scripts/interactives/"],
             cwd=REPO_ROOT, check=True, capture_output=True
         )
         diff = subprocess.run(
