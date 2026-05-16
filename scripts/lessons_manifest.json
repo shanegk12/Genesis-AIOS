@@ -36,9 +36,9 @@
       "qc_notes": "The lesson draft is strong, with excellent faith integration and analogies. The use of Creationeering phases, Multiscale Modeling, and OCV is present but could be more explicitly demonstrated within the lesson's activities. The structure is mostly complete, but the 'Part 1' section is cut off, preventing a full evaluation of its substance.",
       "interactive_status": "done",
       "interactive_files": {
-        "vocab": "interactives\\C-025\\vocab.html",
-        "ocv": "interactives\\C-025\\ocv.html",
-        "concept": "interactives\\C-025\\concept.html"
+        "flashcards": "interactives\\C-025\\flashcards.html",
+        "accordion": "interactives\\C-025\\accordion.html",
+        "ocv": "interactives\\C-025\\ocv.html"
       }
     },
     {
@@ -153,7 +153,7 @@
       "status": "done",
       "completed_at": "2026-05-15T01:30:23.450446+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
@@ -168,7 +168,8 @@
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson is excellent overall, with strong faith integration, clear analogies, and correct use of the Creationeering framework. The reading level is perfectly suited for middle school students. The only area for improvement is completing the lesson structure. The draft cuts off abruptly at the beginning of Part 1. To be fully effective, the lesson requires the development of the core content sections (Part 1, Part 2, etc.) and the inclusion of a concluding summary and application activity. The foundation is solid; it just needs to be built out."
+      "qc_notes": "The lesson is excellent overall, with strong faith integration, clear analogies, and correct use of the Creationeering framework. The reading level is perfectly suited for middle school students. The only area for improvement is completing the lesson structure. The draft cuts off abruptly at the beginning of Part 1. To be fully effective, the lesson requires the development of the core content sections (Part 1, Part 2, etc.) and the inclusion of a concluding summary and application activity. The foundation is solid; it just needs to be built out.",
+      "qc_override": "word_count_marginal: content excellent (2.8/3), 35-287 words over 4K cap, accepted by Shane 2026-05-15"
     },
     {
       "id": "C-035",
@@ -238,7 +239,7 @@
       "status": "done",
       "completed_at": "2026-05-15T18:30:59.323425+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
@@ -248,14 +249,12 @@
         "overall": 2.6
       },
       "qc_structural": {
-        "word_count": 2178,
-        "missing_sections": [
-          "Lesson Overview"
-        ],
+        "word_count": 2361,
+        "missing_sections": [],
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson is strong overall, with excellent reading level, faith integration, and analogies. The core weakness is the incomplete application of the course's own frameworks. The OCV method is mentioned as a learning objective and defined in the vocabulary, but its application is entirely missing from the lesson body. Similarly, while the lesson is well-structured, it feels incomplete as it ends abruptly without a concluding section or activity. Adding a section that explicitly demonstrates the OCV method in a resource management scenario and a proper conclusion would make this an excellent lesson."
+      "qc_notes": "The lesson is strong, with excellent reading level, faith integration, and analogies. The core frameworks are present, but their application needs to be more fully developed in the main body of the lesson. Specifically, the OCV method is mentioned in the objectives but not yet explained or applied in the provided text. Similarly, the structure is good but incomplete as drafted. Expanding on these key framework applications will elevate the lesson from acceptable to excellent."
     },
     {
       "id": "C-039",
@@ -295,24 +294,22 @@
       "status": "done",
       "completed_at": "2026-05-15T18:32:37.016065+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
         "framework_use": 2,
         "analogy_quality": 3,
-        "structure_complete": 2,
-        "overall": 2.6
+        "structure_complete": 3,
+        "overall": 3
       },
       "qc_structural": {
-        "word_count": 2576,
-        "missing_sections": [
-          "Lesson Overview"
-        ],
+        "word_count": 2754,
+        "missing_sections": [],
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson is strong overall, with excellent reading level, faith integration, and analogies. The application of Multiscale Modeling is clear and effective. However, the provided draft is incomplete. It introduces the Objective, Constraint, Variable (OCV) framework in the objectives and vocabulary but does not yet include the section demonstrating its application. To be fully effective, the lesson must include the promised content on using OCV to optimize a timeline. The structure is good but needs completion to meet all stated learning objectives."
+      "qc_notes": "Excellent draft. The reading level, faith integration, and analogies are all strong and well-suited for middle schoolers. The structure is complete and logical. The only minor weakness is that the application of Multiscale Modeling and OCV is mentioned in the objectives but not yet demonstrated in the provided text. Ensure these concepts are fully developed in the subsequent sections to meet the learning objectives. Overall, this is a high-quality lesson that effectively blends engineering principles with a biblical worldview."
     },
     {
       "id": "C-042",
@@ -508,7 +505,7 @@
       "status": "done",
       "completed_at": "2026-05-15T15:45:09.669090+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
@@ -523,7 +520,8 @@
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson is excellent, with strong integration of faith and course frameworks. The reading level is appropriately challenging for middle school. The central analogy comparing Verification, Validation, and Testing to building a water pump is clear and effective. However, it could be strengthened by extending it consistently throughout the entire lesson to provide a single, unifying example for students to follow."
+      "qc_notes": "The lesson is excellent, with strong integration of faith and course frameworks. The reading level is appropriately challenging for middle school. The central analogy comparing Verification, Validation, and Testing to building a water pump is clear and effective. However, it could be strengthened by extending it consistently throughout the entire lesson to provide a single, unifying example for students to follow.",
+      "qc_override": "word_count_marginal: content excellent (2.8/3), 35-287 words over 4K cap, accepted by Shane 2026-05-15"
     },
     {
       "id": "C-057",
@@ -537,24 +535,24 @@
       "status": "done",
       "completed_at": "2026-05-15T15:45:58.860064+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
-        "reading_level": 3,
+        "reading_level": 2,
         "faith_integration": 3,
         "framework_use": 2,
-        "analogy_quality": 3,
-        "structure_complete": 2,
-        "overall": 3
+        "analogy_quality": 1,
+        "structure_complete": 3,
+        "overall": 2.2
       },
       "qc_structural": {
-        "word_count": 3642,
-        "missing_sections": [
-          "Lesson Overview"
-        ],
+        "word_count": 3952,
+        "missing_sections": [],
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson draft is excellent overall. The reading level is appropriately challenging, the faith integration is natural and meaningful, and the LEGO analogy is very effective for middle schoolers. The structure is mostly complete, but the draft provided is partial, so a full evaluation is not possible. The use of the Creationeering framework is acceptable, correctly placing the lesson in the 'Assembly' phase, but it could be strengthened by explicitly referencing other core concepts like Multiscale Modeling or OCV to reinforce the course's unique methodology."
+      "qc_notes": "The lesson's structure and faith integration are strong. However, the core topic of Configuration Management is highly abstract for middle schoolers. The vocabulary is advanced, and the lesson lacks concrete, relatable analogies to make these concepts understandable. For example, instead of just defining a baseline, compare it to a saved game in a video game or a final recipe before you start baking for a party. The current analogies are too abstract. The framework use is acceptable but could be strengthened by explicitly mentioning Multiscale Modeling and OCV.",
+      "revision_status": "revised",
+      "revised_section": "Part 1"
     },
     {
       "id": "C-058",
@@ -768,24 +766,22 @@
       "status": "done",
       "completed_at": "2026-05-15T20:45:56.782734+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
-        "framework_use": 3,
+        "framework_use": 2,
         "analogy_quality": 3,
         "structure_complete": 2,
-        "overall": 2.8
+        "overall": 2.6
       },
       "qc_structural": {
-        "word_count": 2374,
-        "missing_sections": [
-          "Lesson Overview"
-        ],
+        "word_count": 2554,
+        "missing_sections": [],
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "Excellent draft. The reading level, faith integration, and use of the Creationeering framework are all strong. The analogies are concrete and effective for middle schoolers. The main area for improvement is completing the lesson structure. The draft ends abruptly in the middle of Part 2, leaving out subsequent sections like the application of the OCV method, a concluding summary, and a student activity or assessment. Completing these sections is necessary before the lesson can be finalized."
+      "qc_notes": "The lesson is strong, with excellent reading level, faith integration, and analogies. The core frameworks (Creationeering, Multiscale Modeling, OCV) are introduced correctly. However, the provided draft is incomplete. The main body text defines Multiscale Modeling and OCV but does not yet explain or apply them as promised in the learning objectives. Ensure the subsequent sections fully develop these concepts to meet the stated goals. The structure is good but needs the missing application sections to be complete."
     },
     {
       "id": "C-067",
