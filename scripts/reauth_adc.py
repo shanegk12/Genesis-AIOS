@@ -11,6 +11,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/documents",
     "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/cloud-platform",
+    "https://www.googleapis.com/auth/gmail.send",
 ]
 
 CLIENT_FILE = os.path.join(os.path.dirname(__file__), "..", "oauth-client.json")
@@ -34,3 +35,4 @@ with open(ADC_PATH, "w") as f:
 
 print(f"ADC credentials written to:\n  {ADC_PATH}")
 print(f"Scopes granted: {creds.scopes}")
+print(f"\nGMAIL_REFRESH_TOKEN (add to Secret Manager):\n{creds.refresh_token}")

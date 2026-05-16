@@ -224,6 +224,23 @@ def notify(message):
         subprocess.run([sys.executable, NOTIFY_SCRIPT, message], check=False)
 
 
+def notify_morning(pending_count, batch_size):
+    if os.path.exists(NOTIFY_SCRIPT):
+        subprocess.run(
+            [sys.executable, NOTIFY_SCRIPT, "--morning"],
+            check=False,
+            env={**os.environ},
+        )
+
+
+def notify_failure(error_text):
+    if os.path.exists(NOTIFY_SCRIPT):
+        subprocess.run(
+            [sys.executable, NOTIFY_SCRIPT, "--failure", error_text[:2000]],
+            check=False,
+        )
+
+
 def git_push_manifest():
     try:
         subprocess.run(
@@ -399,6 +416,8 @@ def main():
             print(f"  [{l['id']:6s}] {l['doc']:15s} tab {l['tab_number']:3d} | {l['tab']}")
         return
 
+    notify_morning(len(queue), args.batch or len(queue))
+
     print()
     done = failed = qc_flagged = media_failed = interactive_failed = assessment_failed = scorm_failed = image_failed = 0
 
@@ -492,4 +511,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import traceback
+    try:
+        main()
+    except Exception:
+        error_text = traceback.format_exc()
+        print(f"FATAL ERROR:\n{error_text}", file=sys.stderr)
+        notify_failure(error_text)
+        sys.exit(1)
