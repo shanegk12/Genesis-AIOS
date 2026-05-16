@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Circular Economy Sort</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    min-height: 100vh;
+  }
+  h1 { text-align: center; margin: 0 0 6px; color: #1e3a5f; }
+  .subtitle { text-align: center; margin-bottom: 16px; color: #555; font-size: 14px; }
+  .scoreboard {
+    display: flex; justify-content: space-around;
+    background: #1e3a5f; color: #fff;
+    padding: 10px; border-radius: 8px;
+    margin-bottom: 16px; font-weight: bold;
+  }
+  .scoreboard span { color: #c9a227; }
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+  }
+  .item-stage {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-card {
+    background: #fff;
+    border: 3px dashed #c9a227;
+    border-radius: 10px;
+    padding: 16px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.2s;
+  }
+  .item-card:active { cursor: grabbing; transform: scale(1.05); }
+  .item-emoji { font-size: 56px; display: block; }
+  .item-name { font-weight: bold; margin-top: 6px; font-size: 16px; }
+  .bins {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .bin.hover {
+    background: #c9a227;
+    color: #fff;
+    transform: scale(1.03);
+  }
+  .bin-icon { font-size: 32px; }
+  .bin-title { font-weight: bold; font-size: 15px; margin: 4px 0 2px; }
+  .bin-desc { font-size: 11px; color: #555; }
+  .bin.hover .bin-desc { color: #fff; }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 50px;
+    background: #fff;
+    border: 2px solid #ddd;
+  }
+  .feedback.good { border-color: #2e8b57; color: #2e8b57; }
+  .feedback.bad { border-color: #c0392b; color: #c0392b; }
+  .end-screen {
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+  }
+  .end-screen h2 { color: #1e3a5f; }
+  button {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover { background: #b08e1f; }
+  .progress-bar {
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #c9a227;
+    transition: width 0.3s;
+  }
+</style>
+</head>
+<body>
+
+<h1>♻️ Close the Loop!</h1>
+<p class="subtitle">Drag each item into the best circular-economy bin to keep it out of the landfill.</p>
+
+<div class="scoreboard">
+  <div>Item: <span id="itemNum">1</span> / <span id="itemTotal">8</span></div>
+  <div>Score: <span id="score">0</span></div>
+  <div>Streak: <span id="streak">0</span> 🔥</div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+
+<div id="game">
+  <div class="game-area">
+    <div class="item-stage" id="itemStage"></div>
+    <div class="bins" id="bins">
+      <div class="bin" data-bin="reduce">
+        <div class="bin-icon">🚫</div>
+        <div class="bin-title">REDUCE</div>
+        <div class="bin-desc">Use less in the first place</div>
+      </div>
+      <div class="bin" data-bin="reuse">
+        <div class="bin-icon">🔄</div>
+        <div class="bin-title">REUSE</div>
+        <div class="bin-desc">Use it again as-is</div>
+      </div>
+      <div class="bin" data-bin="recycle">
+        <div class="bin-icon">♻️</div>
+        <div class="bin-title">RECYCLE</div>
+        <div class="bin-desc">Break down into new material</div>
+      </div>
+      <div class="bin" data-bin="compost">
+        <div class="bin-icon">🌱</div>
+        <div class="bin-title">COMPOST</div>
+        <div class="bin-desc">Return to soil as nutrients</div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback" id="feedback">Drag the item above into the matching bin!</div>
+</div>
+
+<div id="endScreen" class="end-screen" style="display:none;">
+  <h2>🌟 Loop Closed!</h2>
+  <p id="finalMsg"></p>
+  <p id="finalScore" style="font-size:22px; color:#c9a227; font-weight:bold;"></p>
+  <p style="font-style:italic; color:#555; max-width:500px; margin:14px auto;">
+    God's creation runs in cycles — nothing is wasted. Engineers design circular systems to mimic that perfect renewal.
+  </p>
+  <button onclick="restart()">Play Again</button>
+</div>
+
+<script>
+const items = [
+  { emoji: "🍎", name: "Apple Core", answer: "compost", explain: "Food scraps break down into rich soil for new plants." },
+  { emoji: "🥤", name: "Aluminum Can", answer: "recycle", explain: "Aluminum can be melted and reshaped endlessly!" },
+  { emoji: "👕", name: "Outgrown T-Shirt", answer: "reuse", explain: "Donate it — someone else can wear it again." },
+  { emoji: "🛍️", name: "Plastic Shopping Bag", answer: "reduce", explain: "Bring a reusable bag so you never need a disposable one." },
+  { emoji: "📰", name: "Old Newspaper", answer: "recycle", explain: "Paper fibers can become new paper products." },
+  { emoji: "🍌", name: "Banana Peel", answer: "compost", explain: "Peels become nutrients that feed new fruit trees." },
+  { emoji: "🍶", name: "Glass Jar", answer: "reuse", explain: "Wash it out and store snacks, crafts, or coins!" },
+  { emoji: "💧", name: "Single-Use Water Bottle", answer: "reduce", explain: "Use a refillable bottle — avoid the waste entirely." }
+];
+
+let order = [];
+let idx = 0;
+let score = 0;
+let streak = 0;
+let locked = false;
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function init() {
+  order = shuffle([...items]);
+  idx = 0; score = 0; streak = 0;
+  document.getElementById('itemTotal').textContent = order.length;
+  document.getElementById('endScreen').style.display = 'none';
+  document.getElementById('game').style.display = 'block';
+  updateScore();
+  showItem();
+}
+
+function updateScore() {
+  document.getElementById('score').textContent = score;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('itemNum').textContent = Math.min(idx+1, order.length);
+  document.getElementById('progress').style.width = (idx/order.length*100) + '%';
+}
+
+function showItem() {
+  if (idx >= order.length) return endGame();
+  locked = false;
+  const item = order[idx];
+  const stage = document.getElementById('itemStage');
+  stage.innerHTML = `<div class="item-card" draggable="true" id="dragItem">
+    <span class="item-emoji">${item.emoji}</span>
+    <div class="item-name">${item.name}</div>
+  </div>`;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = 'Drag this item into the best bin!';
+  attachDrag();
+  updateScore();
+}
+
+function attachDrag() {
+  const drag = document.getElementById('dragItem');
+  if (!drag) return;
+  drag.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text/plain', 'item');
+  });
+  // Touch support
+  let touchClone = null, touchOffsetX=0, touchOffsetY=0;
+  drag.addEventListener('touchstart', e => {
+    if (locked) return;
+    const t = e.touches[0];
+    const rect = drag.getBoundingClientRect();
+    touchOffsetX = t.clientX - rect.left;
+    touchOffsetY = t.clientY - rect.top;
+    touchClone = drag.cloneNode(true);
+    touchClone.style.position = 'fixed';
+    touchClone.style.left = rect.left + 'px';
+    touchClone.style.top = rect.top + 'px';
+    touchClone.style.width = rect.width + 'px';
+    touchClone.style.zIndex = 999;
+    touchClone.style.opacity = '0.8';
+    touchClone.style.pointerEvents = 'none';
+    document.body.appendChild(touchClone);
+    drag.style.opacity = '0.3';
+  }, {passive:true});
+  drag.addEventListener('touchmove', e => {
+    if (!touchClone) return;
+    const t = e.touches[0];
+    touchClone.style.left = (t.clientX - touchOffsetX) + 'px';
+    touchClone.style.top = (t.clientY - touchOffsetY) + 'px';
+    document.querySelectorAll('.bin').forEach(b => {
+      const r = b.getBoundingClientRect();
+      if (t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom) {
+        b.classList.add('hover');
+      } else { b.classList.remove('hover'); }
+    });
+    e.preventDefault();
+  }, {passive:false});
+  drag.addEventListener('touchend', e => {
+    if (!touchClone) return;
+    const t = e.changedTouches[0];
+    let dropped = null;
+    document.querySelectorAll('.bin').forEach(b => {
+      const r = b.getBoundingClientRect();
+      if (t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom) {
+        dropped = b.dataset.bin;
+      }
+      b.classList.remove('hover');
+    });
+    touchClone.remove(); touchClone=null;
+    drag.style.opacity='1';
+    if (dropped) handleDrop(dropped);
+  });
+}
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('hover'); });
+  bin.addEventListener('dragleave', () => bin.classList.remove('hover'));
+  bin.addEventListener('drop', e => {
+    e.preventDefault();
+    bin.classList.remove('hover');
+    handleDrop(bin.dataset.bin);
+  });
+});
+
+function handleDrop(binName) {
+  if (locked) return;
+  locked = true;
+  const item = order[idx];
+  const fb = document.getElementById('feedback');
+  if (binName === item.answer) {
+    score += 10 + streak * 2;
+    streak++;
+    fb.className = 'feedback good';
+    fb.textContent = `✓ Correct! ${item.explain}`;
+  } else {
+    streak = 0;
+    fb.className = 'feedback bad';
+    const correctBin = document.querySelector(`.bin[data-bin="${item.answer}"] .bin-title`).textContent;
+    fb.textContent = `✗ Better answer: ${correctBin}. ${item.explain}`;
+  }
+  updateScore();
+  setTimeout(() => {
+    idx++;
+    if (idx >= order.length) endGame();
+    else showItem();
+  }, 1900);
+}
+
+function endGame() {
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('endScreen').style.display = 'block';
+  const max = order.length * 10 + (order.length-1)*2*order.length/2;
+  document.getElementById('finalScore').textContent = `Final Score: ${score}`;
+  let msg = '';
+  if (score >= 100) msg = "Outstanding! You're a circular-economy engineer! 🏆";
+  else if (score >= 70) msg = "Great work! You understand the waste hierarchy.";
+  else if (score >= 40) msg = "Good effort — review the bins and try again!";
+  else msg = "Keep learning — every item has a better path than the trash!";
+  document.getElementById('finalMsg').textContent = msg;
+}
+
+function restart() { init(); }
+
+init();
+</script>
+
+</body>
+</html>

@@ -297,30 +297,30 @@
     "prompts": [
       {
         "section": "Cover",
-        "concept": "Defining precise engineering requirements",
-        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized blueprint is unfurling to reveal a detailed, colorful 3D model of a simple robot. Several callout lines point to specific parts of the robot, each with a small, clear icon representing a measurement, material type, or performance metric. The overall scene conveys precision and the translation of abstract ideas into tangible components.",
+        "concept": "Engineering Design and Procurement",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized blueprint unrolls from the top, revealing a vibrant, partially constructed model of a futuristic bridge. Scattered around the blueprint are various neatly organized material samples: a piece of polished metal, a small coil of wire, a block of dense wood, and a clear plastic component. A magnifying glass hovers over one of the samples, highlighting its detail. The overall image conveys precision, planning, and the tangible results of good engineering.",
         "aspectRatio": "16:9"
       },
       {
-        "section": "Part 1: Introduction to Technical Specifications",
-        "concept": "The role of specifications in procurement",
-        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A split scene shows two contrasting scenarios. On the left, a student is confused, holding a jumble of mismatched parts and a vague drawing, looking frustrated. On the right, a student confidently holds a detailed specification sheet and is selecting the correct, clearly labeled components from organized bins, smiling. Arrows show the flow from specification sheet to correct parts.",
+        "section": "Part 1: What Are Technical Specifications?",
+        "concept": "Defining Precise Material Requirements",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A close-up view of a workbench. On the workbench, a partially assembled wooden birdhouse is visible. Next to it, a detailed technical drawing of a specific wooden beam is laid out, showing dimensions, material type (e.g., 'Pine, Grade A'), and finish requirements (e.g., 'Weather-resistant sealant'). Several neatly stacked planks of wood are in the background, with one plank highlighted to match the drawing's specifications.",
         "aspectRatio": "16:9"
       }
     ],
     "images": {
       "Cover": {
-        "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-035\\Cover.png",
-        "drive_id": "1EGfSb8S-K7cU889B9dGmZSqyIdS9vYvV",
-        "drive_url": "https://drive.google.com/file/d/1EGfSb8S-K7cU889B9dGmZSqyIdS9vYvV/view?usp=drivesdk",
+        "local": "/repo/scripts/../output/images/creationeering/C-035/Cover.png",
+        "drive_id": "1PawoHtqgYY7LbLUDzqgESMN78Dv5RGtM",
+        "drive_url": "https://drive.google.com/file/d/1PawoHtqgYY7LbLUDzqgESMN78Dv5RGtM/view?usp=drivesdk",
         "image_qc_status": "passed",
         "image_qc_notes": "none",
         "image_retry_count": 0
       },
-      "Part 1: Introduction to Technical Specifications": {
-        "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-035\\Part_1_Introduction_to_Technical_Specifi.png",
-        "drive_id": "1MUBUTKdj7C2TyM31et8Do2aOWSqEnC1A",
-        "drive_url": "https://drive.google.com/file/d/1MUBUTKdj7C2TyM31et8Do2aOWSqEnC1A/view?usp=drivesdk",
+      "Part 1: What Are Technical Specifications?": {
+        "local": "/repo/scripts/../output/images/creationeering/C-035/Part_1_What_Are_Technical_Specifications.png",
+        "drive_id": "1P-oJcR0Rxck18ceZvgiq_HVp9GPwT6CZ",
+        "drive_url": "https://drive.google.com/file/d/1P-oJcR0Rxck18ceZvgiq_HVp9GPwT6CZ/view?usp=drivesdk",
         "image_qc_status": "passed",
         "image_qc_notes": "none",
         "image_retry_count": 0
@@ -492,12 +492,12 @@
         "image_retry_count": 0
       },
       "Part 3: The Benefits of Just-In-Case": {
-        "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-049\\Part_3_The_Benefits_of_Just-In-Case.png",
-        "drive_id": "1vKArBjqdykV6VMhDnJ1p0xTRwZpkZtZa",
-        "drive_url": "https://drive.google.com/file/d/1vKArBjqdykV6VMhDnJ1p0xTRwZpkZtZa/view?usp=drivesdk",
-        "image_qc_status": "flagged",
-        "image_qc_notes": "The image does not clearly depict the concept of 'Ensuring project continuity with buffer inventory'. While it shows students working on a bridge construction with various parts, there's no visual representation of a buffer stock or how it ensures continuity.",
-        "image_retry_count": 0
+        "local": "/repo/scripts/../output/images/creationeering/C-049/Part_3_The_Benefits_of_Just-In-Case.png",
+        "drive_id": "1O0AcdhbwC-Yo8Y1CK1o-go0h1f1TaSGz",
+        "drive_url": "https://drive.google.com/file/d/1O0AcdhbwC-Yo8Y1CK1o-go0h1f1TaSGz/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 1
       },
       "Part 4: When to Use Which Strategy": {
         "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-049\\Part_4_When_to_Use_Which_Strategy.png",
@@ -516,12 +516,12 @@
         "image_retry_count": 0
       },
       "Part 6: Stewardship and Wise Planning": {
-        "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-049\\Part_6_Stewardship_and_Wise_Planning.png",
-        "drive_id": "1y75mG7_dbySmIKTkCZl00q8Av-Eww2Y3",
-        "drive_url": "https://drive.google.com/file/d/1y75mG7_dbySmIKTkCZl00q8Av-Eww2Y3/view?usp=drivesdk",
+        "local": "/repo/scripts/../output/images/creationeering/C-049/Part_6_Stewardship_and_Wise_Planning.png",
+        "drive_id": "1LJcvCnDjOcOijXXmio27ViG1q-K5sDRt",
+        "drive_url": "https://drive.google.com/file/d/1LJcvCnDjOcOijXXmio27ViG1q-K5sDRt/view?usp=drivesdk",
         "image_qc_status": "flagged",
-        "image_qc_notes": "The image does not clearly depict Biblical principles of resource management. The two circular emblems at the top are abstract and do not convey a clear message related to the concept. The rest of the illustration shows children working with building materials, which is relevant to engineering but not specifically to resource management or Biblical principles.",
-        "image_retry_count": 0
+        "image_qc_notes": "The image does not clearly depict Biblical principles of resource management. While it shows students in an engineering setting, there is no visual element that connects to the concept of resource management from a Biblical perspective.",
+        "image_retry_count": 1
       }
     }
   },
@@ -714,12 +714,12 @@
         "image_retry_count": 0
       },
       "Part 1: Verification vs. Validation": {
-        "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-056\\Part_1_Verification_vs._Validation.png",
-        "drive_id": "14yXccdup0GIhwwXda0hYu64Mme8O8OLe",
-        "drive_url": "https://drive.google.com/file/d/14yXccdup0GIhwwXda0hYu64Mme8O8OLe/view?usp=drivesdk",
-        "image_qc_status": "flagged",
-        "image_qc_notes": "The image depicts 'Verification' vs. 'Validation', not 'Checking requirements vs. checking user needs'. Verification typically refers to checking if the product is built correctly according to specifications, while validation refers to checking if the product meets the user's needs. The illustration shows a person checking measurements (verification) and people building a bridge (validation), which is a misinterpretation of the concept.",
-        "image_retry_count": 0
+        "local": "/repo/scripts/../output/images/creationeering/C-056/Part_1_Verification_vs._Validation.png",
+        "drive_id": "1zZe9BXriXLt4B8h5J2qeAMtJANVK7SIG",
+        "drive_url": "https://drive.google.com/file/d/1zZe9BXriXLt4B8h5J2qeAMtJANVK7SIG/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 1
       },
       "Part 2: The Importance of Testing": {
         "local": "d:\\AIOS\\scripts\\..\\output\\images\\creationeering\\C-056\\Part_2_The_Importance_of_Testing.png",
@@ -1191,5 +1191,149 @@
       }
     ],
     "images": {}
+  },
+  "C-068": {
+    "topic": "Product Certification and Regulatory Compliance",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Product certification as a seal of approval",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A collection of diverse, friendly-looking engineered products like a solar-powered toy car, a robust water filter, and a simple robotic arm, each prominently displaying a golden, stylized 'certified' stamp or badge. The products are arranged in a dynamic, celebratory composition, suggesting success and trustworthiness.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: What is Product Certification?",
+        "concept": "Independent verification of safety and quality",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A clear, detailed illustration of a sturdy, modern bicycle. A magnifying glass hovers over a prominent, golden circular 'Certified Safe' emblem attached to the bicycle frame. In the background, a friendly, simplified diagram shows a third-party inspector in a lab coat examining a component of the bicycle, emphasizing the independent verification process.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/creationeering/C-068/Cover.png",
+        "drive_id": "16M8kl6ZSCCjO5ZemLfcQ9EN8B6Fb7TR3",
+        "drive_url": "https://drive.google.com/file/d/16M8kl6ZSCCjO5ZemLfcQ9EN8B6Fb7TR3/view?usp=drivesdk",
+        "image_qc_status": "flagged",
+        "image_qc_notes": "The image does not depict product certification as a seal of approval. It shows a car, robotic arms, and a water filter, which are elements of engineering and manufacturing, but lack any visual representation of a certification mark or seal.",
+        "image_retry_count": 1
+      },
+      "Part 1: What is Product Certification?": {
+        "local": "/repo/scripts/../output/images/creationeering/C-068/Part_1_What_is_Product_Certification.png",
+        "drive_id": "1J7ZH77sl5hn7gxhq0V5yczGyBEiH13OL",
+        "drive_url": "https://drive.google.com/file/d/1J7ZH77sl5hn7gxhq0V5yczGyBEiH13OL/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "C-069": {
+    "topic": "Customer Acceptance and Final Delivery",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Fulfilling purpose through engineered systems",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A diverse group of middle school students excitedly examining a completed, functional robot they have built. The robot is sleek and advanced-looking, with glowing gold accents. In the background, a subtle blueprint overlay hints at the design process. The overall scene conveys a sense of accomplishment and purpose fulfilled.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: What is Customer Acceptance?",
+        "concept": "User satisfaction with a finished product",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A split scene showing a young engineer presenting a newly built, functional solar-powered water pump to a smiling community member in a rural setting. On one side, the engineer is pointing to the pump's features. On the other side, the community member is giving a thumbs-up, clearly pleased with its operation. The pump is depicted with clear, visible components.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/creationeering/C-069/Cover.png",
+        "drive_id": "1vJj_Bcixllnu9ja8J1S8t4KrYf3TFXrX",
+        "drive_url": "https://drive.google.com/file/d/1vJj_Bcixllnu9ja8J1S8t4KrYf3TFXrX/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: What is Customer Acceptance?": {
+        "local": "/repo/scripts/../output/images/creationeering/C-069/Part_1_What_is_Customer_Acceptance.png",
+        "drive_id": "1defRaJIBYBCKW_sH6IQKT-__iRATJ_Ga",
+        "drive_url": "https://drive.google.com/file/d/1defRaJIBYBCKW_sH6IQKT-__iRATJ_Ga/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "C-071": {
+    "topic": "The 3 R's: Reduce, Reuse, Recycle",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "The 3 R's: Reduce, Reuse, Recycle",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A central graphic features three distinct icons: a downward-pointing arrow for 'Reduce', a circular arrow for 'Reuse', and a triangle of arrows for 'Recycle'. These icons are surrounded by stylized, simplified representations of everyday objects like a water bottle, a cardboard box, and a metal can, all arranged in a visually appealing and balanced composition. 16:9 composition.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: Reduce – Less is More",
+        "concept": "Minimizing material usage",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A comparison is shown between two identical school desks. The desk on the left is depicted with thick, bulky materials and excess components. The desk on the right, labeled as 'Reduced Design', is shown with sleeker lines, fewer visible screws, and appears lighter, implying less material usage. Arrows point from the bulkier elements of the left desk to the more efficient design on the right, illustrating the concept of using less. 16:9 composition.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/creationeering/C-071/Cover.png",
+        "drive_id": "1zL0VKbgtmcJZ0AdK4tt2R5D1r3-1XTyE",
+        "drive_url": "https://drive.google.com/file/d/1zL0VKbgtmcJZ0AdK4tt2R5D1r3-1XTyE/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Reduce – Less is More": {
+        "local": "/repo/scripts/../output/images/creationeering/C-071/Part_1_Reduce_–_Less_is_More.png",
+        "drive_id": "1wEY-JqGE6PqVlbQyEpFjKDMUW-nrEXjs",
+        "drive_url": "https://drive.google.com/file/d/1wEY-JqGE6PqVlbQyEpFjKDMUW-nrEXjs/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "C-074": {
+    "topic": "Waste Stream Management and Circular Economy",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Waste streams transforming into valuable resources",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A dynamic visual showing discarded items like plastic bottles, paper, and metal scraps on one side, seamlessly transforming through a series of stylized gears and pipes into new, useful products like a bicycle frame, a notebook, and a new can on the other side. A subtle upward arrow indicates a positive progression. 16:9 composition.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: The Problem with \"Take, Make, Dispose\"",
+        "concept": "Linear economy's waste generation",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A clear, step-by-step diagram illustrating a linear economy. On the left, a large factory icon extracts raw materials from the earth. Arrows lead to a product icon (like a simple box). A prominent arrow then leads to a large, overflowing trash bin icon on the far right, with discarded items spilling out. The overall flow is a straight line from left to right. 16:9 composition.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/creationeering/C-074/Cover.png",
+        "drive_id": "18E5L-v44Gw_FSoiVd532-KmM48ZlFF6X",
+        "drive_url": "https://drive.google.com/file/d/18E5L-v44Gw_FSoiVd532-KmM48ZlFF6X/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Problem with \"Take, Make, Dispose\"": {
+        "local": "/repo/scripts/../output/images/creationeering/C-074/Part_1_The_Problem_with_Take,_Make,_Disp.png",
+        "drive_id": "1M9qKuDs6f8n_N48Yi4MujcLHqvBQOVgU",
+        "drive_url": "https://drive.google.com/file/d/1M9qKuDs6f8n_N48Yi4MujcLHqvBQOVgU/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
   }
 }

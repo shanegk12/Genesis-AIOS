@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Treehouse Tech Specs Challenge</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 4px;
+    text-align: center;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 16px;
+    font-size: 0.95em;
+  }
+  .progress {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 20px;
+    height: 18px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    background: #c9a227;
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .scenario {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 1.05em;
+    line-height: 1.4;
+  }
+  .scenario strong { color: #c9a227; }
+  .order-card {
+    background: #f7f9fc;
+    border: 2px dashed #c9a227;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 18px;
+    font-size: 0.95em;
+  }
+  .order-card h3 {
+    margin: 0 0 6px;
+    color: #c9a227;
+    font-size: 1em;
+  }
+  .spec-row {
+    margin-bottom: 14px;
+  }
+  .spec-label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+  }
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .opt {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 140px;
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .opt:hover:not(.locked) {
+    background: #1e3a5f;
+    color: #fff;
+  }
+  .opt.selected {
+    background: #1e3a5f;
+    color: #fff;
+    border-color: #c9a227;
+  }
+  .opt.correct {
+    background: #2d7a4f;
+    color: #fff;
+    border-color: #2d7a4f;
+  }
+  .opt.wrong {
+    background: #b03030;
+    color: #fff;
+    border-color: #b03030;
+  }
+  .opt.locked { cursor: default; }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.4;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.good { background: #e6f4ec; border-left: 5px solid #2d7a4f; }
+  .feedback.bad { background: #fbeaea; border-left: 5px solid #b03030; }
+  .btn {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    display: block;
+    margin: 18px auto 0;
+    transition: transform 0.1s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:disabled { background: #bbb; cursor: not-allowed; transform: none; }
+  .final {
+    text-align: center;
+    padding: 20px;
+  }
+  .final h2 { color: #c9a227; font-size: 1.8em; margin: 8px 0; }
+  .score-num { font-size: 3em; color: #1e3a5f; font-weight: bold; }
+  .blueprint {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+  .blueprint .label { color: #c9a227; }
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+const scenarios = [
+  {
+    title: "The Treehouse Floor",
+    story: "You're building a treehouse floor. Three friends will play on it, and it has to last through rainy seasons outside. Pick the right specs!",
+    specs: [
+      {
+        label: "Material Type",
+        options: [
+          { text: "Pressure-treated pine (outdoor rated)", correct: true, why: "Pressure-treated wood resists rot and moisture — essential for outdoor use." },
+          { text: "Cardboard sheets", correct: false, why: "Cardboard collapses under weight and disintegrates when wet." },
+          { text: "Untreated indoor plywood", correct: false, why: "Indoor plywood rots quickly when exposed to rain." },
+          { text: "Thin balsa wood", correct: false, why: "Balsa is way too weak to hold people." }
+        ]
+      },
+      {
+        label: "Plank Thickness",
+        options: [
+          { text: "3/4 inch (19 mm)", correct: true, why: "3/4\" is the standard load-bearing thickness for floor decking." },
+          { text: "1/16 inch (paper-thin)", correct: false, why: "Too thin — it would snap immediately." },
+          { text: "4 inches (extremely thick)", correct: false, why: "Overkill — too heavy and wasteful." },
+          { text: "Not specified", correct: false, why: "A real spec MUST include thickness. 'Just wood' isn't enough!" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Fasteners (Screws)",
+    story: "Now you need screws to hold those floor planks down. Specs matter — the wrong screw = a falling treehouse!",
+    specs: [
+      {
+        label: "Screw Material",
+        options: [
+          { text: "Galvanized or stainless steel", correct: true, why: "Galvanized/stainless steel resists rust outdoors." },
+          { text: "Plain iron nails", correct: false, why: "Plain iron rusts fast in rain and weakens." },
+          { text: "Plastic push-pins", correct: false, why: "Plastic pins can't hold structural loads." },
+          { text: "Aluminum foil twists", correct: false, why: "Foil has almost no strength!" }
+        ]
+      },
+      {
+        label: "Screw Length",
+        options: [
+          { text: "2.5 inches (long enough to bite into the joist)", correct: true, why: "Length must pass through the plank AND grip the support beam below." },
+          { text: "1/2 inch", correct: false, why: "Too short — it won't reach the support beam." },
+          { text: "12 inches", correct: false, why: "Way too long — it would poke out the other side dangerously." },
+          { text: "Any length, doesn't matter", correct: false, why: "Length is one of THE most important fastener specs." }
+        ]
+      }
+    ]
+  },
+  {
+    title: "The Safety Rope Ladder",
+    story: "Last spec: a rope ladder. Climbers' safety depends on choosing the right rope.",
+    specs: [
+      {
+        label: "Rope Strength Rating",
+        options: [
+          { text: "Rated for at least 500 lbs (227 kg) working load", correct: true, why: "A safe rope must be rated well above the heaviest user with a safety margin." },
+          { text: "Rated for 20 lbs (decorative twine)", correct: false, why: "Twine snaps under a person's weight!" },
+          { text: "No rating listed", correct: false, why: "Unrated rope = unknown safety. Always specify a load rating." },
+          { text: "Rated for 50,000 lbs (ship anchor cable)", correct: false, why: "Way overkill — too heavy and stiff to climb." }
+        ]
+      },
+      {
+        label: "Rope Diameter",
+        options: [
+          { text: "1/2 inch (12 mm) — easy to grip", correct: true, why: "Half-inch is comfortable to grip and strong enough." },
+          { text: "1/32 inch (fishing line)", correct: false, why: "Too thin to grip or hold weight." },
+          { text: "3 inches (giant ship rope)", correct: false, why: "Too thick for small hands to grip." },
+          { text: "Whatever's in the garage", correct: false, why: "Specs must be EXACT, not guesses!" }
+        ]
+      }
+    ]
+  }
+];
+
+let currentScenario = 0;
+let currentSpec = 0;
+let score = 0;
+let total = 0;
+let selections = [];
+
+const app = document.getElementById('app');
+
+function render() {
+  if (currentScenario >= scenarios.length) {
+    renderFinal();
+    return;
+  }
+  const sc = scenarios[currentScenario];
+  const sp = sc.specs[currentSpec];
+  const totalSteps = scenarios.reduce((a,b)=>a+b.specs.length,0);
+  const stepsDone = scenarios.slice(0,currentScenario).reduce((a,b)=>a+b.specs.length,0) + currentSpec;
+  const pct = (stepsDone / totalSteps) * 100;
+
+  app.innerHTML = `
+    <h1>🔨 Tech Specs Challenge</h1>
+    <div class="subtitle">Procure the right materials for your treehouse!</div>
+    <div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div class="scenario"><strong>${sc.title}:</strong> ${sc.story}</div>
+    <div class="order-card">
+      <h3>📋 PROCUREMENT ORDER — Specify:</h3>
+      <div class="spec-label">${sp.label}</div>
+      <div class="options" id="opts"></div>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <button class="btn" id="nextBtn" disabled>Next →</button>
+  `;
+
+  const optsDiv = document.getElementById('opts');
+  sp.options.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = o.text;
+    b.onclick = () => selectOption(i);
+    optsDiv.appendChild(b);
+  });
+}
+
+function selectOption(idx) {
+  const sp = scenarios[currentScenario].specs[currentSpec];
+  const opt = sp.options[idx];
+  const buttons = document.querySelectorAll('.opt');
+  buttons.forEach((b, i) => {
+    b.classList.add('locked');
+    b.onclick = null;
+    if (sp.options[i].correct) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+  total++;
+  const fb = document.getElementById('fb');
+  if (opt.correct) {
+    score++;
+    fb.className = 'feedback show good';
+    fb.innerHTML = `<strong>✓ Perfect spec!</strong> ${opt.why}`;
+  } else {
+    const correctOpt = sp.options.find(o => o.correct);
+    fb.className = 'feedback show bad';
+    fb.innerHTML = `<strong>✗ Not quite.</strong> ${opt.why}<br><br><strong>Better choice:</strong> "${correctOpt.text}" — ${correctOpt.why}`;
+  }
+  selections.push({ label: sp.label, choice: opt.text, correct: opt.correct });
+
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = false;
+  nextBtn.onclick = () => {
+    currentSpec++;
+    if (currentSpec >= scenarios[currentScenario].specs.length) {
+      currentSpec = 0;
+      currentScenario++;
+    }
+    render();
+  };
+}
+
+function renderFinal() {
+  const pct = Math.round((score/total)*100);
+  let rating = "", msg = "";
+  if (pct === 100) { rating = "Master Creationeer™!"; msg = "Every spec was precise. Your treehouse is built to last!"; }
+  else if (pct >= 75) { rating = "Skilled Junior Creationeer"; msg = "Strong specs overall — review the misses and you're set."; }
+  else if (pct >= 50) { rating = "Apprentice Creationeer"; msg = "You're learning! Precise specs prevent project disasters."; }
+  else { rating = "Keep Practicing!"; msg = "Technical specs need EXACT details — type, size, strength, and rating."; }
+
+  app.innerHTML = `
+    <div class="final">
+      <h1>🏆 Procurement Complete!</h1>
+      <div class="score-num">${score}/${total}</div>
+      <h2>${rating}</h2>
+      <p style="font-size:1.05em;">${msg}</p>
+      <div class="blueprint">
+        <div style="text-align:center; color:#c9a227; font-weight:bold; margin-bottom:8px;">━━ YOUR TREEHOUSE BLUEPRINT ━━</div>
+        ${selections.map(s => `<div><span class="label">${s.label}:</span> ${s.correct ? '✓' : '✗'} ${s.choice}</div>`).join('')}
+      </div>
+      <p style="font-size:0.9em; color:#555; font-style:italic;">
+        Just as God specified each plant "according to its kind" (Genesis 1:11), good engineers specify every material with purpose and precision.
+      </p>
+      <button class="btn" onclick="restart()">🔄 Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  currentScenario = 0; currentSpec = 0; score = 0; total = 0; selections = [];
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
