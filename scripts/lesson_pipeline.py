@@ -124,7 +124,7 @@ def call_gemini(api_key, prompt, horstemeyer_uri=None):
     payload = json.dumps({
         "contents": [{"parts": req_parts}],
         "tools": [{"google_search": {}}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 0}}
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 2048}}
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"
@@ -180,7 +180,23 @@ def get_tab_id(doc_id, tab_title):
 
 def write_to_tab(doc_id, tab_id, text):
     svc = get_docs_service()
-    requests = [{"insertText": {"text": text, "location": {"index": 1, "tabId": tab_id}}}]
+    req = svc.documents().get(documentId=doc_id)
+    req.uri += "&includeTabsContent=true"
+    doc = req.execute()
+    end_index = 1
+    for tab in doc.get("tabs", []):
+        if tab.get("tabProperties", {}).get("tabId") == tab_id:
+            content = tab.get("documentTab", {}).get("body", {}).get("content", [])
+            if content:
+                end_index = content[-1].get("endIndex", 1)
+            break
+
+    requests = []
+    if end_index > 2:
+        requests.append({"deleteContentRange": {"range": {
+            "startIndex": 1, "endIndex": end_index - 1, "tabId": tab_id
+        }}})
+    requests.append({"insertText": {"text": text, "location": {"index": 1, "tabId": tab_id}}})
     svc.documents().batchUpdate(documentId=doc_id, body={"requests": requests}).execute()
 
 
