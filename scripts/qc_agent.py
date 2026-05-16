@@ -15,7 +15,7 @@ import argparse, json, os, re, sys, urllib.request, urllib.error
 
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 
-GEMINI_MODEL = "gemini-2.5-flash-lite"
+GEMINI_MODEL = "gemini-2.5-pro"
 GEMINI_URL   = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 
 REQUIRED_SECTIONS_CREATIONEERING = [
@@ -102,10 +102,14 @@ def structural_check(draft, doc):
 
 def gemini_qc(api_key, draft, doc):
     course_label = "Creationeering" if doc == "creationeering" else "Mousetrap Build"
-    prompt = QC_PROMPT.format(course=course_label, draft=draft[:6000])
+    prompt = QC_PROMPT.format(course=course_label, draft=draft[:15000])
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 600}
+        "generationConfig": {
+            "temperature": 0.2,
+            "maxOutputTokens": 4096,
+            "thinkingConfig": {"thinkingBudget": 1024}
+        }
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"

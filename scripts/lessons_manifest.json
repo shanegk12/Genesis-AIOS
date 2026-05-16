@@ -947,22 +947,22 @@
       "status": "done",
       "completed_at": "2026-05-16T13:13:08.432964+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
-        "reading_level": 3,
+        "reading_level": 2,
         "faith_integration": 3,
         "framework_use": 3,
         "analogy_quality": 3,
         "structure_complete": 2,
-        "overall": 3
+        "overall": 2.6
       },
       "qc_structural": {
-        "word_count": 1972,
+        "word_count": 3972,
         "missing_sections": [],
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson draft is strong, with excellent integration of faith and framework concepts. The reading level and analogies are appropriate. The structure is mostly complete, but Part 2 (Reuse) is cut off, preventing a full evaluation of that section and the overall completeness.",
+      "qc_notes": "The lesson is strong, with excellent integration of faith and the Creationeering framework. The analogies and examples are clear and age-appropriate. The reading level is challenging but acceptable for the target grade range, especially with the provided vocabulary list. The primary issue is structural: the draft contains duplicated sections at the end (Lesson Overview, Objectives, etc.) that need to be removed. Additionally, the 'Works Cited' section is not typical for a middle school lesson plan and should be reformatted or removed for the student-facing version.",
       "interactive_status": "done",
       "interactive_files": {
         "flashcards": "interactives/C-071/flashcards.html",
@@ -1289,7 +1289,7 @@
       "status": "done",
       "completed_at": "2026-05-16T15:41:35.628890+00:00",
       "error": null,
-      "qc_status": "flagged",
+      "qc_status": "passed",
       "qc_scores": {
         "reading_level": 3,
         "faith_integration": 3,
@@ -1304,7 +1304,9 @@
         "missing_frameworks": [],
         "has_scripture": true
       },
-      "qc_notes": "The lesson is excellent, with strong faith integration and correct application of the Creationeering frameworks. The reading level is appropriate and the structure is complete. The analogies are generally good, but the 'superhero with unpredictable powers' analogy for hazardous waste is a bit abstract and could be improved. Consider a more concrete analogy, like comparing it to household chemicals that are useful but dangerous if misused (e.g., bleach). Otherwise, this is a high-quality draft ready for implementation."
+      "qc_notes": "The lesson is excellent, with strong faith integration and correct application of the Creationeering frameworks. The reading level is appropriate and the structure is complete. The analogies are generally good, but the 'superhero with unpredictable powers' analogy for hazardous waste is a bit abstract and could be improved. Consider a more concrete analogy, like comparing it to household chemicals that are useful but dangerous if misused (e.g., bleach). Otherwise, this is a high-quality draft ready for implementation.",
+      "qc_score": 2.8,
+      "structural_pass": true
     },
     {
       "id": "C-083",
