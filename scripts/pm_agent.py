@@ -33,6 +33,8 @@ QC_SCRIPT          = os.path.join(os.path.dirname(__file__), "qc_agent.py")
 MEDIA_SCRIPT       = os.path.join(os.path.dirname(__file__), "media_agent.py")
 IMAGE_SCRIPT       = os.path.join(os.path.dirname(__file__), "image_agent.py")
 INTERACTIVE_SCRIPT = os.path.join(os.path.dirname(__file__), "interactive_agent.py")
+ASSESSMENT_SCRIPT  = os.path.join(os.path.dirname(__file__), "assessment_agent.py")
+SCORM_SCRIPT       = os.path.join(os.path.dirname(__file__), "scorm_packager.py")
 NOTIFY_SCRIPT      = os.path.join(os.path.dirname(__file__), "notify.py")
 
 
@@ -177,6 +179,32 @@ def run_interactive_agent(draft_path, lesson, skip_concept=False):
     return result.returncode == 0
 
 
+def run_assessment_agent(draft_path, lesson):
+    cmd = [
+        sys.executable, ASSESSMENT_SCRIPT,
+        "--draft-file", draft_path,
+        "--lesson-id",  lesson["id"],
+        "--topic",      lesson["topic"],
+        "--doc",        lesson["doc"],
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
+def run_scorm_packager(lesson_id):
+    cmd = [sys.executable, SCORM_SCRIPT, "--lesson-id", lesson_id]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
 def run_image_agent(lesson_id=None, rework_flagged=False):
     cmd = [sys.executable, IMAGE_SCRIPT]
     if lesson_id:
@@ -300,9 +328,13 @@ def main():
     parser.add_argument("--skip-qc",              action="store_true", help="Skip QC agent")
     parser.add_argument("--skip-media",           action="store_true", help="Skip media agent")
     parser.add_argument("--generate-interactives", action="store_true",
-                        help="Run interactive agent (vocab + OCV + Claude concept game)")
+                        help="Run interactive agent (flashcards + accordion + OCV + Claude concept)")
     parser.add_argument("--interactives-no-concept", action="store_true",
-                        help="Generate vocab + OCV only, skip Claude API concept interactive")
+                        help="Generate flashcards + accordion + OCV only, skip Claude API concept")
+    parser.add_argument("--generate-assessments", action="store_true",
+                        help="Generate 5 MCQ per QC-passed lesson (Gemini Flash)")
+    parser.add_argument("--generate-scorm", action="store_true",
+                        help="Package each lesson + interactives as a SCORM ZIP for LearnWorlds")
     parser.add_argument("--generate-images",      action="store_true",
                         help="Run image agent after media (slow — generates images via Gemini)")
     parser.add_argument("--dry-run",   action="store_true", help="Preview queue, no drafting")
@@ -368,7 +400,7 @@ def main():
         return
 
     print()
-    done = failed = qc_flagged = media_failed = interactive_failed = image_failed = 0
+    done = failed = qc_flagged = media_failed = interactive_failed = assessment_failed = scorm_failed = image_failed = 0
 
     for i, lesson in enumerate(queue, 1):
         print(f"[{i}/{len(queue)}] {lesson['id']} — {lesson['tab']}")
@@ -408,7 +440,20 @@ def main():
                 if not run_interactive_agent(draft_path, lesson, skip_concept=skip_concept):
                     interactive_failed += 1
 
-            # 5. Image agent (opt-in via --generate-images)
+            # 5. Assessment agent (opt-in via --generate-assessments, QC-passed only)
+            data = load_manifest()
+            lesson_fresh = find_lesson(data, lesson["id"])
+            if args.generate_assessments and os.path.exists(draft_path):
+                if lesson_fresh and lesson_fresh.get("qc_status") == "passed":
+                    if not run_assessment_agent(draft_path, lesson):
+                        assessment_failed += 1
+
+            # 6. SCORM packager (opt-in via --generate-scorm, runs after interactives)
+            if args.generate_scorm:
+                if not run_scorm_packager(lesson["id"]):
+                    scorm_failed += 1
+
+            # 7. Image agent (opt-in via --generate-images)
             if args.generate_images and not args.skip_media:
                 if not run_image_agent(lesson_id=lesson["id"]):
                     image_failed += 1
@@ -431,6 +476,10 @@ def main():
         summary_parts.append(f"{media_failed} media errors")
     if args.generate_interactives:
         summary_parts.append(f"{interactive_failed} interactive errors")
+    if args.generate_assessments:
+        summary_parts.append(f"{assessment_failed} assessment errors")
+    if args.generate_scorm:
+        summary_parts.append(f"{scorm_failed} SCORM errors")
     if args.generate_images:
         summary_parts.append(f"{image_failed} image errors")
 
