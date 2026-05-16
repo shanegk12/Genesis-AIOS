@@ -159,3 +159,37 @@ gcloud auth application-default login --client-id-file="D:\AIOS\oauth-client.jso
 **Owner:** Shane / AIOS
 
 ---
+
+## 2026-05-15 — AIOS dashboard: PWA project scoped, deferred post-June 12
+
+**Decision:** Build a mobile-first Progressive Web App (PWA) as a separate project after the June 12 content deadline. Not a native app — PWA installs to phone home screen from browser, works on iOS and Android, no App Store required.
+
+**Why:** Shane wants a JARVIS-like interface — pipeline metrics, Google Docs content rendered inline, push notifications, and eventually a conversational layer. ntfy handles alerts well enough for now. Building the dashboard during the content sprint would split focus at the worst time.
+
+**Planned scope (in order):**
+1. PWA shell — dashboard with pipeline metrics pulled from manifest on GitHub
+2. Google Docs viewer — lesson content rendered inline on phone
+3. Push notifications — replace ntfy with built-in web push
+4. Chat interface — natural language queries against pipeline state
+
+**Tech:** Next.js, Google Drive/Docs API, hosted on Vercel (free tier).
+
+**Trigger to start:** June 12 content deadline cleared.
+
+**Alternatives considered:** Native iOS/Android app (too slow to build, App Store friction); Notion/Airtable dashboard (no custom pipeline integration).
+
+**Owner:** Shane / AIOS
+
+---
+
+## 2026-05-15 — Interactive agent: Claude API added for concept interactives
+
+**Decision:** Add `interactive_agent.py` to the lesson pipeline. Uses Claude (`claude-opus-4-7`) via Anthropic API to generate a custom JS interactive per lesson. Also generates a vocab grid (two-column checkmark style) and OCV tab widget from the lesson draft. Runs automatically via `--generate-interactives` in Cloud Run daily batch.
+
+**Why:** LearnWorlds Starter plan has no API for content. Interactives must be hand-placed or SCORM-imported. Building them per lesson automatically saves 30-60 min of manual work per lesson and ensures every lesson ships with at least 3 reusable HTML components. Claude is better than Gemini for creative JS game generation — Gemini excels at drafting prose, Claude excels at structured interactive UI code.
+
+**Alternatives considered:** Gemini for concept interactives (worse at creative JS); hand-coding interactives (not viable at scale); skipping interactives entirely (misses LearnWorlds engagement features Shane wants).
+
+**Owner:** Shane / AIOS
+
+---
