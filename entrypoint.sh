@@ -11,4 +11,4 @@ cd /repo
 git config user.email "pipeline@genesis-aios.iam.gserviceaccount.com"
 git config user.name "GK12 Pipeline"
 
-exec python scripts/pm_agent.py --course both --batch 20 --type all --generate-images
+exec python scripts/pm_agent.py --course both --batch 20 --type all --generate-images --generate-interactives

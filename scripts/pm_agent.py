@@ -12,11 +12,13 @@ Usage:
   python pm_agent.py --course both            # draft both courses
   python pm_agent.py --batch 5               # process only 5 lessons this run
   python pm_agent.py --type all              # include build and activity types
-  python pm_agent.py --skip-qc               # skip QC agent
-  python pm_agent.py --skip-media            # skip media agent
-  python pm_agent.py --dry-run               # preview queue without drafting
-  python pm_agent.py --status                # show progress summary
-  python pm_agent.py --retry-failed          # re-queue failed lessons
+  python pm_agent.py --skip-qc                     # skip QC agent
+  python pm_agent.py --skip-media                  # skip media agent
+  python pm_agent.py --generate-interactives        # add vocab + OCV + Claude concept interactive
+  python pm_agent.py --interactives-no-concept      # vocab + OCV only (no Claude API)
+  python pm_agent.py --dry-run                      # preview queue without drafting
+  python pm_agent.py --status                       # show progress summary
+  python pm_agent.py --retry-failed                 # re-queue failed lessons
 """
 
 import argparse, json, os, subprocess, sys, tempfile, urllib.request, urllib.error
@@ -27,10 +29,11 @@ REPO_ROOT          = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PIPELINE_SCRIPT    = os.path.join(os.path.dirname(__file__), "lesson_pipeline.py")
 HORSTEMEYER_PDF    = os.path.join(REPO_ROOT, "references", "horstemeyer-2022.pdf")
 GEMINI_UPLOAD_URL  = "https://generativelanguage.googleapis.com/upload/v1beta/files"
-QC_SCRIPT       = os.path.join(os.path.dirname(__file__), "qc_agent.py")
-MEDIA_SCRIPT    = os.path.join(os.path.dirname(__file__), "media_agent.py")
-IMAGE_SCRIPT    = os.path.join(os.path.dirname(__file__), "image_agent.py")
-NOTIFY_SCRIPT   = os.path.join(os.path.dirname(__file__), "notify.py")
+QC_SCRIPT          = os.path.join(os.path.dirname(__file__), "qc_agent.py")
+MEDIA_SCRIPT       = os.path.join(os.path.dirname(__file__), "media_agent.py")
+IMAGE_SCRIPT       = os.path.join(os.path.dirname(__file__), "image_agent.py")
+INTERACTIVE_SCRIPT = os.path.join(os.path.dirname(__file__), "interactive_agent.py")
+NOTIFY_SCRIPT      = os.path.join(os.path.dirname(__file__), "notify.py")
 
 
 def load_env():
@@ -147,6 +150,25 @@ def run_media_agent(draft_path, lesson):
         "--topic",      lesson["topic"],
         "--doc",        lesson["doc"],
     ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
+def run_interactive_agent(draft_path, lesson, skip_concept=False):
+    cmd = [
+        sys.executable, INTERACTIVE_SCRIPT,
+        "--draft-file", draft_path,
+        "--lesson-id",  lesson["id"],
+        "--topic",      lesson["topic"],
+        "--phase",      lesson["phase"],
+        "--doc",        lesson["doc"],
+    ]
+    if skip_concept:
+        cmd.append("--skip-concept")
     result = subprocess.run(cmd, capture_output=True, text=True)
     output = (result.stdout + result.stderr).strip()
     if output:
@@ -272,9 +294,13 @@ def main():
                         help="Max lessons to process this run (0 = all pending)")
     parser.add_argument("--type",      dest="lesson_type", default="lesson",
                         choices=["lesson", "build", "activity", "all"])
-    parser.add_argument("--skip-qc",         action="store_true", help="Skip QC agent")
-    parser.add_argument("--skip-media",      action="store_true", help="Skip media agent")
-    parser.add_argument("--generate-images", action="store_true",
+    parser.add_argument("--skip-qc",              action="store_true", help="Skip QC agent")
+    parser.add_argument("--skip-media",           action="store_true", help="Skip media agent")
+    parser.add_argument("--generate-interactives", action="store_true",
+                        help="Run interactive agent (vocab + OCV + Claude concept game)")
+    parser.add_argument("--interactives-no-concept", action="store_true",
+                        help="Generate vocab + OCV only, skip Claude API concept interactive")
+    parser.add_argument("--generate-images",      action="store_true",
                         help="Run image agent after media (slow — generates images via Gemini)")
     parser.add_argument("--dry-run",   action="store_true", help="Preview queue, no drafting")
     parser.add_argument("--status",    action="store_true", help="Print progress summary and exit")
@@ -326,6 +352,9 @@ def main():
         print("QC:      enabled (flag-only mode)")
     if not args.skip_media:
         print("Media:   enabled -> media_prompts.json")
+    if args.generate_interactives:
+        mode = "vocab + OCV only" if args.interactives_no_concept else "vocab + OCV + Claude concept"
+        print(f"Interactives: enabled ({mode})")
     if args.generate_images:
         print("Images:  enabled -> Gemini + Drive")
 
@@ -336,7 +365,7 @@ def main():
         return
 
     print()
-    done = failed = qc_flagged = media_failed = image_failed = 0
+    done = failed = qc_flagged = media_failed = interactive_failed = image_failed = 0
 
     for i, lesson in enumerate(queue, 1):
         print(f"[{i}/{len(queue)}] {lesson['id']} — {lesson['tab']}")
@@ -370,7 +399,13 @@ def main():
                 if not run_media_agent(draft_path, lesson):
                     media_failed += 1
 
-            # 4. Image agent (opt-in via --generate-images)
+            # 4. Interactive agent (opt-in via --generate-interactives)
+            if args.generate_interactives and os.path.exists(draft_path):
+                skip_concept = args.interactives_no_concept
+                if not run_interactive_agent(draft_path, lesson, skip_concept=skip_concept):
+                    interactive_failed += 1
+
+            # 5. Image agent (opt-in via --generate-images)
             if args.generate_images and not args.skip_media:
                 if not run_image_agent(lesson_id=lesson["id"]):
                     image_failed += 1
@@ -391,6 +426,8 @@ def main():
         summary_parts.append(f"{qc_flagged} QC-flagged")
     if not args.skip_media:
         summary_parts.append(f"{media_failed} media errors")
+    if args.generate_interactives:
+        summary_parts.append(f"{interactive_failed} interactive errors")
     if args.generate_images:
         summary_parts.append(f"{image_failed} image errors")
 

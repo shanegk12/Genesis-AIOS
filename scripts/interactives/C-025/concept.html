@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Synthesis Builder</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.1);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #ffffff;
+    padding: 20px 30px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { margin: 0; font-size: 24px; }
+  header p { margin: 6px 0 0; font-size: 14px; opacity: 0.9; }
+  .stage {
+    padding: 25px 30px;
+  }
+  .progress {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .pip {
+    flex: 1;
+    height: 8px;
+    background: #e1e6ee;
+    border-radius: 4px;
+  }
+  .pip.active { background: #c9a227; }
+  .pip.done { background: #1e3a5f; }
+  .challenge h2 {
+    margin: 0 0 8px;
+    color: #1e3a5f;
+    font-size: 20px;
+  }
+  .goal {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+  .parts-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .panel {
+    background: #f7f9fc;
+    border: 2px dashed #c9d4e3;
+    border-radius: 10px;
+    padding: 14px;
+    min-height: 220px;
+  }
+  .panel h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1e3a5f;
+  }
+  .panel.drop-active {
+    border-color: #c9a227;
+    background: #fff8e6;
+  }
+  .part {
+    display: inline-block;
+    background: #ffffff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 8px 12px;
+    margin: 4px;
+    border-radius: 20px;
+    cursor: grab;
+    font-size: 14px;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .part:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(30,58,95,0.2); }
+  .part.dragging { opacity: 0.4; }
+  .part.in-build { background: #c9a227; color: #ffffff; border-color: #c9a227; }
+  .controls {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  button {
+    background: #1e3a5f;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  button:hover:not(:disabled) { background: #2a4f7d; }
+  button:disabled { background: #b8c0cc; cursor: not-allowed; }
+  button.gold { background: #c9a227; }
+  button.gold:hover:not(:disabled) { background: #d9b237; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.good { background: #e8f5e9; border-left: 4px solid #2e7d32; color: #1b5e20; }
+  .feedback.bad { background: #fdecea; border-left: 4px solid #c62828; color: #b71c1c; }
+  .feedback.info { background: #fff8e6; border-left: 4px solid #c9a227; color: #7d5e00; }
+  .final {
+    text-align: center;
+    padding: 20px;
+  }
+  .final h2 { color: #c9a227; font-size: 28px; margin: 0 0 10px; }
+  .score-big {
+    font-size: 60px;
+    font-weight: bold;
+    color: #1e3a5f;
+    margin: 10px 0;
+  }
+  .verse {
+    font-style: italic;
+    color: #1e3a5f;
+    margin: 16px auto;
+    max-width: 600px;
+    padding: 12px;
+    background: #f7f9fc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🧩 Synthesis Builder</h1>
+    <p>Combine the right parts to build each system. Drag parts into the Build Zone!</p>
+  </header>
+  <div class="stage">
+    <div class="progress" id="progress"></div>
+    <div id="challengeArea"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="controls">
+      <button id="resetBtn">↺ Reset Build</button>
+      <button class="gold" id="checkBtn">Check Synthesis ✓</button>
+      <button id="nextBtn" style="display:none;">Next Challenge →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const challenges = [
+  {
+    title: "Build a Bicycle 🚲",
+    goal: "A bicycle is a system. Drag in ONLY the parts that combine to make a working bicycle.",
+    parts: [
+      {name: "Wheels", correct: true},
+      {name: "Handlebars", correct: true},
+      {name: "Pedals", correct: true},
+      {name: "Frame", correct: true},
+      {name: "Chain", correct: true},
+      {name: "Toaster", correct: false},
+      {name: "Fish Tank", correct: false},
+      {name: "Pillow", correct: false}
+    ],
+    explanation: "Synthesis means combining the RIGHT parts for a purpose. A toaster doesn't belong on a bike — every part must serve the system's goal!"
+  },
+  {
+    title: "Build a Healthy Meal 🥗",
+    goal: "Synthesize a balanced meal. Choose components that work together for nutrition.",
+    parts: [
+      {name: "Grilled Chicken", correct: true},
+      {name: "Brown Rice", correct: true},
+      {name: "Vegetables", correct: true},
+      {name: "Water", correct: true},
+      {name: "Motor Oil", correct: false},
+      {name: "Soap", correct: false},
+      {name: "Rubber Band", correct: false}
+    ],
+    explanation: "Just like an engineer, you chose parts that are COMPATIBLE and serve a purpose together. Random combining doesn't equal synthesis!"
+  },
+  {
+    title: "Build a Solar-Powered Light 💡",
+    goal: "An engineer synthesizes a system that captures sunlight and produces light at night.",
+    parts: [
+      {name: "Solar Panel", correct: true},
+      {name: "Battery", correct: true},
+      {name: "LED Bulb", correct: true},
+      {name: "Light Sensor", correct: true},
+      {name: "Wires", correct: true},
+      {name: "Ice Cube", correct: false},
+      {name: "Paper Bag", correct: false},
+      {name: "Banana", correct: false}
+    ],
+    explanation: "Each part has a job: capture, store, sense, deliver. Synthesis designs how parts INTERACT — that's emergent function!"
+  },
+  {
+    title: "Build a Living Ecosystem 🌳",
+    goal: "God's creation is the ultimate synthesis. Pick parts that work together as a forest ecosystem.",
+    parts: [
+      {name: "Trees", correct: true},
+      {name: "Soil", correct: true},
+      {name: "Sunlight", correct: true},
+      {name: "Water", correct: true},
+      {name: "Animals", correct: true},
+      {name: "Plastic Bottle", correct: false},
+      {name: "Television", correct: false},
+      {name: "Concrete", correct: false}
+    ],
+    explanation: "An ecosystem is a beautifully synthesized system — each living and non-living part depends on the others. This reflects the order of our Creator!"
+  }
+];
+
+let current = 0;
+let scores = [];
+let buildZone = [];
+
+const progressEl = document.getElementById('progress');
+const challengeArea = document.getElementById('challengeArea');
+const feedback = document.getElementById('feedback');
+const checkBtn = document.getElementById('checkBtn');
+const nextBtn = document.getElementById('nextBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+function renderProgress() {
+  progressEl.innerHTML = '';
+  challenges.forEach((_, i) => {
+    const p = document.createElement('div');
+    p.className = 'pip';
+    if (i < current) p.classList.add('done');
+    else if (i === current) p.classList.add('active');
+    progressEl.appendChild(p);
+  });
+}
+
+function renderChallenge() {
+  const c = challenges[current];
+  buildZone = [];
+  feedback.className = 'feedback';
+  feedback.classList.remove('show');
+  checkBtn.style.display = '';
+  checkBtn.disabled = false;
+  nextBtn.style.display = 'none';
+  resetBtn.style.display = '';
+
+  challengeArea.innerHTML = `
+    <div class="challenge">
+      <h2>${c.title}</h2>
+      <div class="goal">${c.goal}</div>
+      <div class="parts-area">
+        <div class="panel" id="partsPanel">
+          <h3>Available Parts</h3>
+          <div id="partsList"></div>
+        </div>
+        <div class="panel" id="buildPanel">
+          <h3>🔧 Build Zone</h3>
+          <div id="buildList"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  renderParts();
+  setupDrop();
+}
+
+function renderParts() {
+  const c = challenges[current];
+  const partsList = document.getElementById('partsList');
+  const buildList = document.getElementById('buildList');
+  partsList.innerHTML = '';
+  buildList.innerHTML = '';
+
+  c.parts.forEach((part, idx) => {
+    const inBuild = buildZone.includes(idx);
+    const el = document.createElement('div');
+    el.className = 'part' + (inBuild ? ' in-build' : '');
+    el.textContent = part.name;
+    el.draggable = true;
+    el.dataset.idx = idx;
+    el.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', idx);
+      el.classList.add('dragging');
+    });
+    el.addEventListener('dragend', () => el.classList.remove('dragging'));
+    el.addEventListener('click', () => togglePart(idx));
+    if (inBuild) buildList.appendChild(el);
+    else partsList.appendChild(el);
+  });
+}
+
+function togglePart(idx) {
+  if (buildZone.includes(idx)) {
+    buildZone = buildZone.filter(i => i !== idx);
+  } else {
+    buildZone.push(idx);
+  }
+  renderParts();
+}
+
+function setupDrop() {
+  const buildPanel = document.getElementById('buildPanel');
+  const partsPanel = document.getElementById('partsPanel');
+
+  [buildPanel, partsPanel].forEach(panel => {
+    panel.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      panel.classList.add('drop-active');
+    });
+    panel.addEventListener('dragleave', () => panel.classList.remove('drop-active'));
+    panel.addEventListener('drop', (e) => {
+      e.preventDefault();
+      panel.classList.remove('drop-active');
+      const idx = parseInt(e.dataTransfer.getData('text/plain'));
+      const isBuild = panel.id === 'buildPanel';
+      if (isBuild && !buildZone.includes(idx)) buildZone.push(idx);
+      else if (!isBuild && buildZone.includes(idx)) buildZone = buildZone.filter(i => i !== idx);
+      renderParts();
+    });
+  });
+}
+
+checkBtn.addEventListener('click', () => {
+  const c = challenges[current];
+  let correctChosen = 0;
+  let wrongChosen = 0;
+  let missedCorrect = 0;
+
+  c.parts.forEach((part, idx) => {
+    const inBuild = buildZone.includes(idx);
+    if (part.correct && inBuild) correctChosen++;
+    else if (!part.correct && inBuild) wrongChosen++;
+    else if (part.correct && !inBuild) missedCorrect++;
+  });
+
+  const totalCorrect = c.parts.filter(p => p.correct).length;
+  const perfect = (correctChosen === totalCorrect && wrongChosen === 0);
+  const score = Math.max(0, correctChosen - wrongChosen);
+  scores.push({ score, max: totalCorrect, perfect });
+
+  feedback.classList.add('show');
+  if (perfect) {
+    feedback.className = 'feedback show good';
+    feedback.innerHTML = `<strong>✓ Perfect Synthesis!</strong><br>${c.explanation}`;
+  } else {
+    feedback.className = 'feedback show bad';
+    let msg = `<strong>Not quite synthesized yet.</strong><br>`;
+    if (wrongChosen > 0) msg += `• You included ${wrongChosen} part(s) that don't belong.<br>`;
+    if (missedCorrect > 0) msg += `• You're missing ${missedCorrect} important part(s).<br>`;
+    msg += `<em>${c.explanation}</em>`;
+    feedback.innerHTML = msg;
+  }
+
+  checkBtn.disabled = true;
+  nextBtn.style.display = '';
+  nextBtn.textContent = (current === challenges.length - 1) ? 'See Final Results 🏆' : 'Next Challenge →';
+});
+
+nextBtn.addEventListener('click', () => {
+  current++;
+  if (current >= challenges.length) {
+    showFinal();
+  } else {
+    renderProgress();
+    renderChallenge();
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  buildZone = [];
+  renderParts();
+  feedback.classList.remove('show');
+});
+
+function showFinal() {
+  const perfectCount = scores.filter(s => s.perfect).length;
+  const total = challenges.length;
+  let msg, emoji;
+  if (perfectCount === total) { msg = "Master Creationeer! You understand synthesis."; emoji = "🏆"; }
+  else if (perfectCount >= total - 1) { msg = "Excellent synthesizing!"; emoji = "⭐"; }
+  else if (perfectCount >= total / 2) { msg = "Good work — keep practicing!"; emoji = "👍"; }
+  else { msg = "Keep building those synthesis skills!"; emoji = "💪"; }
+
+  progressEl.innerHTML = '';
+  challenges.forEach(() => {
+    const p = document.createElement('div');
+    p.className = 'pip done';
+    progressEl.appendChild(p);
+  });
+
+  challengeArea.innerHTML = `
+    <div class="final">
+      <div style="font-size:60px;">${emoji}</div>
+      <h2>Activity Complete!</h2>
+      <div class="score-big">${perfectCount} / ${total}</div>
+      <p style="font-size:17px;">${msg}</p>
+      <p style="max-width:600px;margin:16px auto;">
+        You practiced <strong>synthesis</strong> — choosing the right parts and combining them
+        with purpose. That's exactly what engineers and Creationeers do!
+      </p>
+      <div class="verse">
+        "He synthesized mankind from the dust of the ground..." — reflecting Genesis 1:26,
+        the ultimate act of combining parts into a purposeful whole.
+      </div>
+    </div>
+  `;
+  feedback.classList.remove('show');
+  checkBtn.style.display = 'none';
+  nextBtn.style.display = 'none';
+  resetBtn.style.display = 'none';
+}
+
+renderProgress();
+renderChallenge();
+</script>
+</body>
+</html>
