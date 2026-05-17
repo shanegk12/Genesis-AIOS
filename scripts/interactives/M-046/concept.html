@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car: Sustainability Sort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 { color: #1e3a5f; font-size: 1.5em; margin-bottom: 4px; text-align: center; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 12px; font-size: 0.95em; }
+  .score-bar {
+    background: #1e3a5f; color: #fff; padding: 10px 16px;
+    border-radius: 8px; display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 14px; font-weight: bold;
+  }
+  .score-bar span.gold { color: #c9a227; }
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media(min-width: 700px) {
+    .game-area { grid-template-columns: 1fr 2fr; }
+  }
+  .parts-pool {
+    background: #fff; border: 2px solid #1e3a5f; border-radius: 10px;
+    padding: 12px; min-height: 200px;
+  }
+  .parts-pool h3 { color: #1e3a5f; margin-bottom: 10px; font-size: 1.05em; }
+  .part {
+    background: #c9a227; color: #1e3a5f; padding: 10px 12px;
+    margin: 6px 0; border-radius: 6px; cursor: grab;
+    font-weight: 600; font-size: 0.9em;
+    border: 2px solid #a8881d;
+    transition: transform 0.15s;
+  }
+  .part:hover { transform: translateX(4px); }
+  .part.dragging { opacity: 0.4; }
+  .bins { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .bin {
+    background: #fff; border: 3px dashed #1e3a5f; border-radius: 10px;
+    padding: 10px; min-height: 200px;
+  }
+  .bin h3 {
+    text-align: center; padding-bottom: 8px;
+    border-bottom: 2px solid #c9a227; margin-bottom: 8px;
+    font-size: 0.95em;
+  }
+  .bin .icon { font-size: 1.6em; text-align: center; display: block; margin-bottom: 4px; }
+  .bin.over { background: #fff8e1; border-style: solid; }
+  .bin .part { cursor: default; font-size: 0.8em; padding: 6px 8px; }
+  .feedback {
+    margin-top: 12px; padding: 12px; border-radius: 8px;
+    background: #fff; border-left: 5px solid #c9a227;
+    min-height: 40px; font-size: 0.95em;
+  }
+  .feedback.correct { border-color: #2d8a3e; background: #e8f5e9; }
+  .feedback.wrong { border-color: #c0392b; background: #fdecea; }
+  button {
+    background: #1e3a5f; color: #fff; border: none;
+    padding: 10px 22px; border-radius: 6px; font-size: 1em;
+    cursor: pointer; font-weight: bold; margin-top: 10px;
+  }
+  button:hover { background: #c9a227; color: #1e3a5f; }
+  button:disabled { background: #999; cursor: not-allowed; }
+  .final {
+    text-align: center; padding: 20px; background: #1e3a5f;
+    color: #fff; border-radius: 10px; margin-top: 14px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+  .final p { margin: 6px 0; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+  <h1>♻️ Mousetrap Car: Post-Build Sustainability Sort</h1>
+  <p class="subtitle">Your race is over. Drag each part to the best end-of-life bin. Be a good steward!</p>
+
+  <div class="score-bar">
+    <div>Sorted: <span class="gold" id="sorted">0</span> / 8</div>
+    <div>Score: <span class="gold" id="score">0</span></div>
+  </div>
+
+  <div class="game-area">
+    <div class="parts-pool" id="pool">
+      <h3>🔧 Used Car Parts</h3>
+    </div>
+    <div class="bins">
+      <div class="bin" data-bin="reuse">
+        <h3><span class="icon">🔄</span>REUSE<br><small>(Use Again As-Is)</small></h3>
+      </div>
+      <div class="bin" data-bin="recycle">
+        <h3><span class="icon">♻️</span>RECYCLE<br><small>(Remake Material)</small></h3>
+      </div>
+      <div class="bin" data-bin="trash">
+        <h3><span class="icon">🗑️</span>DISPOSE<br><small>(Last Resort)</small></h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback">Drag a part into a bin to see if it's the most sustainable choice.</div>
+
+  <div class="final hidden" id="final">
+    <h2>🏁 Mission Complete!</h2>
+    <p id="finalScore"></p>
+    <p id="finalMsg"></p>
+    <p style="font-size:0.85em; margin-top:10px; color:#c9a227;">"The earth is the Lord's, and everything in it." — Psalm 24:1</p>
+    <button onclick="resetGame()">Try Again</button>
+  </div>
+
+<script>
+const parts = [
+  { id: 'mousetrap', name: 'Mousetrap (still works)', correct: 'reuse', expl: 'The spring still works perfectly — reuse it in your next build!' },
+  { id: 'wheels', name: 'CD Wheels (no damage)', correct: 'reuse', expl: 'Undamaged CDs make great wheels again. Reuse saves the most resources.' },
+  { id: 'axle', name: 'Wooden Dowel Axle', correct: 'reuse', expl: 'A straight dowel can be reused many times before it warps.' },
+  { id: 'string', name: 'Frayed String', correct: 'recycle', expl: 'Frayed string can be recycled into new fiber products.' },
+  { id: 'cardboard', name: 'Cardboard Chassis', correct: 'recycle', expl: 'Cardboard is one of the most recyclable materials on Earth.' },
+  { id: 'aluminum', name: 'Bent Aluminum Frame', correct: 'recycle', expl: 'Aluminum can be recycled infinitely without losing quality!' },
+  { id: 'glue', name: 'Hot Glue Blobs', correct: 'trash', expl: 'Cured hot glue cannot be reused or recycled. Use less next time!' },
+  { id: 'tape', name: 'Sticky Used Tape', correct: 'trash', expl: 'Used tape contaminates recycling. Try mechanical fasteners next build.' }
+];
+
+const bins = { reuse: [], recycle: [], trash: [] };
+let score = 0;
+let sorted = 0;
+
+function init() {
+  const pool = document.getElementById('pool');
+  pool.querySelectorAll('.part').forEach(p => p.remove());
+  parts.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'part';
+    div.draggable = true;
+    div.dataset.id = p.id;
+    div.textContent = p.name;
+    div.addEventListener('dragstart', dragStart);
+    div.addEventListener('dragend', dragEnd);
+    pool.appendChild(div);
+  });
+
+  document.querySelectorAll('.bin').forEach(bin => {
+    bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('over'); });
+    bin.addEventListener('dragleave', () => bin.classList.remove('over'));
+    bin.addEventListener('drop', drop);
+  });
+}
+
+let dragged = null;
+function dragStart(e) {
+  dragged = e.target;
+  e.target.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function dragEnd(e) { e.target.classList.remove('dragging'); }
+
+function drop(e) {
+  e.preventDefault();
+  const bin = e.currentTarget;
+  bin.classList.remove('over');
+  if (!dragged) return;
+  const id = dragged.dataset.id;
+  const part = parts.find(p => p.id === id);
+  const chosenBin = bin.dataset.bin;
+  const fb = document.getElementById('feedback');
+
+  dragged.draggable = false;
+  dragged.classList.remove('dragging');
+  bin.appendChild(dragged);
+
+  sorted++;
+  if (chosenBin === part.correct) {
+    score += 10;
+    fb.className = 'feedback correct';
+    fb.innerHTML = '✅ <b>Correct!</b> ' + part.expl;
+    dragged.style.background = '#a5d6a7';
+    dragged.style.borderColor = '#2d8a3e';
+  } else {
+    fb.className = 'feedback wrong';
+    const correctName = part.correct.toUpperCase();
+    fb.innerHTML = '❌ <b>Better choice:</b> ' + correctName + '. ' + part.expl;
+    dragged.style.background = '#ef9a9a';
+    dragged.style.borderColor = '#c0392b';
+  }
+
+  document.getElementById('sorted').textContent = sorted;
+  document.getElementById('score').textContent = score;
+  dragged = null;
+
+  if (sorted === parts.length) setTimeout(showFinal, 800);
+}
+
+function showFinal() {
+  document.getElementById('final').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = 'Final Score: ' + score + ' / 80';
+  let msg = '';
+  if (score === 80) msg = '🌟 Master Steward! You designed for the full lifecycle.';
+  else if (score >= 60) msg = '👍 Great work! You understand sustainable engineering.';
+  else if (score >= 40) msg = '🔍 Good effort — review which materials can be reused vs. recycled.';
+  else msg = '📚 Try again! Remember: REUSE beats RECYCLE beats DISPOSE.';
+  document.getElementById('finalMsg').textContent = msg;
+}
+
+function resetGame() {
+  score = 0; sorted = 0;
+  document.getElementById('sorted').textContent = 0;
+  document.getElementById('score').textContent = 0;
+  document.getElementById('final').classList.add('hidden');
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = 'Drag a part into a bin to see if it\'s the most sustainable choice.';
+  document.querySelectorAll('.bin .part').forEach(p => p.remove());
+  init();
+}
+
+init();
+</script>
+</body>
+</html>

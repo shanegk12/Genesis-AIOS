@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aerodynamic Design Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .panel {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h3 {
+    color: #1e3a5f;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .control {
+    margin-bottom: 14px;
+  }
+  .control label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+  .control .val {
+    color: #c9a227;
+    float: right;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #c9a227;
+  }
+  .shape-picker {
+    display: flex;
+    gap: 8px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .shape-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px;
+    background: #ffffff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .shape-btn.selected {
+    background: #c9a227;
+    color: #ffffff;
+    border-color: #c9a227;
+  }
+  .shape-btn svg { display: block; margin: 0 auto 4px; }
+  canvas {
+    width: 100%;
+    background: linear-gradient(to bottom, #e8f0fb 0%, #e8f0fb 75%, #d4dae3 75%, #d4dae3 100%);
+    border-radius: 6px;
+    display: block;
+  }
+  .metrics {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .metric {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  .metric strong { display: block; color: #c9a227; font-size: 1.1rem; }
+  .btn {
+    width: 100%;
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  .btn:hover { background: #1e3a5f; }
+  .btn:disabled { background: #aaa; cursor: not-allowed; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #1e3a5f;
+    color: #fff;
+    display: none;
+  }
+  .feedback h3 { color: #c9a227; margin-bottom: 8px; }
+  .star { font-size: 1.5rem; color: #c9a227; }
+  @media (max-width: 650px) {
+    .stage { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏎️ Aerodynamic Body Design</h1>
+  <p class="subtitle">Design your mousetrap car body for minimum drag. Test it, then race for distance!</p>
+
+  <div class="stage">
+    <div class="panel">
+      <h3>Design Your Car</h3>
+      <div class="control">
+        <label>Body Shape</label>
+        <div class="shape-picker" id="shapes">
+          <div class="shape-btn" data-shape="box">
+            <svg width="50" height="30"><rect x="2" y="5" width="46" height="20" fill="#1e3a5f"/></svg>
+            Box
+          </div>
+          <div class="shape-btn selected" data-shape="wedge">
+            <svg width="50" height="30"><polygon points="2,25 48,25 48,5" fill="#1e3a5f"/></svg>
+            Wedge
+          </div>
+          <div class="shape-btn" data-shape="teardrop">
+            <svg width="50" height="30"><path d="M 2,15 Q 10,5 30,5 Q 48,5 48,15 Q 48,25 30,25 Q 10,25 2,15 Z" fill="#1e3a5f"/></svg>
+            Teardrop
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <label>Frontal Height <span class="val" id="hVal">30</span></label>
+        <input type="range" id="height" min="15" max="60" value="30">
+      </div>
+      <div class="control">
+        <label>Surface Smoothness <span class="val" id="sVal">50%</span></label>
+        <input type="range" id="smooth" min="0" max="100" value="50">
+      </div>
+
+      <div class="metrics">
+        <div class="metric">Drag<strong id="dragVal">--</strong></div>
+        <div class="metric">Efficiency<strong id="effVal">--</strong></div>
+      </div>
+      <button class="btn" id="raceBtn">🚀 Race It!</button>
+    </div>
+
+    <div class="panel">
+      <h3>Test Track</h3>
+      <canvas id="track" width="400" height="260"></canvas>
+      <div class="metrics">
+        <div class="metric">Distance<strong id="distVal">0 m</strong></div>
+        <div class="metric">Best<strong id="bestVal">0 m</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback">
+    <h3 id="fbTitle"></h3>
+    <p id="fbText"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const state = { shape:'wedge', height:30, smooth:50, racing:false, best:0, attempts:0 };
+  const $ = id => document.getElementById(id);
+  const canvas = $('track'), ctx = canvas.getContext('2d');
+
+  function shapeFactor(s){ return s==='box'?1.0 : s==='wedge'?0.6 : 0.35; }
+
+  function computeDrag(){
+    const sf = shapeFactor(state.shape);
+    const hf = state.height/30;
+    const smf = 1 - (state.smooth/100)*0.4;
+    return Math.round(sf * hf * smf * 100);
+  }
+
+  function update(){
+    $('hVal').textContent = state.height;
+    $('sVal').textContent = state.smooth + '%';
+    const drag = computeDrag();
+    const eff = Math.max(5, 110 - drag);
+    $('dragVal').textContent = drag;
+    $('effVal').textContent = eff + '%';
+    drawCar(60, 200);
+  }
+
+  function drawCar(x, y){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // ground
+    ctx.fillStyle = '#d4dae3';
+    ctx.fillRect(0, 200, canvas.width, 60);
+    // finish line marks
+    ctx.strokeStyle = '#1e3a5f';
+    ctx.setLineDash([5,5]);
+    for(let i=0;i<5;i++){
+      ctx.beginPath();
+      ctx.moveTo(80+i*70, 195);
+      ctx.lineTo(80+i*70, 205);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    const h = state.height;
+    const bodyY = y - h;
+    ctx.fillStyle = '#1e3a5f';
+    ctx.beginPath();
+    if(state.shape==='box'){
+      ctx.rect(x, bodyY, 70, h);
+    } else if(state.shape==='wedge'){
+      ctx.moveTo(x, y);
+      ctx.lineTo(x+70, y);
+      ctx.lineTo(x+70, bodyY);
+      ctx.lineTo(x+15, bodyY);
+      ctx.closePath();
+    } else {
+      ctx.moveTo(x, y-h/2);
+      ctx.quadraticCurveTo(x+10, bodyY, x+40, bodyY);
+      ctx.quadraticCurveTo(x+70, bodyY, x+70, y-h/2);
+      ctx.quadraticCurveTo(x+70, y, x+40, y);
+      ctx.quadraticCurveTo(x+10, y, x, y-h/2);
+    }
+    ctx.fill();
+    // wheels
+    ctx.fillStyle = '#222';
+    ctx.beginPath(); ctx.arc(x+12, y+5, 8, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x+58, y+5, 8, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#c9a227';
+    ctx.beginPath(); ctx.arc(x+12, y+5, 3, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x+58, y+5, 3, 0, Math.PI*2); ctx.fill();
+
+    // wind lines
+    ctx.strokeStyle = 'rgba(30,58,95,0.3)';
+    ctx.lineWidth = 1;
+    for(let i=0;i<4;i++){
+      const wy = bodyY + 5 + i*(h/4);
+      ctx.beginPath();
+      ctx.moveTo(x-25, wy);
+      ctx.lineTo(x-5, wy);
+      ctx.stroke();
+    }
+  }
+
+  function race(){
+    if(state.racing) return;
+    state.racing = true;
+    state.attempts++;
+    $('raceBtn').disabled = true;
+    const drag = computeDrag();
+    const eff = Math.max(5, 110-drag);
+    // distance: efficiency drives how far. range ~ 3 to 25 m
+    const finalDist = Math.round((eff/100) * 25 + Math.random()*2);
+    let x = 60, dist = 0;
+    let vx = 5 - drag*0.025;
+    if(vx < 0.5) vx = 0.5;
+
+    function frame(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#d4dae3';
+      ctx.fillRect(0, 200, canvas.width, 60);
+      drawCar(x, 200);
+      dist = Math.round(((x-60)/( (canvas.width-130) )) * finalDist);
+      $('distVal').textContent = dist + ' m';
+      x += vx;
+      vx *= (1 - drag*0.0005);
+      if(x < canvas.width-70 && vx > 0.2){
+        requestAnimationFrame(frame);
+      } else {
+        dist = finalDist;
+        $('distVal').textContent = dist + ' m';
+        if(dist > state.best){ state.best = dist; $('bestVal').textContent = dist + ' m'; }
+        state.racing = false;
+        $('raceBtn').disabled = false;
+        showFeedback(dist);
+      }
+    }
+    frame();
+  }
+
+  function showFeedback(d){
+    const fb = $('feedback');
+    fb.style.display = 'block';
+    let title, text, stars;
+    if(d >= 22){ stars='⭐⭐⭐'; title='Excellent Design! '+stars; text='Your streamlined body slices through air with minimal drag. Like a fish in water — designed with purpose!'; }
+    else if(d >= 15){ stars='⭐⭐'; title='Good Effort! '+stars; text='Solid performance. Try a smoother shape or lower body height to reduce drag even more.'; }
+    else if(d >= 8){ stars='⭐'; title='Keep Tuning! '+stars; text='Air is pushing back hard. A wedge or teardrop shape with smoother surfaces will travel farther.'; }
+    else { title='Back to the Drawing Board'; text='High drag is stopping your car. Choose a more streamlined shape and reduce frontal height.'; }
+    $('fbTitle').textContent = title;
+    $('fbText').textContent = text;
+  }
+
+  document.querySelectorAll('.shape-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.shape-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      state.shape = b.dataset.shape;
+      update();
+    });
+  });
+  $('height').addEventListener('input', e=>{ state.height = +e.target.value; update(); });
+  $('smooth').addEventListener('input', e=>{ state.smooth = +e.target.value; update(); });
+  $('raceBtn').addEventListener('click', race);
+
+  update();
+})();
+</script>
+</body>
+</html>

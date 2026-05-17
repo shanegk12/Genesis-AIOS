@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Build the BOM - Mousetrap Car</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 8px 0;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 10px;
+  }
+  .subtitle { color: #555; margin-bottom: 20px; font-size: 14px;}
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .panel {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 380px;
+  }
+  .panel h2 {
+    margin: 0 0 12px 0;
+    color: #1e3a5f;
+    font-size: 16px;
+    text-align: center;
+  }
+  .parts-bin {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 330px;
+  }
+  .part {
+    background: white;
+    border: 2px solid #c9a227;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: grab;
+    font-size: 13px;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .part:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.15); }
+  .part.dragging { opacity: 0.4; }
+  .part .icon { font-size: 18px; }
+  .bom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bom-table th {
+    background: #1e3a5f;
+    color: white;
+    padding: 8px;
+    font-size: 13px;
+    text-align: left;
+  }
+  .bom-table td {
+    padding: 8px;
+    border-bottom: 1px solid #e0e6ed;
+    font-size: 13px;
+  }
+  .slot {
+    min-height: 32px;
+    background: #fffbe6;
+    border: 2px dashed #c9a227;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #999;
+    font-style: italic;
+  }
+  .slot.over { background: #fff3b0; border-style: solid; }
+  .slot.filled { background: #e8f5e9; border: 2px solid #4a7c4e; color: #1e3a5f; font-style: normal; font-weight: bold; }
+  .slot.wrong { background: #ffebee; border: 2px solid #c62828; color: #1e3a5f; font-style: normal; }
+  .qty-input {
+    width: 50px;
+    padding: 4px;
+    border: 1px solid #c9a227;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .controls {
+    margin-top: 20px;
+    text-align: center;
+  }
+  button {
+    background: #c9a227;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: background 0.2s;
+  }
+  button:hover { background: #1e3a5f; }
+  button:disabled { background: #ccc; cursor: not-allowed; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 15px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.success { background: #e8f5e9; color: #1b5e20; border: 2px solid #4a7c4e; }
+  .feedback.partial { background: #fff8e1; color: #856404; border: 2px solid #c9a227; }
+  .score-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e3a5f;
+    margin: 10px 0;
+  }
+  .intro {
+    background: #1e3a5f;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .intro strong { color: #c9a227; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📋 Build Your Bill of Materials</h1>
+  <p class="subtitle">Mousetrap Car Assembly — Creationeering Phase</p>
+
+  <div class="intro">
+    <strong>Your Mission:</strong> Drag each part into the correct slot on the BOM. Then set the right quantity for each. A good engineer never starts assembly without a complete list!
+  </div>
+
+  <div class="game-area">
+    <div class="panel">
+      <h2>🧰 Parts Bin (drag from here)</h2>
+      <div class="parts-bin" id="partsBin"></div>
+    </div>
+
+    <div class="panel">
+      <h2>📄 Bill of Materials</h2>
+      <table class="bom-table">
+        <thead>
+          <tr><th>Function</th><th>Part</th><th>Qty</th></tr>
+        </thead>
+        <tbody id="bomBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="checkBtn">Check My BOM</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+</div>
+
+<script>
+  const parts = [
+    { id: 'mousetrap', name: 'Mousetrap', icon: '🪤' },
+    { id: 'axle', name: 'Wooden Axle Rod', icon: '➖' },
+    { id: 'wheel', name: 'CD Wheel', icon: '⭕' },
+    { id: 'string', name: 'Pull String', icon: '🧵' },
+    { id: 'chassis', name: 'Wood Chassis Board', icon: '▭' },
+    { id: 'eyehook', name: 'Eye Hook', icon: '🔩' },
+    { id: 'tape', name: 'Duct Tape', icon: '🩹' },
+    { id: 'leverarm', name: 'Lever Arm Extension', icon: '📏' },
+    { id: 'glue', name: 'Hot Glue', icon: '💧' },
+    { id: 'pizza', name: 'Pizza Slice', icon: '🍕' },
+    { id: 'battery', name: 'AA Battery', icon: '🔋' },
+    { id: 'rubberband', name: 'Rubber Band', icon: '🟠' }
+  ];
+
+  // Correct parts for each function slot and correct qty
+  const bomSlots = [
+    { function: 'Power source (provides energy)', correctId: 'mousetrap', correctQty: 1 },
+    { function: 'Main body / frame', correctId: 'chassis', correctQty: 1 },
+    { function: 'Wheels (roll on ground)', correctId: 'wheel', correctQty: 4 },
+    { function: 'Axles (wheels rotate on)', correctId: 'axle', correctQty: 2 },
+    { function: 'Extends lever for more pull', correctId: 'leverarm', correctQty: 1 },
+    { function: 'Connects lever to drive axle', correctId: 'string', correctQty: 1 },
+    { function: 'Fastens chassis pieces', correctId: 'glue', correctQty: 1 }
+  ];
+
+  // Distractors stay in bin: eyehook, tape, pizza, battery, rubberband
+  // But eyehook, tape are reasonable - we'll only flag truly wrong ones if placed
+  // For scoring: only the listed correctIds count. Others = wrong.
+
+  const partsBin = document.getElementById('partsBin');
+  const bomBody = document.getElementById('bomBody');
+  const feedback = document.getElementById('feedback');
+
+  function renderParts() {
+    partsBin.innerHTML = '';
+    parts.forEach(p => {
+      if (!placedParts.has(p.id)) {
+        const div = document.createElement('div');
+        div.className = 'part';
+        div.draggable = true;
+        div.dataset.id = p.id;
+        div.innerHTML = `<span class="icon">${p.icon}</span> ${p.name}`;
+        div.addEventListener('dragstart', e => {
+          e.dataTransfer.setData('text/plain', p.id);
+          div.classList.add('dragging');
+        });
+        div.addEventListener('dragend', () => div.classList.remove('dragging'));
+        partsBin.appendChild(div);
+      }
+    });
+  }
+
+  const placedParts = new Map(); // partId -> slotIndex
+  const slotContents = {}; // slotIndex -> {partId, qty}
+
+  function renderBOM() {
+    bomBody.innerHTML = '';
+    bomSlots.forEach((slot, idx) => {
+      const tr = document.createElement('tr');
+      const tdFunc = document.createElement('td');
+      tdFunc.textContent = slot.function;
+
+      const tdPart = document.createElement('td');
+      const slotDiv = document.createElement('div');
+      slotDiv.className = 'slot';
+      slotDiv.dataset.idx = idx;
+      const current = slotContents[idx];
+      if (current) {
+        const p = parts.find(x => x.id === current.partId);
+        slotDiv.innerHTML = `${p.icon} ${p.name} <span style="float:right;cursor:pointer;color:#c62828;font-weight:bold;" data-remove="${idx}">✕</span>`;
+        slotDiv.classList.add('filled');
+      } else {
+        slotDiv.textContent = 'Drop a part here...';
+      }
+      slotDiv.addEventListener('dragover', e => { e.preventDefault(); slotDiv.classList.add('over'); });
+      slotDiv.addEventListener('dragleave', () => slotDiv.classList.remove('over'));
+      slotDiv.addEventListener('drop', e => {
+        e.preventDefault();
+        slotDiv.classList.remove('over');
+        const partId = e.dataTransfer.getData('text/plain');
+        // remove from old slot if any
+        if (slotContents[idx]) {
+          placedParts.delete(slotContents[idx].partId);
+        }
+        // if part was in another slot, clear that
+        for (const [pid, sidx] of placedParts.entries()) {
+          if (pid === partId) {
+            delete slotContents[sidx];
+            placedParts.delete(pid);
+          }
+        }
+        slotContents[idx] = { partId, qty: 1 };
+        placedParts.set(partId, idx);
+        renderAll();
+      });
+      tdPart.appendChild(slotDiv);
+
+      const tdQty = document.createElement('td');
+      if (current) {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = '0';
+        input.max = '20';
+        input.value = current.qty;
+        input.className = 'qty-input';
+        input.addEventListener('input', () => {
+          slotContents[idx].qty = parseInt(input.value) || 0;
+        });
+        tdQty.appendChild(input);
+      } else {
+        tdQty.innerHTML = '<span style="color:#aaa">—</span>';
+      }
+
+      tr.appendChild(tdFunc);
+      tr.appendChild(tdPart);
+      tr.appendChild(tdQty);
+      bomBody.appendChild(tr);
+    });
+
+    // remove handlers
+    bomBody.querySelectorAll('[data-remove]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = parseInt(el.dataset.remove);
+        const pid = slotContents[idx].partId;
+        placedParts.delete(pid);
+        delete slotContents[idx];
+        renderAll();
+      });
+    });
+  }
+
+  function renderAll() {
+    renderParts();
+    renderBOM();
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    let correctParts = 0;
+    let correctQty = 0;
+    const total = bomSlots.length;
+    const slots = bomBody.querySelectorAll('.slot');
+    slots.forEach((slotDiv, idx) => {
+      const expected = bomSlots[idx];
+      const actual = slotContents[idx];
+      slotDiv.classList.remove('filled', 'wrong');
+      if (actual && actual.partId === expected.correctId) {
+        slotDiv.classList.add('filled');
+        correctParts++;
+        if (actual.qty === expected.correctQty) correctQty++;
+      } else if (actual) {
+        slotDiv.classList.add('wrong');
+      }
+    });
+
+    const totalScore = correctParts + correctQty;
+    const maxScore = total * 2;
+    const pct = Math.round((totalScore / maxScore) * 100);
+
+    feedback.className = 'feedback show';
+    let msg = '';
+    if (pct === 100) {
+      feedback.classList.add('success');
+      msg = `<div class="score-display">🏆 Perfect BOM! ${pct}%</div>
+             <div>Every part and quantity is correct. Like the Ultimate Creationeer, you planned with precision — now you're ready to assemble!</div>`;
+    } else if (pct >= 70) {
+      feedback.classList.add('partial');
+      msg = `<div class="score-display">👍 Good work — ${pct}%</div>
+             <div>Parts correct: <strong>${correctParts}/${total}</strong> &nbsp;|&nbsp; Quantities correct: <strong>${correctQty}/${total}</strong><br>
+             Red rows need a different part. Adjust and try again!</div>`;
+    } else {
+      feedback.classList.add('partial');
+      msg = `<div class="score-display">🔧 Keep Building — ${pct}%</div>
+             <div>Parts correct: <strong>${correctParts}/${total}</strong> &nbsp;|&nbsp; Quantities correct: <strong>${correctQty}/${total}</strong><br>
+             A good BOM is the foundation of assembly. Review the function descriptions and try again!</div>`;
+    }
+    feedback.innerHTML = msg;
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    placedParts.clear();
+    for (const k in slotContents) delete slotContents[k];
+    feedback.classList.remove('show');
+    renderAll();
+  });
+
+  renderAll();
+</script>
+</body>
+</html>

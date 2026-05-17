@@ -1164,9 +1164,9 @@
       "phase": "Sustainability",
       "prev": "Design for Disassembly and Recycling",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:09:18.847036+00:00",
-      "error": null,
+      "status": "failed",
+      "completed_at": "2026-05-17T19:01:33.961368+00:00",
+      "error": "usage: lesson_pipeline.py [-h] --doc {creationeering,mousetrap} --tab TAB\n                          --topic TOPIC --phase PHASE --prev PREV\n                          [--draft-out DRAFT_OUT]\n                          [--horstemeyer-uri HORSTEMEYER_URI]\nlesson_pipeline.py: error: argument --doc: invalid choice: 'creationeering-2' (choose from creationeering, mousetrap)\n",
       "qc_status": null,
       "qc_scores": {
         "reading_level": 1,
@@ -1538,9 +1538,9 @@
       "phase": "Death & Recycling",
       "prev": "Recycling Logistics and Infrastructure",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:09:59.201410+00:00",
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:01:34.262503+00:00",
+      "error": "usage: lesson_pipeline.py [-h] --doc {creationeering,mousetrap} --tab TAB\n                          --topic TOPIC --phase PHASE --prev PREV\n                          [--draft-out DRAFT_OUT]\n                          [--horstemeyer-uri HORSTEMEYER_URI]\nlesson_pipeline.py: error: argument --doc: invalid choice: 'creationeering-2' (choose from creationeering, mousetrap)\n"
     },
     {
       "id": "C-089",
@@ -1837,9 +1837,9 @@
       "phase": "Assembly",
       "prev": "Build: Inventory Checks and Verifications",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:28:03.656088+00:00",
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:02:46.190870+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[0].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[0].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-030",
@@ -1850,9 +1850,34 @@
       "phase": "Assembly",
       "prev": "Lesson: Precision Finishing and Tolerance",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:29:12.956701+00:00",
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:03:13.301226+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2201,
+        "missing_sections": [
+          "Lesson Overview"
+        ],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent overall, with strong faith integration and clear, age-appropriate language. The Multiscale Modeling connections are present but could be strengthened by using more direct, concrete analogies instead of abstract atomic-level explanations. For example, connect the cost of carbon fiber to the complex 'recipe' and 'baking process' needed to align its atoms perfectly, versus the simpler process for wood. This would make the concept more accessible for middle schoolers. Otherwise, the structure and application of the frameworks are solid.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-030/flashcards.html",
+        "accordion": "interactives/M-030/accordion.html",
+        "ocv": "interactives/M-030/ocv.html",
+        "concept": "interactives/M-030/concept.html"
+      }
     },
     {
       "id": "M-031",
@@ -1899,9 +1924,32 @@
       "phase": "Assembly",
       "prev": "Build: Material Processing",
       "type": "activity",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:32:37.092609+00:00",
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:05:06.835146+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 1898,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured and the reading level is appropriate. The core frameworks (Creationeering, OCV) are applied, but the Multiscale Modeling examples are abstract and may be difficult for middle schoolers to grasp. The primary analogy comparing a BOM to God's creation in Genesis is a significant stretch, weakening the faith integration. Consider simplifying the Multiscale Modeling connections to be more concrete and tangible for this age group. The overall lesson is solid but could be improved with more relatable analogies.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-032/flashcards.html",
+        "accordion": "interactives/M-032/accordion.html",
+        "ocv": "interactives/M-032/ocv.html",
+        "concept": "interactives/M-032/concept.html"
+      }
     },
     {
       "id": "M-033",
@@ -1985,9 +2033,9 @@
       "phase": "Logistics",
       "prev": "Lesson: Critical Paths and Calculating Time",
       "type": "activity",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:37:03.771053+00:00",
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:07:06.239969+00:00",
+      "error": " - Lesson: Principles of E-Waste and Safe Disposal\n  - BA: Business Plan Compilation + Pitch\n  - Lesson: Salvage Value and Resource Recovery\n  - Lesson: Closing a Project\n  - Death and Recycling: End of Life Classification\n  - Final Activity: Parent Pitch Night\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\n"
     },
     {
       "id": "M-036",
@@ -1998,9 +2046,9 @@
       "phase": "Logistics",
       "prev": "Business Activity: Break Even Analysis",
       "type": "activity",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:37:35.148688+00:00",
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:07:41.868491+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-037",
@@ -2011,9 +2059,9 @@
       "phase": "Logistics",
       "prev": "BA: Patents, IP + Engineer Liability",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T13:38:55.831703+00:00",
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:08:18.421531+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-038",
@@ -2059,9 +2107,32 @@
       "phase": "Performance",
       "prev": "Lesson: Risks and Contingencies",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:08:45.242643+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2353,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured with excellent analogies. However, the reading level is advanced for 6th-8th grade, using complex vocabulary and sentence structures. The application of the Creationeering framework, particularly the 'Performance' phase, is slightly misaligned. The lesson focuses on planning and sourcing (Design/Development phase), not on evaluating the car's actual function post-build (Performance phase). Adjusting the phase alignment and simplifying some of the core text would significantly improve this otherwise solid lesson.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-039/flashcards.html",
+        "accordion": "interactives/M-039/accordion.html",
+        "ocv": "interactives/M-039/ocv.html",
+        "concept": "interactives/M-039/concept.html"
+      }
     },
     {
       "id": "M-040",
@@ -2072,9 +2143,32 @@
       "phase": "Performance",
       "prev": "Logistics: Supply Chain Map and Risk Analysis",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:10:50.478689+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 1,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2392,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson's core concept of connecting performance to a customer persona is excellent, as are the faith integration and analogies. However, the application of Multiscale Modeling is a critical weakness. The connections between atomic-level material properties (e.g., intermolecular bonds) and macro-level outcomes like customer satisfaction are abstract, confusing, and not practical for a middle school mousetrap project. This framework feels forced and detracts from the lesson's otherwise strong, user-centered focus. Revising or removing the Multiscale Modeling sections is highly recommended to improve clarity and effectiveness.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-040/flashcards.html",
+        "accordion": "interactives/M-040/accordion.html",
+        "ocv": "interactives/M-040/ocv.html",
+        "concept": "interactives/M-040/concept.html"
+      }
     },
     {
       "id": "M-041",
@@ -2085,9 +2179,9 @@
       "phase": "Performance",
       "prev": "BA: Customer Persona + Marketing Standards",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:13:34.392039+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-042",
@@ -2098,9 +2192,9 @@
       "phase": "Performance",
       "prev": "Lesson: Assembly Blueprint and Safety Review",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:14:10.875092+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-043",
@@ -2111,9 +2205,32 @@
       "phase": "Performance",
       "prev": "Lesson: Frame, Axle, and Wheel Integration",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:14:36.376309+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 3.0
+      },
+      "qc_structural": {
+        "word_count": 2309,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "This is an exemplary lesson draft. The reading level is perfectly pitched for middle school, blending plain-language explanations with appropriate technical vocabulary. The faith integration is natural and meaningful, connecting engineering excellence to biblical principles of stewardship and creation. The use of the Creationeering, Multiscale Modeling, and OCV frameworks is clear, correct, and consistently applied. Analogies are concrete and relatable, and the lesson structure is complete and well-organized. No significant revisions are needed.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-043/flashcards.html",
+        "accordion": "interactives/M-043/accordion.html",
+        "ocv": "interactives/M-043/ocv.html",
+        "concept": "interactives/M-043/concept.html"
+      }
     },
     {
       "id": "M-044",
@@ -2124,9 +2241,9 @@
       "phase": "Performance",
       "prev": "Build: Body and Mousetrap",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:16:31.214995+00:00",
+      "error": "Drafting: 'Power System and Axles' (Performance phase)...\nError: draft is 40,165 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-045",
@@ -2137,9 +2254,9 @@
       "phase": "Performance",
       "prev": "Build: Power System and Axles",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:16:58.147036+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-046",
@@ -2150,9 +2267,31 @@
       "phase": "Sustainability",
       "prev": "Lesson: Component Alignment and Quality",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:17:26.374905+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2736,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "This is an excellent lesson draft. The reading level is appropriately challenging, and the faith integration is natural and foundational. The use of the proprietary frameworks (Creationeering, Multiscale Modeling, OCV) is consistent, correct, and well-applied to the project. The only minor area for improvement is in the analogies; while the bridge analogy is good, adding more concrete, everyday examples for concepts like 'circular economy' or 'multiscale modeling' could further enhance middle schooler comprehension. The lesson structure is complete and substantive. Overall, this is a high-quality, well-designed lesson.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-046/flashcards.html",
+        "ocv": "interactives/M-046/ocv.html",
+        "concept": "interactives/M-046/concept.html"
+      }
     },
     {
       "id": "M-047",
@@ -2163,9 +2302,35 @@
       "phase": "Sustainability",
       "prev": "Lesson: Post-Build Systems",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:19:22.075673+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 1886,
+        "missing_sections": [
+          "Lesson Overview",
+          "Learning Objectives",
+          "Key Vocabulary"
+        ],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson effectively integrates faith concepts and uses clear analogies. The structure is complete and robust. The primary area for improvement is the application of the Multiscale Modeling framework. The descriptions of atomic-level interactions (e.g., asperities, bond strength) are a bit abstract and advanced for the 6th-8th grade level. Simplifying this language and providing more concrete, visual examples would improve comprehension and make the framework more accessible. The reading level is generally appropriate but trends towards the higher end of the grade band due to this technical complexity.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-047/flashcards.html",
+        "ocv": "interactives/M-047/ocv.html",
+        "concept": "interactives/M-047/concept.html"
+      }
     },
     {
       "id": "M-048",
@@ -2176,9 +2341,31 @@
       "phase": "Sustainability",
       "prev": "Build: Braking System and Test",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:21:36.410434+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2359,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson effectively integrates faith concepts with engineering principles. However, the application of Multiscale Modeling is abstract and may be difficult for 6th-8th graders to grasp, especially concepts like atomic-level friction and micro-cracks. Simplifying these examples or replacing them with more concrete, observable phenomena (e.g., wood grain vs. smooth plastic) would improve comprehension. The reading level is challenging but acceptable, given the defined vocabulary. The OCV applications are solid, but could be more clearly distinguished from one another in each section. Overall, a strong lesson draft that could be improved with more accessible scientific analogies.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-048/flashcards.html",
+        "ocv": "interactives/M-048/ocv.html",
+        "concept": "interactives/M-048/concept.html"
+      }
     },
     {
       "id": "M-049",
@@ -2189,9 +2376,31 @@
       "phase": "Performance",
       "prev": "Build: Arduino Station and Test",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T19:23:18.257061+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 2,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2252,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong integration of faith and the Creationeering framework. The content is well-structured and appropriate for the target grade level. The only minor issue is the inclusion of 'Sustainability' in the vocabulary list without any corresponding explanation or application in the lesson body. This term should either be integrated into the lesson content or removed to avoid confusion. Otherwise, the draft is ready for implementation.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-049/flashcards.html",
+        "ocv": "interactives/M-049/ocv.html",
+        "concept": "interactives/M-049/concept.html"
+      }
     },
     {
       "id": "M-050",
@@ -2202,9 +2411,9 @@
       "phase": "Performance",
       "prev": "Lesson: Test Protocol and Baselines",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T19:25:43.644544+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-051",

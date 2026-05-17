@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Supply Chain Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    font-size: 1.6em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .stage {
+    background: #1e3a5f;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stage-name { font-weight: bold; }
+  .progress { color: #c9a227; font-weight: bold; }
+
+  /* PART 1: Sorting */
+  .part {
+    display: none;
+  }
+  .part.active { display: block; }
+
+  .instruction {
+    background: #fff8e1;
+    border-left: 4px solid #c9a227;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+
+  .sort-zones {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .zone {
+    background: #f7f9fc;
+    border: 2px dashed #1e3a5f;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 140px;
+  }
+  .zone h3 {
+    font-size: 0.85em;
+    text-align: center;
+    color: #1e3a5f;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #c9a227;
+  }
+  .zone.drag-over {
+    background: #fff3cd;
+    border-color: #c9a227;
+  }
+  .item-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: #eef2f7;
+    border-radius: 8px;
+    min-height: 70px;
+  }
+  .item {
+    background: #c9a227;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: grab;
+    font-size: 0.85em;
+    font-weight: 500;
+    user-select: none;
+    transition: transform 0.15s;
+  }
+  .item:hover { transform: scale(1.05); }
+  .item.placed {
+    background: #1e3a5f;
+    font-size: 0.8em;
+    padding: 6px 10px;
+    margin: 3px;
+    display: inline-block;
+  }
+  .item.correct { background: #2d8a3e; }
+  .item.incorrect { background: #c0392b; }
+
+  button {
+    background: #c9a227;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  button:hover { background: #b08e1f; }
+  button:disabled { background: #999; cursor: not-allowed; }
+
+  .feedback {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .feedback.success { background: #d4edda; color: #155724; border-left: 4px solid #2d8a3e; }
+  .feedback.partial { background: #fff3cd; color: #856404; border-left: 4px solid #c9a227; }
+
+  /* PART 2: Risk Quiz */
+  .scenario {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .scenario-title {
+    color: #c9a227;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  .choices {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .choice {
+    background: white;
+    border: 2px solid #1e3a5f;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-size: 0.95em;
+    color: #1e3a5f;
+  }
+  .choice:hover { background: #fff8e1; }
+  .choice.selected-correct { background: #2d8a3e; color: white; border-color: #2d8a3e; }
+  .choice.selected-wrong { background: #c0392b; color: white; border-color: #c0392b; }
+  .choice.show-correct { background: #d4edda; border-color: #2d8a3e; }
+  .choice:disabled { cursor: default; }
+
+  .explanation {
+    margin-top: 12px;
+    padding: 10px;
+    background: #eef2f7;
+    border-radius: 6px;
+    font-size: 0.9em;
+    display: none;
+  }
+  .explanation.show { display: block; }
+
+  /* FINAL */
+  .final {
+    text-align: center;
+    padding: 30px;
+  }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    font-size: 2.5em;
+    font-weight: bold;
+    border: 6px solid #c9a227;
+  }
+  .badge {
+    font-size: 1.3em;
+    color: #1e3a5f;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  .summary {
+    background: #f7f9fc;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🚗 Mousetrap Car Supply Chain Challenge</h1>
+  <div class="subtitle">Map the journey of your car's parts — then survive the risks!</div>
+
+  <div class="stage">
+    <span class="stage-name" id="stageName">Stage 1: Supply Chain Mapping</span>
+    <span class="progress" id="progress">Step 1 of 3</span>
+  </div>
+
+  <!-- PART 1: Drag and Drop -->
+  <div class="part active" id="part1">
+    <div class="instruction">
+      <strong>🎯 Your Mission:</strong> Drag each item into the correct supply chain stage. A supply chain follows materials from the ground all the way to your finished mousetrap car!
+    </div>
+
+    <div class="sort-zones">
+      <div class="zone" data-stage="raw"><h3>1. Raw Materials</h3></div>
+      <div class="zone" data-stage="supplier"><h3>2. Supplier</h3></div>
+      <div class="zone" data-stage="manufacturer"><h3>3. Manufacturer</h3></div>
+      <div class="zone" data-stage="distributor"><h3>4. Distributor</h3></div>
+      <div class="zone" data-stage="end"><h3>5. You (Builder)</h3></div>
+    </div>
+
+    <div class="item-pool" id="itemPool"></div>
+
+    <button id="checkSort">Check My Map</button>
+    <div class="feedback" id="sortFeedback" style="display:none;"></div>
+    <button id="toPart2" style="display:none;">Next: Risk Analysis →</button>
+  </div>
+
+  <!-- PART 2: Risk Quiz -->
+  <div class="part" id="part2">
+    <div class="instruction">
+      <strong>⚠️ Risk Analysis:</strong> Real supply chains face problems! For each situation, pick the smartest response for your mousetrap car project.
+    </div>
+    <div id="quizContainer"></div>
+    <button id="toFinal" style="display:none;">See My Results →</button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="part" id="part3">
+    <div class="final">
+      <h2 style="color:#1e3a5f;">Mission Complete!</h2>
+      <div class="score-circle" id="finalScore">0%</div>
+      <div class="badge" id="badge"></div>
+      <div class="summary" id="summary"></div>
+      <p style="font-style:italic; color:#555; margin-top:14px;">
+        Good stewards understand every link in the chain — from raw material to finished design.
+      </p>
+      <button onclick="location.reload()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const items = [
+  { id: 'wood', text: 'Tree in forest', stage: 'raw' },
+  { id: 'iron', text: 'Iron ore in mine', stage: 'raw' },
+  { id: 'oil', text: 'Crude oil', stage: 'raw' },
+  { id: 'lumber', text: 'Lumber mill', stage: 'supplier' },
+  { id: 'steel', text: 'Steel plant', stage: 'supplier' },
+  { id: 'plastic', text: 'Plastic pellet maker', stage: 'supplier' },
+  { id: 'trapfact', text: 'Mousetrap factory', stage: 'manufacturer' },
+  { id: 'wheelfact', text: 'Wheel factory', stage: 'manufacturer' },
+  { id: 'warehouse', text: 'Warehouse truck', stage: 'distributor' },
+  { id: 'store', text: 'Hardware store', stage: 'distributor' },
+  { id: 'build', text: 'Your workbench', stage: 'end' },
+  { id: 'race', text: 'Race day car', stage: 'end' }
+];
+
+const pool = document.getElementById('itemPool');
+const shuffled = [...items].sort(() => Math.random() - 0.5);
+shuffled.forEach(item => {
+  const el = document.createElement('div');
+  el.className = 'item';
+  el.draggable = true;
+  el.dataset.id = item.id;
+  el.dataset.stage = item.stage;
+  el.textContent = item.text;
+  pool.appendChild(el);
+});
+
+let dragged = null;
+document.querySelectorAll('.item').forEach(el => {
+  el.addEventListener('dragstart', e => {
+    dragged = el;
+    e.dataTransfer.effectAllowed = 'move';
+  });
+});
+
+document.querySelectorAll('.zone, #itemPool').forEach(zone => {
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (dragged) {
+      if (zone.id === 'itemPool') {
+        dragged.classList.remove('placed');
+      } else {
+        dragged.classList.add('placed');
+      }
+      zone.appendChild(dragged);
+    }
+  });
+});
+
+let sortScore = 0;
+document.getElementById('checkSort').addEventListener('click', () => {
+  let correct = 0;
+  document.querySelectorAll('.zone').forEach(zone => {
+    const stage = zone.dataset.stage;
+    zone.querySelectorAll('.item').forEach(item => {
+      if (item.dataset.stage === stage) {
+        item.classList.add('correct');
+        correct++;
+      } else {
+        item.classList.add('incorrect');
+      }
+    });
+  });
+  const total = items.length;
+  sortScore = correct;
+  const fb = document.getElementById('sortFeedback');
+  fb.style.display = 'block';
+  if (correct === total) {
+    fb.className = 'feedback success';
+    fb.innerHTML = `🌟 Perfect! ${correct}/${total} correct. You mapped the entire chain!`;
+  } else {
+    fb.className = 'feedback partial';
+    fb.innerHTML = `You got ${correct}/${total}. Green = correct, Red = wrong. Each part travels: Raw → Supplier → Manufacturer → Distributor → You!`;
+  }
+  document.getElementById('checkSort').disabled = true;
+  document.getElementById('toPart2').style.display = 'inline-block';
+  document.querySelectorAll('.item').forEach(i => i.draggable = false);
+});
+
+document.getElementById('toPart2').addEventListener('click', () => {
+  document.getElementById('part1').classList.remove('active');
+  document.getElementById('part2').classList.add('active');
+  document.getElementById('stageName').textContent = 'Stage 2: Risk Analysis';
+  document.getElementById('progress').textContent = 'Step 2 of 3';
+});
+
+// Quiz
+const quiz = [
+  {
+    title: 'Scenario 1: Shipping Delay',
+    q: 'The wheels you ordered are stuck on a delayed truck and won\'t arrive until AFTER race day. What\'s your best move?',
+    choices: [
+      { t: 'Wait and hope they arrive in time.', correct: false, exp: 'Hope is not a plan! Race day won\'t wait.' },
+      { t: 'Find a backup supplier OR use CDs/bottle caps as wheels.', correct: true, exp: 'Smart! Having a backup plan (redundancy) reduces risk.' },
+      { t: 'Cancel the project.', correct: false, exp: 'Engineers solve problems — they don\'t give up at the first delay.' }
+    ]
+  },
+  {
+    title: 'Scenario 2: Price Spike',
+    q: 'The price of metal axles doubled overnight. What should you do?',
+    choices: [
+      { t: 'Buy them anyway without checking alternatives.', correct: false, exp: 'Always compare options before spending more.' },
+      { t: 'Compare materials — wooden dowels or pencils might work for less.', correct: true, exp: 'Substituting materials is a key risk-management skill.' },
+      { t: 'Skip axles entirely.', correct: false, exp: 'Removing essential parts breaks the design!' }
+    ]
+  },
+  {
+    title: 'Scenario 3: Single Supplier',
+    q: 'You only know ONE store that sells mousetraps and it just closed for a month. What\'s the lesson?',
+    choices: [
+      { t: 'Relying on one supplier is risky — always know 2+ sources.', correct: true, exp: 'Exactly! Diversifying suppliers protects your project.' },
+      { t: 'Stores never close, so this won\'t happen again.', correct: false, exp: 'Real supply chains face unexpected closures all the time.' },
+      { t: 'Use a glue stick instead of a mousetrap.', correct: false, exp: 'A mousetrap car needs... a mousetrap! Find another supplier.' }
+    ]
+  },
+  {
+    title: 'Scenario 4: Quality Problem',
+    q: 'The string you bought keeps snapping during test runs. What\'s the engineering response?',
+    choices: [
+      { t: 'Keep using it and hope it lasts on race day.', correct: false, exp: 'Known failures will fail again — fix the root cause.' },
+      { t: 'Test stronger materials (fishing line, dental floss) before race day.', correct: true, exp: 'Testing alternatives early prevents disaster later.' },
+      { t: 'Blame the string and quit.', correct: false, exp: 'Engineers iterate and improve — they don\'t blame and quit.' }
+    ]
+  }
+];
+
+const quizContainer = document.getElementById('quizContainer');
+let quizScore = 0;
+let answered = 0;
+
+quiz.forEach((item, idx) => {
+  const div = document.createElement('div');
+  div.className = 'scenario';
+  div.innerHTML = `
+    <div class="scenario-title">${item.title}</div>
+    <div>${item.q}</div>
+    <div class="choices" id="choices-${idx}"></div>
+    <div class="explanation" id="exp-${idx}"></div>
+  `;
+  quizContainer.appendChild(div);
+  const choicesDiv = div.querySelector(`#choices-${idx}`);
+  item.choices.forEach((c, ci) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c.t;
+    btn.addEventListener('click', () => {
+      const allBtns = choicesDiv.querySelectorAll('.choice');
+      allBtns.forEach(b => b.disabled = true);
+      if (c.correct) {
+        btn.classList.add('selected-correct');
+        quizScore++;
+      } else {
+        btn.classList.add('selected-wrong');
+        allBtns.forEach((b, bi) => {
+          if (item.choices[bi].correct) b.classList.add('show-correct');
+        });
+      }
+      const exp = document.getElementById(`exp-${idx}`);
+      exp.textContent = c.exp;
+      exp.classList.add('show');
+      answered++;
+      if (answered === quiz.length) {
+        document.getElementById('toFinal').style.display = 'inline-block';
+      }
+    });
+    choicesDiv.appendChild(btn);
+  });
+});
+
+document.getElementById('toFinal').addEventListener('click', () => {
+  document.getElementById('part2').classList.remove('active');
+  document.getElementById('part3').classList.add('active');
+  document.getElementById('stageName').textContent = 'Stage 3: Results';
+  document.getElementById('progress').textContent = 'Complete!';
+
+  const totalPoints = items.length + quiz.length;
+  const earned = sortScore + quizScore;
+  const pct = Math.round((earned / totalPoints) * 100);
+  document.getElementById('finalScore').textContent = pct + '%';
+
+  let badge = '';
+  if (pct === 100) badge = '🏆 Master Creationeer!';
+  else if (pct >= 80) badge = '⭐ Skilled Supply Chain Engineer';
+  else if (pct >= 60) badge = '🔧 Apprentice Builder';
+  else badge = '📚 Keep Learning, Creationeer!';
+  document.getElementById('badge').textContent = badge;
+
+  document.getElementById('summary').innerHTML = `
+    <strong>Your Performance:</strong><br>
+    • Supply Chain Mapping: ${sortScore} / ${items.length}<br>
+    • Risk Analysis Scenarios: ${quizScore} / ${quiz.length}<br>
+    <br>
+    <strong>Key Takeaway:</strong> A strong mousetrap car project depends on understanding where every part comes from AND having a plan when things go wrong. That's good stewardship of your resources!
+  `;
+});
+</script>
+</body>
+</html>

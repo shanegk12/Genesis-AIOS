@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Baseline Test Lab</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 4px;
+    text-align: center;
+    font-size: 22px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.12);
+  }
+  .progress {
+    height: 8px;
+    background: #e6ebf2;
+    border-radius: 4px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: #c9a227;
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .step-title {
+    color: #1e3a5f;
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .options {
+    display: grid;
+    gap: 8px;
+  }
+  .option {
+    background: #fff;
+    border: 2px solid #d0d7e2;
+    padding: 12px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    text-align: left;
+    color: #1e3a5f;
+  }
+  .option:hover { border-color: #c9a227; background: #fffaf0; }
+  .option.correct { border-color: #2e7d32; background: #e8f5e9; }
+  .option.wrong { border-color: #c62828; background: #ffebee; }
+  .option:disabled { cursor: not-allowed; }
+  .feedback {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.good { background: #e8f5e9; border-left: 4px solid #2e7d32; }
+  .feedback.bad { background: #fff3e0; border-left: 4px solid #c9a227; }
+  .next-btn {
+    margin-top: 12px;
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    float: right;
+  }
+  .next-btn:hover { background: #2a5285; }
+  .next-btn:disabled { background: #aab; cursor: not-allowed; }
+
+  /* Baseline data step */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .data-table th, .data-table td {
+    border: 1px solid #d0d7e2;
+    padding: 6px 10px;
+    text-align: center;
+  }
+  .data-table th { background: #1e3a5f; color: #fff; }
+  .calc-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  .calc-row label { font-size: 14px; font-weight: 600; }
+  .calc-row input {
+    padding: 8px 10px;
+    border: 2px solid #d0d7e2;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 90px;
+  }
+  .calc-row button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Drag and drop */
+  .dd-area { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;}
+  .dd-bank, .dd-targets {
+    flex: 1;
+    min-width: 240px;
+    background: #f7f9fc;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .dd-bank h4, .dd-targets h4 { margin: 0 0 8px; color: #1e3a5f; font-size: 14px;}
+  .draggable {
+    background: #fff;
+    border: 2px solid #c9a227;
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin: 6px 0;
+    cursor: grab;
+    font-size: 13px;
+    user-select: none;
+  }
+  .draggable.dragging { opacity: 0.4; }
+  .drop-zone {
+    background: #fff;
+    border: 2px dashed #1e3a5f;
+    min-height: 50px;
+    padding: 6px;
+    border-radius: 6px;
+    margin: 6px 0;
+  }
+  .drop-zone.label { font-weight: 600; font-size: 13px; padding-bottom: 4px;}
+  .drop-zone.over { background: #fffaf0; border-color: #c9a227; }
+  .zone-wrap { margin-bottom: 10px; }
+  .zone-wrap > div.zone-label { font-weight: 600; font-size: 13px; margin-bottom: 4px; color: #1e3a5f;}
+
+  /* Final score */
+  .final {
+    text-align: center;
+    padding: 20px;
+  }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 14px auto;
+    border: 6px solid #c9a227;
+  }
+  .restart {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 10px;
+  }
+  .clearfix::after { content: ""; display: table; clear: both; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏁 Baseline Test Lab</h1>
+  <div class="subtitle">Establish a baseline so you can measure improvement!</div>
+  <div class="progress"><div class="progress-bar" id="progBar"></div></div>
+  <div id="content"></div>
+</div>
+
+<script>
+let score = 0;
+let step = 0;
+const totalSteps = 5;
+
+const content = document.getElementById('content');
+const progBar = document.getElementById('progBar');
+
+function updateProgress() {
+  progBar.style.width = ((step) / totalSteps * 100) + '%';
+}
+
+function renderStep() {
+  updateProgress();
+  if (step === 0) renderIntro();
+  else if (step === 1) renderQ1();
+  else if (step === 2) renderDragDrop();
+  else if (step === 3) renderBaselineCalc();
+  else if (step === 4) renderQ2();
+  else renderFinal();
+}
+
+function renderIntro() {
+  content.innerHTML = `
+    <h2 class="step-title">What is a Baseline?</h2>
+    <div class="scenario">
+      Before improving your mousetrap car, engineers run <strong>baseline tests</strong> — the FIRST set of measurements that show how your design performs as-is. Without a baseline, you can't tell if changes actually help!
+      <br><br>
+      You'll guide a baseline test of "Car #1" in 4 quick challenges.
+    </div>
+    <button class="next-btn" onclick="step++; renderStep();">Start Testing →</button>
+    <div class="clearfix"></div>
+  `;
+}
+
+function renderQ1() {
+  content.innerHTML = `
+    <h2 class="step-title">Step 1 of 4: Choosing What to Measure</h2>
+    <div class="scenario">
+      Your design goal is: <em>"Travel as far as possible in a straight line."</em><br>
+      Which measurement is the BEST baseline to record?
+    </div>
+    <div class="options" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <div class="clearfix"><button class="next-btn" id="nx" disabled onclick="step++; renderStep();">Next →</button></div>
+  `;
+  const opts = [
+    {t: "The color of the car", c: false, e: "Color doesn't tell us anything about how the car performs."},
+    {t: "The distance traveled and how straight it went", c: true, e: "Exactly! Measure what matches your design goal."},
+    {t: "How cool the car looks", c: false, e: "Looks aren't a performance measurement."},
+    {t: "Whether the wheels are round", c: false, e: "That's a design check, not a performance baseline."}
+  ];
+  const optsDiv = document.getElementById('opts');
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = o.t;
+    btn.onclick = () => handleAnswer(btn, o, opts);
+    optsDiv.appendChild(btn);
+  });
+}
+
+function handleAnswer(btn, o, allOpts) {
+  const buttons = document.querySelectorAll('.option');
+  buttons.forEach(b => b.disabled = true);
+  const fb = document.getElementById('fb');
+  if (o.c) {
+    btn.classList.add('correct');
+    fb.className = 'feedback show good';
+    fb.innerHTML = '✅ <strong>Correct!</strong> ' + o.e;
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    buttons.forEach(b => {
+      if (allOpts[Array.from(buttons).indexOf(b)].c) b.classList.add('correct');
+    });
+    fb.className = 'feedback show bad';
+    fb.innerHTML = '❌ ' + o.e;
+  }
+  document.getElementById('nx').disabled = false;
+}
+
+function renderDragDrop() {
+  content.innerHTML = `
+    <h2 class="step-title">Step 2 of 4: Build a Fair Test</h2>
+    <div class="scenario">
+      Drag each item into <strong>"Keep Constant"</strong> (controlled variables) or <strong>"Measure"</strong> (the result we record).
+    </div>
+    <div class="dd-area">
+      <div class="dd-bank">
+        <h4>📦 Test Items</h4>
+        <div id="bank"></div>
+      </div>
+      <div class="dd-targets">
+        <div class="zone-wrap">
+          <div class="zone-label">🔒 Keep Constant</div>
+          <div class="drop-zone" data-cat="constant" id="zoneC"></div>
+        </div>
+        <div class="zone-wrap">
+          <div class="zone-label">📏 Measure</div>
+          <div class="drop-zone" data-cat="measure" id="zoneM"></div>
+        </div>
+      </div>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <div class="clearfix"><button class="next-btn" id="nx" onclick="checkDD()">Check My Answers</button></div>
+  `;
+  const items = [
+    {t: "Same floor surface", cat: "constant"},
+    {t: "Same starting line", cat: "constant"},
+    {t: "Same person releasing the car", cat: "constant"},
+    {t: "Distance the car traveled", cat: "measure"},
+    {t: "Time to reach 5 meters", cat: "measure"}
+  ];
+  // shuffle
+  items.sort(() => Math.random() - 0.5);
+  const bank = document.getElementById('bank');
+  items.forEach((it, i) => {
+    const d = document.createElement('div');
+    d.className = 'draggable';
+    d.draggable = true;
+    d.textContent = it.t;
+    d.dataset.cat = it.cat;
+    d.id = 'drag' + i;
+    d.addEventListener('dragstart', e => { d.classList.add('dragging'); e.dataTransfer.setData('text/plain', d.id);});
+    d.addEventListener('dragend', () => d.classList.remove('dragging'));
+    bank.appendChild(d);
+  });
+  document.querySelectorAll('.drop-zone').forEach(z => {
+    z.addEventListener('dragover', e => { e.preventDefault(); z.classList.add('over');});
+    z.addEventListener('dragleave', () => z.classList.remove('over'));
+    z.addEventListener('drop', e => {
+      e.preventDefault();
+      z.classList.remove('over');
+      const id = e.dataTransfer.getData('text/plain');
+      const el = document.getElementById(id);
+      if (el) z.appendChild(el);
+    });
+  });
+  // also allow drop back to bank
+  bank.addEventListener('dragover', e => e.preventDefault());
+  bank.addEventListener('drop', e => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const el = document.getElementById(id);
+    if (el) bank.appendChild(el);
+  });
+}
+
+function checkDD() {
+  const zoneC = document.getElementById('zoneC');
+  const zoneM = document.getElementById('zoneM');
+  let correct = 0, total = 5;
+  zoneC.querySelectorAll('.draggable').forEach(d => { if (d.dataset.cat === 'constant') correct++; });
+  zoneM.querySelectorAll('.draggable').forEach(d => { if (d.dataset.cat === 'measure') correct++; });
+  const fb = document.getElementById('fb');
+  if (correct === total) {
+    fb.className = 'feedback show good';
+    fb.innerHTML = '✅ <strong>Perfect!</strong> A fair test holds variables constant and measures only the outcome.';
+    score++;
+  } else {
+    fb.className = 'feedback show bad';
+    fb.innerHTML = `You got <strong>${correct} of ${total}</strong>. Items like floor, start line, and the releaser should stay the same so your test is fair. We only measure what relates to performance.`;
+  }
+  document.querySelectorAll('.draggable').forEach(d => d.draggable = false);
+  document.getElementById('nx').textContent = 'Next →';
+  document.getElementById('nx').onclick = () => { step++; renderStep(); };
+}
+
+function renderBaselineCalc() {
+  content.innerHTML = `
+    <h2 class="step-title">Step 3 of 4: Calculate the Baseline Average</h2>
+    <div class="scenario">
+      One test run isn't enough — we run multiple trials and average them. Here are Car #1's three trial distances:
+    </div>
+    <table class="data-table">
+      <tr><th>Trial 1</th><th>Trial 2</th><th>Trial 3</th></tr>
+      <tr><td>4.2 m</td><td>5.0 m</td><td>4.6 m</td></tr>
+    </table>
+    <div class="calc-row">
+      <label>Baseline average (m):</label>
+      <input type="number" step="0.1" id="avgIn" placeholder="?">
+      <button onclick="checkAvg()">Submit</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <div class="clearfix"><button class="next-btn" id="nx" disabled onclick="step++; renderStep();">Next →</button></div>
+  `;
+}
+
+function checkAvg() {
+  const v = parseFloat(document.getElementById('avgIn').value);
+  const fb = document.getElementById('fb');
+  const correctAns = 4.6;
+  if (isNaN(v)) {
+    fb.className = 'feedback show bad';
+    fb.innerHTML = 'Please enter a number.';
+    return;
+  }
+  if (Math.abs(v - correctAns) < 0.05) {
+    fb.className = 'feedback show good';
+    fb.innerHTML = '✅ <strong>Correct! Baseline = 4.6 m.</strong> (4.2 + 5.0 + 4.6) ÷ 3 = 4.6 m. Now any new design can be compared to this number!';
+    score++;
+  } else {
+    fb.className = 'feedback show bad';
+    fb.innerHTML = `Close! The correct baseline average is <strong>4.6 m</strong>. Add the three trials (4.2 + 5.0 + 4.6 = 13.8) and divide by 3.`;
+  }
+  document.getElementById('nx').disabled = false;
+}
+
+function renderQ2() {
+  content.innerHTML = `
+    <h2 class="step-title">Step 4 of 4: Using Your Baseline</h2>
+    <div class="scenario">
+      You change the wheel size and re-test Car #1. New average: <strong>6.1 m</strong>. Baseline was <strong>4.6 m</strong>. What is the BEST conclusion?
+    </div>
+    <div class="options" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <div class="clearfix"><button class="next-btn" id="nx" disabled onclick="step++; renderStep();">See Results →</button></div>
+  `;
+  const opts = [
+    {t: "The car is worse — ignore the change.", c: false, e: "6.1 m is greater than 4.6 m, so the car improved!"},
+    {t: "The new wheels improved performance by 1.5 m on average.", c: true, e: "Right! Comparing to the baseline shows a real, measurable improvement."},
+    {t: "We can't tell anything from the data.", c: false, e: "Actually, this is exactly why baselines exist — to compare and learn!"},
+    {t: "The baseline doesn't matter anymore.", c: false, e: "The baseline is the reference point — it always matters for comparison."}
+  ];
+  const optsDiv = document.getElementById('opts');
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = o.t;
+    btn.onclick = () => handleAnswer(btn, o, opts);
+    optsDiv.appendChild(btn);
+  });
+}
+
+function renderFinal() {
+  progBar.style.width = '100%';
+  let msg = '';
+  if (score === 4) msg = "🏆 Outstanding! You're a true Creationeer — testing with excellence.";
+  else if (score === 3) msg = "👏 Great work! You understand baseline testing well.";
+  else if (score === 2) msg = "👍 Good effort! Review how baselines help measure improvement.";
+  else msg = "Keep practicing! Baselines are the key to knowing if your design improvements really work.";
+
+  content.innerHTML = `
+    <div class="final">
+      <h2 class="step-title">Test Complete!</h2>
+      <div class="score-circle">${score}/4</div>
+      <p style="font-size:15px; max-width:520px; margin:10px auto;">${msg}</p>
+      <div class="scenario" style="text-align:left; max-width:520px; margin: 14px auto;">
+        <strong>Key Takeaway:</strong> A baseline is your <em>"before"</em> measurement. Without it, you can't prove your design changes made things better. Just as God evaluated His creation and saw it was "very good" (Genesis 1:31), good engineers evaluate their work with care and clear data.
+      </div>
+      <button class="restart" onclick="score=0; step=0; renderStep();">↻ Try Again</button>
+    </div>
+  `;
+}
+
+renderStep();
+</script>
+</body>
+</html>

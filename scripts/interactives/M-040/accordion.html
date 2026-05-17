@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Discovering Your Customer Persona</summary>
+    <div class="panel-body"><p>Plain-language explanation: Imagine you're building a gift for someone. You wouldn't just build anything; you'd think about the person receiving it, right? What do they like? What are their hobbies? What would make them happy? A customer persona is like doing that, but for your mousetrap car! It's a detailed description of your ideal user. It helps you understand their goals, their challenges, and what they would consider &quot;good performance&quot; for your car. This goes beyond just knowing they want a car; it's about understanding their specific desires for that car.</p><p>Direct application to the mousetrap car project: For your mousetrap car, who is your customer? Is it a younger sibling who wants a car that looks cool and can race short distances? Is it a grandparent who would appreciate a durable car that demonstrates clever engineering and can travel a long way without breaking? Or is it a science fair judge looking for innovative design and precise measurement? Defining this persona will directly influence your design choices. For example, if your customer is a younger sibling, aesthetics and robustness might be more important than extreme speed. If it's a science fair judge, detailed documentation and measurable performance will be key.</p><p>Multiscale Modeling connection: The macro-level observation here is the overall &quot;satisfaction&quot; or &quot;delight&quot; of your customer persona with your mousetrap car's performance. This macro-level perception is directly influenced by atomic-level causes in your design. For instance, if your customer values durability (a macro-level performance metric), this translates to choices at the atomic level, such as selecting materials with strong intermolecular bonds, like certain plastics or metals for the chassis, or wheels made of a resilient rubber compound rather than brittle wood. The atomic structure of these materials dictates their macroscopic properties like toughness and wear resistance, which directly contribute to the car’s perceived durability and, ultimately, customer satisfaction.</p><p>OCV application: Let's consider a customer persona: &quot;Competitive Racer Chris.&quot; Chris wants a mousetrap car that wins races.
+   Objective: Maximize speed over a 3-meter track.
+   Constraints: Must be powered solely by one mousetrap, must stay within a 30cm x 15cm footprint, and must cost under $20 in materials.
+   Variables: Wheel size, axle material, lever arm length, chassis weight, type of string used for the mousetrap arm.
+Knowing Chris's objective helps you prioritize speed in your variable adjustments, even if it means sacrificing some distance or aesthetic appeal.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Defining Performance Metrics for Your Customer</summary>
+    <div class="panel-body"><p>Plain-language explanation: Once you know who your customer is, you need to figure out what &quot;performance&quot; means to them. It's not enough for your car to &quot;work.&quot; Does it need to be super fast? Travel far? Look amazing? Be easy to repair? These are your performance metrics – the specific things you will measure to know if your car is performing well for your customer. If your customer is &quot;Eco-Conscious Emily,&quot; who cares about sustainability, then &quot;recycled material percentage&quot; or &quot;ease of disassembly for recycling&quot; might be important metrics, not just speed or distance.</p><p>Direct application to the mousetrap car project: Think about your chosen customer persona and list 3-5 specific performance metrics that would matter most to them. For &quot;Competitive Racer Chris,&quot; metrics would likely include: top speed (meters/second), acceleration (time to reach full speed), and consistency (how reliably it achieves its top speed). For &quot;Showcase Sally,&quot; who wants a visually appealing car for a display, metrics might be: aesthetic appeal (rated on a scale), unique design features, and stability while stationary. These metrics will guide your design and testing. You can't just say &quot;my car is good&quot;; you need to say &quot;my car is good at X, Y, and Z for this customer.&quot;</p><p>Multiscale Modeling connection: The macro-level performance metric of &quot;low friction&quot; for a fast car (valued by &quot;Competitive Racer Chris&quot;) can be traced to atomic-level causes. For example, using polished metal axles with low surface roughness (macro-level observation) means fewer atomic-scale irregularities to impede motion. The atomic interactions between the axle and its bearing (e.g., graphite lubricant) reduce the energy required for movement, directly contributing to the car's overall speed. Similarly, the atomic arrangement within a specific polymer used for wheels can influence its coefficient of friction with the track surface, impacting speed.</p><p>OCV application: Let's use &quot;Showcase Sally&quot; as our persona.
+   Objective: Maximize aesthetic appeal and unique design features.
+   Constraints: Must use a mousetrap for propulsion (even if not primary focus), must be stable, and must be transportable.
+   Variables: Paint color and finish, decorative elements (e.g., spoilers, miniature figures), material choice for chassis (e.g., polished wood, clear acrylic), lighting elements.
+Sally’s objective shifts the focus of your variables from purely functional elements to those that enhance visual impact and creativity, while still adhering to the core mousetrap car constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Marketing Standards: Communicating Your Car's Value</summary>
+    <div class="panel-body"><p>Plain-language explanation: Once you've designed and built a car that performs well for your customer, how do you tell them about it? That's where marketing comes in. But &quot;marketing&quot; isn't just about flashy ads; it's about clearly and honestly communicating the value of your product. Marketing standards are the rules you follow to make sure your message is truthful, helpful, and resonates with your customer. This means highlighting the specific performance metrics that matter most to your persona and explaining how your design choices achieve those.</p><p>Direct application to the mousetrap car project: For your mousetrap car, your &quot;marketing&quot; might involve creating a brief presentation, a poster, or a short video. Your marketing standards should dictate that you clearly state your target customer persona, explain the specific performance metrics you aimed for (e.g., &quot;designed for optimal speed for Competitive Racer Chris&quot;), and demonstrate how your car achieves those. For instance, you could show a graph of its speed over time, highlight the durable materials used, or explain the unique aesthetic choices that appeal to &quot;Showcase Sally.&quot; The goal is to articulate your car's unique value proposition.</p><p>Multiscale Modeling connection: The marketing claim &quot;our wheels provide exceptional grip for consistent acceleration&quot; (macro-level performance communicated to the customer) is supported by atomic-level design. This claim is true because the rubber compound chosen for the wheels has a specific molecular structure (atomic-level cause) that results in a high coefficient of friction with the track surface (macro-level property). This molecular arrangement allows for strong adhesion without excessive energy loss, ensuring that the force from the mousetrap is efficiently converted into forward motion. Your marketing highlights this macro-level benefit, which is enabled by careful atomic-level material selection.</p><p>OCV application: Let's consider a marketing objective for &quot;Eco-Conscious Emily.&quot;
+   Objective: Effectively communicate the car's sustainable design and materials.
+   Constraints: Marketing materials must be concise (e.g., a single infographic), accurate, and appealing to a middle school audience.
+   Variables: Choice of imagery (e.g., pictures of recycled components), specific statistics about recycled content, testimonials about durability, use of a &quot;green&quot; color palette in the presentation.
+Emily’s persona influences the variables to focus on environmental benefits, guiding the visual and textual content of your marketing efforts.</p></div>
+  </details>
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car: Source & Cost Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border-bottom: 4px solid #c9a227;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  header p { font-size: 14px; opacity: 0.9; }
+  .budget-bar {
+    background: #fff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .budget-bar div { font-size: 15px; }
+  .budget-bar .label { color: #555; font-size: 12px; text-transform: uppercase; }
+  .budget-bar .value { font-weight: bold; color: #1e3a5f; font-size: 18px; }
+  .value.gold { color: #c9a227; }
+  .parts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .part-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .part-card h3 {
+    font-size: 14px;
+    color: #1e3a5f;
+    border-bottom: 2px solid #c9a227;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .option {
+    border: 2px solid #e3e8ef;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f7f9fc;
+  }
+  .option:hover { border-color: #c9a227; transform: translateY(-1px); }
+  .option.selected {
+    border-color: #1e3a5f;
+    background: #1e3a5f;
+    color: #fff;
+  }
+  .option .icon { font-size: 26px; text-align: center; display: block; }
+  .option .name { font-size: 12px; font-weight: bold; text-align: center; margin: 4px 0 2px; }
+  .option .cost { font-size: 11px; text-align: center; color: #c9a227; font-weight: bold; }
+  .option.selected .cost { color: #ffd866; }
+  .option .perf {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 4px;
+    color: #666;
+  }
+  .option.selected .perf { color: #d4dce8; }
+  .controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  button:hover { background: #1e3a5f; color: #c9a227; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .results {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    display: none;
+  }
+  .results.show { display: block; }
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  .verdict {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .verdict.win { background: #e8f5e9; border-left: 5px solid #2e7d32; }
+  .verdict.ok { background: #fff8e1; border-left: 5px solid #c9a227; }
+  .verdict.bad { background: #ffebee; border-left: 5px solid #c62828; }
+  .stars { font-size: 24px; color: #c9a227; margin: 8px 0; }
+  @media (max-width: 700px) {
+    .parts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🏎️ Mousetrap Car: Source Smart, Spend Wise</h1>
+    <p>Pick one option for each part. Stay under budget AND build a fast car!</p>
+  </header>
+
+  <div class="budget-bar">
+    <div>
+      <div class="label">Budget</div>
+      <div class="value gold">$15.00</div>
+    </div>
+    <div>
+      <div class="label">Spent</div>
+      <div class="value" id="spent">$0.00</div>
+    </div>
+    <div>
+      <div class="label">Remaining</div>
+      <div class="value" id="remaining">$15.00</div>
+    </div>
+    <div>
+      <div class="label">Performance</div>
+      <div class="value" id="perfScore">0 / 40</div>
+    </div>
+  </div>
+
+  <div class="parts-grid" id="grid"></div>
+
+  <div class="controls">
+    <button id="testBtn">🔧 Test My Car!</button>
+    <button id="resetBtn" style="background:#e3e8ef;">↻ Reset</button>
+  </div>
+
+  <div class="results" id="results"></div>
+</div>
+
+<script>
+const parts = {
+  wheels: {
+    name: 'Wheels',
+    options: [
+      { id:'cd', icon:'💿', name:'Old CDs', cost:0, perf:6, note:'Free from home, lightweight' },
+      { id:'caps', icon:'🔘', name:'Bottle Caps', cost:1, perf:4, note:'Small but cheap' },
+      { id:'wood', icon:'🟫', name:'Wood Circles', cost:4, perf:7, note:'Solid, balanced' },
+      { id:'rc', icon:'⚙️', name:'RC Car Wheels', cost:9, perf:10, note:'Premium grip' }
+    ]
+  },
+  axle: {
+    name: 'Axle',
+    options: [
+      { id:'skewer', icon:'🥢', name:'BBQ Skewer', cost:0, perf:5, note:'From kitchen, may bend' },
+      { id:'pencil', icon:'✏️', name:'Pencil', cost:1, perf:3, note:'Cheap, less straight' },
+      { id:'dowel', icon:'📏', name:'Wood Dowel', cost:3, perf:7, note:'Straight, reliable' },
+      { id:'metal', icon:'🔩', name:'Metal Rod', cost:6, perf:9, note:'Strong, low friction' }
+    ]
+  },
+  chassis: {
+    name: 'Chassis',
+    options: [
+      { id:'cardboard', icon:'📦', name:'Cardboard', cost:0, perf:4, note:'Free but flimsy' },
+      { id:'foam', icon:'🟦', name:'Foam Board', cost:2, perf:6, note:'Light & stiff' },
+      { id:'balsa', icon:'🪵', name:'Balsa Wood', cost:4, perf:8, note:'Light & strong' },
+      { id:'acrylic', icon:'🟪', name:'Acrylic Sheet', cost:8, perf:9, note:'Pro-grade' }
+    ]
+  },
+  string: {
+    name: 'Pull String',
+    options: [
+      { id:'thread', icon:'🧵', name:'Sewing Thread', cost:0, perf:3, note:'Free, may snap' },
+      { id:'yarn', icon:'🧶', name:'Yarn', cost:1, perf:5, note:'Stretchy' },
+      { id:'fishing', icon:'🎣', name:'Fishing Line', cost:2, perf:9, note:'Strong, low friction' },
+      { id:'paracord', icon:'🪢', name:'Paracord', cost:5, perf:7, note:'Strong but thick' }
+    ]
+  }
+};
+
+const BUDGET = 15;
+const selections = {};
+const grid = document.getElementById('grid');
+
+Object.keys(parts).forEach(key => {
+  const part = parts[key];
+  const card = document.createElement('div');
+  card.className = 'part-card';
+  card.innerHTML = `<h3>${part.name}</h3>`;
+  part.options.forEach(opt => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.dataset.part = key;
+    div.dataset.id = opt.id;
+    div.innerHTML = `
+      <span class="icon">${opt.icon}</span>
+      <div class="name">${opt.name}</div>
+      <div class="cost">$${opt.cost.toFixed(2)}</div>
+      <div class="perf">${opt.note}</div>
+    `;
+    div.addEventListener('click', () => selectOption(key, opt, div));
+    card.appendChild(div);
+  });
+  grid.appendChild(card);
+});
+
+function selectOption(part, opt, el) {
+  document.querySelectorAll(`.option[data-part="${part}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selections[part] = opt;
+  updateTotals();
+}
+
+function updateTotals() {
+  let cost = 0, perf = 0;
+  Object.values(selections).forEach(s => { cost += s.cost; perf += s.perf; });
+  document.getElementById('spent').textContent = '$' + cost.toFixed(2);
+  const rem = BUDGET - cost;
+  const remEl = document.getElementById('remaining');
+  remEl.textContent = '$' + rem.toFixed(2);
+  remEl.style.color = rem < 0 ? '#c62828' : '#1e3a5f';
+  document.getElementById('perfScore').textContent = perf + ' / 40';
+}
+
+document.getElementById('testBtn').addEventListener('click', () => {
+  if (Object.keys(selections).length < 4) {
+    alert('Pick one option for each of the 4 parts!');
+    return;
+  }
+  let cost = 0, perf = 0;
+  Object.values(selections).forEach(s => { cost += s.cost; perf += s.perf; });
+  const overBudget = cost > BUDGET;
+  const results = document.getElementById('results');
+
+  let rowsHTML = '';
+  Object.keys(parts).forEach(key => {
+    const s = selections[key];
+    rowsHTML += `<div class="result-row"><span>${parts[key].name}: ${s.icon} ${s.name}</span><span>$${s.cost.toFixed(2)} • ⚡${s.perf}</span></div>`;
+  });
+
+  let stars = 0;
+  let verdictClass = 'bad';
+  let verdictMsg = '';
+
+  if (overBudget) {
+    verdictClass = 'bad';
+    stars = 1;
+    verdictMsg = `<strong>🚫 Over Budget!</strong> You spent $${cost.toFixed(2)} — that's $${(cost-BUDGET).toFixed(2)} too much. Smart Creationeers find <em>sourcing alternatives</em> — cheaper parts that still get the job done. Try swapping a pricey item for a free or low-cost one!`;
+  } else if (perf >= 28) {
+    verdictClass = 'win';
+    stars = 3;
+    verdictMsg = `<strong>🏆 Excellent Engineering!</strong> Your car is fast AND affordable. You spent $${cost.toFixed(2)} with a performance of ${perf}/40. You sourced like a pro — balancing cost and quality, just as the Israelites carefully gathered materials for the Tabernacle.`;
+  } else if (perf >= 20) {
+    verdictClass = 'ok';
+    stars = 2;
+    verdictMsg = `<strong>👍 Solid Build!</strong> Under budget at $${cost.toFixed(2)} with ${perf}/40 performance. Can you find an alternative that boosts speed without breaking the bank?`;
+  } else {
+    verdictClass = 'ok';
+    stars = 1;
+    verdictMsg = `<strong>💭 Under Budget, But Slow.</strong> You only spent $${cost.toFixed(2)} but performance is just ${perf}/40. Sometimes spending a little more on a key part (like wheels or string) is worth it. Try mixing free items with one or two upgrades!`;
+  }
+
+  results.className = 'results show';
+  results.innerHTML = `
+    <h2 style="color:#1e3a5f; border-bottom:2px solid #c9a227; padding-bottom:8px; margin-bottom:12px;">📊 Test Results</h2>
+    ${rowsHTML}
+    <div class="result-row" style="font-weight:bold; border-top:2px solid #1e3a5f; padding-top:10px;">
+      <span>TOTAL</span><span>$${cost.toFixed(2)} • ⚡${perf}/40</span>
+    </div>
+    <div class="stars">${'★'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+    <div class="verdict ${verdictClass}">${verdictMsg}</div>
+  `;
+  results.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  Object.keys(selections).forEach(k => delete selections[k]);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.getElementById('results').className = 'results';
+  updateTotals();
+});
+</script>
+</body>
+</html>

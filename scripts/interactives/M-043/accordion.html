@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Mousetrap Integration and Power Transfer</summary>
+    <div class="panel-body"><p>Plain-language explanation: The mousetrap is the engine of your car. It stores energy in its spring when it's set, and then releases that energy very quickly. To make the car move, we need to transfer this released energy to the wheels. We do this using a string attached to the mousetrap's &quot;snapping&quot; arm and wrapped around the drive axle. The mousetrap arm acts as a lever. The length of this lever arm, from where the string attaches to the arm to the pivot point of the spring, is incredibly important. A longer lever arm will give you more turns of the axle but less torque (twisting force), which might be better for distance. A shorter lever arm provides more torque but fewer turns, which might be better for quick acceleration. Finding the right balance is key!</p><p>Direct application to the mousetrap car project: First, securely attach your mousetrap to the car's frame. Make sure it's firmly glued or screwed down so it doesn't shift during operation. Next, attach a string to the mousetrap's arm. This string will then be wound around your drive axle. Consider adding a small piece of a straw or a paper clip to the end of the mousetrap arm to extend the lever arm, giving you more flexibility in adjusting its length. Experiment with different string lengths and attachment points on the arm. Wind the string tightly and evenly around the drive axle, ensuring it doesn't overlap or tangle. The goal is a smooth, consistent pull on the axle as the mousetrap arm snaps forward.</p><p>Multiscale Modeling connection: The mousetrap's spring stores potential energy due to the bending and stretching of its metal atoms' bonds (atomic-level). When released, these bonds rapidly return to their equilibrium positions, converting potential energy into kinetic energy. This kinetic energy is transferred through the string to the drive axle, causing it to rotate (macro-level observation). The strength of the atomic bonds in the spring and string materials dictates how much energy can be stored and transferred, and how efficiently this transfer occurs. Weak or brittle materials would fail at the atomic level, leading to poor performance or breakage.</p><p>OCV application: Let's consider the mousetrap's lever arm length.
+Objective: Achieve the longest possible distance for your car.
+Constraint: The mousetrap arm itself has a fixed length, and your string length is limited.
+Variable: The effective length of the lever arm (how far from the pivot point you attach the string, possibly extended with an additional piece).
+By adjusting this variable, you can explore how it influences the car's total distance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Minimizing Friction and Maximizing Efficiency</summary>
+    <div class="panel-body"><p>Plain-language explanation: Imagine trying to slide a heavy box across rough concrete versus a smooth, polished floor. It's much easier on the smooth floor because there's less friction. Friction is a force that slows things down when two surfaces rub together. In your mousetrap car, friction can occur at several points: where the axles pass through the frame, where the wheels touch the ground, and anywhere the body might accidentally rub against a moving part. Minimizing friction means more of the mousetrap's energy goes into moving the car forward, making it more efficient. Efficiency is about getting the most out of your energy input.</p><p>Direct application to the mousetrap car project: To reduce friction, first ensure your axles are straight and spin freely within their bearings (or holes in the frame). You can use small plastic sleeves (straws or pen tubes) as bushings to reduce contact area and provide a smoother surface for the axle to rotate against. Lubrication is also key. A tiny bit of graphite powder or a light oil on the axles where they meet the frame can make a big difference. Check that your wheels are perfectly aligned and don't wobble, as wobbling creates extra friction. Also, make sure the string unwinds cleanly from the axle and doesn't rub against the frame or other components.</p><p>Multiscale Modeling connection: Friction, at the macro level, manifests as a resistance to motion. At the atomic level, this resistance arises from the intermolecular forces and microscopic irregularities between the two surfaces in contact. Even seemingly smooth surfaces have tiny bumps and valleys. When these surfaces rub, the atoms on one surface snag against the atoms on the other, requiring energy to overcome these interatomic attractions and deformations. Lubricants work by introducing a layer of molecules between the surfaces, reducing direct contact and thus minimizing the atomic-level interactions that cause friction.</p><p>OCV application: Let's look at friction in your car's axles.
+Objective: Maximize the car's travel distance.
+Constraint: You can only use materials found in a standard household or school kit for lubrication.
+Variable: The type of lubricant used on the axles (e.g., graphite powder, petroleum jelly, cooking oil).
+By testing different lubricants, you can see which variable best helps you achieve your objective within the given constraints.</p><p>6. Engineering Journal Task</p><p>(1) Apply to Your Car: Describe the specific body shape you chose for your mousetrap car and explain why you believe it will be aerodynamic. Detail how you have integrated your mousetrap, including how the string attaches to the arm and wraps around the drive axle. What materials did you use for your body, and how did you secure the mousetrap?</p><p>(2) Identify Trade-offs: What trade-offs did you consider when designing your car's body and integrating the mousetrap? For example, did you choose a very sleek body that was difficult to build, or a simpler shape that was easier to construct but perhaps less aerodynamic? Did you opt for a longer lever arm for distance, knowing it might sacrifice initial acceleration?</p><p>(3) OCV for Your Design: Choose one specific design decision related to your car’s body or mousetrap assembly (e.g., the length of your mousetrap’s lever arm, the material for your body, or the type of axle bushing). Clearly state your Objective, the Constraints you faced, and the Variable you adjusted or considered adjusting for that decision.</p><p>(4) Biblical Reflection: Read Romans 1:20 (KJV): &quot;For the invisible things of him from the creation of the world are clearly seen, being understood by the things that are made, even his eternal power and Godhead; so that they are without excuse.&quot; How does designing and building your mousetrap car, paying close attention to its performance, reflect an understanding of God's design principles, even on a small scale? How does striving for excellence in your design honor the Creator who made all things with purpose and perfection?</p><p>Junior Creationeer Signature:
+Person: [Your Name]
+Date: [Current Date]
+Location of Lab: [Your Lab Location]</p><p>7. Technical Documentation Requirements</p><p>Sketches and Diagrams: Include at least two detailed sketches in your engineering journal. One sketch should show the overall body design, highlighting its aerodynamic features. The second sketch should illustrate the mousetrap's placement, the string attachment, and how it connects to the drive axle, clearly labeling the lever arm.
+Materials List Update: Update your car’s materials list to include all components used for the body and mousetrap assembly (e.g., specific type of cardboard, mousetrap, string, lubricant, etc.). For each item, note its approximate cost or source.</p><p>Junior Creationeer Signature:
+Person: [Your Name]
+Date: [Current Date]
+Location of Lab: [Your Lab Location]</p><p>8. Summary of Key Concepts</p><p>Aerodynamics: Body shape significantly impacts a car's drag and overall speed.
+Lever Arm: Adjusting the mousetrap's lever arm length balances torque for optimal performance.
+Efficiency: Minimizing friction at all contact points maximizes the car's useful energy.
+Stewardship: Designing with intentionality and excellence reflects God's perfect creation.</p><p>9. Works Cited</p><p>1.  Genesis K12 Academy Full Lesson Book. (n.d.).
+2.  Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). &quot;Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis.&quot; Creation Research Society Quarterly 58:238–261.
+3.  Dowson, D. (1998). History of Tribology. Professional Engineering Publishing. ISBN: 978-1860580709.
+4.  Gere, J. M., &amp; Goodno, B. J. (2012). Mechanics of Materials (8th ed.). Cengage Learning. ISBN: 978-1111577735.</p></div>
+  </details>
+</div>
+</body>
+</html>

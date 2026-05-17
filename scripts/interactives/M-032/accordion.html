@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: What is a Bill of Materials?</summary>
+    <div class="panel-body"><p>A Bill of Materials, or BOM, is essentially a detailed shopping list and instruction manual rolled into one. Imagine trying to bake a cake without a recipe or a list of ingredients. You might forget the flour, or use too much sugar! In engineering, a BOM prevents these kinds of mistakes. It lists every single part, component, and raw material needed to build your mousetrap car. It also specifies the quantity of each item, and sometimes even where it comes from or how it's made. The Creationeering process emphasizes eight steps in engineering, and the BOM is a crucial tool that supports the Assembly phase, ensuring that everything designed and procured can be brought together effectively.</p><p>For your mousetrap car project, your BOM will include items like the mousetrap itself, the wood for the chassis, the wheels, axles, string, glue, and any fasteners. Each of these is a component. If your wheels are made of multiple pieces (like a hub and a tire), those sub-components would also be listed. A well-prepared BOM acts as a roadmap, guiding you through the assembly process and helping you verify that no part is missing or incorrectly accounted for.</p><p>Multiscale Modeling connection: Consider a wheel for your mousetrap car. At the macro level, you observe a complete wheel. However, your BOM might break it down into a wooden disc, a rubber band for the tire, and a small metal bushing for the axle. Each of these components, at a slightly smaller scale, has its own material properties. At the atomic level, the specific arrangement of atoms in the wood determines its strength, the rubber's elasticity, and the metal's durability. A BOM helps us manage these different scales by ensuring all necessary materials, down to their smallest functional units, are accounted for to achieve the desired macro-level performance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Planning for Assembly and Inventory Management</summary>
+    <div class="panel-body"><p>The Creationeering phase we are in is Assembly. This is where your individual components, which you processed in the previous stage, are joined together to make subsystems, and then subsystems are joined to make the complete mousetrap car. The Creationeering paper defines assembly as &quot;the process of putting components together to make a subsystem and putting subsystems together to make a system.&quot; Before you can physically put things together, you need a plan. Your BOM is the foundation of this plan. It helps you organize your workspace, identify potential bottlenecks, and ensure a smooth flow of components.</p><p>Inventory management, guided by your BOM, means knowing exactly what parts you have on hand and what you still need to procure. For your mousetrap car, this means checking off each item on your BOM as you acquire or create it. If you're building multiple cars in a group, a shared BOM helps ensure everyone has the correct parts without duplication or shortages. This careful tracking is a practical application of good stewardship. We are called to be diligent with our resources, and that includes the materials and components for our engineering projects.</p><p>OCV application: Let's apply the OCV method to your mousetrap car's assembly.
+Objective: To assemble a durable and efficient mousetrap car that meets the initial design specifications.
+Constraint: You have a limited budget for materials and a fixed timeframe (18 weeks for the course). You also have specific tools available.
+Variable: The order in which you assemble certain components. For example, do you attach the wheels before or after securing the mousetrap to the chassis? Changing this variable might affect the ease or speed of assembly. A well-thought-out BOM and assembly plan help optimize these variables within your constraints to achieve your objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: The Importance of Accuracy and Iteration</summary>
+    <div class="panel-body"><p>Accuracy in your BOM is paramount. If you list the wrong quantity of an item, or an incorrect specification, it can lead to delays and wasted resources during assembly. Imagine realizing you only have three wheels instead of four, or that your axles are too short for your chassis! The Creationeering process, as God demonstrated, involves thoughtful design and analysis before procurement and assembly. God’s creation was perfect and complete from the start. While we, as Junior Creationeers, are not perfect, we strive for accuracy by double-checking our work.</p><p>The process of creating a BOM and planning assembly is often iterative. This means you might refine your BOM as you go. For example, during initial design, you might plan for wooden wheels. But after some analysis or material processing, you might decide to use CD-ROMs with rubber bands for better traction. Your BOM should be updated to reflect these changes. This iterative refinement helps you learn and adapt, making your final mousetrap car even better. This continuous improvement aligns with the concept of sustainability in Creationeering, ensuring that designs can be re-energized and improved as needs change.</p><p>Multiscale Modeling connection: Consider the tolerance of your mousetrap car's axle holes. At the macro level, if the hole is too large, the axle wobbles, and the car doesn't run straight. If it's too small, the axle won't fit. At the micro-level, the precision of the drill bit and the grain structure of the wood affect the final dimension of the hole. An accurate BOM would specify the exact diameter of the axle and the required drill bit size, ensuring these micro-level details contribute to a well-functioning macro-level assembly.</p></div>
+  </details>
+</div>
+</body>
+</html>

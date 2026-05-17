@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Sourcing Alternatives for Your Mousetrap Car</summary>
+    <div class="panel-body"><p>Sourcing is like being a detective for materials. It’s about finding the best parts for your project. For your mousetrap car, this means identifying what you need, like wheels, axles, and a chassis, and then figuring out where to get them. But what if the first thing you find isn't perfect, or it's too expensive? That's where &quot;Sourcing Alternatives&quot; comes in. It’s the engineering practice of looking for different options that can still meet your design goals.</p><p>Let's think about your mousetrap car wheels. You might initially think of using CDs as wheels. They are readily available and often free. But what are some alternatives? Perhaps plastic bottle caps, wooden craft circles, or even 3D-printed wheels. Each alternative has different properties that will affect your car's performance.</p><p>Applying to Your Mousetrap Car Project:
+Consider your car's wheels. If you're using CDs, you might find they are too thin, or don't grip the surface well. An alternative could be larger, lighter plastic wheels from a toy car, or thicker wooden wheels. For axles, you might start with wooden dowels, but discover they bend too easily. Alternatives could be metal rods, carbon fiber tubes, or even stiff plastic straws. Each choice has consequences for your car's speed, stability, and durability.</p><p>Multiscale Modeling Connection:
+When you choose a material like wood for your chassis versus a lighter plastic, you're making a macro-level decision that has roots in the atomic level. Wood, at the macroscopic level, is strong but can be heavy. At the atomic level, wood is composed of cellulose fibers, which are long chains of glucose molecules. These fibers are strong, but the overall structure of wood, with its grain and density, dictates its macroscopic properties like stiffness and weight. Plastic, on the other hand, is a polymer with different molecular structures. Some plastics are very light and flexible, while others can be rigid. The arrangement and bonding of atoms in these materials directly determine their strength, weight, and how they interact with friction and impact. So, a wooden wheel might be heavier but more durable due to its cellular structure, while a plastic wheel might be lighter but less robust due to its polymer composition.</p><p>OCV Application:
+Let's apply OCV to your wheel choice.
+Objective: Maximize the distance your mousetrap car travels.
+Constraint: Wheels must be circular and have a diameter between 4-6 inches.
+Variable: Material of the wheel (CD, wood, plastic).
+If you choose a CD, your objective might be limited by its low friction. If you choose wood, it might be limited by its weight. You would then iterate through these variables, perhaps trying a CD with a rubber band for more grip, or a lighter, thinner piece of wood.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Costing Your Mousetrap Car</summary>
+    <div class="panel-body"><p>Costing is about understanding the financial side of your project. Every material, every tool you buy, adds to the overall expense. Even if you're using mostly recycled materials, there might be small costs for glue, string, or special tools. Being aware of these costs helps you manage your resources wisely. Remember, God calls us to be good stewards of everything He provides, including our finances.</p><p>Applying to Your Mousetrap Car Project:
+For your mousetrap car, you need to list every item you plan to use and estimate its cost.
+Example Cost List:
+   Mousetrap: $3.00
+   Wheels (CDs): $0.00 (recycled)
+   Axles (wooden dowels): $2.00
+   Chassis (cardboard): $0.00 (recycled)
+   Glue: $2.00
+   String: $1.00
+   Eye hooks: $1.50
+Total Estimated Cost: $9.50</p><p>Now, imagine you want to upgrade your wheels to high-performance plastic ones that cost $5.00 each, and you need four. Your wheel cost jumps to $20.00, making your total project cost $26.50. This is why costing is so important – it directly impacts your budget and helps you decide if an upgrade is worth the extra expense.</p><p>Multiscale Modeling Connection:
+The cost of materials can sometimes be linked to the complexity of their production, which itself involves processes at the atomic level. For instance, a simple wooden dowel is relatively inexpensive because wood is a natural material that requires less complex processing. Conversely, advanced materials like carbon fiber tubes, while lightweight and strong (due to the specific arrangement of carbon atoms in long, strong chains), are much more expensive because their manufacturing involves precise control over atomic bonding and microstructure formation. The energy and technology required to manipulate matter at these finer scales contribute significantly to the macroscopic cost of the final product.</p><p>OCV Application:
+Let's consider your budget as a constraint.
+Objective: Build a mousetrap car that travels at least 10 feet.
+Constraint: Project budget must be under $15.00.
+Variable: Material choice for various components.
+If your initial design with high-performance wheels exceeds the $15.00 budget, you must adjust your variables. Perhaps you choose cheaper wheels, or find a free alternative for your chassis, to stay within the financial constraint while still aiming for your objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Balancing Alternatives and Costs (Trade-offs)</summary>
+    <div class="panel-body"><p>In engineering, you rarely get everything you want without giving up something else. This is called a &quot;trade-off.&quot; You might want the lightest, fastest car, but those materials often come with a high price tag. Or you might want the cheapest car, but it might not perform as well or last as long. The skill of a good engineer, and a good Creationeer, is to find the best balance.</p><p>Applying to Your Mousetrap Car Project:
+Let’s say you are deciding between two types of wheels:
+Option A: Recycled CDs (free) – Pros: No cost, easy to find. Cons: Low grip, potentially fragile.
+Option B: Lightweight plastic wheels ($5 each, $20 total for four) – Pros: Better grip, more durable, lighter. Cons: High cost.</p><p>The trade-off here is between cost and performance. If your main objective is to keep costs low, you might accept the lower performance of the CDs. If your main objective is maximum distance, you might justify the higher cost of the plastic wheels. You could also look for a compromise, an alternative that offers better performance than CDs but is cheaper than the plastic wheels, like sturdy cardboard circles covered with rubber bands.</p><p>Multiscale Modeling Connection:
+When you make a trade-off between a cheaper, less durable material and a more expensive, robust one, you are essentially weighing the macroscopic performance against the cost, which ties back to the material's internal structure. For example, a cheaper, less durable plastic might have weaker polymer chains or a less ordered microstructure at the atomic level, leading to easier fracture (a macroscopic observation). A more expensive, engineered plastic would have stronger bonds or a more refined microstructure, resisting fracture and performing better under stress. The trade-off decision then becomes a choice about how much you are willing to invest in materials with superior atomic-level properties to achieve desired macroscopic durability and performance.</p><p>OCV Application:
+Let’s use OCV to make a trade-off decision.
+Objective: Achieve a car speed of at least 1 meter per second.
+Constraint: Total material cost must not exceed $10.00.
+Variable: Wheel material and axle material.
+You might find that metal axles give you the speed you need (objective met) but push you over budget (constraint violated) if combined with certain wheels. So, you might switch to wooden dowels for axles (cheaper variable) and then find a way to reduce friction on them to still achieve your speed objective, or perhaps compromise on the speed objective slightly to meet the budget constraint. It's an iterative process of adjusting variables to satisfy objectives within constraints.</p></div>
+  </details>
+</div>
+</body>
+</html>

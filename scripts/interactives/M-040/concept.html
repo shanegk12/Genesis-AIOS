@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Match the Mousetrap Car to the Customer</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .progress {
+    text-align: center;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  .persona-card {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(30,58,95,0.1);
+  }
+  .persona-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  .persona-icon {
+    font-size: 3em;
+  }
+  .persona-name {
+    color: #1e3a5f;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  .persona-desc {
+    color: #333;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .question {
+    color: #1e3a5f;
+    font-weight: bold;
+    margin: 15px 0 10px;
+    font-size: 1.05em;
+  }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .option {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-size: 0.95em;
+    color: #1e3a5f;
+  }
+  .option:hover:not(:disabled) {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .option.correct {
+    background: #2d7a3d;
+    color: #fff;
+    border-color: #2d7a3d;
+  }
+  .option.wrong {
+    background: #b33;
+    color: #fff;
+    border-color: #b33;
+  }
+  .option:disabled {
+    cursor: default;
+  }
+  .feedback {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .next-btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+    display: none;
+  }
+  .next-btn.show { display: inline-block; }
+  .next-btn:hover { background: #b8901f; }
+  .results {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+  }
+  .score {
+    font-size: 3em;
+    color: #c9a227;
+    font-weight: bold;
+  }
+  .results-msg {
+    color: #1e3a5f;
+    font-size: 1.2em;
+    margin: 15px 0;
+  }
+  .restart {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  .restart:hover { background: #16294a; }
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏎️ Design for Your Customer</h1>
+  <div class="subtitle">Match each design choice to what your customer would truly delight in.</div>
+  <div class="progress" id="progress">Customer 1 of 4</div>
+  <div id="game"></div>
+  <div id="results" style="display:none;"></div>
+</div>
+
+<script>
+const personas = [
+  {
+    icon: "🧒",
+    name: "Max, age 7 — Little Brother",
+    desc: "\"I want a car that looks AWESOME and zooms super fast across the kitchen floor! Make it cool!\"",
+    question: "Which design choice would delight Max the most?",
+    options: [
+      { text: "Bright painted body with flame stickers and quick-launch wheels for short, fast bursts", correct: true,
+        explain: "Yes! Max cares about looks and speed over short distances — exactly what excites a 7-year-old." },
+      { text: "Plain wood frame optimized for traveling 30+ feet very slowly but efficiently", correct: false,
+        explain: "Max wants speed and visual excitement, not slow long-distance travel." },
+      { text: "Lab-grade precision wheels with detailed engineering data sheets", correct: false,
+        explain: "That fits a judge, not a 7-year-old who wants fun and flash." },
+      { text: "Heavy, durable steel chassis built to last 20 years", correct: false,
+        explain: "Durability matters less to Max than excitement and speed." }
+    ]
+  },
+  {
+    icon: "👴",
+    name: "Grandpa Joe — Retired Engineer",
+    desc: "\"I appreciate clever engineering. Show me something well-built that travels a long distance and lasts.\"",
+    question: "Which design would Grandpa Joe most appreciate?",
+    options: [
+      { text: "A lightweight frame with large drive wheels and long lever arm for maximum distance", correct: true,
+        explain: "Perfect! Grandpa Joe values clever engineering and long-distance performance." },
+      { text: "Glittery paint job with cartoon characters glued on top", correct: false,
+        explain: "Decorations don't impress an engineer — smart design does." },
+      { text: "A car that launches fast but tips over after 3 feet", correct: false,
+        explain: "Grandpa Joe wants reliability and distance, not a short flashy burst." },
+      { text: "An untested prototype with loose parts to 'see what happens'", correct: false,
+        explain: "He values durability and thoughtful engineering, not guesswork." }
+    ]
+  },
+  {
+    icon: "🔬",
+    name: "Dr. Lin — Science Fair Judge",
+    desc: "\"I'm looking for innovative design, precise measurements, and clear documentation of your process.\"",
+    question: "Which choice would impress Dr. Lin most?",
+    options: [
+      { text: "A unique gear-ratio system with a data log of test runs and measured distances", correct: true,
+        explain: "Excellent! Judges reward innovation, data, and evidence of the design process." },
+      { text: "The same basic design everyone else built, painted blue", correct: false,
+        explain: "Judges look for innovation — not copies of common designs." },
+      { text: "A car covered in sequins with no testing data", correct: false,
+        explain: "Looks alone won't win over a science judge who wants measurements." },
+      { text: "A car that works but you can't explain how it works", correct: false,
+        explain: "Judges want to see your engineering reasoning, not mystery." }
+    ]
+  },
+  {
+    icon: "👧",
+    name: "Sister Ava, age 12 — Speed Racer",
+    desc: "\"I want to WIN the classroom race! Just 15 feet across the gym floor — make it the fastest one there!\"",
+    question: "Which design fits Ava's racing goal best?",
+    options: [
+      { text: "Small lightweight wheels and a short, powerful spring release for max acceleration over 15 feet", correct: true,
+        explain: "Right! Short-distance racing needs quick acceleration, not long-distance efficiency." },
+      { text: "Huge wheels built for traveling 50+ feet slowly", correct: false,
+        explain: "Big distance-wheels accelerate slowly — bad for a short race." },
+      { text: "Heavy decorative trophy-shaped body", correct: false,
+        explain: "Extra weight kills acceleration in a short race." },
+      { text: "A car designed to look pretty while parked", correct: false,
+        explain: "Ava wants to WIN — performance matters more than looks." }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function render() {
+  const p = personas[current];
+  document.getElementById('progress').textContent = `Customer ${current+1} of ${personas.length}  •  Score: ${score}`;
+  const game = document.getElementById('game');
+  game.innerHTML = `
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-icon">${p.icon}</div>
+        <div class="persona-name">${p.name}</div>
+      </div>
+      <div class="persona-desc">${p.desc}</div>
+      <div class="question">${p.question}</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="nextBtn">${current === personas.length-1 ? 'See Results →' : 'Next Customer →'}</button>
+    </div>
+  `;
+  const opts = document.getElementById('options');
+  // shuffle
+  const order = p.options.map((o,i)=>i).sort(()=>Math.random()-0.5);
+  order.forEach(i => {
+    const opt = p.options[i];
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt.text;
+    btn.onclick = () => choose(btn, opt, p);
+    opts.appendChild(btn);
+  });
+}
+
+function choose(btn, opt, p) {
+  const allBtns = document.querySelectorAll('.option');
+  allBtns.forEach(b => { b.disabled = true; });
+  if (opt.correct) {
+    btn.classList.add('correct');
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    // highlight correct
+    allBtns.forEach((b,i) => {
+      const matching = p.options.find(o => o.text === b.textContent);
+      if (matching && matching.correct) b.classList.add('correct');
+    });
+  }
+  const fb = document.getElementById('feedback');
+  fb.innerHTML = `<strong>${opt.correct ? '✓ Great match!' : '✗ Not quite.'}</strong> ${opt.explain}`;
+  fb.classList.add('show');
+  const nb = document.getElementById('nextBtn');
+  nb.classList.add('show');
+  nb.onclick = next;
+  document.getElementById('progress').textContent = `Customer ${current+1} of ${personas.length}  •  Score: ${score}`;
+}
+
+function next() {
+  current++;
+  if (current >= personas.length) {
+    showResults();
+  } else {
+    render();
+  }
+}
+
+function showResults() {
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('progress').style.display = 'none';
+  const r = document.getElementById('results');
+  r.style.display = 'block';
+  let msg = '';
+  if (score === 4) msg = "Outstanding! You're a true Creationeer — designing with the customer's delight in mind. 🌟";
+  else if (score === 3) msg = "Great work! You understand that different customers need different designs.";
+  else if (score === 2) msg = "Good start! Remember: a great design fits the specific person who will use it.";
+  else msg = "Keep practicing! The key idea: know your customer BEFORE you design.";
+
+  r.innerHTML = `
+    <div class="results">
+      <div class="score">${score} / 4</div>
+      <div class="results-msg">${msg}</div>
+      <p style="color:#555; line-height:1.6;">A <strong>customer persona</strong> guides every choice you make — from wheel size to paint color. When you design for a specific person's goals, your mousetrap car doesn't just work — it <em>delights</em>.</p>
+      <button class="restart" onclick="restart()">Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  document.getElementById('game').style.display = 'block';
+  document.getElementById('progress').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

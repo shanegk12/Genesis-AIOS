@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Identifying Supply Chain Risks</summary>
+    <div class="panel-body"><p>Plain-language explanation: Once you know all the links in your supply chain, you can start looking for potential problems. These are called risks. A risk is anything that could go wrong and prevent you from getting your parts on time, or cause the parts to be of poor quality.</p><p>Direct application to the mousetrap car project: For your mousetrap car, risks could include:
+  Availability: The store might run out of the specific type of wheel you need. Or the mousetrap supplier might be out of stock.
+  Quality: The wooden dowels for your axles might be warped, making your car wobble. The glue might not be as strong as advertised.
+  Cost: The price of a specific component might increase unexpectedly, making it harder to stay within your budget.
+  Delivery: If you ordered parts online, they might get lost or delayed in shipping.</p><p>Multiscale Modeling connection: Consider the glue you are using. At a macro level, you observe the glue holding parts together. If the glue fails (a macro-level observation), it could be due to issues at the molecular level. Perhaps the chemical composition of the glue (atomic-level cause) was incorrect during manufacturing, leading to poor adhesion. A supply chain risk here could be receiving a batch of glue with an incorrect chemical formulation, causing your car parts to fall apart during testing.</p><p>OCV application: For your car’s overall construction, your Objective is to have a durable vehicle. A Constraint might be that all connections must withstand a certain amount of vibration. A Variable is the type of adhesive used. A supply chain risk here could be that the batch of glue you purchased was stored improperly by the retailer, degrading its chemical properties (an OCV for the glue itself) and reducing its ability to meet your durability objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Mitigating Supply Chain Risks and Ensuring Performance</summary>
+    <div class="panel-body"><p>Plain-language explanation: Identifying risks is good, but preventing them or having a backup plan is even better. This is called risk mitigation. It means taking steps to reduce the chance of a problem happening or reducing its impact if it does.</p><p>Direct application to the mousetrap car project: Here are some ways you can mitigate risks for your mousetrap car:
+  Having multiple suppliers: Instead of relying on just one store for your wheels, check two or three. If one is out, you have other options.
+  Quality checks: Before you buy a part, inspect it carefully. Are the axles straight? Is the wood free of cracks? If you ordered online, inspect immediately upon arrival.
+  Buffer inventory: Buy a few extra pieces of critical components, like an extra mousetrap or a spare set of wheels. That way, if one breaks, you have a replacement ready.
+  Communication: If you are working with a team, make sure everyone knows what parts are needed and when, and who is responsible for getting them.
+  Alternative materials: If your ideal material (e.g., a specific type of plastic for wheels) is unavailable, have a plan for a substitute (e.g., cardboard or other disc shapes).</p><p>This process is critical in the &quot;Performance&quot; phase of Creationeering. The goal is to ensure your car consistently performs as designed. By thinking through supply chain risks, you are ensuring that the components themselves contribute to the overall reliability and functionality of your system.</p><p>Multiscale Modeling connection: Let’s consider your car’s frame material, perhaps balsa wood. At a macro level, you want the wood to be strong enough to withstand impact. If your supplier provides wood with too many knots or an inconsistent grain (macro-level observation), it suggests an issue with the wood’s cellular structure (atomic-level cause), making it prone to breaking. Mitigating this risk would involve inspecting each piece of wood before purchase or choosing a supplier known for consistent quality wood.</p><p>OCV application: For your car’s speed, your Objective is to maximize distance. A Constraint might be that the car must travel in a straight line. A Variable is the type of wheel chosen. A supply chain risk could be that your chosen wheels are out of stock, forcing you to use heavier, less efficient wheels. To mitigate this, you could identify a backup supplier or pre-order your preferred wheels. This ensures that your chosen variables (lightweight wheels) for achieving your objective (maximum distance) are secured, reducing the risk of suboptimal performance.</p><p>6. Engineering Journal Task</p><p>Junior Creationeer, it is time to reflect on what you have learned and apply it to your mousetrap car project. Please complete the following four tasks in your Engineering Journal:</p><p>(1) Apply to Your Car: Create a simple supply chain map for at least three major components of your mousetrap car (e.g., wheels, axles, mousetrap). For each component, list where you obtained it and at least one step that occurred before you acquired it (e.g., &quot;Wheels: CD from home; originally manufactured from plastic&quot;).</p><p>(2) Identify Trade-offs: Describe one potential supply chain risk for your mousetrap car (e.g., a part being unavailable, a quality issue). Then, explain a trade-off you might have to make to mitigate this risk. For example, using a more expensive but reliable supplier might increase your cost (trade-off) but reduce the risk of low-quality parts.</p><p>(3) OCV for Your Design: Choose one specific design decision related to a component of your car (e.g., wheel size, axle material). State your Objective for that component, any Constraints affecting it, and the Variables you considered. Then, explain how a supply chain risk related to that component could impact your OCVs and how you would mitigate it.</p><p>(4) Biblical Reflection: Read Proverbs 16:3: &quot;Commit your works to the Lord, and your thoughts will be established.&quot; In your own words, reflect on how this verse applies to the process of mapping and analyzing your supply chain. How does committing your planning and efforts to God influence your approach to ensuring a reliable and ethical supply chain for your mousetrap car?</p><p>7. Technical Documentation Requirements</p><p>Your Engineering Journal entries for this lesson must clearly label each of the four tasks (Apply to Your Car, Identify Trade-offs, OCV for Your Design, Biblical Reflection) and be legible.
+  Include your supply chain map (can be a simple list or diagram) and your risk mitigation strategies as part of your journal entry.</p><p>Junior Creationeer Signature:
+_________________________ / _________________________ / _________________________
+(Person) (Date) (Location of Lab)</p><p>8. Summary of Key Concepts</p><p>Supply Chain: The network of steps and people involved in bringing a product to you.
+Risk Analysis: Identifying potential problems at each step of the supply chain.
+Mitigation: Planning to prevent or lessen the impact of these identified risks.
+Performance: Ensuring your car works as intended by managing its component sources.</p><p>9. Works Cited</p><p>Genesis K12 Academy Full Lesson Book. (n.d.). LearnWorlds.
+  Horstemeyer, M.F., Adebayo, A., Jantomaso, M., Long, J.L., Burgess, S., &amp; McIntosh, A. (2022). CreationeeringTM: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis. Creation Research Society Quarterly, 58, 238–261.
+  Kouvelis, P., &amp; Dong, L. (2018). Supply Chain Management: Concepts, Strategies, and Decisions. McGraw-Hill Education.
+  Mentzer, J. T., DeWitt, W., Keebler, J. S., Min, S., Nix, N. W., Smith, C. D., &amp; Zacharia, Z. G. (2001). Defining Supply Chain Management. Journal of Business Logistics, 22(2), 1-25. https://onlinelibrary.wiley.com/doi/abs/10.1002/j.2158-1592.2001.tb00001.x</p></div>
+  </details>
+</div>
+</body>
+</html>

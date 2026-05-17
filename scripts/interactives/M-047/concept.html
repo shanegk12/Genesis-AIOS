@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brake Tuning Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 15px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 18px 25px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 22px; }
+  header p { font-size: 13px; opacity: 0.9; margin-top: 4px; }
+  .content { padding: 20px 25px; }
+  .target {
+    background: #f7f9fc;
+    border: 2px dashed #c9a227;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .target strong { color: #c9a227; font-size: 18px; }
+  .track-wrap {
+    position: relative;
+    background: #1e3a5f;
+    border-radius: 8px;
+    height: 80px;
+    margin-bottom: 15px;
+    overflow: hidden;
+  }
+  .track-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #fff 0 20px, transparent 20px 40px);
+    transform: translateY(-50%);
+  }
+  .finish {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #c9a227;
+    box-shadow: 0 0 8px #c9a227;
+  }
+  .car {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 38px;
+    height: 24px;
+    transform: translateY(-50%);
+    transition: left 0.05s linear;
+  }
+  .car-body {
+    width: 100%;
+    height: 14px;
+    background: #c9a227;
+    border-radius: 4px;
+    position: absolute;
+    top: 2px;
+  }
+  .wheel {
+    position: absolute;
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  .wheel.front { right: 3px; }
+  .wheel.back { left: 3px; }
+  .marker-label {
+    position: absolute;
+    color: #c9a227;
+    font-size: 11px;
+    font-weight: bold;
+    top: 4px;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  .slider-group {
+    background: #f7f9fc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #1e3a5f;
+  }
+  .slider-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .slider-group .val {
+    color: #c9a227;
+    float: right;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #1e3a5f;
+  }
+  .hint { font-size: 11px; color: #555; margin-top: 4px; }
+  .btn-row { display: flex; gap: 10px; margin-bottom: 12px; }
+  button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  button:hover:not(:disabled) { transform: translateY(-2px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-go { background: #c9a227; color: #1e3a5f; }
+  .btn-reset { background: #1e3a5f; color: #fff; }
+  .feedback {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    min-height: 50px;
+    background: #f7f9fc;
+    border: 2px solid #ddd;
+  }
+  .feedback.success { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; }
+  .feedback.close { background: #fff8e1; border-color: #c9a227; color: #8a6914; }
+  .feedback.miss { background: #ffebee; border-color: #c62828; color: #b71c1c; }
+  .score-board {
+    display: flex;
+    justify-content: space-around;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .score-board span { color: #c9a227; font-weight: bold; }
+  .final {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #1e3a5f, #2c5282);
+    color: #fff;
+    border-radius: 8px;
+    margin-top: 12px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🛑 Brake Tuning Challenge</h1>
+    <p>Tune your mousetrap car's brake so it stops AT the finish line — not before, not after!</p>
+  </header>
+  <div class="content">
+    <div class="target">
+      Trial <strong id="trialNum">1</strong> of <strong>5</strong> — Stop at: <strong id="targetDist">60 cm</strong>
+    </div>
+
+    <div class="track-wrap" id="track">
+      <div class="track-line"></div>
+      <div class="finish" id="finish"></div>
+      <div class="marker-label" id="finishLabel">FINISH</div>
+      <div class="car" id="car">
+        <div class="car-body"></div>
+        <div class="wheel back"></div>
+        <div class="wheel front"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="slider-group">
+        <label>Brake Friction <span class="val" id="frictionVal">5</span></label>
+        <input type="range" id="friction" min="1" max="10" value="5">
+        <div class="hint">Higher = more grip on the wheel</div>
+      </div>
+      <div class="slider-group">
+        <label>Brake Delay <span class="val" id="delayVal">2.0 s</span></label>
+        <input type="range" id="delay" min="0" max="50" value="20">
+        <div class="hint">When the brake engages after launch</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-go" id="goBtn">🚗 LAUNCH</button>
+      <button class="btn-reset" id="nextBtn" disabled>NEXT TRIAL ➜</button>
+    </div>
+
+    <div class="feedback" id="feedback">Adjust your brake settings, then launch the car!</div>
+
+    <div class="score-board">
+      <div>Score: <span id="score">0</span></div>
+      <div>Best Stop: <span id="bestStop">—</span></div>
+    </div>
+
+    <div id="finalArea"></div>
+  </div>
+</div>
+
+<script>
+  const trackEl = document.getElementById('track');
+  const finishEl = document.getElementById('finish');
+  const finishLabel = document.getElementById('finishLabel');
+  const car = document.getElementById('car');
+  const friction = document.getElementById('friction');
+  const delay = document.getElementById('delay');
+  const frictionVal = document.getElementById('frictionVal');
+  const delayVal = document.getElementById('delayVal');
+  const goBtn = document.getElementById('goBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const feedback = document.getElementById('feedback');
+  const scoreEl = document.getElementById('score');
+  const bestStopEl = document.getElementById('bestStop');
+  const trialNumEl = document.getElementById('trialNum');
+  const targetDistEl = document.getElementById('targetDist');
+  const finalArea = document.getElementById('finalArea');
+
+  const targets = [60, 80, 45, 95, 70]; // cm
+  let trial = 0;
+  let score = 0;
+  let bestStop = null;
+  let running = false;
+
+  const MAX_CM = 120;
+
+  function placeFinish() {
+    const pct = targets[trial] / MAX_CM;
+    const trackW = trackEl.clientWidth;
+    const x = pct * trackW;
+    finishEl.style.left = x + 'px';
+    finishLabel.style.left = (x + 6) + 'px';
+  }
+
+  function setup() {
+    trialNumEl.textContent = trial + 1;
+    targetDistEl.textContent = targets[trial] + ' cm';
+    car.style.left = '10px';
+    placeFinish();
+    feedback.className = 'feedback';
+    feedback.textContent = 'Adjust your brake settings, then launch the car!';
+    goBtn.disabled = false;
+    nextBtn.disabled = true;
+  }
+
+  friction.addEventListener('input', () => frictionVal.textContent = friction.value);
+  delay.addEventListener('input', () => delayVal.textContent = (delay.value / 10).toFixed(1) + ' s');
+
+  window.addEventListener('resize', () => { if (!running) placeFinish(); });
+
+  goBtn.addEventListener('click', launch);
+  nextBtn.addEventListener('click', () => {
+    trial++;
+    if (trial >= targets.length) {
+      showFinal();
+    } else {
+      setup();
+    }
+  });
+
+  function launch() {
+    if (running) return;
+    running = true;
+    goBtn.disabled = true;
+    feedback.className = 'feedback';
+    feedback.textContent = 'Rolling...';
+
+    const target = targets[trial];
+    const brakeDelay = parseFloat(delay.value) / 10; // seconds
+    const brakeStrength = parseInt(friction.value); // 1-10
+
+    // Physics sim
+    let position = 0; // cm
+    let velocity = 0;
+    const acceleration = 40; // cm/s^2 during powered phase
+    const poweredTime = 1.2; // seconds of mousetrap pull
+    const naturalFriction = 3; // baseline drag cm/s^2
+    let t = 0;
+    const dt = 0.02;
+
+    const interval = setInterval(() => {
+      t += dt;
+      // Powered phase
+      if (t < poweredTime) {
+        velocity += acceleration * dt;
+      }
+      // Natural drag always
+      velocity -= naturalFriction * dt;
+      // Brake engaged
+      if (t >= brakeDelay) {
+        velocity -= brakeStrength * 8 * dt;
+      }
+      if (velocity < 0) velocity = 0;
+      position += velocity * dt;
+
+      // Update car
+      const trackW = trackEl.clientWidth - 50;
+      const pct = Math.min(position / MAX_CM, 1);
+      car.style.left = (10 + pct * trackW) + 'px';
+
+      if (velocity <= 0.05 || position >= MAX_CM) {
+        clearInterval(interval);
+        finishTrial(position, target);
+      }
+    }, dt * 1000);
+  }
+
+  function finishTrial(stopPos, target) {
+    running = false;
+    const diff = Math.abs(stopPos - target);
+    let pts = 0;
+    let msg = '';
+    let cls = '';
+
+    if (diff <= 3) {
+      pts = 20; cls = 'success';
+      msg = `🎯 PERFECT! Stopped at ${stopPos.toFixed(1)} cm (off by ${diff.toFixed(1)} cm). +20 pts`;
+    } else if (diff <= 8) {
+      pts = 12; cls = 'success';
+      msg = `✅ Great stop! ${stopPos.toFixed(1)} cm — off by ${diff.toFixed(1)} cm. +12 pts`;
+    } else if (diff <= 15) {
+      pts = 6; cls = 'close';
+      msg = `⚠️ Close. Stopped at ${stopPos.toFixed(1)} cm (off by ${diff.toFixed(1)} cm). ${stopPos < target ? 'Try less friction or longer delay.' : 'Try more friction or shorter delay.'} +6 pts`;
+    } else {
+      pts = 0; cls = 'miss';
+      msg = `❌ Off target. Stopped at ${stopPos.toFixed(1)} cm. ${stopPos < target ? 'Brakes too strong/early.' : 'Brakes too weak/late.'}`;
+    }
+
+    score += pts;
+    scoreEl.textContent = score;
+    if (bestStop === null || diff < bestStop) {
+      bestStop = diff;
+      bestStopEl.textContent = diff.toFixed(1) + ' cm off';
+    }
+    feedback.className = 'feedback ' + cls;
+    feedback.textContent = msg;
+    nextBtn.disabled = false;
+    if (trial === targets.length - 1) nextBtn.textContent = 'SEE RESULTS ➜';
+  }
+
+  function showFinal() {
+    document.querySelector('.controls').style.display = 'none';
+    document.querySelector('.btn-row').style.display = 'none';
+    document.querySelector('.target').style.display = 'none';
+    document.querySelector('.track-wrap').style.display = 'none';
+    feedback.style.display = 'none';
+
+    let rating = '';
+    let comment = '';
+    if (score >= 80) { rating = '🏆 Master Engineer!'; comment = 'Your braking system shows precise control — true Creationeering!'; }
+    else if (score >= 50) { rating = '⭐ Skilled Builder'; comment = 'Solid braking control. Keep refining your design.'; }
+    else if (score >= 25) { rating = '🔧 Apprentice'; comment = 'You\'re learning the trade-offs. Practice makes precision.'; }
+    else { rating = '📚 Keep Iterating'; comment = 'Engineering is iteration — try again to dial it in.'; }
+
+    finalArea.innerHTML = `
+      <div class="final">
+        <h2>${rating}</h2>
+        <p style="font-size:28px; margin:10px 0;">Final Score: <span style="color:#c9a227">${score}</span> / 100</p>
+        <p>${comment}</p>
+        <p style="margin-top:14px; font-size:13px; opacity:0.85;">A good engineer designs systems that not only <em>go</em>, but also <em>stop</em> with control.</p>
+      </div>
+    `;
+  }
+
+  setup();
+</script>
+</body>
+</html>
