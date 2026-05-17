@@ -271,6 +271,33 @@ def git_push_manifest():
         print(f"Git push failed (non-fatal): {e}")
 
 
+def cleanup_retry_scheduler_jobs():
+    """Delete any gk12-retry-* Cloud Scheduler jobs — called after every non-morning run."""
+    try:
+        import google.auth
+        import google.auth.transport.requests
+        creds, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        creds.refresh(google.auth.transport.requests.Request())
+        token = creds.token
+
+        list_url = "https://cloudscheduler.googleapis.com/v1/projects/genesis-aios/locations/us-central1/jobs"
+        req = urllib.request.Request(list_url, headers={"Authorization": f"Bearer {token}"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            jobs = json.loads(resp.read()).get("jobs", [])
+
+        retry_jobs = [j["name"] for j in jobs if "/gk12-retry-" in j["name"]]
+        for job_name in retry_jobs:
+            del_req = urllib.request.Request(
+                f"https://cloudscheduler.googleapis.com/v1/{job_name}",
+                method="DELETE",
+                headers={"Authorization": f"Bearer {token}"},
+            )
+            urllib.request.urlopen(del_req, timeout=15)
+            print(f"Deleted one-time scheduler job: {job_name.split('/')[-1]}")
+    except Exception as e:
+        print(f"Scheduler cleanup (non-fatal): {e}")
+
+
 def print_status(data):
     by_doc = {}
     for l in data["lessons"]:
@@ -508,6 +535,11 @@ def main():
 
     if done > 0:
         git_push_manifest()
+
+    # Clean up any one-time retry scheduler jobs (non-morning runs only)
+    run_hour = datetime.now(timezone.utc).hour
+    if run_hour != 13:  # 13 UTC = 8am Central
+        cleanup_retry_scheduler_jobs()
 
 
 if __name__ == "__main__":
