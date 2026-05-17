@@ -124,7 +124,7 @@ def call_gemini(api_key, prompt, horstemeyer_uri=None):
     payload = json.dumps({
         "contents": [{"parts": req_parts}],
         "tools": [{"google_search": {}}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 24576, "thinkingConfig": {"thinkingBudget": 2048}}
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 8192, "thinkingConfig": {"thinkingBudget": 1024}}
     }).encode("utf-8")
 
     url = f"{GEMINI_URL}?key={api_key}"
@@ -141,9 +141,11 @@ def call_gemini(api_key, prompt, horstemeyer_uri=None):
                 print(f"Gemini returned no content (finishReason: {finish})")
                 sys.exit(1)
             resp_parts = candidate["content"].get("parts", [])
-            text_parts = [p["text"] for p in resp_parts if not p.get("thought", False) and "text" in p]
+            text_parts = [p["text"] for p in resp_parts
+                          if not p.get("thought", False) and "text" in p
+                          and len(p["text"]) < 40000]
             result = "\n".join(text_parts)
-            if len(result) > 60000:
+            if len(result) > 30000:
                 print(f"Error: draft is {len(result):,} chars, exceeds 60K safety limit. Skipping.")
                 sys.exit(1)
             return strip_markdown(result)

@@ -2,7 +2,10 @@
 Genesis K-12 Gmail Notifier
 
 Sends pipeline status emails to shane@gk12academy.com via Gmail API.
-Uses a stored OAuth refresh token — no browser flow needed at runtime.
+
+Auth strategy:
+  1. Cloud Run: service account DWD — impersonates shane@gk12academy.com, no tokens to expire.
+  2. Local fallback: OAuth refresh token from .env or ADC file.
 
 Usage:
   python notify.py "message"          # run summary
@@ -22,6 +25,27 @@ MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 
 # ── Auth ─────────────────────────────────────────────────────────────────────
 
+def _get_access_token_dwd():
+    """Service account DWD impersonation — used on Cloud Run. No tokens to expire."""
+    try:
+        import google.auth
+        import google.auth.impersonated_credentials
+        import google.auth.transport.requests
+        creds, _ = google.auth.default(
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
+        impersonated = google.auth.impersonated_credentials.Credentials(
+            source_credentials=creds,
+            target_principal=FROM_EMAIL,
+            target_scopes=["https://www.googleapis.com/auth/gmail.send"],
+        )
+        impersonated.refresh(google.auth.transport.requests.Request())
+        return impersonated.token
+    except Exception as e:
+        print(f"Notify: DWD auth failed ({e}), falling back to refresh token")
+        return None
+
+
 def _load_env():
     env = {}
     env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
@@ -35,22 +59,22 @@ def _load_env():
     return env
 
 
-def _load_oauth_credentials():
+def _get_access_token_refresh():
+    """OAuth refresh token fallback — used locally."""
     env = _load_env()
     client_id     = os.environ.get("GOOGLE_OAUTH_CLIENT_ID")     or env.get("GOOGLE_OAUTH_CLIENT_ID")
     client_secret = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET") or env.get("GOOGLE_OAUTH_CLIENT_SECRET")
     refresh_token = os.environ.get("GMAIL_REFRESH_TOKEN")        or env.get("GMAIL_REFRESH_TOKEN")
-    # Local fallback: read refresh token from ADC file
     if not refresh_token:
         adc = os.path.join(os.environ.get("APPDATA", ""), "gcloud", "application_default_credentials.json")
         if os.path.exists(adc):
             with open(adc) as f:
                 data = json.load(f)
             refresh_token = data.get("refresh_token")
-    return client_id, client_secret, refresh_token
-
-
-def _get_access_token(client_id, client_secret, refresh_token):
+            client_id     = client_id     or data.get("client_id")
+            client_secret = client_secret or data.get("client_secret")
+    if not all([client_id, client_secret, refresh_token]):
+        return None
     data = urllib.parse.urlencode({
         "client_id":     client_id,
         "client_secret": client_secret,
@@ -60,6 +84,11 @@ def _get_access_token(client_id, client_secret, refresh_token):
     req = urllib.request.Request("https://oauth2.googleapis.com/token", data=data)
     with urllib.request.urlopen(req, timeout=15) as resp:
         return json.loads(resp.read())["access_token"]
+
+
+def _get_access_token():
+    """DWD first (Cloud Run), refresh token fallback (local)."""
+    return _get_access_token_dwd() or _get_access_token_refresh()
 
 
 # ── Manifest stats ────────────────────────────────────────────────────────────
@@ -145,12 +174,11 @@ def _build_html(headline, body_html, stats=None):
 # ── Send ─────────────────────────────────────────────────────────────────────
 
 def send_email(subject, html):
-    client_id, client_secret, refresh_token = _load_oauth_credentials()
-    if not all([client_id, client_secret, refresh_token]):
-        print("Notify: missing OAuth credentials — skipping email")
-        return
     try:
-        access_token = _get_access_token(client_id, client_secret, refresh_token)
+        access_token = _get_access_token()
+        if not access_token:
+            print("Notify: no access token available — skipping email")
+            return
         msg = email.mime.multipart.MIMEMultipart("alternative")
         msg["Subject"] = subject
         msg["To"]      = TO_EMAIL
