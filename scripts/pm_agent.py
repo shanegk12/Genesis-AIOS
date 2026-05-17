@@ -348,7 +348,7 @@ def build_queue(data, course, lesson_type, batch):
     queue = [l for l in data["lessons"] if l["status"] == "pending"]
 
     if course != "both":
-        queue = [l for l in queue if l["doc"] == course]
+        queue = [l for l in queue if l["doc"] == course or l["doc"].startswith(course)]
 
     if lesson_type != "all":
         queue = [l for l in queue if l["type"] == lesson_type]

@@ -16,8 +16,9 @@ from googleapiclient.discovery import build
 # ── CONFIG ──────────────────────────────────────────────────────────────────
 
 DOC_IDS = {
-    "creationeering": "1oKMuj29QBxEz7ji4GedBiUP0b3a3ESr20L_OK128IEY",
-    "mousetrap":      "1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc",
+    "creationeering":   "1oKMuj29QBxEz7ji4GedBiUP0b3a3ESr20L_OK128IEY",
+    "creationeering-2": "14zURPF6v6A_rQFDD0ojrmFSos3jwu_kZvLkpfg5dqDc",
+    "mousetrap":        "1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc",
 }
 
 GEMINI_MODEL = "gemini-2.5-flash"
