@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Build Your Bill of Materials</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 { color: #1e3a5f; font-size: 1.5em; margin-bottom: 4px; text-align: center; }
+  .subtitle { text-align: center; color: #555; font-size: 0.9em; margin-bottom: 12px; }
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .stats span { color: #c9a227; }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .panel {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 380px;
+  }
+  .panel h2 {
+    color: #1e3a5f;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #c9a227;
+    padding-bottom: 4px;
+  }
+  .shop-item, .bom-item {
+    background: #f7f9fc;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    transition: all 0.15s;
+  }
+  .shop-item:hover { border-color: #c9a227; background: #fff8e1; }
+  .shop-item .icon { font-size: 1.4em; margin-right: 6px; }
+  .shop-item .info { flex: 1; }
+  .shop-item .name { font-weight: bold; }
+  .shop-item .desc { font-size: 0.75em; color: #666; }
+  .shop-item .cost { color: #c9a227; font-weight: bold; }
+  .bom-item {
+    background: #fff8e1;
+    border-color: #c9a227;
+  }
+  .bom-item .remove {
+    background: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 0.8em;
+  }
+  .category {
+    font-size: 0.75em;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+  }
+  .empty {
+    color: #999;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+  }
+  #submit {
+    display: block;
+    width: 100%;
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  #submit:hover { background: #b8901c; }
+  #submit:disabled { background: #ccc; cursor: not-allowed; color: #666; }
+  #result {
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 8px;
+    display: none;
+  }
+  .result-good { background: #d4edda; border: 2px solid #28a745; }
+  .result-bad { background: #fff3cd; border: 2px solid #c9a227; }
+  .result-poor { background: #f8d7da; border: 2px solid #dc3545; }
+  #result h3 { margin-bottom: 8px; }
+  #result ul { margin-left: 18px; margin-top: 6px; font-size: 0.9em; }
+  #reset {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  .budget-warn { color: #dc3545 !important; }
+  @media (max-width: 600px) {
+    .container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🐭 Mousetrap Car: Bill of Materials</h1>
+<p class="subtitle">Pick the parts you need. Stay on budget. Cover every category!</p>
+
+<div class="stats">
+  <div>Budget: <span>$<span id="budget">25.00</span></span></div>
+  <div>Spent: <span id="spent" style="color:#c9a227">$0.00</span></div>
+  <div>Items: <span id="count">0</span></div>
+</div>
+
+<div class="container">
+  <div class="panel">
+    <h2>🛒 Parts Shop (tap to add)</h2>
+    <div id="shop"></div>
+  </div>
+  <div class="panel">
+    <h2>📋 Your Bill of Materials</h2>
+    <div id="bom"><div class="empty">No parts selected yet</div></div>
+  </div>
+</div>
+
+<button id="submit">Submit Bill of Materials</button>
+<div id="result"></div>
+
+<script>
+const BUDGET = 25.00;
+const parts = [
+  { id: 1, name: "Wood Plank Chassis", icon: "🪵", desc: "Sturdy base for the car", cost: 4.00, cat: "Chassis", good: true },
+  { id: 2, name: "Cardboard Chassis", icon: "📦", desc: "Lightweight but flimsy base", cost: 1.50, cat: "Chassis", good: true },
+  { id: 3, name: "Standard Mousetrap", icon: "🪤", desc: "Provides spring power", cost: 3.50, cat: "Power", good: true },
+  { id: 4, name: "Rubber Band Motor", icon: "➿", desc: "Alternate power source", cost: 2.00, cat: "Power", good: true },
+  { id: 5, name: "CD Wheels (set of 4)", icon: "💿", desc: "Lightweight large wheels", cost: 3.00, cat: "Wheels", good: true },
+  { id: 6, name: "Wooden Wheels (set of 4)", icon: "⚙️", desc: "Solid traction wheels", cost: 5.00, cat: "Wheels", good: true },
+  { id: 7, name: "Wooden Dowel Axles", icon: "📏", desc: "Connects wheels to chassis", cost: 2.00, cat: "Axle", good: true },
+  { id: 8, name: "Metal Rod Axles", icon: "🔩", desc: "Strong, smooth-spinning", cost: 3.50, cat: "Axle", good: true },
+  { id: 9, name: "Fishing Line", icon: "🎣", desc: "Connects trap arm to axle", cost: 1.50, cat: "String", good: true },
+  { id: 10, name: "Strong Twine", icon: "🧵", desc: "Pulls axle when trap snaps", cost: 1.00, cat: "String", good: true },
+  { id: 11, name: "Hot Glue Sticks", icon: "🔥", desc: "Bonds parts together", cost: 2.00, cat: "Adhesive", good: true },
+  { id: 12, name: "Duct Tape", icon: "🩹", desc: "Quick fastener", cost: 1.50, cat: "Adhesive", good: true },
+  { id: 13, name: "Decorative Stickers", icon: "✨", desc: "Looks cool but not needed", cost: 3.00, cat: "Extra", good: false },
+  { id: 14, name: "LED Light Kit", icon: "💡", desc: "Fancy but unnecessary", cost: 6.00, cat: "Extra", good: false },
+  { id: 15, name: "Toy Steering Wheel", icon: "🎡", desc: "Adds weight, no function", cost: 4.00, cat: "Extra", good: false },
+];
+
+const REQUIRED_CATS = ["Chassis","Power","Wheels","Axle","String","Adhesive"];
+let bom = [];
+
+const shopEl = document.getElementById('shop');
+const bomEl = document.getElementById('bom');
+const spentEl = document.getElementById('spent');
+const countEl = document.getElementById('count');
+const submitBtn = document.getElementById('submit');
+const resultEl = document.getElementById('result');
+
+function renderShop() {
+  shopEl.innerHTML = '';
+  parts.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'shop-item';
+    div.innerHTML = `
+      <span class="icon">${p.icon}</span>
+      <div class="info">
+        <div class="name">${p.name}<span class="category">${p.cat}</span></div>
+        <div class="desc">${p.desc}</div>
+      </div>
+      <span class="cost">$${p.cost.toFixed(2)}</span>
+    `;
+    div.onclick = () => addPart(p.id);
+    shopEl.appendChild(div);
+  });
+}
+
+function addPart(id) {
+  if (bom.find(b => b.id === id)) return;
+  const p = parts.find(x => x.id === id);
+  bom.push(p);
+  renderBOM();
+}
+
+function removePart(id) {
+  bom = bom.filter(b => b.id !== id);
+  renderBOM();
+}
+
+function renderBOM() {
+  if (bom.length === 0) {
+    bomEl.innerHTML = '<div class="empty">No parts selected yet</div>';
+  } else {
+    bomEl.innerHTML = '';
+    bom.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'bom-item';
+      div.innerHTML = `
+        <span class="icon">${p.icon}</span>
+        <div class="info">
+          <div class="name">${p.name}</div>
+          <div class="desc">$${p.cost.toFixed(2)} • ${p.cat}</div>
+        </div>
+        <button class="remove">Remove</button>
+      `;
+      div.querySelector('.remove').onclick = () => removePart(p.id);
+      bomEl.appendChild(div);
+    });
+  }
+  const total = bom.reduce((s,p) => s + p.cost, 0);
+  spentEl.textContent = '$' + total.toFixed(2);
+  spentEl.className = total > BUDGET ? 'budget-warn' : '';
+  countEl.textContent = bom.length;
+}
+
+submitBtn.onclick = () => {
+  const total = bom.reduce((s,p) => s + p.cost, 0);
+  const cats = new Set(bom.map(p => p.cat));
+  const missing = REQUIRED_CATS.filter(c => !cats.has(c));
+  const extras = bom.filter(p => !p.good);
+  const overBudget = total > BUDGET;
+
+  let score = 100;
+  if (overBudget) score -= 40;
+  score -= missing.length * 15;
+  score -= extras.length * 10;
+  score = Math.max(0, score);
+
+  let msg = '';
+  let cls = '';
+  if (score >= 90) { cls = 'result-good'; msg = '🏆 Excellent Stewardship!'; }
+  else if (score >= 60) { cls = 'result-bad'; msg = '⚠️ Good Start, Needs Refinement'; }
+  else { cls = 'result-poor'; msg = '❌ Bill of Materials Needs Work'; }
+
+  let feedback = `<h3>${msg}</h3><p><strong>Score: ${score}/100</strong></p><ul>`;
+  feedback += `<li>Total cost: $${total.toFixed(2)} of $${BUDGET.toFixed(2)} budget ${overBudget ? '— OVER BUDGET!' : '✓'}</li>`;
+  if (missing.length) feedback += `<li>Missing essential categories: ${missing.join(', ')}</li>`;
+  else feedback += `<li>All essential categories covered ✓</li>`;
+  if (extras.length) feedback += `<li>Unnecessary items added: ${extras.map(e=>e.name).join(', ')}</li>`;
+  else feedback += `<li>No wasteful purchases ✓</li>`;
+  feedback += `</ul><p style="margin-top:8px;font-size:0.85em;font-style:italic;">A good BOM lists every part you need — and nothing you don't. Wise stewardship of resources!</p>`;
+  feedback += `<button id="reset">Try Again</button>`;
+
+  resultEl.className = cls;
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = feedback;
+  resultEl.scrollIntoView({ behavior:'smooth', block:'end' });
+
+  document.getElementById('reset').onclick = () => {
+    bom = [];
+    renderBOM();
+    resultEl.style.display = 'none';
+  };
+};
+
+document.getElementById('budget').textContent = BUDGET.toFixed(2);
+renderShop();
+renderBOM();
+</script>
+</body>
+</html>

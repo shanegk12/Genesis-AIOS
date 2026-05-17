@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Essential Inventory Check</summary>
+    <div class="panel-body"><p>A Plain-Language Explanation
+Once you have all your materials, the very first thing you need to do is an inventory check. This is like making a checklist of everything you are supposed to have and then seeing if it matches what you actually have. Think about it like packing for a trip: you would not want to arrive at your destination only to realize you forgot your toothbrush, would you? In engineering, forgetting or misplacing a part can halt an entire project. An inventory check helps you confirm that all components listed in your Bill of Materials (BOM) are physically present. It also helps you identify any extra parts you might have, which could be useful spares or indicate an error in your initial material preparation. This systematic review is crucial for efficient project management and preventing unexpected surprises down the line. Accurately tracking your inventory ensures that your project stays on schedule and within budget, minimizing waste and maximizing productivity.</p><p>Direct Application to Your Mousetrap Car Project
+For your mousetrap car, this means comparing your collected parts against your Bill of Materials. Your BOM should list every item you need: the mousetrap itself, the chassis material, axles, wheels, string, glue, fasteners, and any decorative elements. Go through your list item by item. As you find each part, check it off. If you are missing something, make a note to acquire it. If you have extra, note that too. This process helps you confirm you have everything you need before you start cutting, gluing, or assembling. For example, if your BOM specifies four wheels, visually confirm you have exactly four wheels. If it lists two wooden dowels for axles, ensure both are present. This step is often overlooked in the excitement of building, but it saves immense frustration later on. Imagine getting halfway through assembling your car only to realize you are missing a critical wheel. An inventory check prevents such headaches.</p><p>OCV Application for Your Design
+Let us apply the OCV method to this inventory check.
+Objective: To ensure all necessary components are present before starting assembly, thereby preventing delays and rework.
+Constraint: Limited time and budget for acquiring additional or replacement parts.
+Variable: The number of each specific component on hand.
+By performing a thorough inventory check, you are managing the &quot;variable&quot; (your parts) against the &quot;constraint&quot; (time/budget) to achieve your &quot;objective&quot; (a complete car). If you find a missing part (a variable discrepancy), you can address it immediately within your constraints, rather than discovering it mid-build when time pressure is higher. This proactive approach is a hallmark of good engineering practice.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Material Verification and Quality Control</summary>
+    <div class="panel-body"><p>A Plain-Language Explanation
+Beyond simply having all the parts, you need to make sure they are the right parts and that they are in good condition. This is where material verification and quality control come in. Verification means checking that each part matches its specifications. For instance, if your design calls for a 6-inch axle, you need to verify that your axle is indeed 6 inches long. Quality control involves inspecting parts for defects, damage, or inconsistencies. A bent axle, a cracked wheel, or a frayed piece of string might not seem like a big deal, but these small imperfections can significantly impact your car's performance. Just as an architect would never use a cracked foundation stone, an engineer must ensure the quality of every component. This diligent checking ensures that the materials you use will perform as expected, contributing to the overall success and reliability of your project.</p><p>Direct Application to Your Mousetrap Car Project
+Let us consider your mousetrap car.
+For the chassis: If your design specifies a certain thickness of wood, measure it to verify it meets that dimension within an acceptable tolerance. Check the wood for warps, cracks, or splinters that could weaken it.
+For the axles: Use a ruler to measure the length and diameter of your dowels or rods. Roll them on a flat surface to check for straightness. A bent axle will cause your wheels to wobble, creating friction and slowing your car down.
+For the wheels: Verify that all wheels are the same diameter and that their centers are perfectly drilled. Check for any chips, cracks, or inconsistencies in the material that could affect their balance or grip.
+For the string: Ensure it is strong, free of knots, and not frayed. The string is crucial for transferring the mousetrap's energy to the axle. A weak or damaged string could snap, ending your car's run prematurely.
+Every part must be verified against your design specifications and checked for quality. This process is about attention to detail and ensuring that your materials are fit for their intended purpose.</p><p>Multiscale Modeling Connection
+This verification process has a direct connection to multiscale modeling, a concept Creationeering emphasizes. When you visually inspect a wheel for cracks (a macro-level observation), you are implicitly considering its atomic-level causes. A crack at the macro level is a manifestation of weaknesses in the material's atomic or molecular structure. For instance, if a plastic wheel has a visible crack, it means that at the microscopic level, the polymer chains or crystalline structures within the plastic are breaking apart or were improperly formed during manufacturing. This structural flaw at the atomic scale reduces the material's ability to withstand stress, leading to failure at the macro level. Similarly, a bent metal axle (macro observation) suggests that the metal's internal grain structure has been deformed beyond its elastic limit, or perhaps the material itself has a lower yield strength due to its atomic composition. By verifying the quality of your parts, you are ensuring that their fundamental material properties, down to the atomic level, are robust enough for the demands of your mousetrap car.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Organizing and Storing Your Inventory (Stewardship)</summary>
+    <div class="panel-body"><p>A Plain-Language Explanation
+Once you have checked your inventory and verified the quality of your materials, the next step is to organize and store them properly. This is a practical application of good stewardship. Just as a good gardener tends to their tools and seeds, you should care for your engineering materials. Proper organization makes it easy to find what you need when you need it, saving time and reducing frustration. Good storage protects your materials from damage, loss, or degradation. This means keeping delicate parts in protective containers, preventing wood from warping, and keeping small fasteners from getting lost. An organized workspace is not just tidy; it is an efficient workspace, reflecting respect for the resources God has provided. This systematic approach contributes to the longevity of your materials and the smooth progression of your project. The careful handling and storage of your materials are essential for maintaining their integrity throughout the build process and beyond.</p><p>Direct Application to Your Mousetrap Car Project
+Consider how you will store your mousetrap car components.
+Small parts: Use small containers, zip-top bags, or tackle boxes to keep screws, washers, string, and other tiny items organized and together. Label these containers clearly so you know exactly what is inside.
+Larger parts: Store your chassis material flat to prevent warping. Keep axles straight and protected from bending. Wheels can be stacked or placed in a dedicated box to prevent damage.
+Tools: Ensure your tools are clean and put away after each use. A dull saw or a misplaced ruler can cause errors and delays.
+Your workspace: Maintain a clean and organized area. This reduces the chance of losing parts or making mistakes due to clutter. A well-ordered lab environment is a safer and more productive environment. This commitment to order reflects the divine order seen in God’s creation.</p><p>OCV Application for Your Design
+Let us apply the OCV method to material organization and storage.
+Objective: To maintain the quality and accessibility of all components throughout the project.
+Constraint: Limited storage space and the need to protect delicate parts.
+Variable: The chosen storage method (e.g., labeled bins, protective cases, flat storage).
+By thoughtfully selecting your &quot;variable&quot; (storage methods), you are working within your &quot;constraints&quot; (space, fragility) to achieve your &quot;objective&quot; (material integrity and easy access). This mindful approach ensures that your resources are preserved, ready for use, and contribute positively to your project's success. It is a tangible way to demonstrate responsible stewardship over the materials entrusted to you.</p></div>
+  </details>
+</div>
+</body>
+</html>

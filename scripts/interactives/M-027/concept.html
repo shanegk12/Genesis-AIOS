@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Procurement Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { color: #1e3a5f; font-size: 24px; margin-bottom: 6px; }
+  .subtitle { color: #555; margin-bottom: 14px; font-size: 14px; }
+  .header-bar {
+    background: #1e3a5f; color: white; padding: 14px 18px;
+    border-radius: 10px 10px 0 0; display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .stats { display: flex; gap: 14px; font-size: 14px; }
+  .stat { background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 6px; }
+  .stat b { color: #c9a227; }
+  .card {
+    background: white; border-radius: 0 0 10px 10px; padding: 18px;
+    box-shadow: 0 2px 8px rgba(30,58,95,0.1);
+  }
+  .item-display {
+    background: #f7f9fc; border: 2px dashed #c9a227; padding: 18px;
+    border-radius: 10px; margin-bottom: 14px; text-align: center;
+  }
+  .item-icon { font-size: 50px; margin-bottom: 6px; }
+  .item-name { font-size: 20px; font-weight: bold; color: #1e3a5f; }
+  .item-desc { font-size: 13px; color: #666; margin-top: 4px; }
+  .bins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .bin {
+    background: white; border: 3px solid #1e3a5f; border-radius: 10px;
+    padding: 14px 8px; text-align: center; cursor: pointer;
+    transition: all 0.2s; user-select: none;
+  }
+  .bin:hover { background: #1e3a5f; color: white; transform: translateY(-2px); }
+  .bin:hover .bin-icon { transform: scale(1.1); }
+  .bin-icon { font-size: 32px; display: block; margin-bottom: 4px; transition: transform 0.2s; }
+  .bin-name { font-weight: bold; font-size: 14px; }
+  .bin-desc { font-size: 11px; opacity: 0.8; margin-top: 3px; }
+  .feedback {
+    padding: 12px; border-radius: 8px; margin-top: 10px;
+    font-size: 14px; min-height: 50px; display: flex; align-items: center;
+  }
+  .feedback.correct { background: #e8f5e9; border-left: 5px solid #4caf50; color: #2e7d32; }
+  .feedback.wrong { background: #ffebee; border-left: 5px solid #f44336; color: #c62828; }
+  .feedback.hidden { display: none; }
+  .progress {
+    height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .progress-bar { height: 100%; background: #c9a227; transition: width 0.4s; }
+  .final-screen { text-align: center; padding: 20px; }
+  .final-screen h2 { color: #1e3a5f; font-size: 28px; margin-bottom: 10px; }
+  .score-circle {
+    width: 130px; height: 130px; border-radius: 50%;
+    background: linear-gradient(135deg, #1e3a5f, #c9a227);
+    display: flex; align-items: center; justify-content: center;
+    margin: 16px auto; color: white; font-size: 36px; font-weight: bold;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.3);
+  }
+  .badge {
+    display: inline-block; background: #c9a227; color: white;
+    padding: 8px 18px; border-radius: 20px; font-weight: bold; margin: 10px 0;
+  }
+  button {
+    background: #c9a227; color: white; border: none; padding: 11px 24px;
+    border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover { background: #b08e1f; }
+  .verse {
+    font-style: italic; color: #666; font-size: 13px;
+    margin-top: 14px; padding: 10px; border-left: 3px solid #c9a227;
+    background: #faf6ec;
+  }
+  @media(max-width:600px){
+    .bins { grid-template-columns: 1fr; }
+    .stats { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div id="game">
+    <div class="header-bar">
+      <div>
+        <h1 style="color:white;">🛠️ Procurement Challenge</h1>
+        <div style="font-size:13px; color:#c9a227;">Sort each mousetrap car part to the smartest source</div>
+      </div>
+      <div class="stats">
+        <div class="stat">Item <b id="itemNum">1</b>/8</div>
+        <div class="stat">Score <b id="score">0</b></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="progress"><div class="progress-bar" id="progBar" style="width:0%"></div></div>
+      <div class="item-display">
+        <div class="item-icon" id="itemIcon">🪤</div>
+        <div class="item-name" id="itemName">Mousetrap</div>
+        <div class="item-desc" id="itemDesc">The engine of your car</div>
+      </div>
+      <div style="text-align:center; font-size:13px; color:#1e3a5f; font-weight:bold; margin-bottom:8px;">Where would a wise Junior Creationeer get this?</div>
+      <div class="bins">
+        <div class="bin" data-source="buy">
+          <span class="bin-icon">🛒</span>
+          <div class="bin-name">Buy New</div>
+          <div class="bin-desc">From a store</div>
+        </div>
+        <div class="bin" data-source="repurpose">
+          <span class="bin-icon">♻️</span>
+          <div class="bin-name">Repurpose</div>
+          <div class="bin-desc">From home</div>
+        </div>
+        <div class="bin" data-source="donate">
+          <span class="bin-icon">🎁</span>
+          <div class="bin-name">Donation</div>
+          <div class="bin-desc">Ask / borrow</div>
+        </div>
+      </div>
+      <div class="feedback hidden" id="feedback"></div>
+    </div>
+  </div>
+
+  <div id="finalScreen" style="display:none;">
+    <div class="header-bar"><h1 style="color:white;">Procurement Complete!</h1></div>
+    <div class="card final-screen">
+      <div class="score-circle"><span id="finalScore">0</span>/8</div>
+      <div class="badge" id="badge">Junior Creationeer</div>
+      <h2 id="finalTitle">Great work!</h2>
+      <p id="finalMsg" style="margin-top:8px; color:#555;"></p>
+      <div class="verse">
+        Just as God specified materials for the Tabernacle — gold, acacia wood, fine linen — and His people procured each one, smart procurement turns a design into reality. (Exodus 25)
+      </div>
+      <button onclick="reset()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const items = [
+  { icon:'🪤', name:'Snap Mousetrap', desc:'The power source / engine', best:'buy',
+    explain:{ buy:'✅ Best choice! Mousetraps are inexpensive and need to be new for safety and reliable spring tension.',
+              repurpose:'❌ Used mousetraps may have a worn spring — you need full power for your car.',
+              donate:'⚠️ Possible, but most homes don\'t have spare working mousetraps. Buying is more reliable.'} },
+  { icon:'💿', name:'Old CDs (for wheels)', desc:'Round, flat, lightweight', best:'repurpose',
+    explain:{ buy:'❌ Wasteful! Most families have unused CDs. Save your budget.',
+              repurpose:'✅ Smart! CDs from home are perfect wheels — free and ready to use.',
+              donate:'⚠️ Could work, but check your own home first before asking others.'} },
+  { icon:'🥢', name:'Wooden Skewer (axle)', desc:'Long, thin, rigid rod', best:'repurpose',
+    explain:{ buy:'⚠️ You can buy them, but kitchens usually have skewers already.',
+              repurpose:'✅ Excellent! BBQ skewers from the kitchen drawer work great as axles.',
+              donate:'❌ Strange thing to ask for — just check your kitchen.'} },
+  { icon:'🧵', name:'Strong Fishing Line', desc:'Connects trap arm to axle', best:'buy',
+    explain:{ buy:'✅ Best — needs to be strong and thin. Cheap and worth buying new.',
+              repurpose:'⚠️ Only if you already have some. Regular string often snaps under tension.',
+              donate:'⚠️ A fishing friend could give some, but buying is most reliable.'} },
+  { icon:'📦', name:'Cardboard (chassis)', desc:'The car body / frame', best:'repurpose',
+    explain:{ buy:'❌ Never buy cardboard! It\'s everywhere for free.',
+              repurpose:'✅ Perfect! Cereal boxes and shipping boxes are ideal chassis material.',
+              donate:'⚠️ Possible, but you almost certainly have some at home already.'} },
+  { icon:'🔩', name:'Specialty Wheel Bearings', desc:'Reduce axle friction', best:'donate',
+    explain:{ buy:'⚠️ Available but pricey for a school project.',
+              repurpose:'❌ Unlikely to be lying around the house.',
+              donate:'✅ Ask a hobbyist, older sibling, or shop class — these are often donated.'} },
+  { icon:'🎈', name:'Rubber Bands', desc:'For grip on wheels', best:'repurpose',
+    explain:{ buy:'❌ Wasteful — most homes have a drawer full of rubber bands.',
+              repurpose:'✅ Yes! Free and easy to find at home or in a desk drawer.',
+              donate:'⚠️ Easy to find yourself — no need to ask.'} },
+  { icon:'🔧', name:'Hot Glue Gun (tool)', desc:'Equipment to assemble parts', best:'donate',
+    explain:{ buy:'⚠️ Possible, but a one-time school project doesn\'t need a new tool.',
+              repurpose:'⚠️ Only if you already own one.',
+              donate:'✅ Borrow from a parent, neighbor, or the school art room — smart procurement!'} }
+];
+
+let idx = 0, score = 0, answered = false;
+
+const itemIcon = document.getElementById('itemIcon');
+const itemName = document.getElementById('itemName');
+const itemDesc = document.getElementById('itemDesc');
+const feedback = document.getElementById('feedback');
+const bins = document.querySelectorAll('.bin');
+
+function loadItem(){
+  answered = false;
+  const it = items[idx];
+  itemIcon.textContent = it.icon;
+  itemName.textContent = it.name;
+  itemDesc.textContent = it.desc;
+  feedback.className = 'feedback hidden';
+  document.getElementById('itemNum').textContent = idx+1;
+  document.getElementById('progBar').style.width = ((idx)/items.length*100)+'%';
+}
+
+bins.forEach(bin => {
+  bin.addEventListener('click', () => {
+    if(answered) return;
+    answered = true;
+    const choice = bin.dataset.source;
+    const it = items[idx];
+    const correct = (choice === it.best);
+    if(correct){ score++; document.getElementById('score').textContent = score; }
+    feedback.className = 'feedback ' + (correct ? 'correct' : 'wrong');
+    feedback.innerHTML = '<div>' + it.explain[choice] +
+      (correct ? '' : '<br><b>Best answer:</b> ' + (it.best==='buy'?'🛒 Buy New':it.best==='repurpose'?'♻️ Repurpose':'🎁 Donation')) +
+      '<br><br><button onclick="next()" style="margin-top:4px;padding:6px 14px;">' +
+      (idx === items.length-1 ? 'See Results →' : 'Next Item →') + '</button></div>';
+  });
+});
+
+function next(){
+  idx++;
+  if(idx >= items.length){
+    showFinal();
+  } else {
+    loadItem();
+  }
+}
+
+function showFinal(){
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('finalScreen').style.display = 'block';
+  document.getElementById('finalScore').textContent = score;
+  let title, msg, badge;
+  if(score === 8){ title='Master Creationeer! 🏆'; msg='Perfect procurement! You understand exactly how to source materials wisely — just like a real engineer.'; badge='⭐ Master Creationeer'; }
+  else if(score >= 6){ title='Skilled Procurer! 🎯'; msg='Strong work! You think carefully about cost, availability, and reliability.'; badge='⭐ Skilled Procurer'; }
+  else if(score >= 4){ title='Learning Engineer 🔧'; msg='Good effort! Remember: check home first, buy only what you must, and ask before assuming.'; badge='Junior Creationeer'; }
+  else { title='Keep Practicing!'; msg='Procurement is a skill. Review which materials are best bought, repurposed, or donated, and try again.'; badge='Apprentice'; }
+  document.getElementById('finalTitle').textContent = title;
+  document.getElementById('finalMsg').textContent = msg;
+  document.getElementById('badge').textContent = badge;
+}
+
+function reset(){
+  idx = 0; score = 0;
+  document.getElementById('score').textContent = '0';
+  document.getElementById('game').style.display = 'block';
+  document.getElementById('finalScreen').style.display = 'none';
+  loadItem();
+}
+
+loadItem();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Material Selection and Properties for Optimal Performance</summary>
+    <div class="panel-body"><p>Once you know what materials you need, selecting the right type based on its properties is critical. Material properties are the characteristics that describe how a material behaves. For your mousetrap car, key properties include strength (how much force it can withstand), weight (how heavy it is), hardness (resistance to scratching), and friction (resistance to motion). Choosing the right material for each component is vital for your car's performance.</p><p>Think about your mousetrap car's wheels. If you choose heavy, dense wheels, your car will have more rotational inertia, making it harder for the mousetrap's energy to get it moving quickly (Objective: maximum speed). Lighter wheels, perhaps made of foam board or thin plastic, will require less energy to accelerate. However, very light wheels might lack the necessary grip (Constraint: traction) or durability (Constraint: structural integrity). At a multiscale level, the macro-level grip of your wheels depends on the micro-level surface texture and the molecular adhesion between the wheel material and the track surface. If your wheel material is too smooth at the micro-level, even if light, it won't create enough friction (traction) to propel your car effectively.</p><p>Applying OCV to material selection for your wheels: Your Objective is to maximize the distance your car travels. A Constraint is that your wheels must be durable enough to withstand the race. Your Variable could be the material chosen for the wheels (e.g., CD, foam board, cardboard). A CD is durable but might be too heavy and have poor grip. Foam board is light but could be easily damaged. Cardboard is cheap but might deform under stress. You must weigh these properties against your objectives and constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Preparing Your Materials for Precision and Performance</summary>
+    <div class="panel-body"><p>After procuring your materials, the next step is preparation. This involves cutting, shaping, drilling, and finishing to ensure each part fits correctly and performs as intended. The Horstemeyer et al. (2022) paper mentions &quot;materials processing&quot; as a key aspect of procurement, emphasizing the &quot;process-structure-property-performance sequence.&quot; This means that how you process a material affects its structure, which in turn affects its properties and ultimately its performance.</p><p>For your mousetrap car, material preparation is hands-on. If you're using a wooden dowel for an axle, you'll need to cut it to the correct length and sand it smooth. An unsanded, rough axle will create more friction with the chassis, slowing your car down. If you're cutting a chassis from a sheet of wood, precise measurements and clean cuts are essential for a straight and stable car. At a multiscale level, sanding an axle removes macro-level imperfections. This action alters the micro-level surface roughness, reducing the contact points and minimizing intermolecular forces that contribute to friction, thereby improving the axle's macro-level performance. Even tiny burrs or unevenness, invisible to the naked eye, can increase friction at the atomic level and hinder your car's speed.</p><p>Let's use OCV for material preparation. Your Objective is to minimize friction in your axle system. A Constraint is the available tools (e.g., sandpaper, files, drill). Your Variable is the finishing technique you apply to your axle. You could simply cut it, or you could sand it with progressively finer grits of sandpaper, or even polish it. Each choice impacts the final surface quality and thus the friction.</p><p>6. Engineering Journal Task</p><p>Junior Creationeer, it's time to reflect on your material preparation process.</p><p>(1) Apply to Your Car: Describe one specific material you have already procured or plan to procure for your mousetrap car. Explain why you chose this particular material for that component, linking it to desired performance. For example, if you chose balsa wood for your chassis, explain why its lightness is beneficial.</p><p>(2) Identify Trade-offs: Every material choice involves trade-offs. Identify one material you are using and discuss a trade-off you had to make. For instance, did you choose a material for its strength but had to accept its higher weight, or vice-versa? Explain the impact of this trade-off on your car's design.</p><p>(3) OCV for Your Design: Choose one component of your mousetrap car (e.g., the lever arm, a wheel, or the chassis). State a clear Objective for that component, identify one Constraint you face in preparing its material, and describe a Variable you can adjust during material preparation to meet your objective within that constraint.</p><p>(4) Biblical Reflection: Read Proverbs 12:11 (KJV): &quot;He that tilleth his land shall be satisfied with bread: but he that followeth vain persons is void of understanding.&quot; Reflect on how diligently preparing your materials for your mousetrap car aligns with the principle of diligence and wise effort. How does careful preparation, rather than &quot;following vain persons&quot; (or taking shortcuts), lead to a &quot;satisfied&quot; (successful) outcome in your engineering endeavors?</p><p>7. Technical Documentation Requirements</p><p>Document all materials procured, including their source, cost (if applicable), and any initial dimensions. Note any variations from your Bill of Materials and the reason for the change.
+Record the preparation steps for at least two key components (e.g., chassis, axles, wheels). Include measurements, tools used, and any finishing techniques.</p><p>Junior Creationeer Signature:
+Person: ___________________________________
+Date: ____________________________________
+Location of Lab: ___________________________</p><p>8. Summary of Key Concepts</p><p>Procurement: Obtaining and preparing materials is foundational for any engineering project.
+Materials: Properties like strength and weight dictate their suitability for different components.
+Preparation: Careful processing ensures parts fit and perform optimally, reducing friction and improving durability.
+Stewardship: Responsible sourcing and use of materials reflect our role as caretakers of God's creation.</p><p>9. Works Cited</p><p>1. Genesis K12 Academy Full Lesson Book. (n.d.). (forthcoming).
+2. Horstemeyer, M.F., Adebayo, A., Jantomaso, M., Long, J.L., Burgess, S., &amp; McIntosh, A. (2022). Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis. Creation Research Society Quarterly, 58, 238–261.
+3. Callister, W.D., &amp; Rethwisch, D.G. (2018). Materials Science and Engineering: An Introduction (10th ed.). Wiley. https://www.wiley.com/en-us/Materials+Science+and+Engineering%3A+An+Introduction%2C+10th+Edition-p-9781119405391
+4. Ashby, M.F. (2011). Materials Selection in Mechanical Design (4th ed.). Butterworth-Heinemann. https://books.google.com/books/about/Materials_Selection_in_Mechanical_Design.html?id=wFqTPgAACAAJ</p></div>
+  </details>
+</div>
+</body>
+</html>

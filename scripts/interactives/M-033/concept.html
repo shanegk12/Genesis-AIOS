@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Assembly Order</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 20px 25px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 1.5em; }
+  header p { font-size: 0.95em; opacity: 0.9; margin-top: 5px; }
+  .main { padding: 25px; }
+  .phase-label {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+  }
+  .instructions {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+  .zones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .zone {
+    background: #f7f9fc;
+    border: 2px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 350px;
+  }
+  .zone h3 {
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #c9a227;
+  }
+  .pool h3::before { content: "🧰 "; }
+  .sequence h3::before { content: "⚙️ "; }
+  .step-slot {
+    background: #fff;
+    border: 2px dashed #c9a227;
+    border-radius: 6px;
+    margin: 6px 0;
+    min-height: 50px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .step-slot.drag-over { background: #fff5d6; }
+  .step-num {
+    background: #1e3a5f;
+    color: #c9a227;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .part {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 6px 0;
+    cursor: grab;
+    user-select: none;
+    border-left: 4px solid #c9a227;
+    transition: transform 0.15s, box-shadow 0.15s;
+    flex-grow: 1;
+  }
+  .part:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .part.dragging { opacity: 0.4; }
+  .part.placed { cursor: pointer; }
+  .controls {
+    margin-top: 20px;
+    text-align: center;
+  }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: translateY(-2px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .feedback {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.success { background: #e8f5e9; border-left: 5px solid #2e7d32; }
+  .feedback.partial { background: #fff5d6; border-left: 5px solid #c9a227; }
+  .feedback h3 { margin-bottom: 8px; }
+  .feedback ul { margin-top: 10px; padding-left: 20px; font-size: 0.92em; }
+  .feedback li { margin: 4px 0; }
+  .correct-step { background: #e8f5e9 !important; border-style: solid !important; border-color: #2e7d32 !important; }
+  .wrong-step { background: #ffe5e5 !important; border-style: solid !important; border-color: #c62828 !important; }
+  @media (max-width: 600px) {
+    .zones { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🐭 Mousetrap Car Assembly Challenge</h1>
+    <p>Project Phases & Dependencies — Creationeering: Assembly</p>
+  </header>
+  <div class="main">
+    <span class="phase-label">CREATIONEERING — ASSEMBLY</span>
+    <div class="instructions">
+      Just like God built creation in a careful order, your mousetrap car must be assembled in the right sequence. Some parts <strong>depend</strong> on others being built first! Drag each step from the toolbox into the correct order on the right.
+    </div>
+
+    <div class="zones">
+      <div class="zone pool">
+        <h3>Toolbox</h3>
+        <div id="pool"></div>
+      </div>
+      <div class="zone sequence">
+        <h3>Assembly Sequence</h3>
+        <div id="slots"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="checkBtn">Check Assembly</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+  </div>
+</div>
+
+<script>
+  const steps = [
+    { id: 1, text: "Gather and inspect all procured parts (chassis, axles, wheels, mousetrap, string)", why: "You can't build without verifying your materials first." },
+    { id: 2, text: "Attach the mousetrap securely to the chassis frame", why: "The chassis is the foundation — the trap (power source) must mount before moving parts." },
+    { id: 3, text: "Slide axles through the chassis bearings", why: "Axles must be installed before wheels can spin on them." },
+    { id: 4, text: "Mount the wheels onto both axles", why: "Wheels depend on axles being in place." },
+    { id: 5, text: "Tie the pull string to the mousetrap arm and wind it around the drive axle", why: "The string connects the power source to the wheels — it needs both installed." },
+    { id: 6, text: "Test-roll the car and make adjustments", why: "Testing is the final integration step — verify the system works as one." }
+  ];
+
+  const pool = document.getElementById('pool');
+  const slots = document.getElementById('slots');
+  let placed = {};
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildUI() {
+    pool.innerHTML = '';
+    slots.innerHTML = '';
+    placed = {};
+    const shuffled = shuffle(steps);
+    shuffled.forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'part';
+      div.draggable = true;
+      div.dataset.id = s.id;
+      div.textContent = s.text;
+      div.addEventListener('dragstart', dragStart);
+      div.addEventListener('dragend', dragEnd);
+      pool.appendChild(div);
+    });
+    for (let i = 1; i <= steps.length; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'step-slot';
+      slot.dataset.pos = i;
+      const num = document.createElement('span');
+      num.className = 'step-num';
+      num.textContent = i;
+      slot.appendChild(num);
+      slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('drag-over'); });
+      slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+      slot.addEventListener('drop', drop);
+      slots.appendChild(slot);
+    }
+    document.getElementById('feedback').classList.remove('show');
+  }
+
+  let dragged = null;
+  function dragStart(e) {
+    dragged = e.target;
+    e.target.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  }
+  function dragEnd(e) { e.target.classList.remove('dragging'); }
+
+  function drop(e) {
+    e.preventDefault();
+    const slot = e.currentTarget;
+    slot.classList.remove('drag-over');
+    if (!dragged) return;
+
+    // If slot already has a part, swap it back to pool
+    const existing = slot.querySelector('.part');
+    if (existing) {
+      pool.appendChild(existing);
+      existing.classList.remove('placed');
+      const pos = slot.dataset.pos;
+      delete placed[pos];
+    }
+    slot.appendChild(dragged);
+    dragged.classList.add('placed');
+    placed[slot.dataset.pos] = parseInt(dragged.dataset.id);
+
+    // Allow returning to pool by click
+    dragged.onclick = () => {
+      pool.appendChild(dragged);
+      dragged.classList.remove('placed');
+      for (const k in placed) if (placed[k] === parseInt(dragged.dataset.id)) delete placed[k];
+      dragged.onclick = null;
+    };
+  }
+
+  // Allow dropping back to pool
+  pool.addEventListener('dragover', e => e.preventDefault());
+  pool.addEventListener('drop', e => {
+    e.preventDefault();
+    if (!dragged) return;
+    pool.appendChild(dragged);
+    dragged.classList.remove('placed');
+    for (const k in placed) if (placed[k] === parseInt(dragged.dataset.id)) delete placed[k];
+  });
+
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    const slotEls = slots.querySelectorAll('.step-slot');
+    let correct = 0;
+    let total = steps.length;
+    slotEls.forEach(slot => {
+      slot.classList.remove('correct-step','wrong-step');
+      const pos = parseInt(slot.dataset.pos);
+      const part = slot.querySelector('.part');
+      if (part && parseInt(part.dataset.id) === pos) {
+        slot.classList.add('correct-step');
+        correct++;
+      } else if (part) {
+        slot.classList.add('wrong-step');
+      }
+    });
+    const fb = document.getElementById('feedback');
+    fb.classList.add('show');
+    let html = '';
+    if (correct === total) {
+      fb.className = 'feedback show success';
+      html = `<h3>🎉 Perfect Assembly! ${correct}/${total}</h3>
+              <p>You built your mousetrap car in the correct order — every dependency satisfied! Just like God's orderly creation, careful sequencing turns a pile of parts into a working system.</p>`;
+    } else {
+      fb.className = 'feedback show partial';
+      html = `<h3>Score: ${correct}/${total} steps in the right place</h3>
+              <p>Green = correct, red = needs rethinking. Remember: some steps <em>depend</em> on others. Here's the correct order:</p><ul>`;
+      steps.forEach(s => { html += `<li><strong>${s.id}.</strong> ${s.text} <em>— ${s.why}</em></li>`; });
+      html += '</ul>';
+    }
+    fb.innerHTML = html;
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', buildUI);
+
+  buildUI();
+</script>
+</body>
+</html>

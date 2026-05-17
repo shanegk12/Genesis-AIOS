@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Arduino: Inputs & Outputs</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 28px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+  .score-bar {
+    background: #1e3a5f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .score-bar .gold { color: #c9a227; }
+  .arduino-board {
+    background: #1e3a5f;
+    border: 4px solid #c9a227;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+  .arduino-board h2 {
+    color: #c9a227;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  .pin-areas {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pin-zone {
+    flex: 1;
+    min-width: 220px;
+    background: rgba(255,255,255,0.1);
+    border: 2px dashed #c9a227;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 140px;
+  }
+  .pin-zone h3 {
+    color: #c9a227;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .pin-zone.drag-over {
+    background: rgba(201, 162, 39, 0.25);
+  }
+  .components {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+  .components h2 {
+    color: #1e3a5f;
+    margin-bottom: 12px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .comp-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .chip {
+    background: #ffffff;
+    border: 2px solid #1e3a5f;
+    border-radius: 20px;
+    padding: 10px 16px;
+    cursor: grab;
+    font-weight: 600;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    font-size: 14px;
+  }
+  .chip:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+  .chip:active { cursor: grabbing; }
+  .chip.placed {
+    background: #c9a227;
+    color: white;
+    border-color: #c9a227;
+  }
+  .chip.correct {
+    background: #2d8a4a;
+    color: white;
+    border-color: #2d8a4a;
+    cursor: default;
+  }
+  .chip.wrong {
+    background: #c44;
+    color: white;
+    border-color: #c44;
+    animation: shake 0.4s;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .feedback {
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 12px;
+    min-height: 24px;
+    font-weight: 600;
+  }
+  .btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    display: block;
+    margin: 15px auto;
+  }
+  .btn:hover { background: #b8911f; }
+  .final {
+    background: white;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .final h2 { color: #1e3a5f; margin-bottom: 10px; }
+  .final .stars { font-size: 32px; color: #c9a227; margin: 10px 0; }
+  .hidden { display: none; }
+  .legend {
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    color: #333;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🤖 The Arduino: Your Car's Brain</h1>
+  <div class="subtitle">Drag each component to the correct side: <b>INPUTS</b> send data IN, <b>OUTPUTS</b> get commands OUT.</div>
+
+  <div class="score-bar">
+    <span>Round: <span class="gold" id="round">1</span> / 3</span>
+    <span>Score: <span class="gold" id="score">0</span></span>
+  </div>
+
+  <div class="components">
+    <h2>📦 Components to Sort</h2>
+    <div class="comp-row" id="chipPool"></div>
+  </div>
+
+  <div class="arduino-board">
+    <h2>⚡ ARDUINO MICROCONTROLLER ⚡</h2>
+    <div class="pin-areas">
+      <div class="pin-zone" id="inputZone" data-type="input">
+        <h3>📥 INPUTS (Sensors)</h3>
+      </div>
+      <div class="pin-zone" id="outputZone" data-type="output">
+        <h3>📤 OUTPUTS (Actions)</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+  <button class="btn hidden" id="checkBtn">Check My Wiring ✓</button>
+  <button class="btn hidden" id="nextBtn">Next Round →</button>
+
+  <div class="final hidden" id="finalScreen">
+    <h2>🏁 Build Complete!</h2>
+    <div class="stars" id="stars"></div>
+    <p id="finalMsg"></p>
+    <p style="margin-top:12px;font-style:italic;color:#555;font-size:14px;">
+      "The LORD by wisdom founded the earth..." — Proverbs 3:19. Use that same wisdom to design your car!
+    </p>
+    <button class="btn" id="restartBtn">Play Again</button>
+  </div>
+</div>
+
+<script>
+const rounds = [
+  [
+    { name: "Speed Sensor", type: "input", icon: "⏱️" },
+    { name: "Distance Sensor", type: "input", icon: "📏" },
+    { name: "DC Motor", type: "output", icon: "⚙️" },
+    { name: "LED Light", type: "output", icon: "💡" }
+  ],
+  [
+    { name: "Push Button", type: "input", icon: "🔘" },
+    { name: "Buzzer", type: "output", icon: "🔊" },
+    { name: "Light Sensor", type: "input", icon: "☀️" },
+    { name: "Servo Motor", type: "output", icon: "🦾" }
+  ],
+  [
+    { name: "Temperature Sensor", type: "input", icon: "🌡️" },
+    { name: "Ultrasonic Sensor", type: "input", icon: "📡" },
+    { name: "Display Screen", type: "output", icon: "🖥️" },
+    { name: "Vibration Motor", type: "output", icon: "📳" }
+  ]
+];
+
+let currentRound = 0;
+let score = 0;
+let placements = {};
+let draggedChip = null;
+
+const chipPool = document.getElementById('chipPool');
+const inputZone = document.getElementById('inputZone');
+const outputZone = document.getElementById('outputZone');
+const feedback = document.getElementById('feedback');
+const checkBtn = document.getElementById('checkBtn');
+const nextBtn = document.getElementById('nextBtn');
+const finalScreen = document.getElementById('finalScreen');
+
+function loadRound() {
+  placements = {};
+  feedback.textContent = '';
+  feedback.style.background = '';
+  feedback.style.color = '';
+  checkBtn.classList.add('hidden');
+  nextBtn.classList.add('hidden');
+  document.getElementById('round').textContent = currentRound + 1;
+  
+  // Clear zones
+  chipPool.innerHTML = '';
+  [...inputZone.querySelectorAll('.chip'), ...outputZone.querySelectorAll('.chip')].forEach(c => c.remove());
+  
+  // Shuffle
+  const items = [...rounds[currentRound]].sort(() => Math.random() - 0.5);
+  items.forEach((item, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.draggable = true;
+    chip.textContent = item.icon + ' ' + item.name;
+    chip.dataset.type = item.type;
+    chip.dataset.id = i;
+    
+    chip.addEventListener('dragstart', e => {
+      draggedChip = chip;
+      chip.style.opacity = '0.5';
+    });
+    chip.addEventListener('dragend', e => {
+      chip.style.opacity = '1';
+    });
+    
+    // Touch support
+    chip.addEventListener('click', () => {
+      if (chip.classList.contains('correct')) return;
+      // Cycle: pool -> input -> output -> pool
+      if (chip.parentElement === chipPool) {
+        inputZone.appendChild(chip);
+        placements[chip.dataset.id] = 'input';
+      } else if (chip.parentElement === inputZone) {
+        outputZone.appendChild(chip);
+        placements[chip.dataset.id] = 'output';
+      } else {
+        chipPool.appendChild(chip);
+        delete placements[chip.dataset.id];
+      }
+      chip.classList.toggle('placed', chip.parentElement !== chipPool);
+      updateCheckBtn();
+    });
+    
+    chipPool.appendChild(chip);
+  });
+}
+
+[inputZone, outputZone].forEach(zone => {
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (draggedChip && !draggedChip.classList.contains('correct')) {
+      zone.appendChild(draggedChip);
+      draggedChip.classList.add('placed');
+      placements[draggedChip.dataset.id] = zone.dataset.type;
+      updateCheckBtn();
+    }
+  });
+});
+
+chipPool.addEventListener('dragover', e => e.preventDefault());
+chipPool.addEventListener('drop', e => {
+  e.preventDefault();
+  if (draggedChip && !draggedChip.classList.contains('correct')) {
+    chipPool.appendChild(draggedChip);
+    draggedChip.classList.remove('placed');
+    delete placements[draggedChip.dataset.id];
+    updateCheckBtn();
+  }
+});
+
+function updateCheckBtn() {
+  const total = rounds[currentRound].length;
+  if (Object.keys(placements).length === total) {
+    checkBtn.classList.remove('hidden');
+  } else {
+    checkBtn.classList.add('hidden');
+  }
+}
+
+checkBtn.addEventListener('click', () => {
+  const allChips = document.querySelectorAll('.chip');
+  let correct = 0;
+  allChips.forEach(chip => {
+    if (placements[chip.dataset.id] === chip.dataset.type) {
+      chip.classList.remove('placed', 'wrong');
+      chip.classList.add('correct');
+      correct++;
+    } else {
+      chip.classList.add('wrong');
+      setTimeout(() => chip.classList.remove('wrong'), 500);
+    }
+  });
+  
+  const total = rounds[currentRound].length;
+  if (correct === total) {
+    score += 10;
+    document.getElementById('score').textContent = score;
+    feedback.textContent = '✅ Perfect! All components wired correctly!';
+    feedback.style.background = '#2d8a4a';
+    feedback.style.color = 'white';
+    checkBtn.classList.add('hidden');
+    nextBtn.classList.remove('hidden');
+    if (currentRound === rounds.length - 1) {
+      nextBtn.textContent = 'See Final Score 🏆';
+    }
+  } else {
+    feedback.textContent = `${correct}/${total} correct. Sensors send data IN, motors/lights/buzzers act OUT. Try again!`;
+    feedback.style.background = '#c9a227';
+    feedback.style.color = '#1e3a5f';
+    // Reset wrong ones
+    setTimeout(() => {
+      allChips.forEach(chip => {
+        if (!chip.classList.contains('correct')) {
+          chipPool.appendChild(chip);
+          chip.classList.remove('placed');
+          delete placements[chip.dataset.id];
+        }
+      });
+      updateCheckBtn();
+    }, 1200);
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  currentRound++;
+  if (currentRound >= rounds.length) {
+    showFinal();
+  } else {
+    loadRound();
+  }
+});
+
+function showFinal() {
+  document.querySelector('.components').style.display = 'none';
+  document.querySelector('.arduino-board').style.display = 'none';
+  feedback.style.display = 'none';
+  nextBtn.classList.add('hidden');
+  finalScreen.classList.remove('hidden');
+  
+  const stars = score >= 30 ? '⭐⭐⭐' : score >= 20 ? '⭐⭐' : '⭐';
+  document.getElementById('stars').textContent = stars;
+  const msg = score >= 30 
+    ? `Outstanding! You scored ${score}/30. You understand how the Arduino acts as a brain — taking in sensor data and sending out commands.`
+    : score >= 20
+    ? `Good work! You scored ${score}/30. Remember: sensors = INPUTS, motors/lights = OUTPUTS.`
+    : `You scored ${score}/30. Keep practicing — the Arduino's job is to read INPUTS and control OUTPUTS!`;
+  document.getElementById('finalMsg').textContent = msg;
+}
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  currentRound = 0;
+  score = 0;
+  document.getElementById('score').textContent = 0;
+  document.querySelector('.components').style.display = '';
+  document.querySelector('.arduino-board').style.display = '';
+  feedback.style.display = '';
+  finalScreen.classList.add('hidden');
+  loadRound();
+});
+
+loadRound();
+</script>
+</body>
+</html>

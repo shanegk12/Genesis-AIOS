@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Maximizing Performance Through Efficiency</summary>
+    <div class="panel-body"><p>Plain-language explanation</p><p>Efficiency is all about getting the most &quot;bang for your buck&quot; from the energy stored in your mousetrap spring. No machine is 100% efficient; some energy is always lost, usually as heat or sound. Think about pushing a heavy box across the floor. You put in a lot of effort (energy), but not all of that energy goes into moving the box forward. Some is lost to friction between the box and the floor, or to the sound of the box scraping. For your mousetrap car, maximizing efficiency means making sure as much of the spring's energy as possible is used to propel the car forward, rather than being wasted.</p><p>Direct application to the mousetrap car project</p><p>There are several ways energy can be lost in your mousetrap car, reducing its efficiency:</p><p>Friction: This is the biggest energy thief!
+       Axle Friction: The axles rubbing against the car body or bearings.
+       Wheel Friction: The wheels rubbing against the car body.
+       Road Friction: The wheels rolling on the ground.
+   Air Resistance: Your car pushing against the air as it moves.
+   Weight: A heavier car requires more energy to get moving and to keep moving.
+   Energy Transfer Loss: How well the string unwinds from the axle, or how smoothly the lever arm pulls.</p><p>To maximize efficiency, you need to minimize these losses. This means:</p><p>Reducing friction: Use smooth axles, proper bearings (like plastic straws or small tubes), and ensure wheels spin freely without wobbling or rubbing. Lubricants (like graphite or petroleum jelly) can also help.
+   Optimizing weight: Make your car as light as possible while still being sturdy. Distribute weight strategically for good traction and balance.
+   Minimizing air resistance: Design a car with a streamlined shape, reducing flat surfaces that &quot;catch&quot; the air.</p><p>Multiscale Modeling connection</p><p>Let's consider friction, a major source of inefficiency. At the macro-level, you observe your wheels not spinning freely, or your car slowing down due to resistance. This macro-level observation (friction slowing your car) is caused by atomic-level interactions. Even surfaces that appear smooth to the naked eye have tiny bumps and valleys at the atomic scale. When two surfaces rub together, these microscopic irregularities interlock, and energy is required to overcome these interlocks. The materials themselves also play a role; some materials have stronger atomic bonds at their surfaces, leading to more resistance. By using smoother materials or lubricants (which create a thin layer between surfaces, reducing direct atomic contact), you are effectively altering these atomic-level interactions to reduce macro-level friction and increase efficiency.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: The Importance of Precise Assembly</summary>
+    <div class="panel-body"><p>Plain-language explanation</p><p>Imagine trying to build a tall tower with blocks that are slightly crooked. Even if each block is only a tiny bit off, by the time you get to the top, the whole tower will be leaning precariously. The same principle applies to your mousetrap car. Engineering is about more than just good design on paper; it's about executing that design accurately. Precise assembly means putting your car together exactly as planned, with components aligned correctly and securely attached. Small errors in assembly, often called &quot;tolerances&quot; or &quot;uncertainties&quot; in engineering, can add up and significantly impact your car's performance.</p><p>Direct application to the mousetrap car project</p><p>In the Creationeering framework, the &quot;Assembly&quot; step involves putting components together to make subsystems, and then combining subsystems to make a complete system (Horstemeyer et al. 2022, p. 241). For your mousetrap car, this means:</p><p>Axle Alignment: If your axles are not perfectly parallel to each other and perpendicular to the chassis, your wheels will not track straight. This causes extra friction as the wheels drag sideways, wasting energy and making your car veer off course.
+   Wheel Attachment: Wheels must be securely attached to the axles so they don't wobble. Any wobble creates uneven contact with the ground and increased friction. They also need to be spaced correctly so they don't rub against the car body.
+   Lever Arm and String Connection: The lever arm needs to be firmly attached to the mousetrap and positioned so it pulls the string smoothly and directly off the drive axle. Any slack, snag, or misdirection in the string's path will waste energy from the spring.
+   Chassis Stability: A wobbly or flimsy chassis will absorb energy as it flexes, rather than transferring it to forward motion. Ensure all joints are strong and stable.</p><p>Even a tiny misalignment (a macro-level observation) in your axle, caused by perhaps a slightly misdrilled hole or a glued joint that isn't perfectly square (atomic-level cause in the material's internal structure or adhesive bond), can lead to a noticeable decrease in distance or speed. Your carefulness in this assembly phase is critical to realizing the full potential of your design.</p><p>6. Engineering Journal Task</p><p>Junior Creationeers, it's time to reflect on your build process. Open your Engineering Journal and respond to the following prompts:</p><p>(1) Apply to Your Car: Review your Mark 2 mousetrap car. Where do you think your car might be losing efficiency due to friction or air resistance? Describe at least two specific areas and explain how you might modify your car to improve its efficiency.</p><p>(2) Identify Trade-offs: When making design decisions for your mousetrap car, you often face trade-offs. For example, a very large wheel might increase distance but decrease acceleration. Describe one specific trade-off you encountered or considered for your Mark 2 design related to calculations or efficiency, and explain why you made the choice you did.</p><p>(3) OCV for Your Design: Choose one specific component or aspect of your mousetrap car (e.g., the lever arm, the wheels, the chassis material). State an Objective for that component, identify at least two Constraints on its design, and list at least two Variables you could change.</p><p>(4) Biblical Reflection: Read Proverbs 27:17: &quot;Iron sharpens iron, and one man sharpens another.&quot; How does this verse relate to the process of iterative design, calculations, and striving for efficiency in your mousetrap car project? Think about how feedback, testing, and refining your design with precision helps &quot;sharpen&quot; your engineering skills and your car's performance.</p><p>7. Technical Documentation Requirements</p><p>Include detailed calculations for your Mark 2 mousetrap car's theoretical maximum distance, speed, or torque based on your chosen design variables (e.g., wheel diameter, axle diameter, lever arm length). Document your assumptions and formulas.
+   Provide at least three clear photographs of your mousetrap car's assembly, highlighting areas where you focused on precision to reduce friction or improve stability. Add captions explaining what each photo shows and how it contributes to efficiency.</p><p>Junior Creationeer Signature:
+Person: [Your Name]
+Date: [Current Date]
+Location of Lab: [Your Homeschool/Group Location]</p><p>8. Summary of Key Concepts</p><p>Calculations: Predict how your mousetrap car will perform using physics principles.
+Efficiency: Maximize useful energy from the spring by minimizing losses like friction.
+Precision: Assemble your car with accuracy; small errors accumulate and reduce performance.
+Stewardship: Optimize your design and use resources wisely, reflecting God's purposeful creation.</p><p>9. Works Cited</p><p>Genesis K12 Academy Full Lesson Book. (2026). Genesis K12 Academy.
+   Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). &quot;Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis.&quot; Creation Research Society Quarterly 58:238–261.
+   National Research Council. (2012). &quot;A Framework for K-12 Science Education: Practices, Crosscutting Concepts, and Core Ideas.&quot; The National Academies Press. Available at: https://www.nap.edu/read/13165/chapter/1
+The Physics Classroom. (2024). &quot;Mousetrap Car Lesson.&quot; The Physics Classroom. Available at: https://www.physicsclassroom.com/Physics-Tutorial/Mousetrap-Cars</p></div>
+  </details>
+</div>
+</body>
+</html>

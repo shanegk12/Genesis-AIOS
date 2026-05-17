@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Critical Path Builder</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc; color: #1e3a5f;
+    min-height: 100vh;
+  }
+  h1 { color: #1e3a5f; margin: 0 0 8px; text-align: center; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 20px; font-size: 14px; }
+  .container {
+    max-width: 900px; margin: 0 auto;
+    background: #fff; border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  .stage { display: none; }
+  .stage.active { display: block; }
+  .task-pool, .timeline {
+    background: #f7f9fc;
+    border: 2px dashed #c9a227;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 90px;
+    margin: 10px 0;
+  }
+  .timeline { border-style: solid; border-color: #1e3a5f; }
+  .pool-label, .tl-label {
+    font-weight: bold; color: #1e3a5f;
+    margin-bottom: 8px; font-size: 14px;
+  }
+  .task {
+    display: inline-block;
+    background: #1e3a5f; color: #fff;
+    padding: 10px 14px; margin: 4px;
+    border-radius: 6px; cursor: grab;
+    user-select: none; font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.15s;
+  }
+  .task:hover { transform: translateY(-2px); }
+  .task.dragging { opacity: 0.5; }
+  .task .time { color: #c9a227; font-weight: bold; margin-left: 6px; }
+  .controls { text-align: center; margin-top: 16px; }
+  button {
+    background: #c9a227; color: #1e3a5f;
+    border: none; padding: 12px 24px;
+    font-size: 16px; font-weight: bold;
+    border-radius: 6px; cursor: pointer;
+    margin: 6px;
+    transition: background 0.2s;
+  }
+  button:hover { background: #b08e1d; }
+  button:disabled { background: #ccc; cursor: not-allowed; }
+  .feedback {
+    padding: 14px; border-radius: 6px;
+    margin-top: 12px; font-size: 15px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: #d4f4dd; color: #14532d; border-left: 4px solid #14a352; }
+  .feedback.wrong { background: #fde2e2; color: #7a1a1a; border-left: 4px solid #c92727; }
+  .progress {
+    height: 6px; background: #e5e9f0; border-radius: 3px;
+    margin-bottom: 16px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; background: #c9a227;
+    transition: width 0.4s;
+  }
+  .scenario-text {
+    background: #1e3a5f; color: #fff;
+    padding: 14px; border-radius: 8px;
+    margin-bottom: 12px; font-size: 15px;
+    line-height: 1.5;
+  }
+  .scenario-text strong { color: #c9a227; }
+  .final {
+    text-align: center; padding: 30px;
+  }
+  .final .score {
+    font-size: 48px; color: #c9a227;
+    font-weight: bold; margin: 16px 0;
+  }
+  .choice-btn {
+    display: block; width: 100%;
+    background: #fff; color: #1e3a5f;
+    border: 2px solid #1e3a5f;
+    padding: 14px; margin: 8px 0;
+    text-align: left; cursor: pointer;
+    border-radius: 6px; font-size: 15px;
+  }
+  .choice-btn:hover { background: #1e3a5f; color: #fff; }
+  .choice-btn.selected { background: #c9a227; color: #1e3a5f; border-color: #c9a227; }
+  .path-display {
+    font-family: monospace; font-size: 14px;
+    background: #fff; padding: 10px;
+    border-radius: 4px; margin-top: 8px;
+    border: 1px solid #ddd;
+  }
+  .verse {
+    font-style: italic; font-size: 13px;
+    color: #555; margin-top: 12px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<h1>⚙️ Critical Path Builder</h1>
+<div class="subtitle">Plan your mousetrap car build — find the fastest path!</div>
+
+<div class="container">
+  <div class="progress"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
+
+  <!-- STAGE 1: Sequence tasks -->
+  <div class="stage active" id="stage1">
+    <div class="scenario-text">
+      <strong>Step 1 of 3:</strong> Drag the build tasks from the pool into the timeline <strong>in the order they must happen</strong>. Some tasks depend on others being done first!
+    </div>
+    <div class="pool-label">📦 Task Pool — drag these:</div>
+    <div class="task-pool" id="pool"></div>
+    <div class="tl-label">🛠️ Build Timeline (drop here in order):</div>
+    <div class="timeline" id="timeline"></div>
+    <div class="controls">
+      <button onclick="checkOrder()">Check Order</button>
+      <button onclick="resetPool()">Reset</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+  </div>
+
+  <!-- STAGE 2: Identify parallel tasks -->
+  <div class="stage" id="stage2">
+    <div class="scenario-text">
+      <strong>Step 2 of 3:</strong> You have <strong>two teammates</strong>! Which pair of tasks can be done <strong>at the same time</strong> (in parallel) to save time?
+    </div>
+    <div id="parallelChoices"></div>
+    <div class="controls">
+      <button onclick="checkParallel()" id="p2btn" disabled>Submit</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+  </div>
+
+  <!-- STAGE 3: Calculate critical path time -->
+  <div class="stage" id="stage3">
+    <div class="scenario-text">
+      <strong>Step 3 of 3:</strong> The <strong>critical path</strong> is the longest chain of dependent tasks — it sets the minimum build time. Calculate the total time for this build:
+      <div class="path-display" id="pathDisplay"></div>
+      With two teammates working in parallel, what is the <strong>minimum total time</strong>?
+    </div>
+    <div id="timeChoices"></div>
+    <div class="controls">
+      <button onclick="checkTime()" id="p3btn" disabled>Submit</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="stage" id="stageFinal">
+    <div class="final">
+      <h2>🏆 Build Plan Complete!</h2>
+      <div class="score" id="finalScore">0 / 3</div>
+      <div id="finalMsg" style="font-size:16px; line-height:1.6;"></div>
+      <div class="verse">"Let all things be done decently and in order." — 1 Corinthians 14:40</div>
+      <button onclick="restart()">Plan Another Build</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const tasks = [
+  { id: 'chassis', name: 'Cut the chassis', time: 10, order: 1 },
+  { id: 'axles',   name: 'Attach the axles', time: 5, order: 2 },
+  { id: 'trap',    name: 'Mount the mousetrap', time: 8, order: 2 },
+  { id: 'wheels',  name: 'Mount the wheels', time: 6, order: 3 },
+  { id: 'string',  name: 'Tie string to lever', time: 4, order: 4 },
+  { id: 'test',    name: 'Test the car', time: 3, order: 5 }
+];
+
+let score = 0;
+let timelineOrder = [];
+
+function renderPool() {
+  const pool = document.getElementById('pool');
+  const tl = document.getElementById('timeline');
+  pool.innerHTML = ''; tl.innerHTML = '';
+  timelineOrder = [];
+  // shuffle
+  const shuffled = [...tasks].sort(() => Math.random() - 0.5);
+  shuffled.forEach(t => {
+    const el = makeTaskEl(t);
+    pool.appendChild(el);
+  });
+  setupDropZones();
+}
+
+function makeTaskEl(t) {
+  const el = document.createElement('div');
+  el.className = 'task';
+  el.draggable = true;
+  el.dataset.id = t.id;
+  el.innerHTML = t.name + '<span class="time">(' + t.time + 'm)</span>';
+  el.addEventListener('dragstart', e => {
+    el.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', t.id);
+  });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  return el;
+}
+
+function setupDropZones() {
+  ['pool', 'timeline'].forEach(zoneId => {
+    const zone = document.getElementById(zoneId);
+    zone.addEventListener('dragover', e => { e.preventDefault(); });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain');
+      const dragged = document.querySelector('.task.dragging') || document.querySelector('[data-id="'+id+'"]');
+      if (dragged) zone.appendChild(dragged);
+      updateTimelineOrder();
+    });
+  });
+}
+
+function updateTimelineOrder() {
+  const tl = document.getElementById('timeline');
+  timelineOrder = Array.from(tl.children).map(c => c.dataset.id);
+}
+
+function checkOrder() {
+  updateTimelineOrder();
+  const fb = document.getElementById('fb1');
+  if (timelineOrder.length !== tasks.length) {
+    fb.className = 'feedback show wrong';
+    fb.textContent = '⚠️ Please drag ALL tasks into the timeline first.';
+    return;
+  }
+  // Validate based on dependency order numbers (allow ties)
+  let valid = true;
+  let lastOrder = 0;
+  for (const id of timelineOrder) {
+    const t = tasks.find(x => x.id === id);
+    if (t.order < lastOrder) { valid = false; break; }
+    lastOrder = t.order;
+  }
+  if (valid) {
+    score++;
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✅ Great planning! Like Bezalel building the Tabernacle, you sequenced each step so it depends on the one before. Moving on...';
+    setTimeout(() => goToStage(2), 1800);
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '❌ Some tasks are out of order. Remember: you must <strong>cut the chassis</strong> before attaching axles, and <strong>attach axles</strong> before mounting wheels. Test should be last!';
+  }
+}
+
+function resetPool() {
+  document.getElementById('fb1').className = 'feedback';
+  renderPool();
+}
+
+function goToStage(n) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  if (n === 'final') {
+    document.getElementById('stageFinal').classList.add('active');
+    document.getElementById('pbar').style.width = '100%';
+    document.getElementById('finalScore').textContent = score + ' / 3';
+    let msg = '';
+    if (score === 3) msg = '🌟 Outstanding! You think like a master Creationeer — sequencing, parallelizing, and calculating the critical path.';
+    else if (score === 2) msg = '👍 Good work! You understand most of the critical path concept. Review the trickier step!';
+    else if (score === 1) msg = '📘 Keep practicing! Planning is a skill that gets better with each build.';
+    else msg = '💪 Every engineer starts somewhere. Try again and watch the dependencies carefully!';
+    document.getElementById('finalMsg').textContent = msg;
+  } else {
+    document.getElementById('stage' + n).classList.add('active');
+    document.getElementById('pbar').style.width = (n * 33) + '%';
+  }
+}
+
+// Stage 2
+const parallelOptions = [
+  { txt: 'Cut the chassis + Attach the axles', correct: false, why: 'Axles need the chassis already cut. These must happen in sequence.' },
+  { txt: 'Attach the axles + Mount the mousetrap', correct: true, why: 'Yes! Once the chassis is cut, one teammate can attach axles while another mounts the mousetrap — they don\'t depend on each other.' },
+  { txt: 'Mount the wheels + Test the car', correct: false, why: 'You can\'t test the car before its wheels are on!' },
+  { txt: 'Cut the chassis + Test the car', correct: false, why: 'Testing must come last — every other task must be done first.' }
+];
+
+function renderParallel() {
+  const c = document.getElementById('parallelChoices');
+  c.innerHTML = '';
+  parallelOptions.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'choice-btn';
+    b.textContent = o.txt;
+    b.onclick = () => {
+      document.querySelectorAll('#parallelChoices .choice-btn').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+      b.dataset.idx = i;
+      document.getElementById('p2btn').disabled = false;
+      document.getElementById('p2btn').dataset.choice = i;
+    };
+    c.appendChild(b);
+  });
+}
+
+function checkParallel() {
+  const idx = parseInt(document.getElementById('p2btn').dataset.choice);
+  const opt = parallelOptions[idx];
+  const fb = document.getElementById('fb2');
+  if (opt.correct) {
+    score++;
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✅ ' + opt.why;
+    setTimeout(() => goToStage(3), 2200);
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '❌ ' + opt.why + ' Try again.';
+  }
+}
+
+// Stage 3
+// Critical path: chassis(10) -> [axles(5) || trap(8)] -> wheels(6) -> string(4) -> test(3)
+// With parallel: 10 + max(5,8) + 6 + 4 + 3 = 10 + 8 + 6 + 4 + 3 = 31
+const timeOptions = [
+  { v: 36, correct: false, why: 'That\'s the time if everything were done one-by-one (10+5+8+6+4+3). But we have parallel workers!' },
+  { v: 31, correct: true,  why: 'Correct! 10 + max(5,8) + 6 + 4 + 3 = 31 minutes. The longer parallel task (mousetrap, 8 min) sets the time for that step — that\'s the critical path!' },
+  { v: 28, correct: false, why: 'Close! Remember the longer of the two parallel tasks (8 min) is what counts, not the shorter (5 min).' },
+  { v: 23, correct: false, why: 'Too low. You can\'t skip dependent tasks — even with helpers, sequential steps add up.' }
+];
+
+function renderTimes() {
+  document.getElementById('pathDisplay').innerHTML =
+    'Cut chassis (10m) → [Axles (5m) <em>or</em> Mousetrap (8m) in parallel] → Wheels (6m) → String (4m) → Test (3m)';
+  const c = document.getElementById('timeChoices');
+  c.innerHTML = '';
+  timeOptions.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'choice-btn';
+    b.textContent = o.v + ' minutes';
+    b.onclick = () => {
+      document.querySelectorAll('#timeChoices .choice-btn').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+      document.getElementById('p3btn').disabled = false;
+      document.getElementById('p3btn').dataset.choice = i;
+    };
+    c.appendChild(b);
+  });
+}
+
+function checkTime() {
+  const idx = parseInt(document.getElementById('p3btn').dataset.choice);
+  const opt = timeOptions[idx];
+  const fb = document.getElementById('fb3');
+  if (opt.correct) {
+    score++;
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✅ ' + opt.why;
+    setTimeout(() => goToStage('final'), 2800);
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '❌ ' + opt.why;
+  }
+}
+
+function restart() {
+  score = 0;
+  document.getElementById('fb1').className = 'feedback';
+  document.getElementById('fb2').className = 'feedback';
+  document.getElementById('fb3').className = 'feedback';
+  document.getElementById('p2btn').disabled = true;
+  document.getElementById('p3btn').disabled = true;
+  renderPool();
+  renderParallel();
+  renderTimes();
+  goToStage(1);
+}
+
+renderPool();
+renderParallel();
+renderTimes();
+</script>
+</body>
+</html>

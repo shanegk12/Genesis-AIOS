@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Closure Sort</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px 22px;
+    border-radius: 10px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { margin: 0; font-size: 22px; }
+  header p { margin: 6px 0 0; font-size: 14px; opacity: 0.9; }
+  .progress-bar {
+    background: #fff;
+    border-radius: 6px;
+    height: 10px;
+    margin-top: 12px;
+    overflow: hidden;
+    border: 1px solid #c9a227;
+  }
+  .progress-fill {
+    background: #c9a227;
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .item-card {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(30,58,95,0.1);
+  }
+  .item-card h2 {
+    margin: 0 0 10px;
+    color: #c9a227;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .scenario {
+    font-size: 17px;
+    line-height: 1.5;
+    min-height: 110px;
+    padding: 12px;
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    border-radius: 4px;
+  }
+  .bins {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .bin {
+    background: #fff;
+    border: 2px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .bin:hover:not(:disabled) {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .bin:disabled { cursor: default; opacity: 0.6; }
+  .bin-title { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
+  .bin-desc { font-size: 13px; opacity: 0.85; }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    min-height: 70px;
+    font-size: 15px;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.correct {
+    display: block;
+    background: #e8f5e8;
+    border-left: 5px solid #2e7d32;
+    color: #1b3a1b;
+  }
+  .feedback.incorrect {
+    display: block;
+    background: #fdecea;
+    border-left: 5px solid #c62828;
+    color: #4a1010;
+  }
+  .next-btn {
+    margin-top: 14px;
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    display: none;
+  }
+  .next-btn:hover { background: #b8911e; }
+  .score-screen {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .score-screen h2 { color: #1e3a5f; margin-top: 0; }
+  .big-score {
+    font-size: 52px;
+    color: #c9a227;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .restart {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .restart:hover { background: #2a4f7c; }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 640px) {
+    .game-area { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔄 System Closure Sort</h1>
+  <p>An engineered system is reaching its end-of-life. Choose the right closure action for each one!</p>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<div id="game">
+  <div class="game-area">
+    <div class="item-card">
+      <div class="badge" id="badge">Scenario 1 of 6</div>
+      <h2>End-of-Life Scenario</h2>
+      <div class="scenario" id="scenario"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="nextBtn">Next Scenario →</button>
+    </div>
+    <div class="item-card">
+      <h2>Closure Action</h2>
+      <div class="bins" id="bins"></div>
+    </div>
+  </div>
+</div>
+
+<div id="scoreScreen" class="score-screen" style="display:none;">
+  <h2>System Closure Complete!</h2>
+  <div class="big-score" id="finalScore">0/6</div>
+  <p id="scoreMsg"></p>
+  <p style="font-size:14px; color:#1e3a5f; opacity:0.8; max-width:500px; margin:14px auto;">
+    Just as rivers return to the sea and rise again as rain (Ecclesiastes 1:7), good engineers close systems thoughtfully — so the lessons, materials, and value flow forward to the next innovation.
+  </p>
+  <button class="restart" onclick="restart()">Try Again</button>
+</div>
+
+<script>
+const scenarios = [
+  {
+    text: "A school robotics team's championship robot still works perfectly, but the season is over. The motors, sensors, and wheels are in great shape.",
+    correct: "reuse",
+    explain: "Working parts in good condition should be REUSED. This saves money and reduces waste — next year's team can build on this foundation!"
+  },
+  {
+    text: "An old laptop's battery is swollen and leaking chemicals. The plastic case is cracked but the rare-earth metals inside are valuable.",
+    correct: "recycle",
+    explain: "Hazardous components must be handled by certified RECYCLING. The valuable metals are recovered while toxic materials are safely contained."
+  },
+  {
+    text: "Your team finished a bridge-building project. You took photos, recorded load test data, and listed three design flaws you'd fix next time.",
+    correct: "document",
+    explain: "This is DOCUMENTATION — capturing lessons learned. Future engineers (including future you!) can avoid the same mistakes and build on successes."
+  },
+  {
+    text: "A medical device contains patient data and biohazard residue. It cannot be reused or easily recycled due to contamination risks.",
+    correct: "dispose",
+    explain: "Some items require SAFE DISPOSAL through specialized waste channels — protecting people and the environment is the top priority."
+  },
+  {
+    text: "A weather station's solar panel works fine, but the data logger is obsolete. The frame and panel could power a different project.",
+    correct: "reuse",
+    explain: "REUSE the working solar panel and frame in a new project! Only the obsolete part needs further closure action."
+  },
+  {
+    text: "Your 3D-printed prototype failed testing. You wrote a report explaining WHY the support structure cracked under load.",
+    correct: "document",
+    explain: "Excellent DOCUMENTATION! Failures teach the most important lessons. Recording the 'why' prevents repeated mistakes."
+  }
+];
+
+const bins = [
+  { id: "reuse", title: "♻️ Reuse", desc: "Parts still work — use them in another project" },
+  { id: "recycle", title: "🔄 Recycle", desc: "Recover valuable materials for new products" },
+  { id: "document", title: "📋 Document", desc: "Record lessons learned for future engineers" },
+  { id: "dispose", title: "⚠️ Safe Disposal", desc: "Hazardous — must be handled by specialists" }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function loadScenario() {
+  answered = false;
+  const s = scenarios[current];
+  document.getElementById('scenario').textContent = s.text;
+  document.getElementById('badge').textContent = `Scenario ${current+1} of ${scenarios.length}`;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('progress').style.width = ((current)/scenarios.length*100) + '%';
+  
+  const binsEl = document.getElementById('bins');
+  binsEl.innerHTML = '';
+  bins.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'bin';
+    btn.innerHTML = `<div class="bin-title">${b.title}</div><div class="bin-desc">${b.desc}</div>`;
+    btn.onclick = () => choose(b.id, btn);
+    binsEl.appendChild(btn);
+  });
+}
+
+function choose(id, btn) {
+  if (answered) return;
+  answered = true;
+  const s = scenarios[current];
+  const fb = document.getElementById('feedback');
+  const allBins = document.querySelectorAll('.bin');
+  allBins.forEach(b => b.disabled = true);
+  
+  if (id === s.correct) {
+    score++;
+    fb.className = 'feedback correct';
+    fb.innerHTML = '<strong>✓ Correct!</strong> ' + s.explain;
+    btn.style.background = '#2e7d32';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#2e7d32';
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.innerHTML = '<strong>✗ Not quite.</strong> ' + s.explain;
+    btn.style.background = '#c62828';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#c62828';
+    // highlight correct
+    allBins.forEach(b => {
+      if (b.querySelector('.bin-title').textContent === bins.find(x=>x.id===s.correct).title) {
+        b.style.background = '#2e7d32';
+        b.style.color = '#fff';
+        b.style.borderColor = '#2e7d32';
+      }
+    });
+  }
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+document.getElementById('nextBtn').onclick = () => {
+  current++;
+  if (current >= scenarios.length) {
+    showScore();
+  } else {
+    loadScenario();
+  }
+};
+
+function showScore() {
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('scoreScreen').style.display = 'block';
+  document.getElementById('finalScore').textContent = score + '/' + scenarios.length;
+  let msg;
+  if (score === scenarios.length) msg = "Perfect! You're a master of formal system closure. 🏆";
+  else if (score >= 4) msg = "Great work! You understand how to close engineering systems responsibly.";
+  else if (score >= 2) msg = "Good start! Review the feedback and try again to sharpen your closure skills.";
+  else msg = "Keep learning! Every engineer improves through documentation and review.";
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('progress').style.width = '100%';
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  document.getElementById('scoreScreen').style.display = 'none';
+  document.getElementById('game').style.display = 'block';
+  loadScenario();
+}
+
+loadScenario();
+</script>
+</body>
+</html>

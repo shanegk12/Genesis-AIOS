@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Risks & Contingencies: Mousetrap Car Mission</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    padding: 24px;
+  }
+  h1 {
+    color: #1e3a5f;
+    border-bottom: 4px solid #c9a227;
+    padding-bottom: 10px;
+    margin-top: 0;
+    font-size: 1.6em;
+  }
+  .progress {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 20px;
+    height: 22px;
+    margin: 12px 0 20px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    background: linear-gradient(90deg, #c9a227, #e0b840);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s;
+  }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .scenario h2 {
+    margin: 0 0 8px;
+    color: #1e3a5f;
+    font-size: 1.15em;
+  }
+  .scenario p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  .label {
+    font-weight: bold;
+    margin: 14px 0 8px;
+    color: #1e3a5f;
+  }
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+  .option {
+    background: #ffffff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 12px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.98em;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .option:hover:not(:disabled) {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .option:disabled { cursor: default; }
+  .option.correct {
+    background: #2d8a4e;
+    border-color: #2d8a4e;
+    color: #fff;
+  }
+  .option.wrong {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: #fff;
+  }
+  .option.dim { opacity: 0.55; }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fff8e1;
+    border-left: 5px solid #c9a227;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .next-btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 14px;
+    float: right;
+  }
+  .next-btn:hover { background: #b8911e; }
+  .results {
+    text-align: center;
+    padding: 20px;
+  }
+  .score-big {
+    font-size: 3em;
+    color: #c9a227;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .badge {
+    display: inline-block;
+    background: #1e3a5f;
+    color: #c9a227;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .restart {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 14px;
+    font-size: 1em;
+  }
+  .step-counter {
+    color: #1e3a5f;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  .clear { clear: both; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔧 Mousetrap Car: Risks & Contingencies</h1>
+  <div class="step-counter" id="counter">Scenario 1 of 5</div>
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div id="game"></div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    title: "🛞 Pre-Race Inspection",
+    text: "You wiggle a rear wheel and notice it shifts side-to-side on the axle. Race is in 10 minutes!",
+    question: "What is the RISK here?",
+    options: [
+      { t: "The wheel could wobble or fall off mid-run, causing the car to veer or stop.", correct: true, fb: "Exactly! A loose wheel is a major failure point during performance." },
+      { t: "The car will look ugly to the judges.", correct: false, fb: "Engineering risks are about FUNCTION failing, not looks." },
+      { t: "There is no real risk — wheels always stay on.", correct: false, fb: "Identifying potential failure points is a core engineering skill." }
+    ]
+  },
+  {
+    title: "🛞 Pick a Contingency",
+    text: "You identified the loose-wheel risk. What's the best CONTINGENCY (backup plan / fix)?",
+    options: [
+      { t: "Hope it doesn't fall off during the run.", correct: false, fb: "Hope isn't a plan. Diligent planning prevents failure." },
+      { t: "Tighten the wheel with a dab of glue and bring extra glue + spare wheel to the test.", correct: true, fb: "Smart! Fix the issue AND prepare backups in case it happens again." },
+      { t: "Take all the wheels off to be safe.", correct: false, fb: "Removing wheels prevents the car from functioning at all!" }
+    ]
+  },
+  {
+    title: "🧵 The String Snaps",
+    text: "During a test run, the string connecting the mousetrap arm to the axle snaps halfway through.",
+    question: "Which contingency would have PREVENTED this?",
+    options: [
+      { t: "Use a stronger string and test it under load before race day.", correct: true, fb: "Yes! Testing in-service performance reveals weaknesses early." },
+      { t: "Run the test faster so the string doesn't have time to break.", correct: false, fb: "Speed doesn't reduce the load — it often increases it." },
+      { t: "Add more mousetraps to the car.", correct: false, fb: "More force on a weak string makes the problem WORSE." }
+    ]
+  },
+  {
+    title: "↪️ Veering Off Course",
+    text: "Your car keeps curving sharply to the left during practice runs.",
+    question: "What is the most likely RISK source to investigate?",
+    options: [
+      { t: "Misaligned axles or uneven wheels on one side.", correct: true, fb: "Correct! Alignment issues are the #1 cause of veering." },
+      { t: "The color of the car body.", correct: false, fb: "Color has no effect on driving direction." },
+      { t: "The classroom lighting.", correct: false, fb: "External factors like light don't change car physics here." }
+    ]
+  },
+  {
+    title: "📋 Final Race Prep",
+    text: "You have 5 minutes before your final run. Which contingency kit shows the BEST planning?",
+    options: [
+      { t: "Spare string, extra glue, a small screwdriver, and your test-data notes.", correct: true, fb: "Excellent! Tools + spares + data = a true engineer's contingency kit." },
+      { t: "A snack and your phone.", correct: false, fb: "Not useful for fixing mid-race failures." },
+      { t: "Nothing — if it breaks, it breaks.", correct: false, fb: "Diligent planning leads to success; haste leads to failure." }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+const game = document.getElementById('game');
+const bar = document.getElementById('progressBar');
+const counter = document.getElementById('counter');
+
+function render() {
+  if (current >= scenarios.length) { showResults(); return; }
+  const s = scenarios[current];
+  counter.textContent = `Scenario ${current + 1} of ${scenarios.length}`;
+  bar.style.width = (current / scenarios.length * 100) + '%';
+
+  game.innerHTML = `
+    <div class="scenario">
+      <h2>${s.title}</h2>
+      <p>${s.text}</p>
+    </div>
+    <div class="label">${s.question || "Choose the best option:"}</div>
+    <div class="options" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <div class="clear"></div>
+  `;
+  const opts = document.getElementById('opts');
+  s.options.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = o.t;
+    b.onclick = () => choose(i);
+    opts.appendChild(b);
+  });
+}
+
+function choose(i) {
+  const s = scenarios[current];
+  const buttons = document.querySelectorAll('#opts .option');
+  buttons.forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === i) {
+      b.classList.add(s.options[idx].correct ? 'correct' : 'wrong');
+    } else if (s.options[idx].correct) {
+      b.classList.add('correct');
+    } else {
+      b.classList.add('dim');
+    }
+  });
+  if (s.options[i].correct) score++;
+  const fb = document.getElementById('fb');
+  fb.innerHTML = `<strong>${s.options[i].correct ? '✅ Great thinking!' : '❌ Let\'s look at this:'}</strong><br>${s.options[i].fb}`;
+  fb.classList.add('show');
+
+  const btn = document.createElement('button');
+  btn.className = 'next-btn';
+  btn.textContent = current === scenarios.length - 1 ? 'See Results →' : 'Next Scenario →';
+  btn.onclick = () => { current++; render(); };
+  game.appendChild(btn);
+}
+
+function showResults() {
+  bar.style.width = '100%';
+  counter.textContent = 'Mission Complete!';
+  let msg, badge;
+  const pct = score / scenarios.length;
+  if (pct === 1) { msg = "Outstanding! You think like a master creationeer."; badge = "🏆 Master Engineer"; }
+  else if (pct >= 0.8) { msg = "Great job! You spot risks and plan contingencies well."; badge = "⚙️ Skilled Engineer"; }
+  else if (pct >= 0.6) { msg = "Good start! Review the scenarios to sharpen your planning."; badge = "🔧 Apprentice Engineer"; }
+  else { msg = "Keep practicing — diligent planning leads to success!"; badge = "📘 Trainee"; }
+
+  game.innerHTML = `
+    <div class="results">
+      <div class="badge">${badge}</div>
+      <div class="score-big">${score} / ${scenarios.length}</div>
+      <p style="font-size:1.1em; line-height:1.5;">${msg}</p>
+      <p style="font-style:italic; color:#1e3a5f; max-width:520px; margin:18px auto;">
+        "The plans of the diligent lead surely to abundance..." — Proverbs 21:5
+      </p>
+      <button class="restart" onclick="restart()">🔄 Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

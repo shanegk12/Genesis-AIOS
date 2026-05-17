@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Material Selection and Specification</summary>
+    <div class="panel-body"><p>After your Analysis Gate Review, you have a solid design for your mousetrap car. Now it’s time to think about the actual stuff your car will be made of. This is material selection. It is not just grabbing whatever is handy. It is a deliberate choice based on your design’s objectives and constraints. For example, if your objective is a very lightweight car, you would choose lightweight materials. If a constraint is that your car must withstand bumps, you would choose strong, durable materials.</p><p>For your mousetrap car, you need to specify each material precisely. What kind of wood will you use for the chassis? Balsa wood is light, but pine is stronger. What about the axles? Metal rods are strong, but wooden dowels are lighter. What kind of wheels? CDs are light and smooth, but plastic caps might be more durable. Even the string matters – fishing line is strong and thin, while twine is thicker. Think about the properties of each material you considered during the Analysis phase.</p><p>Let's look at this through Multiscale Modeling. When you observe a piece of wood (macro-level), you see its grain and feel its stiffness. This macro-level observation is caused by what is happening at the micro and atomic levels. Wood’s strength comes from its cellular structure, specifically the cellulose fibers that are long, strong chains of molecules. These molecules are held together by atomic bonds. If these bonds are strong and arranged well, the wood is strong. If there are imperfections at the atomic level, like weak bonds or gaps, the wood might be brittle or weak, even if it looks fine on the macro-level. So, choosing the &quot;right&quot; wood means selecting material with good atomic-level structure for strength and durability.</p><p>Let’s apply the OCV method to a material choice for your mousetrap car.</p><p>Objective: Maximize the distance your car travels.
+Constraint: The car must be lightweight enough for the mousetrap to power it effectively.
+Variable: The material used for the car's wheels.</p><p>If your objective is to maximize distance, you might choose very lightweight wheels. However, a constraint is that the mousetrap itself has limited power. So, you might vary the wheel material between thin plastic, CDs, or even foam. Each choice has trade-offs. Plastic might be durable but heavier than a CD. Foam might be lightest but less rigid. Your final selection should balance these factors to meet your overall objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Sourcing and Acquisition</summary>
+    <div class="panel-body"><p>Once you have specified your materials, the next step in Procurement is sourcing them. This means figuring out where you will get each material. Will you buy them from a store, use recycled items, or perhaps even make some parts yourself? For your mousetrap car, you might find wood at a craft store or hardware store. Axles could come from a broken toy or a metal rod from a hobby shop. Wheels could be old CDs or plastic bottle caps. The string could be fishing line from a tackle box or strong thread from a sewing kit.</p><p>The article &quot;Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis&quot; highlights that engineers must always consider their limited resources, unlike God who has no limitations. This is where biblical stewardship comes in. As Junior Creationeers, we are called to be good stewards of the Earth's resources (Genesis 1:28). This means being mindful of where our materials come from and how they are produced. Can you use recycled materials? Are there sustainable options? For example, instead of buying brand new plastic wheels, could you repurpose plastic caps from bottles you already have? This not only saves money but also reduces waste, reflecting responsible stewardship.</p><p>Consider your suppliers. Even for a simple mousetrap car, you are &quot;sourcing&quot; from different places. A craft store might be a supplier for wood, a recycling bin for wheels, and your home for string. Think about the reliability of your sources. Can you get enough of the material? Is it consistently available? These are practical considerations in procurement.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Quality Control and Inspection</summary>
+    <div class="panel-body"><p>Once you have sourced your materials, the final step in Procurement is quality control and inspection. This means carefully checking each piece of material to make sure it meets your specifications and is free from defects. You do not want to start building your mousetrap car with a warped piece of wood or a cracked wheel, as this could compromise your entire design and performance.</p><p>For your mousetrap car, this means:</p><p>Inspecting wood: Is it straight? Are there any splinters or weak spots? Is it the right thickness?
+   Checking axles: Are they straight and smooth? Do they fit through your chosen wheels?
+   Examining wheels: Are they perfectly round? Are there any cracks or chips? Are they balanced?
+   Testing string: Is it strong enough? Is it free of fraying?</p><p>Understanding quality control can also involve Multiscale Modeling. A macroscopic flaw, like a visible crack in a plastic wheel, has its origins at the microscopic or even atomic level. A crack might start from a tiny imperfection in the plastic’s molecular structure, perhaps due to uneven cooling during manufacturing or a weak spot in the polymer chains. Over time, or under stress, these microscopic weaknesses can propagate, leading to a macroscopic crack that would cause your wheel to fail. By performing quality control, you are essentially looking for macro-level evidence of micro-level imperfections that could affect your car’s performance.</p><p>The Creationeering paper notes that God, as the skilled craftsman, carefully appraised His work and pronounced it fit for use/purpose (Genesis 1:31a). This divine example shows us the importance of verifying the quality of our creations. As Junior Creationeers, you should do the same. This careful inspection ensures that the materials you use will perform as intended, leading to a more successful and reliable mousetrap car. It also saves you time and effort in the long run, preventing issues during assembly or performance.</p></div>
+  </details>
+</div>
+</body>
+</html>

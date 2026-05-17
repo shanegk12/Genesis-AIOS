@@ -517,11 +517,11 @@
       },
       "Part 6: Stewardship and Wise Planning": {
         "local": "/repo/scripts/../output/images/creationeering/C-049/Part_6_Stewardship_and_Wise_Planning.png",
-        "drive_id": "1LJcvCnDjOcOijXXmio27ViG1q-K5sDRt",
-        "drive_url": "https://drive.google.com/file/d/1LJcvCnDjOcOijXXmio27ViG1q-K5sDRt/view?usp=drivesdk",
-        "image_qc_status": "flagged",
-        "image_qc_notes": "The image does not clearly depict Biblical principles of resource management. While it shows students in an engineering setting, there is no visual element that connects to the concept of resource management from a Biblical perspective.",
-        "image_retry_count": 1
+        "drive_id": "1py-tmfXqFM5ZW8Y1xI_wbBzhfjSdGV1t",
+        "drive_url": "https://drive.google.com/file/d/1py-tmfXqFM5ZW8Y1xI_wbBzhfjSdGV1t/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 2
       }
     }
   },
@@ -1212,11 +1212,11 @@
     "images": {
       "Cover": {
         "local": "/repo/scripts/../output/images/creationeering/C-068/Cover.png",
-        "drive_id": "16M8kl6ZSCCjO5ZemLfcQ9EN8B6Fb7TR3",
-        "drive_url": "https://drive.google.com/file/d/16M8kl6ZSCCjO5ZemLfcQ9EN8B6Fb7TR3/view?usp=drivesdk",
-        "image_qc_status": "flagged",
-        "image_qc_notes": "The image does not depict product certification as a seal of approval. It shows a car, robotic arms, and a water filter, which are elements of engineering and manufacturing, but lack any visual representation of a certification mark or seal.",
-        "image_retry_count": 1
+        "drive_id": "1ft3uC2pgS5nv56opWq_OKh4bESnEbBCT",
+        "drive_url": "https://drive.google.com/file/d/1ft3uC2pgS5nv56opWq_OKh4bESnEbBCT/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 2
       },
       "Part 1: What is Product Certification?": {
         "local": "/repo/scripts/../output/images/creationeering/C-068/Part_1_What_is_Product_Certification.png",
@@ -1330,6 +1330,550 @@
         "local": "/repo/scripts/../output/images/creationeering/C-074/Part_1_The_Problem_with_Take,_Make,_Disp.png",
         "drive_id": "1M9qKuDs6f8n_N48Yi4MujcLHqvBQOVgU",
         "drive_url": "https://drive.google.com/file/d/1M9qKuDs6f8n_N48Yi4MujcLHqvBQOVgU/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "C-089": {
+    "topic": "Formal System Closure and Documentation",
+    "doc": "creationeering",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Documenting the end of a product's life",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized workbench scene. On the left, a dismantled electronic device (like a tablet) is neatly arranged with its components. On the right, a detailed technical notebook is open, showing clean diagrams of the device's parts and handwritten notes with checkmarks and question marks, symbolizing the process of recording and reviewing. A hand is shown placing a final component into a designated recycling bin.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: The Importance of Formal System Closure",
+        "concept": "Systematic conclusion of a project",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A visual metaphor for closing a project. Imagine a well-organized digital dashboard with several completed project timelines clearly marked as 'Closed.' Arrows point from these closed projects to a central 'Knowledge Archive' icon. Surrounding the dashboard are small, clear icons representing different aspects of closure: a magnifying glass over data points, a handshake symbolizing handover, and a clipboard with a checkmark.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 2: Documentation as a Resource",
+        "concept": "Recording lessons learned for future use",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A visual representation of knowledge sharing. Imagine a central, brightly lit 'Idea Hub' with glowing connections radiating outwards. These connections lead to several smaller screens or digital displays, each showing a different successful engineering project. Annotations and highlighted sections on these displays indicate specific design improvements or solutions derived from past documentation. Think of it as a library of successful engineering solutions built from recorded experiences.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 3: Key Information for End-of-Life Analysis",
+        "concept": "Data points for product recycling",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A clear infographic showing the breakdown of a simplified product (e.g., a toy robot) into its constituent materials. Each material type (plastic, metal, battery) is color-coded and linked to a specific recycling process icon (e.g., a recycling symbol for plastic, a gear for metal, a battery symbol for safe disposal). Beside each material, a small icon representing a data point is displayed, such as a percentage for material composition or a symbol for toxicity.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 4: Applying OCV for Optimization",
+        "concept": "Improving recycling processes",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A visual depicting the OCV (Objective, Constraints, Variables) method applied to a recycling scenario. On the left, an 'Objective' box shows a goal like 'Maximize Recycled Plastic.' Below it, a 'Constraints' box lists items like 'Energy Cost' and 'Purity Level.' On the right, 'Variables' are shown as adjustable sliders or dials, representing different recycling techniques or sorting methods. Arrows connect these elements, showing how adjusting variables impacts the objective within constraints, leading to a more efficient recycling process.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 5: Stewardship and God's Wisdom",
+        "concept": "Biblical principles in engineering",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A serene scene blending nature and engineering. In the foreground, a hand carefully sorts recyclable materials. In the background, a stylized depiction of a thriving ecosystem (lush trees, clean water) is visible. Subtle golden light emanates from the ecosystem, symbolizing divine wisdom and the beauty of creation. A connection is visually made between the careful stewardship of materials and the flourishing of the natural world, reflecting principles of responsible care and learning from creation.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Cover.png",
+        "drive_id": "1KPTEFAeJoU6XIVxUWX6aCnRToRRRwRl2",
+        "drive_url": "https://drive.google.com/file/d/1KPTEFAeJoU6XIVxUWX6aCnRToRRRwRl2/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Importance of Formal System Closure": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Part_1_The_Importance_of_Formal_System_C.png",
+        "drive_id": "1Nfsl1uYVRtdubpfPV-YLLAEJJQ_gkNPp",
+        "drive_url": "https://drive.google.com/file/d/1Nfsl1uYVRtdubpfPV-YLLAEJJQ_gkNPp/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 2: Documentation as a Resource": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Part_2_Documentation_as_a_Resource.png",
+        "drive_id": "1BqOmzTdxvlVosvY6T8EXA38qNqtN7Tpq",
+        "drive_url": "https://drive.google.com/file/d/1BqOmzTdxvlVosvY6T8EXA38qNqtN7Tpq/view?usp=drivesdk",
+        "image_qc_status": "flagged",
+        "image_qc_notes": "The illustration does not depict the concept of recording lessons learned for future use. It shows a central 'Idea Hub' connected to various engineering concepts like wind turbines, bridges, solar panels, robotic arms, and water filtration, suggesting idea generation or project management rather than lesson recording.",
+        "image_retry_count": 1
+      },
+      "Part 3: Key Information for End-of-Life Analysis": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Part_3_Key_Information_for_End-of-Life_A.png",
+        "drive_id": "1zlIIKZcftLPTg6vJU0T9F9iyD7z-Mfja",
+        "drive_url": "https://drive.google.com/file/d/1zlIIKZcftLPTg6vJU0T9F9iyD7z-Mfja/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 4: Applying OCV for Optimization": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Part_4_Applying_OCV_for_Optimization.png",
+        "drive_id": "1yGSeRGDSJ3r4EKLzxwy_hHdcqFhP1yRI",
+        "drive_url": "https://drive.google.com/file/d/1yGSeRGDSJ3r4EKLzxwy_hHdcqFhP1yRI/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 5: Stewardship and God's Wisdom": {
+        "local": "/repo/scripts/../output/images/creationeering/C-089/Part_5_Stewardship_and_God's_Wisdom.png",
+        "drive_id": "1WmWCz5Sd6c3PphCLQOnMbW2w-nss1gcn",
+        "drive_url": "https://drive.google.com/file/d/1WmWCz5Sd6c3PphCLQOnMbW2w-nss1gcn/view?usp=drivesdk",
+        "image_qc_status": "flagged",
+        "image_qc_notes": "The image does not depict Biblical principles in engineering. It shows a hand sorting recyclables into bins, with a landscape in the background. This concept is related to environmentalism or waste management, not Biblical principles in engineering.",
+        "image_retry_count": 1
+      }
+    }
+  },
+  "M-007": {
+    "topic": "Digital Measurement",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Digital measurement tools for engineering analysis",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A dynamic arrangement of various digital measurement tools, including a digital caliper, digital protractor, and a digital scale, are shown in the foreground. In the background, a partially assembled mousetrap car prototype is visible, with subtle measurement lines and callouts pointing to its components, suggesting analysis. The overall scene conveys precision and the excitement of engineering discovery.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: The Power of Accuracy and Precision",
+        "concept": "Distinguishing accuracy and precision in measurement",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. Two distinct target diagrams are shown side-by-side. The left target, labeled 'Accurate and Precise', shows a tight cluster of darts hitting the bullseye. The right target, labeled 'Precise but Not Accurate', shows a tight cluster of darts that are all close to each other, but far from the bullseye. Below each target, a small, simplified diagram of a digital caliper is shown taking a measurement, visually linking the concept to the tool.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-007/Cover.png",
+        "drive_id": "1Qs0QvJJw8ozik7EQ3geVslc4ezIHZ6Zm",
+        "drive_url": "https://drive.google.com/file/d/1Qs0QvJJw8ozik7EQ3geVslc4ezIHZ6Zm/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Power of Accuracy and Precision": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-007/Part_1_The_Power_of_Accuracy_and_Precisi.png",
+        "drive_id": "1wZHzIOm3DRQhXijYgBlMHDQb8O8PXdYk",
+        "drive_url": "https://drive.google.com/file/d/1wZHzIOm3DRQhXijYgBlMHDQb8O8PXdYk/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-008": {
+    "topic": "The Arduino",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Introduction to Arduino for mousetrap cars",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A stylized, friendly-looking Arduino Uno board is shown prominently in the foreground, with a simplified, bright red mousetrap car model appearing behind it, subtly connected by glowing gold lines representing data flow. The overall scene suggests innovation and hands-on building.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: What is an Arduino? Your Car's New Brain",
+        "concept": "Arduino as a microcontroller brain",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A clear, detailed illustration of an Arduino Uno board is shown from a slightly elevated angle. Gold lines extend from the board's input and output pins, connecting to simplified icons representing a sensor (like a wheel encoder) and an actuator (like a small motor). The Arduino board is depicted as the central hub, with the connecting lines clearly indicating data flow into and out of it.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-008/Cover.png",
+        "drive_id": "1AKRUHICHs46E-GIeiA8va23IpbCclMtW",
+        "drive_url": "https://drive.google.com/file/d/1AKRUHICHs46E-GIeiA8va23IpbCclMtW/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: What is an Arduino? Your Car's New Brain": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-008/Part_1_What_is_an_Arduino_Your_Car's_New.png",
+        "drive_id": "1y6Grcxmcy-k5ijZaXpfE5RzRjim96t5n",
+        "drive_url": "https://drive.google.com/file/d/1y6Grcxmcy-k5ijZaXpfE5RzRjim96t5n/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-017": {
+    "topic": "Calculations and Efficiency",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Engineering Calculations and Efficiency",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized mousetrap car is depicted mid-motion, leaving a trail of golden mathematical equations and efficiency graphs behind it. Gears and springs are subtly integrated into the background, hinting at the mechanical nature of the lesson. The overall scene conveys movement, precision, and the application of science.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: Understanding Your Car's Potential with Calculations",
+        "concept": "Applying physics calculations to predict performance",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A detailed, exploded view of a mousetrap car's chassis is shown. Golden arrows indicate forces acting on the car, such as the pull from the mousetrap spring and friction on the axles. Superimposed over the diagram are simple, clear mathematical formulas for speed, distance, and force, represented by golden lines and symbols. Axles, wheels, and the mousetrap mechanism are clearly labeled with technical outlines.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-017/Cover.png",
+        "drive_id": "1MqYbKRNxGoyTAfDillu5Ux17W4iBvUVu",
+        "drive_url": "https://drive.google.com/file/d/1MqYbKRNxGoyTAfDillu5Ux17W4iBvUVu/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Understanding Your Car's Potential with Calculations": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-017/Part_1_Understanding_Your_Car's_Potentia.png",
+        "drive_id": "1fY6YmLr7kM-M-gwllTP85ipZb5h-nlMk",
+        "drive_url": "https://drive.google.com/file/d/1fY6YmLr7kM-M-gwllTP85ipZb5h-nlMk/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-025": {
+    "topic": "Engineering Notebook Entry 5",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Mousetrap car build journey",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A dynamic illustration showing a partially assembled mousetrap car with gears, wheels, and a mousetrap mechanism. In the background, a stylized blueprint of the car is visible, suggesting the progression from design to build. Junior engineers in silhouette are shown actively working on the car, emphasizing hands-on creation.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: Material Selection and Specification",
+        "concept": "Choosing and specifying building materials",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A clear, organized display of various potential materials for a mousetrap car. Show different types of wood (e.g., balsa, pine blocks), metal rods for axles, various wheel options (e.g., CDs, plastic caps), and spools of string. Each material sample has a small, clean label pointing to it, indicating its name and perhaps a key property like 'lightweight' or 'strong'.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-025/Cover.png",
+        "drive_id": "1BhugJ208WkXkBAq6hKnZFZlO1M5NecUF",
+        "drive_url": "https://drive.google.com/file/d/1BhugJ208WkXkBAq6hKnZFZlO1M5NecUF/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Material Selection and Specification": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-025/Part_1_Material_Selection_and_Specificat.png",
+        "drive_id": "1SFaeiBjxhG8X6Wv6sSPfdiiA2zo7scPs",
+        "drive_url": "https://drive.google.com/file/d/1SFaeiBjxhG8X6Wv6sSPfdiiA2zo7scPs/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-026": {
+    "topic": "Bill of Materials",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Engineering project materials list",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized, open blueprint for a mousetrap car is laid out on a workbench. Scattered around it are various components like wheels, axles, a mousetrap, rubber bands, and small fasteners. A magnifying glass hovers over a neatly organized list of these items, highlighting the concept of a Bill of Materials.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: What is a Bill of Materials?",
+        "concept": "Detailed list of project components",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A clear, exploded view diagram of a simple mousetrap car. Each individual component, such as the chassis, wheels, axles, and the mousetrap mechanism, is labeled with a small, numbered tag. Adjacent to the diagram is a clean, organized list with matching numbers, detailing each part and its quantity, visually representing a Bill of Materials.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 2: The Procurement Process",
+        "concept": "Steps to acquire project materials",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A simple, step-by-step flowchart illustrating the procurement process. The first box shows a designer looking at a Bill of Materials. The next box shows a student at a computer browsing online stores or a physical store aisle. The third box depicts a student receiving a package or holding gathered materials. Arrows connect the boxes, showing a clear, sequential path from planning to acquiring.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 3: Material Types and Selection",
+        "concept": "Different materials for car construction",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A visual comparison of different materials suitable for mousetrap car construction. Three distinct sections show: lightweight balsa wood planks, sturdy cardboard sheets, and robust plastic components. Each material is shown in its raw form and as a potential car part (e.g., a wheel made from plastic, a chassis from wood). Small icons indicate properties like 'lightweight' or 'durable' next to each material.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 4: Impact on Performance",
+        "concept": "How materials affect car speed and efficiency",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A split-screen illustration showing two identical mousetrap car designs. On one side, the car is built with heavier, less efficient materials, depicted with a slower-moving, slightly sluggish car icon and a shorter distance line. On the other side, the same car is built with lighter, optimized materials, shown with a faster-moving, sleek car icon and a longer distance line, visually demonstrating performance differences.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 5: Responsible Procurement and Stewardship",
+        "concept": "Wise use of project resources",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A scene depicting a student carefully selecting materials for their mousetrap car. The student is shown choosing durable, reusable components from a bin, rather than disposable ones. A subtle visual element, like a small, stylized leaf or a gentle light source, could be incorporated to represent wise stewardship of resources. The focus is on thoughtful selection and avoiding waste.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Cover.png",
+        "drive_id": "1c7NguZjVwE_Bd0j0zjGe41jLUKQPNpub",
+        "drive_url": "https://drive.google.com/file/d/1c7NguZjVwE_Bd0j0zjGe41jLUKQPNpub/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: What is a Bill of Materials?": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Part_1_What_is_a_Bill_of_Materials.png",
+        "drive_id": "1-kwLYYlFKK-9bwRES0xpjLeVdrhoU3bk",
+        "drive_url": "https://drive.google.com/file/d/1-kwLYYlFKK-9bwRES0xpjLeVdrhoU3bk/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 2: The Procurement Process": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Part_2_The_Procurement_Process.png",
+        "drive_id": "15I1vI9tW5FL-xewEdnUyqLJkuIDEOHh0",
+        "drive_url": "https://drive.google.com/file/d/15I1vI9tW5FL-xewEdnUyqLJkuIDEOHh0/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 3: Material Types and Selection": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Part_3_Material_Types_and_Selection.png",
+        "drive_id": "1ueTSIqB2BfFG5U2x6UdlBxAeQmd-43Mb",
+        "drive_url": "https://drive.google.com/file/d/1ueTSIqB2BfFG5U2x6UdlBxAeQmd-43Mb/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 4: Impact on Performance": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Part_4_Impact_on_Performance.png",
+        "drive_id": "10QRZWvwphDnAL5_Sq8ceVQK8VYi03rqs",
+        "drive_url": "https://drive.google.com/file/d/10QRZWvwphDnAL5_Sq8ceVQK8VYi03rqs/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 5: Responsible Procurement and Stewardship": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-026/Part_5_Responsible_Procurement_and_Stewa.png",
+        "drive_id": "1dFjR8681meBPMDglIKs3ur5qSrYOK5o5",
+        "drive_url": "https://drive.google.com/file/d/1dFjR8681meBPMDglIKs3ur5qSrYOK5o5/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-027": {
+    "topic": "Material Preparation",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Junior Creationeers preparing for building",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A group of diverse middle school students, wearing safety glasses, are gathered around a workbench. One student is carefully examining a piece of wood, another is holding a small drill, and a third is looking at a blueprint. Various tools and materials for building a mousetrap car are neatly organized on the table. The overall scene conveys focus and readiness for a project. 16:9 composition.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: The Art of Procurement for Your Mousetrap Car",
+        "concept": "Gathering and selecting project materials",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A clear, step-by-step diagram showing the procurement process for a mousetrap car. On the left, a student is looking at a 'Bill of Materials' checklist. Arrows point to different sources: a hardware store shelf with wood and wheels, a recycling bin with potential repurposed parts, and a small donation box. In the center, a student is examining a piece of wood, checking its grain. On the right, the student is placing selected materials into a project box. 16:9 composition.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-027/Cover.png",
+        "drive_id": "1RqMyCAp9CguUbkf0tys3dGOwUVl_M7Wa",
+        "drive_url": "https://drive.google.com/file/d/1RqMyCAp9CguUbkf0tys3dGOwUVl_M7Wa/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Art of Procurement for Your Mousetrap Car": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-027/Part_1_The_Art_of_Procurement_for_Your_M.png",
+        "drive_id": "11WLLc-_N7XxM2R5AuHbFiR77WK9He_Ka",
+        "drive_url": "https://drive.google.com/file/d/11WLLc-_N7XxM2R5AuHbFiR77WK9He_Ka/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-028": {
+    "topic": "Inventory Checks and Verifications",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Mousetrap car inventory and verification",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 1:1 composition. A partially assembled mousetrap car chassis is laid out on a workbench. Next to it, a neatly organized collection of all its individual components is displayed: wheels, axles, gears, string, screws, and the mousetrap itself. A magnifying glass hovers over one of the components, emphasizing inspection.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: The Essential Inventory Check",
+        "concept": "Comparing materials to a Bill of Materials",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A student's hands are shown carefully placing mousetrap car parts onto a workbench. To the left, a clear, organized digital display or printed sheet shows a 'Bill of Materials' with icons and names for each part. The student is looking back and forth between the physical parts and the list, confirming each item's presence. Several parts are already checked off on the list.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-028/Cover.png",
+        "drive_id": "1eydoGHmn_CBnJhtAszc1ienm04DInNuP",
+        "drive_url": "https://drive.google.com/file/d/1eydoGHmn_CBnJhtAszc1ienm04DInNuP/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Essential Inventory Check": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-028/Part_1_The_Essential_Inventory_Check.png",
+        "drive_id": "1A6FWAcDys3ZQ4c3EGz2Qlu8Ad9qhz3TC",
+        "drive_url": "https://drive.google.com/file/d/1A6FWAcDys3ZQ4c3EGz2Qlu8Ad9qhz3TC/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-031": {
+    "topic": "Material Processing",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Transforming raw materials into engineered components",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A central workbench is shown with various raw materials like a block of wood, a spool of wire, and a sheet of plastic. Hands are actively working on these materials, one using a saw to shape the wood, another bending wire, and a third using a tool to cut the plastic. Several finished, precisely shaped components for a mousetrap car are neatly arranged nearby. The overall scene conveys transformation and preparation for assembly. 16:9 composition.",
+        "aspectRatio": "1:1"
+      },
+      {
+        "section": "Part 1: Shaping and Cutting Your Materials",
+        "concept": "Precision cutting and shaping of wood for a chassis",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. A close-up view of a workbench surface. A piece of lightweight balsa wood is positioned under a clear ruler. A hand is holding a sharp hobby knife, carefully cutting along the marked line on the wood. The cut edge of the wood is visible, showing a clean separation. In the background, slightly out of focus, are other basic tools like a measuring tape and a pencil. The focus is on the precise action of cutting. 16:9 composition.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-031/Cover.png",
+        "drive_id": "1XgwPoV-tRP61_zMmsUxCo4OBaYw_q6DQ",
+        "drive_url": "https://drive.google.com/file/d/1XgwPoV-tRP61_zMmsUxCo4OBaYw_q6DQ/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Shaping and Cutting Your Materials": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-031/Part_1_Shaping_and_Cutting_Your_Material.png",
+        "drive_id": "1sOLR5z_7hjVjqdtJfgbIHlZrNSm5dK3c",
+        "drive_url": "https://drive.google.com/file/d/1sOLR5z_7hjVjqdtJfgbIHlZrNSm5dK3c/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-033": {
+    "topic": "Project Phases and Dependencies",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Project phases and dependencies in mousetrap car build",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A dynamic, partially assembled mousetrap car is shown with arrows indicating the sequence of assembly. Gears, wheels, and the mousetrap mechanism are clearly visible. Floating around the car are icons representing different project phases like 'Procurement' (a shopping cart), 'Assembly' (tools), and 'Testing' (a checkmark). A subtle network of connecting lines highlights how different parts depend on each other.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: The Essence of Assembly",
+        "concept": "Combining components into functional subsystems",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A clear, step-by-step visual showing the assembly of a mousetrap car's wheel and axle subsystem. On the left, individual components: a wheel, an axle, and two small bearings, are laid out. In the middle, the axle is shown being inserted through the wheel with the bearings. On the right, the completed, functional wheel-and-axle subsystem is depicted, ready to be attached to the car's chassis.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-033/Cover.png",
+        "drive_id": "1mt6AoDaIpkvyW7j3OiSJyW-nXYzmJtVb",
+        "drive_url": "https://drive.google.com/file/d/1mt6AoDaIpkvyW7j3OiSJyW-nXYzmJtVb/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: The Essence of Assembly": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-033/Part_1_The_Essence_of_Assembly.png",
+        "drive_id": "1fM3ieDaFWzyhi022pCcwOX8wXF0Qse72",
+        "drive_url": "https://drive.google.com/file/d/1fM3ieDaFWzyhi022pCcwOX8wXF0Qse72/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-034": {
+    "topic": "Critical Paths and Calculating Time",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Planning a complex project with a clear timeline",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A stylized, partially assembled mousetrap car is shown on a workbench. Behind it, a large, clear flowchart or Gantt chart is depicted, with highlighted 'critical path' lines connecting key construction stages. Gears, tools, and rulers are subtly incorporated into the background elements, suggesting a focus on detailed planning and execution.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: Identifying the Critical Path",
+        "concept": "Visualizing project tasks and their dependencies",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A network diagram showing various tasks for building a mousetrap car. Each task is represented by a colored box with a simple icon (e.g., a gear for 'assemble drivetrain', a chassis shape for 'cut chassis'). Arrows connect the boxes, indicating dependencies. One distinct, longer path of connected boxes is highlighted in a brighter gold, representing the critical path, with a subtle clock icon next to its endpoint.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-034/Cover.png",
+        "drive_id": "1W_53zLupDq4oRiAL3b8kMwzpDhxCxHBZ",
+        "drive_url": "https://drive.google.com/file/d/1W_53zLupDq4oRiAL3b8kMwzpDhxCxHBZ/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Identifying the Critical Path": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-034/Part_1_Identifying_the_Critical_Path.png",
+        "drive_id": "1abVRIj_-Xh-LMHdgE1L7r1Ym71NYsGXU",
+        "drive_url": "https://drive.google.com/file/d/1abVRIj_-Xh-LMHdgE1L7r1Ym71NYsGXU/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      }
+    }
+  },
+  "M-038": {
+    "topic": "Risks and Contingencies",
+    "doc": "mousetrap",
+    "prompts": [
+      {
+        "section": "Cover",
+        "concept": "Anticipating and planning for engineering challenges",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A diverse group of middle school students are shown collaborating around a table. One student points to a partially built mousetrap car, while another holds a checklist with potential issues like 'wheel wobble' and 'string snap' highlighted. A thought bubble above the car shows a simplified diagram of possible problems. The overall scene conveys proactive problem-solving and careful preparation.",
+        "aspectRatio": "16:9"
+      },
+      {
+        "section": "Part 1: Understanding Risks in Performance",
+        "concept": "Identifying potential failure points in a mousetrap car",
+        "prompt": "Educational illustration for Genesis K-12 Academy's middle school engineering curriculum. Clean technical style, color palette of deep navy blue (#1B2A5C) and warm gold (#C9A84C) on white background, professional and engaging, appropriate for ages 11-14. No text in image. 16:9 composition. A detailed, exploded view of a mousetrap car is shown. Key components like the wheels, axles, string, and mousetrap mechanism are clearly labeled with callouts. Red 'X' marks or warning symbols are strategically placed on specific connection points, like where the wheel meets the axle or where the string is attached, indicating potential failure points. A small magnifying glass graphic hovers near one of these points to emphasize close inspection.",
+        "aspectRatio": "16:9"
+      }
+    ],
+    "images": {
+      "Cover": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-038/Cover.png",
+        "drive_id": "1In19dKQBP6kxFNI4VK84wbUVNP0LMzFu",
+        "drive_url": "https://drive.google.com/file/d/1In19dKQBP6kxFNI4VK84wbUVNP0LMzFu/view?usp=drivesdk",
+        "image_qc_status": "passed",
+        "image_qc_notes": "none",
+        "image_retry_count": 0
+      },
+      "Part 1: Understanding Risks in Performance": {
+        "local": "/repo/scripts/../output/images/mousetrap/M-038/Part_1_Understanding_Risks_in_Performanc.png",
+        "drive_id": "155tTUjCi2Je1OcZ_2pnH3PMXvOUX4ML9",
+        "drive_url": "https://drive.google.com/file/d/155tTUjCi2Je1OcZ_2pnH3PMXvOUX4ML9/view?usp=drivesdk",
         "image_qc_status": "passed",
         "image_qc_notes": "none",
         "image_retry_count": 0

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Precision Cutting Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 16px;
+    font-size: 0.95em;
+  }
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  .stats span { color: #c9a227; }
+  .target-info {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 4px;
+  }
+  .target-info b { font-size: 1.1em; }
+  .ruler-area {
+    position: relative;
+    margin: 20px 0;
+    user-select: none;
+  }
+  .ruler {
+    position: relative;
+    height: 50px;
+    background: linear-gradient(#fff8dc, #f5e6a8);
+    border: 2px solid #1e3a5f;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .tick {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    background: #1e3a5f;
+  }
+  .tick.major { height: 18px; width: 2px; }
+  .tick.mid { height: 12px; }
+  .tick.minor { height: 7px; }
+  .tick-label {
+    position: absolute;
+    top: 20px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #1e3a5f;
+    font-weight: bold;
+  }
+  .wood {
+    position: relative;
+    height: 40px;
+    background: linear-gradient(#c9874a, #a06a30);
+    border: 2px solid #6b4520;
+    border-radius: 4px;
+    margin-top: 8px;
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.2);
+  }
+  .wood::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 0; right: 0;
+    height: 2px;
+    background: rgba(0,0,0,0.15);
+  }
+  .wood::after {
+    content: '';
+    position: absolute;
+    bottom: 8px; left: 0; right: 0;
+    height: 2px;
+    background: rgba(0,0,0,0.15);
+  }
+  .cut-line {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    width: 2px;
+    background: #c9a227;
+    z-index: 5;
+    cursor: ew-resize;
+  }
+  .cut-line::before {
+    content: '✂';
+    position: absolute;
+    top: -22px;
+    left: -10px;
+    font-size: 20px;
+    color: #1e3a5f;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  input[type=range] {
+    flex: 1;
+    accent-color: #c9a227;
+  }
+  .length-display {
+    background: #1e3a5f;
+    color: #c9a227;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    min-width: 80px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 1em;
+  }
+  button {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 12px auto;
+    transition: all 0.2s;
+  }
+  button:hover { background: #c9a227; }
+  button:disabled { background: #999; cursor: not-allowed; }
+  .feedback {
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feedback.perfect { background: #d4edda; color: #155724; border: 2px solid #28a745; }
+  .feedback.good { background: #fff3cd; color: #856404; border: 2px solid #c9a227; }
+  .feedback.bad { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+  .final {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #1e3a5f, #2c5282);
+    color: #fff;
+    border-radius: 10px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+  .final .score { font-size: 2.5em; color: #c9a227; font-weight: bold; }
+  .verse {
+    font-style: italic;
+    color: #f7f9fc;
+    margin-top: 12px;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚒ Precision Cutting Workshop</h1>
+  <p class="subtitle">Cut each piece to the exact length your mousetrap car needs</p>
+  
+  <div class="stats">
+    <div>Cut: <span id="cutNum">1</span> / 5</div>
+    <div>Score: <span id="score">0</span></div>
+  </div>
+
+  <div id="game">
+    <div class="target-info">
+      Cut this <span id="partName">chassis rail</span> to exactly: <b id="targetLen">8.0 cm</b>
+    </div>
+
+    <div class="ruler-area">
+      <div class="ruler" id="ruler"></div>
+      <div class="wood" id="wood">
+        <div class="cut-line" id="cutLine" style="left: 50%;"></div>
+      </div>
+    </div>
+
+    <div class="slider-row">
+      <span>Cut at:</span>
+      <input type="range" id="slider" min="0" max="1000" value="500">
+      <div class="length-display" id="lenDisplay">5.00 cm</div>
+    </div>
+
+    <button id="cutBtn">✂ Make the Cut</button>
+    <div class="feedback" id="feedback">Slide the scissor mark, then cut precisely!</div>
+  </div>
+
+  <div id="finalScreen" style="display:none;"></div>
+</div>
+
+<script>
+const parts = [
+  { name: "chassis rail", target: 8.0, max: 12 },
+  { name: "front axle", target: 6.5, max: 10 },
+  { name: "rear axle support", target: 4.2, max: 8 },
+  { name: "mousetrap lever arm", target: 9.3, max: 14 },
+  { name: "wheel spacer", target: 2.7, max: 6 }
+];
+
+let cutIndex = 0;
+let totalScore = 0;
+let currentMax = 12;
+
+const ruler = document.getElementById('ruler');
+const wood = document.getElementById('wood');
+const cutLine = document.getElementById('cutLine');
+const slider = document.getElementById('slider');
+const lenDisplay = document.getElementById('lenDisplay');
+const cutBtn = document.getElementById('cutBtn');
+const feedback = document.getElementById('feedback');
+
+function buildRuler(maxCm) {
+  ruler.innerHTML = '';
+  for (let i = 0; i <= maxCm * 10; i++) {
+    const tick = document.createElement('div');
+    const pct = (i / (maxCm * 10)) * 100;
+    tick.style.left = pct + '%';
+    if (i % 10 === 0) {
+      tick.className = 'tick major';
+      const lbl = document.createElement('div');
+      lbl.className = 'tick-label';
+      lbl.textContent = (i/10);
+      lbl.style.left = pct + '%';
+      ruler.appendChild(lbl);
+    } else if (i % 5 === 0) {
+      tick.className = 'tick mid';
+    } else {
+      tick.className = 'tick minor';
+    }
+    ruler.appendChild(tick);
+  }
+}
+
+function loadPart() {
+  const p = parts[cutIndex];
+  currentMax = p.max;
+  document.getElementById('partName').textContent = p.name;
+  document.getElementById('targetLen').textContent = p.target.toFixed(1) + ' cm';
+  document.getElementById('cutNum').textContent = cutIndex + 1;
+  buildRuler(currentMax);
+  slider.value = 500;
+  updateCut();
+  feedback.className = 'feedback';
+  feedback.textContent = 'Slide carefully to set your cut point.';
+  cutBtn.disabled = false;
+}
+
+function updateCut() {
+  const v = parseInt(slider.value);
+  const cm = (v / 1000) * currentMax;
+  cutLine.style.left = (v / 10) + '%';
+  lenDisplay.textContent = cm.toFixed(2) + ' cm';
+}
+
+slider.addEventListener('input', updateCut);
+
+cutBtn.addEventListener('click', () => {
+  const v = parseInt(slider.value);
+  const cm = (v / 1000) * currentMax;
+  const target = parts[cutIndex].target;
+  const diff = Math.abs(cm - target);
+  
+  let pts = 0, msg = '', cls = '';
+  if (diff <= 0.1) {
+    pts = 20;
+    msg = `Perfect cut! Off by only ${(diff*10).toFixed(1)} mm. Master craftsman work!`;
+    cls = 'perfect';
+  } else if (diff <= 0.3) {
+    pts = 12;
+    msg = `Good cut! Off by ${(diff*10).toFixed(1)} mm. Usable but could be tighter.`;
+    cls = 'good';
+  } else if (diff <= 0.6) {
+    pts = 6;
+    msg = `Off by ${(diff*10).toFixed(1)} mm. This could cause friction or instability.`;
+    cls = 'bad';
+  } else {
+    pts = 0;
+    msg = `Off by ${(diff*10).toFixed(1)} mm! This piece won't fit — measure twice, cut once!`;
+    cls = 'bad';
+  }
+  
+  totalScore += pts;
+  document.getElementById('score').textContent = totalScore;
+  feedback.className = 'feedback ' + cls;
+  feedback.textContent = msg;
+  cutBtn.disabled = true;
+  
+  setTimeout(() => {
+    cutIndex++;
+    if (cutIndex >= parts.length) showFinal();
+    else loadPart();
+  }, 1900);
+});
+
+function showFinal() {
+  document.getElementById('game').style.display = 'none';
+  const fs = document.getElementById('finalScreen');
+  fs.style.display = 'block';
+  let rating, comment;
+  if (totalScore >= 90) {
+    rating = "Master Craftsman 🏆";
+    comment = "Bezalel-level precision! Your mousetrap car will roll smooth and true.";
+  } else if (totalScore >= 65) {
+    rating = "Skilled Builder ⚒";
+    comment = "Solid work! A few cuts could be tighter, but your car will perform well.";
+  } else if (totalScore >= 40) {
+    rating = "Apprentice 🔧";
+    comment = "You're learning. Remember: measure twice, cut once. Small errors add up!";
+  } else {
+    rating = "Keep Practicing 📏";
+    comment = "Precision is the heart of good engineering. Slow down and aim for the exact mark.";
+  }
+  fs.innerHTML = `
+    <div class="final">
+      <h2>Workshop Complete!</h2>
+      <div class="score">${totalScore}/100</div>
+      <h3 style="margin-top:10px;color:#fff;">${rating}</h3>
+      <p style="margin-top:10px;">${comment}</p>
+      <p class="verse">"He has filled them with skill to do all kinds of work as craftsmen..." — Exodus 35:35</p>
+      <button onclick="location.reload()" style="margin-top:14px;background:#c9a227;color:#1e3a5f;">Try Again</button>
+    </div>
+  `;
+}
+
+loadPart();
+</script>
+</body>
+</html>

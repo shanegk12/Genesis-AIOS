@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: What is an Arduino? Your Car's New Brain</summary>
+    <div class="panel-body"><p>Imagine your mousetrap car needs to know how fast it's going, or if it's veering off course. How can it &quot;think&quot; about this information and react? This is where the Arduino comes in. An Arduino is essentially a tiny computer, a microcontroller, designed to interact with the physical world. It has inputs to receive information (like from sensors) and outputs to send commands (like to motors). Think of it as the central nervous system for your mousetrap car.</p><p>For your mousetrap car project, an Arduino board could be programmed to do many things. For example, it can read data from a speed sensor attached to a wheel, telling you exactly how many rotations per second your wheel is making. It can also read data from a distance sensor to tell you how far your car has traveled or if it's about to hit an obstacle. The Arduino board itself is a macro-level observation, a physical circuit board you can hold. But its ability to process information relies on the atomic-level causes of electron flow through its microchips, transistors, and resistors. These tiny, precisely arranged components allow for the complex calculations and logical operations that make the Arduino intelligent. This multiscale modeling connection shows how the careful arrangement of materials at the atomic level enables macro-level functionality.</p><p>Using the OCV method, let's consider a design decision: adding a speed sensor to your mousetrap car.
+Objective: To accurately measure and record the car's speed throughout its run.
+Constraint: The sensor must be lightweight enough not to significantly impact the car's performance, and it must be able to interface with the Arduino. The budget for the sensor is also a constraint.
+Variable: The type of speed sensor (e.g., rotary encoder, IR proximity sensor counting wheel spokes), its placement on the car, and the specific code written to interpret its data. By adjusting these variables, you can optimize for accuracy, weight, or ease of implementation.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Gathering Data with Sensors and the Arduino</summary>
+    <div class="panel-body"><p>In our Digital Measurement lesson, we learned about different ways to measure. Now, with the Arduino, we can automate and enhance these measurements. Sensors are the &quot;eyes and ears&quot; of your mousetrap car. They convert physical phenomena (like motion, light, or distance) into electrical signals that the Arduino can understand. For instance, a simple photo-interrupter sensor can be used to count rotations of your car's axle. As a spoke passes through the sensor, it breaks a light beam, and the Arduino registers a &quot;pulse.&quot; By counting these pulses over time, the Arduino can calculate speed.</p><p>This is a direct application to your mousetrap car. You could attach a small disc with evenly spaced holes to your axle. A photo-interrupter sensor, connected to your Arduino, would then count how many times the light beam is broken as the disc spins. This provides real-time digital measurement of your wheel's rotational speed. From a multiscale modeling perspective, the macro-level observation is the spinning wheel and the digital pulses from the sensor. The atomic-level cause involves the interaction of photons (light) with the semiconductor materials in the sensor, generating electrons that create the electrical signal. The precision of this signal depends on the material properties of the sensor components, ensuring a clear &quot;on&quot; or &quot;off&quot; state for each hole detected.</p><p>Let's apply OCV to placing a distance sensor on your car.
+Objective: To measure the total distance traveled by the mousetrap car.
+Constraint: The sensor must be placed where it has a clear path to the ground or a target, without being obstructed by other car parts or the mousetrap mechanism. It also needs to be powered by the Arduino.
+Variable: The type of distance sensor (ultrasonic, infrared), its height above the ground, and its angle. Changing these variables will affect the accuracy of the distance measurement and potentially the sensor's range.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Programming for Intelligent Control</summary>
+    <div class="panel-body"><p>The Arduino is just a piece of hardware until you tell it what to do. This is where programming, or coding, comes in. You write a set of instructions, often in a language called C++, that the Arduino then follows. This code tells the Arduino to read data from your sensors, perform calculations (analysis), and then make decisions or control other components (synthesis). For example, your code could read the speed from the photo-interrupter, calculate if the car is slowing down too rapidly, and then, if you had an advanced design, perhaps adjust a braking mechanism or a steering servo.</p><p>In your mousetrap car project, while the primary power comes from the mousetrap, an Arduino could be used for advanced control. Imagine you want to ensure your car travels in a straight line. You could use two distance sensors, one on each side, to detect walls or lines on the track. Your Arduino program would analyze the readings from both sensors. If one side is closer to a wall than the other, indicating the car is veering, the Arduino could then synthesize a solution by activating a small servo motor to slightly adjust the steering, bringing the car back on course. This is a powerful example of analysis (interpreting sensor data) leading to synthesis (executing a corrective action). The macro-level control of the car's direction is a result of precise, atomic-level instructions in the code that manipulate the flow of electrons to activate the servo motor, which then mechanically adjusts the car's alignment.</p><p>Let's use OCV for integrating a simple braking mechanism.
+Objective: To stop the car precisely at a target distance.
+Constraint: The braking mechanism must be lightweight, reliable, and able to be activated by a small servo motor connected to the Arduino. The servo power consumption must be within the Arduino's capabilities.
+Variable: The type of braking material, the force applied by the servo, and the distance threshold programmed into the Arduino for activation. Adjusting these can optimize for stopping distance, smoothness of the stop, or power efficiency.</p></div>
+  </details>
+</div>
+</body>
+</html>

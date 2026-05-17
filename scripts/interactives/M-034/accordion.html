@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Identifying the Critical Path</summary>
+    <div class="panel-body"><p>What is a critical path? Imagine you have a list of all the tasks needed to build your mousetrap car, like cutting the chassis, attaching the axles, securing the mousetrap, and mounting the wheels. Some tasks can happen at the same time (like one person cutting the chassis while another prepares the wheels), while others must happen in a specific order (you can't attach the wheels until the axles are in place). The &quot;critical path&quot; is the longest sequence of tasks from start to finish that, if any task in it is delayed, will push back the entire project's completion date. It's like the main highway of your project; if there's a traffic jam on the main highway, everyone gets delayed.</p><p>For your mousetrap car project, identifying the critical path means listing every task, estimating how long each will take, and then figuring out which tasks absolutely must be completed on schedule for your car to be ready on time. For example, if you need to wait for paint to dry on your chassis before you can attach the mousetrap, and that drying time is 24 hours, then those 24 hours are part of the critical path. If you try to rush the paint and attach the mousetrap too soon, you might end up with a messy car or a faulty attachment, leading to more delays later.</p><p>Let's connect this to Multiscale Modeling. At a macro-level, we observe the overall project timeline. A delay in the &quot;chassis construction&quot; task (macro-level observation) might be caused by a micro-level issue, such as a specific type of wood being difficult to cut cleanly or a tool breaking down. Even further, at an atomic-level cause, the properties of the wood (its grain, density, moisture content) could unexpectedly slow down the cutting process, impacting the estimated task duration. Understanding these potential delays, even at a microscopic level, helps in making more accurate time estimates for macro-level tasks.</p><p>Using the OCV method for critical path analysis, your Objective is to complete the mousetrap car project by the deadline. Your Constraints include the available materials, tools, and the fixed project deadline. The Variables are the estimated durations of individual tasks, the resources (like team members) you can assign to tasks, and the amount of &quot;contingency time&quot; you build into your schedule for unexpected issues. By carefully considering these, you can optimize your project timeline.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Understanding Task Dependencies and Sequencing</summary>
+    <div class="panel-body"><p>Task dependencies are the relationships between tasks that dictate the order in which they must be performed. Most tasks in your mousetrap car build will have a &quot;finish-to-start&quot; dependency, meaning one task must be completely finished before the next one can start. For instance, you must finish cutting the chassis (predecessor task) before you can start drilling holes for the axles (successor task). You cannot start attaching the wheels until the axles are securely mounted. You cannot test the car until all components are assembled.</p><p>Sometimes, tasks might have &quot;start-to-start&quot; dependencies, where one task can begin as soon as another task starts, even if the first isn't finished. For example, if you have multiple team members, one could start shaping the wheels while another begins cutting the chassis. Both tasks can start simultaneously, but neither is dependent on the other finishing first. However, if the wheels need a specific type of paint that must dry before assembly, then the &quot;painting wheels&quot; task has a finish-to-start dependency on &quot;shaping wheels.&quot;</p><p>Think about the logical flow of building your mousetrap car. You wouldn't try to attach the mousetrap to a piece of wood before that wood has been cut and shaped into your chassis. This logical sequencing is crucial for efficiency and quality. If you skip steps or perform tasks out of order, you risk having to redo work, wasting valuable time and resources. This is where God's orderly creation provides a model. The Universe was systematically ordered during Creation Week, with each step building upon the previous one to support life and function.</p><p>From a Multiscale Modeling perspective, the sequence of assembling tiny components (like attaching a small washer to an axle, a micro-level task) directly affects the overall car assembly (macro-level observation). If the washer isn't placed correctly, it could cause friction, reducing the car's performance or even preventing it from moving. This micro-level detail, if done out of sequence or improperly, can lead to a macro-level failure of the entire system.</p><p>Applying the OCV method to task dependencies, a key Constraint is the fixed logical sequence required for many tasks (e.g., you can't install the engine before the chassis is built). Your Objective is to maintain efficient workflow. The Variables you can adjust include assigning different team members to parallel tasks (if possible) and allocating specific tools or workspaces to ensure tasks can proceed without bottlenecks.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Calculating Task Durations and Float</summary>
+    <div class="panel-body"><p>Estimating how long each task will take is more art than science, especially at first. However, with practice, you'll get better. For each task in your mousetrap car project, think about the steps involved and make a best guess for the duration. Be realistic. Don't just think about the &quot;doing&quot; time, but also &quot;waiting&quot; time (like for glue to dry or paint to cure), and &quot;problem-solving&quot; time (because things rarely go perfectly the first time). It's often helpful to break down larger tasks into smaller sub-tasks for more accurate estimation.</p><p>Once you have estimated all your task durations and mapped out their dependencies, you can identify the critical path. Any task not on the critical path has &quot;float&quot; or &quot;slack.&quot; This is the amount of time that a task can be delayed without affecting the overall project completion date. Float is your friend! It gives you flexibility. If a non-critical task takes longer than expected, or if you encounter a small problem, you have a buffer before it starts to impact your final deadline. Tasks on the critical path, by definition, have zero float.</p><p>For example, if &quot;painting the chassis&quot; takes 2 hours and must be done before &quot;attaching the mousetrap,&quot; which takes 1 hour, and these are on your critical path, then any delay in painting will delay the whole project. However, if &quot;decorating the car&quot; takes 3 hours but can be done anytime after the chassis is built and before final testing, and your schedule shows you have 5 hours of available time for it, then &quot;decorating the car&quot; has 2 hours of float. You can delay starting it by 2 hours, or it can take 2 hours longer than expected, without affecting your overall project end date.</p><p>Considering Multiscale Modeling, variations in material properties (atomic level), such as the consistency of glue or the hardness of a plastic part, can affect micro-level task durations. If glue takes longer to cure due to humidity (a micro-environmental factor influenced by molecular interactions), it directly impacts the &quot;waiting&quot; time for a task. Similarly, the performance of a cutting tool (micro-level) might vary due to material fatigue (atomic-level changes in the metal), leading to longer cutting times for a macro-level task like shaping the chassis. Accurately anticipating these small-scale variations helps in building more robust duration estimates.</p><p>Using the OCV method for calculating task durations and float, your Objective is to create a realistic and flexible schedule. A Constraint is the fixed amount of total project time you have. The Variables are your estimates for task durations and how much float you intentionally build into non-critical tasks. You might choose to allocate more time to tasks you're less confident about, or less time to tasks you know you can do quickly.</p></div>
+  </details>
+</div>
+</body>
+</html>

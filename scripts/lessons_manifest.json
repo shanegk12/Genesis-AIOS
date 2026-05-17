@@ -1164,9 +1164,9 @@
       "phase": "Sustainability",
       "prev": "Design for Disassembly and Recycling",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null,
+      "status": "failed",
+      "completed_at": "2026-05-17T13:09:18.847036+00:00",
+      "error": ", line 130, in positional_wrapper\n    return wrapped(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1oKMuj29QBxEz7ji4GedBiUP0b3a3ESr20L_OK128IEY:batchUpdate?alt=json returned \"Precondition check failed.\". Details: \"Precondition check failed.\">\n",
       "qc_status": null,
       "qc_scores": {
         "reading_level": 1,
@@ -1538,9 +1538,9 @@
       "phase": "Death & Recycling",
       "prev": "Recycling Logistics and Infrastructure",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:09:59.201410+00:00",
+      "error": "hy\n  - Legislation and Global E-Waste Policy\n  - Decommissioning Procedures and System Shutdown\n  - Data Security and System Wipe\n  - Recycling Logistics and Infrastructure\n  - The Engineer’s Role in Product Afterlife\n  - Formal System Closure and Documentation\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\n"
     },
     {
       "id": "C-089",
@@ -1551,9 +1551,32 @@
       "phase": "Death & Recycling",
       "prev": "The Engineer's Role in Product Afterlife",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:10:34.977560+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2584,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong faith integration and clear, relatable analogies. The structure and reading level are well-suited for the target audience. The application of the OCV framework could be slightly improved. In its current form, it describes the OCV elements rather than demonstrating how to use them to solve a problem or make a decision. Consider rephrasing the OCV sections to model a more active optimization process (e.g., 'To optimize, we would choose Variable X because it best achieves our Objective within Constraint Y').",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/C-089/flashcards.html",
+        "accordion": "interactives/C-089/accordion.html",
+        "ocv": "interactives/C-089/ocv.html",
+        "concept": "interactives/C-089/concept.html"
+      }
     },
     {
       "id": "M-007",
@@ -1564,9 +1587,32 @@
       "phase": "Analysis & Synthesis",
       "prev": "Build 1: Little Moe Prototype Car",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:13:14.625313+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2441,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is strong, with excellent faith integration and correct application of the school's frameworks (Creationeering, Multiscale Modeling, OCV). The structure is complete and the content is substantive. The primary area for improvement is the reading level; sentence structures are often too complex for the 6th-8th grade range and should be simplified for better accessibility. Additionally, while the examples are functional, incorporating more concrete, relatable analogies for concepts like accuracy vs. precision (e.g., hitting a bullseye) would enhance student understanding. Overall, a very solid draft that meets the course objectives.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-007/flashcards.html",
+        "accordion": "interactives/M-007/accordion.html",
+        "ocv": "interactives/M-007/ocv.html",
+        "concept": "interactives/M-007/concept.html"
+      }
     },
     {
       "id": "M-008",
@@ -1577,9 +1623,32 @@
       "phase": "Analysis & Synthesis",
       "prev": "Digital Measurement",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:15:05.672814+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2031,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured with excellent analogies and an appropriate reading level. The use of the academy's frameworks (Multiscale Modeling, OCV) is present but could be improved. The Multiscale Modeling examples feel repetitive and don't fully differentiate between the atomic-level causes for each application (sensor vs. code). The faith integration is acceptable but could be strengthened by connecting the biblical principles more directly to the specific engineering challenges of analysis and synthesis, rather than just general design wisdom. Overall, a strong draft that needs minor refinement.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-008/flashcards.html",
+        "accordion": "interactives/M-008/accordion.html",
+        "ocv": "interactives/M-008/ocv.html",
+        "concept": "interactives/M-008/concept.html"
+      }
     },
     {
       "id": "M-017",
@@ -1590,9 +1659,32 @@
       "phase": "Assembly",
       "prev": "Build 2: Iterative Design - Mark 2",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:17:04.155944+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2383,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured and the reading level is appropriate. The use of the Creationeering framework is present, but the Multiscale Modeling connection feels weak; the link between atomic-level material structure and a misdrilled hole is a stretch for this audience. Similarly, the faith integration analogies comparing cosmic creation to building a mousetrap car are a bit too grand. Consider using more grounded, relatable examples from nature to illustrate God's design principles. The core technical content on calculations and efficiency is solid.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-017/flashcards.html",
+        "accordion": "interactives/M-017/accordion.html",
+        "ocv": "interactives/M-017/ocv.html",
+        "concept": "interactives/M-017/concept.html"
+      }
     },
     {
       "id": "M-025",
@@ -1603,9 +1695,32 @@
       "phase": "Procurement",
       "prev": "Analysis Gate Review",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:19:00.510357+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2009,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent overall. The reading level, faith integration, and analogies are well-suited for middle schoolers. The structure is complete and clear. The use of the OCV framework could be slightly improved. The example provided focuses on selecting a variable (wheel material) rather than using OCV to frame the entire material selection problem itself. Clarifying how OCV guides the whole procurement process, not just one component choice, would strengthen this section. Otherwise, this is a high-quality lesson ready for use.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-025/flashcards.html",
+        "accordion": "interactives/M-025/accordion.html",
+        "ocv": "interactives/M-025/ocv.html",
+        "concept": "interactives/M-025/concept.html"
+      }
     },
     {
       "id": "M-026",
@@ -1616,9 +1731,30 @@
       "phase": "Procurement",
       "prev": "Engineering Notebook: Entry 5",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:21:06.206499+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2382,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured with excellent analogies and an appropriate reading level. The application of the Multiscale Modeling framework feels abstract and may confuse students; a more concrete example connecting material choice to performance (e.g., axle friction) would be more effective. The faith integration, while thematically sound on stewardship, uses a direct analogy (divine BoM for the Tabernacle) that feels a bit forced. Consider focusing more on the broader principles of order, provision, and purpose in God's creation as the foundation for meticulous engineering planning.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "ocv": "interactives/M-026/ocv.html",
+        "concept": "interactives/M-026/concept.html"
+      }
     },
     {
       "id": "M-027",
@@ -1629,9 +1765,32 @@
       "phase": "Procurement",
       "prev": "Lesson: Bill of Materials",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:23:46.545312+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 1868,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is strong, with excellent faith integration and correct application of the Creationeering framework. The reading level is acceptable but leans high for the 6th-8th grade range; simplifying some complex sentences and technical vocabulary (e.g., 'intermolecular forces') would improve accessibility. While the core analogies are good, adding more simple, everyday comparisons could further clarify abstract concepts like multiscale modeling for this age group. Overall, a very solid and well-structured lesson draft.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-027/flashcards.html",
+        "accordion": "interactives/M-027/accordion.html",
+        "ocv": "interactives/M-027/ocv.html",
+        "concept": "interactives/M-027/concept.html"
+      }
     },
     {
       "id": "M-028",
@@ -1642,9 +1801,32 @@
       "phase": "Procurement",
       "prev": "Lesson: Material Preparation",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:25:55.354891+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 2,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2568,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured and effectively applies the academy's frameworks (Creationeering, OCV, Multiscale Modeling). Analogies are clear and age-appropriate. The primary area for improvement is the reading level; some sentences and vocabulary are complex for the target grade range, particularly in the Multiscale Modeling section. The faith integration, while present, could be strengthened by using more direct analogies. For example, comparing the Bill of Materials to the detailed instructions for the Tabernacle would create a more concrete connection for students. Overall, a strong and usable lesson draft.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-028/flashcards.html",
+        "accordion": "interactives/M-028/accordion.html",
+        "ocv": "interactives/M-028/ocv.html",
+        "concept": "interactives/M-028/concept.html"
+      }
     },
     {
       "id": "M-029",
@@ -1655,9 +1837,9 @@
       "phase": "Assembly",
       "prev": "Build: Inventory Checks and Verifications",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:28:03.656088+00:00",
+      "error": "Drafting: 'Precision Finishing and Tolerance' (Assembly phase)...\nError: draft is 66,478 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-030",
@@ -1668,9 +1850,9 @@
       "phase": "Assembly",
       "prev": "Lesson: Precision Finishing and Tolerance",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:29:12.956701+00:00",
+      "error": "Drafting: 'Sourcing Alternatives and Costing' (Assembly phase)...\nError: draft is 175,380 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-031",
@@ -1681,9 +1863,32 @@
       "phase": "Assembly",
       "prev": "Lesson: Sourcing Alternatives and Costing",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:29:37.090580+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2025,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong application of the Creationeering framework and meaningful faith integration. The reading level is appropriate, and all sections are complete. To improve, consider adding more concrete, relatable analogies for complex concepts like Multiscale Modeling. For example, compare sanding a surface to polishing a rock to reveal its inner beauty, connecting the microscopic change to the macroscopic result. This would further enhance comprehension for middle school students.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-031/flashcards.html",
+        "accordion": "interactives/M-031/accordion.html",
+        "ocv": "interactives/M-031/ocv.html",
+        "concept": "interactives/M-031/concept.html"
+      }
     },
     {
       "id": "M-032",
@@ -1694,9 +1899,9 @@
       "phase": "Assembly",
       "prev": "Build: Material Processing",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:32:37.092609+00:00",
+      "error": "Drafting: 'Bill of Materials Activity' (Assembly phase)...\nError: draft is 746,265 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-033",
@@ -1707,9 +1912,31 @@
       "phase": "Assembly",
       "prev": "Procurement Activity: Bill of Materials",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:33:03.809001+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2273,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong faith integration and correct application of all proprietary frameworks (Creationeering, Multiscale Modeling, OCV). The analogies are clear and effective for the target age group. The reading level is acceptable but trends high for 6th grade; consider simplifying some complex sentences and defining advanced terms like 'astrosphere' or 'irreducible complexity' if they are essential. The repeated section headers ('5. Part 1', '5. Part 2', '5. Part 3') should be renumbered for clarity (e.g., 5, 6, 7). Overall, a very strong draft.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-033/flashcards.html",
+        "ocv": "interactives/M-033/ocv.html",
+        "concept": "interactives/M-033/concept.html"
+      }
     },
     {
       "id": "M-034",
@@ -1720,9 +1947,34 @@
       "phase": "Logistics",
       "prev": "Lesson: Project Phases and Dependencies",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:34:43.981536+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2337,
+        "missing_sections": [
+          "Lesson Overview"
+        ],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured with excellent faith integration using the Tabernacle as a concrete example of divine logistics. However, the reading level and conceptual load are high for middle school. The application of Multiscale Modeling, particularly at the 'atomic-level,' is abstract and may be difficult for students to grasp in the context of a mousetrap car. Simplifying the framework's language and providing more direct, hands-on analogies for these advanced concepts would improve accessibility and comprehension for the target age group.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-034/flashcards.html",
+        "accordion": "interactives/M-034/accordion.html",
+        "ocv": "interactives/M-034/ocv.html",
+        "concept": "interactives/M-034/concept.html"
+      }
     },
     {
       "id": "M-035",
@@ -1733,9 +1985,9 @@
       "phase": "Logistics",
       "prev": "Lesson: Critical Paths and Calculating Time",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:37:03.771053+00:00",
+      "error": " - Lesson: Principles of E-Waste and Safe Disposal\n  - BA: Business Plan Compilation + Pitch\n  - Lesson: Salvage Value and Resource Recovery\n  - Lesson: Closing a Project\n  - Death and Recycling: End of Life Classification\n  - Final Activity: Parent Pitch Night\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\n"
     },
     {
       "id": "M-036",
@@ -1746,9 +1998,9 @@
       "phase": "Logistics",
       "prev": "Business Activity: Break Even Analysis",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:37:35.148688+00:00",
+      "error": "Drafting: 'Patents, IP, and Engineer Liability' (Logistics phase)...\nError: draft is 92,743 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-037",
@@ -1759,9 +2011,9 @@
       "phase": "Logistics",
       "prev": "BA: Patents, IP + Engineer Liability",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-17T13:38:55.831703+00:00",
+      "error": "Drafting: 'External Supply Chains' (Logistics phase)...\nError: draft is 109,479 chars, exceeds 60K safety limit. Skipping.\n"
     },
     {
       "id": "M-038",
@@ -1772,9 +2024,31 @@
       "phase": "Performance",
       "prev": "Lesson: External Supply Chains",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-17T13:39:20.332201+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2086,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured and effectively integrates faith concepts with engineering principles. The reading level is appropriately challenging with good vocabulary support. The application of the Creationeering framework is mostly solid, but the Multiscale Modeling examples could be more concrete and less abstract for middle schoolers. For instance, instead of atomic bonds in glue, consider the visible texture of the glue or how it spreads. The analogies are functional but could be more vivid and relatable to a student's everyday experiences to enhance comprehension and engagement.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-038/flashcards.html",
+        "ocv": "interactives/M-038/ocv.html",
+        "concept": "interactives/M-038/concept.html"
+      }
     },
     {
       "id": "M-039",

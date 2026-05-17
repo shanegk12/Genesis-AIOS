@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulary Flashcards</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc;
+          padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 18px; border-bottom: 2px solid #c9a227; padding-bottom: 6px; }
+  .counter { font-size: 0.82rem; color: #64748b; margin-bottom: 14px; }
+  .scene { width: 100%; max-width: 520px; height: 200px; perspective: 1000px; cursor: pointer; }
+  .card  { width: 100%; height: 100%; position: relative;
+            transform-style: preserve-3d; transition: transform 0.45s ease; }
+  .card.flipped { transform: rotateY(180deg); }
+  .face  { position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 14px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .front { background: #1e3a5f; color: #fff; box-shadow: 0 4px 16px rgba(30,58,95,0.25); }
+  .back  { background: #c9a227; color: #1e3a5f; transform: rotateY(180deg);
+            box-shadow: 0 4px 16px rgba(201,162,39,0.3); }
+  .face-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+                 opacity: 0.6; margin-bottom: 10px; }
+  .face-text  { font-size: 1.1rem; font-weight: 700; line-height: 1.4; }
+  .back .face-text { font-size: 0.95rem; font-weight: 400; }
+  .hint { font-size: 0.75rem; color: #94a3b8; margin-top: 12px; }
+  .nav { display: flex; gap: 12px; margin-top: 18px; align-items: center; }
+  .btn { background: #1e3a5f; color: #fff; border: none; border-radius: 8px;
+          padding: 10px 22px; font-size: 0.88rem; font-weight: 600;
+          cursor: pointer; transition: background 0.15s; }
+  .btn:hover { background: #152b47; }
+  .btn:disabled { background: #cbd5e1; cursor: default; }
+  .progress { display: flex; gap: 5px; margin-top: 14px; flex-wrap: wrap; justify-content: center; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #dde3ee; transition: background 0.2s; }
+  .dot.seen { background: #c9a227; }
+  .dot.current { background: #1e3a5f; }
+</style>
+</head>
+<body>
+<h2>Vocabulary Flashcards</h2>
+<div class="counter" id="counter"></div>
+<div class="scene" onclick="flip()">
+  <div class="card" id="card">
+    <div class="face front">
+      <div class="face-label">Term</div>
+      <div class="face-text" id="front-text"></div>
+    </div>
+    <div class="face back">
+      <div class="face-label">Definition</div>
+      <div class="face-text" id="back-text"></div>
+    </div>
+  </div>
+</div>
+<div class="hint" id="hint">Click card to reveal definition</div>
+<div class="nav">
+  <button class="btn" id="prev-btn" onclick="go(-1)">&#8592; Prev</button>
+  <button class="btn" id="next-btn" onclick="go(1)">Next &#8594;</button>
+</div>
+<div class="progress" id="progress"></div>
+<script>
+const cards = [{"term": "Term", "def": "Definition"}, {"term": "Procurement", "def": "The process of obtaining and making materials, along with getting the equipment to make a component, subsystem, or system."}, {"term": "Material Properties", "def": "Characteristics of a material, such as strength, weight, hardness, flexibility, or friction, that determine how it behaves."}, {"term": "Multiscale Modeling", "def": "Connecting observations at a large (macro) level to their underlying causes at smaller (micro or atomic) levels."}, {"term": "Objective", "def": "A desired outcome or goal for your design."}, {"term": "Constraint", "def": "A limitation or restriction that must be satisfied in your design, such as budget, available tools, or material availability."}, {"term": "Variable", "def": "A parameter or aspect of your design that can be controlled or changed by the designer to achieve an objective within constraints."}, {"term": "Stewardship", "def": "The responsible overseeing and protection of something considered worth caring for and preserving."}, {"term": "Tolerance", "def": "The allowable range of variation in a dimension or property of a manufactured part."}, {"term": "4. The Beginning", "def": "God the Master Craftsman"}, {"term": "5. Part 1", "def": "The Art of Procurement for Your Mousetrap Car"}];
+let cur = 0, flipped = false, seen = new Set();
+
+function render() {
+  const c = cards[cur];
+  document.getElementById('front-text').textContent = c.term;
+  document.getElementById('back-text').textContent  = c.def;
+  document.getElementById('counter').textContent    = `Card ${cur + 1} of ${cards.length}`;
+  document.getElementById('prev-btn').disabled = cur === 0;
+  document.getElementById('next-btn').disabled = cur === cards.length - 1;
+  document.getElementById('hint').textContent = flipped ? 'Click to flip back' : 'Click card to reveal definition';
+  renderDots();
+}
+
+function renderDots() {
+  const p = document.getElementById('progress');
+  p.innerHTML = cards.map((_, i) => {
+    let cls = 'dot';
+    if (i === cur) cls += ' current';
+    else if (seen.has(i)) cls += ' seen';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+}
+
+function flip() {
+  flipped = !flipped;
+  document.getElementById('card').classList.toggle('flipped', flipped);
+  if (flipped) seen.add(cur);
+  document.getElementById('hint').textContent = flipped ? 'Click to flip back' : 'Click card to reveal definition';
+  renderDots();
+}
+
+function go(dir) {
+  flipped = false;
+  document.getElementById('card').classList.remove('flipped');
+  cur = Math.max(0, Math.min(cards.length - 1, cur + dir));
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

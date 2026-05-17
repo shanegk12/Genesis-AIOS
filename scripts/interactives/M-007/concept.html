@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Accuracy vs Precision Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(30,58,95,0.12);
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    margin-bottom: 6px;
+    font-size: 1.6em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #c9a227;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .progress {
+    background: #e8edf3;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: #c9a227;
+    width: 0%;
+    transition: width 0.4s;
+  }
+  .question-area {
+    text-align: center;
+  }
+  .target-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 18px 0;
+  }
+  .target-card {
+    background: #f7f9fc;
+    border: 3px solid #e8edf3;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 160px;
+  }
+  .target-card:hover {
+    border-color: #c9a227;
+    transform: translateY(-3px);
+  }
+  .target-card.selected {
+    border-color: #1e3a5f;
+    background: #fff8e1;
+  }
+  .target-card.correct {
+    border-color: #2e7d32;
+    background: #e8f5e9;
+  }
+  .target-card.wrong {
+    border-color: #c62828;
+    background: #ffebee;
+  }
+  canvas {
+    display: block;
+    margin: 0 auto;
+    background: white;
+    border-radius: 50%;
+  }
+  .card-label {
+    font-weight: 600;
+    margin-top: 8px;
+    font-size: 0.95em;
+  }
+  .prompt {
+    font-size: 1.15em;
+    margin: 14px 0;
+    padding: 12px;
+    background: #1e3a5f;
+    color: white;
+    border-radius: 8px;
+  }
+  .feedback {
+    min-height: 60px;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    font-size: 0.98em;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.right {
+    background: #e8f5e9;
+    border-left: 5px solid #2e7d32;
+    color: #1b5e20;
+  }
+  .feedback.wrong {
+    background: #ffebee;
+    border-left: 5px solid #c62828;
+    color: #b71c1c;
+  }
+  button {
+    background: #c9a227;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  button:hover { background: #a8851a; }
+  button:disabled { background: #ccc; cursor: not-allowed; }
+  .results {
+    text-align: center;
+    padding: 20px;
+  }
+  .score {
+    font-size: 3em;
+    color: #c9a227;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .results p { margin: 10px 0; line-height: 1.5; }
+  .legend {
+    background: #f7f9fc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 0.9em;
+    text-align: left;
+  }
+  .legend b { color: #1e3a5f; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🎯 Accuracy vs. Precision</h1>
+  <div class="subtitle">Digital Measurement Challenge</div>
+
+  <div class="progress"><div class="progress-bar" id="progress"></div></div>
+
+  <div class="legend">
+    <b>Accuracy</b> = how close shots are to the <b>bullseye</b> (true value).<br>
+    <b>Precision</b> = how close shots are to <b>each other</b> (consistent).
+  </div>
+
+  <div id="game">
+    <div class="question-area">
+      <div class="prompt" id="prompt">Which target shows this?</div>
+      <div class="target-container" id="targets"></div>
+      <div class="feedback" id="feedback"></div>
+      <button id="nextBtn" disabled>Next →</button>
+    </div>
+  </div>
+
+  <div id="results" style="display:none;"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    prompt: "Which target is HIGH ACCURACY but LOW PRECISION?",
+    answer: "acc-only",
+    explain: "Shots are scattered (not consistent), but their average lands on the bullseye — accurate on average, not precise."
+  },
+  {
+    prompt: "Which target is HIGH PRECISION but LOW ACCURACY?",
+    answer: "prec-only",
+    explain: "Shots cluster tightly together (precise), but far from the bullseye — consistent measurements with a calibration error."
+  },
+  {
+    prompt: "Which target shows BOTH high accuracy AND high precision?",
+    answer: "both",
+    explain: "Tight cluster right on the bullseye — the gold standard for engineering measurements like your axle diameter!"
+  },
+  {
+    prompt: "Your caliper readings are 4.99, 5.01, 5.00, 5.02 mm for a 5.00 mm axle. Which target matches?",
+    answer: "both",
+    explain: "Readings are tightly grouped AND centered on 5.00 mm — accurate and precise. Excellent measurement!"
+  },
+  {
+    prompt: "Your readings are 6.10, 6.09, 6.11, 6.10 mm for a 5.00 mm axle. Which target matches?",
+    answer: "prec-only",
+    explain: "Very consistent (precise) but all off by ~1mm — possibly a miscalibrated tool. Precise, not accurate."
+  }
+];
+
+const patterns = {
+  "neither":   { spread: 35, offsetX: 30, offsetY: -25 },
+  "acc-only":  { spread: 40, offsetX: 0,  offsetY: 0 },
+  "prec-only": { spread: 6,  offsetX: 35, offsetY: -28 },
+  "both":      { spread: 6,  offsetX: 0,  offsetY: 0 }
+};
+
+const labels = {
+  "neither":   "Target A",
+  "acc-only":  "Target B",
+  "prec-only": "Target C",
+  "both":      "Target D"
+};
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function drawTarget(canvas, key) {
+  const ctx = canvas.getContext('2d');
+  const cx = canvas.width/2, cy = canvas.height/2;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  
+  const rings = [{r:55,c:'#1e3a5f'},{r:42,c:'#ffffff'},{r:30,c:'#1e3a5f'},{r:18,c:'#ffffff'},{r:8,c:'#c9a227'}];
+  rings.forEach(ring => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, ring.r, 0, Math.PI*2);
+    ctx.fillStyle = ring.c;
+    ctx.fill();
+    ctx.strokeStyle = '#1e3a5f';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  const p = patterns[key];
+  // seeded random for consistent dots
+  let seed = key.length * 7;
+  function rand() { seed = (seed * 9301 + 49297) % 233280; return seed/233280; }
+  
+  for (let i=0; i<6; i++) {
+    const angle = rand() * Math.PI * 2;
+    const dist = rand() * p.spread;
+    const x = cx + p.offsetX + Math.cos(angle)*dist;
+    const y = cy + p.offsetY + Math.sin(angle)*dist;
+    ctx.beginPath();
+    ctx.arc(x, y, 3.5, 0, Math.PI*2);
+    ctx.fillStyle = '#c62828';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+}
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[current];
+  document.getElementById('prompt').textContent = q.prompt;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('progress').style.width = ((current)/questions.length*100) + '%';
+
+  const targets = document.getElementById('targets');
+  targets.innerHTML = '';
+  
+  const keys = ['neither','acc-only','prec-only','both'];
+  // shuffle display order
+  const shuffled = [...keys].sort(() => Math.random()-0.5);
+  
+  shuffled.forEach(key => {
+    const card = document.createElement('div');
+    card.className = 'target-card';
+    card.dataset.key = key;
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = 140;
+    canvas.height = 140;
+    card.appendChild(canvas);
+    drawTarget(canvas, key);
+    
+    const label = document.createElement('div');
+    label.className = 'card-label';
+    label.textContent = labels[key];
+    card.appendChild(label);
+    
+    card.addEventListener('click', () => selectAnswer(card, key));
+    targets.appendChild(card);
+  });
+}
+
+function selectAnswer(card, key) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const fb = document.getElementById('feedback');
+  
+  document.querySelectorAll('.target-card').forEach(c => {
+    if (c.dataset.key === q.answer) c.classList.add('correct');
+    else if (c === card) c.classList.add('wrong');
+  });
+  
+  if (key === q.answer) {
+    score++;
+    fb.className = 'feedback show right';
+    fb.innerHTML = '✓ Correct! ' + q.explain;
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '✗ Not quite. ' + q.explain;
+  }
+  
+  document.getElementById('nextBtn').disabled = false;
+}
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  current++;
+  if (current >= questions.length) showResults();
+  else loadQuestion();
+});
+
+function showResults() {
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('progress').style.width = '100%';
+  const r = document.getElementById('results');
+  r.style.display = 'block';
+  
+  let msg = '';
+  const pct = score/questions.length;
+  if (pct === 1) msg = "Outstanding! You measure like a true Creationeer. 🏆";
+  else if (pct >= 0.8) msg = "Great work! You've got a solid grasp of measurement quality.";
+  else if (pct >= 0.6) msg = "Good effort! Review the difference between accuracy and precision.";
+  else msg = "Keep practicing — precise measurement is the heart of good engineering.";
+  
+  r.innerHTML = `
+    <div class="results">
+      <h2>Challenge Complete!</h2>
+      <div class="score">${score} / ${questions.length}</div>
+      <p>${msg}</p>
+      <p style="font-style:italic; color:#1e3a5f;">Remember: For your mousetrap car, you want measurements that are <b>both</b> accurate AND precise — just like the precision of God's design in creation.</p>
+      <button onclick="location.reload()">Try Again</button>
+    </div>
+  `;
+}
+
+loadQuestion();
+</script>
+</body>
+</html>

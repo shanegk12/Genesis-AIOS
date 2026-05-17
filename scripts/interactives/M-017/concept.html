@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car Efficiency Lab</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 18px 24px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 22px; }
+  header p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+  .content { padding: 22px; }
+  .track {
+    position: relative;
+    height: 110px;
+    background: linear-gradient(to bottom, #e8eef5 0%, #d4dde8 100%);
+    border-radius: 8px;
+    margin: 18px 0;
+    overflow: hidden;
+    border: 2px solid #1e3a5f;
+  }
+  .track::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, #1e3a5f 0, #1e3a5f 20px, #c9a227 20px, #c9a227 40px);
+  }
+  .finish {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 14px;
+    height: 90px;
+    background: repeating-linear-gradient(0deg, #1e3a5f 0, #1e3a5f 10px, #fff 10px, #fff 20px);
+  }
+  .car {
+    position: absolute;
+    bottom: 12px;
+    left: 10px;
+    font-size: 42px;
+    transition: left 0.05s linear;
+  }
+  .sliders { display: grid; gap: 14px; }
+  .slider-row {
+    background: #f7f9fc;
+    border: 2px solid #e0e6ef;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .slider-row label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .slider-row .val { color: #c9a227; }
+  input[type=range] {
+    width: 100%;
+    accent-color: #c9a227;
+  }
+  .hint { font-size: 12px; color: #5a6b80; margin-top: 4px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+  .stat .num { font-size: 24px; font-weight: bold; color: #c9a227; margin-top: 4px; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: translateY(-2px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.secondary { background: #1e3a5f; color: #fff; }
+  .target {
+    background: #fff8e1;
+    border-left: 4px solid #c9a227;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+  }
+  .feedback.win {
+    background: #e8f5e9;
+    border: 2px solid #2e7d32;
+    color: #1b5e20;
+    display: block;
+  }
+  .feedback.try {
+    background: #fff3e0;
+    border: 2px solid #c9a227;
+    color: #6d4c00;
+    display: block;
+  }
+  .score-board {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 13px;
+  }
+  .score-board span { color: #c9a227; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>⚙️ Mousetrap Car Efficiency Lab</h1>
+    <p>Adjust your build. Use calculations. Reach the target distance!</p>
+  </header>
+  <div class="content">
+    <div class="score-board">Challenges Completed: <span id="score">0</span> / 3</div>
+
+    <div class="target" id="targetBox">
+      <strong>🎯 Challenge 1:</strong> <span id="targetText">Travel exactly 8.0 meters (within ±0.3 m)</span>
+    </div>
+
+    <div class="track">
+      <div class="car" id="car">🏎️</div>
+      <div class="finish"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="label">Predicted Distance</div><div class="num"><span id="distOut">0.0</span> m</div></div>
+      <div class="stat"><div class="label">Efficiency</div><div class="num"><span id="effOut">0</span>%</div></div>
+      <div class="stat"><div class="label">Energy</div><div class="num"><span id="enOut">0.0</span> J</div></div>
+    </div>
+
+    <div class="sliders">
+      <div class="slider-row">
+        <label>Lever Arm Length <span class="val"><span id="leverV">20</span> cm</span></label>
+        <input type="range" id="lever" min="10" max="40" value="20">
+        <div class="hint">Longer lever = more distance, but slower release of energy</div>
+      </div>
+      <div class="slider-row">
+        <label>Wheel Diameter <span class="val"><span id="wheelV">8</span> cm</span></label>
+        <input type="range" id="wheel" min="4" max="16" value="8">
+        <div class="hint">Bigger wheels travel farther per turn, but need more force</div>
+      </div>
+      <div class="slider-row">
+        <label>Car Mass <span class="val"><span id="massV">200</span> g</span></label>
+        <input type="range" id="mass" min="80" max="500" value="200">
+        <div class="hint">Lighter cars are faster, but heavier ones grip better (less wheel slip)</div>
+      </div>
+      <div class="slider-row">
+        <label>Axle Friction <span class="val"><span id="fricV">5</span> / 10</span></label>
+        <input type="range" id="fric" min="1" max="10" value="5">
+        <div class="hint">Lower friction = smoother roll. Aligned axles matter!</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;">
+      <button id="runBtn">▶ Run Car</button>
+      <button id="nextBtn" class="secondary" disabled>Next Challenge →</button>
+    </div>
+
+    <div class="feedback" id="fb"></div>
+  </div>
+</div>
+
+<script>
+  const challenges = [
+    { target: 8.0, tol: 0.4, text: "Travel exactly 8.0 meters (within ±0.4 m)" },
+    { target: 12.0, tol: 0.5, text: "Travel a longer 12.0 meters (within ±0.5 m) — tune for distance!" },
+    { target: 6.0, tol: 0.3, text: "Stop precisely at 6.0 meters (within ±0.3 m) — short and controlled!" }
+  ];
+  let current = 0;
+  let score = 0;
+
+  const lever = document.getElementById('lever');
+  const wheel = document.getElementById('wheel');
+  const mass = document.getElementById('mass');
+  const fric = document.getElementById('fric');
+  const leverV = document.getElementById('leverV');
+  const wheelV = document.getElementById('wheelV');
+  const massV = document.getElementById('massV');
+  const fricV = document.getElementById('fricV');
+  const distOut = document.getElementById('distOut');
+  const effOut = document.getElementById('effOut');
+  const enOut = document.getElementById('enOut');
+  const car = document.getElementById('car');
+  const runBtn = document.getElementById('runBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const fb = document.getElementById('fb');
+  const targetText = document.getElementById('targetText');
+  const targetBox = document.getElementById('targetBox');
+  const scoreEl = document.getElementById('score');
+
+  function calc() {
+    const L = +lever.value;     // cm
+    const W = +wheel.value;     // cm
+    const M = +mass.value / 1000; // kg
+    const F = +fric.value;      // 1-10
+
+    // Spring energy stored ~ proportional to lever pull (simplified)
+    const energy = 0.8 + L * 0.06; // Joules
+    // Distance: longer lever pulls string longer; bigger wheels turn that into distance
+    // but heavier mass and friction reduce it
+    const pullLength = L * 2.0; // cm of string
+    const wheelCircum = Math.PI * W; // cm per turn
+    const turns = pullLength / wheelCircum;
+    let dist = turns * wheelCircum / 100 * (W * 0.45); // m, scaled
+    // friction & mass penalty
+    const frictionLoss = 1 - (F * 0.06);
+    const massEffect = 1 - Math.abs(M - 0.2) * 0.6;
+    dist = dist * frictionLoss * Math.max(0.4, massEffect);
+    dist = Math.max(0.5, dist);
+
+    // Efficiency: how much of energy converted to motion
+    const eff = Math.round(frictionLoss * Math.max(0.4, massEffect) * 100);
+
+    return { dist, eff, energy };
+  }
+
+  function update() {
+    leverV.textContent = lever.value;
+    wheelV.textContent = wheel.value;
+    massV.textContent = mass.value;
+    fricV.textContent = fric.value;
+    const { dist, eff, energy } = calc();
+    distOut.textContent = dist.toFixed(1);
+    effOut.textContent = eff;
+    enOut.textContent = energy.toFixed(1);
+  }
+
+  [lever, wheel, mass, fric].forEach(s => s.addEventListener('input', update));
+
+  function animateCar(dist) {
+    const trackWidth = document.querySelector('.track').clientWidth - 60;
+    // map 0-15m to track
+    const maxM = 15;
+    const finalPx = Math.min(trackWidth, (dist / maxM) * trackWidth);
+    let pos = 10;
+    const targetPx = finalPx;
+    const steps = 60;
+    let i = 0;
+    runBtn.disabled = true;
+    const id = setInterval(() => {
+      i++;
+      // ease out
+      const t = i / steps;
+      const eased = 1 - Math.pow(1 - t, 2);
+      car.style.left = (10 + (targetPx - 10) * eased) + 'px';
+      if (i >= steps) {
+        clearInterval(id);
+        runBtn.disabled = false;
+        checkResult(dist);
+      }
+    }, 30);
+  }
+
+  function checkResult(dist) {
+    const ch = challenges[current];
+    const diff = Math.abs(dist - ch.target);
+    if (diff <= ch.tol) {
+      score++;
+      scoreEl.textContent = score;
+      fb.className = 'feedback win';
+      fb.innerHTML = `✅ <strong>Excellent precision!</strong> You hit ${dist.toFixed(1)} m — target was ${ch.target} m. Your calculations paid off!`;
+      nextBtn.disabled = false;
+      runBtn.disabled = true;
+    } else {
+      const dir = dist > ch.target ? "too far" : "too short";
+      fb.className = 'feedback try';
+      fb.innerHTML = `📏 You went ${dist.toFixed(1)} m — that's ${dir}. Target: ${ch.target} m. Adjust your build and try again!`;
+    }
+  }
+
+  runBtn.addEventListener('click', () => {
+    fb.style.display = 'none';
+    fb.className = 'feedback';
+    const { dist } = calc();
+    car.style.left = '10px';
+    setTimeout(() => animateCar(dist), 100);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    current++;
+    if (current >= challenges.length) {
+      finish();
+    } else {
+      targetText.textContent = `Challenge ${current+1}: ` + challenges[current].text;
+      targetBox.innerHTML = `<strong>🎯 Challenge ${current+1}:</strong> ${challenges[current].text}`;
+      fb.style.display = 'none';
+      nextBtn.disabled = true;
+      runBtn.disabled = false;
+      car.style.left = '10px';
+    }
+  });
+
+  function finish() {
+    targetBox.innerHTML = `<strong>🏁 Lab Complete!</strong>`;
+    fb.className = 'feedback win';
+    let msg = '';
+    if (score === 3) msg = "🏆 Master Creationeer! Perfect precision on all 3 challenges. You understand how each variable affects distance and efficiency.";
+    else if (score === 2) msg = "⭐ Great work! You completed " + score + "/3 challenges. Solid understanding of calculations and trade-offs.";
+    else msg = "Good effort! You completed " + score + "/3 challenges. Remember: every variable matters in an efficient build.";
+    fb.innerHTML = msg + "<br><br><em>Like the Master Designer, careful planning and precise calculations bring order to your creation.</em>";
+    runBtn.disabled = true;
+    nextBtn.disabled = true;
+  }
+
+  update();
+</script>
+</body>
+</html>

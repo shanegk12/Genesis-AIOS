@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Procurement Challenge: Build Your Mousetrap Car</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    margin: 0;
+    padding: 16px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 8px;
+  }
+  .subtitle {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .budget-bar {
+    background: #1e3a5f;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    text-align: center;
+    min-width: 110px;
+  }
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .stat-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c9a227;
+  }
+  .parts-needed {
+    background: #fff8e1;
+    border-left: 4px solid #c9a227;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .material {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .material:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(30,58,95,0.2);
+  }
+  .material.selected {
+    background: #c9a227;
+    color: white;
+    border-color: #c9a227;
+  }
+  .material.selected .price { color: white; }
+  .material .icon {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+  .material .name {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .material .category {
+    font-size: 10px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .material .price {
+    color: #c9a227;
+    font-weight: bold;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+  .material .specs {
+    font-size: 10px;
+    margin-top: 4px;
+    color: #444;
+  }
+  .material.selected .specs { color: #fff; }
+  button {
+    background: #1e3a5f;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+  }
+  button:hover:not(:disabled) { background: #2c5282; }
+  button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  .results {
+    background: #f7f9fc;
+    border: 2px solid #c9a227;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .results h2 {
+    margin-top: 0;
+    color: #1e3a5f;
+  }
+  .score {
+    font-size: 36px;
+    font-weight: bold;
+    color: #c9a227;
+    text-align: center;
+    margin: 8px 0;
+  }
+  .feedback-item {
+    background: white;
+    padding: 8px 12px;
+    margin: 6px 0;
+    border-radius: 4px;
+    border-left: 4px solid #1e3a5f;
+    font-size: 13px;
+  }
+  .feedback-item.good { border-left-color: #2d7a2d; }
+  .feedback-item.bad { border-left-color: #c0392b; }
+  .category-tag {
+    display: inline-block;
+    background: #c9a227;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🛒 Procurement Challenge</h1>
+  <div class="subtitle">You're a Junior Creationeer! Select materials for your mousetrap car. Stay within budget, meet specs, and choose wisely — every resource is a gift to be used purposefully.</div>
+
+  <div class="parts-needed">
+    <strong>Mission:</strong> Procure <strong>1 Chassis</strong>, <strong>1 set of Wheels</strong>, <strong>1 Axle</strong>, and <strong>1 String/Pull</strong>. Stay under <strong>$15</strong>. Pick parts that are light, strong, and low-friction!
+  </div>
+
+  <div class="budget-bar">
+    <div class="stat">
+      <div class="stat-label">Budget Left</div>
+      <div class="stat-value" id="budget">$15.00</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Total Weight</div>
+      <div class="stat-value" id="weight">0 g</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Parts Picked</div>
+      <div class="stat-value" id="count">0 / 4</div>
+    </div>
+  </div>
+
+  <div class="grid" id="materials"></div>
+
+  <button id="submit" disabled>Submit Procurement Order</button>
+
+  <div id="results"></div>
+</div>
+
+<script>
+const materials = [
+  // Chassis
+  { id:1, name:"Balsa Wood Plank", cat:"chassis", icon:"🪵", price:3.00, weight:20, score:9, note:"Light & strong — perfect for a car frame!" },
+  { id:2, name:"Steel Plate", cat:"chassis", icon:"⬛", price:6.00, weight:180, score:2, note:"Way too heavy. Mousetrap can't pull this." },
+  { id:3, name:"Cardboard Sheet", cat:"chassis", icon:"📦", price:1.00, weight:30, score:5, note:"Cheap & light, but weak under stress." },
+  { id:4, name:"Foam Board", cat:"chassis", icon:"🟦", price:2.50, weight:25, score:7, note:"Light and rigid — a solid choice." },
+
+  // Wheels
+  { id:5, name:"Old CDs (x4)", cat:"wheels", icon:"💿", price:1.50, weight:60, score:9, note:"Light, smooth, large diameter = great roll!" },
+  { id:6, name:"Rubber Tires (x4)", cat:"wheels", icon:"⚫", price:4.00, weight:90, score:6, note:"Good grip but heavy and high friction." },
+  { id:7, name:"Bottle Caps (x4)", cat:"wheels", icon:"🔵", price:0.50, weight:10, score:4, note:"Too small — won't roll far." },
+  { id:8, name:"Solid Wood Discs", cat:"wheels", icon:"🟫", price:3.00, weight:70, score:6, note:"Sturdy but heavy and rougher rolling." },
+
+  // Axles
+  { id:9, name:"Wooden Dowel", cat:"axle", icon:"🟤", price:1.00, weight:8, score:6, note:"Works, but more friction than metal." },
+  { id:10, name:"Steel Rod (smooth)", cat:"axle", icon:"➖", price:2.00, weight:15, score:9, note:"Smooth, strong, low-friction axle!" },
+  { id:11, name:"Plastic Straw", cat:"axle", icon:"🥤", price:0.25, weight:2, score:3, note:"Too flimsy — will bend under load." },
+  { id:12, name:"Bent Coat Hanger", cat:"axle", icon:"⤴️", price:0.50, weight:10, score:2, note:"Bent = wobble = bad wheels!" },
+
+  // String/Pull
+  { id:13, name:"Fishing Line", cat:"string", icon:"🎣", price:1.50, weight:1, score:9, note:"Thin, strong, low-friction — ideal!" },
+  { id:14, name:"Heavy Rope", cat:"string", icon:"🪢", price:2.00, weight:20, score:3, note:"Way too thick & heavy for this scale." },
+  { id:15, name:"Sewing Thread", cat:"string", icon:"🧵", price:0.50, weight:1, score:6, note:"Light but might snap under tension." },
+  { id:16, name:"Yarn", cat:"string", icon:"🧶", price:0.75, weight:3, score:4, note:"Stretchy — wastes mousetrap energy." }
+];
+
+const categoryNames = { chassis:"Chassis", wheels:"Wheels", axle:"Axle", string:"String/Pull" };
+let selected = {};
+
+const grid = document.getElementById('materials');
+materials.forEach(m => {
+  const div = document.createElement('div');
+  div.className = 'material';
+  div.dataset.id = m.id;
+  div.innerHTML = `
+    <div class="icon">${m.icon}</div>
+    <div class="category"><span class="category-tag">${categoryNames[m.cat]}</span></div>
+    <div class="name">${m.name}</div>
+    <div class="specs">${m.weight}g</div>
+    <div class="price">$${m.price.toFixed(2)}</div>
+  `;
+  div.onclick = () => toggle(m, div);
+  grid.appendChild(div);
+});
+
+function toggle(m, div) {
+  if (selected[m.cat] && selected[m.cat].id === m.id) {
+    delete selected[m.cat];
+    div.classList.remove('selected');
+  } else {
+    // Deselect any other in same category
+    document.querySelectorAll('.material.selected').forEach(el => {
+      const id = parseInt(el.dataset.id);
+      const mat = materials.find(x => x.id === id);
+      if (mat.cat === m.cat) el.classList.remove('selected');
+    });
+    selected[m.cat] = m;
+    div.classList.add('selected');
+  }
+  update();
+}
+
+function update() {
+  const picks = Object.values(selected);
+  const total = picks.reduce((s,p) => s + p.price, 0);
+  const weight = picks.reduce((s,p) => s + p.weight, 0);
+  document.getElementById('budget').textContent = '$' + (15 - total).toFixed(2);
+  document.getElementById('weight').textContent = weight + ' g';
+  document.getElementById('count').textContent = picks.length + ' / 4';
+  document.getElementById('budget').style.color = total > 15 ? '#ff6b6b' : '#c9a227';
+  document.getElementById('submit').disabled = picks.length !== 4 || total > 15;
+}
+
+document.getElementById('submit').onclick = () => {
+  const picks = Object.values(selected);
+  const totalScore = picks.reduce((s,p) => s + p.score, 0);
+  const totalWeight = picks.reduce((s,p) => s + p.weight, 0);
+  const totalCost = picks.reduce((s,p) => s + p.price, 0);
+  const maxScore = 36;
+  const pct = Math.round((totalScore / maxScore) * 100);
+
+  let verdict, vColor;
+  if (pct >= 85) { verdict = "🏆 Master Creationeer! Excellent procurement choices."; vColor = "#2d7a2d"; }
+  else if (pct >= 65) { verdict = "👍 Solid work! Your car will roll well."; vColor = "#c9a227"; }
+  else if (pct >= 45) { verdict = "🤔 It'll move... but you can do better. Review trade-offs."; vColor = "#d68910"; }
+  else { verdict = "⚠️ Back to the drawing board. Reconsider material trade-offs!"; vColor = "#c0392b"; }
+
+  let html = `<div class="results">
+    <h2>Procurement Review</h2>
+    <div class="score">${pct}%</div>
+    <p style="text-align:center;color:${vColor};font-weight:bold;font-size:16px;">${verdict}</p>
+    <p style="font-size:13px;"><strong>Total Cost:</strong> $${totalCost.toFixed(2)} | <strong>Total Weight:</strong> ${totalWeight}g | <strong>Budget Saved:</strong> $${(15-totalCost).toFixed(2)}</p>
+    <h3 style="margin-bottom:6px;">Your Selections:</h3>`;
+  picks.forEach(p => {
+    const good = p.score >= 7;
+    html += `<div class="feedback-item ${good?'good':'bad'}">
+      <strong>${p.icon} ${p.name}</strong> (${categoryNames[p.cat]}) — ${p.note}
+    </div>`;
+  });
+  html += `<p style="margin-top:14px;font-size:13px;font-style:italic;color:#1e3a5f;">💡 Just as God gave Moses careful instructions for the Tabernacle's materials, thoughtful material selection turns a pile of parts into a purposeful build.</p>
+  <button onclick="location.reload()" style="margin-top:10px;">Try Again</button>
+  </div>`;
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+};
+</script>
+</body>
+</html>

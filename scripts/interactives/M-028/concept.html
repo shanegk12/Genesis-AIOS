@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inventory Check Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 18px 24px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 22px; }
+  header p { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+  .stage { padding: 24px; }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  .scenario strong { color: #1e3a5f; }
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .panel {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .panel h3 {
+    color: #1e3a5f;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #c9a227;
+  }
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin: 4px 0;
+    background: #f7f9fc;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .item-row:hover { background: #e8eef5; }
+  .item-row.flagged {
+    background: #fff4d6;
+    border-color: #c9a227;
+  }
+  .item-row .name { font-weight: 500; }
+  .item-row .qty { color: #1e3a5f; font-weight: bold; }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: translateY(-2px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .progress {
+    font-size: 14px;
+    color: #1e3a5f;
+  }
+  .progress strong { color: #c9a227; }
+  .hint {
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .feedback {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+  .feedback.partial { background: #fff3cd; border-left: 4px solid #c9a227; color: #856404; }
+  .feedback.wrong { background: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+  .final {
+    text-align: center;
+    padding: 30px;
+  }
+  .final h2 { color: #1e3a5f; margin-bottom: 10px; }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    border: 6px solid #c9a227;
+  }
+  .verdict {
+    font-size: 16px;
+    margin: 14px 0;
+    color: #1e3a5f;
+  }
+  .legend {
+    font-size: 12px;
+    color: #555;
+    background: #f7f9fc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📋 Inventory Check Challenge</h1>
+    <p>Procurement Phase — Verify each shipment before approving it</p>
+  </header>
+  <div class="stage" id="stage"></div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    id: 1,
+    title: "Shipment #1 — Wooden Base Order",
+    order: [
+      { name: "Wooden Base (5x7 in)", qty: 6 },
+      { name: "Wood Screws #8", qty: 50 },
+      { name: "Sandpaper Sheet", qty: 4 }
+    ],
+    received: [
+      { name: "Wooden Base (5x7 in)", qty: 6, ok: true },
+      { name: "Wood Screws #8", qty: 35, ok: false, reason: "Quantity short — ordered 50, received 35" },
+      { name: "Sandpaper Sheet", qty: 4, ok: true }
+    ]
+  },
+  {
+    id: 2,
+    title: "Shipment #2 — Spring & Hardware Kit",
+    order: [
+      { name: "Mousetrap Spring", qty: 10 },
+      { name: "Steel Hammer Bar", qty: 10 },
+      { name: "Hold-down Bar", qty: 10 }
+    ],
+    received: [
+      { name: "Mousetrap Spring", qty: 10, ok: true },
+      { name: "Steel Hammer Bar", qty: 10, ok: true },
+      { name: "Hold-down Bar", qty: 10, ok: true }
+    ]
+  },
+  {
+    id: 3,
+    title: "Shipment #3 — Wheels & Axles",
+    order: [
+      { name: "CD Wheels (120mm)", qty: 8 },
+      { name: "Wooden Axles (4in)", qty: 4 },
+      { name: "Rubber Bands", qty: 20 }
+    ],
+    received: [
+      { name: "CD Wheels (80mm)", qty: 8, ok: false, reason: "Wrong size — ordered 120mm, received 80mm" },
+      { name: "Wooden Axles (4in)", qty: 4, ok: true },
+      { name: "Rubber Bands", qty: 20, ok: true }
+    ]
+  },
+  {
+    id: 4,
+    title: "Shipment #4 — Finishing Supplies",
+    order: [
+      { name: "Wood Glue Bottle", qty: 3 },
+      { name: "Acrylic Paint (Blue)", qty: 2 },
+      { name: "Paint Brushes", qty: 6 }
+    ],
+    received: [
+      { name: "Wood Glue Bottle", qty: 3, ok: true },
+      { name: "Acrylic Paint (Red)", qty: 2, ok: false, reason: "Wrong color — ordered Blue, received Red" },
+      { name: "Paint Brushes", qty: 6, ok: true },
+      { name: "Mystery Item: Glitter", qty: 1, ok: false, reason: "Extra item not on the order — should not be accepted" }
+    ]
+  }
+];
+
+let currentIdx = 0;
+let score = 0;
+let maxScore = 0;
+let flagged = new Set();
+
+const stage = document.getElementById('stage');
+
+function renderScenario() {
+  const s = scenarios[currentIdx];
+  flagged = new Set();
+  stage.innerHTML = `
+    <div class="scenario">
+      <strong>${s.title}</strong><br>
+      Compare the <strong>Purchase Order</strong> with what was actually <strong>Received</strong>. Click any received item that has a problem (wrong quantity, wrong item, or shouldn't be there) to flag it. Then submit.
+    </div>
+    <div class="panels">
+      <div class="panel">
+        <h3>📑 Purchase Order</h3>
+        ${s.order.map(o => `
+          <div class="item-row" style="cursor:default">
+            <span class="name">${o.name}</span>
+            <span class="qty">×${o.qty}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="panel">
+        <h3>📦 Received Shipment</h3>
+        <div class="legend">Tap items that don't match the order to flag them.</div>
+        ${s.received.map((r, i) => `
+          <div class="item-row" data-idx="${i}">
+            <span class="name">${r.name}</span>
+            <span class="qty">×${r.qty}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="actions">
+      <div class="progress">Shipment <strong>${currentIdx + 1}</strong> of <strong>${scenarios.length}</strong> · Score: <strong>${score}</strong></div>
+      <button id="submitBtn">Submit Verification</button>
+    </div>
+    <div class="hint">💡 An empty flag list means: "All items match — approve as-is."</div>
+  `;
+  document.querySelectorAll('.item-row[data-idx]').forEach(row => {
+    row.addEventListener('click', () => {
+      const idx = row.dataset.idx;
+      if (flagged.has(idx)) {
+        flagged.delete(idx);
+        row.classList.remove('flagged');
+      } else {
+        flagged.add(idx);
+        row.classList.add('flagged');
+      }
+    });
+  });
+  document.getElementById('submitBtn').addEventListener('click', checkAnswer);
+}
+
+function checkAnswer() {
+  const s = scenarios[currentIdx];
+  const correctFlags = new Set(s.received.map((r,i) => r.ok ? null : String(i)).filter(x => x !== null));
+  
+  let correct = 0, missed = 0, falseAlarms = 0;
+  correctFlags.forEach(i => { if (flagged.has(i)) correct++; else missed++; });
+  flagged.forEach(i => { if (!correctFlags.has(i)) falseAlarms++; });
+  
+  const totalIssues = correctFlags.size;
+  const pointsPossible = Math.max(1, totalIssues) + (totalIssues === 0 ? 1 : 0);
+  maxScore += pointsPossible;
+  
+  let earned = 0;
+  let feedbackText = '';
+  let feedbackClass = '';
+  
+  if (totalIssues === 0) {
+    if (falseAlarms === 0) {
+      earned = 1;
+      feedbackClass = 'correct';
+      feedbackText = '✅ Perfect! Every item matched the purchase order. Approving with no issues was correct.';
+    } else {
+      feedbackClass = 'wrong';
+      feedbackText = '❌ This shipment was actually perfect! You flagged items that matched the order.';
+    }
+  } else {
+    earned = correct - Math.min(correct, falseAlarms);
+    if (correct === totalIssues && falseAlarms === 0) {
+      feedbackClass = 'correct';
+      feedbackText = '✅ Excellent verification! Issues found:<br>' + s.received.filter(r => !r.ok).map(r => '• ' + r.reason).join('<br>');
+    } else if (missed > 0 || falseAlarms > 0) {
+      feedbackClass = 'partial';
+      feedbackText = `⚠️ Partial credit. The real issues were:<br>` + s.received.filter(r => !r.ok).map(r => '• ' + r.reason).join('<br>');
+      if (missed > 0) feedbackText += `<br><em>You missed ${missed} problem(s).</em>`;
+      if (falseAlarms > 0) feedbackText += `<br><em>You flagged ${falseAlarms} item(s) that were actually correct.</em>`;
+    }
+  }
+  
+  if (earned < 0) earned = 0;
+  score += earned;
+  
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show ' + feedbackClass;
+  fb.innerHTML = feedbackText;
+  
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = currentIdx === scenarios.length - 1 ? 'See Final Report →' : 'Next Shipment →';
+  btn.onclick = () => {
+    currentIdx++;
+    if (currentIdx >= scenarios.length) showFinal();
+    else renderScenario();
+  };
+}
+
+function showFinal() {
+  const pct = Math.round((score / maxScore) * 100);
+  let verdict, msg;
+  if (pct >= 90) {
+    verdict = "Master Procurement Officer";
+    msg = "Outstanding! Like Bezalel, you demonstrate wisdom and attention to detail in your craft.";
+  } else if (pct >= 70) {
+    verdict = "Skilled Inventory Checker";
+    msg = "Great work! Careful verification prevents costly delays in any build project.";
+  } else if (pct >= 50) {
+    verdict = "Apprentice Verifier";
+    msg = "Good effort. Remember: check quantity, item type, AND watch for unexpected extras.";
+  } else {
+    verdict = "Keep Practicing";
+    msg = "Inventory checks require slow, careful comparison. Review each line item against the order.";
+  }
+  
+  stage.innerHTML = `
+    <div class="final">
+      <h2>🏆 Verification Report</h2>
+      <div class="score-circle">${pct}%</div>
+      <div class="verdict"><strong>${verdict}</strong></div>
+      <p style="margin: 14px 0; color: #555;">${msg}</p>
+      <p style="font-size: 13px; color: #777; margin-top: 18px; font-style: italic;">
+        "Every material, every design, and every piece of craftsmanship was divinely inspired and precisely executed." — Just as God's Tabernacle plans required exact verification, every great build begins with careful inventory checks.
+      </p>
+      <button onclick="restart()" style="margin-top: 20px;">Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  currentIdx = 0;
+  score = 0;
+  maxScore = 0;
+  renderScenario();
+}
+
+renderScenario();
+</script>
+</body>
+</html>

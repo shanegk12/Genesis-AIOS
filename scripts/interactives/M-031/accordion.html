@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Shaping and Cutting Your Materials</summary>
+    <div class="panel-body"><p>Material processing often begins with shaping and cutting raw materials to the correct dimensions. For your mousetrap car, this might involve cutting wood for the chassis, axles, or wheels; trimming plastic for aerodynamic components; or bending metal for brackets. The precision of these initial cuts is vital for successful assembly. If a piece of wood for your chassis is cut too short, your car might be unstable. If an axle is too long, it might rub against the frame, creating unwanted friction.</p><p>Direct Application to Your Mousetrap Car Project:
+Consider the chassis of your mousetrap car. You might choose balsa wood for its lightweight properties. To process this material, you will need to measure carefully and cut precisely. Using a ruler and a sharp hobby knife or saw, you will shape the main body of your car. Any deviation in these cuts could affect how other components, like the wheels and axles, attach and align.</p><p>Multiscale Modeling Connection:
+When you cut a piece of wood, you are observing a macroscopic change – the wood piece becomes smaller and has a new shape. At the atomic level, the saw blade or knife is breaking the chemical bonds between the cellulose fibers that make up the wood. The strength of these bonds, and how they are arranged, determines how easily the wood can be cut and how clean the cut will be. For example, cutting against the grain of the wood often results in a rougher edge because more fibers are torn rather than cleanly severed.</p><p>OCV Application:
+Objective: To create a perfectly straight and dimensionally accurate chassis for your mousetrap car.
+Constraint: You only have a limited amount of balsa wood, and your cutting tools have a certain level of precision.
+Variable: The type of cutting tool you use (hobby knife vs. small saw), the pressure you apply, and the number of passes you make to achieve the cut. Choosing a sharper blade or a finer-toothed saw might improve precision, but it could also take more time.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Joining Methods for Durable Assembly</summary>
+    <div class="panel-body"><p>Once your parts are shaped, you need to join them together. This is where the core of the Assembly phase comes into play. The Horstemeyer et al. paper defines assembly as &quot;the process of putting components together to make a subsystem and putting subsystems together to make a system.&quot; For your mousetrap car, common joining methods include gluing, screwing, or press-fitting. The choice of joining method impacts the strength, durability, and reparability of your car. A weak joint can cause your car to fall apart mid-race, while an overly complex joint might add unnecessary weight or make repairs difficult.</p><p>Direct Application to Your Mousetrap Car Project:
+Think about attaching your wheels to the axles. You might decide to glue the wheels to the axles. This requires selecting the right type of adhesive (like super glue or wood glue), ensuring both surfaces are clean, and applying the glue evenly. Alternatively, you might use a press-fit design where the wheel simply slides tightly onto the axle. For the chassis, you might use small screws or bolts to attach components, providing a stronger, more permanent connection than glue alone.</p><p>Multiscale Modeling Connection:
+When you use glue to join two pieces of wood, you are creating new bonds at the interface. At the macroscopic level, the glue hardens and holds the pieces together. At the atomic level, the adhesive molecules interact with the molecules of the wood, forming chemical or physical bonds that resist separation. The strength of this bond depends on the chemical composition of the glue and the surface properties of the wood. A rougher wood surface, for instance, can provide more surface area for the glue to adhere to, leading to a stronger macroscopic bond.</p><p>OCV Application:
+Objective: To securely attach the wheels to the axles, allowing them to spin freely while remaining firmly attached.
+Constraint: You have limited types of glue available, and you want to avoid adding excessive weight.
+Variable: The amount of glue used, the curing time allowed for the glue, or whether you opt for a mechanical fastener like a small screw or a press-fit instead of glue. Using too much glue might add weight and potentially restrict movement, while too little might result in a weak bond.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Surface Treatments and Finishes</summary>
+    <div class="panel-body"><p>Material processing also includes surface treatments and finishes. While often overlooked, these steps can significantly affect your mousetrap car's performance and durability. A smooth surface reduces friction and air resistance, allowing your car to travel further. A protective coating can prevent wood from warping or metal from corroding, extending the life of your components. These treatments are part of ensuring the &quot;performance/function&quot; and &quot;sustainability&quot; of your engineered system.</p><p>Direct Application to Your Mousetrap Car Project:
+Consider the surface of your wheels or the chassis. If your wheels are made of wood, sanding them smooth and perhaps applying a thin layer of wax or lubricant can significantly reduce friction against the ground or the axle. For your chassis, a light sanding and a clear coat of paint or varnish can protect the wood from moisture and give it a professional finish, which is part of the aesthetic &quot;form and function&quot; mentioned in the Horstemeyer et al. paper.</p><p>Multiscale Modeling Connection:
+When you sand a wooden wheel, you are smoothing its macroscopic surface. At the microscopic level, sanding removes small irregularities and sharp edges, creating a more uniform surface. When you apply wax, the wax molecules fill in the remaining microscopic valleys, creating an even smoother surface. This reduction in surface roughness at the microscopic level directly translates to a lower coefficient of friction at the macroscopic level, allowing your wheel to roll more easily.</p><p>OCV Application:
+Objective: To minimize friction between the wheels and the racing surface to maximize the car's distance.
+Constraint: You have a limited budget for finishing materials, and you want to keep the car lightweight.
+Variable: The grit of sandpaper used, the type of lubricant (graphite, wax, oil), or the number of coats of finish applied. A finer grit sandpaper and a specialized lubricant might reduce friction more effectively, but they might cost more or add a minuscule amount of weight.</p></div>
+  </details>
+</div>
+</body>
+</html>
