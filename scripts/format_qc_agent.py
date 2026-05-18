@@ -38,12 +38,17 @@ TAB_IMAGE_THRESHOLD = 2
 # ── Markdown detection ────────────────────────────────────────────────────────
 
 def is_markdown_content(html: str) -> bool:
-    """True if lesson HTML contains raw markdown (not yet converted)."""
-    return bool(
-        re.search(r'<p>\s*#{1,4}\s', html) or
-        re.search(r'<p>\s*\*\*', html) or
-        re.search(r'<p>\s*\*\s', html)
+    """True if lesson HTML contains raw markdown or has no heading structure."""
+    has_markdown = bool(
+        re.search(r'<p[^>]*>\s*#{1,4}\s', html) or
+        re.search(r'<p[^>]*>\s*\*\*', html) or
+        re.search(r'<p[^>]*>\s*\*\s', html)
     )
+    # Also flag content with no <h2>/<h3> but substantial text (unstructured import)
+    has_headings = bool(re.search(r'<h[23][^>]*>', html))
+    word_count   = len(re.sub(r'<[^>]+>', '', html).split())
+    is_unstructured = not has_headings and word_count > 300
+    return has_markdown or is_unstructured
 
 
 # ── HTML analysis ─────────────────────────────────────────────────────────────
