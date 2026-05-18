@@ -36,6 +36,10 @@ INTERACTIVE_SCRIPT = os.path.join(os.path.dirname(__file__), "interactive_agent.
 ASSESSMENT_SCRIPT  = os.path.join(os.path.dirname(__file__), "assessment_agent.py")
 SCORM_SCRIPT       = os.path.join(os.path.dirname(__file__), "scorm_packager.py")
 NOTIFY_SCRIPT      = os.path.join(os.path.dirname(__file__), "notify.py")
+IMPORT_SCRIPT      = os.path.join(os.path.dirname(__file__), "platform_import.py")
+FORMAT_QC_SCRIPT   = os.path.join(os.path.dirname(__file__), "format_qc_agent.py")
+REFORMAT_SCRIPT    = os.path.join(os.path.dirname(__file__), "reformat_agent.py")
+DEV_FIX_SCRIPT     = os.path.join(os.path.dirname(__file__), "dev_fix_agent.py")
 
 
 def load_env():
@@ -219,6 +223,56 @@ def run_image_agent(lesson_id=None, rework_flagged=False):
     return result.returncode == 0
 
 
+def run_platform_import(lesson_id):
+    cmd = [sys.executable, IMPORT_SCRIPT, "--lesson", lesson_id, "--live", "--skip-images"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
+def run_format_qc(lesson_id):
+    cmd = [sys.executable, FORMAT_QC_SCRIPT, "--lesson-id", lesson_id, "--no-notify"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
+def _read_format_qc_status(lesson_id):
+    reports_path = os.path.join(os.path.dirname(FORMAT_QC_SCRIPT), "qc_reports.json")
+    try:
+        with open(reports_path, encoding="utf-8") as f:
+            reports = json.load(f)
+        return reports.get("reports", {}).get(lesson_id, {}).get("status", "unknown")
+    except Exception:
+        return "unknown"
+
+
+def run_reformat_agent(lesson_id):
+    cmd = [sys.executable, REFORMAT_SCRIPT, "--lesson-id", lesson_id, "--no-notify"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
+def run_dev_fix_agent(lesson_id):
+    cmd = [sys.executable, DEV_FIX_SCRIPT, "--lesson-id", lesson_id, "--no-notify"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        for line in output.splitlines():
+            print(f"    {line}")
+    return result.returncode == 0
+
+
 def notify(message):
     if os.path.exists(NOTIFY_SCRIPT):
         subprocess.run([sys.executable, NOTIFY_SCRIPT, message], check=False)
@@ -381,6 +435,8 @@ def main():
                         help="Package each lesson + interactives as a SCORM ZIP for LearnWorlds")
     parser.add_argument("--generate-images",      action="store_true",
                         help="Run image agent after media (slow — generates images via Gemini)")
+    parser.add_argument("--import-to-platform", action="store_true",
+                        help="After drafting, import each lesson to the live platform, run format QC, reformat, and dev fix")
     parser.add_argument("--dry-run",   action="store_true", help="Preview queue, no drafting")
     parser.add_argument("--status",    action="store_true", help="Print progress summary and exit")
     parser.add_argument("--retry-failed", action="store_true",
@@ -436,6 +492,8 @@ def main():
         print(f"Interactives: enabled ({mode})")
     if args.generate_images:
         print("Images:  enabled -> Gemini + Drive")
+    if args.import_to_platform:
+        print("Import:  enabled -> live platform + format QC + auto-fix")
 
     if args.dry_run:
         print("\nDry run — no drafts will be written:\n")
@@ -446,7 +504,7 @@ def main():
     notify_morning(len(queue), args.batch or len(queue))
 
     print()
-    done = failed = qc_flagged = media_failed = interactive_failed = assessment_failed = scorm_failed = image_failed = 0
+    done = failed = qc_flagged = media_failed = interactive_failed = assessment_failed = scorm_failed = image_failed = import_failed = 0
 
     for i, lesson in enumerate(queue, 1):
         print(f"[{i}/{len(queue)}] {lesson['id']} — {lesson['tab']}")
@@ -504,6 +562,29 @@ def main():
                 if not run_image_agent(lesson_id=lesson["id"]):
                     image_failed += 1
 
+            # 8-11. Platform import + format QC + reformat + dev fix (opt-in)
+            if args.import_to_platform:
+                print(f"  [8] Importing to platform...")
+                imported = run_platform_import(lesson["id"])
+                if not imported:
+                    import_failed += 1
+                else:
+                    print(f"  [9] Format QC...")
+                    run_format_qc(lesson["id"])
+                    fmt_status = _read_format_qc_status(lesson["id"])
+                    print(f"      status: {fmt_status}")
+
+                    if fmt_status == "needs_reformat":
+                        print(f"  [10] Reformat agent...")
+                        run_reformat_agent(lesson["id"])
+                        # Re-check after reformat so dev_fix sees fresh status
+                        run_format_qc(lesson["id"])
+                        fmt_status = _read_format_qc_status(lesson["id"])
+
+                    if fmt_status == "needs_fix":
+                        print(f"  [11] Dev fix agent...")
+                        run_dev_fix_agent(lesson["id"])
+
         finally:
             if os.path.exists(draft_path):
                 os.unlink(draft_path)
@@ -528,6 +609,8 @@ def main():
         summary_parts.append(f"{scorm_failed} SCORM errors")
     if args.generate_images:
         summary_parts.append(f"{image_failed} image errors")
+    if args.import_to_platform:
+        summary_parts.append(f"{import_failed} import errors")
 
     summary = f"GK12 pipeline ({args.course}): " + ", ".join(summary_parts)
     print(f"=== {summary} ===")
