@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Final Function Verification Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(30,58,95,0.12);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 22px 28px;
+    border-bottom: 5px solid #c9a227;
+  }
+  header h1 { font-size: 1.5em; margin-bottom: 4px; }
+  header p { opacity: 0.85; font-size: 0.95em; }
+  .stage {
+    padding: 28px;
+  }
+  .progress-bar {
+    background: #e6ebf2;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .progress-fill {
+    background: #c9a227;
+    height: 100%;
+    transition: width 0.4s ease;
+  }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 18px 20px;
+    border-radius: 8px;
+    margin-bottom: 22px;
+  }
+  .scenario h2 { font-size: 1.15em; margin-bottom: 8px; }
+  .scenario p { font-size: 1em; line-height: 1.5; }
+  .question {
+    font-weight: 600;
+    margin-bottom: 14px;
+    font-size: 1.05em;
+  }
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+  .option {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 14px 16px;
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.98em;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .option:hover:not(:disabled) {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .option.correct {
+    background: #2d7a3e;
+    color: #fff;
+    border-color: #2d7a3e;
+  }
+  .option.wrong {
+    background: #b03a3a;
+    color: #fff;
+    border-color: #b03a3a;
+  }
+  .option:disabled { cursor: default; }
+  .feedback {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: #fff8e0;
+    border-left: 5px solid #c9a227;
+    display: none;
+    line-height: 1.5;
+  }
+  .feedback.show { display: block; }
+  .next-btn {
+    margin-top: 18px;
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 26px;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none;
+    font-family: inherit;
+  }
+  .next-btn.show { display: inline-block; }
+  .next-btn:hover { background: #b38d1d; }
+  .final {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .final h2 { font-size: 1.7em; margin-bottom: 14px; color: #1e3a5f; }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3em;
+    font-weight: 700;
+    border: 6px solid #c9a227;
+  }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    margin: 12px 0;
+  }
+  .summary {
+    text-align: left;
+    background: #f7f9fc;
+    padding: 18px;
+    border-radius: 8px;
+    margin: 18px 0;
+    line-height: 1.6;
+  }
+  .restart {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .restart:hover { background: #2a4d7a; }
+  .tag {
+    display: inline-block;
+    background: #1e3a5f;
+    color: #c9a227;
+    font-size: 0.75em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🏁 Final Function Verification</h1>
+    <p>Test Day! Inspect your mousetrap car like a Junior Creationeer.</p>
+  </header>
+  <div class="stage">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div id="quizArea"></div>
+  </div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    tag: "TEST RUN #1",
+    title: "The Wobble",
+    desc: "You release your car. It rolls forward but wobbles side to side. One front wheel looks slightly bent inward. It only travels 2 feet before stopping.",
+    q: "What is the BEST verification step to take next?",
+    options: [
+      { text: "Call it done — it moved forward, so it works.", correct: false, why: "Final Function Verification means the WHOLE system must perform reliably, not just barely move." },
+      { text: "Inspect axle alignment — a bent wheel wastes energy and shortens distance.", correct: true, why: "Exactly! Wobble = wasted energy. Aligned axles let the team of parts work together efficiently." },
+      { text: "Wind the mousetrap tighter and try again immediately.", correct: false, why: "Adding more force to a misaligned car won't fix the root problem — it may damage parts." }
+    ]
+  },
+  {
+    tag: "TEST RUN #2",
+    title: "Inconsistent Distance",
+    desc: "You run your car 3 times. It travels 12 ft, then 4 ft, then 15 ft. The performance is unpredictable.",
+    q: "What does inconsistency tell a Creationeer?",
+    options: [
+      { text: "The car is sustainable — variety is good.", correct: false, why: "Sustainability means reliable, repeatable function — not random results." },
+      { text: "The car passed verification because it moved each time.", correct: false, why: "A verified design must perform consistently. Random results signal a hidden problem." },
+      { text: "Something is loose or slipping — the string, lever arm, or axle grip needs investigation.", correct: true, why: "Right! Inconsistency points to a connection that isn't reliable. Hunt down the loose link." }
+    ]
+  },
+  {
+    tag: "STEWARDSHIP CHECK",
+    title: "Materials Review",
+    desc: "Your car works! But you used 3 layers of hot glue, lots of tape, and snapped two CDs trying to mount wheels. You have leftover scraps everywhere.",
+    q: "Which response best reflects responsible stewardship of resources?",
+    options: [
+      { text: "Document what worked and what was wasted, so next build uses fewer materials.", correct: true, why: "Yes! Good stewards learn from each build — reducing waste honors the resources given to us." },
+      { text: "Throw away the scraps — the car is done, that's all that matters.", correct: false, why: "A finished car isn't the only goal. Sustainability includes managing materials wisely." },
+      { text: "Add MORE glue to be extra safe before the final run.", correct: false, why: "Overusing materials adds weight, wastes resources, and doesn't fix design problems." }
+    ]
+  },
+  {
+    tag: "TEST RUN #3",
+    title: "Durability Question",
+    desc: "Your car traveled 20 feet — great! But on the 4th run, the lever arm snapped at the glue joint.",
+    q: "Has your car passed Final Function Verification?",
+    options: [
+      { text: "Yes — it hit 20 feet once, which counts.", correct: false, why: "A one-time success isn't verification. Durability over multiple runs matters." },
+      { text: "No — verification requires the design to be durable across repeated tests.", correct: true, why: "Correct! A verified design holds up. The snapped joint shows the structure isn't yet sustainable." },
+      { text: "Yes — broken parts are normal in engineering.", correct: false, why: "Some failure happens, but a verified design should survive intended use without breaking." }
+    ]
+  },
+  {
+    tag: "SYSTEM CHECK",
+    title: "The Team Performance",
+    desc: "Your wheels spin freely (✓), axles are straight (✓), lever arm is strong (✓), and string is firmly tied (✓). But the car barely creeps forward.",
+    q: "What is most likely missing from the system?",
+    options: [
+      { text: "More weight on the car to push it down.", correct: false, why: "Extra weight usually slows a mousetrap car — not the answer." },
+      { text: "The individual parts pass, but their INTEGRATION (how they work together) needs review — string length, wheel-to-axle grip, or lever path.", correct: true, why: "Spot on! Final Function Verification checks the SYSTEM. Each athlete is ready — now check the teamwork." },
+      { text: "Nothing — if each part works alone, the car must be verified.", correct: false, why: "Parts working alone ≠ system working together. That's exactly why we do final verification." }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+const quizArea = document.getElementById('quizArea');
+const progress = document.getElementById('progress');
+
+function render() {
+  if (current >= scenarios.length) { showFinal(); return; }
+  const s = scenarios[current];
+  progress.style.width = ((current) / scenarios.length * 100) + '%';
+  quizArea.innerHTML = `
+    <div class="scenario">
+      <span class="tag">${s.tag}</span>
+      <h2>${s.title}</h2>
+      <p>${s.desc}</p>
+    </div>
+    <div class="question">${s.q}</div>
+    <div class="options" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <button class="next-btn" id="nextBtn">${current === scenarios.length - 1 ? 'See Results →' : 'Next Test →'}</button>
+  `;
+  const opts = document.getElementById('opts');
+  s.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'option';
+    b.textContent = opt.text;
+    b.onclick = () => choose(i);
+    opts.appendChild(b);
+  });
+  document.getElementById('nextBtn').onclick = () => { current++; render(); };
+}
+
+function choose(i) {
+  const s = scenarios[current];
+  const buttons = document.querySelectorAll('.option');
+  buttons.forEach(b => b.disabled = true);
+  const chosen = s.options[i];
+  if (chosen.correct) {
+    buttons[i].classList.add('correct');
+    score++;
+  } else {
+    buttons[i].classList.add('wrong');
+    s.options.forEach((o, idx) => { if (o.correct) buttons[idx].classList.add('correct'); });
+  }
+  const fb = document.getElementById('fb');
+  fb.innerHTML = `<strong>${chosen.correct ? '✓ Correct!' : '✗ Not quite.'}</strong> ${chosen.why}`;
+  fb.classList.add('show');
+  document.getElementById('nextBtn').classList.add('show');
+}
+
+function showFinal() {
+  progress.style.width = '100%';
+  let badge, message;
+  if (score === 5) { badge = "Master Creationeer 🏆"; message = "Outstanding! You verified like a pro — every system, every joint, every resource."; }
+  else if (score >= 3) { badge = "Skilled Junior Creationeer ⚙️"; message = "Great work! You understand that real verification means the whole team performs reliably."; }
+  else { badge = "Apprentice Builder 🔧"; message = "Good start! Review the explanations — verification is about systems, not single parts."; }
+
+  quizArea.innerHTML = `
+    <div class="final">
+      <h2>Verification Complete!</h2>
+      <div class="score-circle">${score}/5</div>
+      <div class="badge">${badge}</div>
+      <p style="font-size:1.05em; margin:10px 0;">${message}</p>
+      <div class="summary">
+        <strong>Key Takeaways:</strong><br>
+        • Final Function Verification tests the <em>whole system</em>, not just single parts.<br>
+        • A verified design is <em>consistent, durable, and efficient</em>.<br>
+        • Good stewardship means learning from each build to use resources wisely.
+      </div>
+      <button class="restart" onclick="location.reload()">↻ Run Tests Again</button>
+    </div>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>

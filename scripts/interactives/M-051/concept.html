@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Baseline Lab: Mousetrap Car Predictions</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    margin: 0;
+    padding: 16px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 8px;
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+  .step-badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    margin-bottom: 8px;
+  }
+  .track {
+    position: relative;
+    background: linear-gradient(to bottom, #e8eef7 0%, #d4dde9 100%);
+    height: 90px;
+    border-radius: 8px;
+    margin: 16px 0;
+    overflow: hidden;
+    border: 2px solid #1e3a5f;
+  }
+  .ruler {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 22px;
+    background: #fff;
+    border-top: 1px solid #1e3a5f;
+    font-size: 0.7em;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 4px;
+  }
+  .car {
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    font-size: 32px;
+    transition: left 0.05s linear;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+  }
+  button {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+  }
+  button:hover:not(:disabled) { background: #c9a227; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .data-box {
+    background: #f7f9fc;
+    border-left: 4px solid #c9a227;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 4px;
+  }
+  .data-box strong { color: #1e3a5f; }
+  .hidden { display: none; }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .slider-row label { min-width: 140px; font-weight: 600; }
+  input[type=range] { flex: 1; accent-color: #c9a227; }
+  .prediction-input {
+    width: 80px;
+    padding: 6px;
+    border: 2px solid #1e3a5f;
+    border-radius: 4px;
+    font-size: 1em;
+    text-align: center;
+  }
+  .feedback {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-weight: 600;
+  }
+  .good { background: #e6f4e6; border-left: 4px solid #2d7a2d; color: #1d4a1d; }
+  .close { background: #fff4d4; border-left: 4px solid #c9a227; color: #6b5314; }
+  .miss { background: #fce4e4; border-left: 4px solid #a52d2d; color: #5a1818; }
+  .score-display {
+    text-align: center;
+    background: #1e3a5f;
+    color: #c9a227;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.3em;
+    margin: 16px 0;
+  }
+  .progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .dot {
+    height: 8px;
+    flex: 1;
+    background: #d4dde9;
+    border-radius: 4px;
+  }
+  .dot.active { background: #c9a227; }
+  .dot.done { background: #1e3a5f; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🐭 Baseline Lab: Predict Your Mousetrap Car</h1>
+  <div class="progress">
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+  </div>
+
+  <!-- STEP 1: Establish Baseline -->
+  <div id="step1">
+    <span class="step-badge">STEP 1 of 4</span>
+    <h2 style="margin:6px 0;">Run the Baseline 3 Times</h2>
+    <p>Before predicting anything, you need a <strong>baseline</strong>. Run the stock car 3 times and record the distance.</p>
+    <div class="track">
+      <div class="car" id="car1">🏎️</div>
+      <div class="ruler">
+        <span>0m</span><span>2m</span><span>4m</span><span>6m</span><span>8m</span><span>10m</span>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="runBtn" onclick="runBaseline()">▶ Run Trial</button>
+      <span style="align-self:center;">Trial: <strong id="trialCount">0</strong> / 3</span>
+    </div>
+    <div class="data-box">
+      <strong>Trial Data:</strong>
+      <div id="trialList">No runs yet.</div>
+      <div id="avgDisplay"></div>
+    </div>
+    <button id="toStep2" onclick="goStep2()" disabled>Next: Make a Prediction →</button>
+  </div>
+
+  <!-- STEP 2: Predict -->
+  <div id="step2" class="hidden">
+    <span class="step-badge">STEP 2 of 4</span>
+    <h2 style="margin:6px 0;">Predict the Effect of Each Change</h2>
+    <p>Your baseline average is <strong id="baselineRef"></strong>. For each design change, predict how far the car will travel. Use logic — bigger wheels = more distance per turn, heavier car = more friction, etc.</p>
+
+    <div id="predictionArea"></div>
+
+    <button id="toStep3" onclick="goStep3()" disabled>Test My Predictions →</button>
+  </div>
+
+  <!-- STEP 3: Results -->
+  <div id="step3" class="hidden">
+    <span class="step-badge">STEP 3 of 4</span>
+    <h2 style="margin:6px 0;">Compare Predictions vs. Reality</h2>
+    <div id="resultsArea"></div>
+    <button onclick="goStep4()">See Final Score →</button>
+  </div>
+
+  <!-- STEP 4: Final -->
+  <div id="step4" class="hidden">
+    <span class="step-badge">COMPLETE</span>
+    <h2 style="margin:6px 0;">Engineer's Report</h2>
+    <div class="score-display" id="finalScore"></div>
+    <div class="data-box" id="finalFeedback"></div>
+    <p style="font-style:italic; color:#1e3a5f;">"We imitate the Creator's foresight by observing, measuring, and predicting — not guessing." Great Creationeers test before they trust.</p>
+    <button onclick="restart()">↻ Run Lab Again</button>
+  </div>
+</div>
+
+<script>
+  const BASELINE_TRUE = 5.0; // meters, with noise
+  let trials = [];
+  let baselineAvg = 0;
+
+  const changes = [
+    { name: "Add larger drive wheels", effect: 1.6, hint: "Larger wheels travel farther per rotation." },
+    { name: "Add 200g of weight", effect: -1.2, hint: "More weight = more friction & energy loss." },
+    { name: "Lengthen the lever arm", effect: 0.8, hint: "Longer arm = more string pulled per snap." },
+    { name: "Use sticky rubber tires", effect: 0.4, hint: "Better grip = less wheel slip on launch." }
+  ];
+
+  let predictions = {};
+  let actuals = {};
+
+  function runBaseline() {
+    if (trials.length >= 3) return;
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    const car = document.getElementById('car1');
+    const distance = BASELINE_TRUE + (Math.random() * 0.6 - 0.3);
+    const trackWidth = document.querySelector('.track').offsetWidth - 40;
+    const targetLeft = (distance / 10) * trackWidth;
+
+    car.style.left = '0px';
+    let pos = 0;
+    const step = targetLeft / 30;
+    const anim = setInterval(() => {
+      pos += step;
+      if (pos >= targetLeft) {
+        pos = targetLeft;
+        clearInterval(anim);
+        trials.push(distance);
+        updateTrialList();
+        btn.disabled = false;
+        if (trials.length >= 3) {
+          btn.disabled = true;
+          document.getElementById('toStep2').disabled = false;
+        }
+      }
+      car.style.left = pos + 'px';
+    }, 25);
+  }
+
+  function updateTrialList() {
+    document.getElementById('trialCount').textContent = trials.length;
+    document.getElementById('trialList').innerHTML = trials.map((t,i) =>
+      `Trial ${i+1}: <strong>${t.toFixed(2)} m</strong>`
+    ).join(' &nbsp;|&nbsp; ');
+    if (trials.length === 3) {
+      baselineAvg = trials.reduce((a,b)=>a+b,0) / 3;
+      document.getElementById('avgDisplay').innerHTML =
+        `<br><strong style="color:#c9a227;">📊 Baseline Average: ${baselineAvg.toFixed(2)} m</strong>`;
+    }
+  }
+
+  function goStep2() {
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+    document.getElementById('d1').classList.add('done');
+    document.getElementById('d2').classList.add('active');
+    document.getElementById('baselineRef').textContent = baselineAvg.toFixed(2) + ' m';
+
+    const area = document.getElementById('predictionArea');
+    area.innerHTML = '';
+    changes.forEach((c, i) => {
+      const row = document.createElement('div');
+      row.className = 'data-box';
+      row.innerHTML = `
+        <div><strong>${c.name}</strong></div>
+        <div style="font-size:0.85em; color:#555; margin:4px 0;">💡 ${c.hint}</div>
+        <div class="slider-row">
+          <label>Predicted distance:</label>
+          <input type="number" step="0.1" min="0" max="15" class="prediction-input" data-idx="${i}" placeholder="m">
+          <span>meters</span>
+        </div>
+      `;
+      area.appendChild(row);
+    });
+
+    area.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', checkAllFilled);
+    });
+  }
+
+  function checkAllFilled() {
+    const inputs = document.querySelectorAll('#predictionArea input');
+    let allFilled = true;
+    inputs.forEach(inp => {
+      if (inp.value === '' || isNaN(parseFloat(inp.value))) allFilled = false;
+    });
+    document.getElementById('toStep3').disabled = !allFilled;
+  }
+
+  function goStep3() {
+    document.querySelectorAll('#predictionArea input').forEach(inp => {
+      predictions[inp.dataset.idx] = parseFloat(inp.value);
+    });
+
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step3').classList.remove('hidden');
+    document.getElementById('d2').classList.add('done');
+    document.getElementById('d2').classList.remove('active');
+    document.getElementById('d3').classList.add('active');
+
+    const results = document.getElementById('resultsArea');
+    results.innerHTML = '';
+    let scoreTotal = 0;
+
+    changes.forEach((c, i) => {
+      const actual = baselineAvg + c.effect + (Math.random() * 0.4 - 0.2);
+      actuals[i] = actual;
+      const pred = predictions[i];
+      const diff = Math.abs(pred - actual);
+
+      let cls = 'miss', msg = '', pts = 0;
+      if (diff <= 0.5) { cls = 'good'; msg = '🎯 Excellent prediction!'; pts = 25; }
+      else if (diff <= 1.2) { cls = 'close'; msg = '👍 Close — right direction.'; pts = 15; }
+      else { cls = 'miss'; msg = '🔍 Off — review the principle.'; pts = 5; }
+      scoreTotal += pts;
+
+      const direction = c.effect > 0 ? 'farther' : 'shorter';
+      const predDir = pred > baselineAvg ? 'farther' : 'shorter';
+      const dirCorrect = (c.effect > 0) === (pred > baselineAvg);
+
+      results.innerHTML += `
+        <div class="feedback ${cls}">
+          <div><strong>${c.name}</strong></div>
+          <div style="font-weight:normal; margin-top:4px;">
+            You predicted: <strong>${pred.toFixed(2)} m</strong> &nbsp;|&nbsp;
+            Actual: <strong>${actual.toFixed(2)} m</strong> &nbsp;|&nbsp;
+            Off by: ${diff.toFixed(2)} m
+          </div>
+          <div style="font-weight:normal; margin-top:4px;">${msg} ${dirCorrect ? '' : '(Direction was wrong — it should go ' + direction + '.)'}</div>
+        </div>
+      `;
+    });
+
+    window._finalScore = scoreTotal;
+  }
+
+  function goStep4() {
+    document.getElementById('step3').classList.add('hidden');
+    document.getElementById('step4').classList.remove('hidden');
+    document.getElementById('d3').classList.add('done');
+    document.getElementById('d3').classList.remove('active');
+    document.getElementById('d4').classList.add('active');
+
+    const score = window._finalScore;
+    document.getElementById('finalScore').innerHTML = `Score: ${score} / 100`;
+
+    let feedback = '';
+    if (score >= 85) feedback = "🏆 <strong>Master Creationeer!</strong> Your predictions show you understand the principles God built into physics — energy, friction, and leverage.";
+    else if (score >= 60) feedback = "⚙️ <strong>Solid Engineer.</strong> You got the direction of most changes right. Refine your estimates by studying baseline data more carefully.";
+    else feedback = "📚 <strong>Keep observing!</strong> Baselines and predictions improve with practice. Review which design changes help vs. hurt distance.";
+
+    document.getElementById('finalFeedback').innerHTML = feedback;
+  }
+
+  function restart() {
+    trials = []; predictions = {}; actuals = {}; baselineAvg = 0;
+    document.getElementById('trialCount').textContent = '0';
+    document.getElementById('trialList').innerHTML = 'No runs yet.';
+    document.getElementById('avgDisplay').innerHTML = '';
+    document.getElementById('runBtn').disabled = false;
+    document.getElementById('toStep2').disabled = true;
+    document.getElementById('car1').style.left = '0px';
+    document.getElementById('step4').classList.add('hidden');
+    document.getElementById('step1').classList.remove('hidden');
+    ['d1','d2','d3','d4'].forEach(id => {
+      document.getElementById(id).classList.remove('done','active');
+    });
+  }
+
+  // init
+  document.getElementById('d1').classList.add('active');
+</script>
+</body>
+</html>

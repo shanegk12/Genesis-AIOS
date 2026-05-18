@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Decommissioning and Disassembly</summary>
+    <div class="panel-body"><p>Plain-language explanation:
+Decommissioning is like saying goodbye to your mousetrap car in a formal way. It’s the planned process of taking your project out of active service. You’ve raced it, tested it, and maybe even celebrated its successes. Now, it's time to responsibly conclude its operational life. After decommissioning, we move to disassembly, which is the step-by-step process of taking your car apart. This isn't just ripping things off; it’s a careful, methodical process where you understand how each part was put together and how it can be separated.</p><p>Direct application to the mousetrap car project:
+For your mousetrap car, decommissioning might mean performing one final, recorded run to document its ultimate performance before you begin to take it apart. Disassembly involves carefully removing the wheels, axles, body, and then the mousetrap itself. Think about the order. Would you remove the mousetrap first for safety? Would you remove the wheels before the axles? Document each step as you go. Consider how easy or difficult it is to separate different components. Did the glue hold too well? Did screws strip? These observations are important.</p><p>Multiscale Modeling connection:
+When you disassemble your car, you are observing macro-level phenomena like a wheel detaching from an axle or a piece of wood splitting. Through multiscale modeling, we can connect these observations to atomic-level causes. For example, if a glued joint breaks cleanly, it tells us something about the adhesive forces between the molecules of the glue and the car material. If wood splits, it reveals the strength and orientation of the cellulose fibers at a micro-level, and how those fibers are bonded at an atomic level. Understanding these connections helps you choose better materials or joining methods for your next project, preventing similar issues.</p><p>OCV application:
+Let's apply the OCV method to the disassembly of your mousetrap car.
+Objective: To safely and efficiently disassemble the mousetrap car while preserving as many components as possible for future use or recycling.
+Constraints:
+       Available tools (e.g., screwdrivers, pliers, utility knife).
+       Time allocated for disassembly.
+       Safety precautions (e.g., handling the mousetrap spring safely, wearing eye protection).
+Variables:
+       The type of fasteners used (screws, glue, tape, zip ties).
+       The order of disassembly steps.
+       The amount of force applied during separation.
+For instance, if you used a strong adhesive to attach your wheels, the objective of preserving components might be constrained by the difficulty of separating them without damage. A variable you could control is how much heat you apply (if safe for the material) to weaken the adhesive, which might make disassembly easier but could also damage the material.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Recycling and Repurposing</summary>
+    <div class="panel-body"><p>Plain-language explanation:
+Once your car is disassembled, you'll have a pile of individual parts. Now comes the exciting part of &quot;Death &amp; Recycling&quot;: deciding what to do with each piece. Recycling means taking materials like metal or certain plastics and sending them to a facility where they can be broken down and turned into new raw materials. Reusing means using a component again for the exact same purpose in a different project. Repurposing means taking a component and giving it a completely new job or function that it wasn't originally designed for. This is where your creativity truly shines!</p><p>Direct application to the mousetrap car project:
+Look at your disassembled mousetrap car components.
+   Mousetrap: Can the metal spring or base be recycled? Can the entire mousetrap be reused in another car or perhaps repurposed as a small clamp or a simple machine demonstration?
+   Wheels: Are they still perfectly round and intact? Can they be reused for another vehicle project? If they are plastic, can they be recycled with other plastics?
+   Axles: Are they straight and undamaged? Can they be reused for another project? If they are metal, can they be recycled?
+   Body frame: If made of wood, can small pieces be used for craft projects or kindling? Can larger pieces be cut down for smaller structural elements in a new design?
+   Adhesives/Fasteners: Can screws or bolts be saved and reused?</p><p>Multiscale Modeling connection:
+The ability of a material to be recycled or repurposed is fundamentally linked to its atomic structure. For example, metals like steel (used in mousetrap springs or axles) are recyclable because their metallic bonds allow them to be melted down and reformed without significant loss of strength. At the atomic level, the orderly crystal lattice of metal can be disrupted and then re-established. Plastics, on the other hand, are polymers—long chains of molecules. Their recyclability depends on the type of polymer. Some can be melted and reformed (like thermoplastics), while others (thermosets) cannot because their molecular chains are permanently cross-linked. Understanding this atomic-level behavior helps engineers design products that are easier to recycle at the macro-level.</p><p>OCV application:
+Consider the decision to repurpose an undamaged mousetrap spring.
+Objective: To maximize the value derived from the mousetrap spring after its initial use.
+Constraints:
+       The physical condition and integrity of the spring.
+       Your imagination and available resources for a new project.
+       Safety considerations for handling the spring.
+Variables:
+       The new function you assign to the spring (e.g., a mini-catapult, a doorstop mechanism, a tensioner).
+       Any modifications you make to the spring to fit its new purpose.
+For example, if the spring is still perfectly functional, you might choose to repurpose it into a mini-catapult, maximizing its mechanical energy potential. The constraint would be that the spring must maintain its structural integrity, and a variable could be the lever arm you attach to it to achieve the desired throwing distance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Final Project Review and Documentation</summary>
+    <div class="panel-body"><p>Plain-language explanation:
+Closing a project isn't just about the physical components; it's also about capturing the knowledge gained. A final project review is a time to look back at everything you did, from your initial ideas to the final race. What worked well? What didn’t? What would you do differently next time? Documentation means writing down these reflections and observations so you (and others) can learn from this experience. This creates a valuable record for future projects.</p><p>Direct application to the mousetrap car project:
+Think about your entire mousetrap car project.
+   Design phase: Were your initial objectives clear? Were your constraints realistic? Did your variables (like wheel size or lever arm length) perform as expected?
+   Build phase: Were your construction methods effective? Did you encounter unexpected challenges?
+   Testing phase: Did your car meet its performance goals? What were the biggest surprises?
+   Teamwork (if applicable): How well did you collaborate? What could improve?
+Write down these insights. This isn't just for a grade; it's about becoming a better engineer. The Horstemeyer et al. paper emphasizes the importance of learning from the entire Creationeering™ process, stating that &quot;Creationeers™ create and construct through this entire process in hopes that the cycle can be re-energized for a second and third round.&quot; Your documentation fuels that re-energization for your next project.</p></div>
+  </details>
+</div>
+</body>
+</html>

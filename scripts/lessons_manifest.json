@@ -1556,9 +1556,9 @@
       "phase": "Sustainability",
       "prev": "Design for Disassembly and Recycling",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T19:01:33.961368+00:00",
-      "error": null,
+      "status": "failed",
+      "completed_at": "2026-05-18T13:07:40.884250+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/14zURPF6v6A_rQFDD0ojrmFSos3jwu_kZvLkpfg5dqDc:batchUpdate?alt=json returned \"Invalid requests[0].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[0].insertText: Insert text requests must specify text to insert.\">\n",
       "qc_status": null,
       "qc_scores": {
         "reading_level": 1,
@@ -1930,8 +1930,8 @@
       "phase": "Death & Recycling",
       "prev": "Recycling Logistics and Infrastructure",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": "2026-05-17T19:01:34.262503+00:00",
+      "status": "done",
+      "completed_at": "2026-05-18T13:08:15.184212+00:00",
       "error": null
     },
     {
@@ -3132,9 +3132,31 @@
       "phase": "Performance",
       "prev": "Lesson: Variables and Optimization Cycle",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-18T13:09:59.536328+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2603,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "This is an excellent lesson draft. The reading level is appropriate, and the proprietary frameworks (Creationeering, Multiscale Modeling, OCV) are applied correctly and consistently. The faith integration is natural and meaningful. The only minor area for improvement is the analogy quality; while the plant fertilizer analogy is good, adding more concrete, relatable examples throughout would further strengthen student understanding. The lesson is well-structured and substantive.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-051/flashcards.html",
+        "ocv": "interactives/M-051/ocv.html",
+        "concept": "interactives/M-051/concept.html"
+      }
     },
     {
       "id": "M-052",
@@ -3145,9 +3167,9 @@
       "phase": "Performance",
       "prev": "Performance Activity: Baselines and Predictions",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:13:20.231019+00:00",
+      "error": "Drafting: 'Variable Confirmation Tests' (Performance phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-053",
@@ -3158,9 +3180,31 @@
       "phase": "Sustainability",
       "prev": "Build: Variable Confirmation Tests",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-18T13:13:51.431389+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2748,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent overall, with strong analogies, clear writing, and natural faith integration. The application of the OCV framework could be improved. In Part 1, the variable (string tension) is more suited for performance tuning than for verifying a final, locked-in design. Final Function Verification should focus on assessing the completed system against its objectives, not on continued optimization. Clarifying this distinction would strengthen the application of the framework.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-053/flashcards.html",
+        "ocv": "interactives/M-053/ocv.html",
+        "concept": "interactives/M-053/concept.html"
+      }
     },
     {
       "id": "M-054",
@@ -3171,9 +3215,9 @@
       "phase": "Sustainability",
       "prev": "Lesson: Final Function Verification",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:16:52.177819+00:00",
+      "error": "Drafting: 'Performance Data' (Sustainability phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-055",
@@ -3184,9 +3228,9 @@
       "phase": "Sustainability",
       "prev": "Lesson: Performance Data",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:17:16.930287+00:00",
+      "error": "Drafting: 'Optimization Tests' (Sustainability phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-056",
@@ -3197,9 +3241,9 @@
       "phase": "Death & Recycling",
       "prev": "Build: Optimization Tests",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:18:28.420336+00:00",
+      "error": "Drafting: 'Final Runs and Data' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-057",
@@ -3210,9 +3254,9 @@
       "phase": "Death & Recycling",
       "prev": "Performance Activity: Final Runs and Data",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:18:34.583975+00:00",
+      "error": "Drafting: 'Product End-of-Life Analysis' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-058",
@@ -3223,9 +3267,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Product End-of-Life Analysis",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:19:06.517527+00:00",
+      "error": "Drafting: 'Sustainable Materials' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-059",
@@ -3236,9 +3280,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Sustainable Materials",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:19:16.191427+00:00",
+      "error": "Drafting: 'Product Sheet and 2-Minute Pitch Practice' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-060",
@@ -3249,9 +3293,9 @@
       "phase": "Death & Recycling",
       "prev": "BA: Product Sheet + 2-Minute Pitch Practice",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:20:23.708170+00:00",
+      "error": "Drafting: 'V2.0 Design in Sustainability' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-061",
@@ -3262,9 +3306,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: V2.0 Design in Sustainability",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:20:30.862769+00:00",
+      "error": "Drafting: 'Total Cost and Lifecycle Improvement Plan' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-062",
@@ -3275,9 +3319,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Total Cost and Lifecycle Improvement Plan",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:20:52.050123+00:00",
+      "error": "Drafting: 'Future Designs' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-063",
@@ -3288,9 +3332,9 @@
       "phase": "Death & Recycling",
       "prev": "Sustainability Activity: Future Designs",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:21:07.917588+00:00",
+      "error": "Drafting: 'Org Chart and Production Gantt Chart' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-064",
@@ -3301,9 +3345,9 @@
       "phase": "Death & Recycling",
       "prev": "BA: Org Chart + Production Gantt Chart",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:21:17.439756+00:00",
+      "error": "Drafting: 'Classifying End of Life' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-065",
@@ -3314,9 +3358,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Classifying End of Life",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:21:27.829426+00:00",
+      "error": "Drafting: 'Principles of E-Waste and Safe Disposal' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-066",
@@ -3327,9 +3371,9 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Principles of E-Waste and Safe Disposal",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:21:57.409661+00:00",
+      "error": "Drafting: 'Business Plan Compilation and Pitch' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-067",
@@ -3340,9 +3384,9 @@
       "phase": "Death & Recycling",
       "prev": "BA: Business Plan Compilation + Pitch",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-18T13:22:04.487416+00:00",
+      "error": "Drafting: 'Salvage Value and Resource Recovery' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-068",
@@ -3353,9 +3397,36 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Salvage Value and Resource Recovery",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-18T13:22:37.691050+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2213,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured with excellent faith integration and correct application of the Creationeering framework. The reading level, particularly in the Multiscale Modeling sections, is advanced for middle school and could be simplified. While the core potter analogy is strong, the lesson would benefit from more concrete, everyday analogies to explain complex concepts like decommissioning and OCV. Overall, this is a strong, substantive lesson that meets the course objectives.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-068/flashcards.html",
+        "accordion": "interactives/M-068/accordion.html",
+        "ocv": "interactives/M-068/ocv.html",
+        "concept": "interactives/M-068/concept.html"
+      },
+      "assessment_status": "done",
+      "assessment_file": "assessments/M-068.json",
+      "scorm_status": "done",
+      "scorm_file": "scorm/M-068.zip"
     },
     {
       "id": "M-069",
