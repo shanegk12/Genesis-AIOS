@@ -274,6 +274,8 @@ def main():
     parser.add_argument("--dry-run",    action="store_true", help="Preview without posting")
     parser.add_argument("--lesson",     help="Import a single lesson by ID (e.g. C-025)")
     parser.add_argument("--course",     choices=["creationeering", "mousetrap", "both"], default="both")
+    parser.add_argument("--all-done",   action="store_true",
+                        help="Import all done lessons regardless of qc_status (pull from docs)")
     parser.add_argument("--delay",       type=float, default=0.5, help="Seconds between requests (default 0.5)")
     parser.add_argument("--skip-images", action="store_true", help="Skip image upload")
     args = parser.parse_args()
@@ -292,12 +294,18 @@ def main():
         if not targets:
             print(f"Lesson {args.lesson} not found in manifest")
             sys.exit(1)
+    elif args.all_done:
+        targets = [
+            l for l in lessons
+            if l.get("status") == "done"
+            and (args.course == "both" or l["doc"] in (args.course, f"{args.course}-2"))
+        ]
     else:
         targets = [
             l for l in lessons
             if l.get("qc_status") == "passed"
             and l.get("status") == "done"
-            and (args.course == "both" or l["doc"] == args.course)
+            and (args.course == "both" or l["doc"] in (args.course, f"{args.course}-2"))
         ]
 
     print(f"Platform import -> {target}")
