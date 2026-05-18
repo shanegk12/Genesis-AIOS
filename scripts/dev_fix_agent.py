@@ -17,6 +17,7 @@ Usage:
 
 import argparse, json, os, re, sys, time, urllib.request, urllib.error
 from datetime import datetime, timezone
+from widget_schemas import WIDGET_REFERENCE, accordion, tabs, callout, image_needed
 
 REPORTS_PATH = os.path.join(os.path.dirname(__file__), "qc_reports.json")
 
@@ -105,18 +106,10 @@ Section: {section_heading}
 Section text (first 600 chars):
 {section_text[:600]}
 
-Write ONE short callout block to break up this text. Choose the most appropriate type:
-- Tip (practical advice)
-- Note (important clarification)
-- Key Point (core concept summary)
-- Biblical Connection (faith tie-in, only if natural)
+{WIDGET_REFERENCE}
 
-Return ONLY a raw HTML snippet — no markdown, no explanation. Use this exact format:
-<div data-callout="TYPE" class="callout-block callout-TYPE">
-  <p>2-3 concise sentences relevant to this section. Written for 6th-8th grade.</p>
-</div>
-
-TYPE must be one of: tip, info, success, biblical"""
+Write ONE callout block to break up this word wall. Choose tip, info, success, or biblical.
+Return ONLY the raw HTML callout — no markdown, no explanation, no preamble."""
 
     try:
         result = _gemini(api_key, prompt)
@@ -137,12 +130,13 @@ def gemini_widget_content(api_key: str, lesson_title: str, widget_label: str,
 Lesson: {lesson_title}
 {widget_type.capitalize()} title: {widget_label}
 
-This {widget_type} contains only placeholder text. Write 2-3 paragraphs of real curriculum content
-appropriate for 6th-8th grade. Keep sentences short and concrete. No jargon without explanation.
+{WIDGET_REFERENCE}
 
-Return ONLY raw HTML paragraphs — no markdown, no preamble:
-<p>...</p>
-<p>...</p>"""
+This {widget_type} contains only placeholder text. Write real curriculum content appropriate
+for 6th-8th grade. Use widgets where they add clarity — tabs to compare examples, a callout
+for a key point, columns for a term+definition pair. Keep sentences short and concrete.
+
+Return ONLY raw HTML — no markdown, no preamble. Must parse correctly in TipTap."""
 
     try:
         result = _gemini(api_key, prompt)
