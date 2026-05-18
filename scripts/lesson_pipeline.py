@@ -205,7 +205,7 @@ def write_to_tab(doc_id, tab_id, text):
 
 def main():
     parser = argparse.ArgumentParser(description="Genesis K-12 Lesson Draft Pipeline")
-    parser.add_argument("--doc",       required=True, choices=["creationeering", "mousetrap"],
+    parser.add_argument("--doc",       required=True, choices=["creationeering", "creationeering-2", "mousetrap"],
                         help="Which course doc to write to")
     parser.add_argument("--tab",       required=True, help="Exact tab title to write into")
     parser.add_argument("--topic",     required=True, help="Lesson topic")
@@ -226,7 +226,7 @@ def main():
 
     doc_id = DOC_IDS[args.doc]
 
-    template = CREATIONEERING_PROMPT_TEMPLATE if args.doc == "creationeering" else MOUSETRAP_PROMPT_TEMPLATE
+    template = MOUSETRAP_PROMPT_TEMPLATE if args.doc == "mousetrap" else CREATIONEERING_PROMPT_TEMPLATE
     prompt = template.format(
         topic=args.topic,
         phase=args.phase,
