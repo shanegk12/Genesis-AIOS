@@ -20,7 +20,7 @@ MANIFEST_PATH  = os.path.join(os.path.dirname(__file__), "lessons_manifest.json"
 REPORTS_PATH   = os.path.join(os.path.dirname(__file__), "qc_reports.json")
 
 LIVE_URL  = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-API_KEY   = "gk12-pipeline-2026"
+API_KEY   = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
 
 EXEMPT_HEADINGS = {
     "lesson overview", "learning objective", "learning objectives",
@@ -97,7 +97,7 @@ def _analyze_section(sec: dict):
 
     # Paragraphs + word count (excluding those inside accordions/tabs/widgets)
     stripped = re.sub(r'<details[^>]*>.*?</details>', '', h, flags=re.DOTALL)
-    stripped = re.sub(r'<div[^>]*data-tab[^>]*>.*?(?=<div[^>]*data-tab|$)', '', stripped, flags=re.DOTALL)
+    stripped = re.sub(r'<div[^>]*tab-group-block[^>]*>.*?</div>\s*</div>', '', stripped, flags=re.DOTALL)
 
     for p_match in re.finditer(r'<p[^>]*>(.*?)</p>', stripped, re.DOTALL):
         text = _strip_tags(p_match.group(1))
@@ -114,12 +114,12 @@ def _analyze_section(sec: dict):
     sec['images'] += carousels
     sec['widgets'] += carousels
 
-    # Callouts + columns
-    sec['widgets'] += len(re.findall(r'data-callout', h))
+    # Callouts + columns (matches blocksToHtml class names)
+    sec['widgets'] += len(re.findall(r'callout-block', h))
     sec['widgets'] += len(re.findall(r'data-columns', h))
 
-    # Accordions
-    for acc_match in re.finditer(r'<details[^>]*data-accordion[^>]*>(.*?)</details>', h, re.DOTALL):
+    # Accordions (blocksToHtml generates <details class="accordion-block">)
+    for acc_match in re.finditer(r'<details[^>]*>(.*?)</details>', h, re.DOTALL):
         acc_html = acc_match.group(1)
         title_m  = re.search(r'<summary[^>]*>(.*?)</summary>', acc_html, re.DOTALL)
         title    = _strip_tags(title_m.group(1)) if title_m else ''

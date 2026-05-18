@@ -22,7 +22,7 @@ IMAGES_DIR      = os.path.join(os.path.dirname(__file__), "..", "output", "image
 
 LOCAL_URL = "http://localhost:3000"
 LIVE_URL  = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-API_KEY   = "gk12-pipeline-2026"
+API_KEY   = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
 
 COURSE_IDS = {
     "creationeering":   "creationeering-ms",

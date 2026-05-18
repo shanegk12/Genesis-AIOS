@@ -22,7 +22,7 @@ from widget_schemas import WIDGET_REFERENCE, accordion, tabs, callout, image_nee
 REPORTS_PATH = os.path.join(os.path.dirname(__file__), "qc_reports.json")
 
 LIVE_URL = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-API_KEY  = "gk12-pipeline-2026"
+API_KEY  = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
 
 GEMINI_MODEL = "gemini-2.5-flash"
 GEMINI_URL   = (f"https://generativelanguage.googleapis.com/v1beta"

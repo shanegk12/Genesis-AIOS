@@ -23,7 +23,7 @@ REPORTS_PATH  = os.path.join(os.path.dirname(__file__), "qc_reports.json")
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 
 LIVE_URL = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-API_KEY  = "gk12-pipeline-2026"
+API_KEY  = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
 
 GEMINI_MODEL = "gemini-2.5-pro"
 GEMINI_URL   = (f"https://generativelanguage.googleapis.com/v1beta"
@@ -134,21 +134,25 @@ def fetch_lesson(lesson_id: str) -> dict | None:
 def patch_lesson(lesson_id: str, content: str, dry_run: bool) -> bool:
     if dry_run:
         preview = content[:400].replace('\n', ' ')
-        print(f"  [DRY RUN] would PATCH {lesson_id}:\n    {preview}...")
+        print(f"  [DRY RUN] would parse-html {lesson_id} ({len(content)} chars):\n    {preview}...")
         return True
+    # Use parse-html action so blocks + content are updated atomically
     url     = f"{LIVE_URL}/api/admin/lessons/{lesson_id}"
-    payload = json.dumps({"content": content}).encode("utf-8")
+    payload = json.dumps({"action": "parse-html", "html": content}).encode("utf-8")
     req     = urllib.request.Request(
         url, data=payload,
         headers={"Authorization": f"Bearer {API_KEY}",
                  "Content-Type": "application/json"},
-        method="PATCH",
+        method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return json.loads(resp.read().decode()).get("ok", False)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode())
+            block_count = result.get("blockCount", "?")
+            print(f"    Saved: {block_count} blocks")
+            return result.get("ok", False)
     except Exception as e:
-        print(f"  PATCH error {lesson_id}: {e}")
+        print(f"  parse-html error {lesson_id}: {e}")
         return False
 
 
