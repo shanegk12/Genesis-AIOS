@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Parts: Death & Recycling Sort</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+  }
+  h1 { margin: 0 0 4px 0; font-size: 1.3em; }
+  header p { margin: 0; font-size: 0.9em; color: #c9a227; }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border: 2px solid #1e3a5f;
+    font-weight: bold;
+  }
+  .stats span { color: #c9a227; }
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .parts-pool {
+    background: #fff;
+    border: 2px dashed #1e3a5f;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 300px;
+  }
+  .parts-pool h3 { margin: 4px 0 10px 0; text-align: center; }
+  .part {
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border-radius: 6px;
+    cursor: grab;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    user-select: none;
+    transition: transform 0.1s;
+  }
+  .part:active { cursor: grabbing; transform: scale(1.03); }
+  .part.dragging { opacity: 0.5; }
+  .bins {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 90px;
+    transition: background 0.2s;
+  }
+  .bin.drag-over { background: #fff8dd; border-color: #c9a227; }
+  .bin h4 {
+    margin: 0 0 6px 0;
+    color: #1e3a5f;
+    font-size: 1em;
+  }
+  .bin .desc { font-size: 0.78em; color: #555; margin-bottom: 6px; }
+  .bin .dropped {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .dropped-item {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.82em;
+  }
+  .dropped-item.wrong { background: #b33; }
+  .dropped-item.right { background: #2a7a3a; }
+  #feedback {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #fff;
+    border-left: 5px solid #c9a227;
+    min-height: 24px;
+    font-size: 0.92em;
+  }
+  #finalScreen {
+    display: none;
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 14px;
+  }
+  #finalScreen h2 { color: #1e3a5f; margin-top: 0; }
+  .score-big { font-size: 2.5em; color: #c9a227; font-weight: bold; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover { background: #1e3a5f; color: #fff; }
+  @media (max-width: 600px) {
+    .game-area { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>♻️ End-of-Life Sort: Mousetrap Parts</h1>
+  <p>Drag each used mousetrap part to its best second life.</p>
+</header>
+
+<div class="stats">
+  <div>Score: <span id="score">0</span></div>
+  <div>Sorted: <span id="sorted">0</span> / <span id="total">0</span></div>
+</div>
+
+<div class="game-area">
+  <div class="parts-pool" id="pool">
+    <h3>Used Mousetrap Parts</h3>
+  </div>
+  <div class="bins">
+    <div class="bin" data-bin="reuse">
+      <h4>🔁 REUSE</h4>
+      <div class="desc">Still works — use again as-is</div>
+      <div class="dropped" id="bin-reuse"></div>
+    </div>
+    <div class="bin" data-bin="recycle">
+      <h4>♻️ RECYCLE</h4>
+      <div class="desc">Reprocess material into something new</div>
+      <div class="dropped" id="bin-recycle"></div>
+    </div>
+    <div class="bin" data-bin="repurpose">
+      <h4>🔧 REPURPOSE</h4>
+      <div class="desc">Use in a creative new way</div>
+      <div class="dropped" id="bin-repurpose"></div>
+    </div>
+    <div class="bin" data-bin="trash">
+      <h4>🗑️ DISPOSE</h4>
+      <div class="desc">Broken/unsafe — landfill only</div>
+      <div class="dropped" id="bin-trash"></div>
+    </div>
+  </div>
+</div>
+
+<div id="feedback">Drag a part to begin!</div>
+
+<div id="finalScreen">
+  <h2>Mission Complete! 🎉</h2>
+  <div class="score-big" id="finalScore"></div>
+  <p id="finalMsg"></p>
+  <p style="font-style: italic; color: #1e3a5f; font-size: 0.9em;">
+    "One generation passes away, and another generation comes; but the earth abides forever." — Ecclesiastes 1:4
+  </p>
+  <button onclick="reset()">Try Again</button>
+</div>
+
+<script>
+const parts = [
+  { id: 'wood', name: '🪵 Wooden base (intact)', correct: 'reuse', tip: 'A solid wood base can be unscrewed and used in a new build.' },
+  { id: 'spring', name: '🌀 Steel spring (stretched out)', correct: 'recycle', tip: 'Steel that lost its springiness can be melted down and reformed.' },
+  { id: 'wheels', name: '⚙️ Plastic wheels (good shape)', correct: 'reuse', tip: 'Working wheels can roll right into the next project!' },
+  { id: 'cardboard', name: '📦 Cardboard body panel', correct: 'recycle', tip: 'Cardboard breaks down into paper pulp easily.' },
+  { id: 'string', name: '🧵 Tangled string', correct: 'repurpose', tip: 'Tangled string isn\'t great for triggers but works for crafts or bundling.' },
+  { id: 'paperclip', name: '📎 Bent paperclip lever', correct: 'repurpose', tip: 'Bent metal can become a hook, tie, or art piece.' },
+  { id: 'glue', name: '🧴 Dried hot glue blob', correct: 'trash', tip: 'Hardened mixed adhesives can\'t be recycled curbside.' },
+  { id: 'tape', name: '🩹 Used duct tape', correct: 'trash', tip: 'Sticky residue contaminates recycling streams.' },
+  { id: 'rubber', name: '🟠 Rubber band (snapped)', correct: 'recycle', tip: 'Some rubber can be ground down and reused in new products.' },
+  { id: 'screws', name: '🔩 Metal screws (clean)', correct: 'reuse', tip: 'Clean fasteners are gold — save them for the next build!' }
+];
+
+let score = 0;
+let sortedCount = 0;
+const total = parts.length;
+document.getElementById('total').textContent = total;
+
+const pool = document.getElementById('pool');
+const feedback = document.getElementById('feedback');
+
+function buildPool() {
+  parts.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'part';
+    div.draggable = true;
+    div.id = p.id;
+    div.textContent = p.name;
+    div.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', p.id);
+      div.classList.add('dragging');
+    });
+    div.addEventListener('dragend', () => div.classList.remove('dragging'));
+    // touch support
+    addTouch(div, p.id);
+    pool.appendChild(div);
+  });
+}
+
+function addTouch(el, id) {
+  let ghost = null;
+  let startX, startY;
+  el.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    startX = t.clientX; startY = t.clientY;
+    ghost = el.cloneNode(true);
+    ghost.style.position = 'fixed';
+    ghost.style.pointerEvents = 'none';
+    ghost.style.opacity = '0.8';
+    ghost.style.zIndex = '999';
+    ghost.style.left = t.clientX + 'px';
+    ghost.style.top = t.clientY + 'px';
+    document.body.appendChild(ghost);
+  });
+  el.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    if (ghost) { ghost.style.left = (t.clientX-50)+'px'; ghost.style.top=(t.clientY-20)+'px'; }
+  }, {passive:false});
+  el.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
+    if (ghost) { ghost.remove(); ghost = null; }
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    const bin = target ? target.closest('.bin') : null;
+    if (bin) handleDrop(id, bin.dataset.bin);
+  });
+}
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('drag-over'); });
+  bin.addEventListener('dragleave', () => bin.classList.remove('drag-over'));
+  bin.addEventListener('drop', e => {
+    e.preventDefault();
+    bin.classList.remove('drag-over');
+    const id = e.dataTransfer.getData('text/plain');
+    handleDrop(id, bin.dataset.bin);
+  });
+});
+
+function handleDrop(id, binType) {
+  const partEl = document.getElementById(id);
+  if (!partEl) return;
+  const part = parts.find(p => p.id === id);
+  const correct = part.correct === binType;
+  
+  const item = document.createElement('div');
+  item.className = 'dropped-item ' + (correct ? 'right' : 'wrong');
+  item.textContent = part.name + (correct ? ' ✓' : ' ✗');
+  document.getElementById('bin-'+binType).appendChild(item);
+  
+  partEl.remove();
+  sortedCount++;
+  if (correct) score++;
+  
+  document.getElementById('score').textContent = score;
+  document.getElementById('sorted').textContent = sortedCount;
+  
+  feedback.innerHTML = (correct ? '<b style="color:#2a7a3a">Correct!</b> ' : '<b style="color:#b33">Not quite.</b> ') + part.tip;
+  
+  if (sortedCount === total) setTimeout(showFinal, 800);
+}
+
+function showFinal() {
+  document.getElementById('finalScreen').style.display = 'block';
+  const pct = Math.round(score/total*100);
+  document.getElementById('finalScore').textContent = score + ' / ' + total + ' (' + pct + '%)';
+  let msg;
+  if (pct === 100) msg = "Perfect! You're a true Creationeer — every material has a future.";
+  else if (pct >= 80) msg = "Great work! You understand the cycle of materials well.";
+  else if (pct >= 60) msg = "Good effort. Review the tips — many 'trash' items have second lives!";
+  else msg = "Keep learning! Reuse and recycle should be tried before disposal.";
+  document.getElementById('finalMsg').textContent = msg;
+}
+
+function reset() {
+  score = 0; sortedCount = 0;
+  document.getElementById('score').textContent = 0;
+  document.getElementById('sorted').textContent = 0;
+  pool.innerHTML = '<h3>Used Mousetrap Parts</h3>';
+  document.querySelectorAll('.dropped').forEach(d => d.innerHTML = '');
+  document.getElementById('finalScreen').style.display = 'none';
+  feedback.textContent = 'Drag a part to begin!';
+  buildPool();
+}
+
+buildPool();
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Foundation: Your Car’s Frame</summary>
+    <div class="panel-body"><p>The frame is the backbone of your mousetrap car. Think of it like the chassis of a full-size automobile or the skeleton of an animal. It holds everything together and provides a stable platform for your axles, wheels, and mousetrap. A well-designed frame is rigid, lightweight, and balanced.</p><p>For your mousetrap car, the frame needs to be strong enough to withstand the forces of the mousetrap spring and the movement of the car, without bending or flexing excessively. If your frame flexes, it can throw off your axle alignment, increase friction, and waste energy. Common materials for frames include balsa wood, cardboard, or even lightweight plastics. The choice of material will affect both the weight and the rigidity of your car. A lighter frame means less mass to accelerate, potentially leading to greater speed and distance.</p><p>Multiscale Modeling Connection:
+At the macro-level, you observe your car's frame flexing or remaining rigid. At the atomic level, this rigidity depends on the material's molecular structure and the strength of the bonds between atoms. For example, wood's cellulose fibers provide excellent stiffness, while the polymer chains in plastic can be engineered for varying degrees of flexibility or strength. The way you join these materials (glue, tape, fasteners) also impacts the overall structural integrity at the micro-level of the connections, which then translates to the macro-level performance of your car.</p><p>OCV Application:
+Objective: Maximize the car's distance traveled.
+Constraint: The car must be powered solely by a standard mousetrap.
+Variable: The material and design of the frame.
+If you choose a frame material that is too heavy (e.g., thick plywood), your objective of maximizing distance might be constrained by the mousetrap's limited energy. If you choose a frame material that is too flexible (e.g., thin cardboard without reinforcement), the frame might twist under torque, leading to misalignment and energy loss, again constraining your distance. Your variable, frame material and design, must be carefully selected to balance weight and rigidity within the mousetrap power constraint to achieve your objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: The Connectors: Axles and Their Mounting</summary>
+    <div class="panel-body"><p>Axles are the critical link between your frame and your wheels. They allow your wheels to rotate freely and transfer the rotational energy from the mousetrap string into linear motion. The key to effective axles is minimizing friction and ensuring perfect alignment.</p><p>For your mousetrap car, you'll need to select appropriate axle materials. Common choices include wooden dowels, metal rods, or even skewers. The smoother the surface of your axle, the less friction it will experience when rotating. Just as important is how your axles are mounted to the frame. They need to be held securely, but also allow for free rotation. Eye hooks, plastic tubing, or even drilled holes can serve as axle bearings. The goal is to create a bearing that has minimal contact with the axle, reducing the surface area where friction can occur.</p><p>Alignment is crucial. If your axles are not perfectly parallel to each other and perpendicular to the direction of travel, your car will veer off course, wasting energy and reducing distance. Use a ruler or square to ensure precise placement.</p><p>Multiscale Modeling Connection:
+When your axle rotates in its bearing, friction occurs at the contact surfaces. At the macro-level, you feel the resistance. At the atomic level, this friction is caused by the interlocking of microscopic bumps and valleys on the surfaces of the axle and the bearing. The type of materials used (e.g., metal on plastic versus wood on wood) and their surface smoothness (how many atoms are interacting) directly influence the atomic-level forces that create macro-level friction. Lubricants work by creating a thin layer of molecules between these surfaces, reducing the direct atomic-level interactions and thus reducing friction.</p><p>OCV Application:
+Objective: Achieve the longest possible travel distance.
+Constraint: Must use readily available materials for axles and bearings.
+Variable: Axle material (e.g., wooden dowel, metal rod) and bearing type (e.g., eye hooks, plastic straw).
+If you choose a rough wooden dowel for an axle and mount it directly in a tight hole drilled in the frame, the friction will be high, limiting your car's distance. If you instead use a polished metal rod as an axle and run it through a smooth plastic straw (acting as a bearing), the friction will be significantly lower, improving your car's performance toward your objective. The variable choices for axle and bearing directly impact the constraint of minimizing energy loss due to friction.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: The Movers: Wheels and Their Attachment</summary>
+    <div class="panel-body"><p>The wheels are where all the energy transfer culminates, converting rotational motion into forward movement. The characteristics of your wheels—size, weight, and material—significantly impact your car's performance.</p><p>For your mousetrap car, larger wheels generally cover more distance per rotation, but they also require more torque to start moving and accelerate. Smaller wheels accelerate faster but cover less distance per rotation. Consider the trade-off based on your car's overall design. Lightweight wheels are always preferred, as less mass in the wheels means more energy can be used for forward motion. Materials like CDs, bottle caps, or foam board can be used.</p><p>Traction is also important. The wheel material and surface texture determine how well the wheels grip the ground. Too little traction, and your wheels will spin in place. Too much, and they might create excessive rolling friction. Rubber bands around your wheels can often provide good traction.</p><p>Attaching the wheels securely to the axles is vital. They must be fixed firmly so they rotate with the axle, but also be centered and balanced. Unbalanced wheels can cause wobbling and vibrations, leading to energy loss and reduced distance. Hot glue, strong tape, or small collars can be used to fasten the wheels to the axles.</p><p>Multiscale Modeling Connection:
+When your car's wheels roll, they interact with the track surface. At the macro-level, you observe the car moving smoothly or slipping. At the atomic level, the contact points between the rubber of the wheel and the track create intermolecular forces that generate traction. If the wheel material is too smooth, these atomic-level interactions are weak, leading to slippage. If the material is too soft or sticky, more atomic bonds might form, increasing rolling resistance. The balance of these micro-level interactions determines the macro-level traction and rolling friction.</p><p>OCV Application:
+Objective: Maximize the car's speed over a short distance.
+Constraint: The car must maintain a straight path.
+Variable: Wheel diameter.
+If you choose very large wheels, your car might struggle to accelerate quickly due to the high inertia (resistance to change in motion), making it difficult to achieve high speed over a short distance. If you choose smaller wheels, they will require less torque to accelerate rapidly, helping you achieve your speed objective. However, very small wheels might increase the number of rotations needed, which could introduce more friction over the same distance if not designed carefully. The variable of wheel diameter directly influences the car's acceleration and the constraint of maintaining a straight path (as wobbling increases with unbalanced large wheels).</p></div>
+  </details>
+</div>
+</body>
+</html>

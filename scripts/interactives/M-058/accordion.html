@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Lifecycle of Materials – Beyond the Finish Line</summary>
+    <div class="panel-body"><p>When you design your mousetrap car, it’s easy to focus on how it will perform on race day. But a true Creationeer™ thinks about the entire journey of their car’s materials, from where they come from to where they go after the race is over. This is the heart of the Creationeering™ Death &amp; Recycling phase (Horstemeyer et al. 2022). It’s about considering the &quot;performance afterlife&quot; of your product, deciding if components will be thrown away or returned for new processing. We want to move beyond a &quot;linear economy&quot; where materials are simply used and discarded. Instead, we aim for a &quot;circular economy&quot; where materials are kept in use for as long as possible.</p><p>For your mousetrap car, this means asking: Can the wood for your chassis be repurposed? Can the plastic wheels be recycled? What about the metal axles? Each material has a different end-of-life story. For example, if you use cardboard for your car body, it's easily recyclable. If you use certain types of plastic, they might be recyclable, but it's important to know which types (often identified by a number code) are accepted in your local recycling program. Materials like metal from soda cans are highly recyclable and can be melted down and reformed into new products.</p><p>Let’s think about this through Multiscale Modeling. At a macro-level, you observe a plastic wheel on your car. You might think, &quot;It's just plastic.&quot; But at the atomic-level, that plastic is made of long chains of repeating molecules called polymers. The way these chains are structured, and what elements they contain, determines if the plastic can be easily melted and reshaped (recycled) or if it will break down into smaller, less useful pieces (downcycled). For example, some plastics have very long, tangled chains that are difficult to break apart and re-form without losing strength, making them harder to recycle into high-quality new products. Understanding these atomic-level properties helps us make better macro-level decisions about material selection.</p><p>Using the OCV method, your Objective might be: &quot;Design a mousetrap car with minimal environmental impact after use.&quot; A Constraint could be: &quot;All materials must be commonly recyclable or biodegradable.&quot; A Variable would then be: &quot;The type of plastic used for wheels (e.g., PET vs. PVC), or the type of wood for the chassis (e.g., balsa vs. plywood).&quot; Your choice of variable will directly influence how well you meet your objective within your constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: The Three R's and Beyond – Reduce, Reuse, Recycle</summary>
+    <div class="panel-body"><p>You’ve probably heard of &quot;Reduce, Reuse, Recycle.&quot; These are key strategies for sustainable material management. In the Death &amp; Recycling phase, we prioritize these actions to extend the life of resources. &quot;Reduce&quot; means using less material in the first place, perhaps by optimizing your design to be lighter or smaller. &quot;Reuse&quot; means finding new applications for existing materials or components. &quot;Recycling&quot; is the process of breaking down used items to create new ones. But there are also &quot;Upcycling&quot; and &quot;Downcycling,&quot; which add more nuance to how materials are processed. Upcycling creates something of higher value, like turning old CDs into reflective decorations for your car, while downcycling creates something of lower value, like turning plastic bottles into park benches.</p><p>For your mousetrap car, let's explore these. To &quot;Reduce,&quot; you might design a lightweight chassis using minimal material, or use smaller wheels if they still meet your performance goals. For &quot;Reuse,&quot; consider using items from around your home: bottle caps for wheels, old CDs for axles, or cardboard boxes for the chassis. These are items that might otherwise be thrown away, and you're giving them a new life. &quot;Recycling&quot; comes into play when you choose materials that can easily be processed by your local recycling facility. For example, selecting aluminum for your chassis instead of a complex composite material might make it easier to recycle after the project.</p><p>Let’s apply Multiscale Modeling to &quot;Reuse.&quot; When you reuse a plastic bottle for a wheel, at the macro-level you see a new function for an old object. At the atomic-level, the polymer chains of the plastic bottle are still intact. No new energy is required to break them down and re-form them. This is why reuse is often preferred over recycling, as it saves the energy needed for material processing. You are leveraging the existing atomic structure of the material without altering it significantly.</p><p>Consider the OCV for choosing materials for reuse. Your Objective: &quot;Maximize the use of repurposed household items in the mousetrap car.&quot; A Constraint: &quot;All repurposed items must be structurally sound for car operation.&quot; A Variable: &quot;The specific repurposed items chosen (e.g., toilet paper rolls for axles, cereal box cardboard for chassis, bottle caps for wheels).&quot; By varying these choices, you can find the best balance between sustainability and performance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Designing for Disassembly and Biodegradability</summary>
+    <div class="panel-body"><p>A truly sustainable design anticipates its end. This means &quot;designing for disassembly,&quot; where your product can be easily taken apart to separate different materials for recycling or reuse. Imagine if your mousetrap car components were glued together permanently. It would be very hard to separate the plastic from the wood from the metal for proper disposal. However, if you use screws, clips, or even tape, it becomes much easier to take apart your car and sort its materials.</p><p>Another important concept is &quot;biodegradability.&quot; Some materials, like certain bioplastics or natural fibers, can break down naturally in the environment, returning their components to the earth. This is a powerful way to manage materials that cannot be easily recycled or reused. For example, if you use a chassis made from untreated wood and natural rubber bands for power, these materials will eventually biodegrade, leaving behind minimal impact.</p><p>Let’s look at Multiscale Modeling for biodegradability. At the macro-level, you observe a wooden chassis slowly decomposing over time. At the atomic-level, microorganisms are breaking down the complex cellulose molecules that make up the wood. They are converting these large organic molecules into simpler compounds like carbon dioxide, water, and nutrients, which can then be reabsorbed into the ecosystem. This natural decomposition process is driven by specific chemical reactions at the molecular level, demonstrating how atomic interactions lead to macro-level environmental outcomes.</p><p>Using the OCV method for designing for disassembly: Your Objective: &quot;Ensure all mousetrap car components can be easily separated for end-of-life processing.&quot; A Constraint: &quot;No permanent adhesives can be used between different material types.&quot; A Variable: &quot;The fastening method used for connecting the chassis to the wheels (e.g., screws, interlocking parts, or removable clips).&quot; This choice directly impacts how easily your car can be disassembled and its materials sorted, fulfilling your objective.</p></div>
+  </details>
+</div>
+</body>
+</html>

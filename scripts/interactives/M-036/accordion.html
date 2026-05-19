@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: What is Intellectual Property (IP) and How Does it Protect Your Mousetrap Car?</summary>
+    <div class="panel-body"><p>Plain-language explanation: Intellectual Property, or IP, is like owning an idea. It refers to creations of the mind. Think of it as the legal rights that protect your original inventions, designs, or even the name you give your mousetrap car. Just like you own your physical car, you can also &quot;own&quot; the unique ideas behind it. This ownership allows you to control how others use your creation and potentially profit from it. There are different types of IP, but for engineers, the most common are patents, copyrights, and trademarks.</p><p>Direct application to the mousetrap car project: Your mousetrap car project is full of potential IP! Did you invent a new way to attach the wheels for better traction? That could be an invention. Did you create a unique body shape or a clever logo for your team? That could be a design protected by copyright or trademark. If you wrote a detailed instruction manual for building your specific car, the text itself would be protected by copyright. Thinking about IP for your mousetrap car means recognizing the unique elements of your design that make it special and valuable. You might not file a real patent for your school project, but understanding what could be protected helps you value your creativity.</p><p>Multiscale Modeling connection: On a macro-level, we observe unique features in successful products, like a car’s aerodynamic shape or a specific engine design. This macro-level observation of distinct design choices often stems from innovative solutions at a more fundamental level. For instance, a new wheel attachment method (macro-level observation) might be possible because of a novel material composition (atomic-level cause) that allows for stronger, lighter connections. Protecting these &quot;witty inventions&quot; through IP ensures that the effort put into both the macro-level design and the underlying material science is recognized and rewarded.</p><p>OCV application: When you design your mousetrap car, one Objective might be &quot;maximize distance.&quot; A Constraint is &quot;must use one mousetrap spring.&quot; A Variable could be &quot;wheel diameter.&quot; If your unique wheel design dramatically increases distance, you might want to protect that innovation. The Objective of maximizing distance drives the Variable of wheel design, and if your specific design is novel, IP becomes a way to protect the value of your solution within the given Constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Patents – Protecting Your Mousetrap Car's Unique Innovations</summary>
+    <div class="panel-body"><p>Plain-language explanation: A patent is a strong form of IP protection. It's like a temporary monopoly granted by the government for an invention. If you get a patent, no one else can make, use, or sell your invention without your permission for a certain number of years. In return for this protection, you must fully describe your invention to the public. This helps advance knowledge and encourages more innovation. To be patentable, an invention must generally be new, useful, and non-obvious to someone skilled in that field. It can be a new process, machine, manufacture, or composition of matter, or any new and useful improvement thereof.</p><p>Direct application to the mousetrap car project: Could your mousetrap car have a patentable feature? Maybe! Did you create a completely new braking system that uses a novel mechanism? Or perhaps a unique steering linkage that has never been seen before in a mousetrap car? If your design introduces a truly novel mechanical or structural element that is functional and not just an aesthetic choice, it might meet the criteria for a patent. For example, if your car uses a never-before-seen gear ratio system that significantly improves efficiency, that could be a patentable invention. Documenting these unique aspects in your engineering journal is the first step, even if you don't file a real patent.</p><p>Multiscale Modeling connection: Consider a new type of axle material for your mousetrap car. On a macro-level, this new axle might allow the car to travel further without bending or breaking. This improved performance (macro-level observation) is due to its specific atomic structure or chemical composition (atomic-level cause) that gives it superior strength-to-weight ratio. If you invented this new material or a novel way to process it, that process or material itself could be patented. A patent protects the underlying scientific discovery and its engineering application, from the atomic scale up to the visible performance of the car.</p><p>OCV application: Imagine your Objective is to &quot;achieve maximum speed.&quot; A Constraint is &quot;car must be self-propelled by a mousetrap.&quot; A Variable is &quot;the material used for the axles.&quot; If you develop a new lightweight, high-strength alloy for your axles that allows for greater speed and is unique, you might seek a patent for that alloy or the manufacturing process. This patent would protect your innovative solution to optimize the variable within the given constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Engineer Liability – Building Your Mousetrap Car Responsibly</summary>
+    <div class="panel-body"><p>Plain-language explanation: Engineer liability refers to the legal responsibility engineers have for any harm or damage caused by their designs or products. If an engineer designs a bridge that collapses, or a car part that fails and causes an accident, they can be held liable. This means they could be legally responsible for the injuries or losses that result. Engineers have a professional and ethical duty to design safe, reliable, and functional products. This involves following safety standards, performing thorough testing, and anticipating potential risks. It's about ensuring your &quot;witty invention&quot; doesn't cause unintended harm.</p><p>Direct application to the mousetrap car project: Even for a mousetrap car, liability is a concept to consider. What if your car has sharp edges that could cut someone? What if the mousetrap spring could unexpectedly snap and injure an eye? What if your car veers off course and damages property? As a Junior Creationeer, you are responsible for designing and building your car safely. This means choosing appropriate materials, securing all components, and testing your car in a controlled environment. If you fail to take reasonable precautions and someone is harmed, you could theoretically be considered negligent. Always prioritize safety in your design and build process.</p><p>Multiscale Modeling connection: A common failure in mousetrap cars is a wheel detaching at high speed. On a macro-level, the wheel flies off, and the car crashes. The atomic-level cause might be insufficient bonding between the wheel and the axle, or fatigue failure in the plastic hub due to repeated stress. An engineer's liability would arise if they failed to specify a strong enough adhesive, or chose a material for the wheel hub that was known to be brittle under stress, leading to a predictable failure. Responsible engineering means understanding these connections from the atomic scale up to the car's performance and designing to prevent such failures.</p><p>OCV application: Let's say your Objective is &quot;ensure safe operation.&quot; A Constraint is &quot;car must travel on a flat surface.&quot; A Variable is &quot;the method of attaching wheels.&quot; If you choose a method that is known to be unreliable and a wheel detaches, causing injury, you could be liable. To mitigate this, you might introduce a new Objective: &quot;maximize wheel attachment security.&quot; This would influence your choice of Variable, perhaps leading you to use a bolt-and-nut system instead of just glue, even if it adds a little weight. Responsible design considers safety as a primary objective.</p></div>
+  </details>
+</div>
+</body>
+</html>

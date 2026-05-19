@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Frame, Axle & Wheel Integration Challenge</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+    padding: 22px;
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 6px 0;
+    font-size: 1.5em;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 8px;
+  }
+  .subtitle { color: #555; font-size: 0.9em; margin-bottom: 18px; }
+  .panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 18px;
+  }
+  .controls {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .control-group { margin-bottom: 14px; }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 0.95em;
+  }
+  .value {
+    color: #c9a227;
+    font-weight: bold;
+    float: right;
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: #c9a227;
+  }
+  .hint { font-size: 0.78em; color: #666; margin-top: 2px; }
+  .stage {
+    background: linear-gradient(to bottom, #e8eef5 0%, #d0dae8 70%, #8a9bb0 70%, #6a7a8e 100%);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    min-height: 240px;
+    border: 2px solid #1e3a5f;
+  }
+  canvas { display: block; width: 100%; height: 240px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .label { font-size: 0.75em; opacity: 0.85; }
+  .stat .num { font-size: 1.4em; font-weight: bold; color: #c9a227; }
+  .buttons { text-align: center; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: translateY(-2px); }
+  button.secondary {
+    background: #1e3a5f;
+    color: #fff;
+  }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fff8e1;
+    border-left: 5px solid #c9a227;
+    min-height: 50px;
+    font-size: 0.95em;
+  }
+  .feedback.success { background: #e8f5e9; border-color: #2e7d32; }
+  .feedback.warn { background: #ffebee; border-color: #c62828; }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-right: 6px;
+  }
+  @media (max-width: 680px) {
+    .panel { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏁 Tune Your Mousetrap Car</h1>
+  <div class="subtitle">Adjust the frame, axles, and wheels. Find the combo that travels FARTHEST. You have 3 test runs!</div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">RUNS LEFT</div><div class="num" id="runs">3</div></div>
+    <div class="stat"><div class="label">BEST DISTANCE</div><div class="num" id="best">0.0 m</div></div>
+    <div class="stat"><div class="label">LAST RUN</div><div class="num" id="last">—</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="control-group">
+        <label>Frame Material <span class="value" id="frameVal">Balsa Wood</span></label>
+        <input type="range" id="frame" min="0" max="2" step="1" value="0">
+        <div class="hint">Cardboard → Balsa → Plastic (mass & rigidity vary)</div>
+      </div>
+      <div class="control-group">
+        <label>Axle Alignment <span class="value" id="alignVal">90°</span></label>
+        <input type="range" id="align" min="80" max="100" step="1" value="90">
+        <div class="hint">90° = perfectly straight. Off = friction!</div>
+      </div>
+      <div class="control-group">
+        <label>Wheel Size <span class="value" id="wheelVal">Medium</span></label>
+        <input type="range" id="wheel" min="0" max="2" step="1" value="1">
+        <div class="hint">Small=quick start, Large=long roll</div>
+      </div>
+      <div class="control-group">
+        <label>Wheel-Axle Friction <span class="value" id="fricVal">Low</span></label>
+        <input type="range" id="fric" min="0" max="2" step="1" value="0">
+        <div class="hint">Loose & smooth = low friction</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <canvas id="canvas" width="440" height="240"></canvas>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="launch">🚀 Launch Car</button>
+    <button id="reset" class="secondary">↻ Reset</button>
+  </div>
+
+  <div class="feedback" id="feedback">
+    Try different combinations! Think about how each part affects motion. A well-integrated design balances <b>weight, alignment, wheel size,</b> and <b>friction</b>.
+  </div>
+</div>
+
+<script>
+const frameNames = ["Cardboard", "Balsa Wood", "Plastic"];
+const frameMass  = [0.9, 0.6, 1.1]; // lower = better accel
+const frameRigid = [0.7, 0.95, 1.0]; // higher = less energy loss
+const wheelNames = ["Small CDs", "Medium", "Large Records"];
+const wheelMult  = [0.75, 1.0, 1.3]; // distance per energy
+const wheelMass  = [0.85, 1.0, 1.25];
+const fricNames  = ["Low", "Medium", "High"];
+const fricVal    = [0.012, 0.025, 0.045];
+
+const $ = id => document.getElementById(id);
+const frame = $("frame"), align = $("align"), wheel = $("wheel"), fric = $("fric");
+const canvas = $("canvas"), ctx = canvas.getContext("2d");
+
+let runsLeft = 3, best = 0;
+let carX = 30, carV = 0, distance = 0, animating = false, wheelAngle = 0;
+let runDistance = 0;
+
+function updateLabels() {
+  $("frameVal").textContent = frameNames[frame.value];
+  $("alignVal").textContent = align.value + "°";
+  $("wheelVal").textContent = wheelNames[wheel.value];
+  $("fricVal").textContent = fricNames[fric.value];
+}
+[frame, align, wheel, fric].forEach(c => c.addEventListener("input", updateLabels));
+updateLabels();
+
+function calculateDistance() {
+  const fM = frameMass[frame.value];
+  const fR = frameRigid[frame.value];
+  const wM = wheelMult[wheel.value];
+  const wMass = wheelMass[wheel.value];
+  const alignOff = Math.abs(align.value - 90);
+  const alignPenalty = 1 - (alignOff * 0.08); // up to 80% loss
+  const frictionPenalty = 1 - fricVal[fric.value] * 12;
+  
+  const totalMass = fM + wMass * 0.5;
+  const energy = 10 / totalMass; // base energy / mass
+  let dist = energy * fR * wM * alignPenalty * frictionPenalty;
+  dist = Math.max(0.3, dist);
+  return dist;
+}
+
+function drawScene(progress) {
+  ctx.clearRect(0,0,440,240);
+  // sky already in CSS bg; draw ground line
+  ctx.fillStyle = "#6a7a8e";
+  ctx.fillRect(0, 168, 440, 72);
+  // distance markers
+  ctx.strokeStyle = "rgba(255,255,255,0.4)";
+  ctx.fillStyle = "#fff";
+  ctx.font = "10px sans-serif";
+  for (let i = 1; i <= 5; i++) {
+    const x = 30 + i * 75;
+    ctx.beginPath(); ctx.moveTo(x, 168); ctx.lineTo(x, 178); ctx.stroke();
+    ctx.fillText(i + "m", x - 6, 192);
+  }
+  // car
+  const x = carX;
+  const y = 150;
+  const alignOff = Math.abs(align.value - 90);
+  
+  // frame
+  const frameColors = ["#c4a484", "#e6d5a8", "#5a8db8"];
+  ctx.fillStyle = frameColors[frame.value];
+  ctx.fillRect(x, y - 18, 70, 14);
+  ctx.strokeStyle = "#1e3a5f";
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(x, y - 18, 70, 14);
+  
+  // mousetrap (gold square)
+  ctx.fillStyle = "#c9a227";
+  ctx.fillRect(x + 18, y - 28, 30, 12);
+  ctx.strokeRect(x + 18, y - 28, 30, 12);
+  
+  // wheels
+  const wSize = [8, 12, 16][wheel.value];
+  drawWheel(x + 12, y, wSize, wheelAngle, alignOff);
+  drawWheel(x + 58, y, wSize, wheelAngle, -alignOff);
+}
+
+function drawWheel(cx, cy, r, ang, tilt) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(tilt * Math.PI / 180 * 0.3);
+  ctx.beginPath();
+  ctx.arc(0, 0, r, 0, Math.PI * 2);
+  ctx.fillStyle = "#222";
+  ctx.fill();
+  ctx.strokeStyle = "#1e3a5f";
+  ctx.stroke();
+  // spokes
+  ctx.strokeStyle = "#c9a227";
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i < 4; i++) {
+    const a = ang + i * Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.lineTo(Math.cos(a)*r*0.8, Math.sin(a)*r*0.8);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function animate() {
+  if (!animating) return;
+  const targetX = 30 + runDistance * 75;
+  const speed = 3;
+  if (carX < targetX) {
+    carX += speed;
+    wheelAngle += 0.15;
+    drawScene();
+    requestAnimationFrame(animate);
+  } else {
+    animating = false;
+    finishRun();
+  }
+}
+
+function finishRun() {
+  $("last").textContent = runDistance.toFixed(2) + " m";
+  if (runDistance > best) {
+    best = runDistance;
+    $("best").textContent = best.toFixed(2) + " m";
+  }
+  showFeedback();
+  if (runsLeft === 0) showFinalScore();
+}
+
+function showFeedback() {
+  const fb = $("feedback");
+  const tips = [];
+  const alignOff = Math.abs(align.value - 90);
+  if (alignOff > 3) tips.push("⚠️ Your axles are crooked! Misalignment creates friction and wastes energy.");
+  if (fric.value == "2") tips.push("⚠️ High friction at the wheel-axle steals energy. Try lubricating or using straws as bearings.");
+  if (frame.value == "0" && wheel.value == "2") tips.push("💡 Heavy wheels on a flimsy cardboard frame may cause flexing.");
+  if (frame.value == "2") tips.push("💡 Plastic is rigid but heavy — more mass means slower acceleration.");
+  if (wheel.value == "2" && alignOff < 2 && fric.value == "0") tips.push("✅ Large wheels + good alignment + low friction = long rolling distance!");
+  if (tips.length === 0) tips.push("✅ Nice integration! Your frame, axles, and wheels are working together.");
+  fb.className = "feedback" + (runDistance > 3 ? " success" : runDistance < 1.5 ? " warn" : "");
+  fb.innerHTML = "<span class='badge'>Run Result: " + runDistance.toFixed(2) + " m</span>" + tips.join("<br>");
+}
+
+function showFinalScore() {
+  const fb = $("feedback");
+  let grade = "🥉 Apprentice Creationeer";
+  if (best > 4) grade = "🏆 Master Creationeer!";
+  else if (best > 3) grade = "🥇 Senior Creationeer";
+  else if (best > 2) grade = "🥈 Junior Creationeer";
+  fb.className = "feedback success";
+  fb.innerHTML = "<span class='badge'>FINAL</span><b>" + grade + "</b><br>Best distance: <b>" + best.toFixed(2) + " m</b><br>" +
+    "Great engineers integrate every component thoughtfully — frame rigidity, axle alignment, wheel size, and friction all work together as one system.";
+  $("launch").disabled = true;
+}
+
+$("launch").addEventListener("click", () => {
+  if (animating || runsLeft <= 0) return;
+  runsLeft--;
+  $("runs").textContent = runsLeft;
+  carX = 30;
+  runDistance = calculateDistance();
+  animating = true;
+  animate();
+});
+
+$("reset").addEventListener("click", () => {
+  runsLeft = 3; best = 0; carX = 30; runDistance = 0;
+  $("runs").textContent = 3;
+  $("best").textContent = "0.0 m";
+  $("last").textContent = "—";
+  $("launch").disabled = false;
+  $("feedback").className = "feedback";
+  $("feedback").innerHTML = "Try different combinations! Think about how each part affects motion.";
+  drawScene();
+});
+
+drawScene();
+</script>
+</body>
+</html>

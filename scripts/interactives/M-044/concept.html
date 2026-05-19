@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Power System & Axles: Trade-Off Lab</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #ffffff;
+    padding: 18px 24px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 1.4em; margin-bottom: 4px; }
+  header p { font-size: 0.9em; opacity: 0.9; }
+  .content { padding: 20px 24px; }
+  .stage {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    height: 140px;
+    overflow: hidden;
+  }
+  .track {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #1e3a5f;
+  }
+  .finish {
+    position: absolute;
+    bottom: 30px;
+    height: 60px;
+    border-left: 3px dashed #c9a227;
+    color: #c9a227;
+    font-weight: bold;
+    font-size: 0.75em;
+    padding-left: 4px;
+  }
+  .car {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    width: 60px;
+    height: 30px;
+    transition: left 0.05s linear;
+  }
+  .car-body {
+    width: 60px;
+    height: 16px;
+    background: #c9a227;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+  }
+  .wheel {
+    width: 14px;
+    height: 14px;
+    background: #1e3a5f;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    border: 2px solid #c9a227;
+  }
+  .wheel.left { left: 4px; }
+  .wheel.right { right: 4px; }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .slider-row {
+    background: #f7f9fc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #c9a227;
+  }
+  .slider-row label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+  }
+  .slider-row .val { color: #c9a227; }
+  .slider-row input[type=range] {
+    width: 100%;
+    accent-color: #1e3a5f;
+  }
+  .slider-row .hint {
+    font-size: 0.78em;
+    color: #555;
+    margin-top: 4px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .label { font-size: 0.75em; opacity: 0.85; }
+  .stat .num { font-size: 1.3em; font-weight: bold; color: #c9a227; }
+  .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: translateY(-1px); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #f7f9fc;
+    border-left: 4px solid #1e3a5f;
+    font-size: 0.9em;
+    line-height: 1.5;
+    min-height: 50px;
+  }
+  .feedback.success { border-left-color: #c9a227; background: #fff8e6; }
+  .challenge {
+    background: #1e3a5f;
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 0.9em;
+  }
+  .challenge strong { color: #c9a227; }
+  .score-badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>⚙️ Power System & Axles Trade-Off Lab</h1>
+    <p>Adjust your mousetrap car's design and race for the finish line!</p>
+  </header>
+  <div class="content">
+    <div class="challenge" id="challenge">
+      <strong>Challenge 1 of 3:</strong> <span id="challengeText">Get your car to cross the gold finish line!</span>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="track"></div>
+      <div class="finish" id="finish">FINISH</div>
+      <div class="car" id="car">
+        <div class="car-body"></div>
+        <div class="wheel left"></div>
+        <div class="wheel right"></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="label">Distance</div><div class="num" id="distStat">0.0 m</div></div>
+      <div class="stat"><div class="label">Top Speed</div><div class="num" id="spdStat">0.0 m/s</div></div>
+      <div class="stat"><div class="label">Score</div><div class="num" id="scoreStat">0</div></div>
+    </div>
+
+    <div class="controls">
+      <div class="slider-row">
+        <label>🪤 Spring Tension (Potential Energy) <span class="val" id="springVal">5</span></label>
+        <input type="range" id="spring" min="1" max="10" value="5">
+        <div class="hint">More tension = more stored energy, but it pulls harder and faster.</div>
+      </div>
+      <div class="slider-row">
+        <label>🔘 Axle Diameter <span class="val" id="axleVal">5</span></label>
+        <input type="range" id="axle" min="1" max="10" value="5">
+        <div class="hint">Thin axle = slow but long distance. Thick axle = fast but shorter pull.</div>
+      </div>
+      <div class="slider-row">
+        <label>⚪ Wheel Size <span class="val" id="wheelVal">5</span></label>
+        <input type="range" id="wheel" min="1" max="10" value="5">
+        <div class="hint">Big wheels travel farther per turn but need more force to start.</div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button id="launchBtn">🚀 Launch Car</button>
+      <button id="nextBtn" disabled>Next Challenge ▶</button>
+      <button id="resetBtn">↺ Reset</button>
+    </div>
+
+    <div class="feedback" id="feedback">Tune your design, then press Launch to test it!</div>
+  </div>
+</div>
+
+<script>
+const challenges = [
+  { text: "Just reach the finish line (200 px away).", target: 200, type: "reach" },
+  { text: "Reach the finish, but go SLOW & STEADY (top speed under 3.0 m/s).", target: 200, type: "slow", maxSpeed: 3.0 },
+  { text: "Reach a FAR finish line (340 px) — efficiency matters!", target: 340, type: "far" }
+];
+
+let challengeIdx = 0;
+let totalScore = 0;
+let animating = false;
+
+const stage = document.getElementById('stage');
+const car = document.getElementById('car');
+const finish = document.getElementById('finish');
+const feedback = document.getElementById('feedback');
+const challengeText = document.getElementById('challengeText');
+const challengeBox = document.getElementById('challenge');
+const launchBtn = document.getElementById('launchBtn');
+const nextBtn = document.getElementById('nextBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+const springEl = document.getElementById('spring');
+const axleEl = document.getElementById('axle');
+const wheelEl = document.getElementById('wheel');
+
+function updateLabels() {
+  document.getElementById('springVal').textContent = springEl.value;
+  document.getElementById('axleVal').textContent = axleEl.value;
+  document.getElementById('wheelVal').textContent = wheelEl.value;
+}
+[springEl, axleEl, wheelEl].forEach(el => el.addEventListener('input', updateLabels));
+
+function setupChallenge() {
+  const ch = challenges[challengeIdx];
+  challengeText.textContent = ch.text;
+  challengeBox.querySelector('strong').textContent = `Challenge ${challengeIdx+1} of 3:`;
+  finish.style.left = (10 + ch.target) + 'px';
+  resetCar();
+}
+
+function resetCar() {
+  car.style.left = '10px';
+  document.getElementById('distStat').textContent = '0.0 m';
+  document.getElementById('spdStat').textContent = '0.0 m/s';
+  launchBtn.disabled = false;
+  nextBtn.disabled = true;
+}
+
+function launch() {
+  if (animating) return;
+  animating = true;
+  launchBtn.disabled = true;
+
+  const spring = parseInt(springEl.value);
+  const axle = parseInt(axleEl.value);
+  const wheel = parseInt(wheelEl.value);
+
+  // Physics model:
+  // Top speed: driven by spring tension and axle thickness, hurt by big wheels
+  const topSpeed = (spring * 0.6) + (axle * 0.3) - (wheel * 0.15);
+  // Distance: hurt by thick axle (energy used fast), helped by big wheels & spring
+  const maxDist = (spring * 18) + (wheel * 14) - (axle * 8) + 40;
+  // Acceleration: thick axle accelerates fast
+  const accel = 0.15 + axle * 0.04;
+
+  let pos = 10;
+  let v = 0;
+  const ch = challenges[challengeIdx];
+  let peakSpeed = 0;
+
+  const interval = setInterval(() => {
+    // accelerate up to top speed
+    if (v < topSpeed && pos - 10 < maxDist * 0.4) {
+      v += accel;
+    } else {
+      // decelerate (friction / energy depleted)
+      v -= 0.04;
+    }
+    if (v < 0) v = 0;
+    if (v > peakSpeed) peakSpeed = v;
+    pos += v;
+
+    car.style.left = pos + 'px';
+    document.getElementById('distStat').textContent = ((pos-10)/30).toFixed(1) + ' m';
+    document.getElementById('spdStat').textContent = peakSpeed.toFixed(1) + ' m/s';
+
+    if (v <= 0.05 || pos - 10 > maxDist || pos > 540) {
+      clearInterval(interval);
+      animating = false;
+      evaluate(pos - 10, peakSpeed, ch);
+    }
+  }, 30);
+}
+
+function evaluate(dist, peak, ch) {
+  let success = false;
+  let msg = '';
+  let points = 0;
+
+  if (ch.type === 'reach') {
+    if (dist >= ch.target) {
+      success = true;
+      points = 10;
+      msg = `✅ Success! Your car crossed the finish line. Potential energy → kinetic energy → motion!`;
+    } else {
+      msg = `❌ Stopped ${Math.round(ch.target - dist)}px short. Try MORE spring tension or BIGGER wheels for distance.`;
+    }
+  } else if (ch.type === 'slow') {
+    if (dist >= ch.target && peak <= ch.maxSpeed) {
+      success = true;
+      points = 15;
+      msg = `✅ Slow and steady wins! A THIN axle releases energy gradually — like gearing down.`;
+    } else if (peak > ch.maxSpeed) {
+      msg = `❌ Too fast (${peak.toFixed(1)} m/s). Try a THINNER axle or LESS spring tension.`;
+    } else {
+      msg = `❌ Didn't reach the finish. Keep speed low, but ensure enough energy to roll the full distance.`;
+    }
+  } else if (ch.type === 'far') {
+    if (dist >= ch.target) {
+      success = true;
+      points = 20;
+      msg = `✅ Excellent engineering! Thin axle + big wheels + strong spring = maximum distance. Energy is conserved efficiently!`;
+    } else {
+      msg = `❌ Came up ${Math.round(ch.target - dist)}px short. For long distances: THIN axle, BIG wheels, HIGH spring tension.`;
+    }
+  }
+
+  totalScore += points;
+  document.getElementById('scoreStat').textContent = totalScore;
+  feedback.textContent = msg;
+  feedback.className = 'feedback' + (success ? ' success' : '');
+
+  if (success) {
+    if (challengeIdx < challenges.length - 1) {
+      nextBtn.disabled = false;
+    } else {
+      finishGame();
+    }
+  } else {
+    launchBtn.disabled = false;
+  }
+}
+
+function finishGame() {
+  let rating = '';
+  if (totalScore >= 40) rating = '🏆 Master Creationeer!';
+  else if (totalScore >= 25) rating = '⭐ Solid Engineer!';
+  else rating = '🔧 Keep tinkering!';
+  feedback.innerHTML = `<strong>Lab Complete! ${rating}</strong><br>Final Score: <span class="score-badge">${totalScore} pts</span><br><br>You've explored how the mousetrap's stored energy, axle thickness, and wheel size all work together as a power system — each part affecting speed, distance, and efficiency. Great design balances trade-offs!`;
+  feedback.className = 'feedback success';
+  launchBtn.disabled = true;
+  nextBtn.disabled = true;
+}
+
+launchBtn.addEventListener('click', launch);
+nextBtn.addEventListener('click', () => {
+  challengeIdx++;
+  setupChallenge();
+  feedback.textContent = 'New challenge! Adjust your design and launch.';
+  feedback.className = 'feedback';
+});
+resetBtn.addEventListener('click', () => {
+  challengeIdx = 0;
+  totalScore = 0;
+  document.getElementById('scoreStat').textContent = '0';
+  springEl.value = 5; axleEl.value = 5; wheelEl.value = 5;
+  updateLabels();
+  setupChallenge();
+  feedback.textContent = 'Tune your design, then press Launch to test it!';
+  feedback.className = 'feedback';
+});
+
+updateLabels();
+setupChallenge();
+</script>
+</body>
+</html>

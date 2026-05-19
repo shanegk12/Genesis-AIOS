@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tolerance Tuner: Axle Fit Challenge</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    margin: 0 0 4px;
+    text-align: center;
+    font-size: 26px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #1e3a5f;
+    opacity: 0.7;
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+  .stage {
+    background: #1e3a5f;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 14px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    background: #f7f9fc;
+    border-radius: 8px;
+    width: 100%;
+    height: 180px;
+  }
+  .controls {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+    border: 2px solid #1e3a5f;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .slider-row label {
+    flex: 0 0 130px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  input[type=range] {
+    flex: 1;
+    accent-color: #c9a227;
+  }
+  .value-tag {
+    flex: 0 0 70px;
+    text-align: right;
+    font-family: monospace;
+    font-weight: bold;
+    color: #c9a227;
+    font-size: 15px;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .metric {
+    background: #ffffff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .metric .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #1e3a5f;
+    opacity: 0.7;
+  }
+  .metric .val {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c9a227;
+    margin-top: 4px;
+  }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 12px 6px 0;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: scale(1.04); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-row { text-align: center; }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    min-height: 60px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .score-banner {
+    background: #1e3a5f;
+    color: #c9a227;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .legend {
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .legend span { color: #c9a227; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚙️ Tolerance Tuner</h1>
+  <div class="subtitle">Adjust the axle fit & finish — find the sweet spot for max distance!</div>
+
+  <div class="score-banner" id="scoreBanner">Trial 1 of 5 — Best Distance: 0.0 m</div>
+
+  <div class="stage">
+    <div class="legend">🏁 Watch your mousetrap car roll! <span>Smooth + just-right fit = winning combo</span></div>
+    <canvas id="track" width="700" height="180"></canvas>
+  </div>
+
+  <div class="controls">
+    <div class="slider-row">
+      <label>Axle Smoothness</label>
+      <input type="range" id="smooth" min="0" max="100" value="50">
+      <div class="value-tag" id="smoothVal">50%</div>
+    </div>
+    <div class="slider-row">
+      <label>Axle-Hole Fit</label>
+      <input type="range" id="fit" min="0" max="100" value="50">
+      <div class="value-tag" id="fitVal">50%</div>
+    </div>
+    <div style="font-size:11px; color:#1e3a5f; opacity:0.7; margin-top:6px;">
+      ← Loose (sloppy) &nbsp;•&nbsp; Just Right &nbsp;•&nbsp; Tight (binds) →
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="label">Friction</div><div class="val" id="friction">--</div></div>
+      <div class="metric"><div class="label">Wobble</div><div class="val" id="wobble">--</div></div>
+      <div class="metric"><div class="label">Distance</div><div class="val" id="distance">--</div></div>
+    </div>
+
+    <div class="btn-row">
+      <button id="runBtn">▶ Run Test</button>
+      <button id="resetBtn" disabled>↻ New Challenge</button>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback">
+    Move the sliders, then press <b>Run Test</b>. You have 5 trials to find the perfect tolerance!
+  </div>
+</div>
+
+<script>
+const smooth = document.getElementById('smooth');
+const fit = document.getElementById('fit');
+const smoothVal = document.getElementById('smoothVal');
+const fitVal = document.getElementById('fitVal');
+const frictionEl = document.getElementById('friction');
+const wobbleEl = document.getElementById('wobble');
+const distanceEl = document.getElementById('distance');
+const feedback = document.getElementById('feedback');
+const runBtn = document.getElementById('runBtn');
+const resetBtn = document.getElementById('resetBtn');
+const scoreBanner = document.getElementById('scoreBanner');
+const canvas = document.getElementById('track');
+const ctx = canvas.getContext('2d');
+
+let trial = 1;
+const maxTrials = 5;
+let bestDist = 0;
+let running = false;
+let carX = 40;
+let carVX = 0;
+let wheelAngle = 0;
+let wobblePhase = 0;
+let currentMetrics = null;
+
+function computeMetrics() {
+  const s = +smooth.value;
+  const f = +fit.value;
+  // Friction: lower smoothness = more friction. Also tight fit (high f) adds friction.
+  const tightPenalty = Math.max(0, (f - 70)) * 1.2;
+  const roughPenalty = (100 - s) * 0.8;
+  const friction = Math.min(100, roughPenalty + tightPenalty + 5);
+  // Wobble: loose fit (low f) causes wobble
+  const wobble = Math.max(0, (50 - f)) * 1.8 + 5;
+  // Distance score: best when friction & wobble both low
+  let dist = 100 - (friction * 0.55) - (wobble * 0.55);
+  dist = Math.max(2, dist) / 10; // meters
+  return { friction: friction.toFixed(0), wobble: wobble.toFixed(0), distance: dist.toFixed(1), s, f };
+}
+
+function updateDisplay() {
+  smoothVal.textContent = smooth.value + '%';
+  fitVal.textContent = fit.value + '%';
+  const m = computeMetrics();
+  frictionEl.textContent = m.friction + '%';
+  wobbleEl.textContent = m.wobble + '%';
+  distanceEl.textContent = m.distance + ' m';
+}
+
+smooth.addEventListener('input', updateDisplay);
+fit.addEventListener('input', updateDisplay);
+
+function drawCar(x, y, wobbleY) {
+  ctx.save();
+  ctx.translate(x, y + wobbleY);
+  // body
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-30, -18, 60, 16);
+  // mousetrap top
+  ctx.fillStyle = '#c9a227';
+  ctx.fillRect(-22, -26, 44, 8);
+  // arm
+  ctx.strokeStyle = '#c9a227';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-15, -22);
+  ctx.lineTo(20, -30);
+  ctx.stroke();
+  // wheels
+  drawWheel(-20, 0);
+  drawWheel(20, 0);
+  ctx.restore();
+}
+
+function drawWheel(wx, wy) {
+  ctx.save();
+  ctx.translate(wx, wy);
+  ctx.rotate(wheelAngle);
+  ctx.fillStyle = '#1e3a5f';
+  ctx.beginPath();
+  ctx.arc(0, 0, 9, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = '#c9a227';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(0, 0, 9, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(-9, 0); ctx.lineTo(9, 0);
+  ctx.moveTo(0, -9); ctx.lineTo(0, 9);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ground
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(0, 150, canvas.width, 4);
+  // distance markers
+  ctx.fillStyle = '#1e3a5f';
+  ctx.font = '11px monospace';
+  for (let i = 0; i <= 10; i++) {
+    const mx = 40 + i * 62;
+    ctx.fillRect(mx, 154, 1, 6);
+    if (i % 2 === 0) ctx.fillText(i + 'm', mx - 7, 172);
+  }
+  // finish flag
+  ctx.fillStyle = '#c9a227';
+  ctx.fillRect(660, 110, 2, 40);
+  ctx.fillRect(662, 110, 14, 10);
+  
+  const wobbleAmt = currentMetrics ? (+currentMetrics.wobble) / 25 : 0;
+  const wy = Math.sin(wobblePhase) * wobbleAmt;
+  drawCar(carX, 138, wy);
+}
+
+function runTest() {
+  if (running) return;
+  running = true;
+  runBtn.disabled = true;
+  smooth.disabled = true;
+  fit.disabled = true;
+  currentMetrics = computeMetrics();
+  const targetDist = parseFloat(currentMetrics.distance);
+  const pixelsPerMeter = 62;
+  const targetX = 40 + targetDist * pixelsPerMeter;
+  carX = 40;
+  // initial velocity proportional to distance
+  carVX = 2.5 + targetDist * 0.4;
+  const friction = (+currentMetrics.friction) / 100;
+  
+  function animate() {
+    // decelerate
+    carVX -= 0.015 + friction * 0.04;
+    if (carVX < 0) carVX = 0;
+    carX += carVX;
+    wheelAngle += carVX * 0.1;
+    wobblePhase += 0.3;
+    
+    if (carX >= targetX || carVX <= 0.01) {
+      carX = Math.min(carX, targetX);
+      drawScene();
+      finishTest(targetDist);
+      return;
+    }
+    drawScene();
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+function finishTest(dist) {
+  running = false;
+  if (dist > bestDist) bestDist = dist;
+  
+  let msg = '';
+  const s = +smooth.value;
+  const f = +fit.value;
+  
+  if (dist >= 8.5) {
+    msg = `🏆 <b>Excellent precision!</b> ${dist.toFixed(1)}m — Your axles are smooth AND the fit is just right. This is what "very good" engineering looks like!`;
+  } else if (dist >= 6.5) {
+    msg = `👍 <b>Good run!</b> ${dist.toFixed(1)}m — You're close to the sweet spot. Try fine-tuning the slider that's furthest from balanced.`;
+  } else if (f < 30) {
+    msg = `⚠️ <b>${dist.toFixed(1)}m</b> — The fit is too LOOSE. Sloppy axle holes let wheels wobble, wasting energy. Tighten the fit!`;
+  } else if (f > 80) {
+    msg = `⚠️ <b>${dist.toFixed(1)}m</b> — The fit is too TIGHT. Binding axles create huge friction. Loosen the fit slightly!`;
+  } else if (s < 40) {
+    msg = `⚠️ <b>${dist.toFixed(1)}m</b> — Rough axles = high friction. Sand & polish for a smoother finish!`;
+  } else {
+    msg = `📏 <b>${dist.toFixed(1)}m</b> — Keep adjusting both sliders. Precision means balancing smoothness AND tolerance.`;
+  }
+  
+  feedback.innerHTML = msg;
+  scoreBanner.textContent = `Trial ${trial} of ${maxTrials} — Best Distance: ${bestDist.toFixed(1)} m`;
+  
+  trial++;
+  if (trial > maxTrials) {
+    showFinalResults();
+  } else {
+    runBtn.disabled = false;
+    smooth.disabled = false;
+    fit.disabled = false;
+  }
+}
+
+function showFinalResults() {
+  let grade, comment;
+  if (bestDist >= 9) { grade = '⭐⭐⭐ Master Creationeer!'; comment = 'You found the precision sweet spot. Excellence honors the Designer.'; }
+  else if (bestDist >= 7.5) { grade = '⭐⭐ Skilled Builder'; comment = 'Solid tolerance control! A little more fine-tuning could push you further.'; }
+  else if (bestDist >= 5.5) { grade = '⭐ Apprentice'; comment = 'You\'re learning the trade-offs between friction and wobble. Keep practicing!'; }
+  else { grade = 'Keep Tuning'; comment = 'Precision finishing takes practice. Remember: smooth axles + just-right fit = best results.'; }
+  
+  feedback.innerHTML = `<div style="text-align:center;"><div style="font-size:22px; color:#c9a227; font-weight:bold;">${grade}</div>
+    <div style="margin:8px 0;">Best Distance: <b>${bestDist.toFixed(1)} m</b> out of 10.0 m</div>
+    <div style="font-size:13px;">${comment}</div></div>`;
+  resetBtn.disabled = false;
+  runBtn.disabled = true;
+}
+
+function reset() {
+  trial = 1;
+  bestDist = 0;
+  carX = 40;
+  smooth.value = 50;
+  fit.value = 50;
+  smooth.disabled = false;
+  fit.disabled = false;
+  runBtn.disabled = false;
+  resetBtn.disabled = true;
+  currentMetrics = null;
+  updateDisplay();
+  scoreBanner.textContent = `Trial 1 of ${maxTrials} — Best Distance: 0.0 m`;
+  feedback.innerHTML = 'Move the sliders, then press <b>Run Test</b>. You have 5 trials to find the perfect tolerance!';
+  drawScene();
+}
+
+runBtn.addEventListener('click', runTest);
+resetBtn.addEventListener('click', reset);
+
+updateDisplay();
+drawScene();
+</script>
+</body>
+</html>

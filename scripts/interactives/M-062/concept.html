@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Parts: New Life Sorter</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border-bottom: 4px solid #c9a227;
+  }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  header p { font-size: 0.95rem; opacity: 0.9; }
+  .scorebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(30,58,95,0.1);
+  }
+  .scorebar span { font-weight: bold; }
+  .gold { color: #c9a227; }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media(min-width: 720px) {
+    .stage { grid-template-columns: 1fr 2fr; }
+  }
+
+  .part-card {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(30,58,95,0.15);
+  }
+  .part-icon {
+    font-size: 3.5rem;
+    margin-bottom: 8px;
+  }
+  .part-name { font-size: 1.2rem; font-weight: bold; color: #1e3a5f; }
+  .part-desc { font-size: 0.85rem; color: #555; margin-top: 6px; }
+
+  .bins {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px dashed #c9a227;
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: bold;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .bin:hover { background: #fff8e1; transform: translateY(-2px); }
+  .bin-icon { font-size: 1.8rem; margin-bottom: 4px; }
+  .bin-label { font-size: 0.9rem; color: #1e3a5f; }
+
+  .feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-height: 60px;
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+  }
+  .feedback.correct { background: #e8f5e9; border-left-color: #2e7d32; }
+  .feedback.wrong { background: #ffebee; border-left-color: #c62828; }
+
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  button:hover { background: #b08f1f; }
+
+  .final {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .final h2 { color: #1e3a5f; margin-bottom: 10px; }
+  .final .big { font-size: 2.5rem; color: #c9a227; font-weight: bold; margin: 10px 0; }
+  .verse { font-style: italic; color: #555; margin-top: 14px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>♻️ Mousetrap Parts: Give Them New Life</h1>
+  <p>Your mousetrap has reached the end of its life. What happens next to each part?</p>
+</header>
+
+<div class="scorebar">
+  <span>Part <span id="curNum">1</span> / <span id="total">7</span></span>
+  <span>Score: <span class="gold" id="score">0</span></span>
+</div>
+
+<div id="game">
+  <div class="stage">
+    <div class="part-card">
+      <div class="part-icon" id="partIcon">🔧</div>
+      <div class="part-name" id="partName">—</div>
+      <div class="part-desc" id="partDesc">—</div>
+    </div>
+
+    <div>
+      <div class="bins">
+        <div class="bin" data-choice="recycle">
+          <div class="bin-icon">♻️</div>
+          <div class="bin-label">RECYCLE<br><small>(melt/reprocess)</small></div>
+        </div>
+        <div class="bin" data-choice="reuse">
+          <div class="bin-icon">🔄</div>
+          <div class="bin-label">REUSE<br><small>(same job again)</small></div>
+        </div>
+        <div class="bin" data-choice="repurpose">
+          <div class="bin-icon">✨</div>
+          <div class="bin-label">REPURPOSE<br><small>(new creative use)</small></div>
+        </div>
+        <div class="bin" data-choice="trash">
+          <div class="bin-icon">🗑️</div>
+          <div class="bin-label">LANDFILL<br><small>(no other option)</small></div>
+        </div>
+      </div>
+      <div class="feedback" id="feedback">Click the best end-of-life choice for this part.</div>
+    </div>
+  </div>
+</div>
+
+<div id="finalScreen" class="final" style="display:none;">
+  <h2>🏆 Lifecycle Complete!</h2>
+  <div class="big"><span id="finalScore">0</span> / 7</div>
+  <p id="finalMsg"></p>
+  <p style="margin-top:14px;">Great engineers think about the <strong>full lifecycle</strong> of every product — including what happens when it's done. Designing for reuse, repurposing, and recycling honors the resources we've been given.</p>
+  <p class="verse">"A generation goes, and a generation comes, but the earth remains forever." — Ecclesiastes 1:4</p>
+  <button onclick="restart()">Try Again</button>
+</div>
+
+<script>
+const parts = [
+  {
+    name: "Steel Spring",
+    icon: "🌀",
+    desc: "Metal coil that powered the snap. Still strong, but stretched out.",
+    best: "recycle",
+    explain: {
+      recycle: "✅ Right! Steel is one of the most recycled materials on Earth — it can be melted down endlessly without losing quality.",
+      reuse: "Close — but a worn-out spring won't snap with enough force. Recycling the steel is the best path.",
+      repurpose: "Creative! But stretched steel springs are hard to safely use for new jobs. Recycling is best.",
+      trash: "Steel is too valuable to bury! It can be melted and reborn as new metal."
+    }
+  },
+  {
+    name: "Wooden Base",
+    icon: "🪵",
+    desc: "Solid pine board, still in good shape after the trap was retired.",
+    best: "repurpose",
+    explain: {
+      repurpose: "✅ Perfect! A sturdy wood block can become a craft base, a coaster, or part of a new build.",
+      reuse: "It could be reused as a base — but the holes from old hardware make it tricky. Repurposing is better.",
+      recycle: "Wood isn't easily recycled like metal. Repurposing keeps it useful longer.",
+      trash: "Wood is a great material to give a second life — don't throw it away!"
+    }
+  },
+  {
+    name: "Metal Staple",
+    icon: "📎",
+    desc: "Tiny staple that held the spring in place. Bent and small.",
+    best: "recycle",
+    explain: {
+      recycle: "✅ Tiny metal parts add up! Collect them with scrap metal for recycling.",
+      reuse: "Bent staples don't grip well anymore.",
+      repurpose: "Too small to safely repurpose on its own.",
+      trash: "Even tiny metal pieces can be recycled — don't landfill them!"
+    }
+  },
+  {
+    name: "Cheese Bait Holder",
+    icon: "🧀",
+    desc: "Small plastic clip, undamaged and clean.",
+    best: "reuse",
+    explain: {
+      reuse: "✅ Still works perfectly! Pop it onto a new trap or similar device.",
+      repurpose: "It could be repurposed, but if it still does its original job, REUSE is the highest form of stewardship.",
+      recycle: "Recycling is good — but reusing a working part is even better.",
+      trash: "Working parts shouldn't go to landfill!"
+    }
+  },
+  {
+    name: "Cardboard Packaging",
+    icon: "📦",
+    desc: "Crushed, slightly damp cardboard box the trap came in.",
+    best: "recycle",
+    explain: {
+      recycle: "✅ Cardboard recycles easily into new paper products.",
+      reuse: "Damp cardboard loses strength — better to recycle.",
+      repurpose: "Some uses possible, but recycling is the standard path.",
+      trash: "Cardboard is one of the easiest things to recycle!"
+    }
+  },
+  {
+    name: "Snapped Wire Bar",
+    icon: "⚡",
+    desc: "The U-shaped striker bar — now bent out of shape and broken.",
+    best: "recycle",
+    explain: {
+      recycle: "✅ Broken metal still has value as scrap — melt it down for new steel.",
+      reuse: "It's bent and broken — can't do its old job.",
+      repurpose: "Too damaged to safely repurpose.",
+      trash: "Metal belongs in the scrap bin, not the landfill."
+    }
+  },
+  {
+    name: "Glue Residue & Dust",
+    icon: "💨",
+    desc: "Old dried glue, dust, and tiny splinters scraped off the trap.",
+    best: "trash",
+    explain: {
+      trash: "✅ Correct — some waste truly has no good second life. Good engineers minimize this category!",
+      recycle: "Contaminated mixed residue can't be recycled.",
+      reuse: "Dried glue and dust can't do any job.",
+      repurpose: "No safe creative use for contaminated debris."
+    }
+  }
+];
+
+let idx = 0;
+let score = 0;
+let answered = false;
+
+const partIcon = document.getElementById('partIcon');
+const partName = document.getElementById('partName');
+const partDesc = document.getElementById('partDesc');
+const feedback = document.getElementById('feedback');
+const scoreEl = document.getElementById('score');
+const curNum = document.getElementById('curNum');
+document.getElementById('total').textContent = parts.length;
+
+function loadPart() {
+  if (idx >= parts.length) { showFinal(); return; }
+  const p = parts[idx];
+  partIcon.textContent = p.icon;
+  partName.textContent = p.name;
+  partDesc.textContent = p.desc;
+  feedback.className = 'feedback';
+  feedback.innerHTML = "Click the best end-of-life choice for this part.";
+  curNum.textContent = idx + 1;
+  answered = false;
+}
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('click', () => {
+    if (answered) return;
+    const choice = bin.dataset.choice;
+    const p = parts[idx];
+    answered = true;
+    if (choice === p.best) {
+      score++;
+      scoreEl.textContent = score;
+      feedback.className = 'feedback correct';
+      feedback.innerHTML = p.explain[choice] + '<br><button onclick="next()">Next Part →</button>';
+    } else {
+      feedback.className = 'feedback wrong';
+      feedback.innerHTML = p.explain[choice] + '<br><em>Best answer was: <strong>' + p.best.toUpperCase() + '</strong></em><br><button onclick="next()">Next Part →</button>';
+    }
+  });
+});
+
+function next() {
+  idx++;
+  loadPart();
+}
+
+function showFinal() {
+  document.getElementById('game').style.display = 'none';
+  document.querySelector('.scorebar').style.display = 'none';
+  document.getElementById('finalScreen').style.display = 'block';
+  document.getElementById('finalScore').textContent = score;
+  let msg = "";
+  if (score === 7) msg = "🌟 Master Steward! You designed for the full lifecycle perfectly.";
+  else if (score >= 5) msg = "👏 Great work! You're thinking like a responsible engineer.";
+  else if (score >= 3) msg = "👍 Good start — review the cycle and try again!";
+  else msg = "Keep learning! Every part has a future when we design with foresight.";
+  document.getElementById('finalMsg').textContent = msg;
+}
+
+function restart() {
+  idx = 0; score = 0;
+  scoreEl.textContent = 0;
+  document.getElementById('game').style.display = 'block';
+  document.querySelector('.scorebar').style.display = 'flex';
+  document.getElementById('finalScreen').style.display = 'none';
+  loadPart();
+}
+
+loadPart();
+</script>
+
+</body>
+</html>

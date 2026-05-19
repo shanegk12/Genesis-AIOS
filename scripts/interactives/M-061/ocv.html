@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCV Method</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; font-weight: 700; margin-bottom: 14px;
+       text-transform: uppercase; letter-spacing: 0.06em;
+       border-bottom: 2px solid #c9a227; padding-bottom: 6px; display: inline-block; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 0; }
+  .tab  { padding: 10px 22px; cursor: pointer; font-weight: 600; color: #666;
+           font-size: 0.88rem; border-radius: 6px 6px 0 0; border: 1px solid #dce4ee;
+           border-bottom: none; background: #eef2f7; transition: all 0.15s; }
+  .tab.active  { background: #1e3a5f; color: #fff; border-color: #1e3a5f; }
+  .tab:hover:not(.active) { background: #dce4ee; }
+  .panel { display: none; background: #fff; border: 1px solid #dce4ee;
+            border-radius: 0 6px 6px 6px; padding: 22px; }
+  .panel.active { display: block; }
+  .label { font-weight: 700; color: #c9a227; font-size: 0.78rem; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 10px; }
+  .panel p { color: #3a4558; font-size: 0.9rem; line-height: 1.6; }
+  .your-turn { margin-top: 16px; background: #f0f4fa; border-left: 3px solid #c9a227;
+                padding: 12px 14px; border-radius: 0 6px 6px 0; }
+  .your-turn span { font-size: 0.82rem; color: #5a6a7e; font-style: italic; }
+  textarea { width: 100%; margin-top: 8px; padding: 8px; border: 1px solid #c5cfe0;
+              border-radius: 6px; font-size: 0.85rem; resize: vertical;
+              font-family: inherit; min-height: 60px; color: #2d3748; }
+</style>
+</head>
+<body>
+<h2>OCV Method</h2>
+<div class="tabs">
+  <div class="tab active" onclick="show('obj',this)">Objective</div>
+  <div class="tab" onclick="show('con',this)">Constraints</div>
+  <div class="tab" onclick="show('var',this)">Variables</div>
+</div>
+<div id="obj" class="panel active">
+  <div class="label">Objective</div>
+  <p>Minimize the total lifecycle cost of your mousetrap car project.</p>
+  <div class="your-turn">
+    <span>Your turn: Write your own objective for this lesson's design problem.</span>
+    <textarea placeholder="My objective is..."></textarea>
+  </div>
+</div>
+<div id="con" class="panel">
+  <div class="label">Constraints</div>
+  <p>Project budget (e.g., $20 limit for new materials).</p>
+  <div class="your-turn">
+    <span>List two constraints that apply to your design.</span>
+    <textarea placeholder="1. &#10;2. "></textarea>
+  </div>
+</div>
+<div id="var" class="panel">
+  <div class="label">Variables</div>
+  <p>Type of materials used (e.g., balsa wood, plywood, cardboard, recycled plastic).</p>
+  <div class="your-turn">
+    <span>What is one variable you would change first, and why?</span>
+    <textarea placeholder="I would change..."></textarea>
+  </div>
+</div>
+<script>
+function show(id, tab) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  tab.classList.add('active');
+}
+</script>
+</body>
+</html>

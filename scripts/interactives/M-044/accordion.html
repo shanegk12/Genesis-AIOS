@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Axles and Wheels – Translating Power into Motion</summary>
+    <div class="panel-body"><p>Plain-language explanation
+Axles are the backbone of your car's movement. They are the rods that connect your wheels and allow them to spin freely. Without axles, your wheels wouldn't be able to turn, and your car wouldn't go anywhere. There are usually two axles: a drive axle, which is connected to the mousetrap's power system, and a free-spinning axle, which simply supports the front wheels. The wheels themselves are crucial because they convert the rotational motion of the axles into linear motion, moving the car across the ground.</p><p>Direct application to the mousetrap car project
+For your mousetrap car, the drive axle is where the string from the mousetrap's lever arm will be wound. As the string unwinds, it spins this axle. The drive wheels are firmly attached to this drive axle, so they spin with it, pushing the car forward. The front axle, and its attached wheels, should spin as freely as possible to minimize resistance. The diameter of your axles and wheels greatly affects performance. Larger drive wheels will cover more distance per rotation of the axle, but they require more torque to get started. Thinner axles can reduce friction at the points where they contact the car's body, but they must be strong enough not to bend or break.</p><p>Multiscale Modeling connection
+When you observe an axle rotating smoothly, that's the macro-level phenomenon. At the atomic level, the smoothness of the axle material and the low friction are due to the arrangement and interaction of atoms on the surface. For example, if you use a polished metal axle, the atoms on its surface are more uniformly arranged, leading to fewer microscopic &quot;bumps&quot; that could catch on the housing. If you apply a lubricant, you're introducing molecules that fill in these microscopic imperfections, creating a layer that allows surfaces to slide past each other with less resistance. The atomic forces between the lubricant molecules and the axle/housing surfaces are weaker than the forces between the axle and housing directly, thus reducing friction.</p><p>OCV application
+Consider the design of your car's wheels and axles using OCV.
+Objective: Achieve maximum speed over the first few feet.
+Constraint: You have a limited selection of materials for wheels (e.g., CDs, plastic caps, cardboard) and axles (e.g., wooden dowels, metal rods).
+Variable: The diameter of the drive wheels and the diameter of the drive axle. If you want maximum initial speed, you might choose smaller drive wheels because they require less torque to accelerate quickly. However, smaller wheels also mean more rotations are needed to cover the same distance, which could lead to the string unwinding faster and the power source depleting sooner. Conversely, a larger drive axle diameter means the string unwinds more slowly, providing torque over a longer duration, which might be better for distance but not initial speed. Balancing these factors is key to meeting your objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Overcoming Resistance – Friction and Efficiency</summary>
+    <div class="panel-body"><p>Plain-language explanation
+Friction is the invisible force that tries to stop your car. It occurs whenever two surfaces rub against each other. In your mousetrap car, friction happens in several places: where the axles rub against the car's body (axle friction), where the wheels rub against the ground (rolling friction), and even internal friction within the mousetrap itself. Our goal is to minimize friction as much as possible to ensure that most of the mousetrap's energy is used to move the car forward, not wasted as heat or sound. This is about maximizing efficiency – getting the most out of our power source.</p><p>Direct application to the mousetrap car project
+To reduce axle friction, ensure your axles are smooth and straight. You can also use bushings (small tubes) or lubricants (like graphite or petroleum jelly) where the axles pass through the car's body. These create a smoother surface for the axle to spin against. For rolling friction, choose wheels that are lightweight and perfectly round. Also, ensure your wheels are aligned straight so they don't drag sideways. The contact point between your wheels and the ground should be minimal but provide enough grip to prevent slipping. Materials matter here; smooth, hard surfaces will have less friction than rough ones.</p><p>Multiscale Modeling connection
+At the macro-level, you feel the resistance when you try to slide two surfaces against each other, or you see your mousetrap car slowing down. At the atomic level, friction arises from the intermolecular forces (like van der Waals forces) between the atoms and molecules of the two contacting surfaces. Even seemingly smooth surfaces have microscopic peaks and valleys. When two surfaces rub, these tiny bumps interlock, and energy is required to break these temporary atomic bonds and lift the surfaces over each other. This energy is dissipated as heat or sound. Lubricants work by introducing a layer of molecules that are more easily sheared (slide past each other) than the solid surfaces, effectively reducing the atomic-level &quot;interlocking&quot; and the energy required to overcome it.</p><p>OCV application
+Let's apply OCV to minimizing friction in your car.
+Objective: Minimize energy loss due to friction.
+Constraint: You have access to common materials for axles (e.g., wooden dowels, metal rods) and limited lubricants (e.g., petroleum jelly, graphite powder). You also have a fixed budget for materials.
+Variable: The material choice for your axles and axle housings, and the type/amount of lubricant used. For example, you might choose a smooth metal rod for your axle instead of a rough wooden dowel to reduce surface roughness at the atomic level, thereby decreasing intermolecular forces. You might also use a low-friction plastic for the axle housing or apply graphite powder. However, using too much lubricant can create its own resistance or attract dirt, becoming a new constraint. These choices directly impact how efficiently your car converts the mousetrap's energy into motion, reflecting the Creationeering principle of maximizing performance within given resources.</p><p>6. Engineering Journal Task</p><p>Junior Creationeer, it's time to document your progress and apply what you've learned.</p><p>(1) Apply to Your Car:
+Describe your current design for the power system (how the string connects to the mousetrap lever and the drive axle) and your chosen axle and wheel setup. Explain why you made these specific choices (e.g., &quot;I chose large CD wheels for distance&quot; or &quot;I used thin wooden dowels for axles to reduce weight&quot;).</p><p>(2) Identify Trade-offs:
+Identify at least one design decision you've made for your power system or axles where you had to balance competing factors (e.g., speed vs. distance, simplicity vs. efficiency). Explain the trade-off you accepted and why.</p><p>(3) OCV for Your Design:
+Choose one specific design decision related to your power system or axles (e.g., the length of your mousetrap's lever arm, the diameter of your drive wheels, or the material for your axles). Clearly state your Objective for that decision, what Constraints you faced, and what Variables you adjusted to try and meet your objective.</p><p>(4) Biblical Reflection:
+Read Proverbs 27:17: &quot;As iron sharpens iron, so one person sharpens another.&quot; Reflect on how this verse applies to the engineering design process, particularly when collaborating with others or learning from the designs of others to refine your own. How does seeking feedback or observing other designs &quot;sharpen&quot; your understanding and improve your car's performance?</p><p>7. Technical Documentation Requirements</p><p>Create a detailed diagram of your car's power system, clearly labeling the mousetrap, string, lever arm, drive axle, and drive wheels. Include any measurements for string length, lever arm extension, and axle/wheel diameters.
+   Document the materials used for your axles and wheels, and any methods you employed to reduce friction (e.g., lubricants, bushings).</p><p>Junior Creationeer Signature:
+___________________________
+Person / Date / Location of Lab</p><p>8. Summary of Key Concepts</p><p>Power: Mousetrap spring stores potential energy, converted to kinetic energy via lever arm and string.
+Axles: Rods that connect wheels, converting rotational force into linear motion.
+Friction: Force resisting motion, must be minimized for efficiency through smooth surfaces and lubrication.
+Efficiency: Maximizing the useful work from stored energy by optimizing design and reducing losses.</p><p>9. Works Cited</p><p>&quot;Mousetrap Cars | Ideas-Inspire.&quot; Scienceguy.org, December 13, 2013.
+   Staab, Tonya. &quot;How to Build a Mousetrap Car for Distance.&quot; TonyaStaab.com, October 3, 2019.
+   Genesis K12 Academy Full Lesson Book (provided).
+Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). &quot;Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis.&quot; Creation Research Society Quarterly 58:238–261.</p></div>
+  </details>
+</div>
+</body>
+</html>

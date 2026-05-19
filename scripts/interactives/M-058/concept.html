@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Material Lifecycle Sort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    color: #1e3a5f;
+    font-size: 1.8em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1em;
+  }
+  .score-bar {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .score-bar span { color: #c9a227; }
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) {
+    .game-area { grid-template-columns: 1fr; }
+  }
+  .items-pool {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 200px;
+  }
+  .items-pool h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #1e3a5f;
+  }
+  .item {
+    background: #c9a227;
+    color: #fff;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 6px;
+    cursor: grab;
+    font-weight: 600;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+  .item:hover { transform: scale(1.03); box-shadow: 0 3px 8px rgba(0,0,0,0.2); }
+  .item.dragging { opacity: 0.5; }
+  .bins {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 700px) {
+    .bins { grid-template-columns: 1fr; }
+  }
+  .bin {
+    background: #fff;
+    border: 3px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 220px;
+    transition: background 0.2s;
+  }
+  .bin.drag-over { background: #fff8e1; border-style: solid; }
+  .bin h3 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 1em;
+  }
+  .bin .icon { font-size: 2em; text-align: center; display: block; margin-bottom: 5px; }
+  .bin .desc { font-size: 0.78em; color: #666; text-align: center; margin-bottom: 10px; }
+  .bin-recycle { border-color: #2e7d32; }
+  .bin-recycle h3 { color: #2e7d32; }
+  .bin-reuse { border-color: #c9a227; }
+  .bin-reuse h3 { color: #c9a227; }
+  .bin-trash { border-color: #777; }
+  .bin-trash h3 { color: #777; }
+  .placed {
+    font-size: 0.85em;
+    padding: 6px 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+    color: #fff;
+  }
+  .placed.correct { background: #2e7d32; }
+  .placed.wrong { background: #c62828; }
+  .feedback {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff;
+    border-left: 5px solid #c9a227;
+    min-height: 40px;
+    font-size: 0.95em;
+  }
+  .feedback.hidden { display: none; }
+  button {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  button:hover { background: #c9a227; }
+  button:disabled { background: #aaa; cursor: not-allowed; }
+  .final {
+    text-align: center;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+  .final.hidden { display: none; }
+  .star { color: #c9a227; font-size: 1.5em; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔁 Mousetrap Car: Material Afterlife</h1>
+  <p class="subtitle">Drag each material to its best end-of-life destination. Think like a Creationeer™!</p>
+  
+  <div class="score-bar">
+    <div>Placed: <span id="placed">0</span> / 8</div>
+    <div>Correct: <span id="correct">0</span></div>
+  </div>
+
+  <div class="game-area">
+    <div class="items-pool" id="pool">
+      <h3>🧰 Car Parts</h3>
+    </div>
+    <div class="bins">
+      <div class="bin bin-recycle" data-bin="recycle">
+        <span class="icon">♻️</span>
+        <h3>Recycle</h3>
+        <p class="desc">Broken down into new raw material</p>
+      </div>
+      <div class="bin bin-reuse" data-bin="reuse">
+        <span class="icon">🔄</span>
+        <h3>Reuse / Repurpose</h3>
+        <p class="desc">Used again as-is for another project</p>
+      </div>
+      <div class="bin bin-trash" data-bin="trash">
+        <span class="icon">🗑️</span>
+        <h3>Landfill</h3>
+        <p class="desc">No safe recycle/reuse option</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback hidden" id="feedback"></div>
+
+  <div class="final hidden" id="final">
+    <h2 id="finalTitle">Mission Complete!</h2>
+    <div id="finalStars"></div>
+    <p id="finalMsg" style="margin-top:10px;"></p>
+    <p style="margin-top:12px; font-style: italic; font-size:0.9em;">"The Lord God took the man and put him in the Garden of Eden to work it and take care of it." — Genesis 2:15</p>
+    <button onclick="reset()">Try Again</button>
+  </div>
+</div>
+
+<script>
+const items = [
+  { id: 1, name: "Wooden chassis (clean scrap)", correct: "reuse", reason: "Clean wood scraps can be repurposed for new projects — a great reuse!" },
+  { id: 2, name: "Aluminum axle rod", correct: "recycle", reason: "Aluminum is one of the most recyclable metals — melted down and reformed endlessly." },
+  { id: 3, name: "Plastic CD wheels (#1 PET)", correct: "recycle", reason: "PET plastic (#1) is widely accepted in recycling streams." },
+  { id: 4, name: "Snapped rubber band", correct: "trash", reason: "Broken rubber bands aren't curbside recyclable and can't be safely reused." },
+  { id: 5, name: "Steel mousetrap spring", correct: "reuse", reason: "Springs in good condition can power another build — reuse it!" },
+  { id: 6, name: "Glued/painted wood block", correct: "trash", reason: "Contaminated wood (glue + paint) usually can't be recycled or safely reused." },
+  { id: 7, name: "Cardboard body panel", correct: "recycle", reason: "Clean cardboard is easily recycled into new paper products." },
+  { id: 8, name: "Paper clip (extra)", correct: "reuse", reason: "Paper clips are perfect for reuse — return to the supply bin!" }
+];
+
+let placedCount = 0;
+let correctCount = 0;
+const total = items.length;
+
+function init() {
+  const pool = document.getElementById('pool');
+  // shuffle
+  const shuffled = [...items].sort(() => Math.random() - 0.5);
+  shuffled.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.draggable = true;
+    div.dataset.id = item.id;
+    div.dataset.correct = item.correct;
+    div.textContent = item.name;
+    div.addEventListener('dragstart', dragStart);
+    div.addEventListener('dragend', dragEnd);
+    // touch fallback
+    div.addEventListener('touchstart', touchStart, {passive: false});
+    div.addEventListener('touchmove', touchMove, {passive: false});
+    div.addEventListener('touchend', touchEnd);
+    pool.appendChild(div);
+  });
+
+  document.querySelectorAll('.bin').forEach(bin => {
+    bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('drag-over'); });
+    bin.addEventListener('dragleave', () => bin.classList.remove('drag-over'));
+    bin.addEventListener('drop', drop);
+  });
+}
+
+let dragged = null;
+function dragStart(e) {
+  dragged = e.target;
+  e.target.classList.add('dragging');
+  if (e.dataTransfer) e.dataTransfer.setData('text/plain', e.target.dataset.id);
+}
+function dragEnd(e) {
+  e.target.classList.remove('dragging');
+}
+
+function drop(e) {
+  e.preventDefault();
+  const bin = e.currentTarget;
+  bin.classList.remove('drag-over');
+  if (!dragged) return;
+  handleDrop(dragged, bin);
+  dragged = null;
+}
+
+function handleDrop(itemEl, bin) {
+  const binType = bin.dataset.bin;
+  const correct = itemEl.dataset.correct;
+  const id = parseInt(itemEl.dataset.id);
+  const itemData = items.find(i => i.id === id);
+  const isCorrect = (binType === correct);
+  
+  const placed = document.createElement('div');
+  placed.className = 'placed ' + (isCorrect ? 'correct' : 'wrong');
+  placed.textContent = (isCorrect ? '✓ ' : '✗ ') + itemData.name;
+  bin.appendChild(placed);
+  
+  itemEl.remove();
+  placedCount++;
+  if (isCorrect) correctCount++;
+  
+  document.getElementById('placed').textContent = placedCount;
+  document.getElementById('correct').textContent = correctCount;
+  
+  const fb = document.getElementById('feedback');
+  fb.classList.remove('hidden');
+  fb.style.borderLeftColor = isCorrect ? '#2e7d32' : '#c62828';
+  fb.innerHTML = '<strong>' + (isCorrect ? '✓ Great steward choice!' : '✗ Reconsider...') + '</strong> ' + itemData.reason;
+  
+  if (placedCount === total) showFinal();
+}
+
+// Touch support
+let touchClone = null;
+let touchOffset = {x:0, y:0};
+function touchStart(e) {
+  e.preventDefault();
+  dragged = e.target;
+  const touch = e.touches[0];
+  const rect = e.target.getBoundingClientRect();
+  touchOffset.x = touch.clientX - rect.left;
+  touchOffset.y = touch.clientY - rect.top;
+  touchClone = e.target.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.left = rect.left + 'px';
+  touchClone.style.top = rect.top + 'px';
+  touchClone.style.width = rect.width + 'px';
+  touchClone.style.opacity = '0.8';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.zIndex = 1000;
+  document.body.appendChild(touchClone);
+  e.target.style.opacity = '0.3';
+}
+function touchMove(e) {
+  e.preventDefault();
+  if (!touchClone) return;
+  const touch = e.touches[0];
+  touchClone.style.left = (touch.clientX - touchOffset.x) + 'px';
+  touchClone.style.top = (touch.clientY - touchOffset.y) + 'px';
+}
+function touchEnd(e) {
+  if (!touchClone || !dragged) return;
+  const touch = e.changedTouches[0];
+  const elBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+  const bin = elBelow ? elBelow.closest('.bin') : null;
+  touchClone.remove();
+  touchClone = null;
+  dragged.style.opacity = '1';
+  if (bin) {
+    handleDrop(dragged, bin);
+  }
+  dragged = null;
+}
+
+function showFinal() {
+  const final = document.getElementById('final');
+  final.classList.remove('hidden');
+  const stars = correctCount >= 7 ? '★★★' : correctCount >= 5 ? '★★' : correctCount >= 3 ? '★' : '';
+  document.getElementById('finalStars').innerHTML = '<span class="star">' + stars + '</span>';
+  let msg = '';
+  if (correctCount === 8) msg = "Perfect! You're thinking like a true Creationeer — closing the loop on every material.";
+  else if (correctCount >= 6) msg = "Strong stewardship! You understand the circular economy.";
+  else if (correctCount >= 4) msg = "Good start. Review which materials can be recycled vs. reused.";
+  else msg = "Keep learning! Every material has a journey beyond the race.";
+  document.getElementById('finalMsg').textContent = "Score: " + correctCount + "/" + total + " — " + msg;
+}
+
+function reset() {
+  placedCount = 0;
+  correctCount = 0;
+  document.getElementById('placed').textContent = 0;
+  document.getElementById('correct').textContent = 0;
+  document.getElementById('pool').innerHTML = '<h3>🧰 Car Parts</h3>';
+  document.querySelectorAll('.bin .placed').forEach(p => p.remove());
+  document.getElementById('feedback').classList.add('hidden');
+  document.getElementById('final').classList.add('hidden');
+  init();
+}
+
+init();
+</script>
+</body>
+</html>

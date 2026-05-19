@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Precision Finishing – Making Parts Work Smoothly</summary>
+    <div class="panel-body"><p>What is precision finishing? It is all about making the surface of your car’s parts as smooth and exact as possible. Think about the axles of your mousetrap car. If they are rough or uneven, they will create more friction when they spin in their bearings or axle holders. This friction will slow your car down and prevent it from traveling as far as it could. Precision finishing involves techniques like sanding, filing, or polishing to remove imperfections and create a smooth, consistent surface.</p><p>Application to Your Mousetrap Car Project:
+For your mousetrap car, precision finishing is vital for several key components. The axles are a prime example. After cutting your wooden dowel or metal rod for the axles, you will likely find rough edges or an uneven surface. Use sandpaper (starting with a coarser grit and moving to a finer one) to smooth these surfaces. Pay close attention to the ends and any areas that will contact other parts. The goal is to make the axles as slick as possible to minimize friction. Similarly, if you have any wooden parts that will rub against each other, like the chassis or axle supports, ensure their contact surfaces are sanded smooth. A smooth surface allows for less resistance, letting your car glide more freely.</p><p>Multiscale Modeling Connection:
+When we talk about a &quot;rough&quot; surface, at a macro-level, it might just look a bit bumpy. But if we zoom in with multiscale modeling, all the way down to the atomic level, we would see tiny peaks and valleys. When two rough surfaces rub together, these atomic-level imperfections snag and collide. This causes atoms to bond and break, generating heat and resisting motion – that is friction! By precision finishing, you are essentially reducing these atomic-level peaks and valleys, creating a surface where fewer atoms collide, thus reducing friction and allowing for smoother, more efficient movement. The macroscopic observation of a slow, jerky car is caused by these microscopic atomic interactions.</p><p>OCV Application for Precision Finishing:
+Let's consider the precision finishing of your axles using the OCV method:
+Objective: Maximize the distance your mousetrap car travels.
+Constraint: Limited time and materials (you cannot spend days polishing, and you only have certain grits of sandpaper).
+Variable: The amount of time spent sanding, the grit of sandpaper used, and the pressure applied during sanding.
+You might choose to spend more time on the axles (variable) to achieve a smoother finish (objective), but you are constrained by the total project time. Finding the optimal balance is part of the engineering challenge.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Understanding Tolerance – Allowing for Imperfection</summary>
+    <div class="panel-body"><p>In engineering, nothing can be made absolutely perfect. There will always be slight variations from the ideal design. This is where the concept of tolerance comes in. Tolerance is the acceptable amount of variation a part can have from its specified dimension. For example, if your design calls for an axle to be 0.25 inches in diameter, a tolerance might specify that it can be between 0.245 and 0.255 inches. If a part falls within this range, it is considered acceptable and should still fit and function correctly. If it falls outside this range, it is out of tolerance and might not work as intended.</p><p>Application to Your Mousetrap Car Project:
+Tolerance is especially important when you have mating parts, such as an axle and an axle support (a hole through which the axle passes).
+Consider the hole for your axle in the chassis or a bearing block. If the hole is too small (below tolerance), the axle will not fit, or it will bind and create excessive friction. If the hole is too large (above tolerance), the axle will wobble excessively, causing instability and inefficient power transfer from the mousetrap. You need to achieve a &quot;good fit.&quot; A good fit means the parts go together easily but without too much slop or play. This requires careful measurement and, sometimes, slight adjustments with a file, reamer, or drill bit to bring the parts within an acceptable tolerance range. For example, if you drill a hole for your axle, you might need to slightly enlarge it with a small file or by gently reaming it with a slightly larger drill bit to get the perfect fit.</p><p>Multiscale Modeling Connection:
+At the macro-level, a loose-fitting wheel might just seem wobbly. But multiscale modeling shows us that this &quot;play&quot; means there is excessive space at the atomic level between the axle and its housing. This allows the wheel to move unpredictably, causing misalignment and inefficient transfer of rotational energy. Conversely, a hole that is too tight means atomic structures are too close, leading to increased friction and potential binding due to atomic-level resistance. Understanding tolerance helps us manage these microscopic gaps to ensure optimal macroscopic performance.</p><p>OCV Application for Tolerance:
+Let's apply OCV to the axle hole size:
+Objective: Ensure smooth, stable rotation of the wheels and efficient power transfer.
+Constraint: Available drill bit sizes, the material properties of your chassis (e.g., wood might splinter if drilled too large), and the strength of the axle itself.
+Variable: The diameter of the drill bit used, the method of enlarging the hole (e.g., reaming, filing), and the choice of bearing material.
+You might select a drill bit (variable) that creates a slightly undersized hole, then carefully ream it (variable) until the axle spins freely but without excessive wobble (objective), all while being careful not to splinter the wood (constraint).</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: The Importance of Fit in Assembly</summary>
+    <div class="panel-body"><p>Precision finishing and tolerance directly impact the &quot;fit&quot; of your parts. Fit describes how well two mating components interact. There are different types of fit:
+   Clearance Fit: The hole is intentionally larger than the shaft, allowing for free movement. This is ideal for your axles and wheels, where you want them to spin freely.
+   Interference Fit (Press Fit): The shaft is slightly larger than the hole, requiring force to assemble them. This creates a tight, permanent connection, good for securing parts that should not move, like gluing an axle support to the chassis.
+   Transition Fit: A fit that can be either clearance or interference, depending on the actual dimensions of the manufactured parts.</p><p>Application to Your Mousetrap Car Project:
+For your mousetrap car, most moving parts, especially the axles and wheels, require a clearance fit to minimize friction. If your wheels are press-fit onto the axles, they will not spin, or they will cause too much friction. If your axle supports are too tight, the axle will bind. You need to ensure that the axles can rotate freely within their supports and that the wheels can spin independently on the axles (or rotate with the axle if that is your design). This often means you will need to test the fit as you go, making small adjustments. If a hole is too tight, ream it slightly. If it is too loose, you might need to add a bushing (a small tube or sleeve) to take up the extra space.</p><p>The goal in the Assembly phase of Creationeering™ is to bring all these perfectly prepared parts together to create a functional system. Just like God assembled the universe with perfect harmony and balance, we strive for a functional and aesthetically pleasing result.</p></div>
+  </details>
+</div>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supply Chain Builder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 1.8em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .part-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .part-btn {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+  .part-btn.active {
+    background: #1e3a5f;
+    color: #fff;
+  }
+  .part-btn.done {
+    background: #c9a227;
+    border-color: #c9a227;
+    color: #fff;
+  }
+  .target-area {
+    background: #f7f9fc;
+    border: 2px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 120px;
+    margin-bottom: 20px;
+  }
+  .target-label {
+    font-weight: bold;
+    color: #1e3a5f;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .chain-slots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .slot {
+    background: #fff;
+    border: 2px dashed #c9a227;
+    border-radius: 8px;
+    min-width: 130px;
+    min-height: 70px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9em;
+    position: relative;
+  }
+  .slot.filled {
+    background: #fff8e1;
+    border-style: solid;
+  }
+  .arrow {
+    color: #c9a227;
+    font-size: 1.5em;
+    align-self: center;
+    font-weight: bold;
+  }
+  .pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .card {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: grab;
+    font-size: 0.9em;
+    user-select: none;
+    transition: transform 0.15s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card.dragging { opacity: 0.4; }
+  .card.used { display: none; }
+  .controls {
+    text-align: center;
+    margin-top: 15px;
+  }
+  button.action {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  button.action:hover { background: #b08d1f; }
+  button.action.secondary {
+    background: #fff;
+    color: #1e3a5f;
+    border: 2px solid #1e3a5f;
+  }
+  .feedback {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+  }
+  .feedback.correct {
+    background: #d4edda;
+    color: #155724;
+    display: block;
+  }
+  .feedback.wrong {
+    background: #f8d7da;
+    color: #721c24;
+    display: block;
+  }
+  .final {
+    text-align: center;
+    padding: 30px;
+  }
+  .final h2 {
+    color: #c9a227;
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+  .score-big {
+    font-size: 3em;
+    color: #1e3a5f;
+    font-weight: bold;
+  }
+  .progress {
+    text-align: center;
+    color: #1e3a5f;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <h1>🔗 Build the Supply Chain</h1>
+  <p class="subtitle">Drag each step into the right order — from raw material to your workbench!</p>
+
+  <div class="progress" id="progress">Part 1 of 3</div>
+
+  <div class="part-selector" id="partSelector"></div>
+
+  <div class="target-area">
+    <div class="target-label" id="targetLabel">Wooden Chassis Block</div>
+    <div class="chain-slots" id="slots"></div>
+  </div>
+
+  <div class="pool" id="pool"></div>
+
+  <div class="controls">
+    <button class="action secondary" id="resetBtn">Reset</button>
+    <button class="action" id="checkBtn">Check Order</button>
+  </div>
+
+  <div class="feedback" id="feedback"></div>
+</div>
+
+<script>
+const parts = [
+  {
+    name: "Wooden Chassis Block",
+    icon: "🪵",
+    chain: [
+      "Tree harvested in forest",
+      "Logs trucked to lumber mill",
+      "Mill cuts wood into blocks",
+      "Blocks shipped to hardware store",
+      "You buy it for your car"
+    ]
+  },
+  {
+    name: "Plastic Wheels",
+    icon: "⚙️",
+    chain: [
+      "Crude oil pumped from ground",
+      "Refinery makes plastic pellets",
+      "Factory molds pellets into wheels",
+      "Wheels packed & shipped to warehouse",
+      "Delivered to your school"
+    ]
+  },
+  {
+    name: "Steel Mousetrap",
+    icon: "🪤",
+    chain: [
+      "Iron ore mined from earth",
+      "Smelter turns ore into steel",
+      "Factory bends steel into trap parts",
+      "Traps assembled & boxed",
+      "Shipped to your classroom"
+    ]
+  }
+];
+
+let currentPart = 0;
+let placed = [];
+let completed = [false, false, false];
+
+const slotsEl = document.getElementById('slots');
+const poolEl = document.getElementById('pool');
+const targetLabel = document.getElementById('targetLabel');
+const feedback = document.getElementById('feedback');
+const partSelector = document.getElementById('partSelector');
+const progress = document.getElementById('progress');
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderPartSelector() {
+  partSelector.innerHTML = '';
+  parts.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'part-btn';
+    if (i === currentPart) btn.classList.add('active');
+    if (completed[i]) btn.classList.add('done');
+    btn.textContent = (completed[i] ? '✓ ' : '') + p.icon + ' ' + p.name;
+    btn.onclick = () => { currentPart = i; loadPart(); };
+    partSelector.appendChild(btn);
+  });
+}
+
+function loadPart() {
+  const part = parts[currentPart];
+  targetLabel.textContent = part.icon + ' ' + part.name;
+  placed = new Array(part.chain.length).fill(null);
+  feedback.className = 'feedback';
+  feedback.textContent = '';
+  progress.textContent = `Part ${currentPart + 1} of 3`;
+  renderPartSelector();
+  renderSlots();
+  renderPool();
+}
+
+function renderSlots() {
+  const part = parts[currentPart];
+  slotsEl.innerHTML = '';
+  for (let i = 0; i < part.chain.length; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'slot' + (placed[i] ? ' filled' : '');
+    slot.textContent = placed[i] || `Step ${i+1}`;
+    slot.dataset.index = i;
+    slot.ondragover = e => e.preventDefault();
+    slot.ondrop = e => {
+      e.preventDefault();
+      const text = e.dataTransfer.getData('text/plain');
+      // If slot already has item, return it to pool
+      placed[i] = text;
+      renderSlots();
+      renderPool();
+    };
+    slot.onclick = () => {
+      if (placed[i]) {
+        placed[i] = null;
+        renderSlots();
+        renderPool();
+      }
+    };
+    slotsEl.appendChild(slot);
+    if (i < part.chain.length - 1) {
+      const arrow = document.createElement('div');
+      arrow.className = 'arrow';
+      arrow.textContent = '→';
+      slotsEl.appendChild(arrow);
+    }
+  }
+}
+
+function renderPool() {
+  const part = parts[currentPart];
+  poolEl.innerHTML = '';
+  const shuffled = part._shuffled || (part._shuffled = shuffle(part.chain));
+  shuffled.forEach(item => {
+    if (placed.includes(item)) return;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.draggable = true;
+    card.textContent = item;
+    card.ondragstart = e => {
+      e.dataTransfer.setData('text/plain', item);
+      card.classList.add('dragging');
+    };
+    card.ondragend = () => card.classList.remove('dragging');
+    poolEl.appendChild(card);
+  });
+}
+
+document.getElementById('checkBtn').onclick = () => {
+  const part = parts[currentPart];
+  if (placed.includes(null)) {
+    feedback.className = 'feedback wrong';
+    feedback.textContent = '⚠️ Fill in all steps first!';
+    return;
+  }
+  const correct = placed.every((p, i) => p === part.chain[i]);
+  if (correct) {
+    completed[currentPart] = true;
+    feedback.className = 'feedback correct';
+    feedback.textContent = '✅ Perfect! That\'s the correct supply chain order.';
+    renderPartSelector();
+    if (completed.every(c => c)) {
+      setTimeout(showFinal, 1200);
+    } else {
+      setTimeout(() => {
+        const next = completed.findIndex(c => !c);
+        if (next >= 0) { currentPart = next; loadPart(); }
+      }, 1500);
+    }
+  } else {
+    feedback.className = 'feedback wrong';
+    let firstWrong = placed.findIndex((p, i) => p !== part.chain[i]);
+    feedback.textContent = `❌ Not quite — check step ${firstWrong + 1}. Think about what must happen first!`;
+  }
+};
+
+document.getElementById('resetBtn').onclick = () => {
+  parts[currentPart]._shuffled = shuffle(parts[currentPart].chain);
+  loadPart();
+};
+
+function showFinal() {
+  document.getElementById('app').innerHTML = `
+    <div class="final">
+      <h2>🏆 Supply Chain Master!</h2>
+      <div class="score-big">3 / 3</div>
+      <p style="margin: 20px 0; font-size: 1.1em; line-height: 1.6;">
+        You traced all three external supply chains for your mousetrap car parts!
+      </p>
+      <p style="background: #f7f9fc; padding: 15px; border-radius: 8px; border-left: 4px solid #c9a227; text-align: left;">
+        <strong>Big Idea:</strong> Every part of your project traveled a long journey before reaching your workbench. Good Creationeers plan ahead — knowing where materials come from helps you avoid delays and build smarter.
+      </p>
+      <button class="action" onclick="location.reload()" style="margin-top:20px;">Play Again</button>
+    </div>
+  `;
+}
+
+loadPart();
+</script>
+</body>
+</html>

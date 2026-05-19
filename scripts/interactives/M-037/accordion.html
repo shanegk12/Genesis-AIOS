@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Navigating External Supply Chains</summary>
+    <div class="panel-body"><p>What exactly is an external supply chain? Think of it as the journey your mousetrap car's parts take before they even reach your workbench. It’s the network of people, companies, and processes that get raw materials, turn them into finished parts, and then deliver those parts to you. For instance, if you're using a wooden block for your car's chassis, the wood didn't just appear. It was harvested from a tree, transported to a lumber mill, cut into specific shapes, perhaps treated, packaged, and then shipped to a hardware store or directly to your kit manufacturer, and finally to you. This entire sequence, from the initial raw material to your hands, makes up the external supply chain.</p><p>For your mousetrap car project, your external supply chain might seem simple, but it’s there. If you bought a kit, the kit manufacturer worked with many suppliers to gather all the different components. If you're sourcing parts yourself, you are interacting directly with the supply chain. Your wheels might come from a craft store, the axles from a hardware store, and the mousetrap itself from a different retailer. Each of these sources represents a link in your external supply chain. Understanding these links helps you appreciate where your materials come from and the effort involved in getting them to you.</p><p>Let's connect this to Multiscale Modeling. The macro-level observation is simply &quot;I have a wooden block.&quot; But at the atomic level, the properties of that wood – its density, grain structure, and moisture content – were determined by its biological origin and processing. These atomic-level characteristics influence how the wood was harvested, cut, and transported. For example, a dense, straight-grained wood might be sourced from specific regions and require particular cutting techniques, affecting the cost and availability in the supply chain. A material's inherent quality at the micro-level directly impacts its journey through the supply chain and its suitability for your macro-level design.</p><p>When we consider the Objective, Constraint, Variable (OCV) method for acquiring parts, it looks like this:
+Objective: To acquire all necessary components for the mousetrap car.
+Constraint: Limited budget for purchasing parts; specific material requirements (e.g., lightweight wood, strong axles); delivery timeframes.
+Variable: Choice of suppliers (e.g., online store, local hardware, recycled materials); type of material (e.g., balsa wood vs. pine); quantity of each part ordered.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: The Importance of Reliable Suppliers</summary>
+    <div class="panel-body"><p>In any engineering project, the quality and timely delivery of materials are paramount. This makes choosing reliable suppliers incredibly important. A reliable supplier consistently provides materials that meet your specifications, delivers them when promised, and offers them at a reasonable cost. If a supplier fails in any of these areas, it can cause delays, increase expenses, and compromise the quality of your final product. Imagine building a house: if the lumberyard delivers warped wood or the wrong type of nails, the entire construction project could be thrown off schedule and the house might not be safe.</p><p>For your mousetrap car, reliable suppliers ensure you get the right components. If you ordered specific wheels online, you expect them to arrive on time and to be perfectly round and balanced. If you're buying wood from a local store, you want to be sure it's free of cracks, knots, or warps that could affect your car's performance. A bent axle, a flimsy chassis, or a mousetrap that doesn’t spring correctly can all be traced back to issues with the quality of the supplied part. Taking the time to select good quality materials, even for a simple project like a mousetrap car, is a direct reflection of considering your suppliers.</p><p>From a Multiscale Modeling perspective, the reliability of a supplier is often tied to the consistency of their materials at the micro-level. For example, if you observe that a certain brand of balsa wood (macro-level observation) consistently splinters or breaks easily, it might be due to inconsistencies in its cellular structure or processing (atomic-level cause). A good supplier will have processes in place to ensure that the atomic-level integrity of their materials translates to reliable macro-level performance. They might use specific manufacturing techniques or quality control checks to minimize defects, ensuring that the materials you receive are suitable for their intended purpose.</p><p>Applying the OCV method to supplier reliability:
+Objective: To build a mousetrap car that performs optimally and consistently.
+Constraint: Availability of high-quality materials; budget for premium parts; time for inspecting incoming materials.
+Variable: Reputation of the supplier; material specifications (e.g., grade of wood, type of plastic); personal inspection of materials before purchase.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Logistics and Inventory Management for Your Project</summary>
+    <div class="panel-body"><p>Logistics is all about the detailed planning and execution of moving and storing things efficiently. For a large company, this means coordinating ships, trucks, warehouses, and thousands of parts. For your mousetrap car, it might be simpler, but the principles are the same. How do you get your parts from the store to your workspace? Do you have a designated area for them? Do you know exactly what you have and what you still need? This is inventory management.</p><p>Consider the journey of your mousetrap car parts. If you buy materials from a store, you need to transport them home. This involves planning: what vehicle will you use? How will you protect the delicate parts? Once home, where will you store them so they are safe, organized, and easy to find? This is your personal logistics system. If you just dump everything in a box, you might waste time searching for a specific wheel or axle later, or worse, damage a critical component. Good inventory management means knowing exactly what parts you have, how many, and where they are. This prevents you from accidentally buying duplicate parts or realizing too late that you're missing something crucial.</p><p>While Multiscale Modeling isn't as directly applicable to the abstract concepts of logistics and inventory itself, it underpins the reason for careful management. The value of each component, from its macro-level function (a wheel) to its atomic-level composition (the specific polymer or rubber it's made from), means that its safe transport and storage are important. Protecting the material's integrity at the micro-level ensures its functionality at the macro-level. If a part is damaged due to poor logistics, its atomic structure might be compromised, leading to macro-level failure in your car.</p><p>Using the OCV method for logistics and inventory:
+Objective: To ensure all parts are available and undamaged when needed for assembly.
+Constraint: Limited workspace and storage area; time available for organizing parts; fragility of certain components.
+Variable: Storage method (e.g., labeled bins, organized trays); frequency of inventory checks; transport method from supplier to workspace.</p></div>
+  </details>
+</div>
+</body>
+</html>

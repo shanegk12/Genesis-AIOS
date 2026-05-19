@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Understanding Lifecycle and Total Cost</summary>
+    <div class="panel-body"><p>Every product, from a complex car to your simple mousetrap vehicle, has a lifecycle. This journey starts with an idea, moves through design, material selection, manufacturing, use, and finally, its end-of-life. In our previous lesson, we focused on the &quot;use&quot; phase, emphasizing sustainability. Now, we're looking at the whole picture, especially the final stages.</p><p>The &quot;Death &amp; Recycling&quot; Creationeering™ phase, as described by Horstemeyer et al. (2022), is &quot;the final stage that an engineer must consider is what to do with the materials once the designed performance of the product is over. Recycling is converting an already existing product or material into a new product.&quot; This phase recognizes that components and materials often have value even after their primary function is complete.</p><p>When we talk about total cost, we're not just thinking about how much money you spent on materials. Total cost includes:
+   Initial material cost: The price of the wood, wheels, axles, glue, etc.
+   Labor cost: The time and effort you put into designing, building, and testing your car.
+   Maintenance cost: Any repairs or adjustments needed during its use.
+   End-of-life cost: The cost (or benefit) associated with disposing of, recycling, or repurposing the materials. For example, if you can reuse parts, you save on future material costs. If you have to throw something away, there might be a disposal cost.</p><p>Mousetrap Car Application:
+Let's consider your mousetrap car. What materials did you choose? Did you consider how easy they would be to separate later? For example, if you used a lot of super glue, it might be very difficult to disassemble your car without damaging the parts, making recycling or reuse harder. If you used screws or rubber bands, disassembly would be much simpler.</p><p>Think about the total cost of your mousetrap car. If you spent hours meticulously cutting a custom chassis from a rare wood, that &quot;labor cost&quot; (your time) is high. If you bought cheap plastic wheels that broke during testing, leading to replacement and more time, that adds to the total cost. When your project is finished, will you simply throw your car in the trash? Or will you carefully take it apart, saving the mousetrap, wheels, and axles for a future project? The latter approach reduces the overall lifecycle cost by extending the utility of the materials.</p><p>Multiscale Modeling Connection:
+The total cost and lifecycle of your mousetrap car are deeply connected to the materials you choose, right down to their atomic structure. For instance, a macro-level observation might be that a plastic chassis breaks easily, leading to a higher total cost due to replacement. At the atomic level, this is because the polymer chains in that particular plastic might have weak intermolecular forces or a brittle molecular structure, making it susceptible to fracture. In contrast, a chassis made from a strong, flexible wood might withstand impacts better, reducing repair costs. This macro-level durability is due to the wood's cellulose fibers being robustly bonded at the molecular level. Understanding these connections helps you choose materials that optimize for a longer, more cost-effective lifecycle.</p><p>OCV Application:
+Let's apply the OCV method to minimizing the total cost of your mousetrap car.
+Objective: Minimize the total lifecycle cost of your mousetrap car project.
+Constraints:
+   Project budget (e.g., $20 limit for new materials).
+   Available tools and skills (e.g., you only have hand tools, limited experience with certain materials).
+   Performance requirements (e.g., car must travel 3 meters).
+Variables:
+   Type of materials used (e.g., balsa wood, plywood, cardboard, recycled plastic).
+   Complexity of design (e.g., simple chassis vs. intricate aerodynamic body).
+   Joining methods (e.g., glue, screws, tape, interlocking parts).</p><p>By carefully considering these variables within your constraints, you can make design choices that not only meet performance objectives but also reduce the overall cost throughout the car's life.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: The &quot;Death&quot; of a Mousetrap Car – End-of-Life Strategies</summary>
+    <div class="panel-body"><p>Once your mousetrap car has completed its races, achieved its objectives, or simply served its purpose, it reaches its end-of-life. This doesn't necessarily mean it's useless! The &quot;Death &amp; Recycling&quot; phase encourages us to think creatively about what happens next. Horstemeyer et al. (2022) state, &quot;Recycling is converting an already existing product or material into a new product.&quot; But recycling isn't the only option.</p><p>Here are some end-of-life strategies:
+   Disposal: Simply throwing the car away. This is generally the least preferred option, as it contributes to landfills and wastes resources.
+   Reuse: Using the entire car or major components for the same purpose again. Perhaps a younger sibling wants to use your car for their project next year.
+   Repurposing: Using parts of the car for a different purpose. The mousetrap mechanism could power a different small device, or the wheels could become part of a robot.
+   Recycling: Breaking down materials (like plastic or metal) to create new raw materials for new products. This requires specific infrastructure.</p><p>Mousetrap Car Application:
+What will be the fate of your mousetrap car? Will it be displayed as a trophy? Will parts be salvaged for future projects? Let's say your car has a sturdy wooden chassis, plastic wheels, metal axles, and of course, the mousetrap itself.</p><p>Chassis (wood): Could it be sanded down and used for another small woodworking project? Could it be composted if it's untreated natural wood?
+   Wheels (plastic): Can they be cleaned and used on a different vehicle? Can they be taken to a local recycling center that accepts that type of plastic?
+   Axles (metal): Can they be straightened and reused? Can they be added to a metal recycling bin?
+   Mousetrap (wood and metal): Can it be carefully disassembled, the spring removed, and the wood and metal parts separated for recycling or repurposing? The spring itself could be a useful component for another invention.</p><p>By thinking about these options before you even build your car, you can make choices that simplify its end-of-life management.</p><p>Multiscale Modeling Connection:
+The feasibility of recycling or repurposing materials depends heavily on their atomic and molecular structure. At the macro level, we observe that some plastics are easily recyclable, while others are not. At the atomic level, this difference lies in the type of polymer chains and how they are bonded. Thermoplastics, for example, can be melted and reshaped because their polymer chains are held by weak intermolecular forces, allowing them to flow when heated. Thermoset plastics, on the other hand, form strong, irreversible covalent bonds during curing, making them difficult to melt and recycle. Similarly, metals like aluminum can be recycled almost indefinitely because their metallic bonds allow atoms to rearrange without significant degradation. Understanding these atomic-level properties helps us predict and design for macro-level recyclability.</p><p>OCV Application:
+Let's consider maximizing resource recovery from your mousetrap car.
+Objective: Maximize the amount of material from your mousetrap car that can be reused, repurposed, or recycled.
+Constraints:
+   Availability of local recycling facilities for specific material types.
+   Time available for careful disassembly.
+   Tools available for separating different materials.
+Variables:
+   Material selection (e.g., choosing readily recyclable plastics over difficult-to-recycle ones).
+   Joining methods (e.g., using screws instead of permanent glue).
+   Modular design (e.g., making components easy to remove and replace).</p><p>By keeping these in mind, you can design a car that is not only functional but also contributes to better resource management at the end of its life.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Designing for Recycling and Improvement</summary>
+    <div class="panel-body"><p>This leads us to a crucial concept in modern engineering: Design for Disassembly (DfD) and Design for Environment (DfE). DfD means designing a product so it can be easily taken apart at the end of its life. This makes it easier to separate different materials for recycling, or to salvage components for reuse. DfE is a broader concept that involves considering the environmental impact of a product throughout its entire lifecycle, including material choices, energy consumption during manufacturing, and end-of-life management.</p><p>For your V2.0 design, you should consider how your choices now will impact the car's end-of-life. Can you make a chassis that uses less material? Can you select materials that are biodegradable or easily recyclable? Can you design connections that allow for quick and non-destructive disassembly?</p><p>Mousetrap Car Application:
+Imagine your current mousetrap car. How easy would it be to take apart without breaking anything?
+   If you used hot glue for everything, it might be challenging to remove parts cleanly. For your V2.0, you might consider small bolts and nuts, or interlocking designs for wooden parts.
+   If your wheels are permanently glued to the axles, they can't be easily separated. For V2.0, perhaps a press-fit design or a set screw could allow for easier removal.
+   Could you use fewer different types of materials? This simplifies sorting for recycling. For example, instead of three different types of plastic for various parts, could you stick to just one?</p><p>By integrating DfD and DfE principles into your V2.0 design, you're not just building a better car; you're becoming a more responsible Creationeer. This iterative process of design and improvement, even considering &quot;death,&quot; is key to true engineering excellence.</p><p>Multiscale Modeling Connection:
+Designing for disassembly and recycling involves thinking about how components interact at both macro and atomic levels. For instance, selecting screws instead of glue (a macro-level decision) directly impacts the ability to separate materials. At the atomic level, gluing involves forming strong chemical bonds between different materials, making separation difficult without breaking these bonds or damaging the materials. Screws, however, rely on mechanical interlocking, which does not create new atomic bonds between components, allowing for easy separation and preservation of the original material properties. This multiscale perspective helps us anticipate the long-term implications of our design choices.</p><p>OCV Application:
+Let's apply OCV to designing for ease of disassembly in your mousetrap car.
+Objective: Maximize the ease and speed of disassembling the mousetrap car into its constituent materials and components.
+Constraints:
+   Structural integrity (car must remain stable during operation).
+   Weight limit (cannot add excessive weight with fasteners).
+   Cost of fasteners (must remain within budget).
+Variables:
+   Type of fasteners (e.g., screws, bolts, clips, interlocking joints, magnets, rubber bands vs. glue, tape).
+   Number of different materials used (fewer types simplify sorting).
+   Modularity of design (e.g., creating sub-assemblies that can be easily detached).</p><p>By optimizing these variables, you can create a car that is not only high-performing but also a model of responsible design for its entire lifecycle.</p></div>
+  </details>
+</div>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Performance Lab</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .goal-banner {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+  }
+  .goal-banner strong { color: #c9a227; }
+  .sliders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .slider-box {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .slider-box label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .slider-box input[type=range] {
+    width: 100%;
+    accent-color: #c9a227;
+  }
+  .val {
+    color: #c9a227;
+    font-weight: bold;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 1.6em;
+    color: #c9a227;
+    font-weight: bold;
+    display: block;
+  }
+  .stat .lbl { font-size: 0.85em; }
+  .track {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+  .finish-line {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: repeating-linear-gradient(0deg, #1e3a5f 0 8px, #fff 8px 16px);
+  }
+  .car {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    transition: left 0.1s linear;
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  button {
+    flex: 1;
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  button:hover { transform: scale(1.03); }
+  button:disabled { background: #ccc; cursor: not-allowed; }
+  .feedback {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 12px;
+    border-radius: 6px;
+    min-height: 60px;
+    margin-bottom: 15px;
+  }
+  .log {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    max-height: 130px;
+    overflow-y: auto;
+    font-size: 0.85em;
+  }
+  .log-row {
+    display: grid;
+    grid-template-columns: 30px 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 4px;
+    border-bottom: 1px solid #eee;
+  }
+  .log-row.header {
+    font-weight: bold;
+    color: #1e3a5f;
+    background: #f7f9fc;
+  }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+  }
+  .final {
+    background: linear-gradient(135deg, #1e3a5f, #2a5080);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 15px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🐭 Mousetrap Car Performance Lab</h1>
+  <p class="subtitle">Tune your design. Collect data. Discover the best build!</p>
+
+  <div class="goal-banner" id="goalBanner">
+    🎯 Mission: <strong id="goalText">Go the FARTHEST distance</strong>
+  </div>
+
+  <div class="sliders">
+    <div class="slider-box">
+      <label>🎡 Wheel Size: <span class="val" id="wheelVal">5</span></label>
+      <input type="range" id="wheel" min="1" max="10" value="5">
+    </div>
+    <div class="slider-box">
+      <label>🪢 Axle String Length: <span class="val" id="stringVal">5</span></label>
+      <input type="range" id="string" min="1" max="10" value="5">
+    </div>
+    <div class="slider-box">
+      <label>⚖️ Car Weight: <span class="val" id="weightVal">5</span></label>
+      <input type="range" id="weight" min="1" max="10" value="5">
+    </div>
+    <div class="slider-box">
+      <label>🔧 Spring Tension: <span class="val" id="springVal">5</span></label>
+      <input type="range" id="spring" min="1" max="10" value="5">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="num" id="distStat">0.0</span><span class="lbl">Distance (m)</span></div>
+    <div class="stat"><span class="num" id="speedStat">0.0</span><span class="lbl">Speed (m/s)</span></div>
+    <div class="stat"><span class="num" id="trialStat">0/5</span><span class="lbl">Trials</span></div>
+  </div>
+
+  <div class="track">
+    <div class="car" id="car">🏎️</div>
+    <div class="finish-line"></div>
+  </div>
+
+  <div class="buttons">
+    <button id="runBtn">▶ Run Test</button>
+    <button id="resetBtn">↻ Reset</button>
+  </div>
+
+  <div class="feedback" id="feedback">
+    Adjust the sliders to design your car, then click <strong>Run Test</strong> to gather performance data!
+  </div>
+
+  <div class="log">
+    <div class="log-row header">
+      <div>#</div><div>Wheel</div><div>String</div><div>Weight</div><div>Result</div>
+    </div>
+    <div id="logBody"></div>
+  </div>
+
+  <div id="finalArea"></div>
+</div>
+
+<script>
+const goals = [
+  { name: "Go the FARTHEST distance", metric: "distance" },
+  { name: "Reach the HIGHEST speed", metric: "speed" }
+];
+let currentGoal = goals[Math.floor(Math.random() * goals.length)];
+document.getElementById('goalText').textContent = currentGoal.name;
+
+const sliders = ['wheel', 'string', 'weight', 'spring'];
+sliders.forEach(s => {
+  const el = document.getElementById(s);
+  el.addEventListener('input', () => {
+    document.getElementById(s + 'Val').textContent = el.value;
+  });
+});
+
+let trials = [];
+const MAX_TRIALS = 5;
+
+function calculate() {
+  const w = +document.getElementById('wheel').value;
+  const s = +document.getElementById('string').value;
+  const wt = +document.getElementById('weight').value;
+  const sp = +document.getElementById('spring').value;
+
+  // Distance: big wheels + long string + light weight + good tension
+  // Optimal: wheel 8-9, string 8-9, weight 2-3, spring 7-8
+  let distance = 0;
+  distance += (w / 10) * 30; // bigger wheels = more distance per rotation
+  distance += (s / 10) * 25; // longer string = more rotations of pull
+  distance += ((11 - wt) / 10) * 20; // lighter = less friction
+  distance += (sp / 10) * 15;
+  // Penalty if too extreme
+  if (wt < 2) distance -= 8; // too light = wheels slip
+  if (sp > 9 && wt < 3) distance -= 10; // tips over
+
+  // Speed: small wheels + short string + light + high tension
+  let speed = 0;
+  speed += ((11 - w) / 10) * 15;
+  speed += ((11 - s) / 10) * 10;
+  speed += ((11 - wt) / 10) * 15;
+  speed += (sp / 10) * 25;
+  if (wt < 2) speed -= 5;
+
+  return {
+    distance: Math.max(2, distance + (Math.random() * 4 - 2)).toFixed(1),
+    speed: Math.max(0.5, speed / 10 + (Math.random() * 0.4 - 0.2)).toFixed(1)
+  };
+}
+
+function runTest() {
+  if (trials.length >= MAX_TRIALS) return;
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+
+  const result = calculate();
+  const config = {
+    wheel: +document.getElementById('wheel').value,
+    string: +document.getElementById('string').value,
+    weight: +document.getElementById('weight').value,
+    spring: +document.getElementById('spring').value
+  };
+
+  // animate car
+  const car = document.getElementById('car');
+  const track = document.querySelector('.track');
+  const maxLeft = track.offsetWidth - 50;
+  const distancePct = Math.min(1, result.distance / 90);
+  const speed = +result.speed;
+  const duration = Math.max(800, 3000 - speed * 400);
+  car.style.transition = 'left ' + duration + 'ms linear';
+  setTimeout(() => { car.style.left = (maxLeft * distancePct) + 'px'; }, 50);
+
+  document.getElementById('distStat').textContent = result.distance;
+  document.getElementById('speedStat').textContent = result.speed;
+
+  setTimeout(() => {
+    trials.push({ config, result });
+    document.getElementById('trialStat').textContent = trials.length + '/' + MAX_TRIALS;
+    logTrial(trials.length, config, result);
+    giveFeedback(result);
+    btn.disabled = false;
+    if (trials.length >= MAX_TRIALS) showFinal();
+  }, duration + 100);
+}
+
+function logTrial(num, config, result) {
+  const metric = currentGoal.metric === 'distance' ? result.distance + ' m' : result.speed + ' m/s';
+  const row = document.createElement('div');
+  row.className = 'log-row';
+  row.innerHTML = `<div>${num}</div><div>${config.wheel}</div><div>${config.string}</div><div>${config.weight}</div><div><span class="badge">${metric}</span></div>`;
+  document.getElementById('logBody').appendChild(row);
+}
+
+function giveFeedback(result) {
+  const fb = document.getElementById('feedback');
+  const val = currentGoal.metric === 'distance' ? +result.distance : +result.speed;
+  const target = currentGoal.metric === 'distance' ? 70 : 5;
+  let msg = '';
+  if (val >= target) {
+    msg = `🌟 Excellent! ${currentGoal.metric} = <strong>${val}</strong>. You're hitting your design goal! Try to repeat or improve.`;
+  } else if (val >= target * 0.7) {
+    msg = `👍 Good run! ${currentGoal.metric} = <strong>${val}</strong>. Use the data — what change might push it higher?`;
+  } else {
+    msg = `🔍 ${currentGoal.metric} = <strong>${val}</strong>. Compare your trials. What variables boost performance for this goal?`;
+  }
+  if (currentGoal.metric === 'distance') {
+    msg += "<br><small>💡 Hint: Big wheels travel farther per turn. Lighter cars have less friction.</small>";
+  } else {
+    msg += "<br><small>💡 Hint: Small wheels & strong spring tension can mean faster acceleration.</small>";
+  }
+  fb.innerHTML = msg;
+}
+
+function showFinal() {
+  let best = trials[0];
+  trials.forEach(t => {
+    if (+t.result[currentGoal.metric] > +best.result[currentGoal.metric]) best = t;
+  });
+  const finalArea = document.getElementById('finalArea');
+  finalArea.innerHTML = `
+    <div class="final">
+      <h2>🏆 Performance Data Complete!</h2>
+      <p>Your best <strong>${currentGoal.metric}</strong>: <span style="color:#c9a227;font-size:1.5em;font-weight:bold;">${best.result[currentGoal.metric]}</span></p>
+      <p style="margin-top:10px;">Winning Design — Wheel: ${best.config.wheel}, String: ${best.config.string}, Weight: ${best.config.weight}, Spring: ${best.config.spring}</p>
+      <p style="margin-top:12px;font-size:0.95em;">Without data, you'd be guessing. <strong>With data, you make smart engineering decisions</strong> — stewarding materials and time wisely. That's the heart of Creationeering!</p>
+    </div>`;
+  document.getElementById('runBtn').disabled = true;
+}
+
+function reset() {
+  trials = [];
+  document.getElementById('logBody').innerHTML = '';
+  document.getElementById('finalArea').innerHTML = '';
+  document.getElementById('trialStat').textContent = '0/5';
+  document.getElementById('distStat').textContent = '0.0';
+  document.getElementById('speedStat').textContent = '0.0';
+  document.getElementById('car').style.transition = 'none';
+  document.getElementById('car').style.left = '5px';
+  document.getElementById('runBtn').disabled = false;
+  currentGoal = goals[Math.floor(Math.random() * goals.length)];
+  document.getElementById('goalText').textContent = currentGoal.name;
+  document.getElementById('feedback').innerHTML = 'New mission! Adjust the sliders and click <strong>Run Test</strong> to gather performance data!';
+}
+
+document.getElementById('runBtn').addEventListener('click', runTest);
+document.getElementById('resetBtn').addEventListener('click', reset);
+</script>
+</body>
+</html>

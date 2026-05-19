@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IP Sorter: Protect Your Mousetrap Car</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    color: #1e3a5f;
+    margin: 0 0 6px;
+    font-size: 1.5em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 14px;
+    font-size: 0.95em;
+  }
+  .progress {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #c9a227;
+  }
+  .card-area {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 0 auto 16px;
+    max-width: 600px;
+    min-height: 110px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(30,58,95,0.15);
+  }
+  .item-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c9a227;
+    margin-bottom: 6px;
+  }
+  .item-text {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto 14px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bin:hover {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateY(-3px);
+  }
+  .bin h3 {
+    margin: 0 0 6px;
+    color: #c9a227;
+    font-size: 1em;
+  }
+  .bin:hover h3 { color: #c9a227; }
+  .bin p {
+    margin: 0;
+    font-size: 0.78em;
+    line-height: 1.3;
+  }
+  .feedback {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .correct { background: #d4edda; color: #155724; border: 2px solid #28a745; }
+  .incorrect { background: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+  .neutral { background: transparent; }
+  .results {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .score {
+    font-size: 3em;
+    color: #c9a227;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .results h2 { color: #1e3a5f; margin-top: 0; }
+  button {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  button:hover { background: #1e3a5f; }
+  .hidden { display: none; }
+  .next-btn {
+    display: block;
+    margin: 10px auto;
+  }
+</style>
+</head>
+<body>
+
+<div id="game">
+  <h1>🛡️ Protect Your Invention!</h1>
+  <p class="subtitle">Which type of Intellectual Property fits each part of your mousetrap car?</p>
+  <div class="progress" id="progress">Item 1 of 8</div>
+
+  <div class="card-area">
+    <div class="item-label">Your Mousetrap Car Element:</div>
+    <div class="item-text" id="itemText">Loading...</div>
+  </div>
+
+  <div class="bins">
+    <div class="bin" data-type="patent" onclick="choose('patent')">
+      <h3>⚙️ PATENT</h3>
+      <p>Protects new <b>inventions</b> & how things work</p>
+    </div>
+    <div class="bin" data-type="copyright" onclick="choose('copyright')">
+      <h3>📝 COPYRIGHT</h3>
+      <p>Protects <b>creative works</b> like writing, art, videos</p>
+    </div>
+    <div class="bin" data-type="trademark" onclick="choose('trademark')">
+      <h3>™️ TRADEMARK</h3>
+      <p>Protects <b>names, logos</b> & brand identity</p>
+    </div>
+  </div>
+
+  <div class="feedback neutral" id="feedback">Tap the box that best protects this idea.</div>
+</div>
+
+<div id="results" class="results hidden">
+  <h2>🏆 Mission Complete!</h2>
+  <p>You scored:</p>
+  <div class="score" id="finalScore">0/8</div>
+  <p id="message"></p>
+  <p style="font-style:italic; color:#555; font-size:0.9em;">"I wisdom dwell with prudence, and find out knowledge of witty inventions." — Proverbs 8:12</p>
+  <button onclick="restart()">Try Again</button>
+</div>
+
+<script>
+const items = [
+  { text: "A brand-new gear system you invented to make your car go farther", answer: "patent", explain: "New mechanical inventions are protected by PATENTS." },
+  { text: "The cool logo you designed for 'Lightning Bolt Racers' team", answer: "trademark", explain: "Logos and team names are TRADEMARKS." },
+  { text: "The instructional YouTube video you made showing how to build the car", answer: "copyright", explain: "Videos, writing, and art are protected by COPYRIGHT." },
+  { text: "A unique wheel-traction mechanism you engineered", answer: "patent", explain: "New devices and mechanisms = PATENT." },
+  { text: "Your car's name: 'TurboMouse Pro™'", answer: "trademark", explain: "Brand names are TRADEMARKS." },
+  { text: "The detailed blueprint drawings you sketched of your design", answer: "copyright", explain: "Original drawings are protected by COPYRIGHT." },
+  { text: "A new lever-arm release system that boosts launch power", answer: "patent", explain: "Novel functional inventions need a PATENT." },
+  { text: "The illustrated instruction manual you wrote", answer: "copyright", explain: "Written manuals are protected by COPYRIGHT." }
+];
+
+let current = 0;
+let score = 0;
+let locked = false;
+
+function loadItem() {
+  if (current >= items.length) { showResults(); return; }
+  locked = false;
+  document.getElementById('itemText').textContent = items[current].text;
+  document.getElementById('progress').textContent = `Item ${current+1} of ${items.length}`;
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback neutral';
+  fb.innerHTML = 'Tap the box that best protects this idea.';
+}
+
+function choose(type) {
+  if (locked) return;
+  locked = true;
+  const item = items[current];
+  const fb = document.getElementById('feedback');
+  if (type === item.answer) {
+    score++;
+    fb.className = 'feedback correct';
+    fb.innerHTML = `✅ Correct! ${item.explain}`;
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.innerHTML = `❌ Not quite. ${item.explain}`;
+  }
+  fb.innerHTML += '<br><button class="next-btn" onclick="nextItem()">Next →</button>';
+}
+
+function nextItem() {
+  current++;
+  loadItem();
+}
+
+function showResults() {
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = `${score}/${items.length}`;
+  let msg = '';
+  if (score === items.length) msg = "Outstanding! You're a true IP expert and a wise Creationeer!";
+  else if (score >= 6) msg = "Great work! You understand how to protect inventions responsibly.";
+  else if (score >= 4) msg = "Good effort! Review the three types and try again.";
+  else msg = "Keep learning — wisdom comes with practice!";
+  document.getElementById('message').textContent = msg;
+}
+
+function restart() {
+  current = 0; score = 0;
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  loadItem();
+}
+
+loadItem();
+</script>
+</body>
+</html>

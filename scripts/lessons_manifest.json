@@ -2539,9 +2539,32 @@
       "phase": "Assembly",
       "prev": "Build: Inventory Checks and Verifications",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:07:13.408240+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2250,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is strong, with excellent reading level support and faith integration. The framework use is generally good but could be improved. The Multiscale Modeling connection to tolerance feels less impactful than its use for friction. The shoe analogy in the introduction is a bit weak; a more mechanical analogy might be more effective. The core content on precision, tolerance, and fit is well-explained and appropriately applied to the project. The structure is complete and all sections are substantive.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-029/flashcards.html",
+        "accordion": "interactives/M-029/accordion.html",
+        "ocv": "interactives/M-029/ocv.html",
+        "concept": "interactives/M-029/concept.html"
+      }
     },
     {
       "id": "M-030",
@@ -2739,9 +2762,9 @@
       "phase": "Logistics",
       "prev": "Lesson: Critical Paths and Calculating Time",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:13:23.305727+00:00",
+      "error": " - Lesson: Principles of E-Waste and Safe Disposal\n  - BA: Business Plan Compilation + Pitch\n  - Lesson: Salvage Value and Resource Recovery\n  - Lesson: Closing a Project\n  - Death and Recycling: End of Life Classification\n  - Final Activity: Parent Pitch Night\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\nhttplib2 transport does not support per-request timeout. Set the timeout when constructing the httplib2.Http instance.\n"
     },
     {
       "id": "M-036",
@@ -2752,9 +2775,34 @@
       "phase": "Logistics",
       "prev": "Business Activity: Break Even Analysis",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:13:49.588070+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 2,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.4
+      },
+      "qc_structural": {
+        "word_count": 2230,
+        "missing_sections": [
+          "Lesson Overview"
+        ],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson effectively integrates faith concepts with complex legal and engineering topics like IP and liability. However, the reading level and abstractness of the Multiscale Modeling examples are high for a 6th-8th grade audience. The vocabulary is challenging, and sentence structures are often academic. To improve, simplify the Multiscale Modeling connections to focus on more tangible cause-and-effect relationships (e.g., 'weak glue leads to wheel failure') rather than atomic-level explanations. Also, simplify sentence structures throughout the 'plain-language' sections to better match the target reading level.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-036/flashcards.html",
+        "accordion": "interactives/M-036/accordion.html",
+        "ocv": "interactives/M-036/ocv.html",
+        "concept": "interactives/M-036/concept.html"
+      }
     },
     {
       "id": "M-037",
@@ -2765,9 +2813,32 @@
       "phase": "Logistics",
       "prev": "BA: Patents, IP + Engineer Liability",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:16:05.473427+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": null,
+        "faith_integration": null,
+        "framework_use": null,
+        "analogy_quality": null,
+        "structure_complete": null,
+        "overall": null
+      },
+      "qc_structural": {
+        "word_count": 2003,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "QC API error: HTTP Error 503: Service Unavailable",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-037/flashcards.html",
+        "accordion": "interactives/M-037/accordion.html",
+        "ocv": "interactives/M-037/ocv.html",
+        "concept": "interactives/M-037/concept.html"
+      }
     },
     {
       "id": "M-038",
@@ -2887,9 +2958,41 @@
       "phase": "Performance",
       "prev": "BA: Customer Persona + Marketing Standards",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:17:52.518659+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": null,
+        "faith_integration": null,
+        "framework_use": null,
+        "analogy_quality": null,
+        "structure_complete": null,
+        "overall": null
+      },
+      "qc_structural": {
+        "word_count": 65,
+        "missing_sections": [
+          "Lesson Overview",
+          "Learning Objectives",
+          "Key Vocabulary",
+          "Engineering Journal",
+          "Technical Documentation",
+          "Summary of Key Concepts",
+          "Works Cited"
+        ],
+        "missing_frameworks": [
+          "Multiscale",
+          "OCV"
+        ],
+        "has_scripture": false
+      },
+      "qc_notes": "QC API error: The read operation timed out",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "ocv": "interactives/M-041/ocv.html",
+        "concept": "interactives/M-041/concept.html"
+      }
     },
     {
       "id": "M-042",
@@ -2900,9 +3003,32 @@
       "phase": "Performance",
       "prev": "Lesson: Assembly Blueprint and Safety Review",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:21:53.266064+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2013,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong application of the Creationeering framework and natural faith integration. The reading level and structure are perfect for the target audience. The only minor area for improvement is in the analogies; while the frame-as-skeleton analogy is good, adding more concrete, relatable examples for other concepts like torque or friction could further enhance student understanding. Overall, this is a high-quality, well-designed lesson that meets all requirements.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-042/flashcards.html",
+        "accordion": "interactives/M-042/accordion.html",
+        "ocv": "interactives/M-042/ocv.html",
+        "concept": "interactives/M-042/concept.html"
+      }
     },
     {
       "id": "M-043",
@@ -2949,9 +3075,32 @@
       "phase": "Performance",
       "prev": "Build: Body and Mousetrap",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:25:29.782800+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 2,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2594,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is strong, with excellent application of the Creationeering framework and clear, relatable analogies. The reading level is well-suited for middle schoolers. The faith integration in the main section feels slightly generic; it could be strengthened by connecting the physics principles (like energy conservation) more directly to the concept of a divinely ordered universe. The structure is mostly complete, but the final Biblical Reflection question in the journal task is cut off, which needs to be fixed before publishing. Overall, a very solid and effective lesson draft.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-044/flashcards.html",
+        "accordion": "interactives/M-044/accordion.html",
+        "ocv": "interactives/M-044/ocv.html",
+        "concept": "interactives/M-044/concept.html"
+      }
     },
     {
       "id": "M-045",
@@ -2962,9 +3111,9 @@
       "phase": "Performance",
       "prev": "Build: Power System and Axles",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:28:50.542642+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-046",
@@ -3119,9 +3268,9 @@
       "phase": "Performance",
       "prev": "Lesson: Test Protocol and Baselines",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:29:29.739261+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-051",
@@ -3167,9 +3316,9 @@
       "phase": "Performance",
       "prev": "Performance Activity: Baselines and Predictions",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:29:32.294772+00:00",
+      "error": "Drafting: 'Variable Confirmation Tests' (Performance phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-053",
@@ -3215,9 +3364,31 @@
       "phase": "Sustainability",
       "prev": "Lesson: Final Function Verification",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:30:00.515102+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 3.0
+      },
+      "qc_structural": {
+        "word_count": 2322,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "This is an exemplary lesson draft. The reading level is appropriately challenging for middle school, supported by clear definitions and plain-language explanations. Faith integration is natural and meaningful, connecting core biblical principles of stewardship to engineering concepts like data analysis and sustainability. The academy's specific frameworks (Creationeering, Multiscale Modeling, OCV) are applied correctly and with clear, relevant examples. Analogies are concrete and effective for the target age group. The lesson structure is complete and all sections are substantive. No major revisions are required.",
+      "interactive_status": "partial",
+      "interactive_files": {
+        "flashcards": "interactives/M-054/flashcards.html",
+        "ocv": "interactives/M-054/ocv.html",
+        "concept": "interactives/M-054/concept.html"
+      }
     },
     {
       "id": "M-055",
@@ -3228,9 +3399,9 @@
       "phase": "Sustainability",
       "prev": "Lesson: Performance Data",
       "type": "build",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:32:14.897508+00:00",
+      "error": "Drafting: 'Optimization Tests' (Sustainability phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-056",
@@ -3241,9 +3412,9 @@
       "phase": "Death & Recycling",
       "prev": "Build: Optimization Tests",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:32:57.741908+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-057",
@@ -3254,9 +3425,9 @@
       "phase": "Death & Recycling",
       "prev": "Performance Activity: Final Runs and Data",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:33:52.582170+00:00",
+      "error": "le \"/usr/local/lib/python3.12/site-packages/googleapiclient/http.py\", line 938, in execute\n    raise HttpError(resp, content, uri=self.uri)\ngoogleapiclient.errors.HttpError: <HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1lgCiQjWdS3k7a4M8ku8EnRmn9VVV6DyKtJInCVuOFxc:batchUpdate?alt=json returned \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\". Details: \"Invalid requests[1].insertText: Insert text requests must specify text to insert.\">\n"
     },
     {
       "id": "M-058",
@@ -3267,9 +3438,32 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Product End-of-Life Analysis",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:34:39.700247+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2103,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong integration of faith and the Creationeering framework. The reading level is appropriate and all sections are complete. The application of Multiscale Modeling and OCV is clear and consistent. To further improve, consider adding more concrete, relatable analogies for abstract concepts like atomic-level polymer chains. For example, comparing polymer chains to tangled spaghetti could help middle schoolers better visualize the concept and its implications for recycling.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-058/flashcards.html",
+        "accordion": "interactives/M-058/accordion.html",
+        "ocv": "interactives/M-058/ocv.html",
+        "concept": "interactives/M-058/concept.html"
+      }
     },
     {
       "id": "M-059",
@@ -3280,9 +3474,32 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Sustainable Materials",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:37:30.910086+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.8
+      },
+      "qc_structural": {
+        "word_count": 2313,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is excellent, with strong integration of faith and the Creationeering framework. The reading level is appropriately challenging, and all sections are well-developed. The only minor area for improvement is in the analogies. While functional, they could be more concrete and relatable for middle schoolers. For example, instead of just mentioning a broken wheel becoming a 'decorative element,' a more specific, tangible example could be provided to better spark student imagination and understanding of upcycling.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-059/flashcards.html",
+        "accordion": "interactives/M-059/accordion.html",
+        "ocv": "interactives/M-059/ocv.html",
+        "concept": "interactives/M-059/concept.html"
+      }
     },
     {
       "id": "M-060",
@@ -3293,9 +3510,9 @@
       "phase": "Death & Recycling",
       "prev": "BA: Product Sheet + 2-Minute Pitch Practice",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:40:19.061908+00:00",
+      "error": "Drafting: 'V2.0 Design in Sustainability' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-061",
@@ -3306,9 +3523,34 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: V2.0 Design in Sustainability",
       "type": "lesson",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:40:51.083197+00:00",
+      "error": null,
+      "qc_status": "flagged",
+      "qc_scores": {
+        "reading_level": 2,
+        "faith_integration": 3,
+        "framework_use": 3,
+        "analogy_quality": 2,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2659,
+        "missing_sections": [
+          "Lesson Overview"
+        ],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is well-structured and effectively integrates the Creationeering framework, OCV, and Multiscale Modeling. The faith integration is natural and meaningful. The primary area for improvement is the reading level; the text is dense and academic for a middle school audience. Simplifying sentence structures and incorporating more concrete, relatable analogies beyond the mousetrap car itself would significantly improve student engagement and comprehension. The current analogies are limited to direct application, rather than bridging concepts from students' everyday lives.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-061/flashcards.html",
+        "accordion": "interactives/M-061/accordion.html",
+        "ocv": "interactives/M-061/ocv.html",
+        "concept": "interactives/M-061/concept.html"
+      }
     },
     {
       "id": "M-062",
@@ -3319,9 +3561,32 @@
       "phase": "Death & Recycling",
       "prev": "Lesson: Total Cost and Lifecycle Improvement Plan",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "done",
+      "completed_at": "2026-05-19T13:44:50.337292+00:00",
+      "error": null,
+      "qc_status": "passed",
+      "qc_scores": {
+        "reading_level": 3,
+        "faith_integration": 2,
+        "framework_use": 2,
+        "analogy_quality": 3,
+        "structure_complete": 3,
+        "overall": 2.6
+      },
+      "qc_structural": {
+        "word_count": 2191,
+        "missing_sections": [],
+        "missing_frameworks": [],
+        "has_scripture": true
+      },
+      "qc_notes": "The lesson is strong, with excellent reading level, analogies, and structure. The faith integration is mostly good, especially the use of Ecclesiastes and Jeremiah. However, the quote connecting Christ's redemption to a 'recycling of time' is too abstract for this age group and feels forced. The Multiscale Modeling examples are generally good but could be more precise; for instance, the atomic-level description of recycling aluminum (rearranging atoms) is an oversimplification of a complex metallurgical process. These are minor points in an otherwise well-crafted lesson.",
+      "interactive_status": "done",
+      "interactive_files": {
+        "flashcards": "interactives/M-062/flashcards.html",
+        "accordion": "interactives/M-062/accordion.html",
+        "ocv": "interactives/M-062/ocv.html",
+        "concept": "interactives/M-062/concept.html"
+      }
     },
     {
       "id": "M-063",
@@ -3332,9 +3597,9 @@
       "phase": "Death & Recycling",
       "prev": "Sustainability Activity: Future Designs",
       "type": "activity",
-      "status": "pending",
-      "completed_at": null,
-      "error": null
+      "status": "failed",
+      "completed_at": "2026-05-19T13:47:23.215385+00:00",
+      "error": "Drafting: 'Org Chart and Production Gantt Chart' (Death & Recycling phase)...\nGemini error 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n\n"
     },
     {
       "id": "M-064",
