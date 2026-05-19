@@ -22,8 +22,12 @@ Usage:
   python scripts/image_backfill_agent.py --course M         # all Mousetrap
 """
 
-import argparse, json, os, re, sys, time, urllib.request, urllib.error, mimetypes
+import argparse, html, json, os, re, sys, time, urllib.request, urllib.error, urllib.parse
 from datetime import datetime, timezone
+
+# Force UTF-8 on Windows so Unicode in placeholder text / print arrows don't crash
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
@@ -64,20 +68,17 @@ def _load_env() -> dict:
     return env
 
 
-def _get_drive_service():
-    """Build Google Drive API service using ADC + oauth-client.json."""
-    try:
-        from googleapiclient.discovery import build
-        from google.auth.transport.requests import Request
-        from google.oauth2.credentials import Credentials
-        from google_auth_oauthlib.flow import InstalledAppFlow
-    except ImportError:
-        print("Missing packages. Run: pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib")
-        sys.exit(1)
+def _get_creds():
+    """Get OAuth credentials using requests transport (avoids httplib2 Windows issues)."""
+    from google.auth.transport.requests import Request
+    from google.oauth2.credentials import Credentials
+    from google_auth_oauthlib.flow import InstalledAppFlow
 
     SCOPES = [
-        "https://www.googleapis.com/auth/drive.readonly",
+        "https://www.googleapis.com/auth/drive",
         "https://www.googleapis.com/auth/devstorage.read_write",
+        "https://www.googleapis.com/auth/documents",
+        "https://www.googleapis.com/auth/calendar",
     ]
     token_path  = os.path.join(os.path.dirname(__file__), "..", "drive-token.json")
     client_path = os.path.join(os.path.dirname(__file__), "..", "oauth-client.json")
@@ -96,75 +97,94 @@ def _get_drive_service():
             creds = flow.run_local_server(port=0)
         with open(token_path, "w") as f:
             f.write(creds.to_json())
-
-    return build("drive", "v3", credentials=creds), creds
-
-
-def _get_storage_service(creds):
-    from googleapiclient.discovery import build
-    return build("storage", "v1", credentials=creds)
+    return creds
 
 
-# ── Drive helpers ─────────────────────────────────────────────────────────────
+def _get_session(creds):
+    """Return an AuthorizedSession using requests (not httplib2)."""
+    from google.auth.transport.requests import AuthorizedSession
+    return AuthorizedSession(creds)
 
-def _find_folder(drive, name: str, parent_id: str | None = None) -> str | None:
+
+# ── Drive helpers (REST via AuthorizedSession) ────────────────────────────────
+
+def _find_folder(session, name: str, parent_id: str | None = None) -> str | None:
     q = f"name='{name}' and mimeType='application/vnd.google-apps.folder' and trashed=false"
     if parent_id:
         q += f" and '{parent_id}' in parents"
-    result = drive.files().list(q=q, fields="files(id,name)", pageSize=5).execute()
-    files = result.get("files", [])
+    params = urllib.parse.urlencode({
+        "q": q, "fields": "files(id,name)", "pageSize": 5,
+        "includeItemsFromAllDrives": "true", "supportsAllDrives": "true",
+    })
+    resp = session.get(f"https://www.googleapis.com/drive/v3/files?{params}")
+    resp.raise_for_status()
+    files = resp.json().get("files", [])
     return files[0]["id"] if files else None
 
 
-def _list_images_in_folder(drive, folder_id: str) -> list[dict]:
+def _list_images_in_folder(session, folder_id: str) -> list[dict]:
     """Return list of {id, name, mimeType} for image files in folder."""
-    q = (f"'{folder_id}' in parents and trashed=false and "
-         f"(mimeType contains 'image/')")
-    result = drive.files().list(
-        q=q,
-        fields="files(id,name,mimeType,size)",
-        pageSize=100,
-    ).execute()
-    return result.get("files", [])
+    q = f"'{folder_id}' in parents and trashed=false and (mimeType contains 'image/')"
+    params = urllib.parse.urlencode({
+        "q": q,
+        "fields": "files(id,name,mimeType,size)",
+        "pageSize": 100,
+        "includeItemsFromAllDrives": "true", "supportsAllDrives": "true",
+    })
+    resp = session.get(f"https://www.googleapis.com/drive/v3/files?{params}")
+    resp.raise_for_status()
+    return resp.json().get("files", [])
 
 
-def _download_file(drive, file_id: str) -> bytes:
-    from googleapiclient.http import MediaIoBaseDownload
-    import io
-    request  = drive.files().get_media(fileId=file_id)
-    buffer   = io.BytesIO()
-    downloader = MediaIoBaseDownload(buffer, request)
-    done = False
-    while not done:
-        _, done = downloader.next_chunk()
-    return buffer.getvalue()
+def _download_file(session, file_id: str) -> bytes:
+    resp = session.get(
+        f"https://www.googleapis.com/drive/v3/files/{file_id}",
+        params={"alt": "media", "supportsAllDrives": "true"},
+        stream=True,
+    )
+    resp.raise_for_status()
+    return resp.content
 
 
-# ── Firebase Storage upload ───────────────────────────────────────────────────
+# ── Firebase Storage upload (via platform /api/admin/images) ─────────────────
 
-def _upload_to_storage(storage_svc, lesson_id: str, filename: str,
+def _upload_to_storage(session, lesson_id: str, filename: str,
                        data: bytes, mime_type: str) -> str:
-    """Upload bytes to Firebase Storage, return public GCS URL.
+    """Upload image via the platform's /api/admin/images endpoint.
 
-    Uses images/ path (same as block editor uploads) with publicRead ACL.
-    Firebase security rules gate Firebase SDK access only — direct GCS URLs
-    are publicly accessible when the ACL is set to publicRead.
+    This uses Firebase Admin SDK on the server (file.save + file.makePublic),
+    which correctly handles GCS Uniform Bucket-Level Access.
+    Returns the public storage.googleapis.com URL.
     """
-    from googleapiclient.http import MediaInMemoryUpload
-    import urllib.parse
+    import base64
 
-    object_name = f"images/{lesson_id}/{filename}"
-    media = MediaInMemoryUpload(data, mimetype=mime_type, resumable=False)
+    payload = json.dumps({
+        "lessonId": lesson_id,
+        "filename": filename,
+        "mimeType": mime_type,
+        "dataBase64": base64.b64encode(data).decode("utf-8"),
+    }).encode("utf-8")
 
-    storage_svc.objects().insert(
-        bucket=STORAGE_BUCKET,
-        name=object_name,
-        media_body=media,
-        predefinedAcl="publicRead",
-    ).execute()
+    req = urllib.request.Request(
+        f"{LIVE_URL}/api/admin/images",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {PLATFORM_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            result = json.loads(resp.read())
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Image upload HTTP {e.code}: {body}") from e
 
-    encoded = urllib.parse.quote(object_name, safe="")
-    return f"https://storage.googleapis.com/{STORAGE_BUCKET}/{encoded}"
+    if not result.get("ok"):
+        raise RuntimeError(f"Image upload failed: {result}")
+
+    return result["url"]
 
 
 # ── Platform API ──────────────────────────────────────────────────────────────
@@ -209,57 +229,47 @@ def _match_images_to_placeholders(
 ) -> dict[int, str]:
     """
     Returns {placeholder_index: image_filename} mapping.
-    Uses Gemini flash (fast + cheap) since this is pure matching, no generation.
+
+    Strategy: sort Drive images by Part number (Part_1, Part_2, …), deduplicate,
+    exclude Cover.png, then assign positionally to placeholders.
+    This is reliable because the curriculum images are named after lesson parts
+    which correspond to the order placeholders appear in the content.
     """
     if not image_names or not placeholders:
         return {}
 
-    # Simple 1:1 case — no need to call Gemini
-    if len(image_names) == 1 and len(placeholders) == 1:
-        return {0: image_names[0]}
+    # Deduplicate while preserving order
+    seen = set()
+    unique = [n for n in image_names if not (n in seen or seen.add(n))]
 
-    prompt = f"""You are matching image files to placeholder slots in a lesson.
+    # Separate Part_N images from others, exclude Cover.png
+    part_map: dict[int, str] = {}
+    extras: list[str] = []
+    for name in unique:
+        if name.lower() == "cover.png":
+            continue
+        m = re.match(r'Part_(\d+)_', name, re.IGNORECASE)
+        if m:
+            part_num = int(m.group(1))
+            if part_num not in part_map:   # first occurrence wins
+                part_map[part_num] = name
+        else:
+            extras.append(name)
 
-Lesson ID: {lesson_id}
+    ordered = [part_map[k] for k in sorted(part_map)] + extras
 
-Image files available (from Google Drive):
-{json.dumps(image_names, indent=2)}
-
-Placeholder descriptions (from lesson content):
-{json.dumps([f"{i}: {p}" for i, p in enumerate(placeholders)], indent=2)}
-
-Return a JSON object mapping placeholder index (as string) to image filename.
-Only include placeholders that have a clear match. If an image has no match, omit it.
-Example: {{"0": "newton-second-law.png", "2": "free-body-diagram.png"}}
-Return ONLY the JSON object, no explanation."""
-
-    payload = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.1, "maxOutputTokens": 512},
-    }).encode()
-
-    url = f"{GEMINI_URL}?key={api_key}"
-    req = urllib.request.Request(url, data=payload,
-                                  headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read())
-        text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
-        text = re.sub(r'^```json?\s*', '', text)
-        text = re.sub(r'\s*```$', '', text)
-        raw  = json.loads(text)
-        return {int(k): v for k, v in raw.items()}
-    except Exception as e:
-        print(f"    Match error: {e}")
+    if not ordered:
         return {}
+
+    # Assign positionally — Part_1 → placeholder 0, Part_2 → placeholder 1, …
+    return {i: img for i, img in enumerate(ordered) if i < len(placeholders)}
 
 
 # ── Per-lesson processing ─────────────────────────────────────────────────────
 
 def process_lesson(
     lesson_id: str,
-    drive,
-    storage_svc,
+    session,
     course_folder_id: str,
     api_key: str,
     dry_run: bool,
@@ -268,13 +278,13 @@ def process_lesson(
     """Returns status: 'done' | 'skipped' | 'no_folder' | 'no_images' | 'error'"""
 
     # Find lesson folder in Drive
-    lesson_folder_id = _find_folder(drive, lesson_id, course_folder_id)
+    lesson_folder_id = _find_folder(session, lesson_id, course_folder_id)
     if not lesson_folder_id:
         print(f"  [{lesson_id}] No Drive folder — skipping")
         return "no_folder"
 
     # List images in Drive folder
-    drive_images = _list_images_in_folder(drive, lesson_folder_id)
+    drive_images = _list_images_in_folder(session, lesson_folder_id)
     if not drive_images:
         print(f"  [{lesson_id}] No images in Drive folder — skipping")
         return "no_images"
@@ -287,21 +297,91 @@ def process_lesson(
     if not lesson:
         return "error"
 
+    # ── Mode A: block-based (QC-extracted image blocks with empty src) ──────────
+    blocks = lesson.get("blocks", [])
+    empty_image_blocks = [
+        (i, b) for i, b in enumerate(blocks)
+        if b.get("type") == "image" and not b.get("data", {}).get("src", "")
+    ]
+
+    if empty_image_blocks:
+        placeholders = [b.get("data", {}).get("caption", "") for _, b in empty_image_blocks]
+        print(f"    {len(placeholders)} empty image block(s): {[p[:50] for p in placeholders]}")
+
+        matches = _match_images_to_placeholders(api_key, lesson_id, image_names, placeholders)
+        if not matches:
+            print(f"    No Drive images matched")
+            return "skipped"
+
+        print(f"    Matches: { {k: v for k, v in matches.items()} }")
+        if dry_run:
+            return "done"
+
+        lesson_log = []
+        updated_blocks = [dict(b) for b in blocks]
+
+        for placeholder_idx, drive_filename in matches.items():
+            _, orig_block = empty_image_blocks[placeholder_idx]
+            block_index   = next(i for i, b in enumerate(blocks) if b is orig_block)
+            drive_file    = next((f for f in drive_images if f["name"] == drive_filename), None)
+            if not drive_file:
+                print(f"    Image not found: {drive_filename}")
+                continue
+            try:
+                img_data   = _download_file(session, drive_file["id"])
+                mime_type  = drive_file.get("mimeType", "image/jpeg")
+                storage_url = _upload_to_storage(None, lesson_id, drive_filename, img_data, mime_type)
+                print(f"    Uploaded: {drive_filename} → {storage_url}")
+
+                updated_blocks[block_index] = {
+                    **orig_block,
+                    "data": {**orig_block.get("data", {}), "src": storage_url},
+                    "meta": {**orig_block.get("meta", {}), "qcStatus": "pending"},
+                }
+                lesson_log.append({"placeholder": placeholders[placeholder_idx], "url": storage_url})
+            except Exception as e:
+                print(f"    Error processing {drive_filename}: {e}")
+                continue
+
+        if not lesson_log:
+            return "skipped"
+
+        # PATCH blocks directly — no HTML re-parse needed
+        patch_payload = json.dumps({"blocks": updated_blocks}).encode("utf-8")
+        patch_req = urllib.request.Request(
+            f"{LIVE_URL}/api/admin/lessons/{lesson_id}",
+            data=patch_payload,
+            headers={"Authorization": f"Bearer {PLATFORM_KEY}", "Content-Type": "application/json"},
+            method="PATCH",
+        )
+        try:
+            with urllib.request.urlopen(patch_req, timeout=30) as resp:
+                result = json.loads(resp.read())
+                ok = result.get("ok", False)
+                print(f"    Patched blocks: ok={ok}")
+        except Exception as e:
+            print(f"    PATCH error: {e}")
+            ok = False
+
+        if ok:
+            log[lesson_id] = {"status": "done", "images": lesson_log,
+                               "at": datetime.now(timezone.utc).isoformat()}
+            return "done"
+        return "error"
+
+    # ── Mode B: HTML-based ([IMAGE NEEDED: ...] text placeholders, legacy) ───────
     content = lesson.get("content", "")
     if not content:
         print(f"    No content in lesson")
         return "skipped"
 
-    # Find all [IMAGE NEEDED: ...] placeholders
     placeholders = IMAGE_NEEDED_RE.findall(content)
     if not placeholders:
-        print(f"    No [IMAGE NEEDED] placeholders found")
-        # Still might have image blocks with empty/placeholder src — skip for now
+        print(f"    No [IMAGE NEEDED] placeholders or empty image blocks found")
         return "skipped"
 
-    print(f"    {len(placeholders)} placeholder(s): {[p[:50] for p in placeholders]}")
+    print(f"    {len(placeholders)} HTML placeholder(s): {[p[:50] for p in placeholders]}")
 
-    # Match images to placeholders
     matches = _match_images_to_placeholders(api_key, lesson_id, image_names, placeholders)
     if not matches:
         print(f"    No matches found")
@@ -312,7 +392,6 @@ def process_lesson(
     if dry_run:
         return "done"
 
-    # Download, upload to Storage, and replace in HTML
     updated_content = content
     lesson_log = []
 
@@ -327,42 +406,26 @@ def process_lesson(
             continue
 
         try:
-            # Download from Drive
-            img_data  = _download_file(drive, drive_file["id"])
+            img_data  = _download_file(session, drive_file["id"])
             mime_type = drive_file.get("mimeType", "image/jpeg")
-
-            # Upload to Firebase Storage
-            storage_url = _upload_to_storage(
-                storage_svc, lesson_id, drive_filename, img_data, mime_type
-            )
+            storage_url = _upload_to_storage(None, lesson_id, drive_filename, img_data, mime_type)
             print(f"    Uploaded: {drive_filename} → {storage_url}")
 
-            # Replace placeholder in HTML
             placeholder_text = f"[IMAGE NEEDED: {placeholder_desc}]"
             img_tag = f'<img src="{storage_url}" alt="{placeholder_desc}" style="width:100%;border-radius:6px;display:block;margin:12px auto">'
-            updated_content = updated_content.replace(
-                f"<p><em>{placeholder_text}</em></p>",
-                img_tag,
-                1,
-            )
-            # Also try without em tags
-            updated_content = updated_content.replace(
-                f"<p>{placeholder_text}</p>",
-                img_tag,
-                1,
-            )
-
+            updated_content = updated_content.replace(f"<p><em>{placeholder_text}</em></p>", img_tag, 1)
+            updated_content = updated_content.replace(f"<p>{placeholder_text}</p>", img_tag, 1)
             lesson_log.append({"placeholder": placeholder_desc, "url": storage_url})
-
         except Exception as e:
             print(f"    Error processing {drive_filename}: {e}")
             continue
 
     if updated_content == content:
-        print(f"    Content unchanged (placeholder text mismatch?)")
+        idx = content.find("[IMAGE NEEDED")
+        snippet = content[max(0, idx-20):idx+120] if idx >= 0 else "(not found)"
+        print(f"    Content unchanged — snippet: {repr(snippet)}")
         return "skipped"
 
-    # Save updated content → re-parses to blocks
     ok = _save_lesson_html(lesson_id, updated_content)
     if ok:
         log[lesson_id] = {"status": "done", "images": lesson_log,
@@ -402,12 +465,12 @@ def main():
         sys.exit(1)
 
     print("Authenticating with Google...")
-    drive, creds = _get_drive_service()
-    storage_svc  = _get_storage_service(creds)
+    creds   = _get_creds()
+    session = _get_session(creds)
 
     # Locate Drive folders — root ID is hardcoded, subfolders by name
-    creat_id = _find_folder(drive, DRIVE_CREAT_NAME, DRIVE_ROOT_ID)
-    mouse_id = _find_folder(drive, DRIVE_MOUSE_NAME, DRIVE_ROOT_ID)
+    creat_id = _find_folder(session, DRIVE_CREAT_NAME, DRIVE_ROOT_ID)
+    mouse_id = _find_folder(session, DRIVE_MOUSE_NAME, DRIVE_ROOT_ID)
     print(f"Creationeering folder: {creat_id}")
     print(f"Mousetrap Build folder: {mouse_id}")
 
@@ -439,7 +502,7 @@ def main():
             continue
 
         status = process_lesson(
-            lid, drive, storage_svc, course_folder_id,
+            lid, session, course_folder_id,
             api_key, args.dry_run, log
         )
         counts[status] = counts.get(status, 0) + 1
