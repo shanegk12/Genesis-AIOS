@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Salvage Sort Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 18px 22px;
+    border-radius: 10px;
+    border-bottom: 4px solid #c9a227;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 1.5em; margin-bottom: 4px; }
+  header p { font-size: 0.95em; opacity: 0.9; }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(30,58,95,0.08);
+    font-weight: bold;
+  }
+  .stats span { color: #c9a227; }
+  .part-title {
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .items-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background: #fff;
+    border: 2px dashed #1e3a5f;
+    border-radius: 10px;
+    min-height: 90px;
+    margin-bottom: 18px;
+  }
+  .item {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: grab;
+    user-select: none;
+    font-size: 0.95em;
+    border: 2px solid #c9a227;
+    transition: transform 0.15s;
+  }
+  .item:active { cursor: grabbing; transform: scale(1.05); }
+  .item.dragging { opacity: 0.4; }
+  .bins {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 180px;
+    transition: background 0.2s;
+  }
+  .bin.over { background: #fff8dc; border-color: #c9a227; }
+  .bin h3 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 1em;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #c9a227;
+  }
+  .bin .icon { font-size: 1.6em; display: block; text-align: center; margin-bottom: 4px; }
+  .bin .item { font-size: 0.85em; padding: 6px 10px; display: block; margin: 5px 0; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+  }
+  button:hover { background: #1e3a5f; color: #c9a227; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fff;
+    border-left: 5px solid #c9a227;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback ul { margin-left: 18px; margin-top: 6px; }
+  .results {
+    text-align: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(30,58,95,0.15);
+  }
+  .results h2 { color: #c9a227; font-size: 2em; margin-bottom: 10px; }
+  .score-big { font-size: 3em; color: #1e3a5f; margin: 12px 0; font-weight: bold; }
+  .badge {
+    display: inline-block;
+    background: #1e3a5f;
+    color: #c9a227;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  .hidden { display: none; }
+  .progress {
+    height: 8px;
+    background: #e1e5ec;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #c9a227;
+    transition: width 0.4s;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>♻️ Salvage Sort Challenge</h1>
+    <p>Your mousetrap car has finished racing. What's left? Sort each part by its salvage value!</p>
+  </header>
+
+  <div class="stats">
+    <div>Round: <span id="roundNum">1</span> / 3</div>
+    <div>Score: <span id="score">0</span></div>
+    <div class="progress" style="flex:1; margin: 8px 0 0 20px;"><div class="progress-fill" id="progBar" style="width:0%"></div></div>
+  </div>
+
+  <div id="game">
+    <div class="part-title" id="partTitle">Round 1: Drag each part into the best recovery bin</div>
+
+    <div class="items-pool" id="pool"></div>
+
+    <div class="bins">
+      <div class="bin" data-bin="high">
+        <h3><span class="icon">⭐</span>HIGH Salvage<br><small>Reuse as-is</small></h3>
+      </div>
+      <div class="bin" data-bin="medium">
+        <h3><span class="icon">🔧</span>MEDIUM Salvage<br><small>Recycle materials</small></h3>
+      </div>
+      <div class="bin" data-bin="low">
+        <h3><span class="icon">🗑️</span>LOW Salvage<br><small>Broken / discard</small></h3>
+      </div>
+    </div>
+
+    <button id="checkBtn">Check My Sort</button>
+    <div class="feedback" id="feedback"></div>
+    <div style="text-align:center; margin-top:10px;">
+      <button id="nextBtn" class="hidden">Next Round →</button>
+    </div>
+  </div>
+
+  <div id="results" class="results hidden">
+    <h2>🏆 Challenge Complete!</h2>
+    <div class="score-big" id="finalScore">0</div>
+    <div id="rank" class="badge"></div>
+    <p id="message" style="margin: 16px 0; line-height: 1.5;"></p>
+    <p style="font-style: italic; color: #1e3a5f; margin: 14px 0; padding: 12px; background: #f7f9fc; border-radius: 6px;">
+      "And the vessel he was making of clay was spoiled in the potter's hand, and he reworked it into another vessel..." — Jeremiah 18:4<br>
+      <small>Like the Master Potter, good engineers don't waste — they rework and renew.</small>
+    </p>
+    <button onclick="location.reload()">Play Again</button>
+  </div>
+</div>
+
+<script>
+const rounds = [
+  [
+    { name: "Wooden chassis (intact)", correct: "high", explain: "Still solid — can be reused for a new build!" },
+    { name: "Snapped rubber band", correct: "low", explain: "Once snapped, it can't safely store energy again." },
+    { name: "CD wheels (no cracks)", correct: "high", explain: "Round, smooth, and ready to roll on a new car." },
+    { name: "Crushed cardboard wing", correct: "medium", explain: "Cardboard fibers can be recycled into new paper." },
+    { name: "Bent steel axle", correct: "medium", explain: "Steel scrap is valuable and 100% recyclable." },
+    { name: "Glued-on hot glue blobs", correct: "low", explain: "Cured hot glue is hard to reuse or recycle." }
+  ],
+  [
+    { name: "Eye hooks (still straight)", correct: "high", explain: "Small hardware reuses easily in many builds." },
+    { name: "Frayed kite string", correct: "low", explain: "Frayed string can't pull reliably anymore." },
+    { name: "Plastic bottle cap wheels", correct: "high", explain: "Undamaged plastic parts can be reused immediately." },
+    { name: "Aluminum can pieces", correct: "medium", explain: "Aluminum has very high recycling value!" },
+    { name: "Cracked plastic spool", correct: "medium", explain: "Broken plastic can be melted and recycled." },
+    { name: "Dried-up duct tape", correct: "low", explain: "Used tape loses its stickiness — landfill bound." }
+  ],
+  [
+    { name: "Mousetrap base (working)", correct: "high", explain: "The most expensive part — definitely reuse it!" },
+    { name: "Paper clip lever arms", correct: "high", explain: "Bent back into shape, they work like new." },
+    { name: "Shattered DVD wheel", correct: "low", explain: "Cracked discs are unsafe and hard to recycle." },
+    { name: "Copper wire scraps", correct: "medium", explain: "Copper is one of the most valuable recyclables." },
+    { name: "Worn balloon", correct: "low", explain: "Stretched-out rubber loses its snap." },
+    { name: "Wooden dowel (uncut)", correct: "high", explain: "A full-length dowel is ready for another project." }
+  ]
+];
+
+let currentRound = 0;
+let score = 0;
+let placements = {};
+
+const pool = document.getElementById('pool');
+const bins = document.querySelectorAll('.bin');
+const checkBtn = document.getElementById('checkBtn');
+const nextBtn = document.getElementById('nextBtn');
+const feedback = document.getElementById('feedback');
+
+function loadRound() {
+  pool.innerHTML = '';
+  bins.forEach(b => {
+    [...b.querySelectorAll('.item')].forEach(i => i.remove());
+  });
+  placements = {};
+  feedback.classList.remove('show');
+  checkBtn.disabled = false;
+  checkBtn.classList.remove('hidden');
+  nextBtn.classList.add('hidden');
+  document.getElementById('roundNum').textContent = currentRound + 1;
+  document.getElementById('partTitle').textContent = `Round ${currentRound + 1}: Drag each part into the best recovery bin`;
+  document.getElementById('progBar').style.width = ((currentRound) / 3 * 100) + '%';
+
+  const items = [...rounds[currentRound]].sort(() => Math.random() - 0.5);
+  items.forEach((it, idx) => {
+    const el = document.createElement('div');
+    el.className = 'item';
+    el.draggable = true;
+    el.textContent = it.name;
+    el.dataset.id = idx;
+    el.dataset.correct = it.correct;
+    el.dataset.explain = it.explain;
+    el.dataset.name = it.name;
+    addDragHandlers(el);
+    pool.appendChild(el);
+  });
+}
+
+function addDragHandlers(el) {
+  el.addEventListener('dragstart', e => {
+    el.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', el.dataset.id);
+  });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  // Touch support
+  let touchStart = null;
+  el.addEventListener('touchstart', e => {
+    touchStart = e.touches[0];
+  }, {passive: true});
+  el.addEventListener('touchend', e => {
+    if (!touchStart) return;
+    const t = e.changedTouches[0];
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    const bin = target ? target.closest('.bin') : null;
+    if (bin) {
+      bin.appendChild(el);
+      placements[el.dataset.id] = bin.dataset.bin;
+    } else if (target && target.closest('.items-pool')) {
+      pool.appendChild(el);
+      delete placements[el.dataset.id];
+    }
+    touchStart = null;
+  });
+}
+
+bins.forEach(bin => {
+  bin.addEventListener('dragover', e => {
+    e.preventDefault();
+    bin.classList.add('over');
+  });
+  bin.addEventListener('dragleave', () => bin.classList.remove('over'));
+  bin.addEventListener('drop', e => {
+    e.preventDefault();
+    bin.classList.remove('over');
+    const id = e.dataTransfer.getData('text/plain');
+    const el = document.querySelector(`.item[data-id="${id}"]`);
+    if (el) {
+      bin.appendChild(el);
+      placements[id] = bin.dataset.bin;
+    }
+  });
+});
+
+pool.addEventListener('dragover', e => e.preventDefault());
+pool.addEventListener('drop', e => {
+  e.preventDefault();
+  const id = e.dataTransfer.getData('text/plain');
+  const el = document.querySelector(`.item[data-id="${id}"]`);
+  if (el) {
+    pool.appendChild(el);
+    delete placements[id];
+  }
+});
+
+checkBtn.addEventListener('click', () => {
+  const items = document.querySelectorAll('.item');
+  if (Object.keys(placements).length < items.length) {
+    feedback.classList.add('show');
+    feedback.innerHTML = '<strong>⚠️ Sort all parts first!</strong> Drag each one into a bin.';
+    return;
+  }
+  let correctCount = 0;
+  let details = '<strong>Results:</strong><ul>';
+  items.forEach(el => {
+    const placed = placements[el.dataset.id];
+    const correct = el.dataset.correct;
+    if (placed === correct) {
+      correctCount++;
+      details += `<li>✅ <strong>${el.dataset.name}</strong> — ${el.dataset.explain}</li>`;
+    } else {
+      details += `<li>❌ <strong>${el.dataset.name}</strong> → belongs in <em>${correct.toUpperCase()}</em>. ${el.dataset.explain}</li>`;
+    }
+  });
+  details += '</ul>';
+  const roundScore = correctCount * 10;
+  score += roundScore;
+  document.getElementById('score').textContent = score;
+  feedback.classList.add('show');
+  feedback.innerHTML = `<strong>You got ${correctCount} / ${items.length} correct (+${roundScore} points)</strong>${details}`;
+  checkBtn.classList.add('hidden');
+  if (currentRound < rounds.length - 1) {
+    nextBtn.classList.remove('hidden');
+    nextBtn.textContent = 'Next Round →';
+  } else {
+    nextBtn.classList.remove('hidden');
+    nextBtn.textContent = 'See Final Results 🏆';
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  currentRound++;
+  if (currentRound >= rounds.length) {
+    showResults();
+  } else {
+    loadRound();
+  }
+});
+
+function showResults() {
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = score + ' pts';
+  document.getElementById('progBar').style.width = '100%';
+  let rank, msg;
+  if (score >= 160) {
+    rank = '⭐ Master Creationeer';
+    msg = 'Outstanding! You think like a true steward of resources. Every part has a future in your hands.';
+  } else if (score >= 120) {
+    rank = '🔧 Skilled Recycler';
+    msg = 'Great work! You understand salvage value and how to recover useful materials.';
+  } else if (score >= 80) {
+    rank = '📚 Apprentice Engineer';
+    msg = 'Good effort! Review which materials can be reused vs. recycled vs. discarded.';
+  } else {
+    rank = '🌱 Learning the Ropes';
+    msg = 'Keep practicing! Remember: intact parts = HIGH value, recyclable materials = MEDIUM, broken/unusable = LOW.';
+  }
+  document.getElementById('rank').textContent = rank;
+  document.getElementById('message').textContent = msg;
+}
+
+loadRound();
+</script>
+</body>
+</html>

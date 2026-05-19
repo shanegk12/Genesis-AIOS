@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Importance of Communicating End-of-Life Plans</summary>
+    <div class="panel-body"><p>In the Creationeering framework, the &quot;Death and Recycling&quot; phase is the eighth and final engineering step. It addresses what happens to a product once its primary function is complete. For your mousetrap car, this means planning what to do with all its parts after the race. Will it be disassembled? Will parts be reused? Can materials be recycled? Or will some components need to be responsibly disposed of? It’s not enough to simply build a great car; a true Creationeer considers the entire journey of their creation.</p><p>Communicating this plan is vital. Imagine you are an engineer designing a new product for a company. Your boss, or even the customers, would want to know not just how well the product works, but also what impact it has on the environment after its use. This is where your &quot;Parent Pitch Night&quot; comes in. Your parents, as your primary stakeholders, need to understand your thoughtful approach. You are demonstrating responsibility and a forward-thinking mindset, showing that you value resources and strive to minimize waste. This communication fosters trust and shows that you are not just a builder, but a steward of resources.</p><p>For your mousetrap car project, this means explaining to your parents your specific plan for each major component. For example, if you used plastic wheels, can they be removed and used for another project? If you used a wooden chassis, can it be repurposed into something else, like a small craft project? Or if you used specific metal parts, how would you ensure they are properly recycled? Your pitch should clearly outline these decisions and the reasoning behind them, showcasing your commitment to resource efficiency.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Applying Multiscale Modeling to End-of-Life Decisions</summary>
+    <div class="panel-body"><p>Multiscale modeling helps us understand how macro-level observations (what we see and experience) are connected to atomic-level causes (the fundamental properties of materials). This concept is crucial even in the &quot;Death and Recycling&quot; phase. When you decide to recycle a plastic wheel, you're making a macro-level decision. The success of that decision, however, depends on the atomic-level properties of the plastic itself.</p><p>Let's consider an example with your mousetrap car.
+Macro-level observation: You have a plastic wheel that you want to recycle.
+Atomic-level cause: At the atomic level, plastics are polymers, long chains of repeating molecular units. Different plastics have different chemical structures (types of monomers, chain lengths, branching). These atomic-level differences dictate whether the plastic can be melted down and reformed (recycled) without significant degradation, or if it will simply break down into unusable fragments. Some plastics, like PET (found in water bottles), have stable atomic bonds that allow for relatively easy recycling into new products. Others, like certain thermoset plastics (used in some electronics), form irreversible bonds when heated and cannot be easily remelted, making them difficult to recycle. Therefore, your decision to recycle a plastic wheel is directly influenced by its molecular structure.</p><p>Another example is a metal axle.
+Macro-level observation: You plan to reuse a metal axle for a new project.
+Atomic-level cause: The metal axle’s ability to be reused without losing its strength or integrity depends on its atomic structure and crystalline lattice. If the metal has undergone significant stress or deformation during the mousetrap car's operation, its atomic arrangement might have developed micro-cracks or dislocations. These atomic-level defects can weaken the material, making it unsuitable for reuse in a high-stress application, even if it looks fine at the macro level. Conversely, if the metal is still structurally sound at the atomic level, it maintains its desired properties for reuse.</p><p>During your Parent Pitch Night, you can explain how your end-of-life decisions were informed by these underlying material properties. For instance, you might say, &quot;We chose this type of wood for the chassis because, at a cellular level, its strong cellulose fibers allow it to be easily sanded and repurposed into a new craft project, rather than just becoming waste.&quot; This shows a deeper understanding of your materials and their full lifecycle potential.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: OCV Application to Your Mousetrap Car's End-of-Life Plan</summary>
+    <div class="panel-body"><p>The Objective, Constraint, and Variable (OCV) method is a powerful tool for making informed design decisions, and it applies just as much to the &quot;Death and Recycling&quot; phase as it does to initial design. For your mousetrap car, you made choices about materials and construction methods throughout the project. Now, as you plan for its end-of-life, you need to apply OCV to those decisions.</p><p>Let's walk through an example for your mousetrap car's &quot;Death and Recycling&quot; plan:</p><p>Objective: Maximize the amount of material from the mousetrap car that can be reused or recycled, and minimize waste sent to a landfill.</p><p>Constraints:
+1.  Available recycling facilities: Not all materials are easily recyclable in your local area. For example, specialized plastics might not be accepted by curbside recycling programs.
+2.  Time and effort for disassembly: Complex assemblies might take a lot of time and effort to separate into individual components for reuse or recycling.
+3.  Material degradation: Some materials might degrade during the car's use, making them unsuitable for reuse or recycling (e.g., a heavily damaged wheel).
+4.  Cost of processing: Some recycling processes or specialized disposal methods might incur costs.</p><p>Variables:
+1.  Choice of materials: Selecting materials known for their recyclability or reusability from the outset. For example, using standard wood (easily compostable or repurposed) instead of composite materials (harder to separate).
+2.  Assembly methods: Using fasteners (screws, bolts) instead of permanent adhesives to allow for easier disassembly and separation of components.
+3.  Design for disassembly: Creating a design where components can be easily removed and sorted. For example, making the wheels easily detachable from the axles.
+4.  Repurposing potential: Designing components with an eye towards secondary uses (e.g., a sturdy wooden chassis that can become part of a birdhouse).</p><p>During your Parent Pitch Night, you will explain how these OCV considerations guided your end-of-life plan. You might say, &quot;Our objective was to minimize waste. A key constraint was that we only have access to standard household recycling. Therefore, we chose to use mostly cardboard and metal axles (variables) because they are widely accepted in recycling programs and are easy to separate from the main structure.&quot; This demonstrates a systematic and responsible approach to your design, extending all the way to its ultimate disposition.</p></div>
+  </details>
+</div>
+</body>
+</html>

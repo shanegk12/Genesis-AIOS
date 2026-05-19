@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Waste Sorting Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 18px 24px;
+    border-radius: 12px;
+    text-align: center;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { font-size: 1.5em; }
+  header p { margin-top: 6px; font-size: 0.95em; opacity: 0.9; }
+  .scoreboard {
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    margin: 14px 0;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(30,58,95,0.1);
+    font-weight: bold;
+  }
+  .scoreboard span { color: #c9a227; }
+  .item-stage {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(30,58,95,0.1);
+    min-height: 180px;
+  }
+  .item {
+    display: inline-block;
+    background: #f7f9fc;
+    border: 3px dashed #1e3a5f;
+    border-radius: 12px;
+    padding: 14px 20px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s;
+  }
+  .item:active { cursor: grabbing; transform: scale(1.05); }
+  .item .emoji { font-size: 3em; display: block; }
+  .item .name { font-weight: bold; margin-top: 6px; }
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+    min-height: 130px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .bin.over { background: #c9a227; color: #fff; transform: scale(1.03); }
+  .bin h3 { font-size: 1em; margin-bottom: 6px; }
+  .bin .icon { font-size: 2em; }
+  .bin small { display: block; font-size: 0.78em; margin-top: 4px; opacity: 0.8; }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff;
+    min-height: 60px;
+    font-size: 0.95em;
+    border-left: 5px solid #c9a227;
+  }
+  .feedback.correct { border-left-color: #2e8b57; }
+  .feedback.wrong { border-left-color: #c0392b; }
+  .results {
+    text-align: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(30,58,95,0.1);
+  }
+  .results h2 { color: #1e3a5f; margin-bottom: 12px; }
+  .results .score-big { font-size: 3em; color: #c9a227; font-weight: bold; }
+  button {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  button:hover { background: #b08d1e; }
+  .hidden { display: none; }
+  @media (max-width: 600px) {
+    .bins { grid-template-columns: 1fr; }
+    .item .emoji { font-size: 2.4em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>♻️ E-Waste Sorting Challenge</h1>
+    <p>Drag each item into the correct disposal bin. Be a good steward!</p>
+  </header>
+
+  <div id="game">
+    <div class="scoreboard">
+      <div>Item: <span id="progress">1 / 8</span></div>
+      <div>Score: <span id="score">0</span></div>
+    </div>
+
+    <div class="item-stage" id="stage"></div>
+
+    <div class="bins">
+      <div class="bin" data-bin="ewaste">
+        <div class="icon">📱</div>
+        <h3>E-Waste Recycling</h3>
+        <small>Electronics with circuits/batteries</small>
+      </div>
+      <div class="bin" data-bin="recycle">
+        <div class="icon">🥫</div>
+        <h3>Regular Recycling</h3>
+        <small>Paper, plain metal, plastic, glass</small>
+      </div>
+      <div class="bin" data-bin="trash">
+        <div class="icon">🗑️</div>
+        <h3>Trash / Compost</h3>
+        <small>Food waste, non-recyclables</small>
+      </div>
+    </div>
+
+    <div class="feedback" id="feedback">Pick up an item and drop it in a bin!</div>
+  </div>
+
+  <div id="results" class="results hidden">
+    <h2>Mission Complete!</h2>
+    <div class="score-big" id="finalScore">0 / 8</div>
+    <p id="rating" style="margin:10px 0; font-size:1.1em;"></p>
+    <p style="margin-top:14px; line-height:1.5;">
+      <strong>Why E-Waste matters:</strong> Electronics contain valuable metals like gold and copper,
+      but also hazardous materials like lead and mercury. When tossed in the trash, those toxins can
+      leak into soil and water. As Creationeers, we care for what God entrusted to us — even at the
+      end of a product's life.
+    </p>
+    <button onclick="restart()">Play Again</button>
+  </div>
+</div>
+
+<script>
+const items = [
+  { name: "Old Cell Phone", emoji: "📱", correct: "ewaste", why: "Phones contain batteries, circuit boards, and rare metals — always recycle as E-Waste." },
+  { name: "Banana Peel", emoji: "🍌", correct: "trash", why: "Food waste belongs in trash or compost — not in any recycling stream." },
+  { name: "Laptop", emoji: "💻", correct: "ewaste", why: "Laptops contain hazardous heavy metals AND valuable materials. E-Waste only!" },
+  { name: "Soda Can", emoji: "🥤", correct: "recycle", why: "Plain aluminum cans go in standard recycling — no electronics inside." },
+  { name: "Broken TV Remote", emoji: "🎮", correct: "ewaste", why: "It has circuits and a battery — that makes it electronic waste." },
+  { name: "Cardboard Box", emoji: "📦", correct: "recycle", why: "Cardboard is paper-based and goes in regular recycling." },
+  { name: "AA Battery", emoji: "🔋", correct: "ewaste", why: "Batteries contain hazardous chemicals and must go to E-Waste, never the trash!" },
+  { name: "Pizza Crust", emoji: "🍕", correct: "trash", why: "Food scraps belong in trash or compost." }
+];
+
+let order = [];
+let idx = 0;
+let score = 0;
+let locked = false;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function showItem() {
+  if (idx >= order.length) { showResults(); return; }
+  const item = items[order[idx]];
+  const stage = document.getElementById('stage');
+  stage.innerHTML = `
+    <div class="item" draggable="true" id="currentItem">
+      <span class="emoji">${item.emoji}</span>
+      <span class="name">${item.name}</span>
+    </div>
+  `;
+  document.getElementById('progress').textContent = `${idx+1} / ${order.length}`;
+  attachDrag();
+}
+
+function attachDrag() {
+  const el = document.getElementById('currentItem');
+  if (!el) return;
+
+  el.addEventListener('dragstart', e => {
+    if (locked) { e.preventDefault(); return; }
+    e.dataTransfer.setData('text/plain', 'item');
+    el.style.opacity = '0.5';
+  });
+  el.addEventListener('dragend', () => { el.style.opacity = '1'; });
+
+  // Touch support
+  let touchClone = null;
+  let touchOffset = {x:0,y:0};
+  el.addEventListener('touchstart', e => {
+    if (locked) return;
+    const t = e.touches[0];
+    const rect = el.getBoundingClientRect();
+    touchOffset.x = t.clientX - rect.left;
+    touchOffset.y = t.clientY - rect.top;
+    touchClone = el.cloneNode(true);
+    touchClone.style.position = 'fixed';
+    touchClone.style.left = rect.left + 'px';
+    touchClone.style.top = rect.top + 'px';
+    touchClone.style.pointerEvents = 'none';
+    touchClone.style.opacity = '0.8';
+    touchClone.style.zIndex = '1000';
+    document.body.appendChild(touchClone);
+    el.style.opacity = '0.3';
+  }, {passive:true});
+  el.addEventListener('touchmove', e => {
+    if (!touchClone) return;
+    const t = e.touches[0];
+    touchClone.style.left = (t.clientX - touchOffset.x) + 'px';
+    touchClone.style.top = (t.clientY - touchOffset.y) + 'px';
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    document.querySelectorAll('.bin').forEach(b => b.classList.remove('over'));
+    if (target) {
+      const bin = target.closest('.bin');
+      if (bin) bin.classList.add('over');
+    }
+    e.preventDefault();
+  }, {passive:false});
+  el.addEventListener('touchend', e => {
+    if (!touchClone) return;
+    const t = e.changedTouches[0];
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    document.body.removeChild(touchClone);
+    touchClone = null;
+    el.style.opacity = '1';
+    document.querySelectorAll('.bin').forEach(b => b.classList.remove('over'));
+    if (target) {
+      const bin = target.closest('.bin');
+      if (bin) handleDrop(bin.dataset.bin);
+    }
+  });
+}
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('over'); });
+  bin.addEventListener('dragleave', () => bin.classList.remove('over'));
+  bin.addEventListener('drop', e => {
+    e.preventDefault();
+    bin.classList.remove('over');
+    handleDrop(bin.dataset.bin);
+  });
+});
+
+function handleDrop(binType) {
+  if (locked) return;
+  locked = true;
+  const item = items[order[idx]];
+  const fb = document.getElementById('feedback');
+  if (binType === item.correct) {
+    score++;
+    fb.className = 'feedback correct';
+    fb.innerHTML = `✅ <strong>Correct!</strong> ${item.why}`;
+  } else {
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `❌ <strong>Not quite.</strong> ${item.why}`;
+  }
+  document.getElementById('score').textContent = score;
+  setTimeout(() => {
+    locked = false;
+    idx++;
+    showItem();
+    if (idx < order.length) {
+      document.getElementById('feedback').className = 'feedback';
+      document.getElementById('feedback').textContent = 'Drag the next item to the correct bin!';
+    }
+  }, 1800);
+}
+
+function showResults() {
+  document.getElementById('game').classList.add('hidden');
+  const r = document.getElementById('results');
+  r.classList.remove('hidden');
+  document.getElementById('finalScore').textContent = `${score} / ${order.length}`;
+  let msg;
+  if (score === order.length) msg = "🏆 Perfect! You're a true Steward of Creation!";
+  else if (score >= 6) msg = "🌟 Great job! You understand E-Waste well.";
+  else if (score >= 4) msg = "👍 Good effort — review the feedback and try again!";
+  else msg = "Keep learning! Every item matters.";
+  document.getElementById('rating').textContent = msg;
+}
+
+function restart() {
+  idx = 0; score = 0; locked = false;
+  order = shuffle([...Array(items.length).keys()]);
+  document.getElementById('score').textContent = '0';
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('game').classList.remove('hidden');
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = 'Pick up an item and drop it in a bin!';
+  showItem();
+}
+
+restart();
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Variable Confirmation Test Lab</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(30,58,95,0.15);
+    overflow: hidden;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 16px 22px;
+    border-bottom: 4px solid #c9a227;
+  }
+  header h1 { margin: 0; font-size: 1.4em; }
+  header p { margin: 4px 0 0; font-size: 0.9em; opacity: 0.9; }
+  .stage { padding: 22px; }
+  .scenario {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 14px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .scenario h2 { margin: 0 0 8px; font-size: 1.1em; color: #1e3a5f; }
+  .scenario p { margin: 0; font-size: 0.95em; line-height: 1.4; }
+  .question { font-weight: bold; margin: 14px 0 8px; }
+  .options { display: grid; gap: 10px; }
+  .opt {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+    padding: 12px 14px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.15s;
+  }
+  .opt:hover:not(:disabled) { background: #1e3a5f; color: #fff; }
+  .opt:disabled { cursor: default; opacity: 0.85; }
+  .opt.correct { background: #2d7a3e; border-color: #2d7a3e; color: #fff; }
+  .opt.wrong { background: #b33a3a; border-color: #b33a3a; color: #fff; }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.92em;
+    line-height: 1.45;
+    display: none;
+  }
+  .feedback.good { background: #e6f3ea; border-left: 5px solid #2d7a3e; }
+  .feedback.bad  { background: #fbeaea; border-left: 5px solid #b33a3a; }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .progress {
+    font-size: 0.9em;
+    color: #1e3a5f;
+  }
+  .next-btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 22px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    display: none;
+  }
+  .next-btn:hover { background: #b08e1c; }
+  .results { text-align: center; padding: 30px 20px; }
+  .results h2 { color: #1e3a5f; margin-top: 0; }
+  .score-circle {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: #1e3a5f;
+    color: #c9a227;
+    margin: 18px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #c9a227;
+  }
+  .score-circle .num { font-size: 2.4em; font-weight: bold; }
+  .score-circle .lbl { font-size: 0.85em; color: #fff; }
+  .retry {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .retry:hover { background: #2a4d7a; }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🔧 Variable Confirmation Test Lab</h1>
+    <p>Decide which tests follow the "change one variable at a time" rule.</p>
+  </header>
+  <div id="stage" class="stage"></div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    badge: "Test 1: Wheel Size",
+    setup: "Mia wants to know if BIGGER REAR WHEELS make her mousetrap car travel farther. Her original car has small wheels, a 10 cm lever arm, and a 50 cm string.",
+    question: "Which test design is a proper variable confirmation test?",
+    options: [
+      { text: "Swap in bigger rear wheels. Keep the 10 cm lever arm and 50 cm string the same.", correct: true, explain: "Only wheel size changes. Everything else is a control. This isolates the variable so Mia can trust her results." },
+      { text: "Swap in bigger rear wheels AND lengthen the lever arm to 15 cm.", correct: false, explain: "Two variables changed at once! If the car goes farther, Mia won't know if it was the wheels or the lever arm." },
+      { text: "Use the same small wheels, but try a new 30 cm string.", correct: false, explain: "This doesn't test wheel size at all — it changes the string instead." }
+    ]
+  },
+  {
+    badge: "Test 2: Identify the Variable",
+    setup: "Jordan runs two trials. Trial A: 8 cm lever arm, plastic wheels, on tile floor. Trial B: 12 cm lever arm, plastic wheels, on tile floor.",
+    question: "What is the independent variable (the one being tested)?",
+    options: [
+      { text: "The lever arm length", correct: true, explain: "Correct! Lever arm length is the ONLY thing that changed between trials. Everything else stayed constant." },
+      { text: "The type of wheels", correct: false, explain: "The wheels are the same in both trials (plastic) — that's a control, not a variable." },
+      { text: "The floor surface", correct: false, explain: "Both trials used tile floor — that's a controlled condition, not the variable being tested." }
+    ]
+  },
+  {
+    badge: "Test 3: Spot the Mistake",
+    setup: "Carlos tests if a lighter car body makes the car faster. He removes weight from the body, switches to rubber-coated wheels, and tests in the gym instead of the hallway.",
+    question: "Why are Carlos's results NOT trustworthy?",
+    options: [
+      { text: "He changed three variables at once, so he can't tell which change caused the new speed.", correct: true, explain: "Exactly! A valid test changes ONE variable. Carlos changed weight, wheels, AND location — the cause-and-effect link is lost." },
+      { text: "He didn't measure the car's speed in kilometers.", correct: false, explain: "Units aren't the problem — the test design itself is flawed." },
+      { text: "Lighter cars are always faster, so testing wasn't needed.", correct: false, explain: "Engineers never assume — they test! Plus, lighter isn't always faster (traction matters)." }
+    ]
+  },
+  {
+    badge: "Test 4: Controls Check",
+    setup: "Ava is testing whether a longer string wound on the axle increases distance. Her variable is STRING LENGTH.",
+    question: "Which item below should be a CONTROL (kept the same)?",
+    options: [
+      { text: "The lever arm length, wheel size, and floor surface", correct: true, explain: "Yes! All other factors must stay constant so the only difference is the string length. That's how you isolate cause and effect." },
+      { text: "The string length on each trial", correct: false, explain: "String length is the VARIABLE Ava is testing — it must change between trials, not stay constant." },
+      { text: "Nothing — change whatever you want each trial", correct: false, explain: "Without controls, the test is meaningless. You'd never know what actually caused the result." }
+    ]
+  },
+  {
+    badge: "Test 5: Design It",
+    setup: "You want to find out if waxing the axles reduces friction and increases distance. Your baseline car: unwaxed axles, 10 cm lever, medium wheels, runs on tile.",
+    question: "Pick the BEST confirmation test:",
+    options: [
+      { text: "Run the baseline car 3 times. Then wax ONLY the axles and run 3 more times. Compare averages.", correct: true, explain: "Perfect engineering! Multiple trials reduce error, and only the axle wax changes. This is a clean variable confirmation test." },
+      { text: "Wax the axles, change to bigger wheels, and run once on carpet.", correct: false, explain: "Too many variables changed AND only one trial — results would be unreliable." },
+      { text: "Just guess based on what feels right.", correct: false, explain: "Engineers test their ideas. Guessing isn't confirmation — it's assumption." }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+const stage = document.getElementById('stage');
+
+function render() {
+  if (current >= scenarios.length) return showResults();
+  const s = scenarios[current];
+  stage.innerHTML = `
+    <div class="scenario">
+      <span class="badge">${s.badge}</span>
+      <h2>Scenario</h2>
+      <p>${s.setup}</p>
+    </div>
+    <div class="question">${s.question}</div>
+    <div class="options" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <div class="footer">
+      <div class="progress">Question ${current+1} of ${scenarios.length} &nbsp;•&nbsp; Score: ${score}</div>
+      <button class="next-btn" id="nextBtn">${current === scenarios.length-1 ? 'See Results →' : 'Next →'}</button>
+    </div>
+  `;
+  const opts = document.getElementById('opts');
+  s.options.forEach((o, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = o.text;
+    b.onclick = () => choose(i, b);
+    opts.appendChild(b);
+  });
+  document.getElementById('nextBtn').onclick = () => { current++; render(); };
+}
+
+function choose(i, btn) {
+  const s = scenarios[current];
+  const opt = s.options[i];
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach((b, idx) => {
+    b.disabled = true;
+    if (s.options[idx].correct) b.classList.add('correct');
+  });
+  if (!opt.correct) btn.classList.add('wrong');
+  else score++;
+  const fb = document.getElementById('fb');
+  fb.className = 'feedback ' + (opt.correct ? 'good' : 'bad');
+  fb.style.display = 'block';
+  fb.innerHTML = (opt.correct ? '✓ ' : '✗ ') + opt.explain;
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+function showResults() {
+  const pct = Math.round((score / scenarios.length) * 100);
+  let msg, title;
+  if (pct === 100) { title = "Master Creationeer!"; msg = "Perfect score! You think like a true engineer — isolating variables, controlling conditions, and trusting evidence over assumption."; }
+  else if (pct >= 80) { title = "Strong Engineer!"; msg = "Great work! You've got a solid grasp of variable confirmation testing. Review the misses and you'll be unstoppable."; }
+  else if (pct >= 60) { title = "Apprentice Tester"; msg = "Good effort! You understand the basics. Remember: change ONE variable, keep everything else constant."; }
+  else { title = "Keep Building!"; msg = "Engineering takes practice. Re-read the rule: change one variable at a time, control the rest, and test multiple trials."; }
+
+  stage.innerHTML = `
+    <div class="results">
+      <h2>${title}</h2>
+      <div class="score-circle">
+        <div class="num">${score}/${scenarios.length}</div>
+        <div class="lbl">${pct}%</div>
+      </div>
+      <p style="max-width:560px; margin: 0 auto; line-height:1.5;">${msg}</p>
+      <button class="retry" onclick="restart()">↻ Try Again</button>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

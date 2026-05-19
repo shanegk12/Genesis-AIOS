@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 2: Understanding Constraints – What Are Your Limits?</summary>
+    <div class="panel-body"><p>Plain-language explanation:
+While variables give you freedom to change things, &quot;constraints&quot; are the rules or limitations you must work within. Think of them as the boundaries of your playing field. In real-world engineering, constraints can be budgets, safety regulations, available materials, time limits, or even the laws of physics. Ignoring constraints can lead to designs that are impossible to build, too expensive, or unsafe. A good engineer learns to innovate creatively within these boundaries.</p><p>Direct application to the mousetrap car project:
+Your mousetrap car project has several important constraints:
+   Mousetrap: You must use one standard mousetrap as your sole power source. This is a fundamental constraint.
+   Materials: You might have a limited selection of materials (wood, plastic, specific types of axles, wheels).
+   Dimensions: Your car may need to fit within certain dimensions (e.g., maximum length, width, height) for the competition track.
+   Time: You have a limited amount of time to design, build, and optimize your car before the competition.
+   Budget: If you were buying all your own parts, your budget would be a constraint.</p><p>It's crucial to list all your constraints clearly before you start making changes. For example, if your objective is to make the fastest car, and a constraint is &quot;must use only one standard mousetrap,&quot; you can't add a second mousetrap for more power. You have to find other ways to increase speed within that constraint, perhaps by reducing weight or optimizing the lever arm.</p><p>Multiscale Modeling connection (macro-level observation → atomic-level cause):
+Consider the constraint of using specific materials, like a particular type of wood for the chassis. At the macro-level, this wood has a certain strength and weight. If you observe your chassis bending or breaking (macro-level observation), it’s due to the atomic bonds within the wood fibers being unable to withstand the applied stress (atomic-level cause). The constraint of using this specific wood means you can't easily switch to a stronger, lighter material like carbon fiber, which has different atomic structures and bonding strengths. Instead, you must work within the existing material's properties, perhaps by reinforcing the design or distributing forces more effectively.</p><p>OCV application (Objective, Constraint, Variable) where relevant:
+Your Objective is to achieve the longest distance. A Constraint is that your car cannot exceed 12 inches in length. A Variable you are considering is the overall length of your car's chassis. You must choose a chassis length that allows for your wheels and lever arm, while staying under the 12-inch limit. This means you might have to make your lever arm shorter than ideal for maximum power, but still within the legal length.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: The Optimization Cycle – Finding the Best Solution</summary>
+    <div class="panel-body"><p>Plain-language explanation:
+&quot;Optimization&quot; is the process of finding the best possible solution for your design, given your objectives and constraints. It’s rarely a one-shot deal. Instead, engineers use an &quot;iterative&quot; process, meaning they repeat a cycle of design, build, test, and refine. You make a change (variable), test it, analyze the results, and then decide on the next change. This continuous cycle helps you get closer and closer to the &quot;optimal&quot; (best) design. Sometimes, you might have multiple objectives, like making a car that is both fast and travels far. This often involves &quot;trade-offs,&quot; where improving one objective might slightly reduce performance in another.</p><p>Direct application to the mousetrap car project:
+You already have your baseline data from the previous lesson. Now, you’ll enter the optimization cycle:
+1.  Identify a variable to change: For example, decide to test different wheel sizes.
+2.  Make a small change: Build a set of new, larger wheels for your car.
+3.  Test your car: Run your car multiple times with the new wheels using your established test protocol.
+4.  Collect data: Record the distance, speed, and other relevant performance metrics.
+5.  Analyze results: Compare the new data to your baseline and previous tests. Did the larger wheels improve distance? Did they slow it down?
+6.  Refine and repeat: Based on your analysis, decide what to change next. Maybe try an even larger wheel, or perhaps the larger wheels caused too much friction, so you need to look at axle lubrication.</p><p>This cycle is repeated until you are satisfied with your car’s performance or you run out of time or resources (constraints!). Remember, perfect is often the enemy of good enough.</p><p>Multiscale Modeling connection (macro-level observation → atomic-level cause):
+When you're trying to optimize for speed, you might reduce the weight of your car (macro-level change). You observe that a lighter car accelerates faster (macro-level observation). Why? At the atomic level, reducing the mass means there are fewer atoms to accelerate. According to Newton's second law (F=ma), with the same force (from the mousetrap), less mass (m) means greater acceleration (a). This direct relationship between the number of atoms (mass) and the car's acceleration is a fundamental multiscale connection. Optimizing weight means carefully selecting materials with lower atomic density or reducing the quantity of material, thereby impacting the overall mass.</p><p>OCV application (Objective, Constraint, Variable) where relevant:
+Let's apply the OCV method to an optimization decision. Your primary Objective is maximum distance. A Constraint is that your car must start from a standstill without any push. A Variable you are optimizing is the length of the lever arm that pulls the string from the mousetrap. You conduct tests:
+   Test 1: Short lever arm (5 cm) – Car moves quickly but runs out of power fast.
+   Test 2: Medium lever arm (10 cm) – Good balance, decent distance.
+   Test 3: Long lever arm (15 cm) – Starts slowly, but maintains pull longer, achieving greater distance.
+Based on these tests, you might choose the long lever arm as it best meets your objective, even if it sacrifices a bit of initial speed.</p><p>6. Engineering Journal Task</p><p>(1) Apply to Your Car:
+Think about your current mousetrap car design. List at least three specific variables you could change to improve its performance (e.g., wheel diameter, axle weight, lever arm attachment point). For each variable, describe how you would change it and what effect you predict it would have on your car's distance or speed.</p><p>(2) Identify Trade-offs:
+Now, consider one of the changes you listed above. What potential trade-offs might occur if you make that change? For example, if you make your wheels much larger to increase distance, what might happen to the car's acceleration or stability? Describe at least one clear trade-off you might encounter.</p><p>(3) OCV for Your Design:
+Choose a specific design decision you are considering for your mousetrap car (e.g., the material for your axles, the number of wheels, the overall shape). Clearly state your primary Objective (what you want to achieve), any relevant Constraints (rules or limitations), and the key Variables you are considering for this decision.</p><p>(4) Biblical Reflection:
+Read Proverbs 16:3, &quot;Commit your works to the LORD, and your thoughts will be established.&quot; As you work through the iterative process of testing and optimizing your mousetrap car, how does this verse encourage you to approach your engineering tasks? In what ways can committing your &quot;works&quot; (your design efforts, experiments, and adjustments) to the Lord help establish your &quot;thoughts&quot; (your understanding, problem-solving, and decision-making) in this project?</p><p>7. Technical Documentation Requirements</p><p>Update your Engineering Journal with your reflections from the &quot;Engineering Journal Task&quot; section, detailing your identified variables, predicted effects, trade-offs, and OCV application.
+   Document any changes you make to your mousetrap car based on your optimization cycle, including specific measurements and materials used.</p><p>Junior Creationeer Signature:
+__________________________
+Person / Date / Location of Lab</p><p>8. Summary of Key Concepts</p><p>Variables: Elements in your design that can be changed or measured.
+Constraints: Limitations or rules that define the boundaries of your design.
+Objectives: The specific goals you aim to achieve with your mousetrap car.
+Optimization: The iterative process of refining your design to best meet objectives within constraints.</p><p>9. Works Cited</p><p>1. Genesis K12 Academy Full Lesson Book. (n.d.).
+2. Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). &quot;Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis.&quot; Creation Research Society Quarterly 58:238–261.
+3. Kirtland, J. (2018). &quot;Engineering Design: An Introduction.&quot; Cambridge University Press.
+4. Ullman, D.G. (2017). &quot;The Mechanical Design Process.&quot; McGraw-Hill Education.</p></div>
+  </details>
+</div>
+</body>
+</html>

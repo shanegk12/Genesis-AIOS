@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Criticality of Alignment</summary>
+    <div class="panel-body"><p>Alignment is about making sure all the parts of your car are perfectly straight and in the right place. Think of it like a train on its tracks: if the wheels are not aligned with the rails, the train will derail. The same is true for your mousetrap car. In the Creationeering™ Performance phase, proper alignment is crucial for efficient energy transfer and minimizing energy loss. If your axles are bent, or your wheels are not straight on the axles, your car will experience excessive friction and will not travel as far or as fast as it could.</p><p>Let us apply this directly to your mousetrap car project. You have already installed your axles and wheels. Now, carefully examine them. Are your axles perfectly straight? You can roll them on a flat surface to check for any wobbles. Are your wheels mounted securely and straight on the axles, or do they tilt inward or outward? Even a slight misalignment can cause the wheels to drag against the car body or the ground, creating unwanted friction. This friction is a major enemy of speed and distance.</p><p>To understand this at a deeper level, let us use Multiscale Modeling. At the macro-level, you observe your car veering off to one side or slowing down unexpectedly. This macroscopic observation is often caused by microscopic issues. For example, a bent axle (macro-level observation) means that the atomic structure of the material is not perfectly straight. The atoms in the bent section are under stress, and as the wheel rotates, these misaligned atoms cause uneven contact with the bearing surface or the ground. This uneven contact increases the tiny points of resistance (friction) at the atomic level, which then translates to a noticeable drag and reduced performance at the car level. Similarly, if a wheel is not aligned, the forces acting on it are uneven, leading to increased wear and tear at the atomic interfaces of the axle and wheel hub, and thus more friction.</p><p>When considering the OCV for alignment, your Objective is to minimize friction and maximize distance. Your Constraints might include the materials you have available (e.g., specific axle rod thickness) and the tools you can use. Your Variables are how you attach the wheels to the axles, the straightness of the axles themselves, and the spacing of the wheels from the car body. By carefully adjusting these variables, such as using spacers or ensuring precise drilling for axle holes, you can improve alignment and achieve your objective within your constraints.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Ensuring Component Quality</summary>
+    <div class="panel-body"><p>Beyond alignment, the quality of each individual component significantly impacts your car's performance. Quality, in engineering, means that a component meets its specifications and performs its intended function reliably. A high-quality mousetrap car component will be durable, smooth, and consistent in its properties. Poor quality, on the other hand, can lead to premature failure, increased friction, and unpredictable behavior.</p><p>Let us bring this back to your mousetrap car. Consider your wheels. Are their edges smooth, or are there rough spots from cutting? Rough edges can create more friction with the ground and also affect how smoothly the wheel spins. How about the holes you drilled for your axles? Are they clean and perfectly round, or are they jagged and uneven? An uneven axle hole can cause the wheel to wobble, which, as we discussed, leads to misalignment and increased friction. Even the surface of your axles matters. If an axle is rough or corroded, it will not spin smoothly within its bearings.</p><p>From a Multiscale Modeling perspective, the quality of a component relates directly to its material properties at the atomic scale. Take a wheel with a rough edge. At the macroscopic level, it just looks &quot;rough.&quot; But microscopically, this roughness means an irregular arrangement of atoms and molecules along the edge. These irregularities create more contact points and greater resistance when the wheel interacts with the ground or air, increasing friction and air drag. Similarly, a smooth axle (macro) implies a uniform, ordered atomic surface (micro). When two smooth surfaces slide past each other, the atomic-level interactions are minimized, resulting in less friction. If the axle surface is rough, the atomic-level &quot;hills and valleys&quot; interlock more, leading to higher friction. Ensuring quality means paying attention to these atomic-level details, even if you cannot see them.</p><p>For OCV regarding component quality, your Objective is to reduce energy loss due to imperfections and maximize the car's efficiency. Your Constraints might be the type of materials you are allowed to use (e.g., cardboard vs. plastic for wheels) and the time you have for refining parts. Your Variables include how you finish the surfaces of your components (e.g., sanding wheel edges, polishing axles), the precision of your cuts and drills, and the choice of materials based on their inherent smoothness and stiffness. Investing time in improving the quality of each component, even seemingly minor ones, will pay dividends in your car's overall performance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Practical Techniques for Improvement</summary>
+    <div class="panel-body"><p>Now that you understand why alignment and quality are so important, let us explore some practical techniques to improve them in your mousetrap car. This is where the rubber meets the road in the Performance phase of Creationeering™. Small adjustments can make a big difference.</p><p>For alignment:
+   Checking axle straightness: Gently roll your axles on a very flat surface, like a glass table or a mirror. If they wobble, they are bent. You might be able to gently straighten a metal axle with pliers, or you may need to replace it.
+   Securing wheels: Ensure your wheels are firmly attached to the axles. Use hot glue, epoxy, or small collars to prevent them from slipping or wobbling. Make sure the wheels are perpendicular to the axle.
+   Axle placement: Use a ruler or a square to ensure your front and rear axles are parallel to each other and perpendicular to the car's body. If the axles are not parallel, your car will constantly try to turn. You can use guide holes or even small blocks to ensure consistent spacing and angle.
+   Minimizing wheel drag: Once your wheels are on the axles, spin each wheel freely. It should spin for a long time without rubbing against the car body. If it rubs, adjust the spacing using washers or by slightly trimming the car body.</p><p>For quality:
+   Smooth wheel edges: If your wheels have rough edges, use sandpaper (starting with coarse, then moving to fine) to smooth them out. A rotary tool with a sanding attachment can also work well.
+   Clean axle holes: If the holes in your wheels or car body are rough, use a small file or a drill bit (spun by hand) to clean them up. This ensures the axle can rotate freely without catching.
+   Lubrication: Apply a small amount of graphite powder or a very light lubricant (like silicone spray, not oil which can attract dirt) to the points where your axles meet their bearings. This significantly reduces friction.
+   Material selection: If you have options, choose materials that are inherently smoother or more rigid for critical components like axles and wheels. For example, a polished metal rod will generally perform better as an axle than a wooden dowel.</p><p>Consider a Multiscale Modeling example for lubrication. At the macroscopic level, you add graphite powder, and the wheel spins more freely. What is happening at the atomic level? The graphite particles, composed of layers of carbon atoms, slide easily past each other. When applied to an axle and bearing, these graphite layers fill in microscopic imperfections on the surfaces, creating a much smoother interface. This allows the metal atoms of the axle and bearing to slide past each other with less resistance, significantly reducing the atomic-level adhesion and interlocking that cause friction.</p><p>When applying OCV to these techniques, your Objective is to maximize the car's travel distance. Your Constraints might include the types of sandpaper or lubricants you have available, and the time limit for the build. Your Variables are the grit of sandpaper you use, the type and amount of lubricant, and the method you use to secure your wheels. By carefully selecting and applying these techniques, you are directly manipulating these variables to optimize your car's performance within the given constraints. Remember, every little detail you refine contributes to the overall excellence of your Creationeering™ project.</p></div>
+  </details>
+</div>
+</body>
+</html>

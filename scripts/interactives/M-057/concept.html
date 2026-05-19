@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap End-of-Life Sort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-user-select: none; user-select: none; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    min-height: 100vh;
+    padding: 16px;
+  }
+  h1 { color: #1e3a5f; font-size: 1.6em; text-align: center; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 14px; font-size: 0.95em; }
+  .score-bar {
+    background: #1e3a5f; color: #fff; padding: 8px 14px; border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 900px; margin: 0 auto 14px; font-weight: 600;
+  }
+  .score-bar .gold { color: #c9a227; }
+  .game-area {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .game-area { grid-template-columns: 1fr; }
+  }
+  .parts-pool {
+    background: #fff; border: 2px solid #1e3a5f; border-radius: 10px;
+    padding: 12px; min-height: 200px;
+  }
+  .parts-pool h2 { font-size: 1.05em; margin-bottom: 10px; text-align: center; }
+  .parts-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .part {
+    background: #c9a227; color: #1e3a5f; font-weight: 600;
+    padding: 8px 12px; border-radius: 6px; cursor: grab;
+    border: 2px solid #1e3a5f; font-size: 0.9em;
+    touch-action: none;
+  }
+  .part.dragging { opacity: 0.5; }
+  .bins { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 480px) { .bins { grid-template-columns: 1fr; } }
+  .bin {
+    background: #fff; border: 3px dashed #1e3a5f; border-radius: 10px;
+    padding: 10px; min-height: 130px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .bin.over { background: #fff5d6; border-color: #c9a227; }
+  .bin h3 { font-size: 0.95em; margin-bottom: 6px; color: #1e3a5f; text-align: center; }
+  .bin .icon { font-size: 1.6em; text-align: center; display: block; margin-bottom: 4px; }
+  .bin .dropped { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+  .bin .dropped .part { font-size: 0.8em; padding: 5px 8px; cursor: default; }
+  .feedback {
+    max-width: 900px; margin: 14px auto 0; padding: 10px 14px;
+    border-radius: 8px; font-weight: 600; text-align: center;
+    min-height: 40px;
+  }
+  .feedback.good { background: #d4edda; color: #155724; }
+  .feedback.bad { background: #f8d7da; color: #721c24; }
+  button {
+    background: #c9a227; color: #1e3a5f; border: 2px solid #1e3a5f;
+    padding: 10px 22px; font-size: 1em; font-weight: 700;
+    border-radius: 8px; cursor: pointer; display: block; margin: 14px auto;
+  }
+  button:hover { background: #1e3a5f; color: #c9a227; }
+  .final {
+    max-width: 900px; margin: 16px auto; background: #fff;
+    border: 3px solid #c9a227; border-radius: 12px; padding: 20px;
+    text-align: center; display: none;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+  .final p { margin: 8px 0; line-height: 1.5; }
+  .stars { font-size: 2em; color: #c9a227; letter-spacing: 6px; }
+</style>
+</head>
+<body>
+  <h1>🐭 Mousetrap Car: End-of-Life Sort</h1>
+  <p class="subtitle">Your mousetrap car has reached the end of its life! Drag each part to its best recycling path.</p>
+
+  <div class="score-bar">
+    <span>Parts Sorted: <span id="sorted">0</span> / 8</span>
+    <span class="gold">Score: <span id="score">0</span></span>
+  </div>
+
+  <div class="game-area">
+    <div class="parts-pool">
+      <h2>📦 Parts to Sort</h2>
+      <div class="parts-list" id="pool"></div>
+    </div>
+
+    <div class="bins">
+      <div class="bin" data-bin="reuse">
+        <span class="icon">♻️</span>
+        <h3>REUSE<br><small>Works as-is</small></h3>
+        <div class="dropped"></div>
+      </div>
+      <div class="bin" data-bin="recycle">
+        <span class="icon">🔄</span>
+        <h3>RECYCLE<br><small>Process into new material</small></h3>
+        <div class="dropped"></div>
+      </div>
+      <div class="bin" data-bin="repurpose">
+        <span class="icon">🔧</span>
+        <h3>REPURPOSE<br><small>New creative use</small></h3>
+        <div class="dropped"></div>
+      </div>
+      <div class="bin" data-bin="dispose">
+        <span class="icon">🗑️</span>
+        <h3>DISPOSE<br><small>Last resort: trash</small></h3>
+        <div class="dropped"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback">Drag a part into a bin to begin!</div>
+
+  <div class="final" id="final">
+    <h2>🎉 Sorting Complete!</h2>
+    <div class="stars" id="stars"></div>
+    <p id="final-score"></p>
+    <p id="final-message"></p>
+    <p style="font-style: italic; color: #1e3a5f; margin-top: 12px;">
+      "A generation goes, and a generation comes, but the earth remains forever." — Ecclesiastes 1:4
+    </p>
+    <button onclick="resetGame()">Play Again</button>
+  </div>
+
+<script>
+const PARTS = [
+  { id: 'p1', name: 'Wooden mousetrap base', correct: 'recycle', explain: 'Untreated wood can be composted or chipped into mulch — a great natural recycle path.' },
+  { id: 'p2', name: 'Steel spring', correct: 'recycle', explain: 'Metal springs can be melted down and reformed into new steel products.' },
+  { id: 'p3', name: 'CD wheels (still round)', correct: 'reuse', explain: 'Undamaged CDs can be reused as wheels in another project — no processing needed!' },
+  { id: 'p4', name: 'Rubber band (stretched out)', correct: 'dispose', explain: 'Worn rubber bands lose elasticity and are hard to recycle. Trash is the last-resort answer.' },
+  { id: 'p5', name: 'Wooden dowel axle', correct: 'reuse', explain: 'A straight, undamaged dowel can be reused directly in your next build.' },
+  { id: 'p6', name: 'Plastic bottle cap', correct: 'repurpose', explain: 'Bottle caps make great washers, spacers, or decorations — repurpose with creativity!' },
+  { id: 'p7', name: 'Tangled fishing line string', correct: 'dispose', explain: 'Tangled fishing line is dangerous to wildlife and not recyclable curbside.' },
+  { id: 'p8', name: 'Cardboard body panel', correct: 'recycle', explain: 'Cardboard is one of the easiest materials to recycle into new paper products.' }
+];
+
+let sorted = 0, score = 0;
+let dragged = null;
+
+function buildPool() {
+  const pool = document.getElementById('pool');
+  pool.innerHTML = '';
+  PARTS.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'part';
+    el.draggable = true;
+    el.dataset.id = p.id;
+    el.textContent = p.name;
+    el.addEventListener('dragstart', e => {
+      dragged = p.id;
+      el.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', p.id);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    el.addEventListener('dragend', () => el.classList.remove('dragging'));
+    // touch support
+    el.addEventListener('touchstart', e => { dragged = p.id; el.classList.add('dragging'); }, {passive: true});
+    el.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const t = e.touches[0];
+      el.style.position = 'fixed';
+      el.style.left = (t.clientX - 40) + 'px';
+      el.style.top = (t.clientY - 15) + 'px';
+      el.style.zIndex = 1000;
+      document.querySelectorAll('.bin').forEach(b => {
+        const r = b.getBoundingClientRect();
+        if (t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom) {
+          b.classList.add('over');
+        } else { b.classList.remove('over'); }
+      });
+    }, {passive: false});
+    el.addEventListener('touchend', e => {
+      const t = e.changedTouches[0];
+      el.style.position = ''; el.style.left = ''; el.style.top = ''; el.style.zIndex = '';
+      el.classList.remove('dragging');
+      let dropped = false;
+      document.querySelectorAll('.bin').forEach(b => {
+        const r = b.getBoundingClientRect();
+        b.classList.remove('over');
+        if (!dropped && t.clientX >= r.left && t.clientX <= r.right && t.clientY >= r.top && t.clientY <= r.bottom) {
+          handleDrop(b, p.id);
+          dropped = true;
+        }
+      });
+      dragged = null;
+    });
+    pool.appendChild(el);
+  });
+}
+
+function setupBins() {
+  document.querySelectorAll('.bin').forEach(bin => {
+    bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('over'); });
+    bin.addEventListener('dragleave', () => bin.classList.remove('over'));
+    bin.addEventListener('drop', e => {
+      e.preventDefault();
+      bin.classList.remove('over');
+      const id = e.dataTransfer.getData('text/plain') || dragged;
+      if (id) handleDrop(bin, id);
+    });
+  });
+}
+
+function handleDrop(bin, id) {
+  const part = PARTS.find(p => p.id === id);
+  const poolEl = document.querySelector(`.parts-list .part[data-id="${id}"]`);
+  if (!poolEl) return; // already sorted
+  poolEl.remove();
+  const newEl = document.createElement('div');
+  newEl.className = 'part';
+  newEl.textContent = part.name;
+  bin.querySelector('.dropped').appendChild(newEl);
+  const fb = document.getElementById('feedback');
+  if (bin.dataset.bin === part.correct) {
+    score += 10;
+    newEl.style.background = '#d4edda';
+    fb.className = 'feedback good';
+    fb.textContent = '✓ Correct! ' + part.explain;
+  } else {
+    newEl.style.background = '#f8d7da';
+    fb.className = 'feedback bad';
+    fb.textContent = '✗ Better choice: ' + part.correct.toUpperCase() + '. ' + part.explain;
+  }
+  sorted++;
+  document.getElementById('sorted').textContent = sorted;
+  document.getElementById('score').textContent = score;
+  if (sorted === PARTS.length) setTimeout(showFinal, 600);
+}
+
+function showFinal() {
+  const fin = document.getElementById('final');
+  fin.style.display = 'block';
+  const stars = Math.round(score / 20);
+  document.getElementById('stars').textContent = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+  document.getElementById('final-score').textContent = `You scored ${score} out of 80 points!`;
+  let msg = '';
+  if (score >= 70) msg = 'Outstanding! You think like a true Creationeer — designing for renewal, not waste.';
+  else if (score >= 50) msg = 'Good work! Keep thinking about how every material can serve a purpose beyond its first life.';
+  else msg = 'Keep practicing! The circular economy takes creative thinking — every part has potential.';
+  document.getElementById('final-message').textContent = msg;
+  fin.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetGame() {
+  sorted = 0; score = 0;
+  document.getElementById('sorted').textContent = '0';
+  document.getElementById('score').textContent = '0';
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = 'Drag a part into a bin to begin!';
+  document.getElementById('final').style.display = 'none';
+  document.querySelectorAll('.bin .dropped').forEach(d => d.innerHTML = '');
+  buildPool();
+}
+
+buildPool();
+setupBins();
+</script>
+</body>
+</html>

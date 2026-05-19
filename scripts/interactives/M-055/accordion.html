@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: What is Optimization?</summary>
+    <div class="panel-body"><p>Optimization is all about making your mousetrap car the absolute best it can be for its intended purpose. It’s not enough for your car to just move; we want it to move optimally. This means achieving the fastest speed, the longest distance, or the most consistent path, depending on your specific objective. Think of it like a chef refining a recipe: they don't just throw ingredients together; they adjust amounts, cooking times, and techniques to get the best flavor and texture. In engineering, optimization is this process of adjustment and refinement.</p><p>For your mousetrap car, optimization starts with the &quot;Performance Data&quot; you collected in the last lesson. That data tells you what your car is currently doing. Now, we use that information to identify areas for improvement. Perhaps your car veers off course, or it stops short of your target distance. These are the problems that optimization aims to solve. You’ll make small, controlled changes to your design, test each change, and then analyze the new data to see if the change improved performance. This is an iterative process, meaning you'll repeat it many times, each time getting closer to your ideal car.</p><p>When we talk about Multiscale Modeling in optimization, we're thinking about how changes at a small level can impact the car's overall performance. For example, a tiny adjustment to the axle's smoothness (a micro-level change in the material’s surface) might significantly reduce friction, leading to a much longer travel distance (a macro-level observation). At the atomic level, reducing friction might involve polishing the axle and bearings, which smooths out microscopic irregularities on the surfaces. These smoother surfaces allow the atoms of the axle and bearing to slide past each other with less resistance, preventing energy from being converted into heat and instead allowing it to contribute to the car's motion. So, a small-scale change in surface texture has a large-scale impact on how far your car travels.</p><p>Using the OCV method, let's consider a common optimization goal:
+Objective: Maximize the distance your mousetrap car travels.
+Constraint: You must use only one mousetrap spring for power.
+Variable: The diameter of your car's drive wheels. You can change this to see how it affects distance.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Systematic Optimization Testing</summary>
+    <div class="panel-body"><p>To optimize effectively, you need a systematic approach. This means making one change at a time and carefully recording the results. If you change multiple things at once, you won't know which change caused an improvement or a decline in performance.</p><p>Here’s a step-by-step guide for systematic optimization:
+1.  Identify a single variable to change: Based on your performance data, what is one aspect of your car you want to test? Examples: wheel size, axle length, lever arm length, weight distribution, type of string.
+2.  Formulate a hypothesis: Before you make the change, predict what you think will happen. For example, &quot;I hypothesize that increasing the drive wheel diameter will increase the distance traveled because each rotation will cover more ground.&quot;
+3.  Make the change: Carefully modify only that one variable on your car. Ensure all other parts of the car remain exactly the same.
+4.  Test and collect new data: Run your car multiple times (at least three to five) with the modified variable. Record all the relevant performance data, just as you did in the previous lesson.
+5.  Analyze the data: Compare the new data to your baseline data (from the previous lesson) and to your hypothesis. Did the change improve performance? Did it make it worse? Was there no significant change?
+6.  Draw conclusions and decide next steps: Based on your analysis, decide if the change was beneficial. If it was, you might keep that change and then identify another variable to optimize. If not, you might revert the change or try a different modification to that same variable. This is the iteration process in action.</p><p>Let's apply Multiscale Modeling to an example: optimizing wheel-to-axle friction. At the macro-level, you observe your car slowing down too quickly, indicating high friction. At the micro-level, this friction is caused by the rough surfaces of the axle and the inside of the wheel hub rubbing against each other. To optimize, you might add a lubricant like graphite. This lubricant, at the atomic level, creates a slippery layer between the two surfaces. The graphite particles, being very small and flat, can slide over each other easily, preventing the direct contact and interlocking of the rough atomic structures of the axle and wheel. This reduces the energy lost as heat and allows more of the mousetrap's energy to propel the car forward, improving overall distance or speed.</p><p>Using the OCV method for friction:
+Objective: Reduce friction between the axle and wheels.
+Constraint: You cannot use ball bearings (due to cost or availability).
+Variable: The type of lubricant applied to the axle. You might test wax, graphite powder, or a thin layer of petroleum jelly.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Understanding Trade-offs and Sustainable Design</summary>
+    <div class="panel-body"><p>Optimization often involves making trade-offs. A trade-off occurs when improving one aspect of your design means another aspect gets worse. For example, making your car much faster might make it less stable, causing it to crash more often. Or, designing for maximum distance might mean sacrificing speed. Good engineers understand that perfect solutions are rare. Instead, they find the best balance of different objectives within their constraints.</p><p>The &quot;Sustainability&quot; phase of Creationeering, which we are in, emphasizes designing systems to last and adapt. This means not just optimizing for a single performance metric today, but also thinking about the long-term reliability and adaptability of your car. Is your design robust enough to withstand multiple tests? Can it be easily repaired or modified if a part breaks or if the competition rules change slightly? Sustainable design also considers the efficient use of materials and energy, reflecting good stewardship. We want to avoid wasteful practices and instead create designs that are both effective and resource-conscious.</p><p>Multiscale Modeling helps us understand trade-offs. Consider axle stiffness. At the macro-level, a very stiff axle might seem good for maintaining a straight path. However, at the micro-level, if the material is too stiff (atoms are rigidly bonded), it might be brittle and prone to snapping under stress (e.g., impact from hitting a wall). A slightly more flexible material (where atomic bonds allow for some give) might absorb impact better, preventing catastrophic failure and contributing to the car's overall sustainability and longevity, even if it introduces a tiny bit more wobble. This is a trade-off between absolute rigidity and material toughness.</p><p>Using the OCV method for a trade-off example:
+Objective 1: Maximize speed.
+Objective 2: Maximize stability.
+Constraint: The mousetrap spring provides a fixed amount of energy.
+Variable: The car's wheelbase (distance between front and rear axles). A shorter wheelbase might increase acceleration (speed) but decrease stability. A longer wheelbase might increase stability but reduce acceleration. You must find the optimal balance for your project.</p></div>
+  </details>
+</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car Optimization Lab</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+  }
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    padding: 25px;
+  }
+  h1 {
+    color: #1e3a5f;
+    border-bottom: 4px solid #c9a227;
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  .goal-box {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    font-size: 1.05em;
+  }
+  .goal-box strong { color: #c9a227; }
+  .track {
+    background: linear-gradient(to bottom, #e8eef5 0%, #d4dfee 100%);
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    height: 90px;
+    position: relative;
+    margin: 15px 0;
+    overflow: hidden;
+  }
+  .finish {
+    position: absolute;
+    right: 8px; top: 5px; bottom: 5px;
+    width: 6px;
+    background: repeating-linear-gradient(0deg, #1e3a5f 0 8px, #fff 8px 16px);
+  }
+  .car {
+    position: absolute;
+    bottom: 12px;
+    left: 5px;
+    font-size: 38px;
+    transition: left 0.05s linear;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .slider-group {
+    background: #f7f9fc;
+    border: 2px solid #c9a227;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .slider-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .slider-group .val {
+    color: #c9a227;
+    font-size: 1.1em;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #1e3a5f;
+  }
+  .tradeoff {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 1.6em;
+    color: #c9a227;
+    font-weight: bold;
+  }
+  .stat .lbl {
+    font-size: 0.85em;
+  }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  button:hover { background: #b08e1c; }
+  button.secondary {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    color: #1e3a5f;
+  }
+  .btn-row { text-align: center; margin: 15px 0; }
+  #feedback {
+    background: #f7f9fc;
+    border-left: 5px solid #c9a227;
+    padding: 12px 16px;
+    margin-top: 10px;
+    border-radius: 4px;
+    min-height: 50px;
+  }
+  .badge {
+    display: inline-block;
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin: 3px;
+  }
+  .star { color: #c9a227; font-size: 1.5em; }
+  .star.off { color: #ddd; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏁 Mousetrap Car Optimization Lab</h1>
+  <div class="goal-box">
+    <strong>Mission:</strong> Adjust your design variables to make the car reach the finish line. Then optimize for a <strong>HIGH SCORE</strong> by balancing speed, distance, and reliability!
+  </div>
+
+  <div class="track">
+    <div class="car" id="car">🏎️</div>
+    <div class="finish"></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num" id="distVal">0</div><div class="lbl">Distance (m)</div></div>
+    <div class="stat"><div class="num" id="speedVal">0</div><div class="lbl">Top Speed (m/s)</div></div>
+    <div class="stat"><div class="num" id="reliVal">0</div><div class="lbl">Reliability %</div></div>
+  </div>
+
+  <div class="controls">
+    <div class="slider-group">
+      <label>🔧 Lever Arm Length: <span class="val" id="leverV">15</span> cm</label>
+      <input type="range" id="lever" min="5" max="30" value="15">
+      <div class="tradeoff">Longer = more distance, but slower start</div>
+    </div>
+    <div class="slider-group">
+      <label>⚙️ Wheel Size: <span class="val" id="wheelV">8</span> cm</label>
+      <input type="range" id="wheel" min="3" max="15" value="8">
+      <div class="tradeoff">Bigger = faster, but harder to turn</div>
+    </div>
+    <div class="slider-group">
+      <label>🪨 Car Mass: <span class="val" id="massV">200</span> g</label>
+      <input type="range" id="mass" min="50" max="500" value="200">
+      <div class="tradeoff">Lighter = faster, but less stable</div>
+    </div>
+    <div class="slider-group">
+      <label>🧵 String Length: <span class="val" id="stringV">40</span> cm</label>
+      <input type="range" id="string" min="10" max="80" value="40">
+      <div class="tradeoff">Longer = more pull, but more friction</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button id="testBtn">▶ Run Test</button>
+    <button id="submitBtn" class="secondary">✓ Submit Final Design</button>
+  </div>
+
+  <div id="feedback">Adjust the sliders and click <strong>Run Test</strong> to see how your car performs. Find the best combination — that's optimization!</div>
+</div>
+
+<script>
+const sliders = {
+  lever: document.getElementById('lever'),
+  wheel: document.getElementById('wheel'),
+  mass: document.getElementById('mass'),
+  string: document.getElementById('string')
+};
+const labels = {
+  lever: document.getElementById('leverV'),
+  wheel: document.getElementById('wheelV'),
+  mass: document.getElementById('massV'),
+  string: document.getElementById('stringV')
+};
+const car = document.getElementById('car');
+const distVal = document.getElementById('distVal');
+const speedVal = document.getElementById('speedVal');
+const reliVal = document.getElementById('reliVal');
+const feedback = document.getElementById('feedback');
+
+function updateLabels() {
+  for (let k in sliders) labels[k].textContent = sliders[k].value;
+}
+for (let k in sliders) sliders[k].addEventListener('input', updateLabels);
+updateLabels();
+
+function computeStats() {
+  const L = +sliders.lever.value;   // 5-30
+  const W = +sliders.wheel.value;   // 3-15
+  const M = +sliders.mass.value;    // 50-500
+  const S = +sliders.string.value;  // 10-80
+
+  // Distance: favors longer lever, bigger wheel, longer string, lighter mass
+  let distance = (L * 0.4) + (W * 0.5) + (S * 0.15) - (M * 0.015);
+  distance = Math.max(0, distance);
+
+  // Speed: favors big wheel, light mass, shorter lever
+  let speed = (W * 0.45) + (20 - L) * 0.1 + (300 - M) * 0.01;
+  speed = Math.max(0.2, speed);
+
+  // Reliability: penalty for extreme values
+  const leverBal = 1 - Math.abs(L - 18) / 25;
+  const wheelBal = 1 - Math.abs(W - 9) / 12;
+  const massBal = 1 - Math.abs(M - 180) / 450;
+  const stringBal = 1 - Math.abs(S - 45) / 70;
+  let reliability = (leverBal + wheelBal + massBal + stringBal) / 4 * 100;
+  reliability = Math.max(10, Math.min(100, reliability));
+
+  return { distance, speed, reliability, L, W, M, S };
+}
+
+function animateCar(stats) {
+  const trackWidth = document.querySelector('.track').clientWidth - 50;
+  const maxDist = 25; // meters representing full track
+  const reach = Math.min(1, stats.distance / maxDist);
+  const target = reach * trackWidth;
+  const duration = 2000 / (stats.speed * 0.4 + 0.5);
+  car.style.transition = `left ${duration}ms ease-out`;
+  car.style.left = '5px';
+  setTimeout(() => { car.style.left = target + 'px'; }, 30);
+}
+
+document.getElementById('testBtn').addEventListener('click', () => {
+  const s = computeStats();
+  distVal.textContent = s.distance.toFixed(1);
+  speedVal.textContent = s.speed.toFixed(1);
+  reliVal.textContent = Math.round(s.reliability);
+  animateCar(s);
+
+  let msg = '<strong>Test Result:</strong> ';
+  const reached = s.distance >= 20;
+  if (reached && s.reliability > 75) {
+    msg += 'Excellent! Your car finished strong AND ran reliably. 🌟';
+  } else if (reached) {
+    msg += 'Your car reached the finish, but reliability is low — extreme settings cause wobbling and failure.';
+  } else if (s.distance > 12) {
+    msg += 'Close! Increase distance — try a longer lever arm or bigger wheels.';
+  } else {
+    msg += 'Your car stopped short. Check the trade-off hints under each slider.';
+  }
+  feedback.innerHTML = msg;
+});
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const s = computeStats();
+  distVal.textContent = s.distance.toFixed(1);
+  speedVal.textContent = s.speed.toFixed(1);
+  reliVal.textContent = Math.round(s.reliability);
+  animateCar(s);
+
+  // Overall optimization score
+  const distScore = Math.min(40, (s.distance / 25) * 40);
+  const speedScore = Math.min(30, (s.speed / 8) * 30);
+  const reliScore = (s.reliability / 100) * 30;
+  const total = Math.round(distScore + speedScore + reliScore);
+
+  let stars = 1;
+  if (total >= 50) stars = 2;
+  if (total >= 70) stars = 3;
+  if (total >= 85) stars = 4;
+  if (total >= 92) stars = 5;
+
+  let starHTML = '';
+  for (let i = 0; i < 5; i++) {
+    starHTML += `<span class="star ${i < stars ? '' : 'off'}">★</span>`;
+  }
+
+  let tier = '';
+  if (total >= 92) tier = 'MASTER ENGINEER — your design is "very good"!';
+  else if (total >= 75) tier = 'Skilled Creationeer — excellent optimization!';
+  else if (total >= 55) tier = 'Solid Builder — keep refining the trade-offs.';
+  else tier = 'Apprentice — try testing one variable at a time.';
+
+  feedback.innerHTML = `
+    <div style="text-align:center">
+      ${starHTML}
+      <h2 style="margin:8px 0;color:#1e3a5f">Optimization Score: ${total}/100</h2>
+      <div class="badge">${tier}</div>
+    </div>
+    <p style="margin-top:12px"><strong>What you learned:</strong> Optimization isn't about maxing out every slider — it's about balancing competing trade-offs (distance vs. speed vs. reliability) to find the BEST overall design. Real engineers test, adjust, and retest, just like you did!</p>
+  `;
+});
+</script>
+</body>
+</html>

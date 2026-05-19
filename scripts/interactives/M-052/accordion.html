@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: Understanding Variables and Controls</summary>
+    <div class="panel-body"><p>A variable is simply anything that can change or be changed in your mousetrap car. Think about it: the length of the lever arm, the size of the wheels, the type of string, the weight of the car body. Each of these is a variable. In engineering, when we want to understand how a specific change affects performance, we must isolate that change. This means we only alter one variable at a time. All other factors must remain constant. These constant factors are called controls.</p><p>Let's apply this to your mousetrap car. Imagine you want to test how the length of the lever arm affects the distance your car travels. Your hypothesis might be: &quot;A longer lever arm will make my mousetrap car travel a greater distance.&quot; To test this, you would build your car with a specific lever arm length (your baseline). Then, for your confirmation test, you would change only the lever arm length. You would keep the wheels, axles, car body weight, string type, and starting position exactly the same. The lever arm length is your variable, and everything else is a control. If you change the lever arm and the wheel size at the same time, you won't know which change caused the difference in performance. This is why controls are so important in scientific and engineering testing.</p><p>Multiscale Modeling Connection: When you change the length of your lever arm (a macro-level observation), you are fundamentally altering the torque applied to the axle. This torque is a result of forces acting at the atomic level within the materials of the mousetrap spring, lever arm, and string. A longer lever arm means the force from the spring acts over a greater distance, converting more potential energy into kinetic energy for the car. This energy transfer, while observed at the macro scale as distance traveled, is driven by the microscopic interactions and bonds within the materials. The strength of the spring's metal, the elasticity of the string, and the rigidity of the lever arm are all determined by their atomic structures. When these atomic structures interact under stress, they dictate the macroscopic force and motion you observe.</p><p>OCV Application: For this test, your Objective is to maximize the distance your car travels. A Constraint might be that your car must use only the energy from one mousetrap. Your Variable is the length of the lever arm. By systematically changing the lever arm length and measuring the distance, you are directly applying the OCV method to understand how to achieve your objective within your constraint.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: Designing and Conducting a Confirmation Test</summary>
+    <div class="panel-body"><p>Designing a confirmation test requires careful thought. First, identify the single variable you want to test. Is it wheel size? Lever arm length? Car weight? Once you've chosen, formulate a clear hypothesis. For example: &quot;Increasing the diameter of the drive wheels will increase the distance the mousetrap car travels.&quot;</p><p>Next, plan your test procedure. You'll need to run multiple trials for each version of your variable. Why multiple trials? Because real-world tests often have slight variations due to human error, inconsistencies in materials, or environmental factors. Running at least three to five trials for each variable setting helps you get a reliable average and identify any outliers.</p><p>For your mousetrap car, let's say you chose to test the diameter of your drive wheels.
+1.  Establish your baseline: Test your car with its current drive wheels multiple times and record the average distance.
+2.  Modify the variable: Change only the drive wheels to a larger diameter. Ensure all other parts remain the same. These new wheels are your &quot;new variable setting.&quot;
+3.  Conduct new trials: Run your car with the larger wheels multiple times (e.g., five trials) and record the distance for each run.
+4.  Record data meticulously: Keep a detailed log of each trial, including the variable setting (e.g., wheel diameter), the distance traveled, and any observations.</p><p>It is crucial to maintain consistency in your testing environment. Use the same starting line, the same surface, and try to release the car in the same way each time. These are your controls. Any variation in these controls could skew your results and make it difficult to confidently confirm your hypothesis.</p><p>Multiscale Modeling Connection: When you change the diameter of your drive wheels (macro-level change), you are changing the gear ratio, which affects how many rotations of the axle are needed to cover a certain distance. This change impacts the forces and stresses distributed through the axle, bearings, and the wheel material itself. At the atomic level, the rigidity and wear resistance of your wheel material (e.g., plastic, cardboard, wood) are determined by the strength of their atomic bonds. Friction between the wheels and the ground, another key factor in performance, is governed by the atomic-scale interactions at the contact surface. A larger wheel, while seemingly a simple change, alters the entire dynamic system, from the macroscopic motion to the microscopic energy dissipation.</p><p>OCV Application: If your Objective is to maximize distance, and a Constraint is that the car must travel in a straight line, your Variable is the wheel diameter. You might find that larger wheels help distance but make it harder to go straight. This highlights a trade-off. You might then need to introduce a new constraint, like &quot;must travel at least 3 meters in a straight line,&quot; which would influence your optimal wheel diameter.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Analyzing Results and Making Informed Decisions</summary>
+    <div class="panel-body"><p>Once you have collected your data, the next step is to analyze it. Calculate the average distance for each variable setting. Compare these averages to your baseline and to each other. Did the change in your variable have the effect you predicted? Was the effect positive, negative, or negligible?</p><p>Visualizing your data, perhaps with a simple bar graph, can help you quickly see trends. For instance, if you tested three different lever arm lengths, a graph showing average distance for each length would clearly illustrate which length performed best.</p><p>Let's consider the example of testing different drive wheel diameters for your mousetrap car. You might find that a slightly larger wheel increases distance, but a very large wheel actually decreases it, perhaps due to increased weight or friction. This kind of nuanced result is valuable. It tells you there's an optimal range for that variable. This process of identifying optimal ranges is called optimization.</p><p>Based on your analysis, you will make informed decisions about your car's design. If a change improved performance, you might incorporate it into your final design. If it worsened performance, you'll know to avoid it or try a different approach. This iterative process of testing, analyzing, and refining is at the heart of engineering. It's how we move from an initial idea to a highly effective product.</p><p>Multiscale Modeling Connection: Analyzing the data from your tests (macro-level observation) allows you to infer what is happening at the microscopic and atomic levels. For instance, if a larger wheel performs poorly, it might be due to increased rotational inertia, meaning more energy is required to get it spinning. This inertia is a macroscopic property, but it's directly related to the mass distribution of the wheel at the atomic level. Excessive friction, another macroscopic observation, arises from the atomic-scale roughness and adhesive forces between the tire material and the track. Understanding these connections helps you think critically about why your car performed the way it did, moving beyond just &quot;it worked&quot; or &quot;it didn't work&quot; to &quot;it worked/didn't work because...&quot;</p><p>OCV Application: When you analyze your results, you're checking if your Objective (e.g., maximum distance) was met. The data will also show if any Constraints (e.g., car must not exceed a certain width) were violated by your Variable changes. This iterative OCV process helps you converge on a design that satisfies all requirements while optimizing performance. For example, if your objective is to maximize speed, and a constraint is to maintain stability, you might find that certain wheel diameters (your variable) increase speed but decrease stability, forcing a trade-off decision.</p></div>
+  </details>
+</div>
+</body>
+</html>

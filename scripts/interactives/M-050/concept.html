@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Optimization Lab</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 15px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    padding: 20px;
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    border-bottom: 3px solid #c9a227;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .track {
+    background: linear-gradient(to right, #e8eef7 0%, #e8eef7 100%);
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    height: 80px;
+    position: relative;
+    margin: 15px 0;
+    overflow: hidden;
+  }
+  .track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(to right, #1e3a5f 0 20px, transparent 20px 40px);
+    transform: translateY(-50%);
+  }
+  .finish {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 15px;
+    background: repeating-linear-gradient(45deg, #1e3a5f 0 8px, #fff 8px 16px);
+    border-radius: 3px;
+  }
+  .car {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 2.5em;
+    transition: left 0.1s linear;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 15px 0;
+  }
+  .slider-group {
+    background: #f7f9fc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid #c9a227;
+  }
+  .slider-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95em;
+  }
+  .slider-group .value {
+    color: #c9a227;
+    font-weight: bold;
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: #1e3a5f;
+  }
+  .hint {
+    font-size: 0.78em;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 1.5em;
+    color: #c9a227;
+    font-weight: bold;
+  }
+  .stat .lbl {
+    font-size: 0.8em;
+    opacity: 0.9;
+  }
+  button {
+    background: #c9a227;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin: 5px;
+  }
+  button:hover { transform: translateY(-2px); }
+  button:disabled { background: #999; cursor: not-allowed; transform: none; }
+  .btn-row { text-align: center; margin: 15px 0; }
+  .feedback {
+    background: #f7f9fc;
+    border-left: 4px solid #1e3a5f;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    min-height: 60px;
+    font-size: 0.95em;
+  }
+  .trial-log {
+    max-height: 120px;
+    overflow-y: auto;
+    background: #f7f9fc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 0.85em;
+  }
+  .trial-row {
+    padding: 4px 8px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+  }
+  .best { background: #fff8dc; font-weight: bold; }
+  .win-banner {
+    background: linear-gradient(135deg, #c9a227, #e3b94a);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: none;
+  }
+  .goal {
+    background: #c9a227;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🐭 Mousetrap Car Optimization Lab</h1>
+  <p class="subtitle">Adjust the design variables. Test. Learn. Iterate. Hit the goal in as few trials as possible!</p>
+
+  <div class="goal">🎯 GOAL: Travel at least 90% of the track distance</div>
+
+  <div class="track">
+    <div class="car" id="car">🏎️</div>
+    <div class="finish"></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num" id="distStat">0%</div><div class="lbl">Last Distance</div></div>
+    <div class="stat"><div class="num" id="bestStat">0%</div><div class="lbl">Best Distance</div></div>
+    <div class="stat"><div class="num" id="trialStat">0</div><div class="lbl">Trials Run</div></div>
+  </div>
+
+  <div class="controls">
+    <div class="slider-group">
+      <label>Wheel Size: <span class="value" id="wheelVal">5</span> cm</label>
+      <input type="range" id="wheel" min="2" max="10" value="5" step="1">
+      <div class="hint">Bigger wheels = more distance per turn, but harder to start</div>
+    </div>
+    <div class="slider-group">
+      <label>String Length: <span class="value" id="stringVal">20</span> cm</label>
+      <input type="range" id="string" min="5" max="40" value="20" step="1">
+      <div class="hint">More string = longer push, but too much wastes energy</div>
+    </div>
+    <div class="slider-group">
+      <label>Car Weight: <span class="value" id="weightVal">150</span> g</label>
+      <input type="range" id="weight" min="50" max="300" value="150" step="10">
+      <div class="hint">Lighter = faster start, heavier = better grip</div>
+    </div>
+    <div class="slider-group">
+      <label>Axle Friction: <span class="value" id="frictionVal">5</span> / 10</label>
+      <input type="range" id="friction" min="1" max="10" value="5" step="1">
+      <div class="hint">Lower friction = less energy lost (lube the axles!)</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button id="testBtn">🚀 Run Test</button>
+    <button id="resetBtn">🔄 Reset Trials</button>
+  </div>
+
+  <div class="win-banner" id="winBanner"></div>
+
+  <div class="feedback" id="feedback">
+    💡 <b>Engineer's Tip:</b> Change ONE variable at a time so you know what made the difference. This is the Optimization Cycle: <i>Test → Observe → Adjust → Repeat</i>.
+  </div>
+
+  <div class="trial-log" id="log"></div>
+</div>
+
+<script>
+  const wheel = document.getElementById('wheel');
+  const string = document.getElementById('string');
+  const weight = document.getElementById('weight');
+  const friction = document.getElementById('friction');
+  const car = document.getElementById('car');
+  const feedback = document.getElementById('feedback');
+  const log = document.getElementById('log');
+  const winBanner = document.getElementById('winBanner');
+
+  let trials = [];
+  let bestDist = 0;
+  let lastVars = null;
+
+  function updateLabels() {
+    document.getElementById('wheelVal').textContent = wheel.value;
+    document.getElementById('stringVal').textContent = string.value;
+    document.getElementById('weightVal').textContent = weight.value;
+    document.getElementById('frictionVal').textContent = friction.value;
+  }
+  [wheel, string, weight, friction].forEach(s => s.addEventListener('input', updateLabels));
+  updateLabels();
+
+  function calcDistance(w, s, m, f) {
+    // Optimal: wheel ~7, string ~25, weight ~120, friction ~2
+    const wheelScore = 100 - Math.abs(w - 7) * 12;
+    const stringScore = 100 - Math.abs(s - 25) * 3;
+    const weightScore = 100 - Math.abs(m - 120) * 0.4;
+    const frictionScore = 100 - (f - 2) * 9;
+    let raw = (wheelScore * 0.3 + stringScore * 0.25 + weightScore * 0.2 + frictionScore * 0.25);
+    raw += (Math.random() - 0.5) * 4; // small variance
+    return Math.max(5, Math.min(100, Math.round(raw)));
+  }
+
+  function analyze(current, prev, dist, prevDist) {
+    if (!prev) return "First trial complete! Now try changing ONE variable to see how it affects the result.";
+    const changes = [];
+    if (current.w !== prev.w) changes.push('wheel size');
+    if (current.s !== prev.s) changes.push('string length');
+    if (current.m !== prev.m) changes.push('weight');
+    if (current.f !== prev.f) changes.push('friction');
+    
+    const diff = dist - prevDist;
+    if (changes.length === 0) return "Same settings — small differences are from real-world variation. Try changing something!";
+    if (changes.length > 1) return `⚠️ You changed ${changes.length} variables (${changes.join(', ')}). Hard to tell which one helped! Try changing just ONE next time.`;
+    
+    const v = changes[0];
+    if (diff > 3) return `✅ Great! Changing ${v} improved distance by ${diff}%. Keep adjusting that variable in the same direction!`;
+    if (diff < -3) return `📉 Changing ${v} made it worse by ${Math.abs(diff)}%. Try the opposite direction.`;
+    return `Hmm, changing ${v} barely affected the result. This variable may already be near optimal — try another.`;
+  }
+
+  document.getElementById('testBtn').addEventListener('click', () => {
+    const cur = { w: +wheel.value, s: +string.value, m: +weight.value, f: +friction.value };
+    const dist = calcDistance(cur.w, cur.s, cur.m, cur.f);
+    const prevDist = trials.length ? trials[trials.length - 1].dist : 0;
+    
+    // animate
+    const trackWidth = document.querySelector('.track').clientWidth - 60;
+    car.style.left = '10px';
+    let pos = 10;
+    const target = 10 + (dist / 100) * trackWidth;
+    const interval = setInterval(() => {
+      pos += (target - pos) * 0.15;
+      car.style.left = pos + 'px';
+      if (Math.abs(target - pos) < 1) {
+        clearInterval(interval);
+        car.style.left = target + 'px';
+      }
+    }, 30);
+
+    trials.push({ ...cur, dist });
+    if (dist > bestDist) bestDist = dist;
+
+    document.getElementById('distStat').textContent = dist + '%';
+    document.getElementById('bestStat').textContent = bestDist + '%';
+    document.getElementById('trialStat').textContent = trials.length;
+
+    feedback.innerHTML = '💡 <b>Analysis:</b> ' + analyze(cur, lastVars, dist, prevDist);
+    lastVars = cur;
+
+    renderLog();
+
+    if (dist >= 90) {
+      winBanner.style.display = 'block';
+      winBanner.innerHTML = `🏆 SUCCESS! You hit ${dist}% in ${trials.length} trial${trials.length>1?'s':''}!<br>
+        <span style="font-size:0.85em;font-weight:normal;">You used the Optimization Cycle like a true Creationeer — adjusting variables with purpose to reach the objective.</span>`;
+    }
+  });
+
+  function renderLog() {
+    log.innerHTML = '<div class="trial-row" style="font-weight:bold;background:#1e3a5f;color:#fff;"><span>Trial</span><span>Wheel/String/Weight/Friction</span><span>Distance</span></div>';
+    trials.forEach((t, i) => {
+      const isBest = t.dist === bestDist;
+      log.innerHTML += `<div class="trial-row ${isBest?'best':''}"><span>#${i+1}${isBest?' ⭐':''}</span><span>${t.w}cm / ${t.s}cm / ${t.m}g / ${t.f}</span><span>${t.dist}%</span></div>`;
+    });
+    log.scrollTop = log.scrollHeight;
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    trials = [];
+    bestDist = 0;
+    lastVars = null;
+    car.style.left = '10px';
+    document.getElementById('distStat').textContent = '0%';
+    document.getElementById('bestStat').textContent = '0%';
+    document.getElementById('trialStat').textContent = '0';
+    log.innerHTML = '';
+    winBanner.style.display = 'none';
+    feedback.innerHTML = "💡 <b>Engineer's Tip:</b> Change ONE variable at a time so you know what made the difference. This is the Optimization Cycle: <i>Test → Observe → Adjust → Repeat</i>.";
+  });
+</script>
+</body>
+</html>

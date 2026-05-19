@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car Alignment Challenge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+  }
+  h1 {
+    color: #1e3a5f;
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+  }
+  .score-bar {
+    display: flex;
+    justify-content: space-between;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  .score-bar span.gold { color: #c9a227; }
+  .car-stage {
+    background: #f7f9fc;
+    border: 3px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+  .track {
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #c9a227 0 20px, transparent 20px 30px);
+  }
+  .track.top { top: 70px; }
+  .track.bottom { top: 150px; }
+  .car {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 120px;
+  }
+  .chassis {
+    position: absolute;
+    top: 35px;
+    left: 20px;
+    width: 160px;
+    height: 50px;
+    background: #1e3a5f;
+    border-radius: 6px;
+  }
+  .axle {
+    position: absolute;
+    height: 6px;
+    background: #888;
+    border-radius: 3px;
+    transform-origin: center;
+  }
+  .axle.front { top: 20px; left: 10px; width: 180px; }
+  .axle.rear { top: 95px; left: 10px; width: 180px; }
+  .wheel {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #c9a227;
+    border: 3px solid #1e3a5f;
+  }
+  .w-fl { top: 8px; left: -5px; }
+  .w-fr { top: 8px; right: -5px; }
+  .w-rl { top: 83px; left: -5px; }
+  .w-rr { top: 83px; right: -5px; }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .control {
+    background: #f7f9fc;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .control label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+  }
+  .control input[type=range] {
+    width: 100%;
+  }
+  .val {
+    color: #c9a227;
+    font-weight: bold;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat .label { font-size: 0.8em; opacity: 0.8; }
+  .stat .num { font-size: 1.4em; font-weight: bold; color: #c9a227; }
+  .btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.1s;
+  }
+  .btn:hover { transform: scale(1.02); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fff;
+    border-left: 5px solid #c9a227;
+    min-height: 50px;
+  }
+  .trial-list {
+    margin-top: 10px;
+    font-size: 0.85em;
+    max-height: 90px;
+    overflow-y: auto;
+  }
+  .trial-list div { padding: 3px 0; border-bottom: 1px solid #eee; }
+  .final {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 14px;
+  }
+  .final h2 { color: #c9a227; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔧 Mousetrap Car Alignment Lab</h1>
+  <p class="subtitle">Tune each component for "very good" performance. You have 3 test runs to achieve the best distance!</p>
+
+  <div class="score-bar">
+    <div>Trials Left: <span class="gold" id="trials">3</span></div>
+    <div>Best Distance: <span class="gold" id="best">0.0 m</span></div>
+  </div>
+
+  <div class="car-stage" id="stage">
+    <div class="track top"></div>
+    <div class="track bottom"></div>
+    <div class="car" id="car">
+      <div class="axle front" id="axleFront"></div>
+      <div class="axle rear" id="axleRear"></div>
+      <div class="chassis"></div>
+      <div class="wheel w-fl" id="wfl"></div>
+      <div class="wheel w-fr" id="wfr"></div>
+      <div class="wheel w-rl" id="wrl"></div>
+      <div class="wheel w-rr" id="wrr"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="control">
+      <label>Front Axle Straightness: <span class="val" id="v1">0</span>°</label>
+      <input type="range" id="s1" min="-10" max="10" value="6">
+    </div>
+    <div class="control">
+      <label>Rear Axle Straightness: <span class="val" id="v2">0</span>°</label>
+      <input type="range" id="s2" min="-10" max="10" value="-5">
+    </div>
+    <div class="control">
+      <label>Wheel Roundness (Quality): <span class="val" id="v3">0</span>%</label>
+      <input type="range" id="s3" min="0" max="100" value="40">
+    </div>
+    <div class="control">
+      <label>Wheel-to-Chassis Gap: <span class="val" id="v4">0</span> mm</label>
+      <input type="range" id="s4" min="0" max="10" value="7">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Alignment</div><div class="num" id="alignScore">--</div></div>
+    <div class="stat"><div class="label">Quality</div><div class="num" id="qualScore">--</div></div>
+    <div class="stat"><div class="label">Friction Loss</div><div class="num" id="fricScore">--</div></div>
+  </div>
+
+  <button class="btn" id="runBtn">▶ RUN TEST</button>
+
+  <div class="feedback" id="feedback">Adjust the sliders, then press RUN TEST. Aim for straight axles, round wheels, and minimal friction!</div>
+
+  <div class="trial-list" id="trials-log"></div>
+</div>
+
+<script>
+const s1 = document.getElementById('s1');
+const s2 = document.getElementById('s2');
+const s3 = document.getElementById('s3');
+const s4 = document.getElementById('s4');
+const v1 = document.getElementById('v1');
+const v2 = document.getElementById('v2');
+const v3 = document.getElementById('v3');
+const v4 = document.getElementById('v4');
+const car = document.getElementById('car');
+const axleFront = document.getElementById('axleFront');
+const axleRear = document.getElementById('axleRear');
+const wheels = ['wfl','wfr','wrl','wrr'].map(id=>document.getElementById(id));
+const feedback = document.getElementById('feedback');
+const runBtn = document.getElementById('runBtn');
+const trialsEl = document.getElementById('trials');
+const bestEl = document.getElementById('best');
+const logEl = document.getElementById('trials-log');
+
+let trialsLeft = 3;
+let best = 0;
+let running = false;
+
+function update() {
+  const a1 = +s1.value, a2 = +s2.value, q = +s3.value, g = +s4.value;
+  v1.textContent = a1;
+  v2.textContent = a2;
+  v3.textContent = q;
+  v4.textContent = g;
+  axleFront.style.transform = `rotate(${a1}deg)`;
+  axleRear.style.transform = `rotate(${a2}deg)`;
+  // wheel quality: deform roundness (less round = more skew)
+  const skew = (100 - q) / 100 * 0.4;
+  wheels.forEach((w,i)=>{
+    const sx = 1 - skew * (i%2===0?1:-1) * 0.5;
+    const sy = 1 + skew * (i%2===0?-1:1) * 0.5;
+    w.style.transform = `scale(${sx.toFixed(2)},${sy.toFixed(2)})`;
+  });
+
+  // scores
+  const alignment = Math.max(0, 100 - (Math.abs(a1)+Math.abs(a2))*5);
+  const quality = q;
+  const friction = Math.max(0, 100 - g*10);
+  document.getElementById('alignScore').textContent = Math.round(alignment);
+  document.getElementById('qualScore').textContent = Math.round(quality);
+  document.getElementById('fricScore').textContent = Math.round(friction);
+  return {alignment, quality, friction, a1, a2, q, g};
+}
+
+function calcDistance(scores) {
+  // Distance based on combined performance
+  const perf = (scores.alignment*0.4 + scores.quality*0.3 + scores.friction*0.3) / 100;
+  const base = perf * 12; // up to 12 m
+  // misalignment causes curving = less effective distance
+  const curveLoss = Math.min(0.5, (Math.abs(scores.a1)+Math.abs(scores.a2))/40);
+  return Math.max(0.2, base * (1 - curveLoss));
+}
+
+function runTest() {
+  if (running || trialsLeft<=0) return;
+  running = true;
+  runBtn.disabled = true;
+  const scores = update();
+  const dist = calcDistance(scores);
+  const curve = (scores.a1 + scores.a2) * 1.2;
+
+  // animate
+  feedback.innerHTML = "🏁 Running test...";
+  let start = null;
+  const duration = 2500;
+  const startLeft = 50;
+  const targetLeft = 50 + (dist/12)*40; // % shift
+  function step(ts){
+    if(!start) start = ts;
+    const t = Math.min(1,(ts-start)/duration);
+    const ease = 1 - Math.pow(1-t,2);
+    car.style.left = (startLeft + (targetLeft-startLeft)*ease) + '%';
+    car.style.top = (50 + curve*ease) + 'px';
+    if(t<1) requestAnimationFrame(step);
+    else finishTest(dist, scores);
+  }
+  requestAnimationFrame(step);
+}
+
+function finishTest(dist, scores) {
+  trialsLeft--;
+  trialsEl.textContent = trialsLeft;
+  if (dist > best) best = dist;
+  bestEl.textContent = best.toFixed(1) + ' m';
+
+  let msg = '';
+  const probs = [];
+  if (Math.abs(scores.a1)>3) probs.push("front axle is crooked");
+  if (Math.abs(scores.a2)>3) probs.push("rear axle is crooked");
+  if (scores.q<70) probs.push("wheels are not round enough");
+  if (scores.g>3) probs.push("wheel gap creates wobble/friction");
+
+  if (probs.length===0) {
+    msg = `✨ Excellent! Distance: <b>${dist.toFixed(2)} m</b>. Precision craftsmanship — "very good"!`;
+  } else {
+    msg = `Distance: <b>${dist.toFixed(2)} m</b>. Issues detected: ${probs.join(', ')}. Refine and try again!`;
+  }
+  feedback.innerHTML = msg;
+
+  const entry = document.createElement('div');
+  entry.textContent = `Trial ${3-trialsLeft}: ${dist.toFixed(2)} m`;
+  logEl.appendChild(entry);
+
+  running = false;
+  if (trialsLeft>0) {
+    runBtn.disabled = false;
+    setTimeout(()=>{ car.style.left='50%'; car.style.top='50px'; }, 800);
+  } else {
+    showFinal();
+  }
+}
+
+function showFinal() {
+  let rating, note;
+  if (best >= 10) { rating='🏆 Master Creationeer!'; note='Your alignment and quality reflect careful, excellent design.'; }
+  else if (best >= 7) { rating='⭐ Skilled Builder'; note='Good performance! A bit more precision could push you further.'; }
+  else if (best >= 4) { rating='🔧 Apprentice'; note='Functional, but check your axles and wheels for better alignment.'; }
+  else { rating='📐 Keep Refining'; note='Misalignment robs energy. Straight axles + round wheels = distance.'; }
+
+  const div = document.createElement('div');
+  div.className='final';
+  div.innerHTML = `<h2>${rating}</h2><p>Best Distance: <b>${best.toFixed(2)} m</b></p><p style="margin-top:8px;font-size:0.9em">${note}</p>`;
+  document.querySelector('.container').appendChild(div);
+  runBtn.textContent='🔄 Reset';
+  runBtn.disabled=false;
+  runBtn.onclick=()=>location.reload();
+}
+
+[s1,s2,s3,s4].forEach(s=>s.addEventListener('input',update));
+runBtn.addEventListener('click', runTest);
+update();
+</script>
+</body>
+</html>

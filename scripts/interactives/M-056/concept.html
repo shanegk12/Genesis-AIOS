@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Recycling Sort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    color: #1e3a5f;
+    font-size: 1.5em;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 12px;
+  }
+  .scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-weight: bold;
+  }
+  .scoreboard span.gold { color: #c9a227; }
+  .parts-area {
+    background: #fff;
+    border: 2px dashed #1e3a5f;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 90px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .part {
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: grab;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 2px solid #1e3a5f;
+    user-select: none;
+    transition: transform 0.15s;
+  }
+  .part:active { cursor: grabbing; transform: scale(1.05); }
+  .part.dragging { opacity: 0.5; }
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 180px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .bin.hover { background: #fff8dc; border-color: #c9a227; }
+  .bin h3 {
+    color: #1e3a5f;
+    font-size: 1em;
+    margin-bottom: 4px;
+  }
+  .bin .icon { font-size: 1.8em; }
+  .bin .desc {
+    font-size: 0.75em;
+    color: #555;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .bin .dropped {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+  .bin .dropped .part { font-size: 0.75em; padding: 4px 6px; }
+  .feedback {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    min-height: 40px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .feedback.correct { background: #d4edda; color: #155724; }
+  .feedback.wrong { background: #f8d7da; color: #721c24; }
+  .complete {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 14px;
+  }
+  .complete h2 { color: #c9a227; margin-bottom: 8px; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1em;
+  }
+  button:hover { background: #b08a1f; }
+</style>
+</head>
+<body>
+  <h1>♻️ Death &amp; Recycling: Sort the Mousetrap Parts</h1>
+  <p class="subtitle">Your mousetrap car finished its runs. What happens to each part now? Drag each piece into the right bin.</p>
+
+  <div class="scoreboard">
+    <div>Score: <span class="gold" id="score">0</span></div>
+    <div>Remaining: <span class="gold" id="remaining">0</span></div>
+  </div>
+
+  <div class="parts-area" id="partsArea"></div>
+
+  <div class="bins">
+    <div class="bin" data-bin="reuse">
+      <div class="icon">🔄</div>
+      <h3>REUSE</h3>
+      <div class="desc">Still works! Use in next build.</div>
+      <div class="dropped"></div>
+    </div>
+    <div class="bin" data-bin="recycle">
+      <div class="icon">♻️</div>
+      <h3>RECYCLE</h3>
+      <div class="desc">Material can be reprocessed.</div>
+      <div class="dropped"></div>
+    </div>
+    <div class="bin" data-bin="analyze">
+      <div class="icon">🔍</div>
+      <h3>ANALYZE</h3>
+      <div class="desc">Broken — study the failure!</div>
+      <div class="dropped"></div>
+    </div>
+  </div>
+
+  <div class="feedback" id="feedback">Drag a part into a bin to begin.</div>
+
+  <div id="completeBox"></div>
+
+<script>
+  const parts = [
+    { id: 1, name: "Sturdy CD Wheels", correct: "reuse", reason: "Wheels show no cracks and still spin true — save them for the next build!" },
+    { id: 2, name: "Snapped Rubber Band", correct: "analyze", reason: "It broke under stress. Study it to choose a stronger material next time." },
+    { id: 3, name: "Cardboard Chassis (torn)", correct: "recycle", reason: "Too damaged to reuse, but cardboard fibers can be recycled into new paper." },
+    { id: 4, name: "Aluminum Axle", correct: "recycle", reason: "Bent out of shape — aluminum melts down and becomes new metal stock." },
+    { id: 5, name: "Working Mousetrap Base", correct: "reuse", reason: "The trap snap mechanism is intact and powerful. Reuse it!" },
+    { id: 6, name: "Frayed Pull String", correct: "analyze", reason: "Wear pattern shows where friction happened — informs a better string path." },
+    { id: 7, name: "Plastic Bottle Cap Bushings", correct: "reuse", reason: "Still smooth and round — perfect for the next prototype." },
+    { id: 8, name: "Shattered Wood Lever", correct: "analyze", reason: "Failure point reveals weak grain direction. Improve the design!" },
+    { id: 9, name: "Steel Paperclip Bits", correct: "recycle", reason: "Tiny metal scraps go into the metal recycling stream." }
+  ];
+
+  let score = 0;
+  let remaining = parts.length;
+  const partsArea = document.getElementById('partsArea');
+  const feedback = document.getElementById('feedback');
+  const scoreEl = document.getElementById('score');
+  const remainingEl = document.getElementById('remaining');
+  remainingEl.textContent = remaining;
+
+  // shuffle
+  parts.sort(() => Math.random() - 0.5);
+
+  parts.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'part';
+    el.textContent = p.name;
+    el.draggable = true;
+    el.dataset.id = p.id;
+    el.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', p.id);
+      el.classList.add('dragging');
+    });
+    el.addEventListener('dragend', () => el.classList.remove('dragging'));
+    // touch support
+    el.addEventListener('touchstart', handleTouchStart, {passive: false});
+    el.addEventListener('touchmove', handleTouchMove, {passive: false});
+    el.addEventListener('touchend', handleTouchEnd);
+    partsArea.appendChild(el);
+  });
+
+  let touchEl = null;
+  let touchClone = null;
+  function handleTouchStart(e) {
+    touchEl = e.currentTarget;
+    const t = e.touches[0];
+    touchClone = touchEl.cloneNode(true);
+    touchClone.style.position = 'fixed';
+    touchClone.style.pointerEvents = 'none';
+    touchClone.style.zIndex = 1000;
+    touchClone.style.opacity = '0.8';
+    document.body.appendChild(touchClone);
+    moveClone(t.clientX, t.clientY);
+    touchEl.classList.add('dragging');
+    e.preventDefault();
+  }
+  function moveClone(x, y) {
+    if (!touchClone) return;
+    touchClone.style.left = (x - 40) + 'px';
+    touchClone.style.top = (y - 20) + 'px';
+  }
+  function handleTouchMove(e) {
+    if (!touchEl) return;
+    const t = e.touches[0];
+    moveClone(t.clientX, t.clientY);
+    document.querySelectorAll('.bin').forEach(b => b.classList.remove('hover'));
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    const bin = target ? target.closest('.bin') : null;
+    if (bin) bin.classList.add('hover');
+    e.preventDefault();
+  }
+  function handleTouchEnd(e) {
+    if (!touchEl) return;
+    const t = e.changedTouches[0];
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    const bin = target ? target.closest('.bin') : null;
+    if (bin) {
+      drop(parseInt(touchEl.dataset.id), bin);
+    }
+    touchEl.classList.remove('dragging');
+    if (touchClone) { touchClone.remove(); touchClone = null; }
+    touchEl = null;
+    document.querySelectorAll('.bin').forEach(b => b.classList.remove('hover'));
+  }
+
+  document.querySelectorAll('.bin').forEach(bin => {
+    bin.addEventListener('dragover', e => { e.preventDefault(); bin.classList.add('hover'); });
+    bin.addEventListener('dragleave', () => bin.classList.remove('hover'));
+    bin.addEventListener('drop', e => {
+      e.preventDefault();
+      bin.classList.remove('hover');
+      const id = parseInt(e.dataTransfer.getData('text/plain'));
+      drop(id, bin);
+    });
+  });
+
+  function drop(id, bin) {
+    const part = parts.find(p => p.id === id);
+    if (!part) return;
+    const partEl = document.querySelector(`.part[data-id="${id}"]`);
+    if (!partEl || partEl.dataset.placed) return;
+    const binType = bin.dataset.bin;
+    const correct = part.correct === binType;
+    if (correct) {
+      score += 10;
+      feedback.className = 'feedback correct';
+      feedback.textContent = `✓ Correct! ${part.reason}`;
+      partEl.dataset.placed = 'true';
+      bin.querySelector('.dropped').appendChild(partEl);
+      partEl.draggable = false;
+      partEl.style.background = '#90c890';
+      remaining--;
+      remainingEl.textContent = remaining;
+      scoreEl.textContent = score;
+      if (remaining === 0) showComplete();
+    } else {
+      score = Math.max(0, score - 2);
+      scoreEl.textContent = score;
+      feedback.className = 'feedback wrong';
+      feedback.textContent = `✗ Not quite. Think again about "${part.name}" — try another bin.`;
+    }
+  }
+
+  function showComplete() {
+    const box = document.getElementById('completeBox');
+    let msg = "Great work, engineer!";
+    if (score >= 80) msg = "Outstanding! You think like a sustainable engineer.";
+    else if (score >= 60) msg = "Good job! You understand the recycling cycle.";
+    else msg = "Nice effort — review which parts go where!";
+    box.innerHTML = `
+      <div class="complete">
+        <h2>🏁 All Parts Sorted!</h2>
+        <p>Final Score: <span style="color:#c9a227;font-size:1.4em;">${score}</span> / 90</p>
+        <p style="margin-top:8px;">${msg}</p>
+        <p style="margin-top:10px;font-style:italic;font-size:0.9em;">"One generation passeth away, and another generation cometh..." — Ecclesiastes 1:4. Nothing in God's creation is truly wasted.</p>
+        <button onclick="location.reload()">Play Again</button>
+      </div>`;
+    feedback.style.display = 'none';
+  }
+</script>
+</body>
+</html>

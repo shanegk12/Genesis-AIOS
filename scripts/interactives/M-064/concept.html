@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Classifying End of Life - Mousetrap Parts</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    color: #1e3a5f;
+    margin: 4px 0;
+    font-size: 1.5em;
+  }
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+  }
+  .score-bar {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-weight: bold;
+  }
+  .score-bar span.gold { color: #c9a227; }
+  .parts-tray {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 90px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .part {
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: grab;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    transition: transform 0.15s;
+    font-size: 0.9em;
+  }
+  .part:active { cursor: grabbing; }
+  .part.dragging { opacity: 0.4; }
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 180px;
+    transition: background 0.2s;
+  }
+  .bin.over { background: #fff4cc; border-style: solid; }
+  .bin h3 {
+    margin: 0 0 4px 0;
+    text-align: center;
+    color: #1e3a5f;
+    font-size: 1em;
+  }
+  .bin .icon {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 4px;
+  }
+  .bin .desc {
+    font-size: 0.75em;
+    text-align: center;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .dropped {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 5px;
+    margin: 4px 0;
+    font-size: 0.8em;
+    text-align: center;
+    cursor: pointer;
+  }
+  .dropped.wrong { background: #b33; }
+  .dropped.right { background: #2a7a3a; }
+  .feedback {
+    background: #fff;
+    border-left: 5px solid #c9a227;
+    padding: 10px 14px;
+    margin-top: 14px;
+    border-radius: 6px;
+    min-height: 24px;
+    font-size: 0.9em;
+  }
+  .final {
+    text-align: center;
+    background: #1e3a5f;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 16px;
+  }
+  .final h2 { color: #c9a227; margin-top: 0; }
+  button {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover { background: #b39120; }
+  @media (max-width: 700px) {
+    .bins { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<h1>♻️ End-of-Life Sorting Challenge</h1>
+<div class="subtitle">Your mousetrap is done its job. Where does each part go? Drag each piece to the best end-of-life bin.</div>
+
+<div class="score-bar">
+  <span>Parts Sorted: <span id="sorted" class="gold">0</span> / 10</span>
+  <span>Correct: <span id="correct" class="gold">0</span></span>
+</div>
+
+<div class="parts-tray" id="tray"></div>
+
+<div class="bins">
+  <div class="bin" data-bin="reuse">
+    <div class="icon">🔄</div>
+    <h3>REUSE</h3>
+    <div class="desc">Still works! Use it again as-is.</div>
+    <div class="dropzone" data-bin="reuse"></div>
+  </div>
+  <div class="bin" data-bin="recycle">
+    <div class="icon">♻️</div>
+    <h3>RECYCLE</h3>
+    <div class="desc">Break down into raw material for new products.</div>
+    <div class="dropzone" data-bin="recycle"></div>
+  </div>
+  <div class="bin" data-bin="compost">
+    <div class="icon">🌱</div>
+    <h3>COMPOST</h3>
+    <div class="desc">Natural materials return to the earth.</div>
+    <div class="dropzone" data-bin="compost"></div>
+  </div>
+  <div class="bin" data-bin="landfill">
+    <div class="icon">🗑️</div>
+    <h3>LANDFILL</h3>
+    <div class="desc">No other option — last resort.</div>
+    <div class="dropzone" data-bin="landfill"></div>
+  </div>
+</div>
+
+<div class="feedback" id="feedback">Drag a part into a bin to begin sorting!</div>
+
+<div id="finalArea"></div>
+
+<script>
+const parts = [
+  { id:'p1', name:'Wooden Base', correct:'compost', why:'Untreated wood is biodegradable — it breaks down naturally and returns nutrients to the soil.' },
+  { id:'p2', name:'Steel Spring', correct:'recycle', why:'Metal springs can be melted down and reformed into new steel products almost endlessly.' },
+  { id:'p3', name:'Brass Hammer Bar', correct:'recycle', why:'Brass is a valuable metal alloy — scrap yards recycle it into new components.' },
+  { id:'p4', name:'Cardboard Packaging', correct:'compost', why:'Plain cardboard is plant-based and can compost OR be recycled — composting works great!' },
+  { id:'p5', name:'Plastic Bait Cup', correct:'recycle', why:'Most rigid plastics have a recycling code and can be reprocessed into new plastic items.' },
+  { id:'p6', name:'Unused Wire Staples', correct:'reuse', why:'Brand new, undamaged staples can go right back into your supply bin for the next build!' },
+  { id:'p7', name:'Cheese Bait', correct:'compost', why:'Food scraps break down into rich soil. Never throw food in the landfill if you can compost!' },
+  { id:'p8', name:'Broken Glue Stick', correct:'landfill', why:'Mixed adhesives are hard to recycle or compost. Sadly, landfill is often the only option.' },
+  { id:'p9', name:'Working Mousetrap', correct:'reuse', why:'If it still works, reuse is the BEST option — no energy needed to remake it!' },
+  { id:'p10', name:'Aluminum Foil Flag', correct:'recycle', why:'Clean aluminum is one of the most valuable recyclables — uses 95% less energy than new!' }
+];
+
+const tray = document.getElementById('tray');
+const feedback = document.getElementById('feedback');
+let sortedCount = 0;
+let correctCount = 0;
+
+// Shuffle
+parts.sort(() => Math.random() - 0.5);
+
+parts.forEach(p => {
+  const el = document.createElement('div');
+  el.className = 'part';
+  el.draggable = true;
+  el.textContent = p.name;
+  el.dataset.id = p.id;
+  el.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text/plain', p.id);
+    el.classList.add('dragging');
+  });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  // touch support fallback - tap to cycle
+  tray.appendChild(el);
+});
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('dragover', e => {
+    e.preventDefault();
+    bin.classList.add('over');
+  });
+  bin.addEventListener('dragleave', () => bin.classList.remove('over'));
+  bin.addEventListener('drop', e => {
+    e.preventDefault();
+    bin.classList.remove('over');
+    const id = e.dataTransfer.getData('text/plain');
+    handleDrop(id, bin.dataset.bin);
+  });
+});
+
+function handleDrop(partId, binType) {
+  const part = parts.find(p => p.id === partId);
+  if (!part) return;
+  const partEl = document.querySelector(`.part[data-id="${partId}"]`);
+  if (!partEl || partEl.dataset.placed) return;
+  partEl.dataset.placed = 'true';
+  partEl.remove();
+
+  const dropzone = document.querySelector(`.dropzone[data-bin="${binType}"]`);
+  const item = document.createElement('div');
+  item.className = 'dropped';
+  
+  const isCorrect = (binType === part.correct);
+  if (isCorrect) {
+    item.classList.add('right');
+    item.textContent = '✓ ' + part.name;
+    correctCount++;
+    feedback.innerHTML = `<strong style="color:#2a7a3a;">Correct!</strong> ${part.why}`;
+  } else {
+    item.classList.add('wrong');
+    item.textContent = '✗ ' + part.name;
+    const correctBinName = part.correct.toUpperCase();
+    feedback.innerHTML = `<strong style="color:#b33;">Not quite.</strong> ${part.name} belongs in <strong>${correctBinName}</strong>. ${part.why}`;
+  }
+  dropzone.appendChild(item);
+
+  sortedCount++;
+  document.getElementById('sorted').textContent = sortedCount;
+  document.getElementById('correct').textContent = correctCount;
+
+  if (sortedCount === parts.length) {
+    showFinal();
+  }
+}
+
+function showFinal() {
+  const pct = Math.round((correctCount / parts.length) * 100);
+  let msg, stars;
+  if (pct === 100) { msg = "Perfect! You're a true Creationeer™ — designing with the whole lifecycle in mind."; stars = "⭐⭐⭐"; }
+  else if (pct >= 80) { msg = "Excellent work! You understand how to honor God's design of renewal."; stars = "⭐⭐⭐"; }
+  else if (pct >= 60) { msg = "Good effort! Review the parts you missed — every material has its best path."; stars = "⭐⭐"; }
+  else { msg = "Keep practicing! Sorting end-of-life materials is a key engineering skill."; stars = "⭐"; }
+
+  const area = document.getElementById('finalArea');
+  area.innerHTML = `
+    <div class="final">
+      <h2>${stars} Sorting Complete! ${stars}</h2>
+      <div style="font-size:1.4em;margin:8px 0;">Score: <span style="color:#c9a227;font-weight:bold;">${correctCount} / ${parts.length}</span> (${pct}%)</div>
+      <p>${msg}</p>
+      <p style="font-style:italic;font-size:0.9em;opacity:0.9;">"Generations come and generations go, but the earth remains forever." – Ecclesiastes 1:4</p>
+      <button onclick="location.reload()">Try Again</button>
+    </div>
+  `;
+  area.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+</script>
+
+</body>
+</html>

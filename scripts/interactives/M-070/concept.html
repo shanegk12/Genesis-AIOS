@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mousetrap Car Lifecycle Sort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  header {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border-bottom: 4px solid #c9a227;
+    margin-bottom: 16px;
+  }
+  h1 { font-size: 1.3em; margin-bottom: 4px; }
+  .sub { font-size: 0.9em; opacity: 0.9; }
+  .progress {
+    background: #fff;
+    border: 2px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 0.95em;
+  }
+  .progress span.score { color: #c9a227; }
+
+  .game-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 700px) {
+    .game-area { grid-template-columns: 1fr 1.2fr; }
+  }
+
+  .part-card {
+    background: #fff;
+    border: 3px solid #c9a227;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(30,58,95,0.15);
+  }
+  .part-icon {
+    font-size: 3em;
+    margin-bottom: 8px;
+  }
+  .part-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #1e3a5f;
+    margin-bottom: 4px;
+  }
+  .part-desc {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .bins {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .bin {
+    background: #fff;
+    border: 3px dashed #1e3a5f;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+    font-size: 0.95em;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .bin:hover {
+    background: #1e3a5f;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .bin .bin-icon {
+    font-size: 1.8em;
+    margin-bottom: 4px;
+  }
+  .bin .bin-label {
+    font-size: 0.85em;
+  }
+
+  .feedback {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.95em;
+    min-height: 60px;
+    background: #fff;
+    border-left: 5px solid #c9a227;
+  }
+  .feedback.correct { border-left-color: #2e7d32; background: #e8f5e9; }
+  .feedback.wrong { border-left-color: #c62828; background: #ffebee; }
+  .feedback.hidden { display: none; }
+  .feedback strong { display: block; margin-bottom: 4px; }
+
+  .next-btn {
+    background: #c9a227;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: none;
+  }
+  .next-btn:hover { background: #b08c1f; }
+
+  .final {
+    text-align: center;
+    padding: 30px 20px;
+    background: #fff;
+    border: 3px solid #1e3a5f;
+    border-radius: 12px;
+  }
+  .final h2 { color: #c9a227; font-size: 1.8em; margin-bottom: 10px; }
+  .final .big-score {
+    font-size: 3em;
+    color: #1e3a5f;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .final p { margin-bottom: 10px; line-height: 1.5; }
+  .restart-btn {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 14px;
+  }
+  .restart-btn:hover { background: #2a527f; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>♻️ Mousetrap Car Lifecycle Sorter</h1>
+  <div class="sub">After the race — where does each part go? Be a responsible Creationeer!</div>
+</header>
+
+<div class="progress">
+  <span>Part <span id="partNum">1</span> of <span id="totalParts">8</span></span>
+  <span>Score: <span class="score" id="score">0</span></span>
+</div>
+
+<div id="gameArea" class="game-area">
+  <div class="part-card" id="partCard">
+    <div class="part-icon" id="partIcon">🔧</div>
+    <div class="part-name" id="partName">Part Name</div>
+    <div class="part-desc" id="partDesc">Description here</div>
+  </div>
+
+  <div>
+    <div class="bins">
+      <div class="bin" data-bin="reuse">
+        <div class="bin-icon">🔁</div>
+        <div class="bin-label">REUSE<br><small>(use again as-is)</small></div>
+      </div>
+      <div class="bin" data-bin="recycle">
+        <div class="bin-icon">♻️</div>
+        <div class="bin-label">RECYCLE<br><small>(new material)</small></div>
+      </div>
+      <div class="bin" data-bin="dispose">
+        <div class="bin-icon">🗑️</div>
+        <div class="bin-label">DISPOSE<br><small>(trash safely)</small></div>
+      </div>
+      <div class="bin" data-bin="hazard">
+        <div class="bin-icon">⚠️</div>
+        <div class="bin-label">HAZARD<br><small>(special drop-off)</small></div>
+      </div>
+    </div>
+    <div class="feedback hidden" id="feedback"></div>
+    <button class="next-btn" id="nextBtn">Next Part →</button>
+  </div>
+</div>
+
+<div id="finalScreen" class="final hidden">
+  <h2>🏁 Lifecycle Plan Complete!</h2>
+  <div class="big-score"><span id="finalScore">0</span> / <span id="finalTotal">8</span></div>
+  <p id="finalMessage">Great stewardship!</p>
+  <p style="font-style:italic; color:#555; font-size:0.9em;">
+    "Be fruitful, and multiply, and replenish the earth..." — Genesis 1:28
+  </p>
+  <button class="restart-btn" id="restartBtn">Try Again</button>
+</div>
+
+<script>
+const parts = [
+  {
+    icon: "🪵",
+    name: "Wooden Base/Chassis",
+    desc: "The flat wood platform that held everything together.",
+    correct: "reuse",
+    explain: "Solid wood chassis can often be REUSED for next year's build or another project. If broken, it could be recycled as wood scrap."
+  },
+  {
+    icon: "💿",
+    name: "Plastic CD Wheels",
+    desc: "Old CDs used as the car's wheels.",
+    correct: "recycle",
+    explain: "CDs are plastic #7 — recycle them through electronic/specialty recycling. Don't put them in regular trash if you can avoid it!"
+  },
+  {
+    icon: "🪤",
+    name: "The Mousetrap Spring",
+    desc: "The metal spring-loaded mousetrap that powered the car.",
+    correct: "reuse",
+    explain: "The mousetrap itself is still functional! REUSE it for another build, demo, or — carefully — its original purpose."
+  },
+  {
+    icon: "🧵",
+    name: "String / Fishing Line",
+    desc: "Cord that wrapped around the axle to transfer power.",
+    correct: "dispose",
+    explain: "Used string is usually frayed and tangled. It's not recyclable curbside, so DISPOSE of it safely in the trash."
+  },
+  {
+    icon: "🔩",
+    name: "Metal Axles & Screws",
+    desc: "Steel rods and fasteners holding wheels in place.",
+    correct: "recycle",
+    explain: "Clean metal parts are highly RECYCLABLE. Collect them in a scrap metal bin — metal recycling saves huge amounts of energy."
+  },
+  {
+    icon: "🎈",
+    name: "Rubber Band Grippers",
+    desc: "Rubber bands stretched around wheels for traction.",
+    correct: "dispose",
+    explain: "Stretched, worn rubber bands aren't recyclable in most programs. DISPOSE in trash — or reuse if still stretchy!"
+  },
+  {
+    icon: "🔋",
+    name: "Leftover Battery (from optional LED)",
+    desc: "A small button-cell battery you used to light up the car.",
+    correct: "hazard",
+    explain: "Batteries are HAZARDOUS waste! Never throw them in trash. Take to a battery drop-off — they contain harmful chemicals."
+  },
+  {
+    icon: "🧴",
+    name: "Super Glue Tube (empty)",
+    desc: "An empty tube of cyanoacrylate adhesive.",
+    correct: "hazard",
+    explain: "Adhesive residue makes this HAZARDOUS. Many communities require special disposal for chemical containers — check local rules."
+  }
+];
+
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+
+const partNumEl = document.getElementById('partNum');
+const totalPartsEl = document.getElementById('totalParts');
+const scoreEl = document.getElementById('score');
+const partIcon = document.getElementById('partIcon');
+const partName = document.getElementById('partName');
+const partDesc = document.getElementById('partDesc');
+const feedback = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const gameArea = document.getElementById('gameArea');
+const finalScreen = document.getElementById('finalScreen');
+const finalScore = document.getElementById('finalScore');
+const finalTotal = document.getElementById('finalTotal');
+const finalMessage = document.getElementById('finalMessage');
+const restartBtn = document.getElementById('restartBtn');
+
+totalPartsEl.textContent = parts.length;
+
+function loadPart() {
+  answered = false;
+  const p = parts[currentIndex];
+  partNumEl.textContent = currentIndex + 1;
+  partIcon.textContent = p.icon;
+  partName.textContent = p.name;
+  partDesc.textContent = p.desc;
+  feedback.className = 'feedback hidden';
+  feedback.innerHTML = '';
+  nextBtn.style.display = 'none';
+  document.querySelectorAll('.bin').forEach(b => b.style.pointerEvents = 'auto');
+}
+
+document.querySelectorAll('.bin').forEach(bin => {
+  bin.addEventListener('click', () => {
+    if (answered) return;
+    answered = true;
+    const choice = bin.dataset.bin;
+    const p = parts[currentIndex];
+    document.querySelectorAll('.bin').forEach(b => b.style.pointerEvents = 'none');
+    
+    if (choice === p.correct) {
+      score++;
+      scoreEl.textContent = score;
+      feedback.className = 'feedback correct';
+      feedback.innerHTML = '<strong>✅ Correct!</strong>' + p.explain;
+    } else {
+      feedback.className = 'feedback wrong';
+      feedback.innerHTML = '<strong>❌ Not quite — best answer: ' + p.correct.toUpperCase() + '</strong>' + p.explain;
+    }
+    nextBtn.style.display = 'inline-block';
+  });
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex++;
+  if (currentIndex >= parts.length) {
+    showFinal();
+  } else {
+    loadPart();
+  }
+});
+
+function showFinal() {
+  gameArea.classList.add('hidden');
+  document.querySelector('.progress').classList.add('hidden');
+  finalScreen.classList.remove('hidden');
+  finalScore.textContent = score;
+  finalTotal.textContent = parts.length;
+  
+  let msg;
+  if (score === parts.length) {
+    msg = "🌟 Perfect! You're a true Creationeer — every part has a plan. Your stewardship would make any engineer proud!";
+  } else if (score >= 6) {
+    msg = "👍 Great work! You understand that responsible design considers the whole lifecycle of a product.";
+  } else if (score >= 4) {
+    msg = "🛠️ Good start! Review the parts you missed — remember: hazardous items need special disposal, and many materials can be reused or recycled.";
+  } else {
+    msg = "📚 Keep learning! End-of-life planning is a real engineering skill. Try again and think about each material's properties.";
+  }
+  finalMessage.textContent = msg;
+}
+
+restartBtn.addEventListener('click', () => {
+  currentIndex = 0;
+  score = 0;
+  scoreEl.textContent = 0;
+  gameArea.classList.remove('hidden');
+  document.querySelector('.progress').classList.remove('hidden');
+  finalScreen.classList.add('hidden');
+  loadPart();
+});
+
+loadPart();
+</script>
+</body>
+</html>

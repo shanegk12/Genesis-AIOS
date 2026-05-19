@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Sections</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f9fc; padding: 20px; }
+  h2 { color: #1e3a5f; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em;
+       margin-bottom: 16px; border-bottom: 2px solid #c9a227; padding-bottom: 6px;
+       display: inline-block; }
+  .panel { background: #fff; border: 1px solid #dce4ee; border-radius: 10px;
+            margin-bottom: 10px; overflow: hidden; }
+  .panel summary {
+    padding: 14px 18px; font-weight: 700; color: #1e3a5f; font-size: 0.92rem;
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; user-select: none;
+    transition: background 0.15s;
+  }
+  .panel summary:hover { background: #f0f4fa; }
+  .panel summary::after { content: '+'; font-size: 1.3rem; color: #c9a227;
+                            font-weight: 900; transition: transform 0.2s; }
+  .panel[open] summary::after { content: '−'; }
+  .panel[open] summary { background: #1e3a5f; color: #fff; border-radius: 10px 10px 0 0; }
+  .panel[open] summary::after { color: #c9a227; }
+  .panel-body { padding: 18px 20px; border-top: 1px solid #dce4ee; }
+  .panel-body p { color: #374151; font-size: 0.9rem; line-height: 1.65;
+                   margin-bottom: 12px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<h2>Lesson Sections</h2>
+<div id="accordion">
+  <details class="panel" open>
+    <summary>Part 1: The Organizational Chart – Who Does What?</summary>
+    <div class="panel-body"><p>A plain-language explanation: Think of an organizational chart, or &quot;org chart,&quot; as a map of your team. It shows who is on the team, what their main job is, and how everyone relates to each other. It's like a family tree, but for your project! It clarifies who is responsible for what, which helps avoid confusion and makes sure all necessary tasks are covered. In the Creationeering™ paradigm, this relates to the &quot;Human Resources&quot; aspect of the business side, ensuring that the diverse talents and skills of a team are recognized and channeled to glorify God and serve humanity.</p><p>Direct application to the mousetrap car project: For your mousetrap car, an org chart will define the roles within your build team. Even if you're working alone, you still have different &quot;hats&quot; you wear: the designer, the builder, the tester, the documenter. If you're working with others, this is even more important. You might have a &quot;Lead Engineer&quot; who oversees the overall design, a &quot;Materials Specialist&quot; who manages parts, a &quot;Fabrication Lead&quot; who focuses on building, and a &quot;Test Driver&quot; who handles performance testing. Each person knows their specific contribution to the project. This clear structure helps ensure that every aspect of the car’s creation is considered and executed.</p><p>Multiscale Modeling connection: On a macro-level, observing a well-functioning team (like a pit crew in a race) shows seamless coordination. On a micro-level, this coordination depends on each individual understanding their role and responsibilities. At an even finer scale, the effective communication between team members relies on the atomic-level interactions within their brains, processing information, making decisions, and sending signals for actions. Just as complex biological systems function because each component (from organs to cells to molecules) has a defined role, so too does a successful project team.</p><p>OCV application: Let's consider the Objective of &quot;Efficient Teamwork.&quot; A Constraint might be &quot;Limited Team Members&quot; (e.g., only two people). A Variable could be &quot;Assigned Roles.&quot; By clearly defining and assigning roles (the variable) on your org chart, you work within the constraint of limited team members to achieve the objective of efficient teamwork.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 2: The Production Gantt Chart – When Things Get Done</summary>
+    <div class="panel-body"><p>A plain-language explanation: A Gantt chart is like a visual calendar for your project. It lists all the tasks you need to do down one side, and then across the top, it has a timeline (days, weeks, or months). Bars are drawn next to each task to show when it starts and when it's supposed to finish. It also shows &quot;dependencies,&quot; meaning some tasks can't begin until another one is complete. For example, you can't paint your car body before you've built it. This tool is fundamental to the &quot;Logistics&quot; step in the engineering process of Creationeering™, which focuses on the synchronization and distribution of components and tasks.</p><p>Direct application to the mousetrap car project: For your mousetrap car, a Gantt chart will be your master schedule. You'll list tasks like &quot;Design Chassis,&quot; &quot;Gather Materials,&quot; &quot;Cut Axles,&quot; &quot;Attach Wheels,&quot; &quot;Test Performance,&quot; and &quot;Document Results.&quot; You'll estimate how long each task will take and draw a bar on your timeline. Then, you'll identify dependencies: for example, &quot;Attach Wheels&quot; depends on &quot;Cut Axles&quot; being finished. This helps you see the critical path—the sequence of tasks that determines the shortest possible project duration. It ensures you don't waste time waiting for a part or starting something too early.</p><p>Multiscale Modeling connection: At the macro-level, a Gantt chart provides a high-level overview of the entire project timeline. At a more micro-level, each bar on the chart represents a series of smaller actions and decisions. For instance, &quot;Attach Wheels&quot; involves measuring, aligning, securing, and checking. Each of these sub-tasks, at an atomic level, relies on precise material properties (e.g., the strength of the adhesive, the rigidity of the axle) and the consistent execution of human actions. A delay at any micro-level step can ripple up to affect the macro-level project timeline.</p><p>OCV application: Consider the Objective of &quot;On-Time Project Completion.&quot; A Constraint might be &quot;Fixed Deadline&quot; (e.g., 18 weeks). A Variable could be &quot;Task Duration Estimates.&quot; By carefully estimating task durations and arranging them logically on your Gantt chart, you manipulate the variable to meet the constraint and achieve your objective.</p></div>
+  </details>
+  <details class="panel">
+    <summary>Part 3: Project Management and the Death &amp; Recycling Phase</summary>
+    <div class="panel-body"><p>A plain-language explanation: Project management is the overall process of making sure your project gets done successfully, on time, and within budget. Org charts and Gantt charts are key tools within project management. As Junior Creationeers, you are not just building a car; you are managing a project. This includes planning for the entire lifecycle of your mousetrap car, even its eventual &quot;death and recycling.&quot; This Creationeering™ phase is about considering what happens after the car has served its primary purpose. Will parts be reused? Can materials be recycled? How will you responsibly dispose of what's left? Effective project management ensures these end-of-life considerations are integrated from the beginning, not just as an afterthought.</p><p>Direct application to the mousetrap car project: When planning your mousetrap car, think about the &quot;Death &amp; Recycling&quot; phase right from the start. On your Gantt chart, you might include tasks like &quot;Disassemble Car for Material Recovery&quot; or &quot;Categorize Reusable Components.&quot; Your org chart might assign a &quot;Recycling Specialist&quot; role. For example, if your car uses rubber bands, how will they be disposed of or reused? If you use wood, can it be repurposed for another project? By planning for these steps, you demonstrate responsible stewardship of resources, ensuring that the &quot;death&quot; of your car is not an end, but potentially a new beginning for its components. This foresight is a hallmark of a true Creationeer.</p><p>Multiscale Modeling connection: Considering &quot;Death &amp; Recycling&quot; at the macro-level involves policies for waste management and material recovery. At a micro-level, it means understanding the material composition of your mousetrap car. For instance, if you use a specific type of plastic for a wheel, knowing its atomic-level chemical structure determines if it can be easily recycled or if it will simply degrade into microplastics. Planning for recycling means selecting materials that have known and accessible atomic-level recycling pathways, ensuring that macro-level goals of sustainability are achievable.</p><p>OCV application: Let's set the Objective as &quot;Minimize Waste at Project End.&quot; A Constraint might be &quot;Limited Recycling Facilities&quot; (e.g., your local community only recycles certain plastics). A Variable could be &quot;Material Selection.&quot; By making conscious choices about the materials you use for your mousetrap car, you are adjusting the variable to work within the constraint and achieve the objective of minimizing waste.</p></div>
+  </details>
+</div>
+</body>
+</html>

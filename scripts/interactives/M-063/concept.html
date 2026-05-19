@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Planner: Org Chart & Gantt</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f7f9fc;
+    color: #1e3a5f;
+    margin: 0;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  h1 { color: #1e3a5f; margin: 0 0 4px; font-size: 22px; }
+  .subtitle { color: #555; font-size: 14px; margin-bottom: 14px; }
+  .stage { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 2px 8px rgba(30,58,95,0.1); margin-bottom: 14px; }
+  .stage-title { color: #c9a227; font-weight: bold; font-size: 16px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  
+  /* Org Chart */
+  .orgchart { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .org-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .role-box {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    min-width: 140px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .role-box .role-title { color: #c9a227; font-size: 11px; display: block; margin-bottom: 4px; }
+  .drop-zone {
+    background: #f7f9fc;
+    border: 2px dashed #1e3a5f;
+    color: #1e3a5f;
+    min-height: 50px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .drop-zone.filled { background: #c9a227; color: #1e3a5f; border-style: solid; }
+  .drop-zone.correct { background: #2d8659; color: #fff; border-color: #2d8659; }
+  .drop-zone.wrong { background: #c74343; color: #fff; border-color: #c74343; }
+  
+  .tasks {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-top: 12px; padding: 10px; background: #f7f9fc; border-radius: 8px;
+  }
+  .task {
+    background: #c9a227;
+    color: #1e3a5f;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: grab;
+    font-size: 13px;
+    font-weight: bold;
+    user-select: none;
+  }
+  .task.dragging { opacity: 0.4; }
+  .task.placed { display: none; }
+  
+  /* Gantt */
+  .gantt { width: 100%; }
+  .gantt-header, .gantt-row {
+    display: grid;
+    grid-template-columns: 140px repeat(8, 1fr);
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+  .gantt-header div { font-size: 11px; font-weight: bold; text-align: center; color: #1e3a5f; padding: 4px; }
+  .gantt-header .task-label { text-align: left; }
+  .task-label { font-size: 12px; font-weight: bold; padding: 6px; }
+  .day-cell {
+    background: #fff;
+    border: 1px solid #ddd;
+    height: 32px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .day-cell:hover { background: #fdf3d4; }
+  .day-cell.active { background: #c9a227; border-color: #c9a227; }
+  .day-cell.locked-correct { background: #2d8659; border-color: #2d8659; cursor: default; }
+  .day-cell.locked-wrong { background: #c74343; border-color: #c74343; cursor: default; }
+  
+  .instructions { background: #fff7dc; border-left: 4px solid #c9a227; padding: 10px 14px; border-radius: 4px; margin-bottom: 12px; font-size: 13px; }
+  
+  button {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  button:hover { background: #2a5080; }
+  button:disabled { background: #999; cursor: not-allowed; }
+  
+  .result { font-size: 16px; font-weight: bold; padding: 12px; border-radius: 8px; margin-top: 12px; text-align: center; }
+  .result.good { background: #2d8659; color: #fff; }
+  .result.partial { background: #c9a227; color: #1e3a5f; }
+  
+  .hidden { display: none; }
+  
+  .legend { font-size: 12px; color: #555; margin-top: 6px; }
+  .progress { font-size: 13px; color: #1e3a5f; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>🔨 Mousetrap Project Planner</h1>
+<div class="subtitle">Your team is building a mousetrap car! Bring order to your project — just as our Creator brings order to the cosmos.</div>
+
+<!-- STAGE 1: ORG CHART -->
+<div class="stage" id="stage1">
+  <div class="stage-title">Step 1: Build the Org Chart</div>
+  <div class="instructions">🎯 Drag each team member into the role that matches their job.</div>
+  
+  <div class="orgchart">
+    <div class="org-row">
+      <div class="role-box" id="slot-pm">
+        <span class="role-title">PROJECT MANAGER</span>
+        <div class="drop-zone" data-role="pm" data-correct="Maya">Drop here</div>
+      </div>
+    </div>
+    <div class="org-row">
+      <div class="role-box">
+        <span class="role-title">DESIGN LEAD</span>
+        <div class="drop-zone" data-role="design" data-correct="Jordan">Drop here</div>
+      </div>
+      <div class="role-box">
+        <span class="role-title">BUILD LEAD</span>
+        <div class="drop-zone" data-role="build" data-correct="Sam">Drop here</div>
+      </div>
+      <div class="role-box">
+        <span class="role-title">TEST & RECYCLE LEAD</span>
+        <div class="drop-zone" data-role="test" data-correct="Riley">Drop here</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tasks" id="taskPool">
+    <div class="task" draggable="true" data-name="Maya">Maya — keeps team on schedule, leads meetings</div>
+    <div class="task" draggable="true" data-name="Jordan">Jordan — draws blueprints, picks materials</div>
+    <div class="task" draggable="true" data-name="Sam">Sam — assembles the car, uses tools</div>
+    <div class="task" draggable="true" data-name="Riley">Riley — runs tests, recycles broken parts</div>
+  </div>
+  
+  <button id="checkOrg" disabled>Check Org Chart →</button>
+</div>
+
+<!-- STAGE 2: GANTT -->
+<div class="stage hidden" id="stage2">
+  <div class="stage-title">Step 2: Build the Gantt Chart</div>
+  <div class="instructions">🎯 Click cells to schedule each task on the right days. Tasks must happen in order!</div>
+  
+  <div class="gantt" id="gantt">
+    <div class="gantt-header">
+      <div class="task-label">TASK</div>
+      <div>Day 1</div><div>Day 2</div><div>Day 3</div><div>Day 4</div>
+      <div>Day 5</div><div>Day 6</div><div>Day 7</div><div>Day 8</div>
+    </div>
+  </div>
+  <div class="legend">💡 Hint: Design comes before Build. Build comes before Test. Recycle comes last. Each task takes 2 days.</div>
+  
+  <button id="checkGantt">Check Schedule →</button>
+</div>
+
+<!-- RESULTS -->
+<div class="stage hidden" id="stageResult">
+  <div class="stage-title">Project Review</div>
+  <div id="resultBox"></div>
+  <button id="restart">🔄 Plan Again</button>
+</div>
+
+<script>
+// ============ STAGE 1: ORG CHART ============
+const dropZones = document.querySelectorAll('.drop-zone');
+const tasks = document.querySelectorAll('.task');
+const taskPool = document.getElementById('taskPool');
+const checkOrgBtn = document.getElementById('checkOrg');
+let draggedTask = null;
+
+tasks.forEach(t => {
+  t.addEventListener('dragstart', e => {
+    draggedTask = t;
+    t.classList.add('dragging');
+  });
+  t.addEventListener('dragend', () => {
+    t.classList.remove('dragging');
+  });
+});
+
+dropZones.forEach(z => {
+  z.addEventListener('dragover', e => { e.preventDefault(); });
+  z.addEventListener('drop', e => {
+    e.preventDefault();
+    if (!draggedTask) return;
+    // if zone already filled, return existing task to pool
+    if (z.dataset.filledWith) {
+      const prev = document.querySelector(`.task[data-name="${z.dataset.filledWith}"]`);
+      if (prev) { prev.classList.remove('placed'); taskPool.appendChild(prev); }
+    }
+    z.textContent = draggedTask.dataset.name;
+    z.classList.add('filled');
+    z.dataset.filledWith = draggedTask.dataset.name;
+    draggedTask.classList.add('placed');
+    updateOrgCheck();
+  });
+});
+
+function updateOrgCheck() {
+  let allFilled = true;
+  dropZones.forEach(z => { if (!z.dataset.filledWith) allFilled = false; });
+  checkOrgBtn.disabled = !allFilled;
+}
+
+let orgScore = 0;
+checkOrgBtn.addEventListener('click', () => {
+  orgScore = 0;
+  dropZones.forEach(z => {
+    if (z.dataset.filledWith === z.dataset.correct) {
+      z.classList.add('correct');
+      orgScore++;
+    } else {
+      z.classList.add('wrong');
+    }
+  });
+  setTimeout(() => {
+    document.getElementById('stage2').classList.remove('hidden');
+    buildGantt();
+    document.getElementById('stage2').scrollIntoView({behavior:'smooth'});
+  }, 1200);
+  checkOrgBtn.disabled = true;
+});
+
+// ============ STAGE 2: GANTT ============
+const ganttTasks = [
+  { name: 'Design Car', correctDays: [1,2], color: '#1e3a5f' },
+  { name: 'Build Car', correctDays: [3,4], color: '#1e3a5f' },
+  { name: 'Test Car', correctDays: [5,6], color: '#1e3a5f' },
+  { name: 'Recycle Parts', correctDays: [7,8], color: '#1e3a5f' }
+];
+
+function buildGantt() {
+  const gantt = document.getElementById('gantt');
+  // clear except header
+  while (gantt.children.length > 1) gantt.removeChild(gantt.lastChild);
+  
+  ganttTasks.forEach((task, ti) => {
+    const row = document.createElement('div');
+    row.className = 'gantt-row';
+    const label = document.createElement('div');
+    label.className = 'task-label';
+    label.textContent = task.name;
+    row.appendChild(label);
+    for (let d = 1; d <= 8; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'day-cell';
+      cell.dataset.task = ti;
+      cell.dataset.day = d;
+      cell.addEventListener('click', () => {
+        cell.classList.toggle('active');
+      });
+      row.appendChild(cell);
+    }
+    gantt.appendChild(row);
+  });
+}
+
+let ganttScore = 0;
+document.getElementById('checkGantt').addEventListener('click', () => {
+  ganttScore = 0;
+  const rows = document.querySelectorAll('.gantt-row');
+  rows.forEach((row, ti) => {
+    const cells = row.querySelectorAll('.day-cell');
+    const selected = [];
+    cells.forEach(c => { if (c.classList.contains('active')) selected.push(parseInt(c.dataset.day)); });
+    const correct = ganttTasks[ti].correctDays;
+    const match = selected.length === correct.length && selected.every(d => correct.includes(d));
+    cells.forEach(c => {
+      c.classList.remove('active');
+      const day = parseInt(c.dataset.day);
+      if (correct.includes(day)) c.classList.add('locked-correct');
+      else if (selected.includes(day)) c.classList.add('locked-wrong');
+    });
+    if (match) ganttScore++;
+  });
+  document.getElementById('checkGantt').disabled = true;
+  setTimeout(showResult, 1000);
+});
+
+function showResult() {
+  const total = orgScore + ganttScore;
+  const max = 8;
+  const box = document.getElementById('resultBox');
+  let msg, cls;
+  if (total === max) {
+    msg = `🏆 PERFECT! Score: ${total}/${max}<br><br>Your team is organized like the cosmos — every person knows their role, every task happens in the right order. You're ready to build!`;
+    cls = 'good';
+  } else if (total >= 5) {
+    msg = `⭐ Good work! Score: ${total}/${max}<br><br>Most of your project is in order. Review the green ✓ correct answers to see what worked!`;
+    cls = 'partial';
+  } else {
+    msg = `💪 Keep planning! Score: ${total}/${max}<br><br>Engineering takes practice. Look at the green cells to learn the correct order.`;
+    cls = 'partial';
+  }
+  box.className = 'result ' + cls;
+  box.innerHTML = msg;
+  document.getElementById('stageResult').classList.remove('hidden');
+  document.getElementById('stageResult').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('restart').addEventListener('click', () => {
+  location.reload();
+});
+</script>
+
+</body>
+</html>
