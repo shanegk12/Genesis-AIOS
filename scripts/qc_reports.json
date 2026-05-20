@@ -1,30 +1,24 @@
 {
-  "generated_at": "2026-05-18T04:13:34.019151+00:00",
+  "generated_at": "2026-05-18T20:25:09.737622+00:00",
   "reports": {
     "C-025": {
       "lessonId": "C-025",
       "title": "What is Synthesis?",
-      "checkedAt": "2026-05-18T04:13:12.183935+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:24:41.377242+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "C-030": {
       "lessonId": "C-030",
       "title": "What is Procurement?",
-      "checkedAt": "2026-05-18T04:13:12.489076+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:24:42.753066+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "tab-image",
+          "location": "Tab: Explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -32,40 +26,139 @@
     "C-031": {
       "lessonId": "C-031",
       "title": "Material Properties and Selection",
-      "checkedAt": "2026-05-18T04:13:12.836807+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:17:31.942891+00:00"
+      "checkedAt": "2026-05-18T20:24:43.026438+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-032": {
       "lessonId": "C-032",
       "title": "Procurement: Cost Analysis and Budgeting",
-      "checkedAt": "2026-05-18T04:13:13.130649+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:18:26.575080+00:00"
+      "checkedAt": "2026-05-18T20:24:43.273909+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy with concrete imagery",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Multiscale Modeling connection",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Multiscale Modeling connection",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy with concrete imagery",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Multiscale Modeling connection",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application where relevant",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy with concrete imagery",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-034": {
       "lessonId": "C-034",
       "title": "Quality Assurance and Material Inspection",
-      "checkedAt": "2026-05-18T04:13:13.734777+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:43.818765+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:19:19.258525+00:00"
+      "fixedAt": null
     },
     "C-035": {
       "lessonId": "C-035",
       "title": "Technical Specifications",
-      "checkedAt": "2026-05-18T04:13:14.035662+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:24:44.051581+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: The Basics",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Key Elements",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Multiscale Modeling",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Procurement in Action",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Optimization",
+          "description": "Tab panel has 5 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -73,54 +166,86 @@
     "C-036": {
       "lessonId": "C-036",
       "title": "Fabrication",
-      "checkedAt": "2026-05-18T04:13:14.370633+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:44.322830+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:20:35.055677+00:00"
+      "fixedAt": null
     },
     "C-038": {
       "lessonId": "C-038",
       "title": "Resource Management and Loss Prevention",
-      "checkedAt": "2026-05-18T04:13:14.971445+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:44.851641+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:21:26.190047+00:00"
+      "fixedAt": null
     },
     "C-041": {
       "lessonId": "C-041",
       "title": "Timeline Development and Milestones",
-      "checkedAt": "2026-05-18T04:13:15.711798+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:22:24.842527+00:00"
+      "checkedAt": "2026-05-18T20:24:45.639071+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Engineering and Multiscale Perspectives",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-056": {
       "lessonId": "C-056",
       "title": "Verification, Validation, and Testing",
-      "checkedAt": "2026-05-18T04:13:19.630029+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:24:49.448352+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "C-057": {
       "lessonId": "C-057",
       "title": "Configuration Management and Baselines",
-      "checkedAt": "2026-05-18T04:13:19.915284+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:24:49.727537+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Multiscale Modeling connection",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Plain-language explanation",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 6 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -128,27 +253,46 @@
     "C-060": {
       "lessonId": "C-060",
       "title": "What is Performance?",
-      "checkedAt": "2026-05-18T04:13:20.669875+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:24:50.554786+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "C-061": {
       "lessonId": "C-061",
       "title": "Experimental Design and Testing Protocols",
-      "checkedAt": "2026-05-18T04:13:20.962741+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:24:50.844103+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 7 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Stewardship and Diligence",
+          "description": "Accordion has 4 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -156,31 +300,49 @@
     "C-062": {
       "lessonId": "C-062",
       "title": "Continuous Improvement",
-      "checkedAt": "2026-05-18T04:13:21.258401+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:51.104917+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:23:42.655327+00:00"
+      "fixedAt": null
     },
     "C-063": {
       "lessonId": "C-063",
       "title": "Data-Defined Performance",
-      "checkedAt": "2026-05-18T04:13:21.554976+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:51.355001+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:24:32.934057+00:00"
+      "fixedAt": null
     },
     "C-064": {
       "lessonId": "C-064",
       "title": "Optimization Techniques and Trade-Offs",
-      "checkedAt": "2026-05-18T04:13:21.853932+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:24:51.610355+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 8 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Engineering analogy",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 6 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -188,234 +350,462 @@
     "C-065": {
       "lessonId": "C-065",
       "title": "Functional Requirements and Specifications",
-      "checkedAt": "2026-05-18T04:13:22.121178+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:25:39.919019+00:00"
+      "checkedAt": "2026-05-18T20:24:51.867822+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Verification",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-066": {
       "lessonId": "C-066",
       "title": "Performance Validation",
-      "checkedAt": "2026-05-18T04:13:22.379407+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:52.138629+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:26:50.100377+00:00"
+      "fixedAt": null
     },
     "C-067": {
       "lessonId": "C-067",
       "title": "Failure Analysis and Reliability Engineering",
-      "checkedAt": "2026-05-18T04:13:22.664775+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:27:41.019487+00:00"
+      "checkedAt": "2026-05-18T20:24:52.377646+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Understanding Failure",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: The Detective Work of Analysis",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Measuring Trustworthiness",
+          "description": "Accordion has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Explanation",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Building for Endurance",
+          "description": "Accordion has 7 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-068": {
       "lessonId": "C-068",
       "title": "Product Certification and Regulatory Compliance",
-      "checkedAt": "2026-05-18T04:13:23.033920+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:52.653367+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:28:29.422845+00:00"
+      "fixedAt": null
     },
     "C-069": {
       "lessonId": "C-069",
       "title": "Customer Acceptance and Final Delivery",
-      "checkedAt": "2026-05-18T04:13:23.314816+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:52.926220+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:29:16.973358+00:00"
+      "fixedAt": null
     },
     "C-070": {
       "lessonId": "C-070",
       "title": "Cradle-to-Cradle Design Philosophy",
-      "checkedAt": "2026-05-18T04:13:23.604770+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:30:04.607953+00:00"
+      "checkedAt": "2026-05-18T20:24:53.227766+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Understanding Material Quality in Recycling",
+          "description": "Accordion has 7 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Building Products That Can Be Taken Apart",
+          "description": "Accordion has 7 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Applying C2C to Our Design Process",
+          "description": "Accordion has 7 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-071": {
       "lessonId": "C-071",
       "title": "The 3 R's: Reduce, Reuse, Recycle",
-      "checkedAt": "2026-05-18T04:13:23.933778+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:53.500423+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:30:44.177313+00:00"
+      "fixedAt": null
     },
     "C-072": {
       "lessonId": "C-072",
       "title": "Environmental Footprint and Carbon Accounting",
-      "checkedAt": "2026-05-18T04:13:24.224102+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:53.764180+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:31:31.399757+00:00"
+      "fixedAt": null
     },
     "C-073": {
       "lessonId": "C-073",
       "title": "Material Toxicity and hazard Minimization",
-      "checkedAt": "2026-05-18T04:13:24.520204+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:54.051368+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:32:18.307193+00:00"
+      "fixedAt": null
     },
     "C-074": {
       "lessonId": "C-074",
       "title": "Waste Stream Management and Circular Economy",
-      "checkedAt": "2026-05-18T04:13:24.812292+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:54.289402+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:33:06.112258+00:00"
+      "fixedAt": null
     },
     "C-075": {
       "lessonId": "C-075",
       "title": "Design for Disassembly and Recycling",
-      "checkedAt": "2026-05-18T04:13:25.073799+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:33:52.880424+00:00"
+      "checkedAt": "2026-05-18T20:24:54.541575+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Click to Explore the Synergy of DfD and DfR",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Click to Explore Tools and Techniques",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Click to Explore Challenges and Opportunities",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-077": {
       "lessonId": "C-077",
       "title": "Innovation for Resource-Limited Environments",
-      "checkedAt": "2026-05-18T04:13:25.334677+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:34:37.815689+00:00"
+      "checkedAt": "2026-05-18T20:24:55.099373+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: What is Sustainability?",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Resource-Limited Environments",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Energy Path Analysis",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: The OCV Method",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Optimization",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-078": {
       "lessonId": "C-078",
       "title": "Durability",
-      "checkedAt": "2026-05-18T04:13:25.588990+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:55.367167+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:35:23.443554+00:00"
+      "fixedAt": null
     },
     "C-079": {
       "lessonId": "C-079",
       "title": "Total Cost of Ownership",
-      "checkedAt": "2026-05-18T04:13:25.847808+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:36:07.882364+00:00"
+      "checkedAt": "2026-05-18T20:24:55.650585+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: What is TCO?",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Categories of TCO",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: TCO Across Creationeering™",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Optimizing for TCO",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: TCO and Sustainability",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-080": {
       "lessonId": "C-080",
       "title": "The Ethics of End-of-Life (EOL) Responsibility",
-      "checkedAt": "2026-05-18T04:13:26.135883+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:55.912673+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:36:56.643995+00:00"
+      "fixedAt": null
     },
     "C-081": {
       "lessonId": "C-081",
       "title": "Material Recovery and Salvage Value",
-      "checkedAt": "2026-05-18T04:13:26.406413+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:37:44.056637+00:00"
+      "checkedAt": "2026-05-18T20:24:56.181955+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Material Recovery",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Salvage Value",
+          "description": "Accordion has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Recycling",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Repurposing (Upcycling)",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: The Engineering Process for Recycling",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: The Business of Recycling",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-082": {
       "lessonId": "C-082",
       "title": "Hazardous Waste and Safe Disposal Protocol",
-      "checkedAt": "2026-05-18T04:13:26.690767+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:56.438988+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:38:29.214327+00:00"
+      "fixedAt": null
     },
     "C-083": {
       "lessonId": "C-083",
       "title": "Life Extension and Maintenance Philosophy",
-      "checkedAt": "2026-05-18T04:13:26.965966+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:39:16.528356+00:00"
+      "checkedAt": "2026-05-18T20:24:56.714975+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Analogies and Applications",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-084": {
       "lessonId": "C-084",
       "title": "Legislation and Global E-Waste Policy",
-      "checkedAt": "2026-05-18T04:13:27.232826+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:39:56.072431+00:00"
+      "checkedAt": "2026-05-18T20:24:56.959861+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: What is E-Waste?",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: The Global Challenge",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Legislation & Policy",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: The Circular Economy",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Our Role",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-085": {
       "lessonId": "C-085",
       "title": "Decommissioning Procedures and System Shutdown",
-      "checkedAt": "2026-05-18T04:13:27.504356+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:40:39.795513+00:00"
+      "checkedAt": "2026-05-18T20:24:57.239858+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive into Decommissioning",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive into System Shutdown",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive into Recycling",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive into Material Degradation",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive into the Circular Economy",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-086": {
       "lessonId": "C-086",
       "title": "Data Security and System Wipe",
-      "checkedAt": "2026-05-18T04:13:27.802850+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:41:24.923269+00:00"
+      "checkedAt": "2026-05-18T20:24:57.498539+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Multiscale Modeling and Data Persistence",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-087": {
       "lessonId": "C-087",
       "title": "Recycling Logistics and Infrastructure",
-      "checkedAt": "2026-05-18T04:13:28.058026+00:00",
-      "status": "reformatted",
-      "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:42:12.899807+00:00"
+      "checkedAt": "2026-05-18T20:24:57.771568+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: The Recycling Journey Begins",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Sorting the Treasures",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Transforming Waste into Resources",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: The Network of Movement",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Building a Sustainable Future",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
     },
     "C-089": {
       "lessonId": "C-089",
       "title": "Formal System Closure and Documentation",
-      "checkedAt": "2026-05-18T04:13:28.333341+00:00",
-      "status": "reformatted",
+      "checkedAt": "2026-05-18T20:24:58.256471+00:00",
+      "status": "clean",
       "issues": [],
-      "fixedAt": null,
-      "reformattedAt": "2026-05-18T04:43:02.625702+00:00"
+      "fixedAt": null
     },
     "M-007": {
       "lessonId": "M-007",
       "title": "Digital Measurement",
-      "checkedAt": "2026-05-18T04:13:28.583548+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:00.025740+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-008": {
       "lessonId": "M-008",
       "title": "The Arduino",
-      "checkedAt": "2026-05-18T04:13:28.844477+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:25:00.266264+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "accordion-image",
+          "location": "Accordion: OCV Example: Integrating a Braking Mechanism",
+          "description": "Accordion has 4 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -423,41 +813,29 @@
     "M-017": {
       "lessonId": "M-017",
       "title": "Analysis Activity: Calculations and Efficiency",
-      "checkedAt": "2026-05-18T04:13:29.107784+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:02.579423+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-025": {
       "lessonId": "M-025",
       "title": "Engineering Notebook: Entry 5",
-      "checkedAt": "2026-05-18T04:13:29.636254+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:04.736635+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-026": {
       "lessonId": "M-026",
       "title": "Lesson: Bill of Materials",
-      "checkedAt": "2026-05-18T04:13:29.900366+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:25:05.003544+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "section-image",
+          "location": "Section: Lesson: Bill of Materials",
+          "description": "No image or widget in this section (2 paragraphs)"
         }
       ],
       "fixedAt": null
@@ -465,13 +843,23 @@
     "M-027": {
       "lessonId": "M-027",
       "title": "Lesson: Material Preparation",
-      "checkedAt": "2026-05-18T04:13:30.152566+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:25:05.254657+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "tab-image",
+          "location": "Tab: Procurement",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Material Selection",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Material Preparation",
+          "description": "Tab panel has 4 paragraphs but no image reference"
         }
       ],
       "fixedAt": null
@@ -479,55 +867,3675 @@
     "M-028": {
       "lessonId": "M-028",
       "title": "Build: Inventory Checks and Verifications",
-      "checkedAt": "2026-05-18T04:13:30.461360+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:05.519611+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-031": {
       "lessonId": "M-031",
       "title": "Build: Material Processing",
-      "checkedAt": "2026-05-18T04:13:31.051242+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:06.060361+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-033": {
       "lessonId": "M-033",
       "title": "Lesson: Project Phases and Dependencies",
-      "checkedAt": "2026-05-18T04:13:31.617096+00:00",
-      "status": "needs_reformat",
-      "issues": [
-        {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
-        }
-      ],
+      "checkedAt": "2026-05-18T20:25:06.575084+00:00",
+      "status": "clean",
+      "issues": [],
       "fixedAt": null
     },
     "M-038": {
       "lessonId": "M-038",
       "title": "Lesson: Risks and Contingencies",
-      "checkedAt": "2026-05-18T04:13:32.162237+00:00",
-      "status": "needs_reformat",
+      "checkedAt": "2026-05-18T20:25:07.088816+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-001": {
+      "lessonId": "C-001",
+      "title": "What is Creationeering",
+      "checkedAt": "2026-05-18T20:24:34.490494+00:00",
+      "status": "needs_fix",
       "issues": [
         {
-          "rule": "needs-reformat",
-          "location": "Document",
-          "description": "Content contains raw markdown — run reformat agent first"
+          "rule": "section-image",
+          "location": "Section: The Beginning",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Creationeering™",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Engineering",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Industrial and Systems Engineering",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Mechanical Engineering",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Aerospace &amp; Aeronautics Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Theme Park Engineers",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Thermodynamic and Energy Systems",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Civil Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Civil Engineering and the Garden",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Computer Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Electrical Engineering",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biblical Understanding of Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sources",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-002": {
+      "lessonId": "C-002",
+      "title": "Entrepreneurship",
+      "checkedAt": "2026-05-18T20:24:34.828010+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Pray",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Think",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Create",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Give God the Glory",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What Is Entrepreneurship?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Envision Your Dream",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Self-Confidence and Leadership",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Four Main Areas of a Business",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Five Fundamental Features of Starting a Business",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Human Resources",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Management",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Finances",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Legal",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sales/Marketing",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sources",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-003": {
+      "lessonId": "C-003",
+      "title": "Genesis and Creationeering",
+      "checkedAt": "2026-05-18T20:24:35.127243+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Creation and Purpose",
+          "description": "No image or widget in this section (17 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Engineers Love Processes",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: God’s Processes",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Problems and Solutions",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Process of Salvation",
+          "description": "No image or widget in this section (6 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-004": {
+      "lessonId": "C-004",
+      "title": "Using Math and Science as Tools",
+      "checkedAt": "2026-05-18T20:24:35.408521+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Scientific Tools",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Mathematical Tools",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Formulas",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Math Skills",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Geometry",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Algebra",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Calculus",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Combinations of Math and Science in Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Newton's Laws of Motion",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Bridging Science and Faith",
+          "description": "No image or widget in this section (8 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-005": {
+      "lessonId": "C-005",
+      "title": "Units, Conversions, and Measurement",
+      "checkedAt": "2026-05-18T20:24:35.703590+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Why Units Matter",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Common Units Used in Engineering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Length",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Temperature",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Time",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Mass (Weight)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Volume",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conversion Factors",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Length Conversions",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Temperature Conversions",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Time Conversions",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Using Units in Calculations",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Example Problem",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Example 1: Unit Conversions (km/h to m/s)",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-006": {
+      "lessonId": "C-006",
+      "title": "Intro to Systems Thinking",
+      "checkedAt": "2026-05-18T20:24:35.991492+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Systems, Subsystems, and Processes",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What Is a System?",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Inputs and Outputs",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: How Processes Shape Systems",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What Is a Subsystem?",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Pattern Recognition in Systems",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Genesis",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Human Body",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-007": {
+      "lessonId": "C-007",
+      "title": "Objectives, Constraints, and Variables",
+      "checkedAt": "2026-05-18T20:24:36.288195+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The OCV Method",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Engineers Start With Problems",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Objectives",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Constraints",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Variables",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Using the OCV Method",
+          "description": "No image or widget in this section (21 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: How OCV Shapes Solutions",
+          "description": "No image or widget in this section (10 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Example: The Catapult",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biblical Connections: God Defines Problems Too",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Gospels: God’s Solution Process",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-008": {
+      "lessonId": "C-008",
+      "title": "Ethics in Engineering",
+      "checkedAt": "2026-05-18T20:24:36.568509+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: What is Ethics?",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Ethical Decision-Making",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: NSPE Code of Ethics for Engineers",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Outline of the Code of Ethics",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why the NSPE Code of Ethics",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Real-World Examples",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Clean Water Projects",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sustainable Energy Solutions",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Safe Transportation Systems",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Understanding Ethical Design",
+          "description": "No image or widget in this section (29 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Key Concepts:",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Three Pillars of Stewardship",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Pillar 1: Sustainability (The Covenant with the Future)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Pillar 2: Resource Management (Managing the \"Talents\")",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Pillar 3: Time Management (The Finite Resource)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Engineer's Moral Duty",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Loving Our Neighbors",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Integrity in Design",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Practical Application",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Case Study—The \"Ethical\" Smartphone vs. The \"Disposable\" Smartphone",
+          "description": "No image or widget in this section (11 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Engineers as Caretakers",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-009": {
+      "lessonId": "C-009",
+      "title": "Understanding Process Mapping and Flowcharts",
+      "checkedAt": "2026-05-18T20:24:36.851999+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Process Mapping",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is a Flowchart?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Common Flowchart Symbols",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Input Vs. Process",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Engineers and Flowcharts",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Other Methods of Process Mapping",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Algorithms",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Task Lists",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biblical Connections",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Logic of the Creator",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Scriptural Examples of Precise Instructions",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Stewardship through Clarity",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-010": {
+      "lessonId": "C-010",
+      "title": "Visualization and Sketching",
+      "checkedAt": "2026-05-18T20:24:37.117129+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction to Technical Sketching",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Are Technical Sketches Important?",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Systems Thinking: Assemblies and Subassemblies",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Viewpoints",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Projection",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Perspective",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Proportion and Scale",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Scale and Proportions",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 01. Understanding the Ratio",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 02. How to Set Up Your Scale",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 03. Use A Ruler or Online Software",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 04. Proportions and Changing Scale",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Annotations and Labeling",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Line Types",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Object Lines (Visible Edges)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hidden Lines",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Center Lines",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Dimension &amp; Extension Lines",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Communicating Ideas Visually",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: A Biblical Perspective on Clarity and Communication",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sketching as Stewardship",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-011": {
+      "lessonId": "C-011",
+      "title": "Design: Forces and Influences",
+      "checkedAt": "2026-05-18T20:24:37.404274+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: What is a Force?",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Engineering in Action: The Falcon 9 Rocket",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Types of Forces",
+          "description": "No image or widget in this section (20 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Internal vs. External Forces: Analyzing Systems.",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: External Forces (The Outside World)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Internal Forces (The Material's Reaction)",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Internal Influences: The Heart of Innovation",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: External Influences: The World Around Us",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Design Process",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection",
+          "description": "No image or widget in this section (14 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-012": {
+      "lessonId": "C-012",
+      "title": "Design: Historical Case Studies",
+      "checkedAt": "2026-05-18T20:24:37.684770+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Overview",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis:",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Insight: The Slope",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Success Pattern: Calculated Consistency",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Overview",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis:",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Insight: Stress Concentration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Refinement",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Overview",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis:",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Insight: Modular Design",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Safety Features and Success Patterns",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Three Pillars of Success Patterns:",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Overview",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Reflection",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-013": {
+      "lessonId": "C-013",
+      "title": "Form, Function, and Aesthetic",
+      "checkedAt": "2026-05-18T20:24:37.949122+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Understanding Form, Function, and Aesthetics in Engineering Design",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is Form?",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is Function?",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Role of Aesthetics",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: User Experience (UX)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Core Principle: Function Dictates Form",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Interplay of Form, Function, and Aesthetics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Role of Subassemblies",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Applying the Principles: The Design Challenge",
+          "description": "No image or widget in this section (11 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection",
+          "description": "No image or widget in this section (7 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-014": {
+      "lessonId": "C-014",
+      "title": "Design Iteration and Communication",
+      "checkedAt": "2026-05-18T20:24:38.261781+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction to Design Iteration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why is Design Iteration Important?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Iteration Enhances Creativity",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Iteration Promotes Problem Solving",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Iteration Increases User Satisfaction",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Iteration Encourages Collaboration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Iterative Process",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Rapid Iteration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: How Rapid Iteration Works",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Importance of Communication in Design Iteration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sharing and Brainstorming",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Feedback Loop",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Documentation (The Engineer's Paper Trail)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Presenting the Final Solution",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-015": {
+      "lessonId": "C-015",
+      "title": "Alternatives and Patents",
+      "checkedAt": "2026-05-18T20:24:38.530762+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Power of Alternatives",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Brainstorming and Sketching Variations",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Evaluation: Choosing the Best Option",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Intellectual Property and Patents",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Designed Alternatives in Nature",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Value of Stewardship",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-016": {
+      "lessonId": "C-016",
+      "title": "Novelty and Innovation in Engineering",
+      "checkedAt": "2026-05-18T20:24:38.811553+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Invention vs. Innovation",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Invention: The \"Aha!\" Moment",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Innovation: The \"Better\" Way",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Novelty Matters",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Intellectual Property and Patents",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Search for \"Prior Art\"",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Types of Innovations",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Engineer's Journey",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biomimicry—God’s Prior Art",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Interactive Idea: The Biomimicry Match-Up",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biblical Connections to Creativity and Innovation",
+          "description": "No image or widget in this section (7 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-017": {
+      "lessonId": "C-017",
+      "title": "Concept Generation",
+      "checkedAt": "2026-05-18T20:24:39.141573+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Brainstorming Basics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Discover Hidden Variables",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Navigate Constraints",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Drive Innovation",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Optimize Through Every Stage",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: SCAMPER Technique",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Morph Charts",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Understanding Tradeoffs",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Common Engineering Tradeoffs",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Using OCV to Evaluate Tradeoffs",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Moving to the Blueprint: Preliminary vs. Technical Sketching",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Brainstorm + Tradeoff Challenge",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: B. Proverbs 2:6 — God Gives Wisdom",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: C. 1 Corinthians 12 — Many Parts, One Body",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-018": {
+      "lessonId": "C-018",
+      "title": "Fundamentals of Motion and Work",
+      "checkedAt": "2026-05-18T20:24:39.423548+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Efficiency via Hierarchical Multiscale Modeling (HM²)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Integrating Efficiency into Design Iteration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-019": {
+      "lessonId": "C-019",
+      "title": "Energy Conservation, Transfer and Loss",
+      "checkedAt": "2026-05-18T20:24:39.687460+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The Closed System Analogy",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Potential vs. Kinetic Energy",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Roller Coaster",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Reality of Friction",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Thermal Energy and HM²",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Applying OCV to Energy",
+          "description": "No image or widget in this section (19 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-020": {
+      "lessonId": "C-020",
+      "title": "The Importance of Data in Engineering",
+      "checkedAt": "2026-05-18T20:24:40.039502+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Why Data Matters",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Objective vs. Subjective",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Creationeering Lens – Data-Driven Modeling",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hierarchical Data",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis – Turning Numbers into Knowledge",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Objective Analysis",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Verifiable Data",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Validation – Comparing the Digital to the Physical",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The \"Ground Truth\"",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Making Wise Choices with Data",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What About the Business?",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Making Wise Choices Together",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Biblical Insights on Truth and Wisdom",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-021": {
+      "lessonId": "C-021",
+      "title": "Design of Experiments (One Factor at A Time_",
+      "checkedAt": "2026-05-18T20:24:40.303677+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Lesson Objectives",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Logic of the Experiment: The OFAT Method",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Use OFAT?",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: How to Conduct an OFAT Test",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Art of Iteration: The Refiner’s Fire",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Iterative Loop",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analogy of the Sculptor",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: When to Stop?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Design of Experiments (DoE): Moving Beyond the Basics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What are Interactions?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Limits and Uses of DoE",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Creationeering in Practice: Analysis and Synthesis",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Faith Connection: The Master Refiner",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Refiner's Fire",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Built on the Rock",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-022": {
+      "lessonId": "C-022",
+      "title": "Measurement Quality and Instrument Validation",
+      "checkedAt": "2026-05-18T20:24:40.573017+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-023": {
+      "lessonId": "C-023",
+      "title": "Modeling Reality: Physical vs. Computational",
+      "checkedAt": "2026-05-18T20:24:40.830139+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Course: Creationeering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-024": {
+      "lessonId": "C-024",
+      "title": "Statistical Analysis",
+      "checkedAt": "2026-05-18T20:24:41.105503+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Analysis",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Power of the Mean (The Average)",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Understanding Variation",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Variation Matters",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Multiscale Modeling and Creationeering",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Case Study: The W89 Tolerance Stackup",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection: Order in the Numbers",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-026": {
+      "lessonId": "C-026",
+      "title": "Managing Resistive Sources",
+      "checkedAt": "2026-05-18T20:24:41.649769+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Mastering Friction and Drag in Creationeering",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 1: The Theology of Resistance and Stewardship",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Stewardship Mandate",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 2: Identifying the Opposition - Friction and Drag",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Frictional Forces",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Air Resistance (Drag)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 3: Minimizing Resistance - The Quest for Efficiency",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Strategy A: Streamlining and Aerodynamics",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Strategy B: Lubrication and Material Selection",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 4: Strategic Use of Resistive Forces",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Traction: The Necessity of Friction",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Braking: Controlled Energy Dissipation",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Stability and Damping",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 5: The Pareto Frontier - Balancing Objectives",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Summary of Key Terms",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-027": {
+      "lessonId": "C-027",
+      "title": "Stress and Strain",
+      "checkedAt": "2026-05-18T20:24:41.896715+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The Mathematical Definition",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Stiletto vs. the Sneaker",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Types of Stress",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Mathematical Definition",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Rubber Band Test",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Regions of Performance",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Paperclip Experiment",
+          "description": "No image or widget in this section (24 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-028": {
+      "lessonId": "C-028",
+      "title": "Protecting Your Business",
+      "checkedAt": "2026-05-18T20:24:42.185797+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Types of Protection For Intellectual Property",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is a Trademark?",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Are Trademarks Important?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is Copyright?",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Are Copyrights Important?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Importance of Protecting Your Business",
+          "description": "No image or widget in this section (10 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Legal Lifecycle of a Project",
+          "description": "No image or widget in this section (9 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-029": {
+      "lessonId": "C-029",
+      "title": "Troubleshooting and Debugging Systems",
+      "checkedAt": "2026-05-18T20:24:42.465330+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Introduction: The Steward’s Mandate",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 1: Defining the Problem",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Types of Failures",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 2: The Creationeering™ Diagnostic Framework",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 3: The 6-Step Troubleshooting Protocol",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 1: Identify the Symptom",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 2: Isolate the Subsystem",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 3: Trace the Creationeering Step",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 4: Develop a Hypothesis",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 5: Implement the Fix",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 6: Verify and Document",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 4: Applying the Protocol to The Model",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 5: The Theology of Troubleshooting",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 6: Professional Engineering Standards",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: Your Challenge",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-033": {
+      "lessonId": "C-033",
+      "title": "Standardization vs. Custom Fabrication",
+      "checkedAt": "2026-05-18T20:24:43.569165+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-037": {
+      "lessonId": "C-037",
+      "title": "Hazards and Operations",
+      "checkedAt": "2026-05-18T20:24:44.603288+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-039": {
+      "lessonId": "C-039",
+      "title": "Precision Measurement and Tolerances",
+      "checkedAt": "2026-05-18T20:24:45.095525+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-040": {
+      "lessonId": "C-040",
+      "title": "What is Logistics?",
+      "checkedAt": "2026-05-18T20:24:45.369712+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-042": {
+      "lessonId": "C-042",
+      "title": "Critical Path Method (CPM)",
+      "checkedAt": "2026-05-18T20:24:45.895782+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV application",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-043": {
+      "lessonId": "C-043",
+      "title": "Risk Assessment",
+      "checkedAt": "2026-05-18T20:24:46.144074+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: The Detective Work of Identification",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-044": {
+      "lessonId": "C-044",
+      "title": "Planning and Buffer Time",
+      "checkedAt": "2026-05-18T20:24:46.401718+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Breaking Down the OCV Method",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-045": {
+      "lessonId": "C-045",
+      "title": "Global Supply Management",
+      "checkedAt": "2026-05-18T20:24:46.640846+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-046": {
+      "lessonId": "C-046",
+      "title": "Inventory and Warehouse Management",
+      "checkedAt": "2026-05-18T20:24:46.871250+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Explore Inventory Concepts",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Explore Warehouse Management Concepts",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Explore Inventory Technology",
+          "description": "Accordion has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-047": {
+      "lessonId": "C-047",
+      "title": "Shipping, Transport, and Compliance",
+      "checkedAt": "2026-05-18T20:24:47.138495+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-048": {
+      "lessonId": "C-048",
+      "title": "Reverse Logistics and End-of-Life Flow",
+      "checkedAt": "2026-05-18T20:24:47.402087+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: OCV Application for Recycling",
+          "description": "Accordion has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Reuse",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Refurbish",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Recycle",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV Application",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-049": {
+      "lessonId": "C-049",
+      "title": "Just-In-Time vs. Just-In-Case",
+      "checkedAt": "2026-05-18T20:24:47.653778+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Decision Factors for JIT vs. JIC",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-050": {
+      "lessonId": "C-050",
+      "title": "What is Assembly?",
+      "checkedAt": "2026-05-18T20:24:47.897518+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-051": {
+      "lessonId": "C-051",
+      "title": "Fabrication Methods and Integrity",
+      "checkedAt": "2026-05-18T20:24:48.161713+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Course: Creationeering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Ensuring Integrity – The Foundation of Reliability",
+          "description": "Accordion has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Casting",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Machining",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Additive Manufacturing",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Welding",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-052": {
+      "lessonId": "C-052",
+      "title": "Quality Control During Assembly",
+      "checkedAt": "2026-05-18T20:24:48.413060+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-053": {
+      "lessonId": "C-053",
+      "title": "Reading and Interpreting Blueprints",
+      "checkedAt": "2026-05-18T20:24:48.683608+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-054": {
+      "lessonId": "C-054",
+      "title": "Sequencing and Assembly Lines",
+      "checkedAt": "2026-05-18T20:24:48.956140+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Multiscale Modeling Connection",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Engineering Analogy",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Engineering Analogy",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Engineering Analogy",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-055": {
+      "lessonId": "C-055",
+      "title": "Systems Integration and Interoperability",
+      "checkedAt": "2026-05-18T20:24:49.205968+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-058": {
+      "lessonId": "C-058",
+      "title": "Human Factors in Production Systems",
+      "checkedAt": "2026-05-18T20:24:49.962371+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV Application",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "C-059": {
+      "lessonId": "C-059",
+      "title": "Feedback Loops and Process Involvement",
+      "checkedAt": "2026-05-18T20:24:50.198206+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-076": {
+      "lessonId": "C-076",
+      "title": "System Upgrades and Backward Compatibility",
+      "checkedAt": "2026-05-18T20:24:54.840105+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "C-088": {
+      "lessonId": "C-088",
+      "title": "The Engineer's Role in Product Afterlife",
+      "checkedAt": "2026-05-18T20:24:58.017605+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-001": {
+      "lessonId": "M-001",
+      "title": "Syllabus and Instructional Guide",
+      "checkedAt": "2026-05-18T20:24:58.517898+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Master Course Syllabus &amp; Instructional Guide",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Course Philosophy",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Nine Pillars of Creationeering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Lab Experience: The Three Generations",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Toolkit",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-002": {
+      "lessonId": "M-002",
+      "title": "Course Introduction",
+      "checkedAt": "2026-05-18T20:24:58.794817+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Lesson Objectives",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Road Map: The Nine Pillars of Creationeering",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Engineering Thinking",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Design Foundations",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Analysis and Synthesis",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 4. Procurement",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 5. Logistics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 6. Assembly",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 7. Performance Evaluation",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 8. Sustainability",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 9. Death and Recycling (End of Life)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Areas of Focus: The Technical Mindset",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hierarchical Multiscale Modeling (HM²)",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Validation and Ground Truth",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Pareto Frontier",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Toolkit: Equipment and Skills",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hardware and Instrumentation",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The \"Language of God\": Math",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Creationeering Vehicle: Applied Technical Components",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 1: Foundation and Prototyping (Little Moe)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 2: Variable Analysis and Design Refinement",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 3: Precision Assembly and Performance Validation",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Lab Culture: A Sanctuary of Learning",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Iterative Cycle: Fail Fast to Learn Faster",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Collaboration and the Feedback Loop",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection: Stewardship and Order",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Summary and Next Steps",
+          "description": "No image or widget in this section (7 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-003": {
+      "lessonId": "M-003",
+      "title": "Build Kit Overview",
+      "checkedAt": "2026-05-18T20:24:59.019932+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: 1. The Power Source: The Victor Mousetrap",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. The Chassis: Balsa Wood Frame Rails",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Transmission: Lever Arm and Kevlar String",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 4. Drivetrain: Brass Axles and Low-Friction Bushings",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 5. Ground Interface: CD Wheels and Traction Treads",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 6. Telemetry: Arduino Nano and HC-SR04 Sensor",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-004": {
+      "lessonId": "M-004",
+      "title": "Objectives, Constraints, and Variables",
+      "checkedAt": "2026-05-18T20:24:59.257521+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: OCV Framework",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Defining the OCV of the Mousetrap Car",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Main Engineering Focus",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Managing Resistive Forces",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hierarchical Multiscale Modeling (HM²)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Data-Driven Decision Making",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Math: The Language of the Creator",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Scientific Testing and Optimization",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Mandate of Stewardship",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: Your Journey as a Junior Creationeer",
+          "description": "No image or widget in this section (7 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-005": {
+      "lessonId": "M-005",
+      "title": "Prototypes",
+      "checkedAt": "2026-05-18T20:24:59.487249+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: I. The Philosophy of the Prototype: Failing Fast to Learn Faster",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: II. The Three Generations of Discovery",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Lil Moe: The Baseline Foundation",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Mark 1: The Iterative Experimental Rig",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Mark 2: The Optimized Physical Build (Second Part of Experiment)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 4. V3.0 Computational Design: The Final Validation",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: III. The Art of Iteration: One Factor At A Time (OFAT)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Rule of OFAT",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: IV. The Variables and the Ground Truth",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Hierarchical Multiscale (HM²) Perspective",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Role of Sensors in Analysis",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: V. Faith Connection: The Stewardship of Energy",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: VI. Preparing for the Lab",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-006": {
+      "lessonId": "M-006",
+      "title": "Build 1: Little Moe Prototype Car",
+      "checkedAt": "2026-05-18T20:24:59.756767+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Part 1: The Philosophy of Subassemblies",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analogy: Many Parts, One Body",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 2: Subassembly I – The Chassis (The Foundation)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Specifications",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step-by-Step Build Instructions: The Chassis",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 3: Subassembly II – The Front Axle (The Guiding System)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Specifications",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step-by-Step Build Instructions: Front Axle",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 4: Subassembly III – The Rear Axle (The Drive System)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Specifications",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step-by-Step Build Instructions: Rear Axle",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 5: The Integration (Final Assembly)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Master Integration Steps",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 6: Performance Validation (The 3 Tests)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Test 1: The Friction \"Spin-Down\" Test",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Test 2: The \"Straight-Roll\" Quality Gate",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Test 3: The Energy Release Test",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: The Mandate of the Junior Creationeer",
+          "description": "No image or widget in this section (8 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-009": {
+      "lessonId": "M-009",
+      "title": "Business Plan",
+      "checkedAt": "2026-05-18T20:25:00.538144+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 1: Identity &amp; Organizational Structure",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 2: Financial Stewardship &amp; Procurement",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 3: Legal Responsibility &amp; Marketing",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 4: Product Sheet and 2-Minute Pitch",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-010": {
+      "lessonId": "M-010",
+      "title": "Business Activity: Company Identit",
+      "checkedAt": "2026-05-18T20:25:00.798373+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Objective",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 1: Company Identity &amp; Mission",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 2: Leadership Roles",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 3: Management Structure &amp; Execution",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 4: Success Metrics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-011": {
+      "lessonId": "M-011",
+      "title": "Fundamentals of Design",
+      "checkedAt": "2026-05-18T20:25:01.051539+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Bridging Theory to Physical Reality in the Creationeering Lab",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Iterative Design Cycle: From Prototype to Perfection",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 1: Mark 1 - Analysis and Variable Isolation (The Experiment)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 2: Mark 2 - Synthesis and Performance Validation (The Final Build)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Phase 3: Computational Design (V3.0) - Validation and the Pareto Frontier",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 2: Form, Function, and Aesthetics",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Function: The \"Why\"",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Form: The \"How\"",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Aesthetics: The \"Excellence\"",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 3: Testing for Truth - The Mark 1 OFAT Strategy",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Factor 1: 50% Wind vs. 100% Wind",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Factor 2: Wheel Size",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Factor 3: Wheel Traction",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Factor 4: Axle Diameter",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 4: The Faith Connection - The Ultimate Validated Model",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Order vs. Confusion",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Stewardship of Energy",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Redemption through Troubleshooting",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Lab Procedure: The Mark 1 Protocol",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: The Call to Excellence",
+          "description": "No image or widget in this section (10 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-012": {
+      "lessonId": "M-012",
+      "title": "Communicating Designs and Testing",
+      "checkedAt": "2026-05-18T20:25:01.308000+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Part 1: Writing the Vision—The Language of Technical Communication",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Architect of Precision: Why Sketches are the Engineer's Language",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Critical Role of Drawing in Mechanical Design",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Final Requirement: Drafting the Vision",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Line Hierarchy and Your Mousetrap Design",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Assemblies and Subassemblies",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 2: The Art of the \"Do-Over\"—Design Iteration",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Refiner's Fire Analogy",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The 6-Stage Iterative Process in Action",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 3: Rapid Iteration—The Creationeering Edge",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 4: Communication as Stewardship",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Meticulous Documentation",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Feedback Loop",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: The Journey Ahead",
+          "description": "No image or widget in this section (6 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-013": {
+      "lessonId": "M-013",
+      "title": "Build 2: Iterative Design - Mark 1",
+      "checkedAt": "2026-05-18T20:25:01.551838+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-014": {
+      "lessonId": "M-014",
+      "title": "Power Transmission Mechanisms",
+      "checkedAt": "2026-05-18T20:25:01.831658+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Energy Flow, Loss, and Efficiency in the Mousetrap Vehicle",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 1: The Mechanical Mandate",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 2: The Energy Map — Inputs and Outputs",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analogy of the Accountant",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 3: Applying the Fundamentals — Motion and Work",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. The Foundation of Force ($F = m \\cdot a$)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Defining Work ($W = F \\cdot d \\cos \\theta$)",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. The Power of the Lever (Torque)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 4: Managing the \"Toll Booths\" (Energy Loss)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Reality of Friction",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 5: Calculating Mechanical Efficiency",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Part 6: The Pareto Frontier — Balancing Your Objectives",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: The Call to Excellence",
+          "description": "No image or widget in this section (13 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-015": {
+      "lessonId": "M-015",
+      "title": "Energy Flow, Loss, and Efficiency]",
+      "checkedAt": "2026-05-18T20:25:02.098850+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The Energy Relay Map",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The \"Groaning\" of the System",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 1: Calculate Work Input ($W_{in}$)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 2: Calculate Work Output ($W_{out}$)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Step 3: Calculate Mechanical Efficiency ($\\eta$)",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Applying OCV to your Build:",
+          "description": "No image or widget in this section (18 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-016": {
+      "lessonId": "M-016",
+      "title": "Build 2: Iterative Design - Mark21",
+      "checkedAt": "2026-05-18T20:25:02.330177+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The OCV Framework for Mark 2",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Chassis: The Strength-to-Weight Balance",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Drivetrain: Reducing Resistive Forces",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Power Plant: Tuning the Energy Curve",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Common Failure Modes and Solutions:",
+          "description": "No image or widget in this section (4 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-018": {
+      "lessonId": "M-018",
+      "title": "The Dynamics of Stored Energy",
+      "checkedAt": "2026-05-18T20:25:02.829769+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The Spring as a Talent",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Atomic Reality (HM²)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Relay Race Analogy",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Energy Transfer Flow",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Identifying the \"Toll Booths\" (Energy Loss)",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Formula of Potential",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Calculating Mechanical Efficiency ($\\eta$)",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Using CAD as a Tool for Discovery",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Finite Element Analysis (FEA) and Stress",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Free Body Diagrams (FBD)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. The Energy Flowchart",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. The Pareto Frontier",
+          "description": "No image or widget in this section (20 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-019": {
+      "lessonId": "M-019",
+      "title": "Modeling Resistive Forces",
+      "checkedAt": "2026-05-18T20:25:03.093632+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: 1. The Language of the Unseen: Free Body Diagrams",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: What is a Free Body Diagram?",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Paper Twin",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Steps to Constructing a Creationeering FBD",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Identifying the \"Hidden Thieves\": Resistive Forces",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Friction ($F_f$)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Air Resistance or Drag ($F_d$)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Toll Booth",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. The Digital Twin: Modeling with CAD",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why Use CAD?",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Finite Element Analysis (FEA)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogy: The Time Machine",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 4. Connecting Modeling to the Mousetrap Lifecycle",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 5. Faith Connection: The Master Model",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: God’s Order and Consistency",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Integrity in Measurement",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sustaining Power",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 6. The Creationeer's Challenge: Your First FBD",
+          "description": "No image or widget in this section (7 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-020": {
+      "lessonId": "M-020",
+      "title": "Build 3: CAD Analysis of Design Parameters",
+      "checkedAt": "2026-05-18T20:25:03.322692+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-021": {
+      "lessonId": "M-021",
+      "title": "Instrumentation and Data Types",
+      "checkedAt": "2026-05-18T20:25:03.595616+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Lesson Objectives",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 1: The Sensor as an Extension of the Senses",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analogy of the Bat",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Transduction: The Great Translation",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 2: Your Lab Kit Toolkit",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. The HC-SR04 Ultrasonic Sensor",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. The IR Reflectance Sensor (Speed &amp; RPM)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. The Force-Sensitive Resistor (FSR)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 3: The Language of Data and Programming",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Input and Output (I/O) Logic",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Section 4: Stewardship of the Joule",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Pareto Frontier",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: Becoming a Designer of Data",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-022": {
+      "lessonId": "M-022",
+      "title": "The Engineering Report Structure",
+      "checkedAt": "2026-05-18T20:25:03.877262+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Title Page",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Executive Summary",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Defining the Mission",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Table of Contents",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Defining the OCV Framework (The Foundation)",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. Objectives (The Goal)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. Constraints (The Rules)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Variables (The Knobs)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 5. Body (Design Specifications, Analysis, Methodology)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Technical Sketch",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Line Hierarchy and Precision",
+          "description": "No image or widget in this section (7 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analysis Phase",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The OFAT Strategy",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Statistical Reliability",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Hierarchical Multiscale Modeling (HM²)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Assembly and Quality Control (The Performance Validation)",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The 3 Mandatory Tests",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Sustainability and the \"Death/Recycling\" Stage",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Redemption in Engineering",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 6. Results",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Integrity and Stewardship",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 7. Conclusions",
+          "description": "No image or widget in this section (9 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 8. Recommendations",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 10. Appendices",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion: The Mandate of the Junior Creationeer",
+          "description": "No image or widget in this section (9 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-023": {
+      "lessonId": "M-023",
+      "title": "Build 4: Arduino - Distance Sensor Calibration",
+      "checkedAt": "2026-05-18T20:25:04.231828+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Junior Creationeer Briefing: Mastering the Digital Eye",
+          "description": "No image or widget in this section (5 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Container Analogy",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Translator: Libraries and Functions",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Why We Calibrate",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The 5-Point Calibration Protocol",
+          "description": "No image or widget in this section (8 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Error: The Deviation from Truth",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Tolerance: The Boundaries of Peace",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Bullseye Analogy",
+          "description": "No image or widget in this section (6 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Applying to the Build",
+          "description": "No image or widget in this section (13 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-024": {
+      "lessonId": "M-024",
+      "title": "Analysis Gate Review",
+      "checkedAt": "2026-05-18T20:25:04.498492+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: The Goal of the Analysis Gate",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Technical Deep Dive: The Tools of Your Review",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 1. The OCV Method (Objectives, Constraints, Variables)",
+          "description": "No image or widget in this section (4 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 2. HM² (Hierarchical Multiscale Modeling)",
+          "description": "No image or widget in this section (2 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: 3. Data Validation and Integrity",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Analysis Gate Review Checklist",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Analogies for the Analytical Mind",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Accountant of Energy",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: The Refiner's Fire",
+          "description": "No image or widget in this section (1 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Faith Connection: The Master Refiner",
+          "description": "No image or widget in this section (3 paragraphs)"
+        },
+        {
+          "rule": "section-image",
+          "location": "Section: Conclusion and Next Steps",
+          "description": "No image or widget in this section (5 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-030": {
+      "lessonId": "M-030",
+      "title": "Lesson: Sourcing Alternatives and Costing",
+      "checkedAt": "2026-05-18T20:25:05.833586+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Option A: Recycled CDs",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Option B: Plastic Wheels",
+          "description": "Tab panel has 3 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-032": {
+      "lessonId": "M-032",
+      "title": "Procurement Activity: Bill of Materials",
+      "checkedAt": "2026-05-18T20:25:06.311580+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-034": {
+      "lessonId": "M-034",
+      "title": "Lesson: Critical Paths and Calculating Time",
+      "checkedAt": "2026-05-18T20:25:06.848241+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Course: Mousetrap Build",
+          "description": "No image or widget in this section (2 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-039": {
+      "lessonId": "M-039",
+      "title": "Logistics: Supply Chain Map and Risk Analysis",
+      "checkedAt": "2026-05-18T20:25:07.377715+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Multiscale & OCV Connections",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Multiscale & OCV Connections",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "accordion-image",
+          "location": "Accordion: Deeper Dive: Multiscale & OCV Connections",
+          "description": "Accordion has 3 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Part 1: Mapping Your Supply Chain",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Part 2: Identifying Supply Chain Risks",
+          "description": "Tab panel has 6 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Part 3: Mitigating Supply Chain Risks",
+          "description": "Tab panel has 7 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-040": {
+      "lessonId": "M-040",
+      "title": "BA: Customer Persona + Marketing Standards",
+      "checkedAt": "2026-05-18T20:25:07.606448+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-043": {
+      "lessonId": "M-043",
+      "title": "Build: Body and Mousetrap",
+      "checkedAt": "2026-05-18T20:25:07.863285+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-046": {
+      "lessonId": "M-046",
+      "title": "Lesson: Post-Build Systems",
+      "checkedAt": "2026-05-18T20:25:08.122763+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "section-image",
+          "location": "Section: Course: Mousetrap Build",
+          "description": "No image or widget in this section (1 paragraphs)"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-047": {
+      "lessonId": "M-047",
+      "title": "Build: Braking System and Test",
+      "checkedAt": "2026-05-18T20:25:08.372307+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-048": {
+      "lessonId": "M-048",
+      "title": "Build: Arduino Station and Test",
+      "checkedAt": "2026-05-18T20:25:08.635024+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Introducing the Arduino",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Testing and Data Analysis",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-049": {
+      "lessonId": "M-049",
+      "title": "Lesson: Test Protocol and Baselines",
+      "checkedAt": "2026-05-18T20:25:08.889985+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: Understanding Performance",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Developing a Test Protocol",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Establishing Baselines",
+          "description": "Tab panel has 4 paragraphs but no image reference"
+        }
+      ],
+      "fixedAt": null
+    },
+    "M-051": {
+      "lessonId": "M-051",
+      "title": "Performance Activity: Baselines and Predictions",
+      "checkedAt": "2026-05-18T20:25:09.129283+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-053": {
+      "lessonId": "M-053",
+      "title": "Lesson: Final Function Verification",
+      "checkedAt": "2026-05-18T20:25:09.364373+00:00",
+      "status": "clean",
+      "issues": [],
+      "fixedAt": null
+    },
+    "M-068": {
+      "lessonId": "M-068",
+      "title": "Lesson: Closing a Project",
+      "checkedAt": "2026-05-18T20:25:09.636487+00:00",
+      "status": "needs_fix",
+      "issues": [
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: OCV",
+          "description": "Tab panel has 5 paragraphs but no image reference"
+        },
+        {
+          "rule": "tab-image",
+          "location": "Tab: Application",
+          "description": "Tab panel has 3 paragraphs but no image reference"
         }
       ],
       "fixedAt": null

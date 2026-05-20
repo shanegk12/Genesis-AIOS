@@ -182,6 +182,73 @@ gcloud auth application-default login --client-id-file="D:\AIOS\oauth-client.jso
 
 ---
 
+## 2026-05-16 — Assessment agent built; all 38 QC-passed lessons have quizzes
+
+**Decision:** Build `assessment_agent.py` (Gemini 2.5 Flash) to generate 5 MCQ per lesson. Run it across all 38 QC-passed Creationeering lessons. Wire `--generate-assessments` into the Cloud Run nightly entrypoint.
+
+**Why:** Assessments are required for LearnWorlds course completion tracking and certificates. 38 lessons × manual quiz writing = not viable. Gemini generates pedagogically sound MCQs from the lesson draft in under 10 seconds per lesson, total batch cost under $0.05. JSON output stored in `scripts/assessments/[id].json`, manifest updated with `assessment_status: done`.
+
+**Robustness improvements added:** `_clean_json_text()` strips markdown fences and smart quotes; truncation fallback on JSON parse error; maxOutputTokens bumped 2048→4096.
+
+**Result:** 38/38 QC-passed lessons now have assessment JSON files. Zero failures.
+
+**Owner:** Shane / AIOS
+
+---
+
+## 2026-05-16 — LearnWorlds Pro Trainer constraints documented; import workflow TBD
+
+**Decision:** Research LearnWorlds fully before designing the import workflow. Finding: Pro Trainer has no API, no bulk SCORM import, and a 20-SCORM-package cap. Decision on import approach is pending discussion with Shane.
+
+**Why:** The import workflow is the largest unresolved time sink before June 12. Before building anything, needed to know what's actually possible on the current plan. Key constraint: each SCORM package must be manually added as a Learning Activity — no programmatic option without upgrading to Learning Center ($249/mo annual).
+
+**Options on the table:**
+- Manual batched upload (time cost unknown)
+- Upgrade to Learning Center → API → automate
+- Hybrid: ZIP bulk upload for non-SCORM assets; manual SCORM only
+- Skip SCORM for launch; use embed or PDF; add SCORM post-launch
+
+**Decision pending:** Shane to decide based on time budget and cost trade-offs.
+
+**Alternatives considered:** Zapier workaround (webhooks are also Learning Center+); scraping the LearnWorlds UI (fragile, unsupported).
+
+**Owner:** Shane
+
+---
+
+## 2026-05-16 — Level-up: meeting-note skill + GK12-Platform project initialized
+
+**Decision:** This week's automation = `/meeting-note` skill (add agenda items to Google Calendar events via MCP). Secondary: initialize `D:\GK12-Platform` as a clean separate git repo for the Gemini AI tutor widget and custom LMS — kept out of AIOS repo to prevent scope creep.
+
+**Why:** Meeting notes to calendar is a high-frequency, low-risk task Shane was doing manually (told Claude what to put in Ethan's event, Claude executed manually). Skill makes it one command. Google Calendar MCP tools added to autorun allowlist so it runs without permission prompts. Platform project isolated so pipeline work and product work don't mix in git history.
+
+**Shipped:**
+- `~/.claude/skills/meeting-note.md` — skill registered globally
+- `.claude/settings.json` — Calendar MCP tools added to allow list
+- `D:\GK12-Platform/` — new git repo, CLAUDE.md with full architecture, COPPA notes, cost model
+
+**KPI:** Time saved on recurring meeting prep. Platform project clean enough to open in a new Claude Code session and start building Phase 1 (AI tutor widget) immediately.
+
+**Owner:** Shane / AIOS
+
+---
+
+## 2026-05-16 — Genesis Education Solutions: standalone platform confirmed, building now
+
+**Decision:** Build a standalone LMS product called "Genesis Education Solutions" — not a LearnWorlds supplement. Genesis K-12 Academy MS courses will launch on this platform (not LearnWorlds). Building starts immediately. Target: August 2026 launch. Repo: `D:\GK12-Platform`.
+
+**Why:** LearnWorlds is a rental. A custom platform gives full control over the AI tutor (key differentiator), data, branding, and long-term pricing. At 500 students, GCP cost is $30–40/month vs $249+/month on LearnWorlds Learning Center. Long-term potential: license the platform to other faith-based homeschool curriculum providers.
+
+**Stack:** Next.js 15 + Firebase (Auth, Firestore, Storage, App Hosting) + Gemini 2.5 Flash-Lite AI tutor. GCP project: genesis-aios (existing).
+
+**LearnWorlds:** Kept as a potential fallback only. Decision on LearnWorlds upgrade tabled — platform build supersedes it. Ethan to be briefed Wednesday.
+
+**COPPA approach:** Parent-account model for MVP. No individual child logins until legal review in Phase 2.
+
+**Owner:** Shane / AIOS
+
+---
+
 ## 2026-05-15 — Interactive agent: Claude API added for concept interactives
 
 **Decision:** Add `interactive_agent.py` to the lesson pipeline. Uses Claude (`claude-opus-4-7`) via Anthropic API to generate a custom JS interactive per lesson. Also generates a vocab grid (two-column checkmark style) and OCV tab widget from the lesson draft. Runs automatically via `--generate-interactives` in Cloud Run daily batch.
