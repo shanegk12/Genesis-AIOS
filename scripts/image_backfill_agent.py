@@ -68,44 +68,6 @@ def _load_env() -> dict:
     return env
 
 
-def _get_creds():
-    """Get OAuth credentials using requests transport (avoids httplib2 Windows issues)."""
-    from google.auth.transport.requests import Request
-    from google.oauth2.credentials import Credentials
-    from google_auth_oauthlib.flow import InstalledAppFlow
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/devstorage.read_write",
-        "https://www.googleapis.com/auth/documents",
-        "https://www.googleapis.com/auth/calendar",
-    ]
-    token_path  = os.path.join(os.path.dirname(__file__), "..", "drive-token.json")
-    client_path = os.path.join(os.path.dirname(__file__), "..", "oauth-client.json")
-
-    creds = None
-    if os.path.exists(token_path):
-        creds = Credentials.from_authorized_user_file(token_path, SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            if not os.path.exists(client_path):
-                print(f"oauth-client.json not found at {client_path}")
-                sys.exit(1)
-            flow = InstalledAppFlow.from_client_secrets_file(client_path, SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open(token_path, "w") as f:
-            f.write(creds.to_json())
-    return creds
-
-
-def _get_session(creds):
-    """Return an AuthorizedSession using requests (not httplib2)."""
-    from google.auth.transport.requests import AuthorizedSession
-    return AuthorizedSession(creds)
-
-
 # ── Drive helpers (REST via AuthorizedSession) ────────────────────────────────
 
 def _find_folder(session, name: str, parent_id: str | None = None) -> str | None:
@@ -465,8 +427,8 @@ def main():
         sys.exit(1)
 
     print("Authenticating with Google...")
-    creds   = _get_creds()
-    session = _get_session(creds)
+    from _gws_auth import get_session
+    session = get_session()
 
     # Locate Drive folders — root ID is hardcoded, subfolders by name
     creat_id = _find_folder(session, DRIVE_CREAT_NAME, DRIVE_ROOT_ID)

@@ -25,8 +25,6 @@ import argparse, io, json, os, sys, time, urllib.request, urllib.error, zipfile
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(__file__))
-from google.auth.transport.requests import Request, AuthorizedSession
-from google.oauth2.credentials import Credentials
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -44,19 +42,8 @@ UPLOAD_API_BASE = f"https://storage.googleapis.com/upload/storage/v1/b/{STORAGE_
 INTERACTIVE_EXTS = {".html", ".htm", ".zip"}
 EMBED_HEIGHT_DEFAULT = 560
 
-DRIVE_SCOPES = [
-    "https://www.googleapis.com/auth/drive.readonly",
-    "https://www.googleapis.com/auth/devstorage.read_write",
-]
-
-# ── Auth ───────────────────────────────────────────────────────────────────────
-
-def get_session() -> AuthorizedSession:
-    token_path = Path(__file__).parent.parent / "drive-token.json"
-    creds = Credentials.from_authorized_user_file(str(token_path), DRIVE_SCOPES)
-    if creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-    return AuthorizedSession(creds)
+from _gws_auth import get_session
+from google.auth.transport.requests import AuthorizedSession
 
 
 # ── Drive helpers ──────────────────────────────────────────────────────────────
