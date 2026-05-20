@@ -39,7 +39,7 @@ def get_credentials(scopes: list[str] | None = None):
     """
     scopes = scopes or DRIVE_SCOPES
 
-    if SA_KEY_PATH.exists():
+    if SA_KEY_PATH.exists() and SA_KEY_PATH.stat().st_size > 0:
         return _dwd_credentials(scopes)
     else:
         print(

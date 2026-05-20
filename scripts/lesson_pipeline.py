@@ -35,29 +35,30 @@ REQUIRED STRUCTURE (use these exact section headers):
 2. Learning Objectives — 5 bulleted objectives. End one with a biblical stewardship connection.
 3. Key Vocabulary — table with Term and Definition columns. 8-10 terms.
 4. The Beginning: [Thematic Title] — Open with a biblical anchor (cite book, chapter, verse). Connect the theological idea directly to the engineering principle.
-5. Part 1–5 (or as needed) — Each part covers one major concept. Use this sub-structure per part:
-   - Plain-language explanation
+5. Part 1–5 (or as needed) — Each part covers one major concept. Teach directly to the learning objectives.
+   Use this sub-structure per part:
+   - Plain-language explanation that directly addresses what students need to learn
    - Engineering analogy with concrete imagery
-   - Multiscale Modeling connection (macro-level observation → atomic-level cause)
-   - OCV application where relevant
+   - Faith or stewardship connection where it arises naturally from the content (do not force it)
+   Only include a Multiscale Modeling or OCV connection in a Part if it genuinely clarifies the specific concept being taught. Do not add these as boilerplate sub-bullets to every part.
 6. Engineering Journal Task — 5-part structured reflection:
    (1) Identify a System, (2) Energy Path Analysis, (3) Identify the "Toll Booths",
-   (4) Optimization Proposal using OCV, (5) Biblical Reflection with a specific scripture passage.
+   (4) Optimization Proposal, (5) Biblical Reflection with a specific scripture passage.
 7. Technical Documentation Requirements — 3 bullet points. End with the Junior Creationeer Signature block: Person / Date of Analysis / Location of Lab.
 8. Summary of Key Concepts — 4 one-line bullets. Each starts with a single word (e.g., Conservation:, Transfer:, Loss:, Analysis:).
 9. Works Cited — Use Google Search to find 2 real, published, verifiable sources directly relevant to this lesson's topic. Each must include: author(s), full title, publication name or website, year, and URL if available. Do not fabricate or guess sources — only cite what you can verify exists. Also include: (1) Genesis K12 Academy Full Lesson Book; (2) Horstemeyer, M.F., A. Adebayo, M. Jantomaso, J.L. Long, S. Burgess, and A. McIntosh. (2022). "Creationeering™: An Integrated Engineering-Business Paradigm for Technological Entrepreneurship from a Biblical Basis." Creation Research Society Quarterly 58:238–261.
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Analogies for every abstract concept. Write as if you are a knowledgeable mentor speaking directly to the student.
 
-FRAMEWORKS TO USE (do not omit these):
-- Creationeering™ phases (name the relevant phase explicitly per Horstemeyer et al. 2022)
-  Phases in order: Design → Analysis/Synthesis → Procurement → Logistics → Assembly → Performance → Sustainability → Death & Recycling
-- Multiscale Modeling — always connect macro-level observation to atomic-level cause
-- OCV Method (Objective, Constraint, Variable) — apply to one design problem per lesson
-- Optimization — use this term (not "Pareto Frontier") when discussing finding the best trade-off between variables
+APPROACH: You are a teacher whose job is to help students achieve the learning objectives above. Teach the topic directly and clearly. Do not structure content around frameworks — structure it around what students need to understand. Frameworks like Multiscale Modeling and OCV are lenses students can apply themselves; they do not need to appear as named sub-sections in every lesson part. Use them only when they are the clearest way to explain the specific concept.
+
+COURSE CONTEXT:
+- Creationeering™ phases (Horstemeyer et al. 2022): Design → Analysis/Synthesis → Procurement → Logistics → Assembly → Performance → Sustainability → Death & Recycling
+- Name the current Creationeering phase in the Lesson Overview so students know where this fits in the bigger picture.
+- Optimization: use this term (not "Pareto Frontier") when discussing trade-offs.
 
 DO NOT use markdown formatting (no **, *, #, >, or - bullets). Write in plain prose with clear paragraph breaks.
-DO NOT reference the mousetrap car."""
+DO NOT reference the mousetrap car.
 
 MOUSETRAP_PROMPT_TEMPLATE = """You are writing a lesson for Genesis K-12 Academy's Middle School Mousetrap Build course, delivered via LearnWorlds. The audience is middle schoolers in homeschool settings (clusters, single families, church groups). Students are designing and building a mousetrap-powered car across an 18-week project course. Write approximately 2,500 words.
 
@@ -70,11 +71,11 @@ REQUIRED STRUCTURE (use these exact section headers):
 2. Learning Objectives — 5 bulleted objectives. End one with a biblical stewardship connection.
 3. Key Vocabulary — table with Term and Definition columns. 6-8 terms.
 4. The Beginning: [Thematic Title] — Open with a biblical anchor (cite book, chapter, verse). Connect the theological idea to the engineering principle at hand.
-5. Part 1–3 (or as needed) — Each part covers one major concept:
-   - Plain-language explanation
+5. Part 1–3 (or as needed) — Each part covers one major concept. Teach directly to the learning objectives.
+   - Plain-language explanation that directly addresses what students need to learn
    - Direct application to the mousetrap car project
-   - Multiscale Modeling connection (macro-level observation → atomic-level cause) where applicable
-   - OCV application (Objective, Constraint, Variable) where relevant
+   - Engineering analogy with concrete imagery
+   Only include a Multiscale Modeling or OCV connection if it genuinely clarifies the specific concept. Do not add these as a sub-bullet to every part.
 6. Engineering Journal Task — 4-part structured reflection:
    (1) Apply to Your Car, (2) Identify Trade-offs, (3) OCV for Your Design,
    (4) Biblical Reflection with a specific scripture passage
@@ -84,11 +85,11 @@ REQUIRED STRUCTURE (use these exact section headers):
 
 TONE: Supportive, technical, and faith-integrated. Short sentences. No jargon without a definition. Always connect abstract concepts to the mousetrap car. Write as a knowledgeable mentor speaking directly to the student.
 
-FRAMEWORKS TO USE (do not omit):
-- Creationeering™ phases (Horstemeyer et al. 2022) — name the current phase explicitly
-- Multiscale Modeling — connect macro-level observation to atomic-level cause
-- OCV Method (Objective, Constraint, Variable) — apply to one mousetrap car design decision
-- All concepts must connect explicitly to the mousetrap car build project
+APPROACH: You are a teacher whose job is to help students achieve the learning objectives above. Teach each concept so students can actually do what the objectives describe. Frameworks like Multiscale Modeling and OCV are analytical lenses — use them only when they are the most direct way to explain the concept at hand. Do not add them as named sections or boilerplate sub-bullets to every lesson part.
+
+COURSE CONTEXT:
+- Name the current Creationeering™ phase (Horstemeyer et al. 2022) in the Lesson Overview.
+- All concepts must connect explicitly to the mousetrap car build project.
 
 DO NOT use markdown formatting (no **, *, #, >, or - bullets). Write in plain prose with clear paragraph breaks."""
 

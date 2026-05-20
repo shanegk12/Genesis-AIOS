@@ -36,7 +36,7 @@ REQUIRED_SECTIONS_MOUSETRAP = [
     "Summary of Key Concepts",
     "Works Cited",
 ]
-REQUIRED_FRAMEWORKS = ["Creationeering", "Multiscale", "OCV"]
+REQUIRED_FRAMEWORKS = ["Creationeering"]
 WORD_COUNT_RANGE = {
     "creationeering": (2000, 4000),
     "mousetrap":      (1800, 3500),
@@ -46,16 +46,21 @@ QC_PROMPT = """You are a curriculum quality reviewer for Genesis K-12 Academy's 
 
 Score each criterion 1 (poor), 2 (acceptable), or 3 (excellent):
 - reading_level: Vocabulary and sentence complexity appropriate for 6th-8th grade
-- faith_integration: Biblical content natural and meaningfully connected to the engineering topic
-- framework_use: Creationeering phases, Multiscale Modeling, and OCV all correctly applied
+- faith_integration: Biblical content is natural and meaningfully connected to the engineering topic (not forced)
+- objective_alignment: The lesson parts actually teach what the Learning Objectives promise — content directly serves the stated objectives, not tangential frameworks
 - analogy_quality: Analogies are concrete and relatable for middle schoolers
-- structure_complete: All required sections present and substantive
+- structure_complete: All required sections present and substantive; no excessive repetition of the same concept across multiple parts
+
+Flag in notes if:
+- Any concept (e.g. Multiscale Modeling, OCV) appears as a named sub-section in more than one lesson Part without being genuinely necessary in each
+- The lesson parts teach frameworks rather than the learning objectives
+- The content does not match what the Learning Objectives actually state students will be able to do
 
 Set "pass" to true if overall >= 2 AND no individual score is 1.
-Keep "notes" under 150 words — focus on the most important issues only.
+Keep "notes" under 200 words — focus on the most important issues only.
 
 Return exactly this format:
-{{"reading_level": 0, "faith_integration": 0, "framework_use": 0, "analogy_quality": 0, "structure_complete": 0, "overall": 0, "pass": false, "notes": ""}}
+{{"reading_level": 0, "faith_integration": 0, "objective_alignment": 0, "analogy_quality": 0, "structure_complete": 0, "overall": 0, "pass": false, "notes": ""}}
 
 DRAFT (first 6000 chars):
 {draft}"""
