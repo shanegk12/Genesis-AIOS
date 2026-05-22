@@ -16,6 +16,16 @@ Usage:
 import argparse, json, os, re, sys, time, urllib.request, urllib.error
 from datetime import datetime, timezone
 
+try:
+    import textstat
+    _TEXTSTAT = True
+except ImportError:
+    _TEXTSTAT = False
+
+# Target Flesch-Kincaid grade level range for 6th–8th grade students
+READABILITY_MIN_GRADE = 4.0
+READABILITY_MAX_GRADE = 9.5
+
 MANIFEST_PATH  = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 REPORTS_PATH   = os.path.join(os.path.dirname(__file__), "qc_reports.json")
 
@@ -198,6 +208,30 @@ def run_checks(html: str, sections: list[dict]) -> list[dict]:
                     'location':    f'Tab: {tab["label"] or "(untitled)"}',
                     'description': (f'Tab panel has {tab["paras"]} paragraphs'
                                     f' but no image reference'),
+                })
+
+    # Readability check (Flesch-Kincaid grade level, target 4.0–9.5 for grades 6–8)
+    if _TEXTSTAT:
+        plain = re.sub(r'<[^>]+>', ' ', html)
+        plain = re.sub(r'&[a-z]+;', ' ', plain)
+        plain = re.sub(r'\s+', ' ', plain).strip()
+        if len(plain.split()) >= 50:  # skip very short lessons
+            grade = textstat.flesch_kincaid_grade(plain)
+            if grade > READABILITY_MAX_GRADE:
+                issues.append({
+                    'rule':        'readability',
+                    'location':    'Document',
+                    'description': (f'Reading level too high: grade {grade:.1f} '
+                                    f'(target {READABILITY_MIN_GRADE}–{READABILITY_MAX_GRADE} '
+                                    f'for middle school). Simplify vocabulary and sentence length.'),
+                })
+            elif grade < READABILITY_MIN_GRADE:
+                issues.append({
+                    'rule':        'readability',
+                    'location':    'Document',
+                    'description': (f'Reading level very low: grade {grade:.1f} '
+                                    f'(target {READABILITY_MIN_GRADE}–{READABILITY_MAX_GRADE}). '
+                                    f'May lack sufficient academic vocabulary.'),
                 })
 
     return issues

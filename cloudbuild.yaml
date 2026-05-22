@@ -15,12 +15,20 @@ steps:
     args:
       - 'gcloud'
       - 'run'
-      - 'jobs'
-      - 'update'
-      - 'gk12-lesson-pipeline'
+      - 'deploy'
+      - 'gk12-pipeline-worker'
       - '--image=us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'
       - '--region=us-central1'
       - '--project=genesis-aios'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--min-instances=1'
+      - '--max-instances=1'
+      - '--concurrency=20'
+      - '--cpu=4'
+      - '--memory=4Gi'
+      - '--timeout=3600'
+      - '--set-secrets=GITHUB_TOKEN=GITHUB_TOKEN:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest,ANTHROPIC_API_KEY=ANTHROPIC_API_KEY:latest,FAL_KEY=FAL_KEY:latest,PIPELINE_KEY=PIPELINE_KEY:latest,WORKER_URL=WORKER_URL:latest'
 
 images:
   - 'us-central1-docker.pkg.dev/genesis-aios/gk12-pipeline/pipeline:latest'

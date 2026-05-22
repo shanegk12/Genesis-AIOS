@@ -5,7 +5,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY startup.sh /startup.sh
+RUN chmod +x /startup.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENV PYTHONUNBUFFERED=1
+EXPOSE 8080
+
+CMD ["/startup.sh"]

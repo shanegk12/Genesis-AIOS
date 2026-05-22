@@ -295,7 +295,7 @@ def analyze_screenshot(png_bytes: bytes, lesson_id: str, title: str) -> dict:
                     "text": f"""You are reviewing a rendered middle school engineering lesson page.
 Lesson: "{title}" (ID: {lesson_id})
 
-Assess the layout quality across these four areas:
+Assess the layout quality across these six areas:
 
 1. IMAGES — Are image placeholders (dashed boxes labeled "IMAGE PENDING") positioned well relative to surrounding content? Does the caption suggest the image is relevant to the section? Flag any placeholder that seems misplaced or whose caption is vague or irrelevant.
 
@@ -305,7 +305,11 @@ Assess the layout quality across these four areas:
 
 4. CALLOUTS — Are note/tip/warning boxes placed naturally within the lesson flow, or do they interrupt mid-explanation?
 
-5. OVERALL — Does the lesson look clean, readable, and appropriate for a middle school student?
+5. REDUNDANT IMAGES — Look for consecutive image blocks that appear to show individual steps or components of a process that is already depicted in full in a nearby overview or infographic image. Example: a lesson shows one full "Creative Process" or "Engineering Steps" diagram, then immediately follows with 5-7 separate photos of each individual step — those individual photos are redundant. Flag them if you see this pattern, noting approximate position in the lesson.
+
+6. IMAGE QUALITY — Do actual (non-placeholder) images appear relevant to the engineering or science topic of the lesson? Flag images that have excessive whitespace or padding around the subject, appear cropped in a way that cuts off important content, or show subject matter that clearly doesn't match the lesson topic.
+
+7. OVERALL — Does the lesson look clean, readable, and appropriate for a middle school student?
 
 Return JSON only — no other text:
 {{
