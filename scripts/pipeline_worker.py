@@ -70,7 +70,12 @@ _manifest_lock = threading.Lock()
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
 def authorized(req) -> bool:
-    return req.headers.get("Authorization", "") == f"Bearer {PIPELINE_KEY}"
+    # Accept key in Authorization header OR in request body (for Cloud Scheduler)
+    body = req.get_json(silent=True) or {}
+    return (
+        req.headers.get("Authorization", "") == f"Bearer {PIPELINE_KEY}"
+        or body.get("key") == PIPELINE_KEY
+    )
 
 
 # ── Manifest ──────────────────────────────────────────────────────────────────
