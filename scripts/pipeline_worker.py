@@ -58,11 +58,27 @@ import pm_agent  # noqa: E402 — must follow sys.path insert
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-PIPELINE_KEY    = os.environ.get("PIPELINE_KEY", "")
-PROJECT_ID      = "genesis-aios"
-LOCATION        = "us-central1"
-QUEUE_NAME      = "lesson-pipeline"
-WORKER_URL      = os.environ.get("WORKER_URL", "")
+PIPELINE_KEY = os.environ.get("PIPELINE_KEY", "")
+PROJECT_ID   = "genesis-aios"
+LOCATION     = "us-central1"
+QUEUE_NAME   = "lesson-pipeline"
+WORKER_URL   = os.environ.get("WORKER_URL", "")
+
+
+def _get_sa_email() -> str:
+    """Detect service account email from GCP metadata server (falls back to env var)."""
+    try:
+        req = urllib.request.Request(
+            "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email",
+            headers={"Metadata-Flavor": "Google"},
+        )
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            return resp.read().decode("utf-8").strip()
+    except Exception:
+        return os.environ.get("PIPELINE_SA_EMAIL", "")
+
+
+SERVICE_ACCOUNT = _get_sa_email()
 
 _manifest_lock = threading.Lock()
 
