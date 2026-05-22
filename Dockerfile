@@ -6,7 +6,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY startup.sh /startup.sh
-RUN chmod +x /startup.sh
+RUN sed -i 's/\r//' /startup.sh && chmod +x /startup.sh
 
 ENV PYTHONUNBUFFERED=1
 EXPOSE 8080
