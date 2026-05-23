@@ -36,14 +36,18 @@ Setup (run once after first deploy):
     gcloud secrets create WORKER_URL --data-file=- --project=genesis-aios
 """
 
+import base64
 import json
 import logging
 import os
+import re
 import sys
 import tempfile
 import threading
 import time
 import traceback
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -342,6 +346,306 @@ def finalize():
     pm_agent.notify(f"GK12 pipeline complete: {done} done, {failed} failed")
 
     return jsonify({"ok": True, "done": done, "failed": failed})
+
+
+# ── Image Text Re-generation ──────────────────────────────────────────────────
+#
+# Two-endpoint flow for cleaning up images that have scripture/callout text
+# burned into the graphic. Feed them from qc_image_text_audit.py output.
+#
+#   POST /dispatch-image-regen  — enqueue one Cloud Task per flagged block
+#   POST /regen-image           — regenerate a single block (called by Cloud Tasks)
+
+_PLATFORM_URL = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
+_GEM_FLASH    = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+_IMAGEN       = "https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-fast-generate-001:predict"
+_STRIP_RE     = re.compile(r"<[^>]+>")
+
+
+def _gemini_key() -> str:
+    return os.environ.get("GEMINI_API_KEY", "")
+
+
+def _strip_tags(html: str) -> str:
+    return _STRIP_RE.sub(" ", html).strip()
+
+
+def _fetch_lesson_direct(lesson_id: str) -> dict | None:
+    req = urllib.request.Request(
+        f"{_PLATFORM_URL}/api/admin/lessons/{lesson_id}",
+        headers={"Authorization": f"Bearer {PIPELINE_KEY}"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read())
+    except Exception as e:
+        logging.warning(f"[regen] fetch {lesson_id}: {e}")
+        return None
+
+
+def _patch_lesson_direct(lesson_id: str, blocks: list) -> bool:
+    payload = json.dumps({"blocks": blocks}).encode("utf-8")
+    req = urllib.request.Request(
+        f"{_PLATFORM_URL}/api/admin/lessons/{lesson_id}",
+        data=payload,
+        headers={"Authorization": f"Bearer {PIPELINE_KEY}", "Content-Type": "application/json"},
+        method="PATCH",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read()).get("ok", False)
+    except Exception as e:
+        logging.warning(f"[regen] patch {lesson_id}: {e}")
+        return False
+
+
+def _upload_image_direct(lesson_id: str, img_bytes: bytes, filename: str) -> str | None:
+    payload = json.dumps({
+        "lessonId":   lesson_id,
+        "filename":   filename,
+        "mimeType":   "image/png",
+        "dataBase64": base64.b64encode(img_bytes).decode("utf-8"),
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        f"{_PLATFORM_URL}/api/admin/images",
+        data=payload,
+        headers={"Authorization": f"Bearer {PIPELINE_KEY}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            result = json.loads(resp.read())
+            return result.get("url") if result.get("ok") else None
+    except Exception as e:
+        logging.warning(f"[regen] upload {lesson_id}: {e}")
+        return None
+
+
+def _build_regen_prompt(lesson: dict, block_idx: int) -> str:
+    """Use Gemini Flash to write a clean image prompt (zero text overlay emphasis)."""
+    title  = lesson.get("title", "Engineering lesson")
+    blocks = lesson.get("blocks", [])
+    block  = blocks[block_idx] if block_idx < len(blocks) else {}
+    bdata  = block.get("data", {})
+    caption = bdata.get("caption", "") or bdata.get("alt", "")
+
+    context_pieces = []
+    for i in range(max(0, block_idx - 2), block_idx):
+        b = blocks[i]
+        if b.get("type") in ("text", "heading"):
+            t = _strip_tags(b.get("data", {}).get("html", ""))
+            if t:
+                context_pieces.append(t[:200])
+
+    system = (
+        f"You write image generation prompts for Genesis K-12 Academy middle school engineering curriculum.\n\n"
+        f"Lesson: {title}\n"
+        f"Caption/alt: {caption or '(none)'}\n"
+        f"Context: {' '.join(context_pieces)[:400] or '(none)'}\n\n"
+        "Write a single detailed prompt for an educational illustration.\n"
+        "CRITICAL requirements:\n"
+        "- Absolutely NO text, words, letters, scripture, or numbers on the image\n"
+        "- Clean professional illustration style appropriate for grades 6-8\n"
+        "- Show the engineering or science concept visually, not textually\n"
+        "- Navy blue and gold color accents welcome\n\n"
+        "Return ONLY the image prompt. Nothing else."
+    )
+
+    payload = json.dumps({
+        "contents": [{"parts": [{"text": system}]}],
+        "generationConfig": {
+            "temperature": 0.4,
+            "maxOutputTokens": 300,
+            "thinkingConfig": {"thinkingBudget": 0},
+        },
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"{_GEM_FLASH}?key={_gemini_key()}",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            d = json.loads(resp.read())
+        parts = d["candidates"][0]["content"]["parts"]
+        return " ".join(p["text"] for p in parts if "text" in p and not p.get("thought")).strip()
+    except Exception as e:
+        logging.warning(f"[regen] prompt gen failed: {e}")
+        return (
+            f"Educational illustration for a middle school engineering lesson on {title}. "
+            f"{caption or 'Clean diagram showing the concept.'} "
+            "No text, no labels, no words. Navy blue and gold color scheme."
+        )
+
+
+def _generate_clean_imagen(prompt: str) -> bytes | None:
+    """Generate via Imagen with a hard 'no text overlay' instruction prefix."""
+    full = (
+        "Educational illustration, clean professional style, navy blue and gold accents. "
+        "CRITICAL: zero text, zero words, zero scripture, zero overlaid labels on the image itself. "
+        + prompt
+    )
+    payload = json.dumps({
+        "instances":  [{"prompt": full}],
+        "parameters": {"sampleCount": 1, "aspectRatio": "4:3"},
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        f"{_IMAGEN}?key={_gemini_key()}",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            data = json.loads(resp.read())
+        preds = data.get("predictions", [])
+        if preds and "bytesBase64Encoded" in preds[0]:
+            return base64.b64decode(preds[0]["bytesBase64Encoded"])
+        logging.warning("[regen] Imagen returned no image data")
+        return None
+    except urllib.error.HTTPError as e:
+        logging.error(f"[regen] Imagen HTTP {e.code}: {e.read().decode('utf-8','replace')[:200]}")
+        return None
+    except Exception as e:
+        logging.error(f"[regen] Imagen: {e}")
+        return None
+
+
+@app.route("/dispatch-image-regen", methods=["POST"])
+def dispatch_image_regen():
+    """
+    Enqueue one Cloud Task per flagged image block for clean regeneration.
+
+    Accepts the 'flagged' array directly from qc_image_text_audit_report.json:
+      { "flagged": [ { "lessonId": "C-025", "blockIdx": 3, "alt": "..." }, ... ] }
+
+    Each task calls /regen-image on this same worker.
+    """
+    if not authorized(request):
+        return jsonify({"error": "Unauthorized"}), 401
+
+    body    = request.get_json(silent=True) or {}
+    flagged = body.get("flagged", [])
+
+    if not flagged:
+        return jsonify({"ok": True, "queued": 0, "message": "No flagged images provided"})
+
+    if not WORKER_URL:
+        return jsonify({"error": "WORKER_URL not configured"}), 500
+
+    from google.cloud import tasks_v2
+    client = tasks_v2.CloudTasksClient()
+    parent = client.queue_path(PROJECT_ID, LOCATION, QUEUE_NAME)
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+
+    queued: list[str] = []
+    failed: list[str] = []
+
+    for item in flagged:
+        lesson_id = item.get("lessonId", "")
+        block_idx = int(item.get("blockIdx", 0))
+        if not lesson_id:
+            continue
+
+        payload = json.dumps({
+            "lessonId": lesson_id,
+            "blockIdx": block_idx,
+            "alt":      item.get("alt", ""),
+            "runId":    run_id,
+            "key":      PIPELINE_KEY,
+        }).encode("utf-8")
+
+        safe   = f"{lesson_id.lower().replace('-', '')}b{block_idx}"
+        t_name = client.task_path(PROJECT_ID, LOCATION, QUEUE_NAME, f"imgregen-{safe}-{run_id}")
+        task   = {
+            "http_request": {
+                "http_method": tasks_v2.HttpMethod.POST,
+                "url":         f"{WORKER_URL}/regen-image",
+                "headers":     {"Content-Type": "application/json"},
+                "body":        payload,
+            },
+            "name": t_name,
+        }
+        try:
+            client.create_task(request={"parent": parent, "task": task})
+            queued.append(f"{lesson_id}[{block_idx}]")
+            logging.info(f"[regen] queued {lesson_id} block {block_idx}")
+        except Exception as e:
+            logging.error(f"[regen] enqueue {lesson_id}[{block_idx}]: {e}")
+            failed.append(f"{lesson_id}[{block_idx}]")
+
+    return jsonify({
+        "ok":    True,
+        "runId": run_id,
+        "queued": len(queued),
+        "failed": len(failed),
+        "tasks": queued,
+    })
+
+
+@app.route("/regen-image", methods=["POST"])
+def regen_image():
+    """
+    Regenerate a single lesson image block without text overlay.
+    Called by Cloud Tasks (enqueued by /dispatch-image-regen).
+
+    Body: { "lessonId": "C-025", "blockIdx": 3, "alt": "...", "key": "...", "runId": "..." }
+    """
+    body = request.get_json(silent=True) or {}
+
+    if body.get("key") != PIPELINE_KEY:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    lesson_id = body.get("lessonId")
+    block_idx = int(body.get("blockIdx", 0))
+    alt       = body.get("alt", "")
+
+    if not lesson_id:
+        return jsonify({"error": "lessonId required"}), 400
+
+    logging.info(f"[regen] Start: {lesson_id} block {block_idx}")
+
+    lesson = _fetch_lesson_direct(lesson_id)
+    if not lesson:
+        return jsonify({"error": f"Could not fetch {lesson_id}"}), 500
+
+    blocks = lesson.get("blocks", [])
+    if block_idx >= len(blocks):
+        return jsonify({"error": f"Block {block_idx} out of range ({len(blocks)} blocks)"}), 400
+
+    prompt    = _build_regen_prompt(lesson, block_idx)
+    logging.info(f"[regen] Prompt: {prompt[:100]}…")
+
+    img_bytes = _generate_clean_imagen(prompt)
+    if not img_bytes:
+        return jsonify({"error": "Image generation failed"}), 500
+
+    logging.info(f"[regen] Generated {len(img_bytes) // 1024}KB")
+
+    safe_id  = re.sub(r"[^\w]", "", lesson_id)
+    filename = f"regen_{safe_id}_b{block_idx}.png"
+    url      = _upload_image_direct(lesson_id, img_bytes, filename)
+    if not url:
+        return jsonify({"error": "Image upload failed"}), 500
+
+    logging.info(f"[regen] Uploaded: {url[:80]}…")
+
+    updated          = list(blocks)
+    block            = dict(blocks[block_idx])
+    bdata            = dict(block.get("data", {}))
+    bdata["src"]     = url
+    bdata["alt"]     = alt or lesson.get("title", lesson_id)
+    block["data"]    = bdata
+    block.setdefault("meta", {})["regenAt"] = datetime.now(timezone.utc).isoformat()
+    updated[block_idx] = block
+
+    ok = _patch_lesson_direct(lesson_id, updated)
+    if not ok:
+        return jsonify({"error": "PATCH failed"}), 500
+
+    logging.info(f"[regen] Done: {lesson_id} block {block_idx} → {url[:60]}")
+    return jsonify({"ok": True, "lessonId": lesson_id, "blockIdx": block_idx, "url": url})
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────

@@ -62,6 +62,8 @@ def main():
                         help="Preview queue locally without dispatching")
     parser.add_argument("--finalize",    action="store_true",
                         help="Call /finalize instead of /dispatch")
+    parser.add_argument("--image-regen", action="store_true",
+                        help="Read qc_image_text_audit_report.json and dispatch clean-regen tasks")
     parser.add_argument("--skip-images", action="store_true")
     parser.add_argument("--skip-scorm",  action="store_true")
     args = parser.parse_args()
@@ -83,6 +85,35 @@ def main():
     if not worker_url:
         print("WORKER_URL not set. Add to .env or pass --worker-url <url>")
         sys.exit(1)
+
+    if args.image_regen:
+        report_path = Path(__file__).parent / "qc_image_text_audit_report.json"
+        if not report_path.exists():
+            print(f"Audit report not found: {report_path}")
+            print("Run: python scripts/qc_image_text_audit.py --course C  (then --course M)")
+            sys.exit(1)
+        with open(report_path, encoding="utf-8") as f:
+            report = json.load(f)
+        flagged = report.get("flagged", [])
+        if not flagged:
+            print("No flagged images in report — nothing to dispatch.")
+            return
+        print(f"Dispatching regen for {len(flagged)} flagged image block(s)…")
+        try:
+            result = call(f"{worker_url}/dispatch-image-regen", pipeline_key, {"flagged": flagged})
+        except Exception as e:
+            print(f"Error calling /dispatch-image-regen: {e}")
+            sys.exit(1)
+        if result.get("ok"):
+            print(f"Queued {result['queued']} task(s) for run {result.get('runId','?')}")
+            if result.get("failed"):
+                print(f"  {result['failed']} enqueue failure(s)")
+            for t in result.get("tasks", []):
+                print(f"  {t}")
+        else:
+            print(f"Dispatch failed: {result}")
+            sys.exit(1)
+        return
 
     if args.finalize:
         result = call(f"{worker_url}/finalize", pipeline_key, {})
