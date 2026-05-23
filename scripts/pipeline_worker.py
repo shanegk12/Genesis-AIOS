@@ -214,7 +214,7 @@ def dispatch():
                 "headers":     {"Content-Type": "application/json"},
                 "body":        payload,
                 "oidc_token":  {
-                    "service_account_email": "pipeline-runner@genesis-aios.iam.gserviceaccount.com",
+                    "service_account_email": SERVICE_ACCOUNT,
                     "audience": WORKER_URL,
                 },
             },
@@ -583,7 +583,7 @@ def dispatch_image_regen():
                 "headers":     {"Content-Type": "application/json"},
                 "body":        payload,
                 "oidc_token":  {
-                    "service_account_email": "pipeline-runner@genesis-aios.iam.gserviceaccount.com",
+                    "service_account_email": SERVICE_ACCOUNT,
                     "audience": WORKER_URL,
                 },
             },
