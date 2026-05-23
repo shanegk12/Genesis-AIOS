@@ -213,6 +213,10 @@ def dispatch():
                 "url":         f"{WORKER_URL}/process",
                 "headers":     {"Content-Type": "application/json"},
                 "body":        payload,
+                "oidc_token":  {
+                    "service_account_email": "pipeline-runner@genesis-aios.iam.gserviceaccount.com",
+                    "audience": WORKER_URL,
+                },
             },
             "name": task_name,
         }
@@ -578,6 +582,10 @@ def dispatch_image_regen():
                 "url":         f"{WORKER_URL}/regen-image",
                 "headers":     {"Content-Type": "application/json"},
                 "body":        payload,
+                "oidc_token":  {
+                    "service_account_email": "pipeline-runner@genesis-aios.iam.gserviceaccount.com",
+                    "audience": WORKER_URL,
+                },
             },
             "name": t_name,
         }
