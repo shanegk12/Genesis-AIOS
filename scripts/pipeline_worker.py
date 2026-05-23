@@ -517,16 +517,30 @@ def dispatch_image_regen():
     """
     Enqueue one Cloud Task per flagged image block for clean regeneration.
 
-    Accepts the 'flagged' array directly from qc_image_text_audit_report.json:
-      { "flagged": [ { "lessonId": "C-025", "blockIdx": 3, "alt": "..." }, ... ] }
+    Two modes:
+      { "flagged": [...] }          — pass list directly
+      { "mode": "from_repo" }       — read from scripts/image_regen_queue.json in cloned repo
 
     Each task calls /regen-image on this same worker.
     """
     if not authorized(request):
         return jsonify({"error": "Unauthorized"}), 401
 
-    body    = request.get_json(silent=True) or {}
-    flagged = body.get("flagged", [])
+    body = request.get_json(silent=True) or {}
+
+    if body.get("mode") == "from_repo":
+        queue_path = REPO_ROOT / "scripts" / "image_regen_queue.json"
+        if not queue_path.exists():
+            return jsonify({"error": f"Queue file not found: {queue_path}"}), 404
+        try:
+            with open(queue_path, encoding="utf-8") as f:
+                queue_data = json.load(f)
+            flagged = queue_data.get("items", [])
+            logging.info(f"[regen] from_repo: {len(flagged)} items from {queue_path}")
+        except Exception as e:
+            return jsonify({"error": f"Failed to read queue file: {e}"}), 500
+    else:
+        flagged = body.get("flagged", [])
 
     if not flagged:
         return jsonify({"ok": True, "queued": 0, "message": "No flagged images provided"})
