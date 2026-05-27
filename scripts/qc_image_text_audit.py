@@ -105,7 +105,9 @@ def load_manifest() -> list[dict]:
         print(f"[WARN] Manifest not found at {MANIFEST_PATH} — run lessons_manifest build first")
         return []
     with open(MANIFEST_PATH, encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    # Manifest is either a list or {"meta": ..., "lessons": [...]}
+    return data if isinstance(data, list) else data.get("lessons", [])
 
 
 def load_report() -> dict:

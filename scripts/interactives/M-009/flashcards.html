@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Plan — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Business Plan</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Business Plan", "definition": "A detailed document that outlines a company's goals, strategies, and how it plans to achieve them, including financial projections and marketing."}, {"term": "Entrepreneur", "definition": "A person who starts a new business, taking on financial risks in the hope of profit. They create new products or services for the market."}, {"term": "Creationeering™ Vehicle Company", "definition": "The name of the student-launched company in this lesson, focused on bringing a mousetrap vehicle product to market through creative engineering."}, {"term": "Mousetrap Vehicle", "definition": "The specific product that students design and then plan to launch as their company's first offering. It's a vehicle powered by a mousetrap."}, {"term": "Engineering Lifecycle", "definition": "A structured process that guides engineers through all stages of developing a product, from initial idea to its eventual retirement. It has nine pillars for comprehensive development."}, {"term": "Stewardship", "definition": "The biblical principle of responsibly managing and protecting something entrusted to one's care. In business, it means wisely using resources, time, and talent."}, {"term": "Resources", "definition": "The materials, money, time, and people (talent) available to a company or individual. Wise stewardship means using these effectively to achieve goals."}, {"term": "Market", "definition": "The place or system where buyers and sellers meet to exchange goods and services. For a company, it's where they sell their products to customers."}, {"term": "Product Launch", "definition": "The official introduction of a new product or service to the market. It involves planning, marketing, and making the product available to customers."}, {"term": "Business Management", "definition": "The process of planning, organizing, leading, and controlling the resources of a company to achieve its goals. It includes making smart decisions about operations and finances."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

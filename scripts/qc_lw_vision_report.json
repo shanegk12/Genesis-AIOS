@@ -1,0 +1,1765 @@
+{
+  "C-015": {
+    "folder": "Alternatives and Patents",
+    "lessonTitle": "Alternatives and Patents",
+    "imagesTotal": 9,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Introduction",
+        "The Power of Alternatives",
+        "Brainstorming and Sketching Variations",
+        "Intellectual Property and Patents",
+        "How to Qualify for a Patent",
+        "Designed Alternatives in Nature",
+        "Your Design Challenge",
+        "Interactive Workbench (Earth-Sampling Tool)",
+        "The Value of Stewardship"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary presented as plain text definitions rather than structured term-definition pairs",
+        "Learning Objectives is a bulleted list that could be more visually distinct",
+        "SCAMPER explanation embedded in paragraph text instead of highlighted or separated",
+        "Patent qualification criteria (Novel, Useful, Non-Obvious) presented as numbered list without callout emphasis",
+        "Design Challenge instructions (Generate, Evaluate, Justify) could use better visual hierarchy",
+        "Mix of conceptual text and biblical references could benefit from callout blocks for integration",
+        "Morphological Model and Morphological Analysis sections are dense paragraphs without visual breaks",
+        "Interactive workbench screenshot lacks caption/context explanation"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Two-column text layout with terms and definitions",
+          "recommended_block": "vocab",
+          "reason": "Vocab block is built for term-definition pairs; provides consistent styling and scannability for 8-term list"
+        },
+        {
+          "section": "Learning Objectives",
+          "current": "Bullet list under heading",
+          "recommended_block": "callout (info)",
+          "reason": "Callout block highlights learning goals as important anchor content; more visually distinct than plain bullets"
+        },
+        {
+          "section": "Brainstorming and Sketching Variations",
+          "current": "Paragraphs with embedded SCAMPER explanation and Morph Model explanation",
+          "recommended_block": "accordion or tabs",
+          "reason": "Content is dense; accordion sections for 'SCAMPER', 'Morphological Model', 'Using SCAMPER for Refinement' would improve scannability"
+        },
+        {
+          "section": "How to Qualify for a Patent",
+          "current": "Numbered list (Novel, Useful, Non-Obvious) embedded in paragraph",
+          "recommended_block": "callout (tip)",
+          "reason": "Three patent criteria are critical concepts; callout block emphasizes them as key takeaway, not just supporting text"
+        },
+        {
+          "section": "Designed Alternatives in Nature",
+          "current": "Paragraph with birds example and embedded biblical principle",
+          "recommended_block": "columns with callout",
+          "reason": "Split nature example (left) from stewardship principle (right callout) to clarify the two distinct ideas being connected"
+        },
+        {
+          "section": "Your Design Challenge",
+          "current": "Three numbered instructions (Generate, Evaluate, Justify)",
+          "recommended_block": "accordion-grid or tabs",
+          "reason": "Three distinct tasks with different cognitive loads; accordion allows students to focus on one step at a time"
+        },
+        {
+          "section": "The Value of Stewardship",
+          "current": "Two paragraphs mixing biblical reference with patent concept",
+          "recommended_block": "callout (biblical)",
+          "reason": "Genesis and Matthew references are foundational to lesson philosophy; biblical callout block integrates theology clearly"
+        },
+        {
+          "section": "Interactive Workbench",
+          "current": "Screenshot of tool with no caption or explanation",
+          "recommended_block": "image with text caption + accordion",
+          "reason": "Add caption explaining workbench purpose; use accordion to hide step-by-step instructions until needed"
+        }
+      ],
+      "content_notes": "Lesson is comprehensive and well-written, but dense. Strong conceptual scaffolding from problem→alternatives→evaluation→IP protection. Biblical stewardship frame is thoughtful. Concern: workbench screenshot lacks context—students may not understand it's an interactive tool vs. static example. SCAMPER acronym appears twice without explicit callout. Morphological Model explanation is solid but could be split from SCAMPER discussion for clarity.",
+      "priority": "medium"
+    }
+  },
+  "C-017": {
+    "folder": "Concept Generation",
+    "lessonTitle": "Concept Generation",
+    "imagesTotal": 8,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Introduction",
+        "Brainstorming Basics",
+        "SCAMPER Technique",
+        "Morph Charts",
+        "Understanding Tradeoffs",
+        "Preliminary vs. Technical Sketching",
+        "Conclusion",
+        "Biblical Connections: Creativity, Wisdom, and Discernment"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary presented as plain text with checkmarks; should use dedicated vocab block for term-definition pairs",
+        "Brainstorming Basics has collapsible sections (Discover Hidden Variables, Navigate Constraints, etc.) that could use accordion or accordion-grid for better interactivity",
+        "SCAMPER items (S, C, A, M, P, E, R) listed with examples; would benefit from structured layout with visual pairing to the image",
+        "No clear visual separation between main content sections; dividers or heading hierarchy could improve",
+        "Biblical Connections section mixes quote, scripture reference, and paragraphs without clear callout styling",
+        "Morph Chart table could be clearer with better visual emphasis on the subassembly categories"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Checkmark-bulleted terms with inline definitions",
+          "recommended_block": "vocab",
+          "reason": "Vocab block provides structured term-definition grid perfect for glossary-style content; improves scanability for 6-8th graders"
+        },
+        {
+          "section": "Brainstorming Basics",
+          "current": "Four collapsible/expandable sections with headers and descriptive text",
+          "recommended_block": "accordion-grid",
+          "reason": "Accordion-grid organizes four related concepts with consistent expand/collapse behavior; matches the 'click through terms' instruction already in content"
+        },
+        {
+          "section": "SCAMPER Technique",
+          "current": "Seven lettered items with examples, text on left, image on right",
+          "recommended_block": "columns",
+          "reason": "Two-column layout (text left, image right) clearly separates SCAMPER list from reference photo; improves layout balance"
+        },
+        {
+          "section": "Morph Charts",
+          "current": "Table with Subassembly row and three Option columns",
+          "recommended_block": "tabs",
+          "reason": "Could use tabs to switch between Power Source, Movement, Material rows; makes comparison easier on smaller screens for middle schoolers"
+        },
+        {
+          "section": "Understanding Tradeoffs",
+          "current": "Introductory paragraph, drone image left, text right, bullet list below",
+          "recommended_block": "columns",
+          "reason": "Image-text pairing on drone example works well; formalize with columns block for consistent spacing"
+        },
+        {
+          "section": "Biblical Connections",
+          "current": "Quote, scripture reference, and paragraphs mixed together",
+          "recommended_block": "callout",
+          "reason": "Use biblical callout type to highlight Proverbs 2:6 and key themes; visually distinguishes this section and reinforces its importance"
+        },
+        {
+          "section": "Lesson Overview & Learning Objectives",
+          "current": "Text paragraphs with bullet list",
+          "recommended_block": "callout",
+          "reason": "Wrap overview in info callout to draw attention; Learning Objectives as info callout helps students understand goals upfront"
+        }
+      ],
+      "content_notes": "Content is comprehensive and well-written for middle school. SCAMPER examples are concrete and relatable. Morph Chart section could use a brief note on how to read the table. Biblical integration is thoughtful but could be higher-impact with visual styling. No spelling/grammar errors detected. Introduction references previous OCV lesson effectively.",
+      "priority": "medium"
+    }
+  },
+  "C-011": {
+    "folder": "Design Forces and Influences",
+    "lessonTitle": "Design: Forces and Influences",
+    "imagesTotal": 21,
+    "imagesSampled": 8,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Lesson Overview\",\n    \"Learning Objectives\",\n    \"Suggested Vocabulary Review\",\n    \"Forces are vectors explanation\",\n    \"Internal vs. External Forces\",\n    \"External Forces (The Outside World)\",\n    \"Internal Forces (The Material's Reaction)\",\n    \"Tension (with bridge cable image)\",\n    \"Torsion (with driveshaft image)\",\n    \"Material properties and composite design\",\n    \"Vocabulary Review (definitions)\",\n    \"Faith Connection\",\n    \"Practical Engineering Example (EV racing)\",\n    \"Types of Forces\",\n    \"Friction (with detailed explanation)\"\n  ],\n  \"formatting_issues\": [\n    \"Vocabulary review appears twice (heading appears early, full definitions appear later) — creates confusion about lesson structure\",\n    \"Long paragraphs of text without visual breaks or hierarchy; difficult for middle schoolers to parse\",\n    \"Internal Forces section uses horizontal tabs for Tension/Compression/Shear/Torsion/Bending but only shows one at a time; better as accordion or sequential sections for learning flow\",\n    \"Faith Connection section is dense narrative text without visual separation from engineering content\",\n    \"Interactive EV racing example is embedded but lacks context introduction or follow-up questions\",\n    \"Types of Forces tabs (Gravity/Normal/Friction/Spring/Applied) use same tab pattern but content varies in depth; inconsistent treatment\",\n    \"Key equation (F = m·a) mentioned in overview but never formally highlighted or used in calculations\",\n    \"Images of real-world structures (bridge cables, driveshaft) could benefit from labeled callout boxes or close-up detail emphasis\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"Lesson Overview & Learning Objectives\",\n      \"current\": \"Two separate text blocks with bullet points\",\n      \"recommended_block\": \"heading (h2) for Overview, then text; heading (h3) for Objectives with list; consider callout (tip) to highlight F=m·a equation\",\n      \"reason\": \"Creates visual hierarchy and emphasizes the foundational equation that connects all content\"\n    },\n    {\n      \"section\": \"Suggested Vocabulary Review (initial heading)\",\n      \"current\": \"Appears as standalone heading before content\",\n      \"recommended_block\": \"Remove early heading; use only the vocab block later (see below)\",\n      \"reason\": \"Eliminates duplicate section labels and confusion about lesson flow\"\n    },\n    {\n      \"section\": \"Forces are vectors + Balanced forces example\",\n      \"current\": \"Two paragraphs of explanation text\",\n      \"recommended_block\": \"heading (h3), then callout (info) for vector definition, then text explanation with embed or image showing force diagram\",\n      \"reason\": \"Middle schoolers need visual anchor for abstract vector concept; callout breaks up dense paragraph\"\n    },\n    {\n      \"section\": \"Internal vs. External Forces (overview)\",\n      \"current\": \"Single introductory paragraph\",\n      \"recommended_block\": \"heading (h3) + callout (tip) summarizing the distinction, then divider before detailed sections\",\n      \"reason\": \"Sets up binary framework before diving into specifics; callout provides reference point\"\n    },\n    {\n      \"section\": \"External Forces (The Outside World)\",\n      \"current\": \"Short paragraph ending with 'Let's look at bridge forces'\",\n      \"recommended_block\": \"heading (h3) + text + callout (info) listing common external loads (dead load, live load, wind, etc.)\",\n      \"reason\": \"Concrete list prepares students before bridge example; callout format is scannable\"\n    },\n    {\n      \"section\": \"Internal Forces (Tension/Compression/Shear/Torsion/Bending)\",\n      \"current\": \"Tabs showing one force type at a time\",\n      \"recommended_block\": \"accordion-grid with 5 items, each containing heading (h3), description text, and image\",\n      \"reason\": \"Accordion-grid allows students to explore at own pace while keeping structure visible; better for comprehension than hidden tabs\"\n    },\n    {\n      \"section\": \"Tension detail (with bridge image)\",\n      \"current\": \"Image on left, text + label on right in columns layout\",\n      \"recommended_block\": \"heading (h3), image, then callout (info) with definition and real-world example in colored box\",\n      \"reason\": \"Callout format highlights key definition; image + callout easier to scan than scattered text\"\n    },\n    {\n      \"section\": \"Torsion detail (with driveshaft image)\",\n      \"current\": \"Text description on left, image on right\",\n      \"recommended_block\": \"heading (h3), image (full width or larger), then callout (info) with definition\",\n      \"reason\": \"Driveshaft is visual concept; image should be prominent; callout keeps explanation concise\"\n    },\n    {\n      \"section\": \"Material properties conclusion paragraph\",\n      \"current\": \"Long text block discussing concrete + steel\",\n      \"recommended_block\": \"heading (h3), then callout (tip) with 2",
+      "error": "json_parse_failed"
+    }
+  },
+  "C-012": {
+    "folder": "Design Historical Case Studies",
+    "lessonTitle": "Design: Historical Case Studies",
+    "imagesTotal": 14,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title/Header",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Technical Insight: Modular Design",
+        "Success Pattern",
+        "Safety Features and Success Patterns",
+        "Analysis",
+        "Reflection",
+        "Case Study 1: Roman Aqueducts",
+        "Case Study 2: De Havilland Comet",
+        "Case Study 3: Gutenberg Press"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary section appears twice (pages 1 and 4) with different content — unclear if intentional or formatting error",
+        "Long paragraph blocks (Lesson Overview, Reflection) lack visual breaks and could overwhelm middle schoolers",
+        "Learning Objectives listed as bullet points but would benefit from visual distinction",
+        "Case study overviews lack structured information hierarchy — mix of images and text without clear labels",
+        "Three Pillars of Success Patterns (Redundancy, Biomimicry, Stewardship) presented as paragraph text; would benefit from visual callout or cards",
+        "Analysis sections under case studies use bullets but mix technical depth with explanatory text inconsistently"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Lesson Overview",
+          "current": "Large paragraph block",
+          "recommended_block": "callout (info)",
+          "reason": "Overview text is foundational context; callout box improves scannability and signals importance to younger learners"
+        },
+        {
+          "section": "Learning Objectives",
+          "current": "Bulleted list under heading",
+          "recommended_block": "callout (tip)",
+          "reason": "Makes objectives stand out visually; helps students understand what they'll learn before starting"
+        },
+        {
+          "section": "Three Pillars of Success Patterns",
+          "current": "Three separate paragraph definitions",
+          "recommended_block": "accordion-grid or columns",
+          "reason": "Each pillar (Redundancy, Biomimicry, Stewardship) is distinct; accordion-grid allows exploration; columns work for single-page view"
+        },
+        {
+          "section": "Key Vocabulary",
+          "current": "Term-definition pairs in grid format (appears twice)",
+          "recommended_block": "vocab",
+          "reason": "Already well-formatted; consolidate single occurrence if duplicate is error"
+        },
+        {
+          "section": "Case Study Overviews",
+          "current": "Image followed by unstructured text",
+          "recommended_block": "columns (image left, text right) or tabs",
+          "reason": "Organizes image and descriptive text side-by-side; tabs could separate Overview/Analysis for each case study"
+        },
+        {
+          "section": "Analysis subsections",
+          "current": "Bullet points mixing concepts with explanations",
+          "recommended_block": "accordion or tabs",
+          "reason": "Pre-Fabrication, Internal Influence, Material Stewardship each deserve expanded explanation; accordion allows students to explore depth"
+        },
+        {
+          "section": "Reflection",
+          "current": "Multiple large paragraph blocks",
+          "recommended_block": "callout (biblical) + text",
+          "reason": "Reflection is metacognitive; callout highlights the spiritual/wisdom dimension; text blocks can follow for elaboration"
+        },
+        {
+          "section": "Technical Insight: Modular Design",
+          "current": "Heading with paragraph text",
+          "recommended_block": "callout (tip)",
+          "reason": "This is a discrete 'insight' box; callout format signals it's a key takeaway separate from narrative flow"
+        }
+      ],
+      "content_notes": "Content quality is strong with clear biblical integration and real-world engineering examples appropriate for middle school. Minor issue: Key Vocabulary section appears duplicated (page 1 and page 4), suggesting possible content management error. Reflection section effectively ties lessons to stewardship values. Case studies are substantive but dense; breaking Analysis subsections into expandable blocks would improve accessibility. No factual errors detected.",
+      "priority": "medium"
+    }
+  },
+  "C-014": {
+    "folder": "Design Iteration and Communication",
+    "lessonTitle": "Design Iteration and Communication",
+    "imagesTotal": 8,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Design Iteration and Communication (title)",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Introduction to Design Iteration",
+        "Why is Design Iteration Important?",
+        "Iteration Enhances Creativity",
+        "Iteration Promotes Problem Solving",
+        "Iteration Increases User Satisfaction",
+        "Iteration Encourages Collaboration",
+        "The Iterative Process",
+        "Rapid Iteration",
+        "How Rapid Iteration Works",
+        "Importance of Communication in Design Iteration",
+        "Documentation",
+        "Presenting the Final Solution"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary definitions are presented as plain text blocks rather than as a structured term-definition grid",
+        "The six-stage iterative process (Define, Brainstorm, Create, Test, Refine, Repeat) is embedded in paragraph text rather than presented as a numbered list or accordion",
+        "Benefits of iteration (Creativity, Problem Solving, User Satisfaction, Collaboration) are presented as separate heading+text blocks instead of a cohesive callout or accordion structure",
+        "Heavy text blocks lack visual breaks; would benefit from callouts to highlight key concepts",
+        "Images are interspersed but not systematically paired with related content sections",
+        "Communication strategies section is dense paragraph text; could use callout boxes for articulation, brainstorming, and feedback concepts",
+        "Documentation section mixes conceptual explanation with practical guidance without clear distinction"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Five term-definition pairs in plain text blocks with checkmarks",
+          "recommended_block": "vocab",
+          "reason": "Designed for term-definition grids; improves scannability and provides consistent formatting for middle school learners"
+        },
+        {
+          "section": "The Iterative Process",
+          "current": "Six numbered steps embedded in paragraph text",
+          "recommended_block": "accordion",
+          "reason": "Each step (Define, Brainstorm, Create, Test, Refine, Repeat) can be expandable; allows students to focus on one stage at a time without overwhelming long blocks"
+        },
+        {
+          "section": "Why is Design Iteration Important?",
+          "current": "Multiple heading+text subsections (Creativity, Problem Solving, User Satisfaction, Collaboration)",
+          "recommended_block": "accordion-grid",
+          "reason": "Four benefits with images and explanatory text; accordion-grid allows parallel structure with images on left/right, collapsible for engagement"
+        },
+        {
+          "section": "How Rapid Iteration Works",
+          "current": "Text explaining objectives, constraints, and variables as bullet points within a paragraph",
+          "recommended_block": "callout (tip)",
+          "reason": "Bridge example with objectives/constraints/variables is practical guidance; callout highlights it as a key strategy"
+        },
+        {
+          "section": "Importance of Communication in Design Iteration",
+          "current": "Dense paragraphs covering articulation, brainstorming, and communication strategies",
+          "recommended_block": "tabs or accordion",
+          "reason": "Three distinct communication concepts (Articulation, Brainstorming, Feedback loops) benefit from tabbed or collapsible organization for clarity"
+        },
+        {
+          "section": "Documentation",
+          "current": "Conceptual explanation + practical note; image of notebook",
+          "recommended_block": "callout (tip)",
+          "reason": "Documentation is a critical habit; callout box emphasizes importance and best practices for middle schoolers"
+        },
+        {
+          "section": "Lesson Overview & Learning Objectives",
+          "current": "Separate heading+text blocks",
+          "recommended_block": "callout (info)",
+          "reason": "Overview and Objectives are foundational context; info callout signals to students what they're learning and why"
+        }
+      ],
+      "content_notes": "Lesson is comprehensive and well-written with strong real-world examples (LEGOs, bridge). Images effectively illustrate collaborative work and design spaces. Content is age-appropriate but text-heavy in places. Consider breaking dense paragraphs on communication and documentation into actionable takeaways. Bridge building example is excellent but could be highlighted more visually. Recommend adding a simple workflow diagram showing the six iterative stages for visual learners.",
+      "priority": "medium"
+    }
+  },
+  "C-002": {
+    "folder": "Entrepreneurship",
+    "lessonTitle": "Entrepreneurship",
+    "imagesTotal": 14,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Intro (Pray, Think, Create, Give God the Glory)",
+        "What Is Entrepreneurship?",
+        "Self-Confidence and Leadership",
+        "Human Resources",
+        "Management",
+        "Sales/Marketing",
+        "Activity (Optional)",
+        "Key Vocabulary"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary section uses plain text definitions instead of structured vocab grid format",
+        "Four-step motto (Pray, Think, Create, Give God the Glory) repeated across multiple slides without consistent visual hierarchy or interactive tabs",
+        "Learning Objectives listed as bullet points without callout/highlight treatment",
+        "Main business areas (HR, Management, Sales/Marketing) lack clear visual separation — appear as isolated text blocks with images rather than cohesive section structure",
+        "Biblical references and faith-based guidance scattered throughout without dedicated callout styling",
+        "Activity section is vague and lacks clear structure or instructions"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Bullet-point list under heading",
+          "recommended_block": "callout (tip)",
+          "reason": "Objectives are key learning targets and deserve visual emphasis for 6th-8th graders"
+        },
+        {
+          "section": "Key Vocabulary",
+          "current": "Plain text term-definition pairs arranged in columns",
+          "recommended_block": "vocab",
+          "reason": "Dedicated vocab block provides structured, scannable layout for definitions"
+        },
+        {
+          "section": "Pray, Think, Create, Give God the Glory",
+          "current": "Multiple separate intro slides with repeated cycle",
+          "recommended_block": "tabs or accordion",
+          "reason": "Consolidate four steps into interactive tabs/accordion to reduce repetition and improve navigation"
+        },
+        {
+          "section": "Main Business Areas",
+          "current": "Three separate text-image blocks (HR, Management, Sales/Marketing) scattered across lesson",
+          "recommended_block": "accordion-grid or columns",
+          "reason": "Group related content logically; accordion-grid allows middle schoolers to explore at own pace"
+        },
+        {
+          "section": "Biblical Guidance & Faith Elements",
+          "current": "Mixed into body text (e.g., Isaiah 26:3-4, Abraham/Isaac story)",
+          "recommended_block": "callout (biblical)",
+          "reason": "Dedicated biblical callouts highlight faith foundation and visual separation aids comprehension"
+        },
+        {
+          "section": "Activity (Optional)",
+          "current": "Brief paragraph with minimal structure",
+          "recommended_block": "callout (info) or accordion",
+          "reason": "Activity deserves clear instructions, objectives, and expanded scaffolding for independent learners"
+        }
+      ],
+      "content_notes": "Lesson is theologically sound and content-rich, but presentation is fragmented across 8 screenshots with repetitive motto cycling. The four business areas (HR, Management, Sales/Marketing, Finance implied) need unified treatment. Activity section is underdeveloped — no instructions, materials list, or success criteria. Consider adding a Finance section to round out the four main areas mentioned in overview. Risk mitigation and faith-based decision-making are strong themes but need callout styling for visibility.",
+      "priority": "high"
+    }
+  },
+  "C-008": {
+    "folder": "Ethics in Engineering and Stewardship",
+    "lessonTitle": "Ethics in Engineering",
+    "imagesTotal": 17,
+    "imagesSampled": 8,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Title: Ethics and Stewardship\",\n    \"Lesson Overview\",\n    \"Learning Objectives\",\n    \"Understanding Ethical Design\",\n    \"Time Management\",\n    \"Integrity in Design\",\n    \"Practical Application\",\n    \"The Creationeering Model (The Ethical Phone)\",\n    \"Interactive 2: The Redemption Lab\",\n    \"Engineers as Caretakers\",\n    \"Key Vocabulary\",\n    \"The Concept of Creationeering\",\n    \"What is Ethics?\",\n    \"Scenario #2 with Creationeering Perspective\",\n    \"Sustainable Energy Solutions\",\n    \"Safe Transportation Systems\"\n  ],\n  \"formatting_issues\": [\n    \"Learning Objectives displayed as bullet list but would benefit from callout formatting for visual hierarchy\",\n    \"Key Vocabulary shown as plain text definitions instead of dedicated vocab grid block\",\n    \"Scenario #2 appears to mix narrative text and image without clear column separation\",\n    \"Long narrative paragraphs under 'What is Ethics?' lack visual breaks and could use callout/tip formatting for key takeaways\",\n    \"The 8-stage design process description is embedded in narrative—would benefit from accordion or tabs for each stage\",\n    \"Interactive activities (Redemption Lab, design challenges) lack visual distinction from regular content\",\n    \"Biblical references scattered throughout could be collected in biblical callout blocks for consistency\",\n    \"Stewardship Triangle mentioned but image placeholder not clearly labeled\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"Learning Objectives\",\n      \"current\": \"Bullet list with four items\",\n      \"recommended_block\": \"callout (tip)\",\n      \"reason\": \"Learning objectives are critical takeaways; callout formatting makes them stand out and improves retention for middle school audience\"\n    },\n    {\n      \"section\": \"Key Vocabulary\",\n      \"current\": \"Plain text term-definition pairs in paragraph format\",\n      \"recommended_block\": \"vocab\",\n      \"reason\": \"Four key terms (Creationeering, Ethics, Stewardship, NSPE Code of Ethics) should use dedicated vocab grid for clarity and reference\"\n    },\n    {\n      \"section\": \"Understanding Ethical Design (8 stages)\",\n      \"current\": \"Narrative paragraphs for Design, Analysis & Synthesis, Time Management, Integrity\",\n      \"recommended_block\": \"accordion\",\n      \"reason\": \"Eight design stages are iterative; accordion allows students to expand each stage without overwhelming the page, improving navigation\"\n    },\n    {\n      \"section\": \"Practical Application\",\n      \"current\": \"Three bullet points describing activities\",\n      \"recommended_block\": \"callout (tip) or tabs\",\n      \"reason\": \"These are actionable learning activities; callout emphasizes engagement; tabs could separate each activity type\"\n    },\n    {\n      \"section\": \"The Creationeering Model (Ethical Phone example)\",\n      \"current\": \"Bullet list describing design, analysis, sustainability, recycling stages\",\n      \"recommended_block\": \"tabs\",\n      \"reason\": \"Four distinct product lifecycle stages work well in tabs; helps students compare stages side-by-side and understand progression\"\n    },\n    {\n      \"section\": \"Interactive 2: Redemption Lab\",\n      \"current\": \"Paragraph describing the activity\",\n      \"recommended_block\": \"callout (warning or tip)\",\n      \"reason\": \"Distinguishes interactive activity from static content; draws attention to hands-on learning moment\"\n    },\n    {\n      \"section\": \"Biblical references (Genesis 1:26-28, Genesis 2:15, Proverbs 11:3)\",\n      \"current\": \"Embedded in narrative paragraphs\",\n      \"recommended_block\": \"callout (biblical)\",\n      \"reason\": \"Centralizes scriptural grounding for the lesson; biblical callout reinforces faith integration for faith-based curriculum\"\n    },\n    {\n      \"section\": \"Scenario #2 with image\",\n      \"current\": \"Text on left, image on right without clear structure\",\n      \"recommended_block\": \"columns\",\n      \"reason\": \"Two-column layout explicitly separates narrative scenario from supporting medical/surgical room image; improves readability\"\n    },\n    {\n      \"section\": \"What is Ethics? (long paragraph section)\",\n      \"current\": \"Dense multi-paragraph section on ethical decision-making\",\n      \"recommended_block\": \"callout (info) with dividers\",\n      \"reason\": \"Key principles (identify core values, consult others, evaluate long-term implications, foster integrity) deserve visual emphasis; dividers separate concepts\"\n    },\n    {\n      \"section\": \"Stewardship Triangle\",\n      \"current\": \"Text reference: '[Image: Stewardship Triangle...]'\",\n      \"recommended_block\": \"image with caption\",\n      \"reason\": \"Placeholder indicates missing visual; image block with caption makes diagram accessible and emphasizes the three pillars (Sustainability, Resource Management, Time Management, Integrity)\"\n    }\n  ],\n  \"content_notes\": \"Strong content aligned with faith-based engineering pedagogy. Key gaps: (1",
+      "error": "json_parse_failed"
+    }
+  },
+  "C-013": {
+    "folder": "Form Function and Aesthetic",
+    "lessonTitle": "Form, Function, and Aesthetic",
+    "imagesTotal": 8,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title slide",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Mastering the Trinity of Design",
+        "What is Form?",
+        "What is Function?",
+        "The Role of Aesthetics",
+        "User Experience (UX)",
+        "The Core Principle: Function Dictates Form",
+        "The Interplay of Form, Function, and Aesthetics",
+        "The Role of Subassemblies",
+        "Faith Connection"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary section uses dense two-column layout that could be better organized as a grid",
+        "Learning Objectives are plain bullet list—could use callout or accordion for visual hierarchy",
+        "Long narrative sections (Mastering the Trinity, Interplay) lack visual breaks and could use columns or callouts",
+        "Table in Interplay section is dense and could benefit from accordion-grid for mobile readability",
+        "Mix of inline images and text creates inconsistent visual pacing—some sections need better image/text balance",
+        "Faith Connection uses numbered list format but could use accordion for better engagement and scanability",
+        "No visual distinction between definition sections (Form/Function/Aesthetics explanations)"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Plain bulleted list",
+          "recommended_block": "callout (info)",
+          "reason": "Highlights learning goals as important checkpoint; improves visual emphasis for K-12 learners"
+        },
+        {
+          "section": "Key Vocabulary",
+          "current": "Two-column text layout",
+          "recommended_block": "vocab",
+          "reason": "Purpose-built for term-definition pairs; improves scannability and supports retention"
+        },
+        {
+          "section": "Mastering the Trinity of Design",
+          "current": "Dense body text paragraph",
+          "recommended_block": "columns + callout (tip)",
+          "reason": "Split narrative from key principle; callout emphasizes that engineering is creative discipline"
+        },
+        {
+          "section": "What is Form? / What is Function? / The Role of Aesthetics",
+          "current": "Three separate heading + text sections with mixed layouts",
+          "recommended_block": "accordion",
+          "reason": "Groups three related concept definitions; allows students to expand/collapse; reduces cognitive load"
+        },
+        {
+          "section": "User Experience (UX)",
+          "current": "Text + center-aligned smartphone image",
+          "recommended_block": "columns (text left, image right)",
+          "reason": "Better text-image balance for web readability; matches pedagogical intent"
+        },
+        {
+          "section": "The Core Principle: Function Dictates Form",
+          "current": "Image + text with sub-bullets mixed inline",
+          "recommended_block": "columns (image left, text+bullets right)",
+          "reason": "Airplane example deserves clear visual separation; improves example comprehension"
+        },
+        {
+          "section": "The Interplay of Form, Function, and Aesthetics — table",
+          "current": "Horizontal table with 2 columns, 4 rows",
+          "recommended_block": "accordion-grid",
+          "reason": "Mobile-responsive; each row becomes expandable card; better for middle school tablet/phone use"
+        },
+        {
+          "section": "The Role of Subassemblies",
+          "current": "Image left + bullet text right",
+          "recommended_block": "columns (image left, bulleted text right)",
+          "reason": "Already well-structured; formalize with columns block for consistent spacing"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Numbered list (1–4) + long closing narrative",
+          "recommended_block": "accordion (one panel per biblical reference) + callout (biblical)",
+          "reason": "Accordion keeps biblical examples organized; biblical callout box elevates closing reflection"
+        }
+      ],
+      "content_notes": "Content is strong and age-appropriate. Minor opportunities: (1) The Faith Connection could better integrate throughout lesson rather than concentrated at end. (2) The airplane wing example is excellent—consider adding a simple diagram showing airfoil shape. (3) Vocabulary section is comprehensive but dense; breaking into smaller themed groups (design terms vs. UX terms) could help. (4) No interactive challenge or design exercise visible—consider adding one that applies all three pillars.",
+      "priority": "medium"
+    }
+  },
+  "C-018": {
+    "folder": "Fundamentals of Force Motion and Work",
+    "lessonTitle": "Fundamentals of Motion and Work",
+    "imagesTotal": 12,
+    "imagesSampled": 8,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Lesson Overview\",\n    \"Learning Objectives\",\n    \"Force\",\n    \"A Creationeering View of Force\",\n    \"Applied Force (with diagram)\",\n    \"The Role of Displacement in Analysis\",\n    \"Section 3: Defining Work—Purposeful Energy Transfer\",\n    \"The Three Conditions for Work\",\n    \"Positive and Negative Work\",\n    \"Section 4: The Pursuit of Mechanical Efficiency\",\n    \"Optimization (with subsections)\",\n    \"Section 6: Mechanical Systems and the Design for Redemption\",\n    \"Faith Connection: The Wisdom of Perpetual Motion\"\n  ],\n  \"formatting_issues\": [\n    \"Inconsistent section numbering (Sections 3, 4, 6 visible but not 1, 2, 5)\",\n    \"Dense paragraphs without visual breaks—difficult for middle school readers\",\n    \"Mathematical formulas embedded in text without proper callout or emphasis\",\n    \"Three Conditions for Work listed as inline bullets within paragraph—should be separated\",\n    \"Mixed levels of heading hierarchy (major sections vs. subsections unclear)\",\n    \"No visual distinction between conceptual definitions and applied examples\",\n    \"Long biblical passages and faith connections blended with technical content—needs separation\",\n    \"Key vocabulary (displacement, efficiency, work) not consistently called out\",\n    \"Diagram labels explained in text rather than with integrated figure captions\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"Lesson Overview\",\n      \"current\": \"Paragraph of text\",\n      \"recommended_block\": \"callout (info)\",\n      \"reason\": \"Overview statements benefit from visual callout; helps students understand intent before diving into content\"\n    },\n    {\n      \"section\": \"Learning Objectives\",\n      \"current\": \"Bullet list in paragraph form\",\n      \"recommended_block\": \"callout (tip)\",\n      \"reason\": \"Framed as actionable learning targets, callout emphasizes what students will achieve\"\n    },\n    {\n      \"section\": \"Force definition\",\n      \"current\": \"Multiple dense paragraphs\",\n      \"recommended_block\": \"text + vocab\",\n      \"reason\": \"Define 'Force' formally in vocab block, then use text for explanation and context\"\n    },\n    {\n      \"section\": \"Force diagram (crane/pulley system)\",\n      \"current\": \"Image with inline text descriptions\",\n      \"recommended_block\": \"image + callout or columns\",\n      \"reason\": \"Diagram is critical; pair with labeled callout box or column for definitions of Applied Force, Gravitational Force, Frictional Force\"\n    },\n    {\n      \"section\": \"Newton's Second Law formula\",\n      \"current\": \"Embedded in paragraph\",\n      \"recommended_block\": \"callout (tip) or accordion\",\n      \"reason\": \"Formula deserves visual emphasis; accordion allows expansion for explanation\"\n    },\n    {\n      \"section\": \"The Three Conditions for Work\",\n      \"current\": \"Paragraph with inline conditions\",\n      \"recommended_block\": \"accordion-grid or tabs\",\n      \"reason\": \"Three distinct, labeled conditions should each have their own card/tab with example; supports active learning\"\n    },\n    {\n      \"section\": \"Work formula (W = F·d·cos θ)\",\n      \"current\": \"Inline text + definitions\",\n      \"recommended_block\": \"callout (tip) + vocab grid\",\n      \"reason\": \"Highlight formula in callout, use vocab grid for parameter definitions (W, F, d, θ)\"\n    },\n    {\n      \"section\": \"Positive and Negative Work\",\n      \"current\": \"Two paragraphs\",\n      \"recommended_block\": \"columns or accordion-grid\",\n      \"reason\": \"Side-by-side or expandable comparison helps students contrast concepts; add simple icons/colors\"\n    },\n    {\n      \"section\": \"Optimization section (Objective/Constraints/Variables)\",\n      \"current\": \"Bulleted list within dense paragraph\",\n      \"recommended_block\": \"tabs or accordion-grid\",\n      \"reason\": \"Three-part framework deserves structured layout; each tab/card explains one concept with examples\"\n    },\n    {\n      \"section\": \"Faith Connection—Wisdom of Perpetual Motion\",\n      \"current\": \"Long paragraph mixing theology and physics\",\n      \"recommended_block\": \"callout (biblical) + divider\",\n      \"reason\": \"Separate faith reflection from technical content using biblical callout; adds visual/cognitive boundary\"\n    },\n    {\n      \"section\": \"Key vocabulary throughout (Force, Displacement, Work, Efficiency, etc.)\",\n      \"current\": \"Defined inline\",\n      \"recommended_block\": \"vocab (term-definition grid)\",\n      \"reason\": \"Create a dedicated vocab block at end of lesson or each major section for quick reference\"\n    }\n  ],\n  \"content_notes\": \"Content is rich and philosophically sophisticated—appropriate for advanced/gifted 6th–8th graders but dense for typical middle schoolers. Recommend adding short thought-check questions after major sections. Diagram of",
+      "error": "json_parse_failed"
+    }
+  },
+  "C-003": {
+    "folder": "Genesis and Creationeering",
+    "lessonTitle": "Genesis and Creationeering",
+    "imagesTotal": 17,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Day 4: Sun, Moon, and Stars",
+        "Day 7: Rest",
+        "Water Pumps and Pressure Tanks",
+        "The Process of Salvation",
+        "Key Vocabulary",
+        "Creation and Purpose",
+        "Why Engineers Love Processes",
+        "The Days of Creation in Genesis",
+        "Day 2: Sky and Waters"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary section uses 2-column text layout instead of dedicated vocab block with term-definition pairs",
+        "Learning Objectives is a bulleted list that could use accordion or structured grid for better scannability",
+        "Mixed theological and engineering content lacks visual separation or tabs to organize dual perspectives",
+        "Day-by-day creation sections repeat the same structure (Creation → Engineering Perspective → Image) but aren't organized as accordion or carousel",
+        "The 'Water Pumps and Pressure Tanks' example uses text + image side-by-side; lacks callout or highlighted problem-solution structure",
+        "Long narrative sections (Creation and Purpose, Why Engineers Love Processes) could use subheadings or accordion to break content into digestible chunks",
+        "PRINT acronym is mentioned but not prominently displayed (callout or highlighted box recommended)"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Bulleted list of 7 items",
+          "recommended_block": "accordion or accordion-grid",
+          "reason": "Middle school students benefit from expandable sections; allows progressive disclosure and helps with focus"
+        },
+        {
+          "section": "Key Vocabulary",
+          "current": "Two-column text with term and definition inline",
+          "recommended_block": "vocab",
+          "reason": "Platform has native vocab block; cleaner, easier to scan, better for mobile"
+        },
+        {
+          "section": "Days of Creation (Day 2, Day 4, Day 7, etc.)",
+          "current": "Repeated text + image sections scattered throughout",
+          "recommended_block": "accordion-grid or carousel",
+          "reason": "Recurring pattern suggests tabbed or accordion interface would reduce scrolling and reinforce parallel structure; carousel good if multiple days"
+        },
+        {
+          "section": "Creation vs. Engineering Perspective",
+          "current": "Mixed into each day as separate paragraphs",
+          "recommended_block": "tabs or columns",
+          "reason": "Two viewpoints (biblical + engineering) should be visually distinct and easy to toggle; helps students compare and contrast"
+        },
+        {
+          "section": "Water Pumps and Pressure Tanks",
+          "current": "Text alongside image in informal layout",
+          "recommended_block": "callout (biblical or info) + image + columns",
+          "reason": "Example of nested problem-solving; callout highlights the key insight; columns organize image and explanation"
+        },
+        {
+          "section": "PRINT Acronym",
+          "current": "Mentioned in narrative but not visually emphasized",
+          "recommended_block": "callout (tip)",
+          "reason": "Key engineering framework needs visual prominence and easy recall for middle schoolers"
+        },
+        {
+          "section": "Creation and Purpose narrative",
+          "current": "Long text block (~300 words)",
+          "recommended_block": "accordion or h3 subheadings + text",
+          "reason": "Break into smaller sections for 6–8th grade attention span; improves scannability"
+        },
+        {
+          "section": "Why Engineers Love Processes",
+          "current": "Long narrative followed by LEGO example",
+          "recommended_block": "accordion or divider + callout + text",
+          "reason": "Separate concept introduction from practical example; use callout for the LEGO analogy to make it memorable"
+        }
+      ],
+      "content_notes": "Lesson successfully integrates biblical narrative with engineering principles—strong conceptual foundation. However, the heavy text sections may overwhelm middle schoolers. Missing explicit connection between Genesis process (7 days) and PRINT acronym steps—this tie-in should be highlighted. 'Process of Salvation' section heading is present but no content visible; verify this isn't a placeholder or incomplete slide.",
+      "priority": "high"
+    }
+  },
+  "C-006": {
+    "folder": "Intro to Systems Thinking",
+    "lessonTitle": "Intro to Systems Thinking",
+    "imagesTotal": 11,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title/Hero",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Systems, Subsystems, and Processes",
+        "What Is a System?",
+        "How Processes Shape Systems",
+        "What Is a Subsystem?",
+        "Interactive Bicycle Diagram",
+        "Pattern Recognition",
+        "Faith Connection",
+        "Genesis (Biblical Example)",
+        "Human Body (Biblical Example)"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary section uses two columns of definitions without clear visual distinction—could be reorganized as a true grid/table",
+        "Multiple long text blocks (2-3 paragraphs each) lack visual breaks or subheadings to aid scannability",
+        "Interactive bicycle element shown as static image with text explanation—unclear if this is truly interactive in LW",
+        "Faith Connection section mixes general theological framing with specific tab-based content below without clear transition",
+        "Biblical examples (Genesis, Human Body) use tabs but could benefit from callout blocks for key theological points"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Two-column text layout with bold terms and definitions",
+          "recommended_block": "vocab",
+          "reason": "Native vocab block provides proper term-definition grid structure, improves scannability for 6-8th graders"
+        },
+        {
+          "section": "What Is a System?",
+          "current": "Large paragraph block followed by bicycle image and text explanation",
+          "recommended_block": "columns + image",
+          "reason": "Separate image from text, use two-column layout (image left, explanation right) to break up dense text"
+        },
+        {
+          "section": "Systems, Subsystems, and Processes",
+          "current": "Multi-paragraph opening section",
+          "recommended_block": "heading (h3) + text + divider",
+          "reason": "Add h3 subheading and divider to signal new major section and improve visual hierarchy"
+        },
+        {
+          "section": "How Processes Shape Systems",
+          "current": "Long introductory paragraph without visual break",
+          "recommended_block": "text + callout (tip)",
+          "reason": "Extract key insight ('systems are result of careful thinking and teamwork') into tip callout for emphasis"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Introductory text followed by tabs below",
+          "recommended_block": "callout (biblical) + tabs",
+          "reason": "Wrap opening paragraph in biblical callout to establish theological framing, then tabs for Genesis/Human Body examples"
+        },
+        {
+          "section": "Interactive Bicycle Diagram",
+          "current": "Static labeled image with text explanation of subsystems",
+          "recommended_block": "image + callout (info)",
+          "reason": "If truly interactive in LW, embed as-is; if static, use info callout to highlight key insight about subsystem interdependence"
+        },
+        {
+          "section": "Learning Objectives",
+          "current": "Bulleted list under heading",
+          "recommended_block": "heading (h3) + text",
+          "reason": "Currently well-formatted; no change needed"
+        }
+      ],
+      "content_notes": "Content is well-written and age-appropriate. Strong integration of biblical examples. Minor gap: no explicit design process diagram/steps shown (mentioned in 'How Processes Shape Systems' but not visually represented). Consider adding simple 4-5 step design cycle visual (Design → Build → Test → Improve → Repeat). Vocabulary is clear; consider expanding 'Process' definition with bicycle example.",
+      "priority": "medium"
+    }
+  },
+  "C-016": {
+    "folder": "Novelty and Innovation in Engineering",
+    "lessonTitle": "Novelty and Innovation in Engineering",
+    "imagesTotal": 7,
+    "imagesSampled": 7,
+    "result": {
+      "sections_found": [
+        "Title/Header",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Invention vs. Innovation",
+        "Why Novelty Matters",
+        "Types of Innovations",
+        "The Engineer's Journey",
+        "Biomimicry—God's Prior Art",
+        "Biblical Connections to Creativity and Innovation"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary terms listed with 'Description' placeholders—no actual definitions provided",
+        "Comparison table (Invention vs. Innovation) is text-heavy; could be more visually scannable",
+        "Lengthy text blocks under 'Why Novelty Matters' lack visual hierarchy",
+        "The Engineer's Journey section references an image that isn't shown; description suggests circular EDP diagram that should be embedded",
+        "Biblical Connections section uses bullet points but could use more visual emphasis for middle school engagement",
+        "Patent requirements and prior art explanations are dense paragraphs without callout/tip formatting"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Listed terms with 'Description' text (no actual definitions)",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Provides structured, scannable reference for 8 key terms; middle schoolers need clear definitions"
+        },
+        {
+          "section": "Invention vs. Innovation",
+          "current": "Text paragraph + comparison table + image examples",
+          "recommended_block": "tabs or columns",
+          "reason": "Can separate Invention and Innovation into distinct, side-by-side views with examples; improves clarity"
+        },
+        {
+          "section": "Why Novelty Matters",
+          "current": "Dense paragraphs with embedded subsections (Patents, Prior Art)",
+          "recommended_block": "accordion-grid or accordion",
+          "reason": "Breaks up long text; students can expand Patent requirements and Prior Art sections as needed"
+        },
+        {
+          "section": "Patent requirements list",
+          "current": "Bulleted text within paragraph",
+          "recommended_block": "callout (info)",
+          "reason": "Highlights the 3 requirements (New, Non-obvious, Useful) as a key takeaway"
+        },
+        {
+          "section": "The Engineer's Journey",
+          "current": "Text steps with reference to missing circular EDP image",
+          "recommended_block": "image + accordion or columns",
+          "reason": "Embed the EDP diagram with Creativity at center; use accordion for each step (Empathize, Define, Ideate, Iterate)"
+        },
+        {
+          "section": "Biomimicry examples",
+          "current": "Three paragraphs (Kingfisher, Velcro, Biomimicry Match-Up)",
+          "recommended_block": "accordion-grid or carousel",
+          "reason": "Each example deserves its own collapsible card for pacing and engagement"
+        },
+        {
+          "section": "Creationeering cycle",
+          "current": "Bulleted steps listed sequentially",
+          "recommended_block": "tabs or accordion-grid",
+          "reason": "Six steps (Observe, Identify, Apply EDP, Protect, Give Glory) work well as expandable tabs or cards"
+        },
+        {
+          "section": "Biblical Connections",
+          "current": "Bullet list with scripture references",
+          "recommended_block": "callout (biblical) or accordion-grid",
+          "reason": "Callout blocks reinforce spiritual dimension; accordion allows deeper dive into each passage"
+        }
+      ],
+      "content_notes": "Vocabulary section shows term titles only; actual definitions are missing and must be filled in before publishing. The Engineer's Journey references a circular EDP flowchart that is not visible in screenshots—confirm image exists and is properly embedded. Biblical Connections section is strong but could integrate throughout lesson (e.g., callout after Biomimicry). Creationeering cycle is powerful framework but needs visual prominence. Overall content is age-appropriate and well-scoped for middle school.",
+      "priority": "medium"
+    }
+  },
+  "C-007": {
+    "folder": "Objectives Constraints and Variables",
+    "lessonTitle": "Objectives, Constraints, and Variables",
+    "imagesTotal": 19,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Problem Impact & Importance (Who/Why)",
+        "Problem Statement Formula",
+        "Variables (What Can Change)",
+        "Objectives (Physics Example)",
+        "Constraints/Formulas (Physics Example)",
+        "Variables (Physics Example)",
+        "Constraints (General Definition with Staircase Image)",
+        "Using the OCV Method (Catapult Example)",
+        "Engineering Process Steps"
+      ],
+      "formatting_issues": [
+        "Problem statement formula appears as plain text with strikethrough rather than as a callout or highlight",
+        "Physics example (Force calculation) lacks clear visual separation from narrative text—equations buried in paragraphs",
+        "Biblical constraints section is lengthy narrative without callout designation; should be marked as biblical context",
+        "Multiple long paragraphs without visual breaks make mid-section content dense for middle school readers",
+        "Definition sections (Constraints, Variables) lack vocab-style formatting despite being key terms",
+        "The four engineering questions (What is scenario/What are we trying/What limits/What might change) are embedded in paragraph; should be a numbered list or accordion",
+        "Accordion/tabs at bottom are collapsed but no clear visual hierarchy distinguishing them from body content"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Problem Statement Formula",
+          "current": "Inline text with strikethrough notation",
+          "recommended_block": "callout (tip)",
+          "reason": "Formula is key takeaway; callout highlights it for visual learners and breaks up dense text"
+        },
+        {
+          "section": "Objectives/Constraints/Variables (Physics Example)",
+          "current": "Narrative paragraphs with inline equations",
+          "recommended_block": "accordion-grid or columns with checkmark icons",
+          "reason": "Three parallel concepts are easier to scan and compare in structured layout; matches design pattern shown in final screenshot"
+        },
+        {
+          "section": "Constraints (General Definition)",
+          "current": "Long paragraph with staircase image",
+          "recommended_block": "columns (text left, image right) + biblical callout",
+          "reason": "Separates image from text for clarity; biblical context deserves callout designation per platform capabilities"
+        },
+        {
+          "section": "Engineering Process (4 Questions)",
+          "current": "Embedded in narrative paragraph",
+          "recommended_block": "accordion or numbered list",
+          "reason": "Four distinct questions deserve scannable, clickable format for student reference during design work"
+        },
+        {
+          "section": "Constraints/Variables Definitions",
+          "current": "Bolded headers followed by explanatory text",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "These are core vocabulary terms; vocab block matches platform affordances and aids retention"
+        },
+        {
+          "section": "Biblical Examples (Creation/Sin/Salvation)",
+          "current": "Narrative section in body text",
+          "recommended_block": "biblical callout",
+          "reason": "Content is explicitly theological; biblical callout provides proper content classification and visual distinction"
+        }
+      ],
+      "content_notes": "Lesson content is strong and age-appropriate, with good real-world examples (backpack organizer, catapult). Physics calculations are accurate. However, dense text paragraphs (especially pages 6–7) risk cognitive overload for 6th graders. The biblical integration is meaningful but buried; use callout block to elevate it. Final section with expandable Objectives/Constraints/Variables shows strong accordion-grid potential for the earlier examples too.",
+      "priority": "high"
+    }
+  },
+  "C-009": {
+    "folder": "Process Mapping and Flowcharts",
+    "lessonTitle": "Understanding Process Mapping and Flowcharts",
+    "imagesTotal": 15,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title/Header",
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Common Flowchart Symbols",
+        "Input/Process/Output Example",
+        "Engineers and Flowcharts",
+        "Other Methods of Process Mapping",
+        "Algorithms section",
+        "Biblical Connections",
+        "Scriptural Examples of Precise Instructions"
+      ],
+      "formatting_issues": [
+        "Learning Objectives listed as plain bullet points; would benefit from structured list or accordion for clarity",
+        "Key Vocabulary appears as simple term-definition pairs; best presented as vocab grid block for scannability",
+        "Common Flowchart Symbols section has 5 symbol types listed as tabs/buttons but lacks visual detail for each symbol type in screenshots shown",
+        "Biblical Connections section mixes narrative text with scripture quotes without visual distinction",
+        "Process Mapping methods (Algorithms, Task Lists) introduced but Task Lists section not visible in these 8 screenshots—incomplete sampling suggests content organization issue",
+        "Input/Process/Output example uses both diagram AND table; could consolidate or clarify relationship",
+        "Algorithms section has decorative chart image but minimal explanation text visible"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Bulleted list of 6 learning outcomes",
+          "recommended_block": "accordion or callout (info)",
+          "reason": "6 objectives are substantial; accordion allows students to expand/collapse; callout keeps them visually distinct from other bullet lists"
+        },
+        {
+          "section": "Key Vocabulary",
+          "current": "Two-column text layout with term and definition pairs",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Platform has native vocab block; cleaner, more scannable for 6-8 grade level; easier to review"
+        },
+        {
+          "section": "Common Flowchart Symbols",
+          "current": "Tab interface with symbol names, each tab contains a symbol image + description",
+          "recommended_block": "tabs or accordion-grid",
+          "reason": "5 symbols are discrete units; tabs or accordion-grid keeps related visual + text together; supports interactive learning"
+        },
+        {
+          "section": "Input/Process/Output Example",
+          "current": "Narrative text + diagram (x+1 process) + table showing input/output pairs",
+          "recommended_block": "columns or structured image + text pairing",
+          "reason": "Diagram and table are complementary; columns layout would let visual sit beside explanation; clearer relationship"
+        },
+        {
+          "section": "Biblical Connections",
+          "current": "Narrative paragraphs with inline scripture quotes",
+          "recommended_block": "callout (biblical) with quoted scripture in distinct styling",
+          "reason": "Platform has biblical callout block; signals theological content to students; distinguishes scripture from explanatory text"
+        },
+        {
+          "section": "Algorithms & Other Methods",
+          "current": "Section heading + explanatory text + decorative chart image",
+          "recommended_block": "heading (h3) + text + image, possibly with tabs for 'Algorithms' vs 'Task Lists'",
+          "reason": "Content appears to introduce multiple methods; tabs or accordion-grid would organize alternatives; image should have alt text describing sorting/ranking concept"
+        }
+      ],
+      "content_notes": "Lesson is well-written and age-appropriate; biblical integration is thoughtful. However, 'Task Lists' method mentioned in overview and vocabulary but not shown in these 8 screenshots—suggest full content audit. Algorithms section image (bar chart with arrow) is decorative; add caption explaining how sorting algorithms relate to process mapping. Consider adding a simple practice flowchart exercise after symbol definitions to reinforce learning before moving to biblical connections.",
+      "priority": "medium"
+    }
+  },
+  "C-010": {
+    "folder": "Visualization and sketching",
+    "lessonTitle": "Visualization and Sketching",
+    "imagesTotal": 20,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Lesson Overview",
+        "Learning Objectives",
+        "Key Vocabulary",
+        "Why Technical Sketches Matter (3-column benefits)",
+        "O2. How to Set Up Your Scale",
+        "O4. Proportions and Changing Scale",
+        "Hidden Lines (Engineering Line Types)",
+        "Foundational Techniques for Clear Sketches",
+        "Viewpoints",
+        "Proportion and Scale"
+      ],
+      "formatting_issues": [
+        "Key Vocabulary appears as unstructured term-definition pairs rather than using vocab grid block",
+        "Three-column benefits section ('Bridge the Gap', 'Save Resources', 'Allow for Iteration') would benefit from columns block instead of inline layout",
+        "Engineering line types scattered across pages—no consistent presentation of all line types together",
+        "Critical Thinking Note embedded mid-content without callout formatting",
+        "Multiple subsections on similar topics (O2, O4, Proportion and Scale, Viewpoints) could use accordion or tabs for organization",
+        "Images lack consistent captions or alt text indicators",
+        "Long text blocks under 'Proportion and Scale' could benefit from better visual hierarchy"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Key Vocabulary",
+          "current": "Checkmark-prefixed term-definition list with bold terms",
+          "recommended_block": "vocab",
+          "reason": "Designed exactly for this use case—cleaner grid presentation with 2-column layout for 6 term pairs"
+        },
+        {
+          "section": "Why Technical Sketches Matter",
+          "current": "Three centered columns with image, heading, and text",
+          "recommended_block": "columns",
+          "reason": "Preserves visual layout while using platform-native column support for responsive design"
+        },
+        {
+          "section": "Critical Thinking Note",
+          "current": "Plain text with pencil icon in header bar",
+          "recommended_block": "callout (tip)",
+          "reason": "Highlights critical thinking prompt and draws visual attention; distinguishes it from instructional content"
+        },
+        {
+          "section": "Engineering Line Types",
+          "current": "Single 'Hidden Lines' section on one screenshot",
+          "recommended_block": "accordion-grid",
+          "reason": "Anticipate other line types (Object, Center, Dimension, Extension); allows expansion for each type with pattern/purpose/image"
+        },
+        {
+          "section": "O2, O4, Viewpoints, Proportion and Scale",
+          "current": "Sequential subsections across multiple pages",
+          "recommended_block": "tabs or accordion",
+          "reason": "Group related foundational techniques together; allows students to jump between topics without excessive scrolling"
+        },
+        {
+          "section": "Learning Objectives & Biblical Connection",
+          "current": "Bullet list at top",
+          "recommended_block": "callout (biblical)",
+          "reason": "Last objective references Habakkuk 2:2; use biblical callout block to emphasize spiritual connection to documentation practice"
+        }
+      ],
+      "content_notes": "Content is comprehensive and well-written with good use of real-world examples (cafe restaurant blueprint, measuring tools, robot arm). Vocabulary is age-appropriate. However, the lesson is spread across 20 slides, suggesting modular reorganization could improve navigation. Consider consolidating foundational techniques (Viewpoints, Proportion, Scale, Line Types) into expandable sections rather than linear progression. No major content gaps detected, but biographical/contextual intro to engineering sketching history could enrich engagement.",
+      "priority": "medium"
+    }
+  },
+  "C-004": {
+    "folder": "Understanding Math and Science as Tools",
+    "lessonTitle": "Using Math and Science as Tools",
+    "imagesTotal": 13,
+    "imagesSampled": 8,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Title: Using Math and Science as Tools\",\n    \"Tools for Creationeering\",\n    \"Scientific Tools\",\n    \"Newton's Laws of Motion (Second Law, Third Law)\",\n    \"Faith Connection\",\n    \"Scientific Tools (detailed explanation)\",\n    \"Formulas\",\n    \"Math Skills (Geometry, Algebra, Calculus tabs)\",\n    \"Combinations of Math and Science in Engineering\"\n  ],\n  \"formatting_issues\": [\n    \"Title and hero image take up full width with no visual hierarchy distinction\",\n    \"Long body text paragraphs (200+ words) lack visual breaks and could overwhelm middle schoolers\",\n    \"Scientific Laws section mixes definition, explanation, and images without clear visual separation\",\n    \"Newton's Laws presented as collapsible sections but no clear indicator they are interactive\",\n    \"Faith Connection section is dense paragraph text—spiritual concepts would benefit from callout treatment\",\n    \"Math Skills tabs appear to be tabbed interface but content density is high; no visual hierarchy within tab panes\",\n    \"Image captions are minimal; context for water/oil experiment could be clearer\",\n    \"Geometric diagram section lacks introductory context; jumps directly to visual\",\n    \"Distance formula presented in plain text box with no visual emphasis or interactive explanation\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"Tools for Creationeering\",\n      \"current\": \"Single large paragraph (150+ words)\",\n      \"recommended_block\": \"text + callout (tip)\",\n      \"reason\": \"Break opening paragraph into 2–3 shorter paragraphs, use callout to highlight the core idea: 'Engineers use math and science to create.'\"\n    },\n    {\n      \"section\": \"Scientific Laws (Second Law, Third Law)\",\n      \"current\": \"Heading + text + image in linear sequence\",\n      \"recommended_block\": \"accordion with columns (text + image side-by-side)\",\n      \"reason\": \"Each law deserves its own accordion section for scanability; images should pair with explanations visually, not below.\"\n    },\n    {\n      \"section\": \"Faith Connection\",\n      \"current\": \"Three long body paragraphs\",\n      \"recommended_block\": \"callout (biblical) + vocab (3 examples with visual icons)\",\n      \"reason\": \"Use biblical callout for thematic emphasis. Convert the three examples (space/time/matter dimensions) into a vocab grid with icons for visual learning.\"\n    },\n    {\n      \"section\": \"Scientific Tools explanation\",\n      \"current\": \"Long paragraph + image + more paragraph\",\n      \"recommended_block\": \"columns (image left, text right) + callout (info) for hypothesis definition\",\n      \"reason\": \"Move image inline with text for middle schooler engagement. Highlight 'hypothesis' and 'law' definitions in info callouts.\"\n    },\n    {\n      \"section\": \"Measurement example (pencil/paperclip/ruler)\",\n      \"current\": \"Body text + inline image\",\n      \"recommended_block\": \"image + callout (tip)\",\n      \"reason\": \"Isolate the measurement concept; add callout tip: 'A unit is a standard measure. You can compare objects using the same unit.'\"\n    },\n    {\n      \"section\": \"Formulas heading\",\n      \"current\": \"Standalone heading with no introduction\",\n      \"recommended_block\": \"heading (h2) + callout (info) + vocab (if multiple formulas follow)\",\n      \"reason\": \"Add transition text explaining why formulas matter; prep reader for what's coming.\"\n    },\n    {\n      \"section\": \"Math Skills (Geometry/Algebra/Calculus)\",\n      \"current\": \"Tabbed interface with dense text and one large diagram\",\n      \"recommended_block\": \"tabs with text + vocab (for key terms like 'angles,' 'intersections') + carousel (if multiple geometry diagrams exist)\",\n      \"reason\": \"Break Geometry tab content into shorter paragraphs; add vocab grid for geometric terms. If Algebra tab has formulas, use callout (info) for each.\"\n    },\n    {\n      \"section\": \"Distance formula (Algebra tab)\",\n      \"current\": \"Formula in plain text box + variable definitions\",\n      \"recommended_block\": \"callout (info) + vocab (formula breakdown: each variable defined)\",\n      \"reason\": \"Emphasize formula visually; create vocab entries for d, x₁, x₂, y₁, y₂ to ensure 6th–8th graders understand notation.\"\n    },\n    {\n      \"section\": \"Combinations of Math and Science\",\n      \"current\": \"Heading + paragraph + image (Newton's cradle) + subheading\",\n      \"recommended_block\": \"heading (h2) + text + image (right-aligned) + accordion-grid (Laws of Motion as expandable cards)\",\n      \"reason\": \"Use accordion-grid to organize the three laws for interactive exploration; image supports context.\"\n    }\n  ],\n  \"content_notes\": \"Content is scientifically sound and age-appropriate. Good use of real-world examples (water/oil, boxes, swimming",
+      "error": "json_parse_failed"
+    }
+  },
+  "C-005": {
+    "folder": "Units Conversions and Measurement",
+    "lessonTitle": "Units, Conversions, and Measurement",
+    "imagesTotal": 16,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title/Header",
+        "Lesson Overview",
+        "Intro",
+        "Why Units Matter",
+        "Common Units Used in Engineering",
+        "Accuracy vs. Precision (Dartboard analogy)",
+        "Unit categories (Length, Mass, Temperature, Volume, Time)",
+        "Using Units in Calculations",
+        "Example Problem (Speed calculation)",
+        "Cancelling Units",
+        "Step-by-step unit conversion walkthrough",
+        "Faith Connection",
+        "Biblical quote (Exodus 26:1-2)"
+      ],
+      "formatting_issues": [
+        "Lesson Overview and Intro sections use plain text blocks; could be better highlighted as callouts",
+        "Dartboard accuracy/precision explanation mixes image with long text paragraph — would benefit from columns or callout styling",
+        "Unit reference tables (Length, Mass, Temperature, Volume, Time) are presented as plain lists; should be a vocab grid or structured table for scannability",
+        "Example Problem has numbered steps but no visual separation — numbered headers or accordion would improve clarity",
+        "Cancelling Units section repeats explanation across multiple slides (carousel); content could be condensed and better structured with tabs or accordion-grid",
+        "Faith Connection is plain text leading to a blockquote; blockquote should use callout (biblical) block type for visual hierarchy",
+        "Steps 1, 2, 3 of unit conversion are on separate carousel slides — should be consolidated into one view with accordion or tabs for reference"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Lesson Overview",
+          "current": "Plain text paragraph describing the lesson goals",
+          "recommended_block": "callout (info)",
+          "reason": "Makes learning objectives stand out and easier for students to reference what they'll learn"
+        },
+        {
+          "section": "Why Units Matter",
+          "current": "Heading followed by bullet list",
+          "recommended_block": "accordion or tabs",
+          "reason": "Three key reasons with explanations would be clearer as expandable cards for 6th-8th graders to digest one concept at a time"
+        },
+        {
+          "section": "Accuracy vs. Precision with dartboards",
+          "current": "Image on left, long text explanation on right (unclear layout)",
+          "recommended_block": "columns (image + callout/text)",
+          "reason": "Explicit two-column layout ensures image and explanation stay paired; clearer visual hierarchy"
+        },
+        {
+          "section": "Unit reference (Length, Mass, Temperature, Volume, Time)",
+          "current": "Separate plain-text lists for Metric and Imperial units",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Students need to learn unit abbreviations and their full names; vocab grid format supports quick reference and memorization"
+        },
+        {
+          "section": "Example Problem (Speed calculation)",
+          "current": "Numbered steps (1, 2, 3) in sequence without clear visual breaks",
+          "recommended_block": "accordion-grid or numbered headings (h3)",
+          "reason": "Allows students to focus on one step, then expand next; better for problem-solving workflow"
+        },
+        {
+          "section": "Cancelling Units walkthrough",
+          "current": "Multi-slide carousel with Steps 1, 2, 3, repeated explanations",
+          "recommended_block": "tabs or accordion",
+          "reason": "Consolidates all steps in one view; students can reference earlier steps without carousel navigation; reduces cognitive load"
+        },
+        {
+          "section": "Faith Connection + Biblical quote",
+          "current": "Paragraph of text leading to a blockquote",
+          "recommended_block": "callout (biblical)",
+          "reason": "Dedicated biblical callout block elevates the faith connection visually and semantically; appropriate for K-12 Christian curriculum"
+        },
+        {
+          "section": "Key takeaway on engineering precision",
+          "current": "Single paragraph at end of Cancelling Units",
+          "recommended_block": "callout (tip)",
+          "reason": "Highlights best practice (separate formula from unit conversion) for student retention"
+        }
+      ],
+      "content_notes": "Content is well-structured and age-appropriate for middle school. Strong inclusion of faith connection ties units to God's precision in creation. Dartboard analogy effectively teaches accuracy vs. precision. Example problems use relevant scenarios (car speed). Minor gaps: no practice problems shown, no direct links between unit conversion steps and dimensional analysis terminology. Metric/Imperial unit lists are comprehensive but dense—vocab grid format would improve usability.",
+      "priority": "medium"
+    }
+  },
+  "C-001": {
+    "folder": "What is Engineering",
+    "lessonTitle": "What is Creationeering",
+    "imagesTotal": 13,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "What is Engineering? (title)",
+        "Lesson Overview",
+        "Learning Objective",
+        "Civil Engineering",
+        "Civil Engineering and the Garden",
+        "Computer Engineering",
+        "Aspects of Computer Engineering",
+        "Biblical Understanding of Engineering",
+        "Sources",
+        "Creationeering™",
+        "Industrial and Systems Engineering",
+        "Mechanical Engineering",
+        "Thermodynamic and Energy Systems"
+      ],
+      "formatting_issues": [
+        "Learning Objective is a bulleted list presented as plain text; should use structured list or callout block",
+        "Engineering discipline sections (Civil, Computer, Industrial, Mechanical) lack visual hierarchy and consistent formatting",
+        "Biblical Understanding section is buried as a single paragraph; should be emphasized as a callout or info block given its importance to the course theme",
+        "No visual separation or tabs used for different engineering disciplines despite covering 4+ major types",
+        "Long paragraph blocks without visual breaks or emphasis (e.g., Civil Engineering definition, Creationeering explanation)",
+        "Tab structure visible in one screenshot (Aerospace, Thermodynamic, Theme Park) but not applied consistently across similar content groups",
+        "Sources section contains only a URL link with no context or citation formatting",
+        "Mixed presentation of definitions: some inline, some in images with overlaid text"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objective",
+          "current": "Four bullet points in plain text paragraph style",
+          "recommended_block": "callout (info)",
+          "reason": "Objectives are key takeaways; callout block creates visual emphasis for middle school learners and signals importance"
+        },
+        {
+          "section": "Engineering Disciplines (Civil, Computer, Industrial, Mechanical)",
+          "current": "Separate heading + paragraph sections with inconsistent formatting",
+          "recommended_block": "tabs or accordion-grid",
+          "reason": "Parallel content about 4 engineering types; tabs/accordion allows students to compare and navigate discipline-by-discipline without scrolling through long page"
+        },
+        {
+          "section": "Civil Engineering definition + context",
+          "current": "Paragraph text overlaid on image + separate paragraph text below",
+          "recommended_block": "columns (image left, text right) or image + text block",
+          "reason": "Better layout control; keeps definition near visual example without awkward overlay; improves readability"
+        },
+        {
+          "section": "Biblical Understanding of Engineering",
+          "current": "Single paragraph after Computer Engineering",
+          "recommended_block": "callout (biblical)",
+          "reason": "Thematic importance to Creationeering approach; biblical callout signals this is core philosophy, not supplementary content"
+        },
+        {
+          "section": "Creationeering™ concept explanation",
+          "current": "Two long paragraphs of dense text",
+          "recommended_block": "accordion or columns with emphasis/vocab terms",
+          "reason": "Abstract concept; breaking into sub-points with vocab terms (science, engineering, entrepreneurship, Bible) aids comprehension for middle school audience"
+        },
+        {
+          "section": "Thermodynamic and Energy Systems",
+          "current": "Definition text + flame image below",
+          "recommended_block": "columns (text left, image right) or image carousel with caption",
+          "reason": "Visual-heavy content; side-by-side layout prevents jarring image placement and connects concept to real-world example"
+        },
+        {
+          "section": "Sources",
+          "current": "Raw URL link",
+          "recommended_block": "callout (info) or divider + properly formatted citation",
+          "reason": "Minimal source formatting for a lesson; callout provides context and signals where information comes from"
+        }
+      ],
+      "content_notes": "Content is biblically integrated and age-appropriate. Strengths: clear definitions, real-world examples (buildings, flame), scripture integration. Gaps: no assessment questions, no interactive challenges, limited narrative flow between disciplines. Minor: 'Aspects of Computer Engineering' heading appears but no content follows in visible screenshots. Consider adding vocab blocks for technical terms (ergonomics, cybernetics, thermodynamics) for middle grade clarity.",
+      "priority": "medium"
+    }
+  },
+  "M-006": {
+    "folder": "Build 1 Mousetrap Prototype Mark 1.0",
+    "lessonTitle": "Build 1: Little Moe Prototype Car",
+    "imagesTotal": 53,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Build 1: The Mousetrap Mark 1.0 Prototype",
+        "Subassembly I – The Chassis",
+        "Chassis Assembly: Step 1",
+        "Materials List",
+        "Step 2",
+        "Step 8",
+        "Mouse Trap (parts list)"
+      ],
+      "formatting_issues": [
+        "Materials List shown as photo of box contents rather than structured list — difficult to reference while building",
+        "Step-by-step instructions lack consistent visual hierarchy (mix of text, images, and unclear navigation)",
+        "Carousel navigation for materials and steps uses dot indicators but lacks clear 'step X of Y' labeling",
+        "Parts needed listed in plain text rather than structured list format",
+        "Instructions ('To-Do') use paragraph format instead of clear numbered/bulleted steps",
+        "Image-heavy slides (especially materials box) lack captions or organized parts inventory",
+        "Step numbering appears non-sequential in screenshots (1, 2, 8) — suggests poor navigation or content organization"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Materials List",
+          "current": "Large photo of box contents with arrow navigation",
+          "recommended_block": "vocab (term-definition grid) or accordion",
+          "reason": "Students need a readable checklist of parts they can reference while building, not a photo they must interpret"
+        },
+        {
+          "section": "Chassis Assembly: Step 1",
+          "current": "Text 'Parts Needed' + text 'To-Do' with right-aligned image",
+          "recommended_block": "columns",
+          "reason": "Left column for parts/instructions, right column for image creates clear visual separation and improves scannability"
+        },
+        {
+          "section": "Step-by-step instructions (2, 8, etc.)",
+          "current": "Mixed text + images with unclear sequencing",
+          "recommended_block": "accordion-grid or tabs",
+          "reason": "Group related steps; allow students to expand only the step they're working on; clearer than carousel for linear assembly tasks"
+        },
+        {
+          "section": "Parts Needed lists within steps",
+          "current": "Plain text (e.g., '1x-Brass Lever Arm')",
+          "recommended_block": "callout (info)",
+          "reason": "Highlighted info blocks draw attention to required parts before instructions"
+        },
+        {
+          "section": "Overall lesson structure",
+          "current": "Carousel navigation between steps",
+          "recommended_block": "accordion or tabs",
+          "reason": "Students building a physical prototype need random access to earlier steps; carousel forces sequential navigation"
+        }
+      ],
+      "content_notes": "The lesson is well-designed conceptually but presentation harms usability. Materials list as a photograph is particularly problematic — students need a text-based checklist. Steps lack consistent formatting: some use 'Parts Needed' + 'To-Do', others don't. Image quality is good, but carousel navigation is inefficient for a step-by-step build guide. Consider adding brief safety callouts (pliers, trap springs) for middle schoolers. Inconsistent step numbering in screenshots suggests either navigation confusion or sampling gaps.",
+      "priority": "high"
+    }
+  },
+  "M-012": {
+    "folder": "Communicating Designs and Testing",
+    "lessonTitle": "Communicating Designs and Testing",
+    "imagesTotal": 7,
+    "imagesSampled": 7,
+    "result": {
+      "sections_found": [
+        "Title: Communicating Designs and Testing",
+        "Learning Objectives",
+        "Intro",
+        "Technical Communication",
+        "Why Sketches are the Engineer's Language",
+        "Mousetrap Design",
+        "Line Hierarchy",
+        "Object Lines",
+        "Hidden Lines",
+        "Center Lines",
+        "Dimension Lines",
+        "Extension Lines",
+        "Assemblies and Subassemblies",
+        "Design Iteration",
+        "The 6-Stage Iterative Process in Action",
+        "Rapid Iteration",
+        "Next Steps"
+      ],
+      "formatting_issues": [
+        "Learning Objectives are presented as plain bullet points; no visual hierarchy or callout to emphasize importance",
+        "Line Hierarchy section (Object/Hidden/Center/Dimension/Extension Lines) uses repetitive h3 headers with identical structure but no visual differentiation between line types",
+        "Line type definitions have placeholder/broken image boxes instead of actual visual examples of each line style",
+        "The 6-Stage Iterative Process uses numbered list but could benefit from visual separation or accordion for clarity",
+        "Rapid Iteration section mixes narrative paragraph with bullet-point definitions (Objective/Constraints/Variables) without clear visual grouping",
+        "Technical Communication section is dense paragraph text; no callout or emphasis on key concept",
+        "Assemblies and Subassemblies uses bullets inconsistently (some with question marks, some declarative)"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Plain bulleted list",
+          "recommended_block": "callout (info)",
+          "reason": "Draws visual attention to learning goals; appropriate for middle school to set expectations"
+        },
+        {
+          "section": "Line Hierarchy (Object/Hidden/Center/Dimension/Extension Lines)",
+          "current": "Repeating h3 headers with description + broken image placeholder",
+          "recommended_block": "accordion-grid or tabs",
+          "reason": "Reduces visual clutter; allows students to expand each line type individually; better for comparison; images can load properly"
+        },
+        {
+          "section": "Technical Communication key concept",
+          "current": "Dense paragraph",
+          "recommended_block": "callout (tip)",
+          "reason": "Highlights importance of technical sketching as 'universal language'; helps visual learners retain core idea"
+        },
+        {
+          "section": "The 6-Stage Iterative Process",
+          "current": "Numbered list in paragraph form",
+          "recommended_block": "accordion or tabs",
+          "reason": "Allows step-by-step exploration; each stage can have more detail; reduces cognitive load for middle schoolers"
+        },
+        {
+          "section": "Rapid Iteration (OCV definitions)",
+          "current": "Mixed narrative + bullet definitions",
+          "recommended_block": "vocab",
+          "reason": "Objective, Constraints, Variables are key terms; vocab block provides consistent term-definition presentation"
+        },
+        {
+          "section": "Assemblies and Subassemblies",
+          "current": "Inconsistent bullet formatting",
+          "recommended_block": "vocab or columns with heading + description",
+          "reason": "Three subassemblies (Chassis/Axle/Drive) can each be a term with detailed definition; improves scannability"
+        },
+        {
+          "section": "Mousetrap Design intro paragraph",
+          "current": "Dense text block",
+          "recommended_block": "callout (tip or info)",
+          "reason": "Signals transition to practical application; prepares students for detailed technical sections"
+        }
+      ],
+      "content_notes": "No major content gaps or errors. Lesson is comprehensive and well-sequenced. Strengths: good scaffolding from concepts to application, clear connection to mousestrap car project, biblical stewardship reference embedded. Opportunities: line type examples are broken/missing visuals (critical for technical communication lesson); some sections could use biblical callout connections (e.g., stewardship link in Design Iteration). Vocabulary density is high; vocab block would help middle schoolers retain terms like OCV.",
+      "priority": "high"
+    }
+  },
+  "M-011": {
+    "folder": "Design",
+    "lessonTitle": "Fundamentals of Design",
+    "imagesTotal": 6,
+    "imagesSampled": 6,
+    "result": {
+      "sections_found": [
+        "Design (title)",
+        "Intro",
+        "Engineering Design",
+        "Form, Function, and Aesthetics",
+        "How We Design",
+        "Faith Connection"
+      ],
+      "formatting_issues": [
+        "Long paragraph blocks under 'Intro' and 'Engineering Design' lack visual hierarchy and break points",
+        "Three subsections under 'Form, Function, and Aesthetics' (Form, Function, Aesthetics) mixed with images but no clear structural separation",
+        "Key concepts like 'Linkages' and 'Stewardship of Energy' buried in body text rather than highlighted",
+        "Technical diagram (blueprint) presented without annotation or callout block",
+        "Faith-based concepts ('Dominion', 'Stewardship', 'Redemption') could be emphasized with biblical callout blocks",
+        "No vocabulary terms formally defined despite technical language (OCV, linkages, torque, validation)"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Intro",
+          "current": "Two dense paragraphs explaining transition from Engineering to Design phase",
+          "recommended_block": "text + divider",
+          "reason": "Break into two shorter paragraphs with divider for visual breathing room"
+        },
+        {
+          "section": "Engineering Design",
+          "current": "Multiple long paragraphs covering problem statement, prototyping, validation, and trade-offs",
+          "recommended_block": "accordion",
+          "reason": "Organize into collapsible subsections: 'Problem Statement', 'Prototyping', 'Validation', 'Trade-offs' for middle school scannability"
+        },
+        {
+          "section": "Form, Function, and Aesthetics",
+          "current": "Three subsections with mixed image placement and inline text",
+          "recommended_block": "accordion-grid or tabs",
+          "reason": "Create three equal tabs/accordion items with heading + text + image for each concept; improves visual balance"
+        },
+        {
+          "section": "Form, Function, and Aesthetics > Aesthetics",
+          "current": "Paragraph explaining aesthetics with architectural photo",
+          "recommended_block": "callout (biblical)",
+          "reason": "1 Corinthians 14:33 reference should be in highlighted callout block"
+        },
+        {
+          "section": "How We Design",
+          "current": "Long paragraph + technical blueprint with no annotations or legend",
+          "recommended_block": "columns (left: text, right: image) + vocab block",
+          "reason": "Left column for process steps, right column for blueprint; add vocab block for key terms (linkage, swivel mount, tolerance)"
+        },
+        {
+          "section": "How We Design > Linkages explanation",
+          "current": "Inline description with photo labeled with arrows",
+          "recommended_block": "callout (tip)",
+          "reason": "Definition of 'linkages' in tip callout; labeled photo stands alone below"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Three subsections with bold headers but no visual distinction",
+          "recommended_block": "accordion with callout (biblical) for each subsection",
+          "reason": "Each subsection (Dominion, Stewardship, Redemption) should have its own accordion item with biblical callout highlighting the verse"
+        },
+        {
+          "section": "Technical vocabulary throughout",
+          "current": "Terms like 'OCV', 'torque', 'linkage', 'validation', 'trade-off' used without formal definition",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Add vocab block at end of 'Engineering Design' section or in tip callouts for middle school comprehension"
+        }
+      ],
+      "content_notes": "Strong faith integration and real-world mousetrap car example. Content is developmentally appropriate but dense. Missing formal vocabulary support for engineering terms. Technical blueprint needs clearer annotation. Consider adding a summary callout at lesson end tying design process back to Genesis 1:28 (Dominion). No errors detected; structure needs reorganization for readability, not content fixes.",
+      "priority": "high"
+    }
+  },
+  "M-003": {
+    "folder": "Kit Overview",
+    "lessonTitle": "Build Kit Overview",
+    "imagesTotal": 10,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Build Kit Overview (title/hero)",
+        "Intro",
+        "List of Supplies",
+        "Brass Axles",
+        "Wheels and Balloons",
+        "What's Next?",
+        "Mark 1 Kit (carousel)",
+        "Mark 2 Kit (carousel)",
+        "Extra Supplies and Items (carousel)",
+        "Measuring Tape (carousel)",
+        "Super Glue (carousel)",
+        "Importance of Parts",
+        "The Mousetrap",
+        "Balsa Wood Frame Rails",
+        "Lever Arm and Kevlar String"
+      ],
+      "formatting_issues": [
+        "Long paragraphs of body text lack visual breaks and hierarchy",
+        "Multiple carousels (kits, supplies) are sequential but not visually grouped—hard to distinguish between product showcases and instructional content",
+        "Component explanations (Mousetrap, Frame Rails, Lever Arm) are presented as plain text without emphasis on key engineering concepts",
+        "Formula (E = ½kx²) appears inline without callout or highlight",
+        "No clear visual separation between 'List of Supplies' section header and the detailed component sections that follow",
+        "Tabs or accordion could consolidate similar component descriptions to reduce cognitive load",
+        "Vocab terms ('Energy Transformation Engine,' 'spring energy budget,' 'transmission') are embedded in text rather than highlighted"
+      ],
+      "block_recommendations": [
+        {
+          "section": "List of Supplies",
+          "current": "Header only; details follow in separate text blocks",
+          "recommended_block": "tabs or accordion-grid",
+          "reason": "Group Brass Axles, Wheels and Balloons under expandable tabs to preview key components before detailed explanations below"
+        },
+        {
+          "section": "Brass Axles / Wheels and Balloons",
+          "current": "Plain paragraph text",
+          "recommended_block": "callout (info or tip)",
+          "reason": "Highlight engineering significance and performance implications in visually distinct boxes"
+        },
+        {
+          "section": "The Mousetrap (energy formula)",
+          "current": "Inline formula within paragraph",
+          "recommended_block": "callout (tip) with embedded formula",
+          "reason": "Isolate spring energy equation for emphasis; middle-schoolers need visual focus on key formulas"
+        },
+        {
+          "section": "Importance of Parts",
+          "current": "Long intro paragraph + multiple subsections",
+          "recommended_block": "accordion or accordion-grid",
+          "reason": "Collapse The Mousetrap, Balsa Wood Frame Rails, Lever Arm sections so students can expand only what they need"
+        },
+        {
+          "section": "The Mousetrap / Balsa Wood / Lever Arm",
+          "current": "Separate text blocks with bold subheadings",
+          "recommended_block": "accordion-grid",
+          "reason": "Organize all component deep-dives into one collapsible structure with consistent h3 headers"
+        },
+        {
+          "section": "Mark 1 Kit / Mark 2 Kit / Extra Supplies",
+          "current": "Sequential carousels with minimal context",
+          "recommended_block": "columns + carousel",
+          "reason": "Wrap carousel section in a column layout with a brief description column to contextualize each kit before/after carousel"
+        },
+        {
+          "section": "Vocab terms",
+          "current": "Embedded in body paragraphs",
+          "recommended_block": "vocab block (term-definition grid)",
+          "reason": "Pull out 'Energy Transformation Engine,' 'stored-energy device,' 'transmission' into a glossary at end of section"
+        }
+      ],
+      "content_notes": "Content is clear and age-appropriate. Key gap: no explicit vocabulary callout—engineering terms are embedded in text. The formula E = ½kx² is present but lacks context (what are k and x units?). Strength: multiple images/carousels help visualization. Consider adding a 'Check Your Understanding' callout or quiz prompt at the end to reinforce learning. Minor: 'Mousetrap Car Kit' is used interchangeably with 'car'—standardize terminology.",
+      "priority": "high"
+    }
+  },
+  "M-019": {
+    "folder": "Modeling Resistive Forces",
+    "lessonTitle": "Modeling Resistive Forces",
+    "imagesTotal": 6,
+    "imagesSampled": 6,
+    "result": {
+      "sections_found": [
+        "Modeling Resistive Forces (title)",
+        "Lesson Overview",
+        "Learning Objectives",
+        "The Language of the Unseen: Free Body Diagrams",
+        "Identifying Resistive Forces",
+        "The Digital Twin: Modeling with CAD",
+        "Faith Connection",
+        "Engineers Journal Activity"
+      ],
+      "formatting_issues": [
+        "Learning Objectives listed as plain text bullets rather than structured vocab or callout",
+        "Long paragraph blocks under section headers lack visual hierarchy and break readability",
+        "Analogies (Paper Twin, Toll Booth, Time Machine) embedded in text—should be visually separated callouts",
+        "FBD steps listed as text paragraphs instead of numbered list or accordion for step-by-step clarity",
+        "Resistive forces definitions ($F_f$, $C_d$) use inline notation without visual emphasis or vocab block",
+        "Faith Connection section is dense theology—benefits from callout or separate visual treatment",
+        "Journal Activity has multiple sub-tasks but presented as linear text, not accordion or numbered steps",
+        "No visual dividers between major conceptual shifts (FBD → CAD → Faith)"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Learning Objectives",
+          "current": "Bullet-point text list",
+          "recommended_block": "callout (type: tip)",
+          "reason": "Objectives are actionable learning goals; callout draws attention and sets expectations clearly for middle schoolers"
+        },
+        {
+          "section": "The Language of the Unseen: Free Body Diagrams",
+          "current": "Large paragraph with embedded definitions and steps",
+          "recommended_block": "accordion-grid",
+          "reason": "Breaking 'What is FBD?', 'Analogy: Paper Twin', and 'Steps to Constructing' into separate accordion panels reduces cognitive load and allows exploration"
+        },
+        {
+          "section": "FBD Steps (Isolate Body, Define Coordinate, Identify Loads, Label Dimensions)",
+          "current": "Paragraph format with colons",
+          "recommended_block": "accordion or tabs with h3 headers",
+          "reason": "Step-by-step process is clearer when visually chunked; each step can stand alone and be revisited"
+        },
+        {
+          "section": "Friction and Air Resistance definitions",
+          "current": "Paragraph with embedded notation and sub-bullets",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Two key terms ($F_f$, $F_d$) with explanations; vocab block provides structured, scannable reference"
+        },
+        {
+          "section": "Analogies (Paper Twin, Toll Booth, Time Machine)",
+          "current": "Embedded within paragraphs",
+          "recommended_block": "callout (type: info) or columns (side-by-side concept + analogy)",
+          "reason": "Analogies are memorable teaching devices; isolating them makes them stand out and aids retention for visual learners"
+        },
+        {
+          "section": "Why Use CAD? / Finite Element Analysis / Prediction / Optimization",
+          "current": "Paragraph with bullet-style explanations",
+          "recommended_block": "tabs or accordion-grid",
+          "reason": "Four related but distinct reasons can be explored independently; tabs reduce initial text density"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Three sub-sections (God's Order, Integrity in Measurement, Sustaining Power) as dense paragraphs",
+          "recommended_block": "accordion or callout (type: biblical)",
+          "reason": "Biblical callout block is purpose-built for faith-integrated content; accordion allows optional exploration without forcing scroll"
+        },
+        {
+          "section": "Engineers Journal Activity",
+          "current": "Linear list of tasks with metadata",
+          "recommended_block": "accordion-grid or numbered columns",
+          "reason": "Five sequential tasks (Draft, Identify, Reflect, Document, Signature) are clearer as collapsible or numbered checklist for student workflow"
+        }
+      ],
+      "content_notes": "Content is rigorous and well-written with strong pedagogy (conceptual → hands-on → reflective). Analogies are excellent for middle grade audience. Minor note: notation like $F_f$ and $F_d$ assumes familiarity with variable naming—consider brief intro. FBD steps are foundational; consider adding a simple example diagram. Faith section is substantive; consider whether 3 sub-topics warrant separate callouts or could be consolidated.",
+      "priority": "medium"
+    }
+  },
+  "M-002": {
+    "folder": "Mousetrap Course Intro",
+    "lessonTitle": "Course Introduction",
+    "imagesTotal": 9,
+    "imagesSampled": 8,
+    "result": {
+      "sections_found": [
+        "Title/Header (Mousetrap Build Course Overview)",
+        "Lesson Objectives",
+        "Introduction",
+        "Creatineering",
+        "Eight-Step Lifecycle (expandable list)",
+        "Step Breakdowns (1-8 with detailed descriptions)",
+        "Math to Communicate",
+        "Science as a Tool",
+        "Iteration",
+        "The Business Section of Creationeering",
+        "Phase 1-4 (Business phases with images)",
+        "Faith Connection",
+        "Note section"
+      ],
+      "formatting_issues": [
+        "Eight-step lifecycle presented as simple expandable list rather than visual/tabbed interface — hard to scan for 6th-8th graders",
+        "Long descriptive text blocks (Design, Analysis & Synthesis, Procurement, etc.) lack visual breaks and would benefit from columns or callouts",
+        "Business phases (1-4) mix text and images inconsistently — Phase 2 and 3 have images on right, Phase 4 on right, but layout not standardized",
+        "Faith Connection section uses bullet points for three concepts but could use callout or accordion for emphasis",
+        "Endpoint 'Note' section feels disconnected and could be a callout or tip block for better visual hierarchy",
+        "Images appear full-width in some places but could be better contained in columns with text"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Lesson Objectives",
+          "current": "Simple bulleted list",
+          "recommended_block": "callout (info)",
+          "reason": "Objectives should stand out as a learning contract; info callout emphasizes learning goals for students"
+        },
+        {
+          "section": "Eight-Step Lifecycle",
+          "current": "Expandable accordion list with brief titles",
+          "recommended_block": "accordion-grid or tabs",
+          "reason": "Accordion-grid allows students to see all 8 steps at once while expanding detail; tabs work if steps are conceptually grouped"
+        },
+        {
+          "section": "Step Breakdowns (1-8 detailed descriptions)",
+          "current": "Long text blocks under each heading",
+          "recommended_block": "columns (text + optional image placeholder)",
+          "reason": "Breaking into 2-column layout with definition on left and example/context on right improves readability for middle schoolers"
+        },
+        {
+          "section": "Math to Communicate",
+          "current": "Paragraph of text",
+          "recommended_block": "callout (tip)",
+          "reason": "Highlights how math is a tool; tip callout signals practical application"
+        },
+        {
+          "section": "Science as a Tool",
+          "current": "Text paragraph + centered image + long explanation",
+          "recommended_block": "columns (image left, text right) or image + text block",
+          "reason": "Better visual organization; image should be constrained and paired tightly with explanatory text"
+        },
+        {
+          "section": "Iteration",
+          "current": "Paragraph block",
+          "recommended_block": "callout (tip) or accordion",
+          "reason": "Iteration is a key concept; callout emphasizes the mindset shift; accordion allows expansion for detail"
+        },
+        {
+          "section": "Business Phases (1-4)",
+          "current": "Mixed text left + image right or image left + text right",
+          "recommended_block": "columns (standardized layout) with heading + text left, image right for all phases",
+          "reason": "Consistency matters for middle-school comprehension; standardized columns reduce cognitive load"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Heading + three bullet points",
+          "recommended_block": "callout (biblical) for heading + vocab grid or accordion for the three concepts",
+          "reason": "Biblical callout signals importance; vocab grid or accordion allows glossing of faith concepts without overwhelming text"
+        },
+        {
+          "section": "Note",
+          "current": "Generic paragraph heading 'Note:' followed by text + bullet list",
+          "recommended_block": "callout (tip) or accordion",
+          "reason": "Callout emphasizes that this is guidance/takeaway; visual distinction from regular content helps retention"
+        }
+      ],
+      "content_notes": "Content is strong and age-appropriate. No major gaps. The lesson clearly scaffolds from course philosophy → lifecycle steps → business/faith integration. However, dense text blocks and inconsistent image placement reduce visual appeal and accessibility for 6th-8th graders. The eight-step framework is the backbone but needs better visual scaffolding (accordion-grid or tabs). Business phases need standardized column layout. Faith Connection section feels somewhat disconnected; consider a biblical callout to anchor it. Overall: content solid, presentation needs restructuring.",
+      "priority": "high"
+    }
+  },
+  "M-004": {
+    "folder": "OCV",
+    "lessonTitle": "Objectives, Constraints, and Variables",
+    "imagesTotal": 5,
+    "imagesSampled": 5,
+    "result": {
+      "sections_found": [
+        "Objectives, Constraints, and Variables (title)",
+        "Intro",
+        "Defining the OCV of the Mousetrap Car",
+        "Optimizing OCV",
+        "Design Tradeoffs",
+        "Energy Transformation",
+        "Managing Resistive Forces",
+        "Data-Driven Decision Making",
+        "Math: The Language of the Creator",
+        "Scientific Testing and Optimization",
+        "The Mandate of Stewardship"
+      ],
+      "formatting_issues": [
+        "Long text blocks without visual breaks or hierarchy—difficult for middle schoolers to scan",
+        "Key concepts (Objectives, Constraints, Variables) introduced in intro but never formally defined or highlighted",
+        "Three main principles mentioned in 'Optimizing OCV' section but not listed or structured clearly",
+        "Mixed content types (text, images, equations) without clear visual separation or alignment",
+        "No callout boxes or emphasis for biblical/stewardship framing despite its importance",
+        "Math section title appears but is cut off; equations shown without explanation or callout formatting",
+        "Image placement inconsistent—some left-aligned, some right-aligned, creating visual discord"
+      ],
+      "block_recommendations": [
+        {
+          "section": "Intro",
+          "current": "Single paragraph introducing OCV framework",
+          "recommended_block": "callout (info)",
+          "reason": "Highlights the core framework students will master; draws attention to intentional thinking"
+        },
+        {
+          "section": "Defining the OCV of the Mousetrap Car",
+          "current": "Three separate paragraphs explaining Objectives, Constraints, Variables",
+          "recommended_block": "vocab (term-definition grid)",
+          "reason": "Makes definitions scannable and memorable for middle schoolers; structured reference"
+        },
+        {
+          "section": "Optimizing OCV",
+          "current": "Paragraph mentioning 'three basic principles' without clear structure",
+          "recommended_block": "accordion-grid or columns",
+          "reason": "Each principle (Design Tradeoffs, Energy Transformation, Managing Resistive Forces) deserves its own structured space"
+        },
+        {
+          "section": "Design Tradeoffs + Energy Transformation + Managing Resistive Forces",
+          "current": "Text with side images",
+          "recommended_block": "columns (text + image pairs)",
+          "reason": "Consistent layout for principle explanations; improves visual rhythm and readability"
+        },
+        {
+          "section": "Math: The Language of the Creator",
+          "current": "Heading with chalkboard image and paragraph below",
+          "recommended_block": "callout (info) + text",
+          "reason": "Frames math as a tool for understanding creation; separates conceptual intro from application"
+        },
+        {
+          "section": "Scientific Testing and Optimization",
+          "current": "Single paragraph",
+          "recommended_block": "callout (tip)",
+          "reason": "Emphasizes the baseline-test-change methodology as a practical strategy students will use"
+        },
+        {
+          "section": "The Mandate of Stewardship",
+          "current": "Single paragraph with biblical reference",
+          "recommended_block": "callout (biblical)",
+          "reason": "Honors the theological framing and motivates the why behind optimization work"
+        }
+      ],
+      "content_notes": "Content is theologically rich and age-appropriate. No major gaps, but structure obscures key learning outcomes. The OCV framework itself needs a clearer definition block early on. Mathematical principles are introduced but not worked through; consider adding worked example or formula card. Stewardship message is powerful but buried at end—consider moving prominence or using callout.",
+      "priority": "medium"
+    }
+  },
+  "M-014": {
+    "folder": "Power Transmission Mechanics",
+    "lessonTitle": "Power Transmission Mechanisms",
+    "imagesTotal": 9,
+    "imagesSampled": 8,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Introduction\",\n    \"Learning Objectives\",\n    \"Understanding Rotational Input\",\n    \"Relation to Linear Travel\",\n    \"Calculating Expected Linear Travel\",\n    \"Wheel Circumference Calculation\",\n    \"Lever Input and Axle Rotation\",\n    \"Identifying Energy Losses\",\n    \"Mechanical Engineering in Creationeering\",\n    \"Defining Work\",\n    \"Torque\",\n    \"Managing Energy Loss\",\n    \"The Reality of Friction\",\n    \"Calculating Mechanical Efficiency\",\n    \"Balancing Your Objectives\",\n    \"Engineering Journal Task\",\n    \"Conclusion\",\n    \"Technical Documentation Requirements\"\n  ],\n  \"formatting_issues\": [\n    \"Learning Objectives listed as numbered text rather than a structured list block\",\n    \"Key formulas (C=2πr, Arc Length=r×θ, τ=F·r, η formula) embedded in paragraph text—should be highlighted/isolated\",\n    \"Bullet lists for energy losses and friction explanations lack visual distinction\",\n    \"Mixed content types (conceptual definitions, mathematical formulas, real-world examples, biblical reflection) not clearly segmented\",\n    \"No visual hierarchy between definitional content and calculation examples\",\n    \"Engineering Journal Task has multiple sub-tasks but is presented as one text block\",\n    \"Biblical/Creationeering content integrated throughout but not consistently marked as reflection/callout\",\n    \"Vocabulary terms ('Rotational Input,' 'Linear Motion,' 'Torque,' 'Efficiency') defined inline but could use vocab block for clarity\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"Learning Objectives\",\n      \"current\": \"Numbered paragraph text\",\n      \"recommended_block\": \"accordion or tabs\",\n      \"reason\": \"3 learning objectives are scannable but could be collapsed/expandable for cleaner first impression; helps middle schoolers see the goal without overwhelming\"\n    },\n    {\n      \"section\": \"Understanding Rotational Input + Relation to Linear Travel\",\n      \"current\": \"Paragraphs with embedded bullet points\",\n      \"recommended_block\": \"columns + callout\",\n      \"reason\": \"Separate conceptual definition (left) from the three-part mechanism breakdown (right) for clarity; use callout for the mechanism summary\"\n    },\n    {\n      \"section\": \"Wheel Circumference Calculation\",\n      \"current\": \"Formula embedded in paragraph with example below\",\n      \"recommended_block\": \"callout (tip) + columns\",\n      \"reason\": \"Isolate formula in a highlighted tip block; place formula on left, example calculation on right for visual separation\"\n    },\n    {\n      \"section\": \"Lever Input and Axle Rotation\",\n      \"current\": \"Paragraph explaining concept, then formula, then example\",\n      \"recommended_block\": \"accordion-grid\",\n      \"reason\": \"Concept → Formula → Example is a repeating pattern; accordion-grid allows students to expand each step and compare structure to wheel circumference section\"\n    },\n    {\n      \"section\": \"Identifying Energy Losses\",\n      \"current\": \"Three numbered items as paragraph text\",\n      \"recommended_block\": \"vocab or accordion\",\n      \"reason\": \"Three distinct loss types (Friction, Slip, Axle Misalignment) warrant a vocab grid (term + definition) or accordion for expandable detail\"\n    },\n    {\n      \"section\": \"Mechanical Engineering in Creationeering\",\n      \"current\": \"Long narrative paragraph with theological reflection\",\n      \"recommended_block\": \"callout (biblical)\",\n      \"reason\": \"This is a reflection section distinct from engineering content; biblical callout signals its purpose and gives students mental break from formulas\"\n    },\n    {\n      \"section\": \"Defining Work + Torque\",\n      \"current\": \"Two separate concept sections with formulas embedded\",\n      \"recommended_block\": \"tabs or accordion-grid\",\n      \"reason\": \"Both explain force concepts via formulas; tabs ('Work' / 'Torque') allow side-by-side comparison; accordion-grid shows formula → definition → example for each\"\n    },\n    {\n      \"section\": \"The Reality of Friction\",\n      \"current\": \"Narrative with sub-concepts (Macro-Level, Atomic Level) as bullet points\",\n      \"recommended_block\": \"accordion\",\n      \"reason\": \"Hierarchical concept (friction overview → two scales of understanding); accordion lets students expand each scale independently\"\n    },\n    {\n      \"section\": \"Calculating Mechanical Efficiency\",\n      \"current\": \"Paragraph with embedded formula and narrative explanation\",\n      \"recommended_block\": \"callout (tip) + text\",\n      \"reason\": \"Isolate efficiency formula and the 90%/95% target in a tip block; follow with stewardship narrative\"\n    },\n    {\n      \"section\": \"Engineering Journal Task\",\n      \"current\": \"Four sub-tasks presented as separate paragraphs\",\n      \"recommended_block\": \"accordion or tabs\",\n      \"reason\": \"Four distinct deliverables (Trace Path, Identify Inputs/Outputs",
+      "error": "json_parse_failed"
+    }
+  },
+  "M-005": {
+    "folder": "Prototyping and Iterative Design",
+    "lessonTitle": "Prototypes",
+    "imagesTotal": 5,
+    "imagesSampled": 5,
+    "result": {
+      "sections_found": [
+        "Prototyping and Iterative Design (title)",
+        "Intro",
+        "The Prototyping Process",
+        "1. Mousetrap Mark 1.0: The Baseline Foundation",
+        "2. Mark 1.1",
+        "3. Mark 2.0 (Second Part of Experiment)",
+        "4. Mark 3.0 Computational Design: The Final Validation",
+        "How Will this Work?",
+        "The Rule of OFAT",
+        "OFAT application list (3 test variables)",
+        "Faith Connection",
+        "Preparing for the Lab"
+      ],
+      "formatting_issues": [
+        "The three Mark prototypes (1.0, 1.1, 2.0) are presented linearly but lack visual hierarchy to distinguish their different purposes in the workflow",
+        "The OFAT method explanation uses prose paragraphs when the three test variables would benefit from a structured list or callout block",
+        "Mark 3.0 and Mark 2.0 descriptions lack clear visual separation despite being distinct phases",
+        "The 'Faith Connection' section repeats verbatim across screenshots, suggesting content duplication or unclear page breaks",
+        "Key engineering concepts (OFAT, iteration, stewardship) are embedded in prose and not highlighted as core vocabulary or tips",
+        "Final 'Preparing for the Lab' section has three distinct principles that read as bullet points but lack formatting emphasis"
+      ],
+      "block_recommendations": [
+        {
+          "section": "The Prototyping Process",
+          "current": "Paragraph with three numbered items (Mark 1.0, 1.1, 2.0) embedded in text with accompanying images",
+          "recommended_block": "accordion or tabs",
+          "reason": "Each Mark version has distinct purpose and content; tabs/accordion allow students to explore each phase sequentially without overwhelming the page, and keeps images co-located with their descriptions"
+        },
+        {
+          "section": "OFAT application list",
+          "current": "Three numbered items in paragraph form (Power Test, Wheel Traction, Wheel Size)",
+          "recommended_block": "vocab (term-definition grid) or callout (tip)",
+          "reason": "Each test isolates one variable and tests one engineering principle; vocab grid makes the variable-to-principle mapping explicit and scannable for middle schoolers"
+        },
+        {
+          "section": "The Rule of OFAT",
+          "current": "Paragraph definition followed by cookie analogy",
+          "recommended_block": "callout (tip) with embedded example",
+          "reason": "The cookie analogy is a teaching tool; wrapping as a tip block emphasizes the method's importance and makes the analogy stand out visually"
+        },
+        {
+          "section": "Faith Connection",
+          "current": "Standalone long-form paragraph covering Genesis Mandate, stewardship, energy, and 1 Corinthians 14:33",
+          "recommended_block": "callout (biblical)",
+          "reason": "Content is explicitly theological; biblical callout block is semantically correct, signals importance to students, and improves readability of a dense paragraph"
+        },
+        {
+          "section": "Preparing for the Lab",
+          "current": "Three paragraphs with implied structure (Don't try to fix, Engineering notebook, Keep Trying)",
+          "recommended_block": "accordion-grid or callout (warning/tip) with subheadings",
+          "reason": "These are actionable pre-lab principles that benefit from visual emphasis; accordion-grid allows quick reference, or three separate callouts highlight each principle"
+        },
+        {
+          "section": "Intro",
+          "current": "Single paragraph block",
+          "recommended_block": "callout (info) or text with h3 subheading",
+          "reason": "Intro previews three Mark versions; splitting into callout or adding a visual break improves scanability and sets expectations"
+        }
+      ],
+      "content_notes": "Lesson is well-written with clear progression (baseline → iteration → computational validation). Strengths: hands-on, integrates faith, explains OFAT method well. Minor gaps: no explicit connection between OFAT tests and which variables students should prioritize, and the Mark 3.0 computational phase lacks detail on what software/model students will use. Consider adding a vocab block defining 'prototype,' 'iteration,' and 'variable' early in Intro.",
+      "priority": "medium"
+    }
+  },
+  "M-018": {
+    "folder": "The Dynamics of Stored Energy",
+    "lessonTitle": "The Dynamics of Stored Energy",
+    "imagesTotal": 6,
+    "imagesSampled": 6,
+    "result": {
+      "raw": "```json\n{\n  \"sections_found\": [\n    \"Introduction\",\n    \"Energy\",\n    \"The Spring\",\n    \"Energy Transfer\",\n    \"Energy Transfer Flow\",\n    \"Identifying the Energy Loss\",\n    \"Mathematical Modeling\",\n    \"Potential Energy\",\n    \"3D Modeling and Simulation\",\n    \"Using CAD as a Tool for Discovery\",\n    \"Finite Element Analysis (FEA) and Stress\",\n    \"Models and Diagrams\",\n    \"Free Body Diagrams (FBD)\",\n    \"The Energy Flowchart\",\n    \"Variable Changes\",\n    \"Faith Connection\",\n    \"Engineering Journal Task\"\n  ],\n  \"formatting_issues\": [\n    \"Definition table (Spring section) lacks visual hierarchy; vocab block would be clearer\",\n    \"Energy Transfer section mixes metaphor (relay race image + text) without clear visual separation\",\n    \"Energy Transfer Flow has four bullet points that could be better highlighted as process steps\",\n    \"Mathematical formulas appear as plain text rather than displayed in callouts or highlighted blocks\",\n    \"Multiple conceptual sections (FBD, Energy Flowchart, Variable Changes) lack visual distinction from explanatory paragraphs\",\n    \"Engineering Journal Task has 5 sub-tasks formatted as plain text bullets; would benefit from accordion or columns\",\n    \"No clear visual break between 'Identifying the Energy Loss' sub-items and surrounding content\",\n    \"Faith Connection section appears isolated; could use callout block for emphasis\"\n  ],\n  \"block_recommendations\": [\n    {\n      \"section\": \"The Spring\",\n      \"current\": \"3-row definition table (Term | Engineering Definition)\",\n      \"recommended_block\": \"vocab\",\n      \"reason\": \"Vocab block is designed for term-definition pairs and provides consistent styling for K-12 content\"\n    },\n    {\n      \"section\": \"Energy Transfer Flow\",\n      \"current\": \"Four separate bullet points describing sequential conversions\",\n      \"recommended_block\": \"accordion or tabs\",\n      \"reason\": \"These are discrete steps in a process; tabs or accordion would show progression from spring → wheels and reduce cognitive load\"\n    },\n    {\n      \"section\": \"Identifying the Energy Loss\",\n      \"current\": \"Three bullet points (Friction, Air Drag, Rolling Resistance) as plain list\",\n      \"recommended_block\": \"callout or columns\",\n      \"reason\": \"These are 'toll booths' (the lesson's own metaphor); a warning/info callout or 3-column layout would emphasize they're loss mechanisms\"\n    },\n    {\n      \"section\": \"Mathematical Modeling\",\n      \"current\": \"Paragraph with inline formula PE_spring = Work Input\",\n      \"recommended_block\": \"callout (info or tip)\",\n      \"reason\": \"Key formulas deserve visual emphasis; callout ensures students notice the equation and its significance\"\n    },\n    {\n      \"section\": \"Potential Energy\",\n      \"current\": \"Paragraph describing PE calculation with embedded example\",\n      \"recommended_block\": \"tabs\",\n      \"reason\": \"Separate explanation, formula, and worked example into tabs so students can focus on one concept at a time\"\n    },\n    {\n      \"section\": \"Efficiency (η) formula\",\n      \"current\": \"Large centered formula as image/text\",\n      \"recommended_block\": \"callout (tip)\",\n      \"reason\": \"This is foundational; callout block will highlight it and signal importance to middle-schoolers\"\n    },\n    {\n      \"section\": \"3D Modeling and Simulation intro\",\n      \"current\": \"Paragraph describing CAD benefits\",\n      \"recommended_block\": \"callout (info)\",\n      \"reason\": \"Sets stage for advanced tools; callout frames it as a key engineering practice\"\n    },\n    {\n      \"section\": \"Using CAD as a Tool for Discovery\",\n      \"current\": \"Two sub-points (Geometric Optimization, Mass Analysis) as plain text\",\n      \"recommended_block\": \"accordion-grid or columns\",\n      \"reason\": \"Each sub-point is a distinct CAD capability; visual separation aids comprehension\"\n    },\n    {\n      \"section\": \"Free Body Diagrams (FBD)\",\n      \"current\": \"Multiple paragraphs explaining concept, application, and purpose\",\n      \"recommended_block\": \"accordion\",\n      \"reason\": \"Three distinct ideas (definition, example, purpose); accordion reduces visual density\"\n    },\n    {\n      \"section\": \"The Energy Flowchart\",\n      \"current\": \"Paragraph + four bullet sub-points describing flowchart components\",\n      \"recommended_block\": \"accordion-grid\",\n      \"reason\": \"Start/Process/Loss/Points are distinct sections; grid or tabs would clarify structure\"\n    },\n    {\n      \"section\": \"Variable Changes\",\n      \"current\": \"Two bullet points (The Trade-off, The Model)\",\n      \"recommended_block\": \"columns or accordion\",\n      \"reason\": \"Two key concepts; side-by-side or expandable view emphasizes relationship\"\n    },\n    {\n      \"section\": \"Faith Connection\",\n      \"current\": \"Paragraph with biblical reference and theological reflection\",",
+      "error": "json_parse_failed"
+    }
+  }
+}

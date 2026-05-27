@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build 2: Iterative Design - Mark 1 — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Build 2: Iterative Design - Mark 1</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Mark 1: Iterative Experimental Rig", "definition": "The initial phase of your design process where you test a prototype to gather data and learn how to improve it."}, {"term": "One Factor At A Time (OFAT) method", "definition": "An experimental approach where you change only one variable between test runs to understand its specific impact on performance."}, {"term": "Ground Truth Data", "definition": "Reliable and accurate information gathered from your experiments, which helps you make informed decisions for your next design."}, {"term": "Variable Isolation", "definition": "The process of changing only one specific part or condition during a test to clearly see how that single change affects your prototype's performance."}, {"term": "Baseline Data / Control Group", "definition": "The initial measurements taken from your standard prototype configuration, used as a comparison point for all other tests."}, {"term": "Return to Control", "definition": "The critical step of reverting your prototype back to its original, standard configuration before testing a new variable. This ensures accurate results for each new test."}, {"term": "Axle Binding", "definition": "A problem where an axle gets stuck or rubs excessively against its housing, preventing smooth rotation and causing energy loss."}, {"term": "Analysis (Creationeering Pillar)", "definition": "The process of carefully examining your test results and observations to understand why your prototype performed the way it did."}, {"term": "Toll Booths (Energy Loss)", "definition": "A metaphor for points in your design where useful energy is lost, often due to friction or other inefficiencies, like a rough wooden dowel axle."}, {"term": "Constraint (Design)", "definition": "A limitation or requirement for your design, such as needing to account for air resistance or specific material properties."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

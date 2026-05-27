@@ -1,256 +1,640 @@
 """
-Genesis K-12 — Markdown-in-HTML Migration
+Genesis K-12 — Markdown-in-HTML → Block[] Migration Script
 
-Fixes lessons stuck in 1-block state where the pipeline produced markdown
-headings inside <p> tags (e.g. <p>## Lesson Overview</p>).
-
-Steps per lesson:
-  1. Detect: 1 block, no contentSource, markdown artifacts present
-  2. Preprocess: convert markdown → proper HTML (<h2>, <strong>, etc.)
-  3. POST parse-html → re-splits into proper multi-block structure
-  4. PATCH contentSource: "platform" → locks lesson so pipeline can't overwrite
+Detects lessons stuck in the "1-block markdown-in-HTML" state and migrates
+them to properly typed Block[] entries, then PATCHes the live platform API.
 
 Usage:
-  python scripts/migrate_markdown_html.py --dry-run         # preview only
-  python scripts/migrate_markdown_html.py                   # migrate all
-  python scripts/migrate_markdown_html.py --lesson-id C-025 # single lesson
-  python scripts/migrate_markdown_html.py --course C        # Creationeering only
-  python scripts/migrate_markdown_html.py --course M        # Mousetrap only
+  python scripts/migrate_markdown_html.py --dry-run            # show changes, no writes
+  python scripts/migrate_markdown_html.py --save               # patch all matching lessons
+  python scripts/migrate_markdown_html.py --lesson-id C-005    # single lesson, dry-run
+  python scripts/migrate_markdown_html.py --lesson-id C-005 --save
+  python scripts/migrate_markdown_html.py --limit 10 --save    # cap for testing
 """
 
-import argparse, json, os, re, sys, time, urllib.request, urllib.error
+import argparse
+import json
+import re
+import sys
+import time
+import uuid
+import urllib.request
+import urllib.error
+from collections import Counter
 from datetime import datetime, timezone
+from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-LIVE_URL      = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-PLATFORM_KEY  = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
-MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
-LOG_PATH      = os.path.join(os.path.dirname(__file__), "migrate_markdown_log.json")
+# ── Config ────────────────────────────────────────────────────────────────────
 
-# Known section headings that appear as plain <p> tags in M-course lessons
-KNOWN_H2_HEADINGS = {
-    "lesson overview", "learning objectives", "key vocabulary",
-    "summary", "conclusion", "sources", "engineering journal task",
-    "technical documentation requirements", "faith connection",
-    "biblical understanding", "check for understanding", "review",
-    "the beginning", "introduction", "materials needed",
+BASE_URL = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
+API_KEY  = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
+LOG_PATH = Path(r"D:\AIOS\scripts\migrate_markdown_log.json")
+
+HEADERS = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json",
 }
 
-# Preamble patterns the pipeline sometimes prepends — strip these
-PREAMBLE_RE = re.compile(
-    r'<p>(?:Here is (?:a |your )?lesson(?: for[^<]*?)?'
-    r'|This lesson (?:is )?for[^<]*?'
-    r'|Welcome to[^<]*?Genesis K-12[^<]*?'
-    r')</p>\s*',
-    re.IGNORECASE,
+# Scripture book names used to detect biblical callout variant
+SCRIPTURE_BOOKS = {
+    "genesis", "exodus", "leviticus", "numbers", "deuteronomy",
+    "joshua", "judges", "ruth", "samuel", "kings", "chronicles",
+    "ezra", "nehemiah", "esther", "job", "psalms", "psalm",
+    "proverbs", "ecclesiastes", "isaiah", "jeremiah", "lamentations",
+    "ezekiel", "daniel", "hosea", "joel", "amos", "obadiah",
+    "jonah", "micah", "nahum", "habakkuk", "zephaniah", "haggai",
+    "zechariah", "malachi", "matthew", "mark", "luke", "john",
+    "acts", "romans", "corinthians", "galatians", "ephesians",
+    "philippians", "colossians", "thessalonians", "timothy", "titus",
+    "philemon", "hebrews", "james", "peter", "jude", "revelation",
+}
+
+CHAPTER_VERSE_RE = re.compile(r"\d+:\d+")
+
+# Markdown indicators used for detection
+MARKDOWN_INDICATORS_RE = re.compile(
+    r"(^#{1,6}\s)"          # ATX headings
+    r"|(^\*\*[^*])"         # bold at line start
+    r"|(\*\*[^*]+\*\*)"     # bold anywhere
+    r"|(^-\s)"              # bullet list
+    r"|(^---\s*$)"          # horizontal rule
+    r"|(\$\$)"              # math
+    r"|(^\s*>\s)",          # blockquote
+    re.MULTILINE,
 )
 
 
-def _needs_migration(blocks: list, content_source: str | None) -> bool:
-    """Return True if the lesson is in the broken 1-block markdown state."""
-    if content_source == "platform":
-        return False
-    if len(blocks) != 1:
-        return False
-    html = blocks[0].get("data", {}).get("html", "") or ""
-    # Has markdown heading artifacts or plain-paragraph heading structure
-    return bool(
-        re.search(r'<p>#{1,3}\s', html) or           # ## or ### prefix
-        re.search(r'<p>\d+\.\s+[A-Z]', html) or      # 1. Section Name
-        re.search(r'\*\*[^*]+\*\*', html) or          # **bold**
-        re.search(r'<p>Lesson Overview</p>', html) or  # plain known headings
-        re.search(r'<p>Learning Objectives</p>', html)
-    )
+# ── API helpers ───────────────────────────────────────────────────────────────
 
-
-def preprocess_html(html: str) -> str:
-    """Convert markdown-in-HTML artifacts to proper HTML tags."""
-
-    # ── Strip pipeline preamble lines ────────────────────────────────────────
-    html = PREAMBLE_RE.sub("", html)
-
-    # ── Convert ## / ### heading paragraphs ──────────────────────────────────
-    # <p>### Subheading</p> before <p>## Heading</p> so the longer match runs first
-    html = re.sub(r'<p>#{3,}\s+(.+?)</p>', r'<h3>\1</h3>', html)
-    html = re.sub(r'<p>#{2}\s+(.+?)</p>',  r'<h2>\1</h2>', html)
-    html = re.sub(r'<p>#\s+(.+?)</p>',     r'<h2>\1</h2>', html)
-
-    # ── Convert numbered section headings: <p>1. Section Name</p> ────────────
-    # Only convert if: starts with capital, ≤ 70 chars, does NOT end with colon
-    # (colon-ending = intro line, not a heading)
-    def _num_heading(m: re.Match) -> str:
-        text = m.group(1).strip()
-        # Skip: too long, colon-ending intros, period-ending sentences, or dollar amounts
-        if text.endswith(":") or len(text) > 70 or text.endswith(".") or "$" in text:
-            return m.group(0)
-        return f"<h2>{text}</h2>"
-
-    html = re.sub(r'<p>\d+\.\s+([A-Z][^<]{2,}?)</p>', _num_heading, html)
-
-    # ── Convert known plain section heading paragraphs ────────────────────────
-    def _known_heading(m: re.Match) -> str:
-        text = m.group(1)
-        if text.lower().strip() in KNOWN_H2_HEADINGS:
-            return f"<h2>{text}</h2>"
-        return m.group(0)
-
-    html = re.sub(r'<p>([^<]{3,60})</p>', _known_heading, html)
-
-    # ── Convert inline markdown bold / italic ─────────────────────────────────
-    # Bold first (double asterisk), then italic (single)
-    html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
-    html = re.sub(r'(?<!\*)\*([^*\n]+?)\*(?!\*)', r'<em>\1</em>', html)
-
-    return html.strip()
-
-
-# ── Platform API helpers ──────────────────────────────────────────────────────
-
-def _fetch_lesson(lesson_id: str) -> dict | None:
-    url = f"{LIVE_URL}/api/admin/lessons/{lesson_id}"
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {PLATFORM_KEY}"})
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return json.loads(resp.read())
-    except Exception as e:
-        print(f"    Fetch error: {e}")
-        return None
-
-
-def _parse_html(lesson_id: str, html: str) -> int | None:
-    """POST parse-html action. Returns block count on success, None on error."""
-    payload = json.dumps({"action": "parse-html", "html": html}).encode("utf-8")
-    req = urllib.request.Request(
-        f"{LIVE_URL}/api/admin/lessons/{lesson_id}",
-        data=payload,
-        headers={"Authorization": f"Bearer {PLATFORM_KEY}", "Content-Type": "application/json"},
-        method="POST",
-    )
+def api_request(method: str, path: str, body=None):
+    """Make an authenticated API request. Returns parsed JSON."""
+    url = f"{BASE_URL}{path}"
+    data = json.dumps(body).encode("utf-8") if body is not None else None
+    req = urllib.request.Request(url, data=data, headers=HEADERS, method=method)
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
-            result = json.loads(resp.read())
-            return result.get("blockCount") if result.get("ok") else None
-    except Exception as e:
-        print(f"    parse-html error: {e}")
-        return None
+            raw = resp.read()
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as e:
+        body_text = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {e.code} {method} {path}: {body_text}") from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"Network error {method} {path}: {e.reason}") from e
 
 
-def _lock_content_source(lesson_id: str) -> bool:
-    """PATCH contentSource: platform so pipeline won't overwrite."""
-    payload = json.dumps({"contentSource": "platform"}).encode("utf-8")
-    req = urllib.request.Request(
-        f"{LIVE_URL}/api/admin/lessons/{lesson_id}",
-        data=payload,
-        headers={"Authorization": f"Bearer {PLATFORM_KEY}", "Content-Type": "application/json"},
-        method="PATCH",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            result = json.loads(resp.read())
-            return result.get("ok", False)
-    except Exception as e:
-        print(f"    lock error: {e}")
-        return False
+MANIFEST_PATH = Path(__file__).parent / "lessons_manifest.json"
+
+def get_all_lessons():
+    """Load lesson IDs from manifest, fetch each individually."""
+    if not MANIFEST_PATH.exists():
+        raise FileNotFoundError(f"Manifest not found: {MANIFEST_PATH}. Run the pipeline to generate it.")
+    with open(MANIFEST_PATH, encoding="utf-8") as f:
+        data = json.load(f)
+    entries = data.get("lessons", data) if isinstance(data, dict) else data
+    lesson_ids = [e["id"] for e in entries if "id" in e]
+    lessons = []
+    for lid in lesson_ids:
+        try:
+            lesson = api_request("GET", f"/api/admin/lessons/{lid}")
+            if lesson:
+                lessons.append(lesson)
+        except RuntimeError as e:
+            print(f"  [WARN] Could not fetch {lid}: {e}")
+        time.sleep(0.05)
+    return lessons
+
+
+def get_lesson(lesson_id: str):
+    return api_request("GET", f"/api/admin/lessons/{lesson_id}")
+
+
+def patch_lesson(lesson_id: str, payload: dict):
+    return api_request("PATCH", f"/api/admin/lessons/{lesson_id}", payload)
+
+
+# ── Detection ─────────────────────────────────────────────────────────────────
+
+def has_markdown(html: str) -> bool:
+    """Return True if the string contains Markdown indicators."""
+    return bool(MARKDOWN_INDICATORS_RE.search(html))
+
+
+def classify_lesson(lesson: dict) -> str:
+    """
+    Return one of:
+      'full'    -- needs full Markdown parse-and-replace
+      'source'  -- already clean HTML, only contentSource patch needed
+      'skip'    -- already done or not a match
+    """
+    blocks = lesson.get("blocks") or []
+    content_source = lesson.get("contentSource")
+
+    if content_source == "platform":
+        return "skip"
+
+    if len(blocks) == 1 and blocks[0].get("type") == "text":
+        raw = blocks[0].get("data", {}).get("html", "")
+        if has_markdown(raw):
+            return "full"
+        # Single clean block, no markdown -- just fix contentSource
+        return "source"
+
+    if len(blocks) == 1 and content_source in (None, ""):
+        # Single block of any type, missing contentSource
+        return "source"
+
+    return "skip"
+
+
+# ── Block factory helpers ─────────────────────────────────────────────────────
+
+def new_id() -> str:
+    return str(uuid.uuid4())
+
+
+def make_meta() -> dict:
+    return {"spacing": "md", "qcStatus": "pending"}
+
+
+def make_text(html: str) -> dict:
+    return {
+        "id": new_id(),
+        "type": "text",
+        "data": {"html": html.strip()},
+        "meta": make_meta(),
+    }
+
+
+def make_callout(variant: str, html: str) -> dict:
+    return {
+        "id": new_id(),
+        "type": "callout",
+        "data": {"variant": variant, "html": html.strip()},
+        "meta": make_meta(),
+    }
+
+
+def make_vocab(items: list) -> dict:
+    return {
+        "id": new_id(),
+        "type": "vocab",
+        "data": {"columns": 2, "items": items},
+        "meta": make_meta(),
+    }
+
+
+def make_divider() -> dict:
+    return {
+        "id": new_id(),
+        "type": "divider",
+        "data": {"style": "solid"},
+        "meta": make_meta(),
+    }
+
+
+def make_math(latex: str) -> dict:
+    return {
+        "id": new_id(),
+        "type": "math",
+        "data": {"latex": latex.strip(), "display": True},
+        "meta": make_meta(),
+    }
+
+
+# ── Inline Markdown → HTML ────────────────────────────────────────────────────
+
+def inline_md(text: str) -> str:
+    """Convert inline Markdown to HTML (bold, italic, inline code)."""
+    # Bold+italic before bold before italic to avoid partial matches
+    text = re.sub(r"\*\*\*(.+?)\*\*\*", r"<strong><em>\1</em></strong>", text)
+    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+    text = re.sub(r"(?<!\*)\*([^*\n]+?)\*(?!\*)", r"<em>\1</em>", text)
+    text = re.sub(r"`(.+?)`", r"<code>\1</code>", text)
+    return text
+
+
+# ── Callout variant detection ─────────────────────────────────────────────────
+
+def detect_callout_variant(text: str) -> str:
+    lower = text.lower()
+    if CHAPTER_VERSE_RE.search(text):
+        return "biblical"
+    for book in SCRIPTURE_BOOKS:
+        if book in lower:
+            return "biblical"
+    if any(w in lower for w in ("warning", "caution", "danger")):
+        return "warning"
+    if any(w in lower for w in ("tip", "hint", "pro tip")):
+        return "tip"
+    return "info"
+
+
+# ── Vocab pattern detection ───────────────────────────────────────────────────
+
+# **Term** -- definition  OR  **Term** - definition  OR  **Term**: definition
+VOCAB_BOLD_RE   = re.compile(r"^\*\*(.+?)\*\*\s*[—\-:]\s*(.+)$")
+# Term: definition  (capitalized, no bold, short key)
+VOCAB_SIMPLE_RE = re.compile(r"^([A-Z][^:]{1,50}):\s+(.{10,})$")
+
+
+def try_parse_vocab(line: str):
+    """Return (term, definition) tuple or None."""
+    m = VOCAB_BOLD_RE.match(line.strip())
+    if m:
+        return m.group(1).strip(), m.group(2).strip()
+    m = VOCAB_SIMPLE_RE.match(line.strip())
+    if m:
+        return m.group(1).strip(), m.group(2).strip()
+    return None
+
+
+# ── Buffer flush helpers ──────────────────────────────────────────────────────
+
+def flush_text(buf: list, blocks: list):
+    """Flush accumulated HTML buffer into a text block (if non-empty)."""
+    html = "".join(buf).strip()
+    if html:
+        blocks.append(make_text(html))
+    buf.clear()
+
+
+def flush_list(items: list, buf: list):
+    """Flush accumulated bullet items into buf as a <ul> element."""
+    if items:
+        inner = "".join(f"<li>{inline_md(item)}</li>" for item in items)
+        buf.append(f"<ul>{inner}</ul>")
+        items.clear()
+
+
+def flush_vocab(vocab_items: list, blocks: list, text_buf: list):
+    """Flush accumulated vocab items into a vocab block."""
+    if vocab_items:
+        flush_text(text_buf, blocks)
+        blocks.append(make_vocab([{"term": t, "definition": d} for t, d in vocab_items]))
+        vocab_items.clear()
+
+
+# ── Main parser ───────────────────────────────────────────────────────────────
+
+def parse_markdown_to_blocks(raw: str) -> list:
+    """
+    Parse a raw Markdown / mixed-HTML string into a list of typed Block dicts.
+
+    Splitting strategy:
+      - Each ## heading starts a new text block (after flushing the previous one)
+      - Bullet/numbered lists are accumulated into <ul>/<ol> inside the current block
+      - Blockquotes and Note/Tip/Warning lines become callout blocks
+      - --- becomes a divider block
+      - $$ or \\[ blocks become math blocks
+      - **Term** - definition and Term: definition patterns become vocab blocks
+      - Everything else is a paragraph in the current text block
+    """
+    blocks: list     = []
+    text_buf: list   = []   # accumulates HTML fragments for current text block
+    list_items: list = []   # pending bullet-list items
+    vocab_items: list = []  # pending (term, definition) pairs
+
+    lines = raw.splitlines()
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        # ── Empty line: skip ──────────────────────────────────────────────────
+        if not stripped:
+            i += 1
+            continue
+
+        # ── Math block: $$...$$ ───────────────────────────────────────────────
+        if stripped.startswith("$$"):
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            # Single-line: $$latex$$
+            if stripped.endswith("$$") and len(stripped) > 4:
+                blocks.append(make_math(stripped[2:-2]))
+            else:
+                math_lines = [stripped[2:]]
+                i += 1
+                while i < len(lines):
+                    l = lines[i].strip()
+                    if l.endswith("$$"):
+                        math_lines.append(l[:-2])
+                        break
+                    math_lines.append(l)
+                    i += 1
+                blocks.append(make_math("\n".join(math_lines)))
+            i += 1
+            continue
+
+        # ── Math block: \[...\] ───────────────────────────────────────────────
+        if stripped.startswith(r"\["):
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            if stripped.endswith(r"\]") and len(stripped) > 4:
+                blocks.append(make_math(stripped[2:-2]))
+            else:
+                math_lines = [stripped[2:]]
+                i += 1
+                while i < len(lines):
+                    l = lines[i].strip()
+                    if l.endswith(r"\]"):
+                        math_lines.append(l[:-2])
+                        break
+                    math_lines.append(l)
+                    i += 1
+                blocks.append(make_math("\n".join(math_lines)))
+            i += 1
+            continue
+
+        # ── Horizontal rule: --- ──────────────────────────────────────────────
+        if re.match(r"^-{3,}\s*$", stripped):
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            blocks.append(make_divider())
+            i += 1
+            continue
+
+        # ── ATX Heading (# or ##) — starts a new text block ──────────────────
+        heading_match = re.match(r"^(#{1,6})\s+(.+)$", stripped)
+        if heading_match:
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            level = min(len(heading_match.group(1)), 4)
+            text_buf.append(f"<h{level}>{inline_md(heading_match.group(2))}</h{level}>")
+            i += 1
+            continue
+
+        # ── Blockquote lines → callout ────────────────────────────────────────
+        if stripped.startswith(">"):
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            quote_lines = []
+            while i < len(lines) and lines[i].strip().startswith(">"):
+                quote_lines.append(lines[i].strip().lstrip(">").strip())
+                i += 1
+            quote_text = " ".join(quote_lines)
+            variant = detect_callout_variant(quote_text)
+            blocks.append(make_callout(variant, f"<p>{inline_md(quote_text)}</p>"))
+            continue
+
+        # ── Inline Note/Tip/Warning prefix → callout ──────────────────────────
+        callout_match = re.match(
+            r"^(Note|Tip|Warning|Caution):\s+(.+)$", stripped, re.IGNORECASE
+        )
+        if callout_match:
+            flush_list(list_items, text_buf)
+            flush_vocab(vocab_items, blocks, text_buf)
+            flush_text(text_buf, blocks)
+            kw = callout_match.group(1).lower()
+            content = callout_match.group(2)
+            variant_map = {
+                "note": "info", "tip": "tip", "warning": "warning", "caution": "warning"
+            }
+            blocks.append(
+                make_callout(variant_map[kw], f"<p>{inline_md(content)}</p>")
+            )
+            i += 1
+            continue
+
+        # ── Bullet list item ──────────────────────────────────────────────────
+        bullet_match = re.match(r"^[-*]\s+(.+)$", stripped)
+        if bullet_match:
+            if vocab_items:
+                flush_vocab(vocab_items, blocks, text_buf)
+            list_items.append(bullet_match.group(1))
+            i += 1
+            continue
+
+        # ── Numbered list: collect consecutive items as <ol> ─────────────────
+        num_match = re.match(r"^\d+\.\s+(.+)$", stripped)
+        if num_match:
+            flush_list(list_items, text_buf)
+            if vocab_items:
+                flush_vocab(vocab_items, blocks, text_buf)
+            ol_items = [num_match.group(1)]
+            i += 1
+            while i < len(lines):
+                nm2 = re.match(r"^\d+\.\s+(.+)$", lines[i].strip())
+                if nm2:
+                    ol_items.append(nm2.group(1))
+                    i += 1
+                else:
+                    break
+            inner = "".join(f"<li>{inline_md(it)}</li>" for it in ol_items)
+            text_buf.append(f"<ol>{inner}</ol>")
+            continue
+
+        # ── Vocab pair ────────────────────────────────────────────────────────
+        vocab_pair = try_parse_vocab(stripped)
+        if vocab_pair:
+            flush_list(list_items, text_buf)
+            vocab_items.append((vocab_pair[0], inline_md(vocab_pair[1])))
+            i += 1
+            continue
+
+        # ── Plain text / pass-through HTML ───────────────────────────────────
+        flush_list(list_items, text_buf)
+        if vocab_items:
+            flush_vocab(vocab_items, blocks, text_buf)
+        # If the line already looks like an HTML tag, pass through unmodified
+        if stripped.startswith("<") and not stripped.startswith("<strong") \
+                and not stripped.startswith("<em"):
+            text_buf.append(stripped)
+        else:
+            text_buf.append(f"<p>{inline_md(stripped)}</p>")
+        i += 1
+
+    # ── Flush remaining buffers ───────────────────────────────────────────────
+    flush_list(list_items, text_buf)
+    if vocab_items:
+        flush_vocab(vocab_items, blocks, text_buf)
+    flush_text(text_buf, blocks)
+
+    return blocks
+
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+
+def type_summary(blocks: list) -> str:
+    counts = Counter(b.get("type", "?") for b in blocks)
+    return ", ".join(f"{t}x{n}" for t, n in sorted(counts.items()))
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--lesson-id", help="Migrate a single lesson")
-    parser.add_argument("--course", choices=["C", "M"])
-    parser.add_argument("--dry-run", action="store_true",
-                        help="Preview preprocessing output without saving")
-    args = parser.parse_args()
+def run(args):
+    dry_run   = not args.save
+    limit     = args.limit
+    target_id = args.lesson_id
 
-    with open(MANIFEST_PATH, encoding="utf-8") as f:
-        manifest = json.load(f)
+    mode_label = "[DRY RUN] " if dry_run else ""
+    print(f"{mode_label}Fetching lessons from platform...")
 
-    lessons = [l for l in manifest["lessons"] if l["status"] == "done"]
-    if args.lesson_id:
-        lessons = [l for l in lessons if l["id"] == args.lesson_id]
-    elif args.course == "C":
-        lessons = [l for l in lessons if l["id"].startswith("C-")]
-    elif args.course == "M":
-        lessons = [l for l in lessons if l["id"].startswith("M-")]
+    if target_id:
+        try:
+            lessons = [get_lesson(target_id)]
+        except RuntimeError as e:
+            print(f"  ERROR: {e}")
+            sys.exit(1)
+    else:
+        try:
+            lessons = get_all_lessons()
+        except RuntimeError as e:
+            print(f"  ERROR: {e}")
+            sys.exit(1)
 
-    mode = "DRY RUN" if args.dry_run else "LIVE"
-    print(f"\nMarkdown-HTML Migration [{mode}]: checking {len(lessons)} lessons\n")
+    print(f"  {len(lessons)} lesson(s) fetched.")
 
-    log = {}
-    counts = {"migrated": 0, "skipped": 0, "no_change": 0, "error": 0}
+    log_entries   = []
+    n_full        = 0
+    n_source_only = 0
+    n_skipped     = 0
+    n_errors      = 0
 
     for lesson in lessons:
-        lid = lesson["id"]
-        data = _fetch_lesson(lid)
-        if not data:
-            counts["error"] += 1
+        if limit is not None and n_full >= limit:
+            print(f"\n[LIMIT] Reached --limit {limit}, stopping.")
+            break
+
+        lesson_id = lesson.get("id") or lesson.get("lessonId") or "?"
+        title     = lesson.get("title") or "(no title)"
+        blocks_before = lesson.get("blocks") or []
+        action = classify_lesson(lesson)
+
+        # ── Skip ─────────────────────────────────────────────────────────────
+        if action == "skip":
+            n_skipped += 1
             continue
 
-        blocks = data.get("blocks", [])
-        cs     = data.get("contentSource")
-
-        if not _needs_migration(blocks, cs):
-            counts["skipped"] += 1
+        # ── Source-only patch ─────────────────────────────────────────────────
+        if action == "source":
+            print(f"\n  [{lesson_id}] {title}")
+            print(f"    contentSource-only patch "
+                  f"(clean HTML, {len(blocks_before)} block(s))")
+            entry = {
+                "lessonId":    lesson_id,
+                "title":       title,
+                "action":      "source_only",
+                "blocksBefore": len(blocks_before),
+                "blocksAfter":  len(blocks_before),
+                "dryRun":      dry_run,
+                "timestamp":   datetime.now(timezone.utc).isoformat(),
+            }
+            log_entries.append(entry)
+            if not dry_run:
+                try:
+                    patch_lesson(lesson_id, {"contentSource": "platform"})
+                    time.sleep(0.5)
+                except RuntimeError as e:
+                    print(f"    ERROR: {e}")
+                    n_errors += 1
+                    continue
+            n_source_only += 1
             continue
 
-        original_html = blocks[0].get("data", {}).get("html", "") if blocks else ""
-        processed_html = preprocess_html(original_html)
-
-        if processed_html == original_html:
-            print(f"  [{lid}] no preprocessing changes")
-            counts["no_change"] += 1
+        # ── Full migration ────────────────────────────────────────────────────
+        raw_html = blocks_before[0].get("data", {}).get("html", "") \
+                   if blocks_before else ""
+        try:
+            new_blocks = parse_markdown_to_blocks(raw_html)
+        except Exception as e:
+            print(f"\n  [{lesson_id}] PARSE ERROR: {e}")
+            n_errors += 1
             continue
 
-        if args.dry_run:
-            # Show a preview of what would change
-            orig_lines = original_html.split("\n")
-            proc_lines = processed_html.split("\n")
-            changed = [(o, p) for o, p in zip(orig_lines, proc_lines) if o != p]
-            print(f"  [{lid}] {len(changed)} line(s) would change:")
-            for orig, proc in changed[:4]:
-                print(f"    - {orig[:80]!r}")
-                print(f"    + {proc[:80]!r}")
-            if len(changed) > 4:
-                print(f"    ... ({len(changed) - 4} more)")
-            counts["migrated"] += 1
-            continue
+        print(f"\n  [{lesson_id}] {title}")
+        print(f"    Before: {len(blocks_before)} block(s)")
+        print(f"    After:  {len(new_blocks)} block(s)  [{type_summary(new_blocks)}]")
 
-        # Live: re-parse HTML → blocks
-        block_count = _parse_html(lid, processed_html)
-        if block_count is None:
-            print(f"  [{lid}] ERROR during parse-html")
-            counts["error"] += 1
-            continue
-
-        # Lock so pipeline won't overwrite
-        locked = _lock_content_source(lid)
-
-        print(f"  [{lid}] {block_count} blocks (was 1) {'✓ locked' if locked else '⚠ lock failed'}")
-        counts["migrated"] += 1
-        log[lid] = {
-            "blockCount": block_count,
-            "locked": locked,
-            "at": datetime.now(timezone.utc).isoformat(),
+        entry = {
+            "lessonId":    lesson_id,
+            "title":       title,
+            "action":      "full_migration",
+            "blocksBefore": len(blocks_before),
+            "blocksAfter":  len(new_blocks),
+            "blockTypes":   type_summary(new_blocks),
+            "dryRun":      dry_run,
+            "timestamp":   datetime.now(timezone.utc).isoformat(),
         }
+        log_entries.append(entry)
 
-        time.sleep(0.3)
+        if not dry_run:
+            try:
+                patch_lesson(lesson_id, {
+                    "blocks": new_blocks,
+                    "contentSource": "platform",
+                })
+                time.sleep(0.5)
+            except RuntimeError as e:
+                print(f"    ERROR: {e}")
+                n_errors += 1
+                continue
 
-    print(f"\n=== Migration {'Dry Run ' if args.dry_run else ''}Complete ===")
-    print(f"  Migrated    : {counts['migrated']}")
-    print(f"  No change   : {counts['no_change']}")
-    print(f"  Skipped     : {counts['skipped']} (already multi-block or platform-locked)")
-    print(f"  Errors      : {counts['error']}")
+        n_full += 1
 
-    if not args.dry_run and counts["migrated"] > 0:
-        with open(LOG_PATH, "w", encoding="utf-8") as f:
-            json.dump(log, f, indent=2)
-        print(f"\nNext step: python scripts/qc_auto_convert.py --save")
+    # ── Summary ───────────────────────────────────────────────────────────────
+    print(f"\n{'=' * 60}")
+    print(f"Done{' (dry run -- nothing written)' if dry_run else ''}.")
+    print(f"  Full migrations    : {n_full}")
+    print(f"  Source-only patches: {n_source_only}")
+    print(f"  Skipped (platform) : {n_skipped}")
+    print(f"  Errors             : {n_errors}")
 
-    if args.dry_run:
-        print(f"\nRun without --dry-run to apply.")
+    # ── Write / append log ────────────────────────────────────────────────────
+    existing = []
+    if LOG_PATH.exists():
+        try:
+            existing = json.loads(LOG_PATH.read_text(encoding="utf-8"))
+            if not isinstance(existing, list):
+                existing = []
+        except Exception:
+            existing = []
+
+    combined = existing + log_entries
+    LOG_PATH.write_text(
+        json.dumps(combined, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(f"  Log: {LOG_PATH}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Migrate 1-block markdown-in-HTML lessons to typed Block[]."
+    )
+    # --dry-run and --save are mutually exclusive; default is dry-run
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--dry-run", dest="save", action="store_false",
+        help="Preview only (default)",
+    )
+    mode.add_argument(
+        "--save", dest="save", action="store_true",
+        help="PATCH lessons on the platform",
+    )
+    parser.set_defaults(save=False)
+
+    parser.add_argument("--lesson-id", metavar="ID",
+                        help="Migrate a single lesson by ID")
+    parser.add_argument("--limit", type=int, metavar="N",
+                        help="Stop after N full migrations (for testing)")
+
+    args = parser.parse_args()
+
+    # Safety: if --save is not explicitly in argv, treat as dry-run
+    if "--save" not in sys.argv:
+        args.save = False
+
+    run(args)
 
 
 if __name__ == "__main__":

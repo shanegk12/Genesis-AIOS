@@ -12,3 +12,21 @@ gk12-sa-key.json
 drive-token.json
 admin_key.tmp
 resend_placeholder.tmp
+
+# Auth tokens and OAuth secrets
+oauth-client.json
+fs-token.json
+
+# Large local asset folders
+screenshots/
+screenshots_import_output/
+/interactives/
+reports/
+
+# Generated/cached outputs
+_vision_raw_*.txt
+.agents/
+scripts/_drive_folders_cache.json
+
+# Local Claude config
+.claude/

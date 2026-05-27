@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measurement Quality and Instrument Validation — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Measurement Quality and Instrument Validation</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Data Validation", "definition": "The critical process of checking if a computer model's predictions match the real-world results. This ensures the model is reliable and accurate."}, {"term": "Objective Data", "definition": "Facts or information that are not influenced by personal feelings, opinions, or biases. It represents verifiable truth."}, {"term": "Precision", "definition": "How consistent the results are when a measurement is repeated multiple times. High precision means measurements are very close to each other."}, {"term": "Accuracy", "definition": "How close a measurement or calculation is to the true or actual value of what is being measured. It tells us how correct our measurement is."}, {"term": "Significant Digits", "definition": "All the reliable digits in a measurement or calculation. They indicate the precision of a measured or calculated value."}, {"term": "Computational Modeling", "definition": "Using computer simulations and mathematical equations to predict how a design or system will behave. This helps engineers test ideas virtually."}, {"term": "Hierarchical Multiscale Modeling (HM²)", "definition": "A method that looks at data from the smallest atomic level all the way to the full system level. It helps understand complex systems."}, {"term": "Clean Data", "definition": "Information that is free from errors, inconsistencies, and mistakes. It ensures data was gathered through precise measurement and is reliable."}, {"term": "Engineering Integrity", "definition": "The principle that an engineer's work must be based on verifiable truth and objective data, not assumptions. This ensures safety and reliability."}, {"term": "Computer Processing & Calculations", "definition": "Modern computer processing has greatly improved the accuracy and precision of calculations. This allows engineers to make more reliable and complex designs."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

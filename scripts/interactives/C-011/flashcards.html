@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Understanding Design — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Understanding Design</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Design", "definition": "To plan and create something new, often to solve a problem or meet a need. Engineers design solutions for the world around us."}, {"term": "Engineer", "definition": "A person who uses science, math, and creativity to design, build, and improve things. They solve problems and invent new technologies."}, {"term": "Engineering Design Process", "definition": "A series of steps engineers follow to identify a problem, brainstorm solutions, build, test, and improve a design. It's a structured way to innovate."}, {"term": "Problem Statement", "definition": "A clear description of the challenge or need that a design aims to address. It helps engineers focus on what they need to solve."}, {"term": "Brainstorming", "definition": "A technique used to generate many ideas quickly, often in a group, without judging them. It helps explore different possible solutions."}, {"term": "Criteria", "definition": "The standards or requirements that a design must meet to be considered successful. These are often measurable goals."}, {"term": "Constraints", "definition": "Limitations or restrictions that affect a design project, such as available materials, time, budget, or safety rules. Engineers must work within these boundaries."}, {"term": "Prototype", "definition": "An early model or sample of a product built to test a design concept. It allows engineers to see how an idea works before final production."}, {"term": "Testing and Evaluation", "definition": "The process of trying out a prototype to see if it meets the criteria and identifying areas for improvement. Data is collected to understand performance."}, {"term": "Iteration", "definition": "The process of refining and improving a design based on feedback and test results. Engineers often go through many iterations to perfect a solution."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>
