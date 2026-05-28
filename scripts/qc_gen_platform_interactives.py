@@ -34,9 +34,11 @@ UPLOAD_API_BASE = f"https://storage.googleapis.com/upload/storage/v1/b/{STORAGE_
 GEMINI_MODEL = "gemini-2.5-flash"
 GEMINI_URL   = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 
+MANIFEST_PATH = Path(__file__).parent / "lessons_manifest.json"
+
 EMBED_HEIGHT = 520
 
-# Thin lessons without Google Docs interactive generation
+# Legacy targeted list — no longer used when --all is passed
 TARGET_LESSONS = ["C-011", "C-023", "M-013", "C-024", "M-009"]
 
 
@@ -125,7 +127,11 @@ def gemini_generate(api_key: str, prompt: str, max_retries: int = 3) -> str | No
     """Call Gemini and return the text response, with retry on 503."""
     payload = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.5, "maxOutputTokens": 8192},
+        "generationConfig": {
+            "temperature": 0.5,
+            "maxOutputTokens": 8192,
+            "thinkingConfig": {"thinkingBudget": 0},
+        },
     }).encode("utf-8")
     url = f"{GEMINI_URL}?key={api_key}"
 
@@ -319,7 +325,7 @@ def process_lesson(lesson_id: str, api_key: str, session, dry_run: bool) -> str:
     content = extract_text_content(lesson)
 
     existing_embeds = {
-        b.get("data", {}).get("src", "")
+        b.get("data", {}).get("url", "") or b.get("data", {}).get("src", "")
         for b in blocks if b.get("type") == "embed"
     }
 
@@ -366,8 +372,8 @@ def process_lesson(lesson_id: str, api_key: str, session, dry_run: bool) -> str:
         print(f"    Uploading {fname}...", end=" ", flush=True)
         uploaded = upload_to_storage(session, lesson_id, content_bytes, fname)
         if uploaded:
-            label = fname.replace(".html", "").replace("-", " ").title()
-            new_embeds.append({"url": url, "label": label})
+            title = fname.replace(".html", "").replace("-", " ").title()
+            new_embeds.append({"url": url, "title": title})
             print("OK")
         else:
             print("FAILED")
@@ -382,7 +388,7 @@ def process_lesson(lesson_id: str, api_key: str, session, dry_run: bool) -> str:
         new_blocks.append({
             "id": gen_id(),
             "type": "embed",
-            "data": {"src": e["url"], "height": EMBED_HEIGHT, "label": e["label"]},
+            "data": {"url": e["url"], "height": EMBED_HEIGHT, "title": e["title"]},
             "meta": {"spacing": "md", "qcStatus": "pending"},
         })
 
@@ -393,11 +399,61 @@ def process_lesson(lesson_id: str, api_key: str, session, dry_run: bool) -> str:
     return "patch_error"
 
 
+def load_log() -> dict:
+    if LOG_PATH.exists():
+        try:
+            return json.loads(LOG_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+
+def save_log(log: dict):
+    LOG_PATH.write_text(json.dumps(log, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def find_lessons_without_embeds(course_filter: str | None) -> list[str]:
+    """Query all lessons from the manifest and return IDs that have no embed blocks."""
+    if not MANIFEST_PATH.exists():
+        print("lessons_manifest.json not found")
+        return []
+
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    all_ids = [l["id"] for l in manifest["lessons"]]
+
+    if course_filter:
+        prefix = "C-" if course_filter == "C" else "M-"
+        all_ids = [lid for lid in all_ids if lid.startswith(prefix)]
+
+    print(f"Scanning {len(all_ids)} lessons for missing embed blocks...")
+    missing = []
+    for lid in all_ids:
+        req = urllib.request.Request(
+            f"{LIVE_URL}/api/admin/lessons/{lid}",
+            headers={"Authorization": f"Bearer {PLATFORM_KEY}"},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                lesson = json.loads(resp.read())
+            blocks = lesson.get("blocks", [])
+            embeds = [b for b in blocks if b.get("type") == "embed" and b.get("data", {}).get("src", "")]
+            if not embeds:
+                missing.append(lid)
+        except Exception as e:
+            print(f"  {lid}: scan error {e}")
+        time.sleep(0.05)
+
+    return missing
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate interactives from platform lesson content")
     parser.add_argument("--dry-run",   action="store_true")
     parser.add_argument("--save",      action="store_true")
     parser.add_argument("--lesson-id", help="Single lesson ID")
+    parser.add_argument("--all",       action="store_true", help="Generate for all lessons missing embed blocks")
+    parser.add_argument("--course",    choices=["C", "M"], help="Filter by course (use with --all)")
+    parser.add_argument("--skip-done", action="store_true", help="Skip lessons already in the log")
     args = parser.parse_args()
 
     if not args.dry_run and not args.save:
@@ -411,7 +467,20 @@ def main():
         print("GEMINI_API_KEY not found in .env")
         sys.exit(1)
 
-    lessons = [args.lesson_id] if args.lesson_id else TARGET_LESSONS
+    log = load_log()
+
+    if args.lesson_id:
+        lessons = [args.lesson_id]
+    elif args.all:
+        lessons = find_lessons_without_embeds(args.course)
+        print(f"Found {len(lessons)} lessons without embed blocks")
+    else:
+        lessons = TARGET_LESSONS
+
+    if args.skip_done:
+        before = len(lessons)
+        lessons = [lid for lid in lessons if lid not in log or log[lid].get("status") != "done"]
+        print(f"Skipping {before - len(lessons)} already-done lessons")
 
     mode = "DRY RUN" if dry_run else "LIVE"
     print(f"\nQC Generate Platform Interactives [{mode}]: {len(lessons)} lesson(s)")
@@ -423,20 +492,23 @@ def main():
         from _gws_auth import get_session
         session = get_session()
 
-    log    = {}
-    counts = {"done": 0, "would_generate": 0, "generation_failed": 0, "fetch_error": 0, "error": 0}
+    counts = {"done": 0, "would_generate": 0, "generation_failed": 0,
+              "fetch_error": 0, "no_new_embeds": 0, "error": 0}
 
-    for lid in lessons:
+    for i, lid in enumerate(lessons, 1):
+        print(f"\n[{i}/{len(lessons)}]", end="")
         status = process_lesson(lid, api_key, session, dry_run)
         key = status if status in counts else "error"
         counts[key] += 1
-        time.sleep(1)
 
-    if not dry_run and log:
-        LOG_PATH.write_text(json.dumps(log, indent=2), encoding="utf-8")
+        if not dry_run and status == "done":
+            log[lid] = {"status": "done", "at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()}
+            save_log(log)  # save after each lesson so progress is preserved
+
+        time.sleep(2)
 
     print(f"\n{'=' * 60}")
-    print(f"Done: {counts}")
+    print(f"Results: {counts}")
     if dry_run:
         print("Run with --save to apply.")
 
