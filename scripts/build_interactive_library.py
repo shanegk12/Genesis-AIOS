@@ -40,8 +40,8 @@ def _get_platform_key() -> str:
     return ""
 
 
-def call_backfill(base_url: str, key: str, dry_run: bool) -> dict | None:
-    payload = json.dumps({"action": "backfill", "dryRun": dry_run}).encode()
+def call_backfill(base_url: str, key: str, dry_run: bool, include_all: bool) -> dict | None:
+    payload = json.dumps({"action": "backfill", "dryRun": dry_run, "includeAll": include_all}).encode()
     req = urllib.request.Request(
         f"{base_url}/api/admin/interactives/library", data=payload,
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
@@ -64,6 +64,7 @@ def main():
     parser.add_argument("--save",    action="store_true")
     parser.add_argument("--url",     default=DEFAULT_URL, help="Platform base URL (default: staging)")
     parser.add_argument("--prod",    action="store_true", help="Shortcut for the prod URL")
+    parser.add_argument("--all",     action="store_true", help="Include beta/duplicate course copies (default: primary C-/M- lessons only)")
     args = parser.parse_args()
 
     if not args.dry_run and not args.save:
@@ -78,12 +79,14 @@ def main():
     print(f"\nInteractive Library Backfill [{mode}] → {base_url}")
     print("=" * 70)
 
-    result = call_backfill(base_url, key, dry_run=args.dry_run)
+    result = call_backfill(base_url, key, dry_run=args.dry_run, include_all=args.all)
     if not result or not result.get("ok"):
         print("FAILED:", result); sys.exit(1)
 
     r = result["report"]
-    print(f"Lessons scanned:        {r['lessons']}")
+    print(f"Lessons scanned:        {r['lessons']}  (scope: {'ALL incl. duplicates' if args.all else 'primary C-/M- only'})")
+    if r.get("skippedDuplicates"):
+        print(f"Skipped duplicates:     {r['skippedDuplicates']}")
     print(f"Total interactives:     {r['totalInteractives']}")
     print(f"Distinct library entries: {r['distinctEntries']}")
     print(f"Redundant (used >1x):   {r['redundant']}")
