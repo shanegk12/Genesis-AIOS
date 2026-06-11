@@ -65,15 +65,32 @@ def main():
     parser.add_argument("--url",     default=DEFAULT_URL, help="Platform base URL (default: staging)")
     parser.add_argument("--prod",    action="store_true", help="Shortcut for the prod URL")
     parser.add_argument("--all",     action="store_true", help="Include beta/duplicate course copies (default: primary C-/M- lessons only)")
+    parser.add_argument("--dedupe",  action="store_true", help="Repair: collapse duplicate library entries (same content) + relink blocks")
     args = parser.parse_args()
 
-    if not args.dry_run and not args.save:
-        print("Pass --dry-run or --save"); sys.exit(1)
+    if not args.dry_run and not args.save and not args.dedupe:
+        print("Pass --dry-run, --save, or --dedupe"); sys.exit(1)
 
     base_url = PROD_URL if args.prod else args.url
     key = _get_platform_key()
     if not key:
         print("ADMIN_API_KEY / PIPELINE_KEY not found in env or .env"); sys.exit(1)
+
+    if args.dedupe:
+        payload = json.dumps({"action": "dedupe"}).encode()
+        req = urllib.request.Request(f"{base_url}/api/admin/interactives/library", data=payload,
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"}, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                r = json.loads(resp.read())
+            print(f"Dedupe → {base_url}")
+            print(f"  groups deduped:   {r.get('groupsDeduped')}")
+            print(f"  entries deleted:  {r.get('entriesDeleted')}")
+            print(f"  blocks relinked:  {r.get('blocksRelinked')}")
+            print(f"  lessons touched:  {r.get('lessonsTouched')}")
+        except Exception as e:
+            print(f"Dedupe error: {e}"); sys.exit(1)
+        return
 
     mode = "DRY RUN" if args.dry_run else "SAVE"
     print(f"\nInteractive Library Backfill [{mode}] → {base_url}")
