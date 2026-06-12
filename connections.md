@@ -22,25 +22,21 @@ Registry of every system your AIOS can reach. `/audit` checks this file for doma
 | 14 | Content pipeline (agents) | Python scripts in `D:\AIOS\scripts` | call platform admin APIs (`/api/admin/lessons`, `/interactives/library`, `/workbook/generate`, …) | `ADMIN_API_KEY` (a.k.a. `PIPELINE_KEY`) in `.env` | 2026-06-12 |
 | 15 | Google API auth (DwD) | pipeline-runner service account | `scripts/_gws_auth.py` impersonates shane@gk12academy.com | `gk12-sa-key.json` (DwD) | 2026-06-12 |
 | 16 | Source control | GitHub (`shanegk12/genesis-education-solutions`) | local git; `gh` CLI | — | 2026-06-12 |
-| 17 | **Team chat** | **Slack** | **two-way MCP — SETUP IN PROGRESS** (see below) | TBD | — |
+| 17 | **Team chat** | **Slack** (workspace `gk12academy`, bot `@genesis_aios`, channel `#aios`) | self-hosted MCP `@modelcontextprotocol/server-slack` (`.mcp.json`, gitignored) | `SLACK_BOT_TOKEN` in `.env` + `.mcp.json` (team `T0BB3BCQTBJ`) | 2026-06-12 |
 | 18 | Bookkeeping | QuickBooks (planned) | not yet connected | — | — |
 | 19 | Task tracking | None yet | not yet connected | — | — |
 
 ## Platform deploy workflow
 Build on `staging` branch → validate → fast-forward `main` (prod). App Hosting auto-builds on push. Firestore rules are **shared** prod+staging (`firebase deploy --only firestore:rules`). App Hosting secrets: `firebase apphosting:secrets:grantaccess` on **both** backends. Prod URL `genesis-lms--genesis-modularity.us-central1.hosted.app`; staging `genesis-lms-staging--…`. Note: App Hosting builds occasionally fail on transient `npm ECONNRESET` — just re-trigger (empty commit).
 
-## Slack — two-way linking (in progress, 2026-06-12)
-Goal: talk to the AIOS from a Slack channel (read history, post, respond on command). **Needs a Slack app + token from Shane.**
-
-**Path A — Claude managed connector (easiest if available):** in Claude (desktop/Code) integrations, authorize the **Slack** connector (same as Gmail/Calendar). Its `mcp__claude_ai_Slack__*` tools then appear; allowlist them in `.claude/settings.json`.
-
-**Path B — self-hosted Slack MCP (fallback):**
-1. api.slack.com → **Create New App** (from scratch) in the GK12 workspace.
-2. **OAuth & Permissions** → Bot scopes: `channels:history`, `channels:read`, `chat:write`, `groups:history`, `users:read`, `search:read`. Install to workspace → copy the **Bot token** `xoxb-…`.
-3. (For socket/event listening) **Basic Information** → App-Level Token with `connections:write` → `xapp-…`.
-4. Paste the tokens to me; I register a Slack MCP server (`claude mcp add`) + allowlist its tools, and update this row to "connected."
-
-Once connected: AIOS posts updates (deploy/pipeline/briefing) AND responds to messages in the chosen channel.
+## Slack — CONNECTED (2026-06-12, two-way via self-hosted MCP)
+- **App:** "Genesis AIOS" (bot `@genesis_aios`) in workspace **gk12academy** (`T0BB3BCQTBJ`); home channel **#aios** (`C0BAAUVERS5`).
+- **Server:** `@modelcontextprotocol/server-slack` via `npx`, configured in **`.mcp.json`** (gitignored — holds the bot token). Token also in `.env` as `SLACK_BOT_TOKEN`.
+- **Scopes:** channels:history/read, groups:history/read, chat:write, users:read (+reactions:write).
+- **Loads on Claude Code restart.** Then the `mcp__…slack__*` tools let the AIOS read #aios history, post, and reply on command. Allowlist them in `.claude/settings.json` after first load.
+- **Verified 2026-06-12:** `auth.test` ok + test message posted to #aios.
+- **Not yet:** always-on auto-reply (a running Socket-Mode listener) — would be a separate deployment; current setup is "AIOS reads/posts during a session."
+- Re-issue the bot token at api.slack.com → app → OAuth & Permissions if it ever leaks; update `.env` + `.mcp.json`.
 
 ## ADC Auth (Google APIs)
 All Google API calls use ADC via a custom Desktop OAuth client. Re-auth: `python scripts/reauth_adc.py` (gcloud `--scopes` is broken on the GK12 domain). Credentials: `D:\AIOS\oauth-client.json`; DwD service-account key: `D:\AIOS\gk12-sa-key.json` (gitignored).
