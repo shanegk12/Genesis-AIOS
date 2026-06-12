@@ -20,7 +20,7 @@ Registry of every system your AIOS can reach. `/audit` checks this file for doma
 | 12 | Calendar | Google Calendar | MCP `claude_ai_Google_Calendar` | Claude managed connector | 2026-06-12 |
 | 13 | Curriculum source | Google Drive + Docs | `google-api-python-client` (scripts) | ADC via `oauth-client.json` | 2026-06-12 |
 | 14 | Content pipeline (agents) | Python scripts in `D:\AIOS\scripts` | call platform admin APIs (`/api/admin/lessons`, `/interactives/library`, `/workbook/generate`, …) | `ADMIN_API_KEY` (a.k.a. `PIPELINE_KEY`) in `.env` | 2026-06-12 |
-| 15 | Google API auth (DwD) | pipeline-runner service account | `scripts/_gws_auth.py` impersonates shane@gk12academy.com | `gk12-sa-key.json` (DwD) | 2026-06-12 |
+| 15 | Google API auth | OAuth/ADC per operator | `scripts/_gws_auth.py` → user OAuth via `oauth-client.json` (DwD `gk12-sa-key.json` is optional + NOT currently present) | `oauth-client.json` + per-user token (`reauth_adc.py`) | 2026-06-12 |
 | 16 | Source control | GitHub (`shanegk12/genesis-education-solutions`) | local git; `gh` CLI | — | 2026-06-12 |
 | 17 | **Team chat** | **Slack** (workspace `gk12academy`, bot `@genesis_aios`, channel `#aios`) | **`scripts/slack.py`** (Slack Web API; read/post/reply) | `SLACK_BOT_TOKEN` in `.env` (team `T0BB3BCQTBJ`) | 2026-06-12 |
 | 18 | Bookkeeping | QuickBooks (planned) | not yet connected | — | — |
@@ -39,7 +39,7 @@ Build on `staging` branch → validate → fast-forward `main` (prod). App Hosti
 - Re-issue the bot token at api.slack.com → app → OAuth & Permissions if it ever leaks; update `.env`.
 
 ## ADC Auth (Google APIs)
-All Google API calls use ADC via a custom Desktop OAuth client. Re-auth: `python scripts/reauth_adc.py` (gcloud `--scopes` is broken on the GK12 domain). Credentials: `D:\AIOS\oauth-client.json`; DwD service-account key: `D:\AIOS\gk12-sa-key.json` (gitignored).
+All Google API calls use ADC via a custom Desktop OAuth client. Re-auth (per operator): `python scripts/reauth_adc.py` (gcloud `--scopes` is broken on the GK12 domain). Credential: `D:\AIOS\oauth-client.json` (shared). A DwD service-account key (`gk12-sa-key.json`) is supported by `_gws_auth.py` but **not currently in use** — leave it absent unless you deliberately set up the non-expiring SA path.
 
 ## Retired
 - **LearnWorlds** (Pro Trainer) — replaced by the custom platform. No longer the course host.

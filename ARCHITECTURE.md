@@ -77,8 +77,9 @@ flowchart TB
 
 **3. Get credentials from Shane (share securely — NEVER commit these; all are gitignored):**
 - `D:/AIOS/.env` — `ADMIN_API_KEY` (a.k.a. `PIPELINE_KEY`), `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `SLACK_BOT_TOKEN`, etc.
-- `D:/AIOS/oauth-client.json` — Google Desktop OAuth client (for ADC).
-- `D:/AIOS/gk12-sa-key.json` — pipeline-runner service-account key (Domain-Wide Delegation for Google Workspace).
+- `D:/AIOS/oauth-client.json` — Google Desktop OAuth *client* config (shared across operators; each then logs in as themselves).
+- Do NOT copy anyone else's `drive-token.json` / `fs-token.json` — those are per-user; you generate your own in step 4.
+- `gk12-sa-key.json` is **optional and not currently used** (the pipeline runs on the OAuth/ADC path). Skip it.
 
 **4. Authenticate:**
 - Google APIs: `python scripts/reauth_adc.py` (gcloud `--scopes` is broken on the GK12 domain — use this).
