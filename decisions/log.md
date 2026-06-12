@@ -260,3 +260,43 @@ gcloud auth application-default login --client-id-file="D:\AIOS\oauth-client.jso
 **Owner:** Shane / AIOS
 
 ---
+
+## 2026-05/06 — Build a custom LMS (Genesis Education Solutions), retire LearnWorlds
+
+**Decision:** Build and run our own platform (`D:\GK12-Platform`, Next.js + Firebase App Hosting, project `genesis-modularity`, live at gk12academy.com) instead of hosting the course on LearnWorlds. Deploy via `staging` → fast-forward `main`.
+
+**Why:** LearnWorlds gated the API behind a pricier plan, capped SCORM, and couldn't deliver the AI tutor, custom interactives, workbook, and data we wanted. Owning the stack unlocked everything and is cheaper at our scale (~$0.25–0.35/active student/mo).
+
+**Owner:** Shane / Ethan (approval)
+
+---
+
+## 2026-06-11 — Engineering workbook architecture (Mousetrap-only, block-canvas, AI-seeded)
+
+**Decision:** A separate per-lesson workbook authored on the existing block canvas (`BlockCanvasEditor`) with new workbook field block types; Mousetrap-only; AI-seeds pages from existing lesson content (then human QC); students fill it in the lesson side panel (replacing the old free-form notebook); parents review in the gradebook. Observational (no auto-grading). Printable PDF planned.
+
+**Why:** The build course needs structured lab worksheets; the lessons already contain the prompts, so AI extraction scales authoring. Reusing the block canvas maximized reuse. Full design: `references/workbook-design.md`.
+
+**Owner:** Shane
+
+---
+
+## 2026-06-11 — Anonymous feedback surveys + "Bez" assistant naming
+
+**Decision:** (1) A reusable `survey` block (rating + free text) writes **anonymous** responses (server-side dedupe marker, unlinkable to the response), reviewed in an admin dashboard. (2) Named the AI content assistant **"Bez"** (after Bezalel, the Spirit-gifted craftsman/builder of Exodus 31).
+
+**Why:** Beta needs honest feedback without identifying minors. The assistant needed an identity that fits a faith-based engineering brand.
+
+**Owner:** Shane
+
+---
+
+## 2026-06-12 — Link Slack for two-way chat; refresh the AIOS docs
+
+**Decision:** Connect Slack so the AIOS can read + post in a channel (two-way), and bring the stale AIOS docs (connections, priorities, CLAUDE.md, this log) back in sync with the custom-platform reality. Launch moved July → **August 2026**.
+
+**Why:** The AIOS had drifted a month out of date during the platform build; Slack gives a live ops channel to talk to the AIOS.
+
+**Owner:** Shane / AIOS
+
+---
