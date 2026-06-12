@@ -9,11 +9,30 @@ Env (.env): SLACK_BOT_TOKEN (xoxb), SLACK_APP_TOKEN (xapp), ANTHROPIC_API_KEY.
 Run:  python scripts/bez_socket.py
 """
 
-import logging, re, threading
+import logging, os, re, threading
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 import bez_agent as bez
+
+
+def _start_health_server():
+    """Cloud Run requires an HTTP listener on $PORT. The socket client isn't one,
+    so serve a tiny health endpoint in a thread when PORT is set (cloud)."""
+    port = os.environ.get("PORT")
+    if not port:
+        return
+    import http.server
+
+    class H(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200); self.end_headers(); self.wfile.write(b"bez ok")
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.HTTPServer(("0.0.0.0", int(port)), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    print(f"health server on :{port}", flush=True)
 
 APP_TOKEN = bez._env("SLACK_APP_TOKEN")
 if not APP_TOKEN or not bez.SLACK_TOKEN:
@@ -62,6 +81,7 @@ def on_mention(event, logger):
 
 
 if __name__ == "__main__":
+    _start_health_server()
     ch = bez.resolve_channel(bez.CHANNEL_NAME)
     print(f"Bez (Socket Mode) connecting · bot {BOT_ID} · channel {bez.CHANNEL_NAME} · model {bez.MODEL} · cwd {bez.CWD}", flush=True)
     bez.post(ch, "🤖 Bez is online 24/7 (real-time Socket Mode) — message me here. Say 'BEZ STOP' to halt a task.")
