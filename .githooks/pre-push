@@ -1,0 +1,16 @@
+#!/bin/sh
+# Failsafe: never push a branch that's behind its remote — pull first.
+# Activated per-clone with:  git config core.hooksPath .githooks
+branch=$(git rev-parse --abbrev-ref HEAD)
+git fetch -q origin "$branch" 2>/dev/null || exit 0
+behind=$(git rev-list --count "HEAD..origin/$branch" 2>/dev/null || echo 0)
+if [ "${behind:-0}" -gt 0 ]; then
+  echo ""
+  echo "  ⛔ pre-push blocked: your '$branch' is behind origin/$branch by $behind commit(s)."
+  echo "     Someone pushed since you last pulled. Sync first, then push again:"
+  echo ""
+  echo "         git pull --rebase origin $branch"
+  echo ""
+  exit 1
+fi
+exit 0
