@@ -86,7 +86,15 @@ flowchart TB
 - Firebase/GCP (for deploys): `firebase login` + `gcloud auth login` (must have access to project `genesis-modularity`).
 - GitHub: `gh auth login`.
 
-**5. Run it:** open Claude Code in `D:/AIOS` (it loads `CLAUDE.md` = the operator brain). For platform dev, work in `D:/GK12-Platform`. Read `connections.md` for the full registry and the deploy workflow.
+**5. Activate the pre-push failsafe (once per clone, both repos):**
+```
+git config core.hooksPath .githooks
+```
+This turns on the `.githooks/pre-push` check that **blocks a push when your branch is behind the remote** (it verifies — it does NOT auto-pull) so two operators never clobber each other. If blocked, run `git pull --rebase origin <branch>` and push again.
+
+**6. Run it:** open Claude Code in `D:/AIOS` (it loads `CLAUDE.md` = the operator brain). For platform dev, work in `D:/GK12-Platform`. Read `connections.md` for the full registry and the deploy workflow.
+
+> **Two-operator rules:** `git pull` before you start; the pre-push hook verifies you're current before each push; ship via `staging` → fast-forward `main` (`/deploy`).
 
 > **Approval note:** Ethan has approval authority on platform-plan decisions. Big architecture/deploy calls get a sign-off.
 
