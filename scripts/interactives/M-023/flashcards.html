@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build 4: Arduino - Distance Sensor Calibration — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Build 4: Arduino - Distance Sensor Calibration</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Performance Evaluation", "definition": "The process of testing and assessing how well a design or system works, using 'Clean Data' to compare it against 'Ground Truth'."}, {"term": "Clean Data", "definition": "Accurate and reliable information gathered during testing, essential for validating designs and making informed improvements."}, {"term": "Ground Truth", "definition": "The real, accurate, and verifiable measurements or facts that our digital data should match."}, {"term": "Pareto Frontier", "definition": "The peak of efficiency, where a system performs at its best without sacrificing other important qualities."}, {"term": "Arduino", "definition": "The 'digital brain' of your vehicle, a small computer that processes information and controls components using code."}, {"term": "C++ code", "definition": "The specific programming language used to give instructions to the Arduino, much like English is used to communicate intent."}, {"term": "Data Types", "definition": "Categories that organize information within code, like different sized containers for different kinds of tools or measurements."}, {"term": "Library", "definition": "A collection of pre-written code that provides specialized instructions, acting like a 'subject matter expert' for your Arduino."}, {"term": "pulseIn() function", "definition": "A specific instruction within the Arduino code that measures the time it takes for a signal, like an ultrasonic sound wave, to travel and return."}, {"term": "Speed of Sound", "definition": "A constant physical value (approximately 0.0343 cm/µs) used in code to convert the time an ultrasonic wave travels into a distance measurement."}, {"term": "Calibration", "definition": "The process of comparing an instrument's measurements to a known standard to ensure accuracy and reliability."}, {"term": "HC-SR04 ultrasonic sensor", "definition": "A digital tool that uses sound waves to measure distance, which needs to be calibrated for accurate readings."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -57,6 +57,90 @@
       },
       "answer": "B",
       "explanation": "A functional requirement defines what a system must do, focusing on its specific actions or behaviors, like 'The robot must pick up a red block.'"
+    },
+    {
+      "type": "comprehension",
+      "question": "Which of the following best describes a *non-functional requirement* for an engineered system?",
+      "options": {
+        "A": "What the system must do to achieve its purpose.",
+        "B": "How well the system performs its tasks, focusing on qualities like speed or reliability.",
+        "C": "The acceptable range of variation for a system's property.",
+        "D": "A specific action or behavior the system needs to perform."
+      },
+      "answer": "B",
+      "explanation": "A non-functional requirement describes the qualities or attributes of a system, such as its performance, reliability, or security."
+    },
+    {
+      "type": "comprehension",
+      "question": "A Junior Creationeer is designing a new smart lamp. Which of these is a *non-functional requirement* for the lamp?",
+      "options": {
+        "A": "The lamp must turn on and off.",
+        "B": "The lamp must change color.",
+        "C": "The lamp must connect to a smartphone app.",
+        "D": "The lamp must turn on within 0.5 seconds of a command."
+      },
+      "answer": "D",
+      "explanation": "A non-functional requirement describes how well a system performs, such as the speed at which the lamp responds to a command."
+    },
+    {
+      "type": "comprehension",
+      "question": "In Creationeering, what does the term *tolerance* refer to?",
+      "options": {
+        "A": "The ultimate goal or desired outcome of a design project.",
+        "B": "The acceptable range of variation for a specified dimension or property.",
+        "C": "The process of checking if a system meets user needs.",
+        "D": "How well a system executes its functions."
+      },
+      "answer": "B",
+      "explanation": "Tolerance defines the permissible limits of variation for a measurement or characteristic in a design."
+    },
+    {
+      "type": "application",
+      "question": "A team is designing a new water filtration system for a community. They want the system to provide clean drinking water. According to the OCV method, what is their *objective*?",
+      "options": {
+        "A": "The system must filter out 99% of harmful bacteria.",
+        "B": "The system must be affordable to build.",
+        "C": "To provide clean drinking water to the community.",
+        "D": "The type of filter material used in the system."
+      },
+      "answer": "C",
+      "explanation": "The objective is the ultimate goal or desired outcome of the design project."
+    },
+    {
+      "type": "application",
+      "question": "Junior Creationeers are designing a new school desk. They want it to be comfortable and durable. Which of the following would be a *constraint* in their design process?",
+      "options": {
+        "A": "The desk must be able to hold a laptop and books.",
+        "B": "The desk must fit through standard classroom doorways.",
+        "C": "The height of the desk's legs.",
+        "D": "To create a comfortable and durable desk."
+      },
+      "answer": "B",
+      "explanation": "A constraint is a limitation or restriction that must be considered in the design process."
+    },
+    {
+      "type": "application",
+      "question": "After building a prototype of their new robot, a team tests it to see if it can pick up a red block weighing up to 200 grams, as specified. This process is an example of what?",
+      "options": {
+        "A": "Validation",
+        "B": "Optimization",
+        "C": "Verification",
+        "D": "Iteration"
+      },
+      "answer": "C",
+      "explanation": "Verification is the process of checking if a system meets its specified requirements."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does understanding and defining clear functional requirements help Creationeers become better stewards of the resources God has given them?",
+      "options": {
+        "A": "It allows them to use the most expensive materials, showing dedication.",
+        "B": "It ensures they only design things that are easy to build, saving time.",
+        "C": "It helps them design systems that precisely meet needs, avoiding waste and inefficiency.",
+        "D": "It encourages them to create as many different designs as possible."
+      },
+      "answer": "C",
+      "explanation": "Clearly defined functional requirements lead to purposeful and efficient designs, preventing wasted materials, time, and effort."
     }
   ]
 }

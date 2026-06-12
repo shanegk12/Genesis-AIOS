@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Mousetrap Car Physics Sandbox – GK12</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f2236;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+  }
+  header {
+    text-align: center;
+    padding: 10px 0 6px;
+    width: 100%;
+    max-width: 860px;
+  }
+  header h1 {
+    color: #C9A84C;
+    font-size: clamp(14px, 2.5vw, 20px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  header p {
+    color: #9bb8d4;
+    font-size: clamp(10px, 1.6vw, 13px);
+    margin-top: 2px;
+  }
+  #main-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 860px;
+    gap: 10px;
+  }
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    background: #122840;
+    border: 2px solid #1B3A5C;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px #00000080;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: none;
+  }
+  #controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+  .panel {
+    background: #1B3A5C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    flex: 1 1 200px;
+    min-width: 170px;
+    max-width: 280px;
+    box-shadow: 0 2px 10px #00000060;
+  }
+  .panel h3 {
+    color: #C9A84C;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #C9A84C55;
+    padding-bottom: 5px;
+  }
+  .ctrl-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .ctrl-row label {
+    font-size: 11px;
+    color: #b0cce0;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ctrl-row label span {
+    color: #C9A84C;
+    font-weight: bold;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #0f2236;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    box-shadow: 0 0 4px #C9A84C88;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: none;
+  }
+  .readout-panel {
+    background: #0f2236;
+    border: 1.5px solid #C9A84C55;
+    border-radius: 10px;
+    padding: 10px 14px;
+    flex: 1 1 160px;
+    min-width: 155px;
+    max-width: 240px;
+    box-shadow: 0 2px 10px #00000060;
+  }
+  .readout-panel h3 {
+    color: #C9A84C;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+  .readout-label { color: #9bb8d4; }
+  .readout-val {
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    background: #1B3A5C;
+    padding: 1px 7px;
+    border-radius: 4px;
+    min-width: 60px;
+    text-align: right;
+  }
+  .fbd-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    color: #9bb8d4;
+  }
+  .fbd-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  #btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  button {
+    padding: 9px 22px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: filter 0.15s, transform 0.1s;
+  }
+  button:active { transform: scale(0.96); }
+  #btn-release {
+    background: #C9A84C;
+    color: #0f2236;
+  }
+  #btn-release:hover { filter: brightness(1.15); }
+  #btn-reset {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C;
+  }
+  #btn-reset:hover { filter: brightness(1.2); }
+  #btn-fbd {
+    background: #1B3A5C;
+    color: #9bb8d4;
+    border: 1.5px solid #9bb8d455;
+    font-size: 12px;
+  }
+  #btn-fbd.active {
+    border-color: #C9A84C;
+    color: #C9A84C;
+  }
+  footer {
+    color: #4a6a84;
+    font-size: 10px;
+    margin-top: 8px;
+    text-align: center;
+    padding-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mousetrap Car — Resistive Forces Sandbox</h1>
+  <p>Modeling Friction &amp; Air Drag · Genesis K-12 Academy · Junior Creationeers</p>
+</header>
+
+<div id="main-wrap">
+  <div id="canvas-wrap">
+    <canvas id="sim" width="840" height="340"></canvas>
+  </div>
+
+  <div id="controls">
+
+    <div class="panel">
+      <h3>🪤 Spring Energy</h3>
+      <div class="ctrl-row">
+        <label>Spring Tension <span id="lbl-tension">50%</span></label>
+        <input type="range" id="sl-tension" min="10" max="100" value="50">
+      </div>
+      <div class="ctrl-row">
+        <label>Arm Length <span id="lbl-arm">15 cm</span></label>
+        <input type="range" id="sl-arm" min="5" max="25" value="15">
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>⚙️ Wheel &amp; Mass</h3>
+      <div class="ctrl-row">
+        <label>Wheel Radius <span id="lbl-wheel">4 cm</span></label>
+        <input type="range" id="sl-wheel" min="2" max="8" value="4">
+      </div>
+      <div class="ctrl-row">
+        <label>Vehicle Mass <span id="lbl-mass">150 g</span></label>
+        <input type="range" id="sl-mass" min="50" max="400" value="150">
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>🌍 Resistive Forces</h3>
+      <div class="ctrl-row">
+        <label>Friction (μ) <span id="lbl-mu">0.05</span></label>
+        <input type="range" id="sl-mu" min="0" max="40" value="5">
+      </div>
+      <div class="ctrl-row">
+        <label>Air Drag (Cd) <span id="lbl-cd">0.30</span></label>
+        <input type="range" id="sl-cd" min="0" max="100" value="30">
+      </div>
+    </div>
+
+    <div class="readout-panel">
+      <h3>📊 Live Readouts</h3>
+      <div class="readout-row">
+        <span class="readout-label">Speed</span>
+        <span class="readout-val" id="ro-speed">0.00 m/s</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-label">Distance</span>
+        <span class="readout-val" id="ro-dist">0.00 m</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-label">Drive Force</span>
+        <span class="readout-val" id="ro-fdrive">0.00 N</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-label">Friction F</span>
+        <span class="readout-val" id="ro-ffrict">0.00 N</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-label">Drag F</span>
+        <span class="readout-val" id="ro-fdrag">0.00 N</span>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="fbd-indicator"><span class="fbd-dot" style="background:#4CAF50"></span>Drive Force →</div>
+        <div class="fbd-indicator"><span class="fbd-dot" style="background:#FF5252"></span>Friction ←</div>
+        <div class="fbd-indicator"><span class="fbd-dot" style="background:#FF9800"></span>Air Drag ←</div>
+        <div class="fbd-indicator"><span class="fbd-dot" style="background:#64B5F6"></span>Normal Force ↑</div>
+        <div class="fbd-indicator"><span class="fbd-dot" style="background:#CE93D8"></span>Weight ↓</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="btn-row">
+    <button id="btn-release">▶ Release Spring</button>
+    <button id="btn-fbd" id="btn-fbd">🔍 FBD Overlay: OFF</button>
+    <button id="btn-reset">↺ Reset</button>
+  </div>
+</div>
+
+<footer>Modeling Resistive Forces · Spring → Kinetic Energy Transfer · FBD Analysis</footer>
+
+<script>
+(function(){
+"use strict";
+
+// ── Canvas setup ──────────────────────────────────────────────
+const canvas = document.getElementById('sim');
+const ctx    = canvas.getContext('2d');
+const W = 840, H = 340;
+
+// ── State ──────────────────────────────────────────────────────
+let running   = false;
+let showFBD   = false;
+let released  = false;
+let lastTime  = null;
+let rafId     = null;
+
+// Physics
+let car_x     = 80;      // pixels from left (sim space)
+let car_v     = 0;       // m/s
+let car_dist  = 0;       // metres travelled
+let springAngle = 0;     // radians (arm swept)
+let armSweep  = 0;       // total arm sweep in radians
+let maxArmSweep = Math.PI * 0.8; // radians of useful spring arc
+
+// Params from sliders
+let P_tension = 0.50;    // 0-1 (normalised spring energy)
+let P_arm     = 0.15;    // metres
+let P_wheel   = 0.04;    // metres radius
+let P_mass    = 0.150;   // kg
+let P_mu      = 0.05;    // rolling friction coeff
+let P_cd      = 0.30;    // drag coefficient * frontal area factor
+
+// Visual scale: 1 metre = 120 px
+const SCALE   = 120;
+const GND_Y   = H - 70; // ground y in canvas px
+const CAR_W   = 100;    // car body px width
+const CAR_H   = 38;     // car body px height
+const WHEEL_R_px = () => P_wheel * SCALE;
+
+// ── Simulation math constants ──────────────────────────────────
+const G = 9.81;
+const AIR_DENSITY = 1.2; // kg/m³
+const FRONTAL_AREA = 0.006; // m² representative for small car
+
+function initialKE() {
+  // E = tension * base_energy; base tune so values feel right
+  const baseEnergy = 0.8; // Joules at 100%
+  return P_tension * baseEnergy * (P_arm / 0.15);
+}
+
+function maxSpeed() {
+  // KE = 0.5 * m * v² → v = sqrt(2*KE/m)
+  const ke = initialKE();
+  return Math.sqrt(2 * ke / P_mass);
+}
+
+// ── Slider wiring ──────────────────────────────────────────────
+function bindSlider(id, labelId, min, max, decimals, unit, scale, setter) {
+  const sl = document.getElementById(id);
+  const lb = document.getElementById(labelId);
+  function update() {
+    const raw = parseFloat(sl.value);
+    const val = raw * scale;
+    lb.textContent = val.toFixed(decimals) + ' ' + unit;
+    setter(val);
+    if (!released) resetSim(false);
+  }
+  sl.addEventListener('input', update);
+  sl.addEventListener('change', update);
+  update();
+}
+
+bindSlider('sl-tension','lbl-tension',10,100,0,'%', 1,  v=>{ P_tension = v/100; });
+bindSlider('sl-arm',    'lbl-arm',    5, 25, 0,'cm',1,  v=>{ P_arm    = v/100; });
+bindSlider('sl-wheel',  'lbl-wheel',  2, 8,  0,'cm',1,  v=>{ P_wheel  = v/100; });
+bindSlider('sl-mass',   'lbl-mass',   50,400,0,'g', 1,  v=>{ P_mass   = v/1000;});
+bindSlider('sl-mu',     'lbl-mu',     0, 40, 2,'',  0.01,v=>{ P_mu    = v;     });
+bindSlider('sl-cd',     'lbl-cd',     0, 100,2,'',  0.01,v=>{ P_cd    = v;     });
+
+// ── Buttons ────────────────────────────────────────────────────
+document.getElementById('btn-release').addEventListener('click', startSim);
+document.getElementById('btn-reset').addEventListener('click', ()=>resetSim(true));
+document.getElementById('btn-fbd').addEventListener('click', ()=>{
+  showFBD = !showFBD;
+  const btn = document.getElementById('btn-fbd');
+  btn.textContent = '🔍 FBD Overlay: ' + (showFBD ? 'ON' : 'OFF');
+  btn.classList.toggle('active', showFBD);
+});
+
+// ── Simulation control ─────────────────────────────────────────
+function resetSim(full) {
+  if (full) {
+    released = false;
+    running  = false;
+  }
+  car_x     = 80;
+  car_v     = 0;
+  car_dist  = 0;
+  springAngle = 0;
+  armSweep  = 0;
+  lastTime  = null;
+  updateReadouts(0, 0, 0, 0, 0);
+  if (!rafId) rafId = requestAnimationFrame(loop);
+}
+
+function startSim() {
+  if (released) return;
+  released = true;
+  running  = true;
+  car_v    = maxSpeed() * 0.25; // spring unwinds gradually, start at fraction
+  lastTime = null;
+  if (!rafId) rafId = requestAnimationFrame(loop);
+}
+
+// ── Physics step ───────────────────────────────────────────────
+function physicsStep(dt) {
+  if (!running || !released) return;
+
+  const g   = G;
+  const m   = P_mass;
+  const wR  = P_wheel;
+  const mu  = P_mu;
+  const cd  = P_cd;
+  const arm = P_arm;
+
+  // Spring drive force: torque / wheel radius, decays as arm sweeps
+  const springProgress = armSweep / maxArmSweep; // 0→1
+  const remainingFrac  = Math.max(0, 1 - springProgress);
+  const torque         = P_tension * 0.12 * (arm / 0.15) * remainingFrac; // N·m
+  const F_drive        = (car_v <= maxSpeed() * remainingFrac + 0.01) ? torque / wR : 0;
+
+  // Normal force
+  const F_normal = m * g;
+
+  // Rolling friction (opposes motion)
+  const F_friction = mu * F_normal;
+
+  // Aerodynamic drag: F = 0.5 * ρ * v² * Cd * A
+  const F_drag = 0.5 * AIR_DENSITY * car_v * car_v * cd * FRONTAL_AREA * 100;
+  // (*100 to give cd=1 meaningful drag at these small scales)
+
+  // Net force
+  const F_net = F_drive - F_friction - F_drag;
+
+  // Acceleration
+  const accel = F_net / m;
+
+  // Integrate velocity
+  car_v = Math.max(0, car_v + accel * dt);
+
+  // Integrate position
+  const dx_m  = car_v * dt;
+  car_dist   += dx_m;
+  car_x      += dx_m * SCALE;
+
+  // Spring arm sweep
+  const dAngle = (dx_m / wR) * (wR / arm); // angular displacement of arm
+  armSweep += dAngle;
+  springAngle += dAngle;
+
+  // Stop when car leaves canvas or stops
+  if (car_x > W + 100 || (car_v < 0.001 && armSweep >= maxArmSweep)) {
+    running = false;
+    car_v   = 0;
+  }
+
+  updateReadouts(car_v, car_dist, F_drive, F_friction, F_drag);
+}
+
+function updateReadouts(v, d, fd, ff, fdg) {
+  document.getElementById('ro-speed').textContent  = v.toFixed(2)  + ' m/s';
+  document.getElementById('ro-dist').textContent   = d.toFixed(2)  + ' m';
+  document.getElementById('ro-fdrive').textContent = fd.toFixed(3) + ' N';
+  document.getElementById('ro-ffrict').textContent = ff.toFixed(3) + ' N';
+  document.getElementById('ro-fdrag').textContent  = fdg.toFixed(4)+ ' N';
+}
+
+// ── Drawing helpers ────────────────────────────────────────────
+function drawBackground() {
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0,0,0,GND_Y);
+  sky.addColorStop(0, '#0a1a2e');
+  sky.addColorStop(1, '#1a3a5c');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, GND_Y);
+
+  // Ground
+  const gnd = ctx.createLinearGradient(0,GND_Y,0,H);
+  gnd.addColorStop(0, '#2c4a1e');
+  gnd.addColorStop(1, '#1a2e10');
+  ctx.fillStyle = gnd;
+  ctx.fillRect(0, GND_Y, W, H - GND_Y);
+
+  // Ground line
+  ctx.strokeStyle = '#8aaa60';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, GND_Y);
+  ctx.lineTo(W, GND_Y);
+  ctx.stroke();
+
+  // Distance ticks
+  ctx.fillStyle = '#8aaa6066';
+  ctx.font = '9px Arial';
+  ctx.textAlign = 'center';
+  for (let m = 0; m <= 7; m++) {
+    const px = 80 + m * SCALE;
+    if (px > W) break;
+    ctx.fillStyle = '#8aaa6066';
+    ctx.fillRect(px - 0.5, GND_Y, 1, 8);
+    ctx.fillStyle = '#8aaa60aa';
+    ctx.fillText(m + 'm', px, GND_Y + 18);
+  }
+
+  // Title watermark
+  ctx.fillStyle = '#ffffff08';
+  ctx.font = 'bold 48px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('GK12', W/2, H/2 + 20);
+}
+
+function drawCar(cx) {
+  const bx  = cx - CAR_W * 0.5;
+  const by  = GND_Y - WHEEL_R_px() * 2 - CAR_H;
+  const wr  = WHEEL_R_px();
+  const axleY = GND_Y - wr;
+
+  // Shadow
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.ellipse(cx, GND_Y + 2, CAR_W * 0.45, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Car body
+  ctx.save();
+  const bodyGrad = ctx.createLinearGradient(bx, by, bx, by + CAR_H);
+  bodyGrad.addColorStop(0, '#2a5a8c');
+  bodyGrad.addColorStop(1, '#1B3A5C');
+  ctx.fillStyle = bodyGrad;
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect(bx, by, CAR_W, CAR_H, 6);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  // Cabin window
+  ctx.save();
+  ctx.fillStyle = '#7fbfff33';
+  ctx.strokeStyle = '#C9A84C88';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(bx + CAR_W * 0.3, by + 4, CAR_W * 0.38, CAR_H * 0.55, 4);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  // GK12 label on car
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 9px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('GK12', cx - 16, by + CAR_H * 0.68);
+
+  // Mousetrap on top
+  drawMousetrap(cx, by);
+
+  // Wheels
+  const wheelPositions = [bx + wr + 4, bx + CAR_W - wr - 4];
+  wheelPositions.forEach(wx => {
+    const spinAngle = (car_dist / P_wheel) % (Math.PI * 2);
+    drawWheel(wx, axleY, wr, spinAngle);
+  });
+
+  // Axle lines
+  ctx.strokeStyle = '#C9A84C88';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(wheelPositions[0], axleY);
+  ctx.lineTo(wheelPositions[1], axleY);
+  ctx.stroke();
+
+  // String line from front axle
+  if (released && armSweep < maxArmSweep) {
+    ctx.strokeStyle = '#ffffffaa';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.moveTo(wheelPositions[0], axleY);
+    ctx.lineTo(wheelPositions[0] - wr * 0.5, axleY - wr * 0.4);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function drawWheel(wx, wy, wr, angle) {
+  // Tire
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(wx, wy, wr, 0, Math.PI * 2);
+  ctx.fillStyle = '#222';
+  ctx.fill();
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Hub
+  ctx.beginPath();
+  ctx.arc(wx, wy, wr * 0.35, 0, Math.PI * 2);
+  ctx.fillStyle = '#C9A84C';
+  ctx.fill();
+
+  // Spokes
+  ctx.strokeStyle = '#C9A84C99';
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i < 4; i++) {
+    const a = angle + i * Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(wx + Math.cos(a) * wr * 0.35, wy + Math.sin(a) * wr * 0.35);
+    ctx.lineTo(wx + Math.cos(a) * wr * 0.85, wy + Math.sin(a) * wr * 0.85);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawMousetrap(cx, bodyTopY) {
+  const tx = cx - 18;
+  const ty = bodyTopY - 14;
+  const tw = 36, th = 14;
+
+  // Base
+  ctx.fillStyle = '#8B6914';
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1;
+  ctx.fillRect(tx, ty, tw, th);
+  ctx.strokeRect(tx, ty, tw, th);
+
+  // Spring coil
+  ctx.strokeStyle = '#aaa';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(tx + 10, ty + 7, 5, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Arm (rotates with spring)
+  const armProgress = Math.min(armSweep / maxArmSweep, 1);
+  const armA = -Math.PI / 2 + armProgress * (Math.PI * 0.75);
+  const armLen = P_arm * SCALE * 0.55;
+
+  ctx.save();
+  ctx.translate(tx + 10, ty + 7);
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(Math.cos(armA) * armLen, Math.sin(armA) * armLen);
+  ctx.stroke();
+  // Arm tip
+  ctx.fillStyle = '#C9A84C';
+  ctx.beginPath();
+  ctx.arc(Math.cos(armA) * armLen, Math.sin(armA) * armLen, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // String wrap indicator
+  if (!released) {
+    ctx.strokeStyle = '#ffcc5588';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2,2]);
+    ctx.beginPath();
+    ctx.arc(tx + 10, ty + 7, 7, -Math.PI, 0);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function drawFBD(cx) {
+  if (!showFBD) return;
+  const wr   = WHEEL_R_px();
+  const carCY = GND_Y - wr - CAR_H / 2;  // vertical center of car
+  const FDRIVE = 0.5 * 1.2 * car_v * car_v * P_cd * FRONTAL_AREA * 100;
+  const springProgress = Math.min(armSweep / maxArmSweep, 1);
+  const remainingFrac  = Math.max(0, 1 - springProgress);
+  const torque  = P_tension * 0.12 * (P_arm / 0.15) * remainingFrac;
+  const fDrive  = torque / P_wheel;
+  const fFrict  = P_mu * P_mass * G;
+  const fDragV  = 0.5 * AIR_DENSITY * car_v * car_v * P_cd * FRONTAL_AREA * 100;
+  const weight  = P_mass * G;
+  const normal  = weight;
+
+  const arrowScale = 28;
+
+  // FBD circle around car
+  ctx.save();
+  ctx.strokeStyle = '#ffffff33';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  ctx.rect(cx - CAR_W * 0.6, carCY - CAR_H, CAR_W * 1.2, CAR_H * 3.2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  function arrow(x, y, dx, dy, color, label, valN) {
+    const len = Math.sqrt(dx*dx + dy*dy);
+    if (len < 2) return;
+    const ux = dx/len, uy = dy/len;
+    ctx.strokeStyle = color;
+    ctx.fillStyle   = color;
+    ctx.lineWidth   = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + dx, y + dy);
+    ctx.stroke();
+    // Arrowhead
+    const hw = 6, hl = 10;
+    const ex = x + dx, ey = y + dy;
+    ctx.beginPath();
+    ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - ux*hl - uy*hw, ey - uy*hl + ux*hw);
+    ctx.lineTo(ex - ux*hl + uy*hw, ey - uy*hl - ux*hw);
+    ctx.closePath();
+    ctx.fill();
+    // Label
+    ctx.font = 'bold 10px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = color;
+    ctx.fillText(label + ' ' + valN.toFixed(3) + 'N', ex + ux * 22 + (uy !== 0 ? 28 : 0), ey + uy * 14);
+  }
+
+  // Drive force →
+  arrow(cx - CAR_W*0.5, carCY, -(Math.min(fDrive, 3) * arrowScale), 0, '#4CAF50', 'Fd', fDrive);
+  // Friction ←
+  arrow(cx + CAR_W*0.3, carCY, Math.min(fFrict, 3) * arrowScale * 0.7, 0, '#FF5252', 'Ff', fFrict);
+  // Drag ←
+  arrow(cx + CAR_W*0.5, carCY - 8, Math.min(fDragV, 3) * arrowScale * 0.7, 0, '#FF9800', 'Fd', fDragV);
+  // Normal ↑
+  arrow(cx, GND_Y - wr, 0, -(Math.min(normal, 5) * 6 + 20), '#64B5F6', 'N', normal);
+  // Weight ↓
+  arrow(cx, carCY, 0, Math.min(weight, 5) * 6 + 20, '#CE93D8', 'W', weight);
+
+  ctx.restore();
+}
+
+function drawPreLaunch() {
+  // Show coiled spring energy indicator
+  const cx = car_x;
+  const wr = WHEEL_R_px();
+  const by = GND_Y - wr * 2 - CAR_H;
+
+  // Energy bar above car
+  const barW = CAR_W * 0.8;
+  const barX = cx - barW/2;
+  const barY = by - 22;
+  ctx.fillStyle = '#0f2236';
+  ctx.strokeStyle = '#C9A84C55';
+  ctx.lineWidth = 1;
+  ctx.fillRect(barX, barY, barW, 10);
+  ctx.strokeRect(barX, barY, barW, 10);
+
+  const energyFill = P_tension;
+  const eGrad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
+  eGrad.addColorStop(0, '#ff6b35');
+  eGrad.addColorStop(1, '#C9A84C');
+  ctx.fillStyle = eGrad;
+  ctx.fillRect(barX, barY, barW * energyFill, 10);
+
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = '9px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('Spring Energy: ' + (initialKE().toFixed(3)) + ' J', cx, barY - 3);
+
+  // "Press Release" pulsing hint
+  const pulse = 0.6 + 0.4 * Math.sin(Date.now() * 0.003);
+  ctx.globalAlpha = pulse;
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 11px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('▶ Press "Release Spring" to launch!', W/2, 22);
+  ctx.globalAlpha = 1;
+}
+
+function drawSpeedometer() {
+  const maxV = maxSpeed();
+  const frac = maxV > 0 ? Math.min(car_v / maxV, 1) : 0;
+  const r = 28, cx2 = W - 45, cy2 = 38;
+
+  ctx.save();
+  // Background arc
+  ctx.beginPath();
+  ctx.arc(cx2, cy2, r, Math.PI * 0.75, Math.PI * 2.25);
+  ctx.strokeStyle = '#1B3A5C';
+  ctx.lineWidth   = 7;
+  ctx.stroke();
+
+  // Speed arc
+  const startA = Math.PI * 0.75;
+  const endA   = startA + frac * Math.PI * 1.5;
+  const arcGrad = ctx.createLinearGradient(cx2-r, cy2, cx2+r, cy2);
+  arcGrad.addColorStop(0, '#4CAF50');
+  arcGrad.addColorStop(0.6, '#C9A84C');
+  arcGrad.addColorStop(1, '#FF5252');
+  ctx.beginPath();
+  ctx.arc(cx2, cy2, r, startA, endA);
+  ctx.strokeStyle = arcGrad;
+  ctx.lineWidth   = 7;
+  ctx.stroke();
+
+  // Needle
+  const needleA = startA + frac * Math.PI * 1.5;
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth   = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(cx2, cy2);
+  ctx.lineTo(cx2 + Math.cos(needleA) * r * 0.75, cy2 + Math.sin(needleA) * r * 0.75);
+  ctx.stroke();
+
+  // Center dot
+  ctx.fillStyle = '#C9A84C';
+  ctx.beginPath();
+  ctx.arc(cx2, cy2, 4, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 8px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(car_v.toFixed(2) + ' m/s', cx2, cy2 + r + 10);
+  ctx.fillText('Speed', cx2, cy2 + r + 20);
+  ctx.restore();
+}
+
+function drawEnergyBars() {
+  const ke  = 0.5 * P_mass * car_v * car_v;
+  const maxKE = initialKE();
+  const springProgress = Math.min(armSweep / maxArmSweep, 1);
+  const pe  = maxKE * (1 - springProgress);
+
+  const bx = 10, by = 10, bw = 12, bh = 90;
+
+  function bar(x, frac, color, label) {
+    ctx.fillStyle = '#1B3A5C';
+    ctx.strokeStyle = '#C9A84C33';
+    ctx.lineWidth = 1;
+    ctx.fillRect(x, by, bw, bh);
+    ctx.strokeRect(x, by, bw, bh);
+    const f = Math.max(0, Math.min(1, frac));
+    if (f > 0) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, by + bh * (1-f), bw, bh * f);
+    }
+    ctx.fillStyle = '#9bb8d4';
+    ctx.font = '8px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x + bw/2, by + bh + 12);
+  }
+
+  bar(bx,      maxKE > 0 ? pe  / maxKE : 0, '#FF9800', 'PE');
+  bar(bx + 18, maxKE > 0 ? ke  / maxKE : 0, '#4CAF50', 'KE');
+
+  ctx.fillStyle = '#9bb8d499';
+  ctx.font = '8px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('Energy', bx + 15, by - 3);
+}
+
+// ── Main render ────────────────────────────────────────────────
+function render() {
+  ctx.clearRect(0, 0, W, H);
+  drawBackground();
+  drawCar(car_x);
+  drawFBD(car_x);
+  drawEnergyBars();
+  drawSpeedometer();
+  if (!released) drawPreLaunch();
+}
+
+// ── Game loop ──────────────────────────────────────────────────
+function loop(ts) {
+  rafId = null;
+  if (lastTime !== null) {
+    const dt = Math.min((ts - lastTime) / 1000, 0.033); // cap at 33ms
+    if (running) physicsStep(dt);
+  }
+  lastTime = ts;
+  render();
+  rafId = requestAnimationFrame(loop);
+}
+
+// ── Init ───────────────────────────────────────────────────────
+resetSim(true);
+
+})();
+</script>
+</body>
+</html>

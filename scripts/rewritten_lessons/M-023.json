@@ -1,0 +1,317 @@
+[
+  {
+    "id": "m023t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build 4: Arduino — Distance Sensor Calibration</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>You have already moved your design from pure math and imagination into the physical world — balsa wood, brass axles, and energy transformation. You have hunted down the \"Toll Booths\" of friction and air drag that steal energy from your system. Now it is time to level up into a new dimension of engineering mastery: <strong>Performance Evaluation</strong>.</p>\n<p>In this lesson, you will learn how to calibrate the HC-SR04 ultrasonic distance sensor, calculate measurement errors and tolerances, and understand the code that acts as a translator between the physical world and your Arduino's digital brain. Clean data is not optional — it is how great engineers prove their designs actually work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p>\n<ul>\n<li>Identify and use basic Arduino data types (<code>int</code>, <code>long</code>, <code>float</code>, <code>boolean</code>) in the context of sensor programming.</li>\n<li>Explain what a code library is and why it is used in Arduino projects.</li>\n<li>Describe how the HC-SR04 ultrasonic sensor measures distance using the speed of sound.</li>\n<li>Define calibration and explain why it is essential for collecting clean, trustworthy data.</li>\n<li>Calculate sensor error and offset by comparing digital readings to a physical ground truth measurement.</li>\n<li>Connect the precision of calibration to the biblical principle of honest, faithful stewardship.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Data Type",
+          "definition": "A classification that tells the Arduino what kind of information a variable holds — such as whole numbers, decimals, or true/false values."
+        },
+        {
+          "term": "int (Integer)",
+          "definition": "A data type that stores whole numbers without decimals (e.g., 5, 100, -3)."
+        },
+        {
+          "term": "long",
+          "definition": "A data type that stores very large whole numbers — useful for measuring time in microseconds."
+        },
+        {
+          "term": "float",
+          "definition": "A data type that stores numbers with decimal places, used when precision matters (e.g., 82.4%)."
+        },
+        {
+          "term": "boolean",
+          "definition": "A data type that stores only two possible values: true or false."
+        },
+        {
+          "term": "Library",
+          "definition": "A pre-written collection of code that gives the Arduino special abilities — like calculating distance from sensor data — without you needing to write the math from scratch."
+        },
+        {
+          "term": "Calibration",
+          "definition": "The process of comparing your sensor's readings to a known physical standard in order to correct errors and improve accuracy."
+        },
+        {
+          "term": "Ground Truth",
+          "definition": "A physical, verified measurement used as the trusted reference point when checking whether your sensor is reading correctly."
+        },
+        {
+          "term": "Data Gap",
+          "definition": "The difference between what your sensor reports and what the physical measurement actually shows."
+        },
+        {
+          "term": "Offset",
+          "definition": "A correction value added to or subtracted from a sensor reading to align it with ground truth."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Digital Brain: How Your Arduino Thinks</h2>\n<p>Your Arduino is the command center of your vehicle. It reads sensor data, runs calculations, and makes decisions — all in a fraction of a second. But before it can do any of that, it needs to know how to organize the information it receives. That is where <strong>data types</strong> come in.</p>\n<p>Think of data types like containers in a specialized tool kit. You have a small pouch for tiny screws, a heavy-duty box for wrenches, and a logbook for recording measurements. If you try to stuff a wrench into the tiny screw pouch, the system breaks down. Code works exactly the same way — every piece of information needs to go into the right container or the program fails.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t005",
+    "type": "text",
+    "data": {
+      "html": "<h3>The Four Data Types You Need to Know</h3>\n<ul>\n<li><strong>int (Integer)</strong> — Stores whole numbers. Use this when counting something that cannot be split, like the number of string wraps on an axle. Example: <code>int wraps = 5;</code></li>\n<li><strong>long</strong> — Stores very large whole numbers. The HC-SR04 sensor measures time in <em>microseconds</em> — numbers so large that a regular <code>int</code> cannot hold them. Example: <code>long duration = 14500;</code></li>\n<li><strong>float</strong> — Stores decimal numbers. Use this whenever precision matters, like calculating mechanical efficiency. Example: <code>float efficiency = 82.4;</code></li>\n<li><strong>boolean</strong> — Stores only two values: <code>true</code> or <code>false</code>. Perfect for recording a pass/fail result on your unpowered roll test. Example: <code>boolean passed = true;</code></li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A four-panel diagram showing each Arduino data type as a labeled container: a small parts bin for 'int', a large ledger book for 'long', a precision caliper case for 'float', and an on/off toggle switch for 'boolean', each with its definition and an example value."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Libraries: Inviting a Subject Matter Expert onto Your Team</h2>\n<p>Near the top of your Arduino sketch, you will see a line that looks like this:</p>\n<p><code>#include &lt;HCSR04.h&gt;</code></p>\n<p>That line is importing a <strong>library</strong>. Think of a library as a subject matter expert you bring onto your engineering team. Instead of spending hours learning every detail of ultrasonic physics yourself, you invite someone who already knows it — and they handle that work for you. The library contains pre-written instructions that the Arduino follows instantly whenever you need them.</p>\n<p>Without the library, you would have to manually write the math to convert a raw time signal into a distance value every single time. With it, that calculation is already done. Good engineers know when to build from scratch and when to use trusted tools that already exist.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>How the HC-SR04 Sensor Measures Distance</h2>\n<p>The HC-SR04 is an ultrasonic sensor — it uses sound waves you cannot hear to measure distance. Here is the sequence, step by step:</p>\n<ul>\n<li><strong>Step 1 — The Ping:</strong> The Arduino sends a signal to the <code>trigPin</code>, which fires a short burst of ultrasonic sound toward your car or target.</li>\n<li><strong>Step 2 — The Echo:</strong> That sound wave travels through the air, bounces off the object, and returns to the <code>echoPin</code>.</li>\n<li><strong>Step 3 — The Timer:</strong> The <code>pulseIn()</code> function measures exactly how long the round-trip took, in microseconds.</li>\n<li><strong>Step 4 — The Calculation:</strong> Because the speed of sound through air is a consistent <strong>0.0343 cm/µs</strong>, the code multiplies the travel time by that value and divides by 2 (since the sound traveled there <em>and</em> back) to get the distance.</li>\n</ul>\n<p>That final result — a number in centimeters — is what your serial monitor displays.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>The speed of sound is a constant — it does not change based on who is measuring it or what mood the engineer is in. God designed the laws of physics to be reliable and consistent. Because of that consistency, we can build instruments that trust those laws and produce repeatable results. As 1 Corinthians 14:33 reminds us, <em>\"God is not a God of disorder but of peace.\"</em> The predictability built into creation is what makes engineering possible in the first place.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram of the HC-SR04 sensor showing the trigPin emitting an ultrasonic pulse toward a flat surface, the echo returning to the echoPin, and a labeled timeline below showing the round-trip travel time in microseconds used to calculate distance."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeking Ground Truth: The Ritual of Calibration</h2>\n<p>Here is a hard truth about engineering: every sensor lies a little. Not on purpose — but because of tiny imperfections in manufacturing, environmental interference, or code rounding. That is why calibration exists.</p>\n<p><strong>Calibration</strong> is the process of comparing your sensor's output to a known, physical measurement — the <strong>Ground Truth</strong>. Your tape measure, verified and trusted, is your ground truth. Your sensor's reading is what you are testing against it.</p>\n<p>Imagine a scout reporting that a target is \"five miles away\" — but his definition of a mile is shorter than everyone else's. His data is well-intentioned but wrong. In engineering, that kind of gap between reported and actual values is called a <strong>Data Gap</strong>, and it can lead to failed designs, wasted materials, and bad decisions.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t009",
+    "type": "text",
+    "data": {
+      "html": "<h3>Finding Your Offset</h3>\n<p>Once you have both your sensor reading and your physical tape measure reading, you can calculate the <strong>offset</strong> — the correction value that closes the data gap.</p>\n<p>The formula is simple:</p>\n<p><strong>Offset = Ground Truth − Sensor Reading</strong></p>\n<p>For example: if your tape measure reads 295 cm but your sensor reports 300 cm, your offset is −5 cm. You then apply that correction inside your code so every future reading is automatically adjusted.</p>\n<p>Some situations require a <strong>scalar</strong> (a multiplier) instead of a simple offset — especially if the error grows larger as the distance increases. In that case:</p>\n<p><strong>Scalar = Ground Truth ÷ Sensor Reading</strong></p>\n<p>Applying that scalar to every reading stretches or compresses the sensor's output to match reality.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Calibration is an act of stewardship.</strong> When you take the time to align your sensor with physical reality, you are ensuring that your data honestly reflects the world — not just what you hope it shows. Take at least three measurements at different distances, average your offset, and apply it. One data point is never enough to trust.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t010",
+    "type": "text",
+    "data": {
+      "html": "<h3>Why Clean Data Matters for Your Build</h3>\n<p>In the Creationeering™ framework, reaching the <strong>Pareto Frontier</strong> — the peak of efficiency for your design — requires validated data. Visual guesses and rough estimates will not get you there. If your distance sensor is off by 5 cm on every reading and you never correct it, every performance calculation built on that data is wrong. Your efficiency numbers are wrong. Your comparisons are wrong. Your conclusions are wrong.</p>\n<p>Clean data is the foundation everything else is built on. A calibrated sensor is a trustworthy sensor — and trustworthy tools produce trustworthy engineers.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often calibrate once at a single short distance and assume it holds everywhere. Sensor error can change at different distances — especially beyond 100 cm. Always test and record at multiple distances (such as 30 cm, 100 cm, and 200 cm) before applying your final correction value.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>In this lesson, you covered a lot of ground. You learned that data types are containers that keep your code organized and functional. You discovered that libraries are expert tools that let you stand on the shoulders of other programmers. You traced how an ultrasonic pulse becomes a distance reading through the reliable physics God built into creation. And you practiced the discipline of calibration — aligning your digital eye with physical reality so your data can be trusted.</p>\n<p>The next time you run a distance test on your vehicle, you will not just be pressing a button and hoping the number is right. You will understand every step of how that number was produced — and you will know how to correct it if something is off. That is the difference between using a tool and truly understanding it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m023a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What data type would you use to store the time (in microseconds) that the HC-SR04 sensor's ping takes to return?</strong><br/>You would use <code>long</code>, because microsecond values can be very large — larger than what an <code>int</code> container can hold.</p>\n<p><strong>2. What is a library in Arduino code, and why is it useful?</strong><br/>A library is a pre-written collection of code that gives the Arduino special capabilities. It saves you from writing complex math (like speed-of-sound calculations) from scratch every time.</p>\n<p><strong>3. If your sensor reads 310 cm but your tape measure shows 300 cm, what is your offset? How would you apply it?</strong><br/>Offset = 300 − 310 = −10 cm. You would subtract 10 cm from every future sensor reading in your code to correct the data gap.</p>\n<p><strong>4. Why is it important to calibrate at multiple distances rather than just one?</strong><br/>Sensor error can grow or change at different distances. A correction that works at 30 cm may not hold at 200 cm. Testing across multiple distances gives you a more reliable average offset.</p>\n<p><strong>5. How does the concept of calibration connect to biblical stewardship?</strong><br/>Calibration ensures your data honestly reflects physical reality. Presenting inaccurate data — even unintentionally — leads to bad decisions. Taking the time to align your instruments with truth is a form of responsible stewardship over your work and your design.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

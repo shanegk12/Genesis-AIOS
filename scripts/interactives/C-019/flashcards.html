@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundamentals of Motion and Work — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Fundamentals of Motion and Work</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Force", "definition": "A push or a pull that can make an object speed up, slow down, or change direction. It's what makes things move or stop moving."}, {"term": "Motion", "definition": "The act of an object changing its position over time. It's how we describe something moving from one place to another."}, {"term": "Work", "definition": "When a force makes an object move a certain distance in the direction of the force, energy is transferred. This transfer of energy is called work."}, {"term": "Displacement", "definition": "The overall change in an object's position from its starting point to its ending point, including both how far it moved and in what direction."}, {"term": "Mechanical Efficiency", "definition": "A way to measure how well a system uses energy, calculated by comparing the useful work it produces to the total energy put into it, shown as a percentage."}, {"term": "Optimization", "definition": "The engineering process of making a design or system the best it can be, achieving its goals as effectively as possible within certain limits."}, {"term": "Newton's First Law of Motion", "definition": "An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force."}, {"term": "Newton's Second Law of Motion", "definition": "This law states that the acceleration of an object is directly related to the force applied to it and inversely related to its mass (F = ma)."}, {"term": "Creationeering View of Force", "definition": "Understanding force as a demonstration of God's active role in maintaining His creation, as described in Colossians 1:17."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Process Mapping Flowchart Simulator – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B3A5C;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  h1 {
+    color: #C9A84C;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    font-size: 0.72em;
+    color: #aac4e0;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .main-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
+  }
+  canvas {
+    background: #f5f8fc;
+    border-radius: 10px;
+    border: 2px solid #C9A84C;
+    touch-action: none;
+    cursor: pointer;
+    display: block;
+  }
+  .panel {
+    background: #162e4a;
+    border-radius: 10px;
+    border: 1.5px solid #C9A84C;
+    padding: 12px 14px;
+    min-width: 200px;
+    max-width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .panel-title {
+    color: #C9A84C;
+    font-size: 0.82em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #C9A84C44;
+    padding-bottom: 5px;
+  }
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  label {
+    font-size: 0.72em;
+    color: #aac4e0;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    height: 18px;
+  }
+  .val-display {
+    font-size: 0.75em;
+    color: #fff;
+    text-align: right;
+  }
+  .readout-box {
+    background: #1B3A5C;
+    border-radius: 7px;
+    padding: 8px 10px;
+    border: 1px solid #C9A84C55;
+  }
+  .readout-label {
+    font-size: 0.68em;
+    color: #C9A84C;
+    margin-bottom: 2px;
+  }
+  .readout-value {
+    font-size: 1.05em;
+    font-weight: bold;
+    color: #fff;
+  }
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 2px;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #e0bf6a; }
+  .btn-run {
+    background: #2e7d32;
+    color: #fff;
+  }
+  .btn-run:hover { background: #43a047; }
+  .legend {
+    font-size: 0.65em;
+    color: #aac4e0;
+    line-height: 1.6;
+    border-top: 1px solid #C9A84C33;
+    padding-top: 6px;
+  }
+  .legend span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .status-bar {
+    font-size: 0.7em;
+    color: #C9A84C;
+    text-align: center;
+    min-height: 18px;
+    margin-top: 2px;
+  }
+  @media (max-width: 650px) {
+    .main-layout { flex-direction: column; align-items: center; }
+    .panel { max-width: 98vw; min-width: unset; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<h1>⚙️ Process Mapping Flowchart Simulator</h1>
+<div class="subtitle">Creationeering · Genesis K-12 Academy · See how data flows through a system!</div>
+<div class="main-layout">
+  <canvas id="cvs" width="620" height="520"></canvas>
+  <div class="panel">
+    <div class="panel-title">🔧 Controls</div>
+
+    <div class="control-group">
+      <label>Input Value (1–100)</label>
+      <input type="range" id="slInput" min="1" max="100" value="50">
+      <div class="val-display" id="dispInput">50</div>
+    </div>
+
+    <div class="control-group">
+      <label>Process Speed (animation)</label>
+      <input type="range" id="slSpeed" min="1" max="10" value="5">
+      <div class="val-display" id="dispSpeed">5</div>
+    </div>
+
+    <div class="control-group">
+      <label>Decision Threshold (1–100)</label>
+      <input type="range" id="slThresh" min="1" max="100" value="50">
+      <div class="val-display" id="dispThresh">50</div>
+    </div>
+
+    <div class="readout-box">
+      <div class="readout-label">📥 Input</div>
+      <div class="readout-value" id="roInput">50</div>
+    </div>
+    <div class="readout-box">
+      <div class="readout-label">📤 Output</div>
+      <div class="readout-value" id="roOutput">—</div>
+    </div>
+
+    <button class="btn btn-run" id="btnRun">▶ Run Flowchart</button>
+    <button class="btn" id="btnReset">↺ Reset</button>
+
+    <div class="legend">
+      <strong>Symbol Legend:</strong><br>
+      <span style="background:#2e7d32;border-radius:50%;"></span>Start / End<br>
+      <span style="background:#1565c0;"></span>Process Block<br>
+      <span style="background:#e65100;transform:rotate(45deg);"></span>Decision<br>
+      <span style="background:#6a1b9a;border-radius:3px;"></span>Input / Output<br>
+    </div>
+    <div class="status-bar" id="statusBar">Adjust sliders, then Run!</div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ── Canvas setup ──────────────────────────────────────────────────────────────
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+
+// ── UI References ─────────────────────────────────────────────────────────────
+const slInput  = document.getElementById('slInput');
+const slSpeed  = document.getElementById('slSpeed');
+const slThresh = document.getElementById('slThresh');
+const dispInput  = document.getElementById('dispInput');
+const dispSpeed  = document.getElementById('dispSpeed');
+const dispThresh = document.getElementById('dispThresh');
+const roInput  = document.getElementById('roInput');
+const roOutput = document.getElementById('roOutput');
+const btnRun   = document.getElementById('btnRun');
+const btnReset = document.getElementById('btnReset');
+const statusBar = document.getElementById('statusBar');
+
+// ── Colors ────────────────────────────────────────────────────────────────────
+const COL = {
+  navy:   '#1B3A5C',
+  gold:   '#C9A84C',
+  start:  '#2e7d32',
+  proc:   '#1565c0',
+  dec:    '#e65100',
+  io:     '#6a1b9a',
+  conn:   '#37474f',
+  arrow:  '#1B3A5C',
+  flow:   '#C9A84C',
+  bg:     '#f5f8fc',
+  textDark: '#1B3A5C',
+  white:  '#ffffff',
+  highlight: '#ffeb3b',
+  pathA:  '#43a047',
+  pathB:  '#e53935'
+};
+
+// ── Flowchart Node Definitions ────────────────────────────────────────────────
+// Each node: { id, type, x, y, w, h, label, sublabel }
+// types: 'start','end','process','decision','io'
+
+const NODES = [
+  { id:'start',  type:'start',    x:260, y:30,  w:100, h:40, label:'START' },
+  { id:'io_in',  type:'io',       x:235, y:108, w:150, h:40, label:'INPUT', sublabel:'Read Value' },
+  { id:'proc1',  type:'process',  x:235, y:186, w:150, h:44, label:'PROCESS A', sublabel:'Multiply × 2' },
+  { id:'proc2',  type:'process',  x:235, y:268, w:150, h:44, label:'PROCESS B', sublabel:'Add Threshold' },
+  { id:'dec',    type:'decision', x:260, y:348, w:100, h:56, label:'Result > 150?' },
+  { id:'io_outY',type:'io',       x:60,  y:378, w:140, h:40, label:'OUTPUT', sublabel:'Path A: High' },
+  { id:'io_outN',type:'io',       x:420, y:378, w:140, h:40, label:'OUTPUT', sublabel:'Path B: Normal' },
+  { id:'endA',   type:'end',      x:80,  y:456, w:100, h:40, label:'END (A)' },
+  { id:'endB',   type:'end',      x:440, y:456, w:100, h:40, label:'END (B)' },
+];
+
+// ── Edges (from, to, label, pathType) ────────────────────────────────────────
+const EDGES = [
+  { from:'start',   to:'io_in',   label:'' },
+  { from:'io_in',   to:'proc1',   label:'' },
+  { from:'proc1',   to:'proc2',   label:'' },
+  { from:'proc2',   to:'dec',     label:'' },
+  { from:'dec',     to:'io_outY', label:'YES', side:'left',  col: COL.pathA },
+  { from:'dec',     to:'io_outN', label:'NO',  side:'right', col: COL.pathB },
+  { from:'io_outY', to:'endA',    label:'',    col: COL.pathA },
+  { from:'io_outN', to:'endB',    label:'',    col: COL.pathB },
+];
+
+// ── Animation State ───────────────────────────────────────────────────────────
+let animRunning = false;
+let animStep = -1;       // current active node index
+let animT    = 0;        // progress 0→1 for current step
+let animPath = null;     // 'A' or 'B' decided at decision node
+let inputVal = 50;
+let threshold = 50;
+let outputVal = null;
+let speed = 5;
+let particleT = 0;       // for flow particles along arrows
+
+// sequence of node IDs for full path A and B
+const SEQ_FULL = ['start','io_in','proc1','proc2','dec'];
+const SEQ_A    = ['io_outY','endA'];
+const SEQ_B    = ['io_outN','endB'];
+
+let activeSeq = [];
+let stepResults = {}; // computed value at each node
+
+// ── Node helpers ─────────────────────────────────────────────────────────────
+function getNode(id){ return NODES.find(n=>n.id===id); }
+
+function nodeCenter(n){
+  return { x: n.x + n.w/2, y: n.y + n.h/2 };
+}
+
+function nodeBounds(n){
+  return { left: n.x, right: n.x+n.w, top: n.y, bottom: n.y+n.h,
+           cx: n.x+n.w/2, cy: n.y+n.h/2 };
+}
+
+// ── Draw Functions ────────────────────────────────────────────────────────────
+function drawRoundedRect(x,y,w,h,r,fill,stroke,lw){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y); ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r);
+  ctx.closePath();
+  if(fill){ ctx.fillStyle=fill; ctx.fill(); }
+  if(stroke){ ctx.strokeStyle=stroke; ctx.lineWidth=lw||2; ctx.stroke(); }
+}
+
+function drawPill(x,y,w,h,fill,stroke,lw){
+  const r = h/2;
+  drawRoundedRect(x,y,w,h,r,fill,stroke,lw);
+}
+
+function drawDiamond(cx,cy,hw,hh,fill,stroke,lw){
+  ctx.beginPath();
+  ctx.moveTo(cx, cy-hh);
+  ctx.lineTo(cx+hw, cy);
+  ctx.lineTo(cx, cy+hh);
+  ctx.lineTo(cx-hw, cy);
+  ctx.closePath();
+  if(fill){ ctx.fillStyle=fill; ctx.fill(); }
+  if(stroke){ ctx.strokeStyle=stroke; ctx.lineWidth=lw||2; ctx.stroke(); }
+}
+
+function drawParallelogram(x,y,w,h,fill,stroke,lw){
+  const skew = 12;
+  ctx.beginPath();
+  ctx.moveTo(x+skew,y);
+  ctx.lineTo(x+w,y);
+  ctx.lineTo(x+w-skew,y+h);
+  ctx.lineTo(x,y+h);
+  ctx.closePath();
+  if(fill){ ctx.fillStyle=fill; ctx.fill(); }
+  if(stroke){ ctx.strokeStyle=stroke; ctx.lineWidth=lw||2; ctx.stroke(); }
+}
+
+function drawArrow(x1,y1,x2,y2,col,lw,dashed){
+  ctx.save();
+  ctx.strokeStyle = col||COL.arrow;
+  ctx.lineWidth = lw||2;
+  if(dashed) ctx.setLineDash([5,4]);
+  ctx.beginPath();
+  ctx.moveTo(x1,y1);
+  ctx.lineTo(x2,y2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // arrowhead
+  const ang = Math.atan2(y2-y1,x2-x1);
+  const as = 9;
+  ctx.fillStyle = col||COL.arrow;
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-as*Math.cos(ang-0.4), y2-as*Math.sin(ang-0.4));
+  ctx.lineTo(x2-as*Math.cos(ang+0.4), y2-as*Math.sin(ang+0.4));
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawBentArrow(pts, col, lw){
+  if(pts.length < 2) return;
+  ctx.save();
+  ctx.strokeStyle = col||COL.arrow;
+  ctx.lineWidth = lw||2;
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x, pts[i].y);
+  ctx.stroke();
+  // arrowhead at last segment
+  const p1 = pts[pts.length-2], p2 = pts[pts.length-1];
+  const ang = Math.atan2(p2.y-p1.y, p2.x-p1.x);
+  const as = 9;
+  ctx.fillStyle = col||COL.arrow;
+  ctx.beginPath();
+  ctx.moveTo(p2.x,p2.y);
+  ctx.lineTo(p2.x-as*Math.cos(ang-0.4), p2.y-as*Math.sin(ang-0.4));
+  ctx.lineTo(p2.x-as*Math.cos(ang+0.4), p2.y-as*Math.sin(ang+0.4));
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function labelText(txt, x, y, size, col, bold){
+  ctx.save();
+  ctx.fillStyle = col||COL.white;
+  ctx.font = (bold?'bold ':'') + (size||12) + 'px Segoe UI,Arial,sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(txt, x, y);
+  ctx.restore();
+}
+
+// ── Draw a single node ────────────────────────────────────────────────────────
+function drawNode(n, highlight, pulse){
+  const b = nodeBounds(n);
+  let glow = highlight || pulse;
+  if(glow){
+    ctx.save();
+    ctx.shadowColor = COL.gold;
+    ctx.shadowBlur = pulse ? 18+10*Math.sin(Date.now()/120) : 14;
+  }
+  switch(n.type){
+    case 'start':
+    case 'end':
+      drawPill(n.x,n.y,n.w,n.h,
+        highlight ? COL.gold : COL.start,
+        highlight ? '#fff' : '#1b5e20', highlight?3:2);
+      break;
+    case 'process':
+      drawRoundedRect(n.x,n.y,n.w,n.h,6,
+        highlight ? COL.gold : COL.proc,
+        highlight ? '#fff' : '#0d3a73', highlight?3:2);
+      break;
+    case 'decision':
+      drawDiamond(b.cx,b.cy, n.w/2, n.h/2,
+        highlight ? COL.gold : COL.dec,
+        highlight ? '#fff' : '#bf360c', highlight?3:2);
+      break;
+    case 'io':
+      drawParallelogram(n.x,n.y,n.w,n.h,
+        highlight ? COL.gold : COL.io,
+        highlight ? '#fff' : '#4a148c', highlight?3:2);
+      break;
+  }
+  if(glow) ctx.restore();
+
+  // Labels
+  const tc = highlight ? COL.navy : COL.white;
+  labelText(n.label, b.cx, n.sublabel ? b.cy-7 : b.cy, 11, tc, true);
+  if(n.sublabel){
+    // Show dynamic value if available
+    let sub = n.sublabel;
+    if(stepResults[n.id] !== undefined) sub = String(stepResults[n.id]);
+    labelText(sub, b.cx, b.cy+8, 10, highlight?COL.navy:'#cce0ff', false);
+  }
+}
+
+// ── Draw all static edges ─────────────────────────────────────────────────────
+function drawEdges(){
+  // straight edges (top chain)
+  const chainIds = ['start','io_in','proc1','proc2','dec'];
+  for(let i=0;i<chainIds.length-1;i++){
+    const a = getNode(chainIds[i]), b2 = getNode(chainIds[i+1]);
+    const bA = nodeBounds(a), bB = nodeBounds(b2);
+    drawArrow(bA.cx, bA.bottom, bB.cx, bB.top, COL.arrow, 2);
+  }
+  // decision YES → left
+  const dec = getNode('dec'), oY = getNode('io_outY'), oN = getNode('io_outN');
+  const endA = getNode('endA'), endB = getNode('endB');
+  const dB = nodeBounds(dec);
+  const oYB = nodeBounds(oY), oNB = nodeBounds(oN);
+  // YES: left side of diamond → io_outY
+  drawBentArrow([
+    {x: dB.cx - dec.w/2, y: dB.cy},
+    {x: oYB.cx, y: dB.cy},
+    {x: oYB.cx, y: oYB.top}
+  ], COL.pathA, 2);
+  // NO: right side of diamond → io_outN
+  drawBentArrow([
+    {x: dB.cx + dec.w/2, y: dB.cy},
+    {x: oNB.cx, y: dB.cy},
+    {x: oNB.cx, y: oNB.top}
+  ], COL.pathB, 2);
+  // io_outY → endA
+  drawArrow(oYB.cx, oYB.bottom, nodeBounds(endA).cx, nodeBounds(endA).top, COL.pathA, 2);
+  // io_outN → endB
+  drawArrow(oNB.cx, oNB.bottom, nodeBounds(endB).cx, nodeBounds(endB).top, COL.pathB, 2);
+
+  // Edge labels
+  ctx.save();
+  ctx.fillStyle = COL.pathA; ctx.font='bold 10px Segoe UI,Arial'; ctx.textAlign='center';
+  ctx.fillText('YES', dB.cx-dec.w/2-14, dB.cy-6);
+  ctx.fillStyle = COL.pathB;
+  ctx.fillText('NO',  dB.cx+dec.w/2+12, dB.cy-6);
+  ctx.restore();
+}
+
+// ── Draw flow particle along active path ─────────────────────────────────────
+function drawFlowParticle(t){
+  // t 0→1: particle moves from current node to next
+  if(animStep < 0 || animStep >= activeSeq.length-1) return;
+  const fromId = activeSeq[animStep];
+  const toId   = activeSeq[animStep+1];
+  const fromN = getNode(fromId), toN = getNode(toId);
+  if(!fromN||!toN) return;
+  const fB = nodeBounds(fromN), tB = nodeBounds(toN);
+
+  let px, py;
+  // decision → side paths use bent arrows
+  if(fromId === 'dec'){
+    const dB = nodeBounds(getNode('dec'));
+    if(toId === 'io_outY'){
+      const oYB = nodeBounds(getNode('io_outY'));
+      // path: left-diamond → left → down
+      const pts = [
+        {x: dB.cx - fromN.w/2, y: dB.cy},
+        {x: oYB.cx, y: dB.cy},
+        {x: oYB.cx, y: oYB.top}
+      ];
+      const totalLen = Math.hypot(pts[1].x-pts[0].x,0) + Math.hypot(0,pts[2].y-pts[1].y);
+      const d = t * totalLen;
+      const seg1 = Math.abs(pts[1].x-pts[0].x);
+      if(d < seg1){ px=pts[0].x-d; py=pts[0].y; }
+      else { px=pts[1].x; py=pts[1].y+(d-seg1); }
+    } else {
+      const oNB = nodeBounds(getNode('io_outN'));
+      const pts = [
+        {x: dB.cx + fromN.w/2, y: dB.cy},
+        {x: oNB.cx, y: dB.cy},
+        {x: oNB.cx, y: oNB.top}
+      ];
+      const totalLen = Math.abs(pts[1].x-pts[0].x) + Math.abs(pts[2].y-pts[1].y);
+      const d = t * totalLen;
+      const seg1 = Math.abs(pts[1].x-pts[0].x);
+      if(d < seg1){ px=pts[0].x+d; py=pts[0].y; }
+      else { px=pts[1].x; py=pts[1].y+(d-seg1); }
+    }
+  } else {
+    px = fB.cx + (tB.cx - fB.cx)*t;
+    py = fB.bottom + (tB.top - fB.bottom)*t;
+  }
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(px, py, 7, 0, Math.PI*2);
+  ctx.fillStyle = COL.gold;
+  ctx.shadowColor = COL.gold;
+  ctx.shadowBlur = 12;
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+// ── Draw title & info panel on canvas ────────────────────────────────────────
+function drawCanvasUI(){
+  // background
+  ctx.fillStyle = COL.bg;
+  ctx.fillRect(0,0,cvs.width,cvs.height);
+
+  // Header bar
+  ctx.fillStyle = COL.navy;
+  ctx.fillRect(0,0,cvs.width,28);
+  ctx.fillStyle = COL.gold;
+  ctx.font = 'bold 13px Segoe UI,Arial';
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText('Process Mapping Flowchart Simulator', 10, 14);
+
+  // Input/Output info box
+  ctx.fillStyle = '#e8f0fe';
+  drawRoundedRect(cvs.width-180, 34, 170, 58, 6, '#e8f0fe', COL.navy, 1.5);
+  ctx.fillStyle = COL.navy; ctx.font='bold 10px Segoe UI,Arial';
+  ctx.textAlign='left';
+  ctx.fillText('📥 Input Value: '+inputVal, cvs.width-172, 48);
+  ctx.fillText('📐 Threshold: '+threshold, cvs.width-172, 62);
+  const proc1out = inputVal*2;
+  const proc2out = proc1out + threshold;
+  ctx.fillText('🔢 After Proc A: '+proc1out, cvs.width-172, 76);
+  ctx.fillText('🔢 After Proc B: '+proc2out, cvs.width-172, 90);
+}
+
+// ── Main render ───────────────────────────────────────────────────────────────
+function render(){
+  drawCanvasUI();
+  drawEdges();
+
+  // Determine active node set
+  for(let i=0;i<NODES.length;i++){
+    const n = NODES[i];
+    let isActive = false, isPulse = false;
+    if(animRunning){
+      const curId = activeSeq[animStep];
+      isActive = (n.id === curId);
+      isPulse  = isActive;
+    }
+    // Mark completed nodes
+    let isDone = false;
+    if(animStep > 0){
+      for(let s=0;s<animStep;s++){
+        if(activeSeq[s]===n.id) isDone=true;
+      }
+    }
+    let fillOverride = null;
+    if(isDone && !isActive) fillOverride = 'done';
+    drawNodeEx(n, isActive, isPulse, isDone);
+  }
+
+  if(animRunning){
+    drawFlowParticle(animT);
+  }
+}
+
+function drawNodeEx(n, highlight, pulse, done){
+  const b = nodeBounds(n);
+  // done tint
+  let baseFill;
+  if(done && !highlight){
+    baseFill = '#b0bec5';
+  } else {
+    switch(n.type){
+      case 'start': case 'end': baseFill=COL.start; break;
+      case 'process': baseFill=COL.proc; break;
+      case 'decision': baseFill=COL.dec; break;
+      case 'io': baseFill=COL.io; break;
+    }
+  }
+  if(highlight) baseFill = COL.gold;
+
+  let glow = highlight || pulse;
+  if(glow){
+    ctx.save();
+    ctx.shadowColor = COL.gold;
+    ctx.shadowBlur = pulse ? 18+10*Math.sin(Date.now()/120) : 14;
+  }
+  switch(n.type){
+    case 'start': case 'end':
+      drawPill(n.x,n.y,n.w,n.h, baseFill, highlight?'#fff':'#1b5e20', highlight?3:done?1:2);
+      break;
+    case 'process':
+      drawRoundedRect(n.x,n.y,n.w,n.h,6, baseFill, highlight?'#fff':'#0d3a73', highlight?3:done?1:2);
+      break;
+    case 'decision':
+      drawDiamond(b.cx,b.cy,n.w/2,n.h/2, baseFill, highlight?'#fff':'#bf360c', highlight?3:done?1:2);
+      break;
+    case 'io':
+      drawParallelogram(n.x,n.y,n.w,n.h, baseFill, highlight?'#fff':'#4a148c', highlight?3:done?1:2);
+      break;
+  }
+  if(glow) ctx.restore();
+
+  const tc = highlight ? COL.navy : (done&&!highlight?'#546e7a':COL.white);
+  labelText(n.label, b.cx, n.sublabel ? b.cy-7 : b.cy, 11, tc, true);
+  if(n.sublabel){
+    let sub = n.sublabel;
+    if(stepResults[n.id] !== undefined) sub = String(stepResults[n.id]);
+    labelText(sub, b.cx, b.cy+8, 10, highlight?COL.navy:(done?'#78909c':'#cce0ff'), false);
+  }
+}
+
+// ── Animation loop ────────────────────────────────────────────────────────────
+let lastTime = 0;
+function loop(ts){
+  const dt = Math.min((ts - lastTime)/1000, 0.1);
+  lastTime = ts;
+
+  if(animRunning){
+    const spd = 0.5 + (speed/10)*1.5; // steps per second
+    animT += dt * spd;
+    if(animT >= 1){
+      animT = 0;
+      animStep++;
+      computeStepResult();
+      if(animStep >= activeSeq.length-1){
+        animStep = activeSeq.length-1;
+        animRunning = false;
+        showFinalResult();
+      }
+    }
+  }
+
+  render();
+  requestAnimationFrame(loop);
+}
+
+// ── Compute result at each step ───────────────────────────────────────────────
+function computeStepResult(){
+  const id = activeSeq[animStep];
+  switch(id){
+    case 'io_in':
+      stepResults['io_in'] = inputVal;
+      break;
+    case 'proc1':
+      stepResults['proc1'] = inputVal * 2;
+      break;
+    case 'proc2':
+      stepResults['proc2'] = inputVal*2 + threshold;
+      break;
+    case 'dec':
+      stepResults['dec'] = (inputVal*2+threshold) > 150 ? 'YES' : 'NO';
+      break;
+    case 'io_outY':
+      const vA = inputVal*2+threshold;
+      stepResults['io_outY'] = 'High: '+vA;
+      outputVal = 'High ('+vA+')';
+      roOutput.textContent = outputVal;
+      break;
+    case 'io_outN':
+      const vB = inputVal*2+threshold;
+      stepResults['io_outN'] = 'Normal: '+vB;
+      outputVal = 'Normal ('+vB+')';
+      roOutput.textContent = outputVal;
+      break;
+  }
+}
+
+function showFinalResult(){
+  const finalId = activeSeq[activeSeq.length-1];
+  if(finalId==='endA'){
+    statusBar.textContent = '✅ Path A taken — Result is HIGH (>150). Process complete!';
+    statusBar.style.color = COL.pathA;
+  } else {
+    statusBar.textContent = '✅ Path B taken — Result is NORMAL (≤150). Process complete!';
+    statusBar.style.color = COL.pathB;
+  }
+}
+
+// ── Run simulation ────────────────────────────────────────────────────────────
+function runSim(){
+  inputVal  = parseInt(slInput.value);
+  threshold = parseInt(slThresh.value);
+  speed     = parseInt(slSpeed.value);
+  stepResults = {};
+
+  // build active sequence
+  const result = inputVal*2 + threshold;
+  animPath = result > 150 ? 'A' : 'B';
+  activeSeq = [...SEQ_FULL, ...(animPath==='A'?SEQ_A:SEQ_B)];
+
+  animStep    = 0;
+  animT       = 0;
+  animRunning = true;
+  outputVal   = null;
+  roOutput.textContent = '—';
+  statusBar.textContent = '⚡ Running flowchart…';
+  statusBar.style.color = COL.gold;
+
+  computeStepResult();
+}
+
+function resetSim(){
+  animRunning = false;
+  animStep    = -1;
+  animT       = 0;
+  animPath    = null;
+  activeSeq   = [];
+  stepResults = {};
+  outputVal   = null;
+  roOutput.textContent = '—';
+  statusBar.textContent = 'Adjust sliders, then Run!';
+  statusBar.style.color = COL.gold;
+}
+
+// ── Slider listeners ──────────────────────────────────────────────────────────
+slInput.addEventListener('input', ()=>{
+  dispInput.textContent  = slInput.value;
+  roInput.textContent    = slInput.value;
+});
+slSpeed.addEventListener('input', ()=>{
+  dispSpeed.textContent  = slSpeed.value;
+  speed = parseInt(slSpeed.value);
+});
+slThresh.addEventListener('input', ()=>{
+  dispThresh.textContent = slThresh.value;
+});
+
+btnRun.addEventListener('click', runSim);
+btnReset.addEventListener('click', resetSim);
+
+// Touch support for canvas (tap nodes to highlight)
+cvs.addEventListener('pointerdown', function(e){
+  const rect = cvs.getBoundingClientRect();
+  const sx = cvs.width / rect.width;
+  const sy = cvs.height / rect.height;
+  const mx = (e.clientX - rect.left)*sx;
+  const my = (e.clientY - rect.top)*sy;
+  for(let n of NODES){
+    const b = nodeBounds(n);
+    if(mx>=b.left&&mx<=b.right&&my>=b.top&&my<=b.bottom){
+      statusBar.textContent = '🔍 '+n.type.toUpperCase()+': "'+n.label+'" — '
+        +(n.sublabel||'Endpoint');
+      statusBar.style.color = '#aac4e0';
+      break;
+    }
+  }
+});
+
+// ── Bootstrap ─────────────────────────────────────────────────────────────────
+// Resize canvas to fill available width on small screens
+function resize(){
+  const maxW = Math.min(620, window.innerWidth - 240);
+  if(window.innerWidth <= 650){
+    cvs.width  = Math.min(620, window.innerWidth - 20);
+    cvs.height = 520;
+  }
+}
+resize();
+window.addEventListener('resize', resize);
+
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+[
+  {
+    "id": "c075t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Design for Disassembly and Recycling</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored Waste Stream Management and the Circular Economy — understanding how we can reduce waste and reuse materials in God's creation. We learned that every material has a story and a potential future. Today, we're diving deeper into the Creationeering™ framework, specifically the Sustainability phase, by examining <strong>Design for Disassembly and Recycling</strong>.</p><p>This means thinking about how we build things so that they can be easily taken apart and their materials given new life when their first purpose is complete. It is about being wise stewards of the resources God has provided, just as He carefully designed the world for ongoing life and renewal.</p><p>We will explore how to design products from the very beginning with their end-of-life in mind. This approach lets us recover valuable materials, reduce environmental impact, and honor God's creation through thoughtful engineering and business practices.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define Design for Disassembly (DfD) and Design for Recycling (DfR) and explain their importance in product development.</li><li>Identify common materials and components that can be easily disassembled and recycled.</li><li>Connect macro-level product design choices to their atomic-level implications for material recovery.</li><li>Apply the Objective, Constraint, Variable (OCV) method to optimize a design for disassembly and recycling.</li><li>Understand how DfD and DfR align with biblical principles of stewardship and careful resource management.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Design for Disassembly (DfD)",
+          "definition": "An approach to product design that makes it easy to take apart components and recover materials at the end of a product's life."
+        },
+        {
+          "term": "Design for Recycling (DfR)",
+          "definition": "Designing products so that their materials can be easily processed and reused in new products."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "Meeting the needs of the present without compromising the ability of future generations to meet their own needs."
+        },
+        {
+          "term": "Waste Stream",
+          "definition": "The flow of discarded materials from consumers to disposal or recycling facilities."
+        },
+        {
+          "term": "Circular Economy",
+          "definition": "An economic system aimed at eliminating waste and the continual use of resources, contrasting with the traditional linear economy."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A method of understanding how the behavior of materials at a large scale (macro) is influenced by their properties at very small scales (atomic)."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "The goal or aim of a design problem — what you are trying to achieve."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that must be met in a design, like budget, material availability, or physical laws."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A factor in a design that can be changed or adjusted to meet objectives within constraints."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Economy of Renewal</h2><p>Our understanding of design for disassembly and recycling begins with God's own example of renewal and resourcefulness. In Genesis 6:19, God instructs Noah to bring two of every living creature into the ark — not to abandon creation, but to preserve it. God didn't simply discard what He made. He provided a way for life to be sustained, renewed, and carried forward into a new chapter.</p><p>That same mindset shapes great engineering. When a product is designed thoughtfully, its materials don't have to die in a landfill — they can be recovered, reborn, and put to use again. We, as Creationeers™, are called to plan for the continuation of materials through design that allows for reuse and renewal. Wastefulness is the opposite of stewardship. Good design, like God's design, thinks ahead.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 6:19</strong> — <em>\"And of every living thing of all flesh, two of every sort shalt thou bring into the ark, to keep them alive with thee; they shall be male and female.\"</em></p><p>God's plan for the ark wasn't just about survival — it was about preservation and a new beginning. When you design for disassembly, you're building that same kind of foresight into your products.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Design for Disassembly?</h2><p>Imagine you built a bookshelf using glue, nails, and five different types of wood all fused together. When that shelf wears out, there's no clean way to take it apart. Everything goes to the landfill as one big, unrecoverable mess. Now imagine you built the same shelf using screws, identical wood panels, and snap-fit connectors. When it reaches the end of its life, you can unscrew it in minutes, separate the materials, and send each one to be recycled. That second approach is <strong>Design for Disassembly</strong>.</p><p>Design for Disassembly (DfD) is the practice of engineering a product so that it can be taken apart quickly and cleanly at the end of its useful life. The goal is to make material recovery easy — not an afterthought. Engineers who practice DfD are thinking about the last day of a product's life on the very first day of its design.</p><h3>Key Principles of DfD</h3><ul><li><strong>Minimize fastener types</strong> — Fewer types of screws or connectors means faster disassembly.</li><li><strong>Avoid mixed-material bonds</strong> — Gluing metal to plastic makes separation nearly impossible; using mechanical fasteners keeps materials recoverable.</li><li><strong>Label materials clearly</strong> — Marking components with material codes (like the number inside the recycling triangle on plastics) helps sorters and recyclers know what they're working with.</li><li><strong>Design for access</strong> — Components that are buried deep inside a product are hard to reach and recover. Layering your design so valuable parts are accessible saves time and money during disassembly.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of two product designs: one using mixed glues and fused materials (labeled 'hard to disassemble') and one using labeled, snap-fit or screwed components of a single material type (labeled 'designed for disassembly'), with arrows showing the recycling pathway for the second design."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Design for Recycling?</h2><p>Design for Recycling (DfR) takes things one step further. It's not just about whether you <em>can</em> take a product apart — it's about whether the materials you chose in the first place are actually recyclable. You could design the most disassemble-friendly product in the world, but if every component is made of a non-recyclable composite material, none of it can be given a second life.</p><p>DfR asks engineers to select materials with the end of the product's life in mind. That means choosing materials that:</p><ul><li>Have established recycling streams (aluminum, steel, certain plastics, glass, and cardboard all have strong recycling infrastructure).</li><li>Are not contaminated or mixed in ways that make reprocessing expensive or impossible.</li><li>Retain useful properties after recycling — aluminum, for example, can be melted and reformed almost indefinitely without losing strength.</li></ul><p>Together, DfD and DfR form a powerful partnership. DfD makes sure the materials <em>can</em> be separated. DfR makes sure those materials <em>are worth</em> separating.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Connecting the Macro to the Atomic</h2><p>Here's where things get really interesting. Every design decision you make at the big, visible scale — what material to use, how to join two parts, how thick to make a wall — has consequences all the way down to the atomic level. This is what <strong>multiscale modeling</strong> helps engineers understand.</p><p>Take a simple example: a plastic water bottle. At the macro scale, it looks like one smooth piece of material. But at the molecular scale, that plastic is made of long chains of carbon atoms bonded together in a specific pattern. The type of plastic — whether it's HDPE, PET, or polypropylene — determines how those chains are arranged, and that determines whether the material can be melted and reformed cleanly or whether it degrades when reprocessed.</p><p>When you choose PET plastic (the kind marked with a #1 recycling symbol) for a bottle, you're making a macro-level decision that has real atomic-level payoffs: PET has a clean melting point, it doesn't release harmful gases when recycled, and the molecular chains survive reprocessing well. That's a material chosen with DfR in mind all the way down to its chemistry.</p><p>The takeaway? Great sustainable design isn't just about what something looks like or how it functions on day one. It's about understanding the full story of your materials — from the atoms up.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing three scales of a plastic bottle: the macro view (full bottle), a cross-section showing material layers, and a molecular diagram of polymer chains, with labels explaining how macro design choices affect atomic-level recyclability."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Sustainable Design</h2><p>You've already learned about the <strong>Objective, Constraint, Variable (OCV)</strong> method as a tool for structured engineering thinking. It's one of the most useful frameworks you have, and it applies perfectly to designing for disassembly and recycling. Let's walk through how.</p><h3>Define Your Objective</h3><p>Your objective is your goal — what a successful design looks like. In DfD and DfR, objectives might sound like:</p><ul><li>\"Maximize the percentage of product components that are recoverable at end-of-life.\"</li><li>\"Minimize the time required to fully disassemble the product into sortable materials.\"</li><li>\"Ensure 90% of material by weight is recyclable through existing infrastructure.\"</li></ul><h3>Identify Your Constraints</h3><p>Constraints are the rules you can't break. They box in your design space. For sustainable design, constraints often include:</p><ul><li>Budget limits on materials (recycled-content materials can cost more upfront).</li><li>Regulatory requirements (some industries are legally required to use certain materials or labeling).</li><li>Structural requirements (the product still has to actually work and be safe).</li><li>Manufacturing capabilities (can your factory actually produce this design?).</li></ul><h3>Adjust Your Variables</h3><p>Variables are the knobs you can turn — the choices within your control. For DfD and DfR, your variables might be:</p><ul><li>Type of fastener (screws vs. glue vs. snap-fits).</li><li>Material selection (aluminum vs. mixed composite vs. recycled-content plastic).</li><li>Number of unique part types (fewer types = easier sorting).</li><li>Product layer order (which components are accessible first during disassembly).</li></ul><p>By clearly separating what you're trying to achieve (Objective), what you can't change (Constraints), and what you can adjust (Variables), you can make smarter, more sustainable design decisions — and defend them with clear engineering reasoning.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in action:</strong> When you're working on a design challenge, write out your Objective, Constraints, and Variables before you start sketching. This prevents you from accidentally designing yourself into a corner — like choosing a material that meets your performance goal but can't be recycled. Thinking in OCV from the start saves you from expensive redesigns later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>DfD and DfR in the Real World</h2><p>These aren't just classroom ideas — engineers and companies around the world are already applying these principles. Here are a few examples worth knowing:</p><ul><li><strong>Smartphones</strong> — Some manufacturers now design phones with replaceable batteries and modular components, making it easier to repair, upgrade, or recycle individual parts rather than discarding the entire device.</li><li><strong>Aluminum cans</strong> — Aluminum is one of the best examples of DfR in action. It can be recycled indefinitely without losing quality, and the recycling process uses only about 5% of the energy required to produce new aluminum from raw ore. Choosing aluminum is a DfR decision.</li><li><strong>Furniture</strong> — Flat-pack furniture held together with screws and bolts (rather than glue) is a classic DfD design. When it wears out, the wood panels can be separated and recycled or composted.</li><li><strong>Automobiles</strong> — Modern cars are designed so that up to 85% of their material by weight can be recovered and recycled. Engineers use material labeling on plastics and design the frame so metals can be efficiently separated in a shredder.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Many students assume that if something is labeled \"recyclable,\" it will actually be recycled. Not always true. A material can be technically recyclable but still end up in a landfill if it's contaminated, mixed with non-recyclable parts, or if no local recycling facility accepts it. Great DfR design accounts for the real-world recycling infrastructure that exists — not just the ideal one.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Smart Design</h2><p>At its heart, Design for Disassembly and Recycling is an act of stewardship. When you build something with its end-of-life in mind, you're saying: <em>the materials in this product are valuable, and they deserve to be honored even after I'm done using them.</em> That's a deeply biblical posture toward creation.</p><p>Proverbs 12:27 says, <em>\"The lazy do not roast any game, but the diligent feed on the riches of the hunt.\"</em> The diligent engineer doesn't waste valuable materials by designing products that can't be recovered. Instead, they think carefully, plan wisely, and build in a way that preserves the value of what God has given us. Every screw you choose over glue, every clearly labeled plastic, every modular component — these are small decisions that add up to a big statement about how you see the world and your responsibility in it.</p><p>That's the spirit of Creationeering™: using your engineering skills not just to solve today's problem, but to leave the world in better shape for the people and generations that come after you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular diagram showing the product life cycle with DfD and DfR labels at each stage: Design, Manufacture, Use, Disassembly, Material Recovery, and back to Design — illustrating how thoughtful design keeps materials in circulation."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c075a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Extended Producer Responsibility",
+      "html": "<p><strong>Extended Producer Responsibility (EPR)</strong> is a policy approach where the company that makes a product is legally responsible for what happens to it at the end of its life — not just the consumer. This is already law in many countries for products like electronics, batteries, and packaging.</p><p>From a business perspective, EPR changes the economics of design. If you know your company will have to pay for the recycling of every product you sell, you have a strong financial reason to design products that are cheap and easy to recycle. This aligns profit motive with environmental stewardship — a powerful combination.</p><p>Some companies go further and offer <strong>take-back programs</strong>, where customers can return old products directly to the manufacturer for disassembly and material recovery. This closes the loop completely and keeps valuable materials out of the waste stream.</p><p>As a future Creationeer, understanding EPR helps you see that sustainable design isn't just the right thing to do — it's increasingly the smart business thing to do as well.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

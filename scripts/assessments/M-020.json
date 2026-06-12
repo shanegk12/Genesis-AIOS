@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-020",
+  "topic": "Build 3: CAD Analysis of Design Parameters",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of the One Factor at a Time (OFAT) strategy used in the Mark 1 phase of the Mousetrap Vehicle project?",
+      "options": {
+        "A": "To combine verified findings into a physical prototype.",
+        "B": "To isolate and study individual variables.",
+        "C": "To adjust thousands of iterations in minutes.",
+        "D": "To identify the Pareto Frontier."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that OFAT was used to 'isolate and study individual variables' to establish a scientific Ground Truth."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the main challenge with physical prototyping that the Digital Twin aims to overcome?",
+      "options": {
+        "A": "Difficulty in finding suitable testing locations.",
+        "B": "Limitations due to time and resource availability.",
+        "C": "The inability to measure macro-level results.",
+        "D": "Lack of creative design ideas."
+      },
+      "answer": "B",
+      "explanation": "The lesson explicitly states, 'The challenge with physical prototyping is time and resource limitations.'"
+    },
+    {
+      "type": "recall",
+      "question": "Which biblical verse is cited in the lesson as a parallel to seeking 'great and hidden things' through computational modeling?",
+      "options": {
+        "A": "Matthew 25:14–30.",
+        "B": "Colossians 1:17.",
+        "C": "Jeremiah 33:3.",
+        "D": "Proverbs 3:5-6."
+      },
+      "answer": "C",
+      "explanation": "The lesson directly quotes Jeremiah 33:3 in the context of revealing optimal design through the simulator."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does the Digital Twin eliminate the 'Measurement Constraint' that limits physical builds?",
+      "options": {
+        "A": "It allows for more precise physical measurements using advanced sensors.",
+        "B": "It is a perfect, mathematical representation based on scientific laws, free from uncontrollable variables.",
+        "C": "It focuses only on macro-level results, ignoring microscopic flaws.",
+        "D": "It requires less time for physical disassembly and re-assembly."
+      },
+      "answer": "B",
+      "explanation": "The Digital Twin eliminates measurement constraints by being a perfect mathematical model based on scientific laws, unlike physical builds affected by uncontrollable variables."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is the Rapid Iteration cycle in a Digital Twin described as 'nearly instantaneous' compared to the physical iteration cycle?",
+      "options": {
+        "A": "It completely replaces the need for any physical work.",
+        "B": "It involves instant adjustments, simulations, and result readings rather than slow physical build and refine steps.",
+        "C": "It only tests one variable at a time, making it faster.",
+        "D": "It doesn't require any analysis of the results."
+      },
+      "answer": "B",
+      "explanation": "The Digital Twin's rapid iteration cycle is instantaneous because it involves quick slider adjustments, simulations, and result readings, unlike the slow physical build-test-analyze-refine cycle."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the relationship between the physical knowledge gained from Mark 1 and Mark 2 builds and the use of the Computational Mousetrap Car Model?",
+      "options": {
+        "A": "The computational model replaces all physical knowledge, making it obsolete.",
+        "B": "The computational model is entirely separate and does not use physical data.",
+        "C": "The computational model synthesizes physical knowledge by using observed data for its heavy computations.",
+        "D": "Physical knowledge is only used to understand the limitations of the digital model."
+      },
+      "answer": "C",
+      "explanation": "The lesson states the Digital Twin is the 'Synthesis of your physical knowledge,' where you input observed physical data for the computer's computations."
+    },
+    {
+      "type": "application",
+      "question": "A team wants to test 50 different wheel diameters for their mousetrap car to find the most efficient one. Based on the lesson, which method would be the most efficient for this task?",
+      "options": {
+        "A": "Using the One Factor at a Time (OFAT) strategy with physical prototypes.",
+        "B": "Building 50 different physical cars and testing them individually.",
+        "C": "Manipulating variables within a Computational Mousetrap Car Model.",
+        "D": "Relying solely on theoretical calculations without any testing."
+      },
+      "answer": "C",
+      "explanation": "The Digital Twin allows for thousands of iterations in minutes, making it ideal for efficiently testing many variables like wheel diameters."
+    },
+    {
+      "type": "application",
+      "question": "An engineer needs to quickly determine the optimal combination of several design variables for a new product without wasting expensive materials. Which tool from the lesson would be most appropriate for this goal?",
+      "options": {
+        "A": "Constructing multiple physical prototypes for trial and error.",
+        "B": "Conducting a single, carefully planned physical experiment.",
+        "C": "Utilizing a Digital Twin in a Computer-Aided Design (CAD) or simulation program.",
+        "D": "Consulting with other engineers without any practical testing."
+      },
+      "answer": "C",
+      "explanation": "A Digital Twin minimizes resource waste and allows for rapid iteration to find optimal designs without the need for costly physical builds."
+    },
+    {
+      "type": "application",
+      "question": "A student has carefully measured the actual force of their specific mousetrap spring during a physical test. To get the most accurate results from the Computational Mousetrap Car Model, what should they do with this measurement?",
+      "options": {
+        "A": "Ignore it, as the digital model uses its own default spring force.",
+        "B": "Use it to build another physical prototype for comparison.",
+        "C": "Input the measured spring force into the Digital Twin simulation.",
+        "D": "Only use it to calculate the theoretical maximum distance."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that you should 'input the data and characteristics you observed in your physical builds' into the computer for accurate simulation."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does using a Digital Twin for rapid iteration align with the principle of acting as a 'responsible Steward of the Joule' and God-given resources?",
+      "options": {
+        "A": "It encourages building more physical prototypes to gain experience.",
+        "B": "It minimizes resource waste by reducing the need for physical materials and time.",
+        "C": "It focuses solely on maximizing speed, regardless of material cost.",
+        "D": "It replaces the need for any human intellect or decision-making."
+      },
+      "answer": "B",
+      "explanation": "The Digital Twin minimizes resource waste by reducing the need for physical materials and time, thus conserving energy and resources, which aligns with responsible stewardship."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that the Master Creator's wisdom is reflected in constant and predictable laws of physics. How does manipulating variables in the Digital Twin allow us to 'emulate this divine precision'?",
+      "options": {
+        "A": "By replacing physical laws with entirely new computational rules.",
+        "B": "By using mathematical models based on these constant physical laws to find optimal designs, rather than inefficient guesswork.",
+        "C": "By allowing for random adjustments until a successful design is found.",
+        "D": "By ignoring the limitations of physical reality in the simulation."
+      },
+      "answer": "B",
+      "explanation": "Emulating divine precision means using the predictable physical laws God established, which the Digital Twin does through mathematical models to find optimal solutions without guesswork."
+    },
+    {
+      "type": "synthesis",
+      "question": "Connecting the concept of the Pareto Frontier (the sweet spot of maximum efficiency) with biblical stewardship, why is identifying this point important for a Creationeer?",
+      "options": {
+        "A": "It allows for the use of unlimited resources without consequence.",
+        "B": "It ensures that resources are used optimally to achieve the best possible outcome, reflecting responsible management of God-given talents and materials.",
+        "C": "It prioritizes speed and distance above all other design considerations.",
+        "D": "It encourages ignoring the physical limitations of the mousetrap car."
+      },
+      "answer": "B",
+      "explanation": "Identifying the Pareto Frontier ensures optimal resource utilization for the best outcome, which is a core aspect of responsible stewardship of God-given resources and talents."
+    }
+  ]
+}

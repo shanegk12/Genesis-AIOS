@@ -1,0 +1,277 @@
+[
+  {
+    "id": "c087t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Recycling Logistics and Infrastructure</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Data Security and System Wipe — the responsible way to handle information when a system reaches the end of its life. Today, we go one step further and ask: what happens to the physical materials after a product is done? That question takes us deep into the Creationeering™ phase of <strong>Death &amp; Recycling</strong>.</p>\n<p>This lesson focuses on <strong>Recycling Logistics and Infrastructure</strong> — the complex network of people, machines, and processes that give materials a second life. You will trace how materials are collected, sorted, and moved through a system designed to reduce waste. Along the way, you will see how engineering tools like multiscale modeling help us optimize that system, and why responsible recycling is one of the most practical expressions of biblical stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p>\n<ul>\n<li>Define recycling logistics and infrastructure within the Creationeering™ framework.</li>\n<li>Identify the key steps involved in the recycling process.</li>\n<li>Understand the importance of efficient material flow in recycling systems.</li>\n<li>Explain how multiscale modeling helps optimize recycling processes, from large-scale collection down to atomic-level material separation.</li>\n<li>Propose improvements to a recycling system, connecting engineering optimization with biblical principles of wise stewardship.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Recycling",
+          "definition": "Converting waste materials into new materials and objects, giving them a second useful life."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and coordination of a complex operation, like collecting and moving materials from place to place."
+        },
+        {
+          "term": "Infrastructure",
+          "definition": "The basic physical systems and facilities — roads, facilities, equipment — that make an operation possible."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Using different levels of detail to understand a system, from large-scale observations all the way down to the smallest parts."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "The desired outcome or goal of a design or process."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that must be considered when designing a process or solution."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A factor that can change and influence the outcome of a design or process."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution under a given set of conditions and constraints."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible oversight and care of something valuable — including the Earth's resources."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Dust to Dust — and Back Again</h2>\n<p>Long before engineers designed recycling facilities, God built recycling into creation itself. Ecclesiastes 1:4–7 describes the endless cycles of nature: generations come and go, the sun rises and sets, winds circle the earth, and rivers pour into the sea only to rise again as rain. Nothing is truly lost — it is transformed.</p>\n<p>That same rhythm is the heartbeat of recycling engineering. When a product reaches the end of its useful life, the materials it is made from do not have to disappear into a landfill. With the right systems in place, aluminum becomes a new can, plastic becomes new packaging, and glass becomes new bottles. Creation keeps moving forward.</p>\n<p>This is not just good science — it is faithful stewardship. God entrusted us with the Earth's resources, and part of honoring that trust is designing systems that waste as little as possible. Recycling logistics is one of the most practical ways engineers live out that calling every single day.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ecclesiastes 1:4–7</strong> — <em>\"Generations come and generations go, but the earth remains forever. The sun rises and the sun sets... The wind blows to the south and turns to the north; round and round it goes, ever returning on its course. All the streams run to the sea, yet the sea is never full; to the place where the streams flow, there they flow again.\"</em></p>\n<p>God designed creation with renewal built in. As engineers, we are called to mirror that design — building systems that return materials to usefulness rather than sending them to waste.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Recycling Journey: Step by Step</h2>\n<p>Recycling is far more than tossing something into a blue bin. It is a carefully engineered system — a pipeline for materials, not so different from an assembly line running in reverse. Every step must work smoothly for the whole system to succeed.</p>\n<h3>Step 1: Collection</h3>\n<p>The journey starts at your front door. Trucks, drop-off centers, and public bins gather discarded materials from homes, businesses, and public spaces. The design of a collection system matters enormously. If it is too inconvenient, people will not participate. If routes are inefficient, fuel and time are wasted. Engineers who design collection systems think carefully about <strong>logistics</strong> — getting the right materials to the right place at the right time.</p>\n<h3>Step 2: Transportation</h3>\n<p>Once collected, materials must be moved to a processing facility. This sounds simple, but it is a serious engineering challenge. Heavy loads of mixed waste travel on roads and highways. The <strong>infrastructure</strong> — roads, bridges, and vehicles — must be capable of handling that load reliably. A broken-down truck or a backed-up route can disrupt the entire downstream system.</p>\n<h3>Step 3: Sorting</h3>\n<p>At a Materials Recovery Facility (MRF, pronounced \"murf\"), mixed recyclables are separated by material type — paper, glass, aluminum, plastic. Some sorting is done by hand; more and more is done by machines using magnets, air jets, and optical sensors. Getting this step right is critical. Contaminated batches — for example, glass mixed into paper — can ruin an entire load and send it to a landfill anyway.</p>\n<h3>Step 4: Processing and Remanufacturing</h3>\n<p>Sorted materials are then cleaned, shredded, melted, or reformed into raw material that manufacturers can use again. Aluminum cans are melted into ingots. Plastic bottles are shredded into flakes. Paper is pulped. Each material type has its own process. The goal is to produce a clean, consistent output that meets the quality standards of whoever buys it next.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the four-step recycling journey: Collection (curbside bins and trucks) → Transportation (route map to facility) → Sorting (conveyor belts with material types separated) → Processing and Remanufacturing (shredding/melting into raw materials)"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture and the Small Details: Multiscale Modeling</h2>\n<p>Here is a challenge every recycling engineer faces: the system they are trying to optimize operates at many different scales at the same time. A city-wide collection network might span hundreds of square miles. The chemical separation happening inside a processing machine happens at the molecular level. How do you design and improve something that exists at both extremes?</p>\n<p>The answer is <strong>multiscale modeling</strong>. Think of it like using both a satellite map and a microscope — each tool reveals something the other cannot. Multiscale modeling means engineers build separate models for each level of detail and then connect them together.</p>\n<h3>The Three Scales of a Recycling System</h3>\n<ul>\n<li><strong>Macroscale</strong> — The big picture. City maps, truck routes, facility locations, and collection schedules. Engineers use data at this scale to reduce driving distances, balance workloads, and cut fuel costs.</li>\n<li><strong>Mesoscale</strong> — The facility level. Conveyor belt speeds, sorter machine settings, throughput rates. Engineers model how materials flow through a building and look for bottlenecks — places where the system slows down unnecessarily.</li>\n<li><strong>Microscale / Atomic Scale</strong> — The material level. How do different types of plastic respond to heat? At what temperature does aluminum melt cleanly? What chemical processes separate mixed materials most efficiently? Models at this scale inform how processing equipment is designed and operated.</li>\n</ul>\n<p>By connecting all three levels, engineers can make changes at one scale and predict how they ripple through the rest of the system. That is powerful — and it reflects the kind of careful, thorough thinking that good stewardship requires.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A three-panel graphic illustrating multiscale modeling in recycling: left panel shows a city map with truck routes (macroscale), center panel shows a facility floor plan with conveyor belts (mesoscale), right panel shows a molecular diagram of material separation (microscale/atomic scale)"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing with OCV: Objectives, Constraints, and Variables</h2>\n<p>Every engineering improvement is really an optimization problem — finding the best answer within real-world limits. Recycling engineers use the <strong>OCV framework</strong> to think through that challenge clearly.</p>\n<h3>Objective</h3>\n<p>What are you trying to achieve? For a recycling system, common objectives include maximizing the amount of material recovered, minimizing cost, reducing carbon emissions from transportation, or increasing the purity of sorted materials. You have to be specific. \"Better recycling\" is too vague. \"Increase aluminum recovery rate from 72% to 90% within two years\" is an objective you can actually engineer toward.</p>\n<h3>Constraints</h3>\n<p>What limitations must your design work within? Budget caps, existing road networks, facility square footage, local regulations, and community participation rates are all constraints. They are not excuses — they are the real conditions of the problem. A good engineer does not ignore constraints; they design around them creatively.</p>\n<h3>Variables</h3>\n<p>What can you actually change? Truck routes, sorting machine speeds, processing temperatures, collection schedules, and public education campaigns are all variables. Changing a variable affects your objective — sometimes positively, sometimes with trade-offs. Multiscale modeling helps you predict those trade-offs before you commit to a change in the real world.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Using OCV to solve problems:</strong> When you are analyzing a recycling system — or any engineering system — start by writing down the Objective, Constraints, and Variables before you try to solve anything. Getting these three things clear at the start will save you a lot of confusion later. It is the difference between a plan and a guess.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Infrastructure Makes or Breaks the System</h2>\n<p>You can design the most efficient sorting algorithm in the world, but if the trucks cannot reach the facility because the roads are too narrow — or if the facility does not exist in a community at all — the system fails before it starts. That is why <strong>infrastructure</strong> is not a background detail; it is a core engineering concern.</p>\n<p>Recycling infrastructure includes:</p>\n<ul>\n<li>Collection bins and drop-off locations placed where people actually are</li>\n<li>Roads and transportation networks capable of handling heavy vehicles</li>\n<li>Materials Recovery Facilities with properly maintained equipment</li>\n<li>Markets for the recovered materials — buyers who will actually purchase the aluminum, plastic, and paper</li>\n<li>Workforce training so that every person in the system knows their role and performs it well</li>\n</ul>\n<p>When any one of these components is missing or underfunded, the whole pipeline suffers. This is a systems thinking lesson as much as a recycling lesson: a chain is only as strong as its weakest link. Responsible stewardship means investing in the whole system, not just the visible parts.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common misconception:</strong> Many people assume that if they put something in the recycling bin, it gets recycled. In reality, contamination (putting the wrong materials in), poor sorting, or lack of a buyer for a material type can result in recyclables going straight to a landfill. Good design alone is not enough — the entire infrastructure must function together.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Action</h2>\n<p>Recycling logistics is one of the clearest examples of stewardship turned into engineering. When you design a better truck route, you reduce fuel burned. When you improve sorting accuracy, you save more material from the landfill. When you optimize processing temperatures, you reduce energy use. Every improvement has a real impact on the world God entrusted to us.</p>\n<p>That is the heart of the Creationeering™ Death &amp; Recycling phase. It is not enough to build something great and then walk away. Responsible creation means thinking ahead — designing products that can be recovered, building systems that make recovery efficient, and caring for the Earth's resources as if they belong to someone important. They do.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c087a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Advanced Recycling Technologies",
+      "html": "<p>Traditional mechanical recycling — sorting, shredding, melting — works well for many materials but has limits. Some materials are too mixed or too degraded to recover mechanically. That is where advanced recycling technologies come in.</p>\n<ul>\n<li><strong>Chemical Recycling</strong> — Uses chemical reactions to break polymers (plastics) back down into their base molecules, which can then be rebuilt into new plastic. This works on materials that mechanical recycling cannot handle.</li>\n<li><strong>Hydrometallurgy</strong> — Uses water-based chemistry to extract valuable metals from electronic waste (e-waste) like circuit boards and batteries.</li>\n<li><strong>Pyrolysis</strong> — Heats materials in the absence of oxygen to break them into gases and oils that can be used as fuel or chemical feedstocks.</li>\n</ul>\n<p>These technologies are still scaling up, but they represent the frontier of recycling engineering. Multiscale modeling is especially important here — understanding the chemistry at the molecular level is essential for designing reactors that work efficiently at industrial scale.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

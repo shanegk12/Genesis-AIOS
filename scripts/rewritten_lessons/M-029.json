@@ -1,0 +1,296 @@
+[
+  {
+    "id": "m029t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Precision Finishing and Tolerance</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson you made sure every part for your mousetrap car was present and accounted for. Now comes the next challenge — making sure those parts actually <em>fit together</em> the right way. This lesson is all about precision finishing and tolerance, two concepts that sit at the heart of good mechanical assembly.</p><p>We are moving into the Assembly phase of Creationeering, where individual components become a complete, working machine. Small details matter here. Think about trying to run a race wearing shoes that are two sizes too big — you would lose energy, slow down, and probably trip. The same thing happens inside your mousetrap car when parts do not fit correctly. By understanding how to refine your components and manage allowable variation, you can reduce friction, improve smoothness, and get the best performance out of every piece you built.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define precision finishing and explain why it matters in mechanical assembly.</li><li>Understand the concept of tolerance in manufacturing and its role in ensuring parts fit correctly.</li><li>Identify areas on their mousetrap car where precision finishing and tolerance adjustments can improve performance.</li><li>Apply the Objective, Constraint, Variable (OCV) method to make informed decisions about part finishing and fit.</li><li>Recognize the biblical principle of stewardship by pursuing excellence and durability in their builds.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Precision",
+          "definition": "The quality of being exact, accurate, and carefully made."
+        },
+        {
+          "term": "Finishing",
+          "definition": "The process of improving the surface quality, appearance, or function of a manufactured part."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable amount of variation in a dimension or size of a part from its specified value."
+        },
+        {
+          "term": "Fit",
+          "definition": "How well two or more mating parts join or work together, affecting their function and movement."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that resists motion when two surfaces rub against each other, converting energy into heat."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The Creationeering phase where individual components are joined together to form a complete system."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A way of understanding how properties at one scale (like a car's speed) are influenced by phenomena at smaller scales (like surface roughness or atomic interactions)."
+        },
+        {
+          "term": "Objective, Constraint, Variable (OCV)",
+          "definition": "A structured design decision-making method that identifies what you want to achieve (Objective), your limitations (Constraint), and the factors you can adjust (Variable)."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Precision — A Blueprint for Your Build</h2><p>When you study creation — from the way planets orbit in predictable paths to the way proteins fold inside a single cell — you see a Designer who never cuts corners. Every structure fits its purpose exactly. The Bible captures this in Genesis 1:31: <em>\"Then God saw everything that He had made, and indeed it was very good.\"</em> That phrase <em>very good</em> is not just about appearance. It means optimal fit, zero wasted energy, and flawless function.</p><p>You are made in that same image. When you take the time to sand a rough axle, align a wheel carefully, or measure twice before cutting, you are reflecting the character of a God who does things with intention and care. Precision is not perfectionism for its own sake — it is stewardship. It means honoring the materials, the time, and the design you have been given.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:31 (KJV)</strong> — \"Then God saw everything that He had made, and indeed it was very good.\" God's creation is the ultimate example of precision engineering — every part fits its purpose perfectly. Strive for that same standard in your own work.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Precision Finishing?</h2><p>Precision finishing is everything you do to a part <em>after</em> the basic shape is made. It might mean sanding a rough edge so it slides smoothly, straightening a bent axle so it spins true, or trimming a piece so it seats firmly without wobbling. The goal is always the same: bring the part as close as possible to its ideal form so the whole system works better.</p><p>Think of a door in a well-built house. When the carpenter gets the dimensions exactly right, the door swings open easily and closes with a satisfying click. Shave off too much wood and there is a gap that lets in drafts. Leave too much and the door sticks. Mousetrap car components work the same way. A wheel hub that is too tight on its axle will bind and rob you of distance. One that is too loose will wobble and waste energy sideways instead of forward.</p><h3>Why Surface Quality Matters</h3><p>Surface roughness is one of the biggest hidden sources of friction in small vehicles. Even surfaces that look smooth to the naked eye have tiny peaks and valleys at the microscopic level. When two rough surfaces grind against each other, those peaks catch, slow the part down, and turn kinetic energy into heat instead of forward motion. This is where multiscale modeling comes in — understanding that what you see at the car level is shaped by what is happening at a much smaller scale on each surface.</p><p>A quick pass with fine-grit sandpaper, a small amount of lubricant on an axle, or straightening a bent component can reduce that microscopic friction dramatically. Small changes at the surface level produce big changes in overall performance.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A close-up cross-section diagram showing two surfaces in contact — one rough and one polished — with arrows indicating friction force and heat generation on the rough surface versus smooth rolling on the polished surface."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Tolerance</h2><p>No manufacturing process is perfect. Even the most careful cut will be slightly off. Tolerance is the engineering term for the acceptable range of that variation. Instead of saying a part must be <em>exactly</em> 50 mm long, an engineer might specify 50 mm ± 0.5 mm — meaning anywhere between 49.5 mm and 50.5 mm is fine.</p><p>Why does this matter for your mousetrap car? Because when you are hand-cutting balsa wood, drilling holes for axles, or shaping wheel hubs, small inconsistencies are unavoidable. The question is not whether variation exists — it always does — but whether that variation is within a range that still allows the parts to fit and function correctly.</p><h3>Three Types of Fit</h3><p>Engineers describe how two parts relate to each other using three categories of fit:</p><ul><li><strong>Clearance fit</strong> — there is always a gap between the parts, allowing free movement (like an axle that spins freely inside a bearing hole).</li><li><strong>Interference fit</strong> — the parts are forced together slightly, creating a tight, permanent join (like a wheel pressed firmly onto a shaft so it cannot slip).</li><li><strong>Transition fit</strong> — the fit could be either a slight gap or a slight interference depending on where within tolerance each part lands.</li></ul><p>For most mousetrap car axles and wheels, you want a <strong>clearance fit</strong> at the axle-to-bearing interface so the wheel spins freely, and an <strong>interference fit</strong> at the wheel-to-hub interface so the wheel does not slip when the spring releases its energy.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying OCV to Finishing Decisions</h2><p>Every time you decide whether to sand, trim, or adjust a part, you are making a design decision. The Objective, Constraint, Variable (OCV) method gives you a structured way to think through that decision instead of just guessing.</p><ul><li><strong>Objective</strong> — What do you want to achieve? (e.g., minimize friction at the axle so the car rolls farther)</li><li><strong>Constraint</strong> — What limits do you have to work within? (e.g., the axle must still be strong enough not to snap; you only have a certain amount of material left)</li><li><strong>Variable</strong> — What can you actually change? (e.g., the diameter of the axle hole, the surface finish on the axle rod, the type of lubricant used)</li></ul><p>Walking through OCV before you start sanding or trimming prevents you from over-finishing a part — removing so much material that you weaken it — or under-finishing it and leaving unnecessary roughness. It keeps your decisions intentional rather than random.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake: Over-finishing.</strong> More sanding is not always better. Removing too much material from an axle can make it too thin and weak, causing it to flex or break under load. Always define your target dimension first, then work toward it in small steps — measuring as you go.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Finding Precision Opportunities on Your Mousetrap Car</h2><p>Now that you understand the concepts, here is how to put them to work on your actual build. Walk through each major interface on your car and ask: <em>Does this fit the way it should?</em></p><h3>Axles and Bearings</h3><p>Spin each axle by hand. It should rotate smoothly with minimal resistance. If it feels rough or catches, the hole may need to be slightly enlarged, or the axle itself may need a light sanding to remove burrs. A tiny amount of lubricant — like petroleum jelly or machine oil — applied to the axle where it contacts the frame can reduce friction significantly.</p><h3>Wheels and Hubs</h3><p>Each wheel should be perpendicular to its axle (90 degrees). A wheel that is angled even slightly will generate sideways drag, pulling the car off course and wasting energy. Check alignment by rolling the car slowly on a flat surface and watching whether it tracks straight.</p><h3>The Mousetrap Lever Arm</h3><p>The connection between the mousetrap spring arm and the drive string is a critical interface. Any slop or wobble here translates directly into lost energy. Make sure the attachment point is secure and that the string wraps cleanly around the axle without bunching.</p><h3>Frame and Body</h3><p>Check that all glued or fastened joints are fully cured and solid. A frame that flexes under load absorbs energy that should be going into forward motion. Reinforce any joints that feel soft or springy.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram of a mousetrap car with callout arrows pointing to key precision check locations: axle-to-bearing interface, wheel perpendicularity, spring arm attachment point, and frame joints."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Excellence as Stewardship</h2><p>It can be tempting to rush through the finishing stage. You have already built the car — why spend more time fussing over tiny details? Here is the answer: the same energy stored in that mousetrap spring will be released whether you finished carefully or not. The only difference is how much of that energy actually moves the car forward versus getting lost to friction, wobble, and vibration.</p><p>Precision finishing is stewardship of energy. It is honoring the work you have already done by making sure it performs to its full potential. Proverbs 12:27 reminds us that <em>\"the precious possession of a man is diligence.\"</em> Diligence is not just working hard — it is working carefully, all the way to the end.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Before you move to final assembly:</strong> Use a checklist approach. Go through each interface on your car one at a time — axles, wheels, lever arm, frame joints. Test each one, apply the OCV method if something feels off, make your adjustment, and test again. Systematic finishing catches problems that a quick glance will miss.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Takeaways</h2><ul><li><strong>Precision finishing</strong> refines parts after they are made — smoothing surfaces, aligning components, and removing imperfections that cause friction or poor fit.</li><li><strong>Tolerance</strong> defines the acceptable range of variation for a dimension. Parts do not need to be perfect, but they do need to fall within the range that allows the system to work correctly.</li><li><strong>Fit type matters</strong> — use clearance fits where parts need to move freely (axle in bearing) and interference fits where parts must stay locked together (wheel on hub).</li><li><strong>OCV thinking</strong> keeps your finishing decisions intentional: define your objective, acknowledge your constraints, and choose the variable to adjust.</li><li>Attention to detail at the assembly stage is an act of stewardship — honoring your design by making it perform to its full potential.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m029a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is tolerance, and why is it important?</strong><br>Tolerance is the allowable range of variation in a part's dimensions. It matters because real manufacturing always produces slight variation — tolerance defines how much variation is acceptable before a part no longer fits or functions correctly.</p><p><strong>2. What is the difference between a clearance fit and an interference fit?</strong><br>A clearance fit always has a small gap between parts, allowing free movement (good for spinning axles). An interference fit is slightly oversized so parts are pressed together and locked (good for wheels that must not slip on their hubs).</p><p><strong>3. How does surface roughness affect your mousetrap car's performance?</strong><br>Rough surfaces have microscopic peaks that catch against each other, creating friction. Friction converts forward motion energy into heat instead, slowing the car and reducing distance. Smoother surfaces and lubrication reduce this energy loss.</p><p><strong>4. How does OCV help you make finishing decisions?</strong><br>OCV gives you a framework: identify what you want (Objective), what you cannot change (Constraint), and what you can adjust (Variable). This prevents random guessing and helps you make changes that actually address the root cause of a problem.</p><p><strong>5. How does precision finishing connect to biblical stewardship?</strong><br>Stewardship means managing what you have been given with care and intention. Taking time to properly finish your car honors the materials, effort, and design already invested — and reflects God's own standard of making things that are \"very good.\"</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

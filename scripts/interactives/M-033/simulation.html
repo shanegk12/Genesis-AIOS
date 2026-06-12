@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Car Assembly Order</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 24px 14px;
+    text-align: center;
+  }
+
+  header .course-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #C9A84C;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  header p {
+    font-size: 0.82rem;
+    color: #cdd8e6;
+    margin-top: 5px;
+  }
+
+  #main-card {
+    background: #fff;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.10);
+    padding: 24px 20px 28px;
+  }
+
+  /* ---- INTRO SCREEN ---- */
+  #intro-screen { text-align: center; }
+  #intro-screen h2 { font-size: 1.2rem; color: #1B3A5C; margin-bottom: 10px; }
+  #intro-screen p { font-size: 0.92rem; color: #3a5272; line-height: 1.6; margin-bottom: 14px; }
+
+  .gold-btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .gold-btn:hover { background: #b5923e; transform: translateY(-1px); }
+  .gold-btn:active { transform: translateY(0); }
+
+  /* ---- GAME SCREEN ---- */
+  #game-screen { display: none; }
+
+  .progress-bar-wrap {
+    background: #e8edf4;
+    border-radius: 20px;
+    height: 8px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 8px;
+    background: #C9A84C;
+    border-radius: 20px;
+    transition: width 0.4s;
+  }
+
+  .round-label {
+    font-size: 0.78rem;
+    color: #C9A84C;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .hint-text {
+    font-size: 0.82rem;
+    color: #5a7296;
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+
+  /* Sort zone */
+  .sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .step-tile {
+    background: #f7f9fc;
+    border: 2px solid #d0daea;
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.15s, border-color 0.15s, background 0.15s;
+    touch-action: none;
+  }
+
+  .step-tile:hover { border-color: #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,0.15); }
+  .step-tile.dragging { opacity: 0.45; border-color: #C9A84C; }
+  .step-tile.drag-over { border-color: #1B3A5C; background: #eef3fa; box-shadow: 0 0 0 3px rgba(27,58,92,0.12); }
+
+  .tile-num {
+    background: #1B3A5C;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tile-text {
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .drag-handle {
+    margin-left: auto;
+    color: #b0bec5;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .check-btn {
+    background: #1B3A5C;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+  }
+  .check-btn:hover { background: #27527f; }
+
+  /* Feedback banner */
+  .feedback-banner {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback-banner.correct {
+    background: #e6f4ea;
+    border: 1.5px solid #4caf50;
+    color: #1b5e20;
+    display: block;
+  }
+  .feedback-banner.incorrect {
+    background: #fff3e0;
+    border: 1.5px solid #ff9800;
+    color: #7a3e00;
+    display: block;
+  }
+
+  .tile-correct { border-color: #4caf50 !important; background: #e6f4ea !important; }
+  .tile-wrong   { border-color: #ff9800 !important; background: #fff3e0 !important; }
+
+  /* ---- SCORE SCREEN ---- */
+  #score-screen { display: none; text-align: center; }
+
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 2rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.18);
+  }
+
+  .score-title { font-size: 1.3rem; font-weight: 800; color: #1B3A5C; margin-bottom: 8px; }
+  .score-msg   { font-size: 0.92rem; color: #3a5272; margin-bottom: 20px; line-height: 1.55; }
+
+  .summary-box {
+    background: #f7f9fc;
+    border: 1.5px solid #d0daea;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .summary-box h3 { font-size: 0.88rem; color: #C9A84C; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 4px 0; border-bottom: 1px solid #e8edf4; }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row span:last-child { font-weight: 700; }
+  .correct-mark { color: #4caf50; }
+  .wrong-mark   { color: #ff9800; }
+
+  .faith-note {
+    font-size: 0.8rem;
+    color: #5a7296;
+    font-style: italic;
+    border-top: 1px solid #e8edf4;
+    padding-top: 14px;
+    margin-top: 4px;
+    line-height: 1.55;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.1rem; }
+    .tile-text { font-size: 0.82rem; }
+    .score-circle { width: 90px; height: 90px; font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="course-label">Mousetrap Build • Genesis K-12 Academy</div>
+  <h1>Assembly Order Challenge</h1>
+  <p>Project Phases & Dependencies</p>
+</header>
+
+<div id="main-card">
+
+  <!-- INTRO -->
+  <div id="intro-screen">
+    <h2>🔧 Can you build it in the right order?</h2>
+    <p>In the Assembly phase, <strong>order matters</strong>. Some parts must be attached before others — these are called <em>dependencies</em>. If you skip a step or do things out of order, your mousetrap car won't work!</p>
+    <p>You'll be given <strong>3 sets of assembly steps</strong>. Drag them into the correct order, then check your answer. Ready?</p>
+    <button class="gold-btn" onclick="startGame()">Start Activity ▶</button>
+  </div>
+
+  <!-- GAME -->
+  <div id="game-screen">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="round-label" id="round-label">Round 1 of 3</div>
+    <div class="question-text" id="question-text"></div>
+    <div class="hint-text" id="hint-text"></div>
+    <div class="feedback-banner" id="feedback-banner"></div>
+    <div class="sort-container" id="sort-container"></div>
+    <button class="check-btn" id="check-btn" onclick="checkOrder()">Check My Order ✓</button>
+  </div>
+
+  <!-- SCORE -->
+  <div id="score-screen">
+    <div class="score-circle" id="score-circle"></div>
+    <div class="score-title" id="score-title"></div>
+    <div class="score-msg"  id="score-msg"></div>
+    <div class="summary-box">
+      <h3>Your Results</h3>
+      <div id="summary-rows"></div>
+    </div>
+    <button class="gold-btn" onclick="restartGame()">Try Again ↺</button>
+    <div class="faith-note">✝ "Whatever you do, do it with all your heart." — Good stewardship means careful, diligent work at every step of assembly.</div>
+  </div>
+
+</div>
+
+<script>
+// =====================
+//   ROUND DATA
+// =====================
+const rounds = [
+  {
+    question: "Round 1: Building the Chassis First",
+    hint: "The chassis is the base frame of your car. Other components like axles and the mousetrap depend on it. Drag the steps below into the correct build order (1 = first).",
+    steps: [
+      { id: "s1a", text: "Mark and drill axle holes in the chassis board at equal distances" },
+      { id: "s1b", text: "Cut the chassis board to the correct length" },
+      { id: "s1c", text: "Attach the mousetrap to the top of the finished chassis using zip ties or tape" },
+      { id: "s1d", text: "Sand the chassis edges so axles can spin freely" },
+    ],
+    correct: ["s1b", "s1a", "s1d", "s1c"],
+    explanation: "You must cut the board first, then mark and drill the holes, then sand for smooth axle rotation, and finally mount the mousetrap — each step depends on the one before it!"
+  },
+  {
+    question: "Round 2: Installing the Axles & Wheels",
+    hint: "Axles connect the wheels to the chassis. The order you install them affects whether the car rolls smoothly. Put these steps in the correct sequence.",
+    steps: [
+      { id: "s2a", text: "Slide one wheel onto each end of the axle and secure with hot glue" },
+      { id: "s2b", text: "Test-roll the car on a flat surface to check wheel alignment" },
+      { id: "s2c", text: "Thread the axle rod through the pre-drilled chassis holes" },
+      { id: "s2d", text: "Add axle bearings (straws) inside the holes to reduce friction" },
+    ],
+    correct: ["s2d", "s2c", "s2a", "s2b"],
+    explanation: "Bearings go in first so the axle doesn't bind. Then thread the axle through, attach wheels, and test — skipping the test means you won't catch alignment problems early!"
+  },
+  {
+    question: "Round 3: Connecting the Power System",
+    hint: "The mousetrap's spring powers the car. The string must be connected carefully or the car won't move. Order these power-system steps correctly.",
+    steps: [
+      { id: "s3a", text: "Wind the string onto the rear axle until the mousetrap arm is fully cocked" },
+      { id: "s3b", text: "Tie one end of the string to the tip of the mousetrap arm" },
+      { id: "s3c", text: "Release the car and observe how far it travels — record your result" },
+      { id: "s3d", text: "Confirm the mousetrap is securely fastened to the chassis before attaching string" },
+    ],
+    correct: ["s3d", "s3b", "s3a", "s3c"],
+    explanation: "Always verify the mousetrap is secured first (a dependency!), then tie the string to the arm, wind the axle to store energy, and only then release and test."
+  }
+];
+
+// =====================
+//   STATE
+// =====================
+let currentRound = 0;
+let scores = [];        // true/false per round
+let attempts = [];      // attempts per round
+let checkedThisRound = false;
+let dragSrcIndex = null;
+
+// =====================
+//   SCREEN HELPERS
+// =====================
+function showScreen(id) {
+  ['intro-screen','game-screen','score-screen'].forEach(s => {
+    document.getElementById(s).style.display = 'none';
+  });
+  document.getElementById(id).style.display = 'block';
+}
+
+function startGame() {
+  currentRound = 0;
+  scores = [];
+  attempts = [];
+  showScreen('game-screen');
+  loadRound();
+}
+
+// =====================
+//   LOAD ROUND
+// =====================
+function loadRound() {
+  checkedThisRound = false;
+  const r = rounds[currentRound];
+
+  document.getElementById('round-label').textContent = `Round ${currentRound + 1} of ${rounds.length}`;
+  document.getElementById('question-text').textContent = r.question;
+  document.getElementById('hint-text').textContent = r.hint;
+
+  const pct = (currentRound / rounds.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const fb = document.getElementById('feedback-banner');
+  fb.className = 'feedback-banner';
+  fb.style.display = 'none';
+  fb.textContent = '';
+
+  document.getElementById('check-btn').style.display = 'block';
+  document.getElementById('check-btn').textContent = 'Check My Order ✓';
+  document.getElementById('check-btn').onclick = checkOrder;
+
+  // Shuffle steps
+  const shuffled = shuffle([...r.steps]);
+  renderTiles(shuffled);
+  attempts.push(0);
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// =====================
+//   RENDER TILES
+// =====================
+function renderTiles(stepsArr) {
+  const container = document.getElementById('sort-container');
+  container.innerHTML = '';
+  stepsArr.forEach((step, idx) => {
+    const tile = document.createElement('div');
+    tile.className = 'step-tile';
+    tile.draggable = true;
+    tile.dataset.id = step.id;
+    tile.dataset.index = idx;
+
+    tile.innerHTML = `
+      <div class="tile-num">${idx + 1}</div>
+      <div class="tile-text">${step.text}</div>
+      <div class="drag-handle">⠿</div>
+    `;
+
+    // Desktop drag events
+    tile.addEventListener('dragstart', onDragStart);
+    tile.addEventListener('dragover',  onDragOver);
+    tile.addEventListener('drop',      onDrop);
+    tile.addEventListener('dragend',   onDragEnd);
+
+    // Touch events
+    tile.addEventListener('touchstart', onTouchStart, { passive: false });
+    tile.addEventListener('touchmove',  onTouchMove,  { passive: false });
+    tile.addEventListener('touchend',   onTouchEnd);
+
+    container.appendChild(tile);
+  });
+}
+
+function updateNumbers() {
+  const tiles = document.querySelectorAll('#sort-container .step-tile');
+  tiles.forEach((t, i) => {
+    t.dataset.index = i;
+    t.querySelector('.tile-num').textContent = i + 1;
+  });
+}
+
+// =====================
+//   DRAG (DESKTOP)
+// =====================
+let dragSrcEl = null;
+
+function onDragStart(e) {
+  if (checkedThisRound) return;
+  dragSrcEl = this;
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  if (checkedThisRound) return;
+  document.querySelectorAll('.step-tile').forEach(t => t.classList.remove('drag-over'));
+  if (this !== dragSrcEl) this.classList.add('drag-over');
+  return false;
+}
+
+function onDrop(e) {
+  e.preventDefault();
+  if (checkedThisRound) return;
+  if (this === dragSrcEl) return;
+  const container = document.getElementById('sort-container');
+  const tiles = [...container.querySelectorAll('.step-tile')];
+  const srcIdx = tiles.indexOf(dragSrcEl);
+  const dstIdx = tiles.indexOf(this);
+  if (srcIdx < dstIdx) {
+    container.insertBefore(dragSrcEl, this.nextSibling);
+  } else {
+    container.insertBefore(dragSrcEl, this);
+  }
+  this.classList.remove('drag-over');
+  updateNumbers();
+}
+
+function onDragEnd() {
+  this.classList.remove('dragging');
+  document.querySelectorAll('.step-tile').forEach(t => t.classList.remove('drag-over'));
+}
+
+// =====================
+//   TOUCH DRAG
+// =====================
+let touchItem = null, touchClone = null, touchOffX = 0, touchOffY = 0;
+
+function onTouchStart(e) {
+  if (checkedThisRound) return;
+  const touch = e.touches[0];
+  touchItem = this;
+  const rect = this.getBoundingClientRect();
+  touchOffX = touch.clientX - rect.left;
+  touchOffY = touch.clientY - rect.top;
+
+  touchClone = this.cloneNode(true);
+  touchClone.style.cssText = `
+    position:fixed; z-index:9999; pointer-events:none; opacity:0.85;
+    width:${rect.width}px; left:${rect.left}px; top:${rect.top}px;
+    border:2px solid #C9A84C; box-shadow:0 4px 16px rgba(0,0,0,0.18);
+    background:#fff; border-radius:10px;
+  `;
+  document.body.appendChild(touchClone);
+  this.style.opacity = '0.3';
+  e.preventDefault();
+}
+
+function onTouchMove(e) {
+  if (!touchClone) return;
+  const touch = e.touches[0];
+  touchClone.style.left = (touch.clientX - touchOffX) + 'px';
+  touchClone.style.top  = (touch.clientY - touchOffY) + 'px';
+  e.preventDefault();
+}
+
+function onTouchEnd(e) {
+  if (!touchClone) return;
+  touchClone.remove();
+  touchClone = null;
+  touchItem.style.opacity = '1';
+
+  const touch = e.changedTouches[0];
+  const container = document.getElementById('sort-container');
+  const tiles = [...container.querySelectorAll('.step-tile')];
+
+  let target = null;
+  tiles.forEach(t => {
+    if (t === touchItem) return;
+    const r = t.getBoundingClientRect();
+    if (touch.clientX >= r.left && touch.clientX <= r.right &&
+        touch.clientY >= r.top  && touch.clientY <= r.bottom) {
+      target = t;
+    }
+  });
+
+  if (target) {
+    const srcIdx = tiles.indexOf(touchItem);
+    const dstIdx = tiles.indexOf(target);
+    if (srcIdx < dstIdx) {
+      container.insertBefore(touchItem, target.nextSibling);
+    } else {
+      container.insertBefore(touchItem, target);
+    }
+    updateNumbers();
+  }
+  touchItem = null;
+}
+
+// =====================
+//   CHECK ORDER
+// =====================
+function checkOrder() {
+  if (checkedThisRound) return;
+  checkedThisRound = true;
+
+  attempts[currentRound]++;
+
+  const r = rounds[currentRound];
+  const tiles = [...document.querySelectorAll('#sort-container .step-tile')];
+  const userOrder = tiles.map(t => t.dataset.id);
+  const isCorrect = userOrder.every((id, i) => id === r.correct[i]);
+
+  scores.push(isCorrect);
+
+  const fb = document.getElementById('feedback-banner');
+
+  tiles.forEach((tile, i) => {
+    if (userOrder[i] === r.correct[i]) {
+      tile.classList.add('tile-correct');
+    } else {
+      tile.classList.add('tile-wrong');
+    }
+  });
+
+  if (isCorrect) {
+    fb.className = 'feedback-banner correct';
+    fb.textContent = '✅ Correct order! ' + r.explanation;
+  } else {
+    fb.className = 'feedback-banner incorrect';
+    fb.textContent = '⚠️ Not quite. ' + r.explanation;
+  }
+  fb.style.display = 'block';
+
+  const btn = document.getElementById('check-btn');
+  btn.textContent = currentRound < rounds.length - 1 ? 'Next Round →' : 'See My Results →';
+  btn.onclick = nextRound;
+}
+
+// =====================
+//   NEXT ROUND / SCORE
+// =====================
+function nextRound() {
+  currentRound++;
+  if (currentRound < rounds.length) {
+    loadRound();
+  } else {
+    showScoreScreen();
+  }
+}
+
+function showScoreScreen() {
+  const total = scores.filter(Boolean).length;
+  const pct = Math.round((total / rounds.length) * 100);
+
+  document.getElementById('progress-fill').style.width = '100%';
+  showScreen('score-screen');
+
+  document.getElementById('score-circle').textContent = pct + '%';
+
+  let title, msg;
+  if (pct === 100) {
+    title = "Perfect Assembly! 🏆";
+    msg = "You nailed every dependency! You understand that order matters in engineering — each step depends on what came before. Your mousetrap car is ready to fly!";
+  } else if (pct >= 67) {
+    title = "Great Work! ⚙️";
+    msg = "You understand most of the assembly dependencies. Review the explanations for any steps you missed — understanding the 'why' behind each order helps you build better!";
+  } else {
+    title = "Keep Building! 🔧";
+    msg = "Assembly order can be tricky! Re-read the explanations below and try again. Remember: in engineering, dependencies tell us what must be done before something else can happen.";
+  }
+
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent   = msg;
+
+  const rows = document.getElementById('summary-rows');
+  rows.innerHTML = '';
+  rounds.forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'summary-row';
+    const mark = scores[i]
+      ? '<span class="correct-mark">✅ Correct</span>'
+      : '<span class="wrong-mark">⚠️ Review</span>';
+    row.innerHTML = `<span>Round ${i+1}: ${r.question.replace(/^Round \d+: /, '')}</span><span>${mark}</span>`;
+    rows.appendChild(row);
+  });
+}
+
+// =====================
+//   RESTART
+// =====================
+function restartGame() {
+  startGame();
+}
+</script>
+</body>
+</html>

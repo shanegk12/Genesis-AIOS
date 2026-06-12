@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Newton's Laws Physics Sandbox – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B3A5C;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    text-align: center;
+    padding: 8px 0 4px;
+    width: 100%;
+  }
+  header h1 {
+    font-size: 1.25rem;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #aac4e0;
+    margin-top: 2px;
+  }
+  #main-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
+    margin-top: 8px;
+  }
+  #canvas-wrap {
+    flex: 1 1 auto;
+    position: relative;
+  }
+  canvas {
+    display: block;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    background: #0d2036;
+    width: 100%;
+    touch-action: none;
+  }
+  #panel {
+    flex: 0 0 210px;
+    background: #142c47;
+    border: 1.5px solid #C9A84C;
+    border-radius: 10px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-title {
+    font-size: 0.7rem;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #C9A84C44;
+    padding-bottom: 4px;
+    margin-bottom: 2px;
+  }
+  .control-group { display: flex; flex-direction: column; gap: 4px; }
+  .control-label {
+    font-size: 0.72rem;
+    color: #d0e4f5;
+    display: flex;
+    justify-content: space-between;
+  }
+  .control-label span { color: #C9A84C; font-weight: bold; }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+    height: 18px;
+  }
+  .readout-box {
+    background: #0d2036;
+    border: 1px solid #C9A84C55;
+    border-radius: 6px;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+  }
+  .readout-key { color: #aac4e0; }
+  .readout-val { color: #C9A84C; font-weight: bold; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+  .law-badge {
+    background: #1B3A5C;
+    border: 1px solid #C9A84C77;
+    border-radius: 6px;
+    padding: 5px 7px;
+    font-size: 0.68rem;
+    color: #c8dff0;
+    line-height: 1.4;
+  }
+  .law-badge b { color: #C9A84C; }
+  button {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    font-size: 0.82rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    letter-spacing: 0.5px;
+    transition: background 0.15s;
+  }
+  button:hover { background: #e0bf6a; }
+  button.secondary {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C;
+    margin-top: 2px;
+  }
+  button.secondary:hover { background: #243f5e; }
+  #scene-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 5px 0;
+    font-size: 0.68rem;
+    border-radius: 5px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C55;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    transition: background 0.15s;
+  }
+  .tab-btn.active {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-color: #C9A84C;
+  }
+  #faith-note {
+    background: #1a3350;
+    border-left: 3px solid #C9A84C;
+    border-radius: 0 6px 6px 0;
+    padding: 5px 7px;
+    font-size: 0.65rem;
+    color: #b8d0e8;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  @media (max-width: 600px) {
+    #main-layout { flex-direction: column; }
+    #panel { flex: none; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚙️ Newton's Laws Physics Sandbox</h1>
+  <p>Creationeering | Using Math &amp; Science as Tools | Genesis K-12 Academy</p>
+</header>
+<div id="main-layout">
+  <div id="canvas-wrap">
+    <canvas id="simCanvas" width="580" height="420"></canvas>
+  </div>
+  <div id="panel">
+    <div>
+      <div class="section-title">Scene</div>
+      <div id="scene-tabs">
+        <button class="tab-btn active" id="tab0" onclick="switchScene(0)">1st Law</button>
+        <button class="tab-btn" id="tab1" onclick="switchScene(1)">2nd Law</button>
+        <button class="tab-btn" id="tab2" onclick="switchScene(2)">3rd Law</button>
+      </div>
+    </div>
+    <div class="law-badge" id="law-desc"></div>
+    <div class="section-title">Controls</div>
+    <div id="controls-area"></div>
+    <div class="section-title">Measurements</div>
+    <div class="readout-box" id="readout-area"></div>
+    <button onclick="resetScene()">↺ Reset</button>
+    <div id="faith-note">✝ "Math is the Language of God — the precise order He wove into creation." — Creationeering</div>
+  </div>
+</div>
+
+<script>
+// ─── GLOBAL SETUP ─────────────────────────────────────────────────────────────
+const canvas = document.getElementById('simCanvas');
+const ctx    = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const NAVY = '#1B3A5C', GOLD = '#C9A84C';
+
+let scene = 0;
+let rafId = null;
+let simTime = 0;
+
+// ─── SCENE DEFINITIONS ────────────────────────────────────────────────────────
+// Each scene has: init(), update(dt), draw(), reset(), controls HTML, law text
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SCENE 0 – 1st Law (Inertia): object on surface, friction stops it
+// ══════════════════════════════════════════════════════════════════════════════
+const s0 = (() => {
+  let ox, oy, vx, vy;
+  let friction, mass;
+  let dragging = false, dragOffX, dragOffY;
+  let prevX, prevY, velX, velY;
+  let lastDragTime;
+  const OBJ_R = 26;
+  const GROUND = H - 80;
+  let trail = [];
+  let launched = false;
+
+  function getFriction() { return parseFloat(document.getElementById('s0_friction')?.value || 0.3); }
+  function getMass()     { return parseFloat(document.getElementById('s0_mass')?.value || 3); }
+
+  function init() {
+    ox = 90; oy = GROUND - OBJ_R;
+    vx = 0; vy = 0;
+    trail = [];
+    launched = false;
+    dragging = false;
+  }
+
+  function update(dt) {
+    if (dragging || !launched) return;
+    const mu = getFriction();
+    const m  = getMass();
+    const g  = 400;
+    const fn = m * g;
+    const fFric = mu * fn;
+    const acc = fFric / m;
+    const speed = Math.abs(vx);
+    if (speed > 0) {
+      const dir = vx > 0 ? -1 : 1;
+      vx += dir * acc * dt;
+      if (dir === -1 && vx < 0) vx = 0;
+      if (dir === 1  && vx > 0) vx = 0;
+    }
+    ox += vx * dt;
+    if (ox < OBJ_R) { ox = OBJ_R; vx = 0; }
+    if (ox > W - OBJ_R) { ox = W - OBJ_R; vx = 0; }
+    trail.push({x: ox, y: oy});
+    if (trail.length > 120) trail.shift();
+    updateReadout();
+  }
+
+  function draw() {
+    // Ground
+    ctx.fillStyle = '#1e3d5c';
+    ctx.fillRect(0, GROUND, W, H - GROUND);
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, GROUND); ctx.lineTo(W, GROUND); ctx.stroke();
+
+    // Surface label
+    const mu = getFriction();
+    const surfaces = [{v:0.05,n:'Ice'},{v:0.15,n:'Wet Floor'},{v:0.3,n:'Tile'},{v:0.5,n:'Wood'},{v:0.7,n:'Concrete'},{v:0.9,n:'Rough Asphalt'}];
+    let sName = 'Custom';
+    for (let s of surfaces) if (Math.abs(s.v - mu) < 0.06) { sName = s.n; break; }
+    ctx.fillStyle = '#aac4e0';
+    ctx.font = '12px Segoe UI';
+    ctx.fillText('Surface: ' + sName + '  (μ=' + mu.toFixed(2) + ')', 10, GROUND + 20);
+
+    // Trail
+    for (let i = 0; i < trail.length; i++) {
+      const alpha = i / trail.length * 0.5;
+      ctx.fillStyle = `rgba(201,168,76,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(trail[i].x, trail[i].y, 3, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    // Object (box-like with rounded corners)
+    ctx.save();
+    ctx.translate(ox, oy);
+    // shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.beginPath(); ctx.ellipse(0, OBJ_R+4, OBJ_R*0.9, 8, 0, 0, Math.PI*2); ctx.fill();
+    // body
+    const grad = ctx.createRadialGradient(-8,-8,2,0,0,OBJ_R+5);
+    grad.addColorStop(0, '#5ba3e0');
+    grad.addColorStop(1, '#1B3A5C');
+    ctx.fillStyle = grad;
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(0,0,OBJ_R,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    // mass label
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(getMass().toFixed(1)+'kg', 0, 0);
+    ctx.restore();
+
+    // Velocity arrow
+    if (Math.abs(vx) > 5) {
+      const arrowLen = Math.min(Math.abs(vx) * 0.3, 80);
+      const dir = vx > 0 ? 1 : -1;
+      drawArrow(ox, oy, ox + dir * arrowLen, oy, '#4ef', 2.5, 'v='+Math.abs(vx).toFixed(0)+' px/s');
+    }
+
+    // Hint
+    if (!launched) {
+      ctx.fillStyle = '#aac4e0';
+      ctx.font = '13px Segoe UI';
+      ctx.textAlign = 'center';
+      ctx.fillText('Drag the object and release to launch!', W/2, 40);
+    }
+  }
+
+  function updateReadout() {
+    const speed = Math.abs(vx);
+    const m = getMass();
+    const ke = 0.5 * m * (vx*vx) / 10000;
+    setReadout([
+      {k:'Speed', v: speed.toFixed(1)+' px/s'},
+      {k:'KE (scaled)', v: ke.toFixed(3)+' J'},
+      {k:'State', v: speed < 1 ? 'At Rest' : 'In Motion'}
+    ]);
+  }
+
+  // Pointer events
+  function onDown(px, py) {
+    const dx = px - ox, dy = py - oy;
+    if (dx*dx + dy*dy < (OBJ_R+10)*(OBJ_R+10)) {
+      dragging = true;
+      dragOffX = dx; dragOffY = dy;
+      prevX = ox; prevY = oy;
+      velX = 0; velY = 0;
+      lastDragTime = performance.now();
+      trail = [];
+    }
+  }
+  function onMove(px, py) {
+    if (!dragging) return;
+    const now = performance.now();
+    const dt2 = (now - lastDragTime) / 1000;
+    if (dt2 > 0.001) {
+      velX = (px - dragOffX - prevX) / dt2;
+      velY = (py - dragOffY - prevY) / dt2;
+    }
+    prevX = ox; prevY = oy;
+    lastDragTime = now;
+    ox = Math.max(OBJ_R, Math.min(W - OBJ_R, px - dragOffX));
+    oy = GROUND - OBJ_R;
+  }
+  function onUp() {
+    if (!dragging) return;
+    dragging = false;
+    vx = velX * 0.7;
+    vy = 0;
+    launched = true;
+    updateReadout();
+  }
+
+  return { init, update, draw, reset: init, onDown, onMove, onUp,
+    law: '<b>1st Law (Inertia):</b> An object in motion stays in motion unless acted upon by friction. Drag &amp; release the object!',
+    controls: `
+      <div class="control-group">
+        <div class="control-label">Friction (μ) <span id="s0_friction_val">0.30</span></div>
+        <input type="range" id="s0_friction" min="0.02" max="0.95" step="0.01" value="0.3"
+          oninput="document.getElementById('s0_friction_val').textContent=parseFloat(this.value).toFixed(2)">
+      </div>
+      <div class="control-group">
+        <div class="control-label">Mass (kg) <span id="s0_mass_val">3.0</span></div>
+        <input type="range" id="s0_mass" min="1" max="10" step="0.5" value="3"
+          oninput="document.getElementById('s0_mass_val').textContent=parseFloat(this.value).toFixed(1)">
+      </div>`
+  };
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SCENE 1 – 2nd Law (F=ma): apply force, watch acceleration & speed build
+// ══════════════════════════════════════════════════════════════════════════════
+const s1 = (() => {
+  let ox, oy, vx;
+  let pushing = false;
+  let forceDisplay = 0;
+  const OBJ_R = 28;
+  const GROUND = H - 80;
+  let tick = 0;
+
+  function getForce() { return parseFloat(document.getElementById('s1_force')?.value || 200); }
+  function getMass()  { return parseFloat(document.getElementById('s1_mass')?.value || 5); }
+
+  function init() {
+    ox = 100; oy = GROUND - OBJ_R;
+    vx = 0; pushing = false; tick = 0; forceDisplay = 0;
+  }
+
+  function update(dt) {
+    tick += dt;
+    const F = getForce();
+    const m = getMass();
+    const a = pushing ? F / m : 0;
+    // small friction always
+    const fric = 0.3 * m * 400 / m;
+    if (!pushing && Math.abs(vx) > 0) {
+      const dir = vx > 0 ? -1 : 1;
+      vx += dir * fric * dt;
+      if ((dir === -1 && vx < 0) || (dir === 1 && vx > 0)) vx = 0;
+    } else if (pushing) {
+      vx += a * dt;
+      if (vx > 600) vx = 600;
+    }
+    ox += vx * dt;
+    if (ox > W - OBJ_R - 10) { ox = W - OBJ_R - 10; vx = 0; pushing = false; }
+    if (ox < OBJ_R) { ox = OBJ_R; vx = 0; }
+    forceDisplay = pushing ? F : 0;
+    updateReadout();
+  }
+
+  function draw() {
+    // Ground
+    ctx.fillStyle = '#1e3d5c';
+    ctx.fillRect(0, GROUND, W, H - GROUND);
+    ctx.strokeStyle = GOLD; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, GROUND); ctx.lineTo(W, GROUND); ctx.stroke();
+
+    const F = getForce(), m = getMass();
+    const a = pushing ? (F/m) : 0;
+
+    // Object
+    ctx.save();
+    ctx.translate(ox, oy);
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    ctx.beginPath(); ctx.ellipse(0, OBJ_R+4, OBJ_R, 7, 0, 0, Math.PI*2); ctx.fill();
+    const grad = ctx.createRadialGradient(-8,-8,2,0,0,OBJ_R+6);
+    grad.addColorStop(0, '#e89c3a');
+    grad.addColorStop(1, '#7a4a10');
+    ctx.fillStyle = grad;
+    ctx.strokeStyle = GOLD; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(0,0,OBJ_R,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px Segoe UI';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(m.toFixed(0)+'kg', 0, 0);
+    ctx.restore();
+
+    // Force arrow
+    if (pushing) {
+      drawArrow(ox - OBJ_R - 5, oy, ox - OBJ_R - 5 - Math.min(F*0.25, 120), oy, '#f66', 3, 'F='+F.toFixed(0)+'N');
+      drawArrow(ox + OBJ_R + 5, oy, ox + OBJ_R + 5 + Math.min(F*0.25, 120), oy, '#6f6', 3, 'a='+a.toFixed(1)+'m/s²');
+    }
+
+    // Speed indicator bar
+    const barW = (Math.abs(vx) / 600) * (W - 40);
+    ctx.fillStyle = '#0d1e2e';
+    ctx.fillRect(20, H - 40, W - 40, 18);
+    ctx.fillStyle = `hsl(${120 - (Math.abs(vx)/600)*120}, 80%, 55%)`;
+    ctx.fillRect(20, H - 40, barW, 18);
+    ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5;
+    ctx.strokeRect(20, H - 40, W - 40, 18);
+    ctx.fillStyle = '#fff'; ctx.font = '11px Segoe UI'; ctx.textAlign = 'left';
+    ctx.fillText('Speed', 24, H - 27);
+
+    // Hold button hint
+    if (!pushing) {
+      ctx.fillStyle = '#aac4e0'; ctx.font = '13px Segoe UI'; ctx.textAlign = 'center';
+      ctx.fillText('Hold "Apply Force" button to push the object →', W/2, 35);
+    }
+
+    // F=ma label
+    ctx.font = 'bold 16px Segoe UI'; ctx.fillStyle = GOLD; ctx.textAlign = 'right';
+    ctx.fillText('F = m × a', W - 15, 28);
+    ctx.font = '12px Segoe UI'; ctx.fillStyle = '#aac4e0';
+    ctx.fillText(F.toFixed(0)+'N = '+m.toFixed(0)+'kg × '+a.toFixed(1)+'m/s²', W - 15, 46);
+  }
+
+  function updateReadout() {
+    const F = getForce(), m = getMass();
+    setReadout([
+      {k:'Acceleration', v: (pushing ? F/m : 0).toFixed(2)+' m/s²'},
+      {k:'Speed', v: Math.abs(vx).toFixed(1)+' px/s'},
+      {k:'Force Applied', v: forceDisplay.toFixed(0)+' N'}
+    ]);
+  }
+
+  // Force button (hold)
+  function startPush() { pushing = true; }
+  function stopPush()  { pushing = false; }
+
+  return { init, update, draw, reset: init,
+    onDown(px,py){}, onMove(px,py){}, onUp(){},
+    startPush, stopPush,
+    law: '<b>2nd Law (F=ma):</b> Force = mass × acceleration. More force → more acceleration. More mass → less acceleration. Hold the button!',
+    controls: `
+      <div class="control-group">
+        <div class="control-label">Applied Force (N) <span id="s1_force_val">200</span></div>
+        <input type="range" id="s1_force" min="50" max="800" step="10" value="200"
+          oninput="document.getElementById('s1_force_val').textContent=this.value">
+      </div>
+      <div class="control-group">
+        <div class="control-label">Mass (kg) <span id="s1_mass_val">5</span></div>
+        <input type="range" id="s1_mass" min="1" max="20" step="1" value="5"
+          oninput="document.getElementById('s1_mass_val').textContent=this.value">
+      </div>
+      <button id="pushBtn"
+        onmousedown="s1.startPush()" onmouseup="s1.stopPush()" onmouseleave="s1.stopPush()"
+        ontouchstart="s1.startPush()" ontouchend="s1.stopPush()"
+        style="margin-top:4px;user-select:none;">▶ Apply Force (Hold)</button>`
+  };
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SCENE 2 – 3rd Law (Action-Reaction): two balls collide
+// ══════════════════════════════════════════════════════════════════════════════
+const s2 = (() => {
+  let b1, b2;
+  let fired = false;
+  let collided = false;
+  let collisionTime = 0;
+  let impactX = 0;
+  const GROUND = H/2 + 30;
+
+  function getMass1() { return parseFloat(document.getElementById('s2_mass1')?.value || 4); }
+  function getMass2() { return parseFloat(document.getElementById('s2_mass2')?.value || 4); }
+
+  function makeB1(m) { return {x:80,  y:GROUND, vx:280, vy:0, r:12+m*2, m, color:'#5ba3e0', label:'Ball A', ax:0}; }
+  function makeB2(m) { return {x:W-80,y:GROUND, vx:0,   vy:0, r:12+m*2, m, color:'#e07a5f', label:'Ball B', ax:0}; }
+
+  function init() {
+    b1 = makeB1(getMass1());
+    b2 = makeB2(getMass2());
+    fired = false; collided = false; collisionTime = -10;
+    updateReadout();
+  }
+
+  function update(dt) {
+    if (!fired) return;
+    const speed2Init = 0;
+    // Simple physics
+    b1.x += b1.vx * dt;
+    b2.x += b2.vx * dt;
+
+    // Collision detection
+    const dist = Math.abs(b1.x - b2.x);
+    const minDist = b1.r + b2.r;
+    if (!collided && dist <= minDist) {
+      collided = true;
+      collisionTime = simTime;
+      impactX = (b1.x + b2.x) / 2;
+      // Elastic collision
+      const m1 = b1.m, m2 = b2.m;
+      const v1 = b1.vx, v2 = b2.vx;
+      b1.vx = ((m1 - m2)*v1 + 2*m2*v2) / (m1 + m2);
+      b2.vx = ((m2 - m1)*v2 + 2*m1*v1) / (m1 + m2);
+      b1.ax = b1.vx - v1;
+      b2.ax = b2.vx - v2;
+    }
+    // Walls
+    if (b1.x < b1.r) { b1.x = b1.r; b1.vx = Math.abs(b1.vx)*0.8; }
+    if (b1.x > W-b1.r) { b1.x = W-b1.r; b1.vx = -Math.abs(b1.vx)*0.8; }
+    if (b2.x < b2.r) { b2.x = b2.r; b2.vx = Math.abs(b2.vx)*0.8; }
+    if (b2.x > W-b2.r) { b2.x = W-b2.r; b2.vx = -Math.abs(b2.vx)*0.8; }
+    updateReadout();
+  }
+
+  function draw() {
+    // Ground line
+    ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5;
+    ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(0, GROUND+Math.max(b1.r,b2.r)+10); ctx.lineTo(W, GROUND+Math.max(b1.r,b2.r)+10); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Impact flash
+    if (collided && simTime - collisionTime < 0.4) {
+      const alpha = 1 - (simTime - collisionTime)/0.4;
+      ctx.save();
+      const flash = ctx.createRadialGradient(impactX, GROUND, 0, impactX, GROUND, 60);
+      flash.addColorStop(0, `rgba(255,220,100,${alpha*0.9})`);
+      flash.addColorStop(1, `rgba(255,220,100,0)`);
+      ctx.fillStyle = flash;
+      ctx.beginPath(); ctx.arc(impactX, GROUND, 60, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+
+    // Draw balls
+    [b1, b2].forEach(b => {
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.beginPath(); ctx.ellipse(0, b.r+3, b.r*0.85, 7, 0, 0, Math.PI*2); ctx.fill();
+      const g = ctx.createRadialGradient(-b.r*0.3,-b.r*0.3,b.r*0.05,0,0,b.r);
+      const c1 = b.color, c2 = b.color+'88';
+      g.addColorStop(0, '#fff8');
+      g.addColorStop(0.3, c1);
+      g.addColorStop(1, c2);
+      ctx.fillStyle = g;
+      ctx.strokeStyle = GOLD; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(0,0,b.r,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.font = `bold ${Math.max(9,b.r*0.5)}px Segoe UI`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(b.m.toFixed(0)+'kg', 0, 0);
+      ctx.restore();
+
+      // Velocity arrow
+      if (Math.abs(b.vx) > 5) {
+        const dir = b.vx > 0 ? 1 : -1;
+        const len = Math.min(Math.abs(b.vx)*0.3, 90);
+        drawArrow(b.x + dir*b.r, b.y, b.x + dir*(b.r+len), b.y,
+          b === b1 ? '#6cf' : '#f96', 2.5, b.label);
+      }
+    });
+
+    // Labels
+    ctx.fillStyle = '#aac4e0'; ctx.font = '12px Segoe UI'; ctx.textAlign = 'center';
+    ctx.fillText(b1.label+' ('+b1.m.toFixed(0)+'kg)', b1.x, b1.y - b1.r - 12);
+    ctx.fillText(b2.label+' ('+b2.m.toFixed(0)+'kg)', b2.x, b2.y - b2.r - 12);
+
+    if (collided) {
+      ctx.fillStyle = GOLD; ctx.font = 'bold 15px Segoe UI'; ctx.textAlign = 'center';
+      ctx.fillText('⚡ Action = Reaction! Momentum Conserved!', W/2, 55);
+      ctx.font = '12px Segoe UI'; ctx.fillStyle = '#c8dff0';
+      ctx.fillText('A pushed B → B pushed A equally & oppositely', W/2, 73);
+    }
+
+    if (!fired) {
+      ctx.fillStyle = '#aac4e0'; ctx.font = '13px Segoe UI'; ctx.textAlign = 'center';
+      ctx.fillText('Press "Launch Ball A" to start the collision!', W/2, 35);
+    }
+
+    // 3rd law equation
+    ctx.font = 'bold 14px Segoe UI'; ctx.fillStyle = GOLD; ctx.textAlign = 'right';
+    ctx.fillText('F₁₂ = −F₂₁', W - 15, H - 15);
+  }
+
+  function updateReadout() {
+    const p1 = (b1.m * b1.vx / 100).toFixed(3);
+    const p2 = (b2.m * b2.vx / 100).toFixed(3);
+    const tot = ((b1.m * b1.vx + b2.m * b2.vx)/100).toFixed(3);
+    setReadout([
+      {k:'Momentum A', v: p1+' kg·m/s'},
+      {k:'Momentum B', v: p2+' kg·m/s'},
+      {k:'Total p', v: tot+' kg·m/s'}
+    ]);
+  }
+
+  function launch() {
+    b1 = makeB1(getMass1());
+    b2 = makeB2(getMass2());
+    collided = false; collisionTime = -10;
+    fired = true;
+  }
+
+  return { init, update, draw, reset: init, launch,
+    onDown(px,py){}, onMove(px,py){}, onUp(){},
+    law: '<b>3rd Law (Action-Reaction):</b> When Ball A hits Ball B, Ball B pushes back equally. Watch momentum transfer!',
+    controls: `
+      <div class="control-group">
+        <div class="control-label">Mass A (kg) <span id="s2_mass1_val">4</span></div>
+        <input type="range" id="s2_mass1" min="1" max="10" step="0.5" value="4"
+          oninput="document.getElementById('s2_mass1_val').textContent=parseFloat(this.value).toFixed(1);resetScene()">
+      </div>
+      <div class="control-group">
+        <div class="control-label">Mass B (kg) <span id="s2_mass2_val">4</span></div>
+        <input type="range" id="s2_mass2" min="1" max="10" step="0.5" value="4"
+          oninput="document.getElementById('s2_mass2_val').textContent=parseFloat(this.value).toFixed(1);resetScene()">
+      </div>
+      <button onclick="s2.launch()" style="margin-top:4px;">▶ Launch Ball A</button>`
+  };
+})();
+
+const scenes = [s0, s1, s2];
+
+// ─── UTILITIES ────────────────────────────────────────────────────────────────
+function drawArrow(x1, y1, x2, y2, color, lw, label) {
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.sqrt(dx*dx + dy*dy);
+  if (len < 2) return;
+  const ux = dx/len, uy = dy/len;
+  const headLen = 12;
+  ctx.save();
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - headLen*ux + headLen*0.4*(-uy), y2 - headLen*uy + headLen*0.4*ux);
+  ctx.lineTo(x2 - headLen*ux - headLen*0.4*(-uy), y2 - headLen*uy - headLen*0.4*ux);
+  ctx.closePath(); ctx.fill();
+  if (label) {
+    ctx.font = 'bold 11px Segoe UI'; ctx.fillStyle = color;
+    ctx.textAlign = dx > 0 ? 'left' : 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(label, x2 + (dx>0?4:-4), y2 - 4);
+  }
+  ctx.restore();
+}
+
+function setReadout(items) {
+  const el = document.getElementById('readout-area');
+  if (!el) return;
+  el.innerHTML = items.map(i =>
+    `<div class="readout-row"><span class="readout-key">${i.k}</span><span class="readout-val">${i.v}</span></div>`
+  ).join('');
+}
+
+// ─── SCENE SWITCHER ───────────────────────────────────────────────────────────
+function switchScene(idx) {
+  scene = idx;
+  for (let i = 0; i < 3; i++) {
+    document.getElementById('tab'+i).classList.toggle('active', i === idx);
+  }
+  // Update law text
+  document.getElementById('law-desc').innerHTML = scenes[idx].law;
+  // Update controls
+  document.getElementById('controls-area').innerHTML = scenes[idx].controls;
+  scenes[idx].init();
+  simTime = 0;
+}
+
+function resetScene() {
+  scenes[scene].reset();
+  simTime = 0;
+}
+
+// ─── POINTER EVENTS (canvas) ──────────────────────────────────────────────────
+function getCanvasPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = W / rect.width;
+  const scaleY = H / rect.height;
+  const src = e.touches ? e.touches[0] : e;
+  return { x: (src.clientX - rect.left)*scaleX, y: (src.clientY - rect.top)*scaleY };
+}
+canvas.addEventListener('mousedown',  e => { const p = getCanvasPos(e); scenes[scene].onDown(p.x,p.y); });
+canvas.addEventListener('mousemove',  e => { const p = getCanvasPos(e); scenes[scene].onMove(p.x,p.y); });
+canvas.addEventListener('mouseup',    e => { scenes[scene].onUp(); });
+canvas.addEventListener('mouseleave', e => { scenes[scene].onUp(); });
+canvas.addEventListener('touchstart', e => { e.preventDefault(); const p = getCanvasPos(e); scenes[scene].onDown(p.x,p.y); }, {passive:false});
+canvas.addEventListener('touchmove',  e => { e.preventDefault(); const p = getCanvasPos(e); scenes[scene].onMove(p.x,p.y); }, {passive:false});
+canvas.addEventListener('touchend',   e => { e.preventDefault(); scenes[scene].onUp(); }, {passive:false});
+
+// ─── MAIN LOOP ────────────────────────────────────────────────────────────────
+let lastTime = null;
+function loop(ts) {
+  if (!lastTime) lastTime = ts;
+  const dt = Math.min((ts - lastTime) / 1000, 0.05);
+  lastTime = ts;
+  simTime += dt;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+  for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  scenes[scene].update(dt);
+  scenes[scene].draw();
+
+  rafId = requestAnimationFrame(loop);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+switchScene(0);
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

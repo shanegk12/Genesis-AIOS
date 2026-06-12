@@ -1,0 +1,376 @@
+[
+  {
+    "id": "c047t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Shipping, Transport, and Compliance</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last lesson, you explored the world of Inventory and Warehouse Management — learning how to track materials, store them safely, and keep everything organized so your project is always ready to go. Think of it like having every LEGO brick sorted and in its place before you start building.</p>\n<p>Now it's time for the next step: getting your carefully managed goods from one place to another. This lesson dives into <strong>Shipping, Transport, and Compliance</strong> — the systems that move your creation out into the world. You'll learn how to choose the right mode of transport, navigate legal requirements, and make sure your product arrives safely and on time. This is a critical part of the Logistics phase, and getting it right means your brilliant ideas can actually reach the people who need them.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define the key components of a successful shipping and transport plan.</li>\n<li>Identify common challenges in moving goods and describe potential solutions.</li>\n<li>Explain why compliance with regulations matters in shipping.</li>\n<li>Apply the OCV method to optimize a transport route.</li>\n<li>Connect efficient and responsible transport practices to biblical stewardship of resources.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Shipping",
+          "definition": "The process of sending goods from one location to another, often over long distances."
+        },
+        {
+          "term": "Transport",
+          "definition": "The act of moving goods or people from one place to another."
+        },
+        {
+          "term": "Compliance",
+          "definition": "Following the rules, regulations, and laws set by governing authorities."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed planning, coordination, and execution of complex operations involving the movement of goods."
+        },
+        {
+          "term": "Consignment",
+          "definition": "A batch of goods destined for or delivered to a specific recipient."
+        },
+        {
+          "term": "Freight",
+          "definition": "Goods transported in bulk by truck, train, ship, or aircraft."
+        },
+        {
+          "term": "Carrier",
+          "definition": "A company or individual that transports goods or people for a fee."
+        },
+        {
+          "term": "Tariff",
+          "definition": "A tax or duty charged on a particular class of imports or exports."
+        },
+        {
+          "term": "Customs",
+          "definition": "The official government department that administers and collects duties on imported goods."
+        },
+        {
+          "term": "Documentation",
+          "definition": "The paperwork and records required for shipping, such as bills of lading and customs forms."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Journey of Provision</h2>\n<p>Before we get into the engineering details, consider this moment from Genesis. In Genesis 45:16–20, Pharaoh tells Joseph's brothers to return to Canaan, gather their father and families, and come settle in Egypt. He promises them the best of the land — and then makes a very specific, practical decision: <em>send wagons</em>. \"Take wagons from Egypt for your little ones and your wives, and bring your father and come.\"</p>\n<p>That detail matters. Pharaoh wasn't just offering words of welcome. He equipped the journey. He thought through the <em>how</em> — the mode of transport, the capacity needed, the people and possessions that had to move safely across a long distance. That's logistics in action, thousands of years before the word existed.</p>\n<p>It's a picture of God's providential care working through human planning and systems. The goods get to the people who need them because someone thought carefully about <em>how</em> to move them. As you learn to design shipping and transport systems, you're stepping into that same tradition of thoughtful, purposeful provision.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 45:19 (NIV):</strong> \"You are also directed to tell them: Do this — take some carts from Egypt for your children and your wives, and get your father and come.\"</p><p>Pharaoh's instruction to send wagons is one of the earliest recorded examples of selecting the right mode of transport for a specific logistical need. God's provision often works through careful, practical planning — including yours.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Modes of Transport</h2>\n<p>When you need to move something from one place to another, you have options. Each mode of transport has strengths and weaknesses — the right choice depends on what you're moving, how far it needs to go, how fast it needs to arrive, and how much it costs.</p>\n<p>Think of it like choosing a tool from a toolbox. A hammer is great for nails, but not for screws. The same logic applies to transport: you match the method to the job.</p>\n<h3>The Four Main Modes</h3>\n<ul>\n<li><strong>Road (Truck):</strong> Flexible, door-to-door delivery, ideal for short to medium distances. Most common for domestic shipping.</li>\n<li><strong>Rail (Train):</strong> Cost-effective for heavy or bulk freight over long land distances. Less flexible than trucks — you go where the tracks go.</li>\n<li><strong>Sea (Ship):</strong> The backbone of global trade. Handles massive volumes at low cost per unit, but it's slow. Most international goods travel by sea at some point.</li>\n<li><strong>Air (Plane):</strong> Fast and reliable for high-value or time-sensitive cargo. Also the most expensive option per kilogram.</li>\n</ul>\n<p>Many real-world shipments use a combination — called <strong>multimodal transport</strong> — where a container might travel by truck to a port, then by ship across an ocean, then by rail to a distribution center, and finally by truck to the customer.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram comparing the four main modes of transport: road, rail, sea, and air — showing relative speed, cost, and cargo capacity for each."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Choosing a mode of transport</strong> comes down to three questions: How fast does it need to arrive? How much does it weigh or how large is it? How much can you spend? Run through those three questions every time, and your decision becomes much clearer.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Planning a Shipping Route</h2>\n<p>Picking a transport mode is just the first step. You also need to plan the actual route your goods will travel. A well-planned route saves time, reduces fuel costs, and lowers the risk of damage or delay.</p>\n<p>Engineers use a method called <strong>OCV</strong> to evaluate and optimize a route:</p>\n<ul>\n<li><strong>O — Origin:</strong> Where is the shipment starting? What facilities, roads, or ports are available there?</li>\n<li><strong>C — Constraints:</strong> What limitations exist? These could be weight limits on roads, border crossing hours, weather seasons, or budget caps.</li>\n<li><strong>V — Value Destination:</strong> Where does it need to arrive, and what matters most when it gets there — speed, cost, or condition?</li>\n</ul>\n<p>By working through OCV, you build a clear picture of your options before committing to a plan. It's the same thinking a structural engineer uses when designing a bridge — you don't just pick materials randomly; you analyze the load, the site, and the purpose first.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample OCV analysis chart showing how origin, constraints, and value destination factors combine to select the optimal shipping route."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Compliance Matters</h2>\n<p>Here's a reality of shipping that surprises many first-time entrepreneurs: you can have the perfect product, the fastest carrier, and an optimized route — and still have everything stopped at a border because of missing paperwork.</p>\n<p><strong>Compliance</strong> means following the rules. In shipping, that includes government regulations, international trade laws, safety standards, and customs requirements. These rules exist for good reasons — they protect consumers, workers, the environment, and national security.</p>\n<h3>Key Compliance Areas</h3>\n<ul>\n<li><strong>Customs and Import/Export Laws:</strong> When goods cross international borders, customs officials check them. You need the right forms, declared values, and sometimes permits.</li>\n<li><strong>Tariffs:</strong> Some goods are taxed when they enter a country. Knowing the tariff rate on your product affects your pricing and profit calculations.</li>\n<li><strong>Hazardous Materials Rules:</strong> Certain goods — batteries, chemicals, flammable items — have strict rules about how they can be packaged and shipped.</li>\n<li><strong>Documentation:</strong> A <em>bill of lading</em> is like a contract between you and the carrier — it lists what's being shipped, where it's going, and who's responsible. Without it, disputes are nearly impossible to resolve.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Missing documentation is one of the most common — and costly — shipping mistakes.</strong> Always confirm you have the correct paperwork before a shipment leaves your facility. A single missing customs form can hold an entire container at a port for days or weeks, costing you time and money.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Compliance and stewardship go hand in hand.</strong> Following regulations isn't just about avoiding fines — it's about being a trustworthy business. Romans 13:1 reminds us to submit to governing authorities. Honest, compliant shipping practices build the kind of reputation that lasts.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Common Challenges in Shipping</h2>\n<p>Even a well-planned shipment can run into problems. Part of being a good logistics engineer is anticipating those challenges before they happen — not just reacting when things go wrong.</p>\n<p>Here are the most common issues and how engineers address them:</p>\n<ul>\n<li><strong>Delays:</strong> Weather, port congestion, or vehicle breakdowns can push delivery timelines. Solution: build buffer time into your schedule and track shipments in real time.</li>\n<li><strong>Damage:</strong> Goods can be jostled, dropped, or exposed to moisture. Solution: choose packaging that matches the fragility of your product, and ensure correct loading and securing.</li>\n<li><strong>Lost Shipments:</strong> Packages can be mislabeled or misrouted. Solution: use clear labeling, tracking numbers, and detailed documentation at every handoff.</li>\n<li><strong>Cost Overruns:</strong> Fuel surcharges, unexpected tariffs, or re-routing can inflate costs. Solution: get carrier quotes in writing and research tariff rates before finalizing your pricing.</li>\n<li><strong>Compliance Violations:</strong> Incorrect forms or undeclared items cause customs holds. Solution: work with a licensed customs broker for international shipments until you know the process well.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Think like a systems engineer:</strong> every link in your shipping chain is a potential failure point. Map out the full journey of your shipment — from your warehouse shelf to the customer's door — and ask yourself, \"What could go wrong here?\" That habit will save you from most surprises.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Shipping as Stewardship</h2>\n<p>There's something deeply meaningful about getting the right resource to the right person at the right time. When you design a shipping system that's efficient, honest, and reliable, you're not just optimizing a business process — you're serving people well.</p>\n<p>Stewardship in logistics means using fuel, materials, money, and time wisely. It means not cutting corners on safety or compliance. It means treating your carriers, suppliers, and customers with integrity. Every cargo container that arrives with the right product, on time, and in perfect condition is a small reflection of the kind of faithful provision we see modeled throughout Scripture.</p>\n<p>Pharaoh sent wagons. You'll design systems. The heart behind both is the same — making sure the things that matter reach the people who need them.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Modes of Transport",
+      "html": "<p><strong>Question:</strong> A company in Texas needs to ship 500 kg of electronic components to a customer in Germany. The components are not fragile but the customer needs them within 5 days. Which mode of transport is most appropriate, and why?</p><p><strong>Think about:</strong> How does air freight compare to sea freight in terms of speed and cost? What constraints does the 5-day timeline create? Use the OCV method to structure your answer.</p><p><strong>Sample Answer:</strong> Air freight is the best choice here. While sea freight would be far cheaper per kilogram, the 5-day deadline rules it out — a transatlantic sea shipment typically takes 10–20 days. Air freight from Texas to Germany takes roughly 1–3 days, leaving buffer time for customs clearance. The higher cost is justified by the time-sensitive requirement at the value destination.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Compliance",
+      "html": "<p><strong>Question:</strong> A startup ships a new product internationally for the first time. The shipment is held at customs for a week. What are three possible reasons this could have happened, and what should the startup do differently next time?</p><p><strong>Think about:</strong> What documents are required for international shipping? What role do tariffs play? What is a customs broker?</p><p><strong>Sample Answer:</strong> Three possible reasons: (1) Missing or incomplete documentation — such as a bill of lading or commercial invoice with incorrect declared values; (2) The product may be subject to a tariff or import restriction that wasn't researched in advance; (3) The product may contain materials (like certain batteries) that require special declarations. Next time, the startup should hire a licensed customs broker, prepare all documentation before the shipment leaves, and research the destination country's import rules for their specific product category.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c047a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: OCV Method",
+      "html": "<p><strong>Question:</strong> Use the OCV method to plan a shipment of 200 hand-crafted wooden toys from a small workshop in North Carolina to a toy store in California. The store needs them in 2 weeks and the budget is limited.</p><p><strong>O — Origin:</strong> North Carolina workshop; access to major highways and regional freight carriers.</p><p><strong>C — Constraints:</strong> 2-week delivery window; limited budget; goods are non-hazardous but moderately fragile (need proper packaging).</p><p><strong>V — Value Destination:</strong> California toy store needs items in sellable condition, on time for an upcoming sale event.</p><p><strong>Best Option:</strong> Ground freight (truck) via a regional or national carrier. With a 2-week window, ground shipping is fast enough (typically 5–7 days cross-country) and significantly cheaper than air. Proper foam or bubble-wrap packaging should be used to protect the wooden items during transit.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

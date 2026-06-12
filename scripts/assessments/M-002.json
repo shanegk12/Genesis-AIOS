@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-002",
+  "topic": "Course Introduction",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of the 'Engineering Thinking' phase in the Creationeering lifecycle?",
+      "options": {
+        "A": "To physically assemble components according to a design.",
+        "B": "To establish a mindset for solving problems using math and science.",
+        "C": "To evaluate the environmental impact of a finished product.",
+        "D": "To break down a system into its smallest parts for analysis."
+      },
+      "answer": "B",
+      "explanation": "Engineering Thinking is described as the phase where students pick up a mindset to use math and science to solve real-world problems."
+    },
+    {
+      "type": "recall",
+      "question": "In the 'Design Foundations' phase, what does OCV stand for?",
+      "options": {
+        "A": "Optimal Component Verification",
+        "B": "Objective-Constraint-Variable",
+        "C": "Overall Cost Value",
+        "D": "Operational Control Volume"
+      },
+      "answer": "B",
+      "explanation": "OCV is explicitly defined as 'Objective-Constraint-Variable' in the Design Foundations section of the lesson."
+    },
+    {
+      "type": "recall",
+      "question": "Which phase of the Creationeering lifecycle focuses on evaluating the Bill of Materials (BOM) and considering factors like cost and environmental impact?",
+      "options": {
+        "A": "Logistics",
+        "B": "Assembly",
+        "C": "Procurement",
+        "D": "Performance Evaluation"
+      },
+      "answer": "C",
+      "explanation": "Procurement is defined as the stewardship of resources, involving the evaluation of the Bill of Materials (BOM) and considering cost and environmental impact."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is 'Validation' considered crucial in professional engineering, according to the lesson?",
+      "options": {
+        "A": "It helps engineers make lucky guesses about their designs.",
+        "B": "It ensures that theoretical models accurately match real-world physical reality.",
+        "C": "It is the final step before a product is sent for recycling.",
+        "D": "It primarily focuses on reducing the cost of materials."
+      },
+      "answer": "B",
+      "explanation": "Validation is described as the process of checking if a model matches reality, ensuring predictions are verified by physical reality."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does Hierarchical Multiscale Modeling (HM²) allow engineers to predict the behavior of a large structure like a skyscraper?",
+      "options": {
+        "A": "By only studying the overall shape and appearance of the structure.",
+        "B": "By focusing on the atomic-level data to understand macro-level performance.",
+        "C": "By guessing how the structure will behave under different conditions.",
+        "D": "By ignoring the smaller components and only looking at the largest parts."
+      },
+      "answer": "B",
+      "explanation": "HM² allows engineers to predict macro-level performance by focusing on 'Clean Data' at the atomic level, understanding that the strength of a skyscraper is determined by its smallest parts."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the main benefit of focusing on 'modularity' during the 'Assembly' phase?",
+      "options": {
+        "A": "It makes the final product much heavier and more durable.",
+        "B": "It allows for building small, testable units that combine into a larger system.",
+        "C": "It reduces the need for any precision during the assembly process.",
+        "D": "It ensures that the project can only be completed by a single person."
+      },
+      "answer": "B",
+      "explanation": "Modularity in the Assembly phase involves building small, testable units that can be combined into a larger system, which aids in precision and testing."
+    },
+    {
+      "type": "application",
+      "question": "A team is designing a new school desk. They want it to be lightweight for easy moving, but also strong enough to last for many years. This challenge of balancing competing goals is best addressed by understanding which concept?",
+      "options": {
+        "A": "The Critical Path",
+        "B": "Hierarchical Multiscale Modeling (HM²)",
+        "C": "The Pareto Frontier",
+        "D": "The 6-step troubleshooting protocol"
+      },
+      "answer": "C",
+      "explanation": "The Pareto Frontier helps find the mathematical 'sweet spot' or best possible balance between competing objectives, such as lightweight versus strength."
+    },
+    {
+      "type": "application",
+      "question": "Your team is building a robot and discovers a 'Data Gap' during 'Performance Evaluation'—the robot's actual speed is slower than predicted. What is the most appropriate next step based on the lesson's principles?",
+      "options": {
+        "A": "Immediately scrap the robot and start a new design from scratch.",
+        "B": "Ignore the discrepancy and assume the model was close enough.",
+        "C": "Use the 6-step troubleshooting protocol to find the root cause in the data.",
+        "D": "Declare the project finished, as some errors are unavoidable."
+      },
+      "answer": "C",
+      "explanation": "A 'Data Gap' during Performance Evaluation requires troubleshooting to find the root cause, and the lesson mentions using the 6-step troubleshooting protocol for this purpose."
+    },
+    {
+      "type": "application",
+      "question": "You are tasked with choosing the best material for a new playground slide. You need to consider its cost, how long it will last in different weather, and its impact on the environment when it eventually needs to be replaced. Which phase of the Creationeering lifecycle are you primarily engaged in?",
+      "options": {
+        "A": "Logistics",
+        "B": "Assembly",
+        "C": "Performance Evaluation",
+        "D": "Procurement"
+      },
+      "answer": "D",
+      "explanation": "Considering cost, material properties like longevity (durability), and environmental impact for materials selection falls directly under the 'Procurement' phase."
+    },
+    {
+      "type": "synthesis",
+      "question": "The 'Death and Recycling' phase emphasizes honoring the 'Master Recycler' by ensuring materials are returned to the cycle. This concept most directly connects to which overarching theme of Creationeering?",
+      "options": {
+        "A": "The importance of achieving the Pareto Frontier in design.",
+        "B": "The principle of stewardship and responsible management of God's creation.",
+        "C": "The need for 'Clean Data' at the atomic level.",
+        "D": "The challenge of identifying a 'Data Gap' in performance."
+      },
+      "answer": "B",
+      "explanation": "The 'Death and Recycling' phase, by honoring the 'Master Recycler' and returning materials to the cycle, directly reflects the Creationeering theme of stewardship and responsible management of resources."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that 'Engineering Thinking' involves seeing the world as interconnected systems, mirroring the intentionality of the 'Master Creator.' This perspective encourages engineers to approach problems with a mindset of:",
+      "options": {
+        "A": "Random experimentation without prior planning.",
+        "B": "Careful design and understanding of how parts work together, like God's creation.",
+        "C": "Focusing only on the largest components of a system.",
+        "D": "Ignoring the long-term impact of their designs."
+      },
+      "answer": "B",
+      "explanation": "Engineering Thinking, described as mirroring the intentionality of the Master Creator and seeing interconnected systems, promotes careful design and understanding of how parts work together, reflecting God's ordered creation."
+    },
+    {
+      "type": "synthesis",
+      "question": "The 'Performance Evaluation' phase aims to find 'Ground Truth' by comparing actual results to predictions, and identifies 'Data Gaps' if they don't match. This iterative process of testing and refinement is most closely aligned with which other core aspect of the Creationeering lab environment?",
+      "options": {
+        "A": "The initial 'Genesis 0:0' pre-made thinking.",
+        "B": "The self-paced, iterative culture of the lab for deep learning.",
+        "C": "The strict adherence to the Critical Path for project scheduling.",
+        "D": "The procurement of materials based solely on lowest cost."
+      },
+      "answer": "B",
+      "explanation": "The iterative process of testing, identifying 'Data Gaps,' and refining designs in Performance Evaluation directly aligns with the stated self-paced, iterative culture of the lab environment, which encourages deep learning and refinement."
+    }
+  ]
+}

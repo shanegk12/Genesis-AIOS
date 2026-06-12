@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson: V2.0 Design in Sustainability — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Lesson: V2.0 Design in Sustainability</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Sustainability", "definition": "Meeting the needs of today without harming the ability of future generations to meet their own needs. In engineering, it means designing products with less environmental impact."}, {"term": "Version 2.0 Design", "definition": "A redesign of a product that focuses on improving sustainability by reducing waste, using better materials, and planning for the product's end-of-life."}, {"term": "Design for Disassembly (DfD)", "definition": "Designing a product so its parts can be easily taken apart at the end of its life, which makes recycling, reusing, or repairing much simpler."}, {"term": "Material Substitution", "definition": "Replacing a material in a product with a different one that is more recyclable, biodegradable, or has a lower environmental impact."}, {"term": "End-of-Life Planning", "definition": "Deciding what will happen to a product after it's no longer used, even before the product is first built."}, {"term": "Product Life Extension", "definition": "Making design choices that help a product last longer, so fewer replacements need to be made and less waste is created."}, {"term": "Circular Economy", "definition": "An economic system where products are designed so their materials can be recovered and reused, leading to less waste going to landfills."}, {"term": "Why is V2.0 important for sustainability?", "definition": "First-generation products often focus only on function. V2.0 is a chance to redesign with sustainability in mind from the start, saving resources and reducing waste."}, {"term": "Example of Design for Disassembly", "definition": "Using screws instead of glue to attach parts of a product, making it easier to separate and recycle different materials."}, {"term": "Example of Material Substitution", "definition": "Replacing plastic wheels on a mousetrap car with cardboard or plywood cutouts, which are more sustainable options."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

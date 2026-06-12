@@ -1,0 +1,281 @@
+[
+  {
+    "id": "m020t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build 3: CAD Analysis of Design Parameters</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>You have successfully navigated the iterative design phases of the Mousetrap Vehicle project. In the Mark 1 phase, you used the One Factor at a Time (OFAT) strategy to isolate individual variables like wheel diameter and lever arm length, building a solid Scientific Ground Truth. In the Mark 2 phase, you synthesized those verified findings into a superior physical prototype.</p><p>Now you enter the most advanced phase of the Analysis and Synthesis pillar of the Creationeering Lifecycle: Computational Modeling and Rapid Iteration. This lesson introduces the Computational Mousetrap Car Model — an interactive digital laboratory that lets you run thousands of design iterations in minutes, revealing optimal solutions that would be impossible to find through physical testing alone.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain the role of a Digital Twin in achieving Rapid Iteration and minimizing resource waste.</li><li>Manipulate Objective-Constraint-Variable (OCV) sliders to predict vehicle performance based on your Mk. 1 and Mk. 2 data.</li><li>Identify the combination of variables that places your design on the Pareto Frontier — the sweet spot of maximum efficiency.</li><li>Analyze and calculate the theoretical Energy Flow, Loss, and Efficiency of your design within the simulation.</li><li>Apply the principle of computational modeling to act as a more responsible Steward of the Joule.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Digital Twin",
+          "definition": "A precise mathematical model of a physical object or system that exists in software, allowing engineers to test and iterate designs without building anything physical."
+        },
+        {
+          "term": "Rapid Iteration",
+          "definition": "The ability to quickly adjust, simulate, and evaluate many design variations in a very short time — nearly instantaneous in a computational model."
+        },
+        {
+          "term": "CAD (Computer-Aided Design)",
+          "definition": "Software used by engineers to create, analyze, and optimize digital models of physical designs."
+        },
+        {
+          "term": "Pareto Frontier",
+          "definition": "The set of design solutions where no single variable can be improved without making another variable worse — the sweet spot of maximum efficiency."
+        },
+        {
+          "term": "OCV (Objective-Constraint-Variable)",
+          "definition": "A framework for structuring a design problem by defining what you want to achieve (objective), what limits your design (constraints), and what you can change (variables)."
+        },
+        {
+          "term": "Steward of the Joule",
+          "definition": "The principle of using energy as wisely and efficiently as possible — treating energy as a resource entrusted to us to manage responsibly."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Engineers Build Models First</h2><p>In professional engineering, designers rarely begin by building the final product. They build a model first — a Digital Twin — inside a simulation or CAD program. Think of it like an architect's blueprint: the architect doesn't pour concrete to test whether a doorway is the right width. They draw it, measure it, revise it, and only then hand the plans to a builder.</p><p>Your Mousetrap Car project has followed exactly this progression. Your Mark 1 was about discovery. Your Mark 2 was about synthesis. Your Mark 3 — the Computational Analysis — is about precision. It is the third and most advanced generation of your design process.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison showing a physical mousetrap car prototype on the left and a glowing digital CAD model of the same car on a dark screen on the right, illustrating the concept of a Digital Twin."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Moving Beyond Physical Limits</h2><p>Your Mark 1 and Mark 2 builds were powerful learning experiences, but physical prototyping comes with real constraints that limit how far you can explore:</p><ul><li><strong>Resource Constraint:</strong> Every piece of balsa wood, every brass axle, and every hour of testing is a resource given by God to be stewarded wisely. A mistake in the physical lab means wasted material.</li><li><strong>Time Constraint:</strong> Changing one variable — like axle diameter — requires carefully disassembling and rebuilding your car. Testing ten different wheel sizes could take hours of work.</li><li><strong>Measurement Constraint:</strong> No matter how carefully you measure, uncontrollable factors like air temperature, humidity, and tiny assembly imperfections always introduce some uncertainty. Your instruments only capture the big-picture result.</li></ul><p>The Digital Twin eliminates these constraints. It is a perfect mathematical representation of your car, built from the same scientific laws you have studied: Newton's Laws, the Law of Conservation of Energy, and the formulas for friction and drag. Inside the simulation, those laws never change — just like in creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Jeremiah 33:3</strong> — <em>\"Call to me and I will answer you and tell you great and unsearchable things you do not know.\"</em></p><p>The laws of physics God wove into creation are consistent and knowable. Computational modeling is one powerful way we \"call\" on those laws — asking deeper questions than physical testing alone can answer, and receiving precise, reliable answers in return.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Power of Rapid Iteration</h2><p>Iteration is at the heart of engineering — it is the engineer's version of a well-practiced \"try again.\" But not all iteration is created equal. Compare the two cycles:</p><h3>Physical Iteration Cycle</h3><ul><li>Build (slow) → Test (medium) → Analyze (medium) → Refine (slow) → Repeat</li></ul><h3>Computational Iteration Cycle</h3><ul><li>Adjust Slider (instant) → Simulate (instant) → Read Results (instant) → Repeat</li></ul><p>In the physical world, testing ten wheel diameters might take a full class period. In the Digital Twin, you can test those same ten values in under a minute — and then test one hundred more before the period ends. That is the power of Rapid Iteration.</p><p>This computational phase is not a shortcut around your physical work — it is built on top of it. The Ground Truth data you collected in Mark 1 and the refined prototype you built in Mark 2 are what give the simulation its accuracy. Garbage in, garbage out: if your physical measurements were sloppy, the digital model cannot save you. But if your data was solid, the model becomes an extraordinary amplifier of that knowledge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Connect your data to the model.</strong> Before you start adjusting sliders, review your Mark 1 and Mark 2 results. Enter the values you actually measured — wheel diameter, lever arm length, axle size — as your starting point. The simulation is most powerful when it is anchored to your real-world data, not random guesses.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Finding the Pareto Frontier</h2><p>One of the most important goals of this computational phase is finding your design's <strong>Pareto Frontier</strong>. Named after economist Vilfredo Pareto, this concept describes the set of solutions where you cannot improve one performance metric without hurting another.</p><p>For your mousetrap car, you are balancing competing objectives — for example, maximizing distance while also minimizing the time it takes to travel that distance, or maximizing speed while keeping the design within material constraints. The Pareto Frontier is the line where your design is as efficient as it can possibly be given those trade-offs.</p><p>Think of it like tuning a guitar. Tightening one string gets you closer to the right pitch, but if you tighten it too far, the string snaps — or pulls the neck out of alignment. Every adjustment affects the whole system. The Digital Twin lets you find the exact tuning — the Pareto Frontier — without ever breaking a string.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple scatter plot graph showing a curved Pareto Frontier line, with data points scattered around it. Points on the curve are labeled 'optimal solutions' and points below/off the curve are labeled 'inefficient solutions.' Axes labeled 'Distance' and 'Speed' to represent mousetrap car performance trade-offs."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Energy Flow and Stewardship in the Simulation</h2><p>Inside the Computational Model, you will also analyze your design's <strong>Energy Flow</strong> — how the stored energy in the mousetrap spring moves through the system and how much is lost at each stage to friction, drag, and heat.</p><p>The Law of Conservation of Energy tells us that energy is never destroyed — it just changes form. But not all of those forms are useful. Energy lost to friction in an axle bearing, for example, becomes heat instead of forward motion. The simulation lets you see exactly where your energy is going and how efficiently your design converts stored potential energy into distance traveled.</p><p>This is what it means to be a <strong>Steward of the Joule</strong>. Just as God calls us to steward every resource He has given us — time, talent, material — a well-designed machine honors that principle by wasting as little as possible. A sloppy design that loses 60% of its energy to friction is not just inefficient engineering; it reflects poor stewardship of the resources put into building it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often chase the highest possible distance number in the simulation without checking the energy efficiency output. A design that travels far but wastes 80% of its energy is not a good design — it just happens to have enough raw energy to overcome its own inefficiencies. Always check both performance <em>and</em> efficiency metrics together.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Using the OCV Framework in the Model</h2><p>The simulation is organized around the <strong>Objective-Constraint-Variable (OCV)</strong> framework. Before you start adjusting sliders, it helps to be clear about which category each parameter falls into:</p><ul><li><strong>Objective:</strong> What you are trying to maximize or minimize — for example, total distance traveled or energy efficiency percentage.</li><li><strong>Constraints:</strong> Limits you cannot change — for example, the energy stored in a standard mousetrap spring, or the maximum allowable vehicle length.</li><li><strong>Variables:</strong> The design parameters you are free to adjust — wheel diameter, axle diameter, lever arm length, wheel mass, and so on.</li></ul><p>Working systematically through the OCV framework keeps your analysis organized. It prevents the common trap of randomly adjusting sliders and losing track of what you changed and why. Methodical, purposeful testing in the simulation is just as important as it was in your physical Mark 1 experiments.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m020acc01",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is a Digital Twin, and why is it more efficient than physical prototyping for exploring many design variations?</strong><br/>A Digital Twin is a precise mathematical model of a physical system that runs in software. It is more efficient because adjustments and simulations are nearly instantaneous — you can test hundreds of design combinations in minutes rather than spending hours building and testing physical prototypes.</p><p><strong>2. What are the three main constraints of physical prototyping that the Digital Twin eliminates?</strong><br/>Resource constraints (material waste), time constraints (slow build-test-rebuild cycles), and measurement constraints (uncontrollable environmental variables that add uncertainty to physical data).</p><p><strong>3. What does it mean for a design to be on the Pareto Frontier?</strong><br/>It means the design is at peak efficiency for its trade-offs — you cannot improve one performance metric without making another one worse. It is the sweet spot of optimal design given competing objectives.</p><p><strong>4. In the OCV framework, what is the difference between a constraint and a variable?</strong><br/>A constraint is a limit you cannot change (like the energy stored in the mousetrap spring). A variable is a design parameter you are free to adjust (like wheel diameter or lever arm length).</p><p><strong>5. Why is energy efficiency important to analyze alongside raw performance metrics like distance?</strong><br/>A design that travels far but wastes most of its energy is not truly well-engineered — it just overcomes its own inefficiency with brute energy. Analyzing efficiency reveals how responsibly your design uses the energy available to it, connecting to the principle of being a Steward of the Joule.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

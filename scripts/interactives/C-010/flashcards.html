@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visualization and Sketching — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Visualization and Sketching</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Technical Sketching", "definition": "A specialized language using drawings to show exactly how something should be built, how it works, and how it fits into a larger system."}, {"term": "Assemblies", "definition": "The complete system or the 'big picture' of what is being designed, like an entire bicycle."}, {"term": "Subassemblies", "definition": "Smaller, functional parts or systems that make up a larger assembly, such as a bike's braking system."}, {"term": "Scale", "definition": "A ratio (like 1:10) used to represent very large or very small objects accurately on paper, making them fit or be seen clearly."}, {"term": "Proportion", "definition": "Making sure that the sizes of different parts in a sketch look realistic and relate correctly to each other."}, {"term": "Annotations", "definition": "Labels or notes added to an engineering sketch to explain important details like materials, sizes, or specific functions."}, {"term": "Object Lines", "definition": "Thick, dark, solid lines used in a sketch to show the visible edges and outlines of an object."}, {"term": "Hidden Lines", "definition": "Thin, dashed lines that show parts of an object that are important but cannot be seen from the current view."}, {"term": "Center Lines", "definition": "Thin lines with alternating long and short dashes used to mark the exact middle of symmetrical objects."}, {"term": "Habakkuk 2:2", "definition": "A Biblical principle that connects clear technical documentation to 'writing the vision' so it can be easily understood and acted upon."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

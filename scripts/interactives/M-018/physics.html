@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Energy Sandbox – Genesis K-12 Academy</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B3A5C;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-size: 1.25rem;
+    color: #C9A84C;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.78rem;
+    color: #aac4de;
+    margin-top: 2px;
+  }
+  #main {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    width: 100%;
+    max-width: 860px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #canvasWrap {
+    position: relative;
+    flex: 1 1 480px;
+  }
+  canvas {
+    display: block;
+    background: #0e2238;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    width: 100%;
+    touch-action: none;
+  }
+  #panel {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card {
+    background: #0e2238;
+    border: 1.5px solid #C9A84C44;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .card h2 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #C9A84C;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #C9A84C33;
+    padding-bottom: 5px;
+  }
+  .ctrl-row {
+    margin-bottom: 10px;
+  }
+  .ctrl-row label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #c8ddef;
+    margin-bottom: 4px;
+  }
+  .ctrl-row label span {
+    color: #C9A84C;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #1B3A5C;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #fff;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #fff;
+  }
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1B3A5C;
+    border-radius: 5px;
+    padding: 6px 8px;
+    margin-bottom: 6px;
+  }
+  .readout-row .rlabel {
+    font-size: 0.72rem;
+    color: #aac4de;
+  }
+  .readout-row .rval {
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: #C9A84C;
+    font-family: monospace;
+  }
+  .energy-bar-wrap {
+    margin-bottom: 6px;
+  }
+  .ebar-label {
+    font-size: 0.68rem;
+    color: #aac4de;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ebar-track {
+    width: 100%;
+    height: 10px;
+    background: #1B3A5C;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .ebar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.05s;
+  }
+  #fill-pe { background: #C9A84C; }
+  #fill-ke { background: #4caaC9; }
+  #fill-heat { background: #C94C4C; }
+  .btn {
+    width: 100%;
+    padding: 9px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: filter 0.15s;
+  }
+  .btn:active { filter: brightness(0.85); }
+  #btn-launch {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  #btn-reset {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C;
+    margin-top: 4px;
+  }
+  .legend {
+    font-size: 0.68rem;
+    color: #8aafc8;
+    line-height: 1.5;
+  }
+  .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🪤 Mousetrap Vehicle – Energy Sandbox</h1>
+  <p>Genesis K-12 Academy · Creationeering™ · Stored Energy &amp; Motion</p>
+</header>
+
+<div id="main">
+  <div id="canvasWrap">
+    <canvas id="sim" width="700" height="420"></canvas>
+  </div>
+
+  <div id="panel">
+
+    <div class="card">
+      <h2>⚙️ Controls</h2>
+
+      <div class="ctrl-row">
+        <label>Spring Wind (θ) <span id="lbl-wind">165°</span></label>
+        <input type="range" id="sl-wind" min="30" max="180" value="165" step="1">
+      </div>
+
+      <div class="ctrl-row">
+        <label>String Arm (cm) <span id="lbl-arm">8</span></label>
+        <input type="range" id="sl-arm" min="3" max="15" value="8" step="0.5">
+      </div>
+
+      <div class="ctrl-row">
+        <label>Wheel Radius (cm) <span id="lbl-wheel">4</span></label>
+        <input type="range" id="sl-wheel" min="2" max="8" value="4" step="0.5">
+      </div>
+
+      <div class="ctrl-row">
+        <label>Surface Friction (μ) <span id="lbl-mu">0.05</span></label>
+        <input type="range" id="sl-mu" min="0.01" max="0.40" value="0.05" step="0.01">
+      </div>
+
+      <button class="btn" id="btn-launch">▶ Release Spring</button>
+      <button class="btn" id="btn-reset">↺ Reset</button>
+    </div>
+
+    <div class="card">
+      <h2>📊 Readouts</h2>
+      <div class="readout-row">
+        <span class="rlabel">Stored PE</span>
+        <span class="rval" id="r-pe">0.00 J</span>
+      </div>
+      <div class="readout-row">
+        <span class="rlabel">Kinetic Energy</span>
+        <span class="rval" id="r-ke">0.00 J</span>
+      </div>
+      <div class="readout-row">
+        <span class="rlabel">Speed</span>
+        <span class="rval" id="r-spd">0.00 m/s</span>
+      </div>
+      <div class="readout-row">
+        <span class="rlabel">Distance</span>
+        <span class="rval" id="r-dist">0.00 m</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Energy Bars</h2>
+      <div class="energy-bar-wrap">
+        <div class="ebar-label"><span>Potential (PE)</span><span id="pct-pe">100%</span></div>
+        <div class="ebar-track"><div class="ebar-fill" id="fill-pe" style="width:100%"></div></div>
+      </div>
+      <div class="energy-bar-wrap">
+        <div class="ebar-label"><span>Kinetic (KE)</span><span id="pct-ke">0%</span></div>
+        <div class="ebar-track"><div class="ebar-fill" id="fill-ke" style="width:0%"></div></div>
+      </div>
+      <div class="energy-bar-wrap">
+        <div class="ebar-label"><span>Heat (Friction)</span><span id="pct-heat">0%</span></div>
+        <div class="ebar-track"><div class="ebar-fill" id="fill-heat" style="width:0%"></div></div>
+      </div>
+      <br>
+      <div class="legend">
+        <span class="dot" style="background:#C9A84C"></span>Potential &nbsp;
+        <span class="dot" style="background:#4caaC9"></span>Kinetic &nbsp;
+        <span class="dot" style="background:#C94C4C"></span>Heat
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ── Canvas setup ──────────────────────────────────────────────────────────────
+const canvas = document.getElementById('sim');
+const ctx = canvas.getContext('2d');
+
+// ── UI refs ───────────────────────────────────────────────────────────────────
+const slWind  = document.getElementById('sl-wind');
+const slArm   = document.getElementById('sl-arm');
+const slWheel = document.getElementById('sl-wheel');
+const slMu    = document.getElementById('sl-mu');
+const lblWind  = document.getElementById('lbl-wind');
+const lblArm   = document.getElementById('lbl-arm');
+const lblWheel = document.getElementById('lbl-wheel');
+const lblMu    = document.getElementById('lbl-mu');
+const rPE   = document.getElementById('r-pe');
+const rKE   = document.getElementById('r-ke');
+const rSpd  = document.getElementById('r-spd');
+const rDist = document.getElementById('r-dist');
+const fillPE   = document.getElementById('fill-pe');
+const fillKE   = document.getElementById('fill-ke');
+const fillHeat = document.getElementById('fill-heat');
+const pctPE   = document.getElementById('pct-pe');
+const pctKE   = document.getElementById('pct-ke');
+const pctHeat = document.getElementById('pct-heat');
+const btnLaunch = document.getElementById('btn-launch');
+const btnReset  = document.getElementById('btn-reset');
+
+// ── Physics constants ──────────────────────────────────────────────────────────
+const SPRING_K = 0.35;   // N·m / rad  (realistic mousetrap spring constant)
+const CAR_MASS = 0.080;  // kg (80 g typical mousetrap car)
+
+// ── State ──────────────────────────────────────────────────────────────────────
+let state = 'idle'; // 'idle' | 'running' | 'coasting' | 'stopped'
+let springAngle = 0;      // radians remaining in spring
+let springAngle0 = 0;     // initial spring angle (rad)
+let carX = 0;             // metres from start
+let carVel = 0;           // m/s
+let heatEnergy = 0;       // J lost to friction
+let totalPE0 = 0;         // initial PE
+let lastTime = null;
+
+// visual
+let carPxX = 0;           // canvas pixels
+const GROUND_Y_FRAC = 0.78;
+let worldOffsetX = 0;     // for scrolling
+
+// Derived from sliders
+function getParams(){
+  const windDeg  = parseFloat(slWind.value);
+  const armCm    = parseFloat(slArm.value);
+  const wheelCm  = parseFloat(slWheel.value);
+  const mu       = parseFloat(slMu.value);
+  return {
+    windRad : windDeg * Math.PI / 180,
+    armM    : armCm / 100,
+    wheelM  : wheelCm / 100,
+    mu,
+    windDeg
+  };
+}
+
+function calcInitialPE(windRad){
+  return 0.5 * SPRING_K * windRad * windRad;
+}
+
+// ── Reset ──────────────────────────────────────────────────────────────────────
+function reset(){
+  const p = getParams();
+  state = 'idle';
+  springAngle = p.windRad;
+  springAngle0 = p.windRad;
+  carX   = 0;
+  carVel = 0;
+  heatEnergy = 0;
+  totalPE0 = calcInitialPE(p.windRad);
+  carPxX = 0;
+  worldOffsetX = 0;
+  lastTime = null;
+  btnLaunch.textContent = '▶ Release Spring';
+  updateReadouts(p);
+  drawScene(p);
+}
+
+// ── Slider event handlers ──────────────────────────────────────────────────────
+function syncLabels(){
+  lblWind.textContent  = slWind.value + '°';
+  lblArm.textContent   = slArm.value + ' cm';
+  lblWheel.textContent = slWheel.value + ' cm';
+  lblMu.textContent    = parseFloat(slMu.value).toFixed(2);
+}
+[slWind, slArm, slWheel, slMu].forEach(s => {
+  s.addEventListener('input', () => {
+    syncLabels();
+    if(state === 'idle' || state === 'stopped') reset();
+  });
+});
+syncLabels();
+
+// ── Button handlers ────────────────────────────────────────────────────────────
+btnLaunch.addEventListener('click', () => {
+  if(state === 'idle'){
+    state = 'running';
+    lastTime = null;
+    btnLaunch.textContent = '⏸ Running…';
+    requestAnimationFrame(loop);
+  }
+});
+btnReset.addEventListener('click', reset);
+
+// ── Physics update ─────────────────────────────────────────────────────────────
+function physicsStep(dt, p){
+  if(state === 'running'){
+    // Torque from spring → force on car via string-on-wheel
+    // τ = K * θ,  F_drive = τ / r_wheel (string wrapped on axle)
+    // We use arm to apply torque; mechanical advantage = armM / wheelM
+    const tau = SPRING_K * springAngle;               // N·m
+    const forceDrive = tau * (p.armM / (p.wheelM * p.wheelM)); 
+    // ↑ arm length amplifies the torque; wheel radius converts to linear force
+    // Simplified: F = K*θ*armM / wheelM
+    const fDrive = SPRING_K * springAngle * p.armM / p.wheelM;
+    const fFric  = p.mu * CAR_MASS * 9.81;
+
+    const netForce = fDrive - fFric;
+    const accel = netForce / CAR_MASS;
+
+    carVel += accel * dt;
+    if(carVel < 0) carVel = 0;
+
+    // Advance spring angle — as car moves forward, string unwinds
+    // arc length on wheel = carX advance, so dθ = dx / wheelM
+    const dx = carVel * dt;
+    const dTheta = dx / p.wheelM * (p.armM / p.wheelM);
+    springAngle -= dTheta;
+
+    if(springAngle <= 0){
+      springAngle = 0;
+      state = 'coasting';
+    }
+
+    heatEnergy += fFric * dx;
+    carX += dx;
+
+  } else if(state === 'coasting'){
+    const fFric = p.mu * CAR_MASS * 9.81;
+    const decel = fFric / CAR_MASS;
+    carVel -= decel * dt;
+    if(carVel <= 0){
+      carVel = 0;
+      state = 'stopped';
+      btnLaunch.textContent = '✓ Stopped';
+    }
+    const dx = Math.max(0, carVel * dt);
+    heatEnergy += fFric * dx;
+    carX += dx;
+  }
+}
+
+// ── Readouts ────────────────────────────────────────────────────────────────────
+function updateReadouts(p){
+  const pe = calcInitialPE(springAngle);
+  const ke = 0.5 * CAR_MASS * carVel * carVel;
+
+  rPE.textContent  = pe.toFixed(3) + ' J';
+  rKE.textContent  = ke.toFixed(3) + ' J';
+  rSpd.textContent = carVel.toFixed(3) + ' m/s';
+  rDist.textContent= carX.toFixed(3) + ' m';
+
+  const total = Math.max(totalPE0, 0.0001);
+  const pPE   = Math.min(100, pe / total * 100);
+  const pKE   = Math.min(100, ke / total * 100);
+  const pHeat = Math.min(100, heatEnergy / total * 100);
+
+  fillPE.style.width   = pPE.toFixed(1) + '%';
+  fillKE.style.width   = pKE.toFixed(1) + '%';
+  fillHeat.style.width = pHeat.toFixed(1) + '%';
+  pctPE.textContent   = pPE.toFixed(0) + '%';
+  pctKE.textContent   = pKE.toFixed(0) + '%';
+  pctHeat.textContent = pHeat.toFixed(0) + '%';
+}
+
+// ── Drawing ─────────────────────────────────────────────────────────────────────
+function drawScene(p){
+  const W = canvas.width;
+  const H = canvas.height;
+  const GY = Math.floor(H * GROUND_Y_FRAC);
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0, 0, 0, GY);
+  sky.addColorStop(0, '#0a1a2e');
+  sky.addColorStop(1, '#1B3A5C');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, GY);
+
+  // Ground
+  const grd = ctx.createLinearGradient(0, GY, 0, H);
+  grd.addColorStop(0, '#2a4a20');
+  grd.addColorStop(1, '#1a2d14');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, GY, W, H - GY);
+
+  // Ground line
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, GY);
+  ctx.lineTo(W, GY);
+  ctx.stroke();
+
+  // Distance ruler marks
+  ctx.font = '10px monospace';
+  ctx.fillStyle = '#8aafc8';
+  ctx.textAlign = 'center';
+  const mPerPx = 0.006; // 1 px = 6mm at default scale
+  for(let m = 0; m <= 5; m += 0.25){
+    const px = m / mPerPx - worldOffsetX;
+    if(px < 0 || px > W) continue;
+    ctx.strokeStyle = m % 1 === 0 ? '#C9A84C88' : '#ffffff22';
+    ctx.lineWidth = m % 1 === 0 ? 1.5 : 0.8;
+    ctx.beginPath();
+    ctx.moveTo(px, GY);
+    ctx.lineTo(px, GY + (m % 1 === 0 ? 12 : 6));
+    ctx.stroke();
+    if(m % 1 === 0 && px > 10 && px < W - 10){
+      ctx.fillStyle = '#C9A84C';
+      ctx.fillText(m.toFixed(0) + 'm', px, GY + 22);
+    }
+  }
+
+  // Car position in px
+  const carScreenX = carX / mPerPx - worldOffsetX;
+
+  // Keep car in left 60% of screen during motion
+  if(state === 'running' || state === 'coasting'){
+    const targetX = W * 0.35;
+    if(carScreenX > targetX){
+      worldOffsetX = carX / mPerPx - targetX;
+    }
+  }
+
+  const csx = carX / mPerPx - worldOffsetX;
+
+  // ── Draw Car ──────────────────────────────────────────────────────────────
+  const wheelR  = p.wheelM / mPerPx;
+  const bodyW   = wheelR * 5;
+  const bodyH   = wheelR * 2.2;
+  const carY    = GY - wheelR * 2;
+  const axleFront = csx + bodyW * 0.38;
+  const axleRear  = csx - bodyW * 0.38;
+  const wheelY    = GY - wheelR;
+
+  // Wheel rotation based on distance
+  const rot = carX / p.wheelM;
+
+  function drawWheel(cx, cy, r){
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(rot);
+    // Rim
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fill();
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Spokes
+    for(let s = 0; s < 6; s++){
+      const a = s * Math.PI / 3;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(a) * r * 0.85, Math.sin(a) * r * 0.85);
+      ctx.strokeStyle = '#C9A84C88';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+    // Hub
+    ctx.beginPath();
+    ctx.arc(0, 0, r * 0.15, 0, Math.PI * 2);
+    ctx.fillStyle = '#C9A84C';
+    ctx.fill();
+    ctx.restore();
+  }
+
+  drawWheel(axleFront, wheelY, wheelR);
+  drawWheel(axleRear,  wheelY, wheelR);
+
+  // Chassis
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(csx - bodyW * 0.5, carY - bodyH * 0.35, bodyW, bodyH * 0.35);
+  ctx.fillStyle = '#2a4a6a';
+  ctx.fill();
+  ctx.strokeStyle = '#4a8aaa';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
+
+  // Body
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(csx - bodyW * 0.38, carY - bodyH, bodyW * 0.76, bodyH * 0.75, 5);
+  ctx.fillStyle = '#1B3A5C';
+  ctx.fill();
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1.8;
+  ctx.stroke();
+  ctx.restore();
+
+  // Mousetrap on body
+  const trapX = csx - bodyW * 0.12;
+  const trapY = carY - bodyH;
+  const trapW = bodyW * 0.5;
+  const trapH = bodyH * 0.32;
+
+  ctx.save();
+  // Trap base
+  ctx.fillStyle = '#8B6914';
+  ctx.fillRect(trapX - trapW * 0.5, trapY - trapH, trapW, trapH);
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(trapX - trapW * 0.5, trapY - trapH, trapW, trapH);
+
+  // Spring coil visual
+  ctx.strokeStyle = '#aaaaaa';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(trapX, trapY - trapH * 0.5, trapW * 0.18, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Lever arm – rotates with spring angle
+  const leverLen = p.armM / mPerPx;
+  const leverAngle = -(Math.PI / 2) + (springAngle0 - springAngle);
+  ctx.strokeStyle = '#dddddd';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(trapX, trapY - trapH * 0.5);
+  ctx.lineTo(
+    trapX + Math.cos(leverAngle) * leverLen,
+    (trapY - trapH * 0.5) + Math.sin(leverAngle) * leverLen
+  );
+  ctx.stroke();
+
+  // String from lever tip to rear axle
+  const tipX = trapX + Math.cos(leverAngle) * leverLen;
+  const tipY = (trapY - trapH * 0.5) + Math.sin(leverAngle) * leverLen;
+  if(state === 'running'){
+    ctx.strokeStyle = '#ffffffaa';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(tipX, tipY);
+    ctx.lineTo(axleRear, wheelY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  ctx.restore();
+
+  // ── Energy flame particles (kinetic) ───────────────────────────────────────
+  if(carVel > 0.05){
+    const intensity = Math.min(1, carVel / 1.5);
+    for(let i = 0; i < 6; i++){
+      const px = csx - bodyW * 0.5 - Math.random() * 18 * intensity;
+      const py = GY - wheelR + (Math.random() - 0.5) * 16;
+      const r2 = 3 + Math.random() * 4 * intensity;
+      const g = ctx.createRadialGradient(px, py, 0, px, py, r2);
+      g.addColorStop(0, 'rgba(255,200,50,0.9)');
+      g.addColorStop(1, 'rgba(255,80,0,0)');
+      ctx.beginPath();
+      ctx.arc(px, py, r2, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    }
+  }
+
+  // ── Labels on canvas ────────────────────────────────────────────────────────
+  ctx.font = 'bold 12px Segoe UI';
+  ctx.fillStyle = '#C9A84C';
+  ctx.textAlign = 'left';
+  ctx.fillText('PE → KE Energy Transfer', 10, 22);
+
+  ctx.font = '11px monospace';
+  ctx.fillStyle = '#aac4de';
+  const peNow = calcInitialPE(springAngle);
+  const keNow = 0.5 * CAR_MASS * carVel * carVel;
+  ctx.fillText('PE: ' + peNow.toFixed(3) + ' J', 10, 40);
+  ctx.fillText('KE: ' + keNow.toFixed(3) + ' J', 10, 56);
+  ctx.fillText('μ:  ' + p.mu.toFixed(2),           10, 72);
+
+  // State badge
+  const stateColor = { idle: '#aaaaaa', running: '#4cC94c', coasting: '#4caaC9', stopped: '#C94C4C' };
+  ctx.fillStyle = stateColor[state] || '#aaa';
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.textAlign = 'right';
+  ctx.fillText(state.toUpperCase(), W - 10, 22);
+
+  // ── Spring wind indicator (top right arc) ──────────────────────────────────
+  const indX = W - 48, indY = 58, indR = 28;
+  ctx.strokeStyle = '#1B3A5C';
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.arc(indX, indY, indR, -Math.PI * 1.1, Math.PI * 0.1);
+  ctx.stroke();
+
+  const progress = springAngle / Math.max(springAngle0, 0.01);
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.arc(indX, indY, indR, -Math.PI * 1.1, -Math.PI * 1.1 + progress * Math.PI * 1.2);
+  ctx.stroke();
+  ctx.lineCap = 'butt';
+
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 9px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText('SPRING', indX, indY + 4);
+  ctx.fillText((progress * 100).toFixed(0) + '%', indX, indY + 14);
+}
+
+// ── Main loop ─────────────────────────────────────────────────────────────────
+function loop(ts){
+  if(lastTime === null) lastTime = ts;
+  let dt = (ts - lastTime) / 1000;
+  lastTime = ts;
+  dt = Math.min(dt, 0.033); // cap at 33ms
+
+  const p = getParams();
+  physicsStep(dt, p);
+  updateReadouts(p);
+  drawScene(p);
+
+  if(state === 'running' || state === 'coasting'){
+    requestAnimationFrame(loop);
+  }
+}
+
+// ── Canvas resize ─────────────────────────────────────────────────────────────
+function resizeCanvas(){
+  const wrap = canvas.parentElement;
+  const ratio = canvas.height / canvas.width;
+  const w = wrap.clientWidth;
+  canvas.style.width  = w + 'px';
+  canvas.style.height = (w * ratio) + 'px';
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+reset();
+
+})();
+</script>
+</body>
+</html>

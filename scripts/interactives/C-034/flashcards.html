@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Standardization vs. Custom Fabrication — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Standardization vs. Custom Fabrication</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Procurement", "definition": "The process of getting the goods, services, or work you need from an outside source, often involving careful planning and selection."}, {"term": "Standardization", "definition": "The process of creating and using common rules or designs so that parts are uniform and can be easily interchanged."}, {"term": "Custom Fabrication", "definition": "The process of designing and making a part or product specifically for a unique purpose or customer."}, {"term": "Component", "definition": "A single part or element that makes up a larger machine or system."}, {"term": "Assembly", "definition": "A group of parts that fit together to create a complete unit within a larger machine or system."}, {"term": "Standardized Components", "definition": "Parts that are mass-produced to specific, common designs, making them readily available and often cheaper."}, {"term": "Custom-Fabricated Components", "definition": "Parts that are specially made to fit a unique design or solve a specific problem, often at a higher cost."}, {"term": "Advantages of Standardization", "definition": "Benefits include lower cost, faster availability, easier replacement, and proven reliability because parts are mass-produced and widely used."}, {"term": "Disadvantages of Custom Fabrication", "definition": "Drawbacks include higher cost, longer production time, and potential for unique issues since parts are made specifically for one purpose."}, {"term": "Creationeering™ Procurement Phase", "definition": "The stage in a project where you acquire all the necessary materials, components, and services to build your design."}, {"term": "Objective, Constraint, Variable (OCV) Method", "definition": "A tool used to evaluate decisions by considering what you want to achieve (objective), the limits you face (constraints), and what you can change (variables)."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

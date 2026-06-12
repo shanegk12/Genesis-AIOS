@@ -1,0 +1,103 @@
+{
+  "lesson_id": "C-027",
+  "topic": "Stress and Strain",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the definition of Stress (σ) in material science?",
+      "options": {
+        "A": "The total external force applied to an object.",
+        "B": "The internal resistance a material develops when subjected to an external force.",
+        "C": "The change in a material's length relative to its original size.",
+        "D": "The measure of how much a material can stretch before breaking."
+      },
+      "answer": "B",
+      "explanation": "Stress is defined as the measure of internal resistance a material develops when subjected to an external force."
+    },
+    {
+      "type": "recall",
+      "question": "How is Strain (ε) defined in the context of material deformation?",
+      "options": {
+        "A": "The force applied per unit area.",
+        "B": "The internal pressure within a material.",
+        "C": "The measure of a material's deformation relative to its original size.",
+        "D": "The point at which a material begins to break."
+      },
+      "answer": "C",
+      "explanation": "Strain is the measure of a material's deformation relative to its original size."
+    },
+    {
+      "type": "recall",
+      "question": "On a Stress-Strain Curve, what does the Yield Point represent?",
+      "options": {
+        "A": "The maximum stress a material can withstand before starting to break.",
+        "B": "The point at which a material begins to permanently deform.",
+        "C": "The material's stiffness or resistance to elastic deformation.",
+        "D": "The initial elastic response of the material before any change."
+      },
+      "answer": "B",
+      "explanation": "The Yield Point is the point at which a material begins to permanently deform (plastic deformation)."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson's analogy, if two people of the same weight walk across soft mud, why does the person wearing stiletto heels sink deeper than the person wearing sneakers?",
+      "options": {
+        "A": "The stiletto applies less total force to the mud.",
+        "B": "The stiletto distributes the force over a much smaller area, creating higher stress.",
+        "C": "The stiletto material is inherently weaker than the sneaker material.",
+        "D": "The sneakers are designed to be lighter than the stilettos."
+      },
+      "answer": "B",
+      "explanation": "A smaller area in the denominator of the stress equation (F/A) results in a much higher stress for the same force, causing the stiletto to sink deeper."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the context of material science, how do Stress and Strain typically relate to each other?",
+      "options": {
+        "A": "Stress is the effect, and Strain is the cause.",
+        "B": "Stress is the cause (internal pressure), and Strain is the effect (deformation).",
+        "C": "They are two different names for the exact same physical phenomenon.",
+        "D": "They only occur simultaneously when a material is about to break."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that if Stress is the cause (the internal pressure), then Strain is the effect (the material's deformation)."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the primary purpose of Hierarchical Multiscale Modeling (HM²) in Creationeering?",
+      "options": {
+        "A": "To calculate the exact yield point of any given material.",
+        "B": "To connect atomic-level data to system-level performance for predicting structural integrity.",
+        "C": "To determine the optimal weight for a structure without considering strength.",
+        "D": "To measure only the external forces acting on a design."
+      },
+      "answer": "B",
+      "explanation": "HM² is a Creationeering technique that links atomic-level data to system-level performance to predict structural integrity."
+    },
+    {
+      "type": "application",
+      "question": "When a heavy book is placed on a shelf, causing the shelf to bend downwards, what type of stress is primarily acting on the top surface of the shelf where it is being pushed together?",
+      "options": {
+        "A": "Tensile stress",
+        "B": "Compressive stress",
+        "C": "Shear stress",
+        "D": "Torsional stress"
+      },
+      "answer": "B",
+      "explanation": "Compressive stress is caused by a squeezing force, which occurs on the top surface of a bending beam as it is pushed together."
+    },
+    {
+      "type": "application",
+      "question": "A Junior Creationeer is designing a support column for a heavy statue. To reduce the internal stress on the column material and prevent failure, what design change would be most effective?",
+      "options": {
+        "A": "Use a taller column to distribute the weight.",
+        "B": "Use a column with a smaller cross-sectional area.",
+        "C": "Use a column with a larger cross-sectional area.",
+        "D": "Use a column made from a lighter material, regardless of strength."
+      },
+      "answer": "C",
+      "explanation": "Increasing the cross-sectional area (A) in the denominator of the stress formula (σ = F/A) will decrease the overall stress on the material."
+    }
+  ]
+}

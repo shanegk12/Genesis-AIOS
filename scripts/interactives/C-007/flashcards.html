@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Objectives, Constraints, and Variables — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Objectives, Constraints, and Variables</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Objective", "definition": "What you want to accomplish or the overall goal you are trying to achieve."}, {"term": "Constraint", "definition": "A limit or rule you must work within, like scientific laws, budget, time, or safety rules."}, {"term": "Variable", "definition": "Something that can change and affect the outcome of a problem or solution, such as materials or design shapes."}, {"term": "Problem Definition", "definition": "A clear statement of what needs to be solved, getting to the root cause of an issue."}, {"term": "OCV Method", "definition": "A structured process engineers use to define and understand difficult problems by identifying Objectives, Constraints, and Variables."}, {"term": "Why engineers define problems first", "definition": "Defining the problem helps engineers understand the root cause of an issue before trying to find a solution, preventing wasted effort on the wrong problem."}, {"term": "Method", "definition": "A specific process or way of doing something to accomplish a goal."}, {"term": "Impact of changing a variable", "definition": "Changing a variable can push a solution closer to or further away from meeting a constraint, affecting the overall success of the design."}, {"term": "Biblical connection to OCV", "definition": "The OCV method helps us understand how God identifies problems, sets boundaries, and responds to changing variables in His redemptive plan, as seen in Genesis and the Gospels."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

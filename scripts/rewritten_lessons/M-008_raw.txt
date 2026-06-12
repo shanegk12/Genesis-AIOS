@@ -1,0 +1,311 @@
+```json
+[
+  {
+    "id": "m008t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>The Arduino</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you explored the world of Digital Measurement — learning how to precisely quantify what your mousetrap car is actually doing. Now we take the next step. Today you will be introduced to the Arduino, a small but powerful tool that lets you do far more than just measure. With an Arduino, you can gather data from sensors, process that information, and make intelligent decisions to optimize your car's performance.</p>\n<p>This is the Analysis and Synthesis phase of Creationeering — the shift from simply observing your design to actively understanding it and refining it. Think of it like upgrading from a ruler to a full diagnostic system. The Arduino is the brain that makes that upgrade possible.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Explain what an Arduino microcontroller is and identify its basic components.</li>\n<li>Describe how sensors connect to an Arduino to collect digital data from your mousetrap car.</li>\n<li>Understand how programming translates collected data into actionable controls for your car.</li>\n<li>Apply the OCV method to an Arduino-integrated design decision for your mousetrap car.</li>\n<li>Recognize how using the Arduino for analysis and synthesis reflects responsible stewardship of the resources and knowledge God has given us.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Arduino",
+          "definition": "A small, open-source microcontroller board that can be programmed to read inputs from sensors and control outputs like motors or lights."
+        },
+        {
+          "term": "Microcontroller",
+          "definition": "A compact integrated circuit designed to govern a specific operation in an embedded system — essentially a small, self-contained computer."
+        },
+        {
+          "term": "Sensor",
+          "definition": "A device that detects input from the physical environment (such as light, motion, or pressure) and converts it into a signal a microcontroller can read."
+        },
+        {
+          "term": "Actuator",
+          "definition": "A component that physically responds to a signal by controlling or moving a mechanism — like powering a motor or flipping a switch."
+        },
+        {
+          "term": "Programming",
+          "definition": "The process of writing instructions (code) for a computer or microcontroller to follow, telling it exactly what to do and when."
+        },
+        {
+          "term": "Analysis",
+          "definition": "The detailed examination of the elements or structure of something, used as the basis for understanding how it works."
+        },
+        {
+          "term": "Synthesis",
+          "definition": "Combining components or ideas to form a connected whole — in engineering, this means building solutions based on what your analysis revealed."
+        },
+        {
+          "term": "Digital Measurement",
+          "definition": "The process of obtaining numerical values from physical quantities using electronic devices, converting real-world signals into discrete data."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Wisdom in Design</h2>\n<p>Before diving into circuits and code, it's worth pausing to think about where this kind of analytical thinking comes from in the first place.</p>\n<p>Proverbs 3:19 says, <em>"The LORD by wisdom founded the earth; by understanding He established the heavens."</em> God didn't create randomly or carelessly. Every structure, every system, every relationship in nature was designed with purpose and precision. The more scientists and engineers study the natural world, the more they uncover layers of intelligent order underneath.</p>\n<p>When you analyze your mousetrap car — measuring its speed, studying where energy is lost, figuring out what to change — you are doing something that reflects the image of the God who designed with understanding. You are using the analytical and creative abilities He gave you to be a faithful steward of the resources and knowledge in your hands.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 3:19</strong> — "The LORD by wisdom founded the earth; by understanding He established the heavens." Just as God used wisdom and understanding to design creation, you are called to use those same gifts to understand and improve your own designs.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is an Arduino?</h2>\n<p>An Arduino is a small, open-source microcontroller board. In plain terms: it's a tiny programmable computer, about the size of a credit card, that can read information from the world around it and respond based on instructions you give it.</p>\n<p>Think of the Arduino like the nervous system of your mousetrap car. Your senses pick up information — heat, pressure, motion — and send signals to your brain, which then tells your body how to react. The Arduino works the same way. Sensors feed it data, it processes that data using your program, and then it tells actuators (like motors) what to do.</p>\n<p>The word <strong>open-source</strong> means the design is freely shared with the public — anyone can build on it, modify it, or learn from it. That spirit of open collaboration has made Arduino one of the most widely used platforms in schools, labs, and engineering companies around the world.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram of an Arduino Uno board showing key components: the microcontroller chip, digital I/O pins, analog input pins, power pins, USB port, and power jack."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Components of an Arduino Board</h2>\n<p>When you pick up an Arduino board for the first time, it can look overwhelming. But every part has a specific job. Here are the main components you need to know:</p>\n<ul>\n<li><strong>Microcontroller chip</strong> — The brain of the board. This small chip executes your program and manages all communication between components.</li>\n<li><strong>Digital I/O pins</strong> — These pins can either receive a digital signal (INPUT) or send one (OUTPUT). Digital means the signal is either ON or OFF — no in-between.</li>\n<li><strong>Analog input pins</strong> — These pins read a range of values, not just on/off. A sensor measuring wheel speed, for example, might send an analog signal that varies continuously.</li>\n<li><strong>Power pins</strong> — Supply voltage (5V or 3.3V) and ground connections to your sensors and other components.</li>\n<li><strong>USB port</strong> — How you connect the Arduino to your computer to upload your program (called a sketch).</li>\n<li><strong>Power jack</strong> — Allows the Arduino to run on a battery or external power supply, independent of a computer.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sensors, Actuators, and Your Mousetrap Car</h2>\n<p>The Arduino becomes useful when you connect it to the outside world — and that happens through sensors and actuators.</p>\n<h3>Sensors: Listening to Your Car</h3>\n<p>A sensor is like an ear or an eye for your Arduino. It detects something happening in the physical environment and converts it into a signal the microcontroller can read. For your mousetrap car, useful sensors might include:</p>\n<ul>\n<li><strong>Wheel encoder</strong> — Counts how many times a wheel rotates, so you can calculate distance and speed.</li>\n<li><strong>Ultrasonic distance sensor</strong> — Uses sound waves to measure how far the car is from an object.</li>\n<li><strong>Accelerometer</strong> — Detects changes in motion and direction, giving you data on acceleration and deceleration.</li>\n</ul>\n<h3>Actuators: Responding to Data</h3>\n<p>Once the Arduino has gathered and processed sensor data, it can send commands to actuators — components that physically do something. A motor controller attached to your drive wheel, for example, could receive a signal from the Arduino telling it to adjust speed based on distance traveled. That closed-loop feedback — sense, process, respond — is the same basic structure found in everything from autopilot systems to the human body.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple circuit diagram showing an Arduino connected to a wheel encoder sensor (input) and a small DC motor via a motor driver (output), with arrows illustrating the data flow from sensor to microcontroller to actuator."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Programming: Giving Your Arduino Instructions</h2>\n<p>A microcontroller is only as smart as the instructions it receives. That's where programming comes in. You write a program — called a <strong>sketch</strong> in Arduino language — that tells the board exactly what to do: which pins to read, what calculations to perform, and when to send commands to your actuators.</p>\n<p>Arduino programs are written in a simplified version of C++, and they follow a predictable structure:</p>\n<ul>\n<li><strong>setup()</strong> — Code in this section runs once when the board powers on. You use it to configure your pins and initialize your sensors.</li>\n<li><strong>loop()</strong> — Code here runs continuously, over and over, as long as the board has power. This is where you read sensor values, run calculations, and send outputs.</li>\n</ul>\n<p>Think of the <code>setup()</code> function like the pre-race checklist a racing team runs before a car hits the track — it only happens once. The <code>loop()</code> function is like the driver constantly scanning instruments and making adjustments while the race is in progress. Together they form the rhythm of a living, responsive system.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Start simple.</strong> When writing your first Arduino sketch, focus on one sensor at a time. Get it reading correctly and printing values to the Serial Monitor before connecting anything else. Debugging one variable at a time is a core engineering habit that saves hours of frustration.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Analysis and Synthesis in Action</h2>\n<p>Remember the two phases you are working through right now: Analysis and Synthesis.</p>\n<p><strong>Analysis</strong> means breaking your design down and examining what is actually happening. With an Arduino, analysis looks like this: you run your mousetrap car, your sensors record speed and distance data, and your Arduino logs that data so you can study it. You might discover that your car accelerates quickly but loses speed faster than expected — a clue that friction or gear ratio needs attention.</p>\n<p><strong>Synthesis</strong> means taking what you learned from analysis and combining it into an improved design. Maybe your data tells you to change your axle diameter or adjust your lever arm length. Synthesis is the moment where knowledge becomes action.</p>\n<p>The Arduino makes both phases sharper and faster. Instead of estimating, you have numbers. Instead of guessing, you have evidence. That is the power of integrating intelligent measurement with intentional design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip the data review step.</strong> It's tempting to collect sensor data and immediately start making changes to your car. But synthesis without analysis is just guessing with extra steps. Always study your data first — look for patterns, ask what the numbers are telling you, and then make one change at a time so you can clearly see what worked.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method</h2>\n<p>When you face a design decision involving your Arduino setup, the OCV method gives you a structured way to think it through. OCV stands for <strong>Options, Criteria, and Variables</strong>.</p>\n<ul>\n<li><strong>Options</strong> — What are the different choices available? For example: Should you use a wheel encoder or an ultrasonic sensor to measure distance?</li>\n<li><strong>Criteria</strong> — What does a good solution need to accomplish? Maybe it needs to be accurate to within 2 centimeters, easy to mount on your car frame, and compatible with your Arduino's available pins.</li>\n<li><strong>Variables</strong> — What factors might change and affect your decision? Cost, available parts, weight added to the car, and your programming skill level are all real variables.</li>\n</ul>\n<p>Working through OCV before you commit to a sensor or wiring configuration helps you make intentional, reasoned decisions rather than random ones. It is the difference between an engineer and someone who is just tinkering.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Intelligent Design</h2>\n<p>There is a deeper reason to care about optimization beyond just winning a competition. When you use the Arduino to analyze your mousetrap car and synthesize a better design, you are practicing stewardship — the responsible use of what God has entrusted to you.</p>\n<p>Stewardship in engineering means not wasting materials, not wasting energy, and not wasting time on solutions that haven't been thought through. It means using the data you collect to make your design as efficient and effective as it can be. Every gram of unnecessary weight you remove, every joule of energy you stop wasting through better design — that is faithful stewardship of the resources in your hands.</p>\n<p>God gave you the capacity to analyze, to reason, and to synthesize. The Arduino is just one of many tools that helps you do those things well. Use it wisely.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m008a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the difference between a sensor and an actuator?</strong><br>A sensor detects something from the environment and sends data to the Arduino. An actuator receives a command from the Arduino and physically does something in response — like spinning a motor.</p>\n<p><strong>2. What are the two main functions in an Arduino sketch, and what does each do?</strong><br>setup() runs once at startup and configures the board. loop() runs continuously and is where your main logic — reading sensors, processing data, controlling outputs — lives.</p>\n<p><strong>3. How does the OCV method help you make a better design decision?</strong><br>OCV gives you a structured framework: you list your Options, define your Criteria for a good solution, and identify the Variables that could affect the outcome. This replaces guesswork with reasoned engineering judgment.</p>\n<p><strong>4. What does it mean to apply Analysis and Synthesis to your mousetrap car?</strong><br>Analysis means using sensor data to understand exactly how your car is performing. Synthesis means taking that understanding and using it to make specific, evidence-based improvements to your design.</p>\n<p><strong>5. How does using the Arduino connect to the idea of stewardship?</strong><br>Using data to optimize your design means you are not wasting materials, energy, or effort. That responsible, intentional use of resources reflects stewardship — faithfully managing what God has given you.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  }
+]
+```

@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading & Interpreting Blueprints | Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    background: #1B3A5C;
+    width: 100%;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  header .logo-box {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 900;
+    font-size: 15px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+
+  header h1 {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  header .subtitle {
+    color: #C9A84C;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 820px;
+    padding: 20px 16px 40px;
+    flex: 1;
+  }
+
+  /* Progress bar */
+  .progress-bar-outer {
+    background: #dde4ee;
+    border-radius: 8px;
+    height: 10px;
+    width: 100%;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+
+  .progress-bar-inner {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    text-align: right;
+    font-size: 12px;
+    color: #1B3A5C;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+
+  /* Cards / Screens */
+  .screen {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Intro screen */
+  .intro-card {
+    background: #1B3A5C;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.18);
+  }
+
+  .intro-card h2 {
+    font-size: 26px;
+    color: #C9A84C;
+    margin-bottom: 10px;
+  }
+
+  .intro-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    opacity: 0.9;
+  }
+
+  .intro-card .badge {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Buttons */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .btn:hover { background: #b8943d; }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+  }
+  .btn-outline:hover { background: #1B3A5C; color: #fff; }
+
+  .btn-sm {
+    padding: 9px 20px;
+    font-size: 14px;
+  }
+
+  /* SECTION: Drag-and-drop labeling */
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1B3A5C;
+    margin-bottom: 4px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: #1B3A5C;
+    opacity: 0.75;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  /* Blueprint SVG area */
+  .blueprint-container {
+    background: #1B3A5C;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .blueprint-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Drop zones on blueprint */
+  .drop-zone {
+    fill: rgba(201,168,76,0.2);
+    stroke: #C9A84C;
+    stroke-width: 2;
+    stroke-dasharray: 5 3;
+    cursor: pointer;
+    transition: fill 0.2s;
+  }
+
+  .drop-zone:hover, .drop-zone.drag-over {
+    fill: rgba(201,168,76,0.45);
+  }
+
+  .drop-zone.correct {
+    fill: rgba(50,180,100,0.35);
+    stroke: #32b464;
+    stroke-dasharray: none;
+  }
+
+  .drop-zone.incorrect {
+    fill: rgba(220,50,50,0.25);
+    stroke: #dc3232;
+    stroke-dasharray: none;
+  }
+
+  /* Label chips */
+  .labels-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+    min-height: 44px;
+  }
+
+  .label-chip {
+    background: #ffffff;
+    border: 2px solid #C9A84C;
+    color: #1B3A5C;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: box-shadow 0.2s, opacity 0.2s;
+    box-shadow: 0 2px 6px rgba(27,58,92,0.1);
+  }
+
+  .label-chip:hover { box-shadow: 0 4px 12px rgba(27,58,92,0.18); }
+  .label-chip.dragging { opacity: 0.4; }
+  .label-chip.placed { opacity: 0.35; pointer-events: none; }
+
+  /* Feedback bubble */
+  .feedback {
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: none;
+  }
+
+  .feedback.correct { background: #d4f4e2; color: #1a6b3c; border: 1.5px solid #32b464; }
+  .feedback.incorrect { background: #fde8e8; color: #8b1a1a; border: 1.5px solid #dc3232; }
+  .feedback.show { display: block; }
+
+  /* Quiz questions */
+  .question-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 26px 24px;
+    box-shadow: 0 3px 16px rgba(27,58,92,0.09);
+    margin-bottom: 18px;
+  }
+
+  .question-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media (max-width: 500px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+
+  .option-btn {
+    background: #f7f9fc;
+    border: 2px solid #dde4ee;
+    color: #1B3A5C;
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+    line-height: 1.4;
+  }
+
+  .option-btn:hover { border-color: #C9A84C; background: #fffbf0; }
+
+  .option-btn.selected-correct {
+    background: #d4f4e2;
+    border-color: #32b464;
+    color: #1a6b3c;
+  }
+
+  .option-btn.selected-wrong {
+    background: #fde8e8;
+    border-color: #dc3232;
+    color: #8b1a1a;
+  }
+
+  .option-btn.show-correct {
+    background: #d4f4e2;
+    border-color: #32b464;
+    color: #1a6b3c;
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* Scale activity */
+  .scale-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 26px 24px;
+    box-shadow: 0 3px 16px rgba(27,58,92,0.09);
+    margin-bottom: 18px;
+  }
+
+  .scale-visual {
+    background: #1B3A5C;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .scale-ruler {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .ruler-segment {
+    height: 28px;
+    border-right: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #ffffff;
+    transition: width 0.5s ease;
+    position: relative;
+  }
+
+  .ruler-segment:first-child { border-left: 2px solid #ffffff; }
+
+  .real-bar {
+    background: #C9A84C;
+    border-radius: 4px;
+    height: 22px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1B3A5C;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 12px auto 4px;
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .slider-row label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1B3A5C;
+    min-width: 120px;
+  }
+
+  input[type=range] {
+    flex: 1;
+    accent-color: #C9A84C;
+    height: 6px;
+  }
+
+  .slider-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #C9A84C;
+    min-width: 50px;
+    text-align: right;
+  }
+
+  .answer-check {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .answer-input {
+    border: 2px solid #dde4ee;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1B3A5C;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .answer-input:focus { border-color: #C9A84C; }
+  .answer-input.correct-input { border-color: #32b464; background: #d4f4e2; }
+  .answer-input.wrong-input { border-color: #dc3232; background: #fde8e8; }
+
+  /* Score screen */
+  .score-card {
+    background: #1B3A5C;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 6px 28px rgba(27,58,92,0.22);
+  }
+
+  .score-card h2 {
+    font-size: 24px;
+    color: #C9A84C;
+    margin-bottom: 8px;
+  }
+
+  .score-big {
+    font-size: 72px;
+    font-weight: 900;
+    color: #C9A84C;
+    line-height: 1;
+    margin: 16px 0;
+  }
+
+  .score-label {
+    font-size: 15px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+  }
+
+  .score-breakdown {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+
+  .score-breakdown h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #C9A84C;
+    margin-bottom: 12px;
+  }
+
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .score-row:last-child { border-bottom: none; }
+  .score-row .pts { color: #C9A84C; font-weight: 700; }
+
+  .congrats-msg {
+    font-size: 14px;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* SVG label text inside blueprint */
+  .zone-label {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    fill: #C9A84C;
+    pointer-events: none;
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+
+  /* touch hint */
+  .touch-hint {
+    font-size: 12px;
+    color: #1B3A5C;
+    opacity: 0.6;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .section-number {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 14px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">GK12</div>
+  <div>
+    <div class="h1-wrap">
+      <h1>Blueprint Challenge</h1>
+      <div class="subtitle">Creationeering · Assembly Phase</div>
+    </div>
+  </div>
+</header>
+
+<div id="app">
+
+  <!-- SCREEN 0: INTRO -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-card">
+      <div class="badge">CREATIONEERING · ASSEMBLY</div>
+      <h2>📐 Blueprint Challenge</h2>
+      <p>Blueprints are the <em>secret language</em> of builders and engineers. Every line, symbol, and number carries meaning — and you need to read them to build anything accurately.</p>
+      <p>Complete <strong>4 challenges</strong> to earn your Blueprint Interpreter badge!</p>
+      <p style="font-size:13px; opacity:0.7;">3–5 minutes · Label · Identify · Calculate</p>
+      <button class="btn" onclick="startGame()">Start Challenge →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: DRAG-AND-DROP BLUEPRINT LABELING -->
+  <div id="screen-1" class="screen">
+    <div class="progress-label" id="prog-label-1">Activity 1 of 4</div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="prog-bar" style="width:0%"></div></div>
+
+    <div class="section-title"><span class="section-number">1</span>Label the Blueprint</div>
+    <div class="section-desc">Drag each label to the correct highlighted zone on the technical drawing below.</div>
+
+    <div class="touch-hint" id="touch-hint-1">💡 Tap a label, then tap a zone to place it</div>
+
+    <div class="labels-bank" id="labels-bank"></div>
+
+    <div class="blueprint-container">
+      <svg id="blueprint-svg" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background grid -->
+        <rect width="520" height="340" fill="#0d2137"/>
+        <!-- Grid lines -->
+        <g stroke="#1d3a55" stroke-width="0.5">
+          <line x1="0" y1="20" x2="520" y2="20"/>
+          <line x1="0" y1="40" x2="520" y2="40"/>
+          <line x1="0" y1="60" x2="520" y2="60"/>
+          <line x1="0" y1="80" x2="520" y2="80"/>
+          <line x1="0" y1="100" x2="520" y2="100"/>
+          <line x1="0" y1="120" x2="520" y2="120"/>
+          <line x1="0" y1="140" x2="520" y2="140"/>
+          <line x1="0" y1="160" x2="520" y2="160"/>
+          <line x1="0" y1="180" x2="520" y2="180"/>
+          <line x1="0" y1="200" x2="520" y2="200"/>
+          <line x1="0" y1="220" x2="520" y2="220"/>
+          <line x1="0" y1="240" x2="520" y2="240"/>
+          <line x1="0" y1="260" x2="520" y2="260"/>
+          <line x1="0" y1="280" x2="520" y2="280"/>
+          <line x1="0" y1="300" x2="520" y2="300"/>
+          <line x1="0" y1="320" x2="520" y2="320"/>
+          <line x1="20" y1="0" x2="20" y2="340"/>
+          <line x1="40" y1="0" x2="40" y2="340"/>
+          <line x1="60" y1="0" x2="60" y2="340"/>
+          <line x1="80" y1="0" x2="80" y2="340"/>
+          <line x1="100" y1="0" x2="100" y2="340"/>
+          <line x1="120" y1="0" x2="120" y2="340"/>
+          <line x1="140" y1="0" x2="140" y2="340"/>
+          <line x1="160" y1="0" x2="160" y2="340"/>
+          <line x1="180" y1="0" x2="180" y2="340"/>
+          <line x1="200" y1="0" x2="200" y2="340"/>
+          <line x1="220" y1="0" x2="220" y2="340"/>
+          <line x1="240" y1="0" x2="240" y2="340"/>
+          <line x1="260" y1="0" x2="260" y2="340"/>
+          <line x1="280" y1="0" x2="280" y2="340"/>
+          <line x1="300" y1="0" x2="300" y2="340"/>
+          <line x1="320" y1="0" x2="320" y2="340"/>
+          <line x1="340" y1="0" x2="340" y2="340"/>
+          <line x1="360" y1="0" x2="360" y2="340"/>
+          <line x1="380" y1="0" x2="380" y2="340"/>
+          <line x1="400" y1="0" x2="400" y2="340"/>
+          <line x1="420" y1="0" x2="420" y2="340"/>
+          <line x1="440" y1="0" x2="440" y2="340"/>
+          <line x1="460" y1="0" x2="460" y2="340"/>
+          <line x1="480" y1="0" x2="480" y2="340"/>
+          <line x1="500" y1="0" x2="500" y2="340"/>
+        </g>
+
+        <!-- FRONT VIEW box -->
+        <rect x="50" y="30" width="130" height="110" fill="none" stroke="#7fb8e0" stroke-width="2"/>
+        <!-- cutout in front view -->
+        <rect x="80" y="55" width="40" height="35" fill="none" stroke="#7fb8e0" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="115" y="150" font-family="Arial" font-size="9" fill="#7fb8e0" text-anchor="middle">FRONT VIEW</text>
+
+        <!-- TOP VIEW box -->
+        <rect x="50" y="175" width="130" height="80" fill="none" stroke="#7fb8e0" stroke-width="2"/>
+        <line x1="50" y1="215" x2="180" y2="215" stroke="#7fb8e0" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <text x="115" y="268" font-family="Arial" font-size="9" fill="#7fb8e0" text-anchor="middle">TOP VIEW</text>
+
+        <!-- SIDE VIEW box -->
+        <rect x="210" y="30" width="90" height="110" fill="none" stroke="#7fb8e0" stroke-width="2"/>
+        <line x1="210" y1="70" x2="300" y2="70" stroke="#7fb8e0" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <text x="255" y="150" font-family="Arial" font-size="9" fill="#7fb8e0" text-anchor="middle">SIDE VIEW</text>
+
+        <!-- DIMENSION LINE (horizontal) -->
+        <line x1="50" y1="20" x2="180" y2="20" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="50" y1="15" x2="50" y2="25" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="180" y1="15" x2="180" y2="25" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="115" y="13" font-family="Arial" font-size="10" fill="#C9A84C" text-anchor="middle">130 mm</text>
+
+        <!-- CENTER LINE (through front view) -->
+        <line x1="115" y1="22" x2="115" y2="148" stroke="#ff9999" stroke-width="1.5" stroke-dasharray="10,3,2,3"/>
+
+        <!-- TITLE BLOCK -->
+        <rect x="330" y="240" width="180" height="90" fill="#0a1a2e" stroke="#7fb8e0" stroke-width="1.5"/>
+        <line x1="330" y1="260" x2="510" y2="260" stroke="#7fb8e0" stroke-width="1"/>
+        <line x1="330" y1="278" x2="510" y2="278" stroke="#7fb8e0" stroke-width="1"/>
+        <line x1="330" y1="296" x2="510" y2="296" stroke="#7fb8e0" stroke-width="1"/>
+        <line x1="330" y1="314" x2="510" y2="314" stroke="#7fb8e0" stroke-width="1"/>
+        <line x1="390" y1="260" x2="390" y2="330" stroke="#7fb8e0" stroke-width="1"/>
+        <text x="420" y="253" font-family="Arial" font-size="9" fill="#7fb8e0" text-anchor="middle">TITLE BLOCK</text>
+        <text x="357" y="273" font-family="Arial" font-size="8" fill="#aaccdd">PART NAME:</text>
+        <text x="452" y="273" font-family="Arial" font-size="8" fill="#ffffff">Bracket A</text>
+        <text x="357" y="291" font-family="Arial" font-size="8" fill="#aaccdd">SCALE:</text>
+        <text x="452" y="291" font-family="Arial" font-size="8" fill="#ffffff">1:2</text>
+        <text x="357" y="309" font-family="Arial" font-size="8" fill="#aaccdd">DRAWN BY:</text>
+        <text x="452" y="309" font-family="Arial" font-size="8" fill="#ffffff">J. Smith</text>
+        <text x="357" y="325" font-family="Arial" font-size="8" fill="#aaccdd">DATE:</text>
+        <text x="452" y="325" font-family="Arial" font-size="8" fill="#ffffff">2025-01-15</text>
+
+        <!-- HIDDEN LINE (dashed) in side view -->
+        <line x1="225" y1="55" x2="285" y2="55" stroke="#7fb8e0" stroke-width="1.5" stroke-dasharray="6,3"/>
+
+        <!-- LEGEND -->
+        <rect x="330" y="30" width="180" height="130" fill="#0a1a2e" stroke="#7fb8e0" stroke-width="1"/>
+        <text x="420" y="46" font-family="Arial" font-size="9" fill="#7fb8e0" text-anchor="middle" font-weight="bold">LINE LEGEND</text>
+        <line x1="345" y1="60" x2="395" y2="60" stroke="#7fb8e0" stroke-width="2"/>
+        <text x="420" y="63" font-family="Arial" font-size="8" fill="#aaccdd">Visible line</text>
+        <line x1="345" y1="78" x2="395" y2="78" stroke="#7fb8e0" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="420" y="81" font-family="Arial" font-size="8" fill="#aaccdd">Hidden line</text>
+        <line x1="345" y1="96" x2="395" y2="96" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="341" y1="92" x2="341" y2="100" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="399" y1="92" x2="399" y2="100" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="420" y="99" font-family="Arial" font-size="8" fill="#aaccdd">Dimension line</text>
+        <line x1="345" y1="114" x2="395" y2="114" stroke="#ff9999" stroke-width="1.5" stroke-dasharray="10,3,2,3"/>
+        <text x="420" y="117" font-family="Arial" font-size="8" fill="#aaccdd">Center line</text>
+        <rect x="345" y="124" width="50" height="28" fill="none" stroke="#7fb8e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="420" y="141" font-family="Arial" font-size="8" fill="#aaccdd">Hidden feature</text>
+
+        <!-- DROP ZONES -->
+        <!-- Zone A: Title Block -->
+        <rect id="zone-A" class="drop-zone" x="330" y="240" width="180" height="90" rx="3" data-answer="Title Block"/>
+        <text id="zone-A-lbl" class="zone-label" x="420" y="285" style="display:none"></text>
+
+        <!-- Zone B: Dimension Line -->
+        <rect id="zone-B" class="drop-zone" x="35" y="8" width="160" height="20" rx="3" data-answer="Dimension Line"/>
+        <text id="zone-B-lbl" class="zone-label" x="115" y="18" style="display:none"></text>
+
+        <!-- Zone C: Center Line -->
+        <rect id="zone-C" class="drop-zone" x="105" y="22" width="20" height="130" rx="3" data-answer="Center Line"/>
+        <text id="zone-C-lbl" class="zone-label" x="115" y="87" style="display:none;font-size:9px;writing-mode:tb"></text>
+
+        <!-- Zone D: Hidden Line -->
+        <rect id="zone-D" class="drop-zone" x="218" y="48" width="90" height="16" rx="3" data-answer="Hidden Line"/>
+        <text id="zone-D-lbl" class="zone-label" x="263" y="56" style="display:none"></text>
+
+        <!-- Zone E: Front View -->
+        <rect id="zone-E" class="drop-zone" x="45" y="25" width="140" height="120" rx="3" data-answer="Orthographic View"/>
+        <text id="zone-E-lbl" class="zone-label" x="115" y="85" style="display:none"></text>
+      </svg>
+    </div>
+
+    <div class="feedback" id="feedback-drag"></div>
+
+    <div class="nav-row">
+      <button class="btn btn-sm" id="check-drag-btn" onclick="checkDragAnswers()">Check Labels →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: LINE TYPES QUIZ -->
+  <div id="screen-2" class="screen">
+    <div class="progress-label">Activity 2 of 4</div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="prog-bar-2" style="width:25%"></div></div>
+
+    <div class="section-title"><span class="section-number">2</span>Identify the Line Type</div>
+    <div class="section-desc">Look at each line drawn below. Choose the correct name from the options.</div>
+
+    <div id="line-quiz-container"></div>
+
+    <div class="feedback" id="feedback-lines"></div>
+    <div class="nav-row">
+      <button class="btn btn-sm" id="check-lines-btn" onclick="checkLineQuiz()">Check Answers →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: SCALE CALCULATOR -->
+  <div id="screen-3" class="screen">
+    <div class="progress-label">Activity 3 of 4</div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:50%"></div></div>
+
+    <div class="section-title"><span class="section-number">3</span>Scale It Up!</div>
+    <div class="section-desc">A blueprint uses a scale to represent real objects. Use the slider to set the drawing measurement, then calculate the real-world size.</div>
+
+    <div class="scale-card">
+      <div class="scale-visual">
+        <div style="color:#C9A84C; font-size:12px; font-weight:700; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Blueprint Scale Visualizer</div>
+        <div style="color:#aaccdd; font-size:11px; margin-bottom:14px;">Scale: <span id="scale-display">1:2</span> &nbsp;|&nbsp; Drawing shows object at HALF real size</div>
+
+        <div style="color:#fff; font-size:11px; margin-bottom:6px; text-align:left;">📏 On the blueprint (drawing size):</div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div id="drawing-bar" style="background:#7fb8e0; height:18px; border-radius:3px; transition:width 0.4s; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#0d2137; white-space:nowrap; overflow:hidden;"></div>
+        </div>
+
+        <div style="color:#fff; font-size:11px; margin-bottom:6px; text-align:left;">🏗️ Real-world actual size:</div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div id="real-bar" style="background:#C9A84C; height:18px; border-radius:3px; transition:width 0.4s; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#1B3A5C; white-space:nowrap; overflow:hidden;"></div>
+        </div>
+      </div>
+
+      <div class="slider-row">
+        <label>Drawing size (mm):</label>
+        <input type="range" id="drawing-slider" min="10" max="100" value="40" step="5" oninput="updateScale()">
+        <div class="slider-val" id="slider-val-display">40 mm</div>
+      </div>
+
+      <div id="scale-questions"></div>
+    </div>
+
+    <div class="feedback" id="feedback-scale"></div>
+    <div class="nav-row">
+      <button class="btn btn-sm" onclick="checkScaleAnswers()">Check Answers →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: BLUEPRINT KNOWLEDGE QUIZ -->
+  <div id="screen-4" class="screen">
+    <div class="progress-label">Activity 4 of 4</div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:75%"></div></div>
+
+    <div class="section-title"><span class="section-number">4</span>Blueprint Knowledge Check</div>
+    <div class="section-desc">Answer these questions about blueprint reading to complete your challenge!</div>
+
+    <div id="knowledge-quiz-container"></div>
+
+    <div class="feedback" id="feedback-knowledge"></div>
+    <div class="nav-row">
+      <button class="btn btn-sm" onclick="checkKnowledgeQuiz()">Finish Challenge →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: RESULTS -->
+  <div id="screen-5" class="screen">
+    <div class="score-card">
+      <h2>🏆 Challenge Complete!</h2>
+      <div class="score-big" id="final-score-pct">0%</div>
+      <div class="score-label" id="score-grade-label">Blueprint Beginner</div>
+
+      <div class="score-breakdown">
+        <h3>Your Results</h3>
+        <div class="score-row"><span>Activity 1 — Label the Blueprint</span><span class="pts" id="score-a1">0 / 15</span></div>
+        <div class="score-row"><span>Activity 2 — Identify Line Types</span><span class="pts" id="score-a2">0 / 12</span></div>
+        <div class="score-row"><span>Activity 3 — Scale Calculator</span><span class="pts" id="score-a3">0 / 10</span></div>
+        <div class="score-row"><span>Activity 4 — Knowledge Check</span><span class="pts" id="score-a4">0 / 12</span></div>
+        <div class="score-row" style="font-weight:700; font-size:15px;"><span>TOTAL</span><span class="pts" id="score-total">0 / 49</span></div>
+      </div>
+
+      <div class="congrats-msg" id="congrats-msg">Great work!</div>
+      <button class="btn" onclick="restartGame()">Try Again 🔄</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  currentScreen: 'intro',
+  scores: { a1: 0, a2: 0, a3: 0, a4: 0 },
+  maxScores: { a1: 15, a2: 12, a3: 10, a4: 12 },
+  dragState: {
+    selectedChip: null,
+    placed: {},  // zoneId -> chipLabel
+    correct: {}  // zoneId -> bool
+  },
+  lineQuizAnswers: {},
+  scaleAnswers: {},
+  knowledgeAnswers: {}
+};
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startGame() {
+  initDragActivity();
+  showScreen(1);
+}
+
+function restartGame() {
+  state.scores = { a1: 0, a2: 0, a3: 0, a4: 0 };
+  state.dragState = { selectedChip: null, placed: {}, correct: {} };
+  state.lineQuizAnswers = {};
+  state.scaleAnswers = {};
+  state.knowledgeAnswers = {};
+  initDragActivity();
+  initLineQuiz();
+  initKnowledgeQuiz();
+  showScreen('intro');
+}
+
+// ============================================================
+// ACTIVITY 1: DRAG-AND-DROP LABELING
+// ============================================================
+const dragLabels = [
+  'Title Block',
+  'Dimension Line',
+  'Center Line',
+  'Hidden Line',
+  'Orthographic View'
+];
+
+const zoneConfig = {
+  'zone-A': { answer: 'Title Block', labelEl: 'zone-A-lbl', cx: 420, cy: 285 },
+  'zone-B': { answer: 'Dimension Line', labelEl: 'zone-B-lbl', cx: 115, cy: 18 },
+  'zone-C': { answer: 'Center Line', labelEl: 'zone-C-lbl', cx: 115, cy: 87 },
+  'zone-D': { answer: 'Hidden Line', labelEl: 'zone-D-lbl', cx: 263, cy: 56 },
+  'zone-E': { answer: 'Orthographic View', labelEl: 'zone-E-lbl', cx: 115, cy: 85 }
+};
+
+function initDragActivity() {
+  // Reset placed state
+  state.dragState.placed = {};
+  state.dragState.correct = {};
+  state.dragState.selectedChip = null;
+
+  // Reset drop zones visually
+  Object.keys(zoneConfig).forEach(zid => {
+    const zone = document.getElementById(zid);
+    if (zone) {
+      zone.className.baseVal = 'drop-zone';
+    }
+    const lbl = document.getElementById(zoneConfig[zid].labelEl);
+    if (lbl) {
+      lbl.textContent = '';
+      lbl.style.display = 'none';
+    }
+  });
+
+  // Reset feedback
+  const fb = document.getElementById('feedback-drag');
+  if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+
+  // Rebuild label bank
+  const bank = document.getElementById('labels-bank');
+  if (!bank) return;
+  bank.innerHTML = '';
+  dragLabels.forEach(lbl => {
+    const chip = document.createElement('div');
+    chip.className = 'label-chip';
+    chip.textContent = lbl;
+    chip.dataset.label = lbl;
+    chip.setAttribute('draggable', 'true');
+
+    // Desktop drag events
+    chip.addEventListener('dragstart', onChipDragStart);
+
+    // Touch / tap events
+    chip.addEventListener('click', onChipTap);
+    bank.appendChild(chip);
+  });
+
+  // Zone events
+  Object.keys(zoneConfig).forEach(zid => {
+    const zone = document.getElementById(zid);
+    if (!zone) return;
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('drag-over'); onDropToZone(zid); });
+    zone.addEventListener('click', () => onZoneTap(zid));
+  });
+}
+
+function onChipDragStart(e) {
+  state.dragState.selectedChip = e.currentTarget.dataset.label;
+}
+
+function onChipTap(e) {
+  // Deselect if clicking same
+  if (state.dragState.selectedChip === e.currentTarget.dataset.label) {
+    state.dragState.selectedChip = null;
+    e.currentTarget.style.outline = '';
+    return;
+  }
+  // Deselect previous
+  document.querySelectorAll('.label-chip').forEach(c => c.style.outline = '');
+  state.dragState.selectedChip = e.currentTarget.dataset.label;
+  e.currentTarget.style.outline = '3px solid #C9A84C';
+}
+
+function onZoneTap(zid) {
+  if (!state.dragState.selectedChip) return;
+  onDropToZone(zid);
+  // Deselect chip
+  document.querySelectorAll('.label-chip').forEach(c => c.style.outline = '');
+}
+
+function onDropToZone(zid) {
+  const chip = state.dragState.selectedChip;
+  if (!chip) return;
+
+  // If zone already has a label, put old label back
+  if (state.dragState.placed[zid]) {
+    const oldLabel = state.dragState.placed[zid];
+    const oldChip = document.querySelector(`.label-chip[data-label="${oldLabel}"]`);
+    if (oldChip) oldChip.classList.remove('placed');
+  }
+
+  state.dragState.placed[zid] = chip;
+  state.dragState.selectedChip = null;
+
+  // Mark chip as placed
+  const chipEl = document.querySelector(`.label-chip[data-label="${chip}"]`);
+  if (chipEl) chipEl.classList.add('placed');
+
+  // Show label in zone
+  const cfg = zoneConfig[zid];
+  const lblEl = document.getElementById(cfg.labelEl);
+  if (lblEl) {
+    lblEl.textContent = chip;
+    lblEl.style.display = '';
+  }
+
+  // Deselect all chips visually
+  document.querySelectorAll('.label-chip').forEach(c => c.style.outline = '');
+}
+
+function checkDragAnswers() {
+  let correct = 0;
+  const total = Object.keys(zoneConfig).length;
+
+  Object.keys(zoneConfig).forEach(zid => {
+    const cfg = zoneConfig[zid];
+    const placed = state.dragState.placed[zid];
+    const zone = document.getElementById(zid);
+    if (!zone) return;
+
+    if (placed === cfg.answer) {
+      correct++;
+      zone.classList.remove('drop-zone');
+      zone.classList.add('correct');
+    } else {
+      zone.classList.remove('drop-zone');
+      zone.classList.add('incorrect');
+      // Show correct answer if wrong
+      const lblEl = document.getElementById(cfg.labelEl);
+      if (lblEl) {
+        lblEl.textContent = cfg.answer;
+        lblEl.style.display = '';
+        lblEl.setAttribute('fill', '#32b464');
+      }
+    }
+  });
+
+  state.scores.a1 = Math.round((correct / total) * state.maxScores.a1);
+
+  const fb = document.getElementById('feedback-drag');
+  if (correct === total) {
+    fb.className = 'feedback correct show';
+    fb.textContent = `✅ Perfect! You correctly labeled all ${total} blueprint parts. (${state.scores.a1}/${state.maxScores.a1} pts)`;
+  } else {
+    fb.className = 'feedback incorrect show';
+    fb.textContent = `You got ${correct} out of ${total} correct. The correct labels are now shown in green. (${state.scores.a1}/${state.maxScores.a1} pts)`;
+  }
+
+  document.getElementById('check-drag-btn').disabled = true;
+
+  setTimeout(() => {
+    initLineQuiz();
+    showScreen(2);
+  }, 2200);
+}
+
+// ============================================================
+// ACTIVITY 2: LINE TYPE QUIZ
+// ============================================================
+const lineQuestions = [
+  {
+    id: 'lq1',
+    svgLine: `<svg viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="40" fill="#0d2137"/><line x1="20" y1="20" x2="180" y2="20" stroke="#7fb8e0" stroke-width="3"/></svg>`,
+    options: ['Visible Line', 'Hidden Line', 'Center Line', 'Dimension Line'],
+    answer: 'Visible Line',
+    explanation: 'A solid, continuous line shows visible edges of an object.'
+  },
+  {
+    id: 'lq2',
+    svgLine: `<svg viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="40" fill="#0d2137"/><line x1="20" y1="20" x2="180" y2="20" stroke="#7fb8e0" stroke-width="2" stroke-dasharray="8,4"/></svg>`,
+    options: ['Visible Line', 'Hidden Line', 'Center Line', 'Construction Line'],
+    answer: 'Hidden Line',
+    explanation: 'Short dashes show edges hidden behind the surface — things you cannot directly see.'
+  },
+  {
+    id: 'lq3',
+    svgLine: `<svg viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="40" fill="#0d2137"/><line x1="20" y1="20" x2="180" y2="20" stroke="#ff9999" stroke-width="2" stroke-dasharray="12,3,2,3"/></svg>`,
+    options: ['Dimension Line', 'Center Line', 'Hidden Line', 'Section Line'],
+    answer: 'Center Line',
+    explanation: 'A long-short-long dash pattern (usually in red or pink) marks the center of circles or symmetric features.'
+  },
+  {
+    id: 'lq4',
+    svgLine: `<svg viewBox="0 0 200 40" width="200" height="40" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="40" fill="#0d2137"/><line x1="20" y1="20" x2="180" y2="20" stroke="#C9A84C" stroke-width="1.5"/><line x1="20" y1="12" x2="20" y2="28" stroke="#C9A84C" stroke-width="1.5"/><line x1="180" y1="12" x2="180" y2="28" stroke="#C9A84C" stroke-width="1.5"/><text x="100" y="13" font-family="Arial" font-size="9" fill="#C9A84C" text-anchor="middle">120 mm</text></svg>`,
+    options: ['Visible Line', 'Center Line', 'Dimension Line', 'Leader Line'],
+    answer: 'Dimension Line',
+    explanation: 'A dimension line has tick marks at each end and a measurement number — it shows size.'
+  }
+];
+
+function initLineQuiz() {
+  const container = document.getElementById('line-quiz-container');
+  if (!container) return;
+  container.innerHTML = '';
+  state.lineQuizAnswers = {};
+
+  lineQuestions.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div style="background:#0d2137; border-radius:8px; padding:14px; margin-bottom:14px; display:inline-block; width:100%; text-align:center;">
+        ${q.svgLine}
+      </div>
+      <div class="question-text">What type of line is shown above?</div>
+      <div class="options-grid" id="opts-${q.id}">
+        ${q.options.map(opt => `<button class="option-btn" data-qid="${q.id}" data-opt="${opt}" onclick="selectLineOption('${q.id}','${opt}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb-${q.id}"></div>
+    `;
+    container.appendChild(card);
+  });
+
+  const fb = document.getElementById('feedback-lines');
+  if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+  const btn = document.getElementById('check-lines-btn');
+  if (btn) btn.disabled = false;
+}
+
+function selectLineOption(qid, opt) {
+  state.lineQuizAnswers[qid] = opt;
+  const opts = document.querySelectorAll(`[data-qid="${qid}"]`);
+  opts.forEach(b => {
+    b.classList.remove('selected-correct', 'selected-wrong');
+    if (b.dataset.opt === opt) b.style.borderColor = '#C9A84C';
+    else b.style.borderColor = '';
+  });
+}
+
+function checkLineQuiz() {
+  let correct = 0;
+  const total = lineQuestions.length;
+
+  lineQuestions.forEach(q => {
+    const chosen = state.lineQuizAnswers[q.id];
+    const opts = document.querySelectorAll(`[data-qid="${q.id}"]`);
+    opts.forEach(b => {
+      b.disabled = true;
+      b.style.borderColor = '';
+      if (b.dataset.opt === q.answer) b.classList.add('show-correct');
+    });
+
+    const fb = document.getElementById('fb-' + q.id);
+    if (chosen === q.answer) {
+      correct++;
+      if (fb) { fb.className = 'feedback correct show'; fb.textContent = '✅ Correct! ' + q.explanation; }
+    } else {
+      if (fb) {
+        fb.className = 'feedback incorrect show';
+        fb.textContent = `❌ ${chosen ? 'That was ' + chosen + '. ' : 'No answer selected. '}Correct: ${q.answer}. ${q.explanation}`;
+      }
+      const wrongBtn = document.querySelector(`[data-qid="${q.id}"][data-opt="${chosen}"]`);
+      if (wrongBtn) wrongBtn.classList.add('selected-wrong');
+    }
+  });
+
+  state.scores.a2 = Math.round((correct / total) * state.maxScores.a2);
+
+  const fb = document.getElementById('feedback-lines');
+  fb.className = 'feedback ' + (correct === total ? 'correct' : 'incorrect') + ' show';
+  fb.textContent = `You got ${correct} of ${total} correct. (${state.scores.a2}/${state.maxScores.a2} pts)`;
+
+  document.getElementById('check-lines-btn').disabled = true;
+
+  setTimeout(() => {
+    initScaleActivity();
+    showScreen(3);
+  }, 2500);
+}
+
+// ============================================================
+// ACTIVITY 3: SCALE CALCULATOR
+// ============================================================
+const scaleProblems = [
+  { id: 'sq1', scale: '1:2', text: 'The blueprint shows 40 mm. Scale is 1:2. What is the real size?', drawingVal: 40, factor: 2, answer: 80, unit: 'mm' },
+  { id: 'sq2', scale: '1:5', text: 'The blueprint shows 30 mm. Scale is 1:5. What is the real size?', drawingVal: 30, factor: 5, answer: 150, unit: 'mm' },
+  { id: 'sq3', scale: '1:10', text: 'The blueprint shows 25 mm. Scale is 1:10. What is the real size?', drawingVal: 25, factor: 10, answer: 250, unit: 'mm' },
+];
+
+let currentScaleFactor = 2;
+
+function initScaleActivity() {
+  currentScaleFactor = 2;
+  updateScale();
+
+  const container = document.getElementById('scale-questions');
+  if (!container) return;
+  container.innerHTML = '';
+  state.scaleAnswers = {};
+
+  scaleProblems.forEach(p => {
+    const row = document.createElement('div');
+    row.style.cssText = 'margin-bottom:14px; background:#f7f9fc; border-radius:10px; padding:14px;';
+    row.innerHTML = `
+      <div style="font-size:14px; font-weight:700; color:#1B3A5C; margin-bottom:8px;">Q: ${p.text}</div>
+      <div class="answer-check">
+        <span style="font-size:14px; color:#1B3A5C;">Real size =</span>
+        <input type="number" class="answer-input" id="sq-input-${p.id}" placeholder="?" min="0" max="9999">
+        <span style="font-size:14px; color:#1B3A5C;">${p.unit}</span>
+        <div class="feedback" id="fb-sq-${p.id}" style="display:none; margin:0; padding:6px 10px;"></div>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+
+  const fb = document.getElementById('feedback-scale');
+  if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+}
+
+function updateScale() {
+  const slider = document.getElementById('drawing-slider');
+  if (!slider) return;
+  const val = parseInt(slider.value);
+  const scaleFactors = [1, 2, 3, 4, 5, 8, 10];
+  // pick scale based on slider position
+  currentScaleFactor = val <= 30 ? 2 : val <= 60 ? 5 : 10;
+
+  document.getElementById('slider-val-display').textContent = val + ' mm';
+  document.getElementById('scale-display').textContent = '1:' + currentScaleFactor;
+
+  const realVal = val * currentScaleFactor;
+  const maxDraw = 100;
+  const drawPct = Math.min(val / maxDraw, 1);
+  const realPct = Math.min(realVal / (maxDraw * 10), 1);
+
+  const maxWidth = 320;
+  const drawBar = document.getElementById('drawing-bar');
+  const realBar = document.getElementById('real-bar');
+
+  const drawW = Math.max(30, drawPct * maxWidth);
+  const realW = Math.max(30, Math.min(realPct * maxWidth * 3, maxWidth));
+
+  drawBar.style.width = drawW + 'px';
+  drawBar.textContent = val + ' mm';
+  realBar.style.width = realW + 'px';
+  realBar.textContent = realVal + ' mm';
+}
+
+function checkScaleAnswers() {
+  let correct = 0;
+  const total = scaleProblems.length;
+
+  scaleProblems.forEach(p => {
+    const input = document.getElementById('sq-input-' + p.id);
+    const fb = document.getElementById('fb-sq-' + p.id);
+    if (!input || !fb) return;
+
+    const val = parseInt(input.value);
+    if (val === p.answer) {
+      correct++;
+      input.classList.add('correct-input');
+      fb.style.display = 'inline-block';
+      fb.className = 'feedback correct';
+      fb.textContent = '✅ Correct!';
+    } else {
+      input.classList.add('wrong-input');
+      fb.style.display = 'inline-block';
+      fb.className = 'feedback incorrect';
+      fb.textContent = `❌ Answer: ${p.answer} mm`;
+    }
+    input.disabled = true;
+  });
+
+  state.scores.a3 = Math.round((correct / total) * state.maxScores.a3);
+
+  const fb = document.getElementById('feedback-scale');
+  fb.className = 'feedback ' + (correct === total ? 'correct' : 'incorrect') + ' show';
+  fb.textContent = `You got ${correct} of ${total} correct. Remember: Real Size = Drawing Size × Scale Factor. (${state.scores.a3}/${state.maxScores.a3} pts)`;
+
+  setTimeout(() => {
+    initKnowledgeQuiz();
+    showScreen(4);
+  }, 2500);
+}
+
+// ============================================================
+// ACTIVITY 4: KNOWLEDGE CHECK QUIZ
+// ============================================================
+const knowledgeQuestions = [
+  {
+    id: 'kq1',
+    text: 'What is a blueprint?',
+    options: [
+      'A list of materials needed for a project',
+      'A detailed technical drawing used for construction or manufacturing',
+      'A photograph of a finished building',
+      'A schedule of when tasks must be completed'
+    ],
+    answer: 'A detailed technical drawing used for construction or manufacturing',
+    explanation: 'A blueprint is a detailed technical drawing — traditionally white lines on blue — that guides every step of construction.'
+  },
+  {
+    id: 'kq2',
+    text: 'What information is found in the Title Block of a blueprint?',
+    options: [
+      'The dimensions of every part',
+      'The list of hidden lines',
+      'Details like part name, scale, who drew it, and the date',
+      'The type of material to use'
+    ],
+    answer: 'Details like part name, scale, who drew it, and the date',
+    explanation: 'The title block is like the ID card of a blueprint — it identifies what the drawing is, who made it, and when.'
+  },
+  {
+    id: 'kq3',
+    text: 'Orthographic projection shows a 3D object by…',
+    options: [
+      'Photographing it from one angle',
+      'Showing multiple aligned 2D views (front, top, side)',
+      'Drawing it in perspective with vanishing points',
+      'Listing all parts in a numbered table'
+    ],
+    answer: 'Showing multiple aligned 2D views (front, top, side)',
+    explanation: 'Orthographic projection converts 3D shapes into multiple flat 2D views so builders can see every detail accurately.'
+  },
+  {
+    id: 'kq4',
+    text: 'If a blueprint has a scale of 1:5, the real object is…',
+    options: [
+      '5 times SMALLER than the drawing',
+      'The same size as the drawing',
+      '5 times LARGER than the drawing',
+      '1/5 the scale of a standard ruler'
+    ],
+    answer: '5 times LARGER than the drawing',
+    explanation: 'Scale 1:5 means every 1 unit on the drawing equals 5 units in reality — the real object is 5× bigger.'
+  }
+];
+
+function initKnowledgeQuiz() {
+  const container = document.getElementById('knowledge-quiz-container');
+  if (!container) return;
+  container.innerHTML = '';
+  state.knowledgeAnswers = {};
+
+  knowledgeQuestions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+      <div class="question-text">${i + 1}. ${q.text}</div>
+      <div class="options-grid" id="kopts-${q.id}">
+        ${q.options.map(opt => `<button class="option-btn" data-qid="${q.id}" data-opt="${opt}" onclick="selectKnowledgeOption('${q.id}','${CSS.escape(opt)}')">${opt}</button>`).join('')}
+      </div>
+      <div class="feedback" id="fb-kq-${q.id}"></div>
+    `;
+    container.appendChild(card);
+  });
+
+  const fb = document.getElementById('feedback-knowledge');
+  if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+}
+
+function selectKnowledgeOption(qid, escapedOpt) {
+  // Find actual option text from button
+  const btns = document.querySelectorAll(`[data-qid="${qid}"]`);
+  let actualOpt = escapedOpt;
+  btns.forEach(b => {
+    if (CSS.escape(b.dataset.opt) === escapedOpt || b.dataset.opt === escapedOpt) {
+      actualOpt = b.dataset.opt;
+    }
+  });
+
+  state.knowledgeAnswers[qid] = actualOpt;
+  btns.forEach(b => {
+    b.style.borderColor = b.dataset.opt === actualOpt ? '#C9A84C' : '';
+    b.style.background = b.dataset.opt === actualOpt ? '#fffbf0' : '';
+  });
+}
+
+function checkKnowledgeQuiz() {
+  let correct = 0;
+  const total = knowledgeQuestions.length;
+
+  knowledgeQuestions.forEach(q => {
+    const chosen = state.knowledgeAnswers[q.id];
+    const btns = document.querySelectorAll(`[data-qid="${q.id}"]`);
+    btns.forEach(b => {
+      b.disabled = true;
+      b.style.borderColor = '';
+      b.style.background = '';
+      if (b.dataset.opt === q.answer) b.classList.add('show-correct');
+    });
+
+    const fb = document.getElementById('fb-kq-' + q.id);
+    if (chosen === q.answer) {
+      correct++;
+      if (fb) { fb.className = 'feedback correct show'; fb.textContent = '✅ ' + q.explanation; }
+    } else {
+      if (fb) {
+        fb.className = 'feedback incorrect show';
+        fb.textContent = `❌ ${q.explanation}`;
+      }
+      const wrongBtn = document.querySelector(`[data-qid="${q.id}"][data-opt="${chosen}"]`);
+      if (wrongBtn) wrongBtn.classList.add('selected-wrong');
+    }
+  });
+
+  state.scores.a4 = Math.round((correct / total) * state.maxScores.a4);
+
+  const fb = document.getElementById('feedback-knowledge');
+  fb.className = 'feedback ' + (correct === total ? 'correct' : 'incorrect') + ' show';
+  fb.textContent = `You got ${correct} of ${total} correct. (${state.scores.a4}/${state.maxScores.a4} pts)`;
+
+  setTimeout(() => {
+    showResults();
+  }, 2200);
+}
+
+// ============================================================
+// RESULTS
+// ============================================================
+function showResults() {
+  const total = state.scores.a1 + state.scores.a2 + state.scores.a3 + state.scores.a4;
+  const maxTotal = state.maxScores.a1 + state.maxScores.a2 + state.maxScores.a3 + state.maxScores.a4;
+  const pct = Math.round((total / maxTotal) * 100);
+
+  document.getElementById('final-score-pct').textContent = pct + '%';
+  document.getElementById('score-a1').textContent = state.scores.a1 + ' / ' + state.maxScores.a1;
+  document.getElementById('score-a2').textContent = state.scores.a2 + ' / ' + state.maxScores.a2;
+  document.getElementById('score-a3').textContent = state.scores.a3 + ' / ' + state.maxScores.a3;
+  document.getElementById('score-a4').textContent = state.scores.a4 + ' / ' + state.maxScores.a4;
+  document.getElementById('score-total').textContent = total + ' / ' + maxTotal;
+
+  let grade, msg;
+  if (pct >= 90) {
+    grade = '🏆 Master Blueprint Reader';
+    msg = 'Outstanding! You read blueprints like a pro engineer. You are ready to assemble with precision and purpose — just as a master designer builds with perfect specifications.';
+  } else if (pct >= 75) {
+    grade = '⭐ Blueprint Interpreter';
+    msg = 'Great work! You have a solid understanding of blueprint reading. Review any areas where you lost points, and you\'ll be at the master level in no time.';
+  } else if (pct >= 55) {
+    grade = '📐 Blueprint Apprentice';
+    msg = 'Good start! You understand the basics. Focus on line types and the scale formula — they are key to accurate assembly.';
+  } else {
+    grade = '🔧 Blueprint Beginner';
+    msg = 'Keep going! Blueprint reading takes practice. Review the lesson on line types, scale, and orthographic projection, then try again.';
+  }
+
+  document.getElementById('score-grade-label').textContent = grade;
+  document.getElementById('congrats-msg').textContent = msg;
+
+  showScreen(5);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initDragActivity();
+});
+</script>
+</body>
+</html>

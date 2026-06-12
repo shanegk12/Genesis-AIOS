@@ -1,0 +1,297 @@
+[
+  {
+    "id": "c085t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Decommissioning Procedures and System Shutdown</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Legislation and Global E-Waste Policy — how human laws and international agreements try to manage the enormous amount of electronic waste our modern world creates. Today, we're diving deeper into the final stage of the Creationeering™ framework: <strong>Death &amp; Recycling</strong>.</p>\n<p>This phase is not about an ending. It's about transformation and renewal — a reflection of God's design for continuous stewardship of the resources He has entrusted to us. You'll explore the engineering principles behind decommissioning procedures and system shutdown, and you'll see how careful planning for the \"death\" of a system allows its materials to be reborn with new purpose.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Understand the Creationeering™ Death &amp; Recycling phase as a process of transformation, not just an end.</li>\n<li>Identify the key engineering considerations for safely decommissioning a system.</li>\n<li>Explain how multiscale modeling helps engineers understand material changes during recycling.</li>\n<li>Apply the OCV method to optimize the recycling process for a given system.</li>\n<li>Connect responsible system shutdown and recycling to biblical stewardship of God's creation.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Decommissioning",
+          "definition": "The process of safely taking a system out of service at the end of its useful life."
+        },
+        {
+          "term": "System Shutdown",
+          "definition": "The orderly process of bringing an operational system to a complete stop."
+        },
+        {
+          "term": "Recycling",
+          "definition": "Converting waste materials into new materials and objects."
+        },
+        {
+          "term": "Material Degradation",
+          "definition": "The weakening or breaking down of a material over time or through processing."
+        },
+        {
+          "term": "Energy Path Analysis",
+          "definition": "Tracing the flow of energy through a system during its operation and decommissioning."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome under given conditions."
+        },
+        {
+          "term": "Circular Economy",
+          "definition": "An economic system aimed at eliminating waste and the continual use of resources."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Dust to Dust — and New Life</h2>\n<p>The Bible gives us a powerful lens for understanding this phase of engineering. Psalm 33:6-9 tells us: <em>\"By the word of the Lord the heavens were made, and by the breath of his mouth all their host.... For He spoke, and it came to be; He commanded, and it stood firm.\"</em></p>\n<p>God is the ultimate Creator — He brought existence out of nothing. But look closely at the world He made, and you'll notice something: everything moves in cycles. Seeds fall and decompose, feeding the soil that grows new plants. Stars burn out and scatter the elements that form new worlds. God didn't design creation to simply stop — He designed it to transform.</p>\n<p>The engineering principle of Death &amp; Recycling mirrors this divine pattern. When a system reaches the end of its useful life, its components don't have to become waste. With careful planning, those materials can be transformed and given new purpose — preventing pollution and honoring the resources God placed in our hands.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Psalm 33:6-9 (KJV)</strong> — \"By the word of the Lord the heavens were made, and by the breath of his mouth all their host.... For He spoke, and it came to be; He commanded, and it stood firm.\" Just as God speaks order and purpose into creation, engineers are called to bring order — even to endings.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Decommissioning — A Planned Farewell</h2>\n<p>Decommissioning is the engineering term for carefully retiring a system. It's not throwing something away — it's a deliberate, step-by-step process for taking a system out of service safely and responsibly.</p>\n<p>Think about an old rollercoaster at an amusement park. After years of thrilling rides, the steel has fatigued, the electronics are outdated, and the ride can no longer be operated safely. You can't just knock it down overnight. Engineers must plan how to drain hydraulic fluids without contaminating the ground, remove steel beams without injuring workers, sort recyclable metals from materials that need special disposal, and document every step so future builders can learn from the process.</p>\n<p>That same careful thinking applies to everything from a retired power plant to an old smartphone. The bigger and more complex the system, the more detailed the decommissioning plan needs to be.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A step-by-step diagram showing the decommissioning stages of a large industrial machine: (1) system shutdown, (2) hazardous material removal, (3) component disassembly, (4) material sorting, and (5) recycling or safe disposal."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Engineering Considerations for Safe Decommissioning</h2>\n<p>When engineers design a decommissioning plan, they think through several critical areas:</p>\n<ul>\n<li><strong>Safety first:</strong> Hazardous materials like chemicals, pressurized fluids, or radiation must be safely neutralized or removed before any disassembly begins. No shortcut is worth a human life.</li>\n<li><strong>Material identification:</strong> Engineers catalog every material in the system — metals, plastics, composites — so they know what can be recycled, what must be specially handled, and what goes to a landfill as a last resort.</li>\n<li><strong>Energy path analysis:</strong> Before shutdown, engineers trace how energy flows through the system. Cutting off the wrong power source at the wrong moment can cause dangerous surges or mechanical failures.</li>\n<li><strong>Documentation:</strong> Every step is recorded. This creates a history that helps future engineers design better systems and better decommissioning plans.</li>\n<li><strong>Environmental protection:</strong> Soil, water, and air quality must be monitored throughout the process to make sure nothing harmful escapes into the surrounding environment.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>System Shutdown — Orderly Stopping</h2>\n<p>System shutdown is the first major step in any decommissioning process. It means bringing an operational system to a complete, controlled stop — and the word \"controlled\" is doing a lot of heavy lifting there.</p>\n<p>An uncontrolled shutdown — like a sudden power failure in a factory — can damage equipment, release stored energy unexpectedly, or leave a system in an unsafe state. A controlled shutdown follows a sequence. Imagine a pilot landing a plane: they don't just cut the engines at 30,000 feet. They reduce thrust gradually, deploy flaps, lower the landing gear, and touch down smoothly. Shutting down an engineering system works the same way — each subsystem is powered down in the right order so that nothing is left in a dangerous or unstable condition.</p>\n<h3>Why Sequence Matters</h3>\n<p>The order in which you shut down components can make a huge difference. In a chemical plant, for example, you must stop the reaction process before you stop the cooling system — not the other way around. In a computer data center, you save all data to storage before cutting power to the servers. Every system has its own safe shutdown sequence, and engineers must know it cold before they begin.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Students often assume \"shutdown\" just means turning something off. In engineering, an unplanned or out-of-sequence shutdown can be as dangerous as a system failure. Always think about the order of steps — sequence is everything.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Decommissioning to the Circular Economy</h2>\n<p>Once a system is safely shut down and disassembled, its materials enter the <strong>circular economy</strong> — a way of thinking about resources where nothing is truly wasted. Instead of the old \"take, make, throw away\" model, the circular economy asks: how can we keep these materials in use as long as possible?</p>\n<p>This is where recycling becomes an engineering challenge, not just an environmental one. Recycled steel from a decommissioned bridge can become rebar for a new building. Rare earth metals recovered from old electronics can go into new batteries. Even the heat generated during recycling processes can be captured and reused as an energy source.</p>\n<h3>Material Degradation — What Engineers Watch For</h3>\n<p>Not every material comes out of a system in perfect condition. Over years of use, materials experience <strong>degradation</strong> — they weaken, corrode, or change at a microscopic level. Engineers use a technique called <strong>multiscale modeling</strong> to understand these changes. It means looking at a material at multiple levels — from the overall structure of a bridge beam all the way down to the arrangement of atoms in the steel — to figure out whether it can be safely reused, needs reprocessing, or must be discarded.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular economy diagram showing how materials flow from product design through manufacturing, use, decommissioning, and back into new product creation — with arrows indicating recycling and reuse at each stage."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method — Optimizing the Recycling Process</h2>\n<p>Engineers don't just recycle randomly — they optimize the process. One approach is the <strong>OCV method</strong>: <strong>Output, Cost, Value</strong>. Here's how it works:</p>\n<ul>\n<li><strong>Output:</strong> What materials or energy can we actually recover from this system? How much of each?</li>\n<li><strong>Cost:</strong> What does it take — in time, energy, equipment, and labor — to recover those materials?</li>\n<li><strong>Value:</strong> Are the recovered materials worth more than what it costs to recover them? And does the environmental benefit add additional value even when the economic return is small?</li>\n</ul>\n<p>By running through these three questions, engineers can decide the most responsible and efficient path for each component in a decommissioned system. Sometimes the best choice is full recycling. Sometimes it's refurbishing a part for reuse. And sometimes — as a genuine last resort — it's safe disposal in a certified facility.</p>\n<p>The goal is always to maximize the stewardship of what God has provided, wasting as little as possible.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the OCV method</strong> with this image: think of a recycling plant as a kitchen. The <em>Output</em> is what ingredients you recover, the <em>Cost</em> is how much prep work it takes, and the <em>Value</em> is whether the dish you make is worth the effort. Good engineers — like good cooks — don't waste ingredients.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship — Why This All Matters</h2>\n<p>You might be wondering: why does an engineering curriculum spend time on endings? Because how we end things reveals our values just as clearly as how we build them.</p>\n<p>God placed us on this earth as stewards — caretakers of something that belongs to Him. Genesis 2:15 tells us He put humanity in the garden \"to work it and keep it.\" That responsibility didn't disappear when we built cities and factories. If anything, it grew. Every material we extract from the earth, every system we build and eventually retire, is an opportunity to either honor or dishonor that calling.</p>\n<p>Decommissioning and recycling aren't just environmental policies. They are acts of stewardship. When an engineer designs a careful shutdown procedure, recovers valuable materials instead of burying them, and minimizes pollution during disassembly, they are working in the spirit of that original calling — keeping and tending the creation God entrusted to us.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Here's a quick summary of what you've explored in this lesson:</p>\n<ul>\n<li><strong>Decommissioning</strong> is a planned, responsible process for retiring a system — not just throwing it away.</li>\n<li><strong>System shutdown</strong> must follow a careful sequence to prevent dangerous situations and protect both people and equipment.</li>\n<li><strong>Energy path analysis</strong> helps engineers understand how to safely remove a system from operation.</li>\n<li><strong>Material degradation</strong> is assessed using multiscale modeling so engineers know what can be reused, recycled, or safely disposed of.</li>\n<li>The <strong>OCV method</strong> (Output, Cost, Value) helps optimize recycling decisions.</li>\n<li>The <strong>circular economy</strong> keeps materials in use as long as possible, reducing waste and honoring creation.</li>\n<li>All of this is rooted in <strong>biblical stewardship</strong> — the calling to responsibly care for the world God made.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c085a001",
+    "type": "accordion",
+    "data": {
+      "title": "Want to Go Deeper? Real-World Decommissioning Examples",
+      "html": "<p><strong>Nuclear Power Plants:</strong> Decommissioning a nuclear plant is one of the most complex engineering challenges in existence. It can take 20–60 years and costs billions of dollars. Engineers must safely handle radioactive materials, contain contaminated water, and monitor the site for decades after shutdown. The planning for decommissioning often begins before the plant even opens.</p>\n<p><strong>Offshore Oil Platforms:</strong> When an oil rig reaches the end of its life, engineers face a choice: remove it entirely (at enormous cost) or convert it into an artificial reef that supports marine ecosystems. Many platforms are now intentionally converted, giving new life and purpose to structures that were built purely for extraction.</p>\n<p><strong>Smartphone Recycling:</strong> A single smartphone contains over 60 different elements from the periodic table — including gold, silver, cobalt, and rare earth metals. Specialized recycling facilities use chemical processes and precision machinery to recover these materials. The challenge is that the phone was never designed to be taken apart, which is exactly why engineers today are increasingly designing products with end-of-life recovery in mind from the very beginning.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

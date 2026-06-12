@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Upgrades and Backward Compatibility — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>System Upgrades and Backward Compatibility</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "System Upgrade", "definition": "A change or improvement made to a system to make it work better, add new features, or fix problems."}, {"term": "Backward Compatibility", "definition": "When a new version of software or hardware can still work with older versions of software or hardware."}, {"term": "Sustainability", "definition": "The ability of a system or product to keep working and be useful for a long time, often by being repaired, updated, or reused."}, {"term": "Modularity", "definition": "Designing a system with separate parts that can be easily replaced or upgraded without breaking the whole system."}, {"term": "Interoperability", "definition": "The ability of different systems or parts to work together smoothly and without problems."}, {"term": "Firmware", "definition": "Permanent software that is built into a device's memory, like the basic instructions for a game console."}, {"term": "Software Patch", "definition": "A small update for a computer program that fixes problems or adds small improvements."}, {"term": "API (Application Programming Interface)", "definition": "A set of rules that lets different software programs talk to each other and share information."}, {"term": "Optimization", "definition": "The process of finding the very best way to design or solve something, given certain limits."}, {"term": "Junior Creationeers", "definition": "The name for students in Genesis K-12 Academy's engineering curriculum, learning to design and build like God."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCV Method – Creationeering | Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-badge {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; }
+  header p { font-size: 0.78rem; opacity: 0.85; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  #intro {
+    max-width: 680px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    text-align: center;
+  }
+  #intro h2 { font-size: 1.6rem; color: #1B3A5C; margin-bottom: 10px; }
+  #intro p { font-size: 0.97rem; color: #3a4f66; line-height: 1.6; margin-bottom: 16px; }
+  .pill-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 18px 0; }
+  .pill {
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  .pill-O { background: #1B3A5C; color: #fff; }
+  .pill-C { background: #C9A84C; color: #1B3A5C; }
+  .pill-V { background: #e8f0fb; color: #1B3A5C; border: 2px solid #1B3A5C; }
+  .def-list { text-align: left; background: #f7f9fc; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+  .def-list li { margin-bottom: 8px; font-size: 0.93rem; line-height: 1.5; }
+  .def-list li strong { color: #1B3A5C; }
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 34px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn:hover { background: #b8943e; transform: translateY(-1px); }
+  .btn-secondary {
+    background: #fff;
+    color: #1B3A5C;
+    border: 2px solid #1B3A5C;
+  }
+  .btn-secondary:hover { background: #e8f0fb; }
+
+  /* ── SCENARIO / CLASSIFY ── */
+  #game {
+    max-width: 760px;
+    margin: 24px auto;
+    padding: 0 14px 40px;
+  }
+  .progress-bar-wrap {
+    background: #dde6f0;
+    border-radius: 50px;
+    height: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 50px;
+    transition: width 0.4s;
+  }
+  .scenario-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 26px 28px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    margin-bottom: 18px;
+  }
+  .scenario-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #C9A84C;
+    margin-bottom: 6px;
+  }
+  .scenario-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+  }
+  .scenario-body {
+    font-size: 0.95rem;
+    color: #3a4f66;
+    line-height: 1.65;
+    background: #f7f9fc;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .task-prompt {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    margin: 18px 0 12px;
+  }
+  /* Drag items */
+  .items-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 52px;
+    padding: 8px;
+    border-radius: 10px;
+    background: #e8f0fb;
+    margin-bottom: 18px;
+  }
+  .drag-item {
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: box-shadow 0.15s, opacity 0.15s;
+    touch-action: none;
+  }
+  .drag-item.dragging { opacity: 0.4; }
+  .drag-item.placed { display: none; }
+  /* Drop zones */
+  .zones-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .drop-zone {
+    flex: 1;
+    min-width: 160px;
+    border-radius: 12px;
+    border: 2.5px dashed #1B3A5C;
+    padding: 10px;
+    min-height: 100px;
+    background: #f7f9fc;
+    transition: background 0.2s;
+  }
+  .drop-zone.drag-over { background: #d9e8ff; }
+  .zone-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .zone-O .zone-label { color: #1B3A5C; }
+  .zone-C .zone-label { color: #b8943e; }
+  .zone-V .zone-label { color: #2a6496; }
+  .zone-items { display: flex; flex-direction: column; gap: 6px; }
+  .zone-chip {
+    background: #fff;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1.5px solid #cdd8e6;
+  }
+  .zone-chip .remove-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 2px;
+  }
+  .zone-chip .remove-btn:hover { color: #c0392b; }
+  .check-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .feedback-box {
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 200px;
+  }
+  .feedback-correct { background: #d4edda; color: #155724; border: 1.5px solid #c3e6cb; }
+  .feedback-partial { background: #fff3cd; color: #856404; border: 1.5px solid #ffeeba; }
+  .feedback-wrong { background: #f8d7da; color: #721c24; border: 1.5px solid #f5c6cb; }
+  .step-counter {
+    font-size: 0.82rem;
+    color: #7a96b0;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  /* ── FILL-IN question ── */
+  .fi-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .fi-option {
+    background: #f7f9fc;
+    border: 2px solid #cdd8e6;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 0.93rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: #1B3A5C;
+    font-weight: 500;
+    text-align: left;
+  }
+  .fi-option:hover { border-color: #C9A84C; background: #fdf6e3; }
+  .fi-option.selected-correct { border-color: #28a745; background: #d4edda; color: #155724; }
+  .fi-option.selected-wrong { border-color: #dc3545; background: #f8d7da; color: #721c24; }
+  .fi-option.show-correct { border-color: #28a745; background: #d4edda; color: #155724; }
+  .fi-option:disabled, .fi-option.disabled { pointer-events: none; }
+
+  /* ── SUMMARY ── */
+  #summary {
+    max-width: 640px;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    text-align: center;
+  }
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .score-circle .score-num { font-size: 2.2rem; font-weight: 800; }
+  .score-circle .score-denom { font-size: 0.85rem; font-weight: 600; opacity: 0.85; }
+  #summary h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  #summary p { font-size: 0.95rem; color: #3a4f66; line-height: 1.6; margin-bottom: 10px; }
+  .summary-review {
+    text-align: left;
+    margin: 18px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .review-item {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #3a4f66;
+    border-left: 5px solid #cdd8e6;
+  }
+  .review-item.correct { border-left-color: #28a745; }
+  .review-item.partial { border-left-color: #ffc107; }
+  .review-item.wrong { border-left-color: #dc3545; }
+  .review-item strong { color: #1B3A5C; }
+  .badge {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-radius: 50px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 520px) {
+    .zones-row { flex-direction: column; }
+    #intro, #summary { padding: 22px 16px; }
+    .scenario-card { padding: 18px 16px; }
+    header h1 { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK12</div>
+  <div>
+    <h1>Objectives, Constraints &amp; Variables</h1>
+    <p>Creationeering · Problem Definition Activity</p>
+  </div>
+</header>
+
+<!-- INTRO SCREEN -->
+<div id="intro" class="screen active">
+  <h2>🛠️ The OCV Method</h2>
+  <p>Engineers don't jump straight to solutions — they <strong>define the problem first</strong>. The OCV method helps you break any challenge into three parts:</p>
+  <div class="pill-row">
+    <span class="pill pill-O">O — Objective</span>
+    <span class="pill pill-C">C — Constraint</span>
+    <span class="pill pill-V">V — Variable</span>
+  </div>
+  <ul class="def-list">
+    <li><strong>Objective:</strong> What you want to accomplish.</li>
+    <li><strong>Constraint:</strong> A limit or rule you must work within.</li>
+    <li><strong>Variable:</strong> Something that can change and affect the outcome.</li>
+  </ul>
+  <p>In this activity you will read <strong>3 real-world scenarios</strong> and sort each item into the correct OCV category. You'll also answer questions about problem definition. Good luck!</p>
+  <button class="btn" onclick="startGame()">Start Activity ▶</button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game" class="screen">
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <div id="gameContent"></div>
+</div>
+
+<!-- SUMMARY SCREEN -->
+<div id="summary" class="screen">
+  <div class="score-circle">
+    <span class="score-num" id="finalScore">0</span>
+    <span class="score-denom" id="finalDenom">/ 0 pts</span>
+  </div>
+  <h2 id="summaryTitle">Nice Work!</h2>
+  <p id="summaryMsg"></p>
+  <div class="summary-review" id="reviewList"></div>
+  <p style="font-size:0.85rem;color:#7a96b0;margin-top:8px;">
+    Remember: A good problem statement = Objective + Constraints + Variables + the 5 Ws (Who, What, When, Where, Why).
+  </p>
+  <button class="btn" onclick="restartGame()">Try Again</button>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
+const scenarios = [
+  {
+    type: 'drag',
+    scenarioLabel: 'Scenario 1 of 3',
+    scenarioTitle: '🚗 The Overheating Car Engine',
+    scenarioBody: `A mechanic notices a car's temperature gauge is dangerously high. After checking the coolant, they realize the real problem is that the engine has been running without enough oil — causing parts to wear out and the engine to overheat.`,
+    taskPrompt: 'Drag each item into the correct OCV category:',
+    items: [
+      { id: 'i1', text: 'Keep the engine running safely', zone: 'O' },
+      { id: 'i2', text: 'Must stay within the repair budget of $500', zone: 'C' },
+      { id: 'i3', text: 'Current oil level in the engine', zone: 'V' },
+      { id: 'i4', text: 'Cannot replace the entire engine block', zone: 'C' },
+      { id: 'i5', text: 'Engine temperature reading', zone: 'V' },
+    ],
+    maxPoints: 5,
+  },
+  {
+    type: 'drag',
+    scenarioLabel: 'Scenario 2 of 3',
+    scenarioTitle: '🌉 Bridge Design Challenge',
+    scenarioBody: `A city needs a new bridge over a river that floods every spring. Engineers must design a bridge that handles heavy truck traffic, costs under $2 million, and can be built in less than 12 months. The river's water level changes drastically with rainfall.`,
+    taskPrompt: 'Drag each item into the correct OCV category:',
+    items: [
+      { id: 'j1', text: 'Build a safe, functional bridge over the river', zone: 'O' },
+      { id: 'j2', text: 'Budget must stay under $2 million', zone: 'C' },
+      { id: 'j3', text: 'Construction must finish within 12 months', zone: 'C' },
+      { id: 'j4', text: 'River water level during construction', zone: 'V' },
+      { id: 'j5', text: 'Weight of truck loads crossing the bridge', zone: 'V' },
+    ],
+    maxPoints: 5,
+  },
+  {
+    type: 'mc',
+    scenarioLabel: 'Scenario 3 of 3',
+    scenarioTitle: '📋 Problem Statement Practice',
+    scenarioBody: `An engineer is designing a solar-powered water pump for a rural village. The pump must deliver clean water to 200 families, cost less than $3,000 to build, and work even on cloudy days. The amount of daily sunlight changes by season.`,
+    questions: [
+      {
+        prompt: 'What is the OBJECTIVE in this scenario?',
+        options: [
+          'The pump must cost less than $3,000',
+          'Deliver clean water to 200 families',
+          'The amount of daily sunlight changes',
+          'The pump must work on cloudy days',
+        ],
+        correct: 1,
+        explanation: 'The objective is what you want to accomplish — delivering clean water to 200 families.',
+      },
+      {
+        prompt: 'Which of the following is a CONSTRAINT?',
+        options: [
+          'The amount of daily sunlight changes by season',
+          'The number of families receiving water',
+          'Cost must be less than $3,000 to build',
+          'The pump uses solar power',
+        ],
+        correct: 2,
+        explanation: 'A constraint is a limit you must work within — the $3,000 budget is a rule the engineers cannot exceed.',
+      },
+      {
+        prompt: 'Which is the best example of a VARIABLE in this scenario?',
+        options: [
+          'Deliver water to 200 families',
+          'Cost limit of $3,000',
+          'The pump must work on cloudy days',
+          'Amount of daily sunlight changes by season',
+        ],
+        correct: 3,
+        explanation: 'A variable is something that can change and affect the outcome — seasonal sunlight is not fixed; it changes.',
+      },
+      {
+        prompt: 'Why do engineers define the problem BEFORE jumping to a solution?',
+        options: [
+          'So they can skip brainstorming and build faster',
+          'Because defining a problem clearly leads to better solutions and avoids fixing the wrong thing',
+          'Because constraints are not important until later',
+          'To avoid working with a team',
+        ],
+        correct: 1,
+        explanation: 'Defining the problem first — like the mechanic who found the oil issue instead of just fixing the coolant — ensures engineers solve the root cause, not just a symptom.',
+      },
+    ],
+    maxPoints: 4,
+  },
+];
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let currentStep = 0;
+let totalPoints = 0;
+let maxPoints = 0;
+let stepResults = [];   // { label, result: 'correct'|'partial'|'wrong', points, max }
+
+// drag state
+let dragItem = null;
+let touchStartX = 0, touchStartY = 0;
+let currentPlacements = {};  // itemId -> zone
+
+// mc state
+let mcAnswered = [];
+
+// ─────────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startGame() {
+  currentStep = 0;
+  totalPoints = 0;
+  maxPoints = 0;
+  stepResults = [];
+  showScreen('game');
+  renderStep();
+}
+
+function restartGame() {
+  startGame();
+}
+
+function advanceStep() {
+  currentStep++;
+  if (currentStep >= scenarios.length) {
+    showSummary();
+  } else {
+    renderStep();
+  }
+}
+
+// ─────────────────────────────────────────────
+//  PROGRESS
+// ─────────────────────────────────────────────
+function updateProgress() {
+  const pct = (currentStep / scenarios.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+// ─────────────────────────────────────────────
+//  RENDER STEP
+// ─────────────────────────────────────────────
+function renderStep() {
+  updateProgress();
+  const s = scenarios[currentStep];
+  const container = document.getElementById('gameContent');
+  if (s.type === 'drag') {
+    renderDragStep(s, container);
+  } else if (s.type === 'mc') {
+    renderMCStep(s, container);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  DRAG-DROP STEP
+// ─────────────────────────────────────────────
+function renderDragStep(s, container) {
+  currentPlacements = {};
+  // shuffle items
+  const shuffled = [...s.items].sort(() => Math.random() - 0.5);
+
+  container.innerHTML = `
+    <div class="step-counter">${s.scenarioLabel}</div>
+    <div class="scenario-card">
+      <div class="scenario-label">Scenario</div>
+      <div class="scenario-title">${s.scenarioTitle}</div>
+      <div class="scenario-body">${s.scenarioBody}</div>
+    </div>
+    <p class="task-prompt">${s.taskPrompt}</p>
+    <div class="items-row" id="itemsPool">
+      ${shuffled.map(item => `
+        <div class="drag-item" id="di_${item.id}" data-id="${item.id}"
+          draggable="true">${item.text}</div>
+      `).join('')}
+    </div>
+    <div class="zones-row">
+      <div class="drop-zone zone-O" id="zone_O" data-zone="O">
+        <div class="zone-label" style="color:#1B3A5C">🎯 Objective</div>
+        <div class="zone-items" id="zi_O"></div>
+      </div>
+      <div class="drop-zone zone-C" id="zone_C" data-zone="C">
+        <div class="zone-label" style="color:#b8943e">🚧 Constraint</div>
+        <div class="zone-items" id="zi_C"></div>
+      </div>
+      <div class="drop-zone zone-V" id="zone_V" data-zone="V">
+        <div class="zone-label" style="color:#2a6496">🔄 Variable</div>
+        <div class="zone-items" id="zi_V"></div>
+      </div>
+    </div>
+    <div class="check-row">
+      <button class="btn" id="checkBtn" onclick="checkDrag()" disabled>Check Answers</button>
+      <div id="dragFeedback"></div>
+    </div>
+  `;
+
+  // Setup desktop drag events
+  setupDragEvents(s);
+  // Setup touch events
+  setupTouchEvents(s);
+  // Setup zone dragover/drop
+  setupZoneEvents();
+}
+
+function setupDragEvents(s) {
+  document.querySelectorAll('.drag-item').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      dragItem = el;
+      setTimeout(() => el.classList.add('dragging'), 0);
+    });
+    el.addEventListener('dragend', e => {
+      el.classList.remove('dragging');
+      dragItem = null;
+    });
+  });
+}
+
+function setupZoneEvents() {
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', e => {
+      zone.classList.remove('drag-over');
+    });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      if (dragItem) {
+        placeItem(dragItem.dataset.id, zone.dataset.zone);
+      }
+    });
+  });
+}
+
+// Touch drag
+function setupTouchEvents(s) {
+  document.querySelectorAll('.drag-item').forEach(el => {
+    el.addEventListener('touchstart', e => {
+      dragItem = el;
+      el.classList.add('dragging');
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    el.addEventListener('touchmove', e => {
+      e.preventDefault();
+      // visual ghost optional — skip for simplicity
+    }, { passive: false });
+
+    el.addEventListener('touchend', e => {
+      el.classList.remove('dragging');
+      const touch = e.changedTouches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target) {
+        const zone = target.closest('.drop-zone');
+        if (zone && dragItem) {
+          placeItem(dragItem.dataset.id, zone.dataset.zone);
+        }
+      }
+      dragItem = null;
+    });
+  });
+}
+
+function placeItem(itemId, zoneId) {
+  // Remove from previous zone if any
+  if (currentPlacements[itemId]) {
+    removeChip(itemId, currentPlacements[itemId]);
+  }
+  currentPlacements[itemId] = zoneId;
+
+  // Hide from pool
+  const poolEl = document.getElementById('di_' + itemId);
+  if (poolEl) poolEl.style.display = 'none';
+
+  // Add chip to zone
+  const zoneItems = document.getElementById('zi_' + zoneId);
+  const chip = document.createElement('div');
+  chip.className = 'zone-chip';
+  chip.id = 'chip_' + itemId;
+  // get text
+  const text = document.getElementById('di_' + itemId)
+    ? document.getElementById('di_' + itemId).textContent
+    : poolEl ? poolEl.textContent : itemId;
+  chip.innerHTML = `<span>${text}</span><button class="remove-btn" onclick="returnItem('${itemId}','${zoneId}')">✕</button>`;
+  zoneItems.appendChild(chip);
+
+  // Enable check button if all placed
+  const totalItems = document.querySelectorAll('.drag-item').length;
+  const placedCount = Object.keys(currentPlacements).length;
+  document.getElementById('checkBtn').disabled = placedCount < totalItems;
+}
+
+function removeChip(itemId, zoneId) {
+  const chip = document.getElementById('chip_' + itemId);
+  if (chip) chip.remove();
+}
+
+function returnItem(itemId, zoneId) {
+  removeChip(itemId, zoneId);
+  delete currentPlacements[itemId];
+  const poolEl = document.getElementById('di_' + itemId);
+  if (poolEl) poolEl.style.display = '';
+  document.getElementById('checkBtn').disabled = true;
+}
+
+function checkDrag() {
+  const s = scenarios[currentStep];
+  let correct = 0;
+  s.items.forEach(item => {
+    if (currentPlacements[item.id] === item.zone) correct++;
+  });
+  const pts = correct;
+  const max = s.items.length;
+
+  // Color chips
+  s.items.forEach(item => {
+    const chip = document.getElementById('chip_' + item.id);
+    if (!chip) return;
+    if (currentPlacements[item.id] === item.zone) {
+      chip.style.borderColor = '#28a745';
+      chip.style.background = '#d4edda';
+    } else {
+      chip.style.borderColor = '#dc3545';
+      chip.style.background = '#f8d7da';
+      // show correct zone
+      chip.querySelector('span').innerHTML += ` <span style="font-size:0.75rem;color:#155724"> → ${item.zone === 'O' ? 'Objective' : item.zone === 'C' ? 'Constraint' : 'Variable'}</span>`;
+    }
+  });
+
+  let resultClass, resultText;
+  if (correct === max) {
+    resultClass = 'feedback-correct';
+    resultText = `✅ Perfect! All ${max} items correctly sorted.`;
+  } else if (correct >= Math.ceil(max / 2)) {
+    resultClass = 'feedback-partial';
+    resultText = `🟡 ${correct} of ${max} correct. Red items show the right category.`;
+  } else {
+    resultClass = 'feedback-wrong';
+    resultText = `❌ ${correct} of ${max} correct. Review the red items to see where they belong.`;
+  }
+
+  document.getElementById('dragFeedback').innerHTML =
+    `<div class="feedback-box ${resultClass}">${resultText}</div>`;
+
+  // Disable further interaction
+  document.querySelectorAll('.remove-btn').forEach(b => b.disabled = true);
+  document.querySelectorAll('.drag-item').forEach(el => el.setAttribute('draggable', 'false'));
+  document.getElementById('checkBtn').style.display = 'none';
+
+  // Store result
+  const resultLabel = correct === max ? 'correct' : correct >= Math.ceil(max / 2) ? 'partial' : 'wrong';
+  stepResults.push({ label: s.scenarioTitle, result: resultLabel, points: pts, max });
+  totalPoints += pts;
+  maxPoints += max;
+
+  // Next button
+  const checkRow = document.querySelector('.check-row');
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'btn';
+  nextBtn.textContent = currentStep + 1 < scenarios.length ? 'Next ▶' : 'See Results ▶';
+  nextBtn.onclick = advanceStep;
+  checkRow.appendChild(nextBtn);
+}
+
+// ─────────────────────────────────────────────
+//  MULTIPLE CHOICE STEP
+// ─────────────────────────────────────────────
+function renderMCStep(s, container) {
+  mcAnswered = new Array(s.questions.length).fill(false);
+  let qHtml = s.questions.map((q, qi) => `
+    <div class="scenario-card" id="qcard_${qi}" style="margin-bottom:14px;">
+      <div class="scenario-label">Question ${qi + 1} of ${s.questions.length}</div>
+      <p style="font-weight:600;font-size:0.97rem;color:#1B3A5C;margin-bottom:12px;">${q.prompt}</p>
+      <div class="fi-options" id="opts_${qi}">
+        ${q.options.map((opt, oi) => `
+          <button class="fi-option" id="opt_${qi}_${oi}" onclick="selectMC(${qi}, ${oi})">${opt}</button>
+        `).join('')}
+      </div>
+      <div id="exp_${qi}" style="display:none;font-size:0.85rem;color:#3a4f66;background:#f7f9fc;padding:10px 14px;border-radius:8px;margin-top:8px;line-height:1.5;"></div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="step-counter">${s.scenarioLabel}</div>
+    <div class="scenario-card">
+      <div class="scenario-label">Scenario</div>
+      <div class="scenario-title">${s.scenarioTitle}</div>
+      <div class="scenario-body">${s.scenarioBody}</div>
+    </div>
+    <p class="task-prompt">Answer each question below:</p>
+    ${qHtml}
+    <div id="mcCheckRow" style="margin-top:8px;display:none;">
+      <button class="btn" onclick="finishMC()">See Results ▶</button>
+    </div>
+  `;
+}
+
+function selectMC(qi, oi) {
+  if (mcAnswered[qi]) return;
+  mcAnswered[qi] = true;
+  const s = scenarios[currentStep];
+  const q = s.questions[qi];
+  const correct = q.correct;
+
+  // Disable all options for this question
+  s.questions[qi].options.forEach((_, i) => {
+    const btn = document.getElementById(`opt_${qi}_${i}`);
+    btn.classList.add('disabled');
+    btn.style.pointerEvents = 'none';
+  });
+
+  const selectedBtn = document.getElementById(`opt_${qi}_${oi}`);
+  const correctBtn = document.getElementById(`opt_${qi}_${correct}`);
+
+  if (oi === correct) {
+    selectedBtn.classList.add('selected-correct');
+  } else {
+    selectedBtn.classList.add('selected-wrong');
+    correctBtn.classList.add('show-correct');
+  }
+
+  // Show explanation
+  const expDiv = document.getElementById(`exp_${qi}`);
+  expDiv.style.display = 'block';
+  expDiv.innerHTML = `<strong>${oi === correct ? '✅ Correct!' : '❌ Not quite.'}</strong> ${q.explanation}`;
+
+  // Check if all answered
+  if (mcAnswered.every(Boolean)) {
+    document.getElementById('mcCheckRow').style.display = 'block';
+  }
+}
+
+function finishMC() {
+  const s = scenarios[currentStep];
+  let correct = 0;
+  s.questions.forEach((q, qi) => {
+    // We need to check which was selected — track via class
+    const selected = document.querySelector(`#opts_${qi} .selected-correct`);
+    if (selected) correct++;
+  });
+  const pts = correct;
+  const max = s.questions.length;
+  const resultLabel = correct === max ? 'correct' : correct >= Math.ceil(max / 2) ? 'partial' : 'wrong';
+  stepResults.push({ label: s.scenarioTitle + ' (Q&A)', result: resultLabel, points: pts, max });
+  totalPoints += pts;
+  maxPoints += max;
+  advanceStep();
+}
+
+// ─────────────────────────────────────────────
+//  SUMMARY
+// ─────────────────────────────────────────────
+function showSummary() {
+  updateProgress();
+  document.getElementById('progressFill').style.width = '100%';
+
+  const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
+  document.getElementById('finalScore').textContent = totalPoints;
+  document.getElementById('finalDenom').textContent = `/ ${maxPoints} pts`;
+
+  let title, msg;
+  if (pct >= 90) {
+    title = '🏆 Outstanding Engineer!';
+    msg = 'You nailed the OCV method! You can identify objectives, constraints, and variables with confidence. Great problem-definers make great engineers.';
+  } else if (pct >= 70) {
+    title = '👍 Good Work!';
+    msg = 'You have a solid grasp of the OCV method. Review any missed items and remember: correctly defining a problem is the first step to finding the right solution.';
+  } else if (pct >= 50) {
+    title = '📚 Keep Practicing!';
+    msg = 'You understand some parts of OCV. Review the definitions: Objective (goal), Constraint (limit), Variable (something that changes). Try again to improve your score!';
+  } else {
+    title = '🔄 Let\'s Try Again!';
+    msg = 'No worries — OCV takes practice. Remember: What do you want? (Objective) • What limits you? (Constraint) • What can change? (Variable). Give it another shot!';
+  }
+
+  document.getElementById('summaryTitle').textContent = title;
+  document.getElementById('summaryMsg').textContent = msg;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = stepResults.map(r => `
+    <div class="review-item ${r.result}">
+      <strong>${r.label}</strong>
+      <span class="badge">${r.points}/${r.max}</span>
+      <br>
+      <span style="font-size:0.82rem;">
+        ${r.result === 'correct' ? '✅ All correct!' : r.result === 'partial' ? '🟡 Partially correct — review and retry.' : '❌ Needs review — try again.'}
+      </span>
+    </div>
+  `).join('');
+
+  showScreen('summary');
+}
+</script>
+</body>
+</html>

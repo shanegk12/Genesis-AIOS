@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Synthesis? – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  header .logo {
+    width: 40px; height: 40px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C; flex-shrink: 0;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+  header p { font-size: 0.78rem; color: #C9A84C; margin-top: 2px; }
+
+  .screen { display: none; width: 100%; max-width: 760px; padding: 20px 16px 40px; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px 28px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; color: #444; line-height: 1.6; margin-bottom: 14px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0; }
+  .tag {
+    background: #edf2f8; border-radius: 20px;
+    padding: 5px 14px; font-size: 0.82rem;
+    color: #1B3A5C; font-weight: 600;
+  }
+  .tag.gold { background: #C9A84C; color: #fff; }
+
+  /* BTN */
+  .btn {
+    background: #C9A84C; color: #1B3A5C;
+    border: none; border-radius: 8px;
+    padding: 13px 30px; font-size: 1rem;
+    font-weight: 700; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn:hover { background: #b8943e; transform: translateY(-1px); }
+  .btn.secondary {
+    background: #1B3A5C; color: #fff; margin-right: 10px;
+  }
+  .btn.secondary:hover { background: #16324f; }
+  .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: #dde6f0; border-radius: 10px;
+    height: 8px; width: 100%; margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: #C9A84C;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+  .step-label {
+    font-size: 0.78rem; color: #7a90a8;
+    margin-bottom: 6px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+
+  /* ACTIVITY CARD */
+  .activity-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    margin-bottom: 16px;
+  }
+  .activity-card h3 {
+    font-size: 1.05rem; color: #1B3A5C;
+    margin-bottom: 6px; font-weight: 700;
+  }
+  .activity-card .prompt {
+    font-size: 0.93rem; color: #333; line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  /* === STAGE 1: SORT === */
+  .sort-instruction {
+    background: #edf2f8; border-radius: 8px;
+    padding: 10px 14px; font-size: 0.85rem;
+    color: #1B3A5C; margin-bottom: 14px; font-weight: 600;
+  }
+  .columns-wrap {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .sort-col {
+    flex: 1; min-width: 140px;
+    border-radius: 10px; padding: 12px 10px;
+    min-height: 180px;
+  }
+  .sort-col.analysis-col { background: #ddeaf7; border: 2px dashed #5a8fc4; }
+  .sort-col.synthesis-col { background: #fdf4e0; border: 2px dashed #C9A84C; }
+  .sort-col h4 {
+    font-size: 0.85rem; font-weight: 700;
+    margin-bottom: 10px; text-align: center;
+    padding-bottom: 6px; border-bottom: 2px solid rgba(0,0,0,0.08);
+  }
+  .sort-col.analysis-col h4 { color: #1B3A5C; }
+  .sort-col.synthesis-col h4 { color: #8a6320; }
+
+  .card-bank {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .sort-card {
+    background: #1B3A5C; color: #fff;
+    border-radius: 8px; padding: 8px 12px;
+    font-size: 0.82rem; cursor: grab;
+    user-select: none; font-weight: 600;
+    transition: opacity 0.15s, box-shadow 0.15s;
+    touch-action: none;
+  }
+  .sort-card:hover { box-shadow: 0 3px 10px rgba(27,58,92,0.3); }
+  .sort-card.dragging { opacity: 0.45; }
+  .sort-card.placed {
+    background: #fff; color: #1B3A5C;
+    border: 2px solid #1B3A5C;
+    cursor: default;
+  }
+  .sort-col .sort-card { width: 100%; margin-bottom: 4px; }
+
+  /* === STAGE 2: OCV === */
+  .ocv-scenario {
+    background: #f0f5fb; border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 16px;
+    font-size: 0.9rem; color: #1B3A5C; line-height: 1.55;
+    border-left: 4px solid #C9A84C;
+  }
+  .ocv-row { display: flex; flex-direction: column; gap: 14px; }
+  .ocv-item label {
+    font-weight: 700; font-size: 0.85rem;
+    color: #1B3A5C; display: block; margin-bottom: 6px;
+  }
+  .ocv-item label span {
+    font-weight: 400; color: #666; font-size: 0.8rem; margin-left: 4px;
+  }
+  .choice-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .choice-btn {
+    background: #edf2f8; border: 2px solid #ccd8e8;
+    color: #1B3A5C; border-radius: 8px;
+    padding: 8px 14px; font-size: 0.82rem;
+    font-weight: 600; cursor: pointer;
+    transition: all 0.18s;
+  }
+  .choice-btn:hover { border-color: #C9A84C; background: #fdf4e0; }
+  .choice-btn.selected { background: #C9A84C; border-color: #C9A84C; color: #1B3A5C; }
+  .choice-btn.wrong { background: #fde8e8; border-color: #e05c5c; color: #c0392b; }
+  .choice-btn.correct { background: #e2f5ea; border-color: #27ae60; color: #1a7340; }
+
+  /* === STAGE 3: MULTISCALE === */
+  .scale-grid {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .scale-box {
+    flex: 1; min-width: 110px;
+    border-radius: 10px; padding: 12px 10px;
+    background: #edf2f8; border: 2px dashed #ccd8e8;
+    min-height: 100px; transition: background 0.2s, border-color 0.2s;
+    text-align: center;
+  }
+  .scale-box h5 {
+    font-size: 0.8rem; font-weight: 700;
+    color: #1B3A5C; margin-bottom: 8px;
+    padding-bottom: 6px; border-bottom: 2px solid rgba(0,0,0,0.07);
+  }
+  .scale-box.drag-over { background: #fdf4e0; border-color: #C9A84C; }
+  .scale-chip {
+    background: #1B3A5C; color: #fff;
+    border-radius: 6px; padding: 6px 10px;
+    font-size: 0.78rem; cursor: grab;
+    font-weight: 600; margin: 3px auto;
+    display: inline-block;
+    user-select: none; touch-action: none;
+  }
+  .scale-chip.dragging { opacity: 0.4; }
+  .scale-chip.placed {
+    background: #27ae60; cursor: default;
+    display: block; width: 100%;
+  }
+
+  /* === QUIZ (stage 4) === */
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .quiz-opt {
+    background: #edf2f8; border: 2px solid #ccd8e8;
+    color: #1B3A5C; border-radius: 8px;
+    padding: 11px 16px; font-size: 0.88rem;
+    font-weight: 600; cursor: pointer;
+    text-align: left; transition: all 0.18s;
+  }
+  .quiz-opt:hover { border-color: #C9A84C; background: #fdf4e0; }
+  .quiz-opt.correct { background: #e2f5ea; border-color: #27ae60; color: #1a7340; }
+  .quiz-opt.wrong { background: #fde8e8; border-color: #e05c5c; color: #c0392b; }
+  .quiz-feedback {
+    margin-top: 10px; font-size: 0.88rem;
+    padding: 10px 14px; border-radius: 8px;
+    font-weight: 600; display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: #e2f5ea; color: #1a7340; }
+  .quiz-feedback.wrong { background: #fde8e8; color: #c0392b; }
+
+  /* RESULTS */
+  .results-card {
+    background: #fff; border-radius: 14px;
+    padding: 32px 28px; box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  .score-ring {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    border: 8px solid #C9A84C;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    margin: 0 auto 18px;
+    background: #fff;
+  }
+  .score-ring .big { font-size: 2rem; font-weight: 900; color: #1B3A5C; line-height: 1; }
+  .score-ring .small { font-size: 0.75rem; color: #7a90a8; font-weight: 600; }
+  .results-card h2 { font-size: 1.4rem; color: #1B3A5C; margin-bottom: 8px; }
+  .results-card .summary { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 20px; }
+  .breakdown {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 20px;
+  }
+  .breakdown-item {
+    background: #edf2f8; border-radius: 10px;
+    padding: 10px 16px; font-size: 0.82rem;
+    color: #1B3A5C; font-weight: 700;
+    text-align: center; min-width: 120px;
+  }
+  .breakdown-item .val { font-size: 1.3rem; color: #C9A84C; display: block; }
+
+  /* nav row */
+  .nav-row {
+    display: flex; justify-content: flex-end;
+    gap: 10px; margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 500px) {
+    header h1 { font-size: 0.95rem; }
+    .intro-card h2 { font-size: 1.2rem; }
+    .sort-col { min-width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK</div>
+  <div>
+    <h1>Creationeering™ — What is Synthesis?</h1>
+    <p>Genesis K-12 Academy · Middle School Engineering</p>
+  </div>
+</header>
+
+<!-- INTRO SCREEN -->
+<div class="screen active" id="screen-intro">
+  <div style="max-width:680px;margin:30px auto;padding:0 8px;">
+    <div class="intro-card">
+      <h2>🔬 Analysis & Synthesis</h2>
+      <p>You already know how to <strong>analyze</strong> — break things apart to understand them. Now it's time to explore <strong>synthesis</strong>: combining pieces into something new and powerful.</p>
+      <div class="tag-row">
+        <span class="tag">Analysis = Break it down</span>
+        <span class="tag gold">Synthesis = Build it up</span>
+        <span class="tag">OCV Method</span>
+        <span class="tag">Multiscale Modeling</span>
+      </div>
+      <p style="font-size:0.88rem;color:#666;">Complete <strong>4 short activities</strong> to earn your Synthesis badge. About 3–5 minutes.</p>
+      <br>
+      <button class="btn" onclick="startGame()">Start Activity ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN GAME SCREEN -->
+<div class="screen" id="screen-game">
+  <div style="max-width:720px;margin:0 auto;">
+    <div class="step-label" id="step-label">Activity 1 of 4</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+    </div>
+
+    <!-- STAGE 1: SORT Analysis vs Synthesis -->
+    <div id="stage-1">
+      <div class="activity-card">
+        <h3>🗂️ Sort It Out: Analysis or Synthesis?</h3>
+        <p class="prompt">Drag each card into the correct column — does it describe <strong>Analysis</strong> (breaking things down) or <strong>Synthesis</strong> (building something new)?</p>
+        <div class="sort-instruction">📌 Drag cards from the bank below into the correct column.</div>
+        <div class="columns-wrap">
+          <div class="sort-col analysis-col" id="col-analysis"
+            ondragover="allowDrop(event)" ondrop="dropSort(event,'analysis')">
+            <h4>🔍 Analysis</h4>
+          </div>
+          <div class="sort-col synthesis-col" id="col-synthesis"
+            ondragover="allowDrop(event)" ondrop="dropSort(event,'synthesis')">
+            <h4>⚗️ Synthesis</h4>
+          </div>
+        </div>
+        <div id="sort-bank" class="card-bank" style="margin-top:14px;"></div>
+        <div id="sort-feedback" style="margin-top:10px;font-size:0.88rem;font-weight:600;color:#c0392b;"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn" id="btn-sort-check" onclick="checkSort()" disabled>Check Answers ✓</button>
+      </div>
+    </div>
+
+    <!-- STAGE 2: OCV Method -->
+    <div id="stage-2" style="display:none;">
+      <div class="activity-card">
+        <h3>🎯 OCV Method: Build a Solution</h3>
+        <p class="prompt">A school wants to reduce paper waste. Use the <strong>Objective, Constraint, Variable (OCV)</strong> method to synthesize the best design plan.</p>
+        <div class="ocv-scenario">
+          <strong>Challenge:</strong> Design a system to reduce how much paper is wasted in a school's printing lab.
+        </div>
+        <div class="ocv-row" id="ocv-row"></div>
+        <div id="ocv-feedback" style="margin-top:12px;font-size:0.88rem;font-weight:600;display:none;"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn" id="btn-ocv-check" onclick="checkOCV()" disabled>Submit OCV Plan ✓</button>
+      </div>
+    </div>
+
+    <!-- STAGE 3: MULTISCALE MATCHING -->
+    <div id="stage-3" style="display:none;">
+      <div class="activity-card">
+        <h3>🔭 Multiscale Modeling: Match the Scale</h3>
+        <p class="prompt">Multiscale Modeling connects what happens at tiny scales (atoms) to big, observable effects. Drag each observation into the correct scale level.</p>
+        <div class="scale-grid" id="scale-grid"></div>
+        <div id="scale-bank" class="card-bank" style="margin-top:10px;"></div>
+        <div id="scale-feedback" style="margin-top:10px;font-size:0.88rem;font-weight:600;color:#c0392b;"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn" id="btn-scale-check" onclick="checkScale()" disabled>Check Matches ✓</button>
+      </div>
+    </div>
+
+    <!-- STAGE 4: QUIZ -->
+    <div id="stage-4" style="display:none;">
+      <div class="activity-card" id="quiz-card">
+        <h3>📝 Quick Check: Synthesis Knowledge</h3>
+        <div id="quiz-body"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn" id="btn-quiz-next" onclick="quizNext()" disabled>Next Question ▶</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div class="screen" id="screen-results">
+  <div style="max-width:640px;margin:30px auto;padding:0 8px;">
+    <div class="results-card">
+      <div class="score-ring">
+        <span class="big" id="final-score">0</span>
+        <span class="small">out of 20</span>
+      </div>
+      <h2 id="result-title">Great Work!</h2>
+      <p class="summary" id="result-summary"></p>
+      <div class="breakdown" id="breakdown"></div>
+      <div style="background:#fdf4e0;border-radius:10px;padding:14px 18px;margin-bottom:20px;text-align:left;">
+        <strong style="font-size:0.88rem;color:#8a6320;">📖 Remember:</strong>
+        <p style="font-size:0.85rem;color:#555;margin-top:6px;line-height:1.55;">
+          <strong>Analysis</strong> breaks things down to understand them. <strong>Synthesis</strong> combines ideas and data to build new solutions. Together, they form the heart of the Creationeering™ process — just as creating something great requires both understanding its parts and bringing them together with purpose.
+        </p>
+      </div>
+      <button class="btn" onclick="restartGame()">Play Again 🔄</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================
+// DATA
+// ============================
+
+const sortCards = [
+  { text: "Breaking a machine into its parts", answer: "analysis" },
+  { text: "Testing each gear separately", answer: "analysis" },
+  { text: "Combining data to design a new bridge", answer: "synthesis" },
+  { text: "Listing all ingredients of a recipe", answer: "analysis" },
+  { text: "Combining ingredients to bake a cake", answer: "synthesis" },
+  { text: "Merging 3 ideas into one solution", answer: "synthesis" },
+  { text: "Measuring each component's strength", answer: "analysis" },
+  { text: "Building a prototype from research", answer: "synthesis" }
+];
+
+const ocvData = [
+  {
+    label: "Objective",
+    hint: "What is the GOAL of the design?",
+    choices: [
+      { text: "Reduce paper waste by at least 40%", correct: true },
+      { text: "Make printers more expensive", correct: false },
+      { text: "Remove all printers from school", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Correct! The Objective states the clear, measurable GOAL of your design.",
+      wrong: "❌ Not quite. The Objective should describe what you're trying to achieve — a clear, positive goal."
+    }
+  },
+  {
+    label: "Constraint",
+    hint: "What LIMITS the solution?",
+    choices: [
+      { text: "Must cost more than $10,000", correct: false },
+      { text: "Must work within the existing lab budget", correct: true },
+      { text: "Students can use any amount of paper", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Correct! A Constraint is a real limit (like budget) that your solution must work within.",
+      wrong: "❌ Not quite. A Constraint is a realistic boundary — something that limits or restricts your solution."
+    }
+  },
+  {
+    label: "Variable",
+    hint: "What can you CHANGE or ADJUST?",
+    choices: [
+      { text: "The number of students in school", correct: false },
+      { text: "The school building location", correct: false },
+      { text: "Printer settings — default to double-sided printing", correct: true }
+    ],
+    feedback: {
+      correct: "✅ Correct! A Variable is something you can control and adjust to improve the design outcome.",
+      wrong: "❌ Not quite. A Variable is something you can actively change — like a setting, process, or material."
+    }
+  }
+];
+
+const scaleData = {
+  levels: [
+    { id: "atomic", label: "⚛️ Atomic Scale", desc: "Molecules & atoms" },
+    { id: "micro",  label: "🔬 Micro Scale",  desc: "Cells & materials" },
+    { id: "macro",  label: "🌍 Macro Scale",  desc: "Visible & observable" }
+  ],
+  chips: [
+    { id: "c1", text: "Hydrogen bonds in water molecules", level: "atomic" },
+    { id: "c2", text: "A metal beam bending under weight", level: "macro" },
+    { id: "c3", text: "Cracks forming in a material's grain structure", level: "micro" },
+    { id: "c4", text: "Carbon atoms arranging in a diamond lattice", level: "atomic" },
+    { id: "c5", text: "A bridge swaying in the wind", level: "macro" },
+    { id: "c6", text: "Tiny pores in a sponge holding water", level: "micro" }
+  ]
+};
+
+const quizQuestions = [
+  {
+    q: "What is the main definition of Synthesis?",
+    opts: [
+      "Breaking a system into smaller parts to understand it",
+      "Combining separate elements to form a coherent whole",
+      "Testing one variable at a time in an experiment",
+      "Listing all possible solutions without choosing one"
+    ],
+    correct: 1,
+    feedback: "Synthesis means combining separate elements or ideas to form a coherent whole — often leading to a new design or solution."
+  },
+  {
+    q: "Which of the following is the BEST example of synthesis in engineering?",
+    opts: [
+      "Examining each wire in a circuit separately",
+      "Recording the temperature of each room in a building",
+      "Combining research data, sketches, and user feedback to design a new app",
+      "Counting the number of screws in a machine"
+    ],
+    correct: 2,
+    feedback: "Combining multiple sources — data, ideas, research — to create something new is the essence of synthesis."
+  },
+  {
+    q: "In Multiscale Modeling, what is the main goal?",
+    opts: [
+      "To only study what can be seen with the naked eye",
+      "To avoid analyzing small-scale phenomena",
+      "To connect observations at different size or time scales",
+      "To replace analysis with guesswork"
+    ],
+    correct: 2,
+    feedback: "Multiscale Modeling connects phenomena at different scales — from atomic-level causes to macro-level observations."
+  },
+  {
+    q: "How do Analysis and Synthesis work together in Creationeering™?",
+    opts: [
+      "They are opposites and should never be used together",
+      "Analysis follows synthesis to check if the design is broken",
+      "Analysis breaks things down to understand them; synthesis builds new solutions from those insights",
+      "Both mean the same thing in engineering"
+    ],
+    correct: 2,
+    feedback: "Analysis and Synthesis are powerful partners: analysis helps you understand the pieces, while synthesis uses that understanding to build something new."
+  }
+];
+
+// ============================
+// STATE
+// ============================
+let currentStage = 1;
+let scores = { sort: 0, ocv: 0, scale: 0, quiz: 0 };
+let sortPlacements = {}; // cardId -> colId
+let ocvSelections = [null, null, null]; // index -> choice index
+let scalePlacements = {}; // chipId -> levelId
+let quizIndex = 0;
+let quizAnswered = false;
+let dragData = { id: null, type: null };
+
+// ============================
+// INIT
+// ============================
+function startGame() {
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-game').classList.add('active');
+  initSort();
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = ((currentStage - 1) / 4) * 100;
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('step-label').textContent = `Activity ${currentStage} of 4`;
+}
+
+// ============================
+// STAGE 1 — SORT
+// ============================
+function initSort() {
+  const bank = document.getElementById('sort-bank');
+  bank.innerHTML = '';
+  sortPlacements = {};
+  sortCards.forEach((card, i) => {
+    const el = createSortCard(card.text, i);
+    bank.appendChild(el);
+  });
+  document.getElementById('btn-sort-check').disabled = true;
+  document.getElementById('sort-feedback').textContent = '';
+  document.getElementById('col-analysis').querySelectorAll('.sort-card').forEach(e=>e.remove());
+  document.getElementById('col-synthesis').querySelectorAll('.sort-card').forEach(e=>e.remove());
+}
+
+function createSortCard(text, id) {
+  const el = document.createElement('div');
+  el.className = 'sort-card';
+  el.textContent = text;
+  el.dataset.id = id;
+  // Desktop drag
+  el.draggable = true;
+  el.addEventListener('dragstart', e => {
+    dragData = { id: id, type: 'sort' };
+    el.classList.add('dragging');
+  });
+  el.addEventListener('dragend', e => { el.classList.remove('dragging'); });
+  // Touch drag
+  el.addEventListener('touchstart', touchSortStart, { passive: true });
+  el.addEventListener('touchmove', touchSortMove, { passive: false });
+  el.addEventListener('touchend', touchSortEnd);
+  return el;
+}
+
+function allowDrop(e) { e.preventDefault(); }
+
+function dropSort(e, col) {
+  e.preventDefault();
+  if (dragData.type !== 'sort') return;
+  const id = dragData.id;
+  // Remove from wherever it was
+  const existing = document.querySelector(`.sort-card[data-id="${id}"]`);
+  if (existing) existing.remove();
+  // Add to col
+  const target = col === 'analysis' ? document.getElementById('col-analysis') : document.getElementById('col-synthesis');
+  const newCard = createSortCard(sortCards[id].text, id);
+  newCard.classList.add('placed');
+  newCard.draggable = false;
+  // Allow re-drag within placed columns too
+  newCard.draggable = true;
+  target.appendChild(newCard);
+  sortPlacements[id] = col;
+  checkSortComplete();
+}
+
+function checkSortComplete() {
+  document.getElementById('btn-sort-check').disabled = Object.keys(sortPlacements).length < sortCards.length;
+}
+
+function checkSort() {
+  let correct = 0;
+  sortCards.forEach((card, i) => {
+    const placed = sortPlacements[i];
+    const cardEl = document.querySelector(`.sort-card[data-id="${i}"]`);
+    if (placed === card.answer) {
+      correct++;
+      if (cardEl) { cardEl.style.background='#27ae60'; cardEl.style.borderColor='#27ae60'; }
+    } else {
+      if (cardEl) { cardEl.style.background='#e05c5c'; cardEl.style.borderColor='#e05c5c'; }
+    }
+  });
+  scores.sort = correct;
+  const fb = document.getElementById('sort-feedback');
+  if (correct === sortCards.length) {
+    fb.style.color = '#1a7340';
+    fb.textContent = `✅ Perfect! All ${correct} cards sorted correctly!`;
+  } else {
+    fb.style.color = '#c0392b';
+    fb.textContent = `You got ${correct} of ${sortCards.length} correct. Red cards need re-sorting!`;
+    if (correct < sortCards.length) { /* let them retry */ return; }
+  }
+  setTimeout(()=>{ goToStage(2); }, 1200);
+}
+
+// Touch events for sort
+let touchClone = null;
+let touchCard = null;
+function touchSortStart(e) {
+  touchCard = e.currentTarget;
+  const touch = e.touches[0];
+  touchClone = touchCard.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.opacity = '0.7';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.zIndex = '9999';
+  touchClone.style.width = touchCard.offsetWidth + 'px';
+  touchClone.style.left = (touch.clientX - touchCard.offsetWidth/2) + 'px';
+  touchClone.style.top = (touch.clientY - 20) + 'px';
+  document.body.appendChild(touchClone);
+  dragData = { id: parseInt(touchCard.dataset.id), type: 'sort' };
+}
+function touchSortMove(e) {
+  e.preventDefault();
+  const touch = e.touches[0];
+  if (touchClone) {
+    touchClone.style.left = (touch.clientX - 60) + 'px';
+    touchClone.style.top = (touch.clientY - 20) + 'px';
+  }
+}
+function touchSortEnd(e) {
+  if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+  const touch = e.changedTouches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const col = el && el.closest('#col-analysis') ? 'analysis' : (el && el.closest('#col-synthesis') ? 'synthesis' : null);
+  if (col) { dropSort({ preventDefault: ()=>{} }, col); }
+}
+
+// ============================
+// STAGE 2 — OCV
+// ============================
+function initOCV() {
+  const row = document.getElementById('ocv-row');
+  row.innerHTML = '';
+  ocvSelections = [null, null, null];
+  ocvData.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'ocv-item';
+    div.innerHTML = `<label>${item.label} <span>— ${item.hint}</span></label>`;
+    const choiceRow = document.createElement('div');
+    choiceRow.className = 'choice-row';
+    item.choices.forEach((ch, ci) => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.textContent = ch.text;
+      btn.onclick = () => selectOCV(idx, ci, btn, choiceRow);
+      choiceRow.appendChild(btn);
+    });
+    div.appendChild(choiceRow);
+    row.appendChild(div);
+  });
+  document.getElementById('ocv-feedback').style.display = 'none';
+  document.getElementById('btn-ocv-check').disabled = true;
+}
+
+function selectOCV(rowIdx, choiceIdx, btn, choiceRow) {
+  choiceRow.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ocvSelections[rowIdx] = choiceIdx;
+  if (ocvSelections.every(v => v !== null)) {
+    document.getElementById('btn-ocv-check').disabled = false;
+  }
+}
+
+function checkOCV() {
+  let correct = 0;
+  const fb = document.getElementById('ocv-feedback');
+  fb.style.display = 'block';
+  let msgs = [];
+  ocvData.forEach((item, idx) => {
+    const sel = ocvSelections[idx];
+    const choiceRows = document.querySelectorAll('#ocv-row .ocv-item');
+    const btns = choiceRows[idx].querySelectorAll('.choice-btn');
+    if (item.choices[sel].correct) {
+      correct++;
+      btns[sel].classList.add('correct');
+      msgs.push(`<span style="color:#1a7340">${item.feedback.correct}</span>`);
+    } else {
+      btns[sel].classList.add('wrong');
+      // Show correct
+      item.choices.forEach((ch, ci) => { if (ch.correct) btns[ci].classList.add('correct'); });
+      msgs.push(`<span style="color:#c0392b">${item.feedback.wrong}</span>`);
+    }
+    btns.forEach(b => b.disabled = true);
+  });
+  fb.innerHTML = msgs.join('<br>');
+  scores.ocv = correct;
+  document.getElementById('btn-ocv-check').disabled = true;
+  setTimeout(()=>{ goToStage(3); }, 2200);
+}
+
+// ============================
+// STAGE 3 — MULTISCALE
+// ============================
+function initScale() {
+  const grid = document.getElementById('scale-grid');
+  grid.innerHTML = '';
+  scalePlacements = {};
+  scaleData.levels.forEach(lvl => {
+    const box = document.createElement('div');
+    box.className = 'scale-box';
+    box.id = 'scale-box-' + lvl.id;
+    box.innerHTML = `<h5>${lvl.label}<br><small style="font-weight:400;font-size:0.72rem;color:#7a90a8">${lvl.desc}</small></h5>`;
+    box.addEventListener('dragover', e => { e.preventDefault(); box.classList.add('drag-over'); });
+    box.addEventListener('dragleave', () => box.classList.remove('drag-over'));
+    box.addEventListener('drop', e => { e.preventDefault(); box.classList.remove('drag-over'); dropScale(e, lvl.id); });
+    grid.appendChild(box);
+  });
+
+  const bank = document.getElementById('scale-bank');
+  bank.innerHTML = '';
+  scaleData.chips.forEach(chip => {
+    bank.appendChild(createScaleChip(chip));
+  });
+  document.getElementById('btn-scale-check').disabled = true;
+  document.getElementById('scale-feedback').textContent = '';
+}
+
+function createScaleChip(chip) {
+  const el = document.createElement('div');
+  el.className = 'scale-chip';
+  el.textContent = chip.text;
+  el.dataset.id = chip.id;
+  el.draggable = true;
+  el.addEventListener('dragstart', () => {
+    dragData = { id: chip.id, type: 'scale' };
+    el.classList.add('dragging');
+  });
+  el.addEventListener('dragend', () => el.classList.remove('dragging'));
+  el.addEventListener('touchstart', touchScaleStart, { passive: true });
+  el.addEventListener('touchmove', touchScaleMove, { passive: false });
+  el.addEventListener('touchend', touchScaleEnd);
+  return el;
+}
+
+function dropScale(e, levelId) {
+  if (dragData.type !== 'scale') return;
+  const chipId = dragData.id;
+  const existing = document.querySelector(`.scale-chip[data-id="${chipId}"]`);
+  if (existing) existing.remove();
+  const chip = scaleData.chips.find(c => c.id === chipId);
+  const newEl = createScaleChip(chip);
+  newEl.classList.add('placed');
+  newEl.style.display = 'block';
+  newEl.style.width = '100%';
+  newEl.draggable = false;
+  document.getElementById('scale-box-' + levelId).appendChild(newEl);
+  scalePlacements[chipId] = levelId;
+  checkScaleComplete();
+}
+
+function checkScaleComplete() {
+  document.getElementById('btn-scale-check').disabled = Object.keys(scalePlacements).length < scaleData.chips.length;
+}
+
+function checkScale() {
+  let correct = 0;
+  scaleData.chips.forEach(chip => {
+    const placed = scalePlacements[chip.id];
+    const el = document.querySelector(`.scale-chip[data-id="${chip.id}"]`);
+    if (placed === chip.level) {
+      correct++;
+      if (el) { el.style.background = '#27ae60'; }
+    } else {
+      if (el) { el.style.background = '#e05c5c'; }
+    }
+  });
+  scores.scale = correct;
+  const fb = document.getElementById('scale-feedback');
+  if (correct === scaleData.chips.length) {
+    fb.style.color = '#1a7340';
+    fb.textContent = `✅ Perfect! All ${correct} observations matched correctly!`;
+  } else {
+    fb.style.color = '#c0392b';
+    fb.textContent = `You got ${correct} of ${scaleData.chips.length}. Red chips are in the wrong column.`;
+    if (correct < scaleData.chips.length) return;
+  }
+  setTimeout(()=>{ goToStage(4); }, 1200);
+}
+
+// Touch for scale chips
+let scaleClone = null;
+let scaleChipEl = null;
+function touchScaleStart(e) {
+  scaleChipEl = e.currentTarget;
+  const touch = e.touches[0];
+  scaleClone = scaleChipEl.cloneNode(true);
+  scaleClone.style.position = 'fixed';
+  scaleClone.style.opacity = '0.75';
+  scaleClone.style.pointerEvents = 'none';
+  scaleClone.style.zIndex = '9999';
+  scaleClone.style.minWidth = '100px';
+  scaleClone.style.left = (touch.clientX - 60) + 'px';
+  scaleClone.style.top = (touch.clientY - 20) + 'px';
+  document.body.appendChild(scaleClone);
+  dragData = { id: scaleChipEl.dataset.id, type: 'scale' };
+}
+function touchScaleMove(e) {
+  e.preventDefault();
+  const touch = e.touches[0];
+  if (scaleClone) {
+    scaleClone.style.left = (touch.clientX - 60) + 'px';
+    scaleClone.style.top = (touch.clientY - 20) + 'px';
+  }
+}
+function touchScaleEnd(e) {
+  if (scaleClone) { document.body.removeChild(scaleClone); scaleClone = null; }
+  const touch = e.changedTouches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const box = el && el.closest('.scale-box');
+  if (box) {
+    const lvlId = box.id.replace('scale-box-', '');
+    dropScale({ preventDefault: ()=>{} }, lvlId);
+  }
+}
+
+// ============================
+// STAGE 4 — QUIZ
+// ============================
+function initQuiz() {
+  quizIndex = 0;
+  scores.quiz = 0;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[quizIndex];
+  const body = document.getElementById('quiz-body');
+  quizAnswered = false;
+  document.getElementById('btn-quiz-next').disabled = true;
+  document.getElementById('btn-quiz-next').textContent = quizIndex < quizQuestions.length - 1 ? 'Next Question ▶' : 'See Results 🏆';
+  body.innerHTML = `
+    <p style="font-size:0.88rem;color:#7a90a8;font-weight:600;margin-bottom:8px;">Question ${quizIndex+1} of ${quizQuestions.length}</p>
+    <p class="prompt" style="font-weight:700;color:#1B3A5C;font-size:0.97rem;">${q.q}</p>
+    <div class="quiz-options" id="quiz-opts"></div>
+    <div class="quiz-feedback" id="qfb"></div>
+  `;
+  const opts = document.getElementById('quiz-opts');
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function answerQuiz(chosen, btn) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizQuestions[quizIndex];
+  const allBtns = document.querySelectorAll('.quiz-opt');
+  allBtns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('qfb');
+  fb.classList.add('show');
+  if (chosen === q.correct) {
+    btn.classList.add('correct');
+    scores.quiz++;
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '✅ ' + q.feedback;
+  } else {
+    btn.classList.add('wrong');
+    allBtns[q.correct].classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '❌ ' + q.feedback;
+  }
+  document.getElementById('btn-quiz-next').disabled = false;
+}
+
+function quizNext() {
+  quizIndex++;
+  if (quizIndex < quizQuestions.length) {
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+// ============================
+// NAVIGATION
+// ============================
+function goToStage(n) {
+  document.getElementById('stage-' + currentStage).style.display = 'none';
+  currentStage = n;
+  document.getElementById('stage-' + n).style.display = 'block';
+  updateProgress();
+  if (n === 2) initOCV();
+  if (n === 3) initScale();
+  if (n === 4) initQuiz();
+}
+
+// ============================
+// RESULTS
+// ============================
+function showResults() {
+  document.getElementById('screen-game').classList.remove('active');
+  document.getElementById('screen-results').classList.add('active');
+
+  const total = scores.sort + scores.ocv + scores.scale + scores.quiz;
+  const maxTotal = sortCards.length + ocvData.length + scaleData.chips.length + quizQuestions.length;
+
+  document.getElementById('final-score').textContent = total;
+  document.querySelector('.score-ring .small').textContent = `out of ${maxTotal}`;
+
+  let title, summary;
+  const pct = total / maxTotal;
+  if (pct >= 0.85) {
+    title = "🏆 Outstanding Synthesizer!";
+    summary = "You demonstrated a deep understanding of synthesis, the OCV method, and multiscale modeling. You're thinking like a true Creationeering™ engineer!";
+  } else if (pct >= 0.65) {
+    title = "⚗️ Strong Work!";
+    summary = "You have a solid grasp of synthesis concepts. Review the ideas about Multiscale Modeling and OCV to strengthen your skills even further.";
+  } else {
+    title = "🔬 Keep Building!";
+    summary = "Synthesis takes practice! Review how Analysis and Synthesis work together, and try the activity again to boost your score.";
+  }
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-summary').textContent = summary;
+
+  const bd = document.getElementById('breakdown');
+  bd.innerHTML = `
+    <div class="breakdown-item"><span class="val">${scores.sort}/${sortCards.length}</span>Sort Activity</div>
+    <div class="breakdown-item"><span class="val">${scores.ocv}/${ocvData.length}</span>OCV Method</div>
+    <div class="breakdown-item"><span class="val">${scores.scale}/${scaleData.chips.length}</span>Multiscale Match</div>
+    <div class="breakdown-item"><span class="val">${scores.quiz}/${quizQuestions.length}</span>Quiz</div>
+  `;
+}
+
+function restartGame() {
+  currentStage = 1;
+  scores = { sort: 0, ocv: 0, scale: 0, quiz: 0 };
+  quizIndex = 0;
+  document.getElementById('screen-results').classList.remove('active');
+  document.getElementById('screen-game').classList.add('active');
+  document.getElementById('stage-1').style.display = 'block';
+  document.getElementById('stage-2').style.display = 'none';
+  document.getElementById('stage-3').style.display = 'none';
+  document.getElementById('stage-4').style.display = 'none';
+  initSort();
+  updateProgress();
+}
+</script>
+</body>
+</html>

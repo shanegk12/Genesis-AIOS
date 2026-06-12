@@ -1,0 +1,261 @@
+[
+  {
+    "id": "m052t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Variable Confirmation Tests</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>This lesson dives into one of the most important phases in the Creationeering process: Performance testing. Specifically, you will learn how to run Variable Confirmation Tests on your mousetrap car. Building on the baseline measurements you recorded in the previous session, you will now systematically test specific changes — one at a time — to figure out exactly what is making your car go farther, faster, or both. By the end of this lesson, you will have a clear, data-driven plan for optimizing your design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p><ul><li>Explain the purpose of variable confirmation tests in the engineering design process.</li><li>Design and run a single-variable test for a component of your mousetrap car.</li><li>Analyze your experimental data to identify cause-and-effect relationships.</li><li>Use test results to make informed decisions about optimizing your car's design.</li><li>Connect diligent testing and refinement to the biblical principle of good stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Variable",
+          "definition": "Any factor, trait, or condition that can exist in differing amounts or types in an experiment."
+        },
+        {
+          "term": "Control",
+          "definition": "The elements in an experiment that are kept constant so that only the variable being tested can cause any observed changes."
+        },
+        {
+          "term": "Hypothesis",
+          "definition": "A testable prediction or educated guess about the relationship between two or more variables."
+        },
+        {
+          "term": "Confirmation Test",
+          "definition": "A focused experiment designed to verify or refute a hypothesis by changing one variable at a time while keeping all others constant."
+        },
+        {
+          "term": "Performance",
+          "definition": "How effectively a design or system achieves its intended function or goal."
+        },
+        {
+          "term": "Trade-off",
+          "definition": "A situation where improving one quality of a design means sacrificing another."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of making a system or design as effective as possible, often by carefully adjusting variables."
+        },
+        {
+          "term": "Data",
+          "definition": "Facts and measurements collected during an experiment for analysis and reference."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Orderly Design</h2>\n<p>Our Creator is the ultimate engineer. Every part of the universe — from the orbit of a planet to the structure of a single cell — works according to consistent, predictable principles. Colossians 1:16 tells us: <em>\"For in him all things were created: things in heaven and on earth, visible and invisible... all things have been created through him and for him.\"</em> Nothing in creation is random. Everything was made with purpose and precision, each part working together in a system that reflects God's intentional, orderly mind.</p>\n<p>When you run a variable confirmation test, you are doing something that echoes that same spirit of careful, intentional investigation. You are not guessing — you are methodically uncovering the cause-and-effect relationships God wove into the physical world. That is what it means to be a good steward of the materials and resources He has given you. Test carefully, observe honestly, and refine wisely.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 1:16</strong> — \"For in him all things were created: things in heaven and on earth, visible and invisible... all things have been created through him and for him.\"</p><p>God's creation operates on consistent, testable laws. When you study cause and effect in your mousetrap car, you are exploring the orderly universe He designed.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Variables and Controls</h2>\n<p>A variable is anything that can change in your mousetrap car. Wheel size, string length, axle diameter, lever arm length — all of these are variables. The key to good testing is this: <strong>only change one variable at a time.</strong></p>\n<p>Here is why that rule matters. Imagine you make your rear wheels larger <em>and</em> shorten your lever arm on the same run. Your car travels farther — great! But which change caused the improvement? You have no way to know. You have just created a situation where your data cannot give you a reliable answer. Professional engineers call this a confounded experiment, and it wastes time and materials.</p>\n<p>Everything you <em>do not</em> change is your <strong>control</strong>. Controls are the anchors of a good test. They hold everything steady so that any difference you observe can only be attributed to the one thing you changed. Think of controls as the quiet, unchanged background that makes your variable stand out clearly.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram of two mousetrap car test runs side by side: one with a single variable changed (rear wheel size) highlighted in color, and all other components labeled as 'control' in gray, illustrating proper single-variable testing technique."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Confirmation Test?</h2>\n<p>A confirmation test is a focused experiment with one job: find out whether your hypothesis is correct. You form a hypothesis first — a specific, testable prediction — and then you design a test that can prove or disprove it.</p>\n<p>A strong hypothesis sounds like this: <em>\"If I increase the length of the lever arm from 10 cm to 15 cm, my mousetrap car will travel a greater distance because the longer arm will pull the string more slowly, reducing energy loss.\"</em> Notice the structure — it names the variable, describes the change, states the expected outcome, and briefly explains the reasoning behind it.</p>\n<p>A weak hypothesis sounds like this: <em>\"I think bigger wheels will help.\"</em> That is a starting instinct, not a testable prediction. Good engineers push past instinct into specifics.</p>\n<h3>Steps for a Variable Confirmation Test</h3>\n<ul><li><strong>Identify your variable.</strong> Choose one component to change — wheel size, axle position, lever arm length, etc.</li><li><strong>Write your hypothesis.</strong> Predict what will happen and explain why.</li><li><strong>Set your controls.</strong> List every other component of the car that will stay exactly the same.</li><li><strong>Run your baseline.</strong> Record at least three runs with your current configuration and average the results.</li><li><strong>Make your change.</strong> Adjust only the one variable you identified.</li><li><strong>Run your test.</strong> Record at least three runs with the new configuration and average the results.</li><li><strong>Compare and analyze.</strong> Did the results match your hypothesis? What does the data tell you?</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Running only one test per configuration. A single run can be thrown off by floor imperfections, a slight misalignment, or just random variation. Always run at least three trials and use the average. One data point is a story; three data points start to show a pattern.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Analyzing Your Data</h2>\n<p>Once you have numbers from both your baseline and your test configuration, the real engineering work begins: analysis. Do not just look at whether the number went up or down. Ask <em>why</em> it changed — or why it did not.</p>\n<p>Here are the key questions to ask about every confirmation test result:</p>\n<ul><li><strong>Did the result match your hypothesis?</strong> If yes, your reasoning was likely sound. If no, what does that tell you about the system?</li><li><strong>How large was the change?</strong> A tiny improvement might not be worth the trade-off. A large improvement signals a high-impact variable worth exploring further.</li><li><strong>Were there unexpected side effects?</strong> Sometimes a change improves distance but hurts steering. That is a trade-off, and recognizing it is just as valuable as finding an improvement.</li><li><strong>Is the result consistent across all three runs?</strong> Consistent results build confidence. Wildly varying results suggest something else is interfering — find it before moving on.</li></ul>\n<p>Good data analysis is not about finding the answer you wanted. It is about finding the truth. An honest negative result — where your hypothesis was wrong — is still a success, because now you know one more thing that does not work and you can redirect your effort wisely.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple data table showing three test runs for two mousetrap car configurations (baseline vs. modified lever arm length), with columns for Trial 1, Trial 2, Trial 3, and Average distance in centimeters."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Using Tests to Optimize Your Design</h2>\n<p>Optimization means making your design as effective as possible. The key insight is that you get there one confirmed variable at a time — not by changing everything at once and hoping for the best.</p>\n<p>Think of it like tuning a musical instrument. A skilled musician does not randomly twist every peg at the same time. They adjust one string, listen, adjust again, and move to the next. Each small, deliberate change brings the whole instrument closer to perfect harmony. Your mousetrap car works the same way.</p>\n<p>As you confirm the effect of each variable, you build a map of your design — a clear picture of which changes have the biggest positive impact, which involve trade-offs, and which simply do not matter. That map becomes your optimization strategy. It is the difference between engineering and guessing.</p>\n<p>Remember: every material on your car — the springs, the wheels, the string, the axles — was a resource given to you. Testing carefully and refining deliberately is how you honor that. It is stewardship in action.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Plan before you build.</strong> Before making any physical change to your car, write down your hypothesis and list your controls. This takes less than two minutes and will save you from confusion later. Engineers call this a test plan — it is one of the most important documents in any real engineering project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m052acc01",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Trade-offs and Real Engineering Decisions",
+      "html": "<p>In the real world, almost every engineering decision involves a trade-off. Making a car lighter might make it faster but also more fragile. A longer lever arm might increase distance but could cause the car to veer off course. There is rarely a single \"perfect\" answer — there is only the best answer for a specific goal.</p><p>Professional engineers manage trade-offs by clearly defining their primary objective first. For your mousetrap car, is the goal maximum distance, maximum speed, or a combination? Once you define that, trade-offs become easier to evaluate. A change that sacrifices a little speed for much better straight-line tracking might be exactly the right call if distance is your metric.</p><p>This kind of thinking — weighing competing priorities against a clear goal — is one of the most transferable skills engineering teaches. You will use it in business decisions, in leadership, and in life long after you have left the classroom.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

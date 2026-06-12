@@ -1,0 +1,315 @@
+[
+  {
+    "id": "c024t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Statistical Analysis</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In this lesson, you will transition from being a builder to becoming an analyst. As we have explored in previous lessons, engineering is the application of science and math to solve problems with purpose — but solving a problem once is not enough. A real engineer must prove that a solution is <em>reliable</em>, <em>consistent</em>, and <em>safe</em>.</p>\n<p>To do that, we use the tools of statistics. You will learn how engineers use objective, verifiable data to validate design decisions, ensuring good stewardship of materials and time. We will dive into the world of data analysis and simulation-based design, exploring how calculating averages and understanding variation allows us to predict the performance of everything from a wind turbine to a crash helmet.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n  <li>Define and calculate basic engineering statistics, specifically the Mean (Average).</li>\n  <li>Identify and analyze variation in trial data to determine system reliability.</li>\n  <li>Explain why running multiple trials is essential to achieving consistent, trustworthy results.</li>\n  <li>Connect statistical precision to the biblical principle of God's ordered and faithful design.</li>\n  <li>Understand how multiscale modeling helps engineers predict outcomes across different levels of complexity.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Statistics",
+          "definition": "The science of collecting, analyzing, and interpreting numerical data to make informed decisions."
+        },
+        {
+          "term": "Mean (Average)",
+          "definition": "The central value of a set of numbers, calculated by adding all values together and dividing by the total count of values."
+        },
+        {
+          "term": "Variation",
+          "definition": "The difference or \"spread\" between individual data points across a series of trials."
+        },
+        {
+          "term": "Standard Deviation",
+          "definition": "A measure of how much the data deviates from the Mean; a high standard deviation means low consistency."
+        },
+        {
+          "term": "Trial",
+          "definition": "A single performance test of a design or system conducted under controlled conditions."
+        },
+        {
+          "term": "Reliability",
+          "definition": "The probability that a system will perform its intended function without failure over a specified period of time."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Builder to Analyst</h2>\n<p>In the world of Creationeering, we don't rely on lucky guesses. As you learned when studying the Engineering Design Process, an engineer must research, prototype, and iterate. But here is a critical question: <strong>how do you know if an iteration was actually an improvement?</strong></p>\n<p>Imagine you are testing a prototype rubber band car. On the first run, it travels 5 meters. On the second run, 3 meters. On the third run, 7 meters. So — is your car a \"5-meter car\"? Or is it a \"3-meter car\" that got lucky twice?</p>\n<p>Without a method to make sense of those numbers, you are just guessing. And guessing is not engineering.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>What is Analysis?</strong> Analysis is the process of thinking deeply and building logic to understand the <em>why</em> behind the <em>what</em>. Engineers use statistics to transform a pile of random numbers into a clear, meaningful story about how a design actually performs.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Statistics Matter</h2>\n<p>Statistics are a branch of mathematics specifically designed to help us find patterns hiding inside data. When you run five trials and get five different results, statistics give you the tools to ask: <em>What is this system really doing?</em></p>\n<p>Think of it like a weather forecast. A meteorologist doesn't predict tomorrow's weather based on a single thermometer reading from one moment in time. They gather hundreds of data points, calculate averages, and study patterns. Engineers do exactly the same thing — just with their designs instead of clouds.</p>\n<p>By calculating averages and studying variation, we move past surface-level observations and start to see the mathematical rules that govern our designs. That consistency isn't an accident. The universe was designed with breathtaking order, and statistics help us read that order clearly.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024cb01",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 11:1</strong> — <em>\"Honest scales and balances belong to the Lord; all the weights in the bag are of his making.\"</em></p>\n<p>God values accuracy and consistency. When you carefully collect data and honestly report what the numbers say — even when the results aren't what you hoped — you are practicing the same integrity this verse describes. Good statistical analysis is an act of honest stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Power of the Mean</h2>\n<p>The most fundamental tool in your statistical toolkit is the <strong>Mean</strong> — commonly called the average. In engineering, the Mean represents your system's <em>expected performance</em>. It tells you what the design is likely to do most of the time, under normal conditions.</p>\n<p>Calculating the Mean is straightforward:</p>\n<ol>\n  <li><strong>Add up</strong> all the results from your trials to get the sum.</li>\n  <li><strong>Divide</strong> that sum by the total number of trials you ran.</li>\n</ol>\n<p>That's it. Simple math — but incredibly powerful insight.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A data table showing five rubber band car trials with distances recorded, the sum calculated, and the Mean (5.0 m) labeled clearly."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>The Rubber Band Car Example</h3>\n<p>Let's go back to that rubber band car. This time, instead of three messy runs, the engineer ran five careful trials and recorded the results in a data table:</p>\n<ul>\n  <li>Trial 1: 5.2 m</li>\n  <li>Trial 2: 4.8 m</li>\n  <li>Trial 3: 5.0 m</li>\n  <li>Trial 4: 5.1 m</li>\n  <li>Trial 5: 4.9 m</li>\n</ul>\n<p><strong>Sum:</strong> 5.2 + 4.8 + 5.0 + 5.1 + 4.9 = 25.0 m</p>\n<p><strong>Mean:</strong> 25.0 ÷ 5 = <strong>5.0 meters</strong></p>\n<p>Only one trial landed exactly on 5.0 meters — but the Mean tells us the <em>system</em> is designed to achieve 5 meters. That single number becomes your baseline. And without a baseline, you cannot optimize, because you won't be able to tell whether a change in your design actually made things better or worse.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Always run multiple trials.</strong> A single result tells you what happened once. Multiple trials tell you what your design actually does. Engineers typically run a minimum of three to five trials before calculating a Mean — more trials means a more trustworthy average.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Variation</h2>\n<p>The Mean tells you the average — but it doesn't tell you the whole story. Look at these two sets of trial data for two different car designs, both with a Mean of 5.0 meters:</p>\n<ul>\n  <li><strong>Car A:</strong> 4.9 m, 5.0 m, 5.1 m, 5.0 m, 5.0 m</li>\n  <li><strong>Car B:</strong> 2.0 m, 7.5 m, 3.5 m, 8.0 m, 4.0 m</li>\n</ul>\n<p>Both cars average 5.0 meters. But which one would you trust to perform reliably in a competition? Car A, without question. Its results are clustered tightly around the Mean. Car B is all over the place.</p>\n<p>That \"spread\" between the highest and lowest values is called <strong>Variation</strong>. Low variation means your design is consistent and predictable. High variation means something in your system is unstable — a loose part, an inconsistent launch angle, an irregular surface. Finding and fixing the source of variation is one of the most important jobs an engineer has.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't ignore your outliers.</strong> An outlier is a data point that sits far outside the rest of your results. It is tempting to throw it out and pretend it didn't happen — but that outlier is often the most important piece of information you have. It is your design telling you something is wrong. Investigate it, don't delete it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Reliability: The Goal of Every Engineer</h2>\n<p>Here is the big picture. Every statistical tool you use — the Mean, variation, standard deviation — is ultimately in service of one goal: <strong>reliability</strong>.</p>\n<p>Reliability is the measure of how dependably a system performs its intended function. A bridge is reliable if it holds its rated load every single time, not just on a good day. A pacemaker is reliable if it sends the correct electrical pulse to a heart consistently, not occasionally. When the stakes are high, \"it usually works\" is not an acceptable standard.</p>\n<p>This is why multiscale modeling matters. Engineers don't just test a finished product — they simulate and analyze performance at every level, from microscopic material properties all the way up to the full system. Statistics are the language those simulations speak. They tell the engineer: <em>here is what we expect, here is how consistent that expectation is, and here is how confident we should be.</em></p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram comparing low-variation data (tight cluster around the mean) versus high-variation data (spread out points), illustrating the concept of reliability."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024cb02",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Lamentations 3:23</strong> — <em>\"They are new every morning; great is your faithfulness.\"</em></p>\n<p>God's faithfulness is the ultimate example of reliability. His mercies don't vary from day to day — they are consistent, dependable, and sure. When you engineer a system to be reliable and consistent, you are reflecting a small piece of that same character: a design that performs faithfully, every time it is called upon.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Statistical analysis is not just a math exercise — it is how an engineer earns confidence in their design. Every time you calculate a Mean, you are establishing a baseline. Every time you study variation, you are finding weaknesses. Every time you run another trial, you are gathering more evidence.</p>\n<p>This is the difference between a prototype that works in a classroom and a product that works in the real world. Real engineering demands that you prove your solution works — not once, but consistently, under real conditions, with the data to back it up.</p>\n<p>As you move forward in your Creationeering journey, you will use these tools constantly. Whether you are designing a structure, programming a robot, or analyzing the efficiency of a business plan, the ability to read data clearly and honestly will set your work apart.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> When reviewing this lesson, practice the Mean formula with your own made-up data sets. Create a table of five numbers, add them up, and divide by five. Then change one number drastically and recalculate — notice how a single extreme value can shift your Mean. That hands-on practice will make the concept stick.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c024acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the Mean, and why is it useful to an engineer?</strong><br/>The Mean is the average of all trial results. It gives the engineer an expected performance baseline — a single number that represents what the system is designed to do under normal conditions.</p>\n<p><strong>2. Two designs both have a Mean of 10 meters. Design A has results of 9.8, 10.0, 10.1, 10.0, 10.1. Design B has results of 6.0, 14.0, 8.0, 12.0, 10.0. Which design is more reliable, and why?</strong><br/>Design A is more reliable. Even though both share the same Mean, Design A has very low variation — its results are tightly clustered. Design B has high variation, meaning its performance is unpredictable and unstable.</p>\n<p><strong>3. Why should an engineer investigate an outlier rather than simply removing it from the data?</strong><br/>An outlier often signals that something is wrong with the design or the test conditions. Ignoring it means ignoring a potential flaw. Investigating the outlier can lead to a discovery that improves the overall design.</p>\n<p><strong>4. How does the biblical concept of faithfulness connect to the engineering goal of reliability?</strong><br/>God's faithfulness means He is consistent and dependable — His character does not change. An engineer striving for reliability is building that same quality into their design: a system that performs its intended function dependably, every time it is called upon.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

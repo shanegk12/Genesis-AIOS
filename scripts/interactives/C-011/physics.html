@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Forces & Motion Sandbox – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #0f2236;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e6cc;
+    overflow: hidden;
+  }
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  #header {
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  #header .badge {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 900;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  #header h1 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f0e6cc;
+    letter-spacing: 0.3px;
+  }
+  #header .subtitle {
+    font-size: 11px;
+    color: #C9A84C;
+    margin-left: auto;
+    font-style: italic;
+  }
+  #canvas-wrap {
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+    background: #0d1e2e;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+  #controls {
+    background: #1B3A5C;
+    border-top: 3px solid #C9A84C;
+    padding: 10px 14px 12px;
+    flex-shrink: 0;
+  }
+  .ctrl-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: center;
+  }
+  .ctrl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 130px;
+    flex: 1 1 130px;
+  }
+  .ctrl-label {
+    font-size: 11px;
+    color: #C9A84C;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .ctrl-val {
+    font-size: 12px;
+    color: #f0e6cc;
+    font-weight: 600;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #0f2236;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #1B3A5C;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #1B3A5C;
+  }
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 7px 18px;
+    border: 2px solid #C9A84C;
+    border-radius: 6px;
+    background: transparent;
+    color: #C9A84C;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+    touch-action: manipulation;
+  }
+  button:active, button.active {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  button.primary {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  button.primary:active {
+    background: #a8893a;
+    border-color: #a8893a;
+  }
+  #readouts {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .readout-box {
+    background: #0f2236;
+    border: 1px solid #C9A84C44;
+    border-radius: 6px;
+    padding: 5px 12px;
+    min-width: 120px;
+  }
+  .readout-label {
+    font-size: 10px;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+  }
+  .readout-value {
+    font-size: 16px;
+    font-weight: 900;
+    color: #f0e6cc;
+    font-variant-numeric: tabular-nums;
+  }
+  .readout-unit {
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 2px;
+  }
+  #formula-bar {
+    background: #0f2236;
+    border: 1px solid #C9A84C44;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #C9A84C;
+    font-style: italic;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #formula-bar span { color: #f0e6cc; font-weight: 700; font-style: normal; }
+  .surface-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <div class="badge">Creationeering</div>
+    <h1>Forces &amp; Motion Sandbox</h1>
+    <div class="subtitle">F = m · a</div>
+  </div>
+  <div id="canvas-wrap">
+    <canvas id="sim"></canvas>
+  </div>
+  <div id="controls">
+    <div class="ctrl-row">
+      <div class="ctrl-group">
+        <div class="ctrl-label">Applied Force (F)</div>
+        <input type="range" id="sliderForce" min="0" max="200" value="50" step="1">
+        <div class="ctrl-val"><span id="valForce">50</span> N</div>
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label">Mass (m)</div>
+        <input type="range" id="sliderMass" min="1" max="50" value="10" step="1">
+        <div class="ctrl-val"><span id="valMass">10</span> kg</div>
+      </div>
+      <div class="ctrl-group">
+        <div class="ctrl-label">Surface / Friction (μ)</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <button class="surface-btn active" id="btnIce" onclick="setSurface('ice')">🧊 Ice</button>
+          <button class="surface-btn" id="btnWood" onclick="setSurface('wood')">🪵 Wood</button>
+          <button class="surface-btn" id="btnRubber" onclick="setSurface('rubber')">⚫ Rubber</button>
+        </div>
+        <div class="ctrl-val">μ = <span id="valMu">0.05</span></div>
+      </div>
+    </div>
+    <div id="readouts">
+      <div class="readout-box">
+        <div class="readout-label">Acceleration</div>
+        <div class="readout-value" id="rdAccel">0.00<span class="readout-unit">m/s²</span></div>
+      </div>
+      <div class="readout-box">
+        <div class="readout-label">Velocity</div>
+        <div class="readout-value" id="rdVel">0.00<span class="readout-unit">m/s</span></div>
+      </div>
+      <div class="readout-box">
+        <div class="readout-label">Net Force</div>
+        <div class="readout-value" id="rdNet">0.00<span class="readout-unit">N</span></div>
+      </div>
+      <div class="readout-box">
+        <div class="readout-label">Friction Force</div>
+        <div class="readout-value" id="rdFric">0.00<span class="readout-unit">N</span></div>
+      </div>
+    </div>
+    <div id="formula-bar">
+      F_net = F_applied − F_friction &nbsp;|&nbsp; a = F_net / m &nbsp;|&nbsp;
+      <span id="formulaLive">a = (50 − 4.9) / 10 = 4.51 m/s²</span>
+    </div>
+    <div class="btn-row">
+      <button class="primary" id="btnApply" ontouchstart="startForce()" ontouchend="stopForce()" onmousedown="startForce()" onmouseup="stopForce()" onmouseleave="stopForce()">▶ APPLY FORCE</button>
+      <button onclick="resetSim()">↺ Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ─── DOM refs ───────────────────────────────────────────────
+  const canvas   = document.getElementById('sim');
+  const ctx      = canvas.getContext('2d');
+  const wrap     = document.getElementById('canvas-wrap');
+
+  const sliderF  = document.getElementById('sliderForce');
+  const sliderM  = document.getElementById('sliderMass');
+  const valF     = document.getElementById('valForce');
+  const valM     = document.getElementById('valMass');
+  const valMu    = document.getElementById('valMu');
+  const rdAccel  = document.getElementById('rdAccel');
+  const rdVel    = document.getElementById('rdVel');
+  const rdNet    = document.getElementById('rdNet');
+  const rdFric   = document.getElementById('rdFric');
+  const formulaLive = document.getElementById('formulaLive');
+
+  // ─── Physics constants ──────────────────────────────────────
+  const G = 9.8;
+  const SURFACES = {
+    ice:    { mu: 0.05, color: '#a8d8ea', label: '🧊 Ice', name:'Ice' },
+    wood:   { mu: 0.35, color: '#c8a05a', label: '🪵 Wood', name:'Wood' },
+    rubber: { mu: 0.75, color: '#555', label: '⚫ Rubber', name:'Rubber' },
+  };
+  let surface    = 'ice';
+  let applyingF  = false;
+
+  // ─── Simulation state ───────────────────────────────────────
+  let px = 0;        // position in metres from left wall
+  let vel = 0;       // m/s
+  let accel = 0;     // m/s²
+  let netF = 0;
+  let fricF = 0;
+  let lastT = null;
+
+  // Trail
+  let trail = [];
+  const MAX_TRAIL = 80;
+
+  // ─── Canvas sizing ──────────────────────────────────────────
+  function resize(){
+    canvas.width  = wrap.clientWidth;
+    canvas.height = wrap.clientHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ─── Helpers ────────────────────────────────────────────────
+  function getF(){ return parseFloat(sliderF.value); }
+  function getM(){ return parseFloat(sliderM.value); }
+  function getMu(){ return SURFACES[surface].mu; }
+
+  // Convert world metres → canvas px  (world: 0..60 m maps across canvas)
+  const WORLD_W = 60; // metres visible
+  function worldToCanvas(xM){
+    const margin = canvas.width * 0.08;
+    const trackW = canvas.width - margin * 2;
+    return margin + (xM / WORLD_W) * trackW;
+  }
+
+  // ─── Surface buttons ────────────────────────────────────────
+  window.setSurface = function(s){
+    surface = s;
+    valMu.textContent = SURFACES[s].mu.toFixed(2);
+    ['btnIce','btnWood','btnRubber'].forEach(id=>{
+      const btn = document.getElementById(id);
+      btn.classList.toggle('active', id === 'btn'+s.charAt(0).toUpperCase()+s.slice(1));
+    });
+  };
+
+  // ─── Force button ───────────────────────────────────────────
+  window.startForce = function(){ applyingF = true; };
+  window.stopForce  = function(){ applyingF = false; };
+
+  // ─── Reset ──────────────────────────────────────────────────
+  window.resetSim = function(){
+    px = 0; vel = 0; accel = 0; netF = 0; fricF = 0;
+    trail = [];
+    applyingF = false;
+    lastT = null;
+  };
+
+  // ─── Sliders live update ─────────────────────────────────────
+  sliderF.addEventListener('input', ()=>{ valF.textContent = sliderF.value; updateFormula(); });
+  sliderM.addEventListener('input', ()=>{ valM.textContent = sliderM.value; updateFormula(); });
+
+  function updateFormula(){
+    const f = getF(), m = getM(), mu = getMu();
+    const ff = (mu * m * G).toFixed(1);
+    const a  = Math.max(0,(f - parseFloat(ff))/m).toFixed(2);
+    formulaLive.textContent = `a = (${f} − ${ff}) / ${m} = ${a} m/s²`;
+  }
+  updateFormula();
+
+  // ─── Physics step ───────────────────────────────────────────
+  function physicsStep(dt){
+    const m  = getM();
+    const mu = getMu();
+    const fa = applyingF ? getF() : 0;
+    fricF    = mu * m * G;
+
+    // friction only opposes motion
+    let fric = 0;
+    if(vel > 0)      fric =  fricF;
+    else if(vel < 0) fric = -fricF;
+    else if(fa > 0)  fric = Math.min(fricF, fa); // static, opposing applied
+
+    netF  = fa - fric;
+    accel = netF / m;
+
+    vel += accel * dt;
+    if(!applyingF && Math.abs(vel) < 0.01 && Math.abs(netF) < 0.1){ vel = 0; }
+    if(vel < 0) vel = 0;   // wall stop at left
+
+    px += vel * dt;
+
+    // Bounce off right wall
+    const maxX = WORLD_W - 1;
+    if(px > maxX){ px = maxX; vel = -vel * 0.3; }
+    if(px < 0){ px = 0; vel = 0; }
+  }
+
+  // ─── Draw ───────────────────────────────────────────────────
+  function draw(){
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0,0,W,H);
+
+    // Sky gradient
+    const sky = ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#0d1e2e');
+    sky.addColorStop(1,'#163050');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0,0,W,H);
+
+    const groundY   = H * 0.72;
+    const margin    = W * 0.08;
+    const trackW    = W - margin*2;
+    const surf      = SURFACES[surface];
+
+    // ── Ground/track ──
+    // Track shadow
+    ctx.fillStyle = '#071420';
+    ctx.fillRect(margin, groundY+2, trackW, H - groundY - 2);
+
+    // Surface color
+    const grad = ctx.createLinearGradient(0, groundY-4, 0, groundY+30);
+    grad.addColorStop(0, surf.color);
+    grad.addColorStop(1, '#1a1a1a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(margin, groundY, trackW, 30);
+
+    // Surface label
+    ctx.fillStyle = '#ffffffaa';
+    ctx.font = `bold ${Math.max(10,W*0.013)}px Segoe UI`;
+    ctx.textAlign = 'left';
+    ctx.fillText(surf.name + '  μ=' + surf.mu, margin+6, groundY+22);
+
+    // Track grid lines
+    ctx.strokeStyle = '#ffffff11';
+    ctx.lineWidth = 1;
+    for(let m2=0; m2<=WORLD_W; m2+=5){
+      const cx = worldToCanvas(m2);
+      ctx.beginPath(); ctx.moveTo(cx, groundY-H*0.55); ctx.lineTo(cx, groundY); ctx.stroke();
+      ctx.fillStyle = '#ffffff33';
+      ctx.font = `${Math.max(8,W*0.009)}px Segoe UI`;
+      ctx.textAlign = 'center';
+      ctx.fillText(m2+'m', cx, groundY-4);
+    }
+
+    // Wall markers
+    ctx.fillStyle = '#C9A84C';
+    ctx.fillRect(margin-4, groundY-60, 4, 60);
+    ctx.fillRect(margin+trackW, groundY-60, 4, 60);
+
+    // ── Trail ──
+    const objW = Math.min(60, W*0.07);
+    const objH = objW * 0.6;
+    const boxY = groundY - objH;
+
+    if(trail.length > 1){
+      for(let i=1; i<trail.length; i++){
+        const alpha = (i/trail.length)*0.35;
+        const tx = worldToCanvas(trail[i]);
+        ctx.fillStyle = `rgba(201,168,76,${alpha})`;
+        const tw = objW * (i/trail.length) * 0.6;
+        ctx.fillRect(tx - tw/2, boxY + objH*0.3, tw, objH*0.4);
+      }
+    }
+
+    // ── Object (box) ──
+    const bx = worldToCanvas(px);
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.beginPath();
+    ctx.ellipse(bx, groundY+6, objW*0.5, 6, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Body gradient
+    const m2 = getM();
+    const sizeScale = 0.7 + (m2/50)*0.6;
+    const bw = objW * sizeScale;
+    const bh = objH * sizeScale;
+    const by = groundY - bh;
+
+    const boxGrad = ctx.createLinearGradient(bx-bw/2, by, bx+bw/2, by+bh);
+    boxGrad.addColorStop(0, '#2a6ab0');
+    boxGrad.addColorStop(0.4, '#1B3A5C');
+    boxGrad.addColorStop(1, '#0d2035');
+    ctx.fillStyle = boxGrad;
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(bx-bw/2, by, bw, bh, 4);
+    ctx.fill(); ctx.stroke();
+
+    // Mass label on box
+    ctx.fillStyle = '#C9A84C';
+    ctx.font = `bold ${Math.max(9,bw*0.22)}px Segoe UI`;
+    ctx.textAlign = 'center';
+    ctx.fillText(m2+'kg', bx, by + bh*0.62);
+
+    // ── Force arrows ──
+    const fa = applyingF ? getF() : 0;
+    const arrowScale = W / 900;
+
+    // Applied Force arrow
+    if(fa > 0){
+      drawArrow(ctx, bx - bw/2 - 10, by+bh*0.4,
+                bx - bw/2 - 10 - Math.min(fa*arrowScale*0.8, W*0.2), by+bh*0.4,
+                '#4af', 'F_app='+fa+'N', 'right');
+      drawArrow(ctx, bx + bw/2 + 10, by+bh*0.4,
+                bx + bw/2 + 10 + Math.min(fa*arrowScale*0.8, W*0.2), by+bh*0.4,
+                '#4af', '', 'left', true);
+    }
+
+    // Friction arrow (opposing)
+    if(vel > 0.05 || (applyingF && fricF > 0)){
+      const fLen = Math.min(fricF*arrowScale*0.8, W*0.15);
+      drawArrow(ctx, bx + bw/2 + 10, by+bh*0.7,
+                bx + bw/2 + 10 + fLen, by+bh*0.7,
+                '#f86', 'F_fric='+fricF.toFixed(1)+'N', 'left', true, true);
+    }
+
+    // Normal force arrow (up)
+    {
+      const nLen = Math.min(m2*G*arrowScale*0.4, H*0.15);
+      drawArrow(ctx, bx, groundY, bx, groundY-nLen,
+                '#6f6', 'F_N='+(m2*G).toFixed(0)+'N', 'bottom');
+    }
+
+    // Gravity arrow (down, only when visible)
+    {
+      const gLen = Math.min(m2*G*arrowScale*0.4, H*0.15);
+      drawArrow(ctx, bx, by, bx, by + gLen*0.7,
+                '#f66', 'F_g='+(m2*G).toFixed(0)+'N', 'top');
+    }
+
+    // ── Velocity vector ──
+    if(Math.abs(vel) > 0.3){
+      const vLen = Math.min(Math.abs(vel)*arrowScale*4, W*0.2);
+      const vDir = vel > 0 ? 1 : -1;
+      drawArrow(ctx, bx, by - 16,
+                bx + vDir*vLen, by-16,
+                '#fff', 'v='+vel.toFixed(1)+'m/s', vDir>0?'left':'right');
+    }
+
+    // ── Readouts on canvas ──
+    ctx.fillStyle = 'rgba(11,30,48,0.75)';
+    ctx.strokeStyle = '#C9A84C55';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.roundRect(8, 8, 200, 54, 6); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#C9A84C';
+    ctx.font = `bold ${Math.max(10,W*0.013)}px Segoe UI`;
+    ctx.textAlign = 'left';
+    ctx.fillText('Position', 16, 26);
+    ctx.fillStyle = '#f0e6cc';
+    ctx.font = `bold ${Math.max(12,W*0.016)}px Segoe UI`;
+    ctx.fillText(px.toFixed(2) + ' m', 90, 26);
+    ctx.fillStyle = '#C9A84C';
+    ctx.font = `bold ${Math.max(10,W*0.013)}px Segoe UI`;
+    ctx.fillText('Kinetic E', 16, 48);
+    ctx.fillStyle = '#f0e6cc';
+    ctx.font = `bold ${Math.max(12,W*0.016)}px Segoe UI`;
+    const ke = (0.5 * getM() * vel * vel).toFixed(1);
+    ctx.fillText(ke + ' J', 90, 48);
+
+    // Instruction hint
+    if(!applyingF && vel < 0.01){
+      ctx.fillStyle = 'rgba(201,168,76,0.7)';
+      ctx.font = `${Math.max(11,W*0.014)}px Segoe UI`;
+      ctx.textAlign = 'center';
+      ctx.fillText('Hold ▶ APPLY FORCE to push the object!', W/2, groundY - bh - 36);
+    }
+  }
+
+  function drawArrow(ctx, x1,y1,x2,y2, color, label, labelSide, flip, reverse){
+    const dx = x2-x1, dy = y2-y1;
+    const len = Math.sqrt(dx*dx+dy*dy);
+    if(len < 4) return;
+    const ux = dx/len, uy = dy/len;
+    const headLen = Math.min(12, len*0.4);
+
+    ctx.strokeStyle = color;
+    ctx.fillStyle   = color;
+    ctx.lineWidth   = 2.5;
+    ctx.lineCap = 'round';
+
+    // shaft
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x2 - ux*headLen*0.5, y2 - uy*headLen*0.5);
+    ctx.stroke();
+
+    // arrowhead
+    const angle = Math.atan2(dy,dx);
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2 - headLen*Math.cos(angle-0.45), y2 - headLen*Math.sin(angle-0.45));
+    ctx.lineTo(x2 - headLen*Math.cos(angle+0.45), y2 - headLen*Math.sin(angle+0.45));
+    ctx.closePath(); ctx.fill();
+
+    // label
+    if(label){
+      ctx.fillStyle = color;
+      ctx.font = `bold ${Math.max(9, canvas.width*0.012)}px Segoe UI`;
+      ctx.textAlign = 'center';
+      const mx = (x1+x2)/2, my = (y1+y2)/2;
+      ctx.fillText(label, mx, my - 6);
+    }
+  }
+
+  // ─── Main loop ──────────────────────────────────────────────
+  function loop(ts){
+    if(lastT === null){ lastT = ts; }
+    let dt = (ts - lastT)/1000;
+    lastT = ts;
+    dt = Math.min(dt, 0.05); // cap
+
+    physicsStep(dt);
+
+    // Trail
+    trail.push(px);
+    if(trail.length > MAX_TRAIL) trail.shift();
+
+    // Readouts
+    rdAccel.innerHTML  = accel.toFixed(2) + '<span class="readout-unit">m/s²</span>';
+    rdVel.innerHTML    = vel.toFixed(2)   + '<span class="readout-unit">m/s</span>';
+    rdNet.innerHTML    = netF.toFixed(2)  + '<span class="readout-unit">N</span>';
+    rdFric.innerHTML   = fricF.toFixed(2) + '<span class="readout-unit">N</span>';
+
+    const fa = applyingF ? getF() : 0;
+    const m  = getM();
+    formulaLive.textContent =
+      `a = (${fa.toFixed(0)} − ${fricF.toFixed(1)}) / ${m} = ${accel.toFixed(2)} m/s²`;
+
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>

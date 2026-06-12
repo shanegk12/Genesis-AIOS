@@ -1,0 +1,452 @@
+[
+  {
+    "id": "c039t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Precision Measurement and Tolerances</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, you explored Resource Management and Loss Prevention — how to be a good steward of the materials God provides and minimize waste. Now you are moving into the Assembly phase of Creationeering. This is where all your planning and preparing come together. You actually build your creation.</p>\n<p>Today's lesson is about Precision Measurement and Tolerances. Think about building something amazing. It needs to fit together just right, doesn't it? This lesson will show you why tiny differences matter, how to measure accurately, and how to understand how much wiggle room you actually have. These skills are essential for creating things that work well and last.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Explain why precise measurements are critical during the Assembly phase of Creationeering.</li>\n<li>Accurately use common measuring tools like calipers and micrometers.</li>\n<li>Define tolerance and explain its importance in manufacturing and design.</li>\n<li>Apply the OCV method to a design problem involving measurement and fitting.</li>\n<li>Connect the pursuit of precision in engineering to biblical stewardship of God-given resources and talents.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Precision",
+          "definition": "How close multiple measurements are to each other — consistency in your results."
+        },
+        {
+          "term": "Accuracy",
+          "definition": "How close a measurement is to the true or accepted value."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable variation in a dimension or property of a part — how much a measurement can differ from the target and still work correctly."
+        },
+        {
+          "term": "Dimension",
+          "definition": "A measurable extent of a part, such as its length, width, or height."
+        },
+        {
+          "term": "Nominal Value",
+          "definition": "The intended or target value of a dimension — the number you are aiming for."
+        },
+        {
+          "term": "Calipers",
+          "definition": "A precision measuring instrument used to measure external and internal distances with high accuracy."
+        },
+        {
+          "term": "Micrometer",
+          "definition": "An extremely precise measuring tool used to measure very small distances or thicknesses, often to the nearest thousandth of an inch or hundredth of a millimeter."
+        },
+        {
+          "term": "Clearance Fit",
+          "definition": "A condition where there is always a gap between two mating parts, allowing them to slide or rotate freely."
+        },
+        {
+          "term": "Interference Fit",
+          "definition": "A condition where two mating parts are designed to overlap slightly, requiring force to press them together for a very tight hold."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Observing and analyzing a system at different levels — from the large visible scale all the way down to the microscopic or atomic level."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The God of Order and Detail</h2>\n<p>Our universe is a breathtaking display of precision. The orbit of every planet follows math so exact that scientists can predict eclipses centuries in advance. A single human cell contains machinery so intricate that researchers are still discovering how it all works. God didn't create things \"good enough.\" He created them with perfect functionality and beauty down to the smallest detail.</p>\n<p>When you design and build with care, you are reflecting a tiny fraction of that creative genius. Precision in your work is a way of honoring the Creator who made everything with such careful attention. It shows respect for the materials and processes He allows you to use. Just as every star has its place and every atom its purpose, every part of your design deserves to be carefully considered and precisely crafted.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 1:20</strong> — \"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse.\"</p><p>The precision built into creation points directly back to its Creator. When your measurements are careful and your designs are thoughtful, your work becomes a small echo of that same excellence.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Precision Matters</h2>\n<p>Imagine building a LEGO castle, but some of the bricks are a little too big and others are a little too small. The walls would wobble. The roof might not sit right. The whole structure would feel unstable. In real engineering, the stakes are even higher. If parts are not made to the correct size, they simply won't fit together — and a product that doesn't fit together either fails to work or breaks under use.</p>\n<p>Think about a mechanical clock. Every single gear, spring, and lever inside must be made to incredibly precise dimensions. If just one gear tooth is too wide, or one pivot hole is too small, the clock stops running. It doesn't matter how beautiful the case looks on the outside. The inside must be right. That's precision at work.</p>\n<p>Precision isn't just about being neat or careful — it is what makes the difference between something that works and something that doesn't. In the Assembly phase of Creationeering, precision is your most important tool.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Precision vs. Accuracy — What's the difference?</strong></p><p><strong>Accuracy</strong> means your measurement is close to the true value. If a rod is supposed to be 10.00 cm and you measure it as 10.01 cm, that's very accurate.</p><p><strong>Precision</strong> means your repeated measurements are consistent with each other. If you measure the same rod five times and always get 9.85 cm, your measurements are precise — but not accurate. Great engineers aim for both.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A target diagram showing the difference between accuracy and precision: scattered shots near center (accurate, not precise), tight cluster off-center (precise, not accurate), and tight cluster at center (both accurate and precise)."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Tolerance</h2>\n<p>Here is an important truth about manufacturing: nothing is ever made <em>perfectly</em> to the exact target dimension. Machines have small vibrations. Materials expand and contract with temperature. Human hands are not robots. So engineers don't demand perfection — they define a range of acceptable values. That range is called <strong>tolerance</strong>.</p>\n<p>A tolerance tells every person on the manufacturing floor: \"This part needs to be close to the nominal value, and here is exactly how close it needs to be.\" For example, a shaft might have a nominal diameter of 25.00 mm with a tolerance of ± 0.05 mm. That means any diameter between 24.95 mm and 25.05 mm is acceptable. Parts within that range will work correctly. Parts outside it will not.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>Types of Fits: How Parts Work Together</h3>\n<p>When two parts are designed to connect — like a shaft sliding into a hole — engineers must decide how tightly they should fit. There are two main categories:</p>\n<ul>\n<li><strong>Clearance Fit:</strong> The shaft is always slightly smaller than the hole, so there is always a gap. This allows the shaft to spin or slide freely. You'd find this in a wheel axle or a door hinge.</li>\n<li><strong>Interference Fit:</strong> The shaft is actually slightly <em>larger</em> than the hole. You have to press or hammer the parts together. Once assembled, they grip each other very tightly with no need for bolts or glue. Gear hubs and press-fit bearings use this type of connection.</li>\n</ul>\n<p>Choosing the right fit is not guesswork — it comes from understanding the tolerances of both parts and how they interact.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram comparing a clearance fit (shaft smaller than hole with visible gap) and an interference fit (shaft larger than hole, pressed together)."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the Rule:</strong> Tight tolerance = higher cost and more time. Loose tolerance = easier to make but may not function as well. Engineers always balance how precise a part needs to be against how much time and money it takes to make it that way. Choose the tightest tolerance you actually need — not tighter.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Measuring Tools: Calipers and Micrometers</h2>\n<p>Knowing about precision and tolerance is only useful if you can actually measure accurately. Two of the most important precision tools in any workshop or lab are calipers and micrometers.</p>\n<h3>Calipers</h3>\n<p>Calipers look like a jaw-shaped sliding ruler. They can measure the outside of an object (like the diameter of a rod), the inside of a hole, or even the depth of a slot. A digital caliper can typically measure to the nearest 0.01 mm (one hundredth of a millimeter). That's roughly the thickness of a human hair. To use calipers correctly:</p>\n<ul>\n<li>Zero the tool before measuring — make sure it reads 0.00 when the jaws are closed.</li>\n<li>Place the jaws gently around the object — don't squeeze hard or you'll get a false reading.</li>\n<li>Read the display straight on to avoid parallax error.</li>\n</ul>\n<h3>Micrometers</h3>\n<p>When you need even more precision, you reach for a micrometer. A micrometer uses a threaded spindle to measure thicknesses or diameters to the nearest 0.001 mm — ten times finer than calipers. Machinists use micrometers when making engine parts, medical devices, or anything where a fraction of a millimeter is the difference between working and failing. The key to using a micrometer is applying consistent, gentle pressure using the ratchet stop — never over-tighten it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A digital caliper and a micrometer placed side by side, with labels identifying the key parts of each tool including jaws, spindle, thimble, and digital display."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Measurement Mistakes to Avoid:</strong></p>\n<ul>\n<li>Forgetting to zero your tool before measuring — always reset first.</li>\n<li>Measuring a warm part that just came off a machine — metal expands with heat. Let parts cool to room temperature first.</li>\n<li>Gripping calipers or micrometers too tightly — gentle, consistent pressure gives accurate readings.</li>\n<li>Reading the scale at an angle — always look straight at the display or scale.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Seeing the Whole Picture</h2>\n<p>Here is a powerful idea that top engineers use: <strong>multiscale modeling</strong>. It means examining your design at multiple levels of scale at the same time.</p>\n<p>At the large scale, you look at your whole product — does it look right? Does it fit in the space it needs to? At a medium scale, you examine individual parts and how they connect. Are the fits correct? Are the tolerances right? At the small scale, you might examine the surface finish under magnification — are there tiny scratches or rough spots that could cause wear or failure over time?</p>\n<p>God's creation operates across all these scales simultaneously. The solar system, ecosystems, organs, cells, molecules, and atoms all work together in a unified system. As a Creationeer, training yourself to think across scales makes you a far more effective designer and problem-solver.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039c004",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Proverbs 11:1 says, <strong>\"A false balance is an abomination to the Lord, but a just weight is his delight.\"</strong> Accurate measurement has always mattered to God — not just in commerce, but as a reflection of honesty and integrity. When your measurements are truthful and your tolerances are carefully defined, your work carries the weight of that same integrity.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Measurement Problems</h2>\n<p>The OCV method — Observe, Calculate, Verify — is a systematic way to approach any measurement challenge during assembly.</p>\n<ul>\n<li><strong>Observe:</strong> Look at the parts. What needs to fit together? What are the nominal dimensions? What type of fit is required — clearance or interference?</li>\n<li><strong>Calculate:</strong> Determine the tolerance range. Find the maximum and minimum acceptable dimensions for each part. Calculate whether the parts, as measured, fall within tolerance.</li>\n<li><strong>Verify:</strong> Measure the actual parts using your calipers or micrometer. Compare the measured values to the calculated acceptable range. If a part is out of tolerance, it must be reworked or replaced before assembly continues.</li>\n</ul>\n<p>This method protects you from assembling something that looks fine on the outside but is actually built on measurements that will cause failure later. It is the engineering equivalent of \"measure twice, cut once.\"</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039c005",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study Tip — Tolerance Math Made Simple:</strong> If a part has a nominal value of 50.00 mm and a tolerance of ±0.10 mm, write out the range like this:</p><p>Minimum acceptable: 50.00 − 0.10 = <strong>49.90 mm</strong><br>Maximum acceptable: 50.00 + 0.10 = <strong>50.10 mm</strong></p><p>Any measurement between 49.90 and 50.10 mm is a good part. Practice writing out the range any time you see a tolerance — it makes the concept click fast.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Precision as Stewardship</h2>\n<p>You have learned a lot today — precision, accuracy, tolerance, fits, and measurement tools. But here is the big idea that ties it all together. Precision is stewardship.</p>\n<p>When you take careful measurements and respect tolerance limits, you waste fewer materials. Parts that are made right the first time don't have to be scrapped and remade. Tools last longer when they're used correctly. Time is not wasted on rework. Every resource God has placed in your hands — materials, money, time, and talent — is used more effectively when you commit to precision.</p>\n<p>Building with accuracy isn't just a technical skill. It is an act of gratitude toward the God who gave you the ability to create in the first place.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — Question 1: What is the difference between precision and accuracy?",
+      "html": "<p><strong>Accuracy</strong> is how close a measurement is to the true value. <strong>Precision</strong> is how consistent repeated measurements are with each other. A precise measurement is repeatable; an accurate measurement is correct. The best engineering measurements are both — consistently close to the true value.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — Question 2: A bolt has a nominal diameter of 12.00 mm with a tolerance of ±0.15 mm. What is the acceptable range?",
+      "html": "<p>Minimum acceptable diameter: 12.00 − 0.15 = <strong>11.85 mm</strong><br>Maximum acceptable diameter: 12.00 + 0.15 = <strong>12.15 mm</strong></p><p>Any bolt measuring between 11.85 mm and 12.15 mm is within tolerance and acceptable for use. A bolt measuring 11.80 mm or 12.20 mm would be out of tolerance and should not be used.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — Question 3: When would you use an interference fit instead of a clearance fit?",
+      "html": "<p>You would use an <strong>interference fit</strong> when you need two parts to hold together very tightly without fasteners — for example, pressing a gear onto a shaft or seating a bearing into a housing. The parts grip each other because the shaft is slightly larger than the hole it is pressed into.</p><p>You would use a <strong>clearance fit</strong> when the parts need to move relative to each other — such as a rotating axle in a bearing housing, or a sliding drawer in a frame. There is always a small gap that allows free movement.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c039a004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — Question 4: Why does precision connect to biblical stewardship?",
+      "html": "<p>When you measure carefully and build within tolerance, you waste fewer materials, avoid rework, and use your time more effectively. Every resource you work with — materials, money, tools, and time — was ultimately provided by God. Treating those resources with precision and care is a practical expression of stewardship. It also reflects God's own character as a God of order and intentional detail, visible in everything He created.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

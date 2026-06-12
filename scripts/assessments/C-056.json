@@ -57,6 +57,90 @@
       },
       "answer": "C",
       "explanation": "Reliability is the probability that a system will perform its intended function under specified conditions for a specified period of time without failure."
+    },
+    {
+      "type": "comprehension",
+      "question": "Which question does the process of **verification** primarily aim to answer in Creationeering?",
+      "options": {
+        "A": "Are we building the product right, according to the specifications?",
+        "B": "Are we building the right product that meets the user's needs?",
+        "C": "Will the product last a long time without breaking down?",
+        "D": "Can we make the product cheaper and faster?"
+      },
+      "answer": "A",
+      "explanation": "Verification checks if the product meets its specified requirements and design plans, asking 'Are we building the product right?'"
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the main purpose of **testing** in the Creationeering process?",
+      "options": {
+        "A": "To identify defects, confirm functionality, and ensure the system meets requirements and user needs.",
+        "B": "To decide if the project should be started in the first place.",
+        "C": "To make the product look visually appealing to customers.",
+        "D": "To choose the cheapest materials available for construction."
+      },
+      "answer": "A",
+      "explanation": "Testing systematically evaluates a system to find flaws, confirm it works, and ensure it meets all specified requirements and user needs."
+    },
+    {
+      "type": "comprehension",
+      "question": "When Creationeers use **Multiscale Modeling** during testing, what are they trying to understand?",
+      "options": {
+        "A": "How properties at a tiny, microscopic level affect the overall behavior of a larger system.",
+        "B": "How many different colors a product can be made in.",
+        "C": "How quickly a product can be manufactured in a factory.",
+        "D": "How much a product will cost to develop and sell."
+      },
+      "answer": "A",
+      "explanation": "Multiscale Modeling connects phenomena at different size scales to understand how properties at one level influence behavior at another."
+    },
+    {
+      "type": "application",
+      "question": "Your team is designing a new water filter for a remote village. The main goal is to make sure it can purify at least 100 liters of water per day. In the OCV Method, this goal of purifying 100 liters per day would be considered the:",
+      "options": {
+        "A": "Objective",
+        "B": "Constraint",
+        "C": "Variable",
+        "D": "Verification"
+      },
+      "answer": "A",
+      "explanation": "An objective is the clear, measurable goal or desired outcome of a design or optimization effort."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer is designing a new type of wind turbine blade. They are experimenting with different lengths and angles for the blades to see which combination generates the most electricity. The length and angle of the blades are examples of a:",
+      "options": {
+        "A": "Variable",
+        "B": "Objective",
+        "C": "Constraint",
+        "D": "Reliability"
+      },
+      "answer": "A",
+      "explanation": "A variable is a characteristic or parameter of a design that can be changed or adjusted to achieve the objective within given constraints."
+    },
+    {
+      "type": "application",
+      "question": "A team is building a new playground slide that needs to withstand years of use by many children, exposure to sun and rain, and resist rust and cracks. When they test the slide to see if it can hold up against these conditions over time, they are primarily assessing its:",
+      "options": {
+        "A": "Durability",
+        "B": "Validation",
+        "C": "Verification",
+        "D": "Optimization"
+      },
+      "answer": "A",
+      "explanation": "Durability is the ability of a material or product to withstand wear, pressure, or damage over time."
+    },
+    {
+      "type": "synthesis",
+      "question": "You've built a robot that is supposed to sort recyclable materials. You first check if the robot's arm moves exactly 90 degrees as specified in your blueprint (**Verification**). Then, you watch the robot sort actual trash to see if it correctly separates plastic from paper, fulfilling its purpose (**Validation**). Finally, you run the robot for 24 hours straight to see if any parts break down or if it makes mistakes over time (**Testing**). Which statement best summarizes the relationship between these three actions?",
+      "options": {
+        "A": "Verification ensures you built it right, Validation ensures you built the right thing, and Testing finds problems and confirms performance.",
+        "B": "Validation comes before Verification, and Testing is only done if something goes wrong.",
+        "C": "All three terms mean the same thing and can be used interchangeably.",
+        "D": "Verification and Validation are only about paperwork, while Testing is the only practical step."
+      },
+      "answer": "A",
+      "explanation": "Verification checks if the product meets specifications, Validation checks if it meets user needs/purpose, and Testing systematically evaluates it to find defects and confirm functionality."
     }
   ]
 }

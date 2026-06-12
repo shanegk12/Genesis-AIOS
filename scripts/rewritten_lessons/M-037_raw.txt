@@ -1,0 +1,273 @@
+```json
+[
+  {
+    "id": "m037t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>External Supply Chains</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored Patents, Intellectual Property, and Engineer Liability — understanding how creative ideas are protected and how responsibility extends to the safety and impact of designs. Today, we're moving into another vital stage of the Creationeering process: Logistics. Specifically, we'll dive into the world of External Supply Chains, learning where materials come from and how they get to us.</p><p>This lesson connects directly to your mousetrap car project. Whether you're using a pre-made kit, sourcing parts from a local hardware store, or repurposing materials you already have, every single component has a journey before it reaches your hands. Understanding external supply chains will help you make smarter decisions about material selection, anticipate challenges before they happen, and appreciate the complex network that supports every engineering project you'll ever build.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Explain what an external supply chain is and why it matters for a manufacturing project.</li><li>Identify at least three factors to consider when sourcing materials for a project.</li><li>Describe how material properties at different scales impact supplier choices.</li><li>Apply the Objective, Constraint, Variable (OCV) method to decisions about acquiring mousetrap car components.</li><li>Recognize the biblical principle of good stewardship in managing resources obtained through supply chains.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Supply Chain",
+          "definition": "The entire network of individuals, organizations, resources, activities, and technology involved in the creation and sale of a product."
+        },
+        {
+          "term": "External Supply",
+          "definition": "The part of the supply chain that involves resources and processes outside of your immediate control, like suppliers and transporters."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and implementation of a complex operation, especially the movement, storage, and flow of materials and information."
+        },
+        {
+          "term": "Supplier",
+          "definition": "An entity that provides goods or services to another entity."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The act of obtaining or buying goods and services."
+        },
+        {
+          "term": "Inventory",
+          "definition": "A complete list of items such as property, goods in stock, or the contents of a building."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at a large scale to causes at smaller, often atomic, scales."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The careful and responsible management of something entrusted to one's care."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Orderly Provision</h2><p>The Creationeering phase of Logistics connects to one of the most foundational truths in Scripture. Genesis 1:1 tells us, <em>"In the beginning God created the heaven and the earth."</em> God didn't just speak the universe into existence randomly — He designed everything with purpose, sequence, and order. Light before life. Water before plants. The cosmos itself is a masterclass in logistics.</p><p>That same principle applies to your engineering work. Before you can build anything, you need the right materials, in the right quantities, at the right time. Managing that process well — knowing where your parts come from, how long they take to arrive, and what they cost — is an act of stewardship. It reflects God's own careful, intentional approach to creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:1</strong> — "In the beginning God created the heaven and the earth." God's creation of the universe is the ultimate example of planning, order, and provision. As you manage your own project's supply chain, you're reflecting that same image of a purposeful, organized Creator.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is an External Supply Chain?</h2><p>Think about your mousetrap car for a moment. The wooden plank, the axles, the wheels, the string, the mousetrap itself — where did all of that come from? Someone grew the tree, milled it into lumber, cut it to size, packaged it, shipped it to a store, and stocked it on a shelf before you ever picked it up. That entire journey is the supply chain.</p><p>An <strong>external supply chain</strong> specifically refers to everything happening <em>outside</em> your direct control. You didn't make the axle rod. You didn't manufacture the wheels. You relied on an outside network of suppliers, transporters, and distributors to get those parts to you. Understanding that network — and its potential weak points — is a core engineering skill.</p><p>Real manufacturing companies think about this constantly. If a supplier is delayed, production stops. If a part is unavailable, designs have to change. As an engineer, knowing your supply chain means you can plan ahead and avoid those problems before they derail your project.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simplified diagram of an external supply chain showing the flow from raw material extraction through manufacturing, distribution, retail, and finally to the end user — with arrows connecting each stage."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Factors to Consider When Sourcing Materials</h2><p>When you go to acquire parts for your mousetrap car — or any engineering project — you're making procurement decisions. Not every supplier is equal, and not every material is the right fit. Here are the key factors to weigh before you commit to a source:</p><h3>Cost</h3><p>What is your budget? Cost isn't just the price tag on the shelf. It includes shipping, taxes, and the time it takes to get the material to you. A cheaper part that takes two weeks to arrive might actually cost you more in the long run if it delays your project.</p><h3>Availability</h3><p>Is the material in stock right now? Supply chains can break down. A single storm, factory shutdown, or shipping delay can make a commonly available part suddenly impossible to find. Good engineers identify backup suppliers before they need them.</p><h3>Quality and Material Properties</h3><p>A part might look right but perform differently under stress. The material's strength, weight, flexibility, and durability all matter. This is where multiscale modeling becomes useful — understanding that a material's performance at your scale (the wheel rolling across the floor) is determined by its properties at a much smaller scale (the grain structure of the metal or the molecular bonds in the plastic).</p><h3>Lead Time</h3><p>How long does it take from placing an order to receiving the part? This is called lead time. If your project deadline is in one week and your supplier's lead time is ten days, you have a problem. Planning your supply chain early gives you options.</p><h3>Sustainability and Stewardship</h3><p>Where did the material come from, and what impact does sourcing it have on people and the environment? As engineers who follow biblical principles, stewardship means thinking beyond your own project. Choosing materials responsibly — recycled, locally sourced, or ethically produced — honors the world God entrusted to us.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Apply OCV to Your Procurement Decisions.</strong> Before choosing a supplier or material, run it through the Objective, Constraint, Variable method. Your <em>objective</em> might be to get the lightest possible axle. Your <em>constraint</em> is your budget and deadline. Your <em>variable</em> is which supplier or material you choose. Writing it out this way keeps your decision-making organized and intentional — exactly how a professional engineer would approach it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Thinking in Material Selection</h2><p>Here's something that might surprise you: the performance of a material you can hold in your hand is determined by things happening at a scale too small to see. This is the idea behind multiscale modeling.</p><p>Take the wood you might use for your mousetrap car chassis. At your scale, it looks solid and uniform. But zoom in and you'd see wood fibers, cell walls, and grain patterns. Zoom in further and you'd find molecular bonds between cellulose chains. The direction of those grain patterns determines whether the wood bends or snaps under load. A supplier who kiln-dries lumber carefully produces wood with more consistent grain than one who rushes the process — and that difference shows up in your design's performance.</p><p>You don't need to analyze every part at the atomic level for your mousetrap car. But understanding that material quality varies between suppliers — and that those differences have real consequences — is exactly the kind of thinking that separates a careful engineer from someone who just grabs the first thing off the shelf.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A multiscale diagram showing a wooden beam at the macro scale, zooming into the wood grain at the micro scale, and further into the cellulose molecular structure at the nano scale — illustrating how large-scale performance connects to small-scale properties."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying Supply Chain Thinking to Your Mousetrap Car</h2><p>Let's make this concrete. Your mousetrap car project requires specific components — a mousetrap, wheels, axles, a frame, and string or wire for the drive mechanism. Each of those parts has a supply chain behind it. Here's how to think through your procurement like an engineer:</p><h3>Step 1 — List Every Component You Need</h3><p>Start with a complete inventory of what your design requires. Don't leave anything out, including small items like tape, glue, or fasteners. Gaps in your inventory list become surprises on build day.</p><h3>Step 2 — Identify Your Source for Each Part</h3><p>Is this part in a kit? Can you find it at a hardware store? Do you need to order it online? For each component, know exactly where it's coming from and how long it will take to arrive if it isn't already in your hands.</p><h3>Step 3 — Evaluate Quality Against Your Design Requirements</h3><p>Not all wheels are equal. A heavy plastic wheel adds rotational mass, which slows acceleration. A lightweight foam wheel might not have enough grip. Match the material properties to your design's needs — using your OCV framework to keep the trade-offs clear.</p><h3>Step 4 — Have a Backup Plan</h3><p>What happens if your first-choice part isn't available? Identify at least one alternative supplier or substitute material for your most critical components. Professional engineers call this supply chain risk mitigation — you call it being prepared.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't wait until the last minute to source your parts.</strong> One of the most common mistakes in student engineering projects is assuming that parts will be easy to find right before the deadline. Lead times, out-of-stock items, and shipping delays are real. Build your inventory list early, confirm your sources, and give yourself time to adjust if something doesn't arrive as planned.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in the Supply Chain</h2><p>Stewardship is one of the most important concepts in Creationeering. It means managing what you've been given — time, money, materials, and skills — with care and intentionality. Supply chains are one of the places where stewardship becomes very practical.</p><p>When you choose materials, you're making decisions that ripple outward. Where was this material extracted? Were the workers who made it treated fairly? What happens to this material after your project is done? These aren't just philosophical questions — they're engineering questions. The best engineers think about the full lifecycle of their materials, from extraction to disposal.</p><p>For your mousetrap car, stewardship might look like reusing materials you already have, choosing a locally available option over a shipped one, or designing your car so parts can be disassembled and used again. Small decisions, but they reflect a big idea: engineering in a way that honors both people and the planet God created.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m037t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Takeaways</h2><ul><li>An external supply chain is the network of suppliers, transporters, and resources outside your direct control that deliver materials to your project.</li><li>When sourcing materials, consider cost, availability, quality, lead time, and stewardship.</li><li>Multiscale thinking reminds you that a material's large-scale performance is determined by its small-scale structure — which varies between suppliers.</li><li>Use the OCV method to make clear, intentional procurement decisions for your mousetrap car.</li><li>Good stewardship means managing your resources responsibly — honoring God in how you acquire, use, and dispose of materials.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  }
+]
+```

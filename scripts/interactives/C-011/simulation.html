@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forces & Motion – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: .5px; }
+  header p  { font-size: .8rem; opacity: .85; margin-top: 2px; }
+
+  .screen { display: none; width: 100%; max-width: 860px; padding: 18px 16px; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p  { font-size: .97rem; line-height: 1.6; color: #333; margin-bottom: 16px; }
+  .formula-box {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 8px;
+    margin: 12px 0 20px;
+    letter-spacing: 1px;
+  }
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+  }
+  .btn:hover  { background: #b8922e; }
+  .btn:active { transform: scale(.97); }
+  .btn.secondary {
+    background: #1B3A5C;
+    color: #fff;
+  }
+  .btn.secondary:hover { background: #14304e; }
+
+  /* ── RACE SIM ── */
+  .sim-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .track-area {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .track-area h2 { font-size: 1.1rem; color: #1B3A5C; margin-bottom: 4px; }
+  .track-area .subtitle { font-size: .82rem; color: #555; margin-bottom: 14px; }
+
+  .track {
+    position: relative;
+    height: 80px;
+    background: #e8ecf0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .track-label {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .75rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    z-index: 2;
+    background: rgba(247,249,252,.7);
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  .finish-line {
+    position: absolute;
+    right: 40px;
+    top: 0; bottom: 0;
+    width: 4px;
+    background: repeating-linear-gradient(
+      #000 0px, #000 10px,
+      #fff 10px, #fff 20px
+    );
+    z-index: 1;
+  }
+  .car {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    transition: left .05s linear;
+    z-index: 3;
+    line-height: 1;
+  }
+
+  /* ── CONTROLS ── */
+  .controls-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .controls-card h3 { font-size: 1rem; color: #1B3A5C; margin-bottom: 12px; }
+
+  .vehicle-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .vehicle-controls { grid-template-columns: 1fr; } }
+
+  .vc-panel {
+    background: #f7f9fc;
+    border: 2px solid #e0e4ea;
+    border-radius: 10px;
+    padding: 14px 12px;
+  }
+  .vc-panel h4 { font-size: .9rem; font-weight: 700; color: #1B3A5C; margin-bottom: 10px; text-align: center; }
+  .vc-panel h4 span { font-size: 1.3rem; }
+
+  .slider-row { margin-bottom: 10px; }
+  .slider-row label {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8rem;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  .slider-row label .val {
+    font-weight: 700;
+    color: #1B3A5C;
+    min-width: 60px;
+    text-align: right;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+  }
+
+  .accel-display {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: .82rem;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 700;
+  }
+
+  /* ── RACE BUTTONS ── */
+  .race-btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  /* ── STATUS BAR ── */
+  .status-bar {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: .88rem;
+    text-align: center;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .status-bar.success { background: #1e7d4a; }
+  .status-bar.fail    { background: #b83232; }
+  .status-bar.warn    { background: #8a6b00; }
+
+  /* ── QUIZ ── */
+  .quiz-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .progress-bar-wrap {
+    background: #e0e4ea;
+    border-radius: 20px;
+    height: 8px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 20px;
+    transition: width .4s;
+  }
+  .q-count { font-size: .78rem; color: #888; margin-bottom: 6px; }
+  .q-text  { font-size: 1.05rem; font-weight: 700; color: #1B3A5C; margin-bottom: 18px; line-height: 1.45; }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0d6de;
+    border-radius: 8px;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: .92rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    font-family: inherit;
+  }
+  .opt-btn:hover:not(:disabled)  { border-color: #C9A84C; background: #fdf5e0; }
+  .opt-btn.correct  { background: #d4f0e0; border-color: #1e7d4a; color: #1e4a30; }
+  .opt-btn.wrong    { background: #fde0e0; border-color: #b83232; color: #6b1a1a; }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: .88rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.correct { background: #d4f0e0; color: #1e4a30; border-left: 4px solid #1e7d4a; }
+  .feedback-box.wrong   { background: #fde0e0; color: #6b1a1a; border-left: 4px solid #b83232; }
+
+  .next-btn-row { margin-top: 16px; text-align: right; }
+
+  /* ── SUMMARY ── */
+  .summary-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 4px 16px rgba(27,58,92,.3);
+  }
+  .score-circle small { font-size: .7rem; color: #fff; font-weight: 400; margin-top: 2px; }
+  .summary-card h2 { font-size: 1.3rem; color: #1B3A5C; margin-bottom: 10px; }
+  .summary-card p  { font-size: .92rem; color: #444; line-height: 1.6; margin-bottom: 8px; }
+
+  .review-list { text-align: left; margin: 16px 0; }
+  .review-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e8ecf0;
+    font-size: .85rem;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .ri-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .ri-q    { color: #1B3A5C; font-weight: 600; margin-bottom: 2px; }
+  .ri-a    { color: #555; }
+  .ri-correct { color: #1e7d4a; }
+  .ri-wrong   { color: #b83232; }
+
+  .faith-note {
+    background: #f0f4ff;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: .82rem;
+    color: #1B3A5C;
+    margin: 14px 0;
+    text-align: left;
+    font-style: italic;
+  }
+
+  /* tabs */
+  .tab-bar {
+    display: flex;
+    background: #1B3A5C;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.6);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+  }
+  .tab.active { background: #C9A84C; color: #1B3A5C; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ Forces &amp; Motion</h1>
+  <p>Creationeering · Genesis K-12 Academy</p>
+</header>
+
+<!-- ═══════════════════  INTRO  ═══════════════════ -->
+<div id="screen-intro" class="screen active">
+  <div class="intro-card" style="margin-top:24px;">
+    <h2>🏎️ Design: Forces &amp; Influences</h2>
+    <p>Engineers use forces every day to design safe, effective systems. In this activity you will:</p>
+    <ol style="text-align:left;margin:10px 0 14px 24px;font-size:.94rem;line-height:1.8;">
+      <li><strong>Race Simulator</strong> — Adjust force &amp; mass sliders so both vehicles cross the finish line at the same time.</li>
+      <li><strong>Force Challenge Quiz</strong> — Test your knowledge of force types and F = ma.</li>
+    </ol>
+    <div class="formula-box">F = m × a</div>
+    <p style="font-size:.85rem;color:#555;">Force (N) = Mass (kg) × Acceleration (m/s²)</p>
+    <br>
+    <button class="btn" onclick="showScreen('screen-sim')">Start Activity ▶</button>
+  </div>
+</div>
+
+<!-- ═══════════════════  SIM  ═══════════════════ -->
+<div id="screen-sim" class="screen">
+
+  <div class="tab-bar">
+    <button class="tab active" id="tab-sim"  onclick="switchTab('sim')">🏁 Race Simulator</button>
+    <button class="tab"        id="tab-quiz" onclick="switchTab('quiz')">📝 Force Quiz</button>
+  </div>
+
+  <div id="panel-sim">
+    <div class="sim-layout" style="margin-top:14px;">
+
+      <!-- Track -->
+      <div class="track-area">
+        <h2>EV Race Track</h2>
+        <p class="subtitle">Goal: Both vehicles must cross the finish line at the <strong>same time</strong>.</p>
+
+        <!-- Car A -->
+        <div class="track" id="track-a">
+          <span class="track-label">Prototype A 🚗</span>
+          <div class="finish-line"></div>
+          <div class="car" id="car-a" style="left:60px;">🏎️</div>
+        </div>
+
+        <!-- Car B -->
+        <div class="track" id="track-b">
+          <span class="track-label">Prototype B 🚛</span>
+          <div class="finish-line"></div>
+          <div class="car" id="car-b" style="left:60px;">🚐</div>
+        </div>
+
+        <div class="status-bar" id="status-bar">Adjust sliders, then press <strong>&nbsp;🏁 Race!&nbsp;</strong></div>
+
+        <div class="race-btn-row">
+          <button class="btn" id="race-btn" onclick="startRace()">🏁 Race!</button>
+          <button class="btn secondary" id="reset-btn" onclick="resetRace()">↺ Reset</button>
+          <button class="btn" id="next-quiz-btn" style="display:none" onclick="switchTab('quiz')">Next: Quiz ▶</button>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-card">
+        <h3>⚙️ Vehicle Settings</h3>
+        <div class="vehicle-controls">
+
+          <!-- CAR A -->
+          <div class="vc-panel">
+            <h4><span>🏎️</span> Prototype A<br><small style="font-weight:400;color:#555;font-size:.75rem;">Sports Car</small></h4>
+
+            <div class="slider-row">
+              <label>Mass (kg) <span class="val" id="a-mass-val">1000 kg</span></label>
+              <input type="range" id="a-mass" min="500" max="3000" step="100" value="1000" oninput="updateCalc()">
+            </div>
+            <div class="slider-row">
+              <label>Motor Force (N) <span class="val" id="a-force-val">4000 N</span></label>
+              <input type="range" id="a-force" min="500" max="12000" step="100" value="4000" oninput="updateCalc()">
+            </div>
+            <div class="accel-display" id="a-accel">a = 4.00 m/s²</div>
+          </div>
+
+          <!-- CAR B -->
+          <div class="vc-panel">
+            <h4><span>🚐</span> Prototype B<br><small style="font-weight:400;color:#555;font-size:.75rem;">Heavy Pickup</small></h4>
+
+            <div class="slider-row">
+              <label>Mass (kg) <span class="val" id="b-mass-val">3000 kg</span></label>
+              <input type="range" id="b-mass" min="500" max="3000" step="100" value="3000" oninput="updateCalc()">
+            </div>
+            <div class="slider-row">
+              <label>Motor Force (N) <span class="val" id="b-force-val">4000 N</span></label>
+              <input type="range" id="b-force" min="500" max="12000" step="100" value="4000" oninput="updateCalc()">
+            </div>
+            <div class="accel-display" id="b-accel">a = 1.33 m/s²</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;background:#f0f4ff;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#1B3A5C;">
+          💡 <strong>Remember:</strong> F = m × a &nbsp;→&nbsp; a = F ÷ m &nbsp;|&nbsp; For a tie, both cars need <em>equal acceleration</em>.
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end panel-sim -->
+
+  <!-- ── QUIZ PANEL ── -->
+  <div id="panel-quiz" style="display:none;margin-top:14px;">
+    <div class="quiz-card">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="q-progress" style="width:0%"></div>
+      </div>
+      <div class="q-count" id="q-count">Question 1 of 8</div>
+      <div class="q-text"  id="q-text"></div>
+      <div class="options"  id="q-options"></div>
+      <div class="feedback-box" id="q-feedback"></div>
+      <div class="next-btn-row">
+        <button class="btn" id="q-next" style="display:none" onclick="nextQuestion()">Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end screen-sim -->
+
+<!-- ═══════════════════  SUMMARY  ═══════════════════ -->
+<div id="screen-summary" class="screen">
+  <div class="summary-card" style="margin-top:20px;">
+    <div class="score-circle" id="score-circle">
+      <span id="score-pct">--</span>
+      <small>score</small>
+    </div>
+    <h2 id="summary-title">Nice Work!</h2>
+    <p id="summary-msg"></p>
+
+    <div class="faith-note">
+      "He is before all things, and in him all things hold together." — Colossians 1:17<br>
+      The orderly forces God built into creation make engineering possible!
+    </div>
+
+    <div class="review-list" id="review-list"></div>
+
+    <button class="btn" onclick="restartAll()" style="margin-top:8px;">🔄 Try Again</button>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+//  SCREEN / TAB HELPERS
+// ════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function switchTab(tab) {
+  document.getElementById('tab-sim').classList.toggle('active',  tab==='sim');
+  document.getElementById('tab-quiz').classList.toggle('active', tab==='quiz');
+  document.getElementById('panel-sim').style.display  = tab==='sim'  ? 'block' : 'none';
+  document.getElementById('panel-quiz').style.display = tab==='quiz' ? 'block' : 'none';
+  if (tab==='quiz' && quizState.current === 0 && !quizState.started) initQuiz();
+}
+
+// ════════════════════════════════════════
+//  RACE SIMULATOR
+// ════════════════════════════════════════
+let raceAnim = null;
+let raceRunning = false;
+
+function updateCalc() {
+  const aMass  = +document.getElementById('a-mass').value;
+  const aForce = +document.getElementById('a-force').value;
+  const bMass  = +document.getElementById('b-mass').value;
+  const bForce = +document.getElementById('b-force').value;
+
+  document.getElementById('a-mass-val').textContent  = aMass  + ' kg';
+  document.getElementById('a-force-val').textContent = aForce + ' N';
+  document.getElementById('b-mass-val').textContent  = bMass  + ' kg';
+  document.getElementById('b-force-val').textContent = bForce + ' N';
+
+  const aAccel = aForce / aMass;
+  const bAccel = bForce / bMass;
+
+  document.getElementById('a-accel').textContent = 'a = ' + aAccel.toFixed(2) + ' m/s²';
+  document.getElementById('b-accel').textContent = 'a = ' + bAccel.toFixed(2) + ' m/s²';
+}
+
+function getTrackWidth(trackId) {
+  const t = document.getElementById(trackId);
+  return t.clientWidth;
+}
+
+function startRace() {
+  if (raceRunning) return;
+  resetCars();
+
+  const aMass  = +document.getElementById('a-mass').value;
+  const aForce = +document.getElementById('a-force').value;
+  const bMass  = +document.getElementById('b-mass').value;
+  const bForce = +document.getElementById('b-force').value;
+
+  const aAccel = aForce / aMass;
+  const bAccel = bForce / bMass;
+
+  // Finish line is at trackWidth - 40 - 8 (finish line width/2) ~ trackWidth - 52
+  const tw = getTrackWidth('track-a');
+  const finishPx = tw - 52;
+  const startPx  = 60;
+  const distPx   = finishPx - startPx;
+
+  // We'll animate over a fixed visual time scaled to acceleration
+  // time = sqrt(2d/a)  in "sim seconds"
+  const tA = Math.sqrt(2 * distPx / aAccel);
+  const tB = Math.sqrt(2 * distPx / bAccel);
+
+  const diff = Math.abs(tA - tB);
+  const tied = diff < 0.15;  // within threshold
+
+  raceRunning = true;
+  document.getElementById('race-btn').disabled = true;
+  const sb = document.getElementById('status-bar');
+  sb.className = 'status-bar';
+  sb.innerHTML = '🚦 Racing…';
+
+  const carA = document.getElementById('car-a');
+  const carB = document.getElementById('car-b');
+
+  // Animate: positions move with kinematics x = 0.5 * a * t^2
+  // Map sim-time to wall-clock 3 seconds max
+  const wallDuration = 3000; // ms
+  let startTime = null;
+
+  // normalise so the faster car takes exactly wallDuration ms
+  const fastT = Math.min(tA, tB);
+  const scale = wallDuration / fastT; // px-time to ms ratio
+
+  function frame(ts) {
+    if (!startTime) startTime = ts;
+    const elapsed = ts - startTime; // ms
+    const tElapsedSim = elapsed / scale; // sim-time equivalent
+
+    const posA = startPx + 0.5 * aAccel * tElapsedSim * tElapsedSim;
+    const posB = startPx + 0.5 * bAccel * tElapsedSim * tElapsedSim;
+
+    carA.style.left = Math.min(posA, finishPx) + 'px';
+    carB.style.left = Math.min(posB, finishPx) + 'px';
+
+    const doneA = posA >= finishPx;
+    const doneB = posB >= finishPx;
+
+    if (!doneA || !doneB) {
+      raceAnim = requestAnimationFrame(frame);
+    } else {
+      raceRunning = false;
+      document.getElementById('race-btn').disabled = false;
+      showRaceResult(tied, tA, tB, aAccel, bAccel);
+    }
+  }
+
+  raceAnim = requestAnimationFrame(frame);
+}
+
+function showRaceResult(tied, tA, tB, aA, aB) {
+  const sb = document.getElementById('status-bar');
+  const nextBtn = document.getElementById('next-quiz-btn');
+
+  if (tied) {
+    sb.className = 'status-bar success';
+    sb.innerHTML = '🏆 Perfect Tie! Both cars crossed together! Great engineering! Now try the quiz ▶';
+    nextBtn.style.display = 'inline-block';
+  } else {
+    const faster = tA < tB ? 'Prototype A 🏎️' : 'Prototype B 🚐';
+    const slower = tA < tB ? 'Prototype B 🚐' : 'Prototype A 🏎️';
+    const hint   = tA < tB
+      ? 'Increase Prototype B\'s motor force (or reduce its mass) to match!'
+      : 'Increase Prototype A\'s motor force (or reduce its mass) to match!';
+    sb.className = 'status-bar fail';
+    sb.innerHTML = `<span>${faster} won! ${hint}</span>`;
+  }
+}
+
+function resetCars() {
+  const carA = document.getElementById('car-a');
+  const carB = document.getElementById('car-b');
+  carA.style.transition = 'none';
+  carB.style.transition = 'none';
+  carA.style.left = '60px';
+  carB.style.left = '60px';
+  if (raceAnim) cancelAnimationFrame(raceAnim);
+}
+
+function resetRace() {
+  raceRunning = false;
+  document.getElementById('race-btn').disabled = false;
+  if (raceAnim) cancelAnimationFrame(raceAnim);
+  resetCars();
+  const sb = document.getElementById('status-bar');
+  sb.className = 'status-bar';
+  sb.innerHTML = 'Adjust sliders, then press <strong>&nbsp;🏁 Race!&nbsp;</strong>';
+}
+
+// ════════════════════════════════════════
+//  QUIZ
+// ════════════════════════════════════════
+const questions = [
+  {
+    q: "What is a FORCE?",
+    opts: ["A type of energy stored in a battery","A push or pull on an object","The speed of a moving object","The weight of an object in grams"],
+    ans: 1,
+    fb: "Correct! A force is a push or pull on an object. Forces cause objects to accelerate, slow down, or change direction."
+  },
+  {
+    q: "Which equation correctly relates force, mass, and acceleration?",
+    opts: ["F = m + a","F = m ÷ a","F = m × a","a = F × m"],
+    ans: 2,
+    fb: "Yes! F = m × a (Newton's Second Law). More mass requires more force to achieve the same acceleration."
+  },
+  {
+    q: "Prototype A (1,000 kg) has a motor force of 4,000 N. What is its acceleration?",
+    opts: ["4,000,000 m/s²","0.25 m/s²","4 m/s²","40 m/s²"],
+    ans: 2,
+    fb: "Correct! a = F ÷ m = 4,000 ÷ 1,000 = 4 m/s². Nice use of F = ma!"
+  },
+  {
+    q: "Prototype B has a mass of 3,000 kg. To match the 4 m/s² acceleration of Prototype A, what motor force is needed?",
+    opts: ["750 N","3,000 N","4,000 N","12,000 N"],
+    ans: 3,
+    fb: "Right! F = m × a = 3,000 × 4 = 12,000 N. The heavier truck needs 3× the force for the same acceleration."
+  },
+  {
+    q: "What force pulls every object toward Earth?",
+    opts: ["Friction","Normal Force","Gravity","Spring Force"],
+    ans: 2,
+    fb: "Correct! Gravity pulls objects toward Earth. It's why the heavier EV presses harder on the road."
+  },
+  {
+    q: "A car sits still on a flat road. The road pushes upward on the car with a force equal to gravity. What is this upward force called?",
+    opts: ["Applied Force","Friction","Spring Force","Normal Force"],
+    ans: 3,
+    fb: "Exactly! The normal force is the support force from a surface, pushing perpendicular to it."
+  },
+  {
+    q: "When brakes are applied, the brake pads rub against the wheel to slow the car. Which force does this describe?",
+    opts: ["Gravity","Friction","Normal Force","Spring Force"],
+    ans: 1,
+    fb: "Yes! Friction resists motion between two surfaces — in this case the brake pads and wheel."
+  },
+  {
+    q: "An engineer uses a compressed coil spring in a car's suspension system. When the spring pushes the wheel back down after a bump, what force is acting?",
+    opts: ["Gravity","Normal Force","Friction","Spring Force"],
+    ans: 3,
+    fb: "Correct! Spring force is created when a spring is stretched or compressed — it's key to smooth suspension design."
+  }
+];
+
+const quizState = {
+  current: 0,
+  score: 0,
+  started: false,
+  answers: []  // {q, correct, chosen, correct_text}
+};
+
+function initQuiz() {
+  quizState.current = 0;
+  quizState.score   = 0;
+  quizState.started = true;
+  quizState.answers = [];
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const idx = quizState.current;
+  const total = questions.length;
+  const q = questions[idx];
+
+  document.getElementById('q-progress').style.width = ((idx / total) * 100) + '%';
+  document.getElementById('q-count').textContent = `Question ${idx + 1} of ${total}`;
+  document.getElementById('q-text').textContent  = q.q;
+
+  const optsDiv = document.getElementById('q-options');
+  optsDiv.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    optsDiv.appendChild(btn);
+  });
+
+  const fb = document.getElementById('q-feedback');
+  fb.className = 'feedback-box';
+  fb.innerHTML = '';
+
+  document.getElementById('q-next').style.display = 'none';
+}
+
+function selectAnswer(chosen) {
+  const idx = quizState.current;
+  const q   = questions[idx];
+  const correct = chosen === q.ans;
+
+  if (correct) quizState.score++;
+
+  const opts = document.querySelectorAll('.opt-btn');
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.ans)    btn.classList.add('correct');
+    if (i === chosen && !correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('q-feedback');
+  fb.className = 'feedback-box show ' + (correct ? 'correct' : 'wrong');
+  fb.innerHTML = (correct ? '✅ ' : '❌ ') + q.fb;
+
+  quizState.answers.push({
+    q: q.q,
+    correct,
+    chosen: q.opts[chosen],
+    correct_text: q.opts[q.ans]
+  });
+
+  document.getElementById('q-next').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  quizState.current++;
+  if (quizState.current < questions.length) {
+    renderQuestion();
+  } else {
+    showSummary();
+  }
+}
+
+// ════════════════════════════════════════
+//  SUMMARY
+// ════════════════════════════════════════
+function showSummary() {
+  const total = questions.length;
+  const score = quizState.score;
+  const pct   = Math.round((score / total) * 100);
+
+  document.getElementById('score-pct').textContent = pct + '%';
+  document.getElementById('score-circle').style.background =
+    pct >= 75 ? '#1e7d4a' : pct >= 50 ? '#8a6b00' : '#b83232';
+
+  let title, msg;
+  if      (pct === 100) { title = '🏆 Perfect Score!'; msg = 'Outstanding! You mastered forces and the F = ma equation. You think like an engineer!'; }
+  else if (pct >= 75)   { title = '🎉 Great Work!';    msg = 'Solid understanding of forces! Review any missed questions below and keep practicing.'; }
+  else if (pct >= 50)   { title = '👍 Good Effort!';   msg = 'You got the basics down. Review the force types and F = ma to strengthen your skills.'; }
+  else                  { title = '📚 Keep Going!';     msg = 'Forces can be tricky — re-read the lesson, then try again. You\'ve got this!'; }
+
+  document.getElementById('summary-title').textContent = title;
+  document.getElementById('summary-msg').textContent   = msg;
+
+  // Review list
+  const rl = document.getElementById('review-list');
+  rl.innerHTML = '';
+  quizState.answers.forEach(a => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `
+      <span class="ri-icon ${a.correct ? 'ri-correct' : 'ri-wrong'}">${a.correct ? '✅' : '❌'}</span>
+      <div>
+        <div class="ri-q">${a.q}</div>
+        <div class="ri-a">Your answer: <em>${a.chosen}</em>${!a.correct ? ' · Correct: <strong>'+a.correct_text+'</strong>' : ''}</div>
+      </div>`;
+    rl.appendChild(div);
+  });
+
+  showScreen('screen-summary');
+}
+
+function restartAll() {
+  quizState.current = 0;
+  quizState.score   = 0;
+  quizState.started = false;
+  quizState.answers = [];
+  resetRace();
+  document.getElementById('next-quiz-btn').style.display = 'none';
+  switchTab('sim');
+  showScreen('screen-sim');
+}
+
+// ════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════
+updateCalc();
+</script>
+</body>
+</html>

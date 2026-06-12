@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newton's Laws - 3D System Viewer | Genesis K-12 Academy</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1e2e;
+    color: #e8e8e8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #header {
+    background: #1B3A5C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #C9A84C;
+    flex-shrink: 0;
+  }
+  #header h1 {
+    font-size: 1.1em;
+    color: #C9A84C;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  #header p {
+    font-size: 0.72em;
+    color: #a0b8d0;
+    margin-top: 2px;
+  }
+  #header .logo {
+    font-size: 0.75em;
+    color: #C9A84C;
+    text-align: right;
+    opacity: 0.85;
+  }
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 230px;
+    background: #162d47;
+    border-right: 2px solid #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-section {
+    padding: 12px;
+    border-bottom: 1px solid #1B3A5C;
+  }
+  .sidebar-section h3 {
+    color: #C9A84C;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .component-item {
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    background: #1B3A5C;
+  }
+  .component-item:hover, .component-item.active {
+    border-left-color: #C9A84C;
+    background: #223f61;
+  }
+  .component-item .comp-name {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #e0e8f0;
+  }
+  .component-item .comp-desc {
+    font-size: 0.68em;
+    color: #8aaac8;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .comp-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  #controls {
+    padding: 12px;
+    border-bottom: 1px solid #1B3A5C;
+  }
+  #controls h3 {
+    color: #C9A84C;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.78em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .btn:hover { background: #C9A84C; color: #1B3A5C; }
+  .btn.active { background: #C9A84C; color: #1B3A5C; }
+  .rotate-btns {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+  .rotate-btns .btn {
+    flex: 1;
+    font-size: 1em;
+    padding: 6px;
+  }
+  #law-display {
+    padding: 12px;
+    flex: 1;
+  }
+  #law-display h3 {
+    color: #C9A84C;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .law-box {
+    background: #1B3A5C;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-left: 3px solid #C9A84C;
+  }
+  .law-box .law-title {
+    font-size: 0.75em;
+    font-weight: 700;
+    color: #C9A84C;
+  }
+  .law-box .law-text {
+    font-size: 0.68em;
+    color: #a0b8d0;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  #canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #0f1e2e;
+  }
+  #mainCanvas {
+    cursor: grab;
+    display: block;
+  }
+  #mainCanvas:active { cursor: grabbing; }
+  #info-bar {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(27,58,92,0.9);
+    color: #a0b8d0;
+    font-size: 0.72em;
+    padding: 5px 14px;
+    border-radius: 12px;
+    border: 1px solid #C9A84C44;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  #tooltip {
+    position: absolute;
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    color: #e8e8e8;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    pointer-events: none;
+    display: none;
+    max-width: 180px;
+    z-index: 10;
+  }
+  #view-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(27,58,92,0.85);
+    color: #C9A84C;
+    font-size: 0.8em;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    border: 1px solid #C9A84C44;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #162d47; }
+  ::-webkit-scrollbar-thumb { background: #1B3A5C; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="header">
+  <div>
+    <h1>⚙️ Newton's Laws — Mousetrap Car System Viewer</h1>
+    <p>Creationeering · Using Math &amp; Science as Tools · Interactive 3D Model</p>
+  </div>
+  <div class="logo">Genesis K-12 Academy<br>Creationeering</div>
+</div>
+<div id="main">
+  <div id="sidebar">
+    <div id="controls">
+      <h3>🎮 Controls</h3>
+      <div class="rotate-btns">
+        <button class="btn" onclick="rotateLeft()">◀ Left</button>
+        <button class="btn" onclick="rotateRight()">Right ▶</button>
+      </div>
+      <div class="rotate-btns">
+        <button class="btn" onclick="tiltUp()">▲ Up</button>
+        <button class="btn" onclick="tiltDown()">▼ Down</button>
+      </div>
+      <button class="btn" id="explodeBtn" onclick="toggleExplode()">💥 Exploded View</button>
+      <button class="btn" id="labelsBtn" onclick="toggleLabels()">🏷️ Hide Labels</button>
+      <button class="btn" onclick="resetView()">↺ Reset View</button>
+      <button class="btn" id="animBtn" onclick="toggleAnim()">▶ Animate</button>
+    </div>
+    <div class="sidebar-section">
+      <h3>📦 Components</h3>
+      <div class="component-item active" id="item-chassis" onclick="selectComp('chassis')">
+        <span class="comp-dot" style="background:#4a9eda"></span><span class="comp-name">Chassis / Frame</span>
+        <div class="comp-desc">The rigid body structure. Geometry determines strength. F=ma: less mass = more acceleration.</div>
+      </div>
+      <div class="component-item" id="item-axle" onclick="selectComp('axle')">
+        <span class="comp-dot" style="background:#e8a030"></span><span class="comp-name">Rear Axle</span>
+        <div class="comp-desc">Transfers rotational force to wheels. Torque = Force × radius (algebra).</div>
+      </div>
+      <div class="component-item" id="item-wheel" onclick="selectComp('wheel')">
+        <span class="comp-dot" style="background:#5cbe8a"></span><span class="comp-name">Drive Wheels</span>
+        <div class="comp-desc">3rd Law: Wheels push back on ground; ground pushes car forward (action-reaction).</div>
+      </div>
+      <div class="component-item" id="item-trap" onclick="selectComp('trap')">
+        <span class="comp-dot" style="background:#e05555"></span><span class="comp-name">Mousetrap Spring</span>
+        <div class="comp-desc">Stores potential energy. 1st Law: releases force to overcome inertia and start motion.</div>
+      </div>
+      <div class="component-item" id="item-lever" onclick="selectComp('lever')">
+        <span class="comp-dot" style="background:#b87fe0"></span><span class="comp-name">Lever Arm</span>
+        <div class="comp-desc">Extended arm multiplies torque. Geometry: longer arm = greater mechanical advantage.</div>
+      </div>
+    </div>
+    <div id="law-display">
+      <h3>⚖️ Newton's Laws</h3>
+      <div class="law-box">
+        <div class="law-title">1st Law — Inertia</div>
+        <div class="law-text">Object at rest stays at rest until the spring releases force.</div>
+      </div>
+      <div class="law-box">
+        <div class="law-title">2nd Law — F = ma</div>
+        <div class="law-text">Lighter chassis + more spring force = greater acceleration.</div>
+      </div>
+      <div class="law-box">
+        <div class="law-title">3rd Law — Action-Reaction</div>
+        <div class="law-text">Wheels push ground back → ground propels car forward.</div>
+      </div>
+    </div>
+  </div>
+  <div id="canvas-area">
+    <div id="view-label">ISOMETRIC VIEW</div>
+    <canvas id="mainCanvas"></canvas>
+    <div id="info-bar">🖱️ Drag to rotate · Click components · Use sidebar buttons</div>
+    <div id="tooltip"></div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+const canvasArea = document.getElementById('canvas-area');
+
+let W, H, cx, cy;
+function resize() {
+  const rect = canvasArea.getBoundingClientRect();
+  W = rect.width; H = rect.height;
+  canvas.width = W; canvas.height = H;
+  cx = W/2; cy = H/2;
+  draw();
+}
+
+let rotX = 0.45, rotY = 0.52;
+let exploded = false, showLabels = true, animating = false;
+let explodeT = 0, explodeDir = 1;
+let animT = 0;
+let selectedComp = 'chassis';
+let isDragging = false, lastMX = 0, lastMY = 0;
+let autoRotate = false;
+
+// Colors
+const NAVY = '#1B3A5C';
+const GOLD = '#C9A84C';
+const C_CHASSIS = '#4a9eda';
+const C_AXLE = '#e8a030';
+const C_WHEEL = '#5cbe8a';
+const C_TRAP = '#e05555';
+const C_LEVER = '#b87fe0';
+
+// Component descriptions for tooltip
+const compInfo = {
+  chassis: { name: 'Chassis / Frame', law: '2nd Law: F=ma — Less mass = more acceleration', color: C_CHASSIS },
+  axle:    { name: 'Rear Axle',       law: 'Algebra: Torque = Force × Arm Length',         color: C_AXLE   },
+  wheel:   { name: 'Drive Wheels',    law: '3rd Law: Action → Reaction propels car',        color: C_WHEEL  },
+  trap:    { name: 'Mousetrap Spring',law: '1st Law: Overcomes inertia to start motion',    color: C_TRAP   },
+  lever:   { name: 'Lever Arm',       law: 'Geometry: Longer arm = more torque',            color: C_LEVER  },
+};
+
+// 3D isometric projection helpers
+function project(x, y, z) {
+  const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+  // Rotate around Y axis
+  let rx = x * cosY - z * sinY;
+  let ry = y;
+  let rz = x * sinY + z * cosY;
+  // Rotate around X axis
+  let fx = rx;
+  let fy = ry * cosX - rz * sinX;
+  let fz = ry * sinX + rz * cosX;
+  const scale = Math.min(W, H) * 0.045;
+  return {
+    sx: cx + fx * scale,
+    sy: cy - fy * scale,
+    depth: fz
+  };
+}
+
+// Draw a filled polygon face with lighting
+function drawFace(pts3d, color, alpha, selected) {
+  if (pts3d.length < 3) return;
+  const proj = pts3d.map(p => project(p[0], p[1], p[2]));
+  // Calculate normal for basic lighting
+  const ax = pts3d[1][0]-pts3d[0][0], ay = pts3d[1][1]-pts3d[0][1], az = pts3d[1][2]-pts3d[0][2];
+  const bx = pts3d[2][0]-pts3d[0][0], by = pts3d[2][1]-pts3d[0][1], bz = pts3d[2][2]-pts3d[0][2];
+  const nx = ay*bz-az*by, ny = az*bx-ax*bz, nz = ax*by-ay*bx;
+  const len = Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
+  const light = [0.5,1,0.7];
+  const llen = Math.sqrt(light[0]*light[0]+light[1]*light[1]+light[2]*light[2]);
+  const dot = (nx/len)*light[0]/llen + (ny/len)*light[1]/llen + (nz/len)*light[2]/llen;
+  const bright = 0.45 + 0.55 * Math.max(0, dot);
+
+  ctx.save();
+  ctx.globalAlpha = alpha || 1;
+  ctx.beginPath();
+  ctx.moveTo(proj[0].sx, proj[0].sy);
+  for (let i=1;i<proj.length;i++) ctx.lineTo(proj[i].sx, proj[i].sy);
+  ctx.closePath();
+
+  // Parse color and apply brightness
+  let r=100,g=100,b=100;
+  if (color.startsWith('#')) {
+    const h = color.slice(1);
+    r=parseInt(h.slice(0,2),16); g=parseInt(h.slice(2,4),16); b=parseInt(h.slice(4,6),16);
+  }
+  r=Math.floor(r*bright); g=Math.floor(g*bright); b=Math.floor(b*bright);
+  ctx.fillStyle = `rgb(${r},${g},${b})`;
+  ctx.fill();
+  ctx.strokeStyle = selected ? GOLD : `rgba(${r+40},${g+40},${b+40},0.8)`;
+  ctx.lineWidth = selected ? 2.5 : 1;
+  ctx.stroke();
+  ctx.restore();
+  return proj;
+}
+
+function drawBox(x,y,z, w,h,d, color, alpha, selected) {
+  // 6 faces of a box centered at (x,y,z) with half-dims (w,h,d)
+  const x0=x-w,x1=x+w, y0=y-h,y1=y+h, z0=z-d,z1=z+d;
+  const verts = [
+    [x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0], // front
+    [x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1], // back
+  ];
+  const faces = [
+    [0,1,2,3], // front Z0
+    [4,5,6,7], // back Z1
+    [0,1,5,4], // bottom
+    [3,2,6,7], // top
+    [0,3,7,4], // left
+    [1,2,6,5], // right
+  ];
+  const projs = verts.map(v => project(v[0],v[1],v[2]));
+  // Sort faces by avg depth
+  const faceDepths = faces.map((f,i) => ({
+    i, depth: f.reduce((s,vi)=>s+projs[vi].depth,0)/f.length
+  }));
+  faceDepths.sort((a,b)=>a.depth-b.depth);
+  faceDepths.forEach(({i}) => {
+    drawFace(faces[i].map(vi=>verts[vi]), color, alpha, selected);
+  });
+}
+
+function drawCylinder(x,y,z, r,len, axis, color, alpha, selected, segments) {
+  // axis: 'x','y','z'
+  segments = segments || 16;
+  const pts = [];
+  for (let i=0;i<segments;i++) {
+    const a = (i/segments)*Math.PI*2;
+    const ca=Math.cos(a)*r, sa=Math.sin(a)*r;
+    let p0,p1;
+    if (axis==='x') { p0=[x-len,y+ca,z+sa]; p1=[x+len,y+ca,z+sa]; }
+    else if (axis==='y') { p0=[x+ca,y-len,z+sa]; p1=[x+ca,y+len,z+sa]; }
+    else { p0=[x+ca,y+sa,z-len]; p1=[x+ca,y+sa,z+len]; }
+    pts.push({p0,p1});
+  }
+  // Draw side quads
+  const allFaces = [];
+  for (let i=0;i<segments;i++) {
+    const j=(i+1)%segments;
+    const face=[pts[i].p0,pts[j].p0,pts[j].p1,pts[i].p1];
+    const mid = face.reduce((acc,p)=>[acc[0]+p[0]/4,acc[1]+p[1]/4,acc[2]+p[2]/4],[0,0,0]);
+    allFaces.push({face, depth:project(mid[0],mid[1],mid[2]).depth});
+  }
+  // Caps
+  const cap0 = pts.map(p=>p.p0);
+  const cap1 = pts.map(p=>p.p1);
+  const c0mid=cap0.reduce((a,p)=>[a[0]+p[0]/segments,a[1]+p[1]/segments,a[2]+p[2]/segments],[0,0,0]);
+  const c1mid=cap1.reduce((a,p)=>[a[0]+p[0]/segments,a[1]+p[1]/segments,a[2]+p[2]/segments],[0,0,0]);
+  allFaces.push({face:cap0,depth:project(c0mid[0],c0mid[1],c0mid[2]).depth});
+  allFaces.push({face:cap1,depth:project(c1mid[0],c1mid[1],c1mid[2]).depth});
+  allFaces.sort((a,b)=>a.depth-b.depth);
+  allFaces.forEach(({face})=>drawFace(face,color,alpha,selected));
+}
+
+// Draw a thick cylinder as box approximation (for axle line)
+function drawLine3D(x0,y0,z0,x1,y1,z1,color,lw) {
+  const a=project(x0,y0,z0), b=project(x1,y1,z1);
+  ctx.save();
+  ctx.strokeStyle=color; ctx.lineWidth=lw||2;
+  ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy); ctx.stroke();
+  ctx.restore();
+}
+
+// Draw label callout
+function drawLabel(x,y,z,text,color,offset) {
+  if(!showLabels)return;
+  const p=project(x,y,z);
+  const ox=offset?offset[0]:20, oy=offset?offset[1]:-25;
+  ctx.save();
+  ctx.strokeStyle=color; ctx.lineWidth=1.5;
+  ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(p.sx,p.sy); ctx.lineTo(p.sx+ox,p.sy+oy); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle=NAVY;
+  const tw=ctx.measureText(text).width+12;
+  const lx=p.sx+ox-(ox<0?tw:0);
+  ctx.fillRect(lx,p.sy+oy-11,tw,18);
+  ctx.strokeStyle=color; ctx.lineWidth=1.5;
+  ctx.strokeRect(lx,p.sy+oy-11,tw,18);
+  ctx.fillStyle=color; ctx.font='bold 11px Segoe UI,Arial';
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillText(text,lx+6,p.sy+oy-2);
+  ctx.restore();
+}
+
+function drawForceArrow(x,y,z,dx,dy,dz,color,label) {
+  if(!animating)return;
+  const t=Math.sin(animT)*0.5+0.5;
+  const a=project(x,y,z);
+  const ex=x+dx*t, ey=y+dy*t, ez=z+dz*t;
+  const b=project(ex,ey,ez);
+  ctx.save();
+  ctx.strokeStyle=color; ctx.lineWidth=2.5;
+  ctx.globalAlpha=0.7+0.3*t;
+  ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy); ctx.stroke();
+  // arrowhead
+  const ang=Math.atan2(b.sy-a.sy,b.sx-a.sx);
+  ctx.fillStyle=color;
+  ctx.beginPath();
+  ctx.moveTo(b.sx,b.sy);
+  ctx.lineTo(b.sx-12*Math.cos(ang-0.3),b.sy-12*Math.sin(ang-0.3));
+  ctx.lineTo(b.sx-12*Math.cos(ang+0.3),b.sy-12*Math.sin(ang+0.3));
+  ctx.closePath(); ctx.fill();
+  if(label) {
+    ctx.globalAlpha=1; ctx.fillStyle=color; ctx.font='bold 10px Segoe UI,Arial';
+    ctx.textAlign='center'; ctx.fillText(label,b.sx,b.sy-14);
+  }
+  ctx.restore();
+}
+
+function getExplodeOffset(comp) {
+  if(!exploded) return [0,0,0];
+  const t = explodeT;
+  const offsets = {
+    chassis: [0,0,0],
+    axle:    [0,-2.5*t,0],
+    wheel:   [3*t,-1.5*t,0],
+    trap:    [0,2.5*t,0],
+    lever:   [-3*t,2*t,0],
+  };
+  return offsets[comp]||[0,0,0];
+}
+
+function getAnimWheelAngle() {
+  if(!animating) return 0;
+  return animT*3;
+}
+
+function drawScene() {
+  ctx.clearRect(0,0,W,H);
+  // Background grid
+  drawGrid();
+
+  // Ground shadow ellipse
+  ctx.save();
+  ctx.globalAlpha=0.18;
+  const gp=project(0,-3.5,0);
+  ctx.beginPath();
+  ctx.ellipse(gp.sx,gp.sy,Math.min(W,H)*0.22,Math.min(W,H)*0.05,0,0,Math.PI*2);
+  ctx.fillStyle='#000'; ctx.fill();
+  ctx.restore();
+
+  const sel = selectedComp;
+
+  // === CHASSIS ===
+  const co = getExplodeOffset('chassis');
+  const bx=0+co[0], by=-0.5+co[1], bz=0+co[2];
+  // Main body (flat board)
+  drawBox(bx,by,bz, 5,0.3,1.5, C_CHASSIS, 1, sel==='chassis');
+  // Front cross member
+  drawBox(bx+3.5,by,bz, 0.3,0.3,1.5, C_CHASSIS,1,sel==='chassis');
+  // Rear cross member (near axle)
+  drawBox(bx-3.5,by,bz, 0.3,0.3,1.5, C_CHASSIS,1,sel==='chassis');
+
+  // === MOUSETRAP SPRING ===
+  const to=getExplodeOffset('trap');
+  const tx=0.5+to[0], ty=-0.1+to[1], tz=0+to[2];
+  // Trap base plate
+  drawBox(tx,ty,tz, 1.5,0.22,1.2, C_TRAP,1,sel==='trap');
+  // Spring coil representation (small box)
+  drawBox(tx-0.5,ty+0.45,tz, 0.8,0.22,0.3, C_TRAP,0.9,sel==='trap');
+  drawBox(tx+0.5,ty+0.45,tz, 0.8,0.22,0.3, C_TRAP,0.9,sel==='trap');
+  drawBox(tx,ty+0.7,tz, 0.3,0.25,0.25, C_TRAP,1,sel==='trap');
+
+  // === LEVER ARM ===
+  const lo=getExplodeOffset('lever');
+  const leverBaseY = -0.05;
+  const leverAng = animating ? -Math.PI/3 + Math.sin(animT)*Math.PI/3 : -Math.PI/5;
+  const lx=0+lo[0], lz=0+lo[2];
+  // Draw lever as thin box
+  const llen=4.5;
+  const la=leverAng;
+  // Lever as rotated set of segments
+  for(let i=0;i<8;i++) {
+    const t0=i/8*llen, t1=(i+1)/8*llen;
+    const lx0=lx+tx+Math.cos(la)*t0, ly0=leverBaseY+lo[1]+Math.sin(la)*t0;
+    const lx1=lx+tx+Math.cos(la)*t1, ly1=leverBaseY+lo[1]+Math.sin(la)*t1;
+    drawBox((lx0+lx1)/2,(ly0+ly1)/2,lz, Math.abs(lx1-lx0)/2+0.05,0.12,0.12, C_LEVER,1,sel==='lever');
+  }
+  // Lever pivot knob
+  drawCylinder(lx+tx,leverBaseY+lo[1],lz, 0.2,0.22,'z',C_LEVER,1,sel==='lever',10);
+
+  // === AXLE ===
+  const ao=getExplodeOffset('axle');
+  const axX=-3.5+ao[0], axY=-2.0+ao[1], axZ=0+ao[2];
+  // Rear axle rod
+  drawCylinder(axX,axY,axZ, 0.18,2.1,'z', C_AXLE,1,sel==='axle',12);
+  // Front axle rod (fixed, non-drive)
+  const faxX=3.5+ao[0], faxY=axY, faxZ=axZ;
+  drawCylinder(faxX,faxY,faxZ, 0.13,2.1,'z', C_AXLE,0.7,sel==='axle',10);
+
+  // === WHEELS ===
+  const wo=getExplodeOffset('wheel');
+  // Draw 4 wheels
+  const wheelPositions = [
+    {x:-3.5+wo[0], y:-2.0+wo[1], z:2.1+wo[2]*1.5, drive:true},
+    {x:-3.5+wo[0], y:-2.0+wo[1], z:-2.1-wo[2]*1.5, drive:true},
+    {x:3.5+wo[0],  y:-2.0+wo[1], z:2.1+wo[2]*1.5, drive:false},
+    {x:3.5+wo[0],  y:-2.0+wo[1], z:-2.1-wo[2]*1.5, drive:false},
+  ];
+  const wheelColor = sel==='wheel';
+  wheelPositions.forEach((wp)=>{
+    // Outer tire
+    drawCylinder(wp.x,wp.y,wp.z, 1.1,0.25,'z', wp.drive?C_WHEEL:'#5cbe8a99',1,wheelColor,16);
+    // Hub
+    drawCylinder(wp.x,wp.y,wp.z, 0.55,0.32,'z','#e8e8e8',1,wheelColor,12);
+    // Center hole
+    drawCylinder(wp.x,wp.y,wp.z, 0.22,0.35,'z',NAVY,1,false,10);
+    // Spokes
+    for(let s=0;s<4;s++){
+      const sa=getAnimWheelAngle()+(s/4)*Math.PI*2;
+      const sx=wp.x+Math.cos(sa)*0.7;
+      const sy=wp.y+Math.sin(sa)*0.7;
+      drawBox((wp.x+sx)/2,(wp.y+sy)/2,wp.z, Math.abs(sx-wp.x)/2+0.03,0.06,0.05,'#ccc',0.85,false);
+    }
+  });
+
+  // === LABELS ===
+  drawLabel(bx,by+1,bz,'Chassis / Frame',C_CHASSIS,[25,-20]);
+  drawLabel(lx+tx+Math.cos(la)*3.5,leverBaseY+lo[1]+Math.sin(la)*3.5,lz,'Lever Arm',C_LEVER,[-35,-30]);
+  drawLabel(tx,ty+1.2,tz,'Spring',C_TRAP,[20,15]);
+  drawLabel(axX,axY,axZ+2.5,'Rear Axle',C_AXLE,[-30,-20]);
+  drawLabel(-3.5+wo[0],-2+wo[1],2.8+wo[2],'Drive Wheel',C_WHEEL,[25,10]);
+
+  // === FORCE ARROWS (animation) ===
+  drawForceArrow(-3.5,-2,0, -3,0,0, '#ff6644','F = ma');
+  drawForceArrow(-3.5,-3.5,0, 0,-1.5,0, '#44ddff','Reaction');
+  drawForceArrow(0.5,-0.1,0, 0,0.8,0, '#ffcc44','Spring F');
+
+  // === STRING from lever to axle ===
+  if(showLabels || animating) {
+    const leverTipX=lx+tx+Math.cos(la)*llen;
+    const leverTipY=leverBaseY+lo[1]+Math.sin(la)*llen;
+    const strA=project(leverTipX,leverTipY,lz);
+    const strB=project(axX,axY,axZ);
+    ctx.save();
+    ctx.strokeStyle=animating?`rgba(255,200,80,${0.5+0.5*Math.abs(Math.sin(animT)})}`:'rgba(255,200,80,0.5)';
+    ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(strA.sx,strA.sy); ctx.lineTo(strB.sx,strB.sy); ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function drawGrid() {
+  ctx.save();
+  ctx.globalAlpha = 0.1;
+  const gSize = 15, steps = 6;
+  for (let i = -steps; i <= steps; i++) {
+    for (let j = -steps; j <= steps; j++) {
+      const p1 = project(i*gSize/steps*1.2, -3.8, j*gSize/steps*1.2);
+      const p2 = project((i+1)*gSize/steps*1.2, -3.8, j*gSize/steps*1.2);
+      const p3 = project(i*gSize/steps*1.2, -3.8, (j+1)*gSize/steps*1.2);
+      ctx.strokeStyle = '#4a9eda';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(p1.sx,p1.sy); ctx.lineTo(p2.sx,p2.sy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(p1.sx,p1.sy); ctx.lineTo(p3.sx,p3.sy); ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+let hitZones = [];
+function buildHitZones() { hitZones = []; }
+
+function draw() {
+  drawScene();
+}
+
+// Animation loop
+let rafId = null;
+function animate() {
+  animT += 0.04;
+  if(exploded && explodeT < 1) explodeT = Math.min(1, explodeT+0.04);
+  if(!exploded && explodeT > 0) explodeT = Math.max(0, explodeT-0.04);
+  draw();
+  rafId = requestAnimationFrame(animate);
+}
+
+function startLoop() {
+  if(!rafId) rafId=requestAnimationFrame(animate);
+}
+function stopLoop() {
+  if(rafId) { cancelAnimationFrame(rafId); rafId=null; }
+}
+
+startLoop();
+
+// Controls
+function rotateLeft()  { rotY -= 0.2; draw(); }
+function rotateRight() { rotY += 0.2; draw(); }
+function tiltUp()   { rotX = Math.max(-1.2, rotX-0.15); draw(); }
+function tiltDown() { rotX = Math.min(1.2,  rotX+0.15); draw(); }
+function resetView() { rotX=0.45; rotY=0.52; draw(); }
+function toggleLabels() {
+  showLabels=!showLabels;
+  document.getElementById('labelsBtn').textContent = showLabels ? '🏷️ Hide Labels' : '🏷️ Show Labels';
+  draw();
+}
+function toggleExplode() {
+  exploded=!exploded;
+  const btn=document.getElementById('explodeBtn');
+  btn.textContent = exploded ? '🔧 Normal View' : '💥 Exploded View';
+  btn.classList.toggle('active',exploded);
+  document.getElementById('view-label').textContent = exploded ? 'EXPLODED VIEW' : 'ISOMETRIC VIEW';
+}
+function toggleAnim() {
+  animating=!animating;
+  const btn=document.getElementById('animBtn');
+  btn.textContent = animating ? '⏹ Stop' : '▶ Animate';
+  btn.classList.toggle('active',animating);
+}
+function selectComp(name) {
+  selectedComp=name;
+  document.querySelectorAll('.component-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById('item-'+name)?.classList.add('active');
+  const info=compInfo[name];
+  if(info) {
+    tooltip.style.display='block';
+    tooltip.style.left='50%';
+    tooltip.style.top='60px';
+    tooltip.style.transform='translateX(-50%)';
+    tooltip.innerHTML=`<b style="color:${info.color}">${info.name}</b><br><span style="color:#aac">${info.law}</span>`;
+    setTimeout(()=>{tooltip.style.display='none';},3500);
+  }
+  draw();
+}
+
+// Mouse/touch interaction
+canvas.addEventListener('mousedown', e=>{
+  isDragging=true; lastMX=e.clientX; lastMY=e.clientY;
+  canvas.style.cursor='grabbing';
+});
+canvas.addEventListener('mousemove', e=>{
+  if(!isDragging) return;
+  const dx=e.clientX-lastMX, dy=e.clientY-lastMY;
+  rotY+=dx*0.008; rotX+=dy*0.008;
+  rotX=Math.max(-1.2,Math.min(1.2,rotX));
+  lastMX=e.clientX; lastMY=e.clientY;
+});
+window.addEventListener('mouseup', ()=>{ isDragging=false; canvas.style.cursor='grab'; });
+
+// Touch
+let lastTouchX=0,lastTouchY=0,lastPinchDist=0;
+canvas.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  if(e.touches.length===1){lastTouchX=e.touches[0].clientX;lastTouchY=e.touches[0].clientY;}
+  if(e.touches.length===2){
+    lastPinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+  }
+},{passive:false});
+canvas.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length===1){
+    const dx=e.touches[0].clientX-lastTouchX, dy=e.touches[0].clientY-lastTouchY;
+    rotY+=dx*0.008; rotX+=dy*0.008;
+    rotX=Math.max(-1.2,Math.min(1.2,rotX));
+    lastTouchX=e.touches[0].clientX; lastTouchY=e.touches[0].clientY;
+  }
+},{passive:false});
+
+// Click component detection (approximate regions)
+canvas.addEventListener('click', e=>{
+  const rect=canvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  // Check projected positions of component centers
+  const checks = [
+    {name:'chassis', pts:[[0,-0.5,0]]},
+    {name:'trap',    pts:[[0.5,-0.1,0]]},
+    {name:'lever',   pts:[[-1,1,0]]},
+    {name:'axle',    pts:[[-3.5,-2,0]]},
+    {name:'wheel',   pts:[[-3.5,-2,2.1],[-3.5,-2,-2.1]]},
+  ];
+  let best=null, bestD=Infinity;
+  checks.forEach(c=>{
+    c.pts.forEach(p=>{
+      const pp=project(p[0],p[1],p[2]);
+      const d=Math.hypot(pp.sx-mx,pp.sy-my);
+      if(d<bestD){bestD=d;best=c.name;}
+    });
+  });
+  if(bestD<70&&best) selectComp(best);
+});
+
+window.addEventListener('resize', resize);
+resize();
+</script>
+</body>
+</html>

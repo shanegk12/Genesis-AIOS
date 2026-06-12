@@ -1,0 +1,296 @@
+[
+  {
+    "id": "m042t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Frame, Axle, and Wheel Integration</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, you finalized your Assembly Blueprints and reviewed safety protocols — carefully planning each component and preparing your workspace for construction. Now it's time to build. This lesson moves you into the Creationeering™ phase of Performance, where you focus on how your mousetrap car actually functions.</p><p>Today is all about the critical integration of your car's frame, axles, and wheels. These three components work together as a single system to transfer the energy from your mousetrap into forward motion. Understanding how to integrate them effectively is the key to building a car that rolls straight, travels far, and performs well under the real forces of competition.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain the function of the frame, axles, and wheels as an integrated system in a mousetrap car.</li><li>Identify key design choices for frames, axles, and wheels that affect car performance.</li><li>Apply principles of friction and alignment to optimize your car's motion.</li><li>Connect macro-level car performance to micro-level material interactions through the concept of Multiscale Modeling.</li><li>Design and build your frame, axle, and wheel system with a focus on efficient energy transfer and wise use of materials.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Frame",
+          "definition": "The main structural body of the car, providing support and rigidity for all other components."
+        },
+        {
+          "term": "Axle",
+          "definition": "A rod or shaft around which a wheel or pair of wheels rotates, transferring motion."
+        },
+        {
+          "term": "Wheel",
+          "definition": "A circular component designed to rotate on an axle, enabling movement."
+        },
+        {
+          "term": "Integration",
+          "definition": "The process of combining different parts into a complete and functional whole."
+        },
+        {
+          "term": "Performance",
+          "definition": "How effectively and efficiently a system — like your mousetrap car — achieves its intended purpose."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that resists motion when two surfaces rub against each other."
+        },
+        {
+          "term": "Torque",
+          "definition": "A twisting force that causes rotation, crucial for turning the wheels."
+        },
+        {
+          "term": "Rigidity",
+          "definition": "The ability of a structure to resist bending or deformation under load."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed for Motion</h2><p>In the beginning, God created the heavens and the earth (Genesis 1:1). From the vast expanse of the cosmos to the microscopic machinery inside a living cell, every part of creation works in harmony with the others. Nothing is isolated. Everything is integrated — designed to fulfill its purpose within a larger system.</p><p>That same principle applies to your mousetrap car. The frame, axles, and wheels are not three separate parts you bolt together and hope for the best. They are one system. When they are aligned, balanced, and well-matched, the stored energy in your mousetrap spring flows efficiently into forward motion. When even one component is off, the whole system suffers. As you design and build this week, you are practicing the same kind of intentional, purposeful integration that we see throughout God's creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:1</strong> — \"In the beginning, God created the heavens and the earth.\" Creation was not random — it was a purposeful, integrated design. Your engineering challenge this week reflects that same call to build with intention and care.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Foundation: Your Car's Frame</h2><p>The frame is the backbone of your mousetrap car. Think of it like the chassis of a full-size automobile, or the skeleton of an animal — it holds everything together and gives a stable platform for your axles, wheels, and mousetrap mechanism. A well-designed frame is rigid, lightweight, and balanced.</p><p>Your frame needs to be strong enough to handle the sudden snap of the mousetrap spring and the forces of motion, without bending or flexing. Here is why that matters: if your frame flexes during a run, your axle alignment shifts. Misaligned axles create uneven friction on the wheels, and uneven friction wastes the energy you worked hard to store. That energy should be going into distance — not heat and wobble.</p><h3>Choosing Your Frame Material</h3><p>Common frame materials for mousetrap cars include balsa wood, cardboard, and lightweight plastics. Each material involves a trade-off between weight and rigidity:</p><ul><li><strong>Balsa wood</strong> — very light and easy to cut, but can snap under heavy lateral stress.</li><li><strong>Cardboard</strong> — widely available and easy to shape, but less rigid; layering or folding improves its stiffness.</li><li><strong>Lightweight plastic or foam board</strong> — moderate rigidity with low mass, good for compact frame designs.</li></ul><p>A lighter frame means less total mass to accelerate — which, thanks to Newton's second law, means more speed for the same amount of force. But go too light, and your frame may flex or break. The goal is the right balance.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of three mousetrap car frame designs — balsa wood, folded cardboard, and foam board — showing how each material affects frame shape, rigidity, and weight."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Axle: Your Car's Power Transmitter</h2><p>If the frame is the skeleton, the axle is the spine of motion. The axle is the rod or shaft that connects to your wheels and transfers the rotational force — the torque — generated by the mousetrap spring into the rolling movement of the car.</p><p>Axle design has a huge impact on performance. Two things matter most: straightness and fit.</p><h3>Straightness</h3><p>A bent axle causes your wheel to wobble as it spins. That wobble creates vibration, increases friction at the contact points, and sends your car veering off course. Even a slight bend — one you might not notice just by looking — can cost you significant distance. Before you attach your axles, roll them on a flat surface to check for any curves or bends.</p><h3>Fit and Friction at the Axle Bearing</h3><p>Where the axle passes through your frame is called the bearing point. This is one of the highest-friction spots on your entire car. If the axle fits too tightly in the hole, friction will slow your wheels. If it fits too loosely, the axle will rattle and waste energy through vibration. A smooth, snug fit — sometimes aided by a small amount of lubricant like petroleum jelly — can make a noticeable difference in how far your car travels.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Skipping the axle roll test. Always roll each axle on a flat table before attaching it to your frame. A bent axle is one of the most common — and most preventable — causes of a car that veers sideways instead of going straight.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Wheels: Where Energy Meets the Ground</h2><p>Your wheels are the final link in the energy chain — from spring, to string, to axle, to wheel, to floor. The wheel's job is to convert rotational motion into linear (straight-line) motion. The diameter, mass, and traction of your wheels all affect how well they do that job.</p><h3>Wheel Diameter</h3><p>Larger wheels travel more distance per rotation than smaller wheels. This is similar to how a big gear on a bicycle covers more ground per pedal stroke. However, larger wheels are also heavier and require more torque to start spinning. For a mousetrap car, there is often an advantage to using large rear wheels (for distance per rotation) paired with smaller front wheels (for light steering weight).</p><h3>Wheel Mass and Balance</h3><p>An unbalanced wheel — one that is heavier on one side — wobbles as it spins, wasting energy and pulling your car off course. If you are cutting your own wheels, check that they are as circular and evenly weighted as possible. Even small irregularities matter at high speeds.</p><h3>Traction vs. Friction</h3><p>Here is a distinction that trips up many builders. You want <em>traction</em> — the friction between your wheel and the floor that allows the wheel to push the car forward without slipping. But you want to <em>minimize</em> the friction in your axle bearings and any other sliding contact points. Too little traction and your rear wheels spin in place. Too much axle friction and your car barely moves. Getting this balance right is one of the core engineering challenges of this build.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing a mousetrap car from above and the side, labeling the frame, front and rear axles, wheel diameter, bearing points, and the string connection from the mousetrap arm to the rear axle."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Integration: The Whole Is Greater Than the Sum of Its Parts</h2><p>Here is the key insight of this lesson: the frame, axle, and wheel are not three separate problems. They are one system. A great frame with a bent axle still fails. Perfect wheels on a misaligned axle still wobble. This is what engineers call systems thinking — evaluating how components interact, not just how each one performs in isolation.</p><p>When you assemble your car, check these three integration points carefully:</p><ul><li><strong>Axle parallelism</strong> — Are your front and rear axles parallel to each other? If they angle even slightly in different directions, your car will turn instead of going straight.</li><li><strong>Wheel perpendicularity</strong> — Are your wheels perpendicular (at a 90-degree angle) to the axle? A wheel that is mounted at a slight angle will wobble and drag.</li><li><strong>Frame symmetry</strong> — Is your frame balanced left-to-right? An off-center frame shifts weight unevenly across your axles and pulls the car to one side.</li></ul><p>Taking a few extra minutes to verify these three things before your first test run can save you hours of troubleshooting later. Good engineers build in checks. They do not just hope it works — they verify.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Big Picture and Small Details</h2><p>Engineers use a concept called <strong>Multiscale Modeling</strong> to connect what they can see and measure at the large scale (the macro level) with what is happening at the small scale (the micro level). For your mousetrap car, the macro level is the overall performance — how far it travels, whether it goes straight, how fast it accelerates. The micro level is what is happening at the material surfaces: the tiny peaks and valleys of your axle rubbing against your frame, the microscopic texture of your wheel surface gripping the floor.</p><p>When your car does not perform the way you expected, asking \"what is happening at the micro level?\" is a powerful troubleshooting tool. Is the axle rough where it contacts the frame? Is the wheel surface uneven? Small changes at the material level can produce large changes in overall performance. God designed the physical world with this kind of layered complexity — and learning to think across those scales is part of becoming a skilled engineer.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Build Tip:</strong> Before gluing anything permanently, do a dry-fit assembly — put all your components together without adhesive and roll the car by hand across the floor. Watch for wobble, veering, or stiff axles. Fix alignment issues now, while adjustments are still easy to make.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Building</h2><p>As you gather your materials and begin construction, remember that stewardship applies here too. Using just what you need, cutting carefully to avoid waste, and selecting materials thoughtfully are all ways of honoring the resources God has provided. A well-planned build wastes less material and produces a better result. That is not a coincidence — it is the nature of thoughtful design.</p><p>Your mousetrap car is a small project, but the habits you build here — careful measurement, intentional material choices, checking your work before committing to it — are the same habits that professional engineers use on projects that span years and millions of dollars.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m042a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the primary purpose of the frame in a mousetrap car?</strong><br>The frame provides structural support and rigidity, holding all other components in proper alignment so the axles, wheels, and mousetrap mechanism can function as a unified system.</p><p><strong>2. Why does axle straightness matter so much for performance?</strong><br>A bent axle causes wheel wobble, which increases friction and throws the car off course. Even a small bend wastes energy and reduces the distance the car travels.</p><p><strong>3. What is the difference between traction and unwanted friction in a mousetrap car?</strong><br>Traction is the beneficial friction between the wheel and the floor that converts rotation into forward movement. Unwanted friction occurs at the axle bearing points and other sliding surfaces — it resists motion and wastes energy.</p><p><strong>4. How does the concept of Multiscale Modeling apply to troubleshooting your car?</strong><br>Multiscale Modeling means looking at both the large-scale performance (how far the car travels, whether it goes straight) and the small-scale material interactions (surface roughness of the axle, texture of the wheel). Problems visible at the macro level often have their root cause at the micro level.</p><p><strong>5. Name the three integration checks you should perform before your first test run.</strong><br>Axle parallelism (front and rear axles are parallel), wheel perpendicularity (wheels are at 90 degrees to the axle), and frame symmetry (the frame is balanced left-to-right).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

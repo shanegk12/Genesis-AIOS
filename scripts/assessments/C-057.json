@@ -57,6 +57,90 @@
       },
       "answer": "B",
       "explanation": "The lesson states that Configuration Management fits the Assembly phase because 'once parts start coming together, things can get messy fast,' and a small change to one piece can affect many others, requiring careful tracking."
+    },
+    {
+      "type": "comprehension",
+      "question": "In Configuration Management, what is a 'Configuration Item' (CI)?",
+      "options": {
+        "A": "Any component, document, or part of a system that needs to be managed and tracked.",
+        "B": "Only the final assembled product of a project.",
+        "C": "A temporary note or idea that is not officially part of the design.",
+        "D": "The person responsible for approving all changes."
+      },
+      "answer": "A",
+      "explanation": "A Configuration Item is any part of a system, including hardware, software, or documents, that requires careful management and tracking."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the main purpose of 'Version Control' in Configuration Management?",
+      "options": {
+        "A": "To track and manage changes to files and documents over time, allowing for comparison and reversion.",
+        "B": "To formally approve all proposed changes to a project's baseline.",
+        "C": "To check if the physical product matches the documented design.",
+        "D": "To define the initial stable state of a project."
+      },
+      "answer": "A",
+      "explanation": "Version Control specifically tracks modifications to items over time, enabling users to see changes and revert to older states if needed."
+    },
+    {
+      "type": "comprehension",
+      "question": "When we talk about 'traceability' in Creationeering projects, what does it allow us to do?",
+      "options": {
+        "A": "To quickly build new parts without documentation.",
+        "B": "To track the history, application, or location of an item or activity.",
+        "C": "To decide the best color for a robot's exterior.",
+        "D": "To ignore past mistakes and only focus on the future."
+      },
+      "answer": "B",
+      "explanation": "Traceability provides the ability to follow the entire history of a component or action, understanding who did what, when, and why."
+    },
+    {
+      "type": "application",
+      "question": "Your Creationeering team is designing a new water filter. Which of these would most likely be designated as a Configuration Item (CI) for your project?",
+      "options": {
+        "A": "The specific type of filter membrane material used in the design.",
+        "B": "The brand of pencils used for sketching ideas.",
+        "C": "The song playing in the background during a design meeting.",
+        "D": "The empty snack wrapper from lunch."
+      },
+      "answer": "A",
+      "explanation": "The filter membrane is a critical component of the design that needs to be managed and tracked, making it a Configuration Item."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeering team has developed several different software codes for controlling their robot's arm. They want to experiment with a new code, but also need to be able to quickly switch back to any of the previous working codes if the new one doesn't perform well. Which Configuration Management practice would best help them do this?",
+      "options": {
+        "A": "Establishing a new baseline.",
+        "B": "Performing a Configuration Audit.",
+        "C": "Using Version Control.",
+        "D": "Initiating a Change Control board."
+      },
+      "answer": "C",
+      "explanation": "Version Control allows teams to track different versions of code, compare them, and easily revert to a previous working version."
+    },
+    {
+      "type": "application",
+      "question": "After completing the assembly of their solar-powered car, the Creationeering team wants to verify that every part installed matches the approved design documents and parts list. What specific Configuration Management activity should they perform?",
+      "options": {
+        "A": "Creating a new baseline for the finished car.",
+        "B": "Conducting a Configuration Audit.",
+        "C": "Implementing a Change Control process.",
+        "D": "Updating their Version Control system."
+      },
+      "answer": "B",
+      "explanation": "A Configuration Audit is a formal check to ensure that the physical product matches its documented configuration."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does the comprehensive practice of Configuration Management, including tracking changes and maintaining order in our projects, connect to the biblical principle of stewardship?",
+      "options": {
+        "A": "It shows that we should avoid making any changes to our creations once they are started.",
+        "B": "It demonstrates responsible and diligent management of the resources, designs, and work entrusted to us.",
+        "C": "It suggests that God's creation was chaotic and required constant, unplanned adjustments.",
+        "D": "It encourages us to keep all project information secret from others."
+      },
+      "answer": "B",
+      "explanation": "Configuration Management reflects stewardship by promoting careful, orderly, and accountable management of all aspects of a project, honoring the gifts and responsibilities given to us."
     }
   ]
 }

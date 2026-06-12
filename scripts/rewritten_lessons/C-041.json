@@ -1,0 +1,397 @@
+[
+  {
+    "id": "c041t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Timeline Development and Milestones</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In the last lesson, you explored Logistics — the art of planning, organizing, and executing the movement of materials, people, and information so that your project actually comes together. Think of a master conductor making sure every instrument is in the right place at exactly the right moment. That is logistics in action.</p>\n<p>Today you are going even deeper into that phase by learning about <strong>Timeline Development and Milestones</strong>. A timeline is your project's roadmap — it shows what needs to happen, in what order, and by when. Milestones are the major checkpoints along that road, the moments where you can look back and say, \"We made it this far.\" Together, they bring order to your creative process. Just as God shaped creation step by step with intention and purpose, you can bring that same sense of order to your own projects.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p><ul><li>Define what a project timeline is and explain why it matters in Creationeering.</li><li>Identify key milestones within a project and understand how they track real progress.</li><li>Explain how Multiscale Modeling helps engineers understand delays and accelerations in a project.</li><li>Apply the Objective, Constraint, Variable (OCV) method to optimize a project timeline.</li><li>Develop a preliminary timeline for a simple project, showing good stewardship of time and resources.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Timeline",
+          "definition": "A visual representation of a project's schedule, showing tasks, durations, and the order in which things need to happen."
+        },
+        {
+          "term": "Milestone",
+          "definition": "A significant point or event in a project schedule that marks a major accomplishment or decision point."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed planning, organization, and implementation of a complex operation — getting the right things to the right place at the right time."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An approach that connects observations at a large scale to their underlying causes at a smaller scale, helping engineers understand why delays or speed-ups happen."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome under a given set of constraints."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or desired outcome of a project or task."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation that must be worked around in a project, such as a deadline, budget cap, or limited materials."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor in your project that can be adjusted — like team size, task order, or working hours — to change your outcome."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Timelines Matter</h2>\n<p>Imagine you are about to bake a three-tier birthday cake for a friend's party that starts at 6 PM. You have the recipe, the ingredients, and the skills. But if you start baking at 5:45 PM, no amount of talent will save you. The cake will not be ready. That is exactly what happens on engineering projects without a timeline — even brilliant ideas can fall apart simply because no one mapped out <em>when</em> each step needed to happen.</p>\n<p>A well-built timeline gives your team a shared view of the whole journey. It shows which tasks depend on other tasks being finished first, where the critical deadlines sit, and how much breathing room you actually have. Builders use construction schedules to raise skyscrapers floor by floor. Film crews use shot schedules to make sure every scene is captured before the budget runs out. As a Creationeer, your timeline is just as essential as your design drawings.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample Gantt chart showing project tasks laid out across weeks, with colored bars indicating task duration and overlap."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb01",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 21:5</strong> — <em>\"The plans of the diligent lead to profit as surely as haste leads to poverty.\"</em> A timeline is one of the most practical ways to be diligent. When you take time to plan carefully, you honor the gift of time that God has given you — and you set your team up for success instead of scrambling at the last minute.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Are Milestones?</h2>\n<p>A milestone is not just another task on your list. It is a moment of real significance — a point where something major has been completed or decided. Think of milestones like the base camps a mountain climber stops at on the way to the summit. Each one says, \"We made it here. Now let's prepare for the next leg.\"</p>\n<p>On a Creationeering project, milestones might look like:</p><ul><li>Completing your initial design sketches</li><li>Finishing the first working prototype</li><li>Passing a safety review or getting approval from a stakeholder</li><li>Delivering the final product to a client or community</li></ul>\n<p>Milestones do two powerful things. First, they give your team something to aim for — a clear, visible target. Second, they give you a moment to pause, evaluate, and celebrate progress before pushing forward. Never underestimate how motivating it is to look back and see how far you have come.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb02",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Name your milestones clearly.</strong> Instead of writing \"Done with prototype,\" try \"Prototype tested and approved by mentor.\" A specific milestone is much easier to check off — and much harder to fudge. Vague milestones lead to vague progress.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture and the Details: Multiscale Modeling</h2>\n<p>Here is a concept that engineers use in materials science and physics, but it applies perfectly to project planning: <strong>Multiscale Modeling</strong>. At its core, multiscale modeling means understanding that what you see at a big scale is driven by what is happening at a much smaller scale.</p>\n<p>In materials science, an engineer might look at why a bridge beam is cracking (large scale) and trace it all the way down to how individual metal atoms are arranged under stress (small scale). The crack you see is just the symptom — the real cause is microscopic.</p>\n<p>Now apply that same thinking to your timeline. Your project might be running two weeks behind schedule (large scale). But <em>why</em>? Maybe one team member did not receive a critical supply shipment (medium scale). And why did that happen? Because the supplier was not contacted early enough in the logistics phase (small scale). Multiscale thinking helps you trace problems back to their root causes — so you can fix the right thing instead of just reacting to what you see on the surface.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb03",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Multiscale Thinking in Practice:</strong> When your project hits a delay, ask \"Why?\" at least three times, going deeper with each answer. This technique — sometimes called the \"5 Whys\" — is used by engineers at NASA, Toyota, and hospitals to find the root cause of problems instead of just patching the surface symptom.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Objective, Constraint, Variable</h2>\n<p>Every engineering decision — including timeline decisions — can be organized using the <strong>OCV method</strong>: Objective, Constraint, Variable.</p>\n<ul>\n<li><strong>Objective:</strong> What are you trying to achieve? (Example: \"Complete the prototype by Friday.\")</li>\n<li><strong>Constraint:</strong> What limits do you have to work within? (Example: \"We only have three team members and a $50 budget.\")</li>\n<li><strong>Variable:</strong> What can you adjust to meet your objective within your constraints? (Example: \"We can extend daily working hours or split tasks differently among team members.\")</li>\n</ul>\n<p>When you apply OCV to your timeline, you stop guessing and start optimizing. Instead of just hoping everything will work out, you are making deliberate, informed choices about how to use your most valuable resources — time, people, and materials.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV triangle: Objective at the top, Constraint and Variable at the base corners, with arrows showing how each element influences the others."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb04",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Many students write down objectives and constraints but forget to identify variables. Without variables, you have no levers to pull when something goes wrong. Always ask yourself: \"What in this plan can I actually change?\" That is where your power to optimize lives.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building Your First Timeline</h2>\n<p>Ready to put it all together? Here is a straightforward process for building a project timeline from scratch.</p>\n<h3>Step 1 — List All Tasks</h3>\n<p>Start by writing down every task your project requires, no matter how small. Do not sort them yet — just get them all on paper. This is sometimes called a <em>work breakdown</em>.</p>\n<h3>Step 2 — Identify Dependencies</h3>\n<p>Some tasks cannot start until another one is finished. Ordering a custom part cannot happen before you have finalized your design. Mark these relationships clearly — they will shape the structure of your timeline.</p>\n<h3>Step 3 — Estimate Time for Each Task</h3>\n<p>Be honest here. Engineers often underestimate how long things take. Build in a small buffer — called <em>float time</em> — for tasks that carry risk or uncertainty.</p>\n<h3>Step 4 — Place Tasks on a Calendar</h3>\n<p>Now lay your tasks out in order, starting from today and working toward your final deadline. Use a simple table, a sticky-note wall, or a Gantt chart. Seeing everything mapped visually makes problems obvious before they happen.</p>\n<h3>Step 5 — Mark Your Milestones</h3>\n<p>Once your tasks are placed, identify the moments of major completion and mark them clearly. These become your team's rallying points — the goals everyone is working toward together.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb05",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Use the \"backward planning\" trick.</strong> Start at your final deadline and work backward to today. Assign your last milestone first, then the one before it, and so on. This approach — used by NASA mission planners and event coordinators worldwide — makes it crystal clear whether your timeline is actually achievable before you commit to it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Time as Stewardship</h2>\n<p>There is a deeper reason why timeline development matters for a Creationeer. Time is not just a resource to manage — it is a gift. Every hour you spend on a project is an opportunity to use your God-given creativity and skill to make something meaningful.</p>\n<p>When you build a thoughtful timeline, you are practicing <strong>stewardship</strong> — the responsible management of what has been entrusted to you. You are saying, \"I take this project seriously. I take my team seriously. And I take the people this project will serve seriously enough to plan well for them.\"</p>\n<p>Engineering history is full of projects that failed not because the engineers lacked talent, but because they ran out of time or money due to poor planning. And it is full of projects that succeeded not because they were perfect, but because disciplined, faithful teams kept showing up and hitting their milestones one by one. That can be you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041cb06",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ephesians 5:15-16</strong> — <em>\"Be very careful, then, how you live — not as unwise but as wise, making the most of every opportunity.\"</em> A well-developed timeline is one of the most concrete ways you can make the most of every opportunity in your project. Plan with intention, and let that planning reflect the wisdom God calls you to walk in.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Expand each question below to check your grasp of the key concepts from this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041ac01",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a task and a milestone?",
+      "html": "<p>A <strong>task</strong> is an action you need to complete — like writing a design report or testing a prototype. A <strong>milestone</strong> is a significant marker that shows a major phase of your project is done. Think of tasks as the steps and milestones as the landings on a staircase. You climb many steps to reach each landing, and each landing represents real, meaningful progress.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041ac02",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling help you manage a project timeline?",
+      "html": "<p>Multiscale Modeling reminds you that large-scale problems — like a project running behind schedule — are caused by smaller-scale issues underneath. Instead of just reacting to the delay you can see, you dig deeper to find the root cause. Maybe a supply was not ordered on time. Maybe a team member's task was unclear. By tracing the problem to its source, you can fix it properly rather than just applying a surface-level patch that lets the same issue happen again.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041ac03",
+    "type": "accordion",
+    "data": {
+      "title": "Walk through the OCV method for a simple timeline problem.",
+      "html": "<p>Suppose your team needs to build and present a model bridge in two weeks, but you only have four days of build time available due to other school commitments.</p><ul><li><strong>Objective:</strong> Complete and present the model bridge within two weeks.</li><li><strong>Constraint:</strong> Only four available build days; limited materials budget of $30.</li><li><strong>Variable:</strong> Task assignments (some members research while others build simultaneously), material choices (cheaper but effective alternatives), and session lengths (longer work sessions on available days).</li></ul><p>By clearly naming each element, you can make smart adjustments instead of feeling stuck.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041ac04",
+    "type": "accordion",
+    "data": {
+      "title": "Why is time considered a form of stewardship in Creationeering?",
+      "html": "<p>Stewardship means managing something valuable that has been entrusted to you. God gives each of us the same 24 hours every day — no more, no less. When you plan your project carefully with a thoughtful timeline, you are being a good steward of that time. You are also being a good steward of your teammates' time and of the trust your community places in you when they need a problem solved. Poor planning wastes everyone's time. Good planning honors it.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c041ac05",
+    "type": "accordion",
+    "data": {
+      "title": "What are the five steps to building a project timeline?",
+      "html": "<ol><li><strong>List all tasks</strong> — capture every action the project requires.</li><li><strong>Identify dependencies</strong> — figure out which tasks must be completed before others can start.</li><li><strong>Estimate time for each task</strong> — be realistic and include buffer time for risky steps.</li><li><strong>Place tasks on a calendar</strong> — arrange them in order from today to the final deadline.</li><li><strong>Mark your milestones</strong> — highlight the major completion points so your team has clear targets to aim for.</li></ol>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

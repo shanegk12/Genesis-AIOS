@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Global Supply Management — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Global Supply Management</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Global Supply Management", "definition": "The process of planning and controlling the movement of goods, services, and information across international borders, from where they start to where they are used."}, {"term": "Logistics", "definition": "The detailed organization and planning of a complex operation, especially when moving equipment, facilities, and people."}, {"term": "Supply Chain", "definition": "The entire network of people, organizations, and activities involved in creating and selling a product, from raw materials to the final customer."}, {"term": "Raw Materials", "definition": "The basic, unprocessed materials from which a product is made, like wood for a table or ore for metal."}, {"term": "Optimization", "definition": "The process of finding the very best solution or outcome for a problem, considering all the rules and limitations."}, {"term": "Multiscale Modeling", "definition": "A scientific way to understand complex systems by looking at how things work at different sizes, from tiny atoms to large-scale events."}, {"term": "Objective", "definition": "The specific goal or desired result you are trying to achieve with a design or process."}, {"term": "Constraint", "definition": "A limit or restriction that you must keep in mind when designing something or solving a problem."}, {"term": "Buffer Stock", "definition": "An extra amount of goods or materials kept in reserve to handle unexpected delays or increased demand."}, {"term": "Creationeering™", "definition": "Genesis K-12 Academy's term for the engineering process, emphasizing God's design for order and provision."}, {"term": "Logistics Phase", "definition": "The stage in Creationeering™ where the focus is on getting the right materials to the right place at the right time."}, {"term": "Stewardship", "definition": "The biblical principle of responsibly managing and taking care of resources, recognizing they are a gift from God."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

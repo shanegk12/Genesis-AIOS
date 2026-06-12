@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Assessment Simulator – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header .logo {
+    width: 36px; height: 36px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+  header p { font-size: 0.78rem; opacity: 0.85; }
+
+  #app {
+    width: 100%;
+    max-width: 780px;
+    padding: 18px 16px 40px;
+    flex: 1;
+  }
+
+  /* ── SCREEN HELPERS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 2px solid #C9A84C;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(27,58,92,.08);
+  }
+  .intro-card h2 { color: #1B3A5C; font-size: 1.4rem; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; line-height: 1.6; color: #333; margin-bottom: 14px; }
+  .scenario-badge {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: .04em;
+  }
+  .steps-list {
+    text-align: left;
+    list-style: none;
+    margin: 0 auto 22px;
+    max-width: 380px;
+  }
+  .steps-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.9rem; color: #1B3A5C; margin-bottom: 8px;
+  }
+  .steps-list li .num {
+    background: #C9A84C; color: #1B3A5C;
+    font-weight: 800; border-radius: 50%;
+    width: 22px; height: 22px; min-width: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none; cursor: pointer;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background .18s, transform .12s;
+  }
+  .btn:hover { background: #b8973e; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-nav {
+    background: #1B3A5C; color: #fff;
+    padding: 10px 20px; font-size: 0.9rem;
+  }
+  .btn-nav:hover { background: #14304d; }
+  .btn-sm {
+    padding: 8px 16px; font-size: 0.85rem; border-radius: 6px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    width: 100%; background: #dde4ed; border-radius: 20px;
+    height: 8px; margin-bottom: 16px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: #C9A84C;
+    border-radius: 20px;
+    transition: width .4s ease;
+  }
+  .progress-label {
+    font-size: 0.78rem; color: #5a6e82;
+    text-align: right; margin-bottom: 4px;
+  }
+
+  /* ── RISK CARD ── */
+  .risk-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 2px solid #dde4ed;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.06);
+    margin-bottom: 16px;
+  }
+  .risk-card h3 {
+    font-size: 1rem; color: #1B3A5C; margin-bottom: 4px;
+  }
+  .risk-tag {
+    display: inline-block; font-size: 0.74rem;
+    background: #eef2f7; color: #5a6e82;
+    padding: 2px 9px; border-radius: 12px; margin-bottom: 10px;
+  }
+  .risk-card p { font-size: 0.88rem; color: #444; line-height: 1.5; margin-bottom: 14px; }
+
+  /* ── SLIDERS ── */
+  .slider-group { margin-bottom: 14px; }
+  .slider-group label {
+    display: block; font-size: 0.85rem; font-weight: 700;
+    color: #1B3A5C; margin-bottom: 6px;
+  }
+  .slider-row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] {
+    flex: 1; -webkit-appearance: none; appearance: none;
+    height: 6px; border-radius: 3px;
+    background: linear-gradient(to right, #C9A84C 0%, #C9A84C var(--val, 50%), #dde4ed var(--val, 50%), #dde4ed 100%);
+    outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px;
+    background: #C9A84C; border: 2px solid #1B3A5C;
+    border-radius: 50%; cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 20px; height: 20px;
+    background: #C9A84C; border: 2px solid #1B3A5C;
+    border-radius: 50%; cursor: pointer; border: none;
+  }
+  .slider-val {
+    min-width: 80px; font-weight: 700; font-size: 0.85rem;
+    color: #1B3A5C; text-align: center;
+    background: #eef2f7; border-radius: 6px; padding: 3px 6px;
+  }
+
+  /* ── RISK SCORE DISPLAY ── */
+  .risk-score-box {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #f0f4f8; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .risk-score-box .label { font-size: 0.85rem; font-weight: 700; color: #1B3A5C; }
+  .risk-meter {
+    display: flex; gap: 4px; align-items: center;
+  }
+  .risk-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #dde4ed; transition: background .3s;
+  }
+  .risk-dot.low { background: #4caf82; }
+  .risk-dot.medium { background: #f0b429; }
+  .risk-dot.high { background: #e05252; }
+  .risk-level-text { font-size: 0.85rem; font-weight: 700; min-width: 58px; }
+  .risk-level-text.low { color: #4caf82; }
+  .risk-level-text.medium { color: #f0b429; }
+  .risk-level-text.high { color: #e05252; }
+
+  /* ── OCV SECTION ── */
+  .ocv-section {
+    border-top: 2px dashed #C9A84C;
+    padding-top: 14px; margin-top: 4px;
+  }
+  .ocv-section h4 {
+    font-size: 0.9rem; font-weight: 800; color: #1B3A5C; margin-bottom: 10px;
+  }
+  .ocv-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .ocv-btn {
+    padding: 8px 13px; border-radius: 8px;
+    border: 2px solid #dde4ed;
+    background: #fff; color: #1B3A5C;
+    font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; transition: all .18s;
+    text-align: left; line-height: 1.3;
+  }
+  .ocv-btn:hover { border-color: #C9A84C; background: #fdf8ec; }
+  .ocv-btn.selected { border-color: #1B3A5C; background: #1B3A5C; color: #fff; }
+  .ocv-btn.correct { border-color: #4caf82; background: #e8f8f1; color: #1B3A5C; }
+  .ocv-btn.wrong { border-color: #e05252; background: #fdeaea; color: #1B3A5C; }
+  .ocv-feedback {
+    font-size: 0.84rem; color: #1B3A5C; line-height: 1.5;
+    background: #eef7ff; border-radius: 8px; padding: 10px 12px;
+    border-left: 4px solid #1B3A5C; display: none;
+  }
+  .ocv-feedback.show { display: block; }
+
+  /* ── NAV ROW ── */
+  .nav-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ── SUMMARY ── */
+  .summary-card {
+    background: #fff; border-radius: 12px;
+    border: 2px solid #C9A84C; padding: 28px 24px;
+    box-shadow: 0 4px 18px rgba(27,58,92,.08);
+  }
+  .summary-card h2 { color: #1B3A5C; font-size: 1.3rem; margin-bottom: 6px; text-align: center; }
+  .score-circle {
+    width: 110px; height: 110px; border-radius: 50%;
+    border: 6px solid #C9A84C;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 16px auto;
+    background: #fff;
+  }
+  .score-circle .big { font-size: 2rem; font-weight: 900; color: #1B3A5C; line-height: 1; }
+  .score-circle .sub { font-size: 0.75rem; color: #5a6e82; }
+  .grade-label {
+    text-align: center; font-size: 1.1rem; font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .grade-label.excellent { color: #4caf82; }
+  .grade-label.good { color: #C9A84C; }
+  .grade-label.needs-work { color: #e05252; }
+
+  .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+  .summary-table th, .summary-table td {
+    text-align: left; padding: 8px 10px; font-size: 0.83rem;
+    border-bottom: 1px solid #eef2f7;
+  }
+  .summary-table th { background: #1B3A5C; color: #fff; }
+  .summary-table tr:nth-child(even) td { background: #f7f9fc; }
+  .correct-mark { color: #4caf82; font-weight: 800; }
+  .wrong-mark { color: #e05252; font-weight: 800; }
+
+  .faith-note {
+    background: #eef7ff; border-radius: 8px;
+    border-left: 4px solid #C9A84C;
+    padding: 12px 14px; font-size: 0.85rem;
+    color: #1B3A5C; line-height: 1.6; margin-bottom: 18px;
+    font-style: italic;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    header h1 { font-size: 0.95rem; }
+    .intro-card h2 { font-size: 1.15rem; }
+    .score-circle { width: 90px; height: 90px; }
+    .score-circle .big { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">G</div>
+  <div>
+    <h1>Risk Assessment Simulator</h1>
+    <p>Creationeering · Genesis K-12 Academy</p>
+  </div>
+</header>
+
+<div id="app">
+
+  <!-- ═══ INTRO SCREEN ═══ -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-card">
+      <div class="scenario-badge">SCENARIO: Bridge Construction Project</div>
+      <h2>⚙️ Risk Assessment Simulator</h2>
+      <p>Your engineering team is building a footbridge over a creek for a local nature trail. Before work begins, you must <strong>assess the risks</strong> and choose the best strategy to manage each one.</p>
+      <ul class="steps-list">
+        <li><span class="num">1</span><span>Read each risk scenario on the project.</span></li>
+        <li><span class="num">2</span><span>Rate the <strong>Likelihood</strong> and <strong>Impact</strong> using the sliders.</span></li>
+        <li><span class="num">3</span><span>Pick the best <strong>OCV mitigation strategy</strong>: <strong>O</strong>bstacle avoidance, <strong>C</strong>ontingency plan, or <strong>V</strong>erification check.</span></li>
+        <li><span class="num">4</span><span>See your final Risk Assessment Report!</span></li>
+      </ul>
+      <button class="btn" onclick="startSim()">Start Assessment →</button>
+    </div>
+  </div>
+
+  <!-- ═══ SIMULATION SCREEN ═══ -->
+  <div id="screen-sim" class="screen">
+    <div class="progress-label" id="prog-label">Risk 1 of 5</div>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+
+    <div class="risk-card" id="risk-card">
+      <!-- filled dynamically -->
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-nav" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn" id="btn-next" onclick="goNext()" disabled>Next Risk →</button>
+    </div>
+  </div>
+
+  <!-- ═══ SUMMARY SCREEN ═══ -->
+  <div id="screen-summary" class="screen">
+    <div class="summary-card">
+      <h2>📋 Risk Assessment Report</h2>
+      <div class="score-circle">
+        <span class="big" id="sum-score">0</span>
+        <span class="sub">/ 5 correct</span>
+      </div>
+      <div class="grade-label" id="sum-grade"></div>
+
+      <table class="summary-table" id="sum-table">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Your Strategy</th>
+            <th>Best Strategy</th>
+            <th>✓/✗</th>
+          </tr>
+        </thead>
+        <tbody id="sum-body"></tbody>
+      </table>
+
+      <div class="faith-note">
+        "The wise man builds his house on the rock." (Matthew 7:24) — Great engineers, like wise builders, think ahead. Risk assessment is planning with wisdom and care for everyone involved.
+      </div>
+
+      <div style="text-align:center">
+        <button class="btn" onclick="restartSim()">🔄 Try Again</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════ */
+const RISKS = [
+  {
+    id: 0,
+    title: "Heavy Rain Flooding",
+    type: "Environmental Hazard",
+    description: "The creek can rise quickly during heavy spring rains. If construction is happening near the water and a sudden flood occurs, workers and materials could be in danger.",
+    suggestedLikelihood: 4,
+    suggestedImpact: 5,
+    ocvOptions: [
+      { label: "🚧 Obstacle Avoidance — Schedule all water-level construction only during the dry season.", correct: true },
+      { label: "📋 Contingency Plan — Keep a weather alert system and have a quick evacuation route planned.", correct: false },
+      { label: "✅ Verification Check — Inspect the construction site each morning for standing water.", correct: false }
+    ],
+    correctExplanation: "Obstacle Avoidance is best here — by scheduling work in dry seasons, you remove the risk entirely rather than just reacting to it. This is the most proactive mitigation strategy."
+  },
+  {
+    id: 1,
+    title: "Weak Anchor Bolts",
+    type: "Structural Risk",
+    description: "The blueprint calls for a specific grade of anchor bolt to secure the bridge deck. If the wrong grade is accidentally ordered, the bridge could fail under load once people start using it.",
+    suggestedLikelihood: 3,
+    suggestedImpact: 5,
+    ocvOptions: [
+      { label: "🚧 Obstacle Avoidance — Use a different bridge design that doesn't need anchor bolts.", correct: false },
+      { label: "📋 Contingency Plan — Order extra bolts so replacements are ready if the first batch fails.", correct: false },
+      { label: "✅ Verification Check — Double-check every material delivery against the spec sheet before use.", correct: true }
+    ],
+    correctExplanation: "A Verification Check is the right call — inspecting materials before they're installed catches the problem before it becomes dangerous. This directly reduces the likelihood of the risk occurring."
+  },
+  {
+    id: 2,
+    title: "Team Member Injury",
+    type: "Safety Risk",
+    description: "A crew member slips on muddy ground near the site and sprains their wrist. The project is shorthanded and the schedule is now at risk of falling behind.",
+    suggestedLikelihood: 3,
+    suggestedImpact: 3,
+    ocvOptions: [
+      { label: "🚧 Obstacle Avoidance — Assign all workers to office tasks so no one goes on-site.", correct: false },
+      { label: "📋 Contingency Plan — Identify backup volunteers in advance who can step in if a crew member is injured.", correct: true },
+      { label: "✅ Verification Check — Review the first-aid kit weekly to make sure it is stocked.", correct: false }
+    ],
+    correctExplanation: "A Contingency Plan is best — you can't fully prevent all injuries, but having backup crew identified in advance means the project keeps moving safely even when the unexpected happens."
+  },
+  {
+    id: 3,
+    title: "Lumber Delivery Delay",
+    type: "Supply Chain Risk",
+    description: "The lumber supplier informs you that your order will arrive two weeks late due to high demand. This delay threatens to push back your critical path and miss the project deadline.",
+    suggestedLikelihood: 4,
+    suggestedImpact: 4,
+    ocvOptions: [
+      { label: "🚧 Obstacle Avoidance — Source lumber from two different suppliers so you are not dependent on one.", correct: true },
+      { label: "📋 Contingency Plan — Have a plan to work on non-lumber tasks during the delay.", correct: false },
+      { label: "✅ Verification Check — Call the supplier every day to confirm the delivery date.", correct: false }
+    ],
+    correctExplanation: "Obstacle Avoidance eliminates the single point of failure by using multiple suppliers. This is smarter than just reacting to a delay — it prevents the delay from ever blocking your project."
+  },
+  {
+    id: 4,
+    title: "Load Capacity Miscalculation",
+    type: "Design Risk",
+    description: "After the bridge is built, someone questions whether the load calculations in the design actually account for a large group of hikers crossing at once. An error here is a serious safety hazard.",
+    suggestedLikelihood: 2,
+    suggestedImpact: 5,
+    ocvOptions: [
+      { label: "🚧 Obstacle Avoidance — Build the bridge twice as wide so it can hold more people.", correct: false },
+      { label: "📋 Contingency Plan — Post a sign limiting the number of people on the bridge at one time.", correct: false },
+      { label: "✅ Verification Check — Have a licensed engineer independently review the load calculations before construction.", correct: true }
+    ],
+    correctExplanation: "A Verification Check by an independent engineer is the right strategy — the risk is low likelihood but extremely high impact. An expert review confirms the design is safe before anyone is in danger."
+  }
+];
+
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+let currentRisk = 0;
+let answers = Array(RISKS.length).fill(null); // index of chosen option
+let likelihoodVals = Array(RISKS.length).fill(3);
+let impactVals = Array(RISKS.length).fill(3);
+let confirmed = Array(RISKS.length).fill(false);
+
+/* ══════════════════════════════════════════════
+   SCREEN MANAGEMENT
+══════════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startSim() {
+  currentRisk = 0;
+  answers = Array(RISKS.length).fill(null);
+  likelihoodVals = Array(RISKS.length).fill(3);
+  impactVals = Array(RISKS.length).fill(3);
+  confirmed = Array(RISKS.length).fill(false);
+  showScreen('screen-sim');
+  renderRisk();
+}
+
+function restartSim() {
+  showScreen('screen-intro');
+}
+
+/* ══════════════════════════════════════════════
+   RENDER RISK CARD
+══════════════════════════════════════════════ */
+function renderRisk() {
+  const r = RISKS[currentRisk];
+  const isConfirmed = confirmed[currentRisk];
+  const chosenIdx = answers[currentRisk];
+
+  // Progress
+  document.getElementById('prog-label').textContent = `Risk ${currentRisk + 1} of ${RISKS.length}`;
+  document.getElementById('prog-fill').style.width = `${((currentRisk) / RISKS.length) * 100}%`;
+
+  // Back button
+  document.getElementById('btn-back').style.visibility = currentRisk === 0 ? 'hidden' : 'visible';
+
+  // Next button
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = (currentRisk === RISKS.length - 1) ? 'See Report →' : 'Next Risk →';
+  nextBtn.disabled = !isConfirmed;
+
+  // Build sliders
+  const lVal = likelihoodVals[currentRisk];
+  const iVal = impactVals[currentRisk];
+  const score = lVal * iVal;
+
+  // Build OCV buttons HTML
+  let ocvHTML = '';
+  r.ocvOptions.forEach((opt, idx) => {
+    let cls = 'ocv-btn';
+    if (isConfirmed) {
+      if (opt.correct) cls += ' correct';
+      else if (idx === chosenIdx && !opt.correct) cls += ' wrong';
+    } else if (idx === chosenIdx) {
+      cls += ' selected';
+    }
+    ocvHTML += `<button class="${cls}" onclick="selectOCV(${idx})" ${isConfirmed ? 'disabled' : ''}>${opt.label}</button>`;
+  });
+
+  const feedbackDisplay = isConfirmed ? 'show' : '';
+
+  document.getElementById('risk-card').innerHTML = `
+    <h3>${r.title}</h3>
+    <span class="risk-tag">${r.type}</span>
+    <p>${r.description}</p>
+
+    <div class="slider-group">
+      <label>Likelihood (How probable is this risk?)</label>
+      <div class="slider-row">
+        <input type="range" min="1" max="5" step="1" value="${lVal}"
+          id="sl-l" oninput="updateSlider('l', this.value)"
+          ${isConfirmed ? 'disabled' : ''}>
+        <span class="slider-val" id="lbl-l">${likelihoodLabel(lVal)}</span>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <label>Impact (How serious if it happens?)</label>
+      <div class="slider-row">
+        <input type="range" min="1" max="5" step="1" value="${iVal}"
+          id="sl-i" oninput="updateSlider('i', this.value)"
+          ${isConfirmed ? 'disabled' : ''}>
+        <span class="slider-val" id="lbl-i">${impactLabel(iVal)}</span>
+      </div>
+    </div>
+
+    <div class="risk-score-box">
+      <span class="label">Risk Score = Likelihood × Impact</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="risk-meter" id="risk-meter">${buildMeter(score)}</div>
+        <span class="risk-level-text ${riskClass(score)}" id="risk-level-text">${riskLevelText(score)} (${score})</span>
+      </div>
+    </div>
+
+    <div class="ocv-section">
+      <h4>🛡️ Choose the Best OCV Mitigation Strategy:</h4>
+      <div class="ocv-choices" id="ocv-choices">${ocvHTML}</div>
+      ${chosenIdx !== null && !isConfirmed ? `<div style="text-align:right;margin-bottom:6px;"><button class="btn btn-sm" onclick="confirmChoice()">Confirm Choice ✓</button></div>` : ''}
+      <div class="ocv-feedback ${feedbackDisplay}" id="ocv-feedback">${isConfirmed ? r.correctExplanation : ''}</div>
+    </div>
+  `;
+
+  updateSliderBackground('sl-l', lVal);
+  updateSliderBackground('sl-i', iVal);
+}
+
+/* ══════════════════════════════════════════════
+   SLIDERS
+══════════════════════════════════════════════ */
+function likelihoodLabel(v) {
+  const labels = ['', 'Very Low', 'Low', 'Moderate', 'High', 'Very High'];
+  return labels[v] || v;
+}
+function impactLabel(v) {
+  const labels = ['', 'Minimal', 'Minor', 'Moderate', 'Major', 'Critical'];
+  return labels[v] || v;
+}
+
+function updateSlider(type, val) {
+  val = parseInt(val);
+  if (type === 'l') {
+    likelihoodVals[currentRisk] = val;
+    document.getElementById('lbl-l').textContent = likelihoodLabel(val);
+    updateSliderBackground('sl-l', val);
+  } else {
+    impactVals[currentRisk] = val;
+    document.getElementById('lbl-i').textContent = impactLabel(val);
+    updateSliderBackground('sl-i', val);
+  }
+  const score = likelihoodVals[currentRisk] * impactVals[currentRisk];
+  const meterEl = document.getElementById('risk-meter');
+  const levelEl = document.getElementById('risk-level-text');
+  if (meterEl) meterEl.innerHTML = buildMeter(score);
+  if (levelEl) {
+    levelEl.textContent = `${riskLevelText(score)} (${score})`;
+    levelEl.className = `risk-level-text ${riskClass(score)}`;
+  }
+}
+
+function updateSliderBackground(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const pct = ((val - 1) / 4) * 100;
+  el.style.background = `linear-gradient(to right, #C9A84C 0%, #C9A84C ${pct}%, #dde4ed ${pct}%, #dde4ed 100%)`;
+}
+
+function buildMeter(score) {
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    let dotScore = i * 5;
+    let cls = 'risk-dot';
+    if (score >= 1 && score <= 8) cls += i <= Math.ceil(score / 5) ? ' low' : '';
+    if (score >= 9 && score <= 15) cls += i <= Math.ceil(score / 5) ? ' medium' : '';
+    if (score >= 16) cls += i <= Math.ceil(score / 5) ? ' high' : '';
+    html += `<div class="${cls}"></div>`;
+  }
+  return html;
+}
+
+function riskClass(score) {
+  if (score <= 8) return 'low';
+  if (score <= 15) return 'medium';
+  return 'high';
+}
+function riskLevelText(score) {
+  if (score <= 8) return 'Low Risk';
+  if (score <= 15) return 'Medium Risk';
+  return 'High Risk';
+}
+
+/* ══════════════════════════════════════════════
+   OCV SELECTION
+══════════════════════════════════════════════ */
+function selectOCV(idx) {
+  if (confirmed[currentRisk]) return;
+  answers[currentRisk] = idx;
+  renderRisk();
+}
+
+function confirmChoice() {
+  if (answers[currentRisk] === null) return;
+  confirmed[currentRisk] = true;
+  renderRisk();
+  document.getElementById('btn-next').disabled = false;
+}
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+function goNext() {
+  if (currentRisk < RISKS.length - 1) {
+    currentRisk++;
+    renderRisk();
+    window.scrollTo(0, 0);
+  } else {
+    showSummary();
+  }
+}
+
+function goBack() {
+  if (currentRisk > 0) {
+    currentRisk--;
+    renderRisk();
+    window.scrollTo(0, 0);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   SUMMARY
+══════════════════════════════════════════════ */
+function showSummary() {
+  let score = 0;
+  let rows = '';
+  RISKS.forEach((r, i) => {
+    const chosenIdx = answers[i];
+    const chosen = chosenIdx !== null ? r.ocvOptions[chosenIdx] : null;
+    const correctOpt = r.ocvOptions.find(o => o.correct);
+    const isCorrect = chosen && chosen.correct;
+    if (isCorrect) score++;
+    const mark = isCorrect
+      ? '<span class="correct-mark">✓</span>'
+      : '<span class="wrong-mark">✗</span>';
+    const chosenLabel = chosen ? chosen.label.replace(/^.{2}\s/, '') : '—';
+    const correctLabel = correctOpt ? correctOpt.label.replace(/^.{2}\s/, '') : '—';
+    rows += `<tr>
+      <td>${r.title}</td>
+      <td>${chosenLabel}</td>
+      <td>${correctLabel}</td>
+      <td>${mark}</td>
+    </tr>`;
+  });
+
+  document.getElementById('sum-score').textContent = score;
+  document.getElementById('sum-body').innerHTML = rows;
+
+  const gradeEl = document.getElementById('sum-grade');
+  if (score === 5) {
+    gradeEl.textContent = '🏆 Outstanding Engineer!';
+    gradeEl.className = 'grade-label excellent';
+  } else if (score >= 3) {
+    gradeEl.textContent = '👍 Good Risk Thinker!';
+    gradeEl.className = 'grade-label good';
+  } else {
+    gradeEl.textContent = '📚 Keep Studying Risk Assessment!';
+    gradeEl.className = 'grade-label needs-work';
+  }
+
+  showScreen('screen-summary');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

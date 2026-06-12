@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-019",
+  "topic": "Modeling Resistive Forces",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of a Free Body Diagram (FBD)?",
+      "options": {
+        "A": "To build a physical model of a car.",
+        "B": "To draw a simplified version of a car.",
+        "C": "To visualize and calculate forces acting on an object.",
+        "D": "To create a digital twin of a design."
+      },
+      "answer": "C",
+      "explanation": "The lesson defines an FBD as a graphical illustration used to visualize applied forces and resulting reactions on an object."
+    },
+    {
+      "type": "recall",
+      "question": "Which of the following is identified as a 'resistive force' in the lesson?",
+      "options": {
+        "A": "Gravity",
+        "B": "Spring Force",
+        "C": "Friction",
+        "D": "Applied Force"
+      },
+      "answer": "C",
+      "explanation": "The lesson specifically identifies Friction and Air Resistance (Drag) as resistive forces."
+    },
+    {
+      "type": "recall",
+      "question": "What does the acronym CAD stand for in the context of engineering design?",
+      "options": {
+        "A": "Car Assembly Diagram",
+        "B": "Computer-Aided Design",
+        "C": "Creationeering Analysis Device",
+        "D": "Conceptual Art Drawing"
+      },
+      "answer": "B",
+      "explanation": "The lesson explicitly states that CAD stands for Computer-Aided Design."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is the term 'Free' critical when referring to a Free Body Diagram?",
+      "options": {
+        "A": "Because engineers can freely choose which forces to include.",
+        "B": "Because the diagram is drawn without cost.",
+        "C": "Because the object is isolated from its environment for analysis.",
+        "D": "Because it allows the car to move freely without resistance."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains that 'Free' means to 'free' the object from its environment to represent it as a single body in space."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does a sleek, tapered car design help minimize air resistance compared to a boxy car?",
+      "options": {
+        "A": "It increases the car's weight, making it harder for air to push.",
+        "B": "It has a lower Drag Coefficient (Cd), allowing it to push less air out of the way.",
+        "C": "It creates more friction with the ground, slowing the car down.",
+        "D": "It generates more lift, making the car float above the track."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that a sleek, tapered car has a low Cd, meaning it is more aerodynamic and experiences less drag."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson, why is 'Rapid Iteration' a significant advantage of using CAD in designing the mousetrap car?",
+      "options": {
+        "A": "It allows engineers to quickly build many physical prototypes.",
+        "B": "It enables quick changes to the digital model, saving time and materials.",
+        "C": "It ensures the car is built perfectly on the first attempt.",
+        "D": "It helps identify all resistive forces without needing an FBD."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that CAD allows for Rapid Iteration by changing design variables in a computer model in seconds, avoiding the waste of building multiple physical cars."
+    },
+    {
+      "type": "application",
+      "question": "If a mousetrap car is designed to travel up a ramp, which step in constructing the Free Body Diagram becomes especially important to ensure accurate calculations?",
+      "options": {
+        "A": "Isolate the Body, as the car is no longer on a flat surface.",
+        "B": "Define the Coordinate System, as the positive X direction might need to align with the ramp.",
+        "C": "Identify All Loads, to include the force of the ramp pushing back.",
+        "D": "Label Dimensions and Angles, to reflect the incline's impact on forces."
+      },
+      "answer": "D",
+      "explanation": "The lesson specifically mentions that if a car is on an incline, the angle must be labeled to ensure the math reflects the Ground Truth."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer wants to design a mousetrap car that travels the farthest distance. To minimize rolling resistance, which design choice would be most effective?",
+      "options": {
+        "A": "Making the car very heavy to increase traction.",
+        "B": "Using large, rough wheels for better grip.",
+        "C": "Ensuring smooth, low-friction contact between wheels and the floor.",
+        "D": "Designing a very tall car to catch more air."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that rolling resistance is the contact between wheels and the floor, and minimizing kinetic friction through polished surfaces and proper alignment (smooth contact) is an engineer's goal."
+    },
+    {
+      "type": "application",
+      "question": "During a test run, a mousetrap car struggles to start moving and then quickly slows down, even on a smooth surface. Based on the lesson, which 'hidden thief' is most likely causing this issue?",
+      "options": {
+        "A": "Air resistance, because the car is pushing too much air.",
+        "B": "Gravity, because it's pulling the car down.",
+        "C": "High axle friction or rolling resistance, stealing energy from the start.",
+        "D": "The spring force, because it's too weak."
+      },
+      "answer": "C",
+      "explanation": "The lesson identifies friction (axle and rolling resistance) as 'hidden thieves' that steal energy, especially kinetic friction which prevents maintaining motion."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does using CAD for 'Rapid Iteration' align with the biblical principle of faithful stewardship?",
+      "options": {
+        "A": "It allows engineers to build more cars, demonstrating abundance.",
+        "B": "It ensures the fastest possible design process, saving time.",
+        "C": "It minimizes the waste of materials by testing designs digitally before physical construction.",
+        "D": "It helps engineers understand God's laws of physics better."
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly states that CAD minimizes waste of materials by allowing digital changes instead of building multiple physical cars, which is an act of good stewardship."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson describes FBDs as allowing us to 'see' unseen forces that God built into the universe. How does this practice connect to the biblical principle of Truth and Integrity in design?",
+      "options": {
+        "A": "It encourages engineers to design only what is visible.",
+        "B": "It requires acknowledging and accurately accounting for all forces, even those not directly observable, reflecting God's ordered creation.",
+        "C": "It promotes designing cars that are aesthetically pleasing.",
+        "D": "It helps engineers hide design flaws from others."
+      },
+      "answer": "B",
+      "explanation": "The lesson connects modeling to Truth and Integrity, and FBDs help visualize and account for all forces, acknowledging the complete reality of God's physical laws."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson introduces the concept of a 'Digital Twin' which involves both FBDs and CAD. How does this comprehensive modeling approach contribute to faithful stewardship in the mousetrap car project?",
+      "options": {
+        "A": "It allows for the creation of multiple physical prototypes to ensure variety.",
+        "B": "It helps predict performance and optimize designs, minimizing material waste and maximizing efficiency before physical construction.",
+        "C": "It focuses solely on the aesthetic appeal of the car, reflecting God's beauty.",
+        "D": "It simplifies the project by removing the need for any physical testing."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that the 'Digital Twin' (FBD + CAD) is essential for Rapid Iteration and faithful stewardship by predicting performance and minimizing waste."
+    }
+  ]
+}

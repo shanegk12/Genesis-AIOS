@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design for Disassembly and Recycling — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Design for Disassembly and Recycling</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Design for Disassembly (DfD)", "definition": "An approach to product design that makes it easy to take apart components and recover materials at the end of a product's life, helping us be wise stewards of God's resources."}, {"term": "Design for Recycling (DfR)", "definition": "Designing products so that their materials can be easily processed and reused in new products, reflecting God's economy of abundance and renewal."}, {"term": "Sustainability", "definition": "Meeting the needs of the present without compromising the ability of future generations to meet their own needs, just as God carefully designed the world for ongoing life."}, {"term": "Waste Stream", "definition": "The flow of discarded materials from consumers to disposal or recycling facilities, which we aim to manage thoughtfully as Creationeers."}, {"term": "Circular Economy", "definition": "An economic system aimed at eliminating waste and continually reusing resources, contrasting with the traditional linear 'take-make-dispose' economy."}, {"term": "Multiscale Modeling", "definition": "A method of understanding how the behavior of materials at a large scale (macro) is influenced by their properties at very small scales (atomic)."}, {"term": "Objective (OCV)", "definition": "The goal or aim of a design problem, what you are trying to achieve, like making a product easy to recycle."}, {"term": "Constraint (OCV)", "definition": "A limitation or restriction that must be met in a design, like budget, material availability, or physical laws, guiding our choices as engineers."}, {"term": "Variable (OCV)", "definition": "A factor in a design that can be changed or adjusted to meet objectives within constraints, helping us optimize our designs for God's creation."}, {"term": "Creationeering™ Framework", "definition": "A framework that guides engineers to design products that are not only functional but also sustainable, reflecting God's economy of abundance and renewal."}, {"term": "Stewardship", "definition": "The careful and responsible management of something entrusted to one's care, like the resources God has provided us in His creation."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

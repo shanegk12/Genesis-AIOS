@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Identity Builder – Mousetrap Build</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header .logo {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 900;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
+  header h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f7f9fc;
+  }
+  header small { color: #C9A84C; font-size: 12px; display: block; }
+
+  .progress-bar-wrap {
+    background: #dce4ee;
+    height: 6px;
+  }
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 6px;
+    transition: width 0.4s ease;
+  }
+
+  .stage-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px 0;
+    flex-wrap: wrap;
+  }
+  .stage-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #dce4ee;
+    color: #888;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dce4ee;
+    transition: all 0.3s;
+  }
+  .stage-dot.active {
+    background: #1B3A5C;
+    color: #fff;
+    border-color: #1B3A5C;
+  }
+  .stage-dot.done {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-color: #C9A84C;
+  }
+
+  .screen { display: none; padding: 20px; max-width: 700px; margin: 0 auto; }
+  .screen.active { display: block; }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.10);
+    margin-bottom: 18px;
+  }
+  .card h2 {
+    font-size: 20px;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+  .card .subtitle {
+    font-size: 13px;
+    color: #C9A84C;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .card p { font-size: 15px; line-height: 1.6; color: #333; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 5px;
+    margin-top: 14px;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #dce4ee;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1B3A5C;
+    background: #f7f9fc;
+    transition: border 0.2s;
+    font-family: inherit;
+  }
+  input[type="text"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #C9A84C;
+    background: #fff;
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: #1B3A5C;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #163150; }
+  .btn-gold {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  .btn-gold:hover { background: #b8943e; }
+  .btn-outline {
+    background: transparent;
+    color: #1B3A5C;
+    border: 2px solid #1B3A5C;
+  }
+  .btn-outline:hover { background: #1B3A5C; color: #fff; }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    justify-content: flex-end;
+  }
+
+  /* Drag-and-drop roles */
+  .roles-area {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .role-bank {
+    flex: 1 1 200px;
+    min-width: 180px;
+  }
+  .drop-zones {
+    flex: 2 1 300px;
+  }
+  .role-bank h3, .drop-zones h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .draggable-role {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 9px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: grab;
+    font-size: 14px;
+    font-weight: 600;
+    user-select: none;
+    touch-action: none;
+    transition: opacity 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .draggable-role:active { cursor: grabbing; transform: scale(1.03); }
+  .draggable-role.dragging { opacity: 0.4; }
+  .draggable-role.placed { background: #C9A84C; color: #1B3A5C; cursor: default; }
+
+  .drop-zone {
+    background: #f7f9fc;
+    border: 2px dashed #dce4ee;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    min-height: 52px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .drop-zone.over { border-color: #C9A84C; background: #fffbe8; }
+  .drop-zone.correct { border-color: #2e7d32; background: #e8f5e9; border-style: solid; }
+  .drop-zone.incorrect { border-color: #c62828; background: #ffebee; border-style: solid; }
+  .drop-zone .dz-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+  .drop-zone .dz-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.4;
+  }
+  .drop-zone .dz-dropped {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .drop-zone.correct .dz-dropped { background: #2e7d32; }
+  .drop-zone.incorrect .dz-dropped { background: #c62828; }
+
+  /* Gantt */
+  .gantt-tasks { list-style: none; }
+  .gantt-task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .gantt-task-item label {
+    margin: 0;
+    flex: 1 1 160px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #1B3A5C;
+  }
+  .gantt-task-item select {
+    flex: 0 0 90px;
+    font-size: 13px;
+    padding: 7px 8px;
+  }
+  .gantt-bar-row {
+    flex: 2 1 200px;
+    display: flex;
+    height: 22px;
+    background: #dce4ee;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .gantt-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: #1B3A5C;
+    transition: width 0.3s, margin-left 0.3s;
+  }
+  .gantt-bar.critical { background: #C9A84C; }
+  .gantt-bar.done { background: #2e7d32; }
+
+  /* Success Metrics quiz */
+  .metric-option {
+    background: #f7f9fc;
+    border: 2px solid #dce4ee;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .metric-option:hover { border-color: #C9A84C; background: #fffbe8; }
+  .metric-option.selected { border-color: #1B3A5C; background: #e8eef5; }
+  .metric-option.correct { border-color: #2e7d32; background: #e8f5e9; }
+  .metric-option.incorrect { border-color: #c62828; background: #ffebee; }
+  .metric-option .check-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Summary */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media(max-width: 500px) { .summary-grid { grid-template-columns: 1fr; } }
+  .summary-item {
+    background: #f7f9fc;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+  }
+  .summary-item .si-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #C9A84C;
+    margin-bottom: 4px;
+  }
+  .summary-item .si-value {
+    font-size: 14px;
+    color: #1B3A5C;
+    font-weight: 600;
+  }
+
+  .score-badge {
+    text-align: center;
+    padding: 20px;
+  }
+  .score-number {
+    font-size: 64px;
+    font-weight: 900;
+    color: #C9A84C;
+    line-height: 1;
+  }
+  .score-label {
+    font-size: 16px;
+    color: #1B3A5C;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .score-sub {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .feedback-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .feedback-box.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #2e7d32; }
+  .feedback-box.warning { background: #fff8e1; color: #f57f17; border-left: 4px solid #f57f17; }
+  .feedback-box.error { background: #ffebee; color: #c62828; border-left: 4px solid #c62828; }
+
+  .tip-box {
+    background: #fffbe8;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* Welcome */
+  .welcome-hero {
+    text-align: center;
+    padding: 10px 0 20px;
+  }
+  .welcome-hero .icon-big { font-size: 60px; }
+  .welcome-hero h2 { font-size: 24px; color: #1B3A5C; margin: 10px 0 6px; }
+  .welcome-hero p { font-size: 15px; color: #555; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+
+  .steps-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .step-prev {
+    background: #fff;
+    border: 2px solid #dce4ee;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #1B3A5C;
+    font-weight: 600;
+  }
+  .step-prev .sp-icon { font-size: 24px; margin-bottom: 6px; }
+  .step-prev .sp-num {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-size: 10px;
+    font-weight: 900;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .char-count { font-size: 11px; color: #999; text-align: right; margin-top: 3px; }
+
+  /* Critical path highlight */
+  .cp-tag {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    text-transform: uppercase;
+  }
+
+  .validation-msg {
+    font-size: 12px;
+    color: #c62828;
+    margin-top: 4px;
+    display: none;
+  }
+  .validation-msg.show { display: block; }
+
+  /* Org chart visual */
+  .org-chart {
+    margin-top: 14px;
+    text-align: center;
+  }
+  .org-node {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 4px;
+  }
+  .org-node.top { background: #1B3A5C; color: #fff; }
+  .org-node.mid { background: #C9A84C; color: #1B3A5C; }
+  .org-node.bot { background: #dce4ee; color: #1B3A5C; }
+  .org-row { margin: 6px 0; }
+  .org-connector {
+    font-size: 18px;
+    color: #C9A84C;
+    display: block;
+    margin: 2px auto;
+  }
+  .org-mid-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .org-mid-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 12px;
+    background: #C9A84C;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK12</div>
+  <div>
+    <h1>Company Identity Builder</h1>
+    <small>Mousetrap Build · Genesis K-12 Academy</small>
+  </div>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+</div>
+
+<div class="stage-indicator" id="stageIndicator">
+  <div class="stage-dot" id="dot0">●</div>
+  <div class="stage-dot" id="dot1">1</div>
+  <div class="stage-dot" id="dot2">2</div>
+  <div class="stage-dot" id="dot3">3</div>
+  <div class="stage-dot" id="dot4">4</div>
+  <div class="stage-dot" id="dot5">5</div>
+</div>
+
+<!-- SCREEN 0: Welcome -->
+<div class="screen active" id="screen0">
+  <div class="card">
+    <div class="welcome-hero">
+      <div class="icon-big">🏭</div>
+      <h2>Launch Your Vehicle Company</h2>
+      <p>Every great product starts with a plan. Before you pick up a single tool, you need a name, a purpose, and a team. Build your company identity in 5 steps!</p>
+    </div>
+    <div class="steps-preview">
+      <div class="step-prev">
+        <div class="sp-num">1</div>
+        <div class="sp-icon">🏷️</div>
+        Company Name &amp; Mission
+      </div>
+      <div class="step-prev">
+        <div class="sp-num">2</div>
+        <div class="sp-icon">👥</div>
+        Assign Team Roles
+      </div>
+      <div class="step-prev">
+        <div class="sp-num">3</div>
+        <div class="sp-icon">🗂️</div>
+        Org Chart Check
+      </div>
+      <div class="step-prev">
+        <div class="sp-num">4</div>
+        <div class="sp-icon">📅</div>
+        Gantt &amp; Critical Path
+      </div>
+      <div class="step-prev">
+        <div class="sp-num">5</div>
+        <div class="sp-icon">🎯</div>
+        Success Metrics
+      </div>
+    </div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-gold" onclick="goTo(1)">Start Building →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 1: Company Name & Mission -->
+<div class="screen" id="screen1">
+  <div class="card">
+    <div class="subtitle">Step 1 of 5</div>
+    <h2>🏷️ Company Identity</h2>
+    <p>Name your company and write your mission statement. Your name should be memorable. Your mission should reflect quality, safety, and stewardship.</p>
+
+    <label for="companyName">Company Name</label>
+    <input type="text" id="companyName" placeholder="e.g., KinetiCore Solutions" maxlength="60">
+    <div class="char-count" id="nameCount">0/60</div>
+    <div class="validation-msg" id="nameErr">Please enter a company name (at least 3 characters).</div>
+
+    <label for="missionStmt">Mission Statement (2–3 sentences)</label>
+    <textarea id="missionStmt" placeholder="Describe your commitment to quality, safety, and responsible use of resources..." maxlength="400"></textarea>
+    <div class="char-count" id="missionCount">0/400</div>
+    <div class="validation-msg" id="missionErr">Please write a mission statement (at least 40 characters).</div>
+
+    <div class="tip-box">
+      💡 <strong>Tip:</strong> A strong mission statement covers three things: <em>what you make</em>, <em>who you serve</em>, and <em>how you operate responsibly</em>. (Proverbs 29:18 — "Where there is no vision, the people perish.")
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goTo(0)">← Back</button>
+      <button class="btn btn-primary" onclick="submitStep1()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: Drag & Drop Roles -->
+<div class="screen" id="screen2">
+  <div class="card">
+    <div class="subtitle">Step 2 of 5</div>
+    <h2>👥 Assign Leadership Roles</h2>
+    <p>Drag each role title to the team position it best matches. Each role connects to a phase of the Engineering Lifecycle.</p>
+
+    <div class="roles-area" id="rolesArea">
+      <div class="role-bank">
+        <h3>Role Titles</h3>
+        <div id="roleBankList"></div>
+      </div>
+      <div class="drop-zones">
+        <h3>Team Positions</h3>
+        <div id="dropZoneList"></div>
+      </div>
+    </div>
+
+    <div id="rolesfeedback" style="display:none;"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goTo(1)">← Back</button>
+      <button class="btn btn-primary" id="checkRolesBtn" onclick="checkRoles()">Check My Matches →</button>
+      <button class="btn btn-gold" id="rolesNextBtn" style="display:none;" onclick="goTo(3)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: Org Chart Check -->
+<div class="screen" id="screen3">
+  <div class="card">
+    <div class="subtitle">Step 3 of 5</div>
+    <h2>🗂️ Org Chart — Who Reports to Whom?</h2>
+    <p>An organizational chart shows the hierarchy of your company. Answer the questions below to demonstrate you understand the information flow.</p>
+
+    <div class="org-chart" id="orgChartVisual"></div>
+
+    <div id="orgQuestions"></div>
+
+    <div id="orgFeedback" style="display:none;"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goTo(2)">← Back</button>
+      <button class="btn btn-primary" id="checkOrgBtn" onclick="checkOrg()">Check Answers →</button>
+      <button class="btn btn-gold" id="orgNextBtn" style="display:none;" onclick="goTo(4)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: Gantt Chart + Critical Path -->
+<div class="screen" id="screen4">
+  <div class="card">
+    <div class="subtitle">Step 4 of 5</div>
+    <h2>📅 Gantt Chart &amp; Critical Path</h2>
+    <p>Order the project tasks by choosing which week each one starts. Then identify which tasks are on the <strong>Critical Path</strong> — the tasks that cannot be delayed without delaying the whole project.</p>
+
+    <div id="ganttTable" style="margin-top:10px;"></div>
+
+    <div style="margin-top:14px; display:flex; gap:18px; flex-wrap:wrap; font-size:13px; align-items:center;">
+      <span><span style="display:inline-block;width:16px;height:12px;background:#1B3A5C;border-radius:3px;vertical-align:middle;margin-right:4px;"></span>Regular Task</span>
+      <span><span style="display:inline-block;width:16px;height:12px;background:#C9A84C;border-radius:3px;vertical-align:middle;margin-right:4px;"></span>Critical Path Task</span>
+    </div>
+
+    <div id="ganttFeedback" style="display:none; margin-top:12px;"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goTo(3)">← Back</button>
+      <button class="btn btn-primary" id="checkGanttBtn" onclick="checkGantt()">Check Schedule →</button>
+      <button class="btn btn-gold" id="ganttNextBtn" style="display:none;" onclick="goTo(5)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5: Success Metrics -->
+<div class="screen" id="screen5">
+  <div class="card">
+    <div class="subtitle">Step 5 of 5</div>
+    <h2>🎯 Define Success Metrics</h2>
+    <p>A success metric is a <em>measurable</em> way to know if your company achieved its goal. Read each statement and select whether it is a <strong>measurable metric</strong> or too <strong>vague to measure</strong>.</p>
+    <div id="metricsQuestions"></div>
+    <div id="metricsFeedback" style="display:none; margin-top:12px;"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goTo(4)">← Back</button>
+      <button class="btn btn-primary" id="checkMetricsBtn" onclick="checkMetrics()">Submit →</button>
+      <button class="btn btn-gold" id="metricsNextBtn" style="display:none;" onclick="showSummary()">See My Results →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 6: Summary -->
+<div class="screen" id="screen6">
+  <div class="card">
+    <div class="score-badge">
+      <div class="score-number" id="finalScore">0</div>
+      <div class="score-label" id="finalLabel">points earned</div>
+      <div class="score-sub" id="finalSub"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>📋 Your Company Profile</h2>
+    <div class="summary-grid" id="summaryGrid"></div>
+  </div>
+  <div class="card">
+    <h2>📊 Activity Summary</h2>
+    <div id="activitySummary"></div>
+    <div class="btn-row" style="justify-content:center; margin-top:18px;">
+      <button class="btn btn-gold" onclick="restartAll()">🔄 Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────────────────────
+const state = {
+  companyName: '',
+  missionStmt: '',
+  rolesScore: 0,
+  orgScore: 0,
+  ganttScore: 0,
+  metricsScore: 0,
+  rolesMax: 0,
+  orgMax: 0,
+  ganttMax: 0,
+  metricsMax: 0,
+  currentScreen: 0
+};
+
+// ─── ROLES DATA ───────────────────────────────────────────────────────────────
+const rolesData = [
+  {
+    id: 'ceo',
+    title: 'Chief Executive Officer (CEO)',
+    icon: '👔',
+    zone: 'zone_ceo',
+    zoneLabel: 'Top Leader',
+    zoneDesc: 'Sets overall direction, ensures the mission is followed, and is responsible for all final decisions.'
+  },
+  {
+    id: 'lead_eng',
+    title: 'Lead Engineer',
+    icon: '⚙️',
+    zone: 'zone_eng',
+    zoneLabel: 'Design & Build Oversight',
+    zoneDesc: 'Oversees the technical design, testing, and construction of the vehicle. Reports to the CEO.'
+  },
+  {
+    id: 'proj_mgr',
+    title: 'Project Manager',
+    icon: '📋',
+    zone: 'zone_pm',
+    zoneLabel: 'Schedule & Resources',
+    zoneDesc: 'Manages the Gantt chart, tracks milestones, and makes sure the team has what it needs on time.'
+  },
+  {
+    id: 'qa',
+    title: 'Quality & Safety Officer',
+    icon: '🛡️',
+    zone: 'zone_qa',
+    zoneLabel: 'Standards & Inspections',
+    zoneDesc: 'Ensures the product meets safety requirements and quality standards before delivery.'
+  },
+  {
+    id: 'comms',
+    title: 'Communications Lead',
+    icon: '📢',
+    zone: 'zone_comms',
+    zoneLabel: 'Stakeholder & Community',
+    zoneDesc: 'Manages how the company communicates with its customers, community, and team members.'
+  }
+];
+
+// ─── ORG CHART DATA ───────────────────────────────────────────────────────────
+const orgQuestionsData = [
+  {
+    id: 'orgQ1',
+    text: 'Who does the Lead Engineer report to?',
+    options: ['Project Manager', 'CEO', 'Quality Officer', 'Communications Lead'],
+    correct: 1,
+    explanation: 'The Lead Engineer reports directly to the CEO, who sets the overall direction.'
+  },
+  {
+    id: 'orgQ2',
+    text: 'Which role is responsible for making sure the Gantt chart is on track?',
+    options: ['CEO', 'Lead Engineer', 'Project Manager', 'Quality & Safety Officer'],
+    correct: 2,
+    explanation: 'The Project Manager owns the schedule and tracks milestones on the Gantt chart.'
+  },
+  {
+    id: 'orgQ3',
+    text: 'An "organizational chart" primarily shows which of the following?',
+    options: ['The Gantt timeline', 'Hierarchy and reporting relationships', 'Success metrics', 'Product materials list'],
+    correct: 1,
+    explanation: 'An org chart diagrams the hierarchy and who reports to whom in the company.'
+  }
+];
+
+// ─── GANTT DATA ───────────────────────────────────────────────────────────────
+const ganttTasks = [
+  { id: 'g1', name: 'Form Company & Assign Roles', duration: 1, correctStart: 1, critical: true },
+  { id: 'g2', name: 'Research & Design Vehicle', duration: 2, correctStart: 2, critical: true },
+  { id: 'g3', name: 'Gather Materials', duration: 1, correctStart: 2, critical: false },
+  { id: 'g4', name: 'Build Prototype', duration: 2, correctStart: 4, critical: true },
+  { id: 'g5', name: 'Test & Revise', duration: 1, correctStart: 6, critical: true },
+  { id: 'g6', name: 'Final Safety Check', duration: 1, correctStart: 7, critical: true },
+  { id: 'g7', name: 'Document & Present', duration: 1, correctStart: 7, critical: false }
+];
+const totalWeeks = 8;
+
+// ─── METRICS DATA ─────────────────────────────────────────────────────────────
+const metricsData = [
+  {
+    text: '"Our vehicle will travel at least 3 meters on a single mousetrap."',
+    measurable: true,
+    explanation: '"At least 3 meters" is a specific, measurable number you can test.'
+  },
+  {
+    text: '"We want our company to do really well."',
+    measurable: false,
+    explanation: '"Do really well" is too vague — there is no number or specific target to measure.'
+  },
+  {
+    text: '"All team members will complete their assigned tasks by the deadline on the Gantt chart."',
+    measurable: true,
+    explanation: 'This ties performance to a specific timeline — the Gantt chart deadline — which is measurable.'
+  },
+  {
+    text: '"Our vehicle will look cool and be fast."',
+    measurable: false,
+    explanation: '"Look cool" and "be fast" have no defined benchmarks — you cannot measure them objectively.'
+  },
+  {
+    text: '"We will stay within a $10 budget and use only approved materials."',
+    measurable: true,
+    explanation: 'A $10 budget cap is a clear, verifiable number — that is a great success metric!'
+  }
+];
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function goTo(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + n).classList.add('active');
+  state.currentScreen = n;
+  updateProgress(n);
+  window.scrollTo(0, 0);
+}
+
+function updateProgress(n) {
+  const total = 6;
+  const pct = Math.round((n / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  for (let i = 0; i <= 5; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.classList.remove('active', 'done');
+    if (i < n) dot.classList.add('done');
+    else if (i === n) dot.classList.add('active');
+  }
+}
+
+// ─── STEP 1 ───────────────────────────────────────────────────────────────────
+document.getElementById('companyName').addEventListener('input', function() {
+  document.getElementById('nameCount').textContent = this.value.length + '/60';
+});
+document.getElementById('missionStmt').addEventListener('input', function() {
+  document.getElementById('missionCount').textContent = this.value.length + '/400';
+});
+
+function submitStep1() {
+  const name = document.getElementById('companyName').value.trim();
+  const mission = document.getElementById('missionStmt').value.trim();
+  let valid = true;
+
+  if (name.length < 3) {
+    document.getElementById('nameErr').classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('nameErr').classList.remove('show');
+  }
+  if (mission.length < 40) {
+    document.getElementById('missionErr').classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('missionErr').classList.remove('show');
+  }
+  if (!valid) return;
+
+  state.companyName = name;
+  state.missionStmt = mission;
+  buildRolesScreen();
+  goTo(2);
+}
+
+// ─── STEP 2: DRAG & DROP ROLES ────────────────────────────────────────────────
+let draggedRole = null;
+let touchDragEl = null;
+let touchClone = null;
+
+function buildRolesScreen() {
+  const bank = document.getElementById('roleBankList');
+  const zones = document.getElementById('dropZoneList');
+  bank.innerHTML = '';
+  zones.innerHTML = '';
+
+  // Shuffle roles for bank
+  const shuffled = [...rolesData].sort(() => Math.random() - 0.5);
+
+  shuffled.forEach(role => {
+    const el = document.createElement('div');
+    el.className = 'draggable-role';
+    el.id = 'role_' + role.id;
+    el.draggable = true;
+    el.dataset.roleId = role.id;
+    el.innerHTML = role.icon + ' ' + role.title;
+
+    // Desktop drag
+    el.addEventListener('dragstart', e => {
+      draggedRole = role.id;
+      el.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', role.id);
+    });
+    el.addEventListener('dragend', () => el.classList.remove('dragging'));
+
+    // Touch drag
+    el.addEventListener('touchstart', touchStart, { passive: false });
+    el.addEventListener('touchmove', touchMove, { passive: false });
+    el.addEventListener('touchend', touchEnd);
+
+    bank.appendChild(el);
+  });
+
+  rolesData.forEach(role => {
+    const dz = document.createElement('div');
+    dz.className = 'drop-zone';
+    dz.id = role.zone;
+    dz.dataset.expects = role.id;
+    dz.innerHTML = `<div class="dz-label">${role.zoneLabel}</div><div class="dz-desc">${role.zoneDesc}</div>`;
+
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+    dz.addEventListener('drop', e => {
+      e.preventDefault();
+      dz.classList.remove('over');
+      const rid = e.dataTransfer.getData('text/plain');
+      dropOnZone(dz, rid);
+    });
+
+    zones.appendChild(dz);
+  });
+
+  document.getElementById('rolesNextBtn').style.display = 'none';
+  document.getElementById('checkRolesBtn').style.display = 'inline-block';
+  document.getElementById('rolesfeeback') && (document.getElementById('rolesfeedback').style.display = 'none');
+}
+
+function dropOnZone(dz, roleId) {
+  // Remove any previous drop in this zone
+  const prev = dz.querySelector('.dz-dropped');
+  if (prev) {
+    const prevId = prev.dataset.roleId;
+    returnToBank(prevId);
+    prev.remove();
+  }
+
+  // Also remove from another zone if already placed
+  document.querySelectorAll('.drop-zone').forEach(z => {
+    const d = z.querySelector('.dz-dropped');
+    if (d && d.dataset.roleId === roleId) {
+      d.remove();
+      z.classList.remove('correct', 'incorrect');
+    }
+  });
+
+  const role = rolesData.find(r => r.id === roleId);
+  if (!role) return;
+
+  const dropped = document.createElement('div');
+  dropped.className = 'dz-dropped';
+  dropped.dataset.roleId = roleId;
+  dropped.innerHTML = role.icon + ' ' + role.title;
+  dz.appendChild(dropped);
+
+  // Grey out in bank
+  const bankEl = document.getElementById('role_' + roleId);
+  if (bankEl) bankEl.style.opacity = '0.3';
+
+  // Reset zone styling
+  dz.classList.remove('correct', 'incorrect');
+  document.getElementById('rolesfeeback') && (document.getElementById('rolesfeedback').style.display = 'none');
+}
+
+function returnToBank(roleId) {
+  const bankEl = document.getElementById('role_' + roleId);
+  if (bankEl) bankEl.style.opacity = '1';
+}
+
+// Touch support
+function touchStart(e) {
+  const el = e.currentTarget;
+  touchDragEl = el;
+  const rect = el.getBoundingClientRect();
+  touchClone = el.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.width = rect.width + 'px';
+  touchClone.style.opacity = '0.85';
+  touchClone.style.zIndex = '9999';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.left = rect.left + 'px';
+  touchClone.style.top = rect.top + 'px';
+  document.body.appendChild(touchClone);
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchClone) return;
+  const t = e.touches[0];
+  touchClone.style.left = (t.clientX - 40) + 'px';
+  touchClone.style.top = (t.clientY - 20) + 'px';
+  e.preventDefault();
+}
+
+function touchEnd(e) {
+  if (!touchClone || !touchDragEl) return;
+  const t = e.changedTouches[0];
+  touchClone.remove();
+  touchClone = null;
+
+  const roleId = touchDragEl.dataset.roleId;
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  let dz = el ? el.closest('.drop-zone') : null;
+  if (dz) {
+    dropOnZone(dz, roleId);
+  }
+  touchDragEl = null;
+}
+
+function checkRoles() {
+  let correct = 0;
+  const total = rolesData.length;
+
+  rolesData.forEach(role => {
+    const dz = document.getElementById(role.zone);
+    if (!dz) return;
+    const dropped = dz.querySelector('.dz-dropped');
+    dz.classList.remove('correct', 'incorrect');
+    if (dropped && dropped.dataset.roleId === role.id) {
+      correct++;
+      dz.classList.add('correct');
+    } else {
+      dz.classList.add('incorrect');
+    }
+  });
+
+  state.rolesScore = correct;
+  state.rolesMax = total;
+
+  const fb = document.getElementById('rolesfeeback') || document.getElementById('rolesfeedback') || (() => {
+    const el = document.createElement('div');
+    el.id = 'rolesfeedback';
+    return el;
+  })();
+
+  const feedbackEl = document.getElementById('rolesfeedback') || document.querySelector('#rolesArea').parentNode.querySelector('[id="rolesfeedback"]');
+
+  let msg = '';
+  if (correct === total) {
+    msg = `<div class="feedback-box success">✅ Perfect! All ${total} roles matched correctly. You understand the team structure!</div>`;
+  } else if (correct >= total - 1) {
+    msg = `<div class="feedback-box warning">⚠️ Almost! ${correct}/${total} correct. Check the highlighted zones (red border) and try rearranging.</div>`;
+  } else {
+    msg = `<div class="feedback-box error">❌ ${correct}/${total} correct. Review the descriptions carefully — each role fits a specific function in the Engineering Lifecycle.</div>`;
+  }
+
+  const existFb = document.getElementById('rolesfeeback2');
+  if (existFb) existFb.remove();
+  const div = document.createElement('div');
+  div.id = 'rolesfeeback2';
+  div.innerHTML = msg;
+  document.getElementById('checkRolesBtn').parentNode.insertBefore(div, document.getElementById('checkRolesBtn'));
+
+  if (correct === total) {
+    document.getElementById('rolesNextBtn').style.display = 'inline-block';
+  }
+}
+
+// ─── STEP 3: ORG CHART ────────────────────────────────────────────────────────
+function buildOrgScreen() {
+  // Build visual org chart
+  const vis = document.getElementById('orgChartVisual');
+  vis.innerHTML = `
+    <div class="org-row"><div class="org-node top">👔 CEO</div></div>
+    <div class="org-row"><span class="org-connector">▼</span></div>
+    <div class="org-mid-row">
+      <div class="org-node mid">⚙️ Lead Engineer</div>
+      <div class="org-node mid">📋 Project Manager</div>
+      <div class="org-node mid">🛡️ Quality Officer</div>
+      <div class="org-node mid">📢 Comms Lead</div>
+    </div>
+    <div class="org-row" style="margin-top:6px;"><div class="org-node bot">🔧 Engineering Team</div></div>
+  `;
+
+  const qContainer = document.getElementById('orgQuestions');
+  qContainer.innerHTML = '';
+
+  orgQuestionsData.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.style.marginTop = '14px';
+    div.innerHTML = `<label style="font-size:14px; font-weight:700; color:#1B3A5C; margin-bottom:8px; display:block;">${i + 1}. ${q.text}</label>`;
+
+    q.options.forEach((opt, j) => {
+      const btn = document.createElement('div');
+      btn.className = 'metric-option';
+      btn.id = `org_${q.id}_${j}`;
+      btn.dataset.qid = q.id;
+      btn.dataset.idx = j;
+      btn.innerHTML = `<span class="check-icon">○</span> ${opt}`;
+      btn.addEventListener('click', () => selectOrgAnswer(q.id, j));
+      div.appendChild(btn);
+    });
+
+    qContainer.appendChild(div);
+  });
+
+  document.getElementById('orgFeedback').style.display = 'none';
+  document.getElementById('checkOrgBtn').style.display = 'inline-block';
+  document.getElementById('orgNextBtn').style.display = 'none';
+}
+
+function selectOrgAnswer(qid, idx) {
+  orgQuestionsData.forEach(q => {
+    if (q.id === qid) {
+      q.options.forEach((_, j) => {
+        const el = document.getElementById(`org_${qid}_${j}`);
+        if (el) {
+          el.classList.remove('selected');
+          el.querySelector('.check-icon').textContent = '○';
+        }
+      });
+      const sel = document.getElementById(`org_${qid}_${idx}`);
+      if (sel) {
+        sel.classList.add('selected');
+        sel.querySelector('.check-icon').textContent = '●';
+        q.userAnswer = idx;
+      }
+    }
+  });
+}
+
+function checkOrg() {
+  let answered = true;
+  orgQuestionsData.forEach(q => {
+    if (q.userAnswer === undefined) answered = false;
+  });
+
+  if (!answered) {
+    document.getElementById('orgFeedback').style.display = 'block';
+    document.getElementById('orgFeedback').innerHTML = '<div class="feedback-box warning">⚠️ Please answer all questions before checking.</div>';
+    return;
+  }
+
+  let correct = 0;
+  orgQuestionsData.forEach(q => {
+    q.options.forEach((_, j) => {
+      const el = document.getElementById(`org_${q.id}_${j}`);
+      if (el) {
+        el.classList.remove('selected', 'correct', 'incorrect');
+        if (j === q.correct) {
+          el.classList.add('correct');
+          el.querySelector('.check-icon').textContent = '✅';
+        } else if (j === q.userAnswer && j !== q.correct) {
+          el.classList.add('incorrect');
+          el.querySelector('.check-icon').textContent = '❌';
+        } else {
+          el.querySelector('.check-icon').textContent = '○';
+        }
+      }
+    });
+    if (q.userAnswer === q.correct) correct++;
+  });
+
+  state.orgScore = correct;
+  state.orgMax = orgQuestionsData.length;
+
+  let explanations = orgQuestionsData.map(q =>
+    `<div style="margin-bottom:6px; font-size:13px;"><strong>${q.userAnswer === q.correct ? '✅' : '❌'}</strong> ${q.explanation}</div>`
+  ).join('');
+
+  let header = correct === orgQuestionsData.length
+    ? `<div class="feedback-box success">✅ All ${correct}/${orgQuestionsData.length} correct! You understand the org chart structure.</div>`
+    : `<div class="feedback-box warning">⚠️ ${correct}/${orgQuestionsData.length} correct. Review the explanations below.</div>`;
+
+  document.getElementById('orgFeedback').style.display = 'block';
+  document.getElementById('orgFeedback').innerHTML = header + explanations;
+  document.getElementById('checkOrgBtn').style.display = 'none';
+  document.getElementById('orgNextBtn').style.display = 'inline-block';
+}
+
+// ─── STEP 4: GANTT CHART ──────────────────────────────────────────────────────
+function buildGanttScreen() {
+  const container = document.getElementById('ganttTable');
+  container.innerHTML = '';
+
+  ganttTasks.forEach(task => {
+    task.userStart = task.correctStart; // default to correct
+    const row = document.createElement('div');
+    row.className = 'gantt-task-item';
+    row.id = 'gantt_row_' + task.id;
+
+    const lbl = document.createElement('label');
+    lbl.innerHTML = task.name + (task.critical ? '<span class="cp-tag">Critical</span>' : '');
+    lbl.style.cursor = 'default';
+
+    const sel = document.createElement('select');
+    sel.id = 'gantt_sel_' + task.id;
+    for (let w = 1; w <= totalWeeks - task.duration + 1; w++) {
+      const opt = document.createElement('option');
+      opt.value = w;
+      opt.textContent = 'Wk ' + w;
+      sel.appendChild(opt);
+    }
+    // Scramble starting value
+    const scramble = [1, 3, 2, 5, 4, 6, 6, 7][ganttTasks.indexOf(task)] || 1;
+    sel.value = scramble;
+    task.userStart = scramble;
+    sel.addEventListener('change', function() {
+      task.userStart = parseInt(this.value);
+      updateGanttBar(task);
+    });
+
+    const barRow = document.createElement('div');
+    barRow.className = 'gantt-bar-row';
+    barRow.id = 'gantt_barrow_' + task.id;
+    barRow.style.position = 'relative';
+
+    // Week markers (light lines)
+    for (let w = 1; w <= totalWeeks; w++) {
+      const mark = document.createElement('div');
+      mark.style.cssText = `position:absolute;top:0;left:${((w-1)/totalWeeks)*100}%;width:1px;height:100%;background:rgba(255,255,255,0.4);`;
+      barRow.appendChild(mark);
+    }
+
+    const bar = document.createElement('div');
+    bar.className = 'gantt-bar' + (task.critical ? ' critical' : '');
+    bar.id = 'gantt_bar_' + task.id;
+    barRow.appendChild(bar);
+
+    row.appendChild(lbl);
+    row.appendChild(sel);
+    row.appendChild(barRow);
+    container.appendChild(row);
+
+    updateGanttBar(task);
+  });
+
+  document.getElementById('ganttFeedback').style.display = 'none';
+  document.getElementById('checkGanttBtn').style.display = 'inline-block';
+  document.getElementById('ganttNextBtn').style.display = 'none';
+}
+
+function updateGanttBar(task) {
+  const bar = document.getElementById('gantt_bar_' + task.id);
+  if (!bar) return;
+  const start = (task.userStart - 1) / totalWeeks * 100;
+  const width = task.duration / totalWeeks * 100;
+  bar.style.marginLeft = start + '%';
+  bar.style.width = width + '%';
+}
+
+function checkGantt() {
+  let correct = 0;
+  const total = ganttTasks.length;
+
+  ganttTasks.forEach(task => {
+    const sel = document.getElementById('gantt_sel_' + task.id);
+    const row = document.getElementById('gantt_row_' + task.id);
+    const bar = document.getElementById('gantt_bar_' + task.id);
+
+    if (parseInt(sel.value) === task.correctStart) {
+      correct++;
+      bar.classList.add('done');
+      bar.classList.remove('critical');
+      row.style.background = '#e8f5e9';
+      row.style.borderRadius = '8px';
+      row.style.padding = '4px';
+    } else {
+      row.style.background = '#ffebee';
+      row.style.borderRadius = '8px';
+      row.style.padding = '4px';
+    }
+  });
+
+  state.ganttScore = correct;
+  state.ganttMax = total;
+
+  let msg = '';
+  if (correct === total) {
+    msg = `<div class="feedback-box success">✅ Perfect schedule! All ${total} tasks placed correctly. Notice how Critical Path tasks must happen in exact order — any delay pushes the whole project back!</div>`;
+  } else {
+    const wrongTasks = ganttTasks.filter(t => t.userStart !== t.correctStart).map(t => `"${t.name}" should start Week ${t.correctStart}`).join('; ');
+    msg = `<div class="feedback-box warning">⚠️ ${correct}/${total} correct. Adjust the highlighted rows (red): ${wrongTasks}.</div>`;
+  }
+
+  document.getElementById('ganttFeedback').style.display = 'block';
+  document.getElementById('ganttFeedback').innerHTML = msg;
+
+  if (correct >= total - 1) {
+    document.getElementById('ganttNextBtn').style.display = 'inline-block';
+  }
+}
+
+// ─── STEP 5: METRICS ──────────────────────────────────────────────────────────
+function buildMetricsScreen() {
+  const container = document.getElementById('metricsQuestions');
+  container.innerHTML = '';
+  metricsData.forEach((m, i) => {
+    m.userAnswer = null;
+    const div = document.createElement('div');
+    div.style.marginBottom = '14px';
+    div.innerHTML = `<div style="font-size:14px; font-weight:600; color:#1B3A5C; margin-bottom:8px; line-height:1.5;">${i + 1}. ${m.text}</div>`;
+
+    const btnRow = document.createElement('div');
+    btnRow.style.display = 'flex';
+    btnRow.style.gap = '10px';
+    btnRow.style.flexWrap = 'wrap';
+
+    const btnY = document.createElement('div');
+    btnY.className = 'metric-option';
+    btnY.id = `metric_yes_${i}`;
+    btnY.innerHTML = '<span class="check-icon">○</span> ✅ Measurable Metric';
+    btnY.style.flex = '1 1 160px';
+    btnY.addEventListener('click', () => selectMetric(i, true));
+
+    const btnN = document.createElement('div');
+    btnN.className = 'metric-option';
+    btnN.id = `metric_no_${i}`;
+    btnN.innerHTML = '<span class="check-icon">○</span> ❓ Too Vague';
+    btnN.style.flex = '1 1 160px';
+    btnN.addEventListener('click', () => selectMetric(i, false));
+
+    btnRow.appendChild(btnY);
+    btnRow.appendChild(btnN);
+    div.appendChild(btnRow);
+    container.appendChild(div);
+  });
+
+  document.getElementById('metricsFeedback').style.display = 'none';
+  document.getElementById('checkMetricsBtn').style.display = 'inline-block';
+  document.getElementById('metricsNextBtn').style.display = 'none';
+}
+
+function selectMetric(i, isMeasurable) {
+  metricsData[i].userAnswer = isMeasurable;
+  const btnY = document.getElementById(`metric_yes_${i}`);
+  const btnN = document.getElementById(`metric_no_${i}`);
+  btnY.classList.remove('selected');
+  btnN.classList.remove('selected');
+  btnY.querySelector('.check-icon').textContent = '○';
+  btnN.querySelector('.check-icon').textContent = '○';
+  if (isMeasurable) {
+    btnY.classList.add('selected');
+    btnY.querySelector('.check-icon').textContent = '●';
+  } else {
+    btnN.classList.add('selected');
+    btnN.querySelector('.check-icon').textContent = '●';
+  }
+}
+
+function checkMetrics() {
+  const unanswered = metricsData.some(m => m.userAnswer === null);
+  if (unanswered) {
+    document.getElementById('metricsFeedback').style.display = 'block';
+    document.getElementById('metricsFeedback').innerHTML = '<div class="feedback-box warning">⚠️ Please answer all 5 questions before submitting.</div>';
+    return;
+  }
+
+  let correct = 0;
+  let explanations = '';
+  metricsData.forEach((m, i) => {
+    const isRight = m.userAnswer === m.measurable;
+    if (isRight) correct++;
+
+    const btnY = document.getElementById(`metric_yes_${i}`);
+    const btnN = document.getElementById(`metric_no_${i}`);
+    btnY.classList.remove('selected', 'correct', 'incorrect');
+    btnN.classList.remove('selected', 'correct', 'incorrect');
+
+    if (m.measurable) {
+      btnY.classList.add('correct');
+      btnY.querySelector('.check-icon').textContent = '✅';
+      if (!isRight) { btnN.classList.add('incorrect'); btnN.querySelector('.check-icon').textContent = '❌'; }
+    } else {
+      btnN.classList.add('correct');
+      btnN.querySelector('.check-icon').textContent = '✅';
+      if (!isRight) { btnY.classList.add('incorrect'); btnY.querySelector('.check-icon').textContent = '❌'; }
+    }
+
+    explanations += `<div style="font-size:13px; margin-bottom:5px;"><strong>${isRight ? '✅' : '❌'}</strong> ${m.explanation}</div>`;
+  });
+
+  state.metricsScore = correct;
+  state.metricsMax = metricsData.length;
+
+  let header = correct === metricsData.length
+    ? `<div class="feedback-box success">✅ Perfect! All ${correct}/${metricsData.length} correct. You know what makes a metric measurable!</div>`
+    : `<div class="feedback-box warning">⚠️ ${correct}/${metricsData.length} correct. A metric must have a specific, testable number or deadline.</div>`;
+
+  document.getElementById('metricsFeedback').style.display = 'block';
+  document.getElementById('metricsFeedback').innerHTML = header + explanations;
+  document.getElementById('checkMetricsBtn').style.display = 'none';
+  document.getElementById('metricsNextBtn').style.display = 'inline-block';
+}
+
+// ─── SUMMARY ──────────────────────────────────────────────────────────────────
+function showSummary() {
+  const totalScore = state.rolesScore + state.orgScore + state.ganttScore + state.metricsScore;
+  const totalMax = state.rolesMax + state.orgMax + state.ganttMax + state.metricsMax;
+  const pct = Math.round((totalScore / totalMax) * 100);
+
+  document.getElementById('finalScore').textContent = pct + '%';
+
+  let label, sub;
+  if (pct === 100) {
+    label = '🏆 Outstanding CEO Material!';
+    sub = 'You aced every section. Your company is ready to launch!';
+  } else if (pct >= 80) {
+    label = '🌟 Strong Company Foundation!';
+    sub = 'Great work — review any missed items and your team will be set.';
+  } else if (pct >= 60) {
+    label = '👍 Good Start!';
+    sub = 'You have the basics down. Study the roles and scheduling concepts to sharpen up.';
+  } else {
+    label = '🔧 Keep Building!';
+    sub = 'Every great engineer learns by doing. Review the lesson and try again!';
+  }
+  document.getElementById('finalLabel').textContent = label;
+  document.getElementById('finalSub').textContent = sub;
+
+  // Company profile
+  const grid = document.getElementById('summaryGrid');
+  grid.innerHTML = `
+    <div class="summary-item" style="grid-column: 1/-1;">
+      <div class="si-label">Company Name</div>
+      <div class="si-value">${escHtml(state.companyName)}</div>
+    </div>
+    <div class="summary-item" style="grid-column: 1/-1;">
+      <div class="si-label">Mission Statement</div>
+      <div class="si-value" style="font-weight:400; font-size:13px; line-height:1.5;">${escHtml(state.missionStmt)}</div>
+    </div>
+  `;
+
+  // Activity summary
+  const actSummary = document.getElementById('activitySummary');
+  const sections = [
+    { name: '👥 Role Assignment', score: state.rolesScore, max: state.rolesMax },
+    { name: '🗂️ Org Chart Questions', score: state.orgScore, max: state.orgMax },
+    { name: '📅 Gantt Schedule', score: state.ganttScore, max: state.ganttMax },
+    { name: '🎯 Success Metrics', score: state.metricsScore, max: state.metricsMax }
+  ];
+
+  actSummary.innerHTML = sections.map(s => {
+    const sp = Math.round((s.score / s.max) * 100);
+    const color = sp === 100 ? '#2e7d32' : sp >= 60 ? '#C9A84C' : '#c62828';
+    return `
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+        <div style="flex:1 1 160px; font-size:14px; font-weight:600; color:#1B3A5C;">${s.name}</div>
+        <div style="flex:0 0 60px; font-size:14px; font-weight:700; color:${color}; text-align:right;">${s.score}/${s.max}</div>
+        <div style="flex:2 1 120px; height:10px; background:#dce4ee; border-radius:5px; overflow:hidden;">
+          <div style="height:100%; width:${sp}%; background:${color}; border-radius:5px; transition:width 0.5s;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  goTo(6);
+}
+
+function escHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ─── RESTART ──────────────────────────────────────────────────────────────────
+function restartAll() {
+  state.companyName = '';
+  state.missionStmt = '';
+  state.rolesScore = 0;
+  state.orgScore = 0;
+  state.ganttScore = 0;
+  state.metricsScore = 0;
+
+  document.getElementById('companyName').value = '';
+  document.getElementById('missionStmt').value = '';
+  document.getElementById('nameCount').textContent = '0/60';
+  document.getElementById('missionCount').textContent = '0/400';
+  document.getElementById('nameErr').classList.remove('show');
+  document.getElementById('missionErr').classList.remove('show');
+
+  orgQuestionsData.forEach(q => delete q.userAnswer);
+  metricsData.forEach(m => m.userAnswer = null);
+
+  goTo(0);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+// Override goTo to build screens on demand
+const _goTo = goTo;
+function goTo(n) {
+  if (n === 2) buildRolesScreen();
+  if (n === 3) buildOrgScreen();
+  if (n === 4) buildGanttScreen();
+  if (n === 5) buildMetricsScreen();
+  _goTo(n);
+}
+
+// Initial setup
+updateProgress(0);
+</script>
+</body>
+</html>

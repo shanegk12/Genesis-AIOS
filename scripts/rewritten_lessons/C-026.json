@@ -1,0 +1,453 @@
+[
+  {
+    "id": "c026t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Managing Resistive Sources</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In this lesson, you will transition from design principles into the performance phase of Creationeering™ by analyzing the dynamic forces that govern how systems move — and what slows them down. You will undertake a technical study of resistive forces, specifically friction and air drag. You will learn mathematical and material science strategies to minimize unwanted resistance for peak energy efficiency, while also exploring how to strategically harness necessary resistive forces like traction and braking for controlled, safe system operation. Along the way, you will see how this work connects directly to your role as a faithful steward of energy and resources.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p><ul><li>Analyze the various resistive forces that oppose an engineer's objectives, including static friction, kinetic friction, and air drag.</li><li>Implement material selection and aerodynamic strategies to minimize unwanted resistance for energy optimization.</li><li>Explain the strategic importance of necessary resistive forces — traction, braking, and damping — in ensuring system safety and function.</li><li>Connect the concept of engineering stewardship to the biblical mandate of faithful resource management.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Resistive Force",
+          "definition": "Any force, such as friction or drag, that acts opposite to the direction of motion."
+        },
+        {
+          "term": "Static Friction",
+          "definition": "The resistance that keeps an object at rest, which must be overcome before movement can begin."
+        },
+        {
+          "term": "Kinetic Friction",
+          "definition": "The force that opposes the motion of an object once it is already moving."
+        },
+        {
+          "term": "Drag Coefficient (Cd)",
+          "definition": "A dimensionless number that quantifies how much air resistance an object experiences as it moves through a fluid like air."
+        },
+        {
+          "term": "Traction",
+          "definition": "The specific application of friction that allows wheels to grip a surface and generate controlled motion."
+        },
+        {
+          "term": "Pareto Frontier",
+          "definition": "The set of optimal design choices where improving one performance goal (like speed) requires sacrificing another (like braking safety)."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible management of resources, time, and energy that have been entrusted to an engineer's care."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Design to Performance</h2>\n<p>In previous lessons, you explored the foundational steps of the Creationeering™ framework — design, analysis, and assembly. You established that God, the Master Engineer, designed the cosmos as a complex, interactive system where every physical law serves a purpose.</p>\n<p>Now you move from the <em>what</em> of design to the <em>how</em> of performance. Every real system you build will face forces that push back. A spinning gear loses energy to friction. A moving vehicle fights air resistance every mile. Understanding those forces — and knowing when to fight them and when to use them — is what separates a good engineer from a great one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:28</strong> calls us to \"subdue\" and \"rule\" over creation. In engineering, subduing creation means understanding the laws of physics so thoroughly that you can innovate within them to serve humanity and glorify God. Resistance is not a mistake in the universe — it is a boundary condition that invites wise stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Resistance Exists — A Stewardship Perspective</h2>\n<p>Before diving into coefficients and equations, it helps to ask a bigger question: why does resistance exist at all?</p>\n<p>Think of the physical world as a system of top-down constraints. Just like a budget forces a business to prioritize spending wisely, resistive forces force engineers to prioritize energy wisely. When a car encounters air resistance or a gear system experiences friction, energy is \"lost\" — converted into heat rather than useful motion. As stewards of the resources entrusted to us, our goal is to minimize that waste wherever we can.</p>\n<p>At the same time, some resistance is not the enemy. Without friction, your car's tires would spin in place. Without drag, a parachute would be useless. The engineer's skill lies in knowing the difference — and designing accordingly.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>1 Corinthians 4:2</strong> — \"It is required of stewards that they be found faithful.\" Faithfulness in engineering means optimizing your designs so that you do not squander the energy or resources entrusted to you. Every joule of energy saved through smart design is an act of responsible stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Identifying the Opposition: Friction and Drag</h2>\n<p>Any force that acts opposite to the direction of motion is called a <strong>resistive force</strong>. For most mechanical systems, two resistive forces dominate: friction and air drag. Understanding each one — where it comes from, how to calculate it, and how to manage it — is essential engineering knowledge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>Frictional Forces</h3>\n<p>Friction is the force that two surfaces exert on each other when they are in contact. It always acts <em>against</em> the direction of motion — or against the tendency to move. There are two key types you need to know.</p>\n<p><strong>Static friction</strong> is the resistance that holds an object in place before it starts moving. It is usually stronger than kinetic friction, which is why it takes more force to get a heavy box sliding than it does to keep it sliding once it's moving. Think of static friction as a locked door — you have to push hard enough to break the lock before anything happens.</p>\n<p><strong>Kinetic friction</strong> takes over once motion begins. It is the ongoing resistance between two sliding surfaces. The magnitude of both types depends on two factors: the normal force (how hard the surfaces press together) and the <strong>coefficient of friction</strong> — a number that describes how \"grippy\" two surfaces are relative to each other. A polished steel surface sliding on ice has a very low coefficient. Rubber on dry concrete has a much higher one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram comparing static friction and kinetic friction on a block being pushed across a surface, showing the transition point where motion begins"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>The Friction Formula:</strong> Friction force (F) = coefficient of friction (μ) × normal force (N). Static friction uses μ<sub>s</sub> and kinetic friction uses μ<sub>k</sub>. In most material pairs, μ<sub>s</sub> &gt; μ<sub>k</sub> — meaning it always takes more force to <em>start</em> movement than to <em>sustain</em> it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Air Drag</h3>\n<p>When an object moves through air (or any fluid), the fluid pushes back. That pushback is called <strong>drag</strong>. Unlike friction between two solid surfaces, drag depends heavily on speed — the faster you go, the harder the air pushes back. At highway speeds, air drag is the dominant energy cost for most vehicles.</p>\n<p>Drag is quantified using the <strong>drag coefficient (C<sub>d</sub>)</strong>. A lower C<sub>d</sub> means a more aerodynamic shape. A flat plate facing into the wind might have a C<sub>d</sub> close to 1.0. A well-designed sports car might achieve 0.25 or lower. Aerospace engineers spend entire careers shaving fractions off that number.</p>\n<p>Three factors drive drag force: the drag coefficient, the cross-sectional area of the object facing the flow, and the speed of the object squared. That squared relationship with speed is important — doubling your speed does not double your drag. It quadruples it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of airflow around a boxy shape versus a streamlined teardrop shape, illustrating the effect of aerodynamic design on drag"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>Remember: drag force grows with the <em>square</em> of velocity. If you're designing a high-speed system, even small reductions in C<sub>d</sub> translate into huge energy savings at top speed. This is why streamlining is one of the most impactful tools in an aerodynamic engineer's toolbox.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Strategies to Minimize Unwanted Resistance</h2>\n<p>Once you understand where resistance comes from, you can take deliberate steps to reduce it. Engineers have two main toolkits: <strong>material selection</strong> and <strong>aerodynamic shaping</strong>.</p>\n<h3>Material Selection</h3>\n<p>Choosing the right materials for surfaces in contact can dramatically reduce the coefficient of friction. Low-friction coatings like PTFE (commonly known as Teflon) are applied to machine parts that slide against each other. Lubricants — oils and greases — create a thin fluid layer between surfaces so they never fully touch, dropping kinetic friction close to zero in some applications. Bearing systems replace sliding contact with rolling contact, which generates far less friction.</p>\n<h3>Aerodynamic Shaping</h3>\n<p>To reduce drag, engineers study how air flows around a shape and redesign surfaces to let air pass smoothly rather than tumble. Smooth, rounded leading edges, tapered rear sections, and minimized frontal area all reduce C<sub>d</sub>. This is why modern cars, aircraft, and even cycling helmets share that characteristic teardrop-like profile — it is the shape that air \"prefers\" to flow around cleanly.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b005",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often assume that eliminating all friction is the goal. It is not. Removing too much friction from the wrong surfaces — like a brake pad or a tire tread — creates dangerous systems. Always ask: is this friction unwanted waste, or is it doing critical work?</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>When Resistance is the Point: Traction, Braking, and Damping</h2>\n<p>Here is one of the most important insights in this entire module: not all resistance is your enemy. In fact, three of the most critical safety features in any mobile system depend entirely on resistance working <em>for</em> you.</p>\n<h3>Traction</h3>\n<p>Traction is friction put to work. When a tire pushes backward against the road, the road's friction pushes the car forward. Without sufficient traction, a vehicle cannot accelerate, steer, or stop reliably. Racing engineers spend enormous effort optimizing tire compounds — essentially tuning the coefficient of friction — to maximize traction in specific temperature and surface conditions.</p>\n<h3>Braking</h3>\n<p>Braking systems deliberately create high friction to convert kinetic energy (motion) into heat. Brake pads are engineered from materials with high friction coefficients that remain stable at elevated temperatures. The entire goal here is to generate as much resistive force as possible — in a controlled, predictable way.</p>\n<h3>Damping</h3>\n<p>Damping is resistance applied to vibration. Shock absorbers in a vehicle use fluid resistance to slow down the bouncing of the suspension. Without damping, a car would oscillate uncontrollably after hitting a bump. Damping turns dangerous vibration energy into heat, stabilizing the system.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026img003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing traction force at a tire-road contact patch, braking force at a disc brake assembly, and a damper absorbing suspension oscillation"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Navigating Trade-offs: The Pareto Frontier</h2>\n<p>Here is where engineering gets genuinely challenging. Reducing drag often means a sleeker, lighter body — which may reduce the surface area available for braking or limit tire grip. Increasing traction by using softer tire compounds improves grip but increases rolling resistance, costing energy efficiency. Every design decision involves a trade-off.</p>\n<p>Engineers use the concept of the <strong>Pareto Frontier</strong> to think clearly about these trade-offs. Imagine plotting all possible designs on a graph — speed on one axis, braking safety on the other. The Pareto Frontier is the curve of \"best possible\" designs: any design on that curve cannot be made faster without becoming less safe to stop, and vice versa. Designs <em>off</em> the curve are simply inferior — they can be improved in one dimension without sacrificing the other.</p>\n<p>Understanding the Pareto Frontier helps you have honest conversations about design priorities. It forces you to ask: what does this system truly need to do, and what are we willing to trade to get there?</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When you encounter a design trade-off, ask yourself two questions: (1) What is the primary mission of this system? and (2) Which performance failure would be most catastrophic? Those two answers usually tell you where on the Pareto Frontier you should aim.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026img004",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A Pareto Frontier graph plotting speed versus braking safety for a set of vehicle designs, showing the optimal trade-off curve"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Resistance as a Reflection of God's Design</h2>\n<p>It would be easy to look at friction and drag and see only obstacles. But consider what a world without resistance would actually look like. Without friction, nothing could grip anything. Without air drag, atmospheric re-entry would be unsurvivable. Without damping, every vibration would amplify until something broke.</p>\n<p>Resistance — managed wisely — is what makes control possible. It is what allows a car to stop, a plane to land, and a bridge to absorb the energy of wind and traffic without shaking apart. The physical laws that create resistance are not flaws in creation. They are features of a brilliantly engineered system that rewards careful, humble, attentive stewardship.</p>\n<p>Your job as a Creationeer is not to fight the laws of physics. It is to understand them deeply enough to work <em>with</em> them — minimizing waste where it serves no purpose, and harnessing resistance where it keeps people safe.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026b007",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:3-4</strong> — \"By wisdom a house is built, and by understanding it is established; by knowledge the rooms are filled with all precious and pleasant riches.\" Engineering mastery is built on wisdom, understanding, and knowledge — not brute force. Managing resistance well is a direct expression of all three.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is the difference between static and kinetic friction?",
+      "html": "<p>Static friction acts on an object that is <em>not yet moving</em> — it resists the start of motion. Kinetic friction acts on an object that <em>is already moving</em> — it resists continued motion. In most material pairs, static friction is greater than kinetic friction, which is why it takes more force to get something moving than to keep it moving.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026ac002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Why does drag force increase so dramatically at high speeds?",
+      "html": "<p>Drag force is proportional to velocity <em>squared</em>. This means doubling your speed multiplies your drag force by four. At highway speeds, this relationship makes aerodynamic drag the dominant energy cost for most vehicles — far outweighing rolling friction. This is why streamlining becomes increasingly critical as speed increases.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026ac003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Give two examples of resistance that engineers intentionally maximize rather than minimize.",
+      "html": "<p>1. <strong>Braking systems</strong> — Brake pads are engineered for high friction coefficients so they can convert kinetic energy into heat and stop a vehicle quickly and safely.</p><p>2. <strong>Traction (tire grip)</strong> — Tire compounds are tuned to maximize friction with the road surface so the vehicle can accelerate and steer predictably. Other examples include dampers (shock absorbers) and parachutes.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c026ac004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is the Pareto Frontier and why does it matter to engineers?",
+      "html": "<p>The Pareto Frontier is the set of optimal design choices where you cannot improve one performance objective without making another worse. It matters because it forces engineers to think clearly about priorities and trade-offs rather than pretending every goal can be maximized simultaneously. Designs that fall <em>off</em> the frontier are simply inefficient — they can be improved without sacrifice. Designs <em>on</em> the frontier require a deliberate choice about what matters most.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

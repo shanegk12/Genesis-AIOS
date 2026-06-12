@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Material Recovery and Salvage Value — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Material Recovery and Salvage Value</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Material Recovery", "definition": "The process of collecting and processing materials from discarded products so they can be used again or recycled into new items."}, {"term": "Salvage Value", "definition": "The estimated worth or value of a product or its parts when it has reached the end of its original useful life."}, {"term": "Recycling", "definition": "Converting an existing product or material into a new product, often to save resources and reduce waste."}, {"term": "Upcycling", "definition": "Repurposing discarded materials into new products that are of higher value or better quality than the original."}, {"term": "Downcycling", "definition": "Recycling a material into a new product that is of lesser quality or value compared to the original material."}, {"term": "Multiscale Modeling", "definition": "Connecting observations from large-scale systems, like a rusty bike, to the behavior of materials at tiny atomic and molecular levels."}, {"term": "Optimization", "definition": "The process of finding the best possible solution or a good balance when you have several goals and limitations to consider."}, {"term": "Dominion Mandate", "definition": "God's command for humans to rule over, care for, and be good stewards of the Earth and all its resources."}, {"term": "Death & Recycling Phase", "definition": "The final phase of the Creationeering™ framework, focusing on what happens to products and materials after their designed use is over."}, {"term": "End-of-Life (EOL) Responsibility", "definition": "Thinking about how our creations impact people and the planet throughout their entire existence, even after they are no longer used."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

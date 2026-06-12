@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Critical Path Method (CPM) — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Critical Path Method (CPM)</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Critical Path Method (CPM)", "definition": "A powerful tool used to figure out the fastest way to complete a project by identifying the most essential tasks and their order."}, {"term": "Task", "definition": "A specific activity that needs to be completed as part of a project, like 'drawing blueprints' or 'gathering materials'."}, {"term": "Duration", "definition": "The estimated amount of time it will take to complete a specific task, helping us plan how long each step will take."}, {"term": "Dependency", "definition": "A relationship between tasks where one task cannot start until another task is completely finished, like needing to bake a cake before you can frost it."}, {"term": "Predecessor Task", "definition": "A task that must be completed before another task can begin, acting as a necessary step before moving forward."}, {"term": "Successor Task", "definition": "A task that can only begin after another task (its predecessor) is finished, following directly after a completed step."}, {"term": "Project Network Diagram", "definition": "A visual map that shows all the tasks in a project, how they connect, and how long each one takes."}, {"term": "Critical Path", "definition": "The longest sequence of tasks in a project, which determines the shortest possible time the entire project can be completed."}, {"term": "Slack (or Float)", "definition": "The amount of extra time a task can be delayed without causing the entire project to be late."}, {"term": "Resource Allocation", "definition": "The process of carefully assigning and managing things like time, materials, or people to different project tasks."}, {"term": "Bottleneck", "definition": "A point in the project where tasks slow down or get stuck, preventing the project from moving forward efficiently."}, {"term": "Stewardship", "definition": "Carefully managing and using the time and resources God has given us in a responsible way, as taught in the Bible."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

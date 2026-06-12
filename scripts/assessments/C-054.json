@@ -1,0 +1,127 @@
+{
+  "lesson_id": "C-054",
+  "topic": "Sequencing and Assembly Lines",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the term for the specific order in which a series of tasks must be performed to achieve a desired outcome?",
+      "options": {
+        "A": "Workflow",
+        "B": "Throughput",
+        "C": "Sequencing",
+        "D": "Optimization"
+      },
+      "answer": "C",
+      "explanation": "Sequencing is defined as the specific order in which tasks must be performed to achieve a desired outcome."
+    },
+    {
+      "type": "recall",
+      "question": "In a sequential process, what is a point where the flow of work is slowed or stopped, limiting the overall output of the entire system?",
+      "options": {
+        "A": "Workflow",
+        "B": "Bottleneck",
+        "C": "Throughput",
+        "D": "Optimization"
+      },
+      "answer": "B",
+      "explanation": "A bottleneck is a point in a process where work slows or stops, limiting the entire system's output."
+    },
+    {
+      "type": "recall",
+      "question": "What term describes the rate at which something can be processed or produced over a given period of time?",
+      "options": {
+        "A": "Sequencing",
+        "B": "Bottleneck",
+        "C": "Throughput",
+        "D": "Workflow"
+      },
+      "answer": "C",
+      "explanation": "Throughput is defined as the rate at which something can be processed or produced over a given period of time."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is following a logical sequence important when building something like a model airplane or making a sandwich?",
+      "options": {
+        "A": "It makes the final product more expensive",
+        "B": "It ensures each step happens smoothly and the final product is correct",
+        "C": "It allows you to skip unnecessary steps",
+        "D": "It always makes the process faster, regardless of the task"
+      },
+      "answer": "B",
+      "explanation": "Following a logical sequence ensures that each step can be completed correctly and smoothly, leading to a proper final product."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does an assembly line primarily improve the process of making a product?",
+      "options": {
+        "A": "By allowing workers to choose their own tasks",
+        "B": "By adding all parts at once in a single workstation",
+        "C": "By organizing tasks sequentially as the product moves from station to station",
+        "D": "By eliminating the need for any planning or blueprints"
+      },
+      "answer": "C",
+      "explanation": "An assembly line improves efficiency by organizing tasks in a sequential manner, with the product moving through different workstations."
+    },
+    {
+      "type": "comprehension",
+      "question": "If a specific workstation on an assembly line is much slower than all the others, what will be the likely effect on the overall production?",
+      "options": {
+        "A": "The other workstations will speed up to compensate",
+        "B": "The overall output of the entire line will be limited by that slow workstation",
+        "C": "The quality of the product will significantly increase",
+        "D": "It will only affect the workers at that specific station, not the whole line"
+      },
+      "answer": "B",
+      "explanation": "A bottleneck, being the slowest point, will limit the overall output of the entire system, regardless of how fast other parts of the process are."
+    },
+    {
+      "type": "application",
+      "question": "A group of students is assembling care packages. One student is responsible for tying bows on the finished packages, but they are much slower than the students filling the packages. What does the student tying bows represent in this assembly process?",
+      "options": {
+        "A": "The throughput",
+        "B": "The objective",
+        "C": "A bottleneck",
+        "D": "A variable"
+      },
+      "answer": "C",
+      "explanation": "The student tying bows is a bottleneck because their slower pace is limiting the overall speed at which the care packages can be completed."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeering team is tasked with building a robot for a competition, but they only have two weeks to complete it. In the OCV method, what does the 'two weeks' represent?",
+      "options": {
+        "A": "The Objective",
+        "B": "A Variable",
+        "C": "A Constraint",
+        "D": "The Throughput"
+      },
+      "answer": "C",
+      "explanation": "The 'two weeks' is a limitation or restriction that must be considered, making it a constraint in the OCV method."
+    },
+    {
+      "type": "application",
+      "question": "A baker wants to make 100 cookies as efficiently as possible. Which action best demonstrates applying sequencing principles to optimize their process?",
+      "options": {
+        "A": "Baking all 100 cookies in one giant batch at once",
+        "B": "Decorating all cookies before baking them",
+        "C": "Mixing all ingredients, then scooping dough, then baking, then decorating in batches",
+        "D": "Asking a friend to randomly help with any step"
+      },
+      "answer": "C",
+      "explanation": "Following a clear, logical sequence (mixing, scooping, baking, decorating) in batches optimizes the process for efficiency and quality."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson mentions God's deliberate, step-by-step creation in Genesis 1. How does this connect to the biblical call for diligent stewardship in our own Creationeering projects?",
+      "options": {
+        "A": "It shows that we should only create things that are very large and complex",
+        "B": "It teaches us to rush through projects to finish quickly",
+        "C": "It encourages us to plan and execute our tasks with purpose and precision, reflecting God's wisdom",
+        "D": "It means we should always work alone, without help from others"
+      },
+      "answer": "C",
+      "explanation": "God's orderly creation teaches us to emulate His wisdom by planning and executing our projects with purpose and precision, which is a form of diligent stewardship."
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+[
+  {
+    "id": "m051hdr1",
+    "type": "text",
+    "data": {
+      "html": "<h1>Performance Activity: Baselines and Predictions</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051ovr2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson on Variables and Optimization, you discovered how identifying and adjusting the right variables — wheel size, lever arm length, axle friction — can push your mousetrap car toward peak performance. Today, we build on that foundation with a critical step in the Creationeering™ Performance phase: <strong>Baselines and Predictions</strong>.</p><p>Before you can improve anything, you need to know where you're starting. This lesson will show you how to measure your mousetrap car's current performance to establish a baseline. Then, using that real data, you'll make informed predictions about how specific design changes will affect your results. This isn't guessing — it's the same systematic thinking engineers use every day to forecast outcomes and make every adjustment count.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051obj3",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Define what a performance baseline is and explain why it matters in engineering design.</li><li>Collect initial performance data for a mousetrap car to establish a baseline.</li><li>Make informed predictions about performance changes based on specific design modifications.</li><li>Apply the OCV (Objective, Constraint, Variable) method to evaluate and refine performance predictions.</li><li>Develop a systematic approach to testing and data analysis that reflects diligent stewardship of resources and time.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051vcb4",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Baseline",
+          "definition": "An initial measurement or set of data used as a comparison point for all future measurements and evaluations."
+        },
+        {
+          "term": "Prediction",
+          "definition": "A forecast about a future outcome based on current data, observations, or scientific principles."
+        },
+        {
+          "term": "Performance",
+          "definition": "How well a system, product, or process fulfills its designed functions and objectives. In Creationeering™, this is the sixth engineering step."
+        },
+        {
+          "term": "Data Collection",
+          "definition": "The systematic process of gathering and measuring information on targeted variables."
+        },
+        {
+          "term": "Iteration",
+          "definition": "Repeating a process — often with improvements — to move closer to a desired outcome."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A method of understanding how large-scale observations (like car speed) are influenced by smaller-scale causes (like material properties or friction)."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution by adjusting variables within given constraints."
+        },
+        {
+          "term": "Hypothesis",
+          "definition": "A proposed explanation for a phenomenon that can be tested through experimentation or observation."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051div1",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051bib5",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Isaiah 46:10</strong> — <em>\"I am God, and there is no other; I am God, and there is none like me, declaring the end from the beginning and from ancient times things not yet done, saying, 'My counsel shall stand, and I will accomplish all my purpose.'\"</em></p><p>God doesn't guess — He declares. He designed the universe with an order that makes prediction possible, from planetary orbits to the properties of materials. When you establish a baseline and make a careful prediction, you're imitating a small piece of that same foresight, using the principles He built into creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Starting with a Baseline</h2><p>Imagine a doctor who wants to know if a new treatment is working. The first thing they do is measure the patient's current condition — heart rate, blood pressure, symptoms. That starting measurement is called a <strong>baseline</strong>. Without it, you have no way to know if anything actually changed.</p><p>Your mousetrap car works the same way. Before you touch a single design element, you need to run your car and record how it actually performs right now. How far does it travel? How fast? Does it drift left or right? These numbers are your baseline — your honest starting point.</p><p>A good baseline isn't a single lucky run. Engineers always take multiple measurements and average them. One run might be slightly off because of a bumpy surface or an inconsistent release. Three to five runs gives you a reliable picture of your car's true capability.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A data table showing three trial runs of a mousetrap car with columns for distance, time, and speed, alongside a calculated average row at the bottom — illustrating how a baseline is established from multiple measurements."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt7",
+    "type": "text",
+    "data": {
+      "html": "<h2>Collecting Your Performance Data</h2><p>When you run your baseline tests, you want to measure the right things. For a mousetrap car, the two most common performance metrics are <strong>distance</strong> (how far the car travels before stopping) and <strong>speed</strong> (how quickly it covers a set distance).</p><p>Here's a simple process to follow:</p><ul><li><strong>Set up a consistent test environment.</strong> Use the same surface, the same starting line, and the same way of releasing the car every time. Consistency is everything — if your test conditions change, your data becomes unreliable.</li><li><strong>Run at least three trials.</strong> Record the result of each run separately. Don't just remember the best one.</li><li><strong>Calculate the average.</strong> Add your results together and divide by the number of trials. That average becomes your official baseline number.</li><li><strong>Note anything unusual.</strong> Did the car veer off course? Did the spring snap differently? Write it down. Observations are data too.</li></ul><p>Think of data collection like a building's foundation. The rest of your engineering decisions — every prediction, every tweak — rests on how solid that foundation is. Sloppy data leads to bad predictions, which leads to wasted effort.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051tip1",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Consistency is your superpower.</strong> Always release your mousetrap car the same way — same tension, same starting position, same surface. If one variable in your test setup changes between runs, you won't know whether your data reflects the car's performance or just a different test condition.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051div2",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Making Informed Predictions</h2><p>Once you have your baseline, you're ready for the exciting part: predicting what will happen when you change something. This is where engineering thinking really kicks in.</p><p>A prediction in engineering is more than a guess — it's a <strong>hypothesis</strong>. You look at your baseline data, apply what you know about physics and design, and state what you expect to happen when you make a specific change. Then you test it.</p><p>For example: if your car currently travels 4 meters and you increase the rear wheel diameter, what do you predict will happen? Based on what you know about wheel circumference and gear ratios, you might predict the car will travel farther per rotation. Write that prediction down before you build or change anything. Then test it and compare.</p><p>The comparison between your prediction and your actual result is where the real learning happens. If they match, your understanding of the system is solid. If they don't match, something unexpected is going on — and that's your signal to investigate further.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt9",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Predictions</h2><p>You've used the OCV framework before — <strong>Objective, Constraint, Variable</strong> — to organize your design thinking. It's just as powerful when you're making predictions.</p><ul><li><strong>Objective:</strong> What are you trying to improve? Distance? Speed? Straightness? Be specific. \"Go farther\" is a goal. \"Travel at least 6 meters on the first run\" is an objective.</li><li><strong>Constraint:</strong> What limits are you working within? Maybe you can't change the mousetrap itself, or your car must stay under a certain weight. Knowing your constraints keeps your predictions realistic.</li><li><strong>Variable:</strong> What exactly are you changing? Change only <em>one variable at a time</em>. If you change the wheels <em>and</em> the lever arm at the same time, you won't know which change caused your result.</li></ul><p>When you write your prediction, connect it to the OCV: \"I am changing [Variable] to achieve [Objective] while staying within [Constraint]. I predict this will result in [specific measurable outcome].\" That structure turns a vague hunch into a testable engineering statement.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side diagram of two mousetrap car designs — one with smaller rear wheels and one with larger rear wheels — with arrows indicating the predicted difference in distance traveled per spring rotation, labeled with OCV annotations."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051div3",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt10",
+    "type": "text",
+    "data": {
+      "html": "<h2>Iteration: The Cycle of Improvement</h2><p>No design is perfect on the first try. That's not failure — that's engineering. Each time you test, compare your result to your prediction, and make a new adjustment, you complete one <strong>iteration</strong>. Over several iterations, your design gets smarter and your predictions get more accurate.</p><p>Think of it like tuning an instrument. The first time you pluck a string, it might be way off pitch. You tighten it a little, listen, adjust again. Each small correction brings you closer to the right note. Your mousetrap car is the same — each iteration tunes the design toward your objective.</p><p>The key habit to build here is documentation. After every test, record:</p><ul><li>What you changed</li><li>What you predicted would happen</li><li>What actually happened</li><li>Why you think the result matched or didn't match your prediction</li></ul><p>That written record is your engineering log. It shows your thinking, your process, and your growth — and it makes the next iteration smarter than the last.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051warn1",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't change more than one variable at a time.</strong> It's tempting to overhaul your whole car at once, but if you change the wheels, the lever arm, and the axle friction in the same round of testing, you'll have no idea which change actually caused your result. Slow down, change one thing, test, then decide what's next.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt11",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Engineering</h2><p>Every test you run uses materials, time, and energy. That might not seem like a big deal, but a careless engineer wastes all three. Setting a careful baseline and making thoughtful predictions before you build or modify anything is an act of stewardship — it means you're using your resources wisely and with intention.</p><p>Proverbs 21:5 says, <em>\"The plans of the diligent lead to profit as surely as haste leads to poverty.\"</em> Rushing straight to building without measuring first is engineering haste. Taking the time to establish your baseline and write a real prediction is engineering diligence. One approach wastes materials; the other honors them.</p><p>As you work through this performance activity, remember that how you work matters just as much as what you build. Careful, methodical, well-documented testing reflects the kind of thoughtful stewardship God calls us to in every area of life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: What is Multiscale Modeling?",
+      "html": "<p>When engineers study a complex system like a car, they often have to think at multiple levels at once. <strong>Multiscale modeling</strong> is the practice of connecting what you observe at a large scale to causes happening at a much smaller scale.</p><p>For your mousetrap car, a large-scale observation might be: \"The car only travels 3 meters.\" But the <em>cause</em> might be found at a much smaller scale: the axle has rough edges creating friction, or the string material stretches slightly under tension and loses energy. Understanding these micro-level factors helps you make better large-scale predictions.</p><p>Professional engineers use multiscale modeling when designing everything from aircraft wings to medical implants. They know that what you see at the surface is always the result of something happening deeper in the system. The habit of asking \"what's causing this at a smaller level?\" is one of the most powerful tools in an engineer's toolkit.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m051txt12",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Here's your workflow for this performance activity:</p><ul><li><strong>Step 1 — Establish your baseline.</strong> Run your car 3–5 times under consistent conditions. Record every result. Calculate the average. That average is your baseline.</li><li><strong>Step 2 — Identify your target.</strong> Use the OCV method. What is your objective? What are your constraints? What one variable will you change?</li><li><strong>Step 3 — Write your prediction.</strong> State specifically what you expect to happen and why, based on engineering principles.</li><li><strong>Step 4 — Make the change and test.</strong> Run the same number of trials as your baseline. Record every result.</li><li><strong>Step 5 — Compare and reflect.</strong> How did your results compare to your baseline and your prediction? What did you learn? What's your next iteration?</li></ul><p>This five-step loop is the heartbeat of the Performance phase. Every pass through it makes you a sharper observer, a more accurate predictor, and a more effective engineer.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

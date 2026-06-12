@@ -1,0 +1,382 @@
+[
+  {
+    "id": "m022t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>The Engineering Report Structure</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>You have built the prototype, run the experiments, and optimized your design. Now comes one of the most important skills in any engineer's toolkit: communicating your work. This lesson walks you through the structure of a professional Engineering Design Report (EDR) — the document that transforms your mousetrap vehicle project from a lucky result into a repeatable, documented success. Using your own build as the primary case study, you will learn each of the ten essential components of an EDR and understand why professional engineers consider the report just as important as the product itself.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p><ul><li>Explain why documentation is a critical deliverable in professional engineering.</li><li>Identify and describe the ten essential components of an Engineering Design Report (EDR).</li><li>Apply the OCV Framework (Objectives, Constraints, Variables) to structure the Introduction section of a report.</li><li>Distinguish between an Executive Summary, an Introduction, and a Conclusion.</li><li>Connect the discipline of clear, ordered documentation to a biblical understanding of stewardship and truth.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Engineering Design Report (EDR)",
+          "definition": "A structured written document that records the problem, process, data, and conclusions of an engineering project."
+        },
+        {
+          "term": "Executive Summary",
+          "definition": "A brief overview of an entire report, written for a busy reader who needs the key mission, findings, and results quickly."
+        },
+        {
+          "term": "OCV Framework",
+          "definition": "A structure for defining an engineering problem using three categories: Objectives (the goal), Constraints (the rules), and Variables (what can be changed)."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal your engineering design is trying to achieve."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A rule, limit, or requirement that your design must satisfy — such as a maximum budget or material restriction."
+        },
+        {
+          "term": "Variable",
+          "definition": "Any factor in an experiment that can be changed, measured, or controlled."
+        },
+        {
+          "term": "Table of Contents",
+          "definition": "An organized list of all sections and subsections in a report, with their corresponding page numbers."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why the Report Matters</h2>\n<p>When your mousetrap vehicle crosses the finish line, it feels like the job is done. But here is the truth every working engineer learns fast: the physical product is only half the deliverable. The other half is the documentation.</p>\n<p>Without a written record, your success is essentially a lucky guess. You cannot reproduce it reliably, you cannot teach it to someone else, and you cannot improve on it next time. But when you write down exactly what you did, what you measured, and why your design worked, you transform a one-time result into a repeatable, verifiable fact. That is the power of the Engineering Design Report.</p>\n<p>Think of it like a recipe. If a chef bakes the best cake anyone has ever tasted but never writes down the recipe, that cake may never exist again. The EDR is your recipe — precise, honest, and complete enough that someone else could follow your steps and get the same result.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>1 Corinthians 14:33 —</strong> \"For God is not a God of confusion but of peace.\" Your EDR is how you bring that same order to your engineering process. Writing down your work clearly and honestly is not just good practice — it reflects the character of a God who creates with intention and purpose.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Ten Components of an Engineering Design Report</h2>\n<p>A professional EDR follows a predictable structure. Each section serves a specific purpose, and together they tell the complete story of your project — from the original problem all the way to the final result. Here is how each section works, using your mousetrap vehicle as the example.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>1. Title Page</h3>\n<p>The Title Page is the front door of your report. It identifies your company name, the project title, your team members, and the date. This is your first opportunity to present a professional brand identity — clean layout, clear text, and a design that represents your team well.</p>\n<p>For your mousetrap vehicle project, your title page might read something like: <em>\"Mark 2 Distance Vehicle — Final Engineering Design Report | Genesis Propulsion Co. | Team Members: [Names] | Date: [Date]\"</em></p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>2. Executive Summary</h3>\n<p>The Executive Summary is the very first page a reader sees, and it has one job: give a busy person everything they need to know in the shortest amount of space possible. Imagine a company director who has only two minutes to understand your entire project — what would they need to hear?</p>\n<p>A strong Executive Summary covers three things:</p>\n<ul>\n<li><strong>The Mission</strong> — Why does your vehicle company exist? What problem were you solving?</li>\n<li><strong>The Key Breakthroughs</strong> — What was the most important engineering decision you made? (For example: optimizing the gear ratio or minimizing axle friction.)</li>\n<li><strong>The Final Result</strong> — What distance did your vehicle achieve, and what made it possible?</li>\n</ul>\n<p>Think of the Executive Summary as the trailer for a movie. It does not show every scene, but it captures the \"why,\" the \"who,\" and the \"what happened.\" It also introduces your team roles — CEO, Chief Engineer, Finance Manager — showing that every part of the project was stewarded deliberately.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>3. Table of Contents</h3>\n<p>A Table of Contents is the navigation system for your report. It lists every major section and subsection with its page number so a reader can jump directly to the part they need.</p>\n<p>This section might seem like a small detail, but it signals something important: your report is organized and intentional. A reader who opens your document and immediately finds a clear roadmap trusts that the rest of the content will be equally well-ordered.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t009",
+    "type": "text",
+    "data": {
+      "html": "<h3>4. Introduction — The OCV Framework</h3>\n<p>The Introduction is where you define the \"ground truth\" of your problem. Before any reader can evaluate your design, they need to understand the starting conditions. In engineering, we use the <strong>OCV Framework</strong> to do this:</p>\n<ul>\n<li><strong>Objectives (The Goal)</strong> — What were you trying to achieve? For your project, the primary objective was to maximize the total distance your vehicle travels on a single release. In the Creationeering framework, this is called \"Stewardship of the Joule\" — squeezing every bit of useful work out of the energy stored in your mousetrap spring.</li>\n<li><strong>Constraints (The Rules)</strong> — What limits did you have to work within? These might include a maximum vehicle length, required materials, or a budget cap. Constraints are not obstacles; they are the boundaries that make the engineering challenge real and fair.</li>\n<li><strong>Variables (What You Can Change)</strong> — Which factors did you choose to test and manipulate? Identifying your variables up front shows the reader that your experiments were planned, not random.</li>\n</ul>\n<p>A well-written Introduction means that anyone — even someone who was not part of your team — could understand exactly what problem you were trying to solve before they read a single data point.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV Framework as three labeled columns — Objectives, Constraints, and Variables — each with example bullet points from a mousetrap vehicle project"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t010",
+    "type": "text",
+    "data": {
+      "html": "<h3>5. Background Research</h3>\n<p>Before you ever touched a piece of balsa wood, you needed to understand the physics behind your design. The Background Research section documents that foundational knowledge — the science and math that informed your decisions.</p>\n<p>For your mousetrap vehicle, this section would cover concepts like energy transfer, torque, gear ratios, and friction. You are not just listing facts here; you are showing the reader <em>why</em> those concepts mattered to your specific design challenge. Good background research is the difference between a design that is guessed at and one that is reasoned through.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t011",
+    "type": "text",
+    "data": {
+      "html": "<h3>6. Design and Methodology</h3>\n<p>This is the \"how you built it\" section — and it needs to be detailed enough that someone else could replicate your process exactly. Include your design sketches, your material choices, and the reasoning behind each decision.</p>\n<p>This is also where you describe your experimental method. For your project, that means explaining the OFAT (One-Factor-at-a-Time) approach: how you changed one variable at a time while holding everything else constant. OFAT is essential because it lets you trace cause and effect clearly. If you change three things at once and your distance improves, you have no idea which change actually helped.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t012",
+    "type": "text",
+    "data": {
+      "html": "<h3>7. Data and Results</h3>\n<p>This section is the heart of your scientific credibility. Present your data clearly — in tables, graphs, or both — so the reader can see exactly what happened in each trial. Label everything: what was measured, what units you used, and how many trials you ran.</p>\n<p>Do not hide inconvenient data. If a run went badly, include it. Honest reporting is a core value in both engineering and in faith. Data that is selectively trimmed to look better is not science — it is storytelling. Your results section should show the full picture, including the tests that did not go as planned, because those failures often contain the most important lessons.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Only reporting your best runs. Professional engineers include all data — even the outliers and failures. A reader who sees only perfect results will not trust your report. A reader who sees honest, complete data will.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t013",
+    "type": "text",
+    "data": {
+      "html": "<h3>8. Analysis and Discussion</h3>\n<p>Data alone does not explain anything. The Analysis section is where you interpret what your numbers mean. Why did your Mark 2 vehicle outperform your Little Moe prototype? What does the data tell you about the relationship between wheel diameter and distance traveled?</p>\n<p>This is your chance to think like an engineer — to move from observation to understanding. Connect your results back to the physics principles in your Background Research. If your gear ratio change produced the distance gain you predicted, explain why that confirms the underlying theory. If it did not, explain what you think happened instead.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t014",
+    "type": "text",
+    "data": {
+      "html": "<h3>9. Conclusion</h3>\n<p>The Conclusion answers the original question: did you meet your objective? State clearly whether your design achieved its goal, what the most significant finding was, and what you would do differently if you built a Mark 3.</p>\n<p>A good conclusion does not just repeat the data — it synthesizes it. It tells the reader what you now know that you did not know at the start. It is also the place to acknowledge limitations honestly: What could not be controlled? What introduced error into your measurements? Admitting limitations is not weakness; it is intellectual honesty, and it makes your conclusions stronger, not weaker.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t015",
+    "type": "text",
+    "data": {
+      "html": "<h3>10. References and Appendices</h3>\n<p>The final section of your EDR gives credit where it is due and provides supporting material for readers who want to go deeper.</p>\n<ul>\n<li><strong>References</strong> — List every source you used in your Background Research. Books, websites, videos — cite them all. This is how engineers give credit to the knowledge that came before their own work.</li>\n<li><strong>Appendices</strong> — Include any material that supports your report but would interrupt the flow of the main document: raw data tables, additional photos of your vehicle, calculation sheets, or design sketches.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022t016",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Every section of the EDR connects to the ones before and after it. Your Introduction sets up the problem; your Methodology explains how you attacked it; your Data shows what happened; your Analysis explains why; and your Conclusion states what it all means. Each component is one piece of a complete, coherent story.</p>\n<p>In Habakkuk 2:2, the instruction is to \"write the vision and make it plain.\" That is exactly what a great EDR does. It makes your creative and scientific work plain — clear, honest, and accessible to anyone who reads it. Your design did not happen by accident. Your EDR is the proof.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A flowchart showing all ten EDR sections in order — Title Page, Executive Summary, Table of Contents, Introduction, Background Research, Design and Methodology, Data and Results, Analysis and Discussion, Conclusion, References and Appendices — with brief labels for each"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Writing tip:</strong> Write your Executive Summary last, even though it appears first in the report. Once you have completed every other section, you will have a much clearer picture of what the most important points actually are — and your summary will be much stronger for it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m022a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is the difference between the Executive Summary and the Conclusion?</strong><br/>A: The Executive Summary appears at the beginning of the report and gives a high-level overview of the whole project — mission, key findings, and final result — for a reader who may not read everything. The Conclusion appears at the end and specifically answers whether you met your original objective, what you learned, and what you would change next time. The Summary previews; the Conclusion reflects.</p><br/><p><strong>Q: Why does the OFAT method matter in the Methodology section?</strong><br/>A: OFAT (One-Factor-at-a-Time) ensures that you can trace cause and effect. If you change only one variable per experiment while holding everything else constant, you can be confident that any change in performance was caused by that specific variable. Without OFAT, your data becomes difficult to interpret and your conclusions become unreliable.</p><br/><p><strong>Q: What does the OCV Framework stand for, and where does it appear in the EDR?</strong><br/>A: OCV stands for Objectives, Constraints, and Variables. It appears in the Introduction section, where it defines the \"ground truth\" of the engineering problem — what you were trying to achieve, what rules you had to follow, and what factors you planned to test.</p><br/><p><strong>Q: Why should you include data from failed or poor-performing runs?</strong><br/>A: Including all data — not just the best results — demonstrates scientific honesty and makes your report credible. Failures often reveal important information about what went wrong and why, which strengthens your Analysis section and makes your Conclusion more trustworthy.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

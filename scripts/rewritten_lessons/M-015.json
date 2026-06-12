@@ -1,0 +1,305 @@
+[
+  {
+    "id": "m015t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Energy Flow, Loss, and Efficiency</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In previous lessons, you explored structural integrity, force, and motion. Now you move into the technical heart of your Mousetrap Vehicle: <strong>energy</strong>. This lesson applies the concepts of energy flow, loss, and efficiency directly to your vehicle build. You will trace where energy comes from, where it goes, and — most importantly — how much of it actually ends up moving your car forward.</p><p>Using Dr. Mark Horstemeyer's Creationeering™ framework, you will treat energy not as an abstract physics concept but as a finite resource to be managed wisely. By the end of this lesson, you will be able to map your car's entire energy journey and use real calculations to evaluate and improve your design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Define and map the flow of energy from the spring reservoir to forward motion in a Mousetrap Vehicle.</li><li>Identify the specific points where energy is lost to heat and sound — the \"toll booths\" of the system.</li><li>Perform mechanical efficiency calculations to evaluate a design's theoretical performance.</li><li>Apply the Objective-Constraint-Variable (OCV) method and Hierarchical Multiscale Modeling (HM²) to optimize their vehicle.</li><li>Connect energy stewardship to the biblical mandate of using talents and resources wisely.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Potential Energy (PE)",
+          "definition": "Stored energy in an object due to its position or condition — like a compressed or wound spring."
+        },
+        {
+          "term": "Kinetic Energy (KE)",
+          "definition": "The energy an object has because it is moving."
+        },
+        {
+          "term": "Law of Conservation of Energy",
+          "definition": "A fundamental physics law stating that energy cannot be created or destroyed, only transformed from one form to another."
+        },
+        {
+          "term": "Mechanical Efficiency",
+          "definition": "A ratio that compares the useful output energy of a machine to the total input energy, expressed as a percentage."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that opposes motion between two surfaces in contact, converting kinetic energy into heat."
+        },
+        {
+          "term": "Drag",
+          "definition": "Air resistance — a force that opposes motion through the air, stealing energy from a moving object."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "Objective-Constraint-Variable — an engineering framework used to define a design goal, list the limits you must work within, and identify what you can change to optimize performance."
+        },
+        {
+          "term": "HM² (Hierarchical Multiscale Modeling)",
+          "definition": "A modeling approach from the Creationeering™ framework that examines how a system behaves at multiple scales — from the atomic level all the way up to the full machine."
+        },
+        {
+          "term": "Rolling Resistance",
+          "definition": "The energy loss that occurs when a wheel rolls along a surface, caused by slight deformation of the wheel and surface."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Energy as a Resource to Steward</h2><p>Here is something that might surprise you: every joule of energy in your Mousetrap Vehicle was placed there by <em>you</em> when you wound the spring. That energy does not appear out of nowhere — you transferred it from your own muscles into the coil. And according to the <strong>Law of Conservation of Energy</strong>, that energy will not disappear either. It will transform. Your job as an engineer is to guide as much of that transformation as possible toward one outcome: forward motion.</p><p>Hebrews 1:3 describes God as the one who \"upholds the universe by the word of his power.\" The consistency of physical laws — including conservation of energy — is part of how He sustains creation. Every time you run an experiment and the numbers add up, you are witnessing that faithfulness in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Matthew 25:14–30 — The Parable of the Talents</strong></p><p>In this parable, a master gives his servants different amounts of money (talents) and expects them to put those resources to work. The servant who buried his talent and returned it unused was called \"unprofitable.\" In your vehicle, wasted energy — energy bled away by friction, poor axle alignment, or a sloppy string wrap — is the engineering equivalent of burying your talent. Seeking high efficiency is not just about winning a distance contest. It is a design choice that reflects faithful stewardship of the resources you were given.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Mapping the Energy Flow</h2><p>The Creationeering™ framework uses <strong>Systems Thinking</strong> to break a machine into subassemblies — smaller parts that each receive energy, do something with it, and pass it along. Think of it like a relay race: energy is the baton, and every handoff is a chance to drop it or slow it down.</p><p>Your Mousetrap Vehicle has five major subassemblies in its energy relay. Tracing each one is how you start diagnosing where your design is losing ground.</p><h3>The Five Stages of Your Energy Relay</h3><ul><li><strong>Spring Reservoir:</strong> You manually wind the spring, storing energy as <em>Potential Energy (PE)</em>. Even here, a small amount is lost to internal molecular friction inside the steel coil.</li><li><strong>Lever Arm:</strong> When released, the spring drives the arm through an arc — converting PE to <em>Kinetic Energy (KE)</em>. Air resistance (drag) acts against the arm's surface the entire time it swings.</li><li><strong>Transmission:</strong> The string attached to the arm pulls the axle, converting the arc motion into rotation. Friction between the string and axle, and any slipping, bleeds energy here.</li><li><strong>Drive Train:</strong> The axle spins, turning the wheels. Friction in the axle bushings or bearings is the main cost at this stage.</li><li><strong>Propulsion:</strong> The wheels grip the floor and push the car forward. Rolling resistance and air drag on the body are the final \"toll charges\" before motion is achieved.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled flow diagram showing five connected stages of a mousetrap vehicle: Spring Reservoir → Lever Arm → Transmission → Drive Train → Propulsion. Each stage shows the form of energy present (PE, KE, rotational KE, linear KE) and an arrow pointing to a side box listing the energy loss at that stage (friction, drag, slip, rolling resistance)."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Toll Booths of Energy Loss</h2><p>If energy is always conserved, why does your car stop? Because \"conserved\" does not mean \"useful.\" Energy that converts into heat from a squeaky axle or sound from a snapping spring is still accounted for — it just cannot push your car any further. We call these conversion points <strong>toll booths</strong> because they charge your system a fee every time energy passes through.</p><h3>The Two Main Toll Collectors</h3><p><strong>Friction</strong> is the biggest thief in most Mousetrap Vehicles. It occurs wherever two surfaces rub together: axle against frame, string against lever arm, wheels against ground. Friction converts kinetic energy directly into heat. You cannot eliminate it entirely, but you can minimize it — smooth surfaces, lubrication, and precise alignment all reduce friction's cut.</p><p><strong>Drag</strong> (air resistance) is the second toll collector. It affects both the swinging lever arm and the body of the car as it moves forward. Drag scales with speed and surface area — meaning a fast car with a wide, flat profile pays the highest air-drag toll. Streamlining your vehicle's shape is the engineering solution here.</p><h3>Where HM² Comes In</h3><p>Hierarchical Multiscale Modeling (HM²) asks you to zoom in on a problem at multiple levels. At the <em>macro</em> scale, you can feel friction when the axle binds. But at the <em>micro</em> scale, friction is caused by tiny surface asperities — microscopic bumps on the axle and bushing — catching on each other. Understanding this is why engineers sand and polish axles, or why a thin film of lubricant makes such a dramatic difference. You are managing a problem that exists at the atomic level, and you are doing it with sandpaper and a drop of oil.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake: Confusing \"lost\" with \"gone.\"</strong> Energy that turns into heat is not destroyed — it still exists. But it is no longer available to move your car. When you say your car \"lost\" energy to friction, you mean it was converted into a form you cannot use, not that it vanished. Keep this distinction clear in your calculations and your written analysis.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Calculating Mechanical Efficiency</h2><p>Now it is time to put numbers to what you have been observing. <strong>Mechanical Efficiency</strong> is the ratio of useful output energy to total input energy, expressed as a percentage. The formula looks like this:</p><p><strong>Efficiency (%) = (Useful Output Energy ÷ Total Input Energy) × 100</strong></p><p>For your Mousetrap Vehicle, the total input energy is the potential energy stored in the wound spring. The useful output energy is the kinetic energy actually used to move the car forward over a measured distance. If your car receives 0.80 joules of spring energy and delivers 0.52 joules of forward motion, your efficiency is:</p><p><strong>(0.52 ÷ 0.80) × 100 = 65%</strong></p><p>That means 35% of your energy was paid out at the toll booths — converted to heat, sound, and vibration. A well-built, carefully tuned vehicle can push this efficiency well above 70%. Your design decisions directly control that number.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple bar chart comparing Total Input Energy (full bar, labeled in joules) to Useful Output Energy (shorter bar) and Energy Lost to Friction and Drag (the difference, shown in red). A percentage label at the top of the output bar reads 'Mechanical Efficiency = 65%'."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing with the OCV Method</h2><p>Now that you can measure efficiency, how do you improve it? The <strong>Objective-Constraint-Variable (OCV) method</strong> gives you a structured way to think about optimization without chasing your tail.</p><ul><li><strong>Objective:</strong> What are you trying to achieve? For this build, it might be maximum distance traveled, or highest mechanical efficiency percentage.</li><li><strong>Constraints:</strong> What limits are you working within? Examples include the size of your mousetrap, the materials you are allowed, the total vehicle weight, and the competition rules.</li><li><strong>Variables:</strong> What can you actually change? Wheel diameter, axle material, lever arm length, string type, and vehicle body shape are all variables you control.</li></ul><p>Here is the key insight: you cannot optimize everything at once. Longer lever arms increase the arc sweep, which can pull the string farther — but they also increase drag. Larger wheels reduce rolling resistance — but add mass and rotational inertia. The OCV method forces you to be intentional about which variable you are adjusting and why. That is engineering thinking, not guessing.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Test one variable at a time.</strong> When you change the axle material <em>and</em> the wheel size <em>and</em> the lever arm length all in the same test run, you cannot know which change improved your results — or which one hurt them. Change one variable, measure the outcome, record your data, then move to the next. This is how professional engineers run experiments, and it is the only way to trust your conclusions.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>You now have a complete picture of your vehicle's energy life cycle. Energy enters as potential energy stored in the spring. It flows through five subassemblies, paying a friction or drag toll at each stage. Whatever survives those tolls becomes the forward kinetic energy that moves your car down the track. Your mechanical efficiency score tells you exactly how well your design managed that journey.</p><p>The engineers who build the most efficient machines are not the ones who got lucky — they are the ones who mapped the system, identified the losses, applied modeling tools to understand root causes, and made intentional design changes. That is the Creationeering™ process. And it starts with a wound-up mousetrap spring and the choice to take your resources seriously.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m015a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What does the Law of Conservation of Energy tell us about the spring's energy after the car stops?</strong><br/>The energy was not destroyed. It was transformed — most of it into heat (from friction at the axles and wheels) and a small amount into sound. Conservation means total energy is always accounted for.</p><p><strong>2. Name two design changes that would reduce friction losses in a Mousetrap Vehicle.</strong><br/>Possible answers include: sanding and polishing the axles, using a lubricant on the axle bushings, replacing rough bushings with smooth-bore tubing, or reducing the weight pressing down on the axles.</p><p><strong>3. If your vehicle's spring stores 1.00 joule and your car travels with 0.63 joules of useful kinetic energy, what is your mechanical efficiency?</strong><br/>(0.63 ÷ 1.00) × 100 = <strong>63%</strong>. The remaining 37% was lost to friction, drag, and other toll booths.</p><p><strong>4. Why does the OCV method tell you to change only one variable at a time?</strong><br/>If you change multiple variables simultaneously, you cannot identify which specific change caused any improvement or decline in performance. Isolating variables is what makes your data trustworthy.</p><p><strong>5. How does HM² help you understand axle friction better than just looking at the axle with your eyes?</strong><br/>HM² zooms in to the microscale — revealing that friction is caused by tiny surface bumps (asperities) catching on each other. This explains why polishing the axle (smoothing those bumps) dramatically reduces friction even when the axle already looks smooth to the naked eye.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

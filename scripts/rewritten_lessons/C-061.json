@@ -1,0 +1,464 @@
+[
+  {
+    "id": "c061t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Experimental Design and Testing Protocols</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored what performance really means — not just how well something works, but how well it fulfills its intended purpose within its environment. Even the most impressive designs can fall short if they don't perform as expected. Today, we're taking the next crucial step in the Creationeering™ journey: moving from understanding performance to actively shaping it.</p>\n<p>This lesson is all about hands-on discovery and careful investigation. You'll learn how to set up experiments that truly tell you what you need to know about your designs. You'll discover how to test your creations in ways that reveal their strengths and weaknesses — helping you make them even better. This falls squarely within the Performance phase of Creationeering™, where we evaluate how well our designs operate and identify areas for improvement. Just as God meticulously designed the universe with order and purpose, you'll learn to test your designs with the same kind of intentionality.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define experimental design and explain its importance in the Creationeering™ Performance phase.</li>\n<li>Identify the key components of a well-structured experimental design, including independent and dependent variables.</li>\n<li>Develop simple testing protocols to systematically evaluate the performance of an engineered system.</li>\n<li>Apply the OCV method to refine experimental objectives and constraints for effective testing.</li>\n<li>Connect the process of meticulous experimental design and testing to the biblical principle of good stewardship of resources and talents.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Experimental Design",
+          "definition": "A systematic approach to planning and conducting experiments to answer specific questions and gather reliable data."
+        },
+        {
+          "term": "Testing Protocols",
+          "definition": "Detailed, step-by-step instructions for how an experiment will be carried out to ensure consistency and accuracy."
+        },
+        {
+          "term": "Independent Variable",
+          "definition": "The factor that you intentionally change or manipulate in an experiment to see its effect."
+        },
+        {
+          "term": "Dependent Variable",
+          "definition": "The factor that you measure or observe in an experiment; it changes in response to the independent variable."
+        },
+        {
+          "term": "Control Group",
+          "definition": "A group in an experiment that does not receive the treatment or change in the independent variable, used for comparison."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible compromise or solution among several conflicting requirements or variables."
+        },
+        {
+          "term": "Data",
+          "definition": "Facts and statistics collected together for reference or analysis."
+        },
+        {
+          "term": "Reproducibility",
+          "definition": "The ability for an experiment to be repeated by different people or at different times, yielding similar results."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering framework that links observations at the macro (large) scale to their causes at the atomic (small) scale."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A design and analysis tool that helps define the Objective, Constraints, and Variables of an engineering problem."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 1:20</strong> — \"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse.\"</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Design with Purpose</h2>\n<p>This verse is a powerful reminder that God's creation speaks volumes about His character. Every part of the universe — from the grandest galaxy to the smallest atom — functions with incredible purpose and precision. That's not accidental. It's the result of intentional design.</p>\n<p>As His image-bearers, we're called to design and test our creations with that same kind of intentionality. Our experiments are not random guesses. They are purposeful investigations. When you carefully test a bridge design or a water filtration system, you're practicing the same principle of purposeful order that God wove into creation itself. Good testing isn't just smart engineering — it's good stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Experimental Design?</h2>\n<p>Imagine you've built a catapult for a class challenge, and it's launching projectiles — but not quite far enough. How do you figure out what to fix? You could just keep tweaking things at random and hoping for the best. But that's not engineering. That's guessing.</p>\n<p>Experimental design is the disciplined alternative. It's a systematic plan for asking a specific question and gathering trustworthy data to answer it. Think of it like writing the rulebook before you play the game. Without clear rules, your results don't mean much. With them, every test teaches you something real.</p>\n<p>In the Creationeering™ Performance phase, experimental design is your primary tool for moving from \"I think this might work\" to \"I know this works — and here's the data to prove it.\"</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student engineering team reviewing test data on a clipboard next to a prototype, illustrating the connection between experimental design and real-world testing."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Key Components of a Good Experiment</h2>\n<p>Every well-structured experiment has a few essential ingredients. Miss one, and your results can become unreliable. Let's break them down.</p>\n<h3>Independent and Dependent Variables</h3>\n<p>The <strong>independent variable</strong> is the one thing you deliberately change. You're in control of it. The <strong>dependent variable</strong> is what you measure — it responds to whatever you changed. A helpful way to remember this: the dependent variable <em>depends</em> on what you do to the independent variable.</p>\n<p>For example, suppose you're testing how the angle of a ramp affects how far a toy car travels. The angle is your independent variable — you set it. The distance the car travels is your dependent variable — you measure it. Simple and clear.</p>\n<h3>The Control Group</h3>\n<p>The <strong>control group</strong> is your baseline. It's the version of your experiment where nothing changes. Without a control, you have no way of knowing whether your results came from your intentional change or from some other factor you didn't notice. A control group gives your data a reference point — like a ruler that tells you how far you've actually moved.</p>\n<h3>Keeping Everything Else Constant</h3>\n<p>Here's a rule that separates a good experiment from a messy one: change only one variable at a time. If you adjust the ramp angle AND the surface material AND the car weight all at once, you'll never know which factor actually caused the change in distance. Real engineers are disciplined about this. One variable. One test. Clear results.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>One Change at a Time:</strong> When designing your experiment, write down every variable that could possibly affect your results — then make sure all of them stay the same except the one you're testing. This discipline is what makes your data trustworthy.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Testing Protocols: The Rulebook for Your Experiment</h2>\n<p>Knowing what to test is only half the battle. You also need to know <em>how</em> to test it — and write it down in enough detail that someone else could repeat your exact experiment and get the same results. That's what a <strong>testing protocol</strong> is: a clear, step-by-step set of instructions for running your experiment.</p>\n<p>Think of a testing protocol like a recipe. A good recipe doesn't just say \"bake until done.\" It says: preheat the oven to 375°F, pour the batter into a greased 9-inch pan, and bake for exactly 28 minutes. That precision is what makes the recipe repeatable — and that repeatability is what makes your experimental results trustworthy.</p>\n<h3>What a Good Testing Protocol Includes</h3>\n<ul>\n<li><strong>A clear objective:</strong> What question are you trying to answer?</li>\n<li><strong>A list of materials:</strong> What equipment and supplies will you use?</li>\n<li><strong>Step-by-step procedures:</strong> Exactly what will you do, in what order?</li>\n<li><strong>Measurement methods:</strong> How will you collect and record your data?</li>\n<li><strong>Safety considerations:</strong> What precautions do you need to take?</li>\n<li><strong>Number of trials:</strong> How many times will you repeat each test?</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Why Reproducibility Matters:</strong> A result that only happens once might be a fluke. A result that happens consistently across multiple trials — and can be reproduced by someone else — is something you can actually rely on. This is why scientists and engineers run multiple trials and write detailed protocols. Your goal isn't just to get a result. It's to get a <em>trustworthy</em> result.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: A Framework for Clear Thinking</h2>\n<p>Before you run a single test, you need to know exactly what you're trying to accomplish. That's where the <strong>OCV Method</strong> comes in. OCV stands for <strong>Objective, Constraints, and Variables</strong> — three things every engineering experiment needs to define up front.</p>\n<h3>Objective</h3>\n<p>What is the goal of your experiment? Be specific. \"Make the bridge stronger\" is vague. \"Determine the maximum load (in grams) a popsicle-stick bridge can support before failure\" is an objective you can actually test.</p>\n<h3>Constraints</h3>\n<p>What are the limits or boundaries of your experiment? Constraints might include available materials, time, budget, size requirements, or safety rules. Knowing your constraints ahead of time keeps your experiment focused and realistic. Every real-world engineering project operates under constraints — and learning to work within them is a core engineering skill.</p>\n<h3>Variables</h3>\n<p>List your independent variable (what you'll change), your dependent variable (what you'll measure), and all the controlled variables (everything you'll keep constant). Writing these out before you start forces you to think clearly — and it often reveals potential problems before they derail your experiment.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV Method framework: Objective (goal of the experiment), Constraints (limits and boundaries), and Variables (independent, dependent, and controlled)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV Quick Check:</strong> Before starting any experiment, ask yourself three questions: (1) What exactly am I trying to find out? (2) What limits do I have to work within? (3) What am I changing, what am I measuring, and what am I keeping the same? If you can answer all three clearly, you're ready to test.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimization: Finding the Best Possible Answer</h2>\n<p>Here's something every engineer learns quickly: there's rarely one perfect answer. Most engineering problems involve trade-offs. Making a bridge stronger might make it heavier. Making a product cheaper might reduce its quality. Making a design faster might reduce its durability.</p>\n<p><strong>Optimization</strong> is the process of finding the best possible balance among competing requirements. It means testing multiple configurations, analyzing your data, and making informed decisions about where the right trade-off lies for your specific situation and constraints.</p>\n<p>This is where experimental design really shines. By carefully varying one factor at a time and recording your results, you build a picture of how your system behaves. That picture helps you make wise, data-driven decisions — rather than just going with your gut.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061c004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Avoid the \"One Test\" Trap:</strong> Running an experiment only once is one of the most common mistakes in student engineering. A single result could be caused by a random error, a measurement mistake, or just bad luck. Always run multiple trials and average your results. Three trials minimum is a good rule of thumb.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Seeing the Whole Picture</h2>\n<p>Sometimes the behavior you observe in a test — like a beam bending under load — is actually caused by something happening at a completely different scale. <strong>Multiscale modeling</strong> is the engineering approach of connecting what you can see (the macro scale) to what's happening at the molecular or atomic level (the micro scale).</p>\n<p>You don't need to be a materials scientist to use this idea. The key insight is that your test data at the big scale is always connected to deeper causes. A bridge that cracks under load is telling you something about the structure of the material itself. A battery that drains too fast is telling you something about the chemistry happening inside it. Good engineers ask not just \"what happened?\" but \"why did it happen — and at what level?\"</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Proverbs 4:7 tells us: <em>\"The beginning of wisdom is this: Get wisdom, and whatever you get, get insight.\"</em> Careful, systematic testing is one of the most powerful ways we gain genuine insight into how creation works. Every experiment you design is an act of seeking understanding — and that pursuit of understanding honors the God who designed the universe with such breathtaking precision.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together: From Test to Improvement</h2>\n<p>Here's how all these pieces connect in a real Creationeering™ workflow. You start with a design. You identify what you want to test using the OCV Method — defining your objective, constraints, and variables. You write a clear testing protocol so your experiment is repeatable and trustworthy. You run multiple trials, collecting data carefully. Then you analyze what you found, looking for patterns and trade-offs. Finally, you use that data to optimize your design and try again.</p>\n<p>This cycle — design, test, analyze, improve — is the heartbeat of engineering. It's not a sign of failure when your first design doesn't perform perfectly. It's an invitation to learn. Every test result, even a disappointing one, is data. And data is a gift.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular diagram illustrating the engineering test cycle: Design → Test → Analyze → Improve → Design again."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between an independent variable and a dependent variable?",
+      "html": "<p>The <strong>independent variable</strong> is the factor you deliberately change in your experiment — you control it. The <strong>dependent variable</strong> is the factor you measure — it responds to whatever you did with the independent variable. For example, if you change the height of a ramp (independent) and measure how far a ball rolls (dependent), the distance depends on the height you set.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061a002",
+    "type": "accordion",
+    "data": {
+      "title": "Why do engineers use a control group in an experiment?",
+      "html": "<p>A <strong>control group</strong> is the baseline version of your experiment where nothing changes. It gives you a reference point so you can tell whether the results you observe were actually caused by your intentional change — or by some other factor. Without a control, your data is much harder to interpret accurately.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061a003",
+    "type": "accordion",
+    "data": {
+      "title": "What do the letters O, C, and V stand for in the OCV Method?",
+      "html": "<p>OCV stands for <strong>Objective</strong> (the specific goal of your experiment), <strong>Constraints</strong> (the limits or boundaries you must work within), and <strong>Variables</strong> (what you're changing, measuring, and keeping constant). Defining all three before you start testing helps you run a focused, reliable experiment.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061a004",
+    "type": "accordion",
+    "data": {
+      "title": "Why is reproducibility important in engineering experiments?",
+      "html": "<p><strong>Reproducibility</strong> means that your experiment can be repeated — by you or someone else — and produce similar results. A result that happens only once might be a fluke or a measurement error. Results that are reproducible are trustworthy. That's why writing a detailed testing protocol matters: it gives anyone the exact steps needed to run your experiment again and verify your findings.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c061a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does careful experimental design connect to biblical stewardship?",
+      "html": "<p>Good stewardship means using the resources and talents God has given us wisely and responsibly. Careful experimental design is a form of stewardship: instead of wasting materials by testing randomly, you plan purposefully, gather trustworthy data, and make informed decisions. It's also a reflection of the order and intentionality God built into creation — and a way of honoring Him through the quality of our work.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

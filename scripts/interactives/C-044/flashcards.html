@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Risk Assessment — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Risk Assessment</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Risk", "definition": "The possibility of something bad happening; a potential problem that could impact a project's success or safety."}, {"term": "Hazard", "definition": "A source of potential harm or adverse health effect, like a sharp tool or a slippery floor."}, {"term": "Likelihood", "definition": "The probability or chance that a specific risk will occur. Is it very likely, or not very likely?"}, {"term": "Impact", "definition": "The consequence or severity of a risk if it does occur. How bad would it be if this problem happened?"}, {"term": "Mitigation", "definition": "Actions taken to reduce the likelihood or impact of a risk. This is how we try to make problems less likely or less severe."}, {"term": "Contingency Plan", "definition": "A backup plan designed to be used if a particular risk actually happens. It's our 'Plan B'."}, {"term": "Risk Assessment", "definition": "The process of identifying, analyzing, and evaluating risks in a project to make it safer and more successful."}, {"term": "Vulnerability", "definition": "A weakness in a system or project that could be exploited by a hazard, making it more likely for a problem to occur."}, {"term": "Resilience", "definition": "The ability of a system or project to recover from or adjust to changes and disruptions, bouncing back after a problem."}, {"term": "Logistics Phase", "definition": "In Creationeering, this phase is about making sure everything goes smoothly and safely, including planning for potential problems."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

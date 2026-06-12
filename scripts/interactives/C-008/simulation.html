@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics in Engineering – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; }
+  header p { font-size: 0.8rem; color: #C9A84C; margin-top: 3px; }
+
+  #app {
+    width: 100%;
+    max-width: 780px;
+    padding: 20px 16px 40px;
+    flex: 1;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    padding: 32px 28px;
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.45rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { color: #3a5a7a; font-size: 0.97rem; line-height: 1.6; margin-bottom: 16px; }
+  .intro-card .badge {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 6px 20px;
+    font-size: 0.88rem;
+    margin-bottom: 22px;
+  }
+  .roles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .role-chip {
+    background: #f0f4f9;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1B3A5C;
+  }
+
+  /* ── SCENARIO ── */
+  .progress-bar-wrap {
+    background: #dde3ec;
+    border-radius: 20px;
+    height: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .scenario-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    padding: 28px 24px;
+    margin-bottom: 16px;
+  }
+  .scenario-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .scenario-num {
+    font-size: 0.78rem;
+    color: #7a9abf;
+    float: right;
+    font-weight: 600;
+  }
+  .scenario-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .scenario-desc {
+    font-size: 0.93rem;
+    color: #3a5a7a;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .choices { display: flex; flex-direction: column; gap: 12px; }
+  .choice-btn {
+    background: #f0f4f9;
+    border: 2px solid #c5d3e0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.93rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .choice-btn:hover:not(:disabled) {
+    border-color: #1B3A5C;
+    background: #e4ecf5;
+    transform: translateY(-1px);
+  }
+  .choice-btn:disabled { cursor: default; }
+  .choice-btn.correct {
+    border-color: #2a8a4a;
+    background: #e6f7ee;
+    color: #1a5c30;
+  }
+  .choice-btn.wrong {
+    border-color: #c0392b;
+    background: #fdecea;
+    color: #7a1a12;
+  }
+  .choice-btn.reveal {
+    border-color: #2a8a4a;
+    background: #e6f7ee;
+    color: #1a5c30;
+  }
+
+  .feedback-box {
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 0.91rem;
+    line-height: 1.55;
+    margin-top: 14px;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.good { background: #e6f7ee; border-left: 4px solid #2a8a4a; color: #1a5c30; }
+  .feedback-box.bad  { background: #fdecea; border-left: 4px solid #c0392b; color: #7a1a12; }
+
+  .principle-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    font-size: 0.97rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 18px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-gold { background: #C9A84C; color: #fff; }
+  .btn-navy { background: #1B3A5C; color: #fff; }
+  .btn:hover { opacity: 0.88; }
+  .btn:disabled { opacity: 0.4; cursor: default; }
+
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+  }
+
+  /* ── SUMMARY ── */
+  .summary-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    padding: 32px 26px;
+    text-align: center;
+  }
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px rgba(27,58,92,0.22);
+  }
+  .score-circle .big { font-size: 2.1rem; font-weight: 800; line-height: 1; }
+  .score-circle .sub { font-size: 0.78rem; font-weight: 600; color: #fff; }
+  .summary-title { font-size: 1.3rem; font-weight: 700; color: #1B3A5C; margin-bottom: 10px; }
+  .summary-msg { font-size: 0.95rem; color: #3a5a7a; line-height: 1.6; margin-bottom: 22px; }
+
+  .review-list { text-align: left; margin-bottom: 22px; }
+  .review-item {
+    background: #f0f4f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    line-height: 1.5;
+    border-left: 4px solid #c5d3e0;
+  }
+  .review-item.r-correct { border-left-color: #2a8a4a; }
+  .review-item.r-wrong   { border-left-color: #c0392b; }
+  .review-item .r-q { font-weight: 700; margin-bottom: 4px; }
+  .review-item .r-chosen { color: #c0392b; }
+  .review-item .r-correct-ans { color: #2a8a4a; }
+
+  .principles-box {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+  .principles-box h3 { font-size: 0.95rem; color: #C9A84C; margin-bottom: 12px; font-weight: 700; }
+  .principles-box li { font-size: 0.87rem; line-height: 1.6; list-style: disc; margin-left: 18px; }
+
+  .restart-btn { margin-top: 0; }
+
+  /* responsiveness */
+  @media (max-width: 500px) {
+    .intro-card { padding: 22px 14px; }
+    .scenario-card { padding: 20px 14px; }
+    .btn { padding: 11px 22px; font-size: 0.91rem; }
+    .score-circle { width: 100px; height: 100px; }
+    .score-circle .big { font-size: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Ethics in Engineering</h1>
+  <p>Creationeering — Genesis K-12 Academy</p>
+</header>
+
+<div id="app">
+
+  <!-- INTRO SCREEN -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-card">
+      <div class="badge">🏗️ Creationeering Challenge</div>
+      <h2>You Are the Engineer</h2>
+      <p>Real engineers face tough decisions every day. In each scenario below, you will choose how to respond — and see how your choices reflect the <strong>NSPE Code of Ethics</strong> and the principles of <strong>Creationeering</strong>: honoring God's creation through responsible engineering.</p>
+      <p>Key ideas you'll explore:</p>
+      <div class="roles-grid">
+        <div class="role-chip">⚖️ Ethics</div>
+        <div class="role-chip">🌿 Stewardship</div>
+        <div class="role-chip">🛡️ Public Safety</div>
+        <div class="role-chip">🤝 Honesty</div>
+        <div class="role-chip">💡 Salt &amp; Light</div>
+      </div>
+      <p style="font-size:0.85rem;color:#7a9abf;">5 scenarios · ~3–4 minutes · Instant feedback on every choice</p>
+      <button class="btn btn-gold" onclick="startGame()">Begin Scenarios →</button>
+    </div>
+  </div>
+
+  <!-- SCENARIO SCREEN -->
+  <div id="screen-scenario" class="screen">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="scenario-card" id="scenario-card">
+      <!-- filled by JS -->
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-navy" id="next-btn" onclick="nextScenario()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY SCREEN -->
+  <div id="screen-summary" class="screen">
+    <div class="summary-card">
+      <div class="score-circle">
+        <div class="big" id="score-display">0/5</div>
+        <div class="sub">SCORE</div>
+      </div>
+      <div class="summary-title" id="summary-title">Great Work!</div>
+      <div class="summary-msg" id="summary-msg"></div>
+
+      <div class="principles-box">
+        <h3>📋 NSPE Code of Ethics — Key Principles</h3>
+        <ul>
+          <li>Engineers must hold public <strong>safety, health, and welfare</strong> above all else.</li>
+          <li>Engineers must be <strong>honest and truthful</strong> in all professional communications.</li>
+          <li>Engineers must act as <strong>faithful agents</strong> for clients and employers — within ethical limits.</li>
+          <li>Engineers must avoid <strong>deception</strong> and conflicts of interest.</li>
+          <li>Engineers are responsible for the <strong>environmental impact</strong> of their work (stewardship).</li>
+        </ul>
+      </div>
+
+      <div class="review-list" id="review-list"></div>
+
+      <button class="btn btn-gold restart-btn" onclick="restartGame()">Play Again ↺</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const scenarios = [
+  {
+    label: "Safety Decision",
+    title: "The Bridge Problem",
+    desc: "You are a structural engineer reviewing a bridge design before construction begins. You discover a calculation error that could make the bridge unsafe in heavy storms. Your boss says, 'It's probably fine — we're already behind schedule. Don't slow us down.' What do you do?",
+    choices: [
+      { text: "A) Trust your boss and stay quiet — the bridge will likely be fine.", correct: false },
+      { text: "B) Report the error to your boss in writing and insist it must be fixed before construction continues.", correct: true },
+      { text: "C) Quietly fix a small part of your own work but say nothing about the bigger problem.", correct: false },
+      { text: "D) Quit the project and let someone else deal with it.", correct: false }
+    ],
+    feedback_good: "✅ Correct! The NSPE Code says engineers must prioritize public safety above schedules or pressure from employers. Staying quiet when lives are at risk violates the first and most important ethical duty of engineers.",
+    feedback_bad: "❌ The NSPE Code of Ethics is clear: engineers must hold public safety above all other pressures. When you find a dangerous error, you must report it — even if it is inconvenient or unpopular.",
+    principle: "Principle: Public Safety Comes First"
+  },
+  {
+    label: "Hazardous Materials",
+    title: "The Shortcut Chemicals",
+    desc: "Your company has developed a new cleaning product. The cheapest ingredient that works is a chemical that can harm local rivers if it enters the water supply. Using it would be legal, but it could damage the environment. Your client wants the cheapest option. What should you recommend?",
+    choices: [
+      { text: "A) Use the harmful chemical — it's legal, and the client asked for it.", correct: false },
+      { text: "B) Use the harmful chemical but add a small warning label and call it done.", correct: false },
+      { text: "C) Find a safer alternative ingredient, explain the environmental risk, and recommend the ethical option — even if it costs a bit more.", correct: true },
+      { text: "D) Say nothing and let the business team decide.", correct: false }
+    ],
+    feedback_good: "✅ Correct! Creationeering means protecting God's creation — including rivers and ecosystems. The NSPE Code requires engineers to consider environmental impact. Recommending the safer option is both ethical and responsible stewardship.",
+    feedback_bad: "❌ Just because something is legal does not make it ethical. Creationeering teaches that engineers are stewards of creation. The NSPE Code expects engineers to consider environmental harm, not just legal compliance.",
+    principle: "Principle: Stewardship of Creation"
+  },
+  {
+    label: "Honesty in Design",
+    title: "The Fudged Data",
+    desc: "You are part of a team testing a new app designed for students. Your test results show the app causes eye strain after 20 minutes of use. Your team leader wants you to report it as 'tested and safe' to meet the launch deadline. What do you do?",
+    choices: [
+      { text: "A) Go along with it — a small launch delay isn't worth the conflict.", correct: false },
+      { text: "B) Report the real results and recommend design changes to fix the eye strain issue before launch.", correct: true },
+      { text: "C) Write your own private note but sign the false report anyway.", correct: false },
+      { text: "D) Tell the users directly through social media, skipping your team entirely.", correct: false }
+    ],
+    feedback_good: "✅ Correct! The NSPE Code of Ethics requires engineers to be honest and not deceive clients or the public. Falsifying test data — even under deadline pressure — is a serious ethical violation. User experience and well-being must be protected.",
+    feedback_bad: "❌ The NSPE Code of Ethics requires honesty in all professional reports. Signing off on false data — even to meet a deadline — is deception. Engineers must be truthful and protect user well-being.",
+    principle: "Principle: Honesty & User Well-Being"
+  },
+  {
+    label: "Conflict of Interest",
+    title: "The Better Bid",
+    desc: "You are choosing which company will supply materials for a new school building. Company A offers the best quality and price. Company B is owned by your cousin, and your cousin offers you a gift card if you choose them — but Company B's materials are lower quality. What do you do?",
+    choices: [
+      { text: "A) Choose Company B — your cousin really needs the business.", correct: false },
+      { text: "B) Accept the gift card but still choose Company A — no harm done.", correct: false },
+      { text: "C) Choose Company A based on quality and price, refuse the gift card, and disclose the relationship to your supervisor.", correct: true },
+      { text: "D) Ask your cousin to improve quality first, then decide later.", correct: false }
+    ],
+    feedback_good: "✅ Correct! The NSPE Code forbids conflicts of interest. Accepting gifts from vendors and choosing lower-quality materials that affect a school building is both unethical and potentially dangerous. Transparency with your supervisor is the right move.",
+    feedback_bad: "❌ Accepting gifts to influence decisions is a conflict of interest — a serious violation of the NSPE Code. Engineers must make decisions based on quality, safety, and honest evaluation — not personal relationships or personal gain.",
+    principle: "Principle: Avoid Conflicts of Interest"
+  },
+  {
+    label: "Salt & Light",
+    title: "Speaking Up in the Room",
+    desc: "You are the only engineer in a business meeting. The team is about to approve a product that you know has a design flaw that will frustrate users and possibly cause minor injuries. Everyone else seems excited and ready to move forward. What do you do?",
+    choices: [
+      { text: "A) Stay quiet — you're outnumbered and it's not worth the awkwardness.", correct: false },
+      { text: "B) Wait until the meeting ends and send a private email — maybe someone will read it.", correct: false },
+      { text: "C) Clearly and respectfully raise the design concern in the meeting, explain the risk, and suggest a path to fix it before approval.", correct: true },
+      { text: "D) Approve it now, then fix it quietly in the next version.", correct: false }
+    ],
+    feedback_good: "✅ Correct! Being 'salt and light' means standing up for what is right — even when it's uncomfortable. The NSPE Code says engineers must act to protect the public. Speaking clearly and respectfully in that meeting is exactly what an ethical engineer does.",
+    feedback_bad: "❌ Being 'salt and light' means bringing truth and good into situations — even when it's hard. The NSPE Code requires engineers to speak up when safety or design quality is at risk. Staying silent when you know something is wrong is not ethical.",
+    principle: "Principle: Salt & Light — Speak Up for Good"
+  }
+];
+
+let current = 0;
+let score = 0;
+let results = [];
+let answered = false;
+
+function startGame() {
+  current = 0;
+  score = 0;
+  results = [];
+  answered = false;
+  showScenario();
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-scenario').classList.add('active');
+}
+
+function showScenario() {
+  answered = false;
+  const s = scenarios[current];
+  const total = scenarios.length;
+  const pct = (current / total) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('next-btn').disabled = true;
+
+  let choicesHTML = s.choices.map((c, i) =>
+    `<button class="choice-btn" id="choice-${i}" onclick="selectChoice(${i})">${c.text}</button>`
+  ).join('');
+
+  document.getElementById('scenario-card').innerHTML = `
+    <div>
+      <span class="scenario-label">${s.label}</span>
+      <span class="scenario-num">Scenario ${current+1} of ${total}</span>
+    </div>
+    <div class="scenario-title">${s.title}</div>
+    <div class="scenario-desc">${s.desc}</div>
+    <div class="choices">${choicesHTML}</div>
+    <div class="feedback-box" id="feedback-box"></div>
+  `;
+}
+
+function selectChoice(idx) {
+  if (answered) return;
+  answered = true;
+
+  const s = scenarios[current];
+  const isCorrect = s.choices[idx].correct;
+  if (isCorrect) score++;
+
+  // find correct index
+  const correctIdx = s.choices.findIndex(c => c.correct);
+
+  s.choices.forEach((c, i) => {
+    const btn = document.getElementById('choice-' + i);
+    btn.disabled = true;
+    if (i === correctIdx) { btn.classList.add('reveal'); }
+    if (i === idx && !isCorrect) { btn.classList.add('wrong'); }
+    if (i === idx && isCorrect) { btn.classList.add('correct'); }
+  });
+
+  const fb = document.getElementById('feedback-box');
+  fb.classList.add('show');
+  if (isCorrect) {
+    fb.classList.add('good');
+    fb.innerHTML = s.feedback_good + `<br><span class="principle-tag">${s.principle}</span>`;
+  } else {
+    fb.classList.add('bad');
+    fb.innerHTML = s.feedback_bad + `<br><span class="principle-tag">${s.principle}</span>`;
+  }
+
+  results.push({
+    question: s.title,
+    chosen: s.choices[idx].text,
+    correctAns: s.choices[correctIdx].text,
+    wasCorrect: isCorrect
+  });
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = false;
+  if (current === scenarios.length - 1) {
+    nextBtn.textContent = 'See Results →';
+  }
+}
+
+function nextScenario() {
+  current++;
+  if (current >= scenarios.length) {
+    showSummary();
+  } else {
+    showScenario();
+  }
+}
+
+function showSummary() {
+  document.getElementById('screen-scenario').classList.remove('active');
+  document.getElementById('screen-summary').classList.add('active');
+
+  const total = scenarios.length;
+  document.getElementById('score-display').textContent = score + '/' + total;
+
+  let title, msg;
+  if (score === total) {
+    title = '🏆 Outstanding Engineer!';
+    msg = `You scored perfectly — ${score} out of ${total}! You clearly understand how ethics, safety, honesty, and stewardship guide responsible engineering. You are ready to be a Creationeering leader!`;
+  } else if (score >= 3) {
+    title = '✅ Solid Ethical Thinking!';
+    msg = `You scored ${score} out of ${total}. You have a good grasp of engineering ethics. Review the scenarios you missed and remember: the NSPE Code and Creationeering principles always point toward protecting people and creation.`;
+  } else {
+    title = '📚 Keep Exploring Ethics!';
+    msg = `You scored ${score} out of ${total}. Ethics in engineering takes practice. Review the feedback from each scenario below — the NSPE Code and Creationeering remind us that good engineers think carefully about safety, honesty, and stewardship.`;
+  }
+
+  document.getElementById('summary-title').textContent = title;
+  document.getElementById('summary-msg').textContent = msg;
+
+  // build review list
+  let html = '';
+  results.forEach((r, i) => {
+    const cls = r.wasCorrect ? 'r-correct' : 'r-wrong';
+    const icon = r.wasCorrect ? '✅' : '❌';
+    html += `<div class="review-item ${cls}">
+      <div class="r-q">${icon} Scenario ${i+1}: ${r.question}</div>
+      ${!r.wasCorrect ? `<div class="r-chosen">Your answer: ${r.chosen}</div><div class="r-correct-ans">Best answer: ${r.correctAns}</div>` : `<div class="r-correct-ans">Your answer: ${r.chosen}</div>`}
+    </div>`;
+  });
+  document.getElementById('review-list').innerHTML = html;
+}
+
+function restartGame() {
+  document.getElementById('screen-summary').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+}
+</script>
+</body>
+</html>

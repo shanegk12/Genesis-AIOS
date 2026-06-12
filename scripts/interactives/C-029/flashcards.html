@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protecting Your Business — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Protecting Your Business</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Trademark", "definition": "A symbol, logo, or name that identifies a product or company and helps customers recognize its quality and origin."}, {"term": "Copyright", "definition": "Legal protection for original creative works like books, music, software code, and technical drawings, giving the creator control over how it's used."}, {"term": "Intellectual Property (IP)", "definition": "Creations of the mind, such as inventions, designs, or artistic works, that can be legally protected."}, {"term": "Brand Identity", "definition": "The unique visual elements and personality of a company or product that makes it recognizable to consumers."}, {"term": "Stewardship (in IP)", "definition": "The biblical principle of responsibly managing and protecting the creative works and resources entrusted to us, including intellectual property."}, {"term": "Engineer's Role in IP", "definition": "Engineers help protect IP by documenting their work, providing technical expertise for legal strategies, and assisting with licensing agreements."}, {"term": "Consumer Confusion", "definition": "When customers are unsure which company made a product because similar names or logos are used, which trademarks help prevent."}, {"term": "Copyrightable Engineering Material", "definition": "Examples include computer code, schematics, technical manuals, and simulation data, which are protected as original works of authorship."}, {"term": "Patent", "definition": "A legal right that protects new, useful, and non-obvious inventions, giving the inventor exclusive rights for a period of time."}, {"term": "Legal Lifecycle of a Project", "definition": "The stages of a project where legal considerations for intellectual property are important, from initial idea to final agreements."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

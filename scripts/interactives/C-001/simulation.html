@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Creationeering? | GK12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  header .logo {
+    width: 40px;
+    height: 40px;
+    background: #C9A84C;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 18px;
+    color: #1B3A5C;
+    flex-shrink: 0;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  header p {
+    font-size: 0.75rem;
+    color: #C9A84C;
+    margin-top: 2px;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    background: #e0e8f0;
+    height: 6px;
+  }
+
+  .progress-bar-fill {
+    height: 6px;
+    background: #C9A84C;
+    transition: width 0.4s ease;
+  }
+
+  .screen {
+    display: none;
+    width: 100%;
+    max-width: 760px;
+    padding: 20px 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .screen.active {
+    display: flex;
+  }
+
+  /* =========== WELCOME =========== */
+  .welcome-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.10);
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .welcome-card .icon-big {
+    font-size: 52px;
+    margin-bottom: 12px;
+  }
+
+  .welcome-card h2 {
+    font-size: 1.5rem;
+    color: #1B3A5C;
+    margin-bottom: 8px;
+  }
+
+  .welcome-card p {
+    color: #4a6080;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    background: #f0f4f8;
+    border: 2px solid #C9A84C;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1B3A5C;
+  }
+
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn:hover { background: #b8922e; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: #fff;
+    color: #1B3A5C;
+    border: 2px solid #1B3A5C;
+  }
+
+  .btn-secondary:hover { background: #f0f4f8; }
+
+  /* =========== DRAG & DROP =========== */
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .section-sub {
+    font-size: 0.85rem;
+    color: #5a7090;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .dnd-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cards-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: 60px;
+    background: #e8eef5;
+    border-radius: 12px;
+    padding: 12px;
+    border: 2px dashed #b0c0d0;
+  }
+
+  .drag-card {
+    background: #fff;
+    border: 2.5px solid #C9A84C;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    cursor: grab;
+    user-select: none;
+    transition: box-shadow 0.2s, transform 0.2s;
+    touch-action: none;
+  }
+
+  .drag-card:hover { box-shadow: 0 4px 12px rgba(201,168,76,0.35); transform: translateY(-2px); }
+  .drag-card.dragging { opacity: 0.5; cursor: grabbing; }
+
+  .zones-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media(max-width: 500px) {
+    .zones-row { grid-template-columns: 1fr; }
+  }
+
+  .drop-zone {
+    background: #fff;
+    border: 2.5px dashed #1B3A5C;
+    border-radius: 12px;
+    padding: 12px;
+    min-height: 110px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .drop-zone.over {
+    background: #eaf1ff;
+    border-color: #C9A84C;
+  }
+
+  .drop-zone.correct-zone {
+    border-color: #2ecc71;
+    background: #f0fff5;
+  }
+
+  .drop-zone.wrong-zone {
+    border-color: #e74c3c;
+    background: #fff5f5;
+  }
+
+  .zone-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-bottom: 8px;
+    letter-spacing: 0.4px;
+  }
+
+  .zone-sub {
+    font-size: 0.72rem;
+    color: #7a90a8;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .zone-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 40px;
+  }
+
+  .drop-zone .drag-card {
+    font-size: 0.8rem;
+    padding: 7px 12px;
+    cursor: default;
+  }
+
+  .drag-card.placed-correct {
+    border-color: #2ecc71;
+    background: #f0fff5;
+  }
+
+  .drag-card.placed-wrong {
+    border-color: #e74c3c;
+    background: #fff0f0;
+  }
+
+  .check-btn-wrap {
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* =========== QUIZ =========== */
+  .quiz-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.08);
+  }
+
+  .q-number {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .options-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    background: #f7f9fc;
+    border: 2.5px solid #d0dce8;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: #C9A84C;
+    background: #fdf9ee;
+  }
+
+  .option-btn.correct {
+    border-color: #2ecc71;
+    background: #eafff3;
+    color: #1a7a3c;
+  }
+
+  .option-btn.wrong {
+    border-color: #e74c3c;
+    background: #fff0f0;
+    color: #b02020;
+  }
+
+  .option-btn.reveal-correct {
+    border-color: #2ecc71;
+    background: #eafff3;
+    color: #1a7a3c;
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .feedback-box.show { display: block; }
+  .feedback-box.pos { background: #eafff3; border-left: 4px solid #2ecc71; color: #1a6030; }
+  .feedback-box.neg { background: #fff0f0; border-left: 4px solid #e74c3c; color: #a02020; }
+
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+  }
+
+  /* =========== SCENARIO =========== */
+  .scenario-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.08);
+  }
+
+  .scenario-badge {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .scenario-text {
+    font-size: 0.97rem;
+    color: #1B3A5C;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .scenario-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2.5px solid #d0dce8;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s;
+  }
+
+  .choice-btn:hover { border-color: #C9A84C; background: #fdf9ee; }
+  .choice-btn.chosen-good { border-color: #2ecc71; background: #eafff3; }
+  .choice-btn.chosen-bad { border-color: #e74c3c; background: #fff0f0; }
+
+  .outcome-box {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .outcome-box.show { display: block; }
+  .outcome-box.good { background: #eafff3; border-left: 4px solid #2ecc71; color: #1a5c30; }
+  .outcome-box.bad { background: #fff0f0; border-left: 4px solid #e74c3c; color: #8a1515; }
+
+  /* =========== RESULTS =========== */
+  .result-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.10);
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .result-icon { font-size: 60px; margin-bottom: 10px; }
+
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-weight: 900;
+  }
+
+  .score-circle .big-num { font-size: 2rem; line-height: 1; }
+  .score-circle .small-lbl { font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; }
+
+  .result-title { font-size: 1.4rem; font-weight: 800; color: #1B3A5C; margin-bottom: 8px; }
+  .result-msg { font-size: 0.93rem; color: #4a6080; line-height: 1.6; margin-bottom: 20px; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+
+  .summary-item {
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+
+  .summary-item .s-label { font-size: 0.72rem; color: #7a90a8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .summary-item .s-val { font-size: 1rem; font-weight: 700; color: #1B3A5C; }
+
+  /* step counter */
+  .step-indicator {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .step-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #d0dce8;
+    transition: background 0.3s;
+  }
+
+  .step-dot.done { background: #C9A84C; }
+  .step-dot.active { background: #1B3A5C; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK</div>
+  <div>
+    <h1>Creationeering</h1>
+    <p>Genesis K-12 Academy · Engineering Curriculum</p>
+  </div>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+</div>
+
+<!-- ===== SCREEN 0: WELCOME ===== -->
+<div class="screen active" id="screen-welcome">
+  <div style="height:20px"></div>
+  <div class="welcome-card">
+    <div class="icon-big">⚙️</div>
+    <h2>What is Creationeering?</h2>
+    <p>Test your knowledge across three challenges covering engineering definitions, engineering fields, and real-world design decisions — all grounded in the Creationeering™ framework.</p>
+    <div class="badge-row">
+      <span class="badge">🔤 Vocab Match</span>
+      <span class="badge">🏗️ Field Sort</span>
+      <span class="badge">💡 Design Decision</span>
+    </div>
+    <button class="btn" onclick="startActivity()">Start Activity →</button>
+  </div>
+</div>
+
+<!-- ===== SCREEN 1: QUIZ ===== -->
+<div class="screen" id="screen-quiz">
+  <div style="height:10px"></div>
+  <div class="step-indicator" id="quizDots"></div>
+  <div class="section-title">Challenge 1 — Vocabulary Quiz</div>
+  <div class="section-sub">Choose the best answer for each question.</div>
+  <div style="height:6px"></div>
+  <div class="quiz-card" id="quizCard">
+    <div class="q-number" id="qNumber"></div>
+    <div class="q-text" id="qText"></div>
+    <ul class="options-list" id="optionsList"></ul>
+    <div class="feedback-box" id="feedbackBox"></div>
+    <div class="nav-row">
+      <button class="btn" id="nextQBtn" onclick="nextQuestion()" style="display:none">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 2: DRAG & DROP ===== -->
+<div class="screen" id="screen-dnd">
+  <div style="height:10px"></div>
+  <div class="section-title">Challenge 2 — Sort the Engineering Fields</div>
+  <div class="section-sub">Drag each example into the correct engineering field box.</div>
+  <div class="dnd-container" id="dndContainer">
+    <div class="cards-pool" id="cardsPool"></div>
+    <div class="zones-row" id="zonesRow"></div>
+    <div class="check-btn-wrap">
+      <button class="btn" id="checkDndBtn" onclick="checkDnd()">Check My Answers ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 3: SCENARIO ===== -->
+<div class="screen" id="screen-scenario">
+  <div style="height:10px"></div>
+  <div class="step-indicator" id="scenDots"></div>
+  <div class="section-title">Challenge 3 — Design Decision</div>
+  <div class="section-sub">Read each situation and pick the best Creationeering approach.</div>
+  <div style="height:6px"></div>
+  <div class="scenario-card" id="scenCard">
+    <div class="scenario-badge" id="scenBadge"></div>
+    <div class="scenario-text" id="scenText"></div>
+    <div class="scenario-choices" id="scenChoices"></div>
+    <div class="outcome-box" id="outcomebox"></div>
+    <div class="nav-row">
+      <button class="btn" id="nextScenBtn" onclick="nextScenario()" style="display:none">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN 4: RESULTS ===== -->
+<div class="screen" id="screen-results">
+  <div style="height:10px"></div>
+  <div class="result-card">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="score-circle">
+      <span class="big-num" id="scoreNum">0</span>
+      <span class="small-lbl">/ <span id="scoreDen">0</span> pts</span>
+    </div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="s-label">Quiz Score</div>
+        <div class="s-val" id="sumQuiz">—</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Field Sort</div>
+        <div class="s-val" id="sumDnd">—</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Design Decisions</div>
+        <div class="s-val" id="sumScen">—</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-label">Total Points</div>
+        <div class="s-val" id="sumTotal">—</div>
+      </div>
+    </div>
+    <button class="btn" onclick="restartActivity()">Try Again 🔄</button>
+  </div>
+</div>
+
+<script>
+// =============================================
+//  DATA
+// =============================================
+
+const QUIZ_QUESTIONS = [
+  {
+    q: "What is the best definition of engineering?",
+    options: [
+      "The study of living organisms and ecosystems",
+      "Using math and science to create physical solutions to real-world problems",
+      "Writing computer programs to entertain users",
+      "Drawing artistic blueprints of buildings"
+    ],
+    correct: 1,
+    feedback: "✅ Engineering uses math and science to build physical solutions that help people and solve real problems."
+  },
+  {
+    q: "What does the Creationeering™ framework combine?",
+    options: [
+      "Art, music, and history",
+      "Science, technology, and government",
+      "Science, engineering, entrepreneurship, and biblical principles",
+      "Math, writing, and foreign language"
+    ],
+    correct: 2,
+    feedback: "✅ Creationeering™ uniquely blends science, engineering, and entrepreneurship with a biblical worldview."
+  },
+  {
+    q: "According to the lesson, why did God create people with the ability to think and innovate?",
+    options: [
+      "So they could build the tallest towers possible",
+      "To compete with other species on Earth",
+      "So they could express creativity and shape the world around them",
+      "To replace the work originally done by angels"
+    ],
+    correct: 2,
+    feedback: "✅ Humans were made in God's image, giving us creativity to shape the world and honor our Creator."
+  },
+  {
+    q: "Which statement BEST describes the role of engineering in society?",
+    options: [
+      "It is only used to build weapons and military equipment",
+      "It applies knowledge to solve real-world problems and improve lives",
+      "It focuses exclusively on computer software design",
+      "It is limited to large construction projects"
+    ],
+    correct: 1,
+    feedback: "✅ Engineering applies knowledge broadly to solve all kinds of real-world problems and improve society."
+  },
+  {
+    q: "Which phrase describes using our creativity as an act of stewardship and respect toward God?",
+    options: [
+      "Channeling creativity into acts of kindness and innovation",
+      "Keeping creative ideas private and never sharing them",
+      "Only creating things that already exist in nature",
+      "Limiting innovation to religious buildings"
+    ],
+    correct: 0,
+    feedback: "✅ The lesson teaches that channeling creativity into kindness and innovation honors our Creator and continues the story of creation."
+  }
+];
+
+const DND_FIELDS = [
+  { label: "Industrial & Systems", sub: "Optimizing processes & systems", color: "#1B3A5C" },
+  { label: "Mechanical", sub: "Machines, motion & forces", color: "#2d5a8e" },
+  { label: "Computer", sub: "Software, hardware & data", color: "#3a7abf" },
+  { label: "Electrical", sub: "Electricity & circuits", color: "#4a90d9" }
+];
+
+const DND_CARDS = [
+  { text: "Designing a factory assembly line", field: "Industrial & Systems" },
+  { text: "Building a smartphone app", field: "Computer" },
+  { text: "Creating a car engine", field: "Mechanical" },
+  { text: "Wiring a school's power system", field: "Electrical" },
+  { text: "Programming a robot to sort packages", field: "Computer" },
+  { text: "Designing gears for a bicycle", field: "Mechanical" },
+  { text: "Planning hospital patient flow", field: "Industrial & Systems" },
+  { text: "Installing solar panels on a roof", field: "Electrical" }
+];
+
+const SCENARIOS = [
+  {
+    badge: "Scenario 1 of 3",
+    text: "Your school needs a faster way to check in students every morning. Right now it takes 20 minutes and students are often late to class. As a Creationeering student, which approach fits best?",
+    choices: [
+      { text: "A) Use Industrial & Systems Engineering to redesign the check-in process and reduce waiting time.", good: true },
+      { text: "B) Tell the principal the problem is too hard to fix.", good: false },
+      { text: "C) Just accept the long wait — it has always been this way.", good: false }
+    ],
+    goodOutcome: "🎯 Great thinking! Industrial & Systems Engineers analyze how processes work and redesign them to be more efficient. That's exactly the right tool here.",
+    badOutcome: "🤔 Not quite. A Creationeering approach means using engineering knowledge to solve real problems rather than giving up. Industrial & Systems Engineering is the right fit."
+  },
+  {
+    badge: "Scenario 2 of 3",
+    text: "A community in a rural area loses power every time it rains. Families can't refrigerate food or charge medical devices. Which engineering field should lead the solution?",
+    choices: [
+      { text: "A) Mechanical Engineering — design a stronger water wheel.", good: false },
+      { text: "B) Electrical Engineering — improve the power grid and install reliable circuits.", good: true },
+      { text: "C) Computer Engineering — build a website about the problem.", good: false }
+    ],
+    goodOutcome: "✅ Correct! Electrical Engineers work with power systems and circuits. They are the right specialists to design a reliable electrical grid for that community.",
+    badOutcome: "🤔 Not the best fit. The core issue is electrical power reliability, which is an Electrical Engineering problem. Mechanical or Computer solutions alone won't fix the power grid."
+  },
+  {
+    badge: "Scenario 3 of 3",
+    text: "A student engineer designs a new water-purification device for a village without clean water. She could sell it at a very high price OR price it affordably so more families can access it. Which choice best reflects Creationeering values?",
+    choices: [
+      { text: "A) Charge the highest price possible to maximize personal profit only.", good: false },
+      { text: "B) Price it affordably so more families benefit, using entrepreneurship to sustain the mission.", good: true },
+      { text: "C) Give up on selling it entirely and never produce it at all.", good: false }
+    ],
+    goodOutcome: "🌟 Excellent! Creationeering blends entrepreneurship WITH biblical stewardship — creating solutions that serve others and make a lasting positive impact.",
+    badOutcome: "🤔 Think about it: Creationeering integrates entrepreneurship AND biblical principles of caring for others. Pricing for access is stewardship in action."
+  }
+];
+
+// =============================================
+//  STATE
+// =============================================
+let quizIndex = 0;
+let quizScore = 0;
+let dndScore = 0;
+let scenScore = 0;
+let scenIndex = 0;
+let dndChecked = false;
+
+// drag state
+let draggedCard = null;
+let draggedFrom = null; // 'pool' or zone label
+
+// =============================================
+//  PROGRESS
+// =============================================
+function setProgress(pct) {
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startActivity() {
+  showScreen('screen-quiz');
+  setProgress(5);
+  renderQuestion();
+}
+
+// =============================================
+//  QUIZ
+// =============================================
+function buildDots(containerId, total, current) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i < current ? ' done' : i === current ? ' active' : '');
+    c.appendChild(d);
+  }
+}
+
+function renderQuestion() {
+  const q = QUIZ_QUESTIONS[quizIndex];
+  buildDots('quizDots', QUIZ_QUESTIONS.length, quizIndex);
+  document.getElementById('qNumber').textContent = `Question ${quizIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+  document.getElementById('qText').textContent = q.q;
+  const list = document.getElementById('optionsList');
+  list.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const li = document.createElement('li');
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    li.appendChild(btn);
+    list.appendChild(li);
+  });
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.remove('show', 'pos', 'neg');
+  fb.textContent = '';
+  document.getElementById('nextQBtn').style.display = 'none';
+  setProgress(5 + (quizIndex / QUIZ_QUESTIONS.length) * 25);
+}
+
+function selectAnswer(chosen) {
+  const q = QUIZ_QUESTIONS[quizIndex];
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === q.correct) {
+    btns[chosen].classList.add('correct');
+    fb.textContent = q.feedback;
+    fb.classList.add('show', 'pos');
+    quizScore++;
+  } else {
+    btns[chosen].classList.add('wrong');
+    btns[q.correct].classList.add('reveal-correct');
+    fb.textContent = '❌ Not quite. ' + q.feedback;
+    fb.classList.add('show', 'neg');
+  }
+  document.getElementById('nextQBtn').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  quizIndex++;
+  if (quizIndex < QUIZ_QUESTIONS.length) {
+    renderQuestion();
+  } else {
+    showScreen('screen-dnd');
+    setProgress(35);
+    renderDnd();
+  }
+}
+
+// =============================================
+//  DRAG & DROP
+// =============================================
+function renderDnd() {
+  dndChecked = false;
+  const pool = document.getElementById('cardsPool');
+  pool.innerHTML = '';
+  const zonesRow = document.getElementById('zonesRow');
+  zonesRow.innerHTML = '';
+  document.getElementById('checkDndBtn').style.display = 'inline-block';
+
+  // Shuffle cards
+  const shuffled = [...DND_CARDS].sort(() => Math.random() - 0.5);
+  shuffled.forEach(cardData => {
+    const card = createDragCard(cardData.text, cardData.field);
+    pool.appendChild(card);
+  });
+
+  // Create zones
+  DND_FIELDS.forEach(field => {
+    const zone = document.createElement('div');
+    zone.className = 'drop-zone';
+    zone.dataset.field = field.label;
+
+    const lbl = document.createElement('div');
+    lbl.className = 'zone-label';
+    lbl.style.background = field.color;
+    lbl.textContent = field.label;
+
+    const sub = document.createElement('div');
+    sub.className = 'zone-sub';
+    sub.textContent = field.sub;
+
+    const zc = document.createElement('div');
+    zc.className = 'zone-cards';
+    zc.dataset.field = field.label;
+
+    zone.appendChild(lbl);
+    zone.appendChild(sub);
+    zone.appendChild(zc);
+    zonesRow.appendChild(zone);
+
+    // Desktop drag events
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      if (draggedCard) {
+        zc.appendChild(draggedCard);
+        draggedCard.classList.remove('dragging');
+        draggedCard = null;
+      }
+    });
+  });
+
+  // Pool drop-back
+  pool.addEventListener('dragover', e => { e.preventDefault(); pool.style.borderColor = '#C9A84C'; });
+  pool.addEventListener('dragleave', () => pool.style.borderColor = '#b0c0d0'; );
+  pool.addEventListener('drop', e => {
+    e.preventDefault();
+    pool.style.borderColor = '#b0c0d0';
+    if (draggedCard) {
+      pool.appendChild(draggedCard);
+      draggedCard.classList.remove('dragging');
+      draggedCard = null;
+    }
+  });
+}
+
+function createDragCard(text, correctField) {
+  const card = document.createElement('div');
+  card.className = 'drag-card';
+  card.textContent = text;
+  card.draggable = true;
+  card.dataset.correct = correctField;
+
+  // Desktop drag
+  card.addEventListener('dragstart', () => {
+    draggedCard = card;
+    setTimeout(() => card.classList.add('dragging'), 0);
+  });
+  card.addEventListener('dragend', () => {
+    card.classList.remove('dragging');
+  });
+
+  // Touch support
+  let touchOffsetX = 0, touchOffsetY = 0;
+  let ghost = null;
+
+  card.addEventListener('touchstart', e => {
+    const touch = e.touches[0];
+    const rect = card.getBoundingClientRect();
+    touchOffsetX = touch.clientX - rect.left;
+    touchOffsetY = touch.clientY - rect.top;
+
+    ghost = card.cloneNode(true);
+    ghost.style.position = 'fixed';
+    ghost.style.opacity = '0.8';
+    ghost.style.pointerEvents = 'none';
+    ghost.style.zIndex = '9999';
+    ghost.style.width = rect.width + 'px';
+    ghost.style.left = (touch.clientX - touchOffsetX) + 'px';
+    ghost.style.top = (touch.clientY - touchOffsetY) + 'px';
+    document.body.appendChild(ghost);
+    card.style.opacity = '0.4';
+    draggedCard = card;
+  }, { passive: true });
+
+  card.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (ghost) {
+      ghost.style.left = (touch.clientX - touchOffsetX) + 'px';
+      ghost.style.top = (touch.clientY - touchOffsetY) + 'px';
+    }
+    // highlight zones
+    document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('over'));
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (el) {
+      const zone = el.closest('.drop-zone');
+      if (zone) zone.classList.add('over');
+    }
+  }, { passive: false });
+
+  card.addEventListener('touchend', e => {
+    const touch = e.changedTouches[0];
+    if (ghost) { ghost.remove(); ghost = null; }
+    card.style.opacity = '1';
+    document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('over'));
+
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (el) {
+      const zone = el.closest('.drop-zone');
+      if (zone) {
+        const zc = zone.querySelector('.zone-cards');
+        if (zc) zc.appendChild(card);
+      } else {
+        const pool = document.getElementById('cardsPool');
+        if (el.closest('#cardsPool') || el === pool) {
+          pool.appendChild(card);
+        }
+      }
+    }
+    draggedCard = null;
+  });
+
+  return card;
+}
+
+function checkDnd() {
+  if (dndChecked) return;
+  dndChecked = true;
+  dndScore = 0;
+  let total = 0;
+
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    const fieldLabel = zone.dataset.field;
+    zone.classList.remove('correct-zone', 'wrong-zone');
+    const placed = zone.querySelectorAll('.drag-card');
+    let zoneCorrect = true;
+    placed.forEach(card => {
+      total++;
+      if (card.dataset.correct === fieldLabel) {
+        card.classList.add('placed-correct');
+        dndScore++;
+      } else {
+        card.classList.add('placed-wrong');
+        zoneCorrect = false;
+      }
+    });
+  });
+
+  // Items still in pool count as 0
+  document.querySelectorAll('#cardsPool .drag-card').forEach(card => {
+    total++;
+  });
+
+  document.getElementById('checkDndBtn').textContent = `Score: ${dndScore}/${DND_CARDS.length} ✓`;
+  document.getElementById('checkDndBtn').disabled = true;
+
+  setTimeout(() => {
+    showScreen('screen-scenario');
+    setProgress(65);
+    renderScenario();
+  }, 1400);
+}
+
+// =============================================
+//  SCENARIOS
+// =============================================
+function renderScenario() {
+  const s = SCENARIOS[scenIndex];
+  buildDots('scenDots', SCENARIOS.length, scenIndex);
+  document.getElementById('scenBadge').textContent = s.badge;
+  document.getElementById('scenText').textContent = s.text;
+  const choicesEl = document.getElementById('scenChoices');
+  choicesEl.innerHTML = '';
+  s.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => pickChoice(i, c.good);
+    choicesEl.appendChild(btn);
+  });
+  const ob = document.getElementById('outcomebox');
+  ob.classList.remove('show', 'good', 'bad');
+  ob.textContent = '';
+  document.getElementById('nextScenBtn').style.display = 'none';
+  setProgress(65 + (scenIndex / SCENARIOS.length) * 25);
+}
+
+function pickChoice(i, isGood) {
+  const s = SCENARIOS[scenIndex];
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[i].classList.add(isGood ? 'chosen-good' : 'chosen-bad');
+
+  const ob = document.getElementById('outcomebox');
+  ob.textContent = isGood ? s.goodOutcome : s.badOutcome;
+  ob.classList.add('show', isGood ? 'good' : 'bad');
+  if (isGood) scenScore++;
+
+  const nextBtn = document.getElementById('nextScenBtn');
+  nextBtn.style.display = 'inline-block';
+  if (scenIndex === SCENARIOS.length - 1) {
+    nextBtn.textContent = 'See Results 🏆';
+  } else {
+    nextBtn.textContent = 'Next →';
+  }
+}
+
+function nextScenario() {
+  scenIndex++;
+  if (scenIndex < SCENARIOS.length) {
+    renderScenario();
+  } else {
+    showResults();
+  }
+}
+
+// =============================================
+//  RESULTS
+// =============================================
+function showResults() {
+  setProgress(100);
+  const total = quizScore + dndScore + scenScore;
+  const maxTotal = QUIZ_QUESTIONS.length + DND_CARDS.length + SCENARIOS.length;
+
+  document.getElementById('scoreNum').textContent = total;
+  document.getElementById('scoreDen').textContent = maxTotal;
+  document.getElementById('sumQuiz').textContent = `${quizScore}/${QUIZ_QUESTIONS.length}`;
+  document.getElementById('sumDnd').textContent = `${dndScore}/${DND_CARDS.length}`;
+  document.getElementById('sumScen').textContent = `${scenScore}/${SCENARIOS.length}`;
+  document.getElementById('sumTotal').textContent = `${total}/${maxTotal}`;
+
+  const pct = total / maxTotal;
+  let icon, title, msg;
+  if (pct >= 0.85) {
+    icon = '🏆'; title = 'Outstanding Creationeer!';
+    msg = 'You\'ve mastered the core ideas of Creationeering™ — engineering, faith, and entrepreneurship working together to make a difference.';
+  } else if (pct >= 0.65) {
+    icon = '⭐'; title = 'Great Work!';
+    msg = 'You have a solid grasp of the Creationeering™ framework. Review any areas you missed and you\'ll be ready to engineer solutions that matter.';
+  } else {
+    icon = '💡'; title = 'Keep Building!';
+    msg = 'Every engineer starts somewhere. Review the lesson on engineering definitions and fields, then try again — you\'ve got this!';
+  }
+
+  document.getElementById('resultIcon').textContent = icon;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultMsg').textContent = msg;
+
+  showScreen('screen-results');
+}
+
+function restartActivity() {
+  quizIndex = 0;
+  quizScore = 0;
+  dndScore = 0;
+  scenScore = 0;
+  scenIndex = 0;
+  dndChecked = false;
+  setProgress(0);
+  showScreen('screen-welcome');
+}
+</script>
+</body>
+</html>

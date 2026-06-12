@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Car – Post-Build Systems Viewer | Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f4f8;
+    color: #1B3A5C;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  header .title-block h1 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  header .title-block p {
+    font-size: 0.7rem;
+    color: #C9A84C;
+    margin-top: 1px;
+  }
+  header .badge {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+  .main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  .sidebar {
+    width: 240px;
+    background: #fff;
+    border-right: 2px solid #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-header {
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .component-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e8edf2;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .component-item:hover, .component-item.active {
+    background: #eef3f8;
+    border-left: 3px solid #C9A84C;
+  }
+  .component-item .comp-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .comp-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .component-item .comp-desc {
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .sustainability-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 8px;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+  }
+  .tag-recycle { background: #d4edda; color: #155724; }
+  .tag-reuse   { background: #cce5ff; color: #004085; }
+  .tag-compost { background: #fff3cd; color: #856404; }
+
+  .controls-panel {
+    padding: 12px;
+    border-top: 2px solid #1B3A5C;
+    background: #f8f9fa;
+  }
+  .controls-panel p {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 7px;
+  }
+  .btn-row { display: flex; flex-direction: column; gap: 6px; }
+  button {
+    background: #1B3A5C;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  button:hover { background: #2a5080; transform: translateY(-1px); }
+  button.gold {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  button.gold:hover { background: #b8923e; }
+  button.active-btn { background: #C9A84C; color: #1B3A5C; }
+
+  .canvas-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #e8edf5 0%, #d0dae8 100%);
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  canvas.grabbing { cursor: grabbing; }
+
+  .label-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .callout {
+    position: absolute;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .callout-line {
+    position: absolute;
+    background: #C9A84C;
+    height: 1.5px;
+    transform-origin: left center;
+  }
+  .callout-box {
+    position: absolute;
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border-left: 3px solid #C9A84C;
+    letter-spacing: 0.3px;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(27,58,92,0.85);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    pointer-events: none;
+    letter-spacing: 0.3px;
+  }
+  .view-mode-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(27,58,92,0.9);
+    color: #C9A84C;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+  .lifecycle-banner {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(201,168,76,0.95);
+    color: #1B3A5C;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <h1>🏎️ Mousetrap Car — Post-Build Systems Viewer</h1>
+    <p>Lesson: Post-Build Systems · Sustainability Phase · Mousetrap Build</p>
+  </div>
+  <div class="badge">CREATIONEERING™</div>
+</header>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <div class="sidebar-header">⚙ Component List</div>
+    <div id="comp-list"></div>
+    <div class="controls-panel">
+      <p>🔧 View Controls</p>
+      <div class="btn-row">
+        <button id="btn-explode" class="gold">💥 Exploded View</button>
+        <button id="btn-assembled">🔩 Assembled View</button>
+        <button id="btn-rotate-left">◀ Rotate Left</button>
+        <button id="btn-rotate-right">Rotate Right ▶</button>
+        <button id="btn-tilt-up">▲ Tilt Up</button>
+        <button id="btn-tilt-down">▼ Tilt Down</button>
+        <button id="btn-reset">↺ Reset View</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-area">
+    <canvas id="viewer"></canvas>
+    <div class="label-overlay" id="label-overlay"></div>
+    <div class="view-mode-label" id="view-mode-label">ASSEMBLED VIEW</div>
+    <div class="lifecycle-banner">♻ LIFECYCLE ANALYSIS<br>Post-Build Systems</div>
+    <div class="hint">Drag to rotate · Use buttons or drag to explore</div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('viewer');
+const ctx = canvas.getContext('2d');
+const overlay = document.getElementById('label-overlay');
+const viewModeLabel = document.getElementById('view-mode-label');
+
+// ── palette
+const C = {
+  navy:   '#1B3A5C',
+  gold:   '#C9A84C',
+  white:  '#FFFFFF',
+  ltblue: '#4a7aad',
+  midblue:'#2e5f8a',
+  gray:   '#8fa8c0',
+  lgray:  '#c8d8e8',
+  red:    '#c0392b',
+  green:  '#27ae60',
+  wood:   '#c8a96e',
+  darkwood:'#9a7840',
+  axle:   '#888',
+  spring: '#e74c3c',
+};
+
+// ── components data
+const components = [
+  {
+    id: 'chassis',
+    name: 'Chassis (Base Board)',
+    color: C.wood,
+    shade: C.darkwood,
+    dotColor: '#c8a96e',
+    desc: 'The wooden platform that supports all other components. Balsa or light pine.',
+    tag: 'reuse',
+    tagLabel: '♻ Reuse / Recycle',
+    tagClass: 'tag-recycle',
+  },
+  {
+    id: 'mousetrap',
+    name: 'Mousetrap Mechanism',
+    color: '#b0b0b0',
+    shade: '#707070',
+    dotColor: '#b0b0b0',
+    desc: 'Steel spring trap — the energy source. Spring stores elastic potential energy.',
+    tag: 'recycle',
+    tagLabel: '♻ Metal Recycle',
+    tagClass: 'tag-recycle',
+  },
+  {
+    id: 'lever',
+    name: 'Lever Arm (String Spool)',
+    color: C.gold,
+    shade: '#9a7830',
+    dotColor: C.gold,
+    desc: 'Extends the mousetrap arm to increase torque & distance. Dowel or skewer.',
+    tag: 'compost',
+    tagLabel: '🌱 Compostable',
+    tagClass: 'tag-compost',
+  },
+  {
+    id: 'axle_rear',
+    name: 'Rear Axle & Drive Wheels',
+    color: C.ltblue,
+    shade: C.navy,
+    dotColor: C.ltblue,
+    desc: 'Rear axle transfers rotational energy from string to forward motion. Largest wheels for speed.',
+    tag: 'reuse',
+    tagLabel: '🔁 Reuse',
+    tagClass: 'tag-reuse',
+  },
+  {
+    id: 'axle_front',
+    name: 'Front Axle & Steering Wheels',
+    color: C.midblue,
+    shade: C.navy,
+    dotColor: C.midblue,
+    desc: 'Front axle guides direction. Smaller wheels reduce friction.',
+    tag: 'reuse',
+    tagLabel: '🔁 Reuse',
+    tagClass: 'tag-reuse',
+  },
+];
+
+// ── build sidebar
+const compList = document.getElementById('comp-list');
+components.forEach((c, i) => {
+  const div = document.createElement('div');
+  div.className = 'component-item';
+  div.id = 'ci-' + c.id;
+  div.innerHTML = `
+    <div class="comp-name">
+      <span class="comp-dot" style="background:${c.dotColor}"></span>
+      ${c.name}
+    </div>
+    <div class="comp-desc">${c.desc}</div>
+    <span class="sustainability-tag ${c.tagClass}">${c.tagLabel}</span>
+  `;
+  div.addEventListener('click', () => highlightComponent(c.id));
+  compList.appendChild(div);
+});
+
+// ── state
+let rotY = -30;   // degrees
+let rotX = 25;
+let exploded = false;
+let explodeT = 0; // 0=assembled, 1=exploded
+let animId = null;
+let targetExplode = 0;
+let highlighted = null;
+let dragging = false;
+let lastX = 0, lastY = 0;
+let labelData = [];
+
+function highlightComponent(id) {
+  highlighted = highlighted === id ? null : id;
+  document.querySelectorAll('.component-item').forEach(el => el.classList.remove('active'));
+  if (highlighted) document.getElementById('ci-' + highlighted)?.classList.add('active');
+  draw();
+}
+
+// ── isometric projection helpers
+function toRad(d) { return d * Math.PI / 180; }
+
+function project(x, y, z, cx, cy) {
+  const ry = toRad(rotY);
+  const rx = toRad(rotX);
+  // rotate around Y
+  const x1 = x * Math.cos(ry) + z * Math.sin(ry);
+  const z1 = -x * Math.sin(ry) + z * Math.cos(ry);
+  // rotate around X
+  const y2 = y * Math.cos(rx) - z1 * Math.sin(rx);
+  const z2 = y * Math.sin(rx) + z1 * Math.cos(rx);
+  return { sx: cx + x1, sy: cy - y2, depth: z2 };
+}
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  draw();
+}
+
+// ── drawing primitives
+function face(pts, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(pts[0].sx, pts[0].sy);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].sx, pts[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.strokeStyle = stroke || '#fff';
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+}
+
+function box(x, y, z, w, h, d, colors, cx, cy, alpha) {
+  // x,y,z = center; w=width(X), h=height(Y), d=depth(Z)
+  const hx = w/2, hy = h/2, hz = d/2;
+  const pts8 = [
+    project(x-hx, y-hy, z-hz, cx, cy),
+    project(x+hx, y-hy, z-hz, cx, cy),
+    project(x+hx, y+hy, z-hz, cx, cy),
+    project(x-hx, y+hy, z-hz, cx, cy),
+    project(x-hx, y-hy, z+hz, cx, cy),
+    project(x+hx, y-hy, z+hz, cx, cy),
+    project(x+hx, y+hy, z+hz, cx, cy),
+    project(x-hx, y+hy, z+hz, cx, cy),
+  ];
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  // top face
+  face([pts8[4],pts8[5],pts8[1],pts8[0]], colors[0], colors[3]);
+  // front face
+  face([pts8[5],pts8[6],pts8[2],pts8[1]], colors[1], colors[3]);
+  // side face
+  face([pts8[6],pts8[7],pts8[3],pts8[2]], colors[2], colors[3]);
+  ctx.globalAlpha = 1;
+  // return screen center for labels
+  const scx = (pts8[0].sx+pts8[1].sx+pts8[2].sx+pts8[3].sx+pts8[4].sx+pts8[5].sx+pts8[6].sx+pts8[7].sx)/8;
+  const scy = (pts8[0].sy+pts8[1].sy+pts8[2].sy+pts8[3].sy+pts8[4].sy+pts8[5].sy+pts8[6].sy+pts8[7].sy)/8;
+  return {sx: scx, sy: scy};
+}
+
+function cylinder(cx3d, cy3d, cz3d, r, hh, topColor, sideColor, cx, cy, segments) {
+  segments = segments || 16;
+  const pts_top = [], pts_bot = [];
+  for (let i = 0; i <= segments; i++) {
+    const a = (i / segments) * Math.PI * 2;
+    const px = cx3d + Math.cos(a) * r;
+    const pz = cz3d + Math.sin(a) * r;
+    pts_top.push(project(px, cy3d + hh, pz, cx, cy));
+    pts_bot.push(project(px, cy3d - hh, pz, cx, cy));
+  }
+  // side
+  ctx.beginPath();
+  ctx.moveTo(pts_bot[0].sx, pts_bot[0].sy);
+  for (let i = 1; i <= segments; i++) ctx.lineTo(pts_bot[i].sx, pts_bot[i].sy);
+  for (let i = segments; i >= 0; i--) ctx.lineTo(pts_top[i].sx, pts_top[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = sideColor;
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+  // top
+  ctx.beginPath();
+  ctx.moveTo(pts_top[0].sx, pts_top[0].sy);
+  for (let i = 1; i <= segments; i++) ctx.lineTo(pts_top[i].sx, pts_top[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = topColor;
+  ctx.fill();
+  ctx.stroke();
+}
+
+function line3d(x1,y1,z1, x2,y2,z2, color, lw, cx,cy) {
+  const p1 = project(x1,y1,z1, cx,cy);
+  const p2 = project(x2,y2,z2, cx,cy);
+  ctx.beginPath();
+  ctx.moveTo(p1.sx, p1.sy);
+  ctx.lineTo(p2.sx, p2.sy);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lw||1;
+  ctx.stroke();
+}
+
+function spring3d(x1,y1,z1, x2,y2,z2, cx,cy) {
+  const steps = 20;
+  const r = 4;
+  ctx.beginPath();
+  for (let i = 0; i <= steps; i++) {
+    const t = i/steps;
+    const px = x1 + (x2-x1)*t + Math.cos(t*Math.PI*6)*r;
+    const py = y1 + (y2-y1)*t;
+    const pz = z1 + (z2-z1)*t + Math.sin(t*Math.PI*6)*r;
+    const p = project(px,py,pz,cx,cy);
+    if (i===0) ctx.moveTo(p.sx, p.sy);
+    else ctx.lineTo(p.sx, p.sy);
+  }
+  ctx.strokeStyle = C.spring;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+// ── draw scene
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // background grid
+  ctx.strokeStyle = 'rgba(27,58,92,0.07)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 30) {
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 30) {
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+  }
+
+  const cx = W * 0.5, cy = H * 0.52;
+  const t = explodeT; // 0..1
+  const newLabels = [];
+
+  // ── CHASSIS ──
+  const chassisY = -8 - t*30;
+  const hi_chassis = highlighted === 'chassis';
+  const chassisAlpha = (!highlighted || hi_chassis) ? 1 : 0.35;
+  const chassisPt = box(0, chassisY, 0, 160, 8, 50,
+    [hi_chassis?'#e8c97e':C.wood, hi_chassis?'#d4a84a':C.darkwood, hi_chassis?'#b89040':'#7a5e28', hi_chassis?C.gold:'rgba(255,255,255,0.3)'],
+    cx, cy, chassisAlpha);
+  newLabels.push({ id:'chassis', sx: chassisPt.sx+10, sy: chassisPt.sy+4, label:'Chassis\n(Base Board)' });
+
+  // ── MOUSETRAP ──
+  const trapY = chassisY + 4 + t*40;
+  const trapZ = -6;
+  const hi_trap = highlighted === 'mousetrap';
+  const trapAlpha = (!highlighted || hi_trap) ? 1 : 0.35;
+  // trap base
+  box(10, trapY, trapZ, 50, 6, 30,
+    [hi_trap?'#d8d8d8':'#c0c0c0', hi_trap?'#aaa':'#909090', hi_trap?'#888':'#606060', 'rgba(255,255,255,0.2)'],
+    cx, cy, trapAlpha);
+  // spring coil
+  if (trapAlpha > 0.3) {
+    ctx.globalAlpha = trapAlpha;
+    spring3d(-5, trapY+6, trapZ-6, 25, trapY+6, trapZ-6, cx, cy);
+    ctx.globalAlpha = 1;
+  }
+  // snap arm
+  ctx.globalAlpha = trapAlpha;
+  line3d(10, trapY+6, trapZ-10, 10, trapY+18, trapZ-10, '#555', 2.5, cx, cy);
+  line3d(10, trapY+18, trapZ-10, 30, trapY+18, trapZ-10, '#555', 2.5, cx, cy);
+  ctx.globalAlpha = 1;
+  const trapLbl = project(10, trapY+10, trapZ, cx, cy);
+  newLabels.push({ id:'mousetrap', sx: trapLbl.sx, sy: trapLbl.sy-15, label:'Mousetrap\nMechanism' });
+
+  // ── LEVER ARM ──
+  const leverY = chassisY + 4 + t*55;
+  const hi_lever = highlighted === 'lever';
+  const leverAlpha = (!highlighted || hi_lever) ? 1 : 0.35;
+  ctx.globalAlpha = leverAlpha;
+  // dowel rod
+  line3d(30, leverY+4, -6, 30, leverY+36, -6, C.gold, 3, cx, cy);
+  // string
+  ctx.setLineDash([3,3]);
+  line3d(30, leverY+36, -6, -70, leverY+36, -6, '#aaa', 1.5, cx, cy);
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+  const leverLbl = project(30, leverY+38, -6, cx, cy);
+  newLabels.push({ id:'lever', sx: leverLbl.sx, sy: leverLbl.sy-10, label:'Lever Arm\n& String' });
+
+  // ── FRONT AXLE ──
+  const frontAxleY = chassisY - t*28;
+  const frontAxleX = -62;
+  const hi_front = highlighted === 'axle_front';
+  const frontAlpha = (!highlighted || hi_front) ? 1 : 0.35;
+  ctx.globalAlpha = frontAlpha;
+  // axle rod
+  line3d(frontAxleX, frontAxleY-4, -35, frontAxleX, frontAxleY-4, 35, C.axle, 2.5, cx, cy);
+  ctx.globalAlpha = 1;
+  // wheels
+  cylinder(frontAxleX, frontAxleY-4, -30, 16, 4,
+    hi_front?'#6090d0':C.midblue, hi_front?'#3060a0':C.navy, cx, cy, 20);
+  cylinder(frontAxleX, frontAxleY-4, 30, 16, 4,
+    hi_front?'#6090d0':C.midblue, hi_front?'#3060a0':C.navy, cx, cy, 20);
+  ctx.globalAlpha = frontAlpha > 0.9 ? 1 : frontAlpha;
+  const frontLbl = project(frontAxleX, frontAxleY+14, 0, cx, cy);
+  newLabels.push({ id:'axle_front', sx: frontLbl.sx, sy: frontLbl.sy, label:'Front Axle\n& Wheels' });
+  ctx.globalAlpha = 1;
+
+  // ── REAR AXLE ──
+  const rearAxleY = chassisY - t*22;
+  const rearAxleX = 62;
+  const hi_rear = highlighted === 'axle_rear';
+  const rearAlpha = (!highlighted || hi_rear) ? 1 : 0.35;
+  ctx.globalAlpha = rearAlpha;
+  line3d(rearAxleX, rearAxleY-4, -38, rearAxleX, rearAxleY-4, 38, C.axle, 3, cx, cy);
+  ctx.globalAlpha = 1;
+  cylinder(rearAxleX, rearAxleY-4, -33, 22, 5,
+    hi_rear?'#7ab0e0':C.ltblue, hi_rear?'#3060a0':C.navy, cx, cy, 24);
+  cylinder(rearAxleX, rearAxleY-4, 33, 22, 5,
+    hi_rear?'#7ab0e0':C.ltblue, hi_rear?'#3060a0':C.navy, cx, cy, 24);
+  // drive spool on rear axle
+  cylinder(rearAxleX, rearAxleY-4, 0, 8, 6,
+    hi_rear?'#e0c070':C.gold, hi_rear?'#b89030':'#9a7830', cx, cy, 10);
+  ctx.globalAlpha = rearAlpha > 0.9 ? 1 : rearAlpha;
+  const rearLbl = project(rearAxleX, rearAxleY+20, 0, cx, cy);
+  newLabels.push({ id:'axle_rear', sx: rearLbl.sx, sy: rearLbl.sy, label:'Rear Drive Axle\n& Wheels' });
+  ctx.globalAlpha = 1;
+
+  // ── shadow
+  ctx.save();
+  ctx.globalAlpha = 0.12;
+  const sp = project(0, -100, 0, cx, cy);
+  ctx.beginPath();
+  ctx.ellipse(sp.sx, cy + 40, 110, 20, 0, 0, Math.PI*2);
+  ctx.fillStyle = '#1B3A5C';
+  ctx.fill();
+  ctx.restore();
+
+  // ── update labels
+  labelData = newLabels;
+  renderLabels();
+}
+
+// ── HTML label overlay
+function renderLabels() {
+  overlay.innerHTML = '';
+  labelData.forEach(l => {
+    const parts = l.label.split('\n');
+    const div = document.createElement('div');
+    div.style.position = 'absolute';
+    div.style.left = (l.sx + 14) + 'px';
+    div.style.top = (l.sy - 10) + 'px';
+    div.style.background = highlighted && highlighted !== l.id ? 'rgba(27,58,92,0.5)' : '#1B3A5C';
+    div.style.color = highlighted && highlighted === l.id ? '#C9A84C' : '#fff';
+    div.style.fontSize = '0.6rem';
+    div.style.fontWeight = '700';
+    div.style.padding = '3px 7px';
+    div.style.borderRadius = '4px';
+    div.style.borderLeft = '3px solid ' + (highlighted === l.id ? '#C9A84C' : 'rgba(201,168,76,0.5)');
+    div.style.pointerEvents = 'auto';
+    div.style.cursor = 'pointer';
+    div.style.whiteSpace = 'nowrap';
+    div.style.lineHeight = '1.4';
+    div.style.letterSpacing = '0.3px';
+    div.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+    div.innerHTML = parts.join('<br>');
+    // extract component id from label
+    const compId = l.id;
+    div.addEventListener('click', () => highlightComponent(compId));
+    // dot line
+    const line = document.createElement('div');
+    line.style.position = 'absolute';
+    line.style.left = (l.sx) + 'px';
+    line.style.top = (l.sy) + 'px';
+    line.style.width = '14px';
+    line.style.height = '1.5px';
+    line.style.background = highlighted === l.id ? '#C9A84C' : 'rgba(201,168,76,0.6)';
+    line.style.pointerEvents = 'none';
+    overlay.appendChild(line);
+    overlay.appendChild(div);
+  });
+}
+
+// ── animation
+function animateExplode(target) {
+  if (animId) cancelAnimationFrame(animId);
+  function step() {
+    const diff = target - explodeT;
+    if (Math.abs(diff) < 0.01) {
+      explodeT = target;
+      draw();
+      return;
+    }
+    explodeT += diff * 0.08;
+    draw();
+    animId = requestAnimationFrame(step);
+  }
+  step();
+}
+
+// ── auto-rotation
+let autoRotate = false;
+let autoId = null;
+function startAutoRotate() {
+  if (autoId) return;
+  function step() {
+    if (!dragging) { rotY -= 0.3; draw(); }
+    autoId = requestAnimationFrame(step);
+  }
+  autoId = requestAnimationFrame(step);
+}
+
+// ── controls
+document.getElementById('btn-explode').addEventListener('click', () => {
+  exploded = true;
+  targetExplode = 1;
+  viewModeLabel.textContent = 'EXPLODED VIEW';
+  animateExplode(1);
+  document.getElementById('btn-explode').classList.add('active-btn');
+  document.getElementById('btn-assembled').classList.remove('active-btn');
+});
+document.getElementById('btn-assembled').addEventListener('click', () => {
+  exploded = false;
+  targetExplode = 0;
+  viewModeLabel.textContent = 'ASSEMBLED VIEW';
+  animateExplode(0);
+  document.getElementById('btn-assembled').classList.add('active-btn');
+  document.getElementById('btn-explode').classList.remove('active-btn');
+});
+document.getElementById('btn-rotate-left').addEventListener('click', () => { rotY -= 20; draw(); });
+document.getElementById('btn-rotate-right').addEventListener('click', () => { rotY += 20; draw(); });
+document.getElementById('btn-tilt-up').addEventListener('click', () => { rotX = Math.min(70, rotX + 10); draw(); });
+document.getElementById('btn-tilt-down').addEventListener('click', () => { rotX = Math.max(5, rotX - 10); draw(); });
+document.getElementById('btn-reset').addEventListener('click', () => {
+  rotY = -30; rotX = 25;
+  explodeT = 0; exploded = false;
+  highlighted = null;
+  viewModeLabel.textContent = 'ASSEMBLED VIEW';
+  document.querySelectorAll('.component-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('btn-assembled').classList.add('active-btn');
+  document.getElementById('btn-explode').classList.remove('active-btn');
+  animateExplode(0);
+  draw();
+});
+
+// ── mouse/touch drag
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  canvas.classList.add('grabbing');
+});
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  rotY += (e.clientX - lastX) * 0.5;
+  rotX -= (e.clientY - lastY) * 0.3;
+  rotX = Math.max(5, Math.min(80, rotX));
+  lastX = e.clientX;
+  lastY = e.clientY;
+  draw();
+});
+window.addEventListener('mouseup', () => {
+  dragging = false;
+  canvas.classList.remove('grabbing');
+});
+
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    dragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  }
+});
+canvas.addEventListener('touchmove', e => {
+  if (!dragging || e.touches.length !== 1) return;
+  e.preventDefault();
+  rotY += (e.touches[0].clientX - lastX) * 0.5;
+  rotX -= (e.touches[0].clientY - lastY) * 0.3;
+  rotX = Math.max(5, Math.min(80, rotX));
+  lastX = e.touches[0].clientX;
+  lastY = e.touches[0].clientY;
+  draw();
+}, { passive: false });
+canvas.addEventListener('touchend', () => { dragging = false; });
+
+// ── resize
+const ro = new ResizeObserver(resizeCanvas);
+ro.observe(canvas.parentElement);
+
+window.addEventListener('load', () => {
+  resizeCanvas();
+  document.getElementById('btn-assembled').classList.add('active-btn');
+  draw();
+});
+</script>
+</body>
+</html>

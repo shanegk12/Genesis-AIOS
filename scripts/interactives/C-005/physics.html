@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Units & Measurement – Projectile Sandbox | Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B3A5C;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    text-align: center;
+    padding: 8px 0 4px;
+    width: 100%;
+  }
+  header h1 {
+    font-size: 1.25rem;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #a8c0d8;
+    margin-top: 2px;
+  }
+  #main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 820px;
+  }
+  #canvasWrap {
+    position: relative;
+    width: 100%;
+    background: #0d2236;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  canvas { display: block; width: 100%; }
+  #controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    background: #122d47;
+    border: 1.5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .ctrl-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 130px;
+    flex: 1;
+  }
+  .ctrl-group label {
+    font-size: 0.72rem;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  .ctrl-group input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+  }
+  .ctrl-group .val-display {
+    font-size: 0.8rem;
+    color: #f0f0f0;
+    background: #0d2236;
+    border: 1px solid #2a5a8c;
+    border-radius: 4px;
+    padding: 2px 8px;
+    min-width: 90px;
+    text-align: center;
+  }
+  .ctrl-group select {
+    background: #0d2236;
+    color: #f0f0f0;
+    border: 1px solid #2a5a8c;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  #btn-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  button {
+    padding: 8px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: filter 0.15s;
+  }
+  button:hover { filter: brightness(1.15); }
+  #btnLaunch { background: #C9A84C; color: #1B3A5C; }
+  #btnReset  { background: #1B3A5C; color: #C9A84C; border: 2px solid #C9A84C; }
+  #readouts {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .readout-card {
+    background: #0d2236;
+    border: 1.5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 18px;
+    text-align: center;
+    flex: 1;
+    min-width: 130px;
+  }
+  .readout-card .r-label {
+    font-size: 0.66rem;
+    color: #a8c0d8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .readout-card .r-value {
+    font-size: 1.2rem;
+    color: #C9A84C;
+    font-weight: bold;
+  }
+  .readout-card .r-unit {
+    font-size: 0.72rem;
+    color: #a8c0d8;
+  }
+  #fact-bar {
+    font-size: 0.7rem;
+    color: #7aa8cc;
+    text-align: center;
+    max-width: 820px;
+    padding: 2px 8px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Projectile Motion Sandbox</h1>
+  <p>Creationeering · Units, Conversions &amp; Measurement · Genesis K-12 Academy</p>
+</header>
+
+<div id="main">
+  <div id="canvasWrap">
+    <canvas id="cvs"></canvas>
+  </div>
+
+  <div id="controls">
+    <div class="ctrl-group">
+      <label>Launch Angle (°)</label>
+      <input type="range" id="slAngle" min="5" max="85" value="45" step="1">
+      <div class="val-display" id="dispAngle">45°</div>
+    </div>
+    <div class="ctrl-group">
+      <label>Launch Speed</label>
+      <input type="range" id="slSpeed" min="5" max="50" value="25" step="1">
+      <div class="val-display" id="dispSpeed">25 m/s</div>
+    </div>
+    <div class="ctrl-group">
+      <label>Display Units</label>
+      <select id="selUnits">
+        <option value="metric">Metric (m, m/s)</option>
+        <option value="imperial">Imperial (ft, ft/s)</option>
+      </select>
+    </div>
+    <div class="ctrl-group" id="btn-row">
+      <button id="btnLaunch">🚀 Launch</button>
+      <button id="btnReset">↺ Reset</button>
+    </div>
+  </div>
+
+  <div id="readouts">
+    <div class="readout-card">
+      <div class="r-label">Max Height</div>
+      <div class="r-value" id="rHeight">—</div>
+      <div class="r-unit" id="rHeightUnit"></div>
+    </div>
+    <div class="readout-card">
+      <div class="r-label">Range (Distance)</div>
+      <div class="r-value" id="rRange">—</div>
+      <div class="r-unit" id="rRangeUnit"></div>
+    </div>
+    <div class="readout-card">
+      <div class="r-label">Time of Flight</div>
+      <div class="r-value" id="rTime">—</div>
+      <div class="r-unit" id="rTimeUnit"></div>
+    </div>
+    <div class="readout-card">
+      <div class="r-label">Current Speed</div>
+      <div class="r-value" id="rSpeed">—</div>
+      <div class="r-unit" id="rSpeedUnit"></div>
+    </div>
+  </div>
+
+  <div id="fact-bar">
+    💡 Dimensional Analysis Tip: 1 meter = 3.281 feet · 1 m/s = 3.281 ft/s · The same physics, different units!
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const cvs = document.getElementById('cvs');
+  const ctx = cvs.getContext('2d');
+
+  const slAngle = document.getElementById('slAngle');
+  const slSpeed = document.getElementById('slSpeed');
+  const selUnits = document.getElementById('selUnits');
+  const dispAngle = document.getElementById('dispAngle');
+  const dispSpeed = document.getElementById('dispSpeed');
+
+  const rHeight    = document.getElementById('rHeight');
+  const rHeightUnit= document.getElementById('rHeightUnit');
+  const rRange     = document.getElementById('rRange');
+  const rRangeUnit = document.getElementById('rRangeUnit');
+  const rTime      = document.getElementById('rTime');
+  const rTimeUnit  = document.getElementById('rTimeUnit');
+  const rSpeed     = document.getElementById('rSpeed');
+  const rSpeedUnit = document.getElementById('rSpeedUnit');
+
+  // Canvas sizing
+  const CANVAS_W = 800;
+  const CANVAS_H = 400;
+  cvs.width = CANVAS_W;
+  cvs.height = CANVAS_H;
+
+  const G = 9.81; // m/s²
+  const M_TO_FT = 3.28084;
+
+  // World coordinates (meters)
+  // Origin: bottom-left of canvas with padding
+  const GROUND_Y_PX = CANVAS_H - 60; // pixels
+  const LAUNCH_X_PX = 60;
+
+  // Simulation state
+  let simState = 'idle'; // idle | flying | landed
+  let ball = { x: 0, y: 0, vx: 0, vy: 0 };
+  let trail = [];
+  let tFlight = 0;
+  let maxHeightM = 0;
+  let rangeM = 0;
+  let peakReached = false;
+  let peakY = 0;
+  let finalRangeM = 0;
+  let finalTimeS = 0;
+
+  // Cached theoretical values (for display before/after)
+  let theoMaxH = 0;
+  let theoRange = 0;
+  let theoTime = 0;
+
+  // View scale: how many meters fit across the canvas
+  let viewScaleX = 1; // px per meter
+  let viewScaleY = 1;
+
+  function getAngleDeg() { return parseFloat(slAngle.value); }
+  function getSpeedMS()  { return parseFloat(slSpeed.value); }
+  function getUnits()    { return selUnits.value; }
+
+  function computeTheoretical(angleDeg, speedMS) {
+    const rad = angleDeg * Math.PI / 180;
+    const vy0 = speedMS * Math.sin(rad);
+    const vx0 = speedMS * Math.cos(rad);
+    const t = 2 * vy0 / G;
+    const h = (vy0 * vy0) / (2 * G);
+    const r = vx0 * t;
+    return { t, h, r };
+  }
+
+  function computeViewScale(rangeM, maxHM) {
+    // Scale so trajectory fits nicely
+    const padX = 80, padY = 80;
+    const availW = CANVAS_W - LAUNCH_X_PX - padX;
+    const availH = GROUND_Y_PX - padY;
+    viewScaleX = availW / Math.max(rangeM, 1);
+    viewScaleY = availH / Math.max(maxHM, 1);
+    // Use same scale to keep aspect but allow independent
+    // Actually keep independent for readability
+  }
+
+  function worldToCanvas(xM, yM) {
+    return {
+      cx: LAUNCH_X_PX + xM * viewScaleX,
+      cy: GROUND_Y_PX - yM * viewScaleY
+    };
+  }
+
+  function initLaunch() {
+    const angleDeg = getAngleDeg();
+    const speedMS  = getSpeedMS();
+    const rad = angleDeg * Math.PI / 180;
+    const theo = computeTheoretical(angleDeg, speedMS);
+    theoMaxH  = theo.h;
+    theoRange = theo.r;
+    theoTime  = theo.t;
+
+    computeViewScale(theoRange, theoMaxH);
+
+    ball.x  = 0;
+    ball.y  = 0;
+    ball.vx = speedMS * Math.cos(rad);
+    ball.vy = speedMS * Math.sin(rad);
+
+    trail = [];
+    tFlight = 0;
+    maxHeightM = 0;
+    peakReached = false;
+    finalRangeM = 0;
+    finalTimeS = 0;
+    simState = 'flying';
+
+    updateReadouts(0, 0, 0, speedMS, false);
+  }
+
+  function resetSim() {
+    simState = 'idle';
+    trail = [];
+    ball = { x: 0, y: 0, vx: 0, vy: 0 };
+    tFlight = 0;
+    maxHeightM = 0;
+    finalRangeM = 0;
+    finalTimeS = 0;
+
+    const angleDeg = getAngleDeg();
+    const speedMS  = getSpeedMS();
+    const theo = computeTheoretical(angleDeg, speedMS);
+    theoMaxH  = theo.h;
+    theoRange = theo.r;
+    theoTime  = theo.t;
+    computeViewScale(theoRange, theoMaxH);
+
+    rHeight.textContent  = '—';
+    rRange.textContent   = '—';
+    rTime.textContent    = '—';
+    rSpeed.textContent   = '—';
+    rHeightUnit.textContent  = '';
+    rRangeUnit.textContent   = '';
+    rTimeUnit.textContent    = '';
+    rSpeedUnit.textContent   = '';
+  }
+
+  function updateReadouts(h, r, t, spd, landed) {
+    const u = getUnits();
+    const isM = u === 'metric';
+    const hVal   = isM ? h      : h * M_TO_FT;
+    const rVal   = isM ? r      : r * M_TO_FT;
+    const sVal   = isM ? spd    : spd * M_TO_FT;
+
+    rHeight.textContent  = hVal.toFixed(2);
+    rRange.textContent   = rVal.toFixed(2);
+    rTime.textContent    = t.toFixed(2);
+    rSpeed.textContent   = sVal.toFixed(2);
+
+    const dLen  = isM ? 'm'    : 'ft';
+    const dSpd  = isM ? 'm/s'  : 'ft/s';
+    rHeightUnit.textContent  = dLen;
+    rRangeUnit.textContent   = dLen;
+    rTimeUnit.textContent    = 's';
+    rSpeedUnit.textContent   = dSpd;
+  }
+
+  const DT_SIM  = 1 / 120;
+  const DT_STEP = 4; // physics steps per frame
+
+  let lastTimestamp = null;
+
+  function physicsStep() {
+    if (simState !== 'flying') return;
+
+    for (let i = 0; i < DT_STEP; i++) {
+      ball.vy -= G * DT_SIM;
+      ball.x  += ball.vx * DT_SIM;
+      ball.y  += ball.vy * DT_SIM;
+      tFlight += DT_SIM;
+
+      if (ball.y > maxHeightM) maxHeightM = ball.y;
+
+      trail.push({ x: ball.x, y: ball.y });
+      if (trail.length > 2000) trail.splice(0, trail.length - 2000);
+
+      if (ball.y <= 0 && tFlight > 0.05) {
+        ball.y = 0;
+        finalRangeM = ball.x;
+        finalTimeS  = tFlight;
+        simState = 'landed';
+        updateReadouts(maxHeightM, finalRangeM, finalTimeS,
+          Math.sqrt(ball.vx*ball.vx + ball.vy*ball.vy), true);
+        return;
+      }
+    }
+
+    const curSpd = Math.sqrt(ball.vx*ball.vx + ball.vy*ball.vy);
+    updateReadouts(maxHeightM, ball.x, tFlight, curSpd, false);
+  }
+
+  /* -------- DRAWING -------- */
+  function drawBackground() {
+    // Sky gradient
+    const grad = ctx.createLinearGradient(0, 0, 0, GROUND_Y_PX);
+    grad.addColorStop(0, '#0a1a2e');
+    grad.addColorStop(1, '#1a4a7a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, CANVAS_W, GROUND_Y_PX);
+
+    // Ground
+    ctx.fillStyle = '#2d5a27';
+    ctx.fillRect(0, GROUND_Y_PX, CANVAS_W, CANVAS_H - GROUND_Y_PX);
+    ctx.fillStyle = '#3a7a32';
+    ctx.fillRect(0, GROUND_Y_PX, CANVAS_W, 6);
+
+    // Stars
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    const stars = [[40,20],[150,45],[300,15],[500,30],[650,10],[730,50],[200,80],[420,60]];
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s[0], s[1], 1.2, 0, Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  function drawGrid() {
+    if (simState === 'idle') return;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(200,168,76,0.12)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4,6]);
+
+    // vertical grid every ~quarterRange
+    const step = theoRange / 4;
+    for (let xM = 0; xM <= theoRange + step; xM += step) {
+      const cx = LAUNCH_X_PX + xM * viewScaleX;
+      if (cx > CANVAS_W - 10) break;
+      ctx.beginPath();
+      ctx.moveTo(cx, 20);
+      ctx.lineTo(cx, GROUND_Y_PX);
+      ctx.stroke();
+    }
+
+    // horizontal grid
+    const hStep = theoMaxH / 3;
+    for (let yM = 0; yM <= theoMaxH + hStep; yM += hStep) {
+      const cy = GROUND_Y_PX - yM * viewScaleY;
+      if (cy < 20) break;
+      ctx.beginPath();
+      ctx.moveTo(LAUNCH_X_PX - 10, cy);
+      ctx.lineTo(CANVAS_W - 10, cy);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  function drawAxes() {
+    ctx.save();
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(LAUNCH_X_PX - 5, 20);
+    ctx.lineTo(LAUNCH_X_PX - 5, GROUND_Y_PX + 5);
+    ctx.lineTo(CANVAS_W - 20, GROUND_Y_PX + 5);
+    ctx.stroke();
+
+    // Arrow tips
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath();
+    ctx.moveTo(CANVAS_W - 20, GROUND_Y_PX + 5);
+    ctx.lineTo(CANVAS_W - 28, GROUND_Y_PX + 1);
+    ctx.lineTo(CANVAS_W - 28, GROUND_Y_PX + 9);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(LAUNCH_X_PX - 5, 20);
+    ctx.lineTo(LAUNCH_X_PX - 9, 28);
+    ctx.lineTo(LAUNCH_X_PX - 1, 28);
+    ctx.fill();
+
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#C9A84C';
+    ctx.textAlign = 'center';
+    ctx.fillText('Distance', CANVAS_W - 60, GROUND_Y_PX + 18);
+    ctx.save();
+    ctx.translate(LAUNCH_X_PX - 18, GROUND_Y_PX / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Height', 0, 0);
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  function drawTheoArc() {
+    if (simState === 'idle') return;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(200,168,76,0.22)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6,5]);
+    ctx.beginPath();
+    const steps = 80;
+    for (let i = 0; i <= steps; i++) {
+      const t = (theoTime / steps) * i;
+      const angleDeg = getAngleDeg();
+      const speedMS  = getSpeedMS();
+      const rad = angleDeg * Math.PI / 180;
+      const xM = speedMS * Math.cos(rad) * t;
+      const yM = speedMS * Math.sin(rad) * t - 0.5 * G * t * t;
+      const p = worldToCanvas(xM, yM);
+      if (i === 0) ctx.moveTo(p.cx, p.cy);
+      else ctx.lineTo(p.cx, p.cy);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  function drawTrail() {
+    if (trail.length < 2) return;
+    ctx.save();
+    for (let i = 1; i < trail.length; i++) {
+      const a = worldToCanvas(trail[i-1].x, trail[i-1].y);
+      const b = worldToCanvas(trail[i].x,   trail[i].y);
+      const alpha = Math.min(1, i / trail.length) * 0.8;
+      ctx.strokeStyle = `rgba(255, 200, 80, ${alpha})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(a.cx, a.cy);
+      ctx.lineTo(b.cx, b.cy);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawBall() {
+    if (simState === 'idle') return;
+    const p = worldToCanvas(ball.x, ball.y);
+
+    // Glow
+    const grd = ctx.createRadialGradient(p.cx, p.cy, 1, p.cx, p.cy, 14);
+    grd.addColorStop(0, 'rgba(255,200,80,0.6)');
+    grd.addColorStop(1, 'rgba(255,200,80,0)');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(p.cx, p.cy, 14, 0, Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffcc44';
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(p.cx, p.cy, 8, 0, Math.PI*2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  function drawLauncher() {
+    const angleDeg = getAngleDeg();
+    const rad = angleDeg * Math.PI / 180;
+    const baseX = LAUNCH_X_PX - 5;
+    const baseY = GROUND_Y_PX;
+    const len = 34;
+
+    // Base
+    ctx.fillStyle = '#3a7a32';
+    ctx.fillRect(baseX - 14, baseY - 8, 28, 8);
+
+    // Barrel
+    ctx.save();
+    ctx.translate(baseX, baseY);
+    ctx.rotate(-rad);
+    ctx.fillStyle = '#1B3A5C';
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(-5, -len, 10, len, 3);
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+
+    // Angle arc indicator
+    ctx.save();
+    ctx.strokeStyle = 'rgba(200,168,76,0.5)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,4]);
+    ctx.beginPath();
+    ctx.arc(baseX, baseY, 28, -Math.PI/2, -rad, rad > Math.PI/2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  function drawLandingMarker() {
+    if (simState !== 'landed') return;
+    const p = worldToCanvas(finalRangeM, 0);
+    ctx.save();
+    ctx.strokeStyle = '#ff6644';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4,3]);
+    ctx.beginPath();
+    ctx.moveTo(p.cx, GROUND_Y_PX - 60);
+    ctx.lineTo(p.cx, GROUND_Y_PX + 4);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#ff6644';
+    ctx.font = 'bold 11px Segoe UI';
+    ctx.textAlign = 'center';
+    const u = getUnits();
+    const v = u === 'metric' ? finalRangeM.toFixed(1) + ' m' : (finalRangeM*M_TO_FT).toFixed(1) + ' ft';
+    ctx.fillText(v, p.cx, GROUND_Y_PX - 66);
+    ctx.restore();
+  }
+
+  function drawPeakMarker() {
+    if (simState === 'idle' || maxHeightM < 0.5) return;
+    const peakX = ball.x - (ball.vx * ball.vy / G); // approximate
+    const peakXActual = (simState === 'flying') ? ball.x : finalRangeM / 2;
+    const p = worldToCanvas(peakXActual, maxHeightM);
+    if (p.cy < 20 || p.cx > CANVAS_W - 10) return;
+
+    ctx.save();
+    ctx.strokeStyle = 'rgba(100,200,255,0.6)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,4]);
+    ctx.beginPath();
+    ctx.moveTo(LAUNCH_X_PX - 5, p.cy);
+    ctx.lineTo(p.cx + 30, p.cy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = 'rgba(100,200,255,0.85)';
+    ctx.font = '10px Segoe UI';
+    ctx.textAlign = 'left';
+    const u = getUnits();
+    const v = u === 'metric' ? maxHeightM.toFixed(1) + ' m' : (maxHeightM*M_TO_FT).toFixed(1) + ' ft';
+    ctx.fillText('H=' + v, p.cx + 33, p.cy + 4);
+    ctx.restore();
+  }
+
+  function drawConversionHint() {
+    const u = getUnits();
+    if (simState === 'idle') {
+      ctx.save();
+      ctx.font = '12px Segoe UI';
+      ctx.fillStyle = 'rgba(200,168,76,0.7)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Set angle & speed, then press 🚀 Launch!', CANVAS_W/2, GROUND_Y_PX/2);
+      ctx.fillStyle = 'rgba(168,192,216,0.6)';
+      ctx.font = '10px Segoe UI';
+      ctx.fillText('Switch units between Metric and Imperial to see dimensional analysis in action.',
+        CANVAS_W/2, GROUND_Y_PX/2 + 22);
+      ctx.restore();
+    }
+
+    if (simState === 'landed') {
+      ctx.save();
+      const isM = u === 'metric';
+      const label = isM
+        ? `${finalRangeM.toFixed(1)} m ÷ 3.281 = ${(finalRangeM / M_TO_FT).toFixed(2)} m`
+        : `${finalRangeM.toFixed(1)} m × 3.281 = ${(finalRangeM * M_TO_FT).toFixed(1)} ft`;
+      ctx.fillStyle = 'rgba(200,168,76,0.55)';
+      ctx.font = '10px Segoe UI';
+      ctx.textAlign = 'right';
+      ctx.fillText('Conversion: Range ' + label, CANVAS_W - 15, GROUND_Y_PX - 8);
+      ctx.restore();
+    }
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+    drawBackground();
+    drawGrid();
+    drawAxes();
+    drawTheoArc();
+    drawTrail();
+    drawLandingMarker();
+    drawPeakMarker();
+    drawLauncher();
+    drawBall();
+    drawConversionHint();
+  }
+
+  function loop(ts) {
+    physicsStep();
+    render();
+    requestAnimationFrame(loop);
+  }
+
+  // ---- UI ----
+  slAngle.addEventListener('input', () => {
+    dispAngle.textContent = slAngle.value + '°';
+    if (simState === 'idle') {
+      const theo = computeTheoretical(getAngleDeg(), getSpeedMS());
+      theoMaxH = theo.h; theoRange = theo.r; theoTime = theo.t;
+      computeViewScale(theoRange, theoMaxH);
+    }
+  });
+
+  slSpeed.addEventListener('input', () => {
+    const u = getUnits();
+    const v = parseFloat(slSpeed.value);
+    dispSpeed.textContent = u === 'metric'
+      ? v + ' m/s'
+      : (v * M_TO_FT).toFixed(1) + ' ft/s';
+    if (simState === 'idle') {
+      const theo = computeTheoretical(getAngleDeg(), getSpeedMS());
+      theoMaxH = theo.h; theoRange = theo.r; theoTime = theo.t;
+      computeViewScale(theoRange, theoMaxH);
+    }
+  });
+
+  selUnits.addEventListener('change', () => {
+    // Update speed display label
+    const v = parseFloat(slSpeed.value);
+    const u = getUnits();
+    dispSpeed.textContent = u === 'metric'
+      ? v + ' m/s'
+      : (v * M_TO_FT).toFixed(1) + ' ft/s';
+
+    // Recompute readouts if data available
+    if (simState === 'landed') {
+      updateReadouts(maxHeightM, finalRangeM, finalTimeS,
+        Math.sqrt(ball.vx*ball.vx + ball.vy*ball.vy), true);
+    }
+  });
+
+  document.getElementById('btnLaunch').addEventListener('click', () => {
+    if (simState === 'flying') return;
+    initLaunch();
+  });
+
+  document.getElementById('btnReset').addEventListener('click', resetSim);
+
+  // Touch support for canvas (drag angle)
+  let touching = false;
+  cvs.addEventListener('touchstart', e => {
+    e.preventDefault();
+    touching = true;
+  }, { passive: false });
+  cvs.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (!touching || simState === 'flying') return;
+    const rect = cvs.getBoundingClientRect();
+    const scaleX = CANVAS_W / rect.width;
+    const scaleY = CANVAS_H / rect.height;
+    const tx = (e.touches[0].clientX - rect.left) * scaleX;
+    const ty = (e.touches[0].clientY - rect.top) * scaleY;
+    const dx = tx - (LAUNCH_X_PX - 5);
+    const dy = (GROUND_Y_PX) - ty;
+    let ang = Math.atan2(dy, Math.max(dx, 1)) * 180 / Math.PI;
+    ang = Math.max(5, Math.min(85, ang));
+    slAngle.value = Math.round(ang);
+    dispAngle.textContent = slAngle.value + '°';
+    const theo = computeTheoretical(getAngleDeg(), getSpeedMS());
+    theoMaxH = theo.h; theoRange = theo.r; theoTime = theo.t;
+    computeViewScale(theoRange, theoMaxH);
+  }, { passive: false });
+  cvs.addEventListener('touchend', () => { touching = false; });
+
+  // Mouse drag angle on canvas
+  let dragging = false;
+  cvs.addEventListener('mousedown', e => { if (simState !== 'flying') dragging = true; });
+  cvs.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const rect = cvs.getBoundingClientRect();
+    const scaleX = CANVAS_W / rect.width;
+    const scaleY = CANVAS_H / rect.height;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top) * scaleY;
+    const dx = mx - (LAUNCH_X_PX - 5);
+    const dy = GROUND_Y_PX - my;
+    let ang = Math.atan2(dy, Math.max(dx, 1)) * 180 / Math.PI;
+    ang = Math.max(5, Math.min(85, ang));
+    slAngle.value = Math.round(ang);
+    dispAngle.textContent = slAngle.value + '°';
+    const theo = computeTheoretical(getAngleDeg(), getSpeedMS());
+    theoMaxH = theo.h; theoRange = theo.r; theoTime = theo.t;
+    computeViewScale(theoRange, theoMaxH);
+  });
+  cvs.addEventListener('mouseup', () => { dragging = false; });
+  cvs.addEventListener('mouseleave', () => { dragging = false; });
+
+  // Init
+  resetSim();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

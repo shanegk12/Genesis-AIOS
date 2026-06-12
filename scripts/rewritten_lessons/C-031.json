@@ -1,0 +1,488 @@
+[
+  {
+    "id": "c031t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Material Properties and Selection</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson on Procurement, we explored how to acquire the right resources to bring engineering ideas to life. Today we go deeper into that process — because choosing <em>what</em> to build with is just as important as deciding <em>what</em> to build.</p>\n<p>This lesson is all about <strong>Material Properties and Selection</strong>: understanding the unique characteristics of different materials and making smart choices about which ones belong in your design. Just as God designed every fiber and element of creation with specific purposes in mind, you as an engineer must learn to read materials — to understand what they can do, what they can't do, and where they shine. That knowledge is what separates a good design from a great one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define common material properties and explain why they matter in engineering design.</li>\n<li>Describe how the atomic and molecular structure of a material influences its large-scale behavior.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to make informed material selection decisions.</li>\n<li>Analyze a simple engineering system to identify how material properties affect its performance.</li>\n<li>Connect responsible material selection to the biblical principle of stewardship over God's creation.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Material Properties",
+          "definition": "The specific characteristics that describe how a material behaves under different conditions — such as strength, stiffness, or conductivity."
+        },
+        {
+          "term": "Material Selection",
+          "definition": "The process of choosing the most suitable material for an engineering application based on its properties, cost, and availability."
+        },
+        {
+          "term": "Strength",
+          "definition": "A material's ability to withstand external forces without breaking or permanently deforming."
+        },
+        {
+          "term": "Stiffness",
+          "definition": "A material's resistance to bending or stretching when a force is applied."
+        },
+        {
+          "term": "Durability",
+          "definition": "A material's ability to resist wear, fatigue, and decay over time, maintaining its usefulness and integrity."
+        },
+        {
+          "term": "Density",
+          "definition": "A measure of how much mass is packed into a given volume — essentially how \"heavy\" a material is for its size."
+        },
+        {
+          "term": "Thermal Conductivity",
+          "definition": "A material's ability to transfer heat. High thermal conductivity means heat moves through it easily; low means it acts as an insulator."
+        },
+        {
+          "term": "Electrical Conductivity",
+          "definition": "A material's ability to conduct electricity. High electrical conductivity means electrons flow through it easily."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects what we observe at the large (macro) scale to the underlying causes at the tiny atomic or molecular scale."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution by balancing competing objectives and constraints, often involving trade-offs."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Creator's Palette</h2>\n<p>Before the first engineer ever picked up a tool, God was already working with materials. Wood, stone, water, bone, clay — creation is packed with an extraordinary variety of substances, each built with intention. The cedars of Lebanon were known for their strength and resistance to decay, which is exactly why Solomon used them to build the Temple. Bone is lightweight yet remarkably strong under compression. Spider silk, gram for gram, is tougher than steel.</p>\n<p>None of that happened by accident. Every material in creation reflects God's design intelligence. As engineers made in His image, your job is to study that palette and learn how to use it wisely.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 1:20</strong> — \"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made.\" The materials around you aren't just raw resources. They are a window into how God thinks about design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Are Material Properties?</h2>\n<p>A <strong>material property</strong> is simply a characteristic that describes how a material behaves. Think of it like a player profile in a sport. Before a coach puts someone on the field, they want to know: How fast are they? How strong? How do they hold up under pressure? Materials have their own version of that profile.</p>\n<p>Engineers study these profiles carefully before committing to a design. Choosing the wrong material is like building a bridge out of cardboard — it might look fine at first, but it won't last. Here are the key properties you need to know:</p>\n<ul>\n<li><strong>Strength</strong> — Can it handle the load without snapping?</li>\n<li><strong>Stiffness</strong> — Will it hold its shape, or will it flex and bend?</li>\n<li><strong>Durability</strong> — Will it still be doing its job in five years? Twenty?</li>\n<li><strong>Density</strong> — How much does it weigh for its size? This matters a lot in aerospace and transportation.</li>\n<li><strong>Thermal Conductivity</strong> — Does heat move through it quickly or slowly?</li>\n<li><strong>Electrical Conductivity</strong> — Can electricity flow through it, or does it block the current?</li>\n</ul>\n<p>These properties don't exist in isolation — they interact. A material might be incredibly strong but also very dense, making it heavy. Another might be lightweight but brittle. Your job as a designer is to weigh those trade-offs based on what your project actually needs.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison chart of common engineering materials (steel, aluminum, wood, plastic, rubber) showing their relative strength, density, and conductivity ratings."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Real-World Example:</strong> Aluminum and steel are both metals, but they make very different choices for different jobs. Steel is much stronger, but aluminum is about one-third the weight. That's why airplane frames are built from aluminum alloys — every pound saved in structure is a pound that can carry fuel or passengers.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>It All Starts at the Atomic Scale</h2>\n<p>Here's something that might surprise you: the reason a material behaves the way it does at full size — why steel is hard and rubber is stretchy — comes down to what's happening at the incredibly tiny atomic and molecular level. This connection between the small and the large is called <strong>multiscale modeling</strong>.</p>\n<p>Imagine you're looking at a brick wall from across the street. It looks solid and uniform. But zoom in close enough and you'll see individual bricks, mortar joints, air gaps — a whole structure that explains why the wall behaves the way it does. Materials work the same way. At the atomic level, the arrangement of atoms — how tightly they're packed, how they bond to each other — determines everything about the material's macro properties.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>Atomic Structure and Material Behavior</h3>\n<p>Carbon is a great example. Pure carbon atoms arranged one way give you graphite — soft enough to leave marks on paper. Arrange those exact same atoms in a different pattern and you get diamond — one of the hardest substances on Earth. Same element, completely different structure, totally different properties. That's the power of atomic arrangement.</p>\n<p>When engineers use multiscale modeling, they study materials at multiple levels — atomic, microscopic, and full scale — to predict how a material will perform before they ever build a prototype. It's a way of being thorough, careful, and precise in the design process.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the multiscale concept: atomic bonding structure on the left, microscopic grain structure in the middle, and a full-scale material sample on the right."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When studying material properties, always ask: <em>why</em> does this material behave this way? Tracing a macro property (like hardness) back to its atomic cause (like tight covalent bonding) is the kind of deep thinking that sets great engineers apart.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Making the Choice: The OCV Method</h2>\n<p>Knowing material properties is step one. Step two is actually making a decision. With hundreds of materials available, how do engineers narrow it down? They use a structured method called <strong>OCV</strong> — Objectives, Constraints, and Variables.</p>\n<ul>\n<li><strong>Objective</strong> — What does the design need to achieve? (e.g., be as light as possible, conduct heat efficiently)</li>\n<li><strong>Constraints</strong> — What are the non-negotiable limits? (e.g., must cost under $5 per unit, must not corrode in saltwater, must withstand 200°F)</li>\n<li><strong>Variables</strong> — What can you adjust or trade off to best meet the objective within the constraints? (e.g., thickness, shape, material type)</li>\n</ul>\n<p>The OCV method turns material selection from guesswork into a disciplined process. It forces you to be clear about what success actually looks like before you start comparing options — and that clarity saves enormous amounts of time and money.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t009",
+    "type": "text",
+    "data": {
+      "html": "<h3>OCV in Action: A Simple Example</h3>\n<p>Say you're designing a water bottle for a hiking trip. Here's how OCV might look:</p>\n<ul>\n<li><strong>Objective:</strong> Keep the bottle as light as possible so it's easy to carry.</li>\n<li><strong>Constraints:</strong> Must hold 32 oz of water, must be food-safe, must not crack if dropped on a rocky trail.</li>\n<li><strong>Variables:</strong> Wall thickness, material type (glass, stainless steel, aluminum, BPA-free plastic), shape.</li>\n</ul>\n<p>Glass is immediately ruled out — too heavy and too fragile (doesn't meet the constraint). Stainless steel is durable but heavier than aluminum. BPA-free plastic is the lightest but may not handle temperature extremes as well. You're not just picking a material you like — you're solving a constrained optimization problem. That's real engineering thinking.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Don't skip the constraints step. Students often jump straight to picking the \"strongest\" or \"cheapest\" material without asking: what <em>else</em> does this material need to do? A material that's strong but too heavy, or cheap but toxic, is still the wrong choice.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimization: Finding the Best Balance</h2>\n<p>In the real world, there is rarely a perfect material — one that is the strongest, lightest, cheapest, and most durable all at once. Engineering is about finding the best possible balance given your specific situation. That balancing act is called <strong>optimization</strong>.</p>\n<p>Think of it like building a team. You don't need every player to be the best at everything. You need each person to be excellent at the right thing for the role they're filling. Materials work the same way. A good engineer doesn't chase perfection — they chase the best fit.</p>\n<p>Optimization often involves trade-offs. Choosing a stiffer material might mean accepting more weight. Choosing a cheaper material might mean planning for more frequent replacements. Your design decisions will always have ripple effects, and understanding those effects is what separates thoughtful Creationeering™ from careless construction.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Stewardship in Design:</strong> Proverbs 24:3-4 says, \"By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures.\" Choosing materials wisely is an act of wisdom — it honors God, serves the people who will use your design, and respects the resources He has provided.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Material Families: A Quick Tour</h2>\n<p>Engineers organize materials into broad families. Knowing these categories helps you quickly narrow your search when starting a new design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t012",
+    "type": "text",
+    "data": {
+      "html": "<h3>Metals</h3>\n<p>Metals like steel, aluminum, copper, and titanium are known for high strength, good electrical and thermal conductivity, and the ability to be shaped by bending, cutting, or casting. Steel is the backbone of construction and heavy machinery. Aluminum shows up wherever weight savings matter — cars, aircraft, packaging. Copper is the go-to for electrical wiring because of its excellent conductivity.</p>\n<h3>Polymers (Plastics)</h3>\n<p>Polymers are lightweight, easy to mold into complex shapes, and resistant to corrosion. They're everywhere — from water bottles and phone cases to car bumpers and medical devices. The trade-off is that most polymers are not as strong as metals and can degrade under UV light or high temperatures.</p>\n<h3>Ceramics</h3>\n<p>Ceramics include materials like glass, brick, and advanced compounds used in aerospace. They're extremely hard and resistant to high temperatures, but they're brittle — meaning they crack suddenly under impact rather than bending first. That's a critical constraint to keep in mind.</p>\n<h3>Composites</h3>\n<p>Composites combine two or more materials to get properties neither could achieve alone. Carbon fiber reinforced polymer (CFRP) is a famous example — it's lighter than aluminum and stronger than steel. Composites are expensive to manufacture but are increasingly common in aerospace, sports equipment, and high-performance vehicles.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A four-quadrant diagram showing the four main material families — metals, polymers, ceramics, and composites — with example items and key properties for each."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When you encounter a new material in a design problem, ask yourself: Which family does it belong to? What are the typical strengths and weaknesses of that family? This gives you a fast starting point before you dig into the specific data.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and Sustainability in Material Selection</h2>\n<p>Choosing the right material isn't only about performance — it's also about responsibility. As Creationeers, we are called to be good stewards of the resources God has placed in our hands. That means asking questions that go beyond the immediate design:</p>\n<ul>\n<li>Where does this material come from? Is it responsibly sourced?</li>\n<li>What happens to it at the end of the product's life? Can it be recycled or reused?</li>\n<li>Does producing this material harm people or the environment?</li>\n<li>Is there a more sustainable alternative that still meets the design requirements?</li>\n</ul>\n<p>These aren't just ethical questions — they're engineering questions. A material that's cheap today but creates costly environmental damage or supply chain problems tomorrow is not a good engineering choice. Wise stewardship and wise engineering point in the same direction.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031t014",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use these questions to review what you've learned in this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between strength and stiffness?",
+      "html": "<p><strong>Strength</strong> is a material's ability to withstand forces without breaking or permanently deforming. <strong>Stiffness</strong> is its resistance to bending or stretching in the first place. A material can be stiff but not very strong (like glass — it doesn't bend easily, but it shatters under a hard enough blow), or flexible but surprisingly strong (like certain polymers that bend a great deal before finally failing).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031a002",
+    "type": "accordion",
+    "data": {
+      "title": "Why does the atomic structure of a material matter to an engineer?",
+      "html": "<p>Because the macro-scale behavior we care about — hardness, flexibility, conductivity — is directly caused by what's happening at the atomic and molecular level. Multiscale modeling helps engineers trace a material's large-scale properties back to its small-scale structure, which allows them to predict performance and even design new materials by engineering the atomic arrangement itself.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031a003",
+    "type": "accordion",
+    "data": {
+      "title": "What are the three parts of the OCV method and what does each one do?",
+      "html": "<p><strong>Objective</strong> defines what the design needs to achieve — the goal you're optimizing toward. <strong>Constraints</strong> are the non-negotiable limits your design must stay within (cost, safety, environment, weight, etc.). <strong>Variables</strong> are the factors you can adjust and trade off to best meet the objective within the constraints. Together, they turn material selection from a guess into a structured engineering decision.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031a004",
+    "type": "accordion",
+    "data": {
+      "title": "Why is there no \"perfect\" material, and what does optimization mean in material selection?",
+      "html": "<p>No single material excels at every property simultaneously — the strongest materials are often the heaviest, the most thermally resistant are often brittle, and the cheapest options often lack durability. Optimization means finding the best balance of properties for your specific design, given your objectives and constraints. It always involves trade-offs, and recognizing those trade-offs clearly is a core engineering skill.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c031a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does material selection connect to biblical stewardship?",
+      "html": "<p>God has entrusted us with the resources of creation, and wise stewardship means using them thoughtfully. In material selection, this means considering not just performance but also sustainability — where materials come from, how they're produced, and what happens to them at end of life. Choosing wisely honors God, serves people well, and protects the creation He has placed in our care.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

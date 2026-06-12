@@ -1,0 +1,449 @@
+[
+  {
+    "id": "c034t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Quality Assurance and Material Inspection</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored the important decisions involved in Standardization vs. Custom Fabrication — when to use off-the-shelf parts and when to design something from scratch. But whether you choose a standard bolt or a custom-machined bracket, how do you know that part is actually <em>good</em>? How can you be sure it will hold up under pressure and not fail when you need it most?</p>\n<p>That's exactly what this lesson is about. Today you'll dive into two essential practices within the <strong>Procurement</strong> phase of the Creationeering™ framework: <strong>Quality Assurance</strong> and <strong>Material Inspection</strong>. Procurement is the phase where you acquire all the materials and components your design needs. And just like a builder who carefully selects the strongest lumber before breaking ground, a Creationeer must carefully check every item to make sure it meets the highest standards. You'll learn how to spot potential problems, understand different testing methods, and apply a systematic approach to guaranteeing quality — reflecting God's excellence in your own work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Explain the fundamental difference between Quality Assurance and Material Inspection within the Procurement phase.</li>\n<li>Identify various methods of material inspection, distinguishing between destructive and nondestructive testing.</li>\n<li>Connect macroscopic material observations to their underlying atomic-level causes through Multiscale Modeling.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to optimize material selection for a given engineering problem.</li>\n<li>Articulate how diligent material inspection and quality assurance practices demonstrate good biblical stewardship of resources and time.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Quality Assurance (QA)",
+          "definition": "The systematic process of ensuring that a product or service will meet specified requirements. It focuses on preventing defects before they happen."
+        },
+        {
+          "term": "Material Inspection",
+          "definition": "The process of examining materials, parts, or components to verify that they meet specific quality standards and requirements."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The Creationeering™ phase focused on acquiring the necessary materials, components, and services for a project."
+        },
+        {
+          "term": "Defect",
+          "definition": "Any characteristic of a material or product that does not meet the specified requirements, potentially causing it to fail or underperform."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The acceptable range of variation in a dimension, property, or characteristic of a material or component."
+        },
+        {
+          "term": "Nondestructive Testing (NDT)",
+          "definition": "A group of techniques used to inspect materials or components for defects without causing any damage to the item being tested."
+        },
+        {
+          "term": "Destructive Testing (DT)",
+          "definition": "A group of techniques used to inspect materials or components by intentionally breaking or damaging them to evaluate their properties."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or design given a set of objectives, constraints, and variables."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at a large (macro) scale to the underlying behaviors at a small (atomic or microscopic) scale."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Quality Matters</h2>\n<p>Imagine you're building a bridge out of wooden planks. You pick up a plank — it looks fine on the outside. But inside, there's a hidden crack running right through the middle. You build with it anyway. Then one day, someone walks across that bridge and the plank snaps. That hidden defect wasn't just an inconvenience. It was a danger.</p>\n<p>This is why engineers don't just <em>assume</em> materials are good. They verify it. Every single time. Quality Assurance and Material Inspection exist to catch problems before they become disasters — saving time, money, and most importantly, keeping people safe.</p>\n<p>God is a God of order and excellence. When He created the universe, everything was made precisely and purposefully. Proverbs 11:1 reminds us that \"A false balance is an abomination to the Lord, but a just weight is His delight.\" In other words, accuracy and integrity in your work — including how you check your materials — honors God.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 11:1</strong> — \"A false balance is an abomination to the Lord, but a just weight is His delight.\" Precision and integrity in how we measure and inspect our work is not just good engineering — it's an act of worship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Quality Assurance vs. Material Inspection</h2>\n<p>These two terms are related, but they play different roles. Think of it this way: Quality Assurance is the <em>system</em>, and Material Inspection is one of the <em>tools</em> inside that system.</p>\n<p><strong>Quality Assurance (QA)</strong> is a big-picture approach. It asks: \"What processes, standards, and checkpoints do we have in place to make sure everything we build will be good?\" QA is proactive — it tries to prevent defects from ever occurring by designing good processes from the start.</p>\n<p><strong>Material Inspection</strong> is more hands-on. It's the act of physically examining, measuring, or testing a specific material or component to confirm it meets your specifications. Inspection catches defects that already exist. It answers the question: \"Is <em>this</em> part actually good enough to use?\"</p>\n<p>Together, QA and inspection form a powerful safety net. QA builds the right habits into your workflow, and inspection verifies that those habits are producing the right results.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>QA vs. Inspection at a glance:</strong> Quality Assurance is about building good <em>processes</em> to prevent defects. Material Inspection is about examining specific <em>parts</em> to catch defects. You need both — prevention and verification.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A quality control technician measuring a metal component with precision calipers in a manufacturing facility"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Defects and Tolerances</h2>\n<p>No manufacturing process is perfect. Every time a part is made, there are tiny variations — the hole drilled might be 0.01 mm too wide, or a beam might be slightly lighter than specified. The key question is: does that variation matter?</p>\n<p>That's where <strong>tolerance</strong> comes in. Tolerance defines the acceptable range of variation for a given measurement. If a bolt is supposed to be 10 mm in diameter and your tolerance is ±0.5 mm, then any bolt between 9.5 mm and 10.5 mm is acceptable. A bolt measuring 9.2 mm would be out of tolerance — a defect.</p>\n<p>A <strong>defect</strong> is any characteristic that falls outside the acceptable range. Defects don't always mean a part is completely useless, but they do mean it doesn't meet the requirements for your specific application. Catching defects early — before assembly — is far cheaper and safer than discovering them after the fact.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the range:</strong> Tolerance is always a range — an upper limit and a lower limit. A part is acceptable when its measurement falls anywhere inside that range. The tighter the tolerance, the more precise the manufacturing must be.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Methods of Material Inspection</h2>\n<p>So how do engineers actually inspect materials? There are two major categories of testing methods: <strong>Nondestructive Testing (NDT)</strong> and <strong>Destructive Testing (DT)</strong>. Each has its place, and knowing when to use which one is a key engineering skill.</p>\n<h3>Nondestructive Testing (NDT)</h3>\n<p>NDT lets you inspect a part without damaging it. This is ideal when you need to keep the part in working condition after the test — for example, inspecting an airplane wing that will actually be used in flight. NDT methods include:</p>\n<ul>\n<li><strong>Visual Inspection:</strong> The simplest form — using your eyes (or magnification tools) to look for cracks, corrosion, or surface damage. Always the first step.</li>\n<li><strong>Ultrasonic Testing:</strong> High-frequency sound waves are sent through the material. Internal cracks or voids reflect the waves differently, revealing hidden defects — similar to how bats use echolocation to navigate in the dark.</li>\n<li><strong>X-Ray / Radiographic Testing:</strong> X-rays pass through a material and create an image, revealing internal structures and hidden defects — just like a doctor uses an X-ray to check a broken bone.</li>\n<li><strong>Magnetic Particle Testing:</strong> A magnetic field is applied to a ferromagnetic material (one that can be magnetized). Defects near the surface disrupt the magnetic field, and tiny iron particles sprinkled on the surface cluster at those disruptions, making defects visible.</li>\n<li><strong>Dye Penetrant Testing:</strong> A brightly colored (or fluorescent) liquid is applied to a surface. It seeps into surface cracks. After the excess is wiped away, a developer is applied that draws the dye back out — making even tiny cracks visible.</li>\n</ul>\n<h3>Destructive Testing (DT)</h3>\n<p>Sometimes the only way to truly know how a material performs is to push it until it fails. Destructive testing intentionally breaks or damages the sample to measure its properties. You can't use the tested sample afterward, but the data you gain is invaluable. DT methods include:</p>\n<ul>\n<li><strong>Tensile Testing:</strong> A sample is pulled apart from both ends until it breaks. This reveals the material's strength, stiffness, and how much it stretches before breaking.</li>\n<li><strong>Hardness Testing:</strong> A small indenter is pressed into the material's surface. The size of the indentation reveals how hard (resistant to deformation) the material is.</li>\n<li><strong>Impact Testing:</strong> A swinging hammer strikes a notched sample to measure how much energy the material absorbs before fracturing — important for materials used in cold environments where brittleness can be a concern.</li>\n<li><strong>Fatigue Testing:</strong> A material is subjected to repeated cycles of stress over time to determine how long it lasts before cracking from repeated loading. This is critical for components like bicycle frames or engine parts that experience constant motion.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students sometimes think NDT is always better because it doesn't damage the part. But destructive testing gives you data you simply cannot get any other way — like exactly how much force a material can take before it snaps. Both methods are essential tools. Use the right one for the right situation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of nondestructive ultrasonic testing and destructive tensile testing of metal samples"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Seeing the Big and the Small</h2>\n<p>Here's something that might surprise you: the reason a metal beam bends or a plastic part cracks often has to do with what's happening at an almost unimaginably small scale — at the level of individual atoms and molecules. <strong>Multiscale Modeling</strong> is the engineering approach that connects these two worlds.</p>\n<p>Think of it like this: when you see a crack spreading across a concrete wall (that's the macro scale — the large, visible scale), the actual cause is atoms losing their bonds with each other deep inside the material (that's the micro or nano scale — the tiny, invisible scale). Multiscale Modeling helps engineers understand <em>why</em> something fails at the big level by studying what's happening at the small level.</p>\n<p>This matters for material inspection because it helps engineers design better tests, predict failure before it happens, and develop stronger materials. For example, understanding how iron atoms arrange themselves lets engineers create steel alloys that are far stronger than pure iron alone.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034c004",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Scale matters:</strong> In Multiscale Modeling, engineers work across multiple levels — from the atomic scale (nanometers) all the way up to the structural scale (meters). A change at the atomic level — like adding a small amount of carbon to iron — creates a completely different material behavior at the structural level (steel vs. pure iron).</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing Material Selection with OCV</h2>\n<p>Once you know how to inspect and evaluate materials, the next challenge is choosing the <em>best</em> one for your design. This is called <strong>optimization</strong> — finding the best possible solution given your specific goals and limitations.</p>\n<p>The <strong>OCV method</strong> is a structured way to think through optimization. OCV stands for <strong>Objective, Constraint, and Variable</strong>.</p>\n<ul>\n<li><strong>Objective:</strong> What are you trying to achieve? (Example: maximize the strength of a structural beam while minimizing its weight.)</li>\n<li><strong>Constraint:</strong> What are the non-negotiable limits? (Example: the beam must cost less than $50 and fit within a 2-inch width.)</li>\n<li><strong>Variable:</strong> What can you change or adjust? (Example: the type of metal, the beam's cross-sectional shape, or the alloy composition.)</li>\n</ul>\n<p>By clearly defining your Objective, Constraints, and Variables before you start testing materials, you create a focused, efficient inspection plan. You're not testing everything about every material — you're testing the specific properties that matter most for your specific design challenge. That's smart, strategic engineering.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034c005",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in action:</strong> Before selecting a material for your next project, write out your Objective, Constraints, and Variables on paper first. This one step will save you hours of guesswork and help you make a decision you can defend with real engineering reasoning.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV framework: Objective, Constraint, and Variable arranged as three interconnected components of an optimization decision"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Quality</h2>\n<p>There's a deeper reason why quality assurance matters — and it goes beyond avoiding failures or saving money. When you take time to carefully inspect your materials and verify your work, you are being a good steward of the resources God has entrusted to you.</p>\n<p>Stewardship means managing what you've been given — time, materials, skills, and tools — with care and intentionality. Cutting corners on quality inspection isn't just a technical risk; it's a failure of stewardship. It wastes materials that could have been used better, it wastes time that will be lost fixing preventable failures, and it can put people in harm's way.</p>\n<p>On the other hand, a Creationeer who builds a systematic quality process, inspects materials diligently, and chooses materials wisely is honoring God with their craft. Colossians 3:23 puts it beautifully: \"Whatever you do, work heartily, as for the Lord and not for men.\" That applies to every measurement taken and every material checked.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 3:23</strong> — \"Whatever you do, work heartily, as for the Lord and not for men.\" Every material you inspect, every measurement you take, every defect you catch — do it with the same excellence and care you would give if God Himself were watching. Because He is.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Expand each question below and think through your answer before moving on.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between Quality Assurance and Material Inspection?",
+      "html": "<p>Quality Assurance (QA) is a big-picture, systematic approach designed to <em>prevent</em> defects by building good processes into your workflow from the start. Material Inspection is a specific hands-on activity where you examine or test a material to <em>detect</em> defects that already exist. QA is the system; inspection is one tool within that system. You need both: prevention and verification working together.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034a002",
+    "type": "accordion",
+    "data": {
+      "title": "When would you choose Nondestructive Testing over Destructive Testing?",
+      "html": "<p>You choose NDT when the part needs to remain usable after testing — for example, inspecting an airplane wing or a bridge cable that will actually be put into service. NDT lets you find defects without harming the component. You choose destructive testing when you need precise data about how a material performs under extreme conditions (like how much force it takes to snap it), and you don't need to keep that specific sample intact. In practice, engineers often use NDT on the actual parts they'll use and DT on sample pieces to establish material properties.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034a003",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling help engineers during material inspection?",
+      "html": "<p>Multiscale Modeling connects what engineers can see at the large (macro) scale — like a crack in a metal beam — to what is happening at the tiny (atomic or microscopic) scale — like atoms losing their bonds. This helps engineers understand <em>why</em> a material fails, not just <em>that</em> it failed. That deeper understanding lets them design better inspection tests, predict failure earlier, and develop stronger materials by making intentional changes at the atomic level (like mixing in specific elements to create stronger alloys).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034a004",
+    "type": "accordion",
+    "data": {
+      "title": "Walk through the OCV method. What do each of the three letters stand for, and how do they work together?",
+      "html": "<p>OCV stands for <strong>Objective, Constraint, and Variable</strong>. Your <strong>Objective</strong> is what you're trying to achieve — the goal you're optimizing for (e.g., maximize strength, minimize weight). Your <strong>Constraint</strong> is a non-negotiable limit that your solution must stay within (e.g., cost must be under $50, dimensions must fit a 2-inch space). Your <strong>Variable</strong> is what you can actually change or adjust to reach your objective while respecting your constraints (e.g., choice of material, shape of the component). Together, they give you a clear, focused framework for decision-making — so instead of testing everything about every material, you test the right things for your specific situation.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c034a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does careful material inspection reflect biblical stewardship?",
+      "html": "<p>Stewardship means managing what God has entrusted to you — including materials, time, and skills — with care and intentionality. When you inspect materials diligently, you avoid wasting resources on defective parts, prevent costly failures, and protect the people who will use what you build. Cutting corners on inspection wastes materials, wastes time, and risks harm. Thorough quality assurance honors God by treating His provision with respect and doing your work with excellence, just as Colossians 3:23 calls us to work \"heartily, as for the Lord.\"</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

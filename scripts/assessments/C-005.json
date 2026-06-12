@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-005",
+  "topic": "Units, Conversions, and Measurement",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is a 'unit'?",
+      "options": {
+        "A": "A type of mathematical calculation",
+        "B": "A known standard used to express and compare measurements",
+        "C": "A tool used to correct measurement errors",
+        "D": "A system for estimating quantities without exact numbers"
+      },
+      "answer": "B",
+      "explanation": "The lesson defines a unit as 'A known standard used to express and compare measurements'."
+    },
+    {
+      "type": "recall",
+      "question": "Which of the following best describes 'Dimensional Analysis'?",
+      "options": {
+        "A": "A method to measure the physical dimensions of an object",
+        "B": "A problem-solving method that uses the manipulation of units to check or perform calculations",
+        "C": "A process for converting numbers into different numerical systems",
+        "D": "A technique for estimating measurements without precise tools"
+      },
+      "answer": "B",
+      "explanation": "Dimensional analysis is defined as a problem-solving method that uses the manipulation of units to check or perform calculations."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, which of these is a crucial reason why standard units are used in engineering?",
+      "options": {
+        "A": "To make measurements more complex and challenging",
+        "B": "To communicate clearly and perform accurate calculations",
+        "C": "To reduce the number of measurements needed for a project",
+        "D": "To ensure that only the Metric system is ever used"
+      },
+      "answer": "B",
+      "explanation": "The lesson states that units are crucial because they allow us to communicate clearly and perform calculations accurately."
+    },
+    {
+      "type": "comprehension",
+      "question": "If an engineer measures the length of a beam three times and gets 10.0m, 10.1m, and 9.9m, while the true length is 15.0m, what can be said about their measurements?",
+      "options": {
+        "A": "They are both accurate and precise",
+        "B": "They are precise but not accurate",
+        "C": "They are accurate but not precise",
+        "D": "They are neither accurate nor precise"
+      },
+      "answer": "B",
+      "explanation": "The measurements are close to each other (consistent), indicating precision, but far from the true value, indicating a lack of accuracy."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why are conversion factors, like '1 inch = 2.54 centimeters,' essential in engineering?",
+      "options": {
+        "A": "They make measurements more difficult to understand for international teams.",
+        "B": "They allow engineers to switch between different unit systems like Metric and Imperial.",
+        "C": "They are only used for very small measurements where precision is critical.",
+        "D": "They help avoid using any units at all by providing a universal number."
+      },
+      "answer": "B",
+      "explanation": "Conversion factors are essential because they provide the ratios needed to change measurements from one unit system to another, facilitating communication and calculations across different systems."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson mentions that mixing up units (e.g., using inches instead of centimeters) can lead to serious errors. How does using correct units help avoid these mistakes?",
+      "options": {
+        "A": "Correct units make calculations longer, forcing engineers to be more careful.",
+        "B": "They ensure that the numerical values are always whole numbers, simplifying calculations.",
+        "C": "They provide context for numbers and ensure calculations are performed with compatible quantities.",
+        "D": "They eliminate the need for any calculations by providing direct answers."
+      },
+      "answer": "C",
+      "explanation": "Using correct units provides necessary context for numerical values and ensures that mathematical operations are performed on compatible quantities, preventing errors."
+    },
+    {
+      "type": "application",
+      "question": "A student measures a desk to be 60 inches long. Using the conversion factor from the lesson (1 foot = 12 inches), how long is the desk in feet?",
+      "options": {
+        "A": "5 feet",
+        "B": "6 feet",
+        "C": "12 feet",
+        "D": "60 feet"
+      },
+      "answer": "A",
+      "explanation": "To convert 60 inches to feet, you divide 60 by 12, which equals 5 feet."
+    },
+    {
+      "type": "application",
+      "question": "An engineer needs to measure the amount of water a large swimming pool can hold. Which unit from the lesson would be most appropriate for this measurement?",
+      "options": {
+        "A": "Milliliters (mL)",
+        "B": "Liters (L)",
+        "C": "Grams (g)",
+        "D": "Centimeters (cm)"
+      },
+      "answer": "B",
+      "explanation": "Liters are a common metric unit for measuring larger volumes of liquids, making them suitable for a swimming pool."
+    },
+    {
+      "type": "application",
+      "question": "If you want to convert 3 hours into seconds using dimensional analysis, which setup correctly uses the conversion factors provided in the lesson?",
+      "options": {
+        "A": "$3 \\text{ h} \\cdot \\frac{1 \\text{ min}}{60 \\text{ s}}$",
+        "B": "$3 \\text{ h} \\cdot \\frac{60 \\text{ min}}{1 \\text{ h}} \\cdot \\frac{60 \\text{ s}}{1 \\text{ min}}$",
+        "C": "$3 \\text{ h} \\cdot \\frac{1 \\text{ h}}{60 \\text{ min}} \\cdot \\frac{1 \\text{ min}}{60 \\text{ s}}$",
+        "D": "$3 \\text{ h} \\cdot \\frac{60 \\text{ s}}{1 \\text{ h}}$"
+      },
+      "answer": "B",
+      "explanation": "This setup correctly multiplies by conversion factors to cancel hours and minutes, leaving seconds as the final unit."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects the precision required in measurement to God's character. What aspect of God's character is reflected through the consistency and exactness of units and measurements?",
+      "options": {
+        "A": "His creativity in designing diverse systems",
+        "B": "His power to control all natural forces",
+        "C": "His order and peace in creation",
+        "D": "His forgiveness for human errors"
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly states that the consistency and precision required in measurement reflect God's character as a God of order and peace."
+    },
+    {
+      "type": "synthesis",
+      "question": "An international team of engineers is designing a new space probe. How do standardized units and the technique of dimensional analysis collectively contribute to the success of this complex project?",
+      "options": {
+        "A": "They make the project more expensive by requiring specialized tools.",
+        "B": "They ensure all engineers use the same language of measurement and prevent calculation errors.",
+        "C": "They allow engineers to ignore small measurement differences, speeding up the design process.",
+        "D": "They are only useful for simple, local projects, not complex international ones."
+      },
+      "answer": "B",
+      "explanation": "Standardized units enable clear communication among diverse teams, while dimensional analysis ensures calculations are accurate and unit-compatible, both critical for complex projects."
+    },
+    {
+      "type": "synthesis",
+      "question": "The Bible's instructions for the Tabernacle included precise measurements, like 'twenty-eight cubits.' How does this biblical example reinforce the importance of both accuracy and precision in engineering, as discussed in the lesson?",
+      "options": {
+        "A": "It shows that only large measurements matter, not small ones.",
+        "B": "It demonstrates that God values exactness and consistency in design.",
+        "C": "It suggests that units are not important if God provides the measurements directly.",
+        "D": "It implies that engineers should only use ancient units for their projects."
+      },
+      "answer": "B",
+      "explanation": "The precise biblical measurements for the Tabernacle illustrate God's value for exactness and consistency, mirroring the engineering principles of accuracy and precision."
+    }
+  ]
+}

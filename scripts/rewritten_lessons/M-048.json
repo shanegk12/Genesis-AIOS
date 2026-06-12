@@ -1,0 +1,323 @@
+[
+  {
+    "id": "m048a1b2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Arduino Station and Test</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048c3d4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Last time, you tackled the critical task of designing and building your mousetrap car's braking system — a key step in controlling movement and protecting your car from damage. Now we're moving into a phase of Creationeering™ that looks further ahead: <strong>Sustainability</strong>. Great engineers don't just ask \"Does it work?\" They ask \"How long will it work, and how efficiently?\"</p><p>In this lesson, you'll set up an Arduino station to collect real performance data from your mousetrap car. That data tells you exactly how your car is behaving — its speed, distance, energy use — so you can make smart improvements. Think of it like a doctor's checkup for your car. You can't fix what you can't measure, and what you measure, you can improve.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048e5f6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Understand the Creationeering™ concept of Sustainability and why it matters in engineering design.</li><li>Identify how an Arduino microcontroller can collect performance data from a mousetrap car.</li><li>Explain the role of sensors in gathering information about speed, distance, and other metrics.</li><li>Apply the OCV (Objective, Constraint, Variable) method to a data-collection design decision.</li><li>Connect designing for longevity and efficient resource use to the biblical principle of stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048g7h8",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Sustainability",
+          "definition": "Designing and building systems that endure, function effectively over time, and use resources efficiently without compromising future performance."
+        },
+        {
+          "term": "Arduino",
+          "definition": "An open-source electronic platform with a microcontroller board and software, used for building interactive projects and collecting sensor data."
+        },
+        {
+          "term": "Sensor",
+          "definition": "A device that detects physical input from the environment — like motion, light, or distance — and converts it into an electrical signal a computer can read."
+        },
+        {
+          "term": "Data Logging",
+          "definition": "The process of automatically recording data from sensors over a period of time so you can analyze it later."
+        },
+        {
+          "term": "Performance Metrics",
+          "definition": "Quantifiable measurements — like speed, distance, or consistency — used to assess how well a system is working."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A structured design approach that identifies your Objectives (what you want to achieve), Constraints (your limitations), and Variables (what you can change)."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that considers how events at different size scales — from tiny material properties to full-system behavior — interact and affect each other."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible care and protection of something worth preserving — in engineering, this means using resources wisely and designing for the long term."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048i9j0",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048k1l2",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:15 (KJV):</strong> \"And the LORD God took the man, and put him into the garden of Eden to dress it and to keep it.\"</p><p>This is the Dominion Mandate — God's instruction to cultivate and care for creation. Engineering that ignores long-term impact isn't just inefficient; it misses the bigger calling. When you design for sustainability, you're honoring the Creator by being a faithful steward of the resources and skills He's given you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048m3n4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewarding Your Design for Longevity</h2><p>God designed the natural world with built-in sustainability — water cycles, seasons, ecosystems that renew themselves. Creation doesn't just work once; it keeps working. As engineers made in His image, we're called to bring that same thoughtfulness to our own designs.</p><p>Your mousetrap car has a limited energy source: the spring. Every run uses that stored energy in a specific way. If your design wastes energy through friction, poor alignment, or inconsistent braking, you'll see it in your results — shorter distances, slower speeds, more wear on your parts. Sustainability in engineering means minimizing waste and maximizing useful output, run after run.</p><p>That's exactly where the Arduino comes in. You can't improve what you can't measure, and the Arduino gives you a way to measure with precision.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048o5p6",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "An Arduino Uno microcontroller board connected to a breadboard with sensor wires, placed next to a small wheeled car model — showing a basic data-collection station setup"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048q7r8",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048s9t0",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is an Arduino — and Why Does It Matter?</h2><p>An <strong>Arduino</strong> is a small, programmable microcontroller board. Think of it as a tiny brain you can teach to listen to the physical world. It reads signals from sensors — devices that detect things like motion, distance, and light — and translates those signals into data your computer can record and display.</p><p>For your mousetrap car, this is a game-changer. Instead of guessing why your car stopped short or veered off course, you get actual numbers. That's the difference between an engineer and someone just tinkering: engineers make decisions based on data.</p><h3>What Can It Measure?</h3><p>Depending on which sensors you connect, your Arduino station can track:</p><ul><li><strong>Speed</strong> — How fast is your car moving at different points in its run?</li><li><strong>Distance</strong> — How far did it travel before stopping?</li><li><strong>Consistency</strong> — Do the results repeat reliably across multiple runs, or does performance vary?</li></ul><p>This collection of numbers is called your <strong>performance metrics</strong>. Each metric tells you something specific about how your design is doing — and where it could do better.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048u1v2",
+    "type": "text",
+    "data": {
+      "html": "<h2>How Sensors Work</h2><p>A <strong>sensor</strong> is any device that detects something happening in the physical world and converts it into an electrical signal. Your eyes are biological sensors — they detect light and send signals to your brain. An Arduino sensor works the same way, just with electronics instead of biology.</p><p>Common sensors you might use with your mousetrap car include:</p><ul><li><strong>Ultrasonic distance sensors</strong> — send out a sound pulse and measure how long it takes to bounce back, calculating distance.</li><li><strong>Hall effect sensors</strong> — detect a magnet passing nearby, which lets you count wheel rotations and calculate speed.</li><li><strong>Infrared (IR) sensors</strong> — detect objects breaking a beam of light, useful for timing start and finish lines.</li></ul><p>Each sensor feeds its readings into the Arduino, which stores or displays the data. This process — automatic data recording over time — is called <strong>data logging</strong>. Once you have logged data from several runs, you can spot patterns, compare designs, and make targeted improvements.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048w3x4",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing three sensor types — ultrasonic, Hall effect, and infrared — each with a simple illustration of how they detect physical input and connect to an Arduino board"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048y5z6",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048a7b8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Data Collection</h2><p>Before you just plug in sensors and start collecting numbers, great engineers pause and plan. That's where the <strong>OCV Method</strong> comes in. OCV stands for <strong>Objective, Constraint, Variable</strong> — and it gives you a framework for making smart design decisions.</p><h3>O — Objective</h3><p>What do you actually want to find out? Be specific. \"I want my car to go farther\" is a goal, but \"I want to measure how far my car travels per run and identify where energy is lost\" is an objective you can test.</p><h3>C — Constraint</h3><p>What are your limits? Your Arduino can only connect so many sensors at once. You have limited build time. Your mousetrap spring can only run so many times before it weakens. Knowing your constraints keeps your plan realistic.</p><h3>V — Variable</h3><p>What are you changing or measuring? In data collection, your variable might be axle friction, wheel size, or the angle of your lever arm. By changing one variable at a time and measuring the result, you can trace cause and effect like a true engineer.</p><p>Running your OCV analysis before you set up your Arduino station means your data will actually answer the questions you're asking — instead of just giving you a pile of numbers with no clear meaning.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048c9d0",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Before your first test run:</strong> Write down your OCV for the session. What is your objective? What constraints apply? What one variable are you testing? Keeping this on paper prevents the common mistake of changing too many things at once — which makes it impossible to know what actually caused a change in performance.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048e1f2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Setting Up Your Arduino Station</h2><p>Here's the general process for getting your Arduino test station ready. Your teacher will walk you through the specific code and wiring for your sensors, but this overview helps you understand what each step is doing and why.</p><h3>Step 1 — Gather Your Components</h3><p>You'll need your Arduino board, a USB cable to connect it to a computer, your chosen sensor(s), a breadboard, and jumper wires. Lay everything out before you start connecting anything.</p><h3>Step 2 — Wire Your Sensors</h3><p>Connect your sensor to the Arduino following the wiring diagram for your sensor type. Most sensors have three main connections: power (VCC), ground (GND), and signal (the data wire). Mixing these up is the most common wiring mistake — double-check before powering on.</p><h3>Step 3 — Upload Your Code</h3><p>Your Arduino needs instructions — a program — to know how to read the sensor and what to do with the data. Using the Arduino IDE software on your computer, you'll upload a sketch (that's what Arduino programs are called) that tells the board how to collect and display your measurements.</p><h3>Step 4 — Run Tests and Log Data</h3><p>Once everything is connected and your code is running, send your mousetrap car through a test run. Watch the data appear in the Serial Monitor on your computer. Record the readings. Run it again. Compare the results. Look for patterns — that's your engineering instinct at work.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048g3h4",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often change their car design between test runs without recording what they changed. Then when results improve — or get worse — they can't explain why. Always record your setup, your OCV, and your results before making any changes. Your data log is only useful if it's complete.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048i5j6",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Data to Design Improvements</h2><p>Collecting data is only half the job. The other half is using it. Once you have performance metrics from several runs, look for patterns across your numbers. Is your car consistently traveling shorter distances on the second or third run? That might indicate spring fatigue or increasing friction. Does it drift to one side? Misaligned axles or uneven wheel sizes could be the cause.</p><p>This is where <strong>multiscale modeling</strong> thinking helps. Small issues — a slightly bent axle, a rough bearing surface — show up as big performance differences at the system level. The Arduino data helps you trace from the large-scale symptom (shorter distance) down to the small-scale cause (increased friction at the rear axle). That's engineering thinking working across scales.</p><p>Once you've identified a pattern, you go back to your OCV. Update your objective, adjust your variable, and test again. This loop — measure, analyze, improve, repeat — is the heartbeat of sustainable engineering design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048k7l8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sustainability as a Design Value</h2><p>It's worth stepping back and seeing the bigger picture here. Sustainability isn't just an engineering buzzword — it's a design value rooted in how God made the world. He didn't create a universe that burns through resources carelessly. He built cycles, renewal, and efficiency into the fabric of creation.</p><p>When you use your Arduino data to reduce friction, improve efficiency, and extend the useful life of your mousetrap car, you're practicing that same principle at a small scale. You're asking: how can this system last longer and work better without wasting what it has? That question is worth asking about every design you ever build — and honestly, about how you steward your own time, talents, and resources too.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048m9n0",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: What Is Open-Source Hardware?",
+      "html": "<p>You may have noticed the word <strong>open-source</strong> in the Arduino definition. Open-source means the design files, schematics, and code for the Arduino platform are freely available for anyone to view, use, and modify. You don't need permission to build your own Arduino-compatible board or write your own programs for it.</p><p>This is a powerful idea in engineering culture. When engineers share their work openly, the whole community benefits — problems get solved faster, designs improve quicker, and innovation spreads further. Many of the tools and libraries that make Arduino easy to use were created by engineers around the world who gave their work away for free.</p><p>From a faith perspective, that spirit of generosity and shared knowledge reflects something beautiful: using your gifts to serve others, not just yourself. Proverbs 11:24 says, \"One person gives freely, yet gains even more.\" Open-source engineering is a real-world example of that principle in action.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048o1p2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student test log sheet showing OCV columns (Objective, Constraint, Variable) filled in alongside a table of Arduino data readings from three mousetrap car test runs"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048q3r4",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m048s5t6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Takeaways</h2><ul><li><strong>Sustainability</strong> means designing systems that perform reliably over time and use resources efficiently — not just systems that work once.</li><li>The <strong>Arduino</strong> is a microcontroller platform that reads sensor data and gives you precise, repeatable measurements of your car's performance.</li><li><strong>Sensors</strong> translate physical events (movement, distance, speed) into electrical signals the Arduino can log and display.</li><li>The <strong>OCV Method</strong> (Objective, Constraint, Variable) keeps your testing focused so your data actually tells you something useful.</li><li><strong>Data logging</strong> across multiple runs reveals patterns that guide smart design improvements.</li><li>Designing for sustainability is a form of <strong>stewardship</strong> — caring well for the resources and creativity God has entrusted to you.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabrication Methods – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 780px;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.4rem; color: #C9A84C; margin-bottom: 4px; }
+  header p { font-size: 0.88rem; opacity: 0.85; }
+  .screen { display: none; width: 100%; max-width: 780px; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.3rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 18px; color: #333; }
+  .badge-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  .badge {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #b8962e; transform: scale(1.03); }
+  .btn:disabled { background: #ccc; color: #888; cursor: not-allowed; transform: none; }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: #e8edf3; }
+
+  /* DRAG-AND-DROP */
+  .dnd-section { margin-bottom: 24px; }
+  .progress-bar-wrap {
+    background: #dde3ea;
+    border-radius: 20px;
+    height: 10px;
+    width: 100%;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s;
+  }
+  .round-info {
+    font-size: 0.82rem;
+    color: #1B3A5C;
+    text-align: right;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .dnd-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+  }
+  .dnd-card h2 { font-size: 1.05rem; color: #1B3A5C; margin-bottom: 6px; }
+  .dnd-card .task-desc { font-size: 0.88rem; color: #555; margin-bottom: 18px; line-height: 1.5; }
+  .columns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .category-col {
+    flex: 1;
+    min-width: 180px;
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 140px;
+  }
+  .category-col h3 {
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 6px;
+    padding: 5px 8px;
+  }
+  .drop-zone {
+    min-height: 90px;
+    border: 2px dashed #b0bed0;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .drop-zone.drag-over { border-color: #C9A84C; background: #fef9ec; }
+  .item-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    min-height: 50px;
+    background: #e8edf3;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .drag-item {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 7px;
+    padding: 7px 13px;
+    font-size: 0.82rem;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.15s;
+    touch-action: none;
+  }
+  .drag-item:active { cursor: grabbing; transform: scale(1.05); }
+  .drag-item.dragging { opacity: 0.4; }
+  .drag-item.placed { background: #2e6da4; }
+  .feedback-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .feedback-text { font-size: 0.92rem; font-weight: 600; min-height: 22px; }
+  .feedback-text.correct { color: #1a7a3a; }
+  .feedback-text.wrong { color: #b83030; }
+  .score-label {
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    font-weight: 700;
+  }
+
+  /* SCENARIO SECTION */
+  .scenario-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    margin-bottom: 18px;
+  }
+  .scenario-card h2 { font-size: 1.05rem; color: #C9A84C; margin-bottom: 6px; }
+  .scenario-text { font-size: 0.93rem; color: #333; line-height: 1.6; margin-bottom: 18px; }
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f0f4f8;
+    border: 2px solid #b0bed0;
+    border-radius: 9px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+    font-weight: 500;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fef9ec; }
+  .choice-btn.correct-ans { background: #d4f0de; border-color: #1a7a3a; color: #1a4d28; }
+  .choice-btn.wrong-ans { background: #fde8e8; border-color: #b83030; color: #7a1a1a; }
+  .choice-btn:disabled { cursor: default; }
+  .explanation {
+    margin-top: 12px;
+    background: #eef3f8;
+    border-left: 4px solid #C9A84C;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.55;
+    display: none;
+  }
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 10px; }
+
+  /* RESULTS */
+  .result-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  .result-card h2 { font-size: 1.4rem; color: #1B3A5C; margin-bottom: 8px; }
+  .big-score {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: #C9A84C;
+    margin: 14px 0;
+  }
+  .result-card .subtitle { font-size: 0.95rem; color: #555; margin-bottom: 20px; }
+  .breakdown {
+    text-align: left;
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .breakdown h3 { font-size: 0.9rem; color: #1B3A5C; margin-bottom: 10px; font-weight: 700; }
+  .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 5px 0;
+    border-bottom: 1px solid #dde3ea;
+  }
+  .breakdown-item:last-child { border-bottom: none; }
+  .breakdown-item .pts { font-weight: 700; color: #1B3A5C; }
+  .rank-badge {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 20px;
+    padding: 8px 22px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .faith-note {
+    font-size: 0.82rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 18px;
+    border-top: 1px solid #dde3ea;
+    padding-top: 14px;
+  }
+
+  /* STEP 3 OCV */
+  .ocv-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.1);
+  }
+  .ocv-card h2 { font-size: 1.05rem; color: #1B3A5C; margin-bottom: 6px; }
+  .ocv-card p { font-size: 0.88rem; color: #555; margin-bottom: 16px; line-height: 1.5; }
+  .ocv-grid { display: flex; flex-direction: column; gap: 14px; }
+  .ocv-row { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .ocv-label {
+    min-width: 90px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .ocv-options { display: flex; flex-wrap: wrap; gap: 7px; }
+  .ocv-chip {
+    background: #f0f4f8;
+    border: 2px solid #b0bed0;
+    border-radius: 20px;
+    padding: 6px 13px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: #1B3A5C;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .ocv-chip:hover { border-color: #C9A84C; }
+  .ocv-chip.selected { background: #C9A84C; border-color: #b8962e; color: #1B3A5C; font-weight: 700; }
+  .ocv-chip.locked { cursor: default; }
+  .ocv-result {
+    margin-top: 16px;
+    background: #eef3f8;
+    border-left: 4px solid #C9A84C;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.55;
+    display: none;
+  }
+  @media (max-width: 500px) {
+    .columns { flex-direction: column; }
+    .category-col { min-width: 100%; }
+    .nav-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ Fabrication Methods</h1>
+  <p>Creationeering™ | Assembly Phase</p>
+</header>
+
+<!-- SCREEN 1: INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-card">
+    <h2>Welcome to Fabrication!</h2>
+    <p>Before parts can be assembled into a machine, they must first be <strong>fabricated</strong> — made from raw materials. In this activity you will:</p>
+    <div class="badge-row">
+      <div class="badge">🗂️ Sort fabrication examples</div>
+      <div class="badge">🧠 Answer scenario questions</div>
+      <div class="badge">🎯 Use the OCV method</div>
+    </div>
+    <p>There are three short rounds. Do your best — you'll earn points along the way!</p>
+    <br>
+    <button class="btn" onclick="startActivity()">Let's Build! →</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: DRAG & DROP -->
+<div class="screen" id="screen-dnd">
+  <div class="dnd-card dnd-section">
+    <div class="round-info" id="dnd-round-info">Round 1 of 3</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="dnd-progress" style="width:0%"></div></div>
+    <h2>Sort the Fabrication Examples</h2>
+    <p class="task-desc">Drag each example into the correct fabrication method category. Drop it in the right box!</p>
+    <div class="item-pool" id="item-pool"></div>
+    <div class="columns" id="drop-columns"></div>
+    <div class="feedback-row">
+      <span class="feedback-text" id="dnd-feedback"></span>
+      <span class="score-label">Score: <span id="dnd-score">0</span></span>
+    </div>
+    <div style="text-align:right; margin-top:14px;">
+      <button class="btn" id="dnd-next-btn" onclick="goToScenarios()" disabled>Next Round →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: SCENARIOS -->
+<div class="screen" id="screen-scenarios">
+  <div class="scenario-card">
+    <div class="round-info" id="sc-round-info">Round 2 of 3</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="sc-progress" style="width:0%"></div></div>
+    <h2 id="sc-title">Scenario Challenge</h2>
+    <p class="scenario-text" id="sc-text"></p>
+    <div class="choices" id="sc-choices"></div>
+    <div class="explanation" id="sc-explanation"></div>
+    <div class="nav-row">
+      <span class="score-label">Score: <span id="sc-score">0</span></span>
+      <button class="btn" id="sc-next-btn" onclick="nextScenario()" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: OCV -->
+<div class="screen" id="screen-ocv">
+  <div class="ocv-card">
+    <div class="round-info">Round 3 of 3</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:100%"></div></div>
+    <h2>OCV Method: Optimize the Fabrication Process</h2>
+    <p>You need to fabricate a lightweight bracket for a school robot. Use the <strong>OCV (Objective, Constraint, Variable)</strong> method to choose the best approach. Select one option in each row, then check your answer.</p>
+    <div class="ocv-grid">
+      <div class="ocv-row">
+        <div class="ocv-label">🎯 OBJECTIVE<br><span style="font-weight:400;font-size:0.72rem;">What is the goal?</span></div>
+        <div class="ocv-options" id="ocv-obj"></div>
+      </div>
+      <div class="ocv-row">
+        <div class="ocv-label">🚧 CONSTRAINT<br><span style="font-weight:400;font-size:0.72rem;">What limits you?</span></div>
+        <div class="ocv-options" id="ocv-con"></div>
+      </div>
+      <div class="ocv-row">
+        <div class="ocv-label">🔧 VARIABLE<br><span style="font-weight:400;font-size:0.72rem;">What can you change?</span></div>
+        <div class="ocv-options" id="ocv-var"></div>
+      </div>
+    </div>
+    <div class="ocv-result" id="ocv-result"></div>
+    <div style="margin-top:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <span class="score-label">Score: <span id="ocv-score-display">0</span></span>
+      <button class="btn" id="ocv-check-btn" onclick="checkOCV()" disabled>Check Answer</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5: RESULTS -->
+<div class="screen" id="screen-results">
+  <div class="result-card">
+    <h2>Activity Complete! 🎉</h2>
+    <div class="big-score" id="final-score-display">0</div>
+    <div class="rank-badge" id="rank-badge">Fabrication Apprentice</div>
+    <p class="subtitle" id="result-subtitle"></p>
+    <div class="breakdown" id="breakdown-list">
+      <h3>Score Breakdown</h3>
+    </div>
+    <div class="faith-note">✝️ "The heavens declare the glory of God; the skies proclaim the work of his hands." — Psalm 19:1<br>Skilled fabrication reflects the creativity of the Creator who brought order from nothing.</div>
+    <button class="btn" onclick="restartActivity()">Try Again</button>
+  </div>
+</div>
+
+<script>
+// ========================
+// STATE
+// ========================
+var dndScore = 0;
+var scenarioScore = 0;
+var ocvScore = 0;
+var totalDndItems = 0;
+var currentScenario = 0;
+var scenarioAnswered = false;
+
+// ========================
+// DATA
+// ========================
+var categories = [
+  { id: "additive", label: "Additive Manufacturing", color: "#1B3A5C" },
+  { id: "subtractive", label: "Subtractive Manufacturing", color: "#2e6da4" },
+  { id: "forming", label: "Forming Manufacturing", color: "#5a3580" }
+];
+
+var items = [
+  { id: "i1", text: "3D printing a phone case layer by layer", correct: "additive" },
+  { id: "i2", text: "Laser cutting shapes from a metal sheet", correct: "subtractive" },
+  { id: "i3", text: "Bending a steel rod into a bracket shape", correct: "forming" },
+  { id: "i4", text: "Printing a plastic gear with a FDM printer", correct: "additive" },
+  { id: "i5", text: "Milling a block of aluminum into a part", correct: "subtractive" },
+  { id: "i6", text: "Stamping sheet metal into a car door panel", correct: "forming" },
+  { id: "i7", text: "Drilling holes into a wooden board", correct: "subtractive" },
+  { id: "i8", text: "Extruding plastic through a heated nozzle", correct: "additive" },
+  { id: "i9", text: "Pressing clay into a mold to shape it", correct: "forming" }
+];
+
+var scenarios = [
+  {
+    title: "Macro to Atomic",
+    text: "A student prints a plastic bracket using a 3D printer. When she looks at it under a microscope, she notices the layers are slightly visible on the surface. According to Multiscale Modeling, what is the atomic-level cause of this macro observation?",
+    choices: [
+      { text: "The printer ran out of filament mid-print.", correct: false },
+      { text: "Each printed layer cools and bonds at the molecular level, leaving slight seams between deposited lines.", correct: true },
+      { text: "The plastic was mixed with metal particles.", correct: false },
+      { text: "The model file had errors that caused surface roughness.", correct: false }
+    ],
+    explanation: "Multiscale Modeling connects what we see (macro) to what happens at the atomic/molecular level. Visible layer lines are caused by the way polymer chains bond as each layer cools — a molecular-level phenomenon."
+  },
+  {
+    title: "Choosing the Right Method",
+    text: "An engineer needs to produce 500 identical metal brackets quickly. Each bracket must be cut from a flat aluminum plate. Which fabrication method is BEST suited for this task?",
+    choices: [
+      { text: "Additive Manufacturing — 3D printing each bracket", correct: false },
+      { text: "Forming Manufacturing — bending rods into brackets", correct: false },
+      { text: "Subtractive Manufacturing — CNC laser cutting from aluminum plate", correct: true },
+      { text: "No fabrication needed — buy pre-made parts", correct: false }
+    ],
+    explanation: "Subtractive manufacturing (cutting/machining) is ideal here: the brackets need to be cut from a flat plate, and CNC laser cutting is fast, precise, and repeatable for large quantities."
+  },
+  {
+    title: "Fabrication vs. Assembly",
+    text: "A team has just finished machining all the metal parts for a robot arm. What is their NEXT step in the Creationeering™ process?",
+    choices: [
+      { text: "Write the Technical Specifications document", correct: false },
+      { text: "Move into the Assembly phase — join the fabricated parts together", correct: true },
+      { text: "Begin forming manufacturing to reshape the parts", correct: false },
+      { text: "Return to the design phase to redraw the parts", correct: false }
+    ],
+    explanation: "Fabrication comes just BEFORE assembly. Once all individual components have been fabricated from raw materials, the team moves into Assembly — joining those parts into a complete product or system."
+  },
+  {
+    title: "Stewardship & Materials",
+    text: "A student is choosing between two methods to make a bracket: (A) Subtractive manufacturing — cuts away 40% of a metal block as waste. (B) Additive manufacturing — uses only the material needed. Considering the biblical principle of stewardship, which approach better honors God's creation, and why?",
+    choices: [
+      { text: "Method A, because traditional methods are more reliable.", correct: false },
+      { text: "It doesn't matter — stewardship only applies to nature, not manufacturing.", correct: false },
+      { text: "Method B, because using only what is needed reduces waste and honors responsible care of resources.", correct: true },
+      { text: "Method A, because removing material gives more design precision.", correct: false }
+    ],
+    explanation: "Good stewardship means using resources responsibly. Additive manufacturing can reduce material waste significantly because you only use what the design requires — aligning with the principle of caring for what God has given us."
+  },
+  {
+    title: "Forming Manufacturing",
+    text: "A factory takes a flat sheet of steel and uses a large press to stamp it into the curved shape of a car hood. No material is removed — it is only reshaped. Which fabrication category does this BEST fit?",
+    choices: [
+      { text: "Additive Manufacturing", correct: false },
+      { text: "Subtractive Manufacturing", correct: false },
+      { text: "Forming Manufacturing", correct: true },
+      { text: "Assembly", correct: false }
+    ],
+    explanation: "Forming manufacturing reshapes material without adding or removing it. Stamping, bending, and pressing are all forming methods — the raw material is shaped by force into a new geometry."
+  }
+];
+
+var ocvData = {
+  objective: {
+    options: [
+      { text: "Make the bracket as heavy as possible", correct: false },
+      { text: "Produce a lightweight, strong bracket", correct: true },
+      { text: "Use the most expensive material available", correct: false }
+    ]
+  },
+  constraint: {
+    options: [
+      { text: "Must fit within the school budget & use available tools", correct: true },
+      { text: "Must be made of solid gold", correct: false },
+      { text: "Must take at least 3 weeks to make", correct: false }
+    ]
+  },
+  variable: {
+    options: [
+      { text: "The name of the teacher", correct: false },
+      { text: "The color of the classroom walls", correct: false },
+      { text: "The fabrication method (additive, subtractive, or forming)", correct: true }
+    ]
+  }
+};
+
+var ocvSelections = { objective: null, constraint: null, variable: null };
+var ocvChecked = false;
+
+// ========================
+// INIT
+// ========================
+function startActivity() {
+  showScreen("screen-dnd");
+  initDragDrop();
+}
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+}
+
+// ========================
+// DRAG & DROP
+// ========================
+function initDragDrop() {
+  totalDndItems = items.length;
+  dndScore = 0;
+  document.getElementById("dnd-score").textContent = "0";
+  document.getElementById("dnd-feedback").textContent = "";
+  document.getElementById("dnd-next-btn").disabled = true;
+  document.getElementById("dnd-progress").style.width = "0%";
+
+  var pool = document.getElementById("item-pool");
+  pool.innerHTML = "";
+  var cols = document.getElementById("drop-columns");
+  cols.innerHTML = "";
+
+  // shuffle items
+  var shuffled = items.slice().sort(function(){ return Math.random()-0.5; });
+
+  shuffled.forEach(function(item) {
+    var el = createDragItem(item);
+    pool.appendChild(el);
+  });
+
+  categories.forEach(function(cat) {
+    var col = document.createElement("div");
+    col.className = "category-col";
+    col.innerHTML = '<h3>' + cat.label + '</h3>';
+    var zone = document.createElement("div");
+    zone.className = "drop-zone";
+    zone.dataset.cat = cat.id;
+    setupDropZone(zone);
+    col.appendChild(zone);
+    cols.appendChild(col);
+  });
+}
+
+function createDragItem(item) {
+  var el = document.createElement("div");
+  el.className = "drag-item";
+  el.textContent = item.text;
+  el.dataset.id = item.id;
+  el.dataset.correct = item.correct;
+  el.draggable = true;
+
+  // Desktop drag
+  el.addEventListener("dragstart", function(e) {
+    e.dataTransfer.setData("text/plain", item.id + "|" + item.correct + "|" + item.text);
+    el.classList.add("dragging");
+  });
+  el.addEventListener("dragend", function() {
+    el.classList.remove("dragging");
+  });
+
+  // Touch drag
+  el.addEventListener("touchstart", handleTouchStart, { passive: true });
+  el.addEventListener("touchmove", handleTouchMove, { passive: false });
+  el.addEventListener("touchend", handleTouchEnd);
+
+  return el;
+}
+
+function setupDropZone(zone) {
+  zone.addEventListener("dragover", function(e) {
+    e.preventDefault();
+    zone.classList.add("drag-over");
+  });
+  zone.addEventListener("dragleave", function() {
+    zone.classList.remove("drag-over");
+  });
+  zone.addEventListener("drop", function(e) {
+    e.preventDefault();
+    zone.classList.remove("drag-over");
+    var data = e.dataTransfer.getData("text/plain");
+    var parts = data.split("|");
+    var id = parts[0], correct = parts[1], text = parts[2];
+    handleDrop(zone, id, correct, text);
+  });
+}
+
+// Touch drag state
+var touchDragEl = null;
+var touchClone = null;
+var touchOffsetX = 0, touchOffsetY = 0;
+
+function handleTouchStart(e) {
+  touchDragEl = e.currentTarget;
+  touchDragEl.classList.add("dragging");
+  var rect = touchDragEl.getBoundingClientRect();
+  var touch = e.touches[0];
+  touchOffsetX = touch.clientX - rect.left;
+  touchOffsetY = touch.clientY - rect.top;
+
+  touchClone = touchDragEl.cloneNode(true);
+  touchClone.style.position = "fixed";
+  touchClone.style.opacity = "0.85";
+  touchClone.style.pointerEvents = "none";
+  touchClone.style.zIndex = "9999";
+  touchClone.style.width = rect.width + "px";
+  touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+  touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+  document.body.appendChild(touchClone);
+}
+
+function handleTouchMove(e) {
+  e.preventDefault();
+  if (!touchClone) return;
+  var touch = e.touches[0];
+  touchClone.style.left = (touch.clientX - touchOffsetX) + "px";
+  touchClone.style.top = (touch.clientY - touchOffsetY) + "px";
+
+  // highlight drop zones
+  document.querySelectorAll(".drop-zone").forEach(function(z) {
+    var r = z.getBoundingClientRect();
+    if (touch.clientX >= r.left && touch.clientX <= r.right && touch.clientY >= r.top && touch.clientY <= r.bottom) {
+      z.classList.add("drag-over");
+    } else {
+      z.classList.remove("drag-over");
+    }
+  });
+}
+
+function handleTouchEnd(e) {
+  if (!touchDragEl || !touchClone) return;
+  var touch = e.changedTouches[0];
+  if (touchClone && touchClone.parentNode) touchClone.parentNode.removeChild(touchClone);
+  touchClone = null;
+  touchDragEl.classList.remove("dragging");
+
+  var found = false;
+  document.querySelectorAll(".drop-zone").forEach(function(z) {
+    z.classList.remove("drag-over");
+    var r = z.getBoundingClientRect();
+    if (touch.clientX >= r.left && touch.clientX <= r.right && touch.clientY >= r.top && touch.clientY <= r.bottom) {
+      handleDrop(z, touchDragEl.dataset.id, touchDragEl.dataset.correct, touchDragEl.textContent);
+      found = true;
+    }
+  });
+  touchDragEl = null;
+}
+
+function handleDrop(zone, id, correct, text) {
+  // remove from any previous location
+  var existing = document.querySelector("[data-id='" + id + "']");
+  if (existing) {
+    existing.remove();
+  }
+
+  var catId = zone.dataset.cat;
+  var isCorrect = (catId === correct);
+
+  var el = document.createElement("div");
+  el.className = "drag-item placed";
+  el.textContent = text;
+  el.dataset.id = id;
+  el.dataset.correct = correct;
+  el.style.background = isCorrect ? "#1a7a3a" : "#b83030";
+  el.style.cursor = "default";
+  el.style.fontSize = "0.78rem";
+
+  zone.appendChild(el);
+
+  var feedback = document.getElementById("dnd-feedback");
+  if (isCorrect) {
+    dndScore += 2;
+    document.getElementById("dnd-score").textContent = dndScore;
+    feedback.textContent = "✓ Correct! +" + 2 + " points";
+    feedback.className = "feedback-text correct";
+  } else {
+    feedback.textContent = "✗ Not quite — look at the category labels!";
+    feedback.className = "feedback-text wrong";
+
+    // Re-add to pool as draggable
+    setTimeout(function() {
+      var orig = createDragItem({ id: id, text: text, correct: correct });
+      document.getElementById("item-pool").appendChild(orig);
+      var placed = zone.querySelector("[data-id='" + id + "']");
+      if (placed) placed.remove();
+      document.getElementById("dnd-feedback").textContent = "";
+    }, 900);
+    return;
+  }
+
+  // Update progress
+  var placedCount = document.querySelectorAll(".drop-zone .drag-item").length;
+  var pct = Math.round((placedCount / totalDndItems) * 100);
+  document.getElementById("dnd-progress").style.width = pct + "%";
+
+  if (document.getElementById("item-pool").children.length === 0) {
+    document.getElementById("dnd-next-btn").disabled = false;
+    feedback.textContent = "✓ All items sorted! Click Next Round.";
+    feedback.className = "feedback-text correct";
+  }
+}
+
+// ========================
+// SCENARIOS
+// ========================
+function goToScenarios() {
+  currentScenario = 0;
+  scenarioScore = 0;
+  document.getElementById("sc-score").textContent = "0";
+  showScreen("screen-scenarios");
+  loadScenario();
+}
+
+function loadScenario() {
+  var q = scenarios[currentScenario];
+  scenarioAnswered = false;
+  document.getElementById("sc-title").textContent = "Scenario " + (currentScenario+1) + " of " + scenarios.length + ": " + q.title;
+  document.getElementById("sc-text").textContent = q.text;
+  document.getElementById("sc-next-btn").disabled = true;
+  document.getElementById("sc-explanation").style.display = "none";
+  document.getElementById("sc-explanation").textContent = "";
+
+  var pct = Math.round((currentScenario / scenarios.length) * 100);
+  document.getElementById("sc-progress").style.width = pct + "%";
+  document.getElementById("sc-round-info").textContent = "Round 2 of 3 — Question " + (currentScenario+1) + "/" + scenarios.length;
+
+  var choicesEl = document.getElementById("sc-choices");
+  choicesEl.innerHTML = "";
+
+  var shuffledChoices = q.choices.slice().sort(function(){ return Math.random()-0.5; });
+  shuffledChoices.forEach(function(c) {
+    var btn = document.createElement("button");
+    btn.className = "choice-btn";
+    btn.textContent = c.text;
+    btn.addEventListener("click", function() {
+      if (scenarioAnswered) return;
+      scenarioAnswered = true;
+      var allBtns = choicesEl.querySelectorAll(".choice-btn");
+      allBtns.forEach(function(b){ b.disabled = true; });
+      if (c.correct) {
+        btn.classList.add("correct-ans");
+        scenarioScore += 3;
+        document.getElementById("sc-score").textContent = scenarioScore;
+      } else {
+        btn.classList.add("wrong-ans");
+        // show correct
+        allBtns.forEach(function(b) {
+          if (b.textContent === shuffledChoices.find(function(x){ return x.correct; }).text) {
+            b.classList.add("correct-ans");
+          }
+        });
+      }
+      var exp = document.getElementById("sc-explanation");
+      exp.textContent = "💡 " + q.explanation;
+      exp.style.display = "block";
+      document.getElementById("sc-next-btn").disabled = false;
+      document.getElementById("sc-next-btn").textContent = (currentScenario + 1 < scenarios.length) ? "Next →" : "Next Round →";
+    });
+    choicesEl.appendChild(btn);
+  });
+}
+
+function nextScenario() {
+  currentScenario++;
+  if (currentScenario < scenarios.length) {
+    loadScenario();
+  } else {
+    document.getElementById("sc-progress").style.width = "100%";
+    showScreen("screen-ocv");
+    initOCV();
+  }
+}
+
+// ========================
+// OCV
+// ========================
+function initOCV() {
+  ocvSelections = { objective: null, constraint: null, variable: null };
+  ocvChecked = false;
+  document.getElementById("ocv-result").style.display = "none";
+  document.getElementById("ocv-check-btn").disabled = true;
+  document.getElementById("ocv-score-display").textContent = 0;
+
+  renderOCVRow("ocv-obj", ocvData.objective.options, "objective");
+  renderOCVRow("ocv-con", ocvData.constraint.options, "constraint");
+  renderOCVRow("ocv-var", ocvData.variable.options, "variable");
+}
+
+function renderOCVRow(containerId, options, key) {
+  var container = document.getElementById(containerId);
+  container.innerHTML = "";
+  var shuffled = options.slice().sort(function(){ return Math.random()-0.5; });
+  shuffled.forEach(function(opt) {
+    var chip = document.createElement("div");
+    chip.className = "ocv-chip";
+    chip.textContent = opt.text;
+    chip.dataset.correct = opt.correct;
+    chip.dataset.key = key;
+    chip.addEventListener("click", function() {
+      if (ocvChecked) return;
+      container.querySelectorAll(".ocv-chip").forEach(function(c){ c.classList.remove("selected"); });
+      chip.classList.add("selected");
+      ocvSelections[key] = opt.correct;
+      checkOCVReady();
+    });
+    container.appendChild(chip);
+  });
+}
+
+function checkOCVReady() {
+  var allSelected = (ocvSelections.objective !== null && ocvSelections.constraint !== null && ocvSelections.variable !== null);
+  document.getElementById("ocv-check-btn").disabled = !allSelected;
+}
+
+function checkOCV() {
+  if (ocvChecked) return;
+  ocvChecked = true;
+  document.getElementById("ocv-check-btn").disabled = true;
+
+  var allCorrect = (ocvSelections.objective === true && ocvSelections.constraint === true && ocvSelections.variable === true);
+  var numCorrect = 0;
+  if (ocvSelections.objective === true) numCorrect++;
+  if (ocvSelections.constraint === true) numCorrect++;
+  if (ocvSelections.variable === true) numCorrect++;
+
+  ocvScore = numCorrect * 3;
+  document.getElementById("ocv-score-display").textContent = ocvScore;
+
+  // Highlight chips
+  ["ocv-obj","ocv-con","ocv-var"].forEach(function(id) {
+    var chips = document.getElementById(id).querySelectorAll(".ocv-chip");
+    chips.forEach(function(c) {
+      c.classList.add("locked");
+      if (c.classList.contains("selected")) {
+        if (c.dataset.correct === "true") {
+          c.style.background = "#d4f0de";
+          c.style.borderColor = "#1a7a3a";
+          c.style.color = "#1a4d28";
+        } else {
+          c.style.background = "#fde8e8";
+          c.style.borderColor = "#b83030";
+          c.style.color = "#7a1a1a";
+        }
+      }
+      if (c.dataset.correct === "true" && !c.classList.contains("selected")) {
+        c.style.borderColor = "#1a7a3a";
+        c.style.background = "#eafbf0";
+      }
+    });
+  });
+
+  var resultEl = document.getElementById("ocv-result");
+  if (allCorrect) {
+    resultEl.innerHTML = "✅ <strong>Perfect OCV!</strong> You identified: the <em>Objective</em> (make a lightweight, strong bracket), the <em>Constraint</em> (budget & tools), and the <em>Variable</em> (fabrication method). Nicely done!";
+  } else {
+    resultEl.innerHTML = "📋 <strong>Good try!</strong> Here's the ideal OCV for this challenge:<br>• <em>Objective:</em> Produce a lightweight, strong bracket<br>• <em>Constraint:</em> Must fit within school budget & use available tools<br>• <em>Variable:</em> The fabrication method (additive, subtractive, or forming)";
+  }
+  resultEl.style.display = "block";
+
+  setTimeout(function(){ showResults(); }, 3200);
+}
+
+// ========================
+// RESULTS
+// ========================
+function showResults() {
+  var total = dndScore + scenarioScore + ocvScore;
+  var maxScore = (totalDndItems * 2) + (scenarios.length * 3) + 9;
+  var pct = Math.round((total / maxScore) * 100);
+
+  document.getElementById("final-score-display").textContent = total + "/" + maxScore;
+
+  var rank, subtitle;
+  if (pct >= 90) {
+    rank = "🏆 Master Fabricator";
+    subtitle = "Outstanding! You've mastered fabrication methods, scenarios, and the OCV process.";
+  } else if (pct >= 70) {
+    rank = "⚙️ Fabrication Engineer";
+    subtitle = "Great work! You have a solid understanding of the key fabrication concepts.";
+  } else if (pct >= 50) {
+    rank = "🔧 Fabrication Apprentice";
+    subtitle = "Good effort! Review the three fabrication methods and the OCV approach to strengthen your skills.";
+  } else {
+    rank = "📐 Fabrication Trainee";
+    subtitle = "Keep at it! Review the lesson content on additive, subtractive, and forming manufacturing.";
+  }
+
+  document.getElementById("rank-badge").textContent = rank;
+  document.getElementById("result-subtitle").textContent = subtitle;
+
+  var maxDnd = totalDndItems * 2;
+  var maxSc = scenarios.length * 3;
+  var breakdown = document.getElementById("breakdown-list");
+  breakdown.innerHTML = '<h3>Score Breakdown</h3>';
+
+  var rows = [
+    { label: "Round 1 – Sort Fabrication Examples", pts: dndScore, max: maxDnd },
+    { label: "Round 2 – Scenario Questions", pts: scenarioScore, max: maxSc },
+    { label: "Round 3 – OCV Challenge", pts: ocvScore, max: 9 }
+  ];
+  rows.forEach(function(r) {
+    var row = document.createElement("div");
+    row.className = "breakdown-item";
+    row.innerHTML = '<span>' + r.label + '</span><span class="pts">' + r.pts + ' / ' + r.max + '</span>';
+    breakdown.appendChild(row);
+  });
+  var totalRow = document.createElement("div");
+  totalRow.className = "breakdown-item";
+  totalRow.style.fontWeight = "700";
+  totalRow.innerHTML = '<span>Total</span><span class="pts">' + total + ' / ' + maxScore + ' (' + pct + '%)</span>';
+  breakdown.appendChild(totalRow);
+
+  showScreen("screen-results");
+}
+
+function restartActivity() {
+  dndScore = 0; scenarioScore = 0; ocvScore = 0;
+  currentScenario = 0;
+  showScreen("screen-intro");
+}
+</script>
+</body>
+</html>

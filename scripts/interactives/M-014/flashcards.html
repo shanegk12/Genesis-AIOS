@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Transmission Mechanisms — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Power Transmission Mechanisms</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Rotational Input", "definition": "The circular motion provided by a lever or an axle, like the snapping motion of a mousetrap's lever arm."}, {"term": "Linear Travel", "definition": "The forward, straight-line movement of an object, such as a mousetrap car."}, {"term": "How does rotational input relate to linear travel?", "definition": "Rotational input (like an axle turning) causes wheels to rotate, which then translates into the linear forward movement of the car."}, {"term": "Circumference", "definition": "The distance around a circle, which helps us calculate how far a wheel travels in one rotation."}, {"term": "Formula for Wheel Circumference", "definition": "C = 2πr, where C is circumference, π (Pi) is approximately 3.14, and r is the radius of the wheel."}, {"term": "Arc Length", "definition": "The distance traveled along the curved path of a circle, used to calculate how much a lever's movement translates to axle rotation."}, {"term": "How does lever movement affect axle rotation?", "definition": "The distance the lever moves (its arc length) directly determines how much the axle rotates, which then affects the car's linear travel."}, {"term": "What is the purpose of understanding power transmission mechanics for a mousetrap car?", "definition": "It helps us understand how motion is transferred from the mousetrap's spring to the car's wheels, which is essential for building an efficient car."}, {"term": "What does 'r' represent in the circumference formula?", "definition": "'r' represents the radius of the wheel, which is the distance from the center of the wheel to its outer edge."}, {"term": "What does 'π' (Pi) represent in the circumference formula?", "definition": "Pi (approximately 3.14) is a mathematical constant used to calculate the circumference or area of a circle."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

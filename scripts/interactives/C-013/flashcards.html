@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design: Historical Case Studies — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Design: Historical Case Studies</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Innovation", "definition": "Improving an existing product to make it more valuable and useful."}, {"term": "Success Pattern", "definition": "A proven method or idea found in history that can help us design better things today."}, {"term": "Iteration", "definition": "A cycle of designing, testing, and improving something again and again to make it better."}, {"term": "Stress Concentration", "definition": "A spot in an object where the pressure or force is much higher than in the areas around it."}, {"term": "Safety Feature", "definition": "A part of a design made to protect the person using it or the system itself from harm."}, {"term": "Modular System", "definition": "A design where a system is broken into smaller, independent parts that can be used in different ways."}, {"term": "Roman Aqueducts", "definition": "An ancient Roman engineering success that used gravity and precise slopes to move water over long distances."}, {"term": "Gradient (Slope)", "definition": "The precise angle or steepness of the aqueduct channels, which was crucial for water flow."}, {"term": "Why study historical designs?", "definition": "To learn from past successes and failures, find patterns to copy, and avoid repeating mistakes, just as God teaches us to remember past events."}, {"term": "Creationeers", "definition": "A term for engineers at Genesis K-12 Academy, emphasizing looking to the past and future in design."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

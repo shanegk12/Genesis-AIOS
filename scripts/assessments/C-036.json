@@ -57,6 +57,90 @@
       },
       "answer": "C",
       "explanation": "Tolerance specifies the acceptable range of variation for a part's dimensions, ensuring that all fabricated parts can be assembled and function as intended."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the key difference between the Fabrication phase and the Assembly phase in Creationeering?",
+      "options": {
+        "A": "Fabrication creates individual parts, while Assembly joins them together.",
+        "B": "Fabrication involves designing, while Assembly involves testing.",
+        "C": "Fabrication uses raw materials, while Assembly uses finished products.",
+        "D": "Fabrication is done by machines, while Assembly is done by hand."
+      },
+      "answer": "A",
+      "explanation": "Fabrication focuses on making individual components, while Assembly combines those components to form a complete product."
+    },
+    {
+      "type": "comprehension",
+      "question": "Which of these actions is an example of Subtractive Manufacturing?",
+      "options": {
+        "A": "Melting plastic pellets and pushing them into a mold.",
+        "B": "Printing a 3D model layer by layer from a digital design.",
+        "C": "Carving a wooden statue from a solid block of wood.",
+        "D": "Bending a metal sheet into a specific angle."
+      },
+      "answer": "C",
+      "explanation": "Subtractive manufacturing involves removing material from a larger piece to achieve the desired shape."
+    },
+    {
+      "type": "comprehension",
+      "question": "If you are shaping a material by bending, molding, or stretching it without removing or adding much material, which fabrication method are you using?",
+      "options": {
+        "A": "Additive Manufacturing",
+        "B": "Subtractive Manufacturing",
+        "C": "Forming Manufacturing",
+        "D": "Assembly Manufacturing"
+      },
+      "answer": "C",
+      "explanation": "Forming manufacturing shapes materials by applying force, such as bending or molding, without significant material removal or addition."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer observes that a metal beam fabricated for a model bridge is unexpectedly weak and breaks easily. Using Multiscale Modeling, what might they investigate to understand *why* it broke?",
+      "options": {
+        "A": "The color of the paint used on the beam.",
+        "B": "The overall length and width of the beam.",
+        "C": "The atomic structure and bonding within the metal.",
+        "D": "The number of other beams used in the bridge."
+      },
+      "answer": "C",
+      "explanation": "Multiscale Modeling connects macro-level observations, like weakness, to atomic-level causes, such as the material's internal structure."
+    },
+    {
+      "type": "application",
+      "question": "You are using the OCV method to decide how to fabricate a new protective casing for a small electronic device. If your budget for materials is limited to $10, what part of the OCV method does this $10 represent?",
+      "options": {
+        "A": "An Objective",
+        "B": "A Variable",
+        "C": "A Constraint",
+        "D": "An Optimization"
+      },
+      "answer": "C",
+      "explanation": "A constraint is a limitation or restriction that must be considered in the design or fabrication process, such as a budget limit."
+    },
+    {
+      "type": "application",
+      "question": "How does practicing good 'Stewardship' relate to the Fabrication phase in Creationeering?",
+      "options": {
+        "A": "It means using the most expensive materials to ensure quality.",
+        "B": "It involves carefully managing resources and minimizing waste during manufacturing.",
+        "C": "It requires fabricating parts as quickly as possible, regardless of cost.",
+        "D": "It focuses solely on making the product look visually appealing."
+      },
+      "answer": "B",
+      "explanation": "Stewardship in fabrication means responsibly managing resources, minimizing waste, and considering the environmental impact of the manufacturing process."
+    },
+    {
+      "type": "synthesis",
+      "question": "A Creationeer needs to fabricate 100 identical, strong, lightweight plastic gears quickly and at a low cost. Considering different manufacturing methods and the OCV principles, which approach best represents 'Optimization' for this task?",
+      "options": {
+        "A": "Hand-carving each gear from a block of plastic.",
+        "B": "Using a 3D printer to print each gear individually.",
+        "C": "Designing a mold and using injection molding to produce the gears.",
+        "D": "Fabricating gears from heavy metal to ensure maximum strength."
+      },
+      "answer": "C",
+      "explanation": "Optimization involves finding the best solution by balancing objectives like speed, cost, and material properties, which injection molding achieves for this scenario."
     }
   ]
 }

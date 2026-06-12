@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabrication Methods & Integrity – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px 10px;
+  }
+  header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: .5px; }
+  header p  { font-size: .78rem; color: #C9A84C; margin-top: 3px; }
+
+  #app {
+    width: 100%;
+    max-width: 720px;
+    padding: 18px 14px 30px;
+    flex: 1;
+  }
+
+  /* ---------- SCREEN SYSTEM ---------- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ---------- INTRO ---------- */
+  #intro-screen {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  #intro-screen h2 { font-size: 1.3rem; color: #1B3A5C; margin-bottom: 10px; }
+  #intro-screen p  { font-size: .92rem; line-height: 1.6; color: #333; margin-bottom: 18px; }
+  .badge-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+  .badge {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-align: center;
+    min-width: 100px;
+  }
+  .badge span { display: block; font-size: .68rem; color: #fff; font-weight: 400; margin-top: 2px; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-size: .95rem;
+    font-weight: 700;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+  }
+  .btn:hover  { background: #b8932f; }
+  .btn:active { transform: scale(.97); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+    padding: 10px 24px;
+  }
+  .btn-outline:hover { background: #1B3A5C; color: #fff; }
+  .btn-sm { font-size: .82rem; padding: 8px 18px; }
+
+  /* ---------- PROGRESS BAR ---------- */
+  #progress-bar-wrap {
+    width: 100%;
+    background: #dde3ec;
+    border-radius: 6px;
+    height: 8px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    display: none;
+  }
+  #progress-bar {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 6px;
+    transition: width .4s;
+    width: 0%;
+  }
+  #progress-label {
+    font-size: .75rem;
+    color: #555;
+    text-align: right;
+    margin-bottom: 4px;
+    display: none;
+  }
+
+  /* ---------- QUESTION CARD ---------- */
+  #question-screen {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  }
+  .q-phase {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .q-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  /* multiple choice */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0d8e4;
+    border-radius: 8px;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: .9rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    width: 100%;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fffbf0; }
+  .choice-btn.correct  { border-color: #2e8b57; background: #e8f7ee; color: #1a5c34; }
+  .choice-btn.wrong    { border-color: #c0392b; background: #fdecea; color: #7a1f17; }
+  .choice-btn:disabled { cursor: default; }
+
+  /* drag-and-drop matching */
+  .match-container { display: flex; gap: 14px; flex-wrap: wrap; }
+  .match-col { flex: 1; min-width: 140px; }
+  .match-col h4 { font-size: .8rem; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
+  .term-item {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 9px 12px;
+    border-radius: 7px;
+    font-size: .85rem;
+    margin-bottom: 8px;
+    cursor: grab;
+    user-select: none;
+    transition: opacity .2s, transform .15s;
+  }
+  .term-item:active { cursor: grabbing; opacity: .7; }
+  .term-item.placed { opacity: .4; pointer-events: none; }
+
+  .def-slot {
+    background: #f0f3f8;
+    border: 2px dashed #b0bcc9;
+    border-radius: 7px;
+    min-height: 54px;
+    padding: 8px 10px;
+    font-size: .83rem;
+    color: #444;
+    margin-bottom: 8px;
+    transition: border-color .2s, background .2s;
+    position: relative;
+  }
+  .def-slot.drag-over { border-color: #C9A84C; background: #fffbf0; }
+  .def-slot.filled-correct { border-color: #2e8b57; background: #e8f7ee; }
+  .def-slot.filled-wrong   { border-color: #c0392b; background: #fdecea; }
+  .def-slot .slot-label { font-style: italic; color: #888; font-size: .8rem; }
+  .slot-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: .8rem;
+    margin-top: 4px;
+  }
+  .remove-tag {
+    background: none;
+    border: none;
+    color: #C9A84C;
+    cursor: pointer;
+    font-size: .85rem;
+    margin-left: 6px;
+    font-weight: 700;
+  }
+
+  /* sequence / build-order */
+  .seq-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .seq-item {
+    background: #f0f3f8;
+    border: 2px solid #d0d8e4;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: .88rem;
+    color: #1B3A5C;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color .15s, background .15s;
+  }
+  .seq-item:active { cursor: grabbing; opacity: .75; }
+  .seq-item .num {
+    min-width: 26px; height: 26px;
+    background: #1B3A5C; color: #C9A84C;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .seq-item.drag-over-top    { border-top: 3px solid #C9A84C; }
+  .seq-item.drag-over-bottom { border-bottom: 3px solid #C9A84C; }
+  .seq-item.correct-seq { border-color: #2e8b57; background: #e8f7ee; }
+  .seq-item.wrong-seq   { border-color: #c0392b; background: #fdecea; }
+
+  /* slider sim */
+  .slider-sim-wrap { display: flex; flex-direction: column; gap: 16px; }
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-row label { font-size: .88rem; font-weight: 600; color: #1B3A5C; min-width: 130px; }
+  input[type=range] { flex: 1; accent-color: #C9A84C; height: 6px; cursor: pointer; }
+  .slider-val { font-size: .85rem; font-weight: 700; color: #C9A84C; min-width: 48px; text-align: right; }
+  .sim-output {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+  .sim-output .big { font-size: 1.6rem; font-weight: 700; color: #C9A84C; display: block; text-align: center; margin: 6px 0; }
+  .integrity-bar-wrap { width: 100%; height: 18px; background: #3a5a7a; border-radius: 9px; overflow: hidden; margin: 8px 0; }
+  .integrity-bar { height: 100%; border-radius: 9px; transition: width .3s, background .3s; }
+
+  /* feedback toast */
+  #feedback-box {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: .88rem;
+    font-weight: 600;
+    display: none;
+  }
+  #feedback-box.correct { background: #e8f7ee; color: #1a5c34; border: 1.5px solid #2e8b57; }
+  #feedback-box.wrong   { background: #fdecea; color: #7a1f17; border: 1.5px solid #c0392b; }
+
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 10px; }
+
+  /* ---------- RESULTS ---------- */
+  #results-screen {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  #results-screen h2 { font-size: 1.4rem; color: #1B3A5C; margin-bottom: 6px; }
+  .score-circle {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 16px auto;
+    font-size: 2rem; font-weight: 700;
+    box-shadow: 0 4px 14px rgba(27,58,92,.3);
+  }
+  .score-circle span { font-size: .72rem; color: #fff; font-weight: 400; }
+  .result-msg { font-size: .95rem; color: #333; line-height: 1.6; margin: 10px 0 18px; }
+  .summary-list { text-align: left; margin: 12px 0 20px; }
+  .summary-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: .83rem; color: #444; margin-bottom: 6px; line-height: 1.4;
+  }
+  .summary-item .icon { flex-shrink: 0; margin-top: 1px; font-size: .95rem; }
+  .faith-note {
+    background: #fffbf0;
+    border-left: 4px solid #C9A84C;
+    padding: 10px 14px;
+    font-size: .83rem;
+    color: #555;
+    border-radius: 0 6px 6px 0;
+    margin: 14px 0;
+    text-align: left;
+    font-style: italic;
+  }
+
+  /* mobile tweaks */
+  @media (max-width: 500px) {
+    .match-container { flex-direction: column; }
+    .slider-row { flex-wrap: wrap; }
+    .slider-row label { min-width: unset; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Fabrication Methods &amp; Integrity</h1>
+  <p>Creationeering · Genesis K-12 Academy</p>
+</header>
+
+<div id="app">
+  <div id="progress-label"></div>
+  <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+  <!-- ===== INTRO ===== -->
+  <div id="intro-screen" class="screen active">
+    <h2>Build It Right! 🔧</h2>
+    <p>In this activity you'll explore <strong>fabrication methods</strong> — the different ways parts are made — and why <strong>integrity</strong> (building things soundly and without defects) determines whether a design succeeds or fails.</p>
+    <div class="badge-row">
+      <div class="badge">Casting<span>Mold &amp; Solidify</span></div>
+      <div class="badge">Machining<span>Cut &amp; Shape</span></div>
+      <div class="badge">3D Printing<span>Layer by Layer</span></div>
+      <div class="badge">Integrity<span>Strength &amp; Quality</span></div>
+    </div>
+    <p style="font-size:.85rem;color:#555;margin-bottom:22px;">You'll match definitions, arrange steps, test a simulator, and answer questions. About 3–4 minutes. Ready?</p>
+    <button class="btn" onclick="startActivity()">Start Activity →</button>
+  </div>
+
+  <!-- ===== QUESTION SCREEN ===== -->
+  <div id="question-screen" class="screen">
+    <div class="q-phase" id="q-phase-label">Section 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div id="q-body"></div>
+    <div id="feedback-box"></div>
+    <div class="nav-row">
+      <div id="q-counter" style="font-size:.8rem;color:#777;"></div>
+      <button class="btn" id="next-btn" style="display:none;" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div id="results-screen" class="screen">
+    <h2>Activity Complete! 🏆</h2>
+    <div class="score-circle" id="score-circle">
+      <span id="score-num">0</span>
+      <span>/ <span id="score-total">0</span> pts</span>
+    </div>
+    <p class="result-msg" id="result-msg"></p>
+    <div class="summary-list" id="summary-list"></div>
+    <div class="faith-note">✝ "Whatever you do, work heartily, as for the Lord." — Colossians 3:23. Building with integrity honors both your design and the One who gave us the ability to create.</div>
+    <button class="btn" onclick="restartActivity()">Try Again 🔄</button>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
+
+const QUESTIONS = [
+  // ── Q1: Multiple Choice – vocab ──
+  {
+    type: "mc",
+    phase: "Vocabulary",
+    text: "Which definition BEST describes 'Fabrication' in engineering?",
+    choices: [
+      "Assembling pre-made parts into a finished product",
+      "The process of making or manufacturing components from raw materials",
+      "Testing a finished product for defects",
+      "Drawing the design plans for a new component"
+    ],
+    correct: 1,
+    explanation: "Fabrication means making or manufacturing components from raw materials — it's how parts are created before assembly."
+  },
+
+  // ── Q2: Multiple Choice – vocab ──
+  {
+    type: "mc",
+    phase: "Vocabulary",
+    text: "In engineering, 'integrity' of a fabricated part means:",
+    choices: [
+      "The part is exactly the same color as the design spec",
+      "The part is cheap to manufacture",
+      "The part is sound, reliable, and free from defects",
+      "The part was assembled by a certified engineer"
+    ],
+    correct: 2,
+    explanation: "Integrity means the part is whole, sound, reliable, and free from defects — it will do its job without failing."
+  },
+
+  // ── Q3: Drag-and-drop matching ──
+  {
+    type: "match",
+    phase: "Fabrication Methods",
+    text: "Drag each fabrication method name to its correct description.",
+    pairs: [
+      { term: "Casting",              def: "Molten material is poured into a mold, allowed to solidify, and removed." },
+      { term: "Machining",            def: "Tools remove material from a workpiece to create the desired shape and size." },
+      { term: "Additive Manufacturing", def: "Material is added layer by layer to build up a shape (also called 3D printing)." }
+    ]
+  },
+
+  // ── Q4: Multiple Choice – scenario ──
+  {
+    type: "mc",
+    phase: "Integrity Matters",
+    text: "A team designs a perfect bridge, but the steel beams were cast with tiny internal cracks (defects). What is MOST likely to happen?",
+    choices: [
+      "The bridge will last forever because the design was perfect",
+      "The cracks won't matter because they are invisible",
+      "The bridge could fail because flawed parts compromise the whole system",
+      "The assembly team can fix the cracks during construction"
+    ],
+    correct: 2,
+    explanation: "Even the best design fails if parts lack integrity. Flawed components — like cracked steel — weaken the whole system, just like a house built with cracked bricks."
+  },
+
+  // ── Q5: Sequence / Build-order ──
+  {
+    type: "sequence",
+    phase: "Casting Process",
+    text: "Arrange the steps of the CASTING fabrication method in the correct order. Drag to reorder.",
+    correctOrder: [
+      "Select raw material and heat it until molten",
+      "Pour molten material into the shaped mold",
+      "Allow the material to cool and solidify",
+      "Remove the solidified part from the mold",
+      "Inspect the part for integrity (defects, cracks, voids)"
+    ]
+  },
+
+  // ── Q6: Slider Simulation ──
+  {
+    type: "slider",
+    phase: "Integrity Simulator",
+    text: "Use the sliders to see how material quality and cooling time affect a cast part's integrity. Reach 80% or higher integrity to pass!",
+    sliders: [
+      { id: "quality", label: "Material Quality (%)", min: 10, max: 100, step: 5, default: 50 },
+      { id: "cooling", label: "Cooling Time (min)",   min: 1,  max: 60,  step: 1, default: 10 }
+    ]
+  },
+
+  // ── Q7: Multiple Choice – OCV ──
+  {
+    type: "mc",
+    phase: "OCV Method",
+    text: "A Creationeering team wants to 3D print a bracket. Their OBJECTIVE is maximum strength. Which item is a CONSTRAINT (a limit they must work within)?",
+    choices: [
+      "The layer thickness used during printing",
+      "The color of the finished bracket",
+      "The printing must finish within 4 hours",
+      "Whether to use additive manufacturing or machining"
+    ],
+    correct: 2,
+    explanation: "A constraint is a fixed limit. 'Must finish within 4 hours' is a constraint — they cannot change it. Layer thickness and method choice are variables they can adjust."
+  },
+
+  // ── Q8: Multiple Choice – multiscale / atomic ──
+  {
+    type: "mc",
+    phase: "Multiscale Thinking",
+    text: "A machined metal part looks fine on the outside but fails under stress. Using multiscale modeling thinking, what is the MOST LIKELY root cause?",
+    choices: [
+      "The part was painted the wrong color",
+      "Atomic-level defects or micro-cracks inside the material that are invisible to the eye",
+      "The machine operator was not paying attention",
+      "The part was assembled in the wrong order"
+    ],
+    correct: 1,
+    explanation: "Multiscale modeling connects what we see (macro-level failure) to what's happening at the atomic level. Invisible micro-cracks or atomic defects are a common root cause of part failure."
+  }
+];
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let currentQ = 0;
+let score = 0;
+let answered = [];
+let sliderValues = {};
+let seqItems = [];
+let matchState = {}; // slotIndex -> term placed
+let draggedTerm = null;
+let draggedSeqIndex = null;
+
+// ─────────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startActivity() {
+  currentQ = 0; score = 0; answered = [];
+  showScreen('question-screen');
+  document.getElementById('progress-bar-wrap').style.display = 'block';
+  document.getElementById('progress-label').style.display = 'block';
+  renderQuestion();
+}
+
+function restartActivity() {
+  startActivity();
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= QUESTIONS.length) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+function updateProgress() {
+  const pct = Math.round((currentQ / QUESTIONS.length) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `Question ${currentQ + 1} of ${QUESTIONS.length}`;
+  document.getElementById('q-counter').textContent = `${currentQ + 1} / ${QUESTIONS.length}`;
+}
+
+// ─────────────────────────────────────────────
+//  RENDER DISPATCHER
+// ─────────────────────────────────────────────
+function renderQuestion() {
+  updateProgress();
+  const q = QUESTIONS[currentQ];
+  document.getElementById('q-phase-label').textContent = q.phase;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('feedback-box').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+
+  const body = document.getElementById('q-body');
+  body.innerHTML = '';
+
+  if (q.type === 'mc')       renderMC(q, body);
+  if (q.type === 'match')    renderMatch(q, body);
+  if (q.type === 'sequence') renderSequence(q, body);
+  if (q.type === 'slider')   renderSlider(q, body);
+}
+
+// ─────────────────────────────────────────────
+//  MC
+// ─────────────────────────────────────────────
+function renderMC(q, body) {
+  const div = document.createElement('div');
+  div.className = 'choices';
+  q.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick = () => handleMCClick(i, q, div);
+    div.appendChild(btn);
+  });
+  body.appendChild(div);
+}
+
+function handleMCClick(chosen, q, container) {
+  const btns = container.querySelectorAll('.choice-btn');
+  btns.forEach(b => b.disabled = true);
+  const correct = chosen === q.correct;
+  btns[chosen].classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) btns[q.correct].classList.add('correct');
+
+  const pts = correct ? 10 : 0;
+  score += pts;
+  answered.push({ text: q.text, correct, pts, phase: q.phase });
+
+  showFeedback(correct, q.explanation, pts);
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+// ─────────────────────────────────────────────
+//  MATCH (drag-and-drop)
+// ─────────────────────────────────────────────
+function renderMatch(q, body) {
+  matchState = {};
+  const container = document.createElement('div');
+  container.className = 'match-container';
+
+  // LEFT: draggable terms (shuffled)
+  const leftCol = document.createElement('div');
+  leftCol.className = 'match-col';
+  leftCol.innerHTML = '<h4>Method</h4>';
+  const shuffled = [...q.pairs].sort(() => Math.random() - .5);
+
+  shuffled.forEach(pair => {
+    const item = document.createElement('div');
+    item.className = 'term-item';
+    item.textContent = pair.term;
+    item.draggable = true;
+    item.dataset.term = pair.term;
+
+    item.addEventListener('dragstart', e => {
+      draggedTerm = pair.term;
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    // touch support
+    item.addEventListener('touchstart', e => { draggedTerm = pair.term; }, {passive:true});
+
+    leftCol.appendChild(item);
+  });
+
+  // RIGHT: definition slots
+  const rightCol = document.createElement('div');
+  rightCol.className = 'match-col';
+  rightCol.innerHTML = '<h4>Description</h4>';
+
+  q.pairs.forEach((pair, idx) => {
+    const slot = document.createElement('div');
+    slot.className = 'def-slot';
+    slot.dataset.idx = idx;
+    slot.dataset.answer = pair.term;
+    slot.innerHTML = `<span class="slot-label">${pair.def}</span>`;
+
+    slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('drag-over'); });
+    slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+    slot.addEventListener('drop', e => {
+      e.preventDefault();
+      slot.classList.remove('drag-over');
+      handleMatchDrop(slot, q, body);
+    });
+    // touch tap-to-place
+    slot.addEventListener('click', () => {
+      if (draggedTerm) handleMatchDrop(slot, q, body);
+    });
+
+    rightCol.appendChild(slot);
+  });
+
+  container.appendChild(leftCol);
+  container.appendChild(rightCol);
+  body.appendChild(container);
+}
+
+function handleMatchDrop(slot, q, body) {
+  if (!draggedTerm) return;
+  // already filled?
+  if (slot.dataset.filled) return;
+
+  const term = draggedTerm;
+  draggedTerm = null;
+
+  slot.dataset.filled = term;
+  matchState[slot.dataset.idx] = term;
+
+  const tag = document.createElement('div');
+  tag.innerHTML = `<span class="slot-tag">${term}</span>`;
+  // optional remove
+  const rmBtn = document.createElement('button');
+  rmBtn.className = 'remove-tag';
+  rmBtn.textContent = '✕';
+  rmBtn.onclick = () => removeFromSlot(slot, term, q, body);
+  tag.querySelector('.slot-tag').appendChild(rmBtn);
+  slot.appendChild(tag);
+
+  // mark dragged term as placed
+  document.querySelectorAll('.term-item').forEach(ti => {
+    if (ti.dataset.term === term) ti.classList.add('placed');
+  });
+
+  // Check if all slots filled
+  if (Object.keys(matchState).length === q.pairs.length) {
+    gradeMatch(q);
+  }
+}
+
+function removeFromSlot(slot, term, q, body) {
+  delete slot.dataset.filled;
+  delete matchState[slot.dataset.idx];
+  // remove tag
+  slot.querySelectorAll('div').forEach(el => el.remove());
+  // re-enable draggable
+  document.querySelectorAll('.term-item').forEach(ti => {
+    if (ti.dataset.term === term) ti.classList.remove('placed');
+  });
+}
+
+function gradeMatch(q) {
+  let pts = 0;
+  q.pairs.forEach((pair, idx) => {
+    const placed = matchState[idx];
+    const slot = document.querySelector(`.def-slot[data-idx="${idx}"]`);
+    if (placed === pair.term) {
+      pts += 5;
+      slot.classList.add('filled-correct');
+    } else {
+      slot.classList.add('filled-wrong');
+    }
+    // disable remove buttons
+    slot.querySelectorAll('.remove-tag').forEach(b => b.style.display='none');
+  });
+  score += pts;
+  const allCorrect = pts === q.pairs.length * 5;
+  answered.push({ text: q.text, correct: allCorrect, pts, phase: q.phase });
+  showFeedback(allCorrect, allCorrect ? "Great job! All three fabrication methods matched correctly." : `You scored ${pts}/${q.pairs.length*5} pts. Review: Casting=mold, Machining=remove material, Additive=layer by layer.`, pts);
+  document.getElementById('next-btn').style.display = 'inline-block';
+  // disable drop zones
+  document.querySelectorAll('.def-slot').forEach(s => s.style.pointerEvents = 'none');
+  document.querySelectorAll('.term-item').forEach(t => { t.draggable = false; t.style.cursor='default'; });
+}
+
+// ─────────────────────────────────────────────
+//  SEQUENCE
+// ─────────────────────────────────────────────
+function renderSequence(q, body) {
+  seqItems = [...q.correctOrder].sort(() => Math.random() - .5);
+
+  const ul = document.createElement('ul');
+  ul.className = 'seq-list';
+  ul.id = 'seq-list';
+
+  seqItems.forEach((step, i) => {
+    ul.appendChild(makeSeqItem(step, i, seqItems.length));
+  });
+
+  body.appendChild(ul);
+
+  const submitBtn = document.createElement('button');
+  submitBtn.className = 'btn btn-sm';
+  submitBtn.style.marginTop = '14px';
+  submitBtn.textContent = 'Check My Order ✓';
+  submitBtn.onclick = () => gradeSequence(q, submitBtn);
+  body.appendChild(submitBtn);
+}
+
+function makeSeqItem(step, i, total) {
+  const li = document.createElement('li');
+  li.className = 'seq-item';
+  li.draggable = true;
+  li.dataset.idx = i;
+
+  const numSpan = document.createElement('span');
+  numSpan.className = 'num';
+  numSpan.textContent = i + 1;
+
+  const txt = document.createElement('span');
+  txt.textContent = step;
+
+  li.appendChild(numSpan);
+  li.appendChild(txt);
+
+  li.addEventListener('dragstart', e => {
+    draggedSeqIndex = parseInt(li.dataset.idx);
+    e.dataTransfer.effectAllowed = 'move';
+    li.style.opacity = '0.5';
+  });
+  li.addEventListener('dragend', () => { li.style.opacity = '1'; });
+  li.addEventListener('dragover', e => {
+    e.preventDefault();
+    const rect = li.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    li.classList.remove('drag-over-top','drag-over-bottom');
+    li.classList.add(e.clientY < midY ? 'drag-over-top' : 'drag-over-bottom');
+  });
+  li.addEventListener('dragleave', () => li.classList.remove('drag-over-top','drag-over-bottom'));
+  li.addEventListener('drop', e => {
+    e.preventDefault();
+    li.classList.remove('drag-over-top','drag-over-bottom');
+    const fromIdx = draggedSeqIndex;
+    const toIdx = parseInt(li.dataset.idx);
+    if (fromIdx === toIdx) return;
+    const rect = li.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    let insertBefore = e.clientY < midY;
+    reorderSeq(fromIdx, toIdx, insertBefore);
+  });
+
+  return li;
+}
+
+function reorderSeq(fromIdx, toIdx, insertBefore) {
+  const ul = document.getElementById('seq-list');
+  const items = [...ul.querySelectorAll('.seq-item')];
+  const fromEl = items.find(el => parseInt(el.dataset.idx) === fromIdx);
+  const toEl   = items.find(el => parseInt(el.dataset.idx) === toIdx);
+  if (!fromEl || !toEl) return;
+
+  if (insertBefore) {
+    ul.insertBefore(fromEl, toEl);
+  } else {
+    ul.insertBefore(fromEl, toEl.nextSibling);
+  }
+  // re-index and update numbers
+  [...ul.querySelectorAll('.seq-item')].forEach((el, i) => {
+    el.dataset.idx = i;
+    el.querySelector('.num').textContent = i + 1;
+  });
+}
+
+function gradeSequence(q, btn) {
+  const ul = document.getElementById('seq-list');
+  const items = [...ul.querySelectorAll('.seq-item')];
+  let pts = 0;
+  items.forEach((el, i) => {
+    const stepText = el.querySelector('span:not(.num)').textContent;
+    const correct = stepText === q.correctOrder[i];
+    el.classList.add(correct ? 'correct-seq' : 'wrong-seq');
+    if (correct) pts += 3;
+  });
+  btn.disabled = true;
+  ul.querySelectorAll('.seq-item').forEach(el => el.draggable = false);
+  score += pts;
+  const allCorrect = pts === q.correctOrder.length * 3;
+  answered.push({ text: q.text, correct: allCorrect, pts, phase: q.phase });
+  const maxPts = q.correctOrder.length * 3;
+  showFeedback(allCorrect,
+    allCorrect ? "Perfect order! You understand the casting process." : `You scored ${pts}/${maxPts} pts. Remember: heat → pour → cool → remove → inspect.`,
+    pts);
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+// ─────────────────────────────────────────────
+//  SLIDER SIM
+// ─────────────────────────────────────────────
+function renderSlider(q, body) {
+  sliderValues = {};
+  q.sliders.forEach(s => sliderValues[s.id] = s.default);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'slider-sim-wrap';
+
+  q.sliders.forEach(s => {
+    const row = document.createElement('div');
+    row.className = 'slider-row';
+
+    const lbl = document.createElement('label');
+    lbl.textContent = s.label;
+
+    const input = document.createElement('input');
+    input.type = 'range';
+    input.min = s.min; input.max = s.max; input.step = s.step;
+    input.value = s.default;
+    input.id = 'slider_' + s.id;
+
+    const valDisplay = document.createElement('span');
+    valDisplay.className = 'slider-val';
+    valDisplay.id = 'val_' + s.id;
+    valDisplay.textContent = formatSliderVal(s, s.default);
+
+    input.addEventListener('input', () => {
+      sliderValues[s.id] = parseInt(input.value);
+      valDisplay.textContent = formatSliderVal(s, parseInt(input.value));
+      updateSimOutput();
+    });
+
+    row.appendChild(lbl);
+    row.appendChild(input);
+    row.appendChild(valDisplay);
+    wrap.appendChild(row);
+  });
+
+  // output panel
+  const out = document.createElement('div');
+  out.className = 'sim-output';
+  out.id = 'sim-output';
+  wrap.appendChild(out);
+
+  body.appendChild(wrap);
+  updateSimOutput();
+
+  // submit
+  const checkBtn = document.createElement('button');
+  checkBtn.className = 'btn btn-sm';
+  checkBtn.style.marginTop = '14px';
+  checkBtn.textContent = 'Lock In Results ✓';
+  checkBtn.onclick = () => gradeSlider(q, checkBtn);
+  body.appendChild(checkBtn);
+}
+
+function formatSliderVal(s, v) {
+  if (s.id === 'quality') return v + '%';
+  return v + ' min';
+}
+
+function calcIntegrity() {
+  const quality = sliderValues['quality'] || 50;
+  const cooling = sliderValues['cooling'] || 10;
+  // integrity formula: quality heavily matters; cooling time has diminishing returns past 30min
+  const coolingBonus = Math.min(cooling / 30, 1) * 30; // max 30 pts from cooling
+  const qualityPart = quality * 0.70;
+  return Math.min(100, Math.round(qualityPart + coolingBonus));
+}
+
+function updateSimOutput() {
+  const integrity = calcIntegrity();
+  const out = document.getElementById('sim-output');
+  if (!out) return;
+  const color = integrity >= 80 ? '#4caf7d' : integrity >= 50 ? '#f0c040' : '#e05c5c';
+  const label = integrity >= 80 ? '✅ High Integrity – Part passes inspection!' :
+                integrity >= 50 ? '⚠️ Moderate Integrity – Part may fail under stress.' :
+                                  '❌ Low Integrity – Part will likely crack or fail.';
+  out.innerHTML = `
+    <div style="font-size:.8rem;color:#ccc;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;">Cast Part Integrity Score</div>
+    <span class="big" style="color:${color}">${integrity}%</span>
+    <div class="integrity-bar-wrap">
+      <div class="integrity-bar" style="width:${integrity}%;background:${color};"></div>
+    </div>
+    <div style="font-size:.88rem;margin-top:6px;">${label}</div>
+    <div style="font-size:.78rem;color:#aac;margin-top:8px;">Tip: Higher material quality has the biggest impact. Adequate cooling time also reduces internal defects.</div>
+  `;
+}
+
+function gradeSlider(q, btn) {
+  const integrity = calcIntegrity();
+  const passed = integrity >= 80;
+  const pts = passed ? 10 : integrity >= 50 ? 5 : 2;
+  score += pts;
+  btn.disabled = true;
+  document.querySelectorAll('input[type=range]').forEach(s => s.disabled = true);
+  answered.push({ text: q.text, correct: passed, pts, phase: q.phase });
+  showFeedback(passed,
+    passed ? `Excellent! With ${integrity}% integrity, the cast part meets quality standards.`
+           : `Your part only reached ${integrity}% integrity. Try raising material quality above 80% and cooling time to at least 25 min to exceed 80%.`,
+    pts);
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+// ─────────────────────────────────────────────
+//  FEEDBACK
+// ─────────────────────────────────────────────
+function showFeedback(correct, msg, pts) {
+  const box = document.getElementById('feedback-box');
+  box.className = 'feedback-box ' + (correct ? 'correct' : 'wrong');
+  box.style.display = 'block';
+  const ptsStr = pts !== undefined ? ` (+${pts} pts)` : '';
+  box.textContent = (correct ? '✅ ' : '❌ ') + msg + ptsStr;
+}
+
+// ─────────────────────────────────────────────
+//  RESULTS
+// ─────────────────────────────────────────────
+function showResults() {
+  // max possible
+  let maxScore = 0;
+  QUESTIONS.forEach(q => {
+    if (q.type === 'mc')       maxScore += 10;
+    if (q.type === 'match')    maxScore += q.pairs.length * 5;
+    if (q.type === 'sequence') maxScore += q.correctOrder.length * 3;
+    if (q.type === 'slider')   maxScore += 10;
+  });
+
+  document.getElementById('score-num').textContent = score;
+  document.getElementById('score-total').textContent = maxScore;
+
+  const pct = Math.round((score / maxScore) * 100);
+  const msg = pct >= 85 ? "Outstanding! You have a strong grasp of fabrication methods and why integrity matters in every engineered part." :
+              pct >= 65 ? "Good work! Review the methods you missed and remember: defects at the part level can compromise the whole system." :
+                          "Keep practicing! Focus on the three fabrication methods and how integrity connects to real-world engineering success.";
+  document.getElementById('result-msg').textContent = msg;
+
+  const summaryList = document.getElementById('summary-list');
+  summaryList.innerHTML = '';
+  answered.forEach(a => {
+    const div = document.createElement('div');
+    div.className = 'summary-item';
+    div.innerHTML = `<span class="icon">${a.correct ? '✅' : '❌'}</span>
+      <span><strong>${a.phase}:</strong> ${a.pts} pts earned</span>`;
+    summaryList.appendChild(div);
+  });
+
+  document.getElementById('progress-bar-wrap').style.display = 'none';
+  document.getElementById('progress-label').style.display = 'none';
+  showScreen('results-screen');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-024",
+  "topic": "Statistical Analysis",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of \"statistics\" in engineering, as defined in the lesson?",
+      "options": {
+        "A": "The art of guessing outcomes based on intuition.",
+        "B": "The science of collecting, analyzing, and interpreting numerical data to make informed decisions.",
+        "C": "The process of building prototypes and testing them once.",
+        "D": "The study of historical events and their impact on technology."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines statistics as the science of collecting, analyzing, and interpreting numerical data for informed decisions."
+    },
+    {
+      "type": "recall",
+      "question": "How is the \"Mean\" (or average) of a set of engineering trial results calculated?",
+      "options": {
+        "A": "By finding the middle value in an ordered list of results.",
+        "B": "By subtracting the smallest result from the largest result.",
+        "C": "By adding all the results together and then dividing by the total number of trials.",
+        "D": "By multiplying all the results and then dividing by the number of trials."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that the Mean is calculated by summing all values and dividing by the count of values."
+    },
+    {
+      "type": "recall",
+      "question": "In statistical analysis, what does \"Variation\" refer to?",
+      "options": {
+        "A": "The highest value recorded in a series of trials.",
+        "B": "The central value that represents expected performance.",
+        "C": "The difference or \"spread\" between individual data points in a series of trials.",
+        "D": "The total number of trials conducted for an experiment."
+      },
+      "answer": "C",
+      "explanation": "The key vocabulary defines Variation as the difference or \"spread\" between individual data points in a series of trials."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson, why is it not enough for an engineer to just solve a problem once, requiring the use of statistics?",
+      "options": {
+        "A": "Because engineers enjoy doing extra math problems.",
+        "B": "To prove that their solutions are reliable, consistent, and safe over time.",
+        "C": "To make the design process more complicated for students.",
+        "D": "Because they need to impress their supervisors with complex data."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that engineers must prove solutions are reliable, consistent, and safe, which requires statistical tools."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is conducting multiple trials important for an engineer, even if the Mean performance seems good?",
+      "options": {
+        "A": "More trials always guarantee a higher Mean value.",
+        "B": "Multiple trials help identify Variation and determine how reliable a system truly is.",
+        "C": "It's a requirement to use up all available materials.",
+        "D": "To make the experiment last longer."
+      },
+      "answer": "B",
+      "explanation": "The lesson emphasizes that multiple trials help analyze Variation, which indicates how much a system can be trusted and its reliability."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson describes our world as \"stochastic,\" not \"deterministic.\" What does this mean for engineering trials?",
+      "options": {
+        "A": "Every trial will always produce the exact same result.",
+        "B": "There will always be some uncertainty and variation in trial results.",
+        "C": "Engineers can perfectly predict every outcome without testing.",
+        "D": "All engineering problems have only one possible solution."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that a \"stochastic\" world means there is always some uncertainty, leading to variation in results, unlike a \"deterministic\" world where every trial would be the same."
+    },
+    {
+      "type": "application",
+      "question": "A team tests a new drone's flight time (in minutes) and gets the following results: 12, 10, 14, 12, 12. What is the Mean (average) flight time for this drone?",
+      "options": {
+        "A": "10 minutes",
+        "B": "12 minutes",
+        "C": "14 minutes",
+        "D": "60 minutes"
+      },
+      "answer": "B",
+      "explanation": "The Mean is calculated by summing the values (12+10+14+12+12 = 60) and dividing by the number of trials (5), resulting in 12 minutes."
+    },
+    {
+      "type": "application",
+      "question": "An engineer tests two different designs for a robotic arm's lifting capacity.\n  * Design X results (kg): 5.0, 5.1, 4.9, 5.0, 5.0\n  * Design Y results (kg): 3.0, 7.0, 5.0, 6.0, 4.0\nWhich design demonstrates higher reliability based on the concept of Variation?",
+      "options": {
+        "A": "Design X, because its results are very close to each other.",
+        "B": "Design Y, because it has a wider range of results.",
+        "C": "Both designs have the same reliability because their Mean is 5.0 kg.",
+        "D": "Neither design is reliable as they both have some variation."
+      },
+      "answer": "A",
+      "explanation": "Design X shows low variation, meaning its results are consistent and predictable, which indicates higher reliability."
+    },
+    {
+      "type": "application",
+      "question": "A student tests a paper airplane and gets these distances (in meters): 8, 3, 10. The Mean is 7 meters. Based on the lesson's discussion of Variation, what should the student conclude about this design?",
+      "options": {
+        "A": "The design is perfect because it flew 10 meters at one point.",
+        "B": "The design is highly reliable because the average is 7 meters.",
+        "C": "The design has high variation, making its performance unpredictable and requiring further iteration.",
+        "D": "The design is a \"7-meter plane\" and no more testing is needed."
+      },
+      "answer": "C",
+      "explanation": "The wide spread in results (8, 3, 10) indicates high variation, meaning the plane's performance is unpredictable and needs further design adjustments."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that statistics help us understand the consistent rules God placed in the universe. How does an engineer's pursuit of low variation and high reliability in a design reflect this biblical principle?",
+      "options": {
+        "A": "It shows that human designs can be more perfect than God's creation.",
+        "B": "It mirrors God's own ordered and faithful design, where systems perform consistently as intended.",
+        "C": "It proves that randomness is more important than consistency.",
+        "D": "It suggests that engineers should avoid using natural materials."
+      },
+      "answer": "B",
+      "explanation": "The pursuit of low variation and high reliability in engineering designs reflects God's ordered and faithful design, where consistency and predictability are inherent."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does \"Multiscale Modeling,\" as described in the lesson, help engineers understand a complex system like a prosthetic limb?",
+      "options": {
+        "A": "It focuses only on the overall appearance of the limb.",
+        "B": "It allows engineers to analyze how tiny details (micro-scale) affect the overall performance (macro-scale).",
+        "C": "It only considers the cost of materials for the limb.",
+        "D": "It helps engineers design limbs that are entirely random in their function."
+      },
+      "answer": "B",
+      "explanation": "Multiscale modeling allows engineers to analyze how variations at the micro-scale (e.g., atomic structure) can impact the macro-scale performance (e.g., total force during a step)."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson mentions that engineers use statistics to ensure \"good stewardship of materials and time.\" How does validating design decisions with objective data contribute to this biblical principle?",
+      "options": {
+        "A": "It encourages engineers to use as many materials as possible for testing.",
+        "B": "It ensures that resources are used efficiently to create reliable solutions, avoiding waste from failed designs.",
+        "C": "It means engineers should only work on projects that are quick to finish.",
+        "D": "It suggests that engineers should ignore data and rely on intuition to save time."
+      },
+      "answer": "B",
+      "explanation": "Using objective data to validate designs ensures that materials and time are not wasted on unreliable solutions, demonstrating good stewardship of resources."
+    }
+  ]
+}

@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data-Defined Performance | Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  header {
+    background: #1B3A5C;
+    width: 100%;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  header .logo-circle {
+    width: 42px; height: 42px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: #1B3A5C; font-size: 16px; flex-shrink: 0;
+  }
+  header h1 { color: #ffffff; font-size: 1.15rem; font-weight: 700; }
+  header p { color: #C9A84C; font-size: 0.78rem; margin-top: 2px; }
+
+  .screen { display: none; width: 100%; max-width: 780px; margin: 0 auto; padding: 20px 16px 40px; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px 28px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    text-align: center;
+    margin-top: 16px;
+  }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { color: #444; font-size: 0.97rem; line-height: 1.6; margin-bottom: 14px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 18px 0; }
+  .badge {
+    background: #f0f4f8;
+    border: 2px solid #C9A84C;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    font-weight: 600;
+  }
+
+  /* BUTTONS */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.1s;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .btn:hover { background: #b8932e; transform: scale(1.03); }
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #ffffff;
+  }
+  .btn-secondary:hover { background: #142d48; }
+  .btn-sm {
+    padding: 9px 20px;
+    font-size: 0.88rem;
+    border-radius: 8px;
+    margin-top: 0;
+  }
+
+  /* PROGRESS BAR */
+  .progress-container { margin: 10px 0 18px; }
+  .progress-label { font-size: 0.8rem; color: #666; margin-bottom: 6px; font-weight: 600; }
+  .progress-bar-outer {
+    background: #dce4ef;
+    border-radius: 20px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .progress-bar-inner {
+    background: linear-gradient(90deg, #C9A84C, #e6be6b);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+  }
+
+  /* SIMULATION */
+  .sim-panel {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 20px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    margin-bottom: 16px;
+  }
+  .sim-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 4px;
+  }
+  .sim-subtitle {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 18px;
+  }
+  .scenario-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* SLIDERS */
+  .slider-section { margin-bottom: 18px; }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .slider-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    min-width: 150px;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    max-width: 280px;
+    height: 8px;
+    border-radius: 4px;
+    background: #dce4ef;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #C9A84C;
+    border: 3px solid #1B3A5C;
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #C9A84C;
+    border: 3px solid #1B3A5C;
+    cursor: pointer;
+  }
+  .slider-value {
+    font-weight: 700;
+    color: #C9A84C;
+    font-size: 1rem;
+    min-width: 60px;
+    background: #1B3A5C;
+    border-radius: 8px;
+    padding: 3px 10px;
+    text-align: center;
+  }
+
+  /* METRICS DISPLAY */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .metric-card {
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .metric-card.highlight { border-color: #C9A84C; }
+  .metric-card .metric-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .metric-card .metric-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1B3A5C;
+  }
+  .metric-card .metric-unit {
+    font-size: 0.72rem;
+    color: #888;
+    margin-top: 2px;
+  }
+  .metric-good { color: #2a7a2a !important; }
+  .metric-bad { color: #c0392b !important; }
+  .metric-mid { color: #c9a84c !important; }
+
+  /* GAUGE / BAR CHART */
+  .gauge-row {
+    margin: 10px 0;
+  }
+  .gauge-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .gauge-bar-outer {
+    background: #dce4ef;
+    border-radius: 8px;
+    height: 22px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .gauge-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease, background 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* QUESTION ZONE */
+  .question-box {
+    background: #eef2f8;
+    border-left: 5px solid #C9A84C;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1B3A5C;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .option-btn {
+    background: #fff;
+    border: 2.5px solid #dce4ef;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .option-btn:hover { border-color: #C9A84C; background: #fdf8ee; }
+  .option-btn.correct { border-color: #2a7a2a; background: #e8f7e8; color: #1a5c1a; }
+  .option-btn.wrong { border-color: #c0392b; background: #fdecea; color: #7a1a1a; }
+  .option-btn:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback-box {
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback-box.correct { background: #e8f7e8; color: #1a5c1a; border: 2px solid #2a7a2a; }
+  .feedback-box.wrong { background: #fdecea; color: #7a1a1a; border: 2px solid #c0392b; }
+  .feedback-box.show { display: block; }
+
+  /* SUMMARY */
+  .summary-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.12);
+    text-align: center;
+    margin-top: 16px;
+  }
+  .score-ring {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#C9A84C 0deg, #C9A84C 0deg, #dce4ef 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    position: relative;
+    transition: background 0.8s;
+  }
+  .score-ring-inner {
+    width: 86px; height: 86px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .score-number { font-size: 2rem; font-weight: 900; color: #1B3A5C; }
+  .score-total { font-size: 0.75rem; color: #888; }
+  .grade-label { font-size: 1.3rem; font-weight: 800; margin: 8px 0 4px; color: #1B3A5C; }
+  .grade-msg { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 18px; }
+  .summary-list {
+    text-align: left;
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+  }
+  .summary-list h3 { font-size: 0.88rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #dce4ef;
+    font-size: 0.88rem;
+  }
+  .summary-item:last-child { border-bottom: none; }
+  .summary-item span { color: #444; }
+  .summary-item .result-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .result-dot.c { background: #2a7a2a; }
+  .result-dot.w { background: #c0392b; }
+
+  /* STEP INDICATOR */
+  .step-indicator {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 12px 0 18px;
+    flex-wrap: wrap;
+  }
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #dce4ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #888;
+    transition: background 0.3s, color 0.3s;
+  }
+  .step-dot.done { background: #C9A84C; color: #1B3A5C; }
+  .step-dot.active { background: #1B3A5C; color: #ffffff; }
+
+  /* NAVIGATION */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .nav-row .step-count { font-size: 0.85rem; color: #888; font-weight: 600; }
+
+  /* FACTORY VISUAL */
+  .factory-container {
+    position: relative;
+    background: #f0f4f8;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  .factory-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .factory-node {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    min-width: 80px;
+    position: relative;
+  }
+  .factory-arrow {
+    font-size: 1.2rem;
+    color: #C9A84C;
+    font-weight: 900;
+  }
+  .throughput-items {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 36px;
+    align-items: center;
+  }
+  .item-box {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: #C9A84C;
+    border: 2px solid #b8932e;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #1B3A5C;
+  }
+  .item-box.rejected {
+    background: #fdecea;
+    border-color: #c0392b;
+    color: #c0392b;
+    text-decoration: line-through;
+  }
+
+  /* KPI MATCHING */
+  .kpi-match-area {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .kpi-col { flex: 1; min-width: 180px; }
+  .kpi-col h3 { font-size: 0.85rem; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 10px; }
+  .draggable-kpi {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.15s;
+    touch-action: none;
+  }
+  .draggable-kpi:active { cursor: grabbing; transform: scale(1.04); }
+  .draggable-kpi.dragging { opacity: 0.45; }
+  .drop-zone {
+    background: #f7f9fc;
+    border: 2.5px dashed #C9A84C;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.82rem;
+    color: #aaa;
+    margin-bottom: 8px;
+    min-height: 42px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+  }
+  .drop-zone.over { background: #fdf8ee; }
+  .drop-zone.filled { border-color: #2a7a2a; color: #1B3A5C; background: #e8f7e8; font-weight: 600; font-size: 0.85rem; }
+  .drop-zone.wrong-fill { border-color: #c0392b; background: #fdecea; }
+
+  @media (max-width: 540px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .slider-label { min-width: 120px; }
+    input[type=range] { max-width: 200px; }
+    .kpi-match-area { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-circle">GK</div>
+  <div>
+    <h1>Data-Defined Performance</h1>
+    <p>Creationeering · Genesis K-12 Academy</p>
+  </div>
+</header>
+
+<!-- SCREEN 1: INTRO -->
+<div class="screen active" id="screen-intro">
+  <div style="max-width:780px;margin:0 auto;padding:20px 16px;">
+    <div class="intro-card">
+      <div style="font-size:2.8rem;margin-bottom:10px;">📊</div>
+      <h2>Data-Defined Performance</h2>
+      <p>Data is like a <strong>flashlight</strong> — it shows you exactly how well your design is working. In this activity, you'll use real engineering data to analyze a factory, tune its performance with sliders, and answer questions about key performance concepts.</p>
+      <div class="badge-row">
+        <div class="badge">📈 KPIs</div>
+        <div class="badge">⚙️ Efficiency</div>
+        <div class="badge">🔄 Throughput</div>
+        <div class="badge">🎯 Optimization</div>
+      </div>
+      <p style="font-size:0.88rem;color:#666;">3 scenarios · 5–7 minutes · Earn a performance score</p>
+      <button class="btn" onclick="startActivity()">Start Activity →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: MAIN ACTIVITY -->
+<div class="screen" id="screen-activity">
+  <div style="max-width:780px;margin:0 auto;padding:20px 16px;">
+    <div class="progress-container">
+      <div class="progress-label" id="progress-label">Scenario 1 of 3</div>
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-bar" style="width:0%"></div></div>
+    </div>
+    <div class="step-indicator" id="step-indicator"></div>
+    <div id="scenario-container"></div>
+  </div>
+</div>
+
+<!-- SCREEN 3: SUMMARY -->
+<div class="screen" id="screen-summary">
+  <div style="max-width:780px;margin:0 auto;padding:20px 16px;">
+    <div class="summary-card">
+      <div class="score-ring" id="score-ring">
+        <div class="score-ring-inner">
+          <div class="score-number" id="final-score">0</div>
+          <div class="score-total" id="final-total">/ 0 pts</div>
+        </div>
+      </div>
+      <div class="grade-label" id="grade-label"></div>
+      <div class="grade-msg" id="grade-msg"></div>
+      <div class="summary-list">
+        <h3>Your Answers</h3>
+        <div id="answer-list"></div>
+      </div>
+      <div style="background:#eef2f8;border-radius:10px;padding:14px 16px;margin-bottom:18px;text-align:left;">
+        <div style="font-size:0.78rem;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:6px;">Remember</div>
+        <div style="font-size:0.9rem;color:#1B3A5C;line-height:1.6;">"Whatever you do, do it all for the glory of God." — Optimizing our designs reflects the care and order built into creation.</div>
+      </div>
+      <button class="btn" onclick="restartActivity()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// DATA & SCENARIO DEFINITIONS
+// =====================================================
+
+const SCENARIOS = [
+  {
+    id: 'slider-factory',
+    type: 'slider',
+    tag: 'Scenario 1: Factory Optimization',
+    title: 'Optimize the Assembly Line',
+    subtitle: 'Adjust the three KPI sliders and find the highest Efficiency score possible before submitting.',
+    sliders: [
+      { key: 'speed', label: 'Machine Speed (units/hr)', min: 10, max: 100, value: 50, unit: 'u/hr' },
+      { key: 'quality', label: 'Quality Check Rate (%)', min: 10, max: 100, value: 50, unit: '%' },
+      { key: 'energy', label: 'Energy Input (kW)', min: 20, max: 100, value: 60, unit: 'kW' }
+    ],
+    compute: function(vals) {
+      // Throughput: speed * (quality/100), penalized by high energy
+      let throughput = Math.round(vals.speed * (vals.quality / 100));
+      // Efficiency: useful output / total input (energy)
+      let efficiency = Math.round((throughput / vals.energy) * 100);
+      // Waste: items rejected
+      let waste = Math.round(vals.speed * (1 - vals.quality / 100));
+      // Score for this scenario based on efficiency
+      let pts = 0;
+      if (efficiency >= 80) pts = 10;
+      else if (efficiency >= 60) pts = 7;
+      else if (efficiency >= 40) pts = 4;
+      else pts = 1;
+      return { throughput, efficiency, waste, pts };
+    },
+    question: 'Which setting change would MOST directly increase the efficiency ratio?',
+    options: [
+      { text: 'Increase energy input without raising throughput', correct: false },
+      { text: 'Increase throughput while keeping energy input the same', correct: true },
+      { text: 'Lower quality check rate to zero', correct: false },
+      { text: 'Decrease machine speed to minimum', correct: false }
+    ],
+    feedbackCorrect: '✅ Efficiency = useful output ÷ energy input. Getting MORE output for the SAME energy is the key to better efficiency!',
+    feedbackWrong: '❌ Efficiency = useful output ÷ energy input. Adding more energy without increasing output makes efficiency worse, not better.'
+  },
+  {
+    id: 'kpi-match',
+    type: 'quiz',
+    tag: 'Scenario 2: KPI Knowledge',
+    questions: [
+      {
+        q: 'A school tracks the number of students who pass their science exam each month. This measurement is best described as a…',
+        options: [
+          { text: 'KPI (Key Performance Indicator)', correct: true },
+          { text: 'Random data point with no purpose', correct: false },
+          { text: 'Constraint only', correct: false },
+          { text: 'Multiscale Model', correct: false }
+        ],
+        feedbackCorrect: '✅ A KPI is a measurable value that shows how effectively a system is achieving its objectives. Pass rates perfectly fit that definition!',
+        feedbackWrong: '❌ A KPI is a measurable value that shows how effectively a system is achieving its objectives — like a monthly pass rate.'
+      },
+      {
+        q: 'A solar panel produces 400 watts of electricity but requires 500 watts of sunlight energy to operate. What is its efficiency?',
+        options: [
+          { text: '80%', correct: true },
+          { text: '125%', correct: false },
+          { text: '500%', correct: false },
+          { text: '40%', correct: false }
+        ],
+        feedbackCorrect: '✅ Efficiency = useful output ÷ total input = 400 ÷ 500 = 0.80 = 80%. Great calculation!',
+        feedbackWrong: '❌ Efficiency = useful output ÷ total input × 100. So 400 ÷ 500 × 100 = 80%.'
+      },
+      {
+        q: 'An engineer adjusts a bridge design to use the least amount of steel while still holding 10 tons safely. This process is called…',
+        options: [
+          { text: 'Throughput', correct: false },
+          { text: 'Data collection', correct: false },
+          { text: 'Optimization', correct: true },
+          { text: 'Rejection', correct: false }
+        ],
+        feedbackCorrect: '✅ Optimization is finding the best possible solution within a set of constraints — like minimizing material while meeting safety requirements.',
+        feedbackWrong: '❌ This is Optimization — finding the best possible solution within constraints (like a weight limit).'
+      },
+      {
+        q: 'A factory packages 240 boxes of cereal in 4 hours. What is its throughput rate?',
+        options: [
+          { text: '60 boxes per hour', correct: true },
+          { text: '240 boxes per hour', correct: false },
+          { text: '4 boxes per hour', correct: false },
+          { text: '960 boxes per hour', correct: false }
+        ],
+        feedbackCorrect: '✅ Throughput = total output ÷ time = 240 ÷ 4 = 60 boxes per hour. You nailed it!',
+        feedbackWrong: '❌ Throughput = total output ÷ time. 240 boxes ÷ 4 hours = 60 boxes per hour.'
+      }
+    ]
+  },
+  {
+    id: 'decision',
+    type: 'decision',
+    tag: 'Scenario 3: Engineering Decision',
+    title: 'The Performance Puzzle',
+    subtitle: 'Read each situation and make the best data-driven decision.',
+    questions: [
+      {
+        q: 'Your robot scored 42 out of 100 on its first run. Your data shows it wastes most energy turning corners. What is your FIRST step toward improvement?',
+        options: [
+          { text: '🔍 Analyze the corner-turning data to find exactly where energy is lost', correct: true },
+          { text: '🎲 Guess and change multiple things at once to see what happens', correct: false },
+          { text: '🗑️ Scrap the robot and start over completely', correct: false },
+          { text: '📺 Ignore the data — trust your gut feeling', correct: false }
+        ],
+        feedbackCorrect: '✅ Smart! Data-Defined Performance means analyzing your data first, then making targeted improvements — not guessing in the dark.',
+        feedbackWrong: '❌ The power of data-defined performance is in analyzing specific measurements to identify the exact problem before changing anything.'
+      },
+      {
+        q: 'Your data shows Metric A is at 95% (excellent) but Metric B is at 12% (very poor). Where should you focus your improvement efforts?',
+        options: [
+          { text: 'Metric A — keep improving what is already working well', correct: false },
+          { text: 'Metric B — target the weakest KPI for the biggest system gain', correct: true },
+          { text: 'Neither — the system is good enough', correct: false },
+          { text: 'Both equally at the same time', correct: false }
+        ],
+        feedbackCorrect: '✅ Targeting your weakest KPI (Metric B at 12%) gives you the most room for improvement and the biggest performance gain!',
+        feedbackWrong: '❌ When optimizing, focus on the KPI with the most room to improve. Metric B at 12% offers far more gain than Metric A which is already at 95%.'
+      }
+    ]
+  }
+];
+
+// =====================================================
+// STATE
+// =====================================================
+let currentScenario = 0;
+let currentQuestion = 0;
+let totalScore = 0;
+let maxScore = 0;
+let sliderOptimizationPts = 0;
+let answerLog = [];
+let sliderVals = {};
+let sliderResult = null;
+let questionAnswered = false;
+let sliderSubmitted = false;
+
+// =====================================================
+// INIT
+// =====================================================
+function startActivity() {
+  currentScenario = 0;
+  currentQuestion = 0;
+  totalScore = 0;
+  maxScore = 0;
+  answerLog = [];
+  sliderVals = {};
+  sliderResult = null;
+  questionAnswered = false;
+  sliderSubmitted = false;
+
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-activity').classList.add('active');
+
+  buildStepIndicator();
+  renderScenario(0);
+}
+
+function buildStepIndicator() {
+  const ind = document.getElementById('step-indicator');
+  ind.innerHTML = '';
+  const labels = ['1','2','3'];
+  labels.forEach((l, i) => {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i === 0 ? ' active' : '');
+    d.textContent = l;
+    d.id = 'stepdot-' + i;
+    ind.appendChild(d);
+  });
+}
+
+function updateStepIndicator() {
+  for (let i = 0; i < SCENARIOS.length; i++) {
+    const d = document.getElementById('stepdot-' + i);
+    if (!d) continue;
+    d.className = 'step-dot' + (i < currentScenario ? ' done' : i === currentScenario ? ' active' : '');
+  }
+}
+
+function updateProgress() {
+  // Compute total questions for progress
+  let total = 0, done = 0;
+  // Scenario 1: slider (1 question after submit)
+  total += 2; // submit + question
+  // Scenario 2: 4 questions
+  total += 4;
+  // Scenario 3: 2 questions
+  total += 2;
+
+  const sc = currentScenario;
+  if (sc === 0) {
+    done = sliderSubmitted ? 1 : 0;
+  } else if (sc === 1) {
+    done = 2 + currentQuestion;
+  } else if (sc === 2) {
+    done = 6 + currentQuestion;
+  }
+  const pct = Math.min(100, Math.round((done / total) * 100));
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent =
+    sc === 0 ? 'Scenario 1 of 3' :
+    sc === 1 ? `Scenario 2 of 3 — Question ${currentQuestion + 1} of 4` :
+    `Scenario 3 of 3 — Question ${currentQuestion + 1} of 2`;
+}
+
+// =====================================================
+// RENDER SCENARIOS
+// =====================================================
+function renderScenario(idx) {
+  updateStepIndicator();
+  updateProgress();
+  const s = SCENARIOS[idx];
+  if (s.type === 'slider') renderSliderScenario(s);
+  else if (s.type === 'quiz') renderQuizScenario(s);
+  else if (s.type === 'decision') renderDecisionScenario(s);
+}
+
+// --- SLIDER SCENARIO ---
+function renderSliderScenario(s) {
+  questionAnswered = false;
+  sliderSubmitted = false;
+  // Init slider values
+  s.sliders.forEach(sl => { sliderVals[sl.key] = sl.value; });
+  sliderResult = s.compute(sliderVals);
+
+  const container = document.getElementById('scenario-container');
+  container.innerHTML = `
+    <div class="sim-panel">
+      <div class="scenario-tag">${s.tag}</div>
+      <div class="sim-title">${s.title}</div>
+      <div class="sim-subtitle">${s.subtitle}</div>
+
+      <div class="slider-section" id="slider-section">
+        ${s.sliders.map(sl => `
+          <div class="slider-row">
+            <div class="slider-label">${sl.label}</div>
+            <input type="range" min="${sl.min}" max="${sl.max}" value="${sl.value}"
+              id="sl-${sl.key}" oninput="onSliderChange('${sl.key}', this.value)">
+            <div class="slider-value" id="sv-${sl.key}">${sl.value} ${sl.unit}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="metrics-grid" id="metrics-grid">
+        <div class="metric-card" id="mc-throughput">
+          <div class="metric-name">Throughput</div>
+          <div class="metric-value" id="mv-throughput">${sliderResult.throughput}</div>
+          <div class="metric-unit">units/hr</div>
+        </div>
+        <div class="metric-card" id="mc-efficiency">
+          <div class="metric-name">Efficiency</div>
+          <div class="metric-value" id="mv-efficiency">${sliderResult.efficiency}%</div>
+          <div class="metric-unit">useful output / energy</div>
+        </div>
+        <div class="metric-card" id="mc-waste">
+          <div class="metric-name">Waste</div>
+          <div class="metric-value" id="mv-waste">${sliderResult.waste}</div>
+          <div class="metric-unit">rejected units/hr</div>
+        </div>
+      </div>
+
+      <div class="gauge-row">
+        <div class="gauge-label-row"><span>Efficiency Target</span><span id="eff-pct-label">${sliderResult.efficiency}%</span></div>
+        <div class="gauge-bar-outer">
+          <div class="gauge-bar-fill" id="eff-gauge" style="width:${Math.min(sliderResult.efficiency,100)}%;background:${gaugeColor(sliderResult.efficiency)};">
+            ${sliderResult.efficiency >= 25 ? sliderResult.efficiency + '%' : ''}
+          </div>
+        </div>
+      </div>
+
+      <div id="factory-vis" style="margin:14px 0;">
+        <div class="factory-container">
+          <div class="factory-row">
+            <div class="factory-node">⚡ Energy<br><small id="fac-energy">--kW</small></div>
+            <div class="factory-arrow">→</div>
+            <div class="factory-node">🏭 Machine<br><small id="fac-speed">--u/hr</small></div>
+            <div class="factory-arrow">→</div>
+            <div class="factory-node">🔍 Quality<br><small id="fac-quality">--%</small></div>
+            <div class="factory-arrow">→</div>
+            <div class="factory-node" style="background:#C9A84C;color:#1B3A5C;">📦 Output<br><small id="fac-output">--u/hr</small></div>
+          </div>
+          <div class="throughput-items" id="throughput-items"></div>
+        </div>
+      </div>
+
+      <div id="question-area" style="display:none;">
+        <div class="question-box">${s.question}</div>
+        <div class="options-grid" id="options-grid"></div>
+        <div class="feedback-box" id="feedback-box"></div>
+      </div>
+
+      <div class="nav-row">
+        <div></div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-sm" id="submit-slider-btn" onclick="submitSlider()">Lock In My Settings →</button>
+        </div>
+      </div>
+    </div>
+  `;
+  updateFactoryVis();
+}
+
+function gaugeColor(eff) {
+  if (eff >= 80) return '#2a7a2a';
+  if (eff >= 60) return '#C9A84C';
+  if (eff >= 40) return '#e08a00';
+  return '#c0392b';
+}
+
+function onSliderChange(key, val) {
+  if (sliderSubmitted) return;
+  sliderVals[key] = parseInt(val);
+  document.getElementById('sv-' + key).textContent = val + ' ' + SCENARIOS[0].sliders.find(s=>s.key===key).unit;
+  sliderResult = SCENARIOS[0].compute(sliderVals);
+  updateMetrics();
+  updateFactoryVis();
+}
+
+function updateMetrics() {
+  const r = sliderResult;
+  const mv_t = document.getElementById('mv-throughput');
+  const mv_e = document.getElementById('mv-efficiency');
+  const mv_w = document.getElementById('mv-waste');
+  if (!mv_t) return;
+  mv_t.textContent = r.throughput;
+  mv_e.textContent = r.efficiency + '%';
+  mv_e.className = 'metric-value ' + (r.efficiency >= 80 ? 'metric-good' : r.efficiency >= 50 ? 'metric-mid' : 'metric-bad');
+  mv_w.textContent = r.waste;
+  mv_w.className = 'metric-value ' + (r.waste <= 10 ? 'metric-good' : r.waste <= 30 ? 'metric-mid' : 'metric-bad');
+
+  const effGauge = document.getElementById('eff-gauge');
+  if (effGauge) {
+    const pct = Math.min(r.efficiency, 100);
+    effGauge.style.width = pct + '%';
+    effGauge.style.background = gaugeColor(r.efficiency);
+    effGauge.textContent = pct >= 25 ? r.efficiency + '%' : '';
+  }
+  const epl = document.getElementById('eff-pct-label');
+  if (epl) epl.textContent = r.efficiency + '%';
+
+  // Highlight efficiency card
+  ['mc-throughput','mc-efficiency','mc-waste'].forEach(id => {
+    const c = document.getElementById(id);
+    if (c) c.classList.remove('highlight');
+  });
+  const mc = document.getElementById('mc-efficiency');
+  if (mc && r.efficiency >= 80) mc.classList.add('highlight');
+}
+
+function updateFactoryVis() {
+  const speed = sliderVals['speed'] || 50;
+  const quality = sliderVals['quality'] || 50;
+  const energy = sliderVals['energy'] || 60;
+  const throughput = sliderResult ? sliderResult.throughput : 0;
+  const waste = sliderResult ? sliderResult.waste : 0;
+
+  const fEnergy = document.getElementById('fac-energy');
+  const fSpeed = document.getElementById('fac-speed');
+  const fQuality = document.getElementById('fac-quality');
+  const fOutput = document.getElementById('fac-output');
+  if (fEnergy) fEnergy.textContent = energy + 'kW';
+  if (fSpeed) fSpeed.textContent = speed + 'u/hr';
+  if (fQuality) fQuality.textContent = quality + '%';
+  if (fOutput) fOutput.textContent = throughput + 'u/hr';
+
+  const items = document.getElementById('throughput-items');
+  if (!items) return;
+  items.innerHTML = '';
+  const shown = Math.min(throughput, 12);
+  const wasteShown = Math.min(waste, 5);
+  for (let i = 0; i < shown; i++) {
+    const b = document.createElement('div');
+    b.className = 'item-box';
+    b.textContent = '✓';
+    items.appendChild(b);
+  }
+  for (let i = 0; i < wasteShown; i++) {
+    const b = document.createElement('div');
+    b.className = 'item-box rejected';
+    b.textContent = '✗';
+    items.appendChild(b);
+  }
+  if (throughput > 12) {
+    const b = document.createElement('div');
+    b.style.cssText = 'font-size:0.75rem;color:#888;font-weight:700;';
+    b.textContent = '+' + (throughput - 12) + ' more';
+    items.appendChild(b);
+  }
+}
+
+function submitSlider() {
+  if (sliderSubmitted) return;
+  sliderSubmitted = true;
+  sliderOptimizationPts = sliderResult.pts;
+  maxScore += 10;
+
+  // Lock sliders
+  SCENARIOS[0].sliders.forEach(sl => {
+    const el = document.getElementById('sl-' + sl.key);
+    if (el) el.disabled = true;
+  });
+
+  // Show result banner
+  const submitBtn = document.getElementById('submit-slider-btn');
+  if (submitBtn) submitBtn.style.display = 'none';
+
+  // Show efficiency result
+  const effBanner = document.createElement('div');
+  effBanner.style.cssText = 'background:#f0f4f8;border-radius:10px;padding:12px 16px;margin:12px 0;text-align:center;';
+  effBanner.innerHTML = `<div style="font-size:0.85rem;color:#666;font-weight:700;">Your Efficiency Score</div>
+    <div style="font-size:2rem;font-weight:900;color:${gaugeColor(sliderResult.efficiency)};">${sliderResult.efficiency}%</div>
+    <div style="font-size:0.82rem;color:#888;">You earned <strong>${sliderOptimizationPts}/10 points</strong> for optimization!</div>`;
+  document.getElementById('factory-vis').appendChild(effBanner);
+
+  // Reveal question
+  document.getElementById('question-area').style.display = 'block';
+  renderSliderQuestion();
+  updateProgress();
+}
+
+function renderSliderQuestion() {
+  const s = SCENARIOS[0];
+  maxScore += 5;
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  s.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => answerSliderQuestion(i, opt.correct, s.feedbackCorrect, s.feedbackWrong);
+    grid.appendChild(btn);
+  });
+}
+
+function answerSliderQuestion(idx, correct, fc, fw) {
+  if (questionAnswered) return;
+  questionAnswered = true;
+  const btns = document.querySelectorAll('#options-grid .option-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (SCENARIOS[0].options[i].correct) btn.classList.add('correct');
+    else if (i === idx) btn.classList.add('wrong');
+  });
+  const fb = document.getElementById('feedback-box');
+  if (correct) {
+    totalScore += 5;
+    fb.textContent = fc;
+    fb.className = 'feedback-box correct show';
+    answerLog.push({ label: 'Slider Knowledge Q', correct: true });
+  } else {
+    fb.textContent = fw;
+    fb.className = 'feedback-box wrong show';
+    answerLog.push({ label: 'Slider Knowledge Q', correct: false });
+  }
+  // Add score from slider
+  totalScore += sliderOptimizationPts;
+  answerLog.push({ label: 'Factory Optimization', correct: sliderOptimizationPts >= 7, pts: sliderOptimizationPts + '/10' });
+
+  // Next button
+  const navRow = document.querySelector('.nav-row');
+  navRow.innerHTML = `
+    <div></div>
+    <button class="btn" onclick="advanceScenario()">Next Scenario →</button>
+  `;
+}
+
+// --- QUIZ SCENARIO ---
+function renderQuizScenario(s) {
+  currentQuestion = 0;
+  renderQuizQuestion(s);
+}
+
+function renderQuizQuestion(s) {
+  questionAnswered = false;
+  updateProgress();
+  const q = s.questions[currentQuestion];
+  maxScore += 5;
+
+  const container = document.getElementById('scenario-container');
+  container.innerHTML = `
+    <div class="sim-panel">
+      <div class="scenario-tag">${s.tag}</div>
+      <div class="sim-title">KPI Knowledge Check</div>
+      <div class="sim-subtitle">Question ${currentQuestion + 1} of ${s.questions.length}</div>
+
+      <div class="question-box">${q.q}</div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback-box" id="feedback-box"></div>
+
+      <div class="nav-row">
+        <div class="step-count">Q${currentQuestion+1} / ${s.questions.length}</div>
+        <div id="next-btn-area"></div>
+      </div>
+    </div>
+  `;
+
+  const grid = document.getElementById('options-grid');
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => answerQuizQuestion(i, opt.correct, q.feedbackCorrect, q.feedbackWrong, s);
+    grid.appendChild(btn);
+  });
+}
+
+function answerQuizQuestion(idx, correct, fc, fw, s) {
+  if (questionAnswered) return;
+  questionAnswered = true;
+  const q = s.questions[currentQuestion];
+  const btns = document.querySelectorAll('#options-grid .option-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (q.options[i].correct) btn.classList.add('correct');
+    else if (i === idx) btn.classList.add('wrong');
+  });
+  const fb = document.getElementById('feedback-box');
+  if (correct) {
+    totalScore += 5;
+    fb.textContent = fc;
+    fb.className = 'feedback-box correct show';
+    answerLog.push({ label: `KPI Q${currentQuestion+1}`, correct: true });
+  } else {
+    fb.textContent = fw;
+    fb.className = 'feedback-box wrong show';
+    answerLog.push({ label: `KPI Q${currentQuestion+1}`, correct: false });
+  }
+
+  const nextArea = document.getElementById('next-btn-area');
+  const isLast = currentQuestion === s.questions.length - 1;
+  nextArea.innerHTML = `<button class="btn" onclick="${isLast ? 'advanceScenario()' : 'nextQuizQuestion()'}">${isLast ? 'Next Scenario →' : 'Next Question →'}</button>`;
+}
+
+function nextQuizQuestion() {
+  currentQuestion++;
+  renderQuizQuestion(SCENARIOS[1]);
+}
+
+// --- DECISION SCENARIO ---
+function renderDecisionScenario(s) {
+  currentQuestion = 0;
+  renderDecisionQuestion(s);
+}
+
+function renderDecisionQuestion(s) {
+  questionAnswered = false;
+  updateProgress();
+  const q = s.questions[currentQuestion];
+  maxScore += 5;
+
+  const container = document.getElementById('scenario-container');
+  container.innerHTML = `
+    <div class="sim-panel">
+      <div class="scenario-tag">${s.tag}</div>
+      <div class="sim-title">${s.title}</div>
+      <div class="sim-subtitle">${s.subtitle}</div>
+
+      <div style="background:#1B3A5C;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:2rem;">🤔</div>
+        <div style="color:#fff;font-size:0.95rem;font-weight:600;line-height:1.5;">${q.q}</div>
+      </div>
+      <div class="options-grid" id="options-grid" style="grid-template-columns:1fr;"></div>
+      <div class="feedback-box" id="feedback-box"></div>
+      <div class="nav-row">
+        <div class="step-count">Decision ${currentQuestion+1} / ${s.questions.length}</div>
+        <div id="next-btn-area"></div>
+      </div>
+    </div>
+  `;
+
+  const grid = document.getElementById('options-grid');
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => answerDecision(i, opt.correct, q.feedbackCorrect, q.feedbackWrong, s);
+    grid.appendChild(btn);
+  });
+}
+
+function answerDecision(idx, correct, fc, fw, s) {
+  if (questionAnswered) return;
+  questionAnswered = true;
+  const q = s.questions[currentQuestion];
+  const btns = document.querySelectorAll('#options-grid .option-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (q.options[i].correct) btn.classList.add('correct');
+    else if (i === idx) btn.classList.add('wrong');
+  });
+  const fb = document.getElementById('feedback-box');
+  if (correct) {
+    totalScore += 5;
+    fb.textContent = fc;
+    fb.className = 'feedback-box correct show';
+    answerLog.push({ label: `Decision ${currentQuestion+1}`, correct: true });
+  } else {
+    fb.textContent = fw;
+    fb.className = 'feedback-box wrong show';
+    answerLog.push({ label: `Decision ${currentQuestion+1}`, correct: false });
+  }
+
+  const nextArea = document.getElementById('next-btn-area');
+  const isLast = currentQuestion === s.questions.length - 1;
+  nextArea.innerHTML = `<button class="btn" onclick="${isLast ? 'showSummary()' : 'nextDecision()'}">${isLast ? 'See My Results →' : 'Next Decision →'}</button>`;
+}
+
+function nextDecision() {
+  currentQuestion++;
+  renderDecisionQuestion(SCENARIOS[2]);
+}
+
+// =====================================================
+// ADVANCE
+// =====================================================
+function advanceScenario() {
+  currentScenario++;
+  currentQuestion = 0;
+  if (currentScenario >= SCENARIOS.length) {
+    showSummary();
+  } else {
+    renderScenario(currentScenario);
+  }
+}
+
+// =====================================================
+// SUMMARY
+// =====================================================
+function showSummary() {
+  document.getElementById('screen-activity').classList.remove('active');
+  document.getElementById('screen-summary').classList.add('active');
+
+  document.getElementById('final-score').textContent = totalScore;
+  document.getElementById('final-total').textContent = '/ ' + maxScore + ' pts';
+
+  const pct = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
+  // Animate ring
+  const ring = document.getElementById('score-ring');
+  setTimeout(() => {
+    ring.style.background = `conic-gradient(#C9A84C 0deg, #C9A84C ${pct * 3.6}deg, #dce4ef ${pct * 3.6}deg)`;
+  }, 100);
+
+  let grade, msg;
+  if (pct >= 90) { grade = '🏆 Outstanding Engineer!'; msg = 'You used data like a pro! Your ability to analyze KPIs, calculate efficiency, and make smart optimization decisions is excellent.'; }
+  else if (pct >= 75) { grade = '⭐ Strong Performance!'; msg = 'Great work! You clearly understand how data drives engineering decisions. Review any missed questions to master every concept.'; }
+  else if (pct >= 55) { grade = '🔧 Good Effort!'; msg = 'You\'re building a solid foundation. Data-defined thinking takes practice — review efficiency, throughput, and KPI concepts to level up.'; }
+  else { grade = '📚 Keep Learning!'; msg = 'Don\'t give up! Every great engineer started by learning from mistakes. Revisit the lesson on KPIs, efficiency, and optimization, then try again.'; }
+
+  document.getElementById('grade-label').textContent = grade;
+  document.getElementById('grade-msg').textContent = msg;
+
+  // Answer list
+  const list = document.getElementById('answer-list');
+  list.innerHTML = '';
+  answerLog.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'summary-item';
+    row.innerHTML = `
+      <span>${item.label}${item.pts ? ' ('+item.pts+')' : ''}</span>
+      <div class="result-dot ${item.correct ? 'c' : 'w'}"></div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+// =====================================================
+// RESTART
+// =====================================================
+function restartActivity() {
+  document.getElementById('screen-summary').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+  totalScore = 0;
+  maxScore = 0;
+  answerLog = [];
+}
+</script>
+</body>
+</html>

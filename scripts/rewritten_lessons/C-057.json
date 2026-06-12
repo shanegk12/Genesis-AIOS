@@ -1,0 +1,346 @@
+[
+  {
+    "id": "c057t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Configuration Management and Baselines</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last lesson, you explored Verification, Validation, and Testing — the process engineers use to confirm that a design works the way it should. You checked parts against requirements and proved the whole system did its job. Today, we take the next step into the <strong>Assembly phase</strong> of Creationeering.</p>\n<p>We are going to explore <strong>Configuration Management and Baselines</strong>. These are the tools engineers use to keep track of every part, every drawing, and every change in a project — so the team always knows exactly what they are building. Once parts start coming together, things can get complicated fast. A small change to one piece can ripple through everything else. Configuration management is the careful habit of tracking every update, and a baseline is a snapshot of the design at an agreed-upon moment. Together, they bring order to complexity.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define Configuration Management and explain its importance in complex engineering projects.</li>\n<li>Identify Configuration Items and understand how Baselines are established and used to track a system's state.</li>\n<li>Describe the process of Change Control and explain why it is essential for maintaining system integrity.</li>\n<li>Explain the role of Version Control in tracking modifications and ensuring traceability of changes.</li>\n<li>Connect the principles of Configuration Management to biblical stewardship — recognizing our responsibility to manage the work entrusted to us with diligence and wisdom.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Configuration",
+          "definition": "The specific arrangement of a system's parts — like a detailed blueprint or recipe that describes exactly how something is built."
+        },
+        {
+          "term": "Configuration Management (CM)",
+          "definition": "A disciplined approach to tracking and controlling changes to a system throughout its entire life cycle, keeping everything consistent and accurate."
+        },
+        {
+          "term": "Configuration Item (CI)",
+          "definition": "Any component of a system that needs to be tracked and managed — this could be a hardware part, a software module, a design document, or a tool."
+        },
+        {
+          "term": "Baseline",
+          "definition": "A formally agreed-upon snapshot of a system's configuration at a specific point in time. It serves as the official reference point for future changes."
+        },
+        {
+          "term": "Change Control",
+          "definition": "The process of evaluating, approving, and tracking every requested change to a system's configuration so nothing is altered without review."
+        },
+        {
+          "term": "Version Control",
+          "definition": "A method of recording changes to files or designs over time so you can see who changed what, when, and why — and go back to an earlier version if needed."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Order Matters in Engineering</h2>\n<p>Picture this: your team is building a robot for a competition. One person updates the arm design. Another person prints the old version and starts cutting parts. A third person writes code based on something in between. By the end of the week, nobody knows which version is correct — and the pieces do not fit together.</p>\n<p>That is exactly the kind of chaos that <strong>Configuration Management</strong> is designed to prevent. Engineering projects involve many people, many parts, and many decisions happening at the same time. Without a system to track all of it, even small miscommunications can cause big failures. CM gives a team one trustworthy source of truth.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>1 Corinthians 14:40</strong> — <em>\"But everything should be done in a fitting and orderly way.\"</em></p>\n<p>God is a God of order. When He created the universe, He did not create everything at once in a jumbled mess — He worked through a deliberate process, day by day, building on what came before. Engineers who practice configuration management are doing the same thing: being faithful stewards of their work by keeping it organized, accurate, and trustworthy.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Configuration Item?</h2>\n<p>Before you can manage something, you need to know what you are managing. In configuration management, anything important enough to track is called a <strong>Configuration Item</strong>, or CI.</p>\n<p>CIs can be almost anything:</p>\n<ul>\n<li>A physical part — like a gear, a circuit board, or a frame</li>\n<li>A document — like a design drawing, a requirements list, or a test report</li>\n<li>A software file — like a program, a script, or a settings file</li>\n<li>A tool or process used to build or test something</li>\n</ul>\n<p>The key question is: <em>If this item changed without anyone knowing, would it cause a problem?</em> If the answer is yes, it is probably a CI and needs to be tracked.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing a system broken into labeled Configuration Items — hardware parts, software modules, and documents — each with a unique identifier for tracking."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Establishing a Baseline</h2>\n<p>Imagine you are writing a group essay and everyone has a copy. At some point, your teacher says, <em>\"Okay, freeze — this is the version we are submitting.\"</em> That frozen version is your <strong>baseline</strong>. Any edits after that point need to go through the teacher first.</p>\n<p>In engineering, a baseline works exactly the same way. It is a formally approved snapshot of your system's configuration at a key moment. Once a baseline is set, the team agrees: <em>this is what we are building from right now.</em></p>\n<h3>Common Types of Baselines</h3>\n<p>Engineers typically establish baselines at three major milestones:</p>\n<ul>\n<li><strong>Functional Baseline</strong> — Set early in a project, this captures the system's requirements and intended performance. It answers: <em>What does this system need to do?</em></li>\n<li><strong>Allocated Baseline</strong> — Established once the high-level design is complete. It shows how the overall requirements are distributed (allocated) across the system's parts.</li>\n<li><strong>Product Baseline</strong> — Created when the design is ready to be built. This is the detailed, final blueprint used for manufacturing and testing.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Think of a baseline like a save point in a video game.</strong> Before you try something risky, you save your progress. If things go wrong, you can reload from that exact point. Engineers use baselines the same way — if a change causes unexpected problems, the team can always refer back to the last approved baseline to understand what changed and why.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Change Control: Handling Updates the Right Way</h2>\n<p>Nothing stays the same. New information comes in. A part does not perform as expected. A customer changes their mind. Changes in engineering are completely normal — but <em>unmanaged</em> changes are dangerous.</p>\n<p><strong>Change Control</strong> is the process that makes sure every change is reviewed before it happens. Think of it like a gate. Any proposed change has to pass through the gate before it affects the system. Here is what that process typically looks like:</p>\n<ul>\n<li><strong>Step 1 — Submit a Change Request:</strong> Someone identifies a needed change and formally describes it.</li>\n<li><strong>Step 2 — Evaluate the Impact:</strong> The team analyzes how the change will affect other parts, the schedule, and the cost.</li>\n<li><strong>Step 3 — Approve or Reject:</strong> A designated person or review board decides whether the change should move forward.</li>\n<li><strong>Step 4 — Implement the Change:</strong> If approved, the change is made in a controlled, documented way.</li>\n<li><strong>Step 5 — Update the Records:</strong> All documents and baselines are updated to reflect the new configuration.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>The most common configuration management mistake</strong> is making an \"unofficial\" change — fixing something on the fly without documenting it or telling anyone. It might seem faster in the moment, but it almost always creates bigger problems later. When something breaks, nobody knows what changed. Always go through the process.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Version Control: Keeping a Full History</h2>\n<p>Have you ever worked on a document and wished you could go back to what it looked like two hours ago? <strong>Version control</strong> makes that possible — not just for documents, but for every design file, software program, and specification in a project.</p>\n<p>Every time an approved change is made to a configuration item, version control systems assign it a new version number and store a record of:</p>\n<ul>\n<li>What exactly changed</li>\n<li>Who made the change</li>\n<li>When the change was made</li>\n<li>Why the change was made</li>\n</ul>\n<p>This creates a complete history — called a <strong>traceability record</strong> — that engineers can follow like a paper trail. If something goes wrong six months from now, the team can trace back through every change and find exactly where the problem started.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A version control timeline showing a design file evolving from v1.0 through v3.2, with notes on who changed what at each step and a branch showing a rejected change that was rolled back."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Real engineers use version control every day.</strong> Software teams use tools like Git and GitHub to track every line of code ever written. Aerospace engineers use Product Lifecycle Management (PLM) software to track every revision to a design drawing. These are not just big-company tools — even your school project benefits from simple version tracking, like naming your files <em>\"BridgeDesign_v1\"</em>, <em>\"BridgeDesign_v2\"</em>, and keeping old copies.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Configuration Management as Stewardship</h2>\n<p>There is a deeper reason why configuration management matters beyond just keeping files organized. It is about <strong>faithfulness</strong>.</p>\n<p>When an engineer designs a bridge, a medical device, or a piece of aircraft software, real people are depending on that work. If a change slips through without proper tracking, and something fails because of it, people can be hurt. Configuration management is one of the ways engineers honor their responsibility to the people who will use what they build.</p>\n<p>That is exactly what stewardship looks like in engineering. God has given us minds to create, and He calls us to manage those creations carefully. Whether you are tracking parts for a robot project or managing revisions to a design document, practicing good configuration management is a way of taking your work seriously — and taking seriously the people who depend on it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 16:10</strong> — <em>\"Whoever can be trusted with very little can also be trusted with much.\"</em></p>\n<p>Starting small matters. If you practice careful, organized habits on a school project now — tracking your changes, documenting your decisions, keeping your files in order — you are building the character of a trustworthy engineer. The habits you form today are the ones you will bring into much larger, higher-stakes work later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use the questions below to review what you learned in this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is Configuration Management, and why does a team need it?",
+      "html": "<p>Configuration Management is the disciplined process of tracking and controlling every part, document, and change in a project throughout its entire lifecycle. A team needs it because engineering projects involve many people working on many pieces at the same time. Without CM, different team members might use different versions of the same design, and small undocumented changes can cause the final system to fail. CM gives everyone one trusted source of information.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057a002",
+    "type": "accordion",
+    "data": {
+      "title": "What is a baseline, and what are the three main types engineers use?",
+      "html": "<p>A baseline is a formally approved snapshot of a system's configuration at a key moment in the project. It becomes the agreed-upon reference point for all future work and changes. The three main types are: (1) the <strong>Functional Baseline</strong>, set early to capture what the system needs to do; (2) the <strong>Allocated Baseline</strong>, established once requirements are distributed across the system's parts; and (3) the <strong>Product Baseline</strong>, the final detailed design ready for manufacturing and testing.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057a003",
+    "type": "accordion",
+    "data": {
+      "title": "Why is Change Control important? What happens without it?",
+      "html": "<p>Change Control ensures that every proposed change is reviewed for its impact before it is implemented. Without it, changes can be made informally — one person adjusts a part, another updates a drawing, and nobody tells the rest of the team. These undocumented changes can cause parts to no longer fit together, make the system fail to meet requirements, or create safety hazards that are very hard to trace. Change Control acts like a gate that keeps the project organized and safe.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057a004",
+    "type": "accordion",
+    "data": {
+      "title": "How does Version Control support traceability in a project?",
+      "html": "<p>Version control records every approved change to a configuration item over time — tracking what changed, who changed it, when it was changed, and why. This creates a full history of the design called a traceability record. If a problem shows up later, engineers can follow this record back through every change to find exactly where and when the issue was introduced. It is like a detailed journal of every decision made on the project.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c057a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does Configuration Management connect to biblical stewardship?",
+      "html": "<p>Configuration management is a practical expression of stewardship. When engineers carefully track their designs and manage changes responsibly, they are honoring the people who depend on their work — and honoring God by being faithful with the abilities and resources He has given them. Just as Luke 16:10 teaches that faithfulness in small things builds toward faithfulness in bigger things, practicing good CM habits on a school project now develops the character of a trustworthy engineer for the future.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-052",
+  "topic": "Variable Confirmation Tests",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "In an experiment, what is defined as any factor, trait, or condition that can exist in differing amounts or types?",
+      "options": {
+        "A": "Control",
+        "B": "Hypothesis",
+        "C": "Variable",
+        "D": "Performance"
+      },
+      "answer": "C",
+      "explanation": "A variable is specifically defined as any factor, trait, or condition that can exist in differing amounts or types in an experiment."
+    },
+    {
+      "type": "recall",
+      "question": "What are the elements in an experiment that are kept constant to ensure only the tested variable causes observed changes?",
+      "options": {
+        "A": "Variables",
+        "B": "Controls",
+        "C": "Data",
+        "D": "Trade-offs"
+      },
+      "answer": "B",
+      "explanation": "Controls are defined as the elements in an experiment that are kept constant to ensure that only the variable being tested is causing any observed changes."
+    },
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of a Confirmation Test in engineering design?",
+      "options": {
+        "A": "To collect random facts and statistics.",
+        "B": "To verify or refute a hypothesis by systematically altering a single variable.",
+        "C": "To identify all possible trade-offs in a design.",
+        "D": "To establish a baseline performance without any changes."
+      },
+      "answer": "B",
+      "explanation": "A Confirmation Test is a focused experiment designed to verify or refute a hypothesis by systematically altering a single variable while keeping others constant."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is it crucial to keep all other factors constant (controls) when testing a single variable in your mousetrap car?",
+      "options": {
+        "A": "To make the experiment easier to set up.",
+        "B": "To ensure the car always travels the same distance.",
+        "C": "To accurately determine which specific change caused any difference in performance.",
+        "D": "To prevent the mousetrap spring from breaking."
+      },
+      "answer": "C",
+      "explanation": "Keeping controls constant ensures that any observed changes in performance can be directly attributed to the single variable being tested, establishing a clear cause-and-effect relationship."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the 'Multiscale Modeling Connection,' how does changing the length of your mousetrap car's lever arm primarily affect its performance at a fundamental level?",
+      "options": {
+        "A": "It changes the car's overall weight, making it faster.",
+        "B": "It alters the torque applied to the axle by changing how the spring's force acts over distance.",
+        "C": "It makes the wheels spin faster due to increased friction.",
+        "D": "It directly increases the air resistance on the car."
+      },
+      "answer": "B",
+      "explanation": "A longer lever arm alters the torque applied to the axle by allowing the spring's force to act over a greater distance, converting more potential energy into kinetic energy."
+    },
+    {
+      "type": "comprehension",
+      "question": "After establishing a baseline for your mousetrap car's performance, what is the main reason for conducting variable confirmation tests?",
+      "options": {
+        "A": "To randomly try new parts without a plan.",
+        "B": "To understand how specific changes affect performance and optimize the design.",
+        "C": "To prove that the initial design was perfect.",
+        "D": "To compare your car's speed to other students' cars."
+      },
+      "answer": "B",
+      "explanation": "Variable confirmation tests are conducted after establishing a baseline to systematically understand how specific changes affect performance, allowing for informed optimization of the design."
+    },
+    {
+      "type": "application",
+      "question": "A Junior Creationeer wants to test if different types of string (e.g., fishing line vs. cotton string) affect how far their mousetrap car travels. To conduct a proper variable confirmation test, which of the following should they keep constant?",
+      "options": {
+        "A": "The type of string and the length of the lever arm.",
+        "B": "The length of the lever arm, the wheel size, and the car body weight.",
+        "C": "Only the type of string, changing everything else.",
+        "D": "The distance the car travels."
+      },
+      "answer": "B",
+      "explanation": "To isolate the effect of string type, all other factors like lever arm length, wheel size, and car body weight must be kept constant as controls."
+    },
+    {
+      "type": "application",
+      "question": "Sarah is testing her mousetrap car. She changes both the size of her wheels and the weight of her car body at the same time. What problem will Sarah most likely encounter when analyzing her results?",
+      "options": {
+        "A": "Her car will definitely go faster than before.",
+        "B": "She won't be able to tell which change (wheels or weight) caused any difference in performance.",
+        "C": "The experiment will take too long to complete.",
+        "D": "Her car will automatically become optimized."
+      },
+      "answer": "B",
+      "explanation": "Changing multiple variables simultaneously makes it impossible to determine which specific change was responsible for any observed differences in the car's performance."
+    },
+    {
+      "type": "application",
+      "question": "David wants to find out if the starting position of his mousetrap car (e.g., 1 inch from the wall vs. 3 inches from the wall) affects its speed. In this experiment, what is the variable David is testing?",
+      "options": {
+        "A": "The speed of the car.",
+        "B": "The type of mousetrap.",
+        "C": "The starting position of the car.",
+        "D": "The length of the lever arm."
+      },
+      "answer": "C",
+      "explanation": "The variable is the factor that David intentionally changes in his experiment, which in this case is the starting position of the car."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does diligently testing and refining your mousetrap car designs, as described in the lesson, reflect the biblical principle of good stewardship?",
+      "options": {
+        "A": "It shows that God wants us to win competitions.",
+        "B": "It demonstrates maximizing the potential of materials and resources God has provided through careful effort.",
+        "C": "It proves that human engineering is superior to God's creation.",
+        "D": "It allows us to ignore the design principles God established."
+      },
+      "answer": "B",
+      "explanation": "Diligently testing and refining designs aligns with biblical stewardship by maximizing the potential of the materials and resources God has provided through careful and intentional effort."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson defines 'optimization' as making a system as effective or functional as possible. How do variable confirmation tests directly contribute to achieving optimization for your mousetrap car?",
+      "options": {
+        "A": "They randomly suggest new parts to try.",
+        "B": "They provide systematic data to identify the best adjustments for improved performance.",
+        "C": "They prevent any need for further design changes.",
+        "D": "They only focus on making the car look better."
+      },
+      "answer": "B",
+      "explanation": "Variable confirmation tests provide systematic data and insights into cause-and-effect relationships, which are essential for making informed adjustments to optimize a design's performance."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that God's design is 'precise and intentional, with every part working together perfectly.' How should this understanding influence a Junior Creationeer's approach to conducting variable confirmation tests?",
+      "options": {
+        "A": "It means we don't need to test our designs, as God already made them perfect.",
+        "B": "It encourages a random and chaotic approach to testing, reflecting the complexity of creation.",
+        "C": "It inspires a systematic, precise, and intentional approach to testing to understand cause-and-effect.",
+        "D": "It suggests that only the largest changes will have any impact on performance."
+      },
+      "answer": "C",
+      "explanation": "God's precise and intentional design inspires Junior Creationeers to adopt a systematic, precise, and intentional approach to testing to understand the cause-and-effect relationships in their own designs."
+    }
+  ]
+}

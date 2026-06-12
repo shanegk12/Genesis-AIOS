@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recycling Logistics and Infrastructure — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Recycling Logistics and Infrastructure</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Recycling", "definition": "The process of converting waste materials into new materials and objects, giving them a new purpose."}, {"term": "Logistics", "definition": "The detailed planning and management of how materials are collected, moved, and processed in a complex operation like recycling."}, {"term": "Infrastructure", "definition": "The essential physical structures and organizational systems, like recycling centers and collection routes, needed for recycling to happen."}, {"term": "Multiscale Modeling", "definition": "Using different levels of detail, from large-scale collection systems to the tiny atoms of materials, to understand and improve recycling processes."}, {"term": "Objective (OCV)", "definition": "The desired outcome or goal you want to achieve when designing or improving a recycling system."}, {"term": "Constraint (OCV)", "definition": "A limitation or restriction, such as budget or available technology, that must be considered when designing a recycling process."}, {"term": "Variable (OCV)", "definition": "A factor or quantity, like the amount of recyclable material or the type of sorting machine, that can change and affect the outcome of a recycling system."}, {"term": "Optimization", "definition": "The process of finding the best possible solution or design for a recycling system under specific conditions, making it as efficient as possible."}, {"term": "Stewardship", "definition": "The responsible overseeing and protection of resources, like recyclable materials and our planet, reflecting a biblical principle of caring for creation."}, {"term": "Death & Recycling Phase", "definition": "The Creationeering™ phase that focuses on what happens to a product or system after its useful life is over, including how it can be recycled or repurposed."}, {"term": "Efficient Material Flow", "definition": "Making sure that materials move smoothly and quickly through the recycling process, from collection to sorting and transformation, to save time and resources."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

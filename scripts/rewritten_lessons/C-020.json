@@ -1,0 +1,279 @@
+[
+  {
+    "id": "c020t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>The Importance of Data in Engineering</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Imagine you're an engineer tasked with designing a bridge. You want it to be strong, safe, and able to withstand all kinds of weather and traffic. But how do you know your design will actually work before anyone sets foot on it? This is where data comes in. In this lesson, you'll explore why data is essential for engineers when making decisions, validating designs, and being responsible stewards of the resources and lives they've been entrusted to protect.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p><ul><li>Learn that objective, verifiable data is essential for analysis.</li><li>Define validation as it pertains to design decisions.</li><li>Correlate data to stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Objective Data",
+          "definition": "Facts that are not influenced by personal feelings or opinions."
+        },
+        {
+          "term": "Verifiable",
+          "definition": "Something that can be tested and proven true by others using the same methods."
+        },
+        {
+          "term": "Validation",
+          "definition": "The process of checking whether a computer model or design matches real-world results."
+        },
+        {
+          "term": "Analysis",
+          "definition": "Examining data carefully to find patterns, limits, and solutions."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible management of resources and the safety of others."
+        },
+        {
+          "term": "Hierarchical Multiscale Modeling",
+          "definition": "A Creationeering method that examines data from the atomic level all the way up to the full system level."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Data Matters</h2>\n<p>Up to this point, you've learned how Rapid Iteration helps engineers find the best designs. But there is one critical question that must be answered before you ever finalize a single design decision: <strong>How do you know you're right?</strong></p>\n<p>In engineering, we don't rely on hunches, guesses, or feelings. Think about it this way — if a bridge designer said, \"I have a feeling this steel will hold up,\" would you want to drive across that bridge? Of course not. Engineers rely on <strong>Objective, Verifiable Data</strong>. That means facts that can be measured, tested, and confirmed by anyone using the same methods — not just one person's opinion on a good day.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Proverbs 14:15 says, <em>\"The simple believe anything, but the prudent give thought to their steps.\"</em> God calls us to think carefully and act wisely — especially when the safety and wellbeing of others depend on our decisions. Collecting solid data before you build is one of the most practical ways to live out that wisdom as an engineer.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Objective vs. Subjective</h2>\n<p>In everyday life, we constantly use subjective information — statements shaped by personal experience or opinion. If you say, \"This bridge looks strong,\" that's a subjective observation. It might feel true, but it can't be tested or proven.</p>\n<p>In engineering, you need <strong>objective</strong> information. Compare these two statements:</p>\n<ul>\n<li><strong>Subjective:</strong> \"This bridge looks strong.\"</li>\n<li><strong>Objective:</strong> \"This bridge can support 50,000 Newtons of force before the steel reaches its yield point.\"</li>\n</ul>\n<p>The second statement is based on measurable data. Anyone with the right equipment can test it and get the same answer. That's the kind of evidence engineers build on.</p>\n<p>Data is the language of truth in the physical world. It gives you the evidence you need to make decisions that keep people safe and ensure your designs actually work. And respecting that data isn't just a technical requirement — it's a form of stewardship, a way of being responsible with the materials and lives you've been trusted to protect.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison: a subjective opinion bubble vs. a data chart showing measurable bridge load results"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Three Ways Data Guides Good Engineering</h2>\n<p>There are three key reasons why data is so powerful in the engineering process. Each one connects directly to your responsibility as a designer.</p>\n<h3>Measurable Evidence</h3>\n<p>Data gives you the numbers and facts needed to evaluate whether your design works. Suppose you design a new type of beam for a building. You'd run tests to measure exactly how much weight it can support. If the beam holds under various conditions, that's measurable evidence of its strength — not a guess, but a proven result.</p>\n<h3>Repeatable Tests</h3>\n<p>One good result isn't enough. Engineers run the same test multiple times to make sure the outcome is consistent. If a material withstands a certain stress level every single time it's tested, you can confidently use it in your design. Repeatability is what separates reliable data from lucky accidents.</p>\n<h3>Clear, Meaningful Data</h3>\n<p>Data isn't just about collecting numbers — it's about understanding what those numbers mean. Clear data helps you make wise choices that avoid waste, improve safety, and honor your responsibilities. Car manufacturers, for example, use crash test data to make sure vehicles protect the people inside. The numbers only matter when you know how to read and apply them.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When you evaluate any engineering claim, ask yourself: <strong>Can this be measured? Can someone else test it and get the same result?</strong> If the answer to both is yes, you're working with objective, verifiable data — the foundation of trustworthy engineering.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Data and Stewardship go hand in hand.</strong> When engineers use solid data to make decisions, they're protecting people, reducing waste, and using resources wisely. That's exactly what stewardship looks like in action — being responsible with what you've been given, whether that's materials, money, or someone else's safety.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Creationeering Lens — Data-Driven Modeling</h2>\n<p>Creationeering takes data use one step further through a method called <strong>Hierarchical Multiscale Modeling</strong>. This approach requires precise data at every level of a system — from the atomic scale all the way up to the full structure.</p>\n<p>In traditional engineering, people often built something, broke it, and then measured what happened. That approach is expensive, slow, and sometimes dangerous. Creationeering uses a more advanced method: <strong>Mathematical Modeling</strong>. Instead of breaking a real bridge to see how it fails, engineers build a mathematical model of the bridge and test it virtually — using data to predict how the real structure will behave before a single bolt is tightened.</p>\n<p>This is possible only when the data feeding the model is accurate, objective, and verified. Garbage in, garbage out — a model built on bad data will give you bad predictions, no matter how sophisticated the software.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing hierarchical multiscale modeling — from atomic structure up through material properties to a full engineering system"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020c004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Watch out for this common mistake:</strong> Assuming that a model is automatically correct just because a computer generated it. A mathematical model is only as trustworthy as the data used to build it. Always validate your model by comparing its predictions to real-world test results before relying on it for critical design decisions.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Validation — How We Know the Model Matches Reality</h2>\n<p><strong>Validation</strong> is the process of confirming that your mathematical model actually reflects what happens in the real world. Think of it like calibrating a scale. Before you trust the reading, you check it against a known weight. If it reads correctly, you know you can trust it going forward.</p>\n<p>Engineers validate their models by running physical experiments and comparing the results to what the model predicted. If the numbers match closely, the model is validated and can be used to make design decisions with confidence. If they don't match, the model needs to be adjusted — and that's okay. That's exactly what the engineering process is for.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>God created a universe that follows consistent, measurable laws. From the orbit of planets to the strength of a steel beam, creation operates by reliable patterns that we can study, measure, and trust. As engineers, when you collect honest data and validate your work, you are aligning your process with the order God built into creation. <em>\"For God is not a God of disorder but of peace.\"</em> — 1 Corinthians 14:33</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c020a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the difference between objective and subjective data?</strong><br/>Objective data is based on measurable facts that anyone can verify using the same methods. Subjective data is based on personal feelings or opinions and cannot be reliably tested.</p><p><strong>2. Why do engineers run tests multiple times instead of just once?</strong><br/>Repeatability confirms that a result is consistent, not just a one-time lucky outcome. Consistent results give engineers confidence that a material or design will behave the same way every time.</p><p><strong>3. What is validation, and why does it matter?</strong><br/>Validation is the process of comparing a mathematical model's predictions to real-world test results. It matters because a model is only useful if it accurately reflects how a real structure or system will behave.</p><p><strong>4. How does collecting and using data connect to stewardship?</strong><br/>Using accurate data to make decisions protects people, reduces waste, and ensures that resources are used wisely — all of which reflect responsible stewardship of what we've been entrusted with.</p><p><strong>5. What is Hierarchical Multiscale Modeling?</strong><br/>It is a Creationeering approach that gathers and uses data at every level of a system — from the atomic scale all the way up to the full structure — to build more accurate and reliable engineering models.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

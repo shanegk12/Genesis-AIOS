@@ -1,0 +1,429 @@
+[
+  {
+    "id": "c051h1blk",
+    "type": "text",
+    "data": {
+      "html": "<h1>Fabrication Methods and Integrity</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051over1",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, we explored what assembly is — that crucial Creationeering phase where individual parts come together to form a whole system. Today, we're going deeper. We're focusing on <strong>fabrication methods and integrity</strong>: the different ways parts are actually made, and why the quality of those parts determines whether your entire design succeeds or fails.</p>\n<p>Think of it this way — even the most perfectly planned assembly falls apart if the individual components are weak or flawed. A house built with cracked bricks won't stand no matter how skilled the builder is. In the same way, understanding how parts are fabricated, and ensuring they're built with integrity, is foundational to every engineered system you'll ever create.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051obj1x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p><ul><li>Identify and describe at least three different fabrication methods commonly used in engineering.</li><li>Explain the concept of <strong>integrity</strong> in the context of fabricated parts and why it matters.</li><li>Connect macro-level observations of part failure to their atomic-level causes using multiscale modeling principles.</li><li>Apply the OCV method (Objective, Constraint, Variable) to optimize a fabrication process for a specific engineering challenge.</li><li>Recognize how ensuring the integrity of fabricated components reflects good biblical stewardship of resources and design.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051voc1x",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Fabrication",
+          "definition": "The process of making or manufacturing components or products from various raw materials."
+        },
+        {
+          "term": "Integrity",
+          "definition": "The quality of being whole and undivided; in engineering, it refers to the soundness, reliability, and freedom from defects of a component."
+        },
+        {
+          "term": "Casting",
+          "definition": "A fabrication method where molten material is poured into a mold, allowed to solidify, and then removed to form a desired shape."
+        },
+        {
+          "term": "Machining",
+          "definition": "A fabrication method that uses tools to remove material from a workpiece to create a desired shape and size."
+        },
+        {
+          "term": "Additive Manufacturing",
+          "definition": "A fabrication method, often called 3D printing, where material is added layer by layer to build a three-dimensional object."
+        },
+        {
+          "term": "Welding",
+          "definition": "A fabrication method used to join two or more metal parts by melting them together, often with the addition of a filler material."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at large scales (macro) to explanations at small scales (atomic or microscopic)."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "The desired outcome or goal of an engineering problem."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that must be considered when solving an engineering problem."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A factor or characteristic that can be changed or adjusted in an engineering design or process."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div1x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051faith1",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 1:20 (NIV):</strong> \"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse.\"</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051fab01",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Perfect Fabrication</h2>\n<p>From the very beginning, God demonstrated what perfect fabrication looks like. Consider the human body — every cell is structured with precision, every organ system interlocks with another, and the whole thing runs without a single assembly manual. No defects. No weak seams. No parts that don't fit. That is fabrication at its finest.</p>\n<p>As engineers, we're called to reflect that same care and intentionality when we create. We won't be perfect — but the standard God set reminds us that how we make something matters just as much as what we make. When you rush a fabrication step or ignore a flaw in a part, you're not just risking your design. You're being a poor steward of the materials, time, and creativity God has given you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div2x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051meth1",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Fabrication?</h2>\n<p><strong>Fabrication</strong> is the process of turning raw materials into usable components. Before anything can be assembled, the parts themselves have to be made. And there isn't just one way to do that — engineers choose different fabrication methods depending on the material, the shape needed, the quantity being produced, and the level of precision required.</p>\n<p>Choosing the right fabrication method is one of the most important design decisions you'll make. The wrong method can waste material, produce weak parts, or make it impossible to meet your design requirements. Let's look at the four most common methods you'll encounter.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051meth2",
+    "type": "text",
+    "data": {
+      "html": "<h3>Casting</h3>\n<p><strong>Casting</strong> works by melting a material — usually metal or plastic — and pouring it into a mold. Once it cools and solidifies, you remove the mold and you have a part shaped exactly like the inside of that mold. It's like pouring Jell-O into a bowl: the bowl is your mold, and the Jell-O takes that shape as it sets.</p>\n<p>Casting is great for making complex shapes that would be very difficult to carve or machine. Engine blocks, cookware, and decorative statues are all commonly cast. The trade-off is that cast parts can sometimes have tiny internal air pockets called <em>voids</em>, which weaken the material if not caught during quality checks.</p>\n<h3>Machining</h3>\n<p><strong>Machining</strong> takes the opposite approach — instead of adding or shaping material, you start with a solid block and <em>remove</em> material to get the shape you want. Drills, lathes, and milling machines are all machining tools. Think of a sculptor chipping away at a block of marble to reveal a statue hidden inside.</p>\n<p>Machining produces very precise, smooth parts and is commonly used for metal components that need to fit tightly together — like the gears inside a clock or the threads on a bolt. The downside is that the removed material is often wasted, which can be costly.</p>\n<h3>Additive Manufacturing (3D Printing)</h3>\n<p><strong>Additive manufacturing</strong> — most commonly known as 3D printing — does the opposite of machining. Instead of removing material, you <em>add</em> it, one thin layer at a time, until the full shape is complete. A 3D printer reads a digital design file and deposits material (usually plastic, resin, or even metal powder) layer by layer from the bottom up.</p>\n<p>This method is incredibly flexible. You can print shapes that would be impossible to cast or machine, and you waste very little material. Engineers use it to rapidly prototype new designs — meaning you can test an idea the same day you design it. The trade-off is that printed parts can sometimes be weaker along the layer lines, especially under stress.</p>\n<h3>Welding</h3>\n<p><strong>Welding</strong> is technically a joining method, but it also creates new material bonds — so it counts as fabrication too. Welding uses intense heat to melt the edges of two metal pieces together, sometimes adding a filler material to strengthen the joint. When it cools, those two pieces are one solid piece.</p>\n<p>Welding is everywhere — bridges, cars, pipelines, buildings. When done correctly, a weld can be stronger than the original metal. But a poor weld is one of the most dangerous defects an engineer can miss. A crack in a weld is invisible on the outside but catastrophic under load.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of the four fabrication methods: casting (molten metal poured into a mold), machining (cutting tool shaping a metal block), 3D printing (layers building up a part), and welding (two metal pieces fused by heat)"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051tip01",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Choosing a Method:</strong> When deciding which fabrication method to use, ask yourself three questions: What material am I working with? How precise does the final part need to be? How many copies do I need to make? The answers will point you toward the right method almost every time.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div3x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051intg1",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Does Integrity Mean in Engineering?</h2>\n<p>You've probably heard the word <em>integrity</em> used to describe a person's character — someone who is honest, reliable, and does what they say they'll do. In engineering, <strong>integrity</strong> means almost the same thing, but applied to a part or component. A part has integrity when it is structurally sound, free from defects, and will perform reliably under the conditions it was designed for.</p>\n<p>A part without integrity might look perfectly fine on the outside. But hidden inside could be a crack, a void, or a weak spot just waiting for the right moment to fail. That failure might be inconvenient — or it could be catastrophic. Bridges collapse. Aircraft lose structural components. Medical devices malfunction. All of these disasters have been traced back to failures in fabrication integrity.</p>\n<p>This is why engineers don't just make parts — they <em>inspect</em> them. They test them. They verify that what was built matches what was designed. Integrity isn't an accident. It's the result of intentional care at every step of the fabrication process.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051warn1",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Assuming a part is fine because it <em>looks</em> fine. Many of the most dangerous defects — internal cracks, voids, and weak welds — are invisible to the naked eye. Always verify with testing, not just visual inspection.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div4x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051msm1x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture and the Tiny Details: Multiscale Modeling</h2>\n<p>Here's something fascinating: when a part fails, the reason is almost never visible at the size you can see with your eyes. A crack you notice on the surface of a metal beam actually started at the <em>atomic level</em> — a misalignment between atoms, a microscopic void, or a grain boundary in the metal's crystal structure.</p>\n<p><strong>Multiscale modeling</strong> is the engineering tool that connects those two worlds. It lets engineers look at a failure they can see — say, a broken weld joint — and trace it back to what happened at the microscopic or atomic scale. Think of it like a crime investigation. The broken bridge is the crime scene you can see. Multiscale modeling is the forensic lab that tells you exactly what went wrong at the smallest level.</p>\n<p>Why does this matter for fabrication? Because if you understand <em>why</em> failures happen at the atomic level, you can change your fabrication process to prevent them. That's the goal — not just fixing problems after they occur, but designing the fabrication process so problems can't occur in the first place.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Multiscale modeling diagram showing how a visible crack in a metal part connects to microscopic grain boundaries and atomic-level defects"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051info1",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Real-World Connection:</strong> Multiscale modeling is used in aerospace engineering to analyze why turbine blades crack under extreme heat, and in biomedical engineering to understand how bone implants bond (or fail to bond) with human tissue. The same principle — connecting big observations to tiny causes — applies across every engineering discipline.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div5x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051ocv01",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing Fabrication with the OCV Method</h2>\n<p>Every fabrication decision is really an engineering problem. And like any engineering problem, you can solve it more systematically using the <strong>OCV method</strong> — which stands for <strong>Objective, Constraint, and Variable</strong>.</p>\n<ul>\n<li><strong>Objective:</strong> What is the goal? What does the finished part need to do or be? (Example: produce a gear that can withstand 500 lbs of torque.)</li>\n<li><strong>Constraint:</strong> What are the limitations? What can't you change? (Example: the gear must be made from aluminum, the budget is $50, and it must be completed in two days.)</li>\n<li><strong>Variable:</strong> What can you adjust? What factors are under your control? (Example: the fabrication method, the thickness of the gear teeth, the surface finish.)</li>\n</ul>\n<p>Once you clearly define your Objective, Constraints, and Variables, you can evaluate your fabrication options logically instead of just guessing. The OCV method keeps your decision-making structured, transparent, and easy to explain to teammates or clients — a skill every great engineer needs.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051tip02",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Using OCV in Your Projects:</strong> Before you start fabricating anything, write out your OCV clearly. Pin it somewhere visible. Revisit it every time you're about to make a decision. If a choice doesn't serve your Objective or violates a Constraint, it's probably the wrong choice — no matter how cool it seems in the moment.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div6x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051stew1",
+    "type": "text",
+    "data": {
+      "html": "<h2>Fabrication as Stewardship</h2>\n<p>Every material you use in fabrication — metal, plastic, wood, resin — was originally created by God. Every hour you spend in a workshop or lab is time He gave you. That means how you fabricate is, at its core, a stewardship issue.</p>\n<p>Cutting corners in fabrication isn't just an engineering risk. It's a failure to honor the resources and responsibilities God has entrusted to you. On the other hand, when you take the time to choose the right method, inspect your work carefully, and build with integrity, you're expressing something true about your character — and reflecting the image of a Creator who does all things well.</p>\n<p>Genesis 1 describes God looking at what He had made and calling it <em>good</em>. That's the standard. Not just functional. Not just good enough. Good. Build toward that standard in everything you make.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051bib02",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 3:23 (NIV):</strong> \"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.\" — This applies in the workshop just as much as anywhere else. Every cut, every weld, every printed layer is an opportunity to work with excellence for an audience of One.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051div7x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051chku1",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is fabrication, and why does it matter?",
+      "html": "<p><strong>Fabrication</strong> is the process of making or manufacturing components from raw materials. It matters because the quality of individual parts directly determines whether an assembled system will work correctly, safely, and reliably. Even the best assembly plan fails if the components aren't built with integrity.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051chku2",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What are the four fabrication methods covered in this lesson?",
+      "html": "<ul><li><strong>Casting</strong> — molten material is poured into a mold and solidified.</li><li><strong>Machining</strong> — material is removed from a solid block using cutting tools.</li><li><strong>Additive Manufacturing (3D Printing)</strong> — material is added layer by layer to build a shape.</li><li><strong>Welding</strong> — two metal parts are melted together to form a single joined piece.</li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051chku3",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: How does multiscale modeling help engineers maintain part integrity?",
+      "html": "<p>Multiscale modeling connects what engineers can observe at the large (macro) scale — like a visible crack or a broken joint — to the root causes at the microscopic or atomic scale. By understanding failures at the smallest level, engineers can adjust their fabrication processes to prevent those failures from occurring in the first place.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051chku4",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What does OCV stand for, and how do you use it?",
+      "html": "<p><strong>OCV</strong> stands for <strong>Objective, Constraint, and Variable.</strong></p><ul><li><strong>Objective</strong> — the goal or desired outcome of your engineering problem.</li><li><strong>Constraint</strong> — the limitations you cannot change (budget, materials, time).</li><li><strong>Variable</strong> — the factors you <em>can</em> adjust to optimize your design or process.</li></ul><p>By clearly defining all three before making fabrication decisions, you avoid guessing and keep your choices aligned with what your design actually needs.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c051chku5",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: How does fabrication connect to biblical stewardship?",
+      "html": "<p>Every material we use in fabrication was created by God, and every hour we spend building is time He provided. Choosing the right fabrication method, inspecting our work carefully, and building with integrity are all acts of stewardship — honoring the resources and responsibilities God has given us. Cutting corners isn't just an engineering risk; it's a failure to use God's gifts well. Building with excellence reflects our identity as image-bearers of a Creator who does all things well.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

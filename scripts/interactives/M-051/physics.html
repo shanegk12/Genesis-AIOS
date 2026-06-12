@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Mousetrap Car Physics Sandbox</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e2336;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e6cc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 10px 10px 0 0;
+    padding: 12px 18px 8px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #a8c0d8;
+    margin-top: 2px;
+  }
+  #main-wrapper {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 0 0 10px 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  canvas {
+    display: block;
+    background: #0e2336;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 830px;
+    touch-action: none;
+  }
+  .controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .control-card {
+    background: #0e2336;
+    border: 1px solid #2d5a8a;
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex: 1 1 160px;
+    min-width: 150px;
+  }
+  .control-card label {
+    display: block;
+    font-size: 0.72rem;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .control-card .val-display {
+    font-size: 1.0rem;
+    font-weight: bold;
+    color: #f0e6cc;
+    margin-bottom: 5px;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+    height: 18px;
+  }
+  .metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .metric-box {
+    background: #0e2336;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 10px 16px;
+    flex: 1 1 140px;
+    text-align: center;
+  }
+  .metric-box .metric-label {
+    font-size: 0.68rem;
+    color: #a8c0d8;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .metric-box .metric-value {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #C9A84C;
+    margin-top: 3px;
+  }
+  .metric-box .metric-unit {
+    font-size: 0.65rem;
+    color: #7a9ab8;
+  }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 9px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button:active { transform: scale(0.97); }
+  #btnLaunch {
+    background: #C9A84C;
+    color: #1B3A5C;
+    flex: 1;
+  }
+  #btnLaunch:hover { background: #e0be6a; }
+  #btnReset {
+    background: #2d5a8a;
+    color: #f0e6cc;
+    flex: 1;
+  }
+  #btnReset:hover { background: #3d7ab0; }
+  .phase-indicator {
+    font-size: 0.7rem;
+    color: #a8c0d8;
+    background: #0e2336;
+    border-radius: 5px;
+    padding: 5px 12px;
+    text-align: center;
+    border: 1px solid #2d5a8a;
+  }
+  #phaseText { color: #C9A84C; font-weight: bold; }
+  .info-bar {
+    font-size: 0.67rem;
+    color: #7a9ab8;
+    text-align: center;
+    padding: 4px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🖱 Mousetrap Car — Physics Sandbox</h1>
+  <p>Baselines &amp; Predictions · Genesis K-12 Academy · Mousetrap Build</p>
+</header>
+<div id="main-wrapper">
+  <canvas id="sim" height="310"></canvas>
+
+  <div class="phase-indicator">
+    Simulation Phase: <span id="phaseText">READY — Set parameters, then LAUNCH</span>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-card">
+      <label>Spring Tension (Energy)</label>
+      <div class="val-display" id="tensionVal">60%</div>
+      <input type="range" id="sliderTension" min="10" max="100" value="60">
+    </div>
+    <div class="control-card">
+      <label>Lever Arm Length</label>
+      <div class="val-display" id="leverVal">12 cm</div>
+      <input type="range" id="sliderLever" min="4" max="20" value="12">
+    </div>
+    <div class="control-card">
+      <label>Wheel Radius</label>
+      <div class="val-display" id="wheelVal">5 cm</div>
+      <input type="range" id="sliderWheel" min="2" max="10" value="5">
+    </div>
+    <div class="control-card">
+      <label>Axle Friction (μ)</label>
+      <div class="val-display" id="frictionVal">0.05</div>
+      <input type="range" id="sliderFriction" min="1" max="30" value="5">
+    </div>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-box">
+      <div class="metric-label">Distance Traveled</div>
+      <div class="metric-value" id="metricDist">0.00</div>
+      <div class="metric-unit">meters</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Peak Speed</div>
+      <div class="metric-value" id="metricSpeed">0.00</div>
+      <div class="metric-unit">m/s</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Drive Time</div>
+      <div class="metric-value" id="metricTime">0.00</div>
+      <div class="metric-unit">seconds</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Predicted Distance</div>
+      <div class="metric-value" id="metricPred">—</div>
+      <div class="metric-unit">meters (estimate)</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button id="btnLaunch">▶ Launch Car</button>
+    <button id="btnReset">↺ Reset</button>
+  </div>
+  <div class="info-bar">
+    Adjust sliders to change car design. Hit Launch to run the simulation and collect your baseline data. Use Predicted Distance to compare before vs. after.
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ── Canvas setup ──────────────────────────────────────────────────────────────
+const canvas = document.getElementById('sim');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas(){
+  const w = canvas.parentElement.clientWidth - 28;
+  canvas.width  = Math.min(830, w);
+  canvas.height = 310;
+}
+resizeCanvas();
+window.addEventListener('resize', ()=>{ resizeCanvas(); if(!running) drawStatic(); });
+
+// ── Controls ──────────────────────────────────────────────────────────────────
+const slTension  = document.getElementById('sliderTension');
+const slLever    = document.getElementById('sliderLever');
+const slWheel    = document.getElementById('sliderWheel');
+const slFriction = document.getElementById('sliderFriction');
+
+const elTension  = document.getElementById('tensionVal');
+const elLever    = document.getElementById('leverVal');
+const elWheel    = document.getElementById('wheelVal');
+const elFriction = document.getElementById('frictionVal');
+
+const elDist     = document.getElementById('metricDist');
+const elSpeed    = document.getElementById('metricSpeed');
+const elTime     = document.getElementById('metricTime');
+const elPred     = document.getElementById('metricPred');
+const elPhase    = document.getElementById('phaseText');
+
+const btnLaunch  = document.getElementById('btnLaunch');
+const btnReset   = document.getElementById('btnReset');
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let running   = false;
+let animId    = null;
+
+// Physics state
+let carX, carVx, carAx;
+let leverAngle, leverOmega;
+let springDone;
+let simTime;
+let peakSpeed;
+let driveTime;
+let lastPredDist = null;
+
+// Visual wheel spin
+let wheelSpin = 0;
+
+// Ground marks (tire tracks for fun)
+let trackMarks = [];
+
+// Car physical dimensions (derived from sliders, in canvas pixels)
+const GROUND_Y_FRAC = 0.78; // ground line fraction of canvas height
+const SCALE = 60; // pixels per "meter" in sim display
+
+function groundY(){ return Math.floor(canvas.height * GROUND_Y_FRAC); }
+
+// ── Physics parameters ─────────────────────────────────────────────────────────
+function getParams(){
+  const tension    = slTension.valueAsNumber  / 100;     // 0.1–1.0
+  const leverCm    = slLever.valueAsNumber;               // 4–20 cm
+  const wheelCm    = slWheel.valueAsNumber;               // 2–10 cm
+  const muAxle     = slFriction.valueAsNumber / 100;      // 0.01–0.30
+
+  // Stored spring potential energy (J) — scaled for satisfying sim values
+  const Ep = tension * 2.5;   // up to 2.5 J
+
+  // Mechanical advantage: longer lever → more torque but slower pull
+  const leverM = leverCm / 100;
+  const wheelR = wheelCm / 100;
+
+  // Force applied at wheel rim from spring (simplified)
+  // F = Ep / (lever_travel_distance)  lever_travel ≈ leverM * pi/2
+  const leverTravel = leverM * (Math.PI / 2);
+  const springForce = Ep / leverTravel;  // N
+
+  // Torque at axle = springForce * leverM
+  // Linear force at wheel rim = torque / wheelR
+  const driveForce = (springForce * leverM) / wheelR;
+
+  // Mass of car (constant for simplicity)
+  const mass = 0.15; // kg
+
+  // Rolling friction from floor (μ_floor constant) + axle friction
+  const mu_floor = 0.02;
+  const frictionForce = mass * 9.81 * (mu_floor + muAxle);
+
+  // Net acceleration (while spring is engaged)
+  const accel = Math.max(0, (driveForce - frictionForce) / mass);
+
+  // Deceleration after spring releases
+  const decel = frictionForce / mass;
+
+  // Spring engagement duration: lever sweeps ~90°
+  // angular_speed of lever ≈ proportional to car speed / wheelR
+  // Approximate: spring runs for a fixed angular sweep
+  // drive_time ≈ sqrt(2 * leverTravel / (accel * (leverM/wheelR)^2 + eps))
+  // Simplified: time for lever to sweep while car accelerates
+  const ratio = leverM / wheelR;
+  // lever angle speed = carVx / wheelR * (wheelR / leverM) ... 
+  // engagement ends when leverAngle reaches PI/2
+  // angle = 0.5 * (accel/wheelR * ratio) * t^2  → t = sqrt(PI / (accel * ratio / wheelR))
+  const engageTime = (accel > 0.001)
+    ? Math.sqrt((Math.PI / 2) / ((accel * ratio) / wheelR + 0.0001))
+    : 0;
+
+  return { tension, leverCm, wheelCm, muAxle, Ep,
+           leverM, wheelR, driveForce, frictionForce,
+           mass, accel, decel, engageTime };
+}
+
+// ── Prediction (shown before launch) ─────────────────────────────────────────
+function computePrediction(){
+  const p = getParams();
+  if(p.accel < 0.001) return 0;
+  // Speed at end of spring engagement
+  const vEnd = p.accel * p.engageTime;
+  // Coast distance after spring done
+  const coastDist = (p.decel > 0.001) ? (vEnd * vEnd) / (2 * p.decel) : 30;
+  // Drive distance during spring
+  const driveDist = 0.5 * p.accel * p.engageTime * p.engageTime;
+  return driveDist + coastDist;
+}
+
+function updatePrediction(){
+  const pred = computePrediction();
+  lastPredDist = pred;
+  elPred.textContent = pred.toFixed(2);
+}
+
+// ── Initialize / Reset ────────────────────────────────────────────────────────
+function resetSim(){
+  if(animId){ cancelAnimationFrame(animId); animId=null; }
+  running    = false;
+  carX       = 0.08;   // meters from left edge
+  carVx      = 0;
+  leverAngle = 0;      // 0 = fully wound, PI/2 = fully released
+  leverOmega = 0;
+  springDone = false;
+  simTime    = 0;
+  peakSpeed  = 0;
+  driveTime  = 0;
+  wheelSpin  = 0;
+  trackMarks = [];
+
+  elDist.textContent  = '0.00';
+  elSpeed.textContent = '0.00';
+  elTime.textContent  = '0.00';
+  elPhase.textContent = 'READY — Set parameters, then LAUNCH';
+  btnLaunch.disabled  = false;
+  btnLaunch.textContent = '▶ Launch Car';
+
+  updatePrediction();
+  drawStatic();
+}
+
+// ── Controls → Labels ─────────────────────────────────────────────────────────
+function updateLabels(){
+  elTension.textContent  = slTension.valueAsNumber + '%';
+  elLever.textContent    = slLever.valueAsNumber + ' cm';
+  elWheel.textContent    = slWheel.valueAsNumber + ' cm';
+  elFriction.textContent = (slFriction.valueAsNumber/100).toFixed(2);
+  if(!running) updatePrediction();
+}
+
+[slTension, slLever, slWheel, slFriction].forEach(s=>{
+  s.addEventListener('input', updateLabels);
+  s.addEventListener('change', updateLabels);
+});
+
+// ── Drawing helpers ───────────────────────────────────────────────────────────
+function toCanvasX(meterX){
+  // World meter → canvas pixel
+  const marginL = 40;
+  return marginL + meterX * SCALE;
+}
+
+function drawBackground(){
+  const W = canvas.width, H = canvas.height;
+  const gy = groundY();
+
+  // Sky gradient
+  const skyGrad = ctx.createLinearGradient(0,0,0,gy);
+  skyGrad.addColorStop(0,'#061522');
+  skyGrad.addColorStop(1,'#0e2a40');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0,0,W,gy);
+
+  // Ground
+  const grdGrad = ctx.createLinearGradient(0,gy,0,H);
+  grdGrad.addColorStop(0,'#2a5c3a');
+  grdGrad.addColorStop(1,'#1a3a24');
+  ctx.fillStyle = grdGrad;
+  ctx.fillRect(0,gy,W,H-gy);
+
+  // Ground line
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0,gy);
+  ctx.lineTo(W,gy);
+  ctx.stroke();
+
+  // Distance markers
+  ctx.fillStyle = '#a8c0d8';
+  ctx.font = `${Math.max(10,Math.floor(W/72))}px monospace`;
+  ctx.textAlign = 'center';
+  for(let m=0; m<=Math.ceil((W-40)/SCALE)+1; m++){
+    const px = toCanvasX(m);
+    if(px > W-10) break;
+    // tick
+    ctx.strokeStyle = '#2d5a8a';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px, gy);
+    ctx.lineTo(px, gy+8);
+    ctx.stroke();
+    if(m > 0){
+      ctx.fillStyle = '#7a9ab8';
+      ctx.fillText(m+'m', px, gy+20);
+    }
+  }
+}
+
+function drawTrackMarks(){
+  trackMarks.forEach(mk=>{
+    const px = toCanvasX(mk);
+    const gy = groundY();
+    ctx.fillStyle = 'rgba(201,168,76,0.18)';
+    ctx.fillRect(px-2, gy-1, 4, 3);
+  });
+}
+
+function drawCar(mX, wSpin, lvAngle, pSpringDone){
+  const p = getParams();
+  const gy = groundY();
+  const wheelR_px = Math.max(8, p.wheelCm * 3.5);
+  const bodyH = wheelR_px * 1.2;
+  const bodyW = wheelR_px * 3.2;
+  const cx = toCanvasX(mX);
+  const bodyY = gy - wheelR_px*2 - bodyH*0.1;
+  const axleY = gy - wheelR_px;
+
+  // --- Wheels ---
+  function drawWheel(wx){
+    ctx.save();
+    ctx.translate(wx, axleY);
+    // Tire
+    ctx.beginPath();
+    ctx.arc(0,0,wheelR_px,0,Math.PI*2);
+    ctx.fillStyle = '#222';
+    ctx.fill();
+    ctx.strokeStyle = '#555';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Spokes
+    ctx.rotate(wSpin);
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 1.5;
+    for(let i=0;i<6;i++){
+      const a = (i/6)*Math.PI*2;
+      ctx.beginPath();
+      ctx.moveTo(0,0);
+      ctx.lineTo(Math.cos(a)*wheelR_px*0.85, Math.sin(a)*wheelR_px*0.85);
+      ctx.stroke();
+    }
+    // Hub
+    ctx.beginPath();
+    ctx.arc(0,0,wheelR_px*0.18,0,Math.PI*2);
+    ctx.fillStyle='#C9A84C';
+    ctx.fill();
+    ctx.restore();
+  }
+
+  const frontWheelX = cx + bodyW*0.38;
+  const rearWheelX  = cx - bodyW*0.38;
+  drawWheel(frontWheelX);
+  drawWheel(rearWheelX);
+
+  // --- Axle rod ---
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(rearWheelX, axleY);
+  ctx.lineTo(frontWheelX, axleY);
+  ctx.stroke();
+
+  // --- Body ---
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect
+    ? ctx.roundRect(cx - bodyW/2, bodyY - bodyH, bodyW, bodyH, 5)
+    : ctx.rect(cx - bodyW/2, bodyY - bodyH, bodyW, bodyH);
+  const bodyGrad = ctx.createLinearGradient(0, bodyY-bodyH, 0, bodyY);
+  bodyGrad.addColorStop(0,'#2255880');
+  bodyGrad.addColorStop(0,'#1f4b78');
+  bodyGrad.addColorStop(1,'#0e2a40');
+  ctx.fillStyle = bodyGrad;
+  ctx.fill();
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
+
+  // Mousetrap body on top
+  const trapX = cx - bodyW*0.1;
+  const trapY = bodyY - bodyH;
+  const trapW = bodyW * 0.55;
+  const trapH = bodyH * 0.55;
+  ctx.fillStyle = '#8B7355';
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1;
+  ctx.fillRect(trapX - trapW/2, trapY - trapH, trapW, trapH);
+  ctx.strokeRect(trapX - trapW/2, trapY - trapH, trapW, trapH);
+
+  // Spring coil on trap
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1.5;
+  const coilCX = trapX;
+  const coilCY = trapY - trapH*0.5;
+  ctx.beginPath();
+  ctx.arc(coilCX, coilCY, trapH*0.22, 0, Math.PI*2);
+  ctx.stroke();
+
+  // --- Lever arm ---
+  const leverPivotX = trapX;
+  const leverPivotY = trapY - trapH;
+  const leverLen_px = p.leverCm * 2.2;
+  // angle: 0=straight up(-PI/2), sweeps forward to PI/2
+  const dispAngle = -Math.PI/2 + lvAngle;
+  const leverTipX = leverPivotX + Math.cos(dispAngle) * leverLen_px;
+  const leverTipY = leverPivotY + Math.sin(dispAngle) * leverLen_px;
+
+  ctx.strokeStyle = pSpringDone ? '#556677' : '#e8c860';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(leverPivotX, leverPivotY);
+  ctx.lineTo(leverTipX, leverTipY);
+  ctx.stroke();
+
+  // Lever tip dot
+  ctx.beginPath();
+  ctx.arc(leverTipX, leverTipY, 3.5, 0, Math.PI*2);
+  ctx.fillStyle = pSpringDone ? '#445566' : '#C9A84C';
+  ctx.fill();
+
+  // String from lever tip to rear axle
+  if(!pSpringDone){
+    ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.moveTo(leverTipX, leverTipY);
+    ctx.lineTo(rearWheelX, axleY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function drawHUD(dist, speed, sTime, phase){
+  const W = canvas.width;
+  ctx.save();
+  // HUD box top-right
+  const bx = W - 160, by = 10, bw = 150, bh = 60;
+  ctx.fillStyle = 'rgba(11,29,46,0.82)';
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1;
+  ctx.fillRect(bx,by,bw,bh);
+  ctx.strokeRect(bx,by,bw,bh);
+
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('LIVE DATA', bx+8, by+15);
+
+  ctx.fillStyle = '#a8c0d8';
+  ctx.font = '10px monospace';
+  ctx.fillText('Dist:  '+dist.toFixed(2)+' m', bx+8, by+30);
+  ctx.fillText('Speed: '+speed.toFixed(2)+' m/s', bx+8, by+43);
+  ctx.fillText('Time:  '+sTime.toFixed(2)+' s', bx+8, by+56);
+  ctx.restore();
+}
+
+function drawStatic(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawBackground();
+  drawTrackMarks();
+  drawCar(carX, wheelSpin, leverAngle, springDone);
+  drawHUD(carX - 0.08, 0, 0, 'READY');
+}
+
+// ── Simulation loop ───────────────────────────────────────────────────────────
+let lastTs = null;
+const DT_CAP = 0.033;
+
+function simStep(ts){
+  if(!running){ return; }
+  if(lastTs === null){ lastTs = ts; animId = requestAnimationFrame(simStep); return; }
+  let dt = Math.min((ts - lastTs)/1000, DT_CAP);
+  lastTs = ts;
+
+  const p = getParams();
+
+  simTime += dt;
+
+  if(!springDone){
+    // Accelerate
+    carVx += p.accel * dt;
+    // Lever sweeps with car
+    const angularSpeed = (p.wheelR > 0) ? (carVx / p.wheelR) * (p.wheelR / p.leverM) : 0;
+    leverAngle += angularSpeed * dt;
+    leverOmega = angularSpeed;
+    if(leverAngle >= Math.PI/2){
+      leverAngle = Math.PI/2;
+      springDone = true;
+      driveTime  = simTime;
+    }
+  } else {
+    // Decelerate (friction)
+    carVx -= p.decel * dt;
+    if(carVx < 0){ carVx = 0; }
+  }
+
+  // Wheel spin
+  if(p.wheelR > 0) wheelSpin += (carVx / p.wheelR) * dt;
+
+  // Track marks every ~0.15m
+  carX += carVx * dt;
+  const lastMark = trackMarks.length > 0 ? trackMarks[trackMarks.length-1] : -1;
+  if(carX - lastMark > 0.18){ trackMarks.push(carX); }
+
+  // Clamp to canvas
+  const maxM = (canvas.width - 80) / SCALE;
+  if(carX > maxM) carX = maxM;
+
+  // Update peak speed
+  if(carVx > peakSpeed) peakSpeed = carVx;
+
+  // Update metrics
+  const dist = carX - 0.08;
+  elDist.textContent  = dist.toFixed(2);
+  elSpeed.textContent = carVx.toFixed(2);
+  elTime.textContent  = simTime.toFixed(2);
+
+  // Phase text
+  if(!springDone){
+    elPhase.textContent = '🔋 SPRING DRIVING — lever sweeping…';
+  } else if(carVx > 0.01){
+    elPhase.textContent = '🏁 COASTING — friction slowing car…';
+  } else {
+    elPhase.textContent = '✅ STOPPED — baseline recorded!';
+    elSpeed.textContent = peakSpeed.toFixed(2);
+    elTime.textContent  = driveTime.toFixed(2);
+    running = false;
+    btnLaunch.disabled  = false;
+    btnLaunch.textContent = '▶ Re-Launch';
+  }
+
+  // Draw
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawBackground();
+  drawTrackMarks();
+  drawCar(carX, wheelSpin, leverAngle, springDone);
+  drawHUD(dist, carVx, simTime, '');
+
+  if(running){
+    animId = requestAnimationFrame(simStep);
+  }
+}
+
+// ── Button handlers ───────────────────────────────────────────────────────────
+btnLaunch.addEventListener('click', ()=>{
+  if(running) return;
+  // store prediction before launch
+  updatePrediction();
+  // Reset position but keep track marks cleared
+  carX       = 0.08;
+  carVx      = 0;
+  leverAngle = 0;
+  leverOmega = 0;
+  springDone = false;
+  simTime    = 0;
+  peakSpeed  = 0;
+  driveTime  = 0;
+  wheelSpin  = 0;
+  trackMarks = [];
+  lastTs     = null;
+  running    = true;
+  btnLaunch.disabled = true;
+  elPhase.textContent = '🔋 SPRING DRIVING…';
+  animId = requestAnimationFrame(simStep);
+});
+
+btnReset.addEventListener('click', ()=>{
+  resetSim();
+});
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+updateLabels();
+resetSim();
+
+})();
+</script>
+</body>
+</html>

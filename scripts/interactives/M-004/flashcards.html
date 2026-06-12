@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Objectives, Constraints, and Variables — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Objectives, Constraints, and Variables</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "OCV Framework", "definition": "A structured mindset used in engineering to intentionally think about a system before it is created, focusing on Objectives, Constraints, and Variables."}, {"term": "Objective", "definition": "The goal or aim of an engineering project. For the mousetrap car, it's to maximize the distance the car can travel."}, {"term": "Constraints", "definition": "The limitations or restrictions that an engineering project must work within, such as laws of physics, available supplies, or time."}, {"term": "Variables", "definition": "The elements or factors in a project that can be changed or adjusted to affect the outcome, like wheel size or lever arm length on a mousetrap car."}, {"term": "Iteration", "definition": "The process of making multiple changes and improvements to a design. In engineering, inventions emerge through continuous cycles of design, analysis, and synthesis."}, {"term": "Design Tradeoff", "definition": "When making a change to one part of a design improves one aspect but negatively affects another. For example, a smaller wheel might improve stability but decrease distance."}, {"term": "Energy Transformation", "definition": "The process of converting energy from one form to another. In the mousetrap car, it's about transferring energy from the mousetrap to the wheels."}, {"term": "Resistive Forces", "definition": "Forces that oppose motion and take energy away from a system, such as friction and added weight. They can also provide necessary stability like traction."}, {"term": "Friction", "definition": "A resistive force that opposes motion between two surfaces in contact. It can reduce a car's distance but also provides the necessary grip for wheels to move the car."}, {"term": "Drag", "definition": "A resistive force that opposes the motion of an object through a fluid (like air). It steals energy from the car and makes it go less far."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

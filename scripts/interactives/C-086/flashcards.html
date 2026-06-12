@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decommissioning Procedures and System Shutdown — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Decommissioning Procedures and System Shutdown</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeering™ Death & Recycling Phase", "definition": "This phase in the Creationeering™ framework focuses on transformation and renewal, showing how systems can be repurposed or materials recycled after their useful life, similar to God's plan for new beginnings."}, {"term": "Decommissioning", "definition": "This is the planned process of safely taking a system out of service when it's no longer needed, preparing it for either disposal or recycling."}, {"term": "System Shutdown", "definition": "This is the organized way to bring an operating system to a complete and safe stop, often as a first step before decommissioning."}, {"term": "Recycling", "definition": "This process turns old or waste materials into new materials and objects, reducing waste and conserving resources."}, {"term": "Material Degradation", "definition": "This refers to the weakening or breaking down of a material over time or when it's processed, which is important to consider during recycling."}, {"term": "Energy Path Analysis", "definition": "This is a method used to track how energy flows through a system, both when it's working and when it's being taken apart."}, {"term": "Optimization", "definition": "This is the process of finding the very best solution or outcome possible for a problem, like making a recycling process as efficient as possible."}, {"term": "Circular Economy", "definition": "This is an economic system designed to eliminate waste and keep resources in use for as long as possible, mimicking natural cycles."}, {"term": "Stewardship", "definition": "This means responsibly overseeing and protecting something valuable, like caring for God's creation and its resources."}, {"term": "Decommissioning Objectives", "definition": "These are the goals for taking a system out of service, such as safely dismantling it and preparing its materials for recycling."}, {"term": "Decommissioning Constraints", "definition": "These are the limitations or rules that must be followed during decommissioning, like safety regulations, environmental laws, budget, and time."}, {"term": "Decommissioning Variables", "definition": "These are the factors that can be changed during decommissioning, such as the tools used, the order of dismantling, or how materials are separated."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

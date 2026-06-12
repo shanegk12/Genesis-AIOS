@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reverse Logistics and End-of-Life Flow — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Reverse Logistics and End-of-Life Flow</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Reverse Logistics", "definition": "The process of moving products backward from their usual final destination, either to get value from them again or to dispose of them properly."}, {"term": "End-of-Life Flow", "definition": "The organized way we manage products when they are no longer useful or wanted, which can include recycling, fixing them up, or throwing them away responsibly."}, {"term": "Refurbishment", "definition": "Making a used product like new again, often by repairing it and replacing any broken parts."}, {"term": "Recycling", "definition": "Turning old or waste materials into new materials and items, so they can be used again."}, {"term": "Lifecycle Assessment (LCA)", "definition": "A detailed study of how a product affects the environment from the moment its materials are taken from the earth until it's thrown away."}, {"term": "Closed-Loop System", "definition": "A system designed to create very little waste by constantly reusing and recycling materials, just like nature does."}, {"term": "Obsolescence", "definition": "The state of something becoming outdated or no longer useful, often because newer, better versions exist."}, {"term": "Creationeering™ Framework", "definition": "Genesis K-12 Academy's framework for engineering, which includes the Logistics phase where reverse logistics and end-of-life flow are critical."}, {"term": "Biblical Stewardship", "definition": "The idea that we are called to be responsible caretakers of God's creation, which includes managing products and resources wisely."}, {"term": "Material Recovery", "definition": "The process of collecting and processing materials from waste so they can be reused or recycled."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

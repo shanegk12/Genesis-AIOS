@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energy Flow, Loss, and Efficiency] — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Energy Flow, Loss, and Efficiency]</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Energy Flow", "definition": "The journey of energy as it transfers from one form or component to another within a system, like from a mousetrap spring to the car's motion."}, {"term": "Energy Loss", "definition": "Energy that transforms into unusable forms, such as heat or sound, due to factors like friction and drag, reducing a system's efficiency."}, {"term": "Efficiency", "definition": "A measure of how well a system converts input energy into useful output energy, minimizing waste."}, {"term": "Creationeering™ Framework", "definition": "A framework developed by Dr. Mark Horstemeyer that applies engineering principles with a focus on stewardship and understanding God as the ultimate Engineer."}, {"term": "Hierarchical Multiscale Modeling (HM²)", "definition": "An advanced modeling technique used to understand how energy is lost at very tiny, atomic levels within materials."}, {"term": "Objective-Constraint-Variable (OCV) Method", "definition": "A design method used to optimize a system by clearly defining what you want to achieve (objective), what limits you have (constraints), and what you can change (variables)."}, {"term": "Law of Conservation of Energy", "definition": "A fundamental law stating that energy cannot be created or destroyed, only changed from one form to another."}, {"term": "Energy Stewardship", "definition": "The responsible and wise management of energy resources, connecting efficient design to biblical principles of using talents and resources wisely."}, {"term": "Potential Energy", "definition": "Stored energy, such as the energy in a wound mousetrap spring, ready to be released."}, {"term": "Kinetic Energy", "definition": "The energy of motion, like the energy of a mousetrap car as it moves across the floor."}, {"term": "Friction", "definition": "A force that opposes motion when two surfaces rub against each other, causing energy to be lost as heat."}, {"term": "Drag", "definition": "A force that opposes the motion of an object through a fluid (like air or water), also leading to energy loss."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

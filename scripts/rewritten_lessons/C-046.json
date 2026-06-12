@@ -1,0 +1,351 @@
+[
+  {
+    "id": "c046t0001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Inventory and Warehouse Management</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Global Supply Management — how products travel across the world to reach us, and the vast networks involved in moving raw materials to factories and finished goods to consumers. Today, we zoom in on what happens <em>after</em> those materials arrive: Inventory and Warehouse Management.</p>\n<p>This lesson sits squarely in the Logistics phase of Creationeering, where we focus on the efficient movement, storage, and handling of materials and information. Once goods arrive from across the globe, where do they go? How are they kept safe and ready for the next step? That's exactly what this lesson is about. It's about being good stewards of the resources God has provided — making sure we have what we need, when we need it, without waste.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define inventory and warehouse management and explain their importance in the logistics phase of Creationeering.</li>\n<li>Identify different types of inventory and their roles within a supply chain.</li>\n<li>Describe key principles of efficient warehouse layout and organization.</li>\n<li>Explain how Multiscale Modeling applies to understanding inventory issues and warehouse operations.</li>\n<li>Apply the OCV method to an inventory management challenge, connecting it to the biblical principle of wise stewardship.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046v0001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Inventory",
+          "definition": "The complete list of items, goods, or materials held in stock by a business or organization."
+        },
+        {
+          "term": "Warehouse",
+          "definition": "A building used for storing goods, materials, or products before they are distributed or used."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and implementation of a complex operation, especially the movement, storage, and flow of resources."
+        },
+        {
+          "term": "Stockout",
+          "definition": "A situation where a product or material is out of stock and unavailable when needed."
+        },
+        {
+          "term": "Overstock",
+          "definition": "Having too much inventory, leading to increased storage costs and potential waste."
+        },
+        {
+          "term": "Throughput",
+          "definition": "The rate at which something can be processed or moved through a system."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that links phenomena occurring at different length and time scales, from atomic to macroscopic."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome under given constraints."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A structured problem-solving approach that identifies the Objective, Constraints, and Variables in a design challenge."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046b0001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>\"For God is not a God of disorder but of peace.\"</strong> — 1 Corinthians 14:33</p><p>From the intricate structure of an atom to the orbit of galaxies, God's creation reflects perfect order. As engineers and problem-solvers made in His image, we are called to bring that same kind of order to the systems we design and manage.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Order from Chaos</h2>\n<p>Think about what happens when a storeroom has no system — products piled everywhere, nobody knows what's in stock, and workers waste time searching for a single item. That's chaos. Now picture the opposite: every item in its labeled place, easy to find, and restocked before it runs out. That's order. That's peace.</p>\n<p>This is exactly the engineering challenge of inventory and warehouse management. Designing an organized, efficient storage system isn't just good business practice — it's a reflection of God's orderly character put into action. When we build systems that reduce waste, prevent shortages, and keep resources flowing smoothly, we're acting as faithful stewards of what we've been given.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Inventory?</h2>\n<p>Inventory is simply all the stuff you have on hand. Think about your pantry at home — every can, box, and ingredient on those shelves is your household inventory. For a store, inventory is every product on its shelves and in its back room. For a factory, inventory includes raw materials waiting to be used, parts being assembled, and finished products ready to ship.</p>\n<p>In engineering terms, inventory represents resources in a paused state — waiting to move to the next step in the process. Managing it well means knowing exactly what you have, where it is, and when you need more.</p>\n<h3>Types of Inventory</h3>\n<ul>\n<li><strong>Raw Materials:</strong> The basic inputs that haven't been processed yet — lumber at a furniture factory, flour at a bakery, or steel at a car plant.</li>\n<li><strong>Work-in-Progress (WIP):</strong> Items currently being made or assembled. A half-built chair or a batch of bread rising in the oven both count as WIP.</li>\n<li><strong>Finished Goods:</strong> Completed products ready to be sold or shipped to customers.</li>\n<li><strong>Maintenance, Repair, and Operations (MRO) Supplies:</strong> The tools, spare parts, and supplies needed to keep the production process running — like replacement conveyor belts or cleaning products.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046i0001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing the four types of inventory — raw materials, work-in-progress, finished goods, and MRO supplies — flowing through a production system."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046c0001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>The Two Big Inventory Problems</strong></p><p>Every inventory manager is trying to avoid two opposite disasters at the same time. A <strong>stockout</strong> means you run out of something right when you need it — production stops, customers go elsewhere, and money is lost. <strong>Overstock</strong> is the opposite extreme: you ordered too much, and now you're paying to store items you can't use or sell fast enough. Great inventory management finds the sweet spot between these two extremes.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0006",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Warehouse?</h2>\n<p>A warehouse is more than just a big building where boxes are stacked. It's a carefully engineered system — a physical machine designed to receive, store, organize, and release goods as efficiently as possible. The layout, shelving, labeling, lighting, temperature controls, and traffic flow inside a warehouse are all the result of deliberate engineering decisions.</p>\n<p>Think of a warehouse like a well-designed city. A city with no plan becomes gridlock and confusion. But a city with intentional roads, zones, and traffic signals moves people and goods smoothly. A well-designed warehouse does the same thing for products.</p>\n<h3>Key Principles of Warehouse Layout</h3>\n<ul>\n<li><strong>Zoning:</strong> Grouping similar items together in dedicated areas so workers always know where to look. High-demand items are placed closest to the shipping dock to reduce travel time.</li>\n<li><strong>Clear Traffic Flow:</strong> Designing wide, clearly marked aisles that separate incoming goods (receiving) from outgoing goods (shipping) to prevent bottlenecks.</li>\n<li><strong>Vertical Space:</strong> Using tall shelving and storage racks to maximize the cubic volume of the building, not just the floor area.</li>\n<li><strong>Labeling and Tracking:</strong> Every item and location is clearly labeled — often with barcodes or RFID tags — so inventory software can track exactly what's where at any moment.</li>\n<li><strong>Safety:</strong> Proper lighting, fire suppression systems, weight limits on shelves, and clear emergency exit paths protect both workers and goods.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046i0002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A top-down diagram of a warehouse floor plan showing receiving docks, storage zones, picking aisles, and shipping docks with labeled traffic flow arrows."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046c0002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Throughput is your speed limit.</strong> Throughput measures how much product moves through your warehouse in a given time. Every bottleneck — a narrow aisle, a slow scanner, a poorly placed shelf — reduces throughput. Engineers study the flow of a warehouse the same way a traffic engineer studies rush-hour roads: find the choke points and redesign them.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling in Inventory and Warehousing</h2>\n<p>Here's where engineering thinking gets really powerful. <strong>Multiscale Modeling</strong> is the idea that to truly understand a system, you have to examine it at multiple levels — zooming in and zooming out to see how small-scale details connect to large-scale outcomes.</p>\n<p>In inventory management, this looks like:</p>\n<ul>\n<li><strong>Macro scale:</strong> The entire supply chain — how your warehouse fits into the global flow of goods from supplier to customer.</li>\n<li><strong>Meso scale:</strong> The warehouse itself — how zones, aisles, and shelving systems interact to move products efficiently.</li>\n<li><strong>Micro scale:</strong> Individual items — the barcode on a single box, the weight of one pallet, the expiration date of a specific batch of goods.</li>\n</ul>\n<p>A problem at any one scale ripples through the others. One mislabeled item (micro) can cause a stockout (meso) that shuts down a production line (macro). That's why engineers don't just fix the symptom — they trace the problem across scales to find the real root cause.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046c0003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't only look at one scale.</strong> A common mistake in logistics problem-solving is fixing only what you can see. If shelves keep running empty, the instinct might be to just order more stock — but the real problem could be a flawed reorder process, a supplier delay, or a labeling error causing items to be stored in the wrong zone. Always investigate across scales before deciding on a solution.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Inventory Challenges</h2>\n<p>When a warehouse or inventory problem shows up, engineers use structured tools to work through it clearly. The <strong>OCV Method</strong> — Objective, Constraints, Variables — is one of the most useful frameworks in your engineering toolkit.</p>\n<h3>Breaking Down OCV</h3>\n<ul>\n<li><strong>Objective:</strong> What are you trying to achieve? For example: \"Reduce stockouts of our most popular product by 90% without increasing storage costs.\"</li>\n<li><strong>Constraints:</strong> What limits do you have to work within? Budget, available floor space, delivery schedules, temperature requirements for certain goods, and staff capacity are all common constraints.</li>\n<li><strong>Variables:</strong> What can you change or adjust? Reorder quantities, shelf placement, supplier contracts, tracking software, and warehouse layout are all variables you can manipulate to reach your objective.</li>\n</ul>\n<p>Walking through OCV forces you to think clearly before you act. It keeps you from jumping to a solution before you actually understand the problem — a discipline that saves enormous time and resources in real engineering projects.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046c0004",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Stewardship in Action</strong></p><p>Proverbs 21:20 says, <em>\"The wise store up choice food and olive oil, but fools gulp theirs down.\"</em> Good inventory management is literally biblical wisdom — having enough on hand, stored carefully, ready when needed. Whether it's a household pantry or a 500,000-square-foot distribution center, the principle is the same: thoughtful preparation honors God and serves others well.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046d0006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046t0009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Inventory and warehouse management might sound like a behind-the-scenes topic, but it's one of the most critical links in any supply chain. Without it, even the most brilliantly designed product never reliably reaches the person who needs it.</p>\n<p>You've now seen how engineering principles — from multiscale modeling to optimization — combine with practical tools like the OCV method to create systems that are orderly, efficient, and purposeful. And you've seen how these systems reflect something deeper: a calling to steward resources wisely, serve others faithfully, and bring God's order into every corner of the work we do.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046a0001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Inventory Types",
+      "html": "<p><strong>Match each scenario to the correct inventory type.</strong></p><ul><li>A car factory has 500 steel sheets waiting to be cut and shaped. → <strong>Raw Materials</strong></li><li>A batch of sneakers is halfway through the stitching machine. → <strong>Work-in-Progress (WIP)</strong></li><li>A shelf of packaged cereal boxes ready for grocery store delivery. → <strong>Finished Goods</strong></li><li>A supply closet stocked with replacement conveyor belts and lubricant. → <strong>MRO Supplies</strong></li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046a0002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: OCV in Practice",
+      "html": "<p><strong>Scenario:</strong> A school supply company keeps running out of backpacks every August, right before the school year starts, even though they have plenty of warehouse space.</p><p><strong>Try applying the OCV method:</strong></p><ul><li><strong>Objective:</strong> Ensure enough backpacks are in stock to meet back-to-school demand without running out.</li><li><strong>Constraints:</strong> Budget for purchasing inventory, lead time from the supplier (how long it takes to get more backpacks once ordered), available shelf space, and the seasonal nature of demand.</li><li><strong>Variables:</strong> When to place the reorder, how many units to order at once, which supplier to use, and how to forecast demand based on previous years' sales data.</li></ul><p>Notice how working through OCV reveals that the solution isn't just \"order more\" — it's about <em>when</em> to order and <em>how much</em>, based on real data and clear constraints.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c046a0003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Multiscale Thinking",
+      "html": "<p><strong>Question:</strong> A grocery store notices it frequently runs out of a popular brand of orange juice. Using multiscale modeling, describe what you would investigate at each scale.</p><ul><li><strong>Macro scale:</strong> Is there a supply chain disruption? Did the orange harvest fail? Is the supplier behind on deliveries across the entire region?</li><li><strong>Meso scale:</strong> Is the orange juice stored in a hard-to-reach area of the warehouse? Is the reorder system set up correctly? Are there enough staff to restock shelves quickly?</li><li><strong>Micro scale:</strong> Are individual cartons being mislabeled or placed in the wrong zone? Is the barcode scanner misreading the product code during inventory counts?</li></ul><p>The real cause could be at any level — or at all three. That's why engineers examine every scale before choosing a fix.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

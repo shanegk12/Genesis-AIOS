@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrepreneurship Simulator – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+  }
+  #app {
+    width: 100%;
+    max-width: 720px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(27,58,92,0.13);
+    overflow: hidden;
+  }
+  .header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.3px; }
+  .header .sub { font-size: 0.78rem; color: #C9A84C; font-weight: 600; margin-top: 2px; }
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.18);
+    border-radius: 8px;
+    height: 7px;
+    width: 140px;
+    overflow: hidden;
+  }
+  .progress-bar-inner {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.4s;
+  }
+  .screen { display: none; padding: 28px 24px 24px; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-icon { font-size: 3rem; text-align: center; margin-bottom: 10px; }
+  .intro-title { font-size: 1.35rem; font-weight: 800; color: #1B3A5C; text-align: center; margin-bottom: 8px; }
+  .intro-desc { font-size: 0.97rem; color: #2c4a6b; text-align: center; line-height: 1.6; margin-bottom: 22px; }
+  .intro-steps {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .step-pill {
+    background: #1B3A5C; color: #C9A84C; border-radius: 20px;
+    padding: 7px 16px; font-size: 0.88rem; font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .step-pill span { color: #fff; font-weight: 500; }
+  .btn {
+    display: block; width: 100%; padding: 14px;
+    background: #C9A84C; color: #1B3A5C; border: none;
+    border-radius: 10px; font-size: 1rem; font-weight: 800;
+    cursor: pointer; transition: background 0.18s, transform 0.1s;
+    text-align: center;
+  }
+  .btn:hover { background: #b8913b; }
+  .btn:active { transform: scale(0.98); }
+  .btn-secondary {
+    background: #e8edf3; color: #1B3A5C;
+  }
+  .btn-secondary:hover { background: #d4dce8; }
+
+  /* SCENARIO */
+  .scenario-phase {
+    background: #1B3A5C; color: #C9A84C;
+    border-radius: 8px; padding: 6px 14px;
+    font-size: 0.82rem; font-weight: 700;
+    display: inline-block; margin-bottom: 12px; letter-spacing: 0.5px;
+  }
+  .scenario-title {
+    font-size: 1.1rem; font-weight: 800; color: #1B3A5C; margin-bottom: 8px;
+  }
+  .scenario-text {
+    font-size: 0.95rem; color: #2c4a6b; line-height: 1.65;
+    background: #f7f9fc; border-radius: 10px; padding: 14px 16px;
+    margin-bottom: 18px; border-left: 4px solid #C9A84C;
+  }
+  .choices { display: flex; flex-direction: column; gap: 11px; margin-bottom: 6px; }
+  .choice-btn {
+    background: #f7f9fc; border: 2px solid #d2dce8;
+    border-radius: 10px; padding: 13px 16px;
+    font-size: 0.95rem; color: #1B3A5C; cursor: pointer;
+    text-align: left; font-weight: 600;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .choice-btn:hover { border-color: #C9A84C; background: #fffbf0; }
+  .choice-btn .choice-letter {
+    background: #1B3A5C; color: #C9A84C;
+    border-radius: 50%; width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+  }
+  .choice-btn.correct { background: #e6f7ec; border-color: #2ecc71; }
+  .choice-btn.wrong { background: #fdecea; border-color: #e74c3c; }
+  .choice-btn.correct .choice-letter { background: #2ecc71; color: #fff; }
+  .choice-btn.wrong .choice-letter { background: #e74c3c; color: #fff; }
+  .choice-btn:disabled { cursor: default; }
+  .feedback-box {
+    border-radius: 10px; padding: 13px 16px; margin-top: 14px;
+    font-size: 0.93rem; line-height: 1.55; font-weight: 600; display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.good { background: #e6f7ec; color: #1a6b3a; border: 1.5px solid #2ecc71; }
+  .feedback-box.bad { background: #fdecea; color: #922b21; border: 1.5px solid #e74c3c; }
+  .pts-badge {
+    display: inline-block; background: #C9A84C; color: #1B3A5C;
+    border-radius: 20px; padding: 2px 11px; font-size: 0.82rem; font-weight: 800;
+    margin-left: 8px;
+  }
+  .next-row { margin-top: 16px; }
+
+  /* SCORE */
+  .score-icon { font-size: 3.5rem; text-align: center; margin-bottom: 6px; }
+  .score-title { font-size: 1.4rem; font-weight: 800; color: #1B3A5C; text-align: center; margin-bottom: 4px; }
+  .score-subtitle { font-size: 0.95rem; color: #4a6a8a; text-align: center; margin-bottom: 20px; }
+  .score-circle {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: #1B3A5C; margin: 0 auto 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .score-number { font-size: 2.1rem; font-weight: 900; color: #C9A84C; }
+  .score-total { font-size: 0.82rem; color: #aec4d9; }
+  .score-message {
+    text-align: center; font-size: 1rem; font-weight: 700; color: #1B3A5C;
+    background: #f7f9fc; border-radius: 10px; padding: 14px 18px;
+    margin-bottom: 20px; border-left: 4px solid #C9A84C;
+    line-height: 1.55;
+  }
+  .summary-list { margin-bottom: 20px; }
+  .summary-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 8px; margin-bottom: 7px;
+    font-size: 0.9rem;
+  }
+  .summary-item.pass { background: #e6f7ec; color: #1a6b3a; }
+  .summary-item.fail { background: #fdecea; color: #922b21; }
+  .summary-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .summary-label { font-weight: 700; flex: 1; }
+  .summary-pts { font-weight: 800; }
+  .concept-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: #f7f9fc; border-radius: 10px; padding: 11px 14px;
+    margin-bottom: 8px; border: 1.5px solid #e2e8f0;
+  }
+  .concept-icon { font-size: 1.2rem; }
+  .concept-text { font-size: 0.88rem; color: #1B3A5C; font-weight: 600; }
+
+  /* stepper */
+  .step-counter {
+    font-size: 0.82rem; color: #7a9bbf; font-weight: 600; text-align: right;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1rem; }
+    .intro-title { font-size: 1.15rem; }
+    .screen { padding: 20px 16px 18px; }
+    .progress-bar-wrap { width: 90px; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div>
+      <div class="header h1" style="font-size:1.1rem;font-weight:800;color:#fff;">🏢 Creationeering™</div>
+      <div class="sub">Entrepreneurship Simulator</div>
+    </div>
+    <div>
+      <div style="font-size:0.75rem;color:#aec4d9;margin-bottom:4px;text-align:right;" id="progressLabel">Step 1 of 8</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-inner" id="progressBar" style="width:12.5%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">💡</div>
+    <div class="intro-title">Launch Your Business!</div>
+    <div class="intro-desc">
+      You're about to launch a student business using the <strong>Creationeering™</strong> model.<br>
+      Make smart decisions at each stage — from planning to marketing — and grow your company God-centered and strong!
+    </div>
+    <div class="intro-steps">
+      <div class="step-pill">🙏 <span>Pray</span></div>
+      <div class="step-pill">🧠 <span>Think</span></div>
+      <div class="step-pill">🔨 <span>Create</span></div>
+      <div class="step-pill">✨ <span>Give Glory</span></div>
+    </div>
+    <div style="background:#fffbf0;border-radius:10px;padding:12px 16px;margin-bottom:22px;border-left:4px solid #C9A84C;font-size:0.88rem;color:#5a4200;font-style:italic;">
+      "Trust in the Lord forever, for the Lord God is an everlasting rock." — Isaiah 26:4
+    </div>
+    <button class="btn" onclick="startGame()">Start the Simulation →</button>
+  </div>
+
+  <!-- SCENARIO SCREEN -->
+  <div class="screen" id="screen-scenario">
+    <div class="step-counter" id="stepCounter"></div>
+    <div class="scenario-phase" id="scenPhase"></div>
+    <div class="scenario-title" id="scenTitle"></div>
+    <div class="scenario-text" id="scenText"></div>
+    <div class="choices" id="choicesContainer"></div>
+    <div class="feedback-box" id="feedbackBox"></div>
+    <div class="next-row">
+      <button class="btn" id="nextBtn" onclick="nextStep()" style="display:none;">Continue →</button>
+    </div>
+  </div>
+
+  <!-- SCORE SCREEN -->
+  <div class="screen" id="screen-score">
+    <div class="score-icon" id="scoreIcon">🏆</div>
+    <div class="score-title" id="scoreTitle">Business Summary</div>
+    <div class="score-subtitle">Here's how your company performed:</div>
+    <div class="score-circle">
+      <div class="score-number" id="scoreNumber">0</div>
+      <div class="score-total" id="scoreTotal">/ 80 pts</div>
+    </div>
+    <div class="score-message" id="scoreMessage"></div>
+    <div class="summary-list" id="summaryList"></div>
+    <div style="margin-bottom:14px;">
+      <div style="font-size:0.82rem;font-weight:800;color:#1B3A5C;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Key Concepts Covered</div>
+      <div class="concept-bar"><span class="concept-icon">💼</span><span class="concept-text">Entrepreneur: Starts/manages a business, takes risks for rewards</span></div>
+      <div class="concept-bar"><span class="concept-icon">⚖️</span><span class="concept-text">Stewardship: Responsible management of resources</span></div>
+      <div class="concept-bar"><span class="concept-icon">🛡️</span><span class="concept-text">Mitigation: Reducing risk through research & planning</span></div>
+      <div class="concept-bar"><span class="concept-icon">🏛️</span><span class="concept-text">Four Business Areas: HR, Finance, Marketing, Operations</span></div>
+    </div>
+    <button class="btn" onclick="restartGame()">Play Again 🔄</button>
+  </div>
+</div>
+
+<script>
+const scenarios = [
+  {
+    phase: "🙏 PRAY & PLAN",
+    title: "Step 1: What Kind of Entrepreneur Are You?",
+    text: "You want to start a small business selling handmade bookmarks at school. Before you do anything, what is the FIRST step a God-centered entrepreneur should take?",
+    choices: [
+      { letter: "A", text: "Start making products immediately to save time.", correct: false, feedback: "Not quite! Jumping in without a plan often leads to wasted materials and missed steps. The Creationeering™ model begins with prayer and reflection, not rushing." },
+      { letter: "B", text: "Pray, seek guidance, then carefully think and plan your next steps.", correct: true, feedback: "Great choice! The Creationeering™ model says to Pray → Think → Create → Give God the Glory. Starting with prayer and planning is the foundation of a God-centered business." },
+      { letter: "C", text: "Ask all your friends to buy your product right away.", correct: false, feedback: "Selling before planning can backfire! You need to think about your product, price, and customers first before marketing." },
+    ],
+    concept: "Pray, Think, Create Motto"
+  },
+  {
+    phase: "🧠 THINK",
+    title: "Step 2: Defining Your Business",
+    text: "Your bookmark business is taking shape. A classmate asks: 'What exactly IS an entrepreneur?' Which answer is most accurate?",
+    choices: [
+      { letter: "A", text: "Someone who only works for a big company and follows orders.", correct: false, feedback: "That describes an employee, not an entrepreneur. Entrepreneurs start or manage their OWN business and often take on financial risk." },
+      { letter: "B", text: "A person who starts or manages a business, often facing higher financial risks for the potential of big rewards.", correct: true, feedback: "Exactly right! Entrepreneurs take risks — but those risks can lead to big rewards. Your bookmark business is a perfect small-scale example!" },
+      { letter: "C", text: "A person who never faces any risks because they own their own company.", correct: false, feedback: "Actually, entrepreneurs face MORE risk than regular employees — but with the chance for greater rewards. Risk is part of the journey!" },
+    ],
+    concept: "Definition of Entrepreneur"
+  },
+  {
+    phase: "🧠 THINK",
+    title: "Step 3: Leadership Qualities",
+    text: "Your bookmark business is growing and you need to lead a small team of 3 classmates. Which set of actions shows the BEST leadership qualities?",
+    choices: [
+      { letter: "A", text: "Tell everyone what to do and ignore their ideas so things move faster.", correct: false, feedback: "That's more like a boss, not a leader. Good leaders listen to their team, share vision, and inspire others. They don't just give orders." },
+      { letter: "B", text: "Do all the work yourself so it gets done right.", correct: false, feedback: "Doing everything alone isn't leadership — it's a shortcut that won't scale. A leader delegates, trusts, and develops their team." },
+      { letter: "C", text: "Share a clear vision, listen to your team, delegate tasks, and encourage everyone.", correct: true, feedback: "Perfect! Great leaders cast vision, communicate clearly, delegate wisely, and build up their team. These are key leadership qualities for any God-centered business." },
+    ],
+    concept: "Leadership Qualities"
+  },
+  {
+    phase: "💰 FINANCE",
+    title: "Step 4: The Finance Department",
+    text: "You need to buy materials. You spend $20 on paper and $10 on ink. You sell 30 bookmarks at $2 each. What does your Finance department track — and did you make a profit?",
+    choices: [
+      { letter: "A", text: "Finance tracks income only. You made $60, so you're rich!", correct: false, feedback: "Finance tracks BOTH income AND expenses. You earned $60 but spent $30 on supplies, so your actual profit is $30. Always track both sides!" },
+      { letter: "B", text: "Finance tracks income and expenses. Revenue = $60, Costs = $30, Profit = $30.", correct: true, feedback: "Excellent stewardship! Finance is one of the four main areas of a biblical business. You responsibly tracked your money and earned a $30 profit — great work!" },
+      { letter: "C", text: "Finance only matters for big companies, not small businesses.", correct: false, feedback: "Every business — big or small — needs to track money. Stewardship means managing resources responsibly, and that starts with knowing your numbers." },
+    ],
+    concept: "Finance & Stewardship"
+  },
+  {
+    phase: "👥 HUMAN RESOURCES",
+    title: "Step 5: Human Resources (HR)",
+    text: "One of your team members keeps missing bookmark-making sessions. As the HR leader, what is the BEST response aligned with biblical principles?",
+    choices: [
+      { letter: "A", text: "Fire them immediately without any conversation.", correct: false, feedback: "That's hasty. Biblical stewardship includes caring for your team. A good HR approach starts with a respectful, honest conversation to understand the issue." },
+      { letter: "B", text: "Have a private, caring conversation, understand their situation, and offer a solution together.", correct: true, feedback: "That's exactly right! Human Resources in a biblical business means treating people with dignity, fairness, and compassion — just as we would want to be treated." },
+      { letter: "C", text: "Ignore the issue and do their work for them every time.", correct: false, feedback: "Ignoring the problem won't solve it. Good HR means addressing issues honestly and with care — for the health of the team AND the person." },
+    ],
+    concept: "HR in a Biblical Business"
+  },
+  {
+    phase: "📣 MARKETING",
+    title: "Step 6: Marketing Your Business",
+    text: "You want more people to know about your bookmarks. Your designs are unique — you created them yourself! What IMPORTANT legal concept should you know before sharing your designs?",
+    choices: [
+      { letter: "A", text: "Once I share my design, anyone can copy it — that's just how it works.", correct: false, feedback: "Not true! Your original designs are Intellectual Property — creations of the mind protected by legal rules. You have rights to your own creative work." },
+      { letter: "B", text: "My original bookmark designs are Intellectual Property and may be protected by copyright.", correct: true, feedback: "Spot on! Intellectual Property refers to creations of the mind — like your designs, logos, and inventions — that are protected by law. Always protect your creative work!" },
+      { letter: "C", text: "Only big companies have intellectual property. Small creators don't need to worry.", correct: false, feedback: "Any creator — big or small — can have intellectual property. Your original ideas and designs belong to you and can be protected legally." },
+    ],
+    concept: "Intellectual Property"
+  },
+  {
+    phase: "🛡️ RISK & MITIGATION",
+    title: "Step 7: Managing Risk",
+    text: "A big craft store opens nearby, selling cheaper bookmarks. Your sales might drop. How do you BEST mitigate (reduce) this risk?",
+    choices: [
+      { letter: "A", text: "Panic and immediately close your business.", correct: false, feedback: "That's giving up too quickly! Risk mitigation means reducing — not avoiding — challenges. Research and adapt before deciding to quit." },
+      { letter: "B", text: "Do nothing and hope customers still buy from you.", correct: false, feedback: "Doing nothing is the riskiest choice! Mitigation means actively taking steps to reduce negative outcomes — through research, creativity, and smart decisions." },
+      { letter: "C", text: "Research what makes your bookmarks unique, improve your marketing, and add new designs to stand out.", correct: true, feedback: "Excellent! Mitigation means reducing the severity of a risk through research and smart action. Your faith-guided, creative response shows real entrepreneurial thinking!" },
+    ],
+    concept: "Risk Mitigation"
+  },
+  {
+    phase: "✨ GIVE GOD THE GLORY",
+    title: "Step 8: Completing the Motto",
+    text: "Your bookmark business is thriving! You've prayed, thought, and created. What is the FINAL step in the Creationeering™ motto — and why does it matter?",
+    choices: [
+      { letter: "A", text: "Take all the credit — you worked hard and deserve it!", correct: false, feedback: "While hard work matters, the Creationeering™ model reminds us to stay humble and recognize that our gifts and opportunities come from God. Give Him the glory!" },
+      { letter: "B", text: "Give God the Glory — acknowledge that your gifts, ideas, and success come from Him.", correct: true, feedback: "Perfect! The complete motto is: Pray → Think → Create → Give God the Glory. A God-centered entrepreneur stays humble, grateful, and focused on serving others and honoring God." },
+      { letter: "C", text: "Move on to the next business immediately — there's always more to achieve.", correct: false, feedback: "Ambition is great, but pausing to reflect and give thanks is part of the Creationeering™ model. Gratitude keeps us grounded and focused on what truly matters." },
+    ],
+    concept: "Pray, Think, Create, Give God the Glory"
+  }
+];
+
+let currentStep = 0;
+let score = 0;
+let answered = false;
+let results = [];
+
+function startGame() {
+  currentStep = 0;
+  score = 0;
+  answered = false;
+  results = [];
+  showScreen('screen-scenario');
+  renderScenario();
+}
+
+function renderScenario() {
+  const s = scenarios[currentStep];
+  document.getElementById('stepCounter').textContent = `Question ${currentStep + 1} of ${scenarios.length}`;
+  document.getElementById('scenPhase').textContent = s.phase;
+  document.getElementById('scenTitle').textContent = s.title;
+  document.getElementById('scenText').textContent = s.text;
+
+  const container = document.getElementById('choicesContainer');
+  container.innerHTML = '';
+  s.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.disabled = false;
+    btn.innerHTML = `<span class="choice-letter">${c.letter}</span><span>${c.text}</span>`;
+    btn.onclick = () => handleChoice(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('feedbackBox').className = 'feedback-box';
+  document.getElementById('feedbackBox').textContent = '';
+  document.getElementById('nextBtn').style.display = 'none';
+  answered = false;
+
+  updateProgress(currentStep + 1, scenarios.length);
+}
+
+function handleChoice(idx) {
+  if (answered) return;
+  answered = true;
+
+  const s = scenarios[currentStep];
+  const choice = s.choices[idx];
+  const buttons = document.querySelectorAll('.choice-btn');
+  const pts = 10;
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (s.choices[i].correct) btn.classList.add('correct');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (choice.correct) {
+    buttons[idx].classList.add('correct');
+    score += pts;
+    fb.className = 'feedback-box good show';
+    fb.innerHTML = `✅ <strong>Correct!</strong><span class="pts-badge">+${pts} pts</span><br>${choice.feedback}`;
+    results.push({ label: s.concept, pass: true, pts: pts });
+  } else {
+    buttons[idx].classList.add('wrong');
+    fb.className = 'feedback-box bad show';
+    fb.innerHTML = `❌ <strong>Not quite.</strong><span class="pts-badge">+0 pts</span><br>${choice.feedback}`;
+    results.push({ label: s.concept, pass: false, pts: 0 });
+  }
+
+  document.getElementById('nextBtn').style.display = 'block';
+}
+
+function nextStep() {
+  currentStep++;
+  if (currentStep >= scenarios.length) {
+    showScore();
+  } else {
+    renderScenario();
+  }
+}
+
+function showScore() {
+  showScreen('screen-score');
+  const total = scenarios.length * 10;
+  const pct = score / total;
+
+  document.getElementById('scoreNumber').textContent = score;
+  document.getElementById('scoreTotal').textContent = `/ ${total} pts`;
+
+  let icon, title, message;
+  if (pct >= 0.9) {
+    icon = '🏆'; title = 'Outstanding Entrepreneur!';
+    message = 'Incredible work! You demonstrated deep understanding of entrepreneurship, biblical stewardship, and the Creationeering™ model. You\'re ready to launch your own business!';
+  } else if (pct >= 0.7) {
+    icon = '🌟'; title = 'Strong Entrepreneur!';
+    message = 'Great job! You showed solid knowledge of key concepts like mitigation, leadership, and the four business areas. Review any missed questions to level up!';
+  } else if (pct >= 0.5) {
+    icon = '📈'; title = 'Growing Entrepreneur!';
+    message = 'Good effort! You\'re building your entrepreneurship skills. Review the concepts you missed — especially the Pray, Think, Create motto and business areas.';
+  } else {
+    icon = '💪'; title = 'Keep Building!';
+    message = 'You\'ve started your entrepreneurship journey! Review the lesson on Creationeering™, the four business areas, and risk mitigation, then try again!';
+  }
+
+  document.getElementById('scoreIcon').textContent = icon;
+  document.getElementById('scoreTitle').textContent = title;
+  document.getElementById('scoreMessage').textContent = message;
+
+  const list = document.getElementById('summaryList');
+  list.innerHTML = '';
+  results.forEach(r => {
+    const div = document.createElement('div');
+    div.className = `summary-item ${r.pass ? 'pass' : 'fail'}`;
+    div.innerHTML = `<span class="summary-icon">${r.pass ? '✅' : '❌'}</span><span class="summary-label">${r.label}</span><span class="summary-pts">${r.pts}/10</span>`;
+    list.appendChild(div);
+  });
+
+  updateProgress(scenarios.length, scenarios.length);
+}
+
+function updateProgress(step, total) {
+  const pct = (step / total) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `Step ${Math.min(step, total)} of ${total}`;
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function restartGame() {
+  showScreen('screen-intro');
+  document.getElementById('progressBar').style.width = '12.5%';
+  document.getElementById('progressLabel').textContent = 'Step 1 of 8';
+}
+</script>
+</body>
+</html>

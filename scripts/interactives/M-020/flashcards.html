@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build 3: CAD Analysis of Design Parameters — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Build 3: CAD Analysis of Design Parameters</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Rapid Iteration", "definition": "The process of quickly making many design changes and testing them, often using digital tools, to find the best solution efficiently."}, {"term": "One Factor at a Time (OFAT)", "definition": "A strategy used in the Mark 1 phase to test one variable at a time (like wheel diameter) to understand its individual effect."}, {"term": "Ground Truth", "definition": "The scientifically verified findings from individual variable testing in the Mark 1 phase, providing a reliable baseline."}, {"term": "Synthesis", "definition": "The rigorous process of combining verified findings from the OFAT tests into a superior physical prototype, as done in the Mark 2 phase."}, {"term": "Computational Modeling", "definition": "Using computer programs to create a digital version of a design and simulate its behavior, allowing for rapid testing and analysis."}, {"term": "Digital Twin", "definition": "A virtual model of a physical object or system that acts as a digital laboratory, allowing for quick adjustments and predictions without physical building."}, {"term": "Computational Mousetrap Car Model", "definition": "An interactive digital simulation that allows you to adjust design variables and instantly see the predicted performance of your mousetrap car."}, {"term": "Objective-Constraint-Variable (OCV) sliders", "definition": "Interactive controls within the digital model that allow you to change design parameters and see how they affect the vehicle's performance."}, {"term": "Pareto Frontier", "definition": "The 'sweet spot' in design where you achieve maximum efficiency or optimal performance for your given constraints."}, {"term": "Steward of the Joule", "definition": "An engineer who responsibly manages and optimizes energy use in their designs, reflecting a mindful approach to resources."}, {"term": "Resource Constraint", "definition": "Limitations on materials, time, and other assets available for a project, which computational modeling helps to minimize."}, {"term": "Mark 3: Computational Analysis", "definition": "The third and most advanced generation of mousetrap car design, focusing on digital modeling and simulation."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

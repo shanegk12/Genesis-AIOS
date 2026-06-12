@@ -57,6 +57,90 @@
       },
       "answer": "C",
       "explanation": "Multiscale Modeling connects observations at a large, visible (macro) scale to the underlying causes at a tiny, invisible (atomic) scale to understand a system's performance."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the OCV (Objective, Constraints, Variables) method, what does a 'Constraint' refer to?",
+      "options": {
+        "A": "The specific goal you are trying to achieve.",
+        "B": "The changeable factors you can adjust.",
+        "C": "The limitations or restrictions that must be considered.",
+        "D": "The final validated performance result."
+      },
+      "answer": "C",
+      "explanation": "Constraints are the limitations or restrictions that must be considered when designing or optimizing a system."
+    },
+    {
+      "type": "comprehension",
+      "question": "When using the OCV method to optimize a design, what are 'Variables'?",
+      "options": {
+        "A": "The fixed rules that cannot be changed.",
+        "B": "The measurable factors that can be adjusted.",
+        "C": "The ultimate purpose of the design.",
+        "D": "The problems encountered during testing."
+      },
+      "answer": "B",
+      "explanation": "Variables are the changeable factors or parameters within a system that can be adjusted to achieve the objective."
+    },
+    {
+      "type": "comprehension",
+      "question": "A Creationeer wants to ensure their newly designed water pump will consistently work without breaking down for many years. Which key vocabulary term are they focusing on?",
+      "options": {
+        "A": "Efficiency",
+        "B": "Optimization",
+        "C": "Reliability",
+        "D": "Specification"
+      },
+      "answer": "C",
+      "explanation": "Reliability is the probability that a system will perform its intended function without failure for a specified period under given conditions."
+    },
+    {
+      "type": "application",
+      "question": "A team is designing a new solar panel. Panel A converts 20% of sunlight into electricity. Panel B converts 15% of sunlight into electricity, but costs half as much to produce. If the team's primary goal is to get the most electricity from the available sunlight, which panel demonstrates better **efficiency** in that specific aspect?",
+      "options": {
+        "A": "Panel A",
+        "B": "Panel B",
+        "C": "Both panels are equally efficient.",
+        "D": "Neither panel is efficient."
+      },
+      "answer": "A",
+      "explanation": "Efficiency measures how well energy or resources are used to achieve a desired outcome, and Panel A converts more sunlight into electricity."
+    },
+    {
+      "type": "application",
+      "question": "Before building a full-scale prototype of a new bridge, engineers often create computer models to test how it will withstand high winds and heavy traffic. This approach is an example of what type of Performance Validation?",
+      "options": {
+        "A": "Real-world physical testing",
+        "B": "Destructive testing",
+        "C": "Simulated validation",
+        "D": "Post-production evaluation"
+      },
+      "answer": "C",
+      "explanation": "Simulated validation uses computer models or virtual environments to test performance before physical construction."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer diligently tests their new safety mechanism for a playground swing, ensuring it meets all safety standards. Why is this thorough Performance Validation important, beyond just meeting the requirements?",
+      "options": {
+        "A": "It makes the swing look more appealing.",
+        "B": "It protects the children who will use the swing.",
+        "C": "It reduces the cost of materials for the swing.",
+        "D": "It makes the swing easier to assemble."
+      },
+      "answer": "B",
+      "explanation": "Validation protects the people who will use your work by ensuring the design is safe and functional."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that 'an engineer's word should be trustworthy, just as Scripture calls us to let our yes be yes.' How does the process of Performance Validation specifically help a Creationeer live out this biblical principle of trustworthiness and excellence?",
+      "options": {
+        "A": "It encourages them to always choose the cheapest materials.",
+        "B": "It provides objective evidence that their design actually performs as promised.",
+        "C": "It allows them to skip the design phase and go straight to building.",
+        "D": "It ensures they only work on projects that are easy to validate."
+      },
+      "answer": "B",
+      "explanation": "Performance Validation provides concrete evidence that a design fulfills its stated promises, demonstrating trustworthiness and excellence."
     }
   ]
 }

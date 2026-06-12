@@ -1,0 +1,327 @@
+[
+  {
+    "id": "c080t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>The Ethics of End-of-Life (EOL) Responsibility</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored Total Cost of Ownership — the idea that every product carries costs far beyond its sticker price. Today, we're moving to the very end of that lifecycle, and to a new beginning: the Creationeering™ phase of <strong>Death &amp; Recycling</strong>.</p><p>This phase isn't just about throwing things away. It's about our ethical responsibility to God's creation, even when a product reaches its end of life. You'll explore how engineers and businesses think about what happens to products after their useful life is over, and how a biblical worldview shapes our approach to this critical stage. Just as God recycles and renews in nature — rivers returning to the sea, seasons cycling through year after year — we, as His image-bearers, have a role in ensuring that the resources He's given us are stewarded wisely.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Identify the eight steps of the Creationeering™ engineering process, with a focus on Death &amp; Recycling.</li><li>Explain the concept of end-of-life responsibility in product design.</li><li>Connect large-scale observations of material degradation to atomic-level causes using multiscale modeling.</li><li>Apply the OCV method to optimize product end-of-life strategies.</li><li>Articulate the biblical mandate for stewardship in the Death &amp; Recycling phase of Creationeering™.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Death & Recycling",
+          "definition": "The Creationeering™ phase where a product's materials are either discarded or reprocessed into new products."
+        },
+        {
+          "term": "End-of-Life (EOL)",
+          "definition": "The point at which a product is no longer functional or useful in its original form."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at large scales to their underlying causes at smaller, often atomic, scales."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "A desired outcome or goal in a design problem."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that must be satisfied in a design problem."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A parameter that can be controlled or changed by the designer in a design problem."
+        },
+        {
+          "term": "Recycling",
+          "definition": "Converting an existing product or material into a new product."
+        },
+        {
+          "term": "Reprocessing",
+          "definition": "Subjecting materials to a new process to prepare them for reuse or recycling."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>A Cycle of Renewal</h2><p>Before we dive into the engineering, let's start with a truth that's been around far longer than any product manual. Ecclesiastes 1:4–7 describes the endless, repetitive cycles of nature — seasons turning, winds circling, rivers flowing to the sea and then returning again. Everything comes back around.</p><p>This isn't just poetry. It's a design principle. God built renewal into the fabric of creation. Rivers don't simply disappear into the ocean; they evaporate, form clouds, fall as rain, and flow again. Carbon atoms in a fallen leaf become soil, then food, then living tissue. The material never stops moving — it just changes form.</p><p>That's the heartbeat behind Death &amp; Recycling in Creationeering™. When you design a product, you're not just thinking about how it works on day one. You're thinking about what happens to it on its last day — and what it becomes after that.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ecclesiastes 1:4–7</strong> — \"One generation passes away, and another generation comes; but the earth abides forever. The wind goes toward the south, and turns around to the north; the wind whirls about continually, and the wind returns again according to its circuits. All the rivers run into the sea, yet the sea is not full; to the place from which the rivers come, there they return again.\"</p><p>God designed creation to cycle and renew. As engineers, we're invited to follow that same pattern.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Does It Mean for a Product to \"Die\"?</h2><p>In Creationeering™, a product reaches its <strong>end of life (EOL)</strong> when it can no longer serve its original purpose. Think about a worn-out sneaker with a split sole, a cracked tablet screen, or an old refrigerator that costs more to repair than it's worth. These products haven't literally died — but their useful life is over.</p><p>Picture a well-loved skateboard. After hundreds of rides, the wheels are worn flat, the deck has a deep crack down the middle, and the bearings grind instead of spin. That skateboard has reached its EOL. But here's the question an engineer asks: what happens <em>next</em>?</p><p>At EOL, you're faced with two broad paths:</p><ul><li><strong>Discard</strong> — the product goes to a landfill, and its materials are lost.</li><li><strong>Recover</strong> — the materials are recycled or reprocessed into something new, re-entering the material stream.</li></ul><p>The second path is harder. It takes planning, engineering, and intentionality. But it's the path that honors both good design and good stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram showing two end-of-life paths for a product: left side shows a product going into a landfill (discard path), right side shows materials being broken down and reprocessed into new products (recover path), with labeled arrows indicating each stage."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Engineering Starts at the End</h2><p>Here's something that surprises a lot of new engineers: responsible product design actually begins with the end in mind. Before a product is ever built, a thoughtful engineer is already asking, \"How will this be taken apart? What will happen to these materials in 10 years?\" That kind of forward thinking is what separates good design from great design.</p><p>This is called <strong>design for end-of-life</strong>, and it's built into the Creationeering™ process from the very start. The Death &amp; Recycling phase isn't tacked on at the end — it's baked into every decision along the way.</p><h3>The Eight Steps of Creationeering™</h3><p>The Creationeering™ engineering process follows eight phases. Each phase builds on the last, and Death &amp; Recycling is the final phase — the one that closes the loop and feeds back into the beginning of a new cycle:</p><ul><li>Identify the Problem</li><li>Research</li><li>Brainstorm Solutions</li><li>Select a Solution</li><li>Prototype</li><li>Test &amp; Evaluate</li><li>Manufacture &amp; Distribute</li><li><strong>Death &amp; Recycling</strong></li></ul><p>That last step is the one most engineers forget about — and the one that matters most for stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture — and the Small One: Multiscale Modeling</h2><p>When a material breaks down — a rubber sole cracking, a metal frame rusting, a plastic casing becoming brittle — what you're seeing on the outside is the result of changes happening at the atomic level on the inside. <strong>Multiscale modeling</strong> is the engineering tool that connects those two worlds.</p><p>Think of it like this: you see a wooden fence rotting at the bottom. That's the <em>macro</em> (large) scale — you can see it with your eyes. But the actual cause is happening at the <em>micro</em> and <em>atomic</em> scale — water molecules are breaking down the cellulose fibers in the wood, one bond at a time. Multiscale modeling helps engineers trace that connection: what we observe on the outside is caused by what's happening at the smallest scales inside.</p><p>Why does this matter for EOL? Because understanding <em>why</em> a material fails tells you how to design it differently, how long it will last, and what it will be like when it's time to recycle it. An engineer who understands the atomic behavior of a material can predict its lifespan and plan for its recovery before the product is ever sold.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Multiscale modeling diagram showing three zoom levels: a macro photo of a corroded metal surface, a microscale view of grain boundaries in the metal structure, and an atomic-scale illustration of iron and oxygen atoms bonding during oxidation — with arrows connecting each scale."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Optimizing End-of-Life Decisions</h2><p>Every engineering decision — including how to handle a product at end of life — can be analyzed using the <strong>OCV method</strong>: Objectives, Constraints, and Variables. This framework helps you think clearly about what you're trying to accomplish and what limits your choices.</p><h3>Objectives</h3><p>An <strong>objective</strong> is what you want to achieve. For EOL decisions, your objectives might include minimizing waste sent to landfills, maximizing the recovery of valuable materials, or reducing environmental impact. Objectives are your targets — the outcomes you're aiming for.</p><h3>Constraints</h3><p>A <strong>constraint</strong> is a rule or limitation you can't ignore. You might be constrained by cost (you can only spend so much on recycling), by technology (some materials are hard to separate), or by regulation (certain materials must be disposed of in specific ways). Constraints define the boundaries of your solution.</p><h3>Variables</h3><p>A <strong>variable</strong> is something you can actually control or change. In EOL design, variables might include the type of material you use, how components are connected, or whether your product is designed to be disassembled easily. Variables are your levers — the things you adjust to move toward your objective while staying within your constraints.</p><p>Together, OCV gives you a structured way to make smarter decisions about what happens to your product at the end of its life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in Action:</strong> When analyzing any EOL scenario, write out your Objectives, Constraints, and Variables before jumping to a solution. This prevents you from either ignoring important limits or giving up on goals that are actually achievable. It's the same disciplined thinking a structural engineer uses before designing a bridge — you don't guess, you map the problem first.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Is an Engineering Value</h2><p>It would be easy to think of stewardship as a purely spiritual idea — something for sermons but not for engineering labs. But the truth is that stewardship is one of the most practical engineering values there is. When you design a product that's easy to recycle, you're reducing material waste. When you choose materials that can be reprocessed, you're lowering long-term costs. When you plan for end of life from day one, you're making a product that's genuinely better.</p><p>God called humanity to <em>tend and keep</em> the garden (Genesis 2:15). That mandate didn't expire. In a world full of engineered products, tending and keeping looks like designing for recyclability, minimizing toxic materials, and thinking past the sale. It looks like treating the resources God provided — metals, polymers, rare earth elements — as borrowed, not owned.</p><p>The engineer who takes EOL responsibility seriously isn't just being environmentally conscious. They're being faithful.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Many designers treat end-of-life as someone else's problem — \"the customer will figure it out.\" But once a product is out in the world, its materials are still part of God's creation. Ignoring EOL doesn't make the responsibility go away; it just transfers the cost to communities, ecosystems, and future generations. Great engineers own the full lifecycle of what they build.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Recycling vs. Reprocessing — What's the Difference?</h2><p>These two terms are related but distinct, and knowing the difference matters when you're designing for EOL.</p><ul><li><strong>Recycling</strong> means taking a material and converting it into a new product. A plastic bottle becomes a fleece jacket. An aluminum can becomes a new can. The material changes form but stays in use.</li><li><strong>Reprocessing</strong> means putting a material through a new process to prepare it for reuse — often a step that comes <em>before</em> recycling. Melting down scrap metal, chemically breaking down polymers, or shredding circuit boards are all forms of reprocessing.</li></ul><p>Both are better than landfill. And both require intentional design choices made long before a product ever reaches its end of life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Infographic comparing recycling and reprocessing: on the left, a flowchart showing a used plastic bottle being cleaned, shredded, and melted into pellets, then formed into a new product (recycling); on the right, a flowchart showing scrap metal being sorted, smelted, and refined into raw material ready for manufacturing (reprocessing). Both flows converge into a 'New Product' box."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World EOL Engineering Challenges",
+      "html": "<p>End-of-life engineering is one of the fastest-growing fields in product design, and it comes with some genuinely hard problems. Here are a few that real engineers are working on right now:</p><ul><li><strong>E-waste</strong> — Electronic waste is one of the fastest-growing waste streams in the world. Smartphones contain dozens of materials — gold, cobalt, lithium, rare earth elements — that are incredibly valuable but extremely difficult to separate. Designing phones for disassembly is an active engineering challenge.</li><li><strong>Composite materials</strong> — Carbon fiber is strong and light, which makes it great for aerospace and sports equipment. But carbon fiber composites are nearly impossible to recycle in their current form. Engineers are working on new bonding methods that allow composites to be separated without destroying the fibers.</li><li><strong>Lithium-ion batteries</strong> — The batteries that power electric vehicles and electronics contain lithium, cobalt, and nickel — all of which are mined at significant environmental cost. Designing batteries that can be safely disassembled and their materials recovered is a major engineering priority.</li></ul><p>These challenges show that Death &amp; Recycling isn't a simple checkbox — it's one of the most intellectually demanding phases of the entire engineering process.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c080t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Death &amp; Recycling is the phase where your engineering decisions either honor or ignore the responsibility that comes with creation. It's the final step of the Creationeering™ process — but it's also the step that loops back to the beginning, feeding recovered materials into new designs and new cycles.</p><p>You've learned that end-of-life planning starts at the design table, not the trash bin. Multiscale modeling helps you understand <em>why</em> materials degrade so you can predict their lifespan and recovery potential. The OCV method gives you a clear framework for making smart EOL decisions. And throughout it all, the biblical call to stewardship reminds you that what you build is made from resources that belong to God — and He cares what happens to them.</p><p>The best engineers don't just ask, \"Does this work?\" They ask, \"Does this work <em>well</em> — for the people who use it, for the communities around it, and for the creation it came from?\" That's the standard. That's Creationeering™.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

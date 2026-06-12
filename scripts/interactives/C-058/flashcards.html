@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Configuration Management and Baselines — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Configuration Management and Baselines</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Configuration Management", "definition": "The process of maintaining order, understanding what you have, and carefully managing changes to a project's parts and plans throughout its entire lifecycle."}, {"term": "Baselines", "definition": "A 'snapshot' or agreed-upon version of a design or system at a specific moment, used as a reference point for all future changes."}, {"term": "Configuration Items", "definition": "Any individual component, document, or piece of information that is part of a larger project and needs to be tracked and managed."}, {"term": "Change Control", "definition": "The organized process of reviewing, approving, and tracking any modifications made to a design or system after a baseline has been established."}, {"term": "Version Control", "definition": "A system used to track all modifications made to files and documents over time, allowing engineers to see who made what changes and when."}, {"term": "Assembly Phase (in Creationeering)", "definition": "The stage in a project where individual parts and components start coming together, making Configuration Management especially important to prevent confusion."}, {"term": "System Integrity", "definition": "Ensuring that a system or design remains whole, consistent, and functions correctly even after changes have been made."}, {"term": "Traceability of Changes", "definition": "The ability to follow the history of every modification made to a design or system, understanding why and when each change occurred."}, {"term": "Biblical Stewardship (in Creationeering)", "definition": "The principle of diligently and wisely managing the resources, designs, and projects entrusted to us, reflecting God's order and care."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

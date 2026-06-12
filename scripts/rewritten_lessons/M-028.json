@@ -1,0 +1,292 @@
+[
+  {
+    "id": "m028t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Inventory Checks and Verifications</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson, you explored how to select and prepare the raw materials for your mousetrap car — the right wood for the chassis, the ideal string for the drive system, and the perfect wheels for efficient motion. Now that your materials are gathered, there is one critical step before you start building: making sure every single component is accounted for and meets the necessary standards.</p><p>This lesson dives into the essential practices of inventory checks and verifications. You will learn how to systematically inspect and confirm that all your mousetrap car parts are present, correct, and ready to use. Think of it like a pilot running through a pre-flight checklist — no detail is too small, because a missed component on the ground can become a big problem in the air. These steps are part of the Procurement phase of Creationeering, and they set the foundation for a successful build.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Identify all components of your mousetrap car against a Bill of Materials.</li><li>Perform visual and dimensional checks on raw materials and purchased parts.</li><li>Understand the importance of quality control in the Procurement phase.</li><li>Explain how material verification impacts the overall performance of your mousetrap car.</li><li>Apply principles of biblical stewardship to the careful management and verification of your project resources.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Inventory",
+          "definition": "A detailed list of all items, goods, or materials on hand."
+        },
+        {
+          "term": "Verification",
+          "definition": "The process of confirming that something is true, accurate, or meets specified standards."
+        },
+        {
+          "term": "Quality Control",
+          "definition": "The process of ensuring that products or services meet specified standards and requirements."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The Creationeering phase that involves obtaining and preparing the materials and equipment needed for a project."
+        },
+        {
+          "term": "Bill of Materials (BOM)",
+          "definition": "A comprehensive list of the raw materials, components, and instructions needed to construct, manufacture, or repair a product."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable variation in a dimension or property of a part or material from its specified value."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Craftsmanship as a Calling</h2><p>Before there were engineering manuals or quality checklists, God was already modeling meticulous, intentional craftsmanship. When He directed the building of the Tabernacle, He didn't leave anything to chance. He handpicked skilled craftsmen, filled them with wisdom, and gave precise specifications for every material and measurement involved.</p><p>Exodus 35:30-35 describes how God filled Bezalel and Oholiab with His Spirit — giving them skill, understanding, and knowledge for every kind of craft work. Gold, silver, stone-cutting, woodcarving, weaving — every detail was intentional. Nothing was haphazard. That same spirit of careful, purposeful preparation is what you are practicing right now as you check your materials before building.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 35:31 (KJV)</strong> — \"And he hath filled him with the spirit of God, in wisdom, in understanding, and in knowledge, and in all manner of workmanship.\" When you carefully verify your materials, you are honoring that same tradition of skilled, God-honoring craftsmanship.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Bill of Materials?</h2><p>Every engineering project starts with a Bill of Materials, or BOM. Think of it as the master recipe for your mousetrap car — it lists every single ingredient you need before you start cooking. A complete BOM includes the name of each part, how many you need, the required dimensions or specifications, and where each part came from (purchased or made by hand).</p><p>Without a BOM, you might reach a critical step in your build and realize you are missing a wheel axle or that your wooden plank is two centimeters too short. That kind of surprise mid-build wastes time and can compromise your entire design. The BOM prevents that by giving you a clear, complete picture of what you need before a single piece is assembled.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample Bill of Materials table for a mousetrap car, showing columns for part name, quantity, dimensions, material type, and source (purchased or self-made)"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Running Your Inventory Check</h2><p>With your BOM in hand, you are ready to run a full inventory check. This means physically locating every part on your list and confirming it is present. Lay everything out on a clean, flat workspace so nothing gets overlooked. Check off each item one by one — do not rush this step.</p><h3>What to Look For</h3><p>As you check each item off your BOM, ask yourself these questions:</p><ul><li><strong>Is it here?</strong> — Simply confirm the part is physically present.</li><li><strong>Is the quantity correct?</strong> — Do you have the right number of each part? Four wheels, not three.</li><li><strong>Is the size right?</strong> — Measure key dimensions. A chassis that is 1 cm too short changes your car's balance and performance.</li><li><strong>Is the condition acceptable?</strong> — Check for warping, cracks, fraying, or other defects that could cause failure during the race.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Visual and Dimensional Checks</h2><p>There are two main types of checks you will perform on your parts: visual checks and dimensional checks.</p><h3>Visual Checks</h3><p>A visual check means you are using your eyes to look for obvious problems. Hold each piece up to the light. Look for splinters, bends, discoloration, or any damage that could weaken the part. For string and elastic components, look for fraying or uneven thickness. For wheels, check that the edges are smooth and that the hole for the axle is centered.</p><h3>Dimensional Checks</h3><p>A dimensional check means measuring a part and comparing it to the specification in your BOM. This is where your ruler or calipers come in. Every measurement has a tolerance — a small range of acceptable variation. For example, if your chassis plank should be 30 cm long, a tolerance of ±0.5 cm means anything from 29.5 cm to 30.5 cm is acceptable. If your part falls outside that range, it needs to be replaced or re-cut before you move forward.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student using a ruler and calipers to measure wooden mousetrap car components laid out on a table, with a checklist nearby"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Skipping dimensional checks because parts \"look fine.\" Even a small deviation in wheel diameter or axle length can cause your car to pull to one side or lose speed. Always measure — don't just eyeball it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Quality Control and Why It Matters</h2><p>Quality control — often called QC — is the practice of checking your work against a standard to make sure it meets requirements. In manufacturing, entire teams are dedicated to QC because one faulty part can cause a product to fail, sometimes with serious consequences. Your mousetrap car is no different.</p><p>Imagine building your entire car and then discovering at race time that one wheel wobbles because its axle hole is off-center. That wobble creates friction, friction steals energy, and your car slows down or veers off course. The fix would have taken 30 seconds during your inventory check — but now it could mean rebuilding part of your car.</p><p>Good quality control during the Procurement phase saves you time, materials, and frustration during the Build phase. It is the difference between a car that performs and one that breaks down on the starting line.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship of Your Materials</h2><p>Stewardship is a biblical principle that means taking careful, responsible care of what you have been given. When you verify your materials before building, you are practicing stewardship. You are making sure that nothing goes to waste, that every part is used intentionally, and that your resources are treated with respect.</p><p>This applies beyond mousetrap cars. Whether you are managing a budget, caring for equipment, or leading a team, the habit of checking, verifying, and being accountable for what is in your care is a mark of trustworthy character. Luke 16:10 reminds us that faithfulness in small things prepares us for greater responsibility. Your inventory checklist is a small thing — but doing it well is practicing faithfulness.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Build Tip:</strong> Create a physical checklist before your inventory check — either print your BOM or write it out. As you verify each part, physically check it off. This simple habit prevents the frustration of discovering a missing component after you have already started assembly.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Before you move into full assembly, take the time to complete these steps in order:</p><ul><li><strong>Step 1 — Pull your BOM:</strong> Make sure your Bill of Materials is complete and up to date with every part your design requires.</li><li><strong>Step 2 — Lay out all components:</strong> Organize your parts on a clean flat surface grouped by category (chassis parts, wheel assembly, drive system, etc.).</li><li><strong>Step 3 — Run your inventory check:</strong> Count each part and confirm quantities match your BOM.</li><li><strong>Step 4 — Perform visual checks:</strong> Inspect every part for visible damage, warping, or defects.</li><li><strong>Step 5 — Perform dimensional checks:</strong> Measure key components and confirm they fall within acceptable tolerances.</li><li><strong>Step 6 — Document any issues:</strong> Note any parts that need to be replaced or re-cut. Do not begin assembly until all issues are resolved.</li></ul><p>These six steps represent the kind of careful, orderly preparation that separates a successful engineering project from one that falls apart mid-build. You have the knowledge — now apply it with intention.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m028a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is the purpose of a Bill of Materials (BOM)?</strong><br/>A: A BOM is a comprehensive list of every part, material, and component needed for your build. It ensures nothing is missing before assembly begins.</p><p><strong>Q: What is the difference between a visual check and a dimensional check?</strong><br/>A: A visual check uses your eyes to spot obvious defects like cracks or warping. A dimensional check uses measurement tools to confirm a part's size falls within the required tolerance.</p><p><strong>Q: Why does quality control during Procurement save time later?</strong><br/>A: Catching a faulty or missing part before assembly takes seconds to fix. Discovering the same problem after building takes much longer and may require disassembly.</p><p><strong>Q: How does the concept of stewardship connect to inventory verification?</strong><br/>A: Stewardship means responsibly managing what you have been given. Verifying your materials ensures nothing is wasted, damaged parts are caught early, and your resources are used purposefully — reflecting faithful care over what God has entrusted to you.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

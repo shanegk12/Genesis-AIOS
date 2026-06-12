@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Units & Conversions – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: .5px; }
+  header p  { font-size: .85rem; opacity: .85; margin-top: 3px; }
+
+  #app {
+    width: 100%;
+    max-width: 760px;
+    padding: 18px 16px 40px;
+  }
+
+  /* ── progress bar ── */
+  #progress-wrap {
+    background: #dce4ed;
+    border-radius: 8px;
+    height: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 8px;
+    transition: width .4s ease;
+  }
+
+  /* ── card ── */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.12);
+    padding: 26px 24px 22px;
+    margin-bottom: 16px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: #C9A84C;
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* ── multiple choice ── */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0dae5;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: .95rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .2s, background .2s;
+    color: #1B3A5C;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fdf7ea; }
+  .choice-btn.correct  { border-color: #2a9d5c; background: #eafaf1; color: #1a6b3c; font-weight: 600; }
+  .choice-btn.wrong    { border-color: #c0392b; background: #fdecea; color: #7b1e1e; }
+  .choice-btn:disabled { cursor: default; }
+
+  /* ── drag-and-drop matching ── */
+  .match-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .match-col { flex: 1; min-width: 140px; }
+  .match-col h3 { font-size: .82rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .6px; color: #C9A84C; margin-bottom: 8px; }
+
+  .term-chip {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: .88rem;
+    margin-bottom: 8px;
+    cursor: grab;
+    user-select: none;
+    transition: opacity .2s;
+  }
+  .term-chip.dragging { opacity: .45; }
+  .term-chip.placed   { background: #2a9d5c; cursor: default; }
+
+  .drop-zone {
+    border: 2px dashed #b0c0d4;
+    border-radius: 8px;
+    min-height: 46px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    font-size: .82rem;
+    color: #6e8aa0;
+    display: flex;
+    align-items: center;
+    transition: background .2s, border-color .2s;
+    position: relative;
+  }
+  .drop-zone.over      { background: #fdf7ea; border-color: #C9A84C; }
+  .drop-zone.matched   { border-color: #2a9d5c; background: #eafaf1; color: #1a6b3c; font-weight: 600; font-size: .88rem; }
+  .drop-zone.mismatch  { border-color: #c0392b; background: #fdecea; }
+  .drop-zone .def-label { font-size: .82rem; color: #1B3A5C; line-height: 1.35; }
+
+  /* ── conversion builder ── */
+  .conv-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .conv-box {
+    background: #f7f9fc;
+    border: 2px solid #d0dae5;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    min-width: 70px;
+    text-align: center;
+  }
+  .conv-box.highlight { border-color: #C9A84C; background: #fdf7ea; }
+  .conv-sep { font-size: 1.2rem; font-weight: 700; color: #1B3A5C; }
+  select.factor-select {
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: .95rem;
+    background: #fff;
+    color: #1B3A5C;
+    cursor: pointer;
+  }
+  .answer-display {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    background: #eef2f7;
+    border-radius: 10px;
+    padding: 12px 20px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .answer-display.correct { background: #eafaf1; color: #1a6b3c; }
+  .answer-display.wrong   { background: #fdecea; color: #7b1e1e; }
+
+  /* ── accuracy vs precision dartboard ── */
+  .dart-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 12px; }
+  .dart-card {
+    flex: 1; min-width: 130px; max-width: 180px;
+    border: 2px solid #d0dae5;
+    border-radius: 12px;
+    padding: 12px 10px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .dart-card:hover { border-color: #C9A84C; box-shadow: 0 2px 8px rgba(201,168,76,.25); }
+  .dart-card.selected { border-color: #1B3A5C; box-shadow: 0 0 0 3px rgba(27,58,92,.18); }
+  .dart-card.correct  { border-color: #2a9d5c; background: #eafaf1; }
+  .dart-card.wrong    { border-color: #c0392b; background: #fdecea; }
+  .dart-card canvas   { display: block; margin: 0 auto 8px; }
+  .dart-card .label   { font-size: .82rem; font-weight: 600; color: #1B3A5C; }
+
+  /* ── feedback ── */
+  .feedback {
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: .9rem;
+    margin-top: 12px;
+    line-height: 1.45;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok  { background: #eafaf1; color: #1a6b3c; border-left: 4px solid #2a9d5c; }
+  .feedback.bad { background: #fdecea; color: #7b1e1e; border-left: 4px solid #c0392b; }
+
+  /* ── nav buttons ── */
+  .nav-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 16px; }
+  .btn {
+    padding: 11px 26px;
+    border-radius: 10px;
+    border: none;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .2s, transform .1s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: #1B3A5C; color: #fff; }
+  .btn-primary:hover { opacity: .88; }
+  .btn-gold { background: #C9A84C; color: #fff; }
+  .btn-gold:hover { opacity: .88; }
+  .btn:disabled { opacity: .4; cursor: default; }
+
+  /* ── score screen ── */
+  #score-screen { text-align: center; }
+  .score-circle {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 4px 18px rgba(27,58,92,.25);
+  }
+  .score-circle .big { font-size: 2.4rem; font-weight: 800; }
+  .score-circle .sub { font-size: .8rem; opacity: .85; }
+  #score-screen h2 { font-size: 1.4rem; margin-bottom: 8px; }
+  #score-screen p  { font-size: .95rem; color: #4a6880; line-height: 1.55; margin-bottom: 10px; }
+
+  .summary-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .88rem; }
+  .summary-table th { background: #1B3A5C; color: #fff; padding: 8px 10px; }
+  .summary-table td { padding: 8px 10px; border-bottom: 1px solid #e2e8ef; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .tick { color: #2a9d5c; font-weight: 700; }
+  .cross { color: #c0392b; font-weight: 700; }
+
+  .faith-note {
+    background: #f7f9fc;
+    border-left: 4px solid #C9A84C;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: .88rem;
+    color: #4a6880;
+    margin-top: 14px;
+    text-align: left;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 18px 14px; }
+    .match-grid { flex-direction: column; }
+    .conv-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Units, Conversions &amp; Measurement</h1>
+  <p>Creationeering · Genesis K-12 Academy</p>
+</header>
+
+<div id="app">
+  <div id="progress-wrap"><div id="progress-bar" style="width:0%"></div></div>
+  <div id="stage"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
+const STAGES = [
+  { type: 'intro' },
+  { type: 'mc',
+    tag: 'Key Vocabulary',
+    q: 'What is a UNIT in engineering?',
+    choices: [
+      'A type of calculator used to solve problems',
+      'A known standard used to express and compare measurements',
+      'The number of decimal places in a measurement',
+      'A tool for measuring length only'
+    ],
+    correct: 1,
+    explain: 'A unit is a known standard that lets engineers express and compare measurements — like meters, kilograms, or seconds.'
+  },
+  { type: 'mc',
+    tag: 'Accuracy vs. Precision',
+    q: 'A student measures a 10 cm rod five times and gets: 9.9, 10.0, 10.1, 9.8, 10.0 cm. Which word BEST describes these results?',
+    choices: [
+      'Accurate but not precise',
+      'Precise but not accurate',
+      'Both accurate AND precise',
+      'Neither accurate nor precise'
+    ],
+    correct: 2,
+    explain: 'The measurements cluster close to the true value (10 cm) AND are consistent with each other — that is both accurate and precise!'
+  },
+  { type: 'dartboard',
+    tag: 'Accuracy vs. Precision',
+    q: 'A dart thrower hits near the bullseye every time, but the darts are spread out widely. Which dartboard shows this?',
+    boards: [
+      { dots: [[50,50],[52,48],[49,53],[51,47],[48,52]], label: 'Accurate & Precise' },
+      { dots: [[20,20],[22,18],[19,23],[21,17],[18,22]], label: 'Precise, Not Accurate' },
+      { dots: [[50,50],[30,70],[70,30],[45,65],[60,40]], label: 'Accurate, Not Precise' },
+      { dots: [[20,80],[70,20],[80,70],[10,40],[60,10]], label: 'Neither' }
+    ],
+    correct: 2,
+    explain: '"Near the bullseye" means accurate (close to true value). "Spread out widely" means not precise. The third board shows darts scattered around the center.'
+  },
+  { type: 'match',
+    tag: 'Unit Systems',
+    q: 'Drag each unit to its correct category.',
+    pairs: [
+      { term: 'Kilometer',   def: 'Metric – Length',   defKey: 'ml' },
+      { term: 'Mile',        def: 'Imperial – Length',  defKey: 'il' },
+      { term: 'Kilogram',    def: 'Metric – Mass',      defKey: 'mm' },
+      { term: 'Pound',       def: 'Imperial – Mass',    defKey: 'im' },
+      { term: 'Celsius (°C)', def: 'Metric – Temp',    defKey: 'mt' },
+      { term: 'Fahrenheit (°F)', def: 'Imperial – Temp', defKey: 'it' }
+    ]
+  },
+  { type: 'conv',
+    tag: 'Dimensional Analysis',
+    q: 'Use dimensional analysis to convert 3.5 kilometers to meters.\nPick the correct conversion factor, then see the result.',
+    given: '3.5 km',
+    givenVal: 3.5,
+    target: 'meters',
+    options: [
+      { label: '100 m / 1 km',    num: 100,  den: 1,    correct: false },
+      { label: '1000 m / 1 km',   num: 1000, den: 1,    correct: true  },
+      { label: '1 km / 1000 m',   num: 1,    den: 1000, correct: false },
+      { label: '10 m / 1 km',     num: 10,   den: 1,    correct: false }
+    ],
+    answer: 3500,
+    unit: 'm'
+  },
+  { type: 'conv',
+    tag: 'Dimensional Analysis',
+    q: 'Convert 150 centimeters to meters.\nChoose the conversion factor that cancels the "cm" unit.',
+    given: '150 cm',
+    givenVal: 150,
+    target: 'meters',
+    options: [
+      { label: '100 cm / 1 m',   num: 100, den: 1,   correct: false },
+      { label: '1 m / 100 cm',   num: 1,   den: 100, correct: true  },
+      { label: '10 cm / 1 m',    num: 10,  den: 1,   correct: false },
+      { label: '1 m / 10 cm',    num: 1,   den: 10,  correct: false }
+    ],
+    answer: 1.5,
+    unit: 'm'
+  },
+  { type: 'mc',
+    tag: 'Dimensional Analysis',
+    q: 'Why do engineers use dimensional analysis?',
+    choices: [
+      'To make numbers bigger and easier to read',
+      'To check and perform calculations by tracking and canceling units',
+      'To skip writing units when solving problems',
+      'To convert only temperature units'
+    ],
+    correct: 1,
+    explain: 'Dimensional analysis is a method that manipulates units — keeping track of them like fractions — so they cancel correctly and your answer has the right unit.'
+  },
+  { type: 'mc',
+    tag: 'Why Units Matter',
+    q: 'Two engineers are building a bridge. Engineer A uses feet; Engineer B uses meters — but they never tell each other. What is the MOST LIKELY problem?',
+    choices: [
+      'The bridge will be too colorful',
+      'The calculations will be faster',
+      'Parts will not fit together because measurements are in different units',
+      'They will need a bigger calculator'
+    ],
+    correct: 2,
+    explain: 'Without shared standard units, measurements are mismatched. This is why standardized units are essential for communication and accuracy in engineering.'
+  },
+  { type: 'score' }
+];
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let current = 0;
+let score   = 0;
+let answers = []; // {correct: bool, stageIndex: i}
+let matchState = {};
+
+// ─────────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────────
+function setProgress(idx) {
+  const total = STAGES.length - 1;
+  document.getElementById('progress-bar').style.width = Math.round((idx / total) * 100) + '%';
+}
+
+function render() {
+  setProgress(current);
+  const s = STAGES[current];
+  const stage = document.getElementById('stage');
+  stage.innerHTML = '';
+  if (s.type === 'intro')    stage.appendChild(buildIntro());
+  else if (s.type === 'mc')  stage.appendChild(buildMC(s));
+  else if (s.type === 'dartboard') stage.appendChild(buildDartboard(s));
+  else if (s.type === 'match') stage.appendChild(buildMatch(s));
+  else if (s.type === 'conv')  stage.appendChild(buildConv(s));
+  else if (s.type === 'score') stage.appendChild(buildScore());
+}
+
+function advance() { current++; render(); }
+
+// ─────────────────────────────────────────────
+//  INTRO
+// ─────────────────────────────────────────────
+function buildIntro() {
+  const d = div('card');
+  d.innerHTML = `
+    <span class="section-tag">Welcome</span>
+    <p class="question-text">Units, Conversions &amp; Measurement</p>
+    <p style="font-size:.93rem;line-height:1.6;color:#3a5470;margin-bottom:14px;">
+      In this activity you will:<br>
+      &nbsp;✦ Identify key vocabulary (unit, accuracy, precision)<br>
+      &nbsp;✦ Classify measurements into Metric and Imperial systems<br>
+      &nbsp;✦ Apply <strong>dimensional analysis</strong> to convert units<br>
+      &nbsp;✦ Understand why standard units matter in engineering
+    </p>
+    <p style="font-size:.88rem;color:#6e8aa0;">7 questions · ~3 minutes</p>
+    <div class="nav-row"><button class="btn btn-gold" onclick="advance()">Start ▶</button></div>
+  `;
+  return d;
+}
+
+// ─────────────────────────────────────────────
+//  MULTIPLE CHOICE
+// ─────────────────────────────────────────────
+function buildMC(s) {
+  const wrap = div('card');
+  wrap.innerHTML = `<span class="section-tag">${s.tag}</span>
+    <p class="question-text">${s.q}</p>`;
+  const choicesDiv = div('choices');
+  s.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick = () => handleMC(s, i, wrap);
+    choicesDiv.appendChild(btn);
+  });
+  wrap.appendChild(choicesDiv);
+  const fb = div('feedback');
+  wrap.appendChild(fb);
+  const nav = div('nav-row');
+  const next = document.createElement('button');
+  next.className = 'btn btn-primary';
+  next.textContent = 'Next →';
+  next.disabled = true;
+  next.onclick = advance;
+  nav.appendChild(next);
+  wrap.appendChild(nav);
+  return wrap;
+}
+
+function handleMC(s, chosen, wrap) {
+  const btns = wrap.querySelectorAll('.choice-btn');
+  btns.forEach(b => b.disabled = true);
+  const isCorrect = chosen === s.correct;
+  btns[chosen].classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) btns[s.correct].classList.add('correct');
+  if (isCorrect) score++;
+  answers.push({ correct: isCorrect, label: s.q.slice(0,40)+'…', stageIndex: current });
+  const fb = wrap.querySelector('.feedback');
+  fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Not quite. ') + s.explain;
+  fb.className = 'feedback show ' + (isCorrect ? 'ok' : 'bad');
+  wrap.querySelector('.btn-primary').disabled = false;
+}
+
+// ─────────────────────────────────────────────
+//  DARTBOARD
+// ─────────────────────────────────────────────
+function buildDartboard(s) {
+  const wrap = div('card');
+  wrap.innerHTML = `<span class="section-tag">${s.tag}</span>
+    <p class="question-text">${s.q}</p>`;
+  const row = div('dart-row');
+  s.boards.forEach((b, i) => {
+    const card = div('dart-card');
+    const cvs = document.createElement('canvas');
+    cvs.width = 90; cvs.height = 90;
+    drawDartboard(cvs, b.dots);
+    const lbl = div('label'); lbl.textContent = b.label;
+    card.appendChild(cvs);
+    card.appendChild(lbl);
+    card.onclick = () => handleDart(s, i, wrap);
+    card.dataset.idx = i;
+    row.appendChild(card);
+  });
+  wrap.appendChild(row);
+  const fb = div('feedback');
+  wrap.appendChild(fb);
+  const nav = div('nav-row');
+  const next = document.createElement('button');
+  next.className = 'btn btn-primary'; next.textContent = 'Next →'; next.disabled = true;
+  next.onclick = advance;
+  nav.appendChild(next);
+  wrap.appendChild(nav);
+  return wrap;
+}
+
+function drawDartboard(cvs, dots) {
+  const ctx = cvs.getContext('2d');
+  const cx = 45, cy = 45, R = 42;
+  // rings
+  const colors = ['#c0392b','#fff','#c0392b','#fff','#1B3A5C'];
+  for (let r = 4; r >= 0; r--) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, R * (r+1)/5, 0, Math.PI*2);
+    ctx.fillStyle = colors[r];
+    ctx.fill();
+    ctx.strokeStyle = '#aaa'; ctx.lineWidth = .5;
+    ctx.stroke();
+  }
+  // bullseye
+  ctx.beginPath(); ctx.arc(cx, cy, R/5*.5, 0, Math.PI*2);
+  ctx.fillStyle = '#c0392b'; ctx.fill();
+  // darts
+  dots.forEach(([dx, dy]) => {
+    const px = dx/100 * (R*2) + (cx - R);
+    const py = dy/100 * (R*2) + (cy - R);
+    ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI*2);
+    ctx.fillStyle = '#C9A84C'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1; ctx.stroke();
+  });
+}
+
+function handleDart(s, chosen, wrap) {
+  wrap.querySelectorAll('.dart-card').forEach(c => {
+    c.onclick = null;
+    if (parseInt(c.dataset.idx) === s.correct) c.classList.add('correct');
+    if (parseInt(c.dataset.idx) === chosen && chosen !== s.correct) c.classList.add('wrong');
+  });
+  const isCorrect = chosen === s.correct;
+  if (isCorrect) score++;
+  answers.push({ correct: isCorrect, label: s.q.slice(0,40)+'…', stageIndex: current });
+  const fb = wrap.querySelector('.feedback');
+  fb.textContent = (isCorrect ? '✓ Correct! ' : '✗ Not quite. ') + s.explain;
+  fb.className = 'feedback show ' + (isCorrect ? 'ok' : 'bad');
+  wrap.querySelector('.btn-primary').disabled = false;
+}
+
+// ─────────────────────────────────────────────
+//  MATCH (drag & drop)
+// ─────────────────────────────────────────────
+function buildMatch(s) {
+  matchState = { matched: {}, total: s.pairs.length, done: false };
+  const wrap = div('card');
+  wrap.innerHTML = `<span class="section-tag">${s.tag}</span>
+    <p class="question-text">${s.q}</p>`;
+
+  const grid = div('match-grid');
+
+  // LEFT: shuffled terms
+  const leftCol = div('match-col');
+  leftCol.innerHTML = '<h3>Terms</h3>';
+  const shuffled = [...s.pairs].sort(() => Math.random()-.5);
+  shuffled.forEach(p => {
+    const chip = div('term-chip');
+    chip.textContent = p.term;
+    chip.draggable = true;
+    chip.dataset.term = p.term;
+    chip.id = 'chip-' + p.defKey;
+    chip.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', p.term);
+      chip.classList.add('dragging');
+    });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    // touch support
+    addTouchDrag(chip);
+    leftCol.appendChild(chip);
+  });
+
+  // RIGHT: drop zones
+  const rightCol = div('match-col');
+  rightCol.innerHTML = '<h3>Categories</h3>';
+  s.pairs.forEach(p => {
+    const zone = div('drop-zone');
+    const lbl = div('def-label'); lbl.textContent = p.def;
+    zone.appendChild(lbl);
+    zone.dataset.defKey = p.defKey;
+    zone.dataset.term   = p.term;
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      handleDrop(zone, e.dataTransfer.getData('text/plain'), s, wrap);
+    });
+    rightCol.appendChild(zone);
+  });
+
+  grid.appendChild(leftCol);
+  grid.appendChild(rightCol);
+  wrap.appendChild(grid);
+
+  const fb = div('feedback');
+  wrap.appendChild(fb);
+  const nav = div('nav-row');
+  const next = document.createElement('button');
+  next.className = 'btn btn-primary'; next.textContent = 'Next →'; next.disabled = true;
+  next.id = 'match-next';
+  next.onclick = advance;
+  nav.appendChild(next);
+  wrap.appendChild(nav);
+  return wrap;
+}
+
+function handleDrop(zone, term, s, wrap) {
+  if (zone.classList.contains('matched')) return;
+  const correct = zone.dataset.term === term;
+  if (correct) {
+    zone.classList.add('matched');
+    zone.querySelector('.def-label').textContent = term + ' ✓';
+    const chip = document.getElementById('chip-' + zone.dataset.defKey);
+    if (chip) { chip.classList.add('placed'); chip.draggable = false; }
+    matchState.matched[zone.dataset.defKey] = true;
+    score += (1/s.pairs.length); // partial credit
+    if (Object.keys(matchState.matched).length === matchState.total) {
+      const fb = wrap.querySelector('.feedback');
+      fb.textContent = '✓ All matched! Well done — you know your Metric and Imperial units.';
+      fb.className = 'feedback show ok';
+      answers.push({ correct: true, label: 'Unit Matching', stageIndex: current });
+      document.getElementById('match-next').disabled = false;
+      matchState.done = true;
+    }
+  } else {
+    zone.classList.add('mismatch');
+    setTimeout(() => zone.classList.remove('mismatch'), 600);
+  }
+}
+
+// ── simple touch drag ──
+let _dragTerm = null;
+function addTouchDrag(chip) {
+  chip.addEventListener('touchstart', e => {
+    _dragTerm = chip.dataset.term;
+    chip.style.opacity = '.5';
+  }, {passive:true});
+  chip.addEventListener('touchend', e => {
+    chip.style.opacity = '';
+    const touch = e.changedTouches[0];
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    let zone = el && (el.classList.contains('drop-zone') ? el : el.closest('.drop-zone'));
+    if (zone && _dragTerm) {
+      const card = document.getElementById('stage').querySelector('.card');
+      const s = STAGES[current];
+      handleDrop(zone, _dragTerm, s, card);
+    }
+    _dragTerm = null;
+  }, {passive:true});
+}
+
+// ─────────────────────────────────────────────
+//  CONVERSION BUILDER
+// ─────────────────────────────────────────────
+function buildConv(s) {
+  const wrap = div('card');
+  wrap.innerHTML = `<span class="section-tag">${s.tag}</span>
+    <p class="question-text" style="white-space:pre-line">${s.q}</p>`;
+
+  // Given value box
+  const row = div('conv-row');
+  const gbox = div('conv-box highlight'); gbox.textContent = s.given;
+  const mult = div('conv-sep'); mult.textContent = '×';
+
+  // Fraction selector wrapper
+  const fracWrap = document.createElement('div');
+  fracWrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:2px;';
+  const selTop = document.createElement('select');
+  selTop.className = 'factor-select';
+  selTop.innerHTML = '<option value="-1">Choose conversion factor…</option>';
+  s.options.forEach((op, i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = op.label;
+    selTop.appendChild(o);
+  });
+  fracWrap.appendChild(selTop);
+
+  const eq = div('conv-sep'); eq.textContent = '=';
+  const ans = div('answer-display'); ans.textContent = '?';
+  ans.id = 'conv-ans';
+
+  row.appendChild(gbox); row.appendChild(mult);
+  row.appendChild(fracWrap); row.appendChild(eq); row.appendChild(ans);
+  wrap.appendChild(row);
+
+  const fb = div('feedback'); wrap.appendChild(fb);
+  const nav = div('nav-row');
+  const next = document.createElement('button');
+  next.className = 'btn btn-primary'; next.textContent = 'Next →'; next.disabled = true;
+  next.id = 'conv-next'; next.onclick = advance;
+  nav.appendChild(next);
+  wrap.appendChild(nav);
+
+  selTop.addEventListener('change', () => handleConv(s, parseInt(selTop.value), wrap));
+  return wrap;
+}
+
+function handleConv(s, idx, wrap) {
+  if (idx < 0) return;
+  const op = s.options[idx];
+  const result = s.givenVal * op.num / op.den;
+  const ans = document.getElementById('conv-ans');
+  const isCorrect = op.correct;
+  ans.textContent = isCorrect
+    ? result.toLocaleString() + ' ' + s.unit
+    : result.toLocaleString() + ' ' + '(units don\'t cancel!)';
+  ans.className = 'answer-display ' + (isCorrect ? 'correct' : 'wrong');
+  const fb = wrap.querySelector('.feedback');
+  if (isCorrect) {
+    fb.textContent = `✓ Correct! ${s.given} × (${s.options[idx].label}) = ${s.answer} ${s.unit}. The units cancel perfectly.`;
+    fb.className = 'feedback show ok';
+    score++;
+    answers.push({ correct: true, label: 'Conversion: ' + s.given + ' → ' + s.target, stageIndex: current });
+    wrap.querySelector('.btn-primary').disabled = false;
+  } else {
+    fb.textContent = '✗ That factor doesn\'t cancel the units correctly. Try again!';
+    fb.className = 'feedback show bad';
+  }
+}
+
+// ─────────────────────────────────────────────
+//  SCORE SCREEN
+// ─────────────────────────────────────────────
+function buildScore() {
+  const QUESTION_COUNT = 7;
+  const raw = Math.round(score);
+  const pct = Math.min(100, Math.round((raw / QUESTION_COUNT) * 100));
+  let msg, grade;
+  if (pct >= 85)      { msg = 'Excellent work! You have a strong grasp of units and measurement.'; grade = '🏆'; }
+  else if (pct >= 65) { msg = 'Good effort! Review a few areas and you\'ll have it down.'; grade = '👍'; }
+  else                { msg = 'Keep practicing — re-read the lesson and try again!'; grade = '📖'; }
+
+  const wrap = div(''); wrap.id = 'score-screen';
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="score-circle">
+        <span class="big">${grade}</span>
+      </div>
+      <h2>Activity Complete!</h2>
+      <div class="score-circle" style="width:110px;height:110px;margin:0 auto 16px;">
+        <span class="big">${raw}/${QUESTION_COUNT}</span>
+        <span class="sub">${pct}%</span>
+      </div>
+      <p>${msg}</p>
+
+      <table class="summary-table">
+        <thead><tr><th>Question</th><th>Result</th></tr></thead>
+        <tbody id="summary-body"></tbody>
+      </table>
+
+      <div class="faith-note">
+        <strong>Reflection:</strong> God created a universe governed by consistent laws and order. 
+        The precision we require in measurement reflects His orderly character — 
+        "For God is not a God of disorder but of peace." (1 Cor. 14:33)
+      </div>
+
+      <div class="nav-row" style="justify-content:center;margin-top:18px;">
+        <button class="btn btn-gold" onclick="restartActivity()">↺ Try Again</button>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const tbody = document.getElementById('summary-body');
+    if (!tbody) return;
+    const labels = [
+      'What is a unit?',
+      'Accuracy vs. precision (rods)',
+      'Dartboard identification',
+      'Unit matching activity',
+      'Convert km → m',
+      'Convert cm → m',
+      'Why use dimensional analysis?',
+      'Why standard units matter?'
+    ];
+    answers.forEach((a, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${labels[i] || 'Question '+(i+1)}</td>
+        <td class="${a.correct?'tick':'cross'}">${a.correct?'✓ Correct':'✗ Incorrect'}</td>`;
+      tbody.appendChild(tr);
+    });
+  }, 50);
+
+  return wrap;
+}
+
+function restartActivity() {
+  current = 0; score = 0; answers = [];
+  render();
+}
+
+// ─────────────────────────────────────────────
+//  UTILITY
+// ─────────────────────────────────────────────
+function div(cls) {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  return d;
+}
+
+// ─────────────────────────────────────────────
+//  BOOT
+// ─────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>

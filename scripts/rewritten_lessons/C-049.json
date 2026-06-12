@@ -1,0 +1,488 @@
+[
+  {
+    "id": "c049t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Just-In-Time vs. Just-In-Case</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Reverse Logistics and End-of-Life Flow — the careful planning that goes into managing products and materials after their primary use. We saw how every creation has a full lifecycle, and how our role as stewards continues even at the very end. Today, we go deeper into the Logistics phase of Creationeering™, focusing on how we manage resources <em>during</em> a project's life.</p>\n<p>Specifically, we are looking at two powerful inventory strategies: <strong>Just-In-Time (JIT)</strong> and <strong>Just-In-Case (JIC)</strong>. Think of these like two different approaches to packing for a road trip — one says \"only bring exactly what you need for each stop,\" while the other says \"pack extra just in case something goes wrong.\" Both have a time and a place. Learning when to use each one will help you make smarter decisions, reduce waste, and honor God through thoughtful stewardship of every resource He has given you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define and differentiate between Just-In-Time (JIT) and Just-In-Case (JIC) inventory management strategies.</li>\n<li>Identify the advantages and disadvantages of both JIT and JIC in various Creationeering scenarios.</li>\n<li>Apply the OCV Method (Objective, Constraint, Variable) to analyze a logistics challenge and propose an optimized solution.</li>\n<li>Connect macro-level logistical observations to their underlying causes using Multiscale Modeling.</li>\n<li>Evaluate logistical decisions through the lens of biblical stewardship, recognizing our responsibility to manage God's resources wisely.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Just-In-Time (JIT)",
+          "definition": "An inventory strategy where materials or parts are delivered precisely when they are needed in the production process, minimizing storage costs and waste."
+        },
+        {
+          "term": "Just-In-Case (JIC)",
+          "definition": "An inventory strategy where extra materials or parts are kept on hand as buffer stock to prevent shortages due to unexpected demand or supply disruptions."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and implementation of a complex operation, involving the movement and storage of materials from point of origin to point of consumption."
+        },
+        {
+          "term": "Inventory",
+          "definition": "The raw materials, work-in-progress, and finished goods that a company or project holds at any given time."
+        },
+        {
+          "term": "Supply Chain",
+          "definition": "The entire network of people, organizations, resources, and activities involved in creating and delivering a product from raw materials to the end user."
+        },
+        {
+          "term": "Lead Time",
+          "definition": "The amount of time that passes between placing an order and receiving the delivery. Longer lead times often push teams toward JIC strategies."
+        },
+        {
+          "term": "Buffer Stock",
+          "definition": "An amount of goods or materials kept in storage to safeguard against unforeseen shortages or demand spikes. This is the core of a Just-In-Case strategy."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution under a given set of constraints — maximizing what you want and minimizing what you don't."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects large-scale (macro) observations to their underlying causes at a very small (atomic or sub-atomic) scale."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A structured Creationeering problem-solving approach that identifies the Objective (what you want to achieve), Constraints (limits you must work within), and Variables (factors you can adjust)."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Two Strategies, One Goal</h2>\n<p>Every engineering project needs materials — wood, wires, bolts, code libraries, you name it. The big question is: <em>when</em> do you get them, and <em>how much</em> do you keep on hand? That question is at the heart of inventory management, and it has no single right answer. It depends on your situation, your budget, your timeline, and how predictable your project really is.</p>\n<p>JIT and JIC represent two ends of a spectrum. Real-world engineers rarely live at either extreme — they blend both strategies based on the needs of each project. Your job as a Creationeer is to understand how each one works so you can choose wisely.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 21:5</strong> — \"The plans of the diligent lead to profit as surely as haste leads to poverty.\" Choosing the right inventory strategy is an act of diligent planning. God calls us to think carefully before we act — and that wisdom applies just as much to a supply chain as it does to any other decision.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Just-In-Time (JIT): Lean and Precise</h2>\n<p>Just-In-Time is all about precision. In a JIT system, materials arrive at your workspace exactly when you need them — not days early, not hours late. There is no large stockroom full of parts waiting around. Instead, deliveries are carefully coordinated with the production schedule so that everything flows without interruption and nothing sits idle.</p>\n<p>Toyota made this strategy world-famous in the 1970s. Their factories were so well-coordinated that parts arrived from suppliers just hours before they were assembled into cars. The result? Massive savings in storage costs, less material waste, and a leaner, faster operation overall.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Advantages of JIT</h3>\n<ul>\n<li><strong>Lower storage costs</strong> — You are not paying to warehouse materials you don't need yet.</li>\n<li><strong>Reduced waste</strong> — Less risk of materials expiring, becoming obsolete, or being damaged in storage.</li>\n<li><strong>Improved cash flow</strong> — Money is not tied up in sitting inventory; it stays available for other needs.</li>\n<li><strong>Encourages quality</strong> — When there is no backup stock, every part must work correctly the first time.</li>\n</ul>\n<h3>Disadvantages of JIT</h3>\n<ul>\n<li><strong>Vulnerable to disruptions</strong> — If a supplier is late or a delivery is delayed, your entire project can halt.</li>\n<li><strong>Requires reliable suppliers</strong> — JIT only works when your supply chain is consistent and trustworthy.</li>\n<li><strong>Little room for error</strong> — There is no safety net. A single unexpected problem can ripple through the whole system.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>Think of JIT like a chef who shops for ingredients at the market every morning — only buying what is needed for that day's menu. The food is always fresh, and nothing goes to waste. But if the market is closed? There is nothing to cook.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A factory assembly line where parts arrive in small batches right before they are needed, illustrating a Just-In-Time workflow."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Just-In-Case (JIC): Safety First</h2>\n<p>Just-In-Case takes the opposite approach. Instead of coordinating deliveries to arrive exactly on time, a JIC system keeps extra materials — called <strong>buffer stock</strong> — stored and ready to go. The idea is simple: if something goes wrong with your supply chain, you already have what you need to keep working.</p>\n<p>This is the strategy hospitals use for critical medical supplies. It is the strategy emergency management agencies use for disaster relief. It is the strategy you use when you pack an extra snack for a long hike, just in case. When the cost of running out is very high, keeping a safety cushion makes a lot of sense.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Advantages of JIC</h3>\n<ul>\n<li><strong>Resilient to disruptions</strong> — Supply delays, demand spikes, or unexpected events do not shut you down.</li>\n<li><strong>Reduces downtime risk</strong> — You can keep working even when something in the supply chain goes wrong.</li>\n<li><strong>Builds confidence</strong> — Knowing you have backup materials lets your team focus on building, not worrying.</li>\n</ul>\n<h3>Disadvantages of JIC</h3>\n<ul>\n<li><strong>Higher storage costs</strong> — You need space and resources to store extra inventory.</li>\n<li><strong>Potential for waste</strong> — Materials can expire, become outdated, or go unused entirely.</li>\n<li><strong>Ties up capital</strong> — Money spent on buffer stock cannot be used for other parts of the project.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p>During the COVID-19 pandemic, many manufacturers who relied entirely on JIT systems struggled when global supply chains were disrupted. Companies that had maintained some buffer stock were able to keep production going. This real-world example shows why understanding <em>both</em> strategies — and knowing when to blend them — is so important for engineers and Creationeers.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Logistics</h2>\n<p>So how do you decide which strategy to use? That is where the <strong>OCV Method</strong> comes in. OCV stands for Objective, Constraint, and Variable — a structured way of thinking through any engineering or logistics problem.</p>\n<ul>\n<li><strong>Objective</strong> — What are you trying to achieve? (e.g., \"Keep project costs low\" or \"Ensure zero downtime.\")</li>\n<li><strong>Constraint</strong> — What limits do you have to work within? (e.g., budget, storage space, supplier reliability, lead time)</li>\n<li><strong>Variable</strong> — What factors can you adjust to reach your objective within those constraints? (e.g., order frequency, buffer stock level, supplier relationships)</li>\n</ul>\n<p>By clearly defining your objective, mapping your constraints, and identifying which variables you can control, you move from guessing to problem-solving. That is the Creationeering way — methodical, purposeful, and grounded in real data.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in action:</strong> Imagine you are building a trebuchet for a school competition. Your <em>objective</em> is to finish on time. Your <em>constraints</em> are a $50 budget and a garage-sized workspace. Your <em>variables</em> include which materials to order first and whether to buy extra wood just in case you make mistakes. Working through OCV helps you see clearly whether JIT or JIC fits your situation better.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV Method: three connected boxes labeled Objective, Constraint, and Variable with arrows showing how each informs the others."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture with Multiscale Modeling</h2>\n<p>Here is something fascinating: the same supply chain problems you can observe at a large scale — like a factory running out of parts — often have very small-scale causes. <strong>Multiscale Modeling</strong> is the engineering practice of connecting those dots.</p>\n<p>For example, imagine a bridge starts showing cracks (macro scale). A multiscale model might reveal that the cause is microscopic corrosion happening at the molecular level inside the steel. In logistics, a warehouse that keeps running out of a specific component (macro observation) might be traced back to a single miscalculation in lead time estimates or a small error in order quantity formulas (micro cause).</p>\n<p>When you apply Multiscale Modeling to logistics, you train yourself to ask: \"What is really causing this problem at its root?\" That kind of deep thinking is what separates a good engineer from a great one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c005",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p>Multiscale Modeling is used across many engineering fields — from materials science and structural engineering to climate modeling and biology. The core idea is always the same: what you see at the large scale is shaped by what is happening at the small scale. Train your eyes to look at both levels.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and Logistics</h2>\n<p>It might seem like inventory management is just a business problem — spreadsheets, delivery schedules, warehouse space. But look closer and you will see something deeper. Every decision you make about resources is a stewardship decision.</p>\n<p>When you choose JIT and reduce waste, you are honoring God by using only what is needed. When you choose JIC and protect against disruption, you are being prudent — like the ant in Proverbs who stores up food in summer for the winter ahead. Neither strategy is inherently more \"godly.\" What matters is that your decision is thoughtful, intentional, and guided by wisdom rather than carelessness or fear.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c006",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 6:6-8</strong> — \"Go to the ant, you sluggard; consider its ways and be wise! It has no commander, no overseer or ruler, yet it stores its provisions in summer and gathers its food at harvest.\" The ant does not wait to be told. It observes the season, anticipates future needs, and plans accordingly. That is JIC wisdom — built right into creation by God Himself.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049c007",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Treating JIT and JIC as opposites where one is always right. In reality, most real-world supply chains use a <em>hybrid</em> approach — JIT for predictable, frequently ordered materials and JIC for critical components with long lead times or high disruption risk. Defaulting to one strategy for everything will get you into trouble.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>JIT vs. JIC at a Glance</h2>\n<p>Use this comparison to quickly recall the key differences between the two strategies:</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049img03",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison table showing JIT (lean, precise, cost-efficient, disruption-vulnerable) versus JIC (resilient, safety-focused, higher storage costs, lower risk of shutdown)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Work through the questions below to see how well you have mastered the key ideas from this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the main difference between JIT and JIC inventory strategies?",
+      "html": "<p>JIT (Just-In-Time) delivers materials <em>exactly when they are needed</em>, keeping storage costs low but leaving little room for error. JIC (Just-In-Case) keeps <em>extra buffer stock on hand</em>, protecting against disruptions but requiring more storage space and capital. JIT prioritizes efficiency; JIC prioritizes resilience.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049a002",
+    "type": "accordion",
+    "data": {
+      "title": "Name one situation where JIT is the better choice, and one where JIC is the better choice.",
+      "html": "<p><strong>JIT is better</strong> when your supply chain is reliable, your lead times are short, and storage space or budget is limited — for example, a car assembly plant with trusted local suppliers delivering daily. <strong>JIC is better</strong> when disruptions are likely, the cost of running out is very high, or lead times are long — for example, a hospital stocking critical medications or an engineer sourcing rare components from overseas.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049a003",
+    "type": "accordion",
+    "data": {
+      "title": "How does the OCV Method help you choose between JIT and JIC?",
+      "html": "<p>The OCV Method gives you a framework to make that decision systematically. First, define your <strong>Objective</strong> — are you trying to minimize cost, prevent downtime, or finish by a deadline? Then map your <strong>Constraints</strong> — budget, storage space, supplier reliability, lead time. Finally, identify which <strong>Variables</strong> you can adjust — order frequency, buffer stock levels, supplier relationships. Once you see all three clearly, the right strategy (or blend of strategies) becomes much easier to identify.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049a004",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling apply to a logistics problem?",
+      "html": "<p>Multiscale Modeling connects what you observe at a large scale to its root causes at a small scale. In logistics, a macro-level problem — like a project grinding to a halt because parts ran out — might trace back to a micro-level cause, such as a small error in lead time calculations or a single supplier's quality control issue. By thinking at multiple scales, you go beyond treating symptoms and actually fix the underlying cause.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c049a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does choosing between JIT and JIC connect to biblical stewardship?",
+      "html": "<p>Both strategies, when chosen wisely, reflect good stewardship. JIT honors God by reducing waste — using only what is needed and not hoarding resources. JIC reflects the prudent planning described in Proverbs — storing provisions wisely to protect against future hardship. The key is that your decision is thoughtful and intentional, guided by wisdom and a genuine desire to manage God's resources well, not by carelessness or anxiety.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

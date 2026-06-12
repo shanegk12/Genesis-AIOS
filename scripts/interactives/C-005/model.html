@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creationeering – Units & Measurement 3D Viewer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1f33;
+    color: #e8e8e8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  header {
+    background: #1B3A5C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 3px solid #C9A84C;
+    flex-shrink: 0;
+  }
+  .logo-box {
+    width: 38px; height: 38px;
+    background: #C9A84C;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C;
+  }
+  header h1 { font-size: 16px; color: #C9A84C; font-weight: 700; line-height: 1.2; }
+  header p  { font-size: 11px; color: #a0b8d0; }
+  .main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  /* SIDEBAR */
+  .sidebar {
+    width: 230px;
+    background: #1B3A5C;
+    border-right: 2px solid #C9A84C44;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-title {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 8px 12px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .comp-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ffffff11;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .comp-item:hover, .comp-item.active { background: #234e7a; }
+  .comp-item .comp-name {
+    font-size: 13px; font-weight: 700; color: #C9A84C; margin-bottom: 3px;
+  }
+  .comp-item .comp-desc { font-size: 11px; color: #b0c8e0; line-height: 1.4; }
+  .comp-item .comp-unit {
+    margin-top: 4px; font-size: 10px; color: #7ad0ff;
+    background: #1B3A5C; border: 1px solid #7ad0ff44;
+    border-radius: 3px; display: inline-block; padding: 1px 5px;
+  }
+  .glossary { padding: 12px; }
+  .glossary h3 { color: #C9A84C; font-size: 11px; text-transform: uppercase; letter-spacing:.5px; margin-bottom:8px; }
+  .gloss-term { margin-bottom: 8px; }
+  .gloss-term strong { color: #fff; font-size: 11px; }
+  .gloss-term span { font-size: 10px; color: #a0b8d0; display: block; }
+
+  /* CANVAS AREA */
+  .canvas-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #1a3352 0%, #0a1520 100%);
+  }
+  canvas {
+    display: block;
+    cursor: grab;
+    touch-action: none;
+  }
+  canvas:active { cursor: grabbing; }
+
+  /* CONTROLS */
+  .controls {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    background: #1B3A5C;
+    border: 2px solid #C9A84C;
+    color: #C9A84C;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: .3px;
+  }
+  .btn:hover { background: #C9A84C; color: #1B3A5C; }
+  .btn.active { background: #C9A84C; color: #1B3A5C; }
+
+  .rotate-hint {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 10px;
+    color: #5a8ab0;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .measure-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #1B3A5C;
+    border: 1px solid #C9A84C55;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 10px;
+    color: #C9A84C;
+    line-height: 1.6;
+  }
+  .measure-badge span { color: #7ad0ff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">GK</div>
+  <div>
+    <h1>Creationeering – 3D Measurement System Viewer</h1>
+    <p>Genesis K-12 Academy · Units, Conversions, and Measurement</p>
+  </div>
+</header>
+
+<div class="main">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-title">📐 Components</div>
+
+    <div class="comp-item active" data-id="0" onclick="selectComp(0)">
+      <div class="comp-name">📏 Ruler / Length</div>
+      <div class="comp-desc">The chassis base represents a measured length. Dimension analysis starts here.</div>
+      <span class="comp-unit">m · cm · ft · in</span>
+    </div>
+    <div class="comp-item" data-id="1" onclick="selectComp(1)">
+      <div class="comp-name">⚖️ Mass Block</div>
+      <div class="comp-desc">A calibrated mass block. Shows the difference between mass and weight.</div>
+      <span class="comp-unit">kg · g · lb · oz</span>
+    </div>
+    <div class="comp-item" data-id="2" onclick="selectComp(2)">
+      <div class="comp-name">🕐 Timer / Time</div>
+      <div class="comp-desc">The stopwatch cylinder represents time — one of the 7 base SI units.</div>
+      <span class="comp-unit">s · min · hr</span>
+    </div>
+    <div class="comp-item" data-id="3" onclick="selectComp(3)">
+      <div class="comp-name">🌡️ Thermometer</div>
+      <div class="comp-desc">Temperature measurement. Compare Celsius, Fahrenheit, Kelvin scales.</div>
+      <span class="comp-unit">°C · °F · K</span>
+    </div>
+    <div class="comp-item" data-id="4" onclick="selectComp(4)">
+      <div class="comp-name">🧪 Volume Flask</div>
+      <div class="comp-desc">Graduated flask for liquid volume. Key for chemistry and fluid systems.</div>
+      <span class="comp-unit">L · mL · gal · fl oz</span>
+    </div>
+
+    <div class="glossary">
+      <h3>Key Terms</h3>
+      <div class="gloss-term"><strong>Unit</strong><span>A known standard for expressing & comparing measurements.</span></div>
+      <div class="gloss-term"><strong>Accuracy</strong><span>How close a result is to the true value.</span></div>
+      <div class="gloss-term"><strong>Precision</strong><span>How consistent repeated results are.</span></div>
+      <div class="gloss-term"><strong>Dim. Analysis</strong><span>Using unit manipulation to solve & check calculations.</span></div>
+      <div class="gloss-term"><strong>Conversion Factor</strong><span>A ratio used to change from one unit to another.</span></div>
+    </div>
+  </div>
+
+  <!-- CANVAS -->
+  <div class="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div class="rotate-hint">🖱 Drag to rotate<br>📱 Touch & drag<br>⚙ Use buttons below</div>
+    <div class="measure-badge" id="mbadge">
+      Selected: <span id="selName">Ruler / Length</span><br>
+      Metric: <span id="selMetric">meter (m)</span><br>
+      Imperial: <span id="selImperial">foot (ft)</span><br>
+      Factor: <span id="selFactor">1 m = 3.281 ft</span>
+    </div>
+
+    <div class="controls">
+      <button class="btn" onclick="rotate(-30)">◀ Rotate Left</button>
+      <button class="btn" onclick="rotate(30)">Rotate Right ▶</button>
+      <button class="btn" onclick="tiltUp()">▲ Tilt Up</button>
+      <button class="btn" onclick="tiltDown()">▼ Tilt Down</button>
+      <button class="btn" id="explodeBtn" onclick="toggleExplode()">💥 Exploded View</button>
+      <button class="btn" onclick="resetView()">↺ Reset View</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+//  CANVAS SETUP
+// =====================================================================
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const wrap = canvas.parentElement;
+  canvas.width  = wrap.clientWidth;
+  canvas.height = wrap.clientHeight - 60;
+}
+resize();
+window.addEventListener('resize', () => { resize(); draw(); });
+
+// =====================================================================
+//  STATE
+// =====================================================================
+let angleY  = -25;   // degrees, horizontal rotation
+let angleX  =  25;   // degrees, vertical tilt
+let exploded = false;
+let explodeT = 0;    // 0=collapsed, 1=exploded (animated)
+let selectedComp = 0;
+let dragging = false;
+let lastX = 0, lastY = 0;
+
+const COMP_INFO = [
+  { name:'Ruler / Length',  metric:'meter (m)',      imperial:'foot (ft)',     factor:'1 m = 3.281 ft'  },
+  { name:'Mass Block',      metric:'kilogram (kg)',   imperial:'pound (lb)',    factor:'1 kg = 2.205 lb' },
+  { name:'Timer / Time',    metric:'second (s)',      imperial:'second (s)',    factor:'1 min = 60 s'    },
+  { name:'Thermometer',     metric:'Celsius (°C)',    imperial:'Fahrenheit (°F)',factor:'°F = °C×9/5+32' },
+  { name:'Volume Flask',    metric:'liter (L)',       imperial:'gallon (gal)',  factor:'1 L = 0.264 gal' },
+];
+
+// =====================================================================
+//  3D MATH HELPERS
+// =====================================================================
+function toRad(d) { return d * Math.PI / 180; }
+
+function project3D(x, y, z) {
+  // Rotate around Y axis
+  const ry = toRad(angleY);
+  const rx = toRad(angleX);
+
+  let x1 = x * Math.cos(ry) - z * Math.sin(ry);
+  let z1 = x * Math.sin(ry) + z * Math.cos(ry);
+  let y1 = y;
+
+  let y2 = y1 * Math.cos(rx) - z1 * Math.sin(rx);
+  let z2 = y1 * Math.sin(rx) + z1 * Math.cos(rx);
+
+  // Simple orthographic-ish perspective
+  const fov = 400;
+  const dz = fov + z2 * 0.3;
+  const scale = fov / (dz > 1 ? dz : 1);
+
+  const cx = canvas.width  / 2;
+  const cy = canvas.height / 2;
+
+  return {
+    sx: cx + x1 * scale,
+    sy: cy - y2 * scale,
+    scale: scale,
+    z: z2
+  };
+}
+
+function projectPt(v) { return project3D(v[0], v[1], v[2]); }
+
+// =====================================================================
+//  DRAWING HELPERS
+// =====================================================================
+function polyFace(verts3d, fillColor, strokeColor, alpha=1) {
+  const pts = verts3d.map(v => project3D(v[0], v[1], v[2]));
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.beginPath();
+  ctx.moveTo(pts[0].sx, pts[0].sy);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].sx, pts[i].sy);
+  ctx.closePath();
+  ctx.fillStyle   = fillColor;
+  ctx.strokeStyle = strokeColor || fillColor;
+  ctx.lineWidth   = 1.5;
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBox(cx,cy,cz, w,h,d, colTop,colLeft,colRight, alpha=1, strokeCol='#000') {
+  const hw=w/2, hh=h/2, hd=d/2;
+  // Top face
+  polyFace([
+    [cx-hw, cy+hh, cz-hd],[cx+hw, cy+hh, cz-hd],
+    [cx+hw, cy+hh, cz+hd],[cx-hw, cy+hh, cz+hd]
+  ], colTop, strokeCol, alpha);
+  // Front face
+  polyFace([
+    [cx-hw, cy-hh, cz+hd],[cx+hw, cy-hh, cz+hd],
+    [cx+hw, cy+hh, cz+hd],[cx-hw, cy+hh, cz+hd]
+  ], colLeft, strokeCol, alpha);
+  // Right face
+  polyFace([
+    [cx+hw, cy-hh, cz-hd],[cx+hw, cy-hh, cz+hd],
+    [cx+hw, cy+hh, cz+hd],[cx+hw, cy+hh, cz-hd]
+  ], colRight, strokeCol, alpha);
+  // Back face
+  polyFace([
+    [cx-hw, cy-hh, cz-hd],[cx+hw, cy-hh, cz-hd],
+    [cx+hw, cy+hh, cz-hd],[cx-hw, cy+hh, cz-hd]
+  ], colRight, strokeCol, alpha);
+  // Left face
+  polyFace([
+    [cx-hw, cy-hh, cz-hd],[cx-hw, cy-hh, cz+hd],
+    [cx-hw, cy+hh, cz+hd],[cx-hw, cy+hh, cz-hd]
+  ], colLeft, strokeCol, alpha);
+  // Bottom face
+  polyFace([
+    [cx-hw, cy-hh, cz-hd],[cx+hw, cy-hh, cz-hd],
+    [cx+hw, cy-hh, cz+hd],[cx-hw, cy-hh, cz+hd]
+  ], colTop, strokeCol, alpha);
+}
+
+function drawCylinder(cx,cy,cz, r,h, colSide,colTop, alpha=1, segs=16) {
+  const hh = h/2;
+  // Side faces
+  for (let i=0;i<segs;i++) {
+    const a0 = (i/segs)*Math.PI*2;
+    const a1 = ((i+1)/segs)*Math.PI*2;
+    polyFace([
+      [cx+r*Math.cos(a0), cy-hh, cz+r*Math.sin(a0)],
+      [cx+r*Math.cos(a1), cy-hh, cz+r*Math.sin(a1)],
+      [cx+r*Math.cos(a1), cy+hh, cz+r*Math.sin(a1)],
+      [cx+r*Math.cos(a0), cy+hh, cz+r*Math.sin(a0)],
+    ], colSide, '#1a1a1a', alpha);
+  }
+  // Top cap
+  const topPts = [];
+  const botPts = [];
+  for (let i=0;i<segs;i++) {
+    const a = (i/segs)*Math.PI*2;
+    topPts.push([cx+r*Math.cos(a), cy+hh, cz+r*Math.sin(a)]);
+    botPts.push([cx+r*Math.cos(a), cy-hh, cz+r*Math.sin(a)]);
+  }
+  polyFace(topPts, colTop, '#1a1a1a', alpha);
+  polyFace(botPts.reverse(), colTop, '#1a1a1a', alpha);
+}
+
+function drawThermometer(cx,cy,cz, alpha=1) {
+  drawCylinder(cx,cy,cz, 5,80, '#e8e8e8','#cccccc', alpha, 12);
+  drawCylinder(cx,cy-30,cz, 3,20, '#ff4444','#ff2222', alpha, 12);
+  // bulb
+  drawCylinder(cx,cy-45,cz, 8,10, '#ff3333','#ff1111', alpha, 10);
+}
+
+function drawFlask(cx,cy,cz, alpha=1) {
+  // Body
+  drawCylinder(cx,cy+10,cz, 25,50, '#7ad0ff55','#7ad0ff33', alpha, 14);
+  // Neck
+  drawCylinder(cx,cy-25,cz, 9,30, '#7ad0ff55','#7ad0ff44', alpha, 12);
+  // Liquid inside (visual)
+  drawCylinder(cx,cy+15,cz, 22,35, '#3399cc88','#3399cc66', alpha, 14);
+}
+
+// =====================================================================
+//  LABEL DRAWING
+// =====================================================================
+function drawLabel(world3, text, subtext, color='#C9A84C', active=false) {
+  const p = project3D(world3[0], world3[1], world3[2]);
+  ctx.save();
+  const bg = active ? '#C9A84C' : '#1B3A5C';
+  const tc = active ? '#1B3A5C' : color;
+
+  ctx.font = 'bold 12px Segoe UI, Arial';
+  const tw = ctx.measureText(text).width;
+  const boxW = Math.max(tw + 16, 80);
+  const boxH = subtext ? 32 : 20;
+  const bx = p.sx - boxW/2;
+  const by = p.sy - boxH - 10;
+
+  // Leader line
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,3]);
+  ctx.beginPath();
+  ctx.moveTo(p.sx, p.sy);
+  ctx.lineTo(p.sx, p.sy - 10);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Box
+  ctx.fillStyle = bg;
+  ctx.globalAlpha = 0.93;
+  roundRect(ctx, bx, by, boxW, boxH, 4);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = active ? 2 : 1;
+  roundRect(ctx, bx, by, boxW, boxH, 4);
+  ctx.stroke();
+
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = tc;
+  ctx.font = 'bold 11px Segoe UI, Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(text, p.sx, by + 13);
+  if (subtext) {
+    ctx.font = '9px Segoe UI, Arial';
+    ctx.fillStyle = active ? '#1B3A5C' : '#7ad0ff';
+    ctx.fillText(subtext, p.sx, by + 26);
+  }
+  ctx.restore();
+}
+
+function roundRect(ctx2, x,y,w,h,r) {
+  ctx2.beginPath();
+  ctx2.moveTo(x+r,y);
+  ctx2.lineTo(x+w-r,y); ctx2.arcTo(x+w,y,x+w,y+r,r);
+  ctx2.lineTo(x+w,y+h-r); ctx2.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx2.lineTo(x+r,y+h); ctx2.arcTo(x,y+h,x,y+h-r,r);
+  ctx2.lineTo(x,y+r); ctx2.arcTo(x,y,x+r,y,r);
+  ctx2.closePath();
+}
+
+// =====================================================================
+//  DRAW GRID
+// =====================================================================
+function drawGrid() {
+  const size = 200, step = 40;
+  ctx.save();
+  ctx.strokeStyle = '#ffffff0a';
+  ctx.lineWidth = 1;
+  for (let i = -size; i <= size; i += step) {
+    const a = project3D(i, -100, -size);
+    const b = project3D(i, -100,  size);
+    ctx.beginPath(); ctx.moveTo(a.sx,a.sy); ctx.lineTo(b.sx,b.sy); ctx.stroke();
+    const c2 = project3D(-size, -100, i);
+    const d2 = project3D( size, -100, i);
+    ctx.beginPath(); ctx.moveTo(c2.sx,c2.sy); ctx.lineTo(d2.sx,d2.sy); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// =====================================================================
+//  COMPONENT POSITIONS & EXPLOSION OFFSETS
+// =====================================================================
+// Base positions
+const BASES = [
+  // ruler:       [x, y, z]
+  [-120,  0,  0],
+  // mass block:
+  [  50, 20,  60],
+  // timer:
+  [ 120,-20, -30],
+  // thermometer:
+  [-30, -20,  90],
+  // flask:
+  [ 30, 10, -90],
+];
+
+// Explosion offsets
+const EXPLODE = [
+  [-80, 40, -60],
+  [ 80, 40,  80],
+  [100, 40, -80],
+  [-80, 40,  80],
+  [ 80, 40, -100],
+];
+
+// =====================================================================
+//  MAIN DRAW
+// =====================================================================
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawGrid();
+
+  const t = explodeT;
+  const positions = BASES.map((b,i) => [
+    b[0] + EXPLODE[i][0]*t,
+    b[1] + EXPLODE[i][1]*t,
+    b[2] + EXPLODE[i][2]*t,
+  ]);
+
+  // ---- 0: RULER (flat box)  ----
+  {
+    const [px,py,pz] = positions[0];
+    const active = selectedComp===0;
+    const alpha = active ? 1 : 0.75;
+    drawBox(px,py,pz, 200,14,30,
+      active?'#2a5f9a':'#1e4870',
+      active?'#1e4870':'#163657',
+      active?'#163657':'#0f2540', alpha, active?'#C9A84C':'#ffffff22');
+    // tick marks
+    for (let ti=0;ti<11;ti++) {
+      const tx = px-90+ti*18;
+      drawBox(tx,py+8,pz+15, 2,8,2,
+        ti%5===0?'#C9A84C':'#5080a0',
+        ti%5===0?'#b89038':'#3060808',
+        ti%5===0?'#a07830':'#204060', alpha);
+    }
+    drawLabel([px, py+20, pz], '📏 Length/Ruler', '1 m = 100 cm = 3.281 ft', '#C9A84C', active);
+  }
+
+  // ---- 1: MASS BLOCK ----
+  {
+    const [px,py,pz] = positions[1];
+    const active = selectedComp===1;
+    const alpha = active ? 1 : 0.75;
+    drawBox(px,py,pz, 55,55,55,
+      active?'#8a6000':'#6a4800',
+      active?'#6a4800':'#4a3000',
+      active?'#4a3000':'#2a1800', alpha, active?'#C9A84C':'#ffffff22');
+    // "kg" label on face
+    const fc = project3D(px+28, py, pz);
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.font = 'bold 14px Segoe UI, Arial';
+    ctx.fillStyle = '#C9A84C';
+    ctx.textAlign = 'center';
+    ctx.fillText('1 kg', fc.sx, fc.sy+5);
+    ctx.restore();
+    drawLabel([px, py+40, pz], '⚖️ Mass Block', '1 kg = 2.205 lb', '#C9A84C', active);
+  }
+
+  // ---- 2: TIMER (cylinder) ----
+  {
+    const [px,py,pz] = positions[2];
+    const active = selectedComp===2;
+    const alpha = active ? 1 : 0.75;
+    drawCylinder(px,py,pz, 28,55,
+      active?'#1e6e5a':'#145045',
+      active?'#29a080':'#1e7560', alpha);
+    // face circle
+    drawCylinder(px,py,pz+28, 18,4, '#1a1a1a','#e8e8e8', alpha, 14);
+    // clock hands
+    const c1 = project3D(px,py,pz+32);
+    ctx.save();
+    ctx.globalAlpha=alpha;
+    ctx.strokeStyle='#333'; ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(c1.sx,c1.sy); ctx.lineTo(c1.sx,c1.sy-10); ctx.stroke();
+    ctx.moveTo(c1.sx,c1.sy); ctx.lineTo(c1.sx+8,c1.sy-4); ctx.stroke();
+    ctx.restore();
+    drawLabel([px, py+40, pz], '🕐 Timer / Time', '1 min = 60 s', '#C9A84C', active);
+  }
+
+  // ---- 3: THERMOMETER ----
+  {
+    const [px,py,pz] = positions[3];
+    const active = selectedComp===3;
+    const alpha = active ? 1 : 0.75;
+    drawThermometer(px,py,pz, alpha);
+    // scale lines
+    for (let ti=0;ti<6;ti++) {
+      drawBox(px+5, py-30+ti*12, pz, 10,2,2,
+        '#aaaaaa','#888','#666', alpha);
+    }
+    drawLabel([px, py+60, pz], '🌡️ Thermometer', '°F = °C × 9/5 + 32', '#C9A84C', active);
+  }
+
+  // ---- 4: FLASK ----
+  {
+    const [px,py,pz] = positions[4];
+    const active = selectedComp===4;
+    const alpha = active ? 1 : 0.75;
+    drawFlask(px,py,pz, alpha);
+    // volume markers
+    for (let ti=0;ti<4;ti++) {
+      drawBox(px+25, py+20-ti*12, pz, 8,2,2, '#7ad0ff','#5ab0cc','#3a90aa', alpha*0.8);
+    }
+    drawLabel([px, py+50, pz], '🧪 Volume Flask', '1 L = 0.264 gal', '#C9A84C', active);
+  }
+
+  // ---- CONVERSION ARROW (if not exploded) ----
+  if (explodeT < 0.1) {
+    const info = COMP_INFO[selectedComp];
+    const p = project3D(0, -110, 0);
+    ctx.save();
+    ctx.font = 'bold 13px Segoe UI, Arial';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#C9A84C';
+    ctx.fillText(`Conversion: ${info.factor}`, p.sx, p.sy);
+    ctx.restore();
+  }
+
+  // ---- TITLE / LESSON LABEL ----
+  ctx.save();
+  ctx.font = '11px Segoe UI, Arial';
+  ctx.fillStyle = '#5a7a9a';
+  ctx.textAlign = 'center';
+  ctx.fillText('Engineering Measurement System · Drag to rotate · Click component names to explore', canvas.width/2, canvas.height - 10);
+  ctx.restore();
+}
+
+// =====================================================================
+//  ANIMATION
+// =====================================================================
+let animating = false;
+let animTarget = 0;
+
+function animateExplode() {
+  animating = true;
+  const speed = 0.05;
+  function step() {
+    if (Math.abs(explodeT - animTarget) < 0.01) {
+      explodeT = animTarget;
+      animating = false;
+      draw();
+      return;
+    }
+    explodeT += (animTarget - explodeT) * speed * 3;
+    draw();
+    requestAnimationFrame(step);
+  }
+  step();
+}
+
+// =====================================================================
+//  CONTINUOUS ROTATION
+// =====================================================================
+let autoRotating = false;
+function startAutoRotate() {
+  if (autoRotating) return;
+  autoRotating = true;
+  function step() {
+    if (!autoRotating) return;
+    angleY += 0.3;
+    draw();
+    requestAnimationFrame(step);
+  }
+  step();
+}
+
+// =====================================================================
+//  CONTROLS
+// =====================================================================
+function rotate(deg) { angleY += deg; draw(); }
+function tiltUp()    { angleX = Math.max(-80, angleX - 10); draw(); }
+function tiltDown()  { angleX = Math.min( 80, angleX + 10); draw(); }
+function resetView() { angleY=-25; angleX=25; explodeT=0; animTarget=0; exploded=false; document.getElementById('explodeBtn').classList.remove('active'); draw(); }
+
+function toggleExplode() {
+  exploded = !exploded;
+  animTarget = exploded ? 1 : 0;
+  const btn = document.getElementById('explodeBtn');
+  btn.classList.toggle('active', exploded);
+  animateExplode();
+}
+
+function selectComp(id) {
+  selectedComp = id;
+  document.querySelectorAll('.comp-item').forEach((el,i) => {
+    el.classList.toggle('active', i===id);
+  });
+  const info = COMP_INFO[id];
+  document.getElementById('selName').textContent    = info.name;
+  document.getElementById('selMetric').textContent   = info.metric;
+  document.getElementById('selImperial').textContent = info.imperial;
+  document.getElementById('selFactor').textContent   = info.factor;
+  draw();
+}
+
+// =====================================================================
+//  MOUSE / TOUCH EVENTS
+// =====================================================================
+canvas.addEventListener('mousedown', e => {
+  dragging=true; lastX=e.clientX; lastY=e.clientY;
+  autoRotating=false;
+});
+window.addEventListener('mouseup', () => dragging=false);
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  angleY += dx * 0.4;
+  angleX += dy * 0.3;
+  angleX = Math.max(-80, Math.min(80, angleX));
+  lastX = e.clientX; lastY = e.clientY;
+  draw();
+});
+
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length===1) {
+    dragging=true;
+    lastX=e.touches[0].clientX;
+    lastY=e.touches[0].clientY;
+    autoRotating=false;
+    e.preventDefault();
+  }
+}, {passive:false});
+canvas.addEventListener('touchend', () => dragging=false);
+canvas.addEventListener('touchmove', e => {
+  if (!dragging||e.touches.length!==1) return;
+  const dx = e.touches[0].clientX - lastX;
+  const dy = e.touches[0].clientY - lastY;
+  angleY += dx * 0.4;
+  angleX += dy * 0.3;
+  angleX = Math.max(-80, Math.min(80, angleX));
+  lastX=e.touches[0].clientX; lastY=e.touches[0].clientY;
+  draw();
+  e.preventDefault();
+}, {passive:false});
+
+// =====================================================================
+//  INIT
+// =====================================================================
+draw();
+</script>
+</body>
+</html>

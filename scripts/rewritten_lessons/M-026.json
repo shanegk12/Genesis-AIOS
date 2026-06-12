@@ -1,0 +1,309 @@
+[
+  {
+    "id": "m026a1b2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Bill of Materials</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026c3d4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson, you explored how raw materials are transformed into usable components for your mousetrap car — cutting, shaping, joining, and everything in between. Now that you have a collection of processed parts, it's time to bring them all together. This lesson marks your transition into the <strong>Assembly phase</strong> of Creationeering, where all your hard work on individual components comes together into one unified system.</p><p>To make that happen successfully, you need an essential engineering tool: the <strong>Bill of Materials</strong>, or BOM. Think of it as a master checklist for your entire project — every part, every material, every quantity, all in one place. A well-built BOM keeps your assembly organized, helps you catch missing pieces before they become problems, and gives your project a clear roadmap from parts to product.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026e5f6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Define what a Bill of Materials (BOM) is and explain its purpose in engineering projects.</li><li>Articulate the critical role of a well-organized BOM in ensuring efficient and accurate assembly of the mousetrap car.</li><li>Develop a preliminary Bill of Materials for their own mousetrap car, listing all major components and materials.</li><li>Understand how tracking inventory and managing component flow directly impacts project timelines and resource allocation.</li><li>Connect meticulous planning and resource management to biblical principles of diligent stewardship over God's creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026g7h8",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Bill of Materials (BOM)",
+          "definition": "A comprehensive list of all items, parts, assemblies, and materials required to build a product."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The process of putting components together to create a subsystem or a complete system."
+        },
+        {
+          "term": "Subsystem",
+          "definition": "A major component of a larger system, itself made up of multiple smaller parts."
+        },
+        {
+          "term": "Component",
+          "definition": "An individual part that makes up a subsystem or system."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The process of obtaining the materials or services needed for a project."
+        },
+        {
+          "term": "Inventory",
+          "definition": "A complete, detailed list of all items — especially goods or materials currently on hand."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The permissible limit or range of variation allowed in a physical dimension or property."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026i9j0",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026k1l2",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><em>\"Thus the heavens and the earth were finished, and all the host of them. And on the seventh day God finished his work that he had done, and he rested on the seventh day from all his work that he had done.\"</em> — Genesis 2:1-2</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026m3n4",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Order in Assembly</h2><p>From the very beginning, God demonstrated perfect order and meticulous planning. After six days, the heavens and the earth — and <em>all the host of them</em> — were finished. Notice that phrase: <em>all the host of them</em>. That's not just individual pieces floating around. It's every star, planet, ocean, and creature integrated into one purposeful, fully functioning system.</p><p>God didn't just gather raw materials and hope it worked out. He assembled everything with divine precision — each part in the right place, at the right time, serving the right purpose. That's the ultimate model for what you're about to do with your mousetrap car. Great engineering isn't just about making good parts; it's about bringing all those parts together in the right order, with the right quantities, in a way that actually works. A Bill of Materials is how you start that process the right way.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026o5p6",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026q7r8",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Bill of Materials?</h2><p>A Bill of Materials is essentially a detailed recipe and shopping list rolled into one. Imagine trying to bake a cake without a recipe — you might forget the flour, grab the wrong amount of sugar, or reach for baking soda when you needed baking powder. By the time you realize the mistake, you're already halfway through mixing. Engineers face the exact same risk when building without a BOM.</p><p>A BOM lists every single part, component, and raw material needed to build your product. It tells you <em>what</em> each item is, <em>how many</em> you need, and often <em>where it fits</em> in the larger assembly. For a mousetrap car, that might include the mousetrap itself, axles, wheels, string, wooden dowels, and any fasteners or connectors. Nothing gets left out — and nothing gets forgotten at the hardware store.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026s9t0",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample Bill of Materials table for a mousetrap car, showing columns for item number, part name, description, quantity, material, and notes — with rows filled in for components like axle, wheels, mousetrap, and string."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026u1v2",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Goes Into a BOM?</h2><p>A well-built BOM typically includes several key columns of information. Each row represents one distinct part or material. Here's what a solid BOM entry usually captures:</p><ul><li><strong>Item Number</strong> — A unique number to identify each part on the list.</li><li><strong>Part Name</strong> — A clear, specific name for the component (e.g., \"rear axle\" rather than just \"stick\").</li><li><strong>Description</strong> — Extra detail about size, shape, or specifications.</li><li><strong>Quantity</strong> — Exactly how many of that part you need.</li><li><strong>Material</strong> — What the part is made from (wood, plastic, metal, etc.).</li><li><strong>Notes / Source</strong> — Where you'll get it or anything special to remember about it.</li></ul><p>The more specific your BOM, the smoother your assembly will go. Vague entries lead to confusion; precise entries lead to confidence.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026w3x4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Systems Within Systems: Subsystems and Components</h2><p>One of the most powerful things a BOM reveals is how your project is actually organized. Your mousetrap car isn't just a pile of parts — it's a <strong>system</strong> made of <strong>subsystems</strong>, each of which is made of individual <strong>components</strong>.</p><p>For example, the <em>drive subsystem</em> might include the mousetrap, the string, and the rear axle assembly. The <em>chassis subsystem</em> might include the main frame pieces and any support structures. Each subsystem has its own components, and all the subsystems work together to make the car go.</p><p>Breaking your BOM down by subsystem helps you build in stages — finishing one section completely before moving to the next. That's how professional engineers tackle complex machines, and it's exactly how you should approach your mousetrap car.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026y5z6",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing a mousetrap car broken into labeled subsystems — drive system, wheel and axle system, and chassis — with arrows pointing from each subsystem to its individual components."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026a7b8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Procurement, Inventory, and Why They Matter</h2><p>Once your BOM is built, it drives two important processes: <strong>procurement</strong> and <strong>inventory management</strong>.</p><p>Procurement is the act of actually <em>getting</em> everything on your list. That might mean checking your supply kit, sourcing materials from your classroom, or requesting items from your teacher. Without a BOM, procurement is guesswork. With one, it's a straightforward checklist.</p><p>Inventory is the tracking of what you already have versus what you still need. Engineers call this process keeping track of your <em>on-hand</em> materials. If your BOM says you need four wheels and you only have three, you catch that gap before assembly begins — not in the middle of building, when time is tight and frustration runs high.</p><p>Together, procurement and inventory management keep your project on schedule and prevent the all-too-common problem of running out of a critical part at the worst possible moment.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026c9d0",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often write vague part names like \"wood piece\" or \"string\" without specifying size or quantity. When you go to build, you won't know <em>which</em> wood piece or <em>how much</em> string. Be specific — your future self will thank you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026e1f2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Tolerances: When Close Enough Isn't Good Enough</h2><p>Here's something that surprises many first-time builders: even if you have all the right parts, they still might not fit together correctly. That's where <strong>tolerance</strong> comes in.</p><p>A tolerance is the acceptable range of variation in a measurement. If your axle hole is supposed to be 6mm wide but you drilled it at 6.5mm, the axle might wobble. If it's 5.5mm, the axle won't fit at all. Real engineering projects — from car engines to spacecraft — specify tolerances for every critical dimension.</p><p>For your mousetrap car, tolerances matter most where parts connect: axle holes in wheels, how tightly the string wraps, and how snugly frame pieces join together. Keep these in mind as you finalize your BOM and move toward assembly.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026g3h4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Planning</h2><p>There's a deeper reason why careful planning matters. Proverbs 21:5 tells us that \"the plans of the diligent lead surely to abundance, but everyone who is hasty comes only to poverty.\" In other words, rushing and winging it wastes resources — while careful, thoughtful preparation produces results.</p><p>When you create a detailed BOM, you're practicing <strong>stewardship</strong> — the responsible management of the resources and materials you've been given. You're not wasting materials on guesswork. You're not over-procuring and leaving supplies unused. You're planning precisely so that every part serves its purpose and nothing is squandered. That's an engineering virtue and a biblical one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026i5j6",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026k7l8",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Building your BOM:</strong> Start by listing every physical part you can see in your design sketch. Then go subsystem by subsystem and ask — what components make up this section? Count carefully, note the material, and add a brief description for anything that could be confused with another part. Review your completed BOM against your design before you start building.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026m9n0",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>A Bill of Materials isn't just paperwork — it's the bridge between your design and your finished mousetrap car. It brings order to complexity, prevents costly mistakes, and keeps your assembly process moving forward with confidence. Every professional engineer uses one, from the person designing a smartphone to the team building a bridge.</p><p>As you create your own BOM in the activity ahead, remember that you're doing exactly what God modeled at creation: surveying all that needs to be made, accounting for every element, and preparing to assemble it all into something purposeful and complete. Build carefully. Build intentionally. Build to last.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m026o1p2",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is a Bill of Materials, and what problem does it solve?</strong><br/>A BOM is a comprehensive list of every part, material, and component needed to build a product. It prevents missing parts, incorrect quantities, and disorganized assembly by giving engineers a clear, complete reference before and during building.</p><p><strong>2. What is the difference between a component and a subsystem?</strong><br/>A component is an individual part. A subsystem is a group of components that work together to perform a specific function within the larger system. For example, the wheels and axle together form a subsystem, while each wheel alone is a component.</p><p><strong>3. Why does tolerance matter when assembling your mousetrap car?</strong><br/>Tolerance defines the acceptable range of variation in a measurement. If parts are cut or drilled outside that range, they may not fit together correctly — causing wobbling, gaps, or parts that won't connect at all.</p><p><strong>4. How does creating a BOM reflect biblical stewardship?</strong><br/>Planning precisely means you use only what you need, waste nothing, and honor the resources you've been given. That careful, intentional management of materials reflects the biblical call to be responsible stewards of what God provides.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

@@ -1,0 +1,288 @@
+[
+  {
+    "id": "m024t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Analysis Gate Review</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>This lesson is your formal Analysis Gate Review — a professional engineering checkpoint where you must demonstrate that your mousetrap car analysis is complete, accurate, and ready to move forward. You will revisit the OCV method, Hierarchical Multiscale Modeling (HM²), and data validation as you prepare to present your technical findings. Just as a NASA engineer cannot move a spacecraft from design into testing without proving the numbers hold up, you cannot move forward without showing your data is trustworthy.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Define what a Gate Review is and explain its role in the professional engineering process.</li><li>Apply the OCV model (Objectives, Constraints, Variables) to evaluate design decisions.</li><li>Describe Hierarchical Multiscale Modeling (HM²) and explain how small-scale material properties affect full-system performance.</li><li>Distinguish between a validation error and a failure, and explain how each informs the next design iteration.</li><li>Complete an Analysis Gate checklist that documents subsystems, data, and OCV alignment.</li><li>Connect the practice of careful, honest documentation to the biblical principle of stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Gate Review",
+          "definition": "A formal engineering checkpoint where a designer must present data to prove a project is ready to move to the next phase."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A design framework built on three elements: Objectives (your goal), Constraints (your boundaries), and Variables (what you change to improve performance)."
+        },
+        {
+          "term": "Hierarchical Multiscale Modeling (HM²)",
+          "definition": "A method of analysis that examines a system at multiple levels — from atomic material properties all the way up to full-system behavior — to understand how small details affect big outcomes."
+        },
+        {
+          "term": "Validation",
+          "definition": "The process of checking whether your mathematical predictions or computer models match real-world experimental results."
+        },
+        {
+          "term": "Validation Error",
+          "definition": "A measurable gap between your predicted results and your actual results — not a failure, but a signal that your model needs to be refined."
+        },
+        {
+          "term": "Mechanical Efficiency",
+          "definition": "A measure of how much of the energy put into a system is actually converted into useful output, expressed as a percentage."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Gate Review?</h2><p>In professional engineering firms — the kind that build spacecraft for NASA or design life-saving medical devices — a Gate Review is a formal checkpoint. It is the moment where an engineer stands before a panel of experts and proves, with data, that their design is safe, efficient, and ready to advance.</p><p>This is not a casual check-up. Think of it like a bridge inspection before a road opens to traffic. The inspector doesn't just glance at the bridge and say, \"Looks fine to me.\" They check load ratings, material certifications, stress test results, and construction logs. Every claim has to be backed by evidence.</p><p>Your Gate Review works the same way. You have spent the last few weeks moving from your initial Little Moe Prototype into a deeper analysis of forces, energy transfer, and structural integrity. Now it is time to prove what you know. Can your data support your conclusions? Does your math match what actually happened on the floor?</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Passing a Gate Review is an act of stewardship. You are being trusted with resources — materials, time, lab space — and God calls us to manage those gifts with care and honesty. <em>\"Whoever can be trusted with very little can also be trusted with much.\"</em> (Luke 16:10) Your documentation is the proof of that trust.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Goal of the Analysis Phase</h2><p>The Analysis phase in the Creationeering™ framework is the act of breaking a complex system down into its smallest parts so you can truly understand it. Think of a master watchmaker taking apart a clock to inspect every gear and spring. If the watchmaker doesn't understand how each individual tooth on a gear interacts with the next, they can never hope to make the clock more accurate. They have to see the parts before they can improve the whole.</p><p>That is exactly what you have been doing with your mousetrap car. You didn't just watch it roll and guess why it moved the way it did. You identified subsystems. You measured forces. You calculated energy loss. You built a picture of your car from the inside out.</p><p>Now, as you close out this section, your goal is to verify that your mathematical models actually match your physical findings. We are closing the gap between \"I think my car is fast\" and \"The data proves my car achieves 98% mechanical efficiency.\" That gap — between what you think and what you can prove — is where real engineering lives.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A mousetrap car broken into labeled subsystems — lever arm, axle, chassis, and wheels — with arrows showing the direction of energy transfer from spring to rear wheels"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Technical Tools of Your Review</h2><p>Before you run through the checklist, let's revisit the three core tools you must have in your toolkit to pass this gate. These aren't just vocabulary words — they are the methods professional engineers use every day.</p><h3>The OCV Method: Objectives, Constraints, Variables</h3><p>Every design decision you made during this project should be rooted in the OCV model. During your review, you need to be able to clearly explain all three elements for at least one iteration of your mousetrap car design.</p><ul><li><strong>Objective:</strong> What was the primary goal of your iteration? For example: to maximize the distance traveled, or to reduce axle friction.</li><li><strong>Constraint:</strong> What boundaries limited your design? For example: the fixed length of the mousetrap spring, the friction coefficient of the test floor, or a budget limit on materials.</li><li><strong>Variable:</strong> What specific part of your system did you change to try to improve performance? For example: the diameter of the rear wheels, the length of the lever arm, or the material of the axle.</li></ul><p>If you can walk through OCV clearly for even one design decision, you are demonstrating exactly how professional engineers think. Every change they make is intentional, bounded, and testable.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>HM²: Hierarchical Multiscale Modeling</h3><p>In Dr. Horstemeyer's Creationeering™ framework, we don't just look at the big picture. We use Hierarchical Multiscale Modeling — or HM² — to understand how what happens at the tiniest scale affects the whole system.</p><p>Here is how to picture it. Imagine you are designing a bridge. If you only look at the bridge as one big piece of steel, you might miss a tiny crack forming inside the metal. HM² is like having superhero vision — it lets you zoom in all the way down to the atoms in that steel beam. If those atoms aren't bonding correctly, the whole bridge is at risk, even if it looks fine from the outside.</p><p>For your mousetrap car, HM² means asking deeper questions about your materials. Is your axle smooth plastic or textured wood? At the microscopic level, a rougher surface means more friction between atoms — and more friction means more energy lost before your wheels even start to spin. That is not a small detail. That is the difference between a car that travels 4 meters and one that travels 8.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Data Validation and Integrity</h3><p>Integrity is not just a character quality — it is an engineering requirement. In the lab, integrity means your data is honest. It means you recorded what actually happened, not what you hoped would happen.</p><p>Validation is the specific process of checking whether your mathematical predictions match your real-world results. If your calculations said the car should travel 10 meters but it only went 5, you have not failed. You have discovered a validation error — a gap between your model and reality that needs to be understood and corrected.</p><p>Finding a validation error is actually good science. It means you are paying attention. The next step is to go back into your model, identify what assumption was wrong, and refine your prediction. That cycle — predict, test, compare, refine — is the heartbeat of the Analysis phase.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When reviewing your data, look for the <strong>biggest gap</strong> between your prediction and your result. That gap is your most important clue. Ask: \"What assumption did I make in my math that doesn't match what actually happened on the floor?\" That question will guide your next iteration.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Analysis Gate Review Checklist</h2><p>A professional engineer never relies on memory alone — they rely on their paper trail. Use the checklist below to make sure your documentation is complete before you present your Gate Review. Each component has an engineering requirement and a Creationeering™ standard to meet.</p><h3>System Identification</h3><ul><li>Identify all four subsystems of your mousetrap car: Lever Arm, Axle, Chassis, and Wheels.</li><li>Trace the path of energy transfer through each subsystem, from the spring release to the point where the car stops.</li></ul><h3>OCV Alignment</h3><ul><li>List at least one specific Variable you changed during your iteration process.</li><li>Explain how that change was bounded by your project Constraints.</li><li>Connect the change back to your original Objective — did it move you closer to your goal?</li></ul><h3>Data Summary</h3><ul><li>Record the mean (average) distance and time from at least three test runs.</li><li>Calculate your car's mechanical efficiency using your energy input and output measurements.</li><li>Identify any validation errors — gaps between your predicted and actual results — and note what may have caused them.</li></ul><h3>HM² Reflection</h3><ul><li>Identify at least one material or surface in your design where atomic-level properties (like friction or elasticity) affected your full-system results.</li><li>Explain how understanding that small-scale behavior helped — or would help — improve your design.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A close-up comparison of two axle materials side by side — smooth plastic versus textured wood — with a microscopic inset illustration showing the difference in surface roughness at the atomic scale"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Do not present a single test run as your data. One result could be an outlier caused by a bad launch or an uneven floor. Always use at least three runs and calculate the mean. A Gate Review panel will immediately question single-point data — and so should you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Moving Forward: From Analysis to Synthesis</h2><p>Passing this gate means you are ready for the next phase: Synthesis. Where Analysis broke your system apart, Synthesis will put it back together — with improvements. You will take everything you learned about energy loss, friction, lever arm ratios, and material properties, and you will use it to build a better car.</p><p>That progression — understand deeply, then build deliberately — is exactly how God modeled the creative process in Genesis. First, order was established. Then, creation was built on that foundation. Your analysis is your foundation. Everything you build next depends on how well you understand what you have already done.</p><p>So take your checklist seriously. Review your data honestly. And walk into your Gate Review knowing that the goal isn't a perfect car — it is a documented, understood one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m024a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the purpose of a Gate Review in professional engineering?</strong><br/>A Gate Review is a formal checkpoint where engineers present data to prove their design is safe, efficient, and ready to advance to the next phase — not just a progress check, but a data-backed decision point.</p><p><strong>2. In the OCV method, what is the difference between a Constraint and a Variable?</strong><br/>A Constraint is a fixed boundary you cannot change (like the length of your mousetrap spring). A Variable is something you intentionally change to test whether it improves performance (like wheel diameter).</p><p><strong>3. Why is finding a validation error considered good science, not failure?</strong><br/>A validation error means the gap between your prediction and your result has been measured and identified. That information tells you exactly which assumption in your model was wrong — giving you a specific target to fix in your next iteration.</p><p><strong>4. How does HM² connect to your mousetrap car?</strong><br/>HM² means looking beyond the whole car to the material properties of individual parts. For example, a rougher axle surface creates more atomic-level friction, which reduces overall mechanical efficiency — even if the car looks well-built from the outside.</p><p><strong>5. Why does the lesson connect honest data recording to stewardship?</strong><br/>Stewardship means responsibly managing what you have been given. Honest documentation ensures that resources — materials, time, and trust — are not wasted chasing a design problem you haven't actually measured or understood.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

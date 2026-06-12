@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design of Experiments (One Factor at A Time_ — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Design of Experiments (One Factor at A Time_</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Analysis and Synthesis", "definition": "The phase in the engineering process where you test, analyze, and improve your designs based on data."}, {"term": "One-Factor-at-a-Time (OFAT)", "definition": "An experimental method where you change only one variable at a time to clearly see its effect on the outcome."}, {"term": "Variable", "definition": "An element, feature, or factor in an experiment that can change or vary."}, {"term": "Factor", "definition": "An independent variable in an experiment whose state can be controlled by the experimenter."}, {"term": "Why use OFAT?", "definition": "OFAT provides clarity, directional data, and is cost-effective by isolating the impact of each change."}, {"term": "Iteration", "definition": "The cyclical process of refining a design by building, testing, analyzing, and improving it repeatedly."}, {"term": "Design of Experiments (DoE)", "definition": "A systematic approach to planning and conducting experiments to gather data and understand how different factors affect a process or product."}, {"term": "Clarity (in OFAT)", "definition": "The benefit of OFAT that allows you to know exactly which change caused a specific result, avoiding confusion from multiple simultaneous changes."}, {"term": "Directional Data", "definition": "Information gained from an experiment that tells you if a specific change makes a performance better or worse."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

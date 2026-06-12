@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-011",
+  "topic": "Design: Forces and Influences",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the most basic definition of a force, as described in the lesson?",
+      "options": {
+        "A": "A change in an object's velocity.",
+        "B": "A push or pull on an object.",
+        "C": "The amount of matter in an object.",
+        "D": "The speed at which an object moves."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines force in its simplest terms as 'a push or a pull on an object'."
+    },
+    {
+      "type": "recall",
+      "question": "In what unit are forces measured, named after the mathematician and physicist who formalized the laws of motion?",
+      "options": {
+        "A": "Kilograms (kg)",
+        "B": "Meters per second (m/s)",
+        "C": "Newtons (N)",
+        "D": "Joules (J)"
+      },
+      "answer": "C",
+      "explanation": "The lesson states that 'Forces are measured in a unit called Newtons (N), named after Sir Isaac Newton'."
+    },
+    {
+      "type": "recall",
+      "question": "Which type of force is the support force exerted by a surface, acting perpendicular to the object in contact with it?",
+      "options": {
+        "A": "Gravity",
+        "B": "Friction",
+        "C": "Normal Force",
+        "D": "Applied Force"
+      },
+      "answer": "C",
+      "explanation": "The lesson defines Normal Force as 'The support force exerted upon an object that is in contact with another stable object. It always acts perpendicular (at a 90-degree angle) to the surface'."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson, why does a rocket's acceleration increase dramatically as it burns fuel and leaves the atmosphere?",
+      "options": {
+        "A": "The force from the engines decreases.",
+        "B": "The rocket's mass decreases, while engine force remains constant.",
+        "C": "Gravity becomes stronger outside the atmosphere.",
+        "D": "Air resistance increases, pushing the rocket faster."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that as a rocket burns fuel, its mass decreases, and with a relatively constant engine force, its acceleration increases dramatically according to F=ma."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why doesn't your computer monitor fall straight through your desk, even though gravity is constantly pulling it downwards?",
+      "options": {
+        "A": "The desk has no gravitational pull on the monitor.",
+        "B": "The Normal Force from the desk pushes upwards, supporting the monitor.",
+        "C": "Gravity only affects objects that are in motion.",
+        "D": "The monitor is too light for gravity to have a significant effect."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that the Normal Force is the support force from a surface that prevents objects from falling through it, counteracting gravity."
+    },
+    {
+      "type": "comprehension",
+      "question": "If you push a stalled car forward with 500 Newtons of force, and your friend simultaneously pushes the car backward with 500 Newtons of force, why will the car not move?",
+      "options": {
+        "A": "The car is too heavy for that amount of force.",
+        "B": "The forces are balanced, resulting in a net force of zero.",
+        "C": "Forces only affect objects if they are pushing in the same direction.",
+        "D": "The car needs more fuel to start moving."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that if forces are balanced (equal magnitude and opposite direction), the net force is zero, and the object will not move."
+    },
+    {
+      "type": "application",
+      "question": "An engineer is designing two new electric scooters. Scooter X has a mass of 50 kg, and Scooter Y has a mass of 100 kg. If the engineer wants both scooters to accelerate at the exact same rate, which scooter will require a more powerful motor to generate the necessary applied force?",
+      "options": {
+        "A": "Scooter X",
+        "B": "Scooter Y",
+        "C": "Both will require motors of the same power.",
+        "D": "Neither scooter needs a motor if they are pushed."
+      },
+      "answer": "B",
+      "explanation": "According to F=ma, if acceleration is identical, the scooter with greater mass (Scooter Y) will require a greater force to achieve that acceleration."
+    },
+    {
+      "type": "application",
+      "question": "A construction engineer is planning to build a tall skyscraper. Which force will be the primary continuous challenge they must account for in their design to prevent the building from collapsing under its own weight?",
+      "options": {
+        "A": "Normal Force",
+        "B": "Spring Force",
+        "C": "Applied Force",
+        "D": "Gravity"
+      },
+      "answer": "D",
+      "explanation": "The lesson identifies gravity as 'the eternal enemy of the civil and aerospace engineer' and the 'primary continuous force you must overcome' for structures like skyscrapers."
+    },
+    {
+      "type": "application",
+      "question": "A drone designer wants to make their new drone accelerate faster without increasing the power of its motors (meaning the applied force is fixed). Based on the principles in the lesson, what is the most effective design change they could make?",
+      "options": {
+        "A": "Make the drone heavier by adding more features.",
+        "B": "Use stronger propellers that push more air.",
+        "C": "Decrease the drone's overall mass by using lighter materials.",
+        "D": "Add more sensors to improve navigation."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains that if force is a fixed constraint, decreasing the mass (m) is the only option to increase acceleration (a), as shown in the F=ma equation."
+    },
+    {
+      "type": "synthesis",
+      "question": "Aerospace engineers frequently use lightweight materials like carbon fiber and titanium in rocket designs. How does this design choice relate to the equation F = m * a and the goal of launching a rocket into orbit?",
+      "options": {
+        "A": "Lighter materials increase the force of gravity on the rocket.",
+        "B": "Lighter materials reduce the mass (m), requiring less force (F) for a given acceleration (a).",
+        "C": "Lighter materials make the rocket stronger against atmospheric pressure.",
+        "D": "Lighter materials decrease the rocket's acceleration, making it easier to control."
+      },
+      "answer": "B",
+      "explanation": "This connects the engineering practice of using lightweight materials to the F=ma equation, explaining that reducing mass allows for greater acceleration with a given force or requires less force for the same acceleration."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects understanding forces like gravity and friction to biblical principles. What does the consistent and predictable operation of these physical forces in the world around us suggest about God?",
+      "options": {
+        "A": "God is constantly changing the laws of nature to test us.",
+        "B": "God is absent from His creation, allowing it to run on its own.",
+        "C": "God designed an orderly universe and actively sustains it with His power.",
+        "D": "God only cares about spiritual matters, not the physical world."
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly connects scientific principles to 'biblical truths about God's creation and sustaining power,' highlighting God's order and power in the consistent operation of forces."
+    },
+    {
+      "type": "synthesis",
+      "question": "When an engineer designs a stable bridge, they must calculate the downward pull of gravity on the bridge's components and ensure the upward Normal Force from the supports can counteract it. This process demonstrates the engineer's need to:",
+      "options": {
+        "A": "Make the bridge as light as possible to avoid gravity.",
+        "B": "Create an unbalanced net force to allow for movement.",
+        "C": "Balance the forces to achieve a net force of zero, keeping the bridge still.",
+        "D": "Ignore the effects of acceleration since the bridge is not moving."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains that engineers 'spend much of their time calculating how to balance forces to keep structures perfectly still,' which involves counteracting forces like gravity with normal force to achieve a net force of zero."
+    }
+  ]
+}

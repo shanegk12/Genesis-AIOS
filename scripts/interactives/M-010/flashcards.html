@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Activity: Company Identit — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Business Activity: Company Identit</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Company Identity", "definition": "The unique characteristics that define a company, including its name, mission, and values."}, {"term": "Stewardship", "definition": "The responsible overseeing and protection of something considered worth caring for and preserving, like resources or talents."}, {"term": "Mission Statement", "definition": "A 2-3 sentence statement that defines a company's purpose and its commitment to its customers and community."}, {"term": "North Star (Company)", "definition": "A guiding principle or clear purpose that helps a company make decisions and stay focused on its goals."}, {"term": "Leadership Roles", "definition": "Specific positions within a company, each with distinct responsibilities for different parts of a project."}, {"term": "Organizational Chart", "definition": "A diagram that shows the hierarchy of a team and how information flows between different roles."}, {"term": "Critical Path", "definition": "The sequence of tasks in a project that must be completed on time to avoid delaying the entire project launch."}, {"term": "Production Gantt Chart", "definition": "A visual tool used to map out the timeline for major milestones and tasks in a project."}, {"term": "The Three Ts of Stewardship", "definition": "Key resources to manage responsibly: Time (schedule), Talent (roles), and Treasury (materials/budget)."}, {"term": "Success Metrics", "definition": "Specific, measurable goals that help a company determine if it has achieved its objectives."}, {"term": "Proverbs 16:3", "definition": "A Bible verse that encourages committing our work to the Lord so our plans will be established."}, {"term": "Engineering Lifecycle", "definition": "The complete process involved in creating a product, from design to final build and marketing."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Death and Recycling: End of Life Classification — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Death and Recycling: End of Life Classification</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "End-of-Life (EoL)", "definition": "The point when a product or part is no longer used for its original purpose. Its EoL classification decides what happens next."}, {"term": "Reuse", "definition": "Using a product or part again for the same or a similar purpose without much processing. This is the lowest energy EoL option."}, {"term": "Refurbish / Repair", "definition": "Restoring a product to working condition through cleaning, replacing parts, or minor fixes. This extends its useful life."}, {"term": "Recycle", "definition": "Processing a material to recover its raw material value, which is then used in new products. This keeps materials in the economy."}, {"term": "Landfill / Incinerate", "definition": "Disposing of material as waste, either by burying it (landfill) or burning it (incinerate). This is the last resort, as material value is lost."}, {"term": "Material Stream", "definition": "A category of material, like metals or plastics, that can be processed together through the same recycling or recovery path."}, {"term": "Contamination", "definition": "When a wrong material is present in a recycling stream, which reduces or destroys its value. For example, food on cardboard."}, {"term": "Engineer's EoL Responsibility", "definition": "Engineers are responsible for designing products to have better outcomes at the end of their life, such as being easier to reuse or recycle."}, {"term": "Lowest Energy EoL Option", "definition": "Reuse requires the least amount of energy compared to other end-of-life options because it avoids significant processing."}, {"term": "Highest Preferred EoL Option", "definition": "Reuse is the most preferred end-of-life option because it preserves the most value and uses the least energy."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

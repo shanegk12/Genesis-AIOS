@@ -1,0 +1,103 @@
+{
+  "lesson_id": "M-049",
+  "topic": "Test Protocol and Baselines",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is a 'Test Protocol' in the context of engineering testing?",
+      "options": {
+        "A": "The final score or result of an experiment.",
+        "B": "A detailed, step-by-step plan for conducting an experiment to ensure consistency.",
+        "C": "The initial measurement taken before any design changes.",
+        "D": "A limitation on the materials or time available for a project."
+      },
+      "answer": "B",
+      "explanation": "A Test Protocol is defined as a detailed, step-by-step plan for conducting an experiment or evaluation to ensure consistency and reliability of results."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what does 'Baseline' refer to in engineering testing?",
+      "options": {
+        "A": "The ultimate goal or objective of a design.",
+        "B": "A factor that can be changed or controlled in an experiment.",
+        "C": "An initial measurement or set of data used as a reference point for comparison.",
+        "D": "The overall performance of a system fulfilling its function."
+      },
+      "answer": "C",
+      "explanation": "A Baseline is defined as an initial measurement or set of data used as a reference point for comparison against future measurements after design changes."
+    },
+    {
+      "type": "recall",
+      "question": "Which biblical verse is mentioned in the lesson to highlight God's meticulous evaluation and affirmation of His creation's performance?",
+      "options": {
+        "A": "John 3:16",
+        "B": "Genesis 1:31",
+        "C": "Proverbs 3:5",
+        "D": "Romans 8:28"
+      },
+      "answer": "B",
+      "explanation": "The lesson directly quotes Genesis 1:31 (KJV) to illustrate God's evaluation of His creation's performance."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is having a clear objective crucial for your mousetrap car's performance testing?",
+      "options": {
+        "A": "It ensures you use the most expensive materials.",
+        "B": "It helps you decide whether to measure distance, speed, or both, guiding your design and evaluation.",
+        "C": "It limits the number of tests you need to perform.",
+        "D": "It guarantees your car will win the competition."
+      },
+      "answer": "B",
+      "explanation": "A clear objective is crucial because it defines what performance metric (e.g., distance or speed) you are trying to maximize or minimize, guiding your testing and design choices."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does 'Multiscale Modeling' help understand a mousetrap car's performance?",
+      "options": {
+        "A": "It focuses only on the car's overall speed or distance.",
+        "B": "It helps connect macro-level observations (like car speed) to micro-level causes (like friction in axles).",
+        "C": "It primarily deals with the car's aesthetic design.",
+        "D": "It is a method for collecting data without any measurements."
+      },
+      "answer": "B",
+      "explanation": "Multiscale Modeling helps understand how macro-level observations of performance are influenced by micro-level causes such as friction or material properties."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is a consistent or 'standardized' test protocol essential for improving your mousetrap car design?",
+      "options": {
+        "A": "It makes the testing process longer and more complicated.",
+        "B": "It ensures that any changes in performance are due to design modifications, not inconsistent testing methods.",
+        "C": "It allows you to skip important measurement steps.",
+        "D": "It guarantees your car will always perform better with each test."
+      },
+      "answer": "B",
+      "explanation": "A standardized test protocol ensures that testing conditions are consistent, allowing engineers to accurately compare results and determine if design modifications are truly improving performance."
+    },
+    {
+      "type": "application",
+      "question": "A student builds their first mousetrap car and tests it to see how far it travels. They record this initial distance. Later, they add larger wheels and test it again. What did the student establish with their first test?",
+      "options": {
+        "A": "A constraint",
+        "B": "A variable",
+        "C": "A baseline",
+        "D": "An objective"
+      },
+      "answer": "C",
+      "explanation": "The initial distance recorded serves as a baseline, which is an initial measurement used as a reference point for comparison against future measurements after design changes."
+    },
+    {
+      "type": "application",
+      "question": "Sarah's mousetrap car is not traveling as far as she expects. She suspects there might be too much friction in the axles. Which concept from the lesson would guide her in investigating these smaller, underlying issues?",
+      "options": {
+        "A": "Performance",
+        "B": "Multiscale Modeling",
+        "C": "Test Protocol",
+        "D": "Sustainability"
+      },
+      "answer": "B",
+      "explanation": "Multiscale Modeling is the approach of understanding how macro-level observations (like car distance) are influenced by micro-level causes (like friction in axles)."
+    }
+  ]
+}

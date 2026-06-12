@@ -1,0 +1,319 @@
+[
+  {
+    "id": "m044t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Power System and Axles</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In your last lesson, you built the body of your mousetrap car and mounted the mousetrap itself. You selected materials, thought through structural integrity, and laid the foundation for a vehicle designed with real purpose. Nice work. Now it's time to give that car some life.</p>\n<p>This lesson moves into the <strong>Performance</strong> phase of Creationeering. You'll dig into the two systems that actually make your car go: the <strong>power system</strong> and the <strong>axles</strong>. You'll trace how energy stored in the mousetrap spring gets converted into motion, how the string and lever arm transfer that energy, and how axles carry it all the way to your wheels. Understanding these pieces is what separates a car that rolls a few feet from one that launches down the track with real efficiency.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Explain how the mousetrap spring's stored energy is converted into kinetic energy to move the car.</li>\n<li>Identify the key components of the power system — including the string and lever arm — and describe what each one does.</li>\n<li>Describe how axles and wheels work together to transfer rotational motion and support the car's weight.</li>\n<li>Analyze how friction affects your car's performance and propose strategies to reduce it.</li>\n<li>Apply efficient energy transfer principles to improve your design, treating your materials and build time as resources worth stewarding well.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Power System",
+          "definition": "The components that work together to generate and transfer the energy needed to move the mousetrap car."
+        },
+        {
+          "term": "Torque",
+          "definition": "A rotational force that causes an object to spin around an axis — in your car, it's the twisting force the spring applies to the axle."
+        },
+        {
+          "term": "Lever Arm",
+          "definition": "A rigid bar that pivots on a fulcrum to apply force — in your car, it's the mousetrap's snapping arm that pulls the string."
+        },
+        {
+          "term": "Axle",
+          "definition": "A rod or shaft that passes through the center of a wheel, allowing it to rotate and supporting the vehicle above the ground."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that opposes motion between two surfaces in contact. It can slow your car down or waste energy."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "A measure of how well energy is converted from one form to another — the more efficient your car, the more of the spring's energy actually becomes forward motion."
+        },
+        {
+          "term": "Gearing",
+          "definition": "The relationship between the rotational speed of the drive axle and the wheels, determined by the diameters of the axle and wheels."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed to Move</h2>\n<p>God is the original engineer of motion. The universe He created operates through precise, elegant systems — planets holding their orbits, muscles firing in sequence, atoms vibrating with stored energy. Nothing is random. Everything functions with purpose.</p>\n<p>Colossians 1:16-17 puts it this way: <em>\"For in him all things were created: things in heaven and on earth, visible and invisible... He is before all things, and in him all things hold together.\"</em> The physical laws that govern energy and motion — the same ones you're working with right now — were designed by God and reflect His orderly, purposeful character.</p>\n<p>When you build your car's power system thoughtfully and efficiently, you're doing something that matters: you're acting as a steward of the resources, knowledge, and creativity God has given you. Every good design decision honors that.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 1:16-17</strong> — \"For in him all things were created: things in heaven and on earth, visible and invisible... He is before all things, and in him all things hold together.\" The same God who designed the laws of physics is the one who gave you the mind to apply them.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>How the Power System Works</h2>\n<p>Think of your mousetrap car's power system like a chain — each link has to do its job, or the whole thing breaks down. The chain starts with stored energy and ends with your wheels spinning. Here's how it flows:</p>\n<ul>\n<li><strong>The spring</strong> stores <em>potential energy</em> when the arm is pulled back and held in place. That energy is locked in, waiting to be released.</li>\n<li>When you let go, the spring snaps the <strong>lever arm</strong> forward. The lever arm acts like a long handle — the longer it is, the more string it can pull through in a single snap.</li>\n<li>The <strong>string</strong> connects the lever arm to the drive axle. As the arm swings, it pulls the string, which unwinds from the axle and causes it to rotate.</li>\n<li>The rotating axle turns the <strong>drive wheels</strong>, and your car accelerates forward.</li>\n</ul>\n<p>That chain — spring → lever arm → string → axle → wheels — is your entire power system. If any link is weak, inefficient, or misaligned, performance suffers. Your job as a Creationeer is to make every link as strong and efficient as possible.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Labeled diagram of a mousetrap car's power system showing the spring, lever arm, string attachment point, drive axle, and rear wheels with arrows indicating the direction of energy flow from spring snap to wheel rotation."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Torque and the Lever Arm</h3>\n<p>Here's an important physics concept you'll feel in your build: <strong>torque</strong>. Torque is a rotational force — the kind of force that causes spinning rather than sliding. When the lever arm snaps forward and pulls the string, it applies torque to the axle, forcing it to rotate.</p>\n<p>The length of the lever arm matters a lot. A longer lever arm pulls more string per snap, which means the axle rotates more times before the string runs out. More rotations = more distance traveled. This is one of the key design decisions you'll make: how long should your lever arm extension be?</p>\n<p>There's a tradeoff, though. A very long lever arm pulls more string but applies that force more slowly. A short lever arm applies force quickly but runs out of pull fast. Finding the right balance for your car's size and wheel diameter is part of the engineering challenge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Axles: The Backbone of Motion</h2>\n<p>Your axles are the critical link between the power system and the ground. They do two jobs at once: they <strong>transfer rotational force to the wheels</strong>, and they <strong>support the weight of the car</strong>. That's a lot of responsibility for a simple rod.</p>\n<p>For your mousetrap car, you'll likely be working with two axles — a front axle (non-drive) and a rear axle (drive axle). The drive axle is the one connected to your string. When the string unwinds, the drive axle spins, and the wheels attached to it push the car forward.</p>\n<h3>Axle Diameter and Gearing</h3>\n<p>The diameter of your drive axle works like a gear. A <strong>thinner axle</strong> means the string wraps tightly — more wraps per inch of string, which gives you more total rotations but less initial force. A <strong>thicker axle</strong> unwinds faster, delivering more torque quickly but running out of string sooner.</p>\n<p>This relationship — axle diameter vs. wheel diameter — is what we call <strong>gearing</strong>. Big wheels on a thin axle is like a high gear on a bike: great for speed over distance. Small wheels on a thick axle is like a low gear: strong and fast at the start but it doesn't carry you as far.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Reducing Friction at the Axle</h3>\n<p>Friction is the enemy of efficiency. Every place your axle rubs against another surface — the body of the car, the wheel hub, the bearing hole — energy is lost as heat instead of motion. The goal is to minimize that loss.</p>\n<p>Here are strategies that actually work:</p>\n<ul>\n<li><strong>Smooth, straight axles</strong> — Any bend or rough spot creates extra friction. Check yours carefully before installing.</li>\n<li><strong>Proper fit</strong> — The axle should spin freely in its holder. Too tight and friction kills your speed; too loose and the car wobbles and loses alignment.</li>\n<li><strong>Lubrication</strong> — A small amount of lubricant (like graphite or wax) at contact points reduces friction dramatically.</li>\n<li><strong>Minimize contact points</strong> — Fewer spots where the axle touches the frame means less friction overall. Simple bearing designs often outperform complex ones.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Close-up comparison of two axle setups: one with a tight, rough fit showing visible rubbing against the frame, and one with a clean, smooth-spinning axle with minimal contact points — arrows highlight where friction occurs in each."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake: String Alignment</strong> — If your string isn't attached to the axle at a point directly in line with the lever arm's pull, it will wind unevenly or slip off entirely during the run. Before testing, slowly pull the lever arm by hand and watch how the string winds. It should wrap smoothly and evenly without bunching to one side.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together: Energy Flow and Efficiency</h2>\n<p>Every engineering system has losses. No machine is 100% efficient — some energy always escapes as heat, sound, or vibration. Your mousetrap car is no different. The spring releases a fixed amount of energy. Your job is to waste as little of it as possible on the way to the wheels.</p>\n<p>Think of it like a pipeline. The spring is the source. Friction at every joint, every contact point, every misaligned part is a leak in that pipeline. The more leaks you seal, the more energy reaches the wheels, and the farther your car goes.</p>\n<p>As you install your power system and axles, ask yourself at each step: <em>Is this adding friction? Is this wasting energy? Can I make this cleaner, straighter, or smoother?</em> That engineering mindset — constantly evaluating and improving — is exactly what good stewardship of your design looks like.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Test before you finalize.</strong> Before gluing or permanently securing any axle or string attachment, do a slow hand-test. Pull the lever arm manually and watch what happens. Does the string wind evenly? Do the axles spin freely? Does the car roll straight? Fix problems now — they're much harder to correct after everything is locked in place.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Build Steps: Power System and Axles</h2>\n<p>Use this sequence as your guide during the build phase of today's lesson. Work carefully — rushing through these steps is one of the most common reasons cars underperform on test day.</p>\n<ul>\n<li><strong>Step 1 — Prepare your axles.</strong> Check each rod for straightness. Sand or smooth any rough spots. Cut to the correct length so wheels sit evenly on both sides.</li>\n<li><strong>Step 2 — Mount the axle holders.</strong> Attach your axle support structures (eye hooks, tubing, or bearing blocks) to the car body. Make sure they're parallel to each other and perpendicular to the car's centerline.</li>\n<li><strong>Step 3 — Thread the axles.</strong> Slide the axles through their holders. Test that each one spins freely with minimal resistance before attaching wheels.</li>\n<li><strong>Step 4 — Attach the drive wheels.</strong> Secure your rear wheels to the drive axle. Ensure they're centered and won't wobble. A wobbling wheel wastes energy with every rotation.</li>\n<li><strong>Step 5 — Attach the string.</strong> Tie one end of the string securely to the drive axle. Tie the other end to the tip of the lever arm extension. Keep the string taut but not so tight it bends the arm.</li>\n<li><strong>Step 6 — Wind and test.</strong> Slowly wind the string by rotating the drive axle backward. Set the car down, release the lever arm, and observe. Note what's working and what needs adjustment.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Think through these questions as you wrap up today's lesson. Use them to check whether the key ideas are clicking before you move on.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044a001",
+    "type": "accordion",
+    "data": {
+      "title": "What type of energy is stored in the mousetrap spring before it's released?",
+      "html": "<p>The spring stores <strong>potential energy</strong> — specifically elastic potential energy — when it's held in the cocked position. When released, that potential energy converts into <strong>kinetic energy</strong> (the energy of motion), which travels through the lever arm, string, and axle to spin the wheels.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m044a002",
+    "type": "accordion",
+    "data": {
+      "title": "Why does axle diameter affect how far your car travels?",
+      "html": "<p>Axle diameter controls how much string unwinds per rotation — this is the concept of <strong>gearing</strong>. A thinner axle has a smaller circumference, so each rotation unwinds less string, allowing the axle to spin more times before the string runs out. More total rotations mean more wheel turns, which means more distance. A thicker axle unwinds string faster, giving strong early acceleration but fewer total rotations.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

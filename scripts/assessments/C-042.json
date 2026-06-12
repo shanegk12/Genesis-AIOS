@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-042",
+  "topic": "Critical Path Method (CPM)",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "In the Critical Path Method (CPM), what does the 'Critical Path' represent?",
+      "options": {
+        "A": "The shortest sequence of tasks in a project.",
+        "B": "The longest sequence of tasks that determines the shortest possible project completion time.",
+        "C": "The tasks that can be delayed without affecting the project's end date.",
+        "D": "The total amount of time a project is expected to take, including all delays."
+      },
+      "answer": "B",
+      "explanation": "The critical path is defined as the longest sequence of tasks in a project network diagram, which determines the shortest possible project completion time."
+    },
+    {
+      "type": "recall",
+      "question": "What is a 'dependency' in a project network diagram?",
+      "options": {
+        "A": "The estimated time it takes to complete a task.",
+        "B": "A specific activity that needs to be finished.",
+        "C": "A relationship where one task cannot start until another is finished.",
+        "D": "The amount of extra time a task can be delayed."
+      },
+      "answer": "C",
+      "explanation": "A dependency is a relationship between two tasks where one task cannot begin until its predecessor task is completed."
+    },
+    {
+      "type": "recall",
+      "question": "What does 'Slack' (or 'Float') refer to in the Critical Path Method?",
+      "options": {
+        "A": "The total time needed for the entire project.",
+        "B": "The amount of time a task can be delayed without delaying the entire project.",
+        "C": "The longest sequence of tasks in a project.",
+        "D": "A task that must be completed before another can begin."
+      },
+      "answer": "B",
+      "explanation": "Slack (or Float) is the amount of time a task can be delayed without causing a delay to the overall project completion time."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is identifying the Critical Path important for project managers?",
+      "options": {
+        "A": "It helps them find tasks that can be skipped entirely.",
+        "B": "It shows the fastest possible way to complete the entire project.",
+        "C": "It allows them to start all tasks at the same time.",
+        "D": "It identifies tasks that do not require any resources."
+      },
+      "answer": "B",
+      "explanation": "The Critical Path identifies the sequence of tasks that determines the shortest possible project completion time, guiding managers to focus on these essential tasks."
+    },
+    {
+      "type": "comprehension",
+      "question": "If 'Task A' is a predecessor to 'Task B,' what must happen?",
+      "options": {
+        "A": "Task B must be completed before Task A can begin.",
+        "B": "Task A and Task B can be completed at the same time.",
+        "C": "Task A must be completed before Task B can begin.",
+        "D": "Task B is not dependent on Task A at all."
+      },
+      "answer": "C",
+      "explanation": "A predecessor task is one that must be completed before its successor task, in this case Task B, can start."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the likely outcome if a task on the Critical Path is delayed?",
+      "options": {
+        "A": "Other tasks will automatically speed up to compensate.",
+        "B": "The entire project's completion time will likely be delayed.",
+        "C": "Only tasks not on the critical path will be affected.",
+        "D": "The project will still finish on time due to slack."
+      },
+      "answer": "B",
+      "explanation": "Because the critical path determines the shortest possible project completion time, any delay to a task on this path will directly delay the entire project."
+    },
+    {
+      "type": "application",
+      "question": "A junior creationeer is building a robot. Which of the following would be considered a 'task' for this project?",
+      "options": {
+        "A": "The total time it takes to build the robot.",
+        "B": "The instruction manual for the robot.",
+        "C": "Attaching the robot's arm to its body.",
+        "D": "The tools used to assemble the robot."
+      },
+      "answer": "C",
+      "explanation": "A task is a specific activity that needs to be completed as part of a project, such as attaching a robot's arm."
+    },
+    {
+      "type": "application",
+      "question": "Imagine you are making a clay model of a creature. You must 'sculpt the body' before you can 'paint the details.' What does this relationship represent?",
+      "options": {
+        "A": "A duration.",
+        "B": "A slack.",
+        "C": "A dependency.",
+        "D": "A bottleneck."
+      },
+      "answer": "C",
+      "explanation": "A dependency is a relationship where one task, 'paint the details,' cannot start until another task, 'sculpt the body,' is finished."
+    },
+    {
+      "type": "application",
+      "question": "For a Creationeering project, you estimate that 'designing the circuit board' will take 3 hours. What does '3 hours' represent in CPM terms?",
+      "options": {
+        "A": "A predecessor.",
+        "B": "A duration.",
+        "C": "A dependency.",
+        "D": "A critical path."
+      },
+      "answer": "B",
+      "explanation": "Duration is the estimated amount of time it will take to complete a task, such as 3 hours for designing a circuit board."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that CPM is a crucial skill in the 'Logistics phase' of Creationeering. Why is CPM particularly helpful during this phase?",
+      "options": {
+        "A": "It helps in the initial brainstorming of new ideas.",
+        "B": "It focuses on planning and managing the flow of tasks, materials, and information efficiently.",
+        "C": "It is primarily used for presenting the final project to others.",
+        "D": "It helps in evaluating the success of a completed project."
+      },
+      "answer": "B",
+      "explanation": "The Logistics phase involves actively planning and managing the flow of materials, information, and tasks, which is precisely what CPM helps to optimize for efficiency and effectiveness."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does God's creation account, with light before land and land before vegetation, relate to the Critical Path Method?",
+      "options": {
+        "A": "It shows that some tasks are not important.",
+        "B": "It demonstrates a random order of events.",
+        "C": "It illustrates a divine sequence where each step was a necessary predecessor for the next.",
+        "D": "It proves that all tasks can be done simultaneously."
+      },
+      "answer": "C",
+      "explanation": "God's creation order exemplifies a divine sequence where each step was a necessary predecessor, mirroring the concept of dependencies and a critical path in project planning."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects CPM to 'good stewardship of the gifts God has given us.' How does using CPM reflect this biblical principle?",
+      "options": {
+        "A": "It encourages us to finish projects as quickly as possible, regardless of quality.",
+        "B": "It helps us waste time and resources by focusing on unnecessary tasks.",
+        "C": "It ensures that our time and resources are used wisely and efficiently to achieve desired outcomes.",
+        "D": "It suggests that we should only work on projects that directly benefit ourselves."
+      },
+      "answer": "C",
+      "explanation": "CPM helps ensure that time and resources are used wisely and efficiently by identifying the most effective path to project completion, reflecting good stewardship."
+    }
+  ]
+}

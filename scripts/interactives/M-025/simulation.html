@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Notebook: Entry 5 — Procurement & Quality Control</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 24px 12px;
+    text-align: center;
+  }
+
+  header .subtitle {
+    color: #C9A84C;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.10);
+    padding: 28px 28px 24px;
+    flex: 1;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 10px;
+    background: #e6eaf0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 0.78rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Screens */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* Intro screen */
+  .intro-icon {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .intro-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1B3A5C;
+    margin-bottom: 8px;
+  }
+  .intro-desc {
+    font-size: 0.95rem;
+    color: #3a5070;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .role-box {
+    background: #f0f4f9;
+    border-left: 4px solid #C9A84C;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.92rem;
+    color: #1B3A5C;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .role-box strong { color: #C9A84C; }
+
+  /* Activity area */
+  .activity-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+  .activity-context {
+    font-size: 0.88rem;
+    color: #4a6080;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  /* Scenario banner */
+  .scenario-banner {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .scenario-banner .tag {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 700;
+    font-size: 0.72rem;
+    border-radius: 5px;
+    padding: 2px 8px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Options grid */
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 500px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+
+  .option-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0d8e4;
+    border-radius: 10px;
+    padding: 14px 12px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    text-align: left;
+    line-height: 1.45;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    position: relative;
+    min-height: 70px;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: #C9A84C;
+    background: #fffbf0;
+    transform: translateY(-2px);
+  }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.correct {
+    border-color: #2a9d5c;
+    background: #eafaf1;
+  }
+  .option-btn.incorrect {
+    border-color: #c0392b;
+    background: #fdf0ef;
+  }
+  .option-btn.highlight {
+    border-color: #2a9d5c;
+    background: #eafaf1;
+  }
+  .option-letter {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    margin-right: 7px;
+    flex-shrink: 0;
+  }
+
+  /* Feedback */
+  .feedback-box {
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .feedback-box.correct {
+    background: #eafaf1;
+    border: 1.5px solid #2a9d5c;
+    color: #1a6640;
+    display: block;
+  }
+  .feedback-box.incorrect {
+    background: #fdf0ef;
+    border: 1.5px solid #c0392b;
+    color: #7b1a12;
+    display: block;
+  }
+  .feedback-icon { font-size: 1.1rem; margin-right: 6px; }
+
+  /* QC Inspector drag-and-drop area */
+  .inspector-section { margin-bottom: 18px; }
+  .inspector-section h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .inspector-section h3 .part-icon { font-size: 1.2rem; }
+
+  .items-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 48px;
+    background: #f0f4f9;
+    border: 2px dashed #b8c8d8;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .drop-zones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 480px) {
+    .drop-zones { grid-template-columns: 1fr; }
+  }
+  .drop-zone {
+    min-height: 80px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px dashed #b8c8d8;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .drop-zone.accept { border-color: #2a9d5c; background: #eafaf1; }
+  .drop-zone.reject { border-color: #c0392b; background: #fdf0ef; }
+  .drop-zone-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .drop-zone.accept .drop-zone-label { color: #2a9d5c; }
+  .drop-zone.reject .drop-zone-label { color: #c0392b; }
+  .drop-zone.drag-over {
+    background: #fffbf0 !important;
+    border-color: #C9A84C !important;
+  }
+
+  .drag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-size: 0.82rem;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.15s, transform 0.15s;
+    touch-action: none;
+  }
+  .drag-chip:active { opacity: 0.8; transform: scale(0.97); }
+  .drag-chip.placed-accept { background: #2a9d5c; }
+  .drag-chip.placed-reject { background: #c0392b; }
+
+  /* Vocab match */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 480px) {
+    .vocab-grid { grid-template-columns: 1fr; }
+  }
+  .vocab-term {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 9px;
+    padding: 11px 13px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, transform 0.1s;
+    border: 2px solid transparent;
+  }
+  .vocab-term:hover { background: #254f7a; transform: translateY(-1px); }
+  .vocab-term.selected { background: #C9A84C; color: #1B3A5C; border-color: #1B3A5C; }
+  .vocab-term.matched { background: #2a9d5c; color: #fff; cursor: default; }
+  .vocab-term.wrong-flash { background: #c0392b; }
+
+  .vocab-def {
+    background: #f0f4f9;
+    border: 2px solid #d0d8e4;
+    border-radius: 9px;
+    padding: 11px 13px;
+    font-size: 0.82rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.4;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .vocab-def:hover { border-color: #C9A84C; background: #fffbf0; }
+  .vocab-def.selected { border-color: #C9A84C; background: #fffbf0; }
+  .vocab-def.matched { border-color: #2a9d5c; background: #eafaf1; color: #1a6640; cursor: default; }
+  .vocab-def.wrong-flash { border-color: #c0392b; background: #fdf0ef; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 9px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background 0.15s, transform 0.1s;
+    text-align: center;
+  }
+  .btn-primary {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  .btn-primary:hover { background: #b8933c; transform: translateY(-1px); }
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #fff;
+  }
+  .btn-secondary:hover { background: #254f7a; }
+  .btn-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* Score screen */
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .score-number {
+    color: #C9A84C;
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .score-label {
+    color: #fff;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .score-title {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 8px;
+  }
+  .score-sub {
+    text-align: center;
+    font-size: 0.88rem;
+    color: #4a6080;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .summary-list {
+    background: #f0f4f9;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+  .summary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #dce4ef;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+  .summary-item:last-child { border-bottom: none; }
+  .summary-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .summary-text { color: #1B3A5C; }
+  .summary-key { font-weight: 700; color: #1B3A5C; }
+
+  .badge {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 700;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    padding: 3px 10px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+  .step-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d0d8e4;
+    transition: background 0.3s;
+  }
+  .step-dot.done { background: #C9A84C; }
+  .step-dot.active { background: #1B3A5C; }
+
+  .mini-glossary {
+    background: #f0f4f9;
+    border-radius: 9px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+  .mini-glossary h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .glossary-entry {
+    font-size: 0.82rem;
+    color: #3a5070;
+    margin-bottom: 4px;
+    line-height: 1.45;
+  }
+  .glossary-entry strong { color: #1B3A5C; }
+
+  .qc-score-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-radius: 8px;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+  }
+
+  /* touch support message */
+  .touch-hint {
+    font-size: 0.76rem;
+    color: #7a90a8;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="subtitle">Genesis K-12 Academy · Mousetrap Build</div>
+  <h1>📓 Engineering Notebook: Entry 5</h1>
+</header>
+
+<div class="card" id="mainCard">
+
+  <!-- ===== SCREEN 0: INTRO ===== -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">🔍</div>
+    <div class="intro-title">Procurement &amp; Quality Control</div>
+    <div class="intro-desc">Before you build anything, you need the right materials — and you need to make sure they're actually good enough to use.</div>
+    <div class="role-box">
+      <strong>Your Role:</strong> You're a Quality Control Inspector at a mousetrap car supplier. In this activity you'll match vocabulary, inspect parts, and make procurement decisions. A final score will show how ready your materials are!
+    </div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-primary" onclick="startActivity()">Start Activity →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 1: VOCAB MATCH ===== -->
+  <div class="screen" id="screen-vocab">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <span class="progress-label" id="progressLabel">Step 1 of 3</span>
+    </div>
+    <div class="step-indicator" id="stepDots"></div>
+    <div class="activity-heading">🗂 Vocabulary Match</div>
+    <div class="activity-context">Match each term to its correct definition. Tap a <strong style="color:#1B3A5C">blue term</strong>, then tap its matching definition.</div>
+    <div id="vocabMatchArea"></div>
+    <div class="feedback-box" id="vocabFeedback"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="vocabNextBtn" onclick="goToInspect()" style="display:none">Next: Inspect Parts →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 2: QC INSPECTION ===== -->
+  <div class="screen" id="screen-inspect">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill2" style="width:40%"></div></div>
+      <span class="progress-label">Step 2 of 3</span>
+    </div>
+    <div class="step-indicator" id="stepDots2"></div>
+    <div class="activity-heading">🔎 Quality Control Inspection</div>
+    <div class="activity-context">You received a shipment of mousetrap car parts. Sort each part description into <strong style="color:#2a9d5c">ACCEPT</strong> or <strong style="color:#c0392b">REJECT</strong> by dragging it to the correct zone.</div>
+    <p class="touch-hint">💡 Drag chips to the zones below — or tap a chip then tap a zone.</p>
+    <div id="inspectArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="inspectCheckBtn" onclick="checkInspect()">Check My Sorting ✓</button>
+    </div>
+    <div class="feedback-box" id="inspectFeedback"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="inspectNextBtn" onclick="goToScenarios()" style="display:none">Next: Procurement Decisions →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3: SCENARIOS ===== -->
+  <div class="screen" id="screen-scenarios">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill3" style="width:65%"></div></div>
+      <span class="progress-label">Step 3 of 3</span>
+    </div>
+    <div class="step-indicator" id="stepDots3"></div>
+    <div class="activity-heading">⚙️ Procurement Decisions</div>
+    <div class="activity-context">Read each scenario and choose the best engineering decision.</div>
+    <div id="scenariosArea"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="scenarioFinishBtn" onclick="showResults()" style="display:none">See My Results 🏁</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 4: RESULTS ===== -->
+  <div class="screen" id="screen-results">
+    <div class="score-circle">
+      <span class="score-number" id="finalScore">0</span>
+      <span class="score-label">/ 20 pts</span>
+    </div>
+    <div class="score-title" id="scoreTitle">Quality Inspector</div>
+    <div class="score-sub" id="scoreSub"></div>
+    <div class="summary-list" id="summaryList"></div>
+    <div class="mini-glossary">
+      <h4>📚 Key Vocabulary Review</h4>
+      <div class="glossary-entry"><strong>Procurement</strong> — Obtaining and making the materials needed for a design.</div>
+      <div class="glossary-entry"><strong>Raw Material</strong> — Basic unprocessed material used to make something.</div>
+      <div class="glossary-entry"><strong>Component</strong> — A pre-manufactured part of a larger whole.</div>
+      <div class="glossary-entry"><strong>Supplier</strong> — A person or company that provides materials.</div>
+      <div class="glossary-entry"><strong>Quality Control</strong> — Ensuring products meet specific standards.</div>
+    </div>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-primary" onclick="restartActivity()">Try Again 🔄</button>
+    </div>
+  </div>
+
+</div><!-- end .card -->
+
+<script>
+// ===================== STATE =====================
+let totalScore = 0;
+let vocabScore = 0;
+let inspectScore = 0;
+let scenarioScore = 0;
+let vocabAttempts = {};
+let inspectAttempts = {};
+let scenarioResults = [];
+let inspectChecked = false;
+
+// ===================== VOCAB DATA =====================
+const vocabPairs = [
+  { term: "Procurement",    def: "Obtaining & making materials needed for a design" },
+  { term: "Raw Material",   def: "Basic unprocessed material used to make something" },
+  { term: "Component",      def: "A pre-manufactured part of a larger whole" },
+  { term: "Supplier",       def: "A person or company that provides materials" },
+  { term: "Quality Control",def: "Ensuring products meet specific standards" },
+];
+
+// ===================== INSPECT DATA =====================
+const inspectItems = [
+  { id:"i1", text:"Wood board is perfectly straight with no splinters",         correct:"accept", icon:"🪵" },
+  { id:"i2", text:"Axle has a slight bend and doesn't fit through the wheel",   correct:"reject", icon:"🔩" },
+  { id:"i3", text:"Wheel is round, balanced, and has no cracks",                correct:"accept", icon:"⚙️" },
+  { id:"i4", text:"String has visible fraying near the middle",                  correct:"reject", icon:"🧵" },
+  { id:"i5", text:"Wood piece has a weak spot that snaps under light pressure",  correct:"reject", icon:"🪵" },
+  { id:"i6", text:"Axle is smooth and slides easily through the wheel holes",   correct:"accept", icon:"🔩" },
+  { id:"i7", text:"Wheel has a small chip on one edge",                          correct:"reject", icon:"⚙️" },
+  { id:"i8", text:"String is strong with no signs of fraying or weakness",      correct:"accept", icon:"🧵" },
+];
+
+// ===================== SCENARIO DATA =====================
+const scenarios = [
+  {
+    q: "You ordered wooden boards from Supplier A, but half the pieces are warped. Supplier B costs 10% more but ships straight boards. What should you do?",
+    options: [
+      { text: "Use the warped boards — they were cheaper", correct: false },
+      { text: "Return the warped boards and order from Supplier B", correct: true },
+      { text: "Cut the warped boards into smaller pieces and hope for the best", correct: false },
+      { text: "Skip the wood and use cardboard instead", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Correct! Warped wood will make your car crooked. Switching suppliers for better quality is a smart procurement decision.",
+      incorrect: "❌ Not quite. Warped boards will ruin your car's straightness. A quality control check should catch defective parts before building."
+    }
+  },
+  {
+    q: "Your axle is the right length but it's slightly bent. It doesn't spin smoothly inside the wheel. What is the BEST first step?",
+    options: [
+      { text: "Glue the wheel to the bent axle so it stays in place", correct: false },
+      { text: "Reject the axle and obtain a straight replacement", correct: true },
+      { text: "Sand the axle until it looks straighter", correct: false },
+      { text: "Use a bigger wheel so the bend doesn't matter", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Correct! A bent axle is a quality control failure. Replacing it during procurement is better than fixing problems after the car is built.",
+      incorrect: "❌ Not quite. A bent axle won't spin smoothly. Quality control means rejecting components that don't meet the standard before using them."
+    }
+  },
+  {
+    q: "A classmate says: 'I don't need to do quality control — I trust that all the parts are fine.' What is the risk of skipping QC?",
+    options: [
+      { text: "No risk — suppliers always send perfect parts", correct: false },
+      { text: "You might waste time building with defective parts that cause your car to fail", correct: true },
+      { text: "Parts become higher quality if you skip inspection", correct: false },
+      { text: "Suppliers will get upset if you inspect their parts", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Correct! Skipping quality control means defective parts make it into your build, which can cause unexpected failures.",
+      incorrect: "❌ Not quite. Skipping QC is risky because defective parts — like a cracked wheel or frayed string — may only fail once the car is in motion."
+    }
+  },
+  {
+    q: "You're about to test your string for the mousetrap mechanism. Which check is MOST important?",
+    options: [
+      { text: "Check if the string is a specific color", correct: false },
+      { text: "Check if the string is strong enough and free of fraying", correct: true },
+      { text: "Check if the string came in nice packaging", correct: false },
+      { text: "Check if the string smells like new material", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Correct! Strength and no fraying are the key quality control checks for string used in a mousetrap mechanism.",
+      incorrect: "❌ Not quite. The engineering concern for string is whether it is strong enough and free of fraying — not its appearance or packaging."
+    }
+  },
+];
+
+// ===================== VOCAB STATE =====================
+let vocabSelectedTerm = null;
+let vocabSelectedDef = null;
+let vocabMatched = {};
+let vocabMatchCount = 0;
+let vocabWrongPenalty = 0;
+// Shuffled definitions order
+let defOrder = [];
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function startActivity() {
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-vocab').classList.add('active');
+  buildVocab();
+  updateProgress(1);
+}
+
+function buildStepDots(containerId, total, activeIndex) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i < activeIndex ? ' done' : i === activeIndex ? ' active' : '');
+    c.appendChild(d);
+  }
+}
+
+function updateProgress(step) {
+  const pcts = [0, 15, 50, 75, 100];
+  const labels = ['','Step 1 of 3','Step 2 of 3','Step 3 of 3','Complete'];
+  const fill = document.getElementById('progressFill');
+  const fill2 = document.getElementById('progressFill2');
+  const fill3 = document.getElementById('progressFill3');
+  if (fill) fill.style.width = pcts[step] + '%';
+  if (fill2) fill2.style.width = pcts[step] + '%';
+  if (fill3) fill3.style.width = pcts[step] + '%';
+  const lbl = document.getElementById('progressLabel');
+  if (lbl) lbl.textContent = labels[step] || '';
+  buildStepDots('stepDots', 3, step-1);
+  buildStepDots('stepDots2', 3, step-1);
+  buildStepDots('stepDots3', 3, step-1);
+}
+
+// ===================== VOCAB =====================
+function buildVocab() {
+  vocabSelectedTerm = null;
+  vocabSelectedDef = null;
+  vocabMatched = {};
+  vocabMatchCount = 0;
+  vocabWrongPenalty = 0;
+
+  defOrder = shuffleArray(vocabPairs.map((_,i)=>i));
+  const termOrder = shuffleArray(vocabPairs.map((_,i)=>i));
+
+  const area = document.getElementById('vocabMatchArea');
+  area.innerHTML = '';
+
+  const grid = document.createElement('div');
+  grid.className = 'vocab-grid';
+
+  // Build terms column + defs column interleaved by row
+  // Actually build separate containers
+  const termsCol = document.createElement('div');
+  const defsCol = document.createElement('div');
+
+  termOrder.forEach(idx => {
+    const el = document.createElement('div');
+    el.className = 'vocab-term';
+    el.textContent = vocabPairs[idx].term;
+    el.dataset.idx = idx;
+    el.id = 'vterm-' + idx;
+    el.addEventListener('click', () => onTermClick(idx));
+    termsCol.appendChild(el);
+  });
+
+  defOrder.forEach(idx => {
+    const el = document.createElement('div');
+    el.className = 'vocab-def';
+    el.textContent = vocabPairs[idx].def;
+    el.dataset.idx = idx;
+    el.id = 'vdef-' + idx;
+    el.addEventListener('click', () => onDefClick(idx));
+    defsCol.appendChild(el);
+  });
+
+  grid.appendChild(termsCol);
+  grid.appendChild(defsCol);
+  area.appendChild(grid);
+}
+
+function onTermClick(idx) {
+  if (vocabMatched[idx]) return;
+  // deselect others
+  document.querySelectorAll('.vocab-term').forEach(el => {
+    if (!vocabMatched[el.dataset.idx]) el.classList.remove('selected');
+  });
+  vocabSelectedTerm = idx;
+  document.getElementById('vterm-' + idx).classList.add('selected');
+  if (vocabSelectedDef !== null) tryVocabMatch();
+}
+
+function onDefClick(idx) {
+  if (vocabMatched[idx]) return;
+  document.querySelectorAll('.vocab-def').forEach(el => {
+    if (!vocabMatched[el.dataset.idx]) el.classList.remove('selected');
+  });
+  vocabSelectedDef = idx;
+  document.getElementById('vdef-' + idx).classList.add('selected');
+  if (vocabSelectedTerm !== null) tryVocabMatch();
+}
+
+function tryVocabMatch() {
+  const t = vocabSelectedTerm;
+  const d = vocabSelectedDef;
+  if (t === null || d === null) return;
+
+  if (t === d) {
+    // Correct match
+    vocabMatched[t] = true;
+    const termEl = document.getElementById('vterm-' + t);
+    const defEl = document.getElementById('vdef-' + d);
+    termEl.classList.remove('selected');
+    termEl.classList.add('matched');
+    defEl.classList.remove('selected');
+    defEl.classList.add('matched');
+    vocabMatchCount++;
+    // Remove event listeners by disabling them visually
+    const fb = document.getElementById('vocabFeedback');
+    fb.className = 'feedback-box correct';
+    fb.innerHTML = '<span class="feedback-icon">✅</span> Matched! <strong>' + vocabPairs[t].term + '</strong> — ' + vocabPairs[t].def;
+
+    if (vocabMatchCount === vocabPairs.length) {
+      // All matched
+      const pts = Math.max(0, 5 - Math.floor(vocabWrongPenalty / 2));
+      vocabScore = pts;
+      fb.innerHTML = '<span class="feedback-icon">🎉</span> All vocabulary matched! You earned <strong>' + pts + ' / 5 points</strong>.';
+      document.getElementById('vocabNextBtn').style.display = 'inline-block';
+    }
+  } else {
+    // Wrong match
+    vocabWrongPenalty++;
+    const termEl = document.getElementById('vterm-' + t);
+    const defEl = document.getElementById('vdef-' + d);
+    termEl.classList.add('wrong-flash');
+    defEl.classList.add('wrong-flash');
+    setTimeout(() => {
+      termEl.classList.remove('wrong-flash', 'selected');
+      defEl.classList.remove('wrong-flash', 'selected');
+    }, 600);
+    const fb = document.getElementById('vocabFeedback');
+    fb.className = 'feedback-box incorrect';
+    fb.innerHTML = '<span class="feedback-icon">❌</span> Not a match — try again!';
+  }
+  vocabSelectedTerm = null;
+  vocabSelectedDef = null;
+}
+
+// ===================== INSPECT =====================
+let dragActiveChip = null;
+let touchActiveChip = null;
+
+function goToInspect() {
+  document.getElementById('screen-vocab').classList.remove('active');
+  document.getElementById('screen-inspect').classList.add('active');
+  buildInspect();
+  updateProgress(2);
+}
+
+function buildInspect() {
+  inspectChecked = false;
+  inspectScore = 0;
+  const area = document.getElementById('inspectArea');
+  area.innerHTML = '';
+
+  // Pool
+  const poolLabel = document.createElement('div');
+  poolLabel.style.cssText = 'font-size:0.8rem;font-weight:700;color:#4a6080;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;';
+  poolLabel.textContent = '📦 Parts Shipment — Drag each part to ACCEPT or REJECT:';
+  area.appendChild(poolLabel);
+
+  const pool = document.createElement('div');
+  pool.className = 'items-pool';
+  pool.id = 'partsPool';
+  pool.addEventListener('dragover', e => e.preventDefault());
+  pool.addEventListener('drop', e => onDropZone(e, 'pool'));
+  area.appendChild(pool);
+
+  const shuffled = shuffleArray(inspectItems);
+  shuffled.forEach(item => {
+    pool.appendChild(makeChip(item));
+  });
+
+  // Drop zones
+  const dzWrap = document.createElement('div');
+  dzWrap.className = 'drop-zones';
+
+  const acceptZone = document.createElement('div');
+  acceptZone.className = 'drop-zone accept';
+  acceptZone.id = 'zone-accept';
+  acceptZone.innerHTML = '<div class="drop-zone-label">✅ Accept</div>';
+  acceptZone.addEventListener('dragover', e => { e.preventDefault(); acceptZone.classList.add('drag-over'); });
+  acceptZone.addEventListener('dragleave', () => acceptZone.classList.remove('drag-over'));
+  acceptZone.addEventListener('drop', e => onDropZone(e, 'accept'));
+  acceptZone.addEventListener('click', () => onZoneClick('accept'));
+
+  const rejectZone = document.createElement('div');
+  rejectZone.className = 'drop-zone reject';
+  rejectZone.id = 'zone-reject';
+  rejectZone.innerHTML = '<div class="drop-zone-label">❌ Reject</div>';
+  rejectZone.addEventListener('dragover', e => { e.preventDefault(); rejectZone.classList.add('drag-over'); });
+  rejectZone.addEventListener('dragleave', () => rejectZone.classList.remove('drag-over'));
+  rejectZone.addEventListener('drop', e => onDropZone(e, 'reject'));
+  rejectZone.addEventListener('click', () => onZoneClick('reject'));
+
+  dzWrap.appendChild(acceptZone);
+  dzWrap.appendChild(rejectZone);
+  area.appendChild(dzWrap);
+
+  // Reset feedback
+  document.getElementById('inspectFeedback').className = 'feedback-box';
+  document.getElementById('inspectFeedback').innerHTML = '';
+  document.getElementById('inspectCheckBtn').style.display = 'inline-block';
+  document.getElementById('inspectNextBtn').style.display = 'none';
+}
+
+function makeChip(item) {
+  const chip = document.createElement('div');
+  chip.className = 'drag-chip';
+  chip.draggable = true;
+  chip.id = 'chip-' + item.id;
+  chip.dataset.id = item.id;
+  chip.dataset.correct = item.correct;
+  chip.innerHTML = item.icon + ' ' + item.text;
+  chip.setAttribute('title', item.text);
+
+  chip.addEventListener('dragstart', e => {
+    dragActiveChip = item.id;
+    e.dataTransfer.setData('text/plain', item.id);
+  });
+  chip.addEventListener('dragend', () => {
+    document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+  });
+
+  // Touch events
+  chip.addEventListener('touchstart', e => {
+    e.preventDefault();
+    touchActiveChip = chip;
+    chip.style.opacity = '0.7';
+  }, {passive:false});
+  chip.addEventListener('touchend', e => {
+    e.preventDefault();
+    chip.style.opacity = '1';
+    if (!touchActiveChip) return;
+    const touch = e.changedTouches[0];
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (!el) { touchActiveChip = null; return; }
+    const zone = el.closest('.drop-zone');
+    if (zone) {
+      const zoneId = zone.id.replace('zone-','');
+      moveChipToZone(item.id, zoneId);
+    } else {
+      const pool = el.closest('#partsPool');
+      if (pool) moveChipToZone(item.id, 'pool');
+    }
+    touchActiveChip = null;
+  }, {passive:false});
+
+  // Click-to-select for mobile fallback
+  chip.addEventListener('click', () => {
+    if (inspectChecked) return;
+    if (touchActiveChip === null) {
+      // Treat as select
+      document.querySelectorAll('.drag-chip').forEach(c => c.style.boxShadow = '');
+      chip.style.boxShadow = '0 0 0 3px #C9A84C';
+      dragActiveChip = item.id;
+    }
+  });
+
+  return chip;
+}
+
+function onZoneClick(zoneId) {
+  if (inspectChecked) return;
+  if (dragActiveChip) {
+    moveChipToZone(dragActiveChip, zoneId);
+    document.querySelectorAll('.drag-chip').forEach(c => c.style.boxShadow = '');
+    dragActiveChip = null;
+  }
+}
+
+function onDropZone(e, zoneId) {
+  e.preventDefault();
+  const id = e.dataTransfer ? e.dataTransfer.getData('text/plain') : dragActiveChip;
+  if (!id) return;
+  document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+  moveChipToZone(id, zoneId);
+  dragActiveChip = null;
+}
+
+function moveChipToZone(chipId, zoneId) {
+  const chip = document.getElementById('chip-' + chipId);
+  if (!chip) return;
+  chip.classList.remove('placed-accept','placed-reject');
+  if (zoneId === 'accept') {
+    document.getElementById('zone-accept').appendChild(chip);
+    chip.classList.add('placed-accept');
+  } else if (zoneId === 'reject') {
+    document.getElementById('zone-reject').appendChild(chip);
+    chip.classList.add('placed-reject');
+  } else {
+    document.getElementById('partsPool').appendChild(chip);
+  }
+}
+
+function checkInspect() {
+  if (inspectChecked) return;
+  // Check how many are in pool (un-sorted)
+  const pool = document.getElementById('partsPool');
+  if (pool.querySelectorAll('.drag-chip').length > 0) {
+    const fb = document.getElementById('inspectFeedback');
+    fb.className = 'feedback-box incorrect';
+    fb.innerHTML = '<span class="feedback-icon">⚠️</span> Please sort ALL parts before checking. Some parts are still in the shipment box!';
+    return;
+  }
+
+  inspectChecked = true;
+  let correct = 0;
+  inspectItems.forEach(item => {
+    const chip = document.getElementById('chip-' + item.id);
+    const parent = chip.parentElement;
+    const inZone = parent.id === 'zone-' + item.correct;
+    if (inZone) {
+      correct++;
+      chip.style.outline = '2px solid #2a9d5c';
+    } else {
+      chip.style.outline = '2px solid #c0392b';
+    }
+  });
+
+  inspectScore = Math.round((correct / inspectItems.length) * 7);
+  const fb = document.getElementById('inspectFeedback');
+  if (correct === inspectItems.length) {
+    fb.className = 'feedback-box correct';
+    fb.innerHTML = '<span class="feedback-icon">🎉</span> Perfect! All ' + correct + ' parts sorted correctly. You earned <strong>7 / 7 points</strong>!';
+  } else {
+    fb.className = 'feedback-box incorrect';
+    fb.innerHTML = '<span class="feedback-icon">📋</span> You sorted <strong>' + correct + ' / ' + inspectItems.length + '</strong> parts correctly. You earned <strong>' + inspectScore + ' / 7 points</strong>. Parts with a <span style="color:#c0392b">red outline</span> were sorted incorrectly.';
+  }
+
+  document.getElementById('inspectCheckBtn').style.display = 'none';
+  document.getElementById('inspectNextBtn').style.display = 'inline-block';
+}
+
+// ===================== SCENARIOS =====================
+let currentScenario = 0;
+let scenarioAnswered = [];
+
+function goToScenarios() {
+  document.getElementById('screen-inspect').classList.remove('active');
+  document.getElementById('screen-scenarios').classList.add('active');
+  currentScenario = 0;
+  scenarioAnswered = new Array(scenarios.length).fill(false);
+  scenarioResults = [];
+  buildScenarios();
+  updateProgress(3);
+}
+
+function buildScenarios() {
+  const area = document.getElementById('scenariosArea');
+  area.innerHTML = '';
+
+  scenarios.forEach((sc, sIdx) => {
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '22px';
+    wrap.id = 'scenario-' + sIdx;
+
+    const banner = document.createElement('div');
+    banner.className = 'scenario-banner';
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.textContent = 'Scenario ' + (sIdx + 1);
+    banner.appendChild(tag);
+    const qText = document.createElement('div');
+    qText.textContent = sc.q;
+    banner.appendChild(qText);
+    wrap.appendChild(banner);
+
+    const grid = document.createElement('div');
+    grid.className = 'options-grid';
+    const letters = ['A','B','C','D'];
+    sc.options.forEach((opt, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = '<span class="option-letter">' + letters[oIdx] + '</span>' + opt.text;
+      btn.dataset.sIdx = sIdx;
+      btn.dataset.oIdx = oIdx;
+      btn.id = 'sbtn-' + sIdx + '-' + oIdx;
+      btn.addEventListener('click', () => answerScenario(sIdx, oIdx));
+      grid.appendChild(btn);
+    });
+    wrap.appendChild(grid);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback-box';
+    fb.id = 'sfb-' + sIdx;
+    wrap.appendChild(fb);
+
+    area.appendChild(wrap);
+  });
+
+  document.getElementById('scenarioFinishBtn').style.display = 'none';
+}
+
+function answerScenario(sIdx, oIdx) {
+  if (scenarioAnswered[sIdx]) return;
+  scenarioAnswered[sIdx] = true;
+
+  const sc = scenarios[sIdx];
+  const isCorrect = sc.options[oIdx].correct;
+  scenarioResults.push({ sIdx, isCorrect });
+
+  // Disable all buttons for this scenario
+  for (let i = 0; i < sc.options.length; i++) {
+    const btn = document.getElementById('sbtn-' + sIdx + '-' + i);
+    btn.disabled = true;
+    if (sc.options[i].correct) btn.classList.add('highlight');
+  }
+  const btn = document.getElementById('sbtn-' + sIdx + '-' + oIdx);
+  if (isCorrect) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('incorrect');
+  }
+
+  const fb = document.getElementById('sfb-' + sIdx);
+  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'incorrect');
+  fb.innerHTML = isCorrect ? sc.feedback.correct : sc.feedback.incorrect;
+
+  // Check if all answered
+  if (scenarioAnswered.every(Boolean)) {
+    scenarioScore = scenarioResults.filter(r => r.isCorrect).length * 2;
+    document.getElementById('scenarioFinishBtn').style.display = 'inline-block';
+  }
+}
+
+// ===================== RESULTS =====================
+function showResults() {
+  document.getElementById('screen-scenarios').classList.remove('active');
+  document.getElementById('screen-results').classList.add('active');
+
+  totalScore = vocabScore + inspectScore + scenarioScore;
+  document.getElementById('finalScore').textContent = totalScore;
+
+  let title, sub;
+  if (totalScore >= 18) {
+    title = '🏆 Master Inspector!';
+    sub = 'Outstanding work! You clearly understand procurement, quality control, and making smart engineering decisions. Your mousetrap car is ready to build!';
+  } else if (totalScore >= 13) {
+    title = '🔍 Quality Inspector';
+    sub = 'Good job! You understand most of the concepts. Review any areas where parts were mis-sorted or scenarios were tricky.';
+  } else if (totalScore >= 8) {
+    title = '🛠 Junior Inspector';
+    sub = 'You\'re on the right track! Review the vocabulary and QC inspection criteria, then try again to improve your score.';
+  } else {
+    title = '📚 Keep Studying!';
+    sub = 'It looks like some concepts need more practice. Re-read your engineering notebook entry and try again — you\'ve got this!';
+  }
+  document.getElementById('scoreTitle').textContent = title;
+  document.getElementById('scoreSub').textContent = sub;
+
+  const list = document.getElementById('summaryList');
+  list.innerHTML = '';
+
+  const items = [
+    { label: 'Vocabulary Match', earned: vocabScore, max: 5, icon: '🗂' },
+    { label: 'QC Inspection', earned: inspectScore, max: 7, icon: '🔎' },
+    { label: 'Procurement Decisions', earned: scenarioScore, max: 8, icon: '⚙️' },
+  ];
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'summary-item';
+    div.innerHTML = `<span class="summary-icon">${item.icon}</span><span class="summary-text"><span class="summary-key">${item.label}</span> — ${item.earned} / ${item.max} pts</span>`;
+    list.appendChild(div);
+  });
+
+  // Total row
+  const tot = document.createElement('div');
+  tot.className = 'summary-item';
+  tot.style.borderTop = '2px solid #1B3A5C';
+  tot.style.marginTop = '4px';
+  tot.style.paddingTop = '10px';
+  tot.innerHTML = `<span class="summary-icon">🏅</span><span class="summary-text"><span class="summary-key">Total Score</span> — ${totalScore} / 20 pts</span>`;
+  list.appendChild(tot);
+}
+
+function restartActivity() {
+  totalScore = 0; vocabScore = 0; inspectScore = 0; scenarioScore = 0;
+  inspectChecked = false;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-intro').classList.add('active');
+}
+</script>
+</body>
+</html>

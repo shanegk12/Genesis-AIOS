@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-029",
+  "topic": "Troubleshooting and Debugging Systems",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the definition of a 'System Failure' according to the lesson?",
+      "options": {
+        "A": "When a system performs its function perfectly.",
+        "B": "When a system or component can no longer perform its intended function within specified limits.",
+        "C": "When a system is too complex to understand.",
+        "D": "When a system is completely destroyed."
+      },
+      "answer": "B",
+      "explanation": "A system failure is defined as when a system or component can no longer perform its intended function within specified limits."
+    },
+    {
+      "type": "recall",
+      "question": "How many steps are in the Creationeering Troubleshooting Protocol?",
+      "options": {
+        "A": "3",
+        "B": "8",
+        "C": "6",
+        "D": "12"
+      },
+      "answer": "C",
+      "explanation": "The Creationeering Troubleshooting Protocol is described as a structured 6-step method."
+    },
+    {
+      "type": "recall",
+      "question": "Which of the following is NOT one of the three primary domains of system failures categorized in the lesson?",
+      "options": {
+        "A": "Physical/Structural Failure",
+        "B": "Mechanical Failure",
+        "C": "Chemical Failure",
+        "D": "Electrical Failure"
+      },
+      "answer": "C",
+      "explanation": "The lesson categorizes failures into Physical/Structural, Mechanical, and Electrical domains, not Chemical."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is it important for an engineer to 'Identify the Symptom' specifically, rather than just saying 'it's broken,' during troubleshooting?",
+      "options": {
+        "A": "To make the problem sound more scientific.",
+        "B": "To impress others with technical vocabulary.",
+        "C": "To narrow down which subsystem is failing and guide further investigation.",
+        "D": "To immediately know the exact fix for the problem."
+      },
+      "answer": "C",
+      "explanation": "Identifying the symptom specifically allows an engineer to narrow down which subsystem is failing, which is crucial for effective troubleshooting."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does Dr. Horstemeyer's 8-step Creationeering framework primarily assist engineers in diagnosing system failures?",
+      "options": {
+        "A": "It provides a list of common fixes for all types of failures.",
+        "B": "It helps categorize failures into Physical, Mechanical, or Electrical types.",
+        "C": "It serves as a diagnostic map to trace the root cause of failure back to a compromised design step.",
+        "D": "It outlines the exact steps for implementing a fix."
+      },
+      "answer": "C",
+      "explanation": "The 8-step Creationeering framework is used as a diagnostic map to trace the root cause of failure to a specific compromised step in the engineering process."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the primary difference between a mechanical failure and an electrical failure in a system?",
+      "options": {
+        "A": "Mechanical failures involve the main frame, while electrical failures involve moving parts.",
+        "B": "Mechanical failures involve moving parts, while electrical failures involve the flow of energy or information.",
+        "C": "Mechanical failures are always visible, while electrical failures are always hidden.",
+        "D": "Mechanical failures are easy to fix, while electrical failures are always complex."
+      },
+      "answer": "B",
+      "explanation": "Mechanical failures involve moving parts, whereas electrical failures involve issues with the flow of energy or information within the system."
+    },
+    {
+      "type": "application",
+      "question": "A robot arm on your model moves slowly and makes a loud grinding noise, but the motor seems to be spinning correctly. This situation most likely indicates which type of system failure?",
+      "options": {
+        "A": "Electrical Failure",
+        "B": "Physical/Structural Failure",
+        "C": "Mechanical Failure",
+        "D": "Software Failure"
+      },
+      "answer": "C",
+      "explanation": "A grinding noise and slow movement with a working motor are classic symptoms of issues with moving parts like gears or linkages, which fall under mechanical failure."
+    },
+    {
+      "type": "application",
+      "question": "Your model's LED light is supposed to turn on when a button is pressed, but it doesn't. According to the Creationeering Troubleshooting Protocol, what is the very first thing you should do?",
+      "options": {
+        "A": "Immediately check if the wires are connected.",
+        "B": "Replace the LED light with a new one.",
+        "C": "Specifically identify the symptom, such as 'the light does not illuminate when the button is pressed.'",
+        "D": "Ask a friend for help."
+      },
+      "answer": "C",
+      "explanation": "The first step in the troubleshooting protocol is to specifically identify the symptom, which means describing exactly what is not working."
+    },
+    {
+      "type": "application",
+      "question": "During a stress test, a beam in your model bridge develops a visible crack and then breaks. This is an example of which type of system failure?",
+      "options": {
+        "A": "Electrical Failure",
+        "B": "Mechanical Failure",
+        "C": "Physical/Structural Failure",
+        "D": "Intermittent Failure"
+      },
+      "answer": "C",
+      "explanation": "A crack and break in a beam directly relate to the material integrity and frame of the system, which is categorized as a physical/structural failure."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson describes the engineer's role as a 'technical diagnostician.' How does this role connect to the biblical principle of seeking truth (Romans 8:28) in the context of troubleshooting?",
+      "options": {
+        "A": "Engineers seek to find the cheapest solution, which is a form of truth.",
+        "B": "Diagnosticians must uncover the exact, factual root cause of a failure, reflecting a pursuit of truth.",
+        "C": "Seeking truth means always building perfect systems that never fail.",
+        "D": "It means only trusting your own judgment, not external data."
+      },
+      "answer": "B",
+      "explanation": "As technical diagnosticians, engineers must diligently uncover the precise, factual root cause of a system's failure, which aligns with the biblical principle of seeking and understanding truth."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that 'failure is our greatest teacher' in engineering. How does this idea connect with the biblical principle of perseverance (Proverbs 24:16) when troubleshooting?",
+      "options": {
+        "A": "Perseverance means never making mistakes in the first place.",
+        "B": "Learning from failure requires persistence through challenges to find solutions and improve, embodying perseverance.",
+        "C": "It means giving up quickly if a system fails too many times.",
+        "D": "Failure teaches us to avoid complex systems altogether."
+      },
+      "answer": "B",
+      "explanation": "Learning from failures requires engineers to persist through difficulties and setbacks to diagnose and fix problems, which directly reflects the principle of perseverance."
+    },
+    {
+      "type": "synthesis",
+      "question": "By following the structured Creationeering Troubleshooting Protocol, how do engineers demonstrate good stewardship of the systems they create?",
+      "options": {
+        "A": "They ensure the system will last forever, defying the fallen world.",
+        "B": "They efficiently restore function and value to a broken system, reflecting responsible care for creation.",
+        "C": "They avoid all future failures by perfectly understanding the system.",
+        "D": "They prove their superior intelligence by fixing problems quickly."
+      },
+      "answer": "B",
+      "explanation": "Following a structured protocol allows engineers to efficiently diagnose and repair systems, restoring their intended function and demonstrating responsible care and stewardship over the resources and creations entrusted to them."
+    }
+  ]
+}

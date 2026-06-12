@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Systems Integration and Interoperability — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Systems Integration and Interoperability</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Systems Integration", "definition": "The process of combining different parts or smaller systems into one complete, working system, like putting together all the pieces of a complex robot."}, {"term": "Interoperability", "definition": "The ability of different systems or parts to 'talk' to each other and work together smoothly, like how your phone and wireless headphones connect."}, {"term": "Subsystem", "definition": "A smaller, self-contained system that functions as a part of a much larger system, similar to how an engine is a subsystem of a car."}, {"term": "Interface", "definition": "A shared boundary or connection point where two different components or systems interact and exchange information, like a USB port on a computer."}, {"term": "Compatibility", "definition": "The ability of two or more items or systems to work together without any problems or conflicts, ensuring they can function side-by-side."}, {"term": "Optimization", "definition": "The process of making a system or design as good or efficient as possible, often by finding the best balance between different factors to get the best performance."}, {"term": "Multiscale Modeling", "definition": "An engineering technique that helps us understand how big-picture system performance is affected by tiny interactions at the atomic or molecular level."}, {"term": "OCV Method", "definition": "A structured way to solve problems by identifying your Objective (what you want to do), Constraints (your limits), and Variables (what you can change)."}, {"term": "Creationeering™", "definition": "A term used in this curriculum to describe the process of designing and building, inspired by God's intricate and interconnected creation."}, {"term": "Assembly Phase", "definition": "The stage in Creationeering™ where individual parts and subsystems are brought together and connected to form a complete system."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

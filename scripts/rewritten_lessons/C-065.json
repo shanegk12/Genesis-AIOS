@@ -1,0 +1,279 @@
+[
+  {
+    "id": "c065t1a2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Functional Requirements and Specifications</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065ovr1",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, you explored Optimization Techniques and Trade-Offs — how to make smart choices when designing and building, always seeking the best balance between competing goals. Today, you're building on that foundation as you step into the Performance phase of Creationeering.</p>\n<p>In this lesson, you'll uncover the critical concepts of Functional Requirements and Specifications. These are the detailed instructions and measurements that ensure your creations don't just work — they work <em>well</em>. You'll learn how to clearly define what an engineered system needs to do, exactly how well it needs to do it, and how to make sure your designs truly serve the people who use them. All while honoring the intentional design principles woven into creation itself.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065obj2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define functional requirements and distinguish them from non-functional requirements.</li>\n<li>Explain why clear, measurable specifications matter in the engineering design process.</li>\n<li>Apply the OCV method to develop precise specifications for an engineered system.</li>\n<li>Connect detailed design specifications to God's meticulous creation of the universe.</li>\n<li>Explain how understanding functional requirements helps you be a better steward of the resources God has given you.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065vc03",
+    "type": "vocab",
+    "data": {
+      "columns": 2,
+      "items": [
+        {
+          "term": "Functional Requirement",
+          "definition": "What a system must do to achieve its purpose — a specific behavior or action it performs."
+        },
+        {
+          "term": "Non-Functional Requirement",
+          "definition": "How a system must be — qualities like reliability, speed, or security rather than specific actions."
+        },
+        {
+          "term": "Specification",
+          "definition": "A detailed, measurable description of a requirement that provides exact criteria for success."
+        },
+        {
+          "term": "Performance",
+          "definition": "How well a system executes its functions, often measured in terms of speed, efficiency, or output."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The acceptable range of variation for a specified dimension or property."
+        },
+        {
+          "term": "Verification",
+          "definition": "The process of checking whether a system meets its specified requirements."
+        },
+        {
+          "term": "Validation",
+          "definition": "The process of checking whether a system meets the actual needs of its users."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "The ultimate goal or desired outcome of a design project."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that must be considered during the design process."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "An aspect of the design that can be changed or adjusted to meet objectives within constraints."
+        }
+      ]
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065dv04",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065bib5",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>\"And God saw everything that he had made, and behold, it was very good.\"</strong> — Genesis 1:31a</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx06",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed for Purpose</h2>\n<p>From the very first moment of creation, everything God made had a purpose — and it fulfilled that purpose precisely. Consider the human eye. It doesn't just \"see.\" It sees color, depth, and motion with stunning accuracy. The retina holds millions of photoreceptor cells, each tuned to detect specific wavelengths of light. The lens curves at exactly the right angle to focus an image onto the retina. Every part has a job, and every job comes with a detailed \"how well\" attached to it.</p>\n<p>That's not an accident. That's intentional design.</p>\n<p>As His image-bearers, you are called to approach your own designs with the same intentionality. The goal isn't just to build something that technically works — it's to build something that works <em>very good</em>, fulfilling its purpose with excellence. That starts by clearly defining what your design must do, and exactly how well it must do it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065dv07",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx08",
+    "type": "text",
+    "data": {
+      "html": "<h2>What It Must Do — Functional Requirements</h2>\n<p>A <strong>functional requirement</strong> describes what a system must do. Think of it as the job description for your design. It answers the question: <em>What action does this thing perform?</em></p>\n<p>If you were designing a water bottle, a functional requirement might be: \"The water bottle must hold liquid without leaking\" or \"The water bottle must allow a user to drink from it with one hand.\" Those are actions. They describe behaviors — what the bottle <em>does</em>.</p>\n<p>Imagine you're designing a robot to sort colored blocks on an assembly line. Some functional requirements for that robot might look like this:</p>\n<ul>\n<li>The robot must detect the color of each block.</li>\n<li>The robot must pick up a block and move it to the correct bin.</li>\n<li>The robot must process each block within a set time window.</li>\n</ul>\n<p>Notice that each statement describes a specific, observable action. If you can watch the system and check whether it performed the action — it's a functional requirement.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065img9",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple split diagram showing a water bottle on the left labeled with functional requirements (hold liquid, allow drinking, seal tightly) and a robot arm on the right labeled with functional requirements (detect color, pick up block, sort into bin) — illustrating what functional requirements look like in two different contexts."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx10",
+    "type": "text",
+    "data": {
+      "html": "<h2>How It Must Be — Non-Functional Requirements</h2>\n<p>Once you know what your system must <em>do</em>, you also need to define how it must <em>be</em>. That's where <strong>non-functional requirements</strong> come in. These describe the qualities of the system — things like how fast it runs, how reliable it is, how safe it is to use, or how long it lasts.</p>\n<p>Going back to the water bottle:</p>\n<ul>\n<li>Functional requirement: \"The bottle must hold liquid.\"</li>\n<li>Non-functional requirement: \"The bottle must maintain its seal after being dropped from 1 meter onto a hard floor at least 50 times.\"</li>\n</ul>\n<p>Both matter. A bottle that holds water perfectly on a shelf but cracks the first time a student drops it on the cafeteria floor has failed its users — even if it technically met the functional requirement. Non-functional requirements protect the quality of your design over time and under real conditions.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx11",
+    "type": "text",
+    "data": {
+      "html": "<h2>Making It Measurable — Specifications</h2>\n<p>A requirement tells you <em>what</em> needs to happen. A <strong>specification</strong> tells you <em>exactly how well</em> it needs to happen — with numbers, units, and measurable criteria.</p>\n<p>Here's the difference in action:</p>\n<ul>\n<li>Requirement: \"The bridge must support heavy loads.\"</li>\n<li>Specification: \"The bridge must support a minimum load of 10,000 kg without deflecting more than 2 cm at the center span.\"</li>\n</ul>\n<p>That second version is powerful. Any engineer — or student — can test it. Either the bridge holds 10,000 kg with less than 2 cm of deflection, or it doesn't. There's no guessing.</p>\n<p>This is why specifications are so important: they turn vague goals into clear targets. When you build to a specification, you know exactly when you've succeeded. And when something fails, you know exactly where to look to fix it.</p>\n<p>Tolerance plays a key role here too. Almost no manufactured part can be made with perfect precision — there will always be tiny variations. A tolerance defines how much variation is acceptable. For example, a metal rod specified at 10 cm ± 0.1 cm can be anywhere from 9.9 cm to 10.1 cm and still pass inspection.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tip2",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Turn every requirement into a specification.</strong> When you write a requirement, ask yourself: \"How would I measure this?\" If you can't put a number or a testable condition on it, keep refining it until you can. Vague requirements lead to designs that almost work — and almost isn't good enough.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx13",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building Specifications with OCV</h2>\n<p>So how do you develop a solid set of specifications? One powerful method is the <strong>OCV framework</strong> — Objectives, Constraints, and Variables. It gives you a structured way to think through every aspect of your design before you start building.</p>\n<h3>Objectives</h3>\n<p>Your <strong>objective</strong> is the ultimate goal. What does success look like? This is where you start. Write it clearly and specifically. \"Build a bridge\" is not an objective — \"Build a bridge that supports 10,000 kg across a 5-meter span\" is an objective.</p>\n<h3>Constraints</h3>\n<p>A <strong>constraint</strong> is a limitation you must work within. Budget, material availability, size, safety regulations, time — these are all constraints. They don't disappear just because you ignore them. Identifying your constraints early keeps you from designing something that can't actually be built or used in the real world.</p>\n<h3>Variables</h3>\n<p>A <strong>variable</strong> is something you can adjust or choose as you design. The thickness of a beam, the angle of a joint, the material you select — these are all variables. Good engineering means changing your variables intelligently to meet your objectives while staying inside your constraints.</p>\n<p>Together, OCV gives you a complete map of your design space. You know where you're going (objective), what boundaries you're working within (constraints), and what knobs you can turn (variables). That's a powerful starting point.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065img4",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A triangular diagram with 'Objective' at the top and 'Constraints' and 'Variables' at the bottom corners, connected by arrows, showing how the three OCV components relate to each other in the design process."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065dv14",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx15",
+    "type": "text",
+    "data": {
+      "html": "<h2>Checking Your Work — Verification and Validation</h2>\n<p>Once you've built to your specifications, two important questions remain: Did you build it right? And did you build the right thing?</p>\n<p><strong>Verification</strong> answers the first question. You compare your finished design against the specifications you wrote. Does the bridge hold 10,000 kg? Does the robot sort blocks within the required time? Verification is about checking your design against your own documented requirements.</p>\n<p><strong>Validation</strong> answers the second question. You put your design in front of actual users and check whether it truly meets their needs. Sometimes a design can pass every specification on paper and still frustrate the people it was built for. That's a validation failure — and it's a reminder that your specifications must be rooted in a real understanding of the people you're serving.</p>\n<p>This is also a stewardship principle. God has given you time, materials, and creative ability. Using them wisely means building things that genuinely help people — not just things that technically pass a test. Verification and validation together make sure your work has real-world impact.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065wrn6",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip validation.</strong> A common mistake is assuming that passing your own tests means your design is finished. Your specifications are only as good as how well they reflect real user needs. Always check your design with the people who will actually use it — you may discover requirements you never thought to write down.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c065tx17",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Functional requirements and specifications are the foundation of excellent engineering. They transform a fuzzy idea into a clear, testable plan. They protect your users, focus your effort, and give you a way to know — without doubt — whether your design has succeeded.</p>\n<p>Think back to the human eye. God didn't create it with a vague goal of \"helping people see.\" Every structure, every cell, every curve was specified with precision to fulfill a particular function. As you develop your own engineering skills, you're learning to think and design with that same level of intentionality.</p>\n<p>Here's a quick summary of the key ideas from this lesson:</p>\n<ul>\n<li><strong>Functional requirements</strong> describe what your system must do — specific, observable actions.</li>\n<li><strong>Non-functional requirements</strong> describe how your system must be — reliability, durability, safety, and other qualities.</li>\n<li><strong>Specifications</strong> make requirements measurable by adding exact numbers, units, and tolerances.</li>\n<li>The <strong>OCV framework</strong> (Objectives, Constraints, Variables) helps you build a complete picture of your design challenge before you start.</li>\n<li><strong>Verification</strong> checks your design against your specifications; <strong>validation</strong> checks your design against real user needs.</li>\n</ul>\n<p>When you design with this level of care, your work becomes more than an engineering project. It becomes an act of stewardship — using the gifts and resources God has placed in your hands to genuinely serve others.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

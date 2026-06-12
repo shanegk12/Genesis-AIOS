@@ -1,0 +1,275 @@
+[
+  {
+    "id": "m030t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Sourcing Alternatives and Costing</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson, you worked on Precision Finishing and Tolerance — making sure every part of your mousetrap car was built to exact measurements and smoothly finished. You discovered that tiny differences can have a surprisingly big impact on how your car performs. Now it's time to move into the next phase of Assembly: <strong>Sourcing Alternatives and Costing</strong>.</p><p>This lesson is about thinking like a smart builder. Where do your materials come from? What options do you have? How much does everything cost? Just like a master builder carefully selects every beam and bolt before construction begins, you'll learn to evaluate your material choices for the chassis, wheels, axles, and other components — balancing performance, availability, and budget.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Identify at least three alternative materials for a specific mousetrap car component.</li><li>Calculate the total cost of materials for a chosen mousetrap car design.</li><li>Evaluate the trade-offs between different sourcing alternatives based on performance, availability, and cost.</li><li>Apply the Objective, Constraint, Variable (OCV) method to make informed sourcing and costing decisions.</li><li>Understand the importance of responsible stewardship in managing resources and finances, reflecting God's provision.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Sourcing",
+          "definition": "The process of finding and obtaining the materials or components needed for a project."
+        },
+        {
+          "term": "Alternative",
+          "definition": "A different option or choice for a material, component, or method."
+        },
+        {
+          "term": "Costing",
+          "definition": "The process of calculating the total expenses involved in a project, including materials, labor, and other overheads."
+        },
+        {
+          "term": "Trade-off",
+          "definition": "A situation where choosing one option means giving up another, often involving balancing desirable but conflicting features."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The formal process of obtaining goods or services — similar to sourcing but often more structured and official."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The process of putting together individual components to create a complete product or system."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building with Purpose: A Biblical Foundation</h2><p>Long before modern engineering, God gave incredibly detailed instructions for a building project. In the book of Exodus, He directed Moses on how to construct the Tabernacle — a portable sanctuary for His presence. Exodus 35:4-5 records Moses telling the Israelites: <em>\"This is the thing that the LORD has commanded: Take from among you an offering to the LORD. Whoever is of a generous heart, let him bring the LORD's offering: gold, silver, and bronze.\"</em></p><p>Notice something important here. God didn't simply say \"build a tent.\" He specified the exact materials needed, and then the people went out and sourced them with willing hearts. That's intentional, purposeful building. As you design your mousetrap car, you're following that same pattern — thinking carefully about every component, where it comes from, what it costs, and whether it's truly the right choice for the job.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 35:4-5</strong> — \"Take from among you an offering to the LORD. Whoever is of a generous heart, let him bring the LORD's offering: gold, silver, and bronze.\" God's blueprint for the Tabernacle included specific materials chosen for specific purposes. Your mousetrap car deserves the same thoughtfulness.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sourcing Alternatives: Being a Material Detective</h2><p>Sourcing is like being a detective for materials. You need to figure out what your project requires, track down where to get it, and then ask a critical question: <em>is this actually the best option?</em></p><p>For your mousetrap car, the main components you'll be sourcing are the chassis, wheels, axles, the mousetrap itself, and any connectors or fasteners. Your first instinct might be to grab whatever is nearby or cheapest — but a smart engineer always considers alternatives before committing to a choice.</p><h3>Why Alternatives Matter</h3><p>Imagine a wheel made from a CD versus a wheel cut from balsa wood. Both can work. But they have very different weights, diameters, friction properties, and costs. Choosing between them isn't just about preference — it's about understanding which one helps your car perform better for your specific design goals. That decision-making process is exactly what sourcing alternatives is all about.</p><p>When evaluating any material alternative, ask yourself three questions:</p><ul><li><strong>Performance:</strong> Will this material do the job well? Is it strong enough, light enough, or smooth enough?</li><li><strong>Availability:</strong> Can you actually get it? Is it in stock, or would it take too long to arrive?</li><li><strong>Cost:</strong> Does it fit within your budget? Is there a cheaper option that performs just as well?</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison of four possible mousetrap car wheel alternatives — a CD, a foam wheel, a wooden circle cut from balsa, and a plastic bottle cap — labeled with material, approximate weight, and cost."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Sourcing</h2><p>You've already used the <strong>Objective, Constraint, Variable (OCV)</strong> method in earlier lessons to guide your design decisions. It works just as powerfully when you're choosing materials.</p><ul><li><strong>Objective:</strong> What do you want the material to accomplish? (e.g., \"The wheels should roll smoothly and travel as far as possible.\")</li><li><strong>Constraint:</strong> What limits apply? (e.g., \"Total material cost must stay under $5.\" or \"Parts must be available at the school supply station.\")</li><li><strong>Variable:</strong> What can you change or experiment with? (e.g., \"Wheel diameter, material type, or axle thickness.\")</li></ul><p>By running your sourcing decisions through the OCV lens, you stay focused on what actually matters for your design — and you avoid wasting time or money on parts that look good but don't serve your objective.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV Sourcing Tip:</strong> Before you commit to any material, write down your Objective, Constraint, and Variable for that component first. If a material doesn't satisfy your constraint or help meet your objective, cross it off your list — no matter how cool it looks.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Costing: Knowing What Things Are Worth</h2><p>Once you've identified your material alternatives, the next step is <strong>costing</strong> — figuring out exactly how much your design will cost to build. This might sound simple, but engineers and project managers spend a lot of time on this step. Going over budget can stop an entire project in its tracks.</p><h3>How to Calculate Total Material Cost</h3><p>The basic formula is straightforward:</p><p><strong>Total Cost = (Unit Price × Quantity) for each material, added together</strong></p><p>For example, if balsa wood strips cost $0.75 each and you need 4 of them, that's $3.00 just for the chassis frame. Add up every component — wheels, axles, fasteners, the mousetrap — and you have your total material cost.</p><h3>Hidden Costs to Watch For</h3><p>Real engineers also account for costs that aren't always obvious at first:</p><ul><li><strong>Waste:</strong> If you cut a piece wrong and need a replacement, that's an added cost.</li><li><strong>Shipping or sourcing time:</strong> A cheaper part that takes two weeks to arrive might not actually be the better choice.</li><li><strong>Tools and consumables:</strong> Glue, sandpaper, and tape all cost money and add up quickly.</li></ul><p>Being aware of these hidden costs is part of thinking like a professional engineer — and a responsible steward of the resources you've been given.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple hand-drawn or digital cost table for a mousetrap car showing component name, unit price, quantity needed, and line-item total, with a bold 'Total Cost' row at the bottom."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Trade-offs: There's No Perfect Choice</h2><p>Here's something every engineer learns quickly: <strong>every material choice involves a trade-off.</strong> A lighter wheel might roll farther but break more easily. A sturdier axle might handle stress better but add weight that slows your car down. A cheaper material might save money now but cost more in replacements later.</p><p>Trade-offs aren't failures — they're part of smart design. Your job isn't to find a perfect part. Your job is to find the <em>best available option</em> given your objectives and constraints, and then defend that choice with evidence and reasoning.</p><h3>Comparing Alternatives: A Simple Framework</h3><p>When you're stuck between two or more options, try rating each one on a scale of 1–5 for the three criteria you already know:</p><ul><li>Performance (does it do the job well?)</li><li>Availability (can you get it in time?)</li><li>Cost (does it fit your budget?)</li></ul><p>Add up the scores for each option. The highest total is usually your best choice — though you should always use your judgment too, because numbers don't tell the whole story.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Choosing a material only because it's the cheapest — without checking whether it can actually handle the job. A wheel that wobbles or an axle that bends will cost you more in redesign time than the money you saved upfront. Always check performance <em>before</em> you finalize your cost calculations.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship: Using Resources Wisely</h2><p>There's a bigger idea underneath all of this material selection and cost math — and it connects directly to your faith. <strong>Stewardship</strong> means managing what you've been given responsibly and wisely. In engineering, that means not wasting materials, not overspending a budget unnecessarily, and making thoughtful decisions about what resources you use and why.</p><p>God calls us to be good stewards — whether that's of our time, our money, or the raw materials sitting on your workbench. Every smart sourcing decision you make is a small act of stewardship. Every cost calculation keeps you accountable. And every trade-off you wrestle through honestly is evidence that you take your role as a builder seriously.</p><p>The Israelites who built the Tabernacle brought their best materials with willing hearts. As you source and cost out your mousetrap car, bring that same intentionality to your work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m030a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the difference between sourcing and procurement?</strong><br/>Sourcing is the general process of finding and obtaining materials. Procurement is more formal and structured — it often involves purchase orders, supplier agreements, and official approvals. Both are about getting what you need, but procurement is the more professional version used in industry.</p><p><strong>2. You're choosing between two wheel options: Option A costs $0.50 and weighs 15g. Option B costs $1.25 and weighs 8g. What factors should guide your decision?</strong><br/>Consider your objective (distance or speed?), your constraint (budget limit?), and how much the weight difference actually matters for your design. A lighter wheel reduces rolling resistance and can improve distance — but if you're already under budget and the performance gain is small, Option A might be the smarter trade-off.</p><p><strong>3. A classmate says, \"I'll just buy the cheapest parts for everything to save money.\" What would you tell them?</strong><br/>Cheapest isn't always best. Cost is only one of three criteria — you also need to evaluate performance and availability. A part that fails or isn't available in time can derail your entire project, costing more in the long run.</p><p><strong>4. How does the OCV method help with sourcing decisions?</strong><br/>It keeps you focused. Your Objective tells you what the material needs to accomplish. Your Constraint sets the limits (budget, size, availability). Your Variable identifies what you can adjust and experiment with. Running every sourcing choice through OCV prevents you from picking parts that look good but don't actually serve your design goals.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

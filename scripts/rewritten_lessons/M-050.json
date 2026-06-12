@@ -1,0 +1,309 @@
+[
+  {
+    "id": "m050tx001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Variables and the Optimization Cycle</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, you built a solid foundation — setting up a Test Protocol, identifying key measurements, and establishing baselines for your mousetrap car. That groundwork matters because you can't improve what you haven't measured. Now it's time to use those baselines to make your car perform better.</p><p>This lesson dives into the world of <strong>variables</strong> and the <strong>Optimization Cycle</strong>. You'll learn how to systematically identify what you can change on your car, understand the limits you're working within, and clearly define what you're actually trying to achieve. Engineers use these concepts to move beyond random trial-and-error into a strategic, data-driven approach — and that's exactly what you're going to do. We are in the <strong>Performance phase</strong> of Creationeering, where the focus is on making sure your engineered system functions properly and hits its targets.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define and identify different types of variables in the context of your mousetrap car design.</li><li>Distinguish between design objectives and constraints for an engineering project.</li><li>Explain the iterative nature of the optimization cycle in engineering design.</li><li>Apply the Objective, Constraint, Variable (OCV) method to make informed design decisions for your mousetrap car.</li><li>Connect careful optimization to good stewardship — using your resources and talents with intention and purpose.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050vc001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Variable",
+          "definition": "Something that can be changed or adjusted in an experiment or design."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or target you want to achieve with your design."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be met in your design, such as material limits, budget, or competition rules."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution to a problem by making a system as effective or functional as possible."
+        },
+        {
+          "term": "Trade-off",
+          "definition": "A situation where improving one quality of a design means giving up another quality."
+        },
+        {
+          "term": "Iterative",
+          "definition": "A process that involves repeating a series of steps — often with refinements — until a desired outcome is achieved."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Looking at how macro-level observations (what you see) are connected to atomic-level causes (what's happening at the smallest scale)."
+        },
+        {
+          "term": "Performance",
+          "definition": "How well your mousetrap car achieves its intended function or objectives."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050dv001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed with Purpose</h2><p>Before we get into spreadsheets and test runs, take a moment to think about the greatest engineering project ever completed. In Genesis, God didn't just create the universe randomly. Every physical law, every element on the periodic table, every astronomical distance — all of it was tuned with extraordinary precision toward a specific goal: a world capable of sustaining life.</p><p>That's not accident. That's optimization at the highest level.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050cl001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><em>\"For this is what the LORD says — he who created the heavens, he is God; he who fashioned and made the earth, he founded it; he did not create it to be empty, but formed it to be inhabited.\"</em> — Isaiah 45:18</p><p>Notice the language: God <strong>fashioned</strong> and <strong>made</strong> with a specific objective in mind. He didn't settle for \"good enough.\" Every variable was set deliberately. As you work through your own optimization process, that same spirit of intentional design applies to you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050dv002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Variable?</h2><p>A <strong>variable</strong> is anything on your mousetrap car that you can change. Think of your car as a system with dozens of adjustable knobs — wheel size, axle diameter, string length, lever arm length, and more. Each one of those is a variable.</p><p>Engineers organize variables into three categories to keep their thinking clear:</p><ul><li><strong>Independent Variable:</strong> The one thing you intentionally change during a test. For example, you change the lever arm length while keeping everything else the same.</li><li><strong>Dependent Variable:</strong> The result you measure after making that change — like the distance your car travels.</li><li><strong>Controlled Variables:</strong> Everything else you keep constant so your results are actually meaningful. If you change the wheel size AND the string length at the same time, you won't know which change made the difference.</li></ul><p>Changing one variable at a time is one of the most important habits in engineering. It's the same discipline a scientist brings to a lab experiment — and it's what separates informed decisions from guessing.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050im001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram of a mousetrap car with arrows pointing to adjustable components: lever arm, string attachment point, rear wheel diameter, axle length, and front wheel size — each labeled as an independent variable example."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Objectives and Constraints: Knowing Your Target and Your Limits</h2><p>Before you start tweaking anything, you need to answer two questions: <em>What am I trying to achieve?</em> And <em>what am I not allowed to do?</em> Those answers define your <strong>objective</strong> and your <strong>constraints</strong>.</p><h3>Objectives</h3><p>Your objective is your specific, measurable goal. \"Make my car go farther\" is too vague. \"Increase my car's travel distance from 3.2 meters to at least 5 meters\" — that's an objective you can actually work toward and verify. Clear objectives keep you focused and help you evaluate whether a change actually helped.</p><h3>Constraints</h3><p>Constraints are the rules and limits you have to work within. They might come from:</p><ul><li><strong>Competition rules</strong> — specific size, weight, or material requirements</li><li><strong>Material limits</strong> — you only have certain parts available</li><li><strong>Budget</strong> — you can't spend unlimited money on components</li><li><strong>Physics</strong> — the mousetrap only stores a fixed amount of energy</li></ul><p>Constraints aren't obstacles to complain about — they're part of the design problem. Every real engineering project has them. A bridge engineer can't use infinite steel. A spacecraft designer can't exceed a launch weight limit. Learning to optimize <em>within</em> constraints is one of the most valuable skills you can develop.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050cl002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Changing multiple variables at the same time. It feels faster, but it makes your data useless — you won't know which change helped (or hurt). Always change one variable per test run and record your results before moving on.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050dv003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Optimization Cycle</h2><p>Optimization isn't a single event — it's a loop. Engineers repeat this cycle over and over, each pass getting closer to the best possible design. Here's how the cycle works:</p><ol><li><strong>Define your objective and constraints.</strong> Know exactly what you're aiming for and what limits you're working within.</li><li><strong>Identify your variables.</strong> List everything you could change on your car. Then prioritize — which variables are most likely to have a big impact on your objective?</li><li><strong>Make one change.</strong> Adjust a single variable and record its new value.</li><li><strong>Test and measure.</strong> Run your car under the same conditions as your baseline test. Record the results carefully.</li><li><strong>Compare to your baseline.</strong> Did performance improve, stay the same, or get worse? By how much?</li><li><strong>Decide and repeat.</strong> Keep the change if it helped. Reverse it if it didn't. Then move to the next variable and start the loop again.</li></ol><p>This is called an <strong>iterative</strong> process — you're not just building once and hoping for the best. You're building, testing, learning, and improving in repeated cycles. The word \"iterative\" comes from the Latin word for \"repeat,\" and in engineering, repetition with reflection is how great designs emerge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050im002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular flowchart showing the Optimization Cycle with six labeled steps: Define Objective → Identify Variables → Make One Change → Test and Measure → Compare to Baseline → Decide and Repeat — with an arrow looping back to the start."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: A Framework for Smart Decisions</h2><p>To keep your optimization organized, use the <strong>OCV Method</strong> — Objective, Constraint, Variable. Before every test, write down these three things:</p><ul><li><strong>O — Objective:</strong> What am I trying to improve right now? (e.g., increase distance traveled)</li><li><strong>C — Constraint:</strong> What limits apply? (e.g., must stay under 30 cm total length, can only use provided materials)</li><li><strong>V — Variable:</strong> What one thing am I changing this test? (e.g., increasing lever arm from 10 cm to 13 cm)</li></ul><p>This framework does something powerful: it forces you to think before you act. Instead of randomly adjusting parts and hoping something works, you're making a hypothesis — a prediction based on your understanding of how the system works. That's engineering thinking at its best.</p><p>It also creates a paper trail. When you finish your build, you'll have a record of every change you made, why you made it, and what happened. That's the kind of documentation that separates good engineers from great ones.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Trade-offs: You Can't Optimize Everything at Once</h2><p>Here's something every engineer eventually learns: improving one aspect of a design often makes another aspect worse. This is called a <strong>trade-off</strong>, and it's unavoidable.</p><p>For your mousetrap car, consider this example. Larger rear wheels cover more distance per rotation — great for maximizing travel distance. But larger wheels are also heavier, which means more energy is spent just getting them spinning. You've gained something and lost something at the same time.</p><p>Some other trade-offs you might encounter:</p><ul><li><strong>Speed vs. distance:</strong> A shorter lever arm releases energy faster (more speed off the start) but may not transfer as much total energy to the wheels.</li><li><strong>Stability vs. weight:</strong> A wider wheelbase helps the car track straight, but adds weight that reduces overall distance.</li><li><strong>String length vs. pull distance:</strong> A longer string can pull the wheels through more rotations, but only if the lever arm travels far enough to use it all.</li></ul><p>Recognizing trade-offs means you understand your system deeply. It also means you have to make judgment calls — deciding which performance factor matters most given your objective. That's a skill that takes practice, and it's exactly what the optimization cycle helps you develop.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050cl003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Engineering tip:</strong> Before you run a test, write a one-sentence prediction: \"I think increasing the lever arm length will increase distance because the string will pull the axle through more rotations.\" Forcing yourself to predict first — even if you're wrong — builds your understanding faster than just watching what happens.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050dv004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimization as Stewardship</h2><p>You might wonder why all this careful, methodical work matters beyond just getting a good score. Here's the bigger picture: the way you approach your mousetrap car is a reflection of how you'll handle real responsibilities in life.</p><p>God has given you creativity, problem-solving ability, and the capacity to learn. Using those gifts carelessly — changing things randomly, ignoring your data, giving up when results aren't immediately perfect — is a waste of what you've been given. But when you approach a problem with discipline, humility, and persistence, you're being a faithful steward of your abilities.</p><p>The optimization cycle isn't just an engineering tool. It's a mindset. It says: <em>I won't settle for my first attempt. I'll keep learning, keep refining, and keep working toward something excellent.</em> That attitude honors the God who designed a universe with breathtaking precision — and it will serve you well far beyond this mousetrap build.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050tx011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It Together: Your Next Steps</h2><p>As you move into your next build session, here's how to apply everything from this lesson:</p><ul><li>Review your baseline data from the last lesson. What is your current best performance?</li><li>Write a clear objective: what specific improvement are you targeting?</li><li>List your constraints: what rules or material limits apply?</li><li>Choose one variable to test first. Make your prediction, change only that variable, and run your test.</li><li>Record your results and compare them to your baseline. Document whether the change helped.</li><li>Repeat the cycle until you've reached your objective — or discovered a new, better one.</li></ul><p>You have a solid car. Now it's time to make it great.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m050ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Multiscale Modeling and Your Mousetrap Car",
+      "html": "<p>Engineers who work on advanced materials and systems use a concept called <strong>multiscale modeling</strong> — examining how what you observe at the large scale (like your car rolling slowly) connects to what's happening at the smallest scale (like friction between molecules on an axle).</p><p>For your mousetrap car, you can think about this in layers:</p><ul><li><strong>Macro scale (what you see):</strong> The car travels 4 meters before stopping.</li><li><strong>System scale (mechanical interactions):</strong> The rear axle isn't spinning freely — there's resistance at the bearing point.</li><li><strong>Material scale (surface properties):</strong> The axle surface is slightly rough, creating friction that robs energy from every rotation.</li></ul><p>Understanding these layers helps you trace performance problems back to their root cause rather than just guessing at solutions. A car that doesn't go far enough might not need bigger wheels — it might need smoother axles. Asking \"why\" at multiple levels is one of the habits that separates good engineers from great ones.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

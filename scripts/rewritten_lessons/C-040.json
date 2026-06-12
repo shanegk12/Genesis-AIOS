@@ -1,0 +1,352 @@
+[
+  {
+    "id": "c040t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>What is Logistics?</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored the world of Precision Measurement and Tolerances — how even tiny differences in size can have a huge impact on how things fit and work together. Today, we're building on that foundation as we dive into a new phase of Creationeering™: <strong>Logistics</strong>.</p>\n<p>Logistics is all about getting the right things to the right place at the right time. Once you've designed something with precision and know exactly what parts you need, how do those parts actually get to your workshop? How do they move through a factory? How do they reach the customer? That's logistics — the art and science of movement, storage, and flow. It ensures that every piece of a project, big or small, arrives exactly when and where it's needed to bring your creative vision to life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define logistics and explain its importance in the Creationeering™ process.</li>\n<li>Identify the key components of a logistical system, including transportation, warehousing, and inventory management.</li>\n<li>Analyze how multiscale modeling principles apply to understanding logistical challenges.</li>\n<li>Apply the OCV method to optimize a simple logistical problem.</li>\n<li>Recognize how efficient logistics demonstrates good biblical stewardship of resources and time.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Logistics",
+          "definition": "The detailed coordination and execution of a complex operation involving many people, facilities, or supplies. It's about getting the right things to the right place at the right time."
+        },
+        {
+          "term": "Supply Chain",
+          "definition": "The entire network of organizations, people, activities, information, and resources involved in moving a product or service from supplier to customer."
+        },
+        {
+          "term": "Inventory",
+          "definition": "The raw materials, work-in-progress, and finished goods that a company holds. Keeping track of inventory means knowing exactly what you have and where it is."
+        },
+        {
+          "term": "Warehousing",
+          "definition": "The act of storing goods in a building or facility before they are distributed or used. Warehouses are crucial hubs in a logistical network."
+        },
+        {
+          "term": "Transportation",
+          "definition": "The movement of goods or people from one place to another — by truck, train, ship, airplane, or even pipeline."
+        },
+        {
+          "term": "Distribution Center",
+          "definition": "A specialized warehouse that stores products for a short time and then quickly distributes them to retailers or customers."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome for a problem, often by balancing competing factors."
+        },
+        {
+          "term": "Throughput",
+          "definition": "The rate at which something can be processed or produced. In logistics, it refers to the volume of goods moving through a system."
+        },
+        {
+          "term": "Bottleneck",
+          "definition": "A point of congestion in a system that limits its overall capacity or flow."
+        },
+        {
+          "term": "Lead Time",
+          "definition": "The time between placing an order and receiving it, or the time between starting a production process and completing it."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Philippians 4:19</strong> — \"And my God will supply every need of yours according to his riches in glory in Christ Jesus.\"</p><p>God's provision is perfectly timed and perfectly placed. He never runs out of resources, and nothing is delivered late. That's the ultimate logistics system — and it's our inspiration as we learn to plan, move, and steward resources well.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Journey of Provision</h2>\n<p>Think about what it takes to feed a city. Farmers grow crops miles away. Trucks carry produce to processing plants. Trains move packaged goods to regional warehouses. Delivery vehicles fan out to every grocery store. And somehow, you walk in and find exactly what you need on the shelf. None of that happens by accident — it's the result of thousands of carefully coordinated decisions. That's a supply chain in action.</p>\n<p>God designed creation with its own kind of perfect logistics. Water cycles from ocean to cloud to rain to river and back again. Seeds travel by wind and water to exactly the places where they can grow. Animals migrate thousands of miles and arrive at the right place at the right season. When you study logistics, you're studying a principle that's woven into the fabric of creation itself.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing a supply chain from raw materials through manufacturing, warehousing, distribution, and delivery to the end customer."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Key Components of a Logistical System</h2>\n<p>Logistics isn't one single thing — it's a system made up of several connected pieces. Think of it like a relay race. Each runner has a specific leg of the race to run, and if one runner stumbles or slows down, the whole team feels it. In logistics, every component depends on the others.</p>\n<h3>Transportation</h3>\n<p>Transportation is the movement of goods from point A to point B. Depending on the distance, the weight of the goods, and the urgency, different transportation modes are chosen. A heavy shipment of steel beams travels by rail or ship. A small urgent package goes by air. A truckload of groceries drives to your local store. Choosing the right mode saves time and money — that's optimization at work.</p>\n<h3>Warehousing</h3>\n<p>Goods rarely travel straight from the factory to your hands. They usually stop somewhere in the middle — a warehouse or distribution center. Warehouses act like holding tanks, keeping inventory safe and organized until it's needed. A well-run warehouse knows exactly where everything is and can pull items quickly when orders come in.</p>\n<h3>Inventory Management</h3>\n<p>Inventory management is about knowing what you have, where it is, and how much of it you need. Too little inventory means you run out and can't fill orders — that's a problem. Too much inventory means you're tying up money in goods that are just sitting there — also a problem. Great logistics finds the balance: just enough, just in time.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the three questions of logistics:</strong> Do we have it? Where is it? When will it arrive? If you can answer all three accurately, your logistical system is working well.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Bottlenecks and Throughput</h2>\n<p>Imagine water flowing through a garden hose. The water flows fine until the hose gets kinked — suddenly almost nothing gets through. That kink is a bottleneck. In a logistical system, a bottleneck is any point where things slow down or get stuck, limiting the flow of the entire system.</p>\n<p>Throughput is the measure of how much is actually flowing through. If your warehouse can only process 100 boxes per hour but trucks are delivering 200 boxes per hour, you've got a serious bottleneck. Boxes pile up, workers get overwhelmed, and orders are delayed. Identifying and fixing bottlenecks is one of the most important jobs in logistics engineering.</p>\n<p>This is where <strong>optimization</strong> comes in. You don't just want to fix the obvious problem — you want to find the best possible solution that balances speed, cost, and reliability. Sometimes that means adding more workers at a bottleneck station. Sometimes it means rerouting shipments entirely. Good engineers think through all the options before choosing a path forward.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A visual showing a logistics flow diagram with a highlighted bottleneck point where goods are backing up before a processing station."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Fixing a bottleneck in one place often reveals a new bottleneck somewhere else downstream. Always look at the entire system, not just the most obvious problem spot.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lead Time: The Clock Is Ticking</h2>\n<p>Lead time is the gap between when you need something and when it actually arrives. In construction, if a specialized part has a six-week lead time and your project needs it in four weeks, you have a problem before you've even started building. Planning for lead time is one of the most critical — and most commonly overlooked — parts of logistics.</p>\n<p>Think of lead time like baking bread. You can't decide at 5:00 PM that you want fresh bread for a 5:30 PM dinner. The dough needs to rise, the oven needs to preheat, and the bread needs to bake. Experienced bakers start hours ahead because they understand the process timeline. Experienced engineers and logisticians do the same thing — they work backward from the deadline to figure out when every step needs to begin.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Logistics in the real world:</strong> During the COVID-19 pandemic, supply chains around the world experienced massive disruptions. Factories shut down, ships were delayed, and warehouses ran out of goods. People suddenly noticed empty store shelves — and realized just how much invisible, careful logistics work normally keeps products flowing. When the system works, you don't notice it. When it breaks, everyone feels it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Logistics as Stewardship</h2>\n<p>Here's a big idea: poor logistics wastes resources. When materials are ordered too early, they sit in a warehouse and cost money to store. When they're ordered too late, a project stalls and workers stand around with nothing to do. When goods are damaged in transit because they weren't packed or routed properly, materials and money are lost.</p>\n<p>Good logistics is, at its core, an act of <strong>stewardship</strong> — the careful, responsible management of the resources God has entrusted to you. As a Creationeer, every material you use, every hour you spend, and every dollar in your project budget is something to be handled with care and intention. Logistics gives you the tools to do exactly that.</p>\n<p>Proverbs 21:5 reminds us: \"The plans of the diligent lead to profit as surely as haste leads to poverty.\" Planning your logistics carefully — thinking ahead about what you need, when you need it, and how it will get to you — is one of the most practical ways to put that wisdom into action in your engineering work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 21:5</strong> — \"The plans of the diligent lead to profit as surely as haste leads to poverty.\"</p><p>Rushing through logistics planning might feel faster in the moment, but it almost always creates bigger problems later. Careful, patient planning is both a biblical principle and a sound engineering practice.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Logistics connects every part of a Creationeering™ project. You can have the best design in the world, the most precise measurements, and the most innovative idea — but if the materials don't arrive, or they arrive damaged, or they arrive three weeks after you needed them, your project suffers. Logistics is the invisible infrastructure that makes everything else possible.</p>\n<p>As you grow as an engineer and entrepreneur, you'll find that the people who truly excel aren't always the ones with the most creative ideas. Often, they're the ones who understand systems — who can see how all the pieces connect and can manage the flow of resources from start to finish. That's the power of logistics thinking.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> As you review this lesson, try to think of a logistics system you interact with every day — your school's cafeteria, a package delivered to your house, or even the books in your classroom. Trace the supply chain backward: where did it come from, how did it get here, and who managed that process?</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c040acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is Logistics?",
+      "html": "<p><strong>1. In your own words, what is logistics?</strong><br>Logistics is the process of planning, coordinating, and managing the movement and storage of goods, materials, and information so that the right things get to the right place at the right time.</p><p><strong>2. What are the three main components of a logistical system?</strong><br>Transportation (moving goods), Warehousing (storing goods), and Inventory Management (tracking what you have and what you need).</p><p><strong>3. What is a bottleneck and why does it matter?</strong><br>A bottleneck is a point in a system where things slow down or pile up, limiting the overall flow. It matters because one bottleneck can slow down an entire operation, even if everything else is running smoothly.</p><p><strong>4. How does good logistics connect to biblical stewardship?</strong><br>Good logistics avoids waste of materials, time, and money — all of which are resources God has entrusted to us. Careful planning and coordination is a practical expression of responsible stewardship.</p><p><strong>5. What is lead time and why should engineers plan for it?</strong><br>Lead time is the gap between ordering something and receiving it. Engineers must account for lead time so that materials arrive when they're actually needed — not too early (wasting storage) and not too late (stalling the project).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

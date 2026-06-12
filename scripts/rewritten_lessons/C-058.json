@@ -1,0 +1,454 @@
+[
+  {
+    "id": "c058t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Human Factors in Production Systems</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, we explored Configuration Management and Baselines — understanding how to keep designs organized and consistent. Today, we're moving deeper into the Assembly phase of the Creationeering™ framework to tackle something just as critical: <strong>Human Factors</strong>.</p>\n<p>The Assembly phase is where your designs come to life. But designs don't build themselves. People are at the heart of every successful production system. In this lesson, you'll discover how understanding human strengths and limitations — from our remarkable ability to innovate to our natural tendency for error — is essential for creating systems that are efficient, safe, and God-honoring.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p><ul><li>Explain what Human Factors are and why they matter in the Assembly phase of Creationeering™.</li><li>Identify common human capabilities and limitations that impact production system design.</li><li>Apply the Multiscale Modeling framework to understand how individual human actions influence system-level outcomes.</li><li>Utilize the OCV method to optimize a production system that accounts for human factors.</li><li>Reflect on our role as image-bearers of God in stewarding our human capabilities for effective and ethical production.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Human Factors",
+          "definition": "The study of how people interact with systems, tools, and environments, focusing on improving safety, efficiency, and comfort."
+        },
+        {
+          "term": "Ergonomics",
+          "definition": "The science of designing and arranging things people use so that they fit the people who use them well."
+        },
+        {
+          "term": "Cognitive Load",
+          "definition": "The total amount of mental effort being used in working memory. Too much cognitive load can lead to errors."
+        },
+        {
+          "term": "Automation",
+          "definition": "The use of technology to perform tasks with minimal human intervention."
+        },
+        {
+          "term": "Error Prevention",
+          "definition": "Strategies and designs aimed at stopping mistakes from happening in the first place."
+        },
+        {
+          "term": "Human-Machine Interface (HMI)",
+          "definition": "The point of interaction between a human and a machine or system — examples include control panels, screens, and joysticks."
+        },
+        {
+          "term": "Situational Awareness",
+          "definition": "Knowing what is happening around you and understanding what it means for the near future."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or design under a given set of constraints."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed for Purpose</h2>\n<p>Genesis 1:26-28 tells us: <em>\"Then God said, 'Let us make mankind in our image, in our likeness, so that they may rule over the fish in the sea and the birds in the sky, over the livestock and all the wild animals, and over all the creatures that move along the ground.' So God created mankind in his own image, in the image of God he created them; male and female he created them. God blessed them and said to them, 'Be fruitful and increase in number; fill the earth and subdue it.\"</em></p>\n<p>Humans are not just another component in God's creation. We are made in His image — endowed with intellect, creativity, and the capacity to reason, build, and solve problems. That truth is exactly where Human Factors engineering begins. Because we are uniquely designed by God, our capabilities and our limitations are part of an intelligent design worth studying and respecting.</p>\n<p>When we design production systems that work <em>with</em> human nature rather than against it, we honor both our Creator and the people who operate within those systems. We are called to subdue and steward the earth — and that requires careful, intentional design that takes the human element seriously.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:26-28</strong> — We are made in God's image and given the responsibility to rule and steward creation. That calling applies directly to the systems we design and the people who work within them. Good engineering takes that responsibility seriously.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Human Element in Production</h2>\n<p>Think about any product you use every day — your phone, a bicycle, even the chair you're sitting in right now. Someone designed it, someone built it, and someone uses it. At every single one of those stages, a human being was involved. That's what makes Human Factors so important.</p>\n<p><strong>Human Factors</strong> is the field of study that asks: how do people actually interact with systems, tools, and environments? And once we understand that, how can we design things better so that people can do their jobs safely, comfortably, and effectively?</p>\n<p>In a production system — the organized process by which something is manufactured or assembled — every worker, operator, and technician brings both incredible strengths and real limitations to the table. Ignoring those realities is how accidents happen and quality suffers. Designing around them is how great systems are built.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A factory assembly line showing workers interacting with machines, tools, and control panels — illustrating human factors in a real production environment."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Human Capabilities: What We Bring to the Table</h2>\n<p>People are remarkably capable. Here are some of the strengths that humans bring to production systems:</p>\n<ul>\n<li><strong>Adaptability</strong> — Humans can handle unexpected situations and make judgment calls that machines cannot.</li>\n<li><strong>Creativity</strong> — We can recognize patterns, generate new ideas, and improvise solutions on the fly.</li>\n<li><strong>Dexterity</strong> — Our hands are extraordinarily precise tools, capable of fine motor tasks that many machines still can't replicate.</li>\n<li><strong>Communication</strong> — We can share information, ask questions, and coordinate with teammates in real time.</li>\n<li><strong>Problem-Solving</strong> — When something goes wrong, humans can diagnose the issue and reason through a fix.</li>\n</ul>\n<p>These capabilities are gifts. A well-designed production system puts them to work in the right places.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Human Limitations: Where Design Must Step In</h2>\n<p>Being made in God's image doesn't mean we're perfect. Every person working in a production system also has real limitations that engineers must account for:</p>\n<ul>\n<li><strong>Fatigue</strong> — Physical and mental performance degrades over long shifts. A tired worker makes more mistakes.</li>\n<li><strong>Cognitive Load</strong> — When someone is asked to track too many things at once, their working memory gets overloaded and errors increase.</li>\n<li><strong>Attention and Distraction</strong> — Humans are not built for perfect, sustained focus. We get distracted, and monotonous tasks make this worse.</li>\n<li><strong>Physical Constraints</strong> — Body size, reach, strength, and sensory ability all vary from person to person.</li>\n<li><strong>Stress and Emotion</strong> — Workplace pressure, conflict, and anxiety affect decision-making and performance.</li>\n</ul>\n<p>Understanding these limitations isn't about criticizing workers — it's about designing systems that protect people from their own vulnerabilities. That's what a good engineer does.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Did you know?</strong> Research shows that up to 80% of workplace accidents involve human error — not mechanical failure. That's why Human Factors engineering exists: to reduce the chance that a person's natural limitations lead to a serious mistake.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Ergonomics: Fitting the System to the Person</h2>\n<p>One of the most practical applications of Human Factors is <strong>ergonomics</strong> — the science of designing tools, workstations, and environments so they fit the human body and mind as naturally as possible.</p>\n<p>Imagine a worker who has to reach over their head for eight hours a day to tighten bolts on an assembly line. That awkward posture strains muscles and leads to injury over time. An ergonomic redesign might lower the workstation so the task is performed at a comfortable height — reducing injury, increasing speed, and improving quality all at once.</p>\n<p>Good ergonomic design asks three questions:</p>\n<ul>\n<li>Does this fit the range of people who will use it?</li>\n<li>Does it reduce unnecessary physical strain?</li>\n<li>Does it minimize mental overload?</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Human-Machine Interfaces and Situational Awareness</h2>\n<p>Every time you interact with a machine — pressing a button, reading a dial, swiping a screen — you're using a <strong>Human-Machine Interface (HMI)</strong>. HMI design is a huge part of Human Factors work.</p>\n<p>A poorly designed HMI can cause a highly trained operator to make a critical error. Think about airplane cockpits: pilots must monitor dozens of instruments and make split-second decisions. If the controls are confusing or the displays are hard to read, lives are at risk. That's why cockpit designers invest enormous effort into clear labeling, logical layout, and color-coded warnings.</p>\n<p>Closely related to HMI is <strong>situational awareness</strong> — a person's ability to perceive what's happening around them, understand what it means, and anticipate what comes next. Production systems should be designed to help workers maintain high situational awareness, not overwhelm them with noise and confusion.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A control panel with clearly labeled buttons, gauges, and color-coded indicators — an example of thoughtful Human-Machine Interface (HMI) design."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Engineers sometimes design a system that works perfectly — on paper — but fails in practice because they didn't account for how real people actually use it. Always test your designs with the actual users in mind, not just the theoretical \"ideal\" operator.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Error Prevention: Designing Out Mistakes</h2>\n<p>One of the most powerful things a systems engineer can do is design a system so that errors become difficult — or even impossible — to make. This is called <strong>error prevention</strong>, and it's a core strategy in Human Factors engineering.</p>\n<p>There are several ways to prevent errors by design:</p>\n<ul>\n<li><strong>Forcing Functions</strong> — Physical or software constraints that prevent an incorrect action. A USB plug that only fits one way is a forcing function.</li>\n<li><strong>Checklists</strong> — Structured lists that help workers remember every required step, even under pressure. Surgeons and pilots rely on these constantly.</li>\n<li><strong>Redundancy</strong> — Building backup systems or double-check steps so that one human error doesn't cascade into a larger failure.</li>\n<li><strong>Clear Feedback</strong> — Designing systems that immediately tell the operator when something has gone wrong, so they can correct it quickly.</li>\n<li><strong>Simplification</strong> — Reducing the number of steps or decisions required, cutting cognitive load and leaving less room for mistakes.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Design tip:</strong> When reviewing your own production system design, ask yourself: \"What is the most likely mistake a worker could make here?\" Then redesign that step to make that mistake harder or impossible. This mindset shift — from punishing errors to preventing them — is what separates good engineers from great ones.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Automation and the Human Role</h2>\n<p><strong>Automation</strong> — using technology to perform tasks with minimal human involvement — is one of the most powerful tools in modern production. Robots weld car frames. Software monitors quality control. Conveyor systems move parts without any human touching them.</p>\n<p>But automation doesn't eliminate the human element. It changes it. When machines take over repetitive or dangerous tasks, human workers shift into roles that require higher-level thinking: monitoring, decision-making, maintenance, and troubleshooting. That shift demands new skills and new kinds of training.</p>\n<p>The key question for a Creationeer is: <em>where does automation help, and where does it hurt?</em> Automating the wrong tasks can actually reduce quality or create new risks. For example, an automated system that removes a worker from the loop may also remove the one person who would notice an unusual vibration before it becomes a catastrophic failure.</p>\n<p>Wisdom in automation means knowing when to rely on machines — and when to keep humans meaningfully in the process.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling and the OCV Method</h2>\n<p>One helpful framework for thinking about human factors in production is <strong>Multiscale Modeling</strong> — the idea that what happens at a small scale (an individual worker making a decision) directly influences what happens at a large scale (the entire system's output and safety).</p>\n<p>Think of it like a building. A single misaligned brick on the first floor can cause problems all the way up to the roof. In the same way, one worker who is fatigued, undertrained, or operating a poorly designed interface can affect the quality and safety of everything downstream in the production process.</p>\n<p>To apply this thinking practically, you can use the <strong>OCV Method</strong> — a framework for optimizing production systems with human factors in mind:</p>\n<ul>\n<li><strong>Observe</strong> — Watch how people actually work in the system. Where do slowdowns happen? Where do errors cluster?</li>\n<li><strong>Categorize</strong> — Sort the issues you observe: are they physical (ergonomics), mental (cognitive load), or environmental (lighting, noise, temperature)?</li>\n<li><strong>Verify</strong> — Test your proposed improvements with real users before fully implementing them. Does the change actually help?</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058c004",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Multiscale Modeling in brief:</strong> Individual actions → Team-level performance → System-wide outcomes. Every layer matters. A great production system is designed to support people at every scale — from the single operator at a workstation all the way up to the entire facility's throughput and safety record.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewarding Human Capability</h2>\n<p>Here's the bigger picture. Every person working in a production system is an image-bearer of God — someone with dignity, worth, and God-given ability. That truth should shape how we design every workstation, every interface, and every process.</p>\n<p>A system that ignores human limitations doesn't just produce bad results. It dishonors the people within it. It creates unnecessary injury, burnout, and frustration. On the other hand, a system designed with genuine care for the humans inside it is an act of stewardship — honoring God by honoring His people.</p>\n<p>As you grow in your engineering skills, carry this with you: <em>great design serves people</em>. The best Creationeers aren't just the ones who build the most efficient systems. They're the ones who build systems where people can do their best work, stay safe, and go home well.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 12:10</strong> — <em>\"A righteous man cares for the needs of his animal.\"</em> If God's Word praises someone who looks after an animal's wellbeing, how much more are we called to care for the people in our systems? Human Factors engineering is, at its core, an act of care.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Are Human Factors?",
+      "html": "<p>Human Factors is the study of how people interact with systems, tools, and environments. It focuses on improving <strong>safety</strong>, <strong>efficiency</strong>, and <strong>comfort</strong> by designing systems that match human capabilities and account for human limitations. It is a critical part of the Assembly phase in the Creationeering™ framework.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is Cognitive Load and why does it matter?",
+      "html": "<p><strong>Cognitive Load</strong> is the total amount of mental effort being used in working memory at one time. When a worker is asked to track too many tasks simultaneously, their cognitive load becomes too high — and errors increase. Good system design reduces unnecessary cognitive load through clear interfaces, checklists, and simplified processes.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is the OCV Method?",
+      "html": "<p>The <strong>OCV Method</strong> is a three-step framework for optimizing production systems with human factors in mind:</p><ul><li><strong>Observe</strong> — Watch how people actually work and identify where problems occur.</li><li><strong>Categorize</strong> — Sort problems by type: physical (ergonomics), mental (cognitive load), or environmental.</li><li><strong>Verify</strong> — Test your proposed solutions with real users before full implementation.</li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058a004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: How does automation affect the human role in production?",
+      "html": "<p>Automation uses technology to handle repetitive or dangerous tasks with minimal human intervention. When done well, it frees human workers to focus on higher-level tasks like monitoring, troubleshooting, and decision-making. However, removing humans from the loop entirely can create new risks — such as losing the experienced worker who would notice an early warning sign. Wisdom in automation means knowing when machines help and when human presence is irreplaceable.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c058c005",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>As you study:</strong> Try connecting each Human Factors concept to a real example from your own life. Where have you experienced a confusing interface? A task that overloaded your brain? A tool that didn't fit your hand well? Noticing these things in everyday life is exactly how engineers develop the instincts that lead to better designs.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

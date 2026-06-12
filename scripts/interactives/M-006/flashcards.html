@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build 1: Little Moe Prototype Car — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Build 1: Little Moe Prototype Car</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeering™ Lifecycle", "definition": "This is the process engineers follow, starting with thinking and planning (conceptual and analytical phases) and moving to building and testing prototypes."}, {"term": "Genesis 0:0", "definition": "This refers to the very first stage of the Creationeering™ lifecycle, where you do all your initial thinking and planning before any materials are used."}, {"term": "OCV", "definition": "OCV stands for Objectives, Constraints, and Variables. These are the key factors you define using math and science to guide your engineering experiments."}, {"term": "Prototype", "definition": "A prototype is an early model or version of a product built to test ideas and designs before creating the final version."}, {"term": "Subassembly", "definition": "A subassembly is a smaller, self-contained unit that is built separately and then combined with other subassemblies to create a larger system."}, {"term": "Chassis", "definition": "In the Little Moe Prototype, the chassis is the main body or frame of the car, which includes the modified mousetrap."}, {"term": "Front Axle", "definition": "The front axle is a subassembly that will act as the guiding system for the Little Moe Prototype car."}, {"term": "Rear Axle", "definition": "The rear axle is a subassembly that will act as the drive system, providing power to move the Little Moe Prototype car."}, {"term": "Validation Protocol", "definition": "This is a set of steps or procedures used to check and confirm that an integrated system is working correctly and efficiently."}, {"term": "Lever Arm Rod", "definition": "This is a brass rod that slides over the bronze arm of the mousetrap, forming part of the chassis assembly."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

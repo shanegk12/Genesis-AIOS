@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Just-In-Time vs. Just-In-Case — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Just-In-Time vs. Just-In-Case</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Just-In-Time (JIT)", "definition": "An inventory strategy where materials are delivered exactly when needed, helping to reduce storage costs and waste."}, {"term": "Just-In-Case (JIC)", "definition": "An inventory strategy where extra materials are kept on hand as a backup, in case of unexpected problems or high demand."}, {"term": "Logistics", "definition": "The detailed planning and movement of materials, parts, and finished products from where they are made to where they are used."}, {"term": "Inventory", "definition": "The list of all raw materials, items being built, and finished products that a company or project has on hand."}, {"term": "Supply Chain", "definition": "The entire network of people, companies, and activities involved in making and selling a product, from getting raw materials to delivering the final item."}, {"term": "Creationeering™", "definition": "The engineering phase focused on managing resources during a project's life, including strategies like Just-In-Time and Just-In-Case."}, {"term": "Biblical Stewardship", "definition": "The responsibility to wisely and efficiently manage the resources God has given us, including making smart logistical decisions."}, {"term": "Advantages of JIT", "definition": "Benefits of JIT include lower storage costs, less waste, and more efficient use of space."}, {"term": "Disadvantages of JIT", "definition": "Drawbacks of JIT include a higher risk of project delays if supplies are late or unexpected problems occur."}, {"term": "Advantages of JIC", "definition": "Benefits of JIC include protection against unexpected shortages, supply disruptions, and sudden increases in demand."}, {"term": "Disadvantages of JIC", "definition": "Drawbacks of JIC include higher storage costs, the risk of materials becoming outdated, and tying up money in stored goods."}, {"term": "OCV Method", "definition": "A method used to analyze a logistics challenge by considering the Objective, Constraints (limitations), and Variables (things that can change)."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-020",
+  "topic": "The Importance of Data in Engineering",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What does the term 'Objective Data' mean in the context of engineering?",
+      "options": {
+        "A": "Information based on personal feelings or opinions.",
+        "B": "Facts that are not influenced by personal feelings or opinions.",
+        "C": "Data that is difficult to verify.",
+        "D": "Guesses or hunches about a design."
+      },
+      "answer": "B",
+      "explanation": "Objective Data is defined as facts that are not influenced by personal feelings or opinions, which is crucial for reliable engineering decisions."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the definition of 'Stewardship' in engineering?",
+      "options": {
+        "A": "The process of designing new products.",
+        "B": "The responsible management of resources and the safety of others.",
+        "C": "The act of collecting data for analysis.",
+        "D": "The financial management of engineering projects."
+      },
+      "answer": "B",
+      "explanation": "Stewardship is explicitly defined in the lesson as the responsible management of resources and the safety of others."
+    },
+    {
+      "type": "recall",
+      "question": "In engineering, what is 'Validation' primarily focused on?",
+      "options": {
+        "A": "Designing a new computer model.",
+        "B": "Gathering opinions from users.",
+        "C": "Checking if a computer model matches real-world results.",
+        "D": "Writing a report about a design."
+      },
+      "answer": "C",
+      "explanation": "Validation is defined as the process of checking if a computer model matches real-world results."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is it important for engineers to use objective, verifiable data instead of 'hunches' or 'feelings' when making design decisions?",
+      "options": {
+        "A": "To make the design process faster.",
+        "B": "To ensure designs are aesthetically pleasing.",
+        "C": "To make decisions that keep people safe and ensure designs actually work.",
+        "D": "To avoid having to conduct experiments."
+      },
+      "answer": "C",
+      "explanation": "The lesson emphasizes that objective, verifiable data provides the evidence needed to make decisions that keep people safe and ensure designs actually work, unlike unreliable hunches."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why do engineers conduct experiments and tests multiple times to ensure their results are consistent?",
+      "options": {
+        "A": "To make the project more expensive.",
+        "B": "To use up more materials.",
+        "C": "To validate their design decisions and build confidence in the material's performance.",
+        "D": "To see if they can get different results each time."
+      },
+      "answer": "C",
+      "explanation": "Repeatability in testing helps engineers validate their design decisions, ensuring consistent results and confidence in the material's ability to withstand stress."
+    },
+    {
+      "type": "comprehension",
+      "question": "In Hierarchical Multiscale Modeling, why is it crucial for data gathered at the atomic level to be extremely accurate?",
+      "options": {
+        "A": "Because atoms are very small and hard to measure.",
+        "B": "To make the computer simulations look more realistic.",
+        "C": "Because inaccurate atomic-level data could lead to a dangerous design at the full system level.",
+        "D": "To impress other engineers with detailed information."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that if data at the atomic level is wrong, the bridge design at the system level will be dangerous, highlighting the importance of accuracy across all scales."
+    },
+    {
+      "type": "application",
+      "question": "A student says, 'This new type of plastic feels much stronger than the old one.' According to the lesson, is this statement an example of objective or subjective information?",
+      "options": {
+        "A": "Objective",
+        "B": "Subjective",
+        "C": "Verifiable",
+        "D": "Analytical"
+      },
+      "answer": "B",
+      "explanation": "The statement 'feels much stronger' is based on personal perception or opinion, which the lesson defines as subjective information."
+    },
+    {
+      "type": "application",
+      "question": "An engineer is designing a new type of car seat. Which of the following actions would be the best example of collecting measurable evidence for the seat's safety?",
+      "options": {
+        "A": "Asking a group of parents if they like the seat's appearance.",
+        "B": "Guessing how well the seat will perform in a crash.",
+        "C": "Conducting crash tests to measure the forces on a dummy in the seat.",
+        "D": "Watching a video of someone installing the seat."
+      },
+      "answer": "C",
+      "explanation": "Conducting crash tests to measure forces provides quantifiable data and facts, which is an example of collecting measurable evidence to evaluate a design's performance."
+    },
+    {
+      "type": "application",
+      "question": "A team is using Rapid Iteration to design a lightweight drone. They have two designs: Design X weighs 2 lbs and can carry 5 lbs, while Design Y weighs 1.8 lbs and can also carry 5 lbs. Based on the lesson's explanation of analysis, which design would the data likely show as more efficient?",
+      "options": {
+        "A": "Design X",
+        "B": "Design Y",
+        "C": "Both are equally efficient",
+        "D": "Neither is efficient"
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that if two designs achieve the same performance (carrying 5 lbs) but one weighs less (1.8 lbs), the lighter one is the more efficient choice."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that gathering and respecting data is a form of Stewardship. How does this connect to an engineer's responsibility?",
+      "options": {
+        "A": "It helps engineers to complete projects faster.",
+        "B": "It ensures engineers are responsible with materials and protect the lives entrusted to them.",
+        "C": "It allows engineers to keep their designs secret.",
+        "D": "It makes engineering projects more profitable."
+      },
+      "answer": "B",
+      "explanation": "The lesson directly links gathering and respecting data to stewardship as a way to be responsible with materials and protect the lives engineers are entrusted to protect."
+    },
+    {
+      "type": "synthesis",
+      "question": "An engineer uses objective and verifiable data to design a bridge that is strong and safe for all traffic. How does this action demonstrate good stewardship?",
+      "options": {
+        "A": "By making the bridge look visually appealing to the public.",
+        "B": "By ensuring the bridge uses the most expensive and luxurious materials.",
+        "C": "By responsibly managing resources and protecting the safety and well-being of people who use the bridge.",
+        "D": "By completing the bridge construction under the initial budget."
+      },
+      "answer": "C",
+      "explanation": "Using objective and verifiable data to ensure safety directly aligns with the definition of stewardship as the responsible management of resources and the safety of others."
+    },
+    {
+      "type": "synthesis",
+      "question": "In Creationeering, engineers need 'High-Fidelity Data' and 'Clean Data' for Hierarchical Multiscale Modeling. How does this requirement relate to an engineer's stewardship responsibilities?",
+      "options": {
+        "A": "It helps them to win engineering awards for precision.",
+        "B": "It ensures their models are complex enough to be impressive.",
+        "C": "It allows them to create reliable and safe designs, responsibly managing the trust placed in them for public safety.",
+        "D": "It makes the data collection process more challenging and time-consuming."
+      },
+      "answer": "C",
+      "explanation": "High-fidelity and clean data are essential for accurate modeling, which in turn enables the creation of reliable and safe designs, fulfilling the engineer's stewardship responsibility to protect lives and resources."
+    }
+  ]
+}

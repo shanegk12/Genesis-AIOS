@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course Introduction — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Course Introduction</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeering™", "definition": "A professional, academic, and spiritual framework for understanding and interacting with the world through engineering principles."}, {"term": "Engineering Thinking", "definition": "The pre-engineering concept of understanding the world as a series of interconnected systems with mathematical and scientific examples."}, {"term": "Multiscale Modeling", "definition": "Focusing on the behavior of the smallest parts (like atoms) to predict the performance of larger systems (like a skyscraper)."}, {"term": "Clean Data", "definition": "Accurate information gathered at the atomic level to ensure precise predictions for larger-scale performance."}, {"term": "Science as a Tool", "definition": "Using scientific principles, like the laws of physics, to understand system interactions and optimize creations."}, {"term": "Iteration", "definition": "A design process that involves repeatedly designing, testing, analyzing, and refining your creation to improve it."}, {"term": "Flaw (in Creationeering)", "definition": "Viewed as a 'finding' or an opportunity to learn and improve a design through testing and refinement."}, {"term": "Engineering Notebook", "definition": "A tool used to document all findings, data, and observations from tests and experiments in the course."}, {"term": "Entrepreneur", "definition": "A Creationeer who also seeks to be a steward of the businesses they create, guiding them from idea to product launch."}, {"term": "Mousetrap Car", "definition": "The main technical build in this course, used to apply and optimize fundamental mechanical engineering concepts."}, {"term": "Mechanical Engineering", "definition": "The field of engineering that focuses on fundamental concepts like friction, energy, power, and mechanics, which are central to this course."}, {"term": "Optimizing", "definition": "The process of making something as effective, perfect, or functional as possible, often through testing and refinement."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

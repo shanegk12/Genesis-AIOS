@@ -1,0 +1,127 @@
+{
+  "lesson_id": "C-023",
+  "topic": "Modeling Reality: Physical vs. Computational",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary definition of a 'model' in engineering?",
+      "options": {
+        "A": "A full-size product ready for market",
+        "B": "A working representation of reality",
+        "C": "A theoretical idea that cannot be tested",
+        "D": "A marketing advertisement for a new product"
+      },
+      "answer": "B",
+      "explanation": "The lesson defines a model as simply a working representation of reality used to predict performance."
+    },
+    {
+      "type": "recall",
+      "question": "In engineering, what does 'Ground Truth' refer to?",
+      "options": {
+        "A": "The initial design hypothesis before any testing",
+        "B": "Objective data collected from a real-world physical system",
+        "C": "The results of a computational simulation without physical verification",
+        "D": "A historical record of past engineering failures"
+      },
+      "answer": "B",
+      "explanation": "Ground Truth is defined as objective data collected from a real-world physical system, providing definitive real-world information."
+    },
+    {
+      "type": "recall",
+      "question": "What is the main purpose of 'Destructive Testing' with a physical model?",
+      "options": {
+        "A": "To preserve the model for future display",
+        "B": "To intentionally push the model until it breaks or fails to find its limits",
+        "C": "To make the model aesthetically pleasing for user feedback",
+        "D": "To compare it with other models without causing any damage"
+      },
+      "answer": "B",
+      "explanation": "Destructive Testing involves intentionally pushing a model until it breaks to see its performance under extreme conditions and generate Ground Truth data."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why do engineers use both physical and computational models together to ensure integrity in their designs?",
+      "options": {
+        "A": "Computational models are always more accurate than physical ones, so physical models are secondary",
+        "B": "Physical models provide Ground Truth data to validate the results of computational models",
+        "C": "Physical models are only for aesthetic checks, while computational models handle all performance testing",
+        "D": "It is faster and cheaper to build two different types of models than to rely on just one"
+      },
+      "answer": "B",
+      "explanation": "Engineers use both models because physical models provide the Ground Truth data necessary to validate the predictions made by computational models, ensuring integrity."
+    },
+    {
+      "type": "comprehension",
+      "question": "How do models help engineers solve the 'Tradeoff' tension in design, such as balancing strength with cost?",
+      "options": {
+        "A": "Models eliminate the need for any compromises in design",
+        "B": "Models provide objective data to find the optimal balance between conflicting objectives and constraints",
+        "C": "Models force engineers to always choose the cheapest option regardless of other factors",
+        "D": "Models only show how to make things stronger, not how to reduce weight or cost"
+      },
+      "answer": "B",
+      "explanation": "Models are the objective tool that provides data needed for discernment, helping engineers find the optimal solution to design tradeoffs like strength versus cost."
+    },
+    {
+      "type": "comprehension",
+      "question": "If an engineer uses a 1:100 scaled model of a bridge, how does it help predict the performance of the full-size bridge?",
+      "options": {
+        "A": "The scaled model will perform exactly the same as the full-size bridge without any adjustments",
+        "B": "The scaled model's performance is mathematically scaled up to predict the full-size system's behavior",
+        "C": "The scaled model is only used for visual inspection and cannot provide performance data",
+        "D": "A 1:100 scaled model is too small to provide any useful data for a large structure"
+      },
+      "answer": "B",
+      "explanation": "With a scaled model, the performance observed is mathematically scaled up to accurately predict how the full-size system will behave."
+    },
+    {
+      "type": "application",
+      "question": "A design team is creating a new ergonomic computer mouse. Which type of prototype would be best to quickly test how the mouse feels in a user's hand (User Experience) early in the design process?",
+      "options": {
+        "A": "A high-fidelity prototype made with final materials and electronics",
+        "B": "A computational model simulating hand grip and comfort",
+        "C": "A low-fidelity prototype made from simple materials like clay or cardboard",
+        "D": "A full-size production model ready for mass manufacturing"
+      },
+      "answer": "C",
+      "explanation": "Low-fidelity prototypes, often made from simple materials, are used early in the design stage to check basic form, function, and aesthetics, including user experience."
+    },
+    {
+      "type": "application",
+      "question": "A bridge is designed to safely hold a maximum load of 50 tons. Through destructive testing, a physical model of the bridge fails at 200 tons. What is the Factor of Safety (FS) for this bridge design?",
+      "options": {
+        "A": "0.25",
+        "B": "1",
+        "C": "4",
+        "D": "150"
+      },
+      "answer": "C",
+      "explanation": "The Factor of Safety (FS) is calculated by dividing the failure point (200 tons) by the maximum safe load (50 tons), which equals 4."
+    },
+    {
+      "type": "application",
+      "question": "An engineer is testing a new airplane wing design. To measure the internal forces of tension and compression within the wing material as it flexes during flight simulations, what instrument would be most appropriate?",
+      "options": {
+        "A": "A ruler to measure length",
+        "B": "A stopwatch to measure time",
+        "C": "A strain gauge to measure stretching and squeezing",
+        "D": "A thermometer to measure temperature"
+      },
+      "answer": "C",
+      "explanation": "Strain gauges are specifically mentioned as instruments used to measure internal forces like tension and compression inside a material."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that 'validation' is checking if computational model results match physical model results (Ground Truth). How does this process connect to the biblical principle of truth and integrity?",
+      "options": {
+        "A": "It shows that only physical evidence is truly reliable, making computational models untrustworthy",
+        "B": "It emphasizes the importance of verifying predictions with objective reality, similar to seeking verifiable truth",
+        "C": "It suggests that engineers should always trust their initial hypotheses without needing external verification",
+        "D": "It proves that human intuition is always superior to scientific data in design"
+      },
+      "answer": "B",
+      "explanation": "Validation connects to biblical truth and integrity by demonstrating the importance of verifying theoretical predictions (computational models) against objective, real-world evidence (Ground Truth)."
+    }
+  ]
+}

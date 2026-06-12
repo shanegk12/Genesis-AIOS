@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-055",
+  "topic": "Optimization Tests",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary definition of optimization in the context of engineering?",
+      "options": {
+        "A": "The process of collecting data about a design.",
+        "B": "The process of making something as effective or functional as possible.",
+        "C": "The phase of designing something completely new.",
+        "D": "The act of stopping a project once it is functional."
+      },
+      "answer": "B",
+      "explanation": "Optimization is defined as the process of making something as effective or functional as possible, finding the best possible solution."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what does a 'trade-off' mean in the context of design?",
+      "options": {
+        "A": "A situation where you can achieve all your goals simultaneously.",
+        "B": "A situation where you must give up one thing to gain another.",
+        "C": "The final decision made after all testing is complete.",
+        "D": "A limitation that prevents any further design changes."
+      },
+      "answer": "B",
+      "explanation": "A trade-off is a situation where you must give up one thing in order to gain another, often due to competing objectives."
+    },
+    {
+      "type": "recall",
+      "question": "What is the 'foundation' for optimization tests, as mentioned in the lesson?",
+      "options": {
+        "A": "New and expensive materials.",
+        "B": "The competition rules and regulations.",
+        "C": "The performance data collected in the previous lesson.",
+        "D": "The opinions of other students."
+      },
+      "answer": "C",
+      "explanation": "The performance data collected in the previous lesson is the foundation for making smart decisions about what to change during optimization."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is optimization described as an 'iterative process'?",
+      "options": {
+        "A": "Because it is only performed once at the very end of a project.",
+        "B": "Because it involves repeating a sequence of steps with slight modifications to get closer to a desired outcome.",
+        "C": "Because it requires completely new materials for each test.",
+        "D": "Because it means ignoring previous test results and starting over."
+      },
+      "answer": "B",
+      "explanation": "Optimization is iterative because it involves repeating steps, making small changes, and retesting to continually improve the design."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does Multiscale Modeling help in optimizing a mousetrap car?",
+      "options": {
+        "A": "By focusing only on the car's overall speed.",
+        "B": "By ignoring small details and only looking at the big picture.",
+        "C": "By connecting large, visible observations to underlying causes at a smaller, often invisible, scale.",
+        "D": "By requiring the use of expensive computer simulations."
+      },
+      "answer": "C",
+      "explanation": "Multiscale Modeling helps by connecting macro-level observations (like distance traveled) to micro-level causes (like axle smoothness) to understand and improve performance."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the Creationeering framework, why does the 'Sustainability' phase focus on designing systems to last and adapt?",
+      "options": {
+        "A": "To make the designs more complicated and challenging.",
+        "B": "To ensure they fail quickly so new designs can be made.",
+        "C": "To consider resource use and long-term viability, ensuring continuous functioning over time.",
+        "D": "To only use materials that are easily found in nature."
+      },
+      "answer": "C",
+      "explanation": "The Sustainability phase focuses on designing systems to last, adapt, and continue functioning over time, considering resource use and long-term viability."
+    },
+    {
+      "type": "application",
+      "question": "A student wants their mousetrap car to travel exactly 5 meters and stop. In the OCV (Objective, Constraint, Variable) method, what would 'travel exactly 5 meters and stop' represent?",
+      "options": {
+        "A": "A constraint",
+        "B": "A variable",
+        "C": "An objective",
+        "D": "An iteration"
+      },
+      "answer": "C",
+      "explanation": "The specific goal or target the student is trying to achieve with their design is called the objective."
+    },
+    {
+      "type": "application",
+      "question": "If a mousetrap car competition rule states that the car cannot be wider than 6 inches, what does this rule represent in the OCV method?",
+      "options": {
+        "A": "An objective",
+        "B": "A constraint",
+        "C": "A variable",
+        "D": "An optimization"
+      },
+      "answer": "B",
+      "explanation": "A limitation or restriction that must be considered or adhered to in your design, such as competition rules, is a constraint."
+    },
+    {
+      "type": "application",
+      "question": "A student decides to try different wheel sizes on their mousetrap car to see which size makes it go fastest. What does the 'wheel size' represent in this optimization test?",
+      "options": {
+        "A": "An objective",
+        "B": "A constraint",
+        "C": "A variable",
+        "D": "A trade-off"
+      },
+      "answer": "C",
+      "explanation": "An element or characteristic of your design that can be changed or adjusted during testing to observe its effect on performance is a variable."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does the practice of optimization in building a mousetrap car connect to the biblical principle of good stewardship?",
+      "options": {
+        "A": "By encouraging students to use as many materials as possible.",
+        "B": "By ignoring the car's performance and focusing only on its appearance.",
+        "C": "By using the intelligence and creativity God has given us to build well-made things that serve their purpose effectively.",
+        "D": "By ensuring the car is only used for personal entertainment."
+      },
+      "answer": "C",
+      "explanation": "Optimization reflects good stewardship by using God-given intelligence and creativity to refine designs, making them robust and enduring, much like God's 'very good' creation."
+    },
+    {
+      "type": "synthesis",
+      "question": "A student optimizes their mousetrap car for maximum speed, but then notices it becomes very difficult to steer in a straight line. This situation best illustrates which concept from the lesson?",
+      "options": {
+        "A": "Multiscale modeling",
+        "B": "An objective",
+        "C": "An iteration",
+        "D": "A trade-off"
+      },
+      "answer": "D",
+      "explanation": "This scenario demonstrates a trade-off because the student gained speed but had to give up consistency in steering, highlighting competing objectives."
+    },
+    {
+      "type": "synthesis",
+      "question": "Why is it important to collect 'Performance Data' before starting an 'iterative' optimization process for your mousetrap car?",
+      "options": {
+        "A": "To make the car slower on purpose.",
+        "B": "To avoid making any changes to the car's design.",
+        "C": "To establish a baseline for comparison, identify areas for improvement, and measure the impact of subsequent changes.",
+        "D": "To ensure the car never works correctly."
+      },
+      "answer": "C",
+      "explanation": "Performance data provides a baseline to understand the car's current state, allowing for informed iterative changes and measurement of their effectiveness."
+    }
+  ]
+}

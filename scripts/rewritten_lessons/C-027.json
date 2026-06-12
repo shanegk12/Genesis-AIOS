@@ -1,0 +1,499 @@
+[
+  {
+    "id": "c027t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Stress and Strain</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In this lesson, you will dig into two of the most foundational concepts in material science and structural engineering: stress and strain. You will learn how materials resist external forces from the inside (stress) and how they deform in response (strain). By mastering the Stress-Strain Curve and applying the Objective-Constraint-Variable (OCV) method, you will be equipped to make smart design decisions — choosing the right material for the right job, and proving mathematically that your structure will hold. This is what separates a hopeful builder from a confident designer.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p><ul><li>Define stress (σ) and strain (ε) and calculate their values mathematically.</li><li>Differentiate between the three main types of stress: tensile, compressive, and shear.</li><li>Analyze a material's performance using the Stress-Strain Curve, identifying the elastic region, yield point, and ultimate tensile strength (UTS).</li><li>Apply the Objective-Constraint-Variable (OCV) method to optimize material selection for safety and efficiency.</li><li>Explain the role of Hierarchical Multiscale Modeling (HM²) in predicting structural integrity from the atomic level up.</li><li>Connect material failure analysis to the biblical mandate of stewardship and wisdom.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Stress (σ)",
+          "definition": "The measure of internal resistance a material develops when an external force is applied — calculated as Force divided by Area."
+        },
+        {
+          "term": "Strain (ε)",
+          "definition": "The measure of a material's deformation relative to its original size — calculated as change in length divided by original length."
+        },
+        {
+          "term": "Tensile Stress",
+          "definition": "Stress caused by a pulling or stretching force acting on a material."
+        },
+        {
+          "term": "Compressive Stress",
+          "definition": "Stress caused by a squeezing or pushing force that tries to shorten a material."
+        },
+        {
+          "term": "Shear Stress",
+          "definition": "Stress caused by forces acting parallel to a surface, causing one layer of material to slide past another."
+        },
+        {
+          "term": "Young's Modulus (E)",
+          "definition": "A measure of a material's stiffness — represented by the slope of the elastic region on the stress-strain curve."
+        },
+        {
+          "term": "Yield Point",
+          "definition": "The point at which a material stops stretching elastically and begins to permanently deform."
+        },
+        {
+          "term": "Ultimate Tensile Strength (UTS)",
+          "definition": "The maximum stress a material can withstand before it begins to fracture or break apart."
+        },
+        {
+          "term": "Pareto Frontier",
+          "definition": "The optimal set of trade-offs in a design where you cannot improve one objective (like strength) without sacrificing another (like weight)."
+        },
+        {
+          "term": "Hierarchical Multiscale Modeling (HM²)",
+          "definition": "A Creationeering technique that links atomic-level material data all the way up to system-level structural performance predictions."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Weight of Stewardship</h2>\n<p>Think about a bridge connecting a rural community to a hospital. A football helmet protecting a player's brain. A satellite component that must survive the extreme temperature swings of outer space. Every single one of these designs comes down to a single, critical question: <em>Will it hold?</em></p>\n<p>Guessing is not good enough. Hoping is not good enough. As a designer, your job is to <em>prove</em> it will hold — using math, data, and a deep understanding of how materials behave under pressure. That shift, from guessing to proving, is exactly what stress and strain analysis gives you.</p>\n<p>Proverbs 24:3 tells us, <em>\"By wisdom a house is built, and through understanding it is established.\"</em> Wisdom in engineering is not just creativity — it is the discipline to study your materials, understand their limits, and make decisions that protect the people who depend on your work. That is stewardship in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:3</strong> — \"By wisdom a house is built, and through understanding it is established.\" The precision you apply when calculating stress and strain is an act of wisdom. It is how you ensure that what you build truly serves and protects others.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Internal Struggle — What Is Stress?</h2>\n<p>When you press down on a table, the table pushes back. You can feel that resistance. But what is actually happening <em>inside</em> the material? That internal resistance is what engineers call <strong>stress</strong>.</p>\n<p>Stress (written with the Greek letter σ, pronounced \"sigma\") measures how much internal force a material develops per unit of area when an outside force is applied. The formula looks like this:</p>\n<p><strong>σ = F / A</strong></p>\n<p>Where <strong>F</strong> is the applied force (in Newtons) and <strong>A</strong> is the cross-sectional area the force is spread across (in square meters). The result is measured in <strong>Pascals (Pa)</strong> — one Pascal equals one Newton per square meter.</p>\n<p>Here is the key insight: the same force can cause very different amounts of stress depending on the area it acts on. A stiletto heel and a snow boot might belong to people of the same weight, but the heel concentrates all that force into a tiny area — creating enormous stress on the floor beneath it. That is why stilettos sink into soft ground and snow boots do not. Area matters enormously in engineering design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram comparing a stiletto heel vs. a snow boot — same force, dramatically different stress due to contact area difference."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Three Types of Stress</h2>\n<p>Not all forces push on materials the same way. There are three main types of stress you need to know:</p>\n<h3>Tensile Stress</h3>\n<p>This happens when forces pull a material apart — stretching it. Think of a rubber band being pulled from both ends, or a cable on a suspension bridge holding up the roadway. The material is being stretched along its length.</p>\n<h3>Compressive Stress</h3>\n<p>This is the opposite — forces squeezing or pushing a material together. A column holding up a roof is under compression. So is the bottom of a dam wall, where the weight of all that water above is pressing down.</p>\n<h3>Shear Stress</h3>\n<p>This one is different. Shear forces don't pull or push straight through a material — they act <em>parallel</em> to a surface, causing layers to slide against each other. Scissors cutting paper, or a bolt holding two metal plates together as they try to slide apart, are classic examples of shear stress at work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagrams illustrating tensile, compressive, and shear stress with force arrows on simple rectangular material samples."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Memory trick:</strong> Think of the three stress types as Pull, Push, and Slide. Tensile = Pull. Compressive = Push. Shear = Slide. If you can picture the direction the force is moving relative to the material, you can always identify which type of stress is happening.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>How Materials Respond — What Is Strain?</h2>\n<p>Stress tells you how hard a material is being pushed internally. Strain tells you how the material <em>responds</em> — how much it actually deforms.</p>\n<p><strong>Strain (ε)</strong> — the Greek letter \"epsilon\" — is defined as the change in length divided by the original length:</p>\n<p><strong>ε = ΔL / L₀</strong></p>\n<p>Where <strong>ΔL</strong> is how much the material stretched or compressed, and <strong>L₀</strong> is its original length. Notice that strain has no units — it is a dimensionless ratio. That is actually useful, because it lets you compare deformation across materials and sizes easily.</p>\n<p>For example, if a steel rod that is 1 meter long stretches by 1 millimeter (0.001 m) under a load, its strain is:</p>\n<p><strong>ε = 0.001 / 1.0 = 0.001</strong></p>\n<p>That is a 0.1% stretch. Small? Yes. But in a critical structural component, even small deformations matter — and knowing the exact value is what separates a safe design from a dangerous one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Stress vs. Strain at a glance:</strong> Stress measures the <em>internal force</em> acting within a material (σ = F/A, units: Pascals). Strain measures the <em>physical deformation</em> that results (ε = ΔL/L₀, no units). One causes the other — but they are not the same thing.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Young's Modulus — The Stiffness Number</h2>\n<p>Here is where stress and strain connect mathematically. For most materials, in the early stages of loading, stress and strain are proportional to each other. That relationship is described by <strong>Young's Modulus (E)</strong>:</p>\n<p><strong>E = σ / ε</strong></p>\n<p>Young's Modulus is sometimes called the \"modulus of elasticity,\" and it tells you how stiff a material is. A high Young's Modulus means the material resists deformation strongly — it takes a lot of stress to produce even a small strain. Steel has a Young's Modulus of about 200 GPa. Rubber's is closer to 0.01 GPa. That difference in stiffness is why you build bridges out of steel and not rubber bands.</p>\n<p>Think of Young's Modulus like the spring constant you may have studied in physics. A stiff spring needs a large force to stretch just a little. A loose spring stretches easily. Young's Modulus is that same idea, applied to solid materials.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Reading the Stress-Strain Curve</h2>\n<p>The most powerful tool in material analysis is the <strong>Stress-Strain Curve</strong>. It is a graph where stress (σ) is plotted on the vertical axis and strain (ε) on the horizontal axis. When engineers test a material — pulling it apart in a lab — they record this data and it tells the whole story of how that material behaves under load.</p>\n<p>Let's walk through the key regions of this curve:</p>\n<h3>The Elastic Region</h3>\n<p>In the early part of the curve, the line is straight. This is the elastic region. Here, the material behaves like a spring: it deforms under load, but when the force is removed, it bounces back to its original shape. The slope of this straight line <em>is</em> Young's Modulus. No permanent damage is done in this region.</p>\n<h3>The Yield Point</h3>\n<p>At a certain stress level, the curve bends — the material stops bouncing back. This is the <strong>yield point</strong>. Past this point, the material enters <em>plastic deformation</em>: it has been permanently changed. A bent paperclip has passed its yield point. You can still use it, but it will never return to its original shape.</p>\n<h3>Ultimate Tensile Strength (UTS)</h3>\n<p>The highest point on the curve is the <strong>Ultimate Tensile Strength</strong> — the maximum stress the material can handle before it starts to break down. Beyond the UTS, the material necks (thins in one spot) and rapidly approaches fracture.</p>\n<h3>Fracture Point</h3>\n<p>This is where the material breaks completely. A good engineer designs so that stress levels in their structure stay well below the yield point — not just below the UTS. You want a safety margin, not a near-miss.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027img003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Labeled Stress-Strain Curve showing the elastic region, yield point, ultimate tensile strength (UTS), and fracture point."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Many students confuse the yield point with the ultimate tensile strength. Remember — the yield point is where permanent damage <em>begins</em>. The UTS is where the material starts to break. A structure that has reached its yield point may still look intact, but it has already been permanently compromised. Design to stay in the elastic region.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing Your Design — The OCV Method and the Pareto Frontier</h2>\n<p>Knowing stress and strain values is only half the job. The other half is making smart decisions with that data. That is where the <strong>Objective-Constraint-Variable (OCV) method</strong> comes in.</p>\n<ul>\n<li><strong>Objective:</strong> What are you trying to achieve? (e.g., maximize strength, minimize weight)</li>\n<li><strong>Constraint:</strong> What are the hard limits you cannot exceed? (e.g., stress must stay below yield point; cost must stay under budget)</li>\n<li><strong>Variable:</strong> What can you change to meet your objective within the constraints? (e.g., material choice, cross-sectional area, thickness)</li>\n</ul>\n<p>In most real designs, you are juggling multiple objectives that pull against each other. A stronger material is often heavier. A lighter material is often more expensive. You cannot always win on every front at once. The set of designs where you have found the best possible trade-offs — where you cannot improve one objective without hurting another — is called the <strong>Pareto Frontier</strong>.</p>\n<p>Think of it like packing for a hiking trip. You want the most useful gear (objective 1) in the lightest pack (objective 2). Every item you add increases usefulness but also increases weight. The Pareto Frontier is the list of packing options where you have hit the best possible balance. Any design on that frontier is optimal — and choosing between them depends on your specific priorities.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in action:</strong> Before selecting a material for any design, write out your OCV table first. What is your objective? What constraints does the real world place on you (safety limits, budget, size)? What variables can you actually change? This one habit will make your engineering analysis dramatically more organized and professional.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Hierarchical Multiscale Modeling (HM²)</h2>\n<p>Materials do not just behave at the scale you can see. What happens at the atomic and molecular level determines how a material performs at the structural level. <strong>Hierarchical Multiscale Modeling (HM²)</strong> is a Creationeering technique that connects these scales — from atoms, to crystal grains, to the full structure — so you can predict how a material will perform before you ever build a physical prototype.</p>\n<p>This matters because material failure almost always starts at the micro level: a tiny crack propagates through a grain boundary, or atomic bonds are repeatedly stressed until they break (this is called <em>fatigue</em>). HM² lets engineers model and predict these failure modes computationally, saving time, money, and — most importantly — lives.</p>\n<p>God designed matter from the smallest atom outward with stunning precision. HM² is simply our attempt to understand and work with that design — honoring the order He built into creation by studying it carefully across every scale.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Stewardship through analysis:</strong> Romans 1:20 reminds us that God's invisible qualities — His power and divine nature — are clearly seen through what He has made. When you study materials at every scale, you are observing the fingerprints of the Master Engineer. Responsible stewardship means understanding creation deeply enough to work with it wisely, not just exploit it carelessly.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Here is how all of these concepts connect in a real design workflow:</p>\n<ul>\n<li>You identify the forces acting on your structure and calculate the <strong>stress</strong> those forces create inside your material (σ = F/A).</li>\n<li>You use the material's <strong>Stress-Strain Curve</strong> to check whether that stress level falls safely within the elastic region — below the yield point.</li>\n<li>If the stress is too high, you use the <strong>OCV method</strong> to adjust your variables: change the material, increase the cross-sectional area, or redistribute the load.</li>\n<li>You use <strong>Young's Modulus</strong> to predict how much the structure will deform (ε = σ/E) — because even safe structures must not deform so much that they become unusable.</li>\n<li>For advanced analysis, you apply <strong>HM²</strong> to check that your design holds up not just at the visible scale, but at the grain and atomic level too.</li>\n<li>Finally, you navigate to the <strong>Pareto Frontier</strong> — finding the design that is simultaneously as strong, light, and affordable as your constraints allow.</li>\n</ul>\n<p>This is high-fidelity engineering. This is what it looks like to prove your design will work, rather than just hoping it will.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027c005",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Key formulas to remember:</strong><br><strong>Stress:</strong> σ = F / A (Pascals)<br><strong>Strain:</strong> ε = ΔL / L₀ (no units)<br><strong>Young's Modulus:</strong> E = σ / ε (Pascals)<br>These three equations form the backbone of all stress-strain analysis. Know them cold.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027d009",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use these questions to review the key concepts from this lesson before moving on.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between stress and strain?",
+      "html": "<p>Stress (σ) is the internal force a material develops per unit of area in response to an external load — measured in Pascals (σ = F/A). Strain (ε) is the actual physical deformation that results, measured as a dimensionless ratio of how much the material changed in length compared to its original length (ε = ΔL/L₀). Stress is the cause; strain is the effect.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027a002",
+    "type": "accordion",
+    "data": {
+      "title": "What are the three types of stress, and how do they differ?",
+      "html": "<p><strong>Tensile stress</strong> is caused by forces that pull or stretch a material along its length. <strong>Compressive stress</strong> is caused by forces that squeeze or push a material together. <strong>Shear stress</strong> is caused by forces acting parallel to a surface, making layers of the material slide against each other. The direction of the applied force relative to the material is what determines which type of stress is present.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027a003",
+    "type": "accordion",
+    "data": {
+      "title": "What does the yield point on a Stress-Strain Curve tell you?",
+      "html": "<p>The yield point marks the boundary between elastic behavior and plastic deformation. Below the yield point, a material will return to its original shape when the load is removed. Above it, the material has been permanently deformed — it will not bounce back. Engineers design structures to keep stress levels safely below the yield point, not just below the ultimate tensile strength (UTS), because permanent deformation often signals that structural integrity has already been compromised.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027a004",
+    "type": "accordion",
+    "data": {
+      "title": "What is the Pareto Frontier and why does it matter to a designer?",
+      "html": "<p>The Pareto Frontier is the set of optimal design solutions where you cannot improve one objective (for example, increasing strength) without making another objective worse (for example, increasing weight or cost). It represents the best achievable trade-offs given your constraints. It matters because real engineering always involves competing demands — understanding the Pareto Frontier helps you make intentional, defensible design choices rather than arbitrary ones.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c027a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does Hierarchical Multiscale Modeling (HM²) help engineers prevent failure?",
+      "html": "<p>HM² links what happens at the atomic and molecular scale of a material all the way up to the full structural scale. Material failures — like cracks and fatigue fractures — almost always begin at the microscopic level. By modeling material behavior across all these scales computationally, engineers can predict where and how a material will fail before building a physical prototype, saving time, money, and potentially lives. It is a way of honoring the intricate design God built into matter by studying it at every level.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

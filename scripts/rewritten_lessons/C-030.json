@@ -1,0 +1,425 @@
+[
+  {
+    "id": "c030t001x",
+    "type": "text",
+    "data": {
+      "html": "<h1>What is Procurement?</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t002x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you explored the critical skills of Troubleshooting and Debugging Systems — learning how to identify problems, trace their causes, and implement fixes to keep your projects running smoothly. That detective work is vital because even the best designs run into unexpected challenges. Now that you know how to fix things, it's time to learn how to get the right things in the first place.</p>\n<p>Today you're diving into the world of <strong>Procurement</strong>, a key phase in the Creationeering™ framework. Procurement is all about wisely acquiring the materials, components, and services you need to bring your designs to life. Think of it like a master builder who carefully selects every stone and beam before construction begins — a Creationeer must thoughtfully choose and obtain every part of their system. This lesson will equip you to make smart, responsible choices so your projects are built on a solid foundation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t003x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define procurement and explain its essential role within the Creationeering™ process.</li>\n<li>Identify the key steps involved in a typical procurement cycle, from identifying needs to receiving goods.</li>\n<li>Explain how factors like quality, cost, and timeliness influence procurement decisions.</li>\n<li>Apply the OCV (Objective, Constraint, Variable) method to make informed choices during procurement.</li>\n<li>Connect effective procurement practices to the biblical principle of wise stewardship of God-given resources.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030v001x",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Procurement",
+          "definition": "The entire process of acquiring goods, services, or works from an external source, often involving careful selection, negotiation, and contract management."
+        },
+        {
+          "term": "Supplier",
+          "definition": "An individual or company that provides goods or services. Also known as a vendor."
+        },
+        {
+          "term": "Quotation",
+          "definition": "A formal statement from a supplier detailing the cost of specific goods or services, usually valid for a limited time."
+        },
+        {
+          "term": "Purchase Order",
+          "definition": "A legal document issued by a buyer to a seller, indicating types, quantities, and agreed prices for products or services. It officially authorizes the purchase."
+        },
+        {
+          "term": "Inventory",
+          "definition": "A complete list of materials, components, or goods held in stock and available for future use in a project."
+        },
+        {
+          "term": "Quality Control",
+          "definition": "A process by which a business ensures that product quality is maintained or improved and that manufacturing processes are consistent."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed planning, coordination, and execution of complex operations — especially the movement, storage, and flow of resources and information."
+        },
+        {
+          "term": "Supply Chain",
+          "definition": "The entire network of individuals, organizations, resources, activities, and technology involved in creating and delivering a product from raw materials to the end user."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible management and protection of resources and talents entrusted to us — especially those given by God."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d001x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t004x",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Exactly Is Procurement?</h2>\n<p>Procurement might sound like a big corporate word, but the idea is simple: it means getting what you need, the right way. Every engineering project — from a small robotics build to a massive bridge — requires materials, tools, and sometimes outside services. Procurement is the structured process of figuring out what you need, finding who can provide it, comparing your options, and making a smart purchase.</p>\n<p>Here's the key insight: procurement isn't just shopping. It's <em>strategic</em> shopping. A random trip to the hardware store without a plan wastes time and money. A well-planned procurement process saves both — and ensures your project succeeds from the very start.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b001x",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:27</strong> — <em>\"Put your outdoor work in order and get your fields ready; after that, build your house.\"</em></p>\n<p>Even in ancient times, wise people knew: prepare before you build. Procurement is that preparation. Gathering your resources thoughtfully before construction begins is a timeless principle — one that honors the wisdom God wired into His creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d002x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t005x",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Procurement Cycle</h2>\n<p>Procurement doesn't happen in one step — it follows a cycle. Each stage builds on the one before it, just like the steps in an engineering design process. Understanding the full cycle helps you stay organized and avoid costly mistakes.</p>\n<h3>Step 1: Identify Your Needs</h3>\n<p>Before you can buy anything, you need to know exactly what you're looking for. What materials does your design require? What quantities? What specifications? Skipping this step is like going to the grocery store hungry with no list — you'll come back with the wrong things and spend too much.</p>\n<h3>Step 2: Find Suppliers</h3>\n<p>A <strong>supplier</strong> (also called a vendor) is anyone who can provide what you need. This could be a local hardware store, an online parts catalog, or a specialized manufacturer. Part of your job is researching who offers the best combination of quality, price, and reliability.</p>\n<h3>Step 3: Request and Compare Quotations</h3>\n<p>A <strong>quotation</strong> is a supplier's formal offer: here's what we'll sell you, at this price, with these terms. Getting quotations from multiple suppliers lets you compare options before committing. Never settle for the first price you see — a little research can save your project's budget.</p>\n<h3>Step 4: Issue a Purchase Order</h3>\n<p>Once you've chosen a supplier, you document the agreement with a <strong>purchase order</strong>. This legal document spells out what you're buying, how many, at what price, and when it should arrive. It protects both you and the supplier — think of it as a handshake made official on paper.</p>\n<h3>Step 5: Receive and Inspect Goods</h3>\n<p>When your materials arrive, you don't just unbox them and get to work. You inspect them. Does everything match the purchase order? Is the quality acceptable? This is where <strong>quality control</strong> kicks in — catching problems early before they become bigger problems mid-build.</p>\n<h3>Step 6: Manage Inventory</h3>\n<p>Finally, you track what you have. Good <strong>inventory</strong> management means you always know what's in stock, what's running low, and what needs to be reordered. Running out of a critical component in the middle of a project is a preventable problem — and good inventory habits prevent it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram of the six-step procurement cycle: Identify Needs → Find Suppliers → Request Quotations → Issue Purchase Order → Receive and Inspect → Manage Inventory"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b002x",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Pro Tip:</strong> Always get at least three quotations before making a major purchase. Comparing options not only saves money — it helps you understand the market and make a more informed decision. In engineering, informed decisions lead to better outcomes.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d003x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t006x",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Three Big Factors: Quality, Cost, and Timeliness</h2>\n<p>Every procurement decision involves a balancing act between three competing factors. Understanding them helps you make choices you won't regret later.</p>\n<h3>Quality</h3>\n<p>Quality means getting materials or components that actually perform the way you need them to. A cheap resistor that fails under load isn't a bargain — it's a liability. That said, the highest quality option isn't always necessary. Match the quality level to the demands of your specific project.</p>\n<h3>Cost</h3>\n<p>Every project has a budget, and staying within it is part of responsible engineering. Cost isn't just the purchase price — it includes shipping, handling, and the time spent managing the process. A slightly more expensive supplier who delivers reliably might actually cost less overall than a cheap one who ships late and sends the wrong parts.</p>\n<h3>Timeliness</h3>\n<p>In engineering, time is a resource. If your components arrive after your project deadline, the best quality and lowest cost mean nothing. Build delivery timelines into your procurement plan from the very beginning. Factor in shipping delays, backorders, and inspection time.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b003x",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p>Engineers often call this tradeoff the <strong>\"Iron Triangle\"</strong> — Quality, Cost, and Time. The idea is that you can optimize for two of the three, but the third will be affected. Want high quality fast? It'll cost more. Want cheap and fast? Quality may suffer. Knowing this triangle helps you set realistic expectations for every project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d004x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t007x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying OCV to Procurement Decisions</h2>\n<p>You've already used the <strong>OCV method</strong> — Objective, Constraint, Variable — in your design work. It turns out this same framework is incredibly useful when making procurement decisions.</p>\n<ul>\n<li><strong>Objective:</strong> What does this component or material need to accomplish? What performance standard must it meet?</li>\n<li><strong>Constraint:</strong> What are your non-negotiable limits? Budget caps, size requirements, safety certifications, delivery deadlines — these are your constraints.</li>\n<li><strong>Variable:</strong> What can you adjust or trade off? Maybe you can accept a slightly longer delivery time in exchange for a lower price, or choose a different material grade that still meets your performance needs.</li>\n</ul>\n<p>Walking through OCV before every significant purchase keeps your decisions grounded in logic rather than impulse. It also creates a record you can review later — useful when explaining your choices to a teacher, client, or team member.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b004x",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Try this:</strong> Before your next lab or build project, write out a quick OCV analysis for the materials you need. List your objective (what the material must do), your constraints (budget, size, availability), and your variables (what you're willing to trade off). You'll be surprised how much clearer your choices become.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d005x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t008x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Supply Chains and Logistics</h2>\n<p>Where do your parts actually come from? The answer is almost never simple. Most materials travel through a complex network before they reach you — that network is called the <strong>supply chain</strong>.</p>\n<p>Think about a simple LED light bulb. The glass comes from one manufacturer, the filament or diode from another, the plastic base from a third, and the finished product gets assembled at a factory before being shipped to a distributor, then a store, and finally to you. Every link in that chain matters. A disruption at any point — a factory shutdown, a shipping delay, a shortage of raw materials — can affect the final product.</p>\n<p><strong>Logistics</strong> is the science of managing all of that movement and storage. Good logistics keeps materials flowing smoothly through the supply chain, minimizing delays and waste. As a Creationeer, understanding logistics helps you plan realistically — knowing that a component shipped from overseas might take weeks, while a local supplier could deliver in days.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simplified supply chain diagram showing the flow from raw materials → manufacturer → distributor → retailer → end user, with logistics connecting each stage"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b005x",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Watch out:</strong> Never assume a part will arrive quickly just because it's listed as \"in stock\" online. Factor in processing time, shipping delays, and inspection time when you plan your project timeline. Ordering too late is one of the most common reasons student projects stall at the build phase.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d006x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t009x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Procurement as Stewardship</h2>\n<p>Here's where procurement connects to something much bigger than spreadsheets and purchase orders. Everything you work with — your time, your budget, your materials — is ultimately a resource entrusted to you. That's the heart of <strong>stewardship</strong>: managing what you've been given with care, wisdom, and intentionality.</p>\n<p>When you research suppliers, compare quotations, avoid waste, and choose quality materials responsibly, you're not just being a good engineer. You're honoring the trust placed in you. God calls us to be faithful with what we have — whether that's a small budget for a school project or the resources of a large organization. The habits you build now, choosing wisely and avoiding careless waste, are the same habits that will define you as a professional engineer, entrepreneur, and leader one day.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030b006x",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 16:10</strong> — <em>\"Whoever can be trusted with very little can also be trusted with much.\"</em></p>\n<p>Faithful procurement — even on a small school project — is practicing the kind of trustworthiness that prepares you for bigger responsibilities. How you manage a $20 parts budget today shapes how you'll manage a $200,000 project budget in the future.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030d007x",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030t010x",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use these questions to review the key ideas from this lesson before moving on.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030a001x",
+    "type": "accordion",
+    "data": {
+      "title": "What is procurement, and why does it matter in engineering?",
+      "html": "<p>Procurement is the full process of acquiring goods, services, or materials from external sources — including identifying needs, finding suppliers, comparing quotations, issuing purchase orders, receiving goods, and managing inventory. It matters because even the best design will fail if you can't obtain the right materials at the right time and cost. Procurement turns a plan on paper into a real, buildable project.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030a002x",
+    "type": "accordion",
+    "data": {
+      "title": "What are the six steps in the procurement cycle?",
+      "html": "<ol><li><strong>Identify Your Needs</strong> — Determine exactly what materials, components, or services your project requires.</li><li><strong>Find Suppliers</strong> — Research vendors who can provide what you need.</li><li><strong>Request and Compare Quotations</strong> — Get formal price offers from multiple suppliers and compare them.</li><li><strong>Issue a Purchase Order</strong> — Document the agreement legally before any money changes hands.</li><li><strong>Receive and Inspect Goods</strong> — Verify that what arrived matches your order and meets your quality standards.</li><li><strong>Manage Inventory</strong> — Track your stock so you always know what you have and what you need to reorder.</li></ol>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030a003x",
+    "type": "accordion",
+    "data": {
+      "title": "How does the Iron Triangle apply to procurement decisions?",
+      "html": "<p>The Iron Triangle says that Quality, Cost, and Time are interconnected — you can typically optimize for two, but the third will be affected. For example, if you need high-quality parts delivered quickly, you'll likely pay more. If you want cheap parts fast, quality may suffer. Understanding this tradeoff helps you set realistic expectations and make intentional choices rather than being surprised when one factor affects another.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030a004x",
+    "type": "accordion",
+    "data": {
+      "title": "How does the OCV method help with procurement?",
+      "html": "<p>OCV — Objective, Constraint, Variable — gives you a structured way to evaluate purchasing decisions. Your <strong>Objective</strong> defines what the component needs to do. Your <strong>Constraints</strong> set the non-negotiable limits like budget, size, or deadline. Your <strong>Variables</strong> are the factors you can trade off, like choosing a longer delivery time in exchange for a lower cost. Applying OCV keeps decisions logical and documented rather than impulsive.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c030a005x",
+    "type": "accordion",
+    "data": {
+      "title": "How is procurement connected to biblical stewardship?",
+      "html": "<p>Stewardship means responsibly managing resources that have been entrusted to you. When you make careful, informed procurement decisions — avoiding waste, comparing options, choosing quality appropriately — you are being a faithful steward of the budget, materials, and time you've been given. Scripture reminds us in Luke 16:10 that faithfulness with small things prepares us for larger responsibilities. Good procurement habits, developed now, reflect a character of integrity and wise management that honors God.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

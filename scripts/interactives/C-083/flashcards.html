@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hazardous Waste and Safe Disposal Protocol — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Hazardous Waste and Safe Disposal Protocol</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Hazardous Waste", "definition": "Waste materials that can cause significant harm to people or the environment."}, {"term": "Disposal Protocol", "definition": "A step-by-step plan for safely and responsibly getting rid of waste."}, {"term": "Toxicity", "definition": "How harmful a substance is to living things."}, {"term": "Corrosivity", "definition": "The ability of a substance to eat away at materials or living tissue."}, {"term": "Reactivity", "definition": "The tendency of a substance to undergo a chemical change, sometimes with a burst of energy."}, {"term": "Ignitability", "definition": "The characteristic of a substance that makes it easy to catch fire."}, {"term": "Stewardship", "definition": "Taking responsible care of something valuable, like God's creation."}, {"term": "General Waste", "definition": "Everyday trash that does not pose a substantial threat to health or the environment, unlike hazardous waste."}, {"term": "Landfill", "definition": "A designated area where waste materials are buried."}, {"term": "Incineration", "definition": "Burning waste at high temperatures to reduce its volume."}, {"term": "Bioremediation", "definition": "Using natural organisms, like bacteria, to clean up polluted areas."}, {"term": "Creationeering™", "definition": "The process of designing and building, reflecting God's wise provision and order in creation."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

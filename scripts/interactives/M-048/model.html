@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arduino Station 3D Viewer – Genesis K-12 Academy</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0e1e30;
+    color: #e8e8e8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #header {
+    background: #1B3A5C;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #C9A84C;
+    flex-shrink: 0;
+  }
+  #header h1 {
+    font-size: 15px;
+    color: #C9A84C;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  #header p {
+    font-size: 11px;
+    color: #a0b8d0;
+  }
+  #logo {
+    font-size: 11px;
+    color: #C9A84C;
+    font-weight: 700;
+    text-align: right;
+  }
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 220px;
+    background: #1B3A5C;
+    border-right: 2px solid #C9A84C;
+    overflow-y: auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar h2 {
+    font-size: 12px;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 14px 6px;
+    border-bottom: 1px solid #2a5480;
+  }
+  .comp-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e3d62;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .comp-item:hover, .comp-item.active {
+    background: #24507a;
+  }
+  .comp-item .comp-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #C9A84C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .comp-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .comp-item .comp-desc {
+    font-size: 10px;
+    color: #a0c0d8;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  #controls {
+    padding: 12px 14px;
+    border-top: 2px solid #C9A84C;
+    margin-top: auto;
+  }
+  #controls h3 {
+    font-size: 11px;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 6px;
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    color: #C9A84C;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn:hover {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  .btn.active-btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  #canvas-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #132840 0%, #0a1520 100%);
+  }
+  #mainCanvas {
+    display: block;
+    cursor: grab;
+  }
+  #mainCanvas:active { cursor: grabbing; }
+  #info-bar {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(27,58,92,0.85);
+    border: 1px solid #C9A84C;
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 10px;
+    color: #a0c0d8;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  #tooltip {
+    position: absolute;
+    display: none;
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    border-radius: 6px;
+    padding: 7px 11px;
+    font-size: 11px;
+    color: #e8e8e8;
+    pointer-events: none;
+    max-width: 180px;
+    line-height: 1.4;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  #tooltip strong { color: #C9A84C; display: block; margin-bottom: 3px; }
+</style>
+</head>
+<body>
+<div id="header">
+  <div>
+    <h1>⚙ Arduino Station – 3D System Viewer</h1>
+    <p>Mousetrap Build · Lesson: Arduino Station and Test</p>
+  </div>
+  <div id="logo">Genesis K-12<br>Academy</div>
+</div>
+<div id="main">
+  <div id="sidebar">
+    <h2>Components</h2>
+    <div class="comp-item active" data-index="0" onclick="selectComponent(0)">
+      <div class="comp-name"><span class="comp-dot" style="background:#4fc3f7"></span>Arduino Uno</div>
+      <div class="comp-desc">Microcontroller board that runs code and reads sensor inputs in real time.</div>
+    </div>
+    <div class="comp-item" data-index="1" onclick="selectComponent(1)">
+      <div class="comp-name"><span class="comp-dot" style="background:#81c784"></span>Breadboard</div>
+      <div class="comp-desc">Prototyping board for connecting sensors and components without soldering.</div>
+    </div>
+    <div class="comp-item" data-index="2" onclick="selectComponent(2)">
+      <div class="comp-name"><span class="comp-dot" style="background:#ffb74d"></span>IR Distance Sensor</div>
+      <div class="comp-desc">Detects distance traveled by the mousetrap car using infrared light reflection.</div>
+    </div>
+    <div class="comp-item" data-index="3" onclick="selectComponent(3)">
+      <div class="comp-name"><span class="comp-dot" style="background:#f06292"></span>USB Data Cable</div>
+      <div class="comp-desc">Transfers power and logged data between the Arduino and a laptop/PC.</div>
+    </div>
+    <div class="comp-item" data-index="4" onclick="selectComponent(4)">
+      <div class="comp-name"><span class="comp-dot" style="background:#ce93d8"></span>Jumper Wires</div>
+      <div class="comp-desc">Flexible wires that connect Arduino pins to breadboard components.</div>
+    </div>
+    <div class="comp-item" data-index="5" onclick="selectComponent(5)">
+      <div class="comp-name"><span class="comp-dot" style="background:#80cbc4"></span>Station Base</div>
+      <div class="comp-desc">Flat platform that organizes all components for stable data collection.</div>
+    </div>
+    <div id="controls">
+      <h3>View Controls</h3>
+      <button class="btn" onclick="rotateLeft()">◀ Rotate Left</button>
+      <button class="btn" onclick="rotateRight()">Rotate Right ▶</button>
+      <button class="btn" onclick="resetView()">↺ Reset View</button>
+      <button class="btn" id="explodeBtn" onclick="toggleExplode()">💥 Exploded View</button>
+      <button class="btn" id="labelBtn" onclick="toggleLabels()">🏷 Toggle Labels</button>
+    </div>
+  </div>
+  <div id="canvas-wrap">
+    <canvas id="mainCanvas"></canvas>
+    <div id="info-bar">Drag to rotate · Click components to highlight · Use buttons to explore</div>
+    <div id="tooltip"></div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+const wrap = document.getElementById('canvas-wrap');
+const tooltip = document.getElementById('tooltip');
+
+let W, H, cx, cy;
+let rotY = 0.55, rotX = 0.42;
+let exploded = false;
+let showLabels = true;
+let selectedComp = 0;
+let explodeT = 0;
+let explodeTarget = 0;
+let animFrame;
+let dragging = false, lastX, lastY;
+let autoRotate = true;
+let autoRotateTimeout;
+
+function resize() {
+  W = wrap.clientWidth;
+  H = wrap.clientHeight;
+  canvas.width = W;
+  canvas.height = H;
+  cx = W / 2;
+  cy = H / 2;
+}
+resize();
+window.addEventListener('resize', () => { resize(); });
+
+// ---- 3D Math ----
+function project(x, y, z) {
+  // Rotate around Y
+  let cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  let x1 = x * cosY - z * sinY;
+  let z1 = x * sinY + z * cosY;
+  // Rotate around X
+  let cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+  let y1 = y * cosX - z1 * sinX;
+  let z2 = y * sinX + z1 * cosX;
+  // Perspective
+  let scale = Math.min(W, H) * 0.38;
+  let fov = 700;
+  let pz = fov + z2 * 40;
+  let sx = cx + (x1 * scale * fov) / (pz);
+  let sy = cy + (y1 * scale * fov) / (pz);
+  return { x: sx, y: sy, z: z2 };
+}
+
+// Draw a filled polygon with depth
+function drawFace(pts3d, fillColor, strokeColor, alpha) {
+  if (pts3d.length < 3) return;
+  let proj = pts3d.map(p => project(p[0], p[1], p[2]));
+  // Backface culling
+  let v1x = proj[1].x - proj[0].x, v1y = proj[1].y - proj[0].y;
+  let v2x = proj[2].x - proj[0].x, v2y = proj[2].y - proj[0].y;
+  let cross = v1x * v2y - v1y * v2x;
+  if (cross > 0) return;
+  ctx.save();
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  ctx.beginPath();
+  ctx.moveTo(proj[0].x, proj[0].y);
+  for (let i = 1; i < proj.length; i++) ctx.lineTo(proj[i].x, proj[i].y);
+  ctx.closePath();
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+  if (strokeColor) {
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawBox(ox, oy, oz, w, h, d, topC, leftC, rightC, strokeC, alpha) {
+  let x0=ox, y0=oy, z0=oz;
+  let x1=ox+w, y1=oy+h, z1=oz+d;
+  // top
+  drawFace([[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]], topC, strokeC, alpha);
+  // front
+  drawFace([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]], leftC, strokeC, alpha);
+  // back
+  drawFace([[x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0]], leftC, strokeC, alpha);
+  // left
+  drawFace([[x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0]], rightC, strokeC, alpha);
+  // right
+  drawFace([[x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1]], rightC, strokeC, alpha);
+  // bottom
+  drawFace([[x0,y1,z0],[x0,y1,z1],[x1,y1,z1],[x1,y1,z0]], topC, strokeC, alpha);
+}
+
+function lerpC(c1, c2, t) {
+  function hex(c) {
+    c = c.replace('#','');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)];
+  }
+  let a = hex(c1), b = hex(c2);
+  let r = Math.round(a[0]+(b[0]-a[0])*t);
+  let g = Math.round(a[1]+(b[1]-a[1])*t);
+  let bl = Math.round(a[2]+(b[2]-a[2])*t);
+  return `rgb(${r},${g},${bl})`;
+}
+
+// ---- Component Definitions ----
+// Each component: label, color, base offset, explode direction
+const components = [
+  { // 0 Arduino Uno
+    name: 'Arduino Uno',
+    color: ['#1a6b4a','#155c3e','#0e4a2f'],
+    stroke: '#4fc3f7',
+    ox:-.35, oy:-.12, oz:-.25,
+    w:.7, h:.1, d:.5,
+    explode: [0, 0.38, 0],
+    labelPos: [0, -.22, 0],
+    desc:'Microcontroller – reads sensors & runs code'
+  },
+  { // 1 Breadboard
+    name: 'Breadboard',
+    color: ['#e8d8b0','#d0c098','#b8a880'],
+    stroke: '#81c784',
+    ox:-.55, oy:-.12, oz:-.55,
+    w:.4, h:.08, d:.4,
+    explode: [-0.45, 0.35, -0.45],
+    labelPos: [-.35, -.2, -.35],
+    desc:'Prototyping board for wiring components'
+  },
+  { // 2 IR Sensor
+    name: 'IR Distance Sensor',
+    color: ['#3a3a3a','#2a2a2a','#1a1a1a'],
+    stroke: '#ffb74d',
+    ox:.25, oy:-.22, oz:.1,
+    w:.15, h:.15, d:.1,
+    explode: [0.55, 0.0, 0.4],
+    labelPos: [.32, -.25, .15],
+    desc:'Measures distance via infrared light'
+  },
+  { // 3 USB Cable
+    name: 'USB Data Cable',
+    color: ['#555','#444','#333'],
+    stroke: '#f06292',
+    ox:.3, oy:-.12, oz:-.4,
+    w:.08, h:.08, d:.6,
+    explode: [0.65, 0.2, 0],
+    labelPos: [.36, -.18, -.1],
+    desc:'Power + data link to computer'
+  },
+  { // 4 Jumper Wires
+    name: 'Jumper Wires',
+    color: ['#c0392b','#a93226','#922b21'],
+    stroke: '#ce93d8',
+    ox:-.3, oy:-.19, oz:-.1,
+    w:.5, h:.05, d:.05,
+    explode: [0, -0.4, 0],
+    labelPos: [-.05, -.22, -.075],
+    desc:'Flexible wires connecting components'
+  },
+  { // 5 Station Base
+    name: 'Station Base',
+    color: ['#2e4a6a','#253d57','#1c3045'],
+    stroke: '#80cbc4',
+    ox:-.75, oy:0, oz:-.7,
+    w:1.5, h:.06, d:1.4,
+    explode: [0, 0.6, 0],
+    labelPos: [0, .06, 0],
+    desc:'Flat base for stable station assembly'
+  }
+];
+
+const dotColors = ['#4fc3f7','#81c784','#ffb74d','#f06292','#ce93d8','#80cbc4'];
+
+// ---- Explode animation ----
+function toggleExplode() {
+  exploded = !exploded;
+  explodeTarget = exploded ? 1 : 0;
+  document.getElementById('explodeBtn').classList.toggle('active-btn', exploded);
+  autoRotate = false;
+}
+
+function toggleLabels() {
+  showLabels = !showLabels;
+  document.getElementById('labelBtn').classList.toggle('active-btn', !showLabels);
+}
+
+function rotateLeft() { rotY -= 0.3; autoRotate = false; }
+function rotateRight() { rotY += 0.3; autoRotate = false; }
+function resetView() {
+  rotY = 0.55; rotX = 0.42; exploded = false; explodeTarget = 0; explodeT = 0;
+  selectedComp = 0; autoRotate = true;
+  document.getElementById('explodeBtn').classList.remove('active-btn');
+  document.querySelectorAll('.comp-item').forEach((el,i) => el.classList.toggle('active', i===0));
+}
+
+function selectComponent(i) {
+  selectedComp = i;
+  document.querySelectorAll('.comp-item').forEach((el,j) => el.classList.toggle('active', j===i));
+  autoRotate = false;
+  clearTimeout(autoRotateTimeout);
+  autoRotateTimeout = setTimeout(() => { autoRotate = true; }, 5000);
+}
+
+// ---- Label Drawing ----
+function drawLabel(text, x3, y3, z3, color, highlight) {
+  let p = project(x3, y3, z3);
+  ctx.save();
+  ctx.globalAlpha = highlight ? 1 : 0.72;
+  let pad = 5;
+  ctx.font = `${highlight ? 'bold' : ''} 11px 'Segoe UI', Arial`;
+  let tw = ctx.measureText(text).width;
+  ctx.fillStyle = highlight ? '#C9A84C' : '#1B3A5C';
+  ctx.strokeStyle = highlight ? '#C9A84C' : color;
+  ctx.lineWidth = 1.5;
+  // Leader dot
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, highlight ? 5 : 3.5, 0, Math.PI*2);
+  ctx.fillStyle = color;
+  ctx.fill();
+  // Background pill
+  let bx = p.x + 12, by = p.y - 10;
+  ctx.beginPath();
+  ctx.roundRect(bx - pad, by - 14, tw + pad*2, 20, 4);
+  ctx.fillStyle = highlight ? 'rgba(201,168,76,0.92)' : 'rgba(15,30,50,0.88)';
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  // Leader line
+  ctx.beginPath();
+  ctx.moveTo(p.x + (highlight?5:3.5), p.y);
+  ctx.lineTo(bx - pad, by - 4);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = highlight ? 1.5 : 1;
+  ctx.stroke();
+  // Text
+  ctx.fillStyle = highlight ? '#1B3A5C' : '#e8e8e8';
+  ctx.font = `${highlight ? 'bold ' : ''}11px 'Segoe UI', Arial`;
+  ctx.fillText(text, bx, by - 1);
+  ctx.restore();
+}
+
+// Draw wires between components
+function drawWire(x1,y1,z1, x2,y2,z2, color, t) {
+  let p1 = project(x1,y1,z1);
+  let p2 = project(x2,y2,z2);
+  ctx.save();
+  ctx.globalAlpha = 0.55 * (1 - t*0.5);
+  ctx.beginPath();
+  ctx.moveTo(p1.x, p1.y);
+  let mx = (p1.x+p2.x)/2, my = Math.min(p1.y,p2.y) - 20;
+  ctx.quadraticCurveTo(mx, my, p2.x, p2.y);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,3]);
+  ctx.stroke();
+  ctx.restore();
+}
+
+// Grid floor
+function drawGrid() {
+  let size = 0.12;
+  let count = 7;
+  ctx.save();
+  ctx.globalAlpha = 0.13;
+  for (let i = -count; i <= count; i++) {
+    let p1 = project(i*size, 0.1, -count*size);
+    let p2 = project(i*size, 0.1, count*size);
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
+    ctx.lineTo(p2.x, p2.y);
+    ctx.strokeStyle = '#80cbc4';
+    ctx.lineWidth = 0.7;
+    ctx.stroke();
+    let p3 = project(-count*size, 0.1, i*size);
+    let p4 = project(count*size, 0.1, i*size);
+    ctx.beginPath();
+    ctx.moveTo(p3.x, p3.y);
+    ctx.lineTo(p4.x, p4.y);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ---- Tooltip on hover ----
+let hoverComp = -1;
+function findHoveredComponent(mx, my) {
+  // simple bounding-box check in projected space
+  for (let i = 0; i < components.length; i++) {
+    let c = components[i];
+    let et = explodeT;
+    let ex = c.ox + c.w/2 + c.explode[0]*et;
+    let ey = c.oy + c.h/2 + c.explode[1]*et;
+    let ez = c.oz + c.d/2 + c.explode[2]*et;
+    let p = project(ex, ey, ez);
+    let dx = mx - p.x, dy = my - p.y;
+    if (Math.sqrt(dx*dx+dy*dy) < 50) return i;
+  }
+  return -1;
+}
+
+canvas.addEventListener('mousemove', e => {
+  let r = canvas.getBoundingClientRect();
+  let mx = e.clientX - r.left, my = e.clientY - r.top;
+  if (dragging) {
+    let dx = mx - lastX, dy = my - lastY;
+    rotY += dx * 0.008;
+    rotX += dy * 0.008;
+    rotX = Math.max(-1.2, Math.min(1.2, rotX));
+    lastX = mx; lastY = my;
+    autoRotate = false;
+    clearTimeout(autoRotateTimeout);
+  } else {
+    let h = findHoveredComponent(mx, my);
+    if (h !== hoverComp) {
+      hoverComp = h;
+      if (h >= 0) {
+        let c = components[h];
+        tooltip.style.display = 'block';
+        tooltip.innerHTML = `<strong>${c.name}</strong>${c.desc}`;
+        tooltip.style.left = (mx+14)+'px';
+        tooltip.style.top = (my-10)+'px';
+        canvas.style.cursor = 'pointer';
+      } else {
+        tooltip.style.display = 'none';
+        canvas.style.cursor = dragging ? 'grabbing' : 'grab';
+      }
+    }
+    if (h >= 0) {
+      tooltip.style.left = (mx+14)+'px';
+      tooltip.style.top = (my-10)+'px';
+    }
+  }
+});
+
+canvas.addEventListener('mousedown', e => {
+  dragging = true;
+  let r = canvas.getBoundingClientRect();
+  lastX = e.clientX - r.left;
+  lastY = e.clientY - r.top;
+  canvas.style.cursor = 'grabbing';
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (!dragging) return;
+  dragging = false;
+  canvas.style.cursor = 'grab';
+  let r = canvas.getBoundingClientRect();
+  let mx = e.clientX - r.left, my = e.clientY - r.top;
+  if (Math.abs(mx-lastX) < 4 && Math.abs(my-lastY) < 4) {
+    let h = findHoveredComponent(mx, my);
+    if (h >= 0) selectComponent(h);
+  }
+  autoRotateTimeout = setTimeout(() => { autoRotate = true; }, 5000);
+});
+
+canvas.addEventListener('mouseleave', () => {
+  dragging = false;
+  tooltip.style.display = 'none';
+  hoverComp = -1;
+  canvas.style.cursor = 'grab';
+});
+
+// Touch
+let lastTouchX, lastTouchY;
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  let t = e.touches[0];
+  lastTouchX = t.clientX; lastTouchY = t.clientY;
+  autoRotate = false;
+}, {passive:false});
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  let t = e.touches[0];
+  let dx = t.clientX - lastTouchX, dy = t.clientY - lastTouchY;
+  rotY += dx * 0.01;
+  rotX += dy * 0.01;
+  rotX = Math.max(-1.2, Math.min(1.2, rotX));
+  lastTouchX = t.clientX; lastTouchY = t.clientY;
+}, {passive:false});
+canvas.addEventListener('touchend', () => {
+  autoRotateTimeout = setTimeout(() => { autoRotate = true; }, 5000);
+});
+
+// ---- Main Draw ----
+function drawScene() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  let bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W,H)*0.7);
+  bg.addColorStop(0, '#132840');
+  bg.addColorStop(1, '#08111e');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawGrid();
+
+  // Animate explode
+  explodeT += (explodeTarget - explodeT) * 0.09;
+
+  // Sort components by depth
+  let sorted = components.map((c, i) => {
+    let et = explodeT;
+    let ex = c.ox + c.w/2 + c.explode[0]*et;
+    let ey = c.oy + c.h/2 + c.explode[1]*et;
+    let ez = c.oz + c.d/2 + c.explode[2]*et;
+    let p = project(ex, ey, ez);
+    return { i, c, pz: p.z };
+  }).sort((a,b) => b.pz - a.pz);
+
+  // Draw wires first (only when not exploded much)
+  if (explodeT < 0.3) {
+    // Arduino to Breadboard
+    let ard = components[0], bb = components[1];
+    drawWire(ard.ox+ard.w, ard.oy+ard.h/2, ard.oz+ard.d/2,
+             bb.ox+bb.w, bb.oy+bb.h/2, bb.oz+bb.d/2, '#ce93d8', explodeT);
+    // Arduino to Sensor
+    let sens = components[2];
+    drawWire(ard.ox+ard.w/2, ard.oy, ard.oz+ard.d/2,
+             sens.ox, sens.oy+sens.h/2, sens.oz+sens.d/2, '#ffb74d', explodeT);
+    // Arduino to USB
+    let usb = components[3];
+    drawWire(ard.ox+ard.w, ard.oy+ard.h/2, ard.oz+0.1,
+             usb.ox, usb.oy+usb.h/2, usb.oz+usb.d/2, '#f06292', explodeT);
+  }
+
+  // Draw each component
+  for (let { i, c } of sorted) {
+    let et = explodeT;
+    let dx = c.explode[0]*et, dy = c.explode[1]*et, dz = c.explode[2]*et;
+    let sel = i === selectedComp;
+    let alpha = sel ? 1.0 : 0.88;
+
+    // Lighter top for selection
+    let topMod = sel ? 0.35 : 0;
+    let topC = lerpC(c.color[0], '#ffffff', topMod);
+    let leftC = lerpC(c.color[1], '#ffffff', topMod*0.5);
+    let rightC = lerpC(c.color[2], '#ffffff', topMod*0.3);
+    let strokeC = sel ? '#C9A84C' : c.stroke;
+
+    let strokeWidth = sel ? 2 : 1;
+    // Draw slightly thicker outline for selected
+    if (sel) {
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      drawBox(c.ox+dx-.01, c.oy+dy-.01, c.oz+dz-.01,
+              c.w+.02, c.h+.02, c.d+.02,
+              '#C9A84C','#C9A84C','#C9A84C','#C9A84C', 0.3);
+      ctx.restore();
+    }
+
+    drawBox(c.ox+dx, c.oy+dy, c.oz+dz,
+            c.w, c.h, c.d,
+            topC, leftC, rightC, strokeC, alpha);
+
+    // Special details for Arduino
+    if (i === 0) {
+      // Pin headers
+      for (let p = 0; p < 5; p++) {
+        let px = c.ox+dx + 0.06 + p*0.12;
+        drawBox(px, c.oy+dy-.04, c.oz+dz+0.02, 0.06, 0.04, 0.06,
+                '#888','#666','#555','#aaa', alpha*0.9);
+      }
+      // USB port
+      drawBox(c.ox+dx+c.w-.01, c.oy+dy+0.02, c.oz+dz+0.15, 0.04, 0.05, 0.12,
+              '#aaa','#888','#777','#ccc', alpha*0.95);
+      // Chip
+      drawBox(c.ox+dx+0.15, c.oy+dy-.05, c.oz+dz+0.15, 0.18, 0.05, 0.14,
+              '#222','#111','#0a0a0a','#444', alpha);
+      drawBox(c.ox+dx+0.18, c.oy+dy-.06, c.oz+dz+0.18, 0.12, 0.01, 0.08,
+              '#1a6b4a','#155c3e','#0e4a2f','#4fc3f7', alpha*0.7);
+    }
+    // Breadboard holes pattern
+    if (i === 1) {
+      for (let r2 = 0; r2 < 3; r2++) for (let col = 0; col < 4; col++) {
+        drawBox(c.ox+dx+0.05+col*0.08, c.oy+dy-.01, c.oz+dz+0.05+r2*0.1,
+                0.03, 0.01, 0.03, '#888','#666','#555','#bbb', alpha*0.7);
+      }
+    }
+    // IR sensor lens
+    if (i === 2) {
+      let p = project(c.ox+dx+c.w/2, c.oy+dy+c.h/2, c.oz+dz+c.d);
+      ctx.save();
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 8, 0, Math.PI*2);
+      ctx.fillStyle = '#1a2530';
+      ctx.fill();
+      ctx.strokeStyle = '#ffb74d';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(p.x-2, p.y-2, 3, 0, Math.PI*2);
+      ctx.fillStyle = '#ffb74d';
+      ctx.fill();
+      ctx.restore();
+    }
+    // USB cable plug
+    if (i === 3) {
+      drawBox(c.ox+dx-.01, c.oy+dy+0.01, c.oz+dz+0.55, 0.1, 0.06, 0.08,
+              '#888','#666','#555','#ccc', alpha*0.9);
+    }
+    // Jumper wire colors
+    if (i === 4) {
+      let wireColors = ['#e74c3c','#27ae60','#3498db','#f39c12','#9b59b6'];
+      for (let w = 0; w < 5; w++) {
+        drawBox(c.ox+dx+w*0.09, c.oy+dy, c.oz+dz, 0.07, 0.05, 0.05,
+                wireColors[w], lerpC(wireColors[w],'#000',0.3), lerpC(wireColors[w],'#000',0.5),
+                wireColors[w], alpha*0.9);
+      }
+    }
+  }
+
+  // Draw labels
+  if (showLabels) {
+    for (let { i, c } of sorted) {
+      let et = explodeT;
+      let dx = c.explode[0]*et, dy = c.explode[1]*et, dz = c.explode[2]*et;
+      let lx = c.labelPos[0]+dx, ly = c.labelPos[1]+dy, lz = c.labelPos[2]+dz;
+      drawLabel(c.name, lx, ly, lz, dotColors[i], i === selectedComp);
+    }
+  }
+
+  // Title watermark
+  ctx.save();
+  ctx.globalAlpha = 0.18;
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.fillStyle = '#C9A84C';
+  ctx.fillText('GK12 · Arduino Station · Mousetrap Build', 12, H-12);
+  ctx.restore();
+
+  // Auto-rotate
+  if (autoRotate && !dragging) {
+    rotY += 0.003;
+  }
+
+  animFrame = requestAnimationFrame(drawScene);
+}
+
+// Start
+autoRotateTimeout = setTimeout(() => { autoRotate = true; }, 1500);
+drawScene();
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification, Validation, and Testing — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Verification, Validation, and Testing</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Verification", "definition": "The process of checking if you built something correctly according to its plans and requirements. It asks, 'Are we building the product right?'"}, {"term": "Validation", "definition": "The process of checking if what you built actually solves the problem and meets the user's needs. It asks, 'Are we building the right product?'"}, {"term": "Reliability", "definition": "How likely it is that a system or part will work correctly as expected for a certain amount of time without breaking down."}, {"term": "Durability", "definition": "The ability of a material or product to resist wear, pressure, or damage and last for a long time."}, {"term": "Multiscale Modeling", "definition": "A way to understand how tiny things, like atoms, affect the behavior and performance of much larger systems or products."}, {"term": "Objective (OCV Method)", "definition": "In the OCV Method, this is the clear, measurable goal or desired outcome you want to achieve with your design or project."}, {"term": "Constraint (OCV Method)", "definition": "In the OCV Method, this is a limit or rule that you must follow when designing something, like a budget, available materials, or size restrictions."}, {"term": "Optimization", "definition": "The process of finding the best possible solution or design for a problem, making it as good as it can be given certain conditions."}, {"term": "Why is rigorous testing important?", "definition": "Rigorous testing is essential to make sure engineered systems are safe, reliable, and work correctly for their intended purpose."}, {"term": "What is the OCV Method used for?", "definition": "The OCV Method (Objective, Constraint, Variable) is used to design effective test plans and make system performance better."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

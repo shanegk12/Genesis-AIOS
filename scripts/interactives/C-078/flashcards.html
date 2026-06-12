@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Innovation for Resource-Limited Environments — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Innovation for Resource-Limited Environments</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Sustainability (Creationeering™)", "definition": "The ability of an engineered system to operate using resources in a way that does not harm the environment or deplete materials for future generations, reflecting good stewardship of God's creation."}, {"term": "Resource-Limited Environment", "definition": "An environment or situation where essential materials, energy, or other necessities are scarce or difficult to obtain, requiring smart engineering solutions."}, {"term": "Energy Path", "definition": "The complete route that energy takes through a system, from its source to its final use or dissipation, which we analyze to make designs more efficient."}, {"term": "Optimization", "definition": "The process of finding the best possible solution to a problem, given a set of objectives and constraints, especially when resources are scarce."}, {"term": "Backward Compatibility", "definition": "The ability of new designs to work with older parts or systems, allowing for upgrades without completely replacing everything, as seen in God's creation."}, {"term": "Creationeering™ Sustainability Phase", "definition": "The phase of Creationeering™ focused on designing systems that can last a long time, especially with limited resources, by being good stewards of creation."}, {"term": "Biblical Stewardship", "definition": "The principle of responsibly managing and caring for the resources and world God has given us, which guides sustainable engineering."}, {"term": "Dominion Mandate", "definition": "God's command for humans to have dominion over the earth and care for it, which connects to our responsibility in sustainable engineering."}, {"term": "Objective, Constraint, Variable (OCV) Method", "definition": "A design method used to optimize solutions by clearly defining what you want to achieve (objective), what limits you have (constraints), and what you can change (variables)."}, {"term": "Innovation for Resource-Limited Environments", "definition": "The creative process of developing new solutions and designs that make the most of scarce materials, energy, and other necessities."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

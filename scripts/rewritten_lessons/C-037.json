@@ -1,0 +1,416 @@
+[
+  {
+    "id": "c037h1tx9",
+    "type": "text",
+    "data": {
+      "html": "<h1>Hazards and Operations</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ov2mn",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, you explored the exciting world of Fabrication — where raw materials get shaped, formed, and joined into individual components. Now imagine you have all those perfect pieces in front of you. What comes next? This lesson moves you into the Assembly phase of Creationeering™, specifically focusing on <strong>Hazards and Operations</strong>. You'll learn to identify what can go wrong during assembly, how to keep the process safe and efficient, and how tools like the OCV method and multiscale modeling help you build with confidence. Building wisely isn't just good engineering — it reflects the same careful order God used when He assembled creation itself.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037lo3pq",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p><ul><li>Identify common hazards that arise during an assembly process.</li><li>Explain why safe operational procedures matter for a successful build.</li><li>Apply the OCV method to reduce risks during assembly.</li><li>Describe how multiscale modeling helps predict and prevent assembly challenges.</li><li>Connect careful assembly practices to the biblical principle of stewardship over God's creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037vk4rs",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Hazard",
+          "definition": "A potential source of harm or danger during assembly."
+        },
+        {
+          "term": "Operation",
+          "definition": "A specific action or task performed as part of an assembly process."
+        },
+        {
+          "term": "Risk",
+          "definition": "The likelihood of a hazard occurring combined with the severity of its impact."
+        },
+        {
+          "term": "Mitigation",
+          "definition": "Actions taken to reduce the likelihood or severity of a risk."
+        },
+        {
+          "term": "Ergonomics",
+          "definition": "The study of how people interact with their work environment to improve comfort, safety, and efficiency."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable variation in a dimension or property of a component — how much it can differ from perfect and still work."
+        },
+        {
+          "term": "Interference Fit",
+          "definition": "When two parts are designed to be slightly larger than each other, requiring force to push them together."
+        },
+        {
+          "term": "Clearance Fit",
+          "definition": "When two parts are designed with a small gap between them, allowing them to slide together easily."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Observing a problem at one level (like the overall structure) and tracing its cause to a smaller level (like individual atoms or materials)."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible care and protection of something valuable — including the skills, tools, and materials God has entrusted to you."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037dv5ab",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037bt6cd",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:1 —</strong> \"In the beginning, God created the heavens and the earth.\"</p><p>God didn't just snap His fingers and hope things lined up. He worked through a deliberate sequence — light before life, water before land, order before complexity. Every phase built on the one before it. That's not an accident. It's the blueprint for good engineering. When you assemble something with care and intention, you're reflecting the same thoughtful design God modeled in creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037tx7ef",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Master Builder's Approach</h2>\n<p>Think about what it took for God to assemble an entire universe. The sun, moon, stars, oceans, plants, animals, and people — all working together in an intricate, interdependent system. Nothing was out of place. Everything fit. Engineers call that kind of result a <em>successful assembly</em>, and it doesn't happen by accident.</p>\n<p>Careful planning and precise execution are what separate a structure that lasts from one that falls apart. As you step into the assembly phase of your own projects, that same standard applies. You've been given gifts — the ability to think, design, and build — and using them wisely is an act of stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037dv8gh",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037hz9ij",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Assembly Hazards</h2>\n<p>Imagine you're building a LEGO castle. What could go wrong? A piece might not fit right. You might step on a stray brick. You might push too hard and snap something. In Creationeering™, a <strong>hazard</strong> is anything that could cause harm, damage, or prevent your project from coming together correctly. And hazards aren't always dramatic. They can be subtle — a misread instruction, a speck of dust in a moving part, or simple fatigue from working too long without a break.</p>\n<p>Think of a master chef preparing a layered cake. The hot oven is an obvious hazard. But so is measuring the wrong amount of flour, or letting a tiny eggshell fall into the batter. Each small hazard threatens the final product. Assembly works the same way. A misaligned screw, a dropped sensor, or even a component installed backwards can cascade into a much larger problem down the line.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037im0kl",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing common assembly hazards — from physical dangers like sharp edges to subtle issues like misalignment and incorrect tolerances."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ca1mn",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Hazards vs. Risks:</strong> These two words get used interchangeably, but they mean different things in engineering. A <em>hazard</em> is the source of potential harm — like a sharp edge on a metal component. A <em>risk</em> is the probability that the hazard actually causes a problem, combined with how bad that problem would be. Good engineers identify hazards first, then assess the risk, then decide how to mitigate it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ms2op",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing Problems at Every Scale — Multiscale Modeling</h2>\n<p>When a part doesn't fit during assembly, you notice it at the macro level — you can see the gap or feel the resistance. But the <em>cause</em> is often happening at a much smaller scale. Maybe the material expanded slightly because of heat. Maybe there's a microscopic surface roughness that's creating friction. Maybe the dimensions drifted just a hair beyond the allowed <strong>tolerance</strong>.</p>\n<p><strong>Multiscale modeling</strong> is the engineering practice of connecting what you observe at one level to what's happening at a deeper level. Think of it like a doctor who sees a patient with a fever — that's the macro observation. But the cause is microscopic bacteria or a virus. The doctor can't treat the fever effectively without understanding what's happening at the smaller scale. Engineers do the same thing. When an assembly fails, they zoom in — sometimes all the way to the material's atomic structure — to find out why.</p>\n<p>This approach helps you predict problems <em>before</em> they happen, not just react to them after something breaks.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ft3qr",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Connecting Scales:</strong> When you notice something wrong during assembly, ask yourself two questions: \"What do I see?\" (macro) and \"What might be causing this at a smaller level?\" (micro). Training yourself to think across scales is one of the most powerful habits an engineer can build.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037fi4st",
+    "type": "text",
+    "data": {
+      "html": "<h2>Fits, Tolerances, and Getting Parts to Work Together</h2>\n<p>Not every assembly challenge is a dramatic failure. Sometimes the issue is much quieter — two parts that are just slightly off. That's where <strong>tolerance</strong> and <strong>fit</strong> become critical.</p>\n<p>Every manufactured component has a tolerance — a small range of acceptable variation. A bolt rated at 10mm in diameter might actually measure anywhere from 9.98mm to 10.02mm, and that's perfectly fine. Engineers design assemblies to account for that variation. The question becomes: how should the parts relate to each other?</p>\n<ul>\n<li><strong>Clearance Fit:</strong> The parts have a small designed gap between them, so they slide together easily. Think of a drawer in a dresser — it needs to move smoothly, so there's intentional space.</li>\n<li><strong>Interference Fit:</strong> The parts are intentionally designed so one is slightly larger than the other. You have to press or force them together, which creates a very tight, strong bond. Think of a bearing pressed into a wheel hub — it's not going anywhere.</li>\n</ul>\n<p>Choosing the wrong fit type is a common assembly hazard. An interference fit applied where a clearance fit was needed can crack a component. A clearance fit used where interference was required can create dangerous looseness in a load-bearing part.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037im5uv",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram comparing clearance fit (gap between parts) and interference fit (parts overlapping in size, requiring force to assemble)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037dv6wx",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037op7yz",
+    "type": "text",
+    "data": {
+      "html": "<h2>Safe Operations — Working with a Plan</h2>\n<p>An <strong>operation</strong> is any specific action or task you perform during assembly. Tightening a bolt is an operation. Soldering a wire is an operation. Pressing a bearing into place is an operation. Each operation carries its own set of potential hazards, and good engineers think through those hazards <em>before</em> they start working — not while something is going wrong.</p>\n<p>This is where <strong>ergonomics</strong> comes in. Ergonomics studies how people interact with their work environment. An ergonomic workstation reduces physical strain, keeps your body in a safe position, and helps you stay focused longer. Poor ergonomics is a real hazard — repetitive motions done incorrectly can cause injury over time, and an uncomfortable or cluttered workspace increases the chance of mistakes.</p>\n<p>Safe operations aren't about being overly cautious. They're about being <em>efficient and effective</em>. When you know the hazards and have a clear procedure, you work faster and better — with fewer costly mistakes.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037wn8ab",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Skipping the planning phase because assembly \"looks simple.\" Even straightforward assemblies can have hidden hazards — wrong torque on a bolt, a component installed in the wrong orientation, or static electricity damaging a sensitive circuit. Always review your operations before you begin.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037oc9cd",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method — Observe, Control, Verify</h2>\n<p>One of the most practical tools for managing hazards during assembly is the <strong>OCV method</strong>: <em>Observe, Control, Verify</em>. It's a three-step rhythm that keeps you from rushing past problems.</p>\n<ul>\n<li><strong>Observe:</strong> Before and during assembly, actively look for hazards. What could go wrong at this step? Are the parts within tolerance? Is the workspace clear and safe?</li>\n<li><strong>Control:</strong> Take action to reduce the identified risks. Use the right tools, apply the correct fit type, follow the prescribed procedure, and adjust your workspace as needed.</li>\n<li><strong>Verify:</strong> After each key operation, confirm that the step was completed correctly. Check dimensions, test connections, and document what you've done. Don't assume — confirm.</li>\n</ul>\n<p>The OCV cycle repeats throughout the entire assembly process. It's not a one-time checklist — it's an ongoing mindset. Think of it like a pilot's pre-flight checklist. Pilots don't skip steps because a flight \"looks routine.\" Every flight gets the same careful verification. Your assembly deserves the same respect.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037im0ef",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Flowchart of the OCV method: Observe (identify hazards) → Control (mitigate risks) → Verify (confirm correct assembly) → repeat."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037st1gh",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Make OCV a habit:</strong> During your next hands-on build, pause after each major operation and run through the three steps out loud — even if it feels slow at first. \"What did I observe? What did I control? What am I verifying?\" Speed comes with practice. Accuracy has to come first.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037dv2ij",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037sw3kl",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Assembly</h2>\n<p>There's a bigger reason to care about safe, careful assembly — and it goes beyond getting a good grade or impressing a client. When God placed humanity in creation, He gave us a responsibility: to tend and keep it (Genesis 2:15). That principle extends to everything we build. The materials you use come from the earth God made. The tools you work with represent resources and ingenuity He enabled. The product you assemble may one day be used by people He loves.</p>\n<p>Sloppy assembly isn't just an engineering problem — it's a stewardship problem. When you cut corners, you risk wasting materials, producing something unsafe, and failing the person who needed what you built. But when you assemble with care, precision, and intention, you honor both your craft and your Creator.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037bi4mn",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:15 —</strong> \"The Lord God took the man and put him in the Garden of Eden to work it and take care of it.\"</p><p>Work and care — both together. Engineering isn't just about making something. It's about making something <em>well</em>, and caring for what you've made. Every safe operation, every properly verified joint, every hazard you identify and mitigate — that's stewardship in action.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037dv5op",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037cu6qr",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ac7st",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a hazard and a risk?",
+      "html": "<p>A <strong>hazard</strong> is the source of potential harm — for example, a sharp metal edge. A <strong>risk</strong> is the combination of how likely that hazard is to cause a problem and how serious that problem would be. Engineers identify hazards first, then assess and mitigate the associated risks.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ac8uv",
+    "type": "accordion",
+    "data": {
+      "title": "When would you choose an interference fit over a clearance fit?",
+      "html": "<p>You would choose an <strong>interference fit</strong> when you need parts to stay permanently and firmly joined under load — like a bearing pressed into a wheel hub. You would choose a <strong>clearance fit</strong> when parts need to move relative to each other or be assembled and disassembled easily, like a drawer in a dresser.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ac9wx",
+    "type": "accordion",
+    "data": {
+      "title": "Walk through the OCV method using a real assembly example.",
+      "html": "<p>Imagine you're installing a bolt to join two structural panels.</p><ul><li><strong>Observe:</strong> Check that the bolt is the correct size, the threads are clean, and the panels are aligned within tolerance.</li><li><strong>Control:</strong> Use a calibrated torque wrench to apply exactly the specified force — not too loose, not too tight.</li><li><strong>Verify:</strong> Confirm the bolt is fully seated, check alignment of the panels, and record the torque value in your build log.</li></ul><p>Then move to the next operation and repeat the cycle.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c037ac0yz",
+    "type": "accordion",
+    "data": {
+      "title": "How does multiscale modeling connect to assembly hazards?",
+      "html": "<p>Multiscale modeling helps engineers trace a visible assembly problem back to its root cause at a smaller scale. For example, if two parts won't fit together correctly (macro observation), the cause might be that the material expanded due to temperature change (micro cause), or that surface roughness at a microscopic level is creating unexpected friction. By connecting scales, engineers can predict and prevent these hazards rather than just reacting after something fails.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

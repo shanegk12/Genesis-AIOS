@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newton's Laws Lab – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header .logo {
+    width: 38px; height: 38px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C; flex-shrink: 0;
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; color: #fff; }
+  header p { font-size: 0.78rem; color: #C9A84C; }
+
+  .screen { display: none; width: 100%; max-width: 780px; padding: 18px 16px; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ── */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.10);
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; color: #3a5270; margin-bottom: 18px; line-height: 1.6; }
+  .tabs-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .tab-badge {
+    background: #1B3A5C; color: #C9A84C;
+    border-radius: 20px; padding: 6px 16px;
+    font-size: 0.82rem; font-weight: 700;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    background: #C9A84C; color: #1B3A5C;
+    border: none; border-radius: 8px;
+    padding: 12px 28px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn:hover { background: #b8933e; }
+  .btn:active { transform: scale(0.97); }
+  .btn-secondary {
+    background: #1B3A5C; color: #fff;
+  }
+  .btn-secondary:hover { background: #14304e; }
+  .btn-sm { padding: 8px 18px; font-size: 0.88rem; }
+
+  /* ── SIM LAYOUT ── */
+  .sim-header {
+    background: #1B3A5C;
+    border-radius: 12px 12px 0 0;
+    padding: 14px 20px;
+    color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .sim-header h2 { font-size: 1.1rem; }
+  .law-badge {
+    background: #C9A84C; color: #1B3A5C;
+    border-radius: 6px; padding: 4px 12px;
+    font-size: 0.85rem; font-weight: 700;
+  }
+  .sim-body {
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+  }
+
+  /* ── CANVAS AREA ── */
+  .canvas-wrap {
+    background: #e8edf3;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin-bottom: 14px;
+  }
+  canvas { display: block; width: 100%; height: 100%; }
+
+  /* ── SLIDERS ── */
+  .controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  @media(max-width:500px){ .controls-grid { grid-template-columns: 1fr; } }
+  .ctrl-group label {
+    font-size: 0.82rem; font-weight: 700; color: #1B3A5C;
+    display: block; margin-bottom: 4px;
+  }
+  .ctrl-group input[type=range] {
+    width: 100%; accent-color: #C9A84C;
+  }
+  .ctrl-val {
+    font-size: 0.8rem; color: #5a7a9a; margin-top: 2px;
+  }
+
+  /* ── READOUT ── */
+  .readout-row {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .readout-box {
+    background: #f0f4f8;
+    border: 2px solid #1B3A5C;
+    border-radius: 8px;
+    padding: 8px 14px;
+    flex: 1; min-width: 100px; text-align: center;
+  }
+  .readout-box .rb-label { font-size: 0.72rem; color: #5a7a9a; font-weight: 600; text-transform: uppercase; }
+  .readout-box .rb-val { font-size: 1.3rem; font-weight: 900; color: #1B3A5C; }
+  .readout-box .rb-unit { font-size: 0.7rem; color: #8a9ab0; }
+
+  /* ── QUIZ / PROMPT ── */
+  .prompt-box {
+    background: #fff7e0;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 0.92rem; color: #1B3A5C; line-height: 1.5;
+  }
+  .prompt-box strong { color: #b8800a; }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .choice-btn {
+    background: #f0f4f8; border: 2px solid #c0ccd8;
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 0.9rem; color: #1B3A5C; cursor: pointer;
+    text-align: left; transition: border-color 0.2s, background 0.2s;
+  }
+  .choice-btn:hover { border-color: #C9A84C; background: #fdf6e3; }
+  .choice-btn.correct { background: #d4f4dd; border-color: #2eaa5c; color: #1a6636; }
+  .choice-btn.wrong { background: #fde8e8; border-color: #c03a3a; color: #7a1c1c; }
+  .choice-btn:disabled { cursor: default; }
+
+  .feedback-msg {
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; display: none;
+  }
+  .feedback-msg.show { display: block; }
+  .feedback-msg.ok { background: #d4f4dd; color: #1a6636; border: 1.5px solid #2eaa5c; }
+  .feedback-msg.bad { background: #fde8e8; color: #7a1c1c; border: 1.5px solid #c03a3a; }
+
+  /* ── NAV ROW ── */
+  .nav-row {
+    display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  }
+  .step-indicator { font-size: 0.82rem; color: #5a7a9a; font-weight: 600; }
+
+  /* ── SCORE SCREEN ── */
+  .score-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.12);
+    text-align: center;
+  }
+  .score-circle {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    border: 5px solid #C9A84C;
+  }
+  .score-circle .sc-num { font-size: 2.2rem; font-weight: 900; color: #C9A84C; line-height: 1; }
+  .score-circle .sc-denom { font-size: 0.85rem; color: #a0bcd0; }
+  .score-card h2 { font-size: 1.4rem; color: #1B3A5C; margin-bottom: 8px; }
+  .score-card p { font-size: 0.92rem; color: #3a5270; line-height: 1.6; max-width: 420px; margin: 0 auto 18px; }
+  .review-list { text-align: left; margin: 14px 0; }
+  .review-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 0; border-bottom: 1px solid #e8edf3;
+    font-size: 0.85rem; color: #1B3A5C;
+  }
+  .ri-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .faith-note {
+    background: #fdf6e3; border-radius: 8px; padding: 12px 16px;
+    font-size: 0.82rem; color: #7a5800; border-left: 3px solid #C9A84C;
+    margin-top: 14px; text-align: left;
+  }
+
+  /* progress bar */
+  .progress-bar-wrap { width: 100%; background: #dce6f0; border-radius: 6px; height: 7px; margin-top: 10px; }
+  .progress-bar-fill { height: 100%; border-radius: 6px; background: #C9A84C; transition: width 0.4s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">G</div>
+  <div>
+    <h1>Newton's Laws Lab</h1>
+    <p>Creationeering · Using Math &amp; Science as Tools</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-card" style="margin-top:24px;">
+    <h2>🔬 Newton's Laws Lab</h2>
+    <p>Engineers use math and science as their most important tools. In this lab you'll explore <strong>Newton's Three Laws of Motion</strong> — adjusting variables, watching what happens, and answering questions to earn points!</p>
+    <div class="tabs-row">
+      <span class="tab-badge">1st Law – Inertia</span>
+      <span class="tab-badge">2nd Law – F = ma</span>
+      <span class="tab-badge">3rd Law – Action-Reaction</span>
+    </div>
+    <p style="font-size:0.85rem;color:#5a7a9a;">3 simulations · 6 questions · earn up to 6 points</p>
+    <br>
+    <button class="btn" onclick="startLab()">Start the Lab →</button>
+  </div>
+</div>
+
+<!-- SIM SCREENS -->
+<div class="screen" id="screen-sim">
+  <div style="margin-top:16px;">
+    <div class="sim-header">
+      <div>
+        <h2 id="sim-title">Simulation</h2>
+        <div style="font-size:0.78rem;color:#a0bcd0;margin-top:2px;" id="sim-subtitle"></div>
+      </div>
+      <span class="law-badge" id="sim-law-badge">Law 1</span>
+    </div>
+    <div class="sim-body">
+
+      <!-- Canvas -->
+      <div class="canvas-wrap">
+        <canvas id="simCanvas" width="740" height="180"></canvas>
+      </div>
+
+      <!-- Controls (shown per step) -->
+      <div id="controls-law1" class="controls-grid" style="display:none;">
+        <div class="ctrl-group">
+          <label>🔷 Object Mass (kg)</label>
+          <input type="range" id="l1-mass" min="1" max="20" value="5" oninput="updateLaw1()">
+          <div class="ctrl-val" id="l1-mass-val">5 kg</div>
+        </div>
+        <div class="ctrl-group">
+          <label>💨 Applied Force (N)</label>
+          <input type="range" id="l1-force" min="0" max="50" value="0" oninput="updateLaw1()">
+          <div class="ctrl-val" id="l1-force-val">0 N</div>
+        </div>
+      </div>
+
+      <div id="controls-law2" class="controls-grid" style="display:none;">
+        <div class="ctrl-group">
+          <label>⚖️ Mass (kg)</label>
+          <input type="range" id="l2-mass" min="1" max="30" value="10" oninput="updateLaw2()">
+          <div class="ctrl-val" id="l2-mass-val">10 kg</div>
+        </div>
+        <div class="ctrl-group">
+          <label>💥 Force (N)</label>
+          <input type="range" id="l2-force" min="1" max="100" value="30" oninput="updateLaw2()">
+          <div class="ctrl-val" id="l2-force-val">30 N</div>
+        </div>
+      </div>
+
+      <div id="controls-law3" class="controls-grid" style="display:none;">
+        <div class="ctrl-group">
+          <label>🚀 Rocket Thrust (N)</label>
+          <input type="range" id="l3-thrust" min="10" max="200" value="80" oninput="updateLaw3()">
+          <div class="ctrl-val" id="l3-thrust-val">80 N</div>
+        </div>
+      </div>
+
+      <!-- Readouts -->
+      <div class="readout-row" id="readout-row"></div>
+
+      <!-- Prompt + choices -->
+      <div class="prompt-box" id="prompt-text"></div>
+      <div class="choices" id="choices-area"></div>
+      <div class="feedback-msg" id="feedback-msg"></div>
+
+      <!-- Nav -->
+      <div class="nav-row">
+        <span class="step-indicator" id="step-indicator"></span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-secondary btn-sm" id="btn-back" onclick="goBack()" style="display:none;">← Back</button>
+          <button class="btn btn-sm" id="btn-next" onclick="goNext()" disabled>Next →</button>
+        </div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE -->
+<div class="screen" id="screen-score">
+  <div class="score-card" style="margin-top:24px;">
+    <div class="score-circle">
+      <span class="sc-num" id="final-score">0</span>
+      <span class="sc-denom">/ 6</span>
+    </div>
+    <h2 id="score-headline">Great Work!</h2>
+    <p id="score-msg"></p>
+    <div class="review-list" id="review-list"></div>
+    <div class="faith-note">
+      ✝️ <strong>Faith Connection:</strong> Scientists and engineers often call mathematics the "Language of God." Just as you use English to share your thoughts, the mathematical laws Newton discovered reveal the order God built into His creation.
+    </div>
+    <br>
+    <button class="btn" onclick="restartLab()">Try Again 🔁</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const STEPS = [
+  {
+    law: 1,
+    badge: "Law 1 – Inertia",
+    title: "First Law: Inertia",
+    subtitle: "An object stays at rest (or in motion) unless a force acts on it.",
+    controls: "controls-law1",
+    drawFn: drawLaw1,
+    updateFn: updateLaw1,
+    readouts: ["state","force-label"],
+    prompt: "You set the Force to <strong>0 N</strong>. What will happen to the stationary box?",
+    question: "According to Newton's First Law, what keeps an object at rest — at rest?",
+    choices: [
+      { text: "Gravity pulls it down into the floor", correct: false },
+      { text: "Inertia — objects resist changes in motion", correct: true },
+      { text: "Friction pushes back against any force", correct: false },
+      { text: "The object has no mass", correct: false }
+    ],
+    explanation: "Inertia is the tendency of an object to resist any change in its state of motion. No force = no change!"
+  },
+  {
+    law: 1,
+    badge: "Law 1 – Inertia",
+    title: "First Law: Object in Motion",
+    subtitle: "An object in motion stays in motion unless acted upon by a force.",
+    controls: "controls-law1",
+    drawFn: drawLaw1,
+    updateFn: updateLaw1,
+    readouts: ["state","force-label"],
+    prompt: "The box is sliding. If you <strong>remove all friction and forces</strong>, what happens next?",
+    question: "If a hockey puck slides on a perfectly frictionless ice surface with NO forces acting on it, it will…",
+    choices: [
+      { text: "Gradually slow down and stop", correct: false },
+      { text: "Speed up over time", correct: false },
+      { text: "Keep moving at the same speed forever", correct: true },
+      { text: "Move in a circle", correct: false }
+    ],
+    explanation: "With zero net force, inertia keeps the puck moving at constant velocity — forever. That's Newton's First Law!"
+  },
+  {
+    law: 2,
+    badge: "Law 2 – F = ma",
+    title: "Second Law: F = ma",
+    subtitle: "Force = Mass × Acceleration. More force → more acceleration.",
+    controls: "controls-law2",
+    drawFn: drawLaw2,
+    updateFn: updateLaw2,
+    readouts: ["force2","mass2","accel2"],
+    prompt: "Use the sliders to change <strong>Force</strong> and <strong>Mass</strong>. Watch the acceleration change using <em>F = ma</em>.",
+    question: "A 10 kg box is pushed with 50 N of force. What is its acceleration?",
+    choices: [
+      { text: "500 m/s²", correct: false },
+      { text: "5 m/s²", correct: true },
+      { text: "0.2 m/s²", correct: false },
+      { text: "10 m/s²", correct: false }
+    ],
+    explanation: "F = ma → a = F ÷ m = 50 ÷ 10 = 5 m/s². Algebra lets engineers solve for any variable!"
+  },
+  {
+    law: 2,
+    badge: "Law 2 – F = ma",
+    title: "Second Law: Mass vs. Acceleration",
+    subtitle: "Heavier objects need more force to reach the same acceleration.",
+    controls: "controls-law2",
+    drawFn: drawLaw2,
+    updateFn: updateLaw2,
+    readouts: ["force2","mass2","accel2"],
+    prompt: "Keep the <strong>Force constant</strong> and increase Mass. Watch what happens to acceleration.",
+    question: "If you double the mass of an object but keep the force the same, the acceleration will…",
+    choices: [
+      { text: "Double", correct: false },
+      { text: "Stay the same", correct: false },
+      { text: "Quadruple", correct: false },
+      { text: "Be cut in half", correct: true }
+    ],
+    explanation: "a = F ÷ m. If m doubles, a is halved. Force and mass have an inverse relationship on acceleration."
+  },
+  {
+    law: 3,
+    badge: "Law 3 – Action-Reaction",
+    title: "Third Law: Action-Reaction",
+    subtitle: "For every action, there is an equal and opposite reaction.",
+    controls: "controls-law3",
+    drawFn: drawLaw3,
+    updateFn: updateLaw3,
+    readouts: ["thrust3","reaction3"],
+    prompt: "Adjust the rocket thrust. Watch the <strong>exhaust reaction force</strong> — it's always equal and opposite!",
+    question: "A rocket expels exhaust gas downward with 500 N of force. What is the upward force on the rocket?",
+    choices: [
+      { text: "250 N upward", correct: false },
+      { text: "0 N — the gas just falls away", correct: false },
+      { text: "500 N upward", correct: true },
+      { text: "1000 N upward", correct: false }
+    ],
+    explanation: "Newton's Third Law: every action has an equal and opposite reaction. 500 N down = 500 N up on the rocket!"
+  },
+  {
+    law: 3,
+    badge: "Law 3 – Action-Reaction",
+    title: "Third Law: Real World",
+    subtitle: "Action-reaction pairs are everywhere in engineering!",
+    controls: "controls-law3",
+    drawFn: drawLaw3,
+    updateFn: updateLaw3,
+    readouts: ["thrust3","reaction3"],
+    prompt: "Think about action-reaction in everyday life. Engineers use this law to design rockets, jets, and even swimming fins!",
+    question: "Which of the following is the best example of Newton's Third Law?",
+    choices: [
+      { text: "A ball rolling down a hill (gravity → speed)", correct: false },
+      { text: "A skateboard rolling forward when you push your foot backward against the ground", correct: true },
+      { text: "A book sitting still on a table", correct: false },
+      { text: "A car accelerating when you press the gas pedal", correct: false }
+    ],
+    explanation: "You push the ground backward (action) → the ground pushes you forward (reaction). Classic Third Law!"
+  }
+];
+
+let currentStep = 0;
+let score = 0;
+let answered = [];
+let results = [];
+let animFrameId = null;
+
+// ── ANIMATION STATE ──
+let law1State = { x: 80, vel: 0 };
+let law2State = { x: 60, vel: 0, accel: 0 };
+let law3State = { rocketY: 130, exhaustY: 130 };
+let animTick = 0;
+
+// ── INIT ──
+function startLab() {
+  currentStep = 0; score = 0;
+  answered = new Array(STEPS.length).fill(false);
+  results = new Array(STEPS.length).fill(null);
+  showScreen('screen-sim');
+  loadStep(0);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── STEP LOADER ──
+function loadStep(idx) {
+  const s = STEPS[idx];
+  if (animFrameId) cancelAnimationFrame(animFrameId);
+
+  // reset anim states
+  law1State = { x: 80, vel: 0 };
+  law2State = { x: 60, vel: 0, accel: 0 };
+  law3State = { rocketY: 90, exhaustY: 130 };
+  animTick = 0;
+
+  // header
+  document.getElementById('sim-title').textContent = s.title;
+  document.getElementById('sim-subtitle').textContent = s.subtitle;
+  document.getElementById('sim-law-badge').textContent = s.badge;
+
+  // hide all controls
+  ['controls-law1','controls-law2','controls-law3'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  document.getElementById(s.controls).style.display = 'grid';
+
+  // call update fn to set readouts
+  s.updateFn();
+
+  // prompt
+  document.getElementById('prompt-text').innerHTML = s.prompt;
+
+  // choices
+  const ca = document.getElementById('choices-area');
+  ca.innerHTML = '';
+  s.choices.forEach((ch, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = ch.text;
+    btn.onclick = () => answerQuestion(i);
+    ca.appendChild(btn);
+  });
+
+  // feedback
+  const fb = document.getElementById('feedback-msg');
+  fb.className = 'feedback-msg';
+  fb.textContent = '';
+
+  // nav
+  document.getElementById('btn-back').style.display = idx > 0 ? 'inline-block' : 'none';
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.disabled = !answered[idx];
+  nextBtn.textContent = idx === STEPS.length - 1 ? 'See Results 🎉' : 'Next →';
+
+  // step indicator
+  document.getElementById('step-indicator').textContent = `Step ${idx + 1} of ${STEPS.length}`;
+  document.getElementById('progress-fill').style.width = ((idx) / STEPS.length * 100) + '%';
+
+  // restore answered state
+  if (answered[idx] && results[idx] !== null) {
+    restoreAnswerState(idx);
+  }
+
+  // start animation
+  requestAnimFrame(s.drawFn);
+}
+
+function requestAnimFrame(fn) {
+  function loop() {
+    animTick++;
+    fn();
+    animFrameId = requestAnimationFrame(loop);
+  }
+  animFrameId = requestAnimationFrame(loop);
+}
+
+// ── ANSWER ──
+function answerQuestion(choiceIdx) {
+  if (answered[currentStep]) return;
+  const s = STEPS[currentStep];
+  const correct = s.choices[choiceIdx].correct;
+  answered[currentStep] = true;
+  results[currentStep] = correct;
+  if (correct) score++;
+
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (s.choices[i].correct) btn.classList.add('correct');
+    else if (i === choiceIdx && !correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback-msg');
+  fb.className = 'feedback-msg show ' + (correct ? 'ok' : 'bad');
+  fb.textContent = (correct ? '✅ Correct! ' : '❌ Not quite. ') + s.explanation;
+
+  document.getElementById('btn-next').disabled = false;
+}
+
+function restoreAnswerState(idx) {
+  const s = STEPS[idx];
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (s.choices[i].correct) btn.classList.add('correct');
+  });
+  const fb = document.getElementById('feedback-msg');
+  const correct = results[idx];
+  fb.className = 'feedback-msg show ' + (correct ? 'ok' : 'bad');
+  fb.textContent = (correct ? '✅ Correct! ' : '❌ Not quite. ') + s.explanation;
+}
+
+function goNext() {
+  if (currentStep < STEPS.length - 1) {
+    currentStep++;
+    loadStep(currentStep);
+  } else {
+    showResults();
+  }
+}
+
+function goBack() {
+  if (currentStep > 0) {
+    currentStep--;
+    loadStep(currentStep);
+  }
+}
+
+// ── READOUT HELPER ──
+function setReadouts(items) {
+  const row = document.getElementById('readout-row');
+  row.innerHTML = '';
+  items.forEach(item => {
+    const box = document.createElement('div');
+    box.className = 'readout-box';
+    box.innerHTML = `<div class="rb-label">${item.label}</div>
+                     <div class="rb-val">${item.val}</div>
+                     <div class="rb-unit">${item.unit}</div>`;
+    row.appendChild(box);
+  });
+}
+
+// ── LAW 1 UPDATE ──
+function updateLaw1() {
+  const mass = parseFloat(document.getElementById('l1-mass').value);
+  const force = parseFloat(document.getElementById('l1-force').value);
+  document.getElementById('l1-mass-val').textContent = mass + ' kg';
+  document.getElementById('l1-force-val').textContent = force + ' N';
+  const state = force === 0 ? 'AT REST' : 'MOVING';
+  setReadouts([
+    { label: 'Object Mass', val: mass, unit: 'kg' },
+    { label: 'Applied Force', val: force, unit: 'N' },
+    { label: 'State', val: state, unit: '' }
+  ]);
+}
+
+// ── LAW 2 UPDATE ──
+function updateLaw2() {
+  const mass = parseFloat(document.getElementById('l2-mass').value);
+  const force = parseFloat(document.getElementById('l2-force').value);
+  document.getElementById('l2-mass-val').textContent = mass + ' kg';
+  document.getElementById('l2-force-val').textContent = force + ' N';
+  const accel = (force / mass).toFixed(2);
+  setReadouts([
+    { label: 'Force (F)', val: force, unit: 'N' },
+    { label: 'Mass (m)', val: mass, unit: 'kg' },
+    { label: 'Acceleration (a)', val: accel, unit: 'm/s²' }
+  ]);
+}
+
+// ── LAW 3 UPDATE ──
+function updateLaw3() {
+  const thrust = parseFloat(document.getElementById('l3-thrust').value);
+  document.getElementById('l3-thrust-val').textContent = thrust + ' N';
+  setReadouts([
+    { label: 'Action (Exhaust)', val: thrust, unit: 'N ↓' },
+    { label: 'Reaction (Rocket)', val: thrust, unit: 'N ↑' }
+  ]);
+}
+
+// ── CANVAS DRAW FN ──
+function getCanvas() {
+  const canvas = document.getElementById('simCanvas');
+  const dpr = window.devicePixelRatio || 1;
+  const wrap = canvas.parentElement;
+  const w = wrap.clientWidth;
+  const h = wrap.clientHeight;
+  if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w, h };
+}
+
+function drawGround(ctx, w, h) {
+  ctx.fillStyle = '#c8d6e5';
+  ctx.fillRect(0, h - 28, w, 28);
+  ctx.strokeStyle = '#8aa0ba';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, h - 28); ctx.lineTo(w, h - 28); ctx.stroke();
+}
+
+function drawLaw1() {
+  const { ctx, w, h } = getCanvas();
+  const force = parseFloat(document.getElementById('l1-force').value);
+  const mass = parseFloat(document.getElementById('l1-mass').value);
+  ctx.clearRect(0, 0, w, h);
+  // sky
+  ctx.fillStyle = '#e8f0f8';
+  ctx.fillRect(0, 0, w, h);
+  drawGround(ctx, w, h);
+
+  // physics
+  const accel = force / mass;
+  law1State.vel += accel * 0.06;
+  law1State.vel *= 0.97; // slight damping
+  if (force === 0) law1State.vel *= 0.94;
+  law1State.x += law1State.vel;
+  if (law1State.x > w - 50) { law1State.x = w - 50; law1State.vel = 0; }
+  if (law1State.x < 40) { law1State.x = 40; law1State.vel = 0; }
+
+  const bx = law1State.x;
+  const by = h - 28 - 44;
+  const sz = Math.max(30, Math.min(50, 20 + mass * 1.5));
+
+  // box
+  ctx.fillStyle = '#1B3A5C';
+  ctx.beginPath();
+  ctx.roundRect(bx - sz/2, by + (50-sz), sz, sz, 4);
+  ctx.fill();
+
+  // force arrow
+  if (force > 0) {
+    const arrowLen = Math.min(force * 1.5, 90);
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(bx - sz/2 - 8, by + (50-sz) + sz/2);
+    ctx.lineTo(bx - sz/2 - 8 - arrowLen, by + (50-sz) + sz/2);
+    ctx.stroke();
+    // arrowhead
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath();
+    ctx.moveTo(bx - sz/2 - 4, by + (50-sz) + sz/2);
+    ctx.lineTo(bx - sz/2 - 14, by + (50-sz) + sz/2 - 7);
+    ctx.lineTo(bx - sz/2 - 14, by + (50-sz) + sz/2 + 7);
+    ctx.fill();
+    ctx.fillStyle = '#C9A84C';
+    ctx.font = 'bold 13px Segoe UI';
+    ctx.fillText(force + ' N', bx - sz/2 - 8 - arrowLen/2 - 14, by + (50-sz) + sz/2 - 10);
+  }
+
+  // label
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText(mass+'kg', bx, by + (50-sz) + sz/2 + 4);
+  ctx.textAlign = 'left';
+
+  // state label
+  ctx.fillStyle = '#1B3A5C';
+  ctx.font = 'bold 13px Segoe UI';
+  const stateLabel = (Math.abs(law1State.vel) < 0.3 && force === 0) ? '⏸ AT REST' : '▶ IN MOTION';
+  ctx.fillText(stateLabel, 10, 22);
+}
+
+function drawLaw2() {
+  const { ctx, w, h } = getCanvas();
+  const mass = parseFloat(document.getElementById('l2-mass').value);
+  const force = parseFloat(document.getElementById('l2-force').value);
+  const accel = force / mass;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#e8f0f8';
+  ctx.fillRect(0, 0, w, h);
+  drawGround(ctx, w, h);
+
+  // object moves with accel
+  law2State.accel = accel;
+  law2State.vel += accel * 0.04;
+  law2State.vel = Math.min(law2State.vel, 8);
+  law2State.x += law2State.vel;
+  if (law2State.x > w - 40) law2State.x = 40;
+
+  const sz = Math.max(28, Math.min(55, 15 + mass * 1.2));
+  const bx = law2State.x;
+  const by = h - 28 - sz;
+
+  // object
+  ctx.fillStyle = '#1B3A5C';
+  ctx.beginPath();
+  ctx.roundRect(bx - sz/2, by, sz, sz, 5);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText(mass+'kg', bx, by + sz/2 + 4);
+
+  // force arrow
+  const aLen = Math.min(force * 0.7, 100);
+  ctx.strokeStyle = '#C9A84C'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(bx - sz/2 - 6, by + sz/2);
+  ctx.lineTo(bx - sz/2 - 6 - aLen, by + sz/2);
+  ctx.stroke();
+  ctx.fillStyle = '#C9A84C';
+  ctx.beginPath();
+  ctx.moveTo(bx - sz/2, by + sz/2);
+  ctx.lineTo(bx - sz/2 - 12, by + sz/2 - 7);
+  ctx.lineTo(bx - sz/2 - 12, by + sz/2 + 7);
+  ctx.fill();
+
+  // velocity arrows (speed lines)
+  ctx.strokeStyle = 'rgba(200,168,76,0.35)'; ctx.lineWidth = 2;
+  for (let i = 1; i <= 3; i++) {
+    ctx.beginPath();
+    ctx.moveTo(bx + sz/2 + i*10, by + sz * 0.35);
+    ctx.lineTo(bx + sz/2 + i*10, by + sz * 0.65);
+    ctx.stroke();
+  }
+
+  // formula overlay
+  ctx.fillStyle = 'rgba(27,58,92,0.85)';
+  ctx.beginPath();
+  ctx.roundRect(w - 170, 10, 158, 54, 8);
+  ctx.fill();
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 13px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText('F = m × a', w - 91, 30);
+  ctx.fillStyle = '#fff';
+  ctx.font = '12px Segoe UI';
+  ctx.fillText(force+'N = '+mass+'kg × '+accel.toFixed(2)+'m/s²', w - 91, 50);
+  ctx.textAlign = 'left';
+}
+
+function drawLaw3() {
+  const { ctx, w, h } = getCanvas();
+  const thrust = parseFloat(document.getElementById('l3-thrust').value);
+  ctx.clearRect(0, 0, w, h);
+
+  // space bg
+  const grd = ctx.createLinearGradient(0, 0, 0, h);
+  grd.addColorStop(0, '#0a1628');
+  grd.addColorStop(1, '#1B3A5C');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, w, h);
+
+  // stars
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  const starPositions = [[30,20],[80,50],[140,15],[200,40],[260,10],[330,55],[420,18],[500,45],[580,12],[650,35],[700,58]];
+  starPositions.forEach(([sx,sy]) => {
+    ctx.beginPath(); ctx.arc(sx, sy, 1.2, 0, Math.PI*2); ctx.fill();
+  });
+
+  // rocket rising
+  const riseSpeed = thrust * 0.015;
+  law3State.rocketY -= riseSpeed * 0.5;
+  if (law3State.rocketY < 20) law3State.rocketY = h - 20;
+
+  const rx = w / 2;
+  const ry = law3State.rocketY;
+
+  // exhaust flame
+  const flameLen = thrust * 0.35;
+  const flameW = 14 + thrust * 0.04;
+  const gradient = ctx.createLinearGradient(rx, ry + 22, rx, ry + 22 + flameLen);
+  gradient.addColorStop(0, '#ff9500');
+  gradient.addColorStop(0.5, '#ffcc00');
+  gradient.addColorStop(1, 'rgba(255,200,0,0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.moveTo(rx - flameW/2, ry + 22);
+  ctx.lineTo(rx, ry + 22 + flameLen + Math.sin(animTick * 0.2) * 8);
+  ctx.lineTo(rx + flameW/2, ry + 22);
+  ctx.fill();
+
+  // rocket body
+  ctx.fillStyle = '#e0e8f0';
+  ctx.beginPath();
+  ctx.roundRect(rx - 14, ry - 22, 28, 44, [14, 14, 4, 4]);
+  ctx.fill();
+  // nose cone
+  ctx.fillStyle = '#C9A84C';
+  ctx.beginPath();
+  ctx.moveTo(rx, ry - 38);
+  ctx.lineTo(rx - 10, ry - 18);
+  ctx.lineTo(rx + 10, ry - 18);
+  ctx.fill();
+  // fins
+  ctx.fillStyle = '#1B3A5C';
+  ctx.beginPath();
+  ctx.moveTo(rx - 14, ry + 18);
+  ctx.lineTo(rx - 24, ry + 30);
+  ctx.lineTo(rx - 14, ry + 22);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(rx + 14, ry + 18);
+  ctx.lineTo(rx + 24, ry + 30);
+  ctx.lineTo(rx + 14, ry + 22);
+  ctx.fill();
+
+  // Action arrow (down)
+  ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(rx + 40, ry + 10);
+  ctx.lineTo(rx + 40, ry + 10 + Math.min(thrust * 0.3, 60));
+  ctx.stroke();
+  ctx.fillStyle = '#ff6b6b';
+  const ad = ry + 10 + Math.min(thrust * 0.3, 60);
+  ctx.beginPath();
+  ctx.moveTo(rx + 40, ad + 10);
+  ctx.lineTo(rx + 34, ad);
+  ctx.lineTo(rx + 46, ad);
+  ctx.fill();
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.fillText('Action', rx + 44, ry + 14);
+
+  // Reaction arrow (up)
+  ctx.strokeStyle = '#4ecb8b'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(rx - 40, ry + 10);
+  ctx.lineTo(rx - 40, ry + 10 - Math.min(thrust * 0.3, 60));
+  ctx.stroke();
+  ctx.fillStyle = '#4ecb8b';
+  const ru = ry + 10 - Math.min(thrust * 0.3, 60);
+  ctx.beginPath();
+  ctx.moveTo(rx - 40, ru - 10);
+  ctx.lineTo(rx - 46, ru);
+  ctx.lineTo(rx - 34, ru);
+  ctx.fill();
+  ctx.fillStyle = '#4ecb8b';
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.fillText('Reaction', rx - 80, ry + 14);
+
+  // thrust label
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = 'bold 12px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText(thrust + ' N', rx, h - 10);
+  ctx.textAlign = 'left';
+}
+
+// ── RESULTS SCREEN ──
+function showResults() {
+  if (animFrameId) cancelAnimationFrame(animFrameId);
+  document.getElementById('final-score').textContent = score;
+
+  const headlines = ['Keep Practicing!', 'Good Effort!', 'Nice Work!', 'Great Job!', 'Excellent!', 'Perfect Score! 🏆'];
+  const msgs = [
+    'Review Newton\'s Three Laws and try again. You\'ve got this!',
+    'You\'re building momentum! A bit more review and you\'ll nail it.',
+    'Solid understanding! Review any you missed and try again.',
+    'You\'re thinking like an engineer! Strong work on the laws of motion.',
+    'Outstanding! You have a strong command of Newton\'s Laws.',
+    'Flawless! You\'re ready to engineer like a pro — God\'s math is no mystery to you!'
+  ];
+
+  document.getElementById('score-headline').textContent = headlines[score] || 'Good Work!';
+  document.getElementById('score-msg').textContent = msgs[score] || '';
+
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = '';
+  STEPS.forEach((s, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item';
+    item.innerHTML = `<span class="ri-icon">${results[i] ? '✅' : '❌'}</span>
+      <div><strong>${s.title}</strong><br><span style="color:#5a7a9a;">${s.explanation}</span></div>`;
+    reviewList.appendChild(item);
+  });
+
+  showScreen('screen-score');
+}
+
+function restartLab() {
+  startLab();
+}
+
+// init sliders on page load
+window.onload = function() {
+  // ensure CanvasRenderingContext2D roundRect polyfill
+  if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+      if (typeof r === 'number') r = [r, r, r, r];
+      else if (r.length === 2) r = [r[0], r[1], r[0], r[1]];
+      this.beginPath();
+      this.moveTo(x + r[0], y);
+      this.lineTo(x + w - r[1], y);
+      this.arcTo(x + w, y, x + w, y + r[1], r[1]);
+      this.lineTo(x + w, y + h - r[2]);
+      this.arcTo(x + w, y + h, x + w - r[2], y + h, r[2]);
+      this.lineTo(x + r[3], y + h);
+      this.arcTo(x, y + h, x, y + h - r[3], r[3]);
+      this.lineTo(x, y + r[0]);
+      this.arcTo(x, y, x + r[0], y, r[0]);
+      this.closePath();
+      return this;
+    };
+  }
+};
+</script>
+</body>
+</html>

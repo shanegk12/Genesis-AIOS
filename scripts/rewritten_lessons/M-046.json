@@ -1,0 +1,277 @@
+[
+  {
+    "id": "m046t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Post-Build Systems</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, <em>Component Alignment and Quality</em>, you focused on the precise details of assembling your mousetrap car — getting axles, wheels, and propulsion systems lined up so your car performs at its best right from the first run. That precision matters. But great engineers don't stop thinking when the race ends.</p><p>Today we're moving into the <strong>Sustainability</strong> phase of Creationeering™. You'll explore what happens to your mousetrap car <em>after</em> the race is over — how its materials can be reused, what its environmental footprint looks like, and how thoughtful design choices now can reduce waste later. Real-world engineers design products with their entire lifecycle in mind, from the first sketch all the way to what happens when the product is retired. This lesson challenges you to do the same.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define <strong>sustainability</strong> in an engineering context and explain why it matters to product design.</li><li>Analyze the materials in their mousetrap car for reuse, repurposing, or recycling potential.</li><li>Identify end-of-life scenarios for their car and propose design modifications that improve sustainability.</li><li>Apply the OCV method (Objectives, Constraints, Variables) to a sustainability-focused design decision.</li><li>Reflect on the biblical principle of stewardship as it applies to responsible use of materials in engineering projects.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Sustainability",
+          "definition": "The ability of an engineered system to use resources in a way that can continue for future generations, without depleting materials or harming the environment."
+        },
+        {
+          "term": "Lifecycle",
+          "definition": "The stages a product goes through from creation and use to eventual disposal or reuse."
+        },
+        {
+          "term": "Recycling",
+          "definition": "The process of converting waste materials into new materials and objects."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible oversight and protection of something worth preserving. In a biblical context, humanity's role in caring for God's creation."
+        },
+        {
+          "term": "Material Science",
+          "definition": "The interdisciplinary field that studies the properties of materials and how they can be used in engineering applications."
+        },
+        {
+          "term": "Circular Economy",
+          "definition": "An economic system designed to eliminate waste by keeping resources in use for as long as possible."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Enduring Design of Creation</h2><p>Here's a truth worth sitting with: <em>\"The earth is the Lord's, and everything in it, the world, and all who live in it\"</em> (Psalm 24:1, NIV). Every piece of balsa wood, every rubber band, every steel axle in your mousetrap car — it all belongs to God first. That changes how you think about what happens to those materials after the race.</p><p>Look at the world God designed and you'll notice something remarkable: almost nothing is truly wasted. Water evaporates, condenses, and falls again. Carbon moves through plants, animals, and soil in an endless loop. God built creation with built-in renewal systems — and as people made in His image, we're called to reflect that same kind of thoughtful, long-term design thinking in our own work.</p><p>When engineers talk about sustainability, they're really asking the same question stewardship asks: <em>How do we use what we've been given in a way that honors its value and preserves it for others?</em> That's not just an environmental idea — it's a deeply biblical one.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Psalm 24:1 (NIV):</strong> \"The earth is the Lord's, and everything in it, the world, and all who live in it.\" As engineers and designers, stewardship means thinking beyond the race — and asking how your creation can honor God's ownership of every material you touch.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Thinking in Lifecycles</h2><p>Most beginning engineers focus on one moment: will it work on race day? But professional engineers think in <strong>lifecycles</strong>. A product's lifecycle has three broad phases:</p><ul><li><strong>Creation</strong> — the materials are gathered, shaped, and assembled into something useful.</li><li><strong>Use</strong> — the product does its job, hopefully for a long time.</li><li><strong>End of Life</strong> — the product is retired. What happens next? Is it thrown away? Can its parts be recovered?</li></ul><p>Your mousetrap car has gone through the first two phases. Now it's time to think about the third. When you zoom out and see your build as part of a larger system — not just a one-time project — you start making smarter decisions about materials, connections, and design from the very beginning.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the three lifecycle phases of a product — Creation, Use, and End of Life — arranged in a circular loop with arrows indicating how materials can cycle back into new creations."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Analyzing Your Mousetrap Car's Materials</h2><p>Take a close look at your finished car. What is it actually made of? Most mousetrap cars include a mix of materials — wood, metal springs, rubber bands, plastic wheels, string, and sometimes adhesives. Each material behaves differently at end of life.</p><ul><li><strong>Wood (balsa or craft wood)</strong> — biodegradable; can also be reused in new builds if it's not damaged.</li><li><strong>Metal (axles, mousetrap spring)</strong> — highly recyclable; scrap metal can be melted and reformed into new products.</li><li><strong>Rubber bands or tubing</strong> — harder to recycle; often end up in landfill, but can sometimes be repurposed.</li><li><strong>Plastic wheels or CDs</strong> — recyclable in many municipal programs depending on plastic type; long-lasting if stored properly.</li><li><strong>Hot glue or adhesives</strong> — typically not recyclable and can contaminate other materials, making them harder to recover.</li></ul><p>A key insight from <strong>material science</strong> is that the way you join materials matters as much as the materials themselves. Gluing two parts together permanently often means neither part can be recovered cleanly. Mechanical fasteners — screws, clips, friction fits — keep parts separable, which is exactly what a circular economy needs.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Design for Disassembly:</strong> When you plan your next build, consider using mechanical connections (screws, clips, or friction-fit axle holders) instead of permanent adhesives wherever possible. This one habit dramatically increases how much of your car can be recovered and reused — and it's standard practice in sustainable product design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Sustainability</h2><p>You've already used the <strong>OCV method</strong> — Objectives, Constraints, and Variables — to make design decisions during your build. Now apply that same thinking to a sustainability question. Here's an example scenario:</p><p><strong>Scenario:</strong> After the race, you want to recover as many materials as possible from your mousetrap car to use in a future project.</p><ul><li><strong>Objective:</strong> Maximize the percentage of car materials that can be cleanly separated and reused.</li><li><strong>Constraints:</strong> You cannot spend more than 15 minutes disassembling the car; you must keep the mousetrap mechanism intact so it can be reused.</li><li><strong>Variables:</strong> Which adhesives or fasteners were used; whether axles were glued or press-fit; how wheels were attached.</li></ul><p>Running this kind of analysis before you build — not after — is what separates reactive engineering from <em>proactive</em> engineering. When you plan for end-of-life before you even pick up a glue gun, you build smarter from the start.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sustainability in the Circular Economy</h2><p>The concept of a <strong>circular economy</strong> flips the traditional \"take, make, throw away\" model on its head. Instead of a straight line from raw material to trash, the goal is a loop — where the output of one process becomes the input for the next.</p><p>Think about how a mousetrap car fits into that idea. The wood came from a tree. The metal came from ore in the ground. When your car reaches the end of its useful life, what if those materials went back into the system — the wood composted into soil, the metal melted into new axles for someone else's car? That's the circular economy in action, and it mirrors something God built into nature from the very beginning: nothing is wasted, everything has a next chapter.</p><p>Engineers who design with a circular economy mindset ask questions like:</p><ul><li>Can this part be easily replaced when it wears out, extending the life of the whole product?</li><li>Are the materials I'm choosing widely recyclable, or will they end up in a landfill?</li><li>Could someone else find value in this product after I'm done with it?</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison: on the left, a linear economy diagram showing raw materials flowing to a product and then to a landfill; on the right, a circular economy diagram showing materials looping back from end-of-life into new products."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Proposing Sustainable Design Modifications</h2><p>Now it's your turn to think like a sustainability engineer. Look at your completed mousetrap car and ask: if you were to build version 2.0 with sustainability in mind from day one, what would you change?</p><p>Here are some directions to explore:</p><ul><li><strong>Material substitution</strong> — Could you swap a non-recyclable plastic component for a wood or metal alternative that's easier to recover?</li><li><strong>Modular design</strong> — Could you design the car so the drivetrain, frame, and propulsion system are separate modules that can be swapped out independently rather than rebuilt from scratch?</li><li><strong>Reduced adhesive use</strong> — Where did you rely on glue that could instead be a press fit, a zip tie, or a screw?</li><li><strong>Repurposed components</strong> — Could any parts of your car be directly used in your next engineering project without modification?</li></ul><p>These aren't just eco-friendly ideas — they're professional engineering practices. Companies like Toyota and Apple now design entire product families with material recovery in mind because it's both responsible and cost-effective. Good stewardship and good engineering turn out to be the same thing.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Misconception:</strong> Sustainability doesn't mean your design has to be weaker or slower. Many sustainable material choices — like replacing bulky plastic parts with precisely shaped wood components — actually improve performance while reducing waste. Don't assume you have to trade function for responsibility.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship as an Engineering Principle</h2><p>Stewardship isn't just a Sunday morning idea — it's a design philosophy. When you accept that the materials in your hands belong to God, you naturally start asking better questions: <em>Am I using this wisely? Could someone else benefit from this after I'm done? Am I creating unnecessary waste?</em></p><p>These are the same questions top sustainability engineers ask every day. The Creationeering™ framework brings them together, connecting your faith to your technical work in a way that makes both stronger. Every design decision you make — every joint, every material choice, every fastener — is an opportunity to reflect God's character as a wise and careful creator.</p><p>As you complete this mousetrap car project, carry this forward: the best engineers don't just build things that work. They build things that last, that can be renewed, and that leave the world a little better than they found it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m046a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Examples of Sustainable Engineering",
+      "html": "<p>Want to see these ideas in action beyond the classroom? Here are a few real examples of engineers applying lifecycle thinking and circular economy principles:</p><ul><li><strong>Patagonia (outdoor gear)</strong> — runs a repair and resale program so customers can extend the life of their products instead of replacing them. They also use recycled materials in new product lines.</li><li><strong>Interface (carpet manufacturing)</strong> — pioneered a \"take-back\" program where old carpet tiles are collected, broken down, and turned into new tiles. Their goal is zero waste to landfill.</li><li><strong>Renault (automotive)</strong> — operates a factory in France dedicated entirely to remanufacturing — taking used car parts, restoring them to original spec, and reselling them at a fraction of the cost of new parts.</li></ul><p>Each of these companies discovered that designing for sustainability didn't hurt their bottom line — it strengthened it. Good stewardship and good business turned out to be the same direction.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

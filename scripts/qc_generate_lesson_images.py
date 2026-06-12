@@ -30,7 +30,22 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 LIVE_URL     = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-PLATFORM_KEY = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
+def _get_platform_key() -> str:
+    """Load platform API key from .env — never hardcode in source."""
+    import os as _os
+    from pathlib import Path as _Path
+    k = _os.environ.get('PIPELINE_KEY') or _os.environ.get('PLATFORM_KEY', '')
+    if k:
+        return k
+    for _n in ['.env', '.env.local']:
+        _p = _Path(__file__).parent.parent / _n
+        if _p.exists():
+            for _line in _p.read_text(encoding='utf-8').splitlines():
+                _line = _line.strip()
+                if _line.startswith(('PIPELINE_KEY=', 'PLATFORM_KEY=')) and '=' in _line:
+                    return _line.split('=', 1)[1].strip().strip('""')
+    return ''
+PLATFORM_KEY = _get_platform_key()
 MANIFEST_PATH = Path(__file__).parent / "lessons_manifest.json"
 LOG_PATH      = Path(__file__).parent / "image_generation_log.json"
 LOGO_PATH     = Path(__file__).parent.parent / "references" / "gk12-logo.PNG"
@@ -47,12 +62,24 @@ FAL_MODELS = {
 }
 FAL_BASE = "https://fal.run"
 
-# Lessons confirmed to have empty image blocks
+# Lessons that need image generation — either existing empty src blocks or
+# zero image blocks altogether (insert mode auto-triggers for the latter).
+# NOTE: Mousetrap screenshot-crop lessons (M-002..M-006, M-011, M-012, M-014,
+# M-018, M-019) excluded — handled by mousetrap_crop_images.py.
 EMPTY_IMAGE_LESSONS = [
+    # Creationeering — originally had empty src blocks
     "C-001","C-004","C-005","C-006","C-008","C-009","C-010",
     "C-012","C-013","C-014","C-015","C-016","C-017","C-018","C-019",
-    "M-004","M-005","M-014","M-018","M-054",
+    # Substantial lessons (>8 blocks) confirmed with zero image blocks (audit 2026-05-28)
+    "C-011","C-020","C-021","C-022","C-024","C-025","C-026","C-027","C-028",
+    "C-029","C-030","C-035","C-054","C-074",
+    "M-001","M-009","M-015","M-016","M-017","M-019","M-020","M-021","M-022",
+    "M-023","M-024","M-035","M-042","M-045","M-054","M-060","M-062","M-066","M-069",
 ]
+
+# Auto-insert constants — used when a lesson has zero image blocks
+_INSERT_INTERVAL   = 4   # insert after every Nth consecutive text block
+_MAX_INSERT        = 3   # cap images per lesson
 
 
 def load_env() -> dict:
@@ -140,6 +167,39 @@ def strip_tags(html: str) -> str:
     return re.sub(r"<[^>]+>", " ", html).strip()
 
 
+def _insertion_points(blocks: list) -> list[tuple[int, str]]:
+    """Return (insert_after_index, context_text) for auto-insert mode."""
+    import random, string
+    points = []
+    consecutive = 0
+    for i, block in enumerate(blocks):
+        if block.get("type") == "text":
+            consecutive += 1
+            if consecutive % _INSERT_INTERVAL == 0 and i < len(blocks) - 1:
+                ctx = " ".join(
+                    strip_tags(blocks[j].get("data", {}).get("html", ""))[:200]
+                    for j in range(max(0, i - 2), i + 1)
+                    if blocks[j].get("type") == "text"
+                )
+                points.append((i, ctx))
+                if len(points) >= _MAX_INSERT:
+                    break
+        else:
+            consecutive = 0
+    return points
+
+
+def _make_empty_image_block(caption: str) -> dict:
+    import random, string
+    bid = "".join(random.choices(string.ascii_lowercase + string.digits, k=9))
+    return {
+        "id": bid,
+        "type": "image",
+        "data": {"src": "", "width": "100%", "caption": caption},
+        "meta": {"spacing": "md", "qcStatus": "pending"},
+    }
+
+
 def build_context(lesson: dict, block_index: int) -> str:
     """Extract context for image prompt: title + caption + neighboring text blocks."""
     title  = lesson.get("title", "Engineering lesson")
@@ -171,11 +231,12 @@ Surrounding content: {context[:400] if context else '(none)'}
 
 Write a single, detailed image generation prompt for an educational illustration suitable for 6th-8th grade students.
 Requirements:
+- Accurately depict the specific engineering or science concept described — this is the top priority
 - Clean, professional educational illustration style
 - No text or labels in the image
 - Age-appropriate, faith-neutral (faith is welcome but not required)
-- Shows the engineering or science concept being taught
-- Navy blue (#1B2A5C) and gold (#C9A84C) accents welcome
+- Focus on realistic or diagram-style depictions of tools, materials, processes, or phenomena from the lesson
+- Do NOT impose color schemes or brand colors — use whatever colors best serve the illustration
 
 Return ONLY the image prompt text, no explanation."""
 
@@ -192,14 +253,14 @@ Return ONLY the image prompt text, no explanation."""
         return " ".join(p["text"] for p in parts if "text" in p and not p.get("thought")).strip()
     except Exception as e:
         # Fallback: use caption or lesson title
-        return f"Educational illustration for a middle school engineering lesson on {lesson_title}. {caption or 'Professional diagram showing the concept.'} Clean illustration style, navy blue and gold color scheme."
+        return f"Educational illustration accurately depicting a middle school engineering lesson on {lesson_title}. {caption or 'Detailed diagram or depiction of the concept.'} Clean professional style, no text or labels."
 
 
 def generate_image(api_key: str, prompt: str, logo_b64: str | None = None) -> bytes | None:
     """Generate image using Imagen 3. Returns PNG bytes or None."""
     # logo_b64 unused — Imagen 3 predict endpoint is text-only
     full_prompt = (
-        "Educational illustration, clean professional style, navy blue and gold accents, "
+        "Educational illustration, clean professional style, accurate depiction of the concept, "
         "no text or labels. " + prompt
     )
     payload = json.dumps({
@@ -234,7 +295,7 @@ def generate_image_fal(fal_key: str, model: str, prompt: str) -> bytes | None:
         return None
 
     full_prompt = (
-        "Educational illustration, clean professional style, navy blue and gold color scheme, "
+        "Educational illustration, clean professional style, accurate depiction of the concept, "
         "no distracting text. " + prompt
     )
 
@@ -296,6 +357,21 @@ def process_lesson(lesson_id: str, api_key: str, fal_key: str | None, logo_b64: 
     empty = [(i, b) for i, b in enumerate(blocks)
              if b.get("type") == "image" and not b.get("data", {}).get("src", "")]
 
+    # Auto-insert mode: lesson has no image blocks at all — create empty slots first
+    if not empty and not any(b.get("type") == "image" for b in blocks):
+        points = _insertion_points(blocks)
+        if not points:
+            print(f"  [{lesson_id}] No empty image blocks and no text runs long enough — skipping")
+            return "skipped"
+        print(f"  [{lesson_id}] Zero image blocks — auto-inserting {len(points)} slot(s)")
+        # Insert in reverse so indices remain valid
+        for insert_after, ctx in reversed(points):
+            new_block = _make_empty_image_block(ctx[:120])
+            blocks.insert(insert_after + 1, new_block)
+        # Rebuild empty list from modified blocks
+        empty = [(i, b) for i, b in enumerate(blocks)
+                 if b.get("type") == "image" and not b.get("data", {}).get("src", "")]
+
     if not empty:
         print(f"  [{lesson_id}] No empty image blocks — skipping")
         return "skipped"
@@ -313,8 +389,8 @@ def process_lesson(lesson_id: str, api_key: str, fal_key: str | None, logo_b64: 
 
     for block_idx, block in empty:
         lesson_title, caption, context = build_context(lesson, block_idx)
-        safe_caption = re.sub(r"[^\w\s-]", "", caption or lesson_title)[:30].strip()
-        filename = f"img_{block_idx}_{safe_caption.replace(' ', '_')}.png"
+        safe_caption = re.sub(r"\s+", "_", re.sub(r"[^\w\s-]", "", (caption or lesson_title).strip()))[:25].strip("_")
+        filename = f"{lesson_id.lower()}_img{block_idx:03d}_{safe_caption}.png"
 
         print(f"    Block {block_idx}: generating image [{model}]...")
         prompt = make_image_prompt(api_key, lesson_title, caption, context)

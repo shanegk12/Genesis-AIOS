@@ -1,0 +1,298 @@
+[
+  {
+    "id": "m034t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Critical Paths and Calculating Time</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Last time, you explored project phases and dependencies — how big engineering projects get broken into smaller chunks that rely on each other. Now it's time to go deeper. This lesson focuses on the <strong>Logistics</strong> phase of Creationeering: identifying the most critical tasks in your mousetrap car project and estimating how long each one will actually take. You will learn to map out your construction timeline, spot the tasks that cannot slip without costing you the whole schedule, and build realistic plans that hold up under pressure. Good time management is not just a skill — it is a form of stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Define and identify critical path tasks within a project schedule.</li><li>Explain the concept of task dependencies and their role in project sequencing.</li><li>Estimate realistic durations for individual project tasks.</li><li>Understand the importance of float (slack) in managing project delays.</li><li>Apply biblical principles of stewardship by responsibly managing project time and resources.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Critical Path",
+          "definition": "The longest sequence of tasks that must be completed on time for the entire project to finish on schedule. Any delay on the critical path delays the whole project."
+        },
+        {
+          "term": "Task Dependency",
+          "definition": "A relationship where one task cannot start or finish until another task is started or finished."
+        },
+        {
+          "term": "Task Duration",
+          "definition": "The estimated amount of time required to complete an individual task."
+        },
+        {
+          "term": "Float (Slack)",
+          "definition": "The amount of time a task can be delayed without pushing back the overall project completion date."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and coordination of a complex operation — making sure the right resources and people are in the right place at the right time. In Creationeering, it is the synchronization of distribution, transportation, and preparation of materials before assembly."
+        },
+        {
+          "term": "Predecessor Task",
+          "definition": "A task that must be completed before another task can begin."
+        },
+        {
+          "term": "Successor Task",
+          "definition": "A task that cannot begin until a preceding task is completed."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>A Blueprint from the Beginning</h2><p>In the Creationeering framework, <strong>Logistics</strong> is the fourth step in the engineering process — it comes after design, analysis, and procurement. It is the phase where you synchronize everything: materials, people, and processes. Nothing gets built until logistics is figured out.</p><p>The most detailed example of logistics in all of history might be the construction of the Tabernacle. In Exodus, God gave Moses extraordinarily specific instructions for every component — the curtains, loops, clasps, frames, bars, sockets, and veil. He did not just say \"build a tent.\" He described exactly what was needed, how each piece should be made, and in what order things should come together.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 26:1 (KJV):</strong> \"Moreover thou shalt make the tabernacle with ten curtains of fine twined linen...\" God's instructions for the Tabernacle spanned hundreds of verses — every dimension, every material, every sequence planned in advance. That is divine logistics. He even assigned specific builders, Bezalel and Oholiab, and filled them with the skill and wisdom to carry it out (Exodus 31:2–6). When you plan your mousetrap car with that same intentionality, you are reflecting the image of a God who builds purposefully.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is the Critical Path?</h2><p>Imagine you are baking a cake for a party that starts at 3:00 PM. You need to mix the batter, bake it for 45 minutes, let it cool for 30 minutes, and then frost it. You cannot frost a hot cake — that is a dependency. And if any of those steps runs late, the whole cake is late. That chain of steps is your critical path.</p><p>In engineering, the <strong>critical path</strong> is the longest sequence of dependent tasks from the start of your project to the finish. It tells you exactly how long the project will take at minimum — and it tells you which tasks you absolutely cannot afford to delay.</p><p>Not every task is on the critical path. Some tasks have wiggle room. That wiggle room is called <strong>float</strong> (or slack). A task with float can slip a day or two without wrecking your schedule. But a task on the critical path has zero float — delay it even a little, and your whole project finishes late.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple network diagram showing a mousetrap car project's tasks as labeled boxes connected by arrows. The critical path tasks (axle prep, wheel attachment, spring mechanism, and test run) are highlighted in a bold color, while non-critical tasks with float are shown in a lighter shade."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Task Dependencies: Order Matters</h2><p>Before you can find your critical path, you need to understand how your tasks relate to each other. A <strong>task dependency</strong> means one task must happen before another can begin.</p><p>Think of it like building a bridge: you cannot pave the road surface before the support beams are in place. The beams are the <strong>predecessor task</strong>. The paving is the <strong>successor task</strong>. One leads the other — that relationship is a dependency.</p><p>For your mousetrap car, here is how dependencies might look:</p><ul><li><strong>Gather materials</strong> must happen before you can cut any wood.</li><li><strong>Cut the axle rods</strong> must happen before you can attach the wheels.</li><li><strong>Attach the mousetrap spring mechanism</strong> must happen before you can do a test run.</li><li><strong>Test run</strong> must happen before you can make final adjustments.</li></ul><p>Mapping out these relationships is the first step toward finding your critical path. You are building a logic map — a chain of cause and effect — before you ever pick up a saw or a drill.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Estimating Task Duration</h2><p>Once you know the order of your tasks, you need to estimate how long each one will take. This is called <strong>task duration</strong>, and it is harder than it sounds. Most beginners estimate how long something takes when everything goes perfectly. Experienced engineers plan for reality.</p><p>Here are three questions to ask yourself when estimating any task:</p><ul><li><strong>Best case:</strong> How long does this take if everything goes smoothly?</li><li><strong>Worst case:</strong> How long if something goes wrong — a part breaks, a measurement is off, you need to redo a step?</li><li><strong>Most likely:</strong> What is your honest, realistic estimate?</li></ul><p>A common engineering technique is to average these three: add your best case, worst case, and most likely estimate, then divide by three. That gives you a more reliable duration than just guessing optimistically. Use that number when you build your schedule.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Estimate honestly, not hopefully.</strong> When you build your mousetrap car timeline, resist the urge to write down the fastest possible time for every task. Padding your estimates slightly on critical path tasks protects your whole schedule. Engineers call this building in a buffer — and it is one of the most practical habits a project manager can develop.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Float: Your Built-In Safety Net</h2><p>Not every task needs to happen at the exact earliest possible moment. Some tasks have <strong>float</strong> — extra time before they become urgent. Float is not laziness; it is strategic flexibility.</p><p>Say you need to sand the chassis of your mousetrap car. It takes 20 minutes, and you have a 2-day window before it needs to be ready for painting. That task has float. If you get interrupted or need to focus on a critical path task first, you can shift the sanding without any harm to your final deadline.</p><p>Understanding float helps you make smart decisions when things do not go according to plan — and in engineering, something almost always comes up. Knowing which tasks have breathing room and which ones do not lets you stay calm and redirect your energy where it matters most.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison showing two project timelines for a mousetrap car build: one without float analysis (tasks crammed together) and one with float identified (some tasks shown with extra buffer space highlighted in green), illustrating how float creates flexibility in the schedule."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying Critical Path Thinking to Your Mousetrap Car</h2><p>Let's put this all together for your actual build. Your mousetrap car project has several major task groups. Here is how you might start identifying the critical path:</p><ul><li><strong>Step 1 — List all tasks:</strong> Write down every single thing that needs to happen, from gathering materials to the final test drive.</li><li><strong>Step 2 — Identify dependencies:</strong> For each task, ask: \"What has to be done before I can start this?\" Mark your predecessor and successor tasks.</li><li><strong>Step 3 — Estimate durations:</strong> Use the best/worst/most-likely method to give each task a realistic time estimate.</li><li><strong>Step 4 — Map the network:</strong> Draw boxes for each task, connect them with arrows based on dependencies, and label the durations.</li><li><strong>Step 5 — Find the critical path:</strong> Trace every possible sequence of tasks from start to finish. Add up the durations. The longest path is your critical path — that is the sequence that controls your project's total time.</li><li><strong>Step 6 — Calculate float:</strong> For tasks not on the critical path, calculate how much time they can slip before they become critical too.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Time as Stewardship</h2><p>There is a deeper reason why this kind of careful planning matters. Time is one of the most valuable resources you have been given, and how you manage it is a reflection of your character and your faith.</p><p>Proverbs 21:5 says, <em>\"The plans of the diligent lead surely to abundance, but everyone who is hasty comes only to poverty.\"</em> Rushing through your project without a plan is not bold — it is careless. But sitting down, mapping your tasks, identifying your critical path, and managing your time wisely? That is diligence. That is stewardship.</p><p>When you plan your mousetrap car with intentionality, you are not just becoming a better engineer. You are practicing a skill that will shape every project, team, and responsibility you take on for the rest of your life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake: confusing \"busy\" with \"on schedule.\"</strong> Students sometimes work hard on non-critical tasks while critical path tasks sit untouched. If your critical path task is \"attach the spring mechanism\" and you spend your whole work session decorating the chassis, your project is falling behind — even though you were busy the whole time. Always protect your critical path first.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m034a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is the critical path, and why does it matter?</strong><br>A: The critical path is the longest sequence of dependent tasks from project start to finish. It matters because any delay on the critical path delays the entire project — it sets the minimum time your project can possibly take.</p><p><strong>Q: What is the difference between a predecessor task and a successor task?</strong><br>A: A predecessor task must be completed before another task can begin. A successor task cannot start until the predecessor is done. They define the dependency relationship between two tasks.</p><p><strong>Q: What does float (slack) tell you about a task?</strong><br>A: Float tells you how much a task can be delayed without affecting the project's overall finish date. Tasks on the critical path have zero float — any delay there directly delays the project.</p><p><strong>Q: Why is it important to estimate task durations realistically rather than optimistically?</strong><br>A: If you only estimate the best-case scenario, one small problem throws your whole schedule off. Realistic estimates — using best, worst, and most-likely cases — give you a plan that holds up when real-world challenges arise.</p><p><strong>Q: How does planning your project connect to biblical stewardship?</strong><br>A: Time is a resource God has entrusted to you. Managing it carefully — through planning, prioritizing, and avoiding wasted effort — reflects the diligence and wisdom that Scripture encourages in Proverbs 21:5 and throughout the example of the Tabernacle's construction.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

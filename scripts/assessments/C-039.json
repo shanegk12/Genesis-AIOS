@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-039",
+  "topic": "Precision Measurement and Tolerances",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What does the term \"Precision\" mean in the context of measurement, according to the lesson?",
+      "options": {
+        "A": "How close a measurement is to the true value.",
+        "B": "How close multiple measurements are to each other.",
+        "C": "The allowable variation in a dimension.",
+        "D": "A measurable extent of some kind."
+      },
+      "answer": "B",
+      "explanation": "Precision is defined as how close multiple measurements are to each other."
+    },
+    {
+      "type": "recall",
+      "question": "Which measuring tool is described as a \"very precise measuring tool used to measure small distances or thicknesses\"?",
+      "options": {
+        "A": "A standard ruler",
+        "B": "Calipers",
+        "C": "A micrometer",
+        "D": "A tape measure"
+      },
+      "answer": "C",
+      "explanation": "The lesson specifically defines a micrometer as a very precise tool for small distances or thicknesses."
+    },
+    {
+      "type": "recall",
+      "question": "In Creationeering, what does \"Tolerance\" refer to?",
+      "options": {
+        "A": "How close measurements are to each other.",
+        "B": "How close a measurement is to the true value.",
+        "C": "The allowable variation in a dimension or property of a part.",
+        "D": "The intended or target value of a dimension."
+      },
+      "answer": "C",
+      "explanation": "Tolerance is defined as the allowable variation in a dimension or property of a part."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson's analogy of building a LEGO castle, what is a likely consequence if parts are not made with precision?",
+      "options": {
+        "A": "The creation will be stronger and more durable.",
+        "B": "The parts will always fit together perfectly.",
+        "C": "The creation might fail, break, or not work as intended.",
+        "D": "Assembly will be much faster and easier."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that if parts aren't made to the right size, they won't fit correctly, causing the creation to fail or not work as intended."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does an atomic-level difference, such as slightly misaligned atoms on a gear, affect a macro-level observation in a clock, according to Multiscale Modeling?",
+      "options": {
+        "A": "It makes the clock run faster due to less friction.",
+        "B": "It causes the gears to grind and prevents smooth movement.",
+        "C": "It makes the clock more durable at the macro-level.",
+        "D": "It has no observable effect on the clock's function."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that atomic-level differences can make a gear larger, leading to macro-level friction and grinding that prevents smooth movement."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the key difference between a \"Clearance Fit\" and an \"Interference Fit\" when two parts are designed to mate?",
+      "options": {
+        "A": "Clearance Fit requires force to assemble, while Interference Fit always has a gap.",
+        "B": "Clearance Fit always has a gap, while Interference Fit requires force to assemble.",
+        "C": "Both Clearance Fit and Interference Fit always result in a gap.",
+        "D": "Both Clearance Fit and Interference Fit require significant force to assemble."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines Clearance Fit as always having a gap and Interference Fit as requiring force to assemble due to overlapping parts."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer needs to measure the internal diameter of a small pipe with high precision to ensure another part fits inside. Which tool from the lesson would be most suitable for this task?",
+      "options": {
+        "A": "A standard ruler",
+        "B": "Calipers",
+        "C": "A tape measure",
+        "D": "A micrometer"
+      },
+      "answer": "B",
+      "explanation": "Calipers are described as a measuring instrument used to measure external and internal distances with high precision."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer is using the OCV method. Their Objective is to build a smoothly rotating fan blade. Their Constraint is that the fan blade must fit onto a motor shaft without wobbling. What is the Variable they should primarily control?",
+      "options": {
+        "A": "The color of the fan blade.",
+        "B": "The material of the motor shaft.",
+        "C": "The diameter of the hole in the fan blade.",
+        "D": "The number of blades on the fan."
+      },
+      "answer": "C",
+      "explanation": "Similar to the axle example, controlling the diameter of the hole in the fan blade is the variable that will ensure a smooth, non-wobbling fit onto the motor shaft."
+    },
+    {
+      "type": "application",
+      "question": "A design specification for a Creationeering part states its length should be \"50.0 mm ± 0.2 mm\". If a Creationeer measures a part and finds its length to be 50.15 mm, what does this measurement indicate about the part?",
+      "options": {
+        "A": "The part is too long and outside the allowable tolerance.",
+        "B": "The part is too short and outside the allowable tolerance.",
+        "C": "The part is within the allowable tolerance.",
+        "D": "The part is exactly the nominal value."
+      },
+      "answer": "C",
+      "explanation": "The allowable range is 49.8 mm to 50.2 mm (50.0 ± 0.2), and 50.15 mm falls within this range."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects the pursuit of precision in Creationeering to biblical stewardship by stating it's a way to acknowledge God's meticulous design. Which specific biblical reference from the lesson supports this connection?",
+      "options": {
+        "A": "The story of Noah's Ark and its precise dimensions.",
+        "B": "Romans 1:20, which speaks of God's invisible qualities seen in creation.",
+        "C": "The parable of the talents, emphasizing using skills wisely.",
+        "D": "The creation account in Genesis, highlighting the goodness of God's work."
+      },
+      "answer": "B",
+      "explanation": "The lesson directly quotes Romans 1:20 and links it to God's incredible precision and order in creation, inspiring our own pursuit of precision."
+    },
+    {
+      "type": "synthesis",
+      "question": "A Creationeer measures a part several times, getting readings of 10.01mm, 10.02mm, 10.00mm, and 10.01mm. The true, intended value for the part is exactly 10.00mm. Based on the lesson's definitions, how would you describe these measurements?",
+      "options": {
+        "A": "The measurements are accurate but not precise.",
+        "B": "The measurements are neither accurate nor precise.",
+        "C": "The measurements are precise but not perfectly accurate.",
+        "D": "The measurements are perfectly precise and perfectly accurate."
+      },
+      "answer": "C",
+      "explanation": "The measurements are very close to each other (precise), but they are slightly off from the true value of 10.00mm (not perfectly accurate)."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson emphasizes that God created everything with \"perfect functionality and beauty\" and \"astounding detail.\" How does this divine example of order and detail relate to the practical importance of precision measurements in the Assembly phase of Creationeering?",
+      "options": {
+        "A": "It suggests that Creationeers should only build things that are beautiful, not functional.",
+        "B": "It means Creationeers should strive for excellence and ensure parts fit together perfectly, reflecting God's design.",
+        "C": "It implies that any creation made by humans will always be flawed, regardless of precision.",
+        "D": "It teaches that only large, visible details matter, not tiny measurements."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that God's example inspires Creationeers to strive for excellence and meticulous design, ensuring parts fit together perfectly to honor the Creator."
+    }
+  ]
+}

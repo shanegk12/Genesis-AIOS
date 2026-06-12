@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-013",
+  "topic": "Build 2: Iterative Design - Mark 1",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of the Mark 1 phase in the iterative design process?",
+      "options": {
+        "A": "To build the final, polished Mark 2 design.",
+        "B": "To isolate key variables and gather Ground Truth data.",
+        "C": "To compete against other teams for the longest distance.",
+        "D": "To quickly assemble a working prototype without testing."
+      },
+      "answer": "B",
+      "explanation": "The lesson states the task is to 'isolate key variables... and gather the Ground Truth data that will inform your final Mark 2 design.'"
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the core principle of the One Factor At A Time (OFAT) method?",
+      "options": {
+        "A": "To change all variables at once to see their combined effect.",
+        "B": "To change one and only one variable between test runs.",
+        "C": "To only test variables that are easy to change.",
+        "D": "To always use the standard Little Moe configuration."
+      },
+      "answer": "B",
+      "explanation": "The lesson explicitly states, 'The core principle of the Mark 1 phase is to change one and only one variable between test runs.'"
+    },
+    {
+      "type": "recall",
+      "question": "What is the required action before testing a *new* variable after completing a previous test in the Mark 1 phase?",
+      "options": {
+        "A": "Immediately proceed to test the next variable.",
+        "B": "Adjust multiple variables at once for the next test.",
+        "C": "Revert the car back to the control configuration.",
+        "D": "Discard the prototype and start a new one."
+      },
+      "answer": "C",
+      "explanation": "The lesson states, 'Before testing the next variable... you must revert the car back to the control configuration.'"
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is it crucial to 'Return to Control' after testing each variable in the OFAT method?",
+      "options": {
+        "A": "To save time by not having to rebuild the entire car.",
+        "B": "To make the car look neat and organized for inspection.",
+        "C": "To ensure that the results of the next test are not influenced by the change from the previous test.",
+        "D": "To compare the current test results directly with the baseline data."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains this step 'ensures that the results of the next test are not influenced by the change from the previous test.'"
+    },
+    {
+      "type": "comprehension",
+      "question": "When changing the axle from a smooth brass tube to a rougher wooden dowel, the lesson suggests useful energy might be lost. What material property of the dowel primarily contributes to this energy loss?",
+      "options": {
+        "A": "Reduced weight.",
+        "B": "Greater flexibility.",
+        "C": "Improved alignment.",
+        "D": "Increased friction."
+      },
+      "answer": "D",
+      "explanation": "The lesson's reflection question directly asks about 'Toll Booths' where energy is lost when changing to a rougher wooden dowel, implying friction as the material property."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson, if the wheels slip during the rubber traction test, is the problem primarily an issue of torque or propulsion?",
+      "options": {
+        "A": "Torque.",
+        "B": "Propulsion.",
+        "C": "Drag.",
+        "D": "Friction."
+      },
+      "answer": "B",
+      "explanation": "The lesson asks, 'If the wheels slip (low traction), is the problem an issue of torque (turning force) or propulsion (transfer of force to the ground)?' indicating that slipping wheels are a propulsion issue."
+    },
+    {
+      "type": "application",
+      "question": "A student is using the OFAT method to test different types of paper for a paper airplane's wings to see which flies farthest. After testing Wing Type A, what should the student do before testing Wing Type B?",
+      "options": {
+        "A": "Immediately attach Wing Type B to the airplane.",
+        "B": "Test Wing Type A again with a different body design.",
+        "C": "Revert the airplane to its original, control wing type.",
+        "D": "Discard the airplane and build a new one for Wing Type B."
+      },
+      "answer": "C",
+      "explanation": "Following the OFAT principle, after testing one variable, the system should return to its control state before introducing the next variable."
+    },
+    {
+      "type": "application",
+      "question": "Imagine you are trying to find the best type of fertilizer for a plant. You test Fertilizer X, then Fertilizer Y, and then Fertilizer Z on the same plant, but you don't remove the previous fertilizer completely before adding the next. Which principle of the OFAT method are you violating?",
+      "options": {
+        "A": "Establishing a control.",
+        "B": "Isolating a single variable.",
+        "C": "Documenting results.",
+        "D": "Returning to control."
+      },
+      "answer": "B",
+      "explanation": "By not removing the previous fertilizer, the effect of the new fertilizer cannot be isolated, thus violating the principle of changing only one factor at a time."
+    },
+    {
+      "type": "application",
+      "question": "A baker is trying to improve a cookie recipe. In one batch, they simultaneously change the type of sugar, the amount of butter, and the baking temperature. Why will it be difficult for the baker to know which specific change improved the cookies?",
+      "options": {
+        "A": "They forgot to establish a baseline recipe first.",
+        "B": "The ingredients might interact in unpredictable ways.",
+        "C": "They are not using the One Factor At A Time (OFAT) method to isolate variables.",
+        "D": "Baking is an art, not a science, so precise changes don't matter."
+      },
+      "answer": "C",
+      "explanation": "By changing multiple variables at once, the baker cannot determine which specific change caused the improvement, which is the purpose of the OFAT method."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does the 'One Factor At A Time (OFAT)' method, used in the Mark 1 phase, contribute to the 'Analysis pillar of Creationeering'?",
+      "options": {
+        "A": "OFAT is a separate process that happens after the Analysis pillar is complete.",
+        "B": "The Analysis pillar focuses only on building, while OFAT focuses on testing.",
+        "C": "OFAT is a deliberate step within the Analysis pillar to gather precise data for understanding and refining a design.",
+        "D": "OFAT helps to skip the analysis phase by providing immediate solutions."
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly states, 'Every test you perform is a deliberate step in the Analysis pillar of Creationeering,' linking OFAT directly to analysis."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson emphasizes gathering 'Ground Truth data' and meticulously recording results. From a biblical stewardship perspective, why is this careful documentation important?",
+      "options": {
+        "A": "It helps to win competitions by proving your design is superior.",
+        "B": "God only cares about the final outcome, not the process of data collection.",
+        "C": "Accurate and detailed data allows for responsible decision-making and efficient use of resources, reflecting good stewardship of time and materials.",
+        "D": "Recording data is mainly for showing off your work to others."
+      },
+      "answer": "C",
+      "explanation": "Good stewardship involves being responsible with resources and making informed decisions, which requires accurate and detailed data."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that the OFAT method transforms a 'flaw' into a 'finding.' How does this concept encourage a mindset of perseverance and learning in the design process?",
+      "options": {
+        "A": "It means that every design will eventually be perfect if you just keep trying.",
+        "B": "It suggests that flaws are not real problems, so you don't need to fix them.",
+        "C": "It encourages quickly abandoning a design if a flaw is found.",
+        "D": "It reframes unexpected results or 'failures' as valuable opportunities for discovery and understanding, leading to improvements rather than discouragement."
+      },
+      "answer": "D",
+      "explanation": "By seeing flaws as 'findings,' students learn to analyze problems as data points that guide refinement, fostering a resilient and learning-oriented approach."
+    }
+  ]
+}

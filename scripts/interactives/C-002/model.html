@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrepreneurship System Viewer — Creationeering | GK12</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B3A5C;
+    --navy-light: #254d7a;
+    --gold: #C9A84C;
+    --gold-light: #e0c070;
+    --white: #f8f9fa;
+    --gray: #e2e8f0;
+    --text: #1a2535;
+    --panel-bg: #f0f4f8;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .logo-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 900;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+  }
+
+  .header-title { flex: 1; }
+  .header-title h1 { color: var(--white); font-size: 18px; font-weight: 700; }
+  .header-title p { color: var(--gold-light); font-size: 12px; }
+
+  .main-layout {
+    display: flex;
+    flex: 1;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 270px;
+    min-width: 220px;
+    background: var(--panel-bg);
+    border-right: 2px solid var(--gray);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    border-bottom: 1px solid var(--gray);
+    padding: 14px;
+  }
+
+  .sidebar-section h2 {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .component-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 4px;
+    border: 2px solid transparent;
+  }
+
+  .component-item:hover { background: #dce7f0; }
+  .component-item.active {
+    background: #d0e3f5;
+    border-color: var(--navy);
+  }
+
+  .comp-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .comp-info { flex: 1; }
+  .comp-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+  .comp-desc { font-size: 10px; color: #4a6080; margin-top: 2px; line-height: 1.4; }
+
+  .btn {
+    width: 100%;
+    padding: 9px 14px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: var(--navy-light); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+  }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+  .rotate-controls {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .rot-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 7px 6px;
+    border: 2px solid var(--navy);
+    border-radius: 6px;
+    background: white;
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .rot-btn:hover { background: var(--navy); color: white; }
+
+  .motto-box {
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .motto-box strong { display: block; font-size: 13px; margin-bottom: 4px; color: var(--gold-light); }
+
+  .verse-box {
+    background: #fffbf0;
+    border-left: 3px solid var(--gold);
+    padding: 8px 10px;
+    font-size: 10px;
+    color: #5a4010;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.5;
+  }
+
+  /* CANVAS AREA */
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1a2e46;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .canvas-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    flex: 1;
+  }
+
+  .view-btn {
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.1);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .view-btn:hover, .view-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+  #mainCanvas {
+    flex: 1;
+    display: block;
+    cursor: grab;
+    touch-action: none;
+  }
+  #mainCanvas:active { cursor: grabbing; }
+
+  .canvas-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* Tooltip */
+  #tooltip {
+    position: absolute;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+    max-width: 160px;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .main-layout { flex-direction: column; }
+    .sidebar { width: 100%; max-height: 240px; border-right: none; border-bottom: 2px solid var(--gray); }
+    .canvas-area { min-height: 340px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK12</div>
+  <div class="header-title">
+    <h1>Entrepreneurship — Business System Viewer</h1>
+    <p>Creationeering™ | Middle School Engineering | Interactive 3D Explorer</p>
+  </div>
+</header>
+
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sidebar-section">
+      <h2>System Components</h2>
+
+      <div class="component-item active" id="item-0" onclick="selectComponent(0)">
+        <div class="comp-dot" style="background:#4a90d9;"></div>
+        <div class="comp-info">
+          <div class="comp-name">🙏 Pray — Foundation</div>
+          <div class="comp-desc">God-centered foundation. Every business begins with prayer and trust in the Lord as the everlasting rock.</div>
+        </div>
+      </div>
+
+      <div class="component-item" id="item-1" onclick="selectComponent(1)">
+        <div class="comp-dot" style="background:#e07b3a;"></div>
+        <div class="comp-info">
+          <div class="comp-name">💡 Think — Leadership</div>
+          <div class="comp-desc">Vision & leadership qualities. Entrepreneurs think critically, plan ahead, and identify risks before acting.</div>
+        </div>
+      </div>
+
+      <div class="component-item" id="item-2" onclick="selectComponent(2)">
+        <div class="comp-dot" style="background:#5ab85a;"></div>
+        <div class="comp-info">
+          <div class="comp-name">⚙️ Create — Operations</div>
+          <div class="comp-desc">The four business areas: HR, Finance, Marketing, and Production working together.</div>
+        </div>
+      </div>
+
+      <div class="component-item" id="item-3" onclick="selectComponent(3)">
+        <div class="comp-dot" style="background:#c94c4c;"></div>
+        <div class="comp-info">
+          <div class="comp-name">📊 Business Core</div>
+          <div class="comp-desc">The five fundamental features: Idea, Capital, People, Process, and Market.</div>
+        </div>
+      </div>
+
+      <div class="component-item" id="item-4" onclick="selectComponent(4)">
+        <div class="comp-dot" style="background:#a050c8;"></div>
+        <div class="comp-info">
+          <div class="comp-name">✨ Give Glory — Output</div>
+          <div class="comp-desc">Stewardship and community impact. Success is shared and returned to God through generous giving.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>View Controls</h2>
+      <button class="btn btn-gold" onclick="toggleExplode()">💥 Toggle Exploded View</button>
+      <button class="btn btn-primary" onclick="resetView()">↺ Reset View</button>
+      <div class="rotate-controls" style="margin-top:6px;">
+        <button class="rot-btn" onclick="rotateLeft()">◀</button>
+        <button class="rot-btn" onclick="rotateUp()">▲</button>
+        <button class="rot-btn" onclick="rotateDown()">▼</button>
+        <button class="rot-btn" onclick="rotateRight()">▶</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>The Motto</h2>
+      <div class="motto-box">
+        <strong>Pray → Think → Create</strong>
+        Give God the Glory
+      </div>
+      <div style="margin-top:10px;" class="verse-box">
+        "You keep him in perfect peace whose mind is stayed on you, because he trusts in you. Trust in the Lord forever, for the Lord God is an everlasting rock." — Isaiah 26:3-4
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Key Vocabulary</h2>
+      <div style="font-size:10px; color:#4a6080; line-height:1.7;">
+        <strong>Entrepreneur:</strong> Starts/manages a business facing risks for rewards.<br>
+        <strong>Stewardship:</strong> Responsible resource management under God.<br>
+        <strong>Mitigation:</strong> Reducing risk through research & planning.<br>
+        <strong>IP:</strong> Intellectual Property — protected ideas & creations.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CANVAS AREA -->
+  <div class="canvas-area">
+    <div class="canvas-toolbar">
+      <span class="toolbar-label">3D Business System — Isometric View</span>
+      <button class="view-btn active" id="vbtn-iso" onclick="setViewMode('iso')">Isometric</button>
+      <button class="view-btn" id="vbtn-top" onclick="setViewMode('top')">Top</button>
+      <button class="view-btn" id="vbtn-front" onclick="setViewMode('front')">Front</button>
+    </div>
+    <canvas id="mainCanvas"></canvas>
+    <div id="tooltip"></div>
+    <div class="canvas-hint">🖱 Drag to rotate &nbsp;|&nbsp; Click layers to select</div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//  ISOMETRIC BUSINESS SYSTEM VIEWER
+//  Genesis K-12 Academy — Entrepreneurship / Creationeering
+// ============================================================
+
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+// --- State ---
+let rotX = 28;   // degrees
+let rotY = -38;  // degrees
+let exploded = false;
+let selectedComp = 0;
+let viewMode = 'iso';
+let isDragging = false;
+let lastMouse = { x: 0, y: 0 };
+let animProgress = 0; // 0=normal, 1=exploded
+let animTarget = 0;
+let animRunning = false;
+
+// Colors
+const C = {
+  navy:    '#1B3A5C',
+  navyL:   '#254d7a',
+  gold:    '#C9A84C',
+  goldL:   '#e0c070',
+  pray:    '#4a90d9',
+  prayD:   '#2a60a9',
+  prayDD:  '#1a4080',
+  think:   '#e07b3a',
+  thinkD:  '#b05a1a',
+  thinkDD: '#7a3a0a',
+  create:  '#5ab85a',
+  createD: '#3a8a3a',
+  createDD:'#1a5a1a',
+  core:    '#c94c4c',
+  coreD:   '#9a2a2a',
+  coreDD:  '#6a1a1a',
+  glory:   '#a050c8',
+  gloryD:  '#7030a0',
+  gloryDD: '#4a1070',
+  bg:      '#1a2e46',
+  grid:    'rgba(201,168,76,0.08)',
+  label:   '#f0f4f8',
+  shadow:  'rgba(0,0,0,0.35)',
+};
+
+// --- Layer definitions (stacked building floors) ---
+// Each layer: id, label, subtitle, colors[top,sideL,sideR], baseY (normal), explodeOffset
+const LAYERS = [
+  {
+    id: 0,
+    label: '🙏 Pray',
+    sub: 'Foundation',
+    w: 220, d: 220, h: 38,
+    top: C.pray, sL: C.prayD, sR: C.prayDD,
+    baseY: 0,
+    explodeOffset: -10,
+    symbol: '✝',
+    detail: 'God-centered foundation'
+  },
+  {
+    id: 1,
+    label: '💡 Think',
+    sub: 'Leadership & Vision',
+    w: 190, d: 190, h: 38,
+    top: C.think, sL: C.thinkD, sR: C.thinkDD,
+    baseY: 38,
+    explodeOffset: 80,
+    symbol: '⚡',
+    detail: 'Plan, research, mitigate risk'
+  },
+  {
+    id: 2,
+    label: '⚙️ Create',
+    sub: 'Operations',
+    w: 160, d: 160, h: 38,
+    top: C.create, sL: C.createD, sR: C.createDD,
+    baseY: 76,
+    explodeOffset: 170,
+    symbol: '⚙',
+    detail: 'HR · Finance · Marketing · Production'
+  },
+  {
+    id: 3,
+    label: '📊 Core',
+    sub: 'Business Fundamentals',
+    w: 130, d: 130, h: 38,
+    top: C.core, sL: C.coreD, sR: C.coreDD,
+    baseY: 114,
+    explodeOffset: 260,
+    symbol: '◆',
+    detail: 'Idea · Capital · People · Process · Market'
+  },
+  {
+    id: 4,
+    label: '✨ Give Glory',
+    sub: 'Impact & Stewardship',
+    w: 100, d: 100, h: 32,
+    top: C.glory, sL: C.gloryD, sR: C.gloryDD,
+    baseY: 152,
+    explodeOffset: 340,
+    symbol: '★',
+    detail: 'Community giving & return to God'
+  }
+];
+
+// Sub-components for the "create" layer (pillars)
+const PILLARS = [
+  { label: 'HR', color: '#3da86e', dx: -55, dz: -55 },
+  { label: 'Finance', color: '#d4a020', dx: 55, dz: -55 },
+  { label: 'Marketing', color: '#c04080', dx: -55, dz: 55 },
+  { label: 'Production', color: '#20a0c0', dx: 55, dz: 55 },
+];
+
+// ============================================================
+//  RESIZE
+// ============================================================
+function resize() {
+  const area = canvas.parentElement;
+  const toolbar = area.querySelector('.canvas-toolbar');
+  canvas.width  = area.clientWidth;
+  canvas.height = area.clientHeight - toolbar.offsetHeight;
+  draw();
+}
+window.addEventListener('resize', resize);
+setTimeout(resize, 50);
+
+// ============================================================
+//  MATH UTILS
+// ============================================================
+function degToRad(d) { return d * Math.PI / 180; }
+
+// Project 3D (x,y,z) → 2D canvas with rotation
+function project(x, y, z) {
+  if (viewMode === 'top') {
+    return {
+      sx: canvas.width/2 + x * 0.7,
+      sy: canvas.height/2 + z * 0.7
+    };
+  }
+  if (viewMode === 'front') {
+    return {
+      sx: canvas.width/2 + x * 0.85,
+      sy: canvas.height/2 - y * 0.85 + z * 0.0
+    };
+  }
+  // Isometric with rotation
+  const ry = degToRad(rotY);
+  const rx = degToRad(rotX);
+  const xr = x * Math.cos(ry) - z * Math.sin(ry);
+  const zr = x * Math.sin(ry) + z * Math.cos(ry);
+  const yr = y * Math.cos(rx) - zr * Math.sin(rx);
+  const zr2= y * Math.sin(rx) + zr * Math.cos(rx);
+  return {
+    sx: canvas.width/2  + xr * 1.0,
+    sy: canvas.height/2 - yr * 1.0 + zr2 * 0.0
+  };
+}
+
+// ============================================================
+//  DRAW HELPERS
+// ============================================================
+function drawIsoBox(cx, cy, cz, w, d, h, topCol, sLCol, sRCol, alpha, highlighted) {
+  const hw = w/2, hd = d/2;
+  // Corners of top face
+  const TFL = project(cx-hw, cy+h, cz+hd);
+  const TFR = project(cx+hw, cy+h, cz+hd);
+  const TBR = project(cx+hw, cy+h, cz-hd);
+  const TBL = project(cx-hw, cy+h, cz-hd);
+  // Corners of bottom face
+  const BFL = project(cx-hw, cy,   cz+hd);
+  const BFR = project(cx+hw, cy,   cz+hd);
+  const BBR = project(cx+hw, cy,   cz-hd);
+  // const BBL = project(cx-hw, cy,   cz-hd);
+
+  ctx.save();
+  ctx.globalAlpha = alpha;
+
+  // Shadow under box
+  if (viewMode === 'iso') {
+    ctx.beginPath();
+    ctx.ellipse(
+      (TFL.sx+TFR.sx+TBR.sx+TBL.sx)/4,
+      Math.max(TFL.sy,TFR.sy,TBR.sy,TBL.sy)+12,
+      w*0.5, w*0.12, 0, 0, Math.PI*2
+    );
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.fill();
+  }
+
+  // Left side
+  ctx.beginPath();
+  ctx.moveTo(TFL.sx, TFL.sy);
+  ctx.lineTo(BFL.sx, BFL.sy);
+  ctx.lineTo(BFR.sx, BFR.sy);
+  ctx.lineTo(TFR.sx, TFR.sy);
+  ctx.closePath();
+  ctx.fillStyle = sLCol;
+  ctx.fill();
+  if (highlighted) { ctx.strokeStyle = C.goldL; ctx.lineWidth = 2.5; ctx.stroke(); }
+
+  // Right side
+  ctx.beginPath();
+  ctx.moveTo(TFR.sx, TFR.sy);
+  ctx.lineTo(BFR.sx, BFR.sy);
+  ctx.lineTo(BBR.sx, BBR.sy);
+  ctx.lineTo(TBR.sx, TBR.sy);
+  ctx.closePath();
+  ctx.fillStyle = sRCol;
+  ctx.fill();
+  if (highlighted) { ctx.strokeStyle = C.goldL; ctx.lineWidth = 2.5; ctx.stroke(); }
+
+  // Top face
+  ctx.beginPath();
+  ctx.moveTo(TFL.sx, TFL.sy);
+  ctx.lineTo(TFR.sx, TFR.sy);
+  ctx.lineTo(TBR.sx, TBR.sy);
+  ctx.lineTo(TBL.sx, TBL.sy);
+  ctx.closePath();
+  ctx.fillStyle = topCol;
+  ctx.fill();
+  if (highlighted) { ctx.strokeStyle = C.goldL; ctx.lineWidth = 2.5; ctx.stroke(); }
+
+  // Highlight edge
+  if (highlighted) {
+    ctx.beginPath();
+    ctx.moveTo(TFL.sx, TFL.sy);
+    ctx.lineTo(TFR.sx, TFR.sy);
+    ctx.lineTo(TBR.sx, TBR.sy);
+    ctx.lineTo(TBL.sx, TBL.sy);
+    ctx.closePath();
+    ctx.strokeStyle = C.gold;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  ctx.restore();
+  return { TFL, TFR, TBR, TBL, BFL, BFR };
+}
+
+function drawCalloutLine(x1, y1, x2, y2, label, sublabel, color) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Dot at origin
+  ctx.beginPath();
+  ctx.arc(x1, y1, 3.5, 0, Math.PI*2);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  // Label box
+  const bx = x2 < canvas.width/2 ? x2 - 8 : x2 + 8;
+  const anchor = x2 < canvas.width/2 ? 'right' : 'left';
+  ctx.textAlign = anchor;
+  ctx.font = 'bold 12px Segoe UI, Arial';
+  ctx.fillStyle = C.gold;
+  ctx.fillText(label, bx, y2 - 2);
+  ctx.font = '10px Segoe UI, Arial';
+  ctx.fillStyle = 'rgba(240,244,248,0.75)';
+  ctx.fillText(sublabel, bx, y2 + 12);
+
+  ctx.restore();
+}
+
+function drawGridFloor() {
+  if (viewMode !== 'iso') return;
+  const size = 320;
+  const step = 40;
+  ctx.save();
+  ctx.strokeStyle = C.grid;
+  ctx.lineWidth = 1;
+  for (let x = -size; x <= size; x += step) {
+    const a = project(x, -20, -size);
+    const b = project(x, -20,  size);
+    ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+  }
+  for (let z = -size; z <= size; z += step) {
+    const a = project(-size, -20, z);
+    const b = project( size, -20, z);
+    ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawPillar(cx, cy, cz, w, d, h, color) {
+  const hw=w/2, hd=d/2;
+  const TFL = project(cx-hw, cy+h, cz+hd);
+  const TFR = project(cx+hw, cy+h, cz+hd);
+  const TBR = project(cx+hw, cy+h, cz-hd);
+  const TBL = project(cx-hw, cy+h, cz-hd);
+  const BFL = project(cx-hw, cy,   cz+hd);
+  const BFR = project(cx+hw, cy,   cz+hd);
+  const BBR = project(cx+hw, cy,   cz-hd);
+
+  ctx.save();
+  // Left
+  ctx.beginPath(); ctx.moveTo(TFL.sx,TFL.sy); ctx.lineTo(BFL.sx,BFL.sy);
+  ctx.lineTo(BFR.sx,BFR.sy); ctx.lineTo(TFR.sx,TFR.sy); ctx.closePath();
+  ctx.fillStyle = shadeColor(color, -0.25); ctx.fill();
+  // Right
+  ctx.beginPath(); ctx.moveTo(TFR.sx,TFR.sy); ctx.lineTo(BFR.sx,BFR.sy);
+  ctx.lineTo(BBR.sx,BBR.sy); ctx.lineTo(TBR.sx,TBR.sy); ctx.closePath();
+  ctx.fillStyle = shadeColor(color, -0.4); ctx.fill();
+  // Top
+  ctx.beginPath(); ctx.moveTo(TFL.sx,TFL.sy); ctx.lineTo(TFR.sx,TFR.sy);
+  ctx.lineTo(TBR.sx,TBR.sy); ctx.lineTo(TBL.sx,TBL.sy); ctx.closePath();
+  ctx.fillStyle = color; ctx.fill();
+  ctx.restore();
+
+  // Label on top center
+  const tc = project(cx, cy+h+8, cz);
+  ctx.save();
+  ctx.font = 'bold 9px Segoe UI, Arial';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#fff';
+  ctx.fillText(PILLARS.find(p=>p.color===color)?.label || '', tc.sx, tc.sy);
+  ctx.restore();
+}
+
+function shadeColor(hex, factor) {
+  let r = parseInt(hex.slice(1,3),16);
+  let g = parseInt(hex.slice(3,5),16);
+  let b = parseInt(hex.slice(5,7),16);
+  r = Math.max(0,Math.min(255, Math.round(r*(1+factor))));
+  g = Math.max(0,Math.min(255, Math.round(g*(1+factor))));
+  b = Math.max(0,Math.min(255, Math.round(b*(1+factor))));
+  return `rgb(${r},${g},${b})`;
+}
+
+// ============================================================
+//  MAIN DRAW
+// ============================================================
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Background gradient
+  const grad = ctx.createRadialGradient(
+    canvas.width/2, canvas.height/2, 0,
+    canvas.width/2, canvas.height/2, canvas.width*0.8
+  );
+  grad.addColorStop(0, '#1f3558');
+  grad.addColorStop(1, '#0d1c2e');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  drawGridFloor();
+
+  // Title overlay
+  ctx.save();
+  ctx.font = 'bold 14px Segoe UI, Arial';
+  ctx.fillStyle = 'rgba(201,168,76,0.6)';
+  ctx.textAlign = 'left';
+  ctx.fillText('Creationeering™ Business System', 14, 22);
+  if (exploded) {
+    ctx.font = '11px Segoe UI, Arial';
+    ctx.fillStyle = 'rgba(201,168,76,0.45)';
+    ctx.fillText('[ EXPLODED VIEW ]', 14, 38);
+  }
+  ctx.restore();
+
+  // Compute layer Y positions (animated)
+  const t = animProgress; // 0..1
+  const scaleY = viewMode === 'iso' ? 1 : (viewMode === 'top' ? 0 : 1);
+
+  // Total stack height
+  const stackH = LAYERS.reduce((s,l)=>s+l.h, 0);
+  const baseOffset = viewMode === 'top' ? 0 : -stackH/2;
+
+  let accY = baseOffset;
+  const layerYs = [];
+  for (let i = 0; i < LAYERS.length; i++) {
+    const L = LAYERS[i];
+    const normalY = accY;
+    const explodeY = normalY + L.explodeOffset * t;
+    layerYs.push(explodeY);
+    accY += L.h;
+  }
+
+  // Draw connectors (dashed lines between layers when exploded)
+  if (t > 0.1 && viewMode === 'iso') {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(201,168,76,0.25)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,4]);
+    for (let i = 0; i < LAYERS.length-1; i++) {
+      const L = LAYERS[i];
+      const yt = layerYs[i] + L.h;
+      const yb = layerYs[i+1];
+      const pt = project(0, yt, 0);
+      const pb = project(0, yb, 0);
+      ctx.beginPath();
+      ctx.moveTo(pt.sx, pt.sy);
+      ctx.lineTo(pb.sx, pb.sy);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  // Draw each layer (bottom to top)
+  const callouts = [];
+
+  for (let i = 0; i < LAYERS.length; i++) {
+    const L = LAYERS[i];
+    const cy = layerYs[i];
+    const highlighted = (selectedComp === i);
+    const alpha = selectedComp >= 0 && !highlighted ? 0.72 : 1.0;
+
+    const faces = drawIsoBox(
+      0, cy, 0,
+      L.w, L.d, L.h,
+      L.top, L.sL, L.sR,
+      alpha, highlighted
+    );
+
+    // Collect callout info
+    const topCenter = project(0, cy + L.h, 0);
+    const labelSide = i % 2 === 0 ? -1 : 1;
+    const calloutX = topCenter.sx + labelSide * (L.w * 0.45 + 40);
+    const calloutY = topCenter.sy - 14 + i * 2;
+
+    callouts.push({
+      x1: topCenter.sx + labelSide * 20,
+      y1: topCenter.sy - 8,
+      x2: calloutX,
+      y2: calloutY,
+      label: L.label,
+      sub: L.sub,
+      color: L.top
+    });
+
+    // Symbol on top face
+    if (viewMode !== 'front') {
+      const tc = project(0, cy+L.h+1, 0);
+      ctx.save();
+      ctx.font = `bold ${Math.floor(L.w*0.11)}px Segoe UI, Arial`;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.fillText(L.symbol, tc.sx, tc.sy + 4);
+      ctx.restore();
+    }
+
+    // Draw pillars inside Create layer
+    if (i === 2 && t < 0.7) {
+      const pillarAlpha = Math.max(0, 1 - t * 2);
+      if (pillarAlpha > 0) {
+        ctx.save();
+        ctx.globalAlpha = pillarAlpha * alpha;
+        for (const P of PILLARS) {
+          drawPillar(P.dx, cy, P.dz, 28, 28, L.h-8, P.color);
+        }
+        ctx.restore();
+      }
+    }
+  }
+
+  // Draw all callouts on top
+  if (viewMode === 'iso') {
+    for (const c of callouts) {
+      drawCalloutLine(c.x1, c.y1, c.x2, c.y2, c.label, c.sub, c.color);
+    }
+  }
+
+  // Legend for top/front views
+  if (viewMode !== 'iso') {
+    drawFlatLegend();
+  }
+
+  // Compass rose
+  if (viewMode === 'iso') {
+    drawCompass();
+  }
+}
+
+function drawFlatLegend() {
+  const pad = 14;
+  let ly = 50;
+  ctx.save();
+  for (const L of LAYERS) {
+    ctx.fillStyle = L.top;
+    ctx.fillRect(pad, ly, 14, 14);
+    ctx.font = '11px Segoe UI, Arial';
+    ctx.fillStyle = C.gold;
+    ctx.textAlign = 'left';
+    ctx.fillText(L.label, pad + 20, ly + 11);
+    ly += 22;
+  }
+  ctx.restore();
+}
+
+function drawCompass() {
+  const cx = canvas.width - 46, cy = canvas.height - 46, r = 26;
+  ctx.save();
+  ctx.globalAlpha = 0.65;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r+4, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(27,58,92,0.8)';
+  ctx.fill();
+  ctx.strokeStyle = C.gold;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Arrows
+  const ry = degToRad(rotY);
+  const labels = [['N',0],['E',90],['S',180],['W',270]];
+  for (const [lbl, deg] of labels) {
+    const a = degToRad(deg) - ry;
+    const ex = cx + Math.sin(a)*r*0.78;
+    const ey = cy - Math.cos(a)*r*0.78;
+    ctx.font = 'bold 9px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = lbl === 'N' ? C.gold : 'rgba(200,220,240,0.8)';
+    ctx.fillText(lbl, ex, ey);
+  }
+  ctx.textBaseline = 'alphabetic';
+  ctx.restore();
+}
+
+// ============================================================
+//  ANIMATION LOOP
+// ============================================================
+function animate() {
+  if (!animRunning) return;
+  const speed = 0.035;
+  const diff = animTarget - animProgress;
+  if (Math.abs(diff) < 0.005) {
+    animProgress = animTarget;
+    animRunning = false;
+  } else {
+    animProgress += diff * speed * 2.5;
+  }
+  draw();
+  if (animRunning) requestAnimationFrame(animate);
+}
+
+function startAnim(target) {
+  animTarget = target;
+  animRunning = true;
+  requestAnimationFrame(animate);
+}
+
+// ============================================================
+//  CONTROLS
+// ============================================================
+function toggleExplode() {
+  exploded = !exploded;
+  startAnim(exploded ? 1 : 0);
+}
+
+function resetView() {
+  rotX = 28; rotY = -38;
+  setViewMode('iso');
+}
+
+function rotateLeft()  { rotY -= 20; draw(); }
+function rotateRight() { rotY += 20; draw(); }
+function rotateUp()    { rotX = Math.min(70, rotX + 10); draw(); }
+function rotateDown()  { rotX = Math.max(-10, rotX - 10); draw(); }
+
+function setViewMode(mode) {
+  viewMode = mode;
+  ['iso','top','front'].forEach(m => {
+    const b = document.getElementById('vbtn-'+m);
+    if (b) b.classList.toggle('active', m===mode);
+  });
+  draw();
+}
+
+function selectComponent(idx) {
+  selectedComp = idx;
+  document.querySelectorAll('.component-item').forEach((el,i)=>{
+    el.classList.toggle('active', i===idx);
+  });
+  draw();
+}
+
+// ============================================================
+//  MOUSE / TOUCH
+// ============================================================
+let touchStart = null;
+
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  lastMouse = { x: e.clientX, y: e.clientY };
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) {
+    handleHover(e);
+    return;
+  }
+  const dx = e.clientX - lastMouse.x;
+  const dy = e.clientY - lastMouse.y;
+  rotY += dx * 0.5;
+  rotX = Math.max(-10, Math.min(75, rotX - dy * 0.35));
+  lastMouse = { x: e.clientX, y: e.clientY };
+  draw();
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  handleClick(e);
+});
+
+canvas.addEventListener('mouseleave', () => {
+  isDragging = false;
+  tooltip.style.display = 'none';
+});
+
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    isDragging = true;
+  }
+  e.preventDefault();
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+  if (!isDragging || e.touches.length !== 1) return;
+  const dx = e.touches[0].clientX - lastMouse.x;
+  const dy = e.touches[0].clientY - lastMouse.y;
+  rotY += dx * 0.5;
+  rotX = Math.max(-10, Math.min(75, rotX - dy * 0.35));
+  lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  draw();
+  e.preventDefault();
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  isDragging = false;
+});
+
+// Simple hit-test: which layer was clicked?
+function handleClick(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const stackH = LAYERS.reduce((s,l)=>s+l.h, 0);
+  const baseOffset = -stackH/2;
+  let accY = baseOffset;
+  const layerYs = [];
+  for (let i = 0; i < LAYERS.length; i++) {
+    const t2 = animProgress;
+    layerYs.push(accY + LAYERS[i].explodeOffset * t2);
+    accY += LAYERS[i].h;
+  }
+
+  // Check each layer top face (simple AABB on screen)
+  for (let i = LAYERS.length-1; i >= 0; i--) {
+    const L = LAYERS[i];
+    const cy = layerYs[i];
+    const hw = L.w/2, hd = L.d/2;
+    const corners = [
+      project(-hw, cy+L.h, +hd),
+      project(+hw, cy+L.h, +hd),
+      project(+hw, cy+L.h, -hd),
+      project(-hw, cy+L.h, -hd),
+    ];
+    if (pointInPoly(mx, my, corners)) {
+      selectComponent(i);
+      return;
+    }
+  }
+}
+
+function pointInPoly(px, py, pts) {
+  let inside = false;
+  for (let i=0, j=pts.length-1; i<pts.length; j=i++) {
+    const xi=pts[i].sx, yi=pts[i].sy;
+    const xj=pts[j].sx, yj=pts[j].sy;
+    if (((yi>py)!==(yj>py)) && (px < (xj-xi)*(py-yi)/(yj-yi)+xi)) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+function handleHover(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const stackH = LAYERS.reduce((s,l)=>s+l.h, 0);
+  const baseOffset = -stackH/2;
+  let accY = baseOffset;
+  const layerYs = [];
+  for (let i=0; i<LAYERS.length; i++) {
+    layerYs.push(accY + LAYERS[i].explodeOffset * animProgress);
+    accY += LAYERS[i].h;
+  }
+
+  let found = false;
+  for (let i=LAYERS.length-1; i>=0; i--) {
+    const L = LAYERS[i];
+    const cy = layerYs[i];
+    const hw=L.w/2, hd=L.d/2;
+    const corners = [
+      project(-hw, cy+L.h, +hd),
+      project(+hw, cy+L.h, +hd),
+      project(+hw, cy+L.h, -hd),
+      project(-hw, cy+L.h, -hd),
+    ];
+    if (pointInPoly(mx, my, corners)) {
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX - rect.left + 14) + 'px';
+      tooltip.style.top  = (e.clientY - rect.top  - 36) + 'px';
+      tooltip.innerHTML  = `<strong>${L.label}</strong><br>${L.detail}`;
+      canvas.style.cursor = 'pointer';
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    tooltip.style.display = 'none';
+    canvas.style.cursor = isDragging ? 'grabbing' : 'grab';
+  }
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+resize();
+draw();
+
+// Auto-spin intro
+let introSpin = 0;
+function introAnim() {
+  if (introSpin < 60) {
+    rotY -= 0.55;
+    draw();
+    introSpin++;
+    requestAnimationFrame(introAnim);
+  }
+}
+setTimeout(introAnim, 400);
+
+</script>
+</body>
+</html>

@@ -26,7 +26,22 @@ from _gws_auth import get_session
 # ── Config ─────────────────────────────────────────────────────────────────────
 
 LIVE_URL      = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-PLATFORM_KEY  = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
+def _get_platform_key() -> str:
+    """Load platform API key from .env — never hardcode in source."""
+    import os as _os
+    from pathlib import Path as _Path
+    k = _os.environ.get('PIPELINE_KEY') or _os.environ.get('PLATFORM_KEY', '')
+    if k:
+        return k
+    for _n in ['.env', '.env.local']:
+        _p = _Path(__file__).parent.parent / _n
+        if _p.exists():
+            for _line in _p.read_text(encoding='utf-8').splitlines():
+                _line = _line.strip()
+                if _line.startswith(('PIPELINE_KEY=', 'PLATFORM_KEY=')) and '=' in _line:
+                    return _line.split('=', 1)[1].strip().strip('""')
+    return ''
+PLATFORM_KEY = _get_platform_key()
 MANIFEST_PATH = Path(__file__).parent / "lessons_manifest.json"
 LOG_PATH      = Path(__file__).parent / "interactive_flashcards_log.json"
 
@@ -92,13 +107,16 @@ def generate_flashcard_html(lesson_id: str, title: str, items: list[dict]) -> st
   <style>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
+    /* No scrollbar — sized to fit the 520px embed container */
+    html, body {{ height: 100%; overflow: hidden; }}
+
     body {{
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #f5f7fb;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      height: 100%;
       padding: 16px;
       color: #1B2A5C;
     }}
@@ -277,13 +295,14 @@ def generate_flashcard_html(lesson_id: str, title: str, items: list[dict]) -> st
 
     .shuffle-row label {{ cursor: pointer; user-select: none; }}
 
-    /* Footer */
+    /* Footer — pinned at bottom, minimal height */
     footer {{
-      margin-top: auto;
-      padding-top: 16px;
-      font-size: 0.68rem;
+      margin-top: 8px;
+      padding-top: 6px;
+      font-size: 0.65rem;
       color: #9aa0b8;
       text-align: center;
+      flex-shrink: 0;
     }}
 
     @media (max-height: 580px) {{

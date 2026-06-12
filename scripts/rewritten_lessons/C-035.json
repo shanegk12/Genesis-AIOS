@@ -1,0 +1,432 @@
+[
+  {
+    "id": "c035t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Technical Specifications</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Quality Assurance and Material Inspection — learning how important it is to make sure every material is exactly what a project needs. Now we're moving forward in the Creationeering™ journey to the <strong>Procurement phase</strong>. This is where you gather all the materials and resources necessary to bring a project to life.</p>\n<p>Think of it like preparing your ingredients before you start baking. You don't just grab anything off the shelf — you check that you have the right flour, the right amount of sugar, the right butter. In engineering, that same careful thinking shows up as <strong>technical specifications</strong>: precise, detailed documents that tell you exactly what you need and why.</p>\n<p>In this lesson, you'll learn how to define and document the exact requirements for the components and materials in an engineering project. Along the way, we'll connect this careful planning to something much bigger — the way God prepared the Earth with exactly the right resources for life to flourish.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p><ul><li>Define technical specifications and explain their importance in the Procurement phase of a Creationeering™ project.</li><li>Identify the key elements that make up a comprehensive technical specification for materials and components.</li><li>Explain how Multiscale Modeling connects large-scale material properties to atomic-level structures.</li><li>Apply the OCV method — Objective, Constraint, Variable — to optimize material selection based on technical specifications.</li><li>Connect the careful creation of technical specifications to the biblical principle of stewardship over God's creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Technical Specifications",
+          "definition": "Detailed documents that describe the exact requirements for a product, material, or service."
+        },
+        {
+          "term": "Procurement",
+          "definition": "The process of obtaining or purchasing the goods, materials, and services needed for a project."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A scientific approach that connects observations at large scales (macro) to events at very small scales (atomic)."
+        },
+        {
+          "term": "Objective",
+          "definition": "The desired outcome or goal for a system or component — what you want it to do."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be satisfied in a design or process, such as a maximum weight or budget."
+        },
+        {
+          "term": "Variable",
+          "definition": "A parameter that can be changed or adjusted in a design to find the best outcome."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution by carefully balancing competing objectives and constraints."
+        },
+        {
+          "term": "Material Properties",
+          "definition": "Characteristics of a material — such as strength, weight, or conductivity — that determine how it behaves."
+        },
+        {
+          "term": "Component",
+          "definition": "A single part or element within a larger system."
+        },
+        {
+          "term": "Subsystem",
+          "definition": "A self-contained system that functions as part of a larger overall system."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Divine Procurement — God's Original Spec Sheet</h2>\n<p>Before any engineer writes a single specification, God already modeled what perfect procurement looks like. In Genesis 1:11-12, we read: <em>\"Then God said, 'Let the land produce vegetation: seed-bearing plants and trees on the land that bear fruit with seed in it, according to their various kinds.' And it was so... And God saw that it was good.\"</em></p>\n<p>That phrase — <em>according to their various kinds</em> — is doing serious engineering work. Every plant, every tree, every seed was created with exact properties suited to its purpose. God didn't just scatter random materials across the Earth. He specified each one. He is the Ultimate Creationeer™, and His creation is the original technical specification document.</p>\n<p>When you write technical specifications for your own projects, you're following that same pattern: being intentional, being precise, and making sure every material is chosen for a reason.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:11-12</strong> — \"Let the land produce vegetation: seed-bearing plants and trees on the land that bear fruit with seed in it, according to their various kinds... And God saw that it was good.\" God's creation reflects intentional design — each element made with a clear purpose, a defined property, and a specific role. That's the spirit behind every technical specification you'll ever write.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Are Technical Specifications?</h2>\n<p>A <strong>technical specification</strong> is a detailed document that describes exactly what a material, component, or system must be and do. It answers questions like: How strong does this part need to be? How much can it weigh? What temperature will it need to survive? What material is acceptable — and what isn't?</p>\n<p>Think of a technical specification as the difference between telling a contractor \"build me a house\" versus handing them a full blueprint. The blueprint tells them the dimensions of every wall, the type of lumber to use, the load capacity of the floor — everything. Without that detail, you might end up with a house that looks fine but can't safely hold the furniture you planned to put inside it.</p>\n<p>In the Procurement phase, technical specifications are your blueprint for shopping. They prevent costly mistakes, wasted materials, and failed designs before a single bolt is tightened.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Why Procurement Matters:</strong> Procurement isn't just purchasing — it's the strategic process of identifying, sourcing, and acquiring exactly the right materials and services at the right time. A poorly specified procurement can delay an entire project, waste a budget, or compromise safety. Getting it right from the start is one of the most valuable skills an engineer can have.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Elements of a Technical Specification</h2>\n<p>A strong technical specification for an engineering material or component usually covers several important areas. When you're writing one, you want to address each of these clearly:</p>\n<ul>\n<li><strong>Purpose / Function:</strong> What is this part supposed to do within the larger system?</li>\n<li><strong>Material Properties:</strong> What physical characteristics are required — strength, weight, flexibility, conductivity, heat resistance?</li>\n<li><strong>Dimensions and Tolerances:</strong> What are the exact sizes, and how much variation is acceptable?</li>\n<li><strong>Performance Standards:</strong> Under what conditions must the component perform — how much load, how much heat, how many cycles?</li>\n<li><strong>Compliance and Standards:</strong> Are there industry codes, safety regulations, or certifications the material must meet?</li>\n<li><strong>Quantity and Delivery:</strong> How many are needed, and when do they need to arrive?</li>\n</ul>\n<p>Miss any one of these, and you've left a gap that could become a serious problem during construction or testing. Great engineers treat their spec documents like a contract with the future — precise and complete.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample engineering technical specification document showing sections for material properties, dimensions, tolerances, and performance standards."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling — Seeing the Big and the Small</h2>\n<p>Here's a question that might surprise you: how do engineers know exactly what properties a material will have before they even build with it? Part of the answer is <strong>Multiscale Modeling</strong>.</p>\n<p>Multiscale Modeling is a scientific approach that connects what you can see and measure with your hands — called the <em>macro scale</em> — all the way down to what's happening at the atomic level, things too small to see even with most microscopes. It's like understanding that the strength of a steel beam depends not just on its shape, but on how millions of iron and carbon atoms are arranged inside it.</p>\n<p>When engineers use Multiscale Modeling to develop technical specifications, they can predict how a material will behave under stress, heat, or repeated use — <em>before</em> a single prototype is built. That predictive power saves enormous amounts of time, money, and material. It's one reason modern aircraft, bridges, and medical devices are safer than ever.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing Multiscale Modeling — connecting atomic-level structure (left) to micro-level grain structure (center) to the macro-level material behavior of a finished component (right)."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember:</strong> When you read a material's properties in a specification — like \"tensile strength: 400 MPa\" — those numbers come from both physical testing AND computational models that trace material behavior all the way to the atomic scale. Multiscale Modeling makes those numbers trustworthy.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method — A Framework for Smart Material Selection</h2>\n<p>Once you understand what a material needs to do, how do you choose the best one from all the options available? Engineers use a structured thinking approach called the <strong>OCV Method</strong>: <strong>Objective, Constraint, Variable</strong>.</p>\n<p>It works like this:</p>\n<ul>\n<li><strong>Objective:</strong> What outcome are you trying to achieve? For example, \"minimize weight\" or \"maximize thermal conductivity.\" Your objective is the target you're aiming at.</li>\n<li><strong>Constraint:</strong> What rules can't you break? Maybe the material must cost less than $5 per kilogram, or it must be non-toxic, or it must meet a specific safety standard. Constraints are your hard boundaries — they eliminate options that can't work.</li>\n<li><strong>Variable:</strong> What parameters can you adjust to get closer to your objective without breaking your constraints? This might be material thickness, alloy composition, or surface treatment.</li>\n</ul>\n<p>The OCV method turns a potentially overwhelming decision into a clear, logical process. You define what winning looks like (objective), you establish what's off-limits (constraints), and then you tune the adjustable parts (variables) until you find the best solution. That process — balancing all three — is called <strong>optimization</strong>.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035img03",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram of the OCV Method showing Objective, Constraint, and Variable as three interconnected elements of engineering optimization."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Students often confuse objectives and constraints. Remember — your <em>objective</em> is what you're optimizing (you want more of it or less of it). Your <em>constraint</em> is a hard limit you simply cannot cross. Mixing them up leads to designs that optimize the wrong thing or ignore critical boundaries.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and Precision — Why This Matters</h2>\n<p>Writing a great technical specification isn't just a technical skill — it's an act of stewardship. When you specify materials carefully, you avoid waste. You prevent over-purchasing. You protect the environment by not ordering more than you need. You protect people by ensuring every component is safe and fit for purpose.</p>\n<p>Proverbs 24:3-4 says, <em>\"By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures.\"</em> Wisdom here isn't just about knowing facts — it's about applying knowledge thoughtfully to create something excellent. That's exactly what a well-written technical specification does for a project.</p>\n<p>Every specification you write is an opportunity to honor God by using His resources wisely, building things that work, and serving others well through your craft.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:3-4</strong> — \"By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures.\" Engineering with precision is engineering with wisdom. When your specifications are thorough and accurate, you build things that last — and that glorify the One who gave you the mind to design them.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Review these key questions to make sure you've got the core ideas from this lesson locked in.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is a technical specification, and why is it important in the Procurement phase?",
+      "html": "<p>A technical specification is a detailed document that describes the exact requirements for a material, component, or service — including its properties, dimensions, performance standards, and compliance requirements. In the Procurement phase, it acts like a blueprint for purchasing: it ensures you acquire exactly what your project needs, prevents costly mistakes, and eliminates guesswork before a single part is ordered.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035a002",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling help engineers write better technical specifications?",
+      "html": "<p>Multiscale Modeling connects large-scale (macro) material behavior to what's happening at the atomic level. This means engineers can predict how a material will perform under real-world conditions — before building a prototype. Those predictions inform the exact property values written into a technical specification, making the document far more accurate and reliable.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035a003",
+    "type": "accordion",
+    "data": {
+      "title": "What does OCV stand for, and how is each element used in material selection?",
+      "html": "<p><strong>O</strong> — Objective: The goal you're trying to achieve, such as minimizing weight or maximizing strength.<br><strong>C</strong> — Constraint: A hard rule you cannot break, like a maximum cost or a required safety certification.<br><strong>V</strong> — Variable: A parameter you can adjust — such as material thickness or composition — to move closer to your objective without violating your constraints.<br><br>Together, the OCV method gives you a structured way to optimize material selection rather than guessing.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035a004",
+    "type": "accordion",
+    "data": {
+      "title": "How does the biblical account of creation connect to technical specifications?",
+      "html": "<p>In Genesis 1, God created each element of the Earth with precise properties and purposes — plants bearing seed \"according to their various kinds.\" This reflects intentional, specification-level design: every material with its own defined role, properties, and fit for purpose. When we write careful technical specifications, we're following that same principle — being good stewards of resources and designing with purpose, not accident.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035a005",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a component and a subsystem?",
+      "html": "<p>A <strong>component</strong> is a single individual part — like a bolt, a sensor, or a circuit board. A <strong>subsystem</strong> is a group of components that work together as a self-contained unit within a larger system — like an engine (subsystem) made up of pistons, valves, and fuel injectors (components). Understanding this difference helps engineers write specifications at the right level of detail.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c035c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study Tip:</strong> When reviewing technical specifications in a real engineering project, read them the same way you'd read a recipe — every detail is intentional. Ask yourself: What is this component supposed to do? What would happen if this property were wrong? That kind of thinking will sharpen your engineering judgment fast.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

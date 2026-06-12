@@ -1,0 +1,283 @@
+[
+  {
+    "id": "m016a1b2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build 2: Iterative Design — Mark 2</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016c3d4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>You've already built something real. Your Little Moe prototype — the Mark 1 — gave you a scientific baseline: real data, real observations, and real answers about how a mousetrap-powered vehicle converts potential energy into motion. Now it's time to do something harder and more exciting. You're entering the <strong>Synthesis</strong> phase of the Creationeering™ lifecycle, where all those isolated findings come together into one optimized machine. The Mark 2 isn't a brand-new car — it's your Mark 1 logic, refined and physicalized in balsa wood and brass.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016e5f6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p><ul><li>Define Synthesis and explain how it differs from exploration in the engineering design process.</li><li>Apply the OCV (Objectives, Constraints, Variables) framework to a Mark 2 vehicle design.</li><li>Identify which Mark 1 test results should drive Mark 2 design decisions.</li><li>Optimize each subassembly — chassis, drivetrain, and lever arm — using data and precision techniques.</li><li>Connect iterative design to biblical principles of stewardship and faithful craftsmanship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016g7h8",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Synthesis",
+          "definition": "The process of combining individual validated findings into a single, superior, optimized whole."
+        },
+        {
+          "term": "OFAT (One-Factor-at-a-Time)",
+          "definition": "A testing strategy where only one variable is changed at a time so that its specific effect can be isolated and measured."
+        },
+        {
+          "term": "OCV Framework",
+          "definition": "A design planning tool that defines the Objectives (what you want to achieve), Constraints (the fixed limits), and Variables (what you can change)."
+        },
+        {
+          "term": "Subassembly",
+          "definition": "A distinct component or group of parts within a larger system — such as the chassis, drivetrain, or lever arm — that can be built and tested independently."
+        },
+        {
+          "term": "Coefficient of Friction",
+          "definition": "A number that describes how much resistive force acts between two surfaces in contact. A lower number means less friction and less energy lost to heat."
+        },
+        {
+          "term": "Strength-to-Weight Ratio",
+          "definition": "A measure of how strong a material is relative to how much it weighs. A high ratio means the material is strong without being heavy — ideal for vehicle frames."
+        },
+        {
+          "term": "Pareto Frontier",
+          "definition": "The boundary of maximum efficiency in a design — the point where improving one variable can no longer happen without sacrificing another."
+        },
+        {
+          "term": "Iterative Design",
+          "definition": "A process of repeatedly testing, evaluating, and improving a design based on real data until it reaches an optimized state."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016div1",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016i9j0",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Exploration to Optimization</h2>\n<p>During your Mark 1 tests, you used the <strong>One-Factor-at-a-Time (OFAT)</strong> strategy. You changed one thing — lever arm length, wheel tread, axle diameter — and held everything else constant. That wasn't just a lab rule. It was the only honest way to know what was actually working.</p>\n<p>Now you have a set of \"Success Patterns\" — the variable settings that produced your best results. Synthesis means combining those patterns intentionally. Think of it like learning an instrument. In Mark 1, you practiced the violin, the flute, and the drums separately. In Mark 2, you bring the whole orchestra together. If one instrument is out of tune, it doesn't matter how well the others are playing — the music falls apart. Your Mark 2 is the concert. Every subassembly has to perform.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016bib1",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 3:23</strong> — \"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.\" The Mark 2 isn't just an engineering exercise — it's a chance to bring your best thinking, your most careful hands, and your most intentional effort to a task that matters. That's what faithful craftsmanship looks like.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016k1l2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Redefining Your OCV for Mark 2</h2>\n<p>Before you pick up a single piece of balsa wood, you need a plan. The <strong>OCV Framework</strong> — Objectives, Constraints, and Variables — gives you that plan. You used it loosely in Mark 1; now you're going to apply it with precision.</p>\n<p>Here's how the OCV framework applies to your Mark 2 build:</p>\n<ul>\n<li><strong>Objective:</strong> Maximize total travel distance while keeping the car within a straight 30 cm lane. This is a stewardship challenge — getting the most distance (\"fruit\") out of a limited amount of stored energy (\"resources\").</li>\n<li><strong>Constraints:</strong> You must use the Little Moe kit, a standard Victor mousetrap, and you cannot override the laws of friction and inertia. Constraints aren't barriers — they define the edges of your problem space and keep competition fair.</li>\n<li><strong>Variables:</strong> Lever arm length, wheel diameter, axle surface finish, and bearing type. These are the \"knobs\" you actually get to turn. Your Mark 1 data should tell you which direction to turn each one.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A filled-in OCV planning table for a Mark 2 mousetrap vehicle, showing the Objective (maximize distance in a straight lane), Constraints (kit components and physical laws), and Variables (lever arm, wheel diameter, axle finish, bearing type) with student notes written in each cell."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016tip1",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Start with your data, not your gut.</strong> Before writing anything in your OCV table, flip back to your Mark 1 lab notebook. Which lever arm length gave the best distance? Which axle setup had the least wobble? Let the evidence guide your Mark 2 decisions — that's what data-driven design actually means.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016div2",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016m3n4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Subassembly Optimization: Building Each Part with Intention</h2>\n<p>A high-performance vehicle is a <em>system</em> of subassemblies. Each part has a job. In Mark 2, your job is to make sure every subassembly does its job as efficiently as possible — because a weakness anywhere in the system costs you distance everywhere.</p>\n<h3>The Chassis: Strength Without Waste</h3>\n<p>Think of the chassis as the skeletal system of your car. It has to be strong enough to handle the spring's snap without flexing, but light enough not to steal momentum. Balsa wood earns its place here because of its outstanding <strong>strength-to-weight ratio</strong> — it's stiff and light at the same time.</p>\n<p>Watch out for two failure modes. If the frame is too heavy, inertia (the resistance to changing motion) eats into your energy before the car even gets rolling. If the frame is too flimsy, the spring's torque will bow the rails inward and cause <strong>axle binding</strong> — the axle drags instead of spins, and your car lurches to a stop.</p>\n<p>The fix: dry-fit every frame piece and check alignment with a square tool <em>before</em> you apply any glue. One drop of glue in the wrong place can warp your geometry and ruin the whole build.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016o5p6",
+    "type": "text",
+    "data": {
+      "html": "<h3>The Drivetrain: Reducing Resistive Forces</h3>\n<p>Your axles and bearings are where most of your energy disappears — not as motion, but as <strong>heat</strong>. Every time a rough axle rubs against the frame, friction converts your stored spring energy into warmth you can't get back. Imagine walking through a room with thick shaggy carpet instead of a smooth hardwood floor. That's what a rough axle feels like to your car's energy budget.</p>\n<p>For Mark 2, you'll polish your brass axles through multiple sandpaper grits — starting around 150 and finishing at 320 or higher — until the surface is smooth and almost reflective. That polish directly lowers the <strong>coefficient of friction</strong> at the axle-frame interface, which means less energy lost and more distance gained.</p>\n<p>You'll also choose between standard thrust washers and micro ball bearings. Ball bearings reduce friction dramatically because they replace sliding contact with rolling contact — but they add complexity and must be seated perfectly. Use your Friction Fighter Lab results to make this call. Don't guess; let the data decide.</p>\n<h3>The Lever Arm: Mechanical Advantage and Spring Travel</h3>\n<p>The lever arm is your energy delivery system. A longer arm gives the string more time to pull the axle — converting more of the spring's rotation into linear wheel motion. But there's a trade-off: an arm that's too long can hit the ground mid-run, and the geometry has to match your string attachment point to avoid slack at release.</p>\n<p>Use your Mark 1 lever arm data as your starting point. If your best distance came from the longest arm you tested, consider going slightly longer — but prototype it first and check clearance before committing to that design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A close-up side-by-side comparison of two brass axles under magnification — one showing a rough, scratched surface finish and one showing a polished, smooth finish — with labels indicating the difference in friction level at each surface."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016warn",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake: gluing before aligning.</strong> Students often rush to glue frame pieces together before verifying that axle holes are parallel and rails are straight. Once the glue sets, misalignment is permanent. Always dry-fit, square up, and confirm everything is true before making the bond.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016div3",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016q7r8",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Mark 2 Build Process</h2>\n<p>Now that your OCV is defined and your subassembly strategy is set, here's the sequence you'll follow during build time. Order matters — build out of sequence and you'll create problems that are very hard to undo.</p>\n<ul>\n<li><strong>Step 1 — Chassis Assembly:</strong> Cut balsa rails to spec, dry-fit with axle tubes in place, verify square alignment, then glue. Allow full cure time before proceeding.</li>\n<li><strong>Step 2 — Axle Preparation:</strong> Sand brass axles through progressive grits (150 → 220 → 320). Wipe clean between each grit change. Test smoothness by rolling the axle across a flat surface — it should roll freely with no wobble.</li>\n<li><strong>Step 3 — Wheel and Bearing Installation:</strong> Install your chosen bearing type. Confirm wheels spin freely and sit perpendicular to the axle. Any tilt here will cause a curved trajectory.</li>\n<li><strong>Step 4 — Mousetrap and Lever Arm Mounting:</strong> Secure the trap to the chassis with your lever arm at the length determined by your Mark 1 data. Attach string and confirm the arm swings through its full arc without obstruction.</li>\n<li><strong>Step 5 — System Test:</strong> Before a full-distance run, do a short \"bench roll\" — pull the string back slightly and release to confirm all systems move freely together. Fix any binding now.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016s9t0",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Makes This Engineering — and Why It Matters</h2>\n<p>Here's the thing about the Mark 2: it's not just a better mousetrap car. It's a demonstration of something important. Every engineer who has ever built a bridge, designed a prosthetic limb, or launched a satellite did exactly what you're doing right now — they started with a rough version, gathered data, and refined their design until it was as good as it could be within the constraints they were given.</p>\n<p>God designed the universe with this kind of layered, intentional order. The natural world is full of optimization — bird wings are shaped for lift and drag balance, tree roots distribute load across soil, the eye focuses light with precision that took decades of engineering to replicate artificially. When you design with care, test honestly, and refine based on evidence, you're reflecting that same creative impulse. You're being a faithful steward of the skills and materials you've been given.</p>\n<p>Your Mark 2 run isn't just a distance score. It's a record of how well you listened to your data, respected the physics, and brought your best thinking to the task.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m016acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is the difference between Mark 1 and Mark 2 in terms of design strategy?</strong><br/>A: Mark 1 used OFAT testing to isolate variables one at a time and establish a baseline. Mark 2 uses Synthesis to combine the best findings from those tests into a single optimized design.</p><p><strong>Q: Why is it important to dry-fit your chassis before gluing?</strong><br/>A: Glue sets permanently. If your axle holes are misaligned or your rails aren't square before gluing, you'll have binding, crooked tracking, or structural weakness that you cannot fix after the fact.</p><p><strong>Q: What does polishing the axles actually do for your car's performance?</strong><br/>A: It lowers the coefficient of friction at the contact point between the axle and the frame. Less friction means less energy converted to heat, which means more energy available to move the car forward.</p><p><strong>Q: What does the Pareto Frontier mean in the context of your Mark 2 design?</strong><br/>A: It's the boundary of maximum efficiency — the point where you can no longer improve one variable (like speed) without giving something up somewhere else (like straight-line tracking). Your goal is to design as close to that frontier as your data allows.</p><p><strong>Q: How does the Mark 2 build process connect to biblical stewardship?</strong><br/>A: Stewardship means getting the most value out of limited resources. In this case, your \"resource\" is the potential energy stored in the mousetrap spring. Every design decision — lighter chassis, polished axles, optimized lever arm — is an act of stewardship, using what you've been given as efficiently as possible.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

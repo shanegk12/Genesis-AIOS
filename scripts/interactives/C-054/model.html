@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assembly Line 3D Viewer — Creationeering | Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1e2e;
+    color: #e8e8e8;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .logo-badge {
+    width: 38px; height: 38px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: #1B3A5C; font-size: 15px;
+    flex-shrink: 0;
+  }
+  header h1 {
+    font-size: 15px; font-weight: 700; color: #C9A84C;
+    line-height: 1.2;
+  }
+  header p { font-size: 11px; color: #a0b8cc; }
+  .main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    gap: 0;
+  }
+  .sidebar {
+    width: 230px;
+    background: #162d45;
+    border-right: 2px solid #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar-section {
+    border-bottom: 1px solid #1e3d5c;
+    padding: 12px;
+  }
+  .sidebar-section h2 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #C9A84C;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .component-item {
+    padding: 7px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    background: #1a3349;
+  }
+  .component-item:hover { border-color: #C9A84C; background: #1e3d5c; }
+  .component-item.active { border-color: #C9A84C; background: #2a4d6e; }
+  .component-item .ci-name {
+    font-size: 12px; font-weight: 700; color: #e0e8f0;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ci-dot {
+    width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0;
+  }
+  .component-item .ci-desc {
+    font-size: 10px; color: #7a9ab8; margin-top: 2px; line-height: 1.4;
+  }
+  .btn-group {
+    padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  button {
+    background: #1B3A5C;
+    color: #e0e8f0;
+    border: 1px solid #2a5580;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-align: left;
+    display: flex; align-items: center; gap: 7px;
+  }
+  button:hover { background: #2a5580; border-color: #C9A84C; color: #C9A84C; }
+  button.active-btn { background: #C9A84C; color: #1B3A5C; border-color: #C9A84C; }
+  .btn-icon { font-size: 14px; }
+  .canvas-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  #mainCanvas {
+    flex: 1;
+    cursor: grab;
+    display: block;
+  }
+  #mainCanvas:active { cursor: grabbing; }
+  .toolbar {
+    background: #162d45;
+    border-top: 1px solid #1B3A5C;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .toolbar-label { font-size: 10px; color: #7a9ab8; text-transform: uppercase; letter-spacing: 0.8px; }
+  .rotate-btns { display: flex; gap: 4px; }
+  .rot-btn {
+    background: #1B3A5C;
+    border: 1px solid #2a5580;
+    color: #e0e8f0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .rot-btn:hover { background: #2a5580; border-color: #C9A84C; }
+  .info-strip {
+    margin-left: auto;
+    font-size: 10px;
+    color: #4a7a9b;
+    font-style: italic;
+  }
+  .legend-bar {
+    background: #1B3A5C;
+    border-top: 1px solid #C9A84C44;
+    padding: 5px 14px;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 5px; font-size: 10px; color: #a0b8cc;
+  }
+  .legend-swatch {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+  .tooltip-overlay {
+    position: absolute;
+    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+  .callout {
+    position: absolute;
+    background: rgba(27,58,92,0.95);
+    border: 1px solid #C9A84C;
+    border-radius: 6px;
+    padding: 5px 9px;
+    font-size: 10px;
+    color: #e8e8e8;
+    pointer-events: none;
+    display: flex; flex-direction: column; gap: 1px;
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .callout strong { color: #C9A84C; font-size: 11px; }
+  .callout-line {
+    position: absolute;
+    pointer-events: none;
+    background: #C9A84C;
+    width: 1px;
+    transform-origin: top center;
+  }
+  .highlight-pulse {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.3);
+    pointer-events: none;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: translate(-50%,-50%) scale(0.7); opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(2); opacity: 0; }
+  }
+  .explode-indicator {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid #C9A84C88;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 10px;
+    color: #C9A84C;
+    pointer-events: none;
+    display: none;
+  }
+  .scroll-hint {
+    font-size: 9px;
+    color: #3a5a7a;
+    text-align: center;
+    padding: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK</div>
+  <div>
+    <h1>Assembly Line 3D System Viewer</h1>
+    <p>Creationeering · Lesson: Sequencing and Assembly Lines · Genesis K-12 Academy</p>
+  </div>
+</header>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <h2>Components</h2>
+      <div id="compList"></div>
+      <div class="scroll-hint">Click to highlight</div>
+    </div>
+    <div class="sidebar-section">
+      <h2>Controls</h2>
+      <div class="btn-group">
+        <button id="btnExplode" onclick="toggleExplode()">
+          <span class="btn-icon">💥</span> Exploded View
+        </button>
+        <button onclick="resetView()">
+          <span class="btn-icon">🔄</span> Reset View
+        </button>
+        <button id="btnLabels" onclick="toggleLabels()" class="active-btn">
+          <span class="btn-icon">🏷</span> Show Labels
+        </button>
+        <button id="btnFlow" onclick="toggleFlow()">
+          <span class="btn-icon">▶</span> Animate Flow
+        </button>
+        <button onclick="setView('top')">
+          <span class="btn-icon">⬛</span> Top View
+        </button>
+        <button onclick="setView('front')">
+          <span class="btn-icon">▭</span> Front View
+        </button>
+        <button onclick="setView('iso')">
+          <span class="btn-icon">◈</span> Isometric View
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <h2>Vocab</h2>
+      <div style="font-size:10px; color:#7a9ab8; line-height:1.6; padding: 2px 0;">
+        <p><strong style="color:#C9A84C;">Sequencing</strong> — The specific order tasks must be performed.</p>
+        <br>
+        <p><strong style="color:#C9A84C;">Throughput</strong> — Rate items are processed per unit time.</p>
+        <br>
+        <p><strong style="color:#C9A84C;">Bottleneck</strong> — A slow step that limits overall throughput.</p>
+        <br>
+        <p><strong style="color:#C9A84C;">Workflow</strong> — The full path from input to finished output.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-area">
+    <canvas id="mainCanvas"></canvas>
+    <div class="tooltip-overlay" id="tooltipOverlay"></div>
+    <div class="explode-indicator" id="explodeIndicator">EXPLODED VIEW</div>
+    <div class="toolbar">
+      <span class="toolbar-label">Rotate:</span>
+      <div class="rotate-btns">
+        <div class="rot-btn" id="btnLeft" title="Rotate Left">◀</div>
+        <div class="rot-btn" id="btnRight" title="Rotate Right">▶</div>
+        <div class="rot-btn" id="btnUp" title="Tilt Up">▲</div>
+        <div class="rot-btn" id="btnDown" title="Tilt Down">▼</div>
+      </div>
+      <span style="margin-left:10px;" class="toolbar-label">Zoom:</span>
+      <div class="rot-btn" onclick="zoom(1.12)" title="Zoom In">＋</div>
+      <div class="rot-btn" onclick="zoom(0.89)" title="Zoom Out">－</div>
+      <span class="info-strip">Drag canvas to rotate · Scroll to zoom</span>
+    </div>
+    <div class="legend-bar" id="legendBar"></div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  GENESIS K-12 ASSEMBLY LINE 3D VIEWER
+//  Pure HTML5 Canvas + Isometric Projection
+// ─────────────────────────────────────────────
+
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+
+// ── Color palette ──
+const COLORS = {
+  navy: '#1B3A5C',
+  gold: '#C9A84C',
+  skyblue: '#4A90C4',
+  teal: '#2E7D8F',
+  green: '#3A8C5C',
+  red: '#C05040',
+  purple: '#6A4C8C',
+  orange: '#D4804C',
+  lightblue: '#5BACD4',
+  cream: '#D4C48C',
+  gray: '#4A6070',
+  white: '#E8F0F8',
+};
+
+// ── State ──
+let rotY = -0.55, rotX = 0.42;
+let zoomFactor = 1.0;
+let exploded = false;
+let showLabels = true;
+let animateFlow = false;
+let flowT = 0;
+let selectedComp = -1;
+let targetRotY = -0.55, targetRotX = 0.42;
+let animRotating = false;
+
+// Drag state
+let isDragging = false, lastMX = 0, lastMY = 0;
+let touchStartX = 0, touchStartY = 0;
+
+// Button hold state
+let holdInterval = null;
+
+// ── Assembly Line Definition ──
+// 5 workstations arranged left to right, conveyor connecting them
+
+const components = [
+  {
+    id: 0,
+    name: 'Input Hopper',
+    shortDesc: 'Raw materials enter here',
+    desc: 'The starting point of the assembly line. Raw parts and materials are loaded into the hopper and fed onto the conveyor belt.',
+    color: COLORS.teal,
+    colorDark: '#1e5a6a',
+    colorTop: '#3aacbf',
+    role: 'Input',
+    isBottleneck: false,
+  },
+  {
+    id: 1,
+    name: 'Station A — Cut',
+    shortDesc: 'Parts are cut to size',
+    desc: 'First workstation: raw materials are measured and cut to specification. Precision here prevents downstream errors.',
+    color: COLORS.skyblue,
+    colorDark: '#2a6090',
+    colorTop: '#6ab4d8',
+    role: 'Process',
+    isBottleneck: false,
+  },
+  {
+    id: 2,
+    name: 'Station B — Assemble',
+    shortDesc: '⚠ Bottleneck station',
+    desc: 'Second workstation: sub-components are joined together. This station takes the longest — it\'s the bottleneck. Extra workers or automation here increases total throughput.',
+    color: COLORS.red,
+    colorDark: '#8a3020',
+    colorTop: '#e07060',
+    role: 'Bottleneck',
+    isBottleneck: true,
+  },
+  {
+    id: 3,
+    name: 'Station C — Finish',
+    shortDesc: 'Surface treatment & QC',
+    desc: 'Third workstation: finished pieces are smoothed, painted, or coated. Quality control checks happen here before the item moves on.',
+    color: COLORS.green,
+    colorDark: '#1e5c34',
+    colorTop: '#50b870',
+    role: 'Process',
+    isBottleneck: false,
+  },
+  {
+    id: 4,
+    name: 'Output Bay',
+    shortDesc: 'Completed products exit',
+    desc: 'The end of the line. Completed products are collected, counted, and packaged. Throughput is measured at this stage.',
+    color: COLORS.gold,
+    colorDark: '#8a6010',
+    colorTop: '#e8c86c',
+    role: 'Output',
+    isBottleneck: false,
+  },
+];
+
+// ── 3D geometry helpers ──
+
+function rotatePoint(x, y, z, rY, rX) {
+  // Rotate around Y axis
+  const cosY = Math.cos(rY), sinY = Math.sin(rY);
+  let x1 = x * cosY + z * sinY;
+  let z1 = -x * sinY + z * cosY;
+  let y1 = y;
+  // Rotate around X axis
+  const cosX = Math.cos(rX), sinX = Math.sin(rX);
+  let y2 = y1 * cosX - z1 * sinX;
+  let z2 = y1 * sinX + z1 * cosX;
+  return [x1, y2, z2];
+}
+
+function project(x, y, z, cx, cy) {
+  const [rx, ry, rz] = rotatePoint(x, y, z, rotY, rotX);
+  // Perspective projection
+  const fov = 500 * zoomFactor;
+  const dist = 6;
+  const scale = fov / (dist + rz * 0.3);
+  const sx = cx + rx * scale;
+  const sy = cy - ry * scale;
+  return { sx, sy, depth: rz };
+}
+
+function poly3D(pts2d, fillColor, strokeColor, alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.beginPath();
+  ctx.moveTo(pts2d[0].sx, pts2d[0].sy);
+  for (let i = 1; i < pts2d.length; i++) ctx.lineTo(pts2d[i].sx, pts2d[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+  ctx.strokeStyle = strokeColor || fillColor;
+  ctx.lineWidth = 1.2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+// Draw a 3D box given base center (bx,by,bz) and dimensions (w,h,d)
+// Returns {faces:[...]} for depth sorting
+function boxFaces(bx, by, bz, w, h, d, comp, explodeOffset) {
+  const ex = explodeOffset ? explodeOffset[0] : 0;
+  const ey = explodeOffset ? explodeOffset[1] : 0;
+  const ez = explodeOffset ? explodeOffset[2] : 0;
+  const ox = bx + ex, oy = by + ey, oz = bz + ez;
+
+  const hw = w / 2, hh = h / 2, hd = d / 2;
+
+  const verts = [
+    [ox-hw, oy-hh, oz-hd], // 0 front-bottom-left
+    [ox+hw, oy-hh, oz-hd], // 1 front-bottom-right
+    [ox+hw, oy+hh, oz-hd], // 2 front-top-right
+    [ox-hw, oy+hh, oz-hd], // 3 front-top-left
+    [ox-hw, oy-hh, oz+hd], // 4 back-bottom-left
+    [ox+hw, oy-hh, oz+hd], // 5 back-bottom-right
+    [ox+hw, oy+hh, oz+hd], // 6 back-top-right
+    [ox-hw, oy+hh, oz+hd], // 7 back-top-left
+  ];
+
+  const faces = [
+    { verts: [0,1,2,3], normal: [0,0,-1], type: 'front' },
+    { verts: [5,4,7,6], normal: [0,0,1],  type: 'back' },
+    { verts: [1,5,6,2], normal: [1,0,0],  type: 'right' },
+    { verts: [4,0,3,7], normal: [-1,0,0], type: 'left' },
+    { verts: [3,2,6,7], normal: [0,1,0],  type: 'top' },
+    { verts: [4,5,1,0], normal: [0,-1,0], type: 'bottom' },
+  ];
+
+  return faces.map(f => {
+    const pts = f.verts.map(vi => verts[vi]);
+    const cx2 = pts.reduce((a, p) => a + p[0], 0) / 4;
+    const cy2 = pts.reduce((a, p) => a + p[1], 0) / 4;
+    const cz2 = pts.reduce((a, p) => a + p[2], 0) / 4;
+    const [, , depth] = rotatePoint(cx2, cy2, cz2, rotY, rotX);
+    return { pts, depth, type: f.type, comp, normal: f.normal };
+  });
+}
+
+function shadeColor(hex, pct) {
+  // pct: -1 to 1
+  const n = parseInt(hex.slice(1), 16);
+  let r = (n >> 16) & 255;
+  let g = (n >> 8) & 255;
+  let b = n & 255;
+  r = Math.min(255, Math.max(0, Math.round(r * (1 + pct))));
+  g = Math.min(255, Math.max(0, Math.round(g * (1 + pct))));
+  b = Math.min(255, Math.max(0, Math.round(b * (1 + pct))));
+  return `rgb(${r},${g},${b})`;
+}
+
+function faceColor(comp, type, isSelected) {
+  const base = comp.color;
+  const boost = isSelected ? 0.25 : 0;
+  switch(type) {
+    case 'top':    return shadeColor(comp.colorTop || base, 0.18 + boost);
+    case 'front':  return shadeColor(base, 0.05 + boost);
+    case 'right':  return shadeColor(base, -0.15 + boost);
+    case 'left':   return shadeColor(base, -0.25 + boost);
+    case 'back':   return shadeColor(comp.colorDark || base, -0.3 + boost);
+    case 'bottom': return shadeColor(comp.colorDark || base, -0.45 + boost);
+    default:       return base;
+  }
+}
+
+// ── Scene Definition ──
+// Layout: 5 stations along X axis, spaced ~2 units apart
+// Base Y = 0, conveyor at Y=-0.2
+
+const STATION_SPACING = 2.0;
+const CONV_Y = -0.55;
+
+function getStationPos(i) {
+  return [(i - 2) * STATION_SPACING, 0, 0];
+}
+
+function getExplodeOffset(i) {
+  if (!exploded) return [0, 0, 0];
+  const ex = (i - 2) * 0.6;
+  const ey = i % 2 === 0 ? 0.5 : -0.5;
+  return [ex, ey + 0.8, 0];
+}
+
+// Conveyor belt segments between stations
+function conveyorGeom() {
+  return { x: 0, y: CONV_Y, z: 0, w: 8.8, h: 0.18, d: 0.9 };
+}
+
+// ── Callout label screen positions ──
+let calloutScreenPos = [];
+
+function computeCalloutPos(cx, cy) {
+  calloutScreenPos = components.map((comp, i) => {
+    const [bx, by, bz] = getStationPos(i);
+    const [ex, ey, ez] = getExplodeOffset(i);
+    const topY = by + ey + 0.7; // top of box
+    const p = project(bx + ex, topY, bz + ez, cx, cy);
+    return { sx: p.sx, sy: p.sy, comp, i };
+  });
+}
+
+// ── Flow particle positions ──
+function flowParticles(t) {
+  const particles = [];
+  for (let i = 0; i < 6; i++) {
+    const phase = (t * 0.6 + i / 6) % 1;
+    const xStart = -4.4, xEnd = 4.4;
+    const px = xStart + (xEnd - xStart) * phase;
+    particles.push({ x: px, y: CONV_Y + 0.2, z: 0 });
+  }
+  return particles;
+}
+
+// ── Main render ──
+function render() {
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2 + H * 0.05;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.7);
+  bg.addColorStop(0, '#142535');
+  bg.addColorStop(1, '#0a1520');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid floor
+  drawGrid(cx, cy);
+
+  // All renderable faces
+  let allFaces = [];
+
+  // Conveyor
+  const conv = conveyorGeom();
+  const convComp = {
+    color: COLORS.gray, colorDark: '#2a3a48', colorTop: '#607080',
+    name: 'Conveyor Belt', isBottleneck: false
+  };
+  const convOffset = exploded ? [0, -1.2, 0] : [0, 0, 0];
+  const convFaces = boxFaces(conv.x + convOffset[0], conv.y + convOffset[1], conv.z + convOffset[2],
+    conv.w, conv.h, conv.d, convComp, null);
+  allFaces.push(...convFaces);
+
+  // Conveyor rollers
+  if (!exploded) {
+    for (let i = -3; i <= 3; i++) {
+      const rollerComp = { color: '#3a5060', colorDark: '#1a3040', colorTop: '#5a7080', name: 'Roller' };
+      const rf = boxFaces(i * 1.1, CONV_Y + 0.12, 0, 0.08, 0.08, 0.95, rollerComp, null);
+      allFaces.push(...rf);
+    }
+  }
+
+  // Workstations
+  components.forEach((comp, i) => {
+    const [bx, by, bz] = getStationPos(i);
+    const explOff = getExplodeOffset(i);
+    const isBottleneck = comp.isBottleneck;
+    const isSel = selectedComp === i;
+
+    // Main box
+    const w = 1.3, h = 0.9, d = 1.1;
+    const faces = boxFaces(bx, by + h / 2, bz, w, h, d, comp, explOff);
+    allFaces.push(...faces.map(f => ({ ...f, compIdx: i, isSel })));
+
+    // Indicator light on top
+    const lightComp = {
+      color: isBottleneck ? COLORS.red : COLORS.green,
+      colorDark: isBottleneck ? '#6a1010' : '#0a4020',
+      colorTop: isBottleneck ? '#ff8070' : '#60f080',
+    };
+    const ex = explOff[0], ey = explOff[1], ez = explOff[2];
+    const lf = boxFaces(bx + ex, by + h + ey + 0.1, bz + ez, 0.2, 0.12, 0.2, lightComp, null);
+    allFaces.push(...lf.map(f => ({ ...f, compIdx: i, isSel })));
+
+    // Slot/opening on front face (decorative detail)
+    // handled by color variation
+
+    // Screen panel
+    const screenComp = {
+      color: '#1a4060', colorDark: '#0a2030', colorTop: '#2a6090',
+    };
+    const sf = boxFaces(bx + ex, by + h * 0.55 + ey, bz - d / 2 + ez, 0.5, 0.28, 0.04, screenComp, null);
+    allFaces.push(...sf.map(f => ({ ...f, compIdx: i })));
+  });
+
+  // Output arrows (flow direction markers)
+  if (!exploded) {
+    for (let i = 0; i < 4; i++) {
+      const ax = getStationPos(i)[0] + 0.72;
+      const arrowComp = { color: COLORS.gold, colorDark: '#806010', colorTop: '#e0c060' };
+      const af = boxFaces(ax, CONV_Y + 0.28, 0, 0.18, 0.12, 0.18, arrowComp, null);
+      allFaces.push(...af);
+    }
+  }
+
+  // Depth sort
+  allFaces.sort((a, b) => b.depth - a.depth);
+
+  // Draw all faces
+  allFaces.forEach(face => {
+    const isSelected = face.isSel;
+    const fill = faceColor(face.comp, face.type, !!isSelected);
+    const stroke = '#0a1a28';
+    const pts2d = face.pts.map(([x, y, z]) => project(x, y, z, cx, cy));
+    poly3D(pts2d, fill, stroke, 1.0);
+
+    // Selection glow
+    if (isSelected && (face.type === 'top' || face.type === 'front')) {
+      ctx.save();
+      ctx.beginPath();
+      pts2d.forEach((p, i) => i === 0 ? ctx.moveTo(p.sx, p.sy) : ctx.lineTo(p.sx, p.sy));
+      ctx.closePath();
+      ctx.strokeStyle = COLORS.gold;
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = COLORS.gold;
+      ctx.shadowBlur = 10;
+      ctx.stroke();
+      ctx.restore();
+    }
+  });
+
+  // Bottleneck warning glow
+  components.forEach((comp, i) => {
+    if (comp.isBottleneck && !exploded) {
+      const [bx, by, bz] = getStationPos(i);
+      const p = project(bx, by + 0.9, bz, cx, cy);
+      const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.004);
+      ctx.save();
+      ctx.globalAlpha = 0.18 + 0.12 * pulse;
+      const grad = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, 60 + 20 * pulse);
+      grad.addColorStop(0, COLORS.red);
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(p.sx - 80, p.sy - 80, 160, 160);
+      ctx.restore();
+    }
+  });
+
+  // Flow particles
+  if (animateFlow && !exploded) {
+    const particles = flowParticles(flowT);
+    particles.forEach(p => {
+      const sp = project(p.x, p.y, p.z, cx, cy);
+      const isOnStation = components.some((_, i) => {
+        const [sx] = getStationPos(i);
+        return Math.abs(p.x - sx) < 0.7;
+      });
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(sp.sx, sp.sy, isOnStation ? 7 : 5, 0, Math.PI * 2);
+      ctx.fillStyle = COLORS.gold;
+      ctx.shadowColor = COLORS.gold;
+      ctx.shadowBlur = 12;
+      ctx.globalAlpha = 0.85;
+      ctx.fill();
+
+      // Trail
+      ctx.globalAlpha = 0.25;
+      ctx.beginPath();
+      const prevX = p.x - 0.3;
+      const sp2 = project(prevX, p.y, p.z, cx, cy);
+      ctx.moveTo(sp2.sx, sp2.sy);
+      ctx.lineTo(sp.sx, sp.sy);
+      ctx.strokeStyle = COLORS.gold;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+    });
+  }
+
+  // Labels
+  computeCalloutPos(cx, cy);
+  if (showLabels) {
+    renderLabels();
+  }
+
+  // Station name badges at base
+  components.forEach((comp, i) => {
+    const [bx, by, bz] = getStationPos(i);
+    const [ex, ey, ez] = getExplodeOffset(i);
+    const p = project(bx + ex, by + ey - 0.65, bz + ez, cx, cy);
+    ctx.save();
+    ctx.globalAlpha = 0.9;
+    const lbl = comp.role;
+    ctx.font = 'bold 9px Segoe UI, sans-serif';
+    const tw = ctx.measureText(lbl).width;
+    const bw = tw + 10, bh = 14;
+    const bx2 = p.sx - bw / 2, by2 = p.sy - bh / 2;
+    ctx.fillStyle = comp.isBottleneck ? COLORS.red : COLORS.navy;
+    ctx.strokeStyle = comp.color;
+    ctx.lineWidth = 1;
+    roundRect(ctx, bx2, by2, bw, bh, 3);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(lbl, p.sx, p.sy);
+    ctx.restore();
+  });
+
+  // Direction arrow labels
+  if (!exploded) {
+    const startP = project(-5.2, CONV_Y + 0.25, 0, cx, cy);
+    const endP = project(5.2, CONV_Y + 0.25, 0, cx, cy);
+    ctx.save();
+    ctx.globalAlpha = 0.6;
+    ctx.font = '9px Segoe UI';
+    ctx.fillStyle = COLORS.gold;
+    ctx.textAlign = 'center';
+    ctx.fillText('INPUT →', startP.sx, startP.sy);
+    ctx.fillText('→ OUTPUT', endP.sx, endP.sy);
+    ctx.restore();
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function drawGrid(cx, cy) {
+  const gridSize = 12;
+  const step = 0.5;
+  ctx.save();
+  ctx.globalAlpha = 0.09;
+  ctx.strokeStyle = '#4a90c4';
+  ctx.lineWidth = 0.5;
+  for (let i = -gridSize; i <= gridSize; i++) {
+    const p1 = project(i * step, -0.61, -gridSize * step, cx, cy);
+    const p2 = project(i * step, -0.61, gridSize * step, cx, cy);
+    const p3 = project(-gridSize * step, -0.61, i * step, cx, cy);
+    const p4 = project(gridSize * step, -0.61, i * step, cx, cy);
+    ctx.beginPath(); ctx.moveTo(p1.sx, p1.sy); ctx.lineTo(p2.sx, p2.sy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(p3.sx, p3.sy); ctx.lineTo(p4.sx, p4.sy); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ── Render HTML overlay callout labels ──
+function renderLabels() {
+  const overlay = document.getElementById('tooltipOverlay');
+  overlay.innerHTML = '';
+  calloutScreenPos.forEach(({ sx, sy, comp, i }) => {
+    if (sx < 0 || sx > canvas.width || sy < 0 || sy > canvas.height) return;
+    const lineLen = 38;
+    const offsetX = i < 2 ? -60 : i > 3 ? 60 : (i % 2 === 0 ? 55 : -55);
+    const offsetY = -lineLen - 16;
+    const tlx = sx + offsetX;
+    const tly = sy + offsetY;
+
+    // Line
+    const lineDiv = document.createElement('div');
+    lineDiv.className = 'callout-line';
+    const dx = tlx - sx, dy = tly - sy + 24;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) - Math.PI / 2;
+    lineDiv.style.left = sx + 'px';
+    lineDiv.style.top = sy + 'px';
+    lineDiv.style.height = len + 'px';
+    lineDiv.style.transform = `rotate(${angle}rad)`;
+    lineDiv.style.opacity = '0.7';
+    overlay.appendChild(lineDiv);
+
+    // Callout box
+    const div = document.createElement('div');
+    div.className = 'callout';
+    div.style.left = (tlx) + 'px';
+    div.style.top = (tly + 24) + 'px';
+    if (selectedComp === i) {
+      div.style.borderColor = COLORS.gold;
+      div.style.boxShadow = `0 0 10px ${COLORS.gold}88`;
+    }
+    div.innerHTML = `<strong>${comp.name}</strong><span style="color:#7ab8d8;font-size:9px;">${comp.shortDesc}</span>`;
+    overlay.appendChild(div);
+
+    // Dot at attachment
+    const dot = document.createElement('div');
+    dot.style.position = 'absolute';
+    dot.style.left = (sx - 3) + 'px';
+    dot.style.top = (sy - 3) + 'px';
+    dot.style.width = '6px'; dot.style.height = '6px';
+    dot.style.borderRadius = '50%';
+    dot.style.background = comp.isBottleneck ? COLORS.red : comp.color;
+    dot.style.border = '1px solid #fff4';
+    dot.style.pointerEvents = 'none';
+    overlay.appendChild(dot);
+  });
+}
+
+// ── Build sidebar component list ──
+function buildSidebar() {
+  const list = document.getElementById('compList');
+  list.innerHTML = '';
+  components.forEach((comp, i) => {
+    const div = document.createElement('div');
+    div.className = 'component-item' + (selectedComp === i ? ' active' : '');
+    div.innerHTML = `
+      <div class="ci-name">
+        <div class="ci-dot" style="background:${comp.color}"></div>
+        ${comp.name}
+        ${comp.isBottleneck ? '<span style="color:#ff6050;font-size:9px;margin-left:auto;">⚠</span>' : ''}
+      </div>
+      <div class="ci-desc">${comp.desc}</div>
+    `;
+    div.onclick = () => selectComponent(i);
+    list.appendChild(div);
+  });
+}
+
+// ── Build legend ──
+function buildLegend() {
+  const bar = document.getElementById('legendBar');
+  const items = [
+    { color: COLORS.teal, label: 'Input' },
+    { color: COLORS.skyblue, label: 'Process' },
+    { color: COLORS.red, label: 'Bottleneck' },
+    { color: COLORS.green, label: 'QC/Finish' },
+    { color: COLORS.gold, label: 'Output' },
+    { color: COLORS.gray, label: 'Conveyor' },
+  ];
+  bar.innerHTML = '<span style="font-size:10px;color:#4a7a9b;margin-right:4px;">LEGEND:</span>';
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'legend-item';
+    el.innerHTML = `<div class="legend-swatch" style="background:${item.color}"></div>${item.label}`;
+    bar.appendChild(el);
+  });
+}
+
+function selectComponent(i) {
+  selectedComp = selectedComp === i ? -1 : i;
+  buildSidebar();
+}
+
+function toggleExplode() {
+  exploded = !exploded;
+  const btn = document.getElementById('btnExplode');
+  btn.className = exploded ? 'active-btn' : '';
+  document.getElementById('explodeIndicator').style.display = exploded ? 'block' : 'none';
+  if (exploded) animateFlow = false;
+}
+
+function resetView() {
+  targetRotY = -0.55;
+  targetRotX = 0.42;
+  zoomFactor = 1.0;
+  exploded = false;
+  showLabels = true;
+  animateFlow = false;
+  selectedComp = -1;
+  document.getElementById('btnExplode').className = '';
+  document.getElementById('btnLabels').className = 'active-btn';
+  document.getElementById('btnFlow').className = '';
+  document.getElementById('explodeIndicator').style.display = 'none';
+  buildSidebar();
+}
+
+function toggleLabels() {
+  showLabels = !showLabels;
+  const btn = document.getElementById('btnLabels');
+  btn.className = showLabels ? 'active-btn' : '';
+  if (!showLabels) document.getElementById('tooltipOverlay').innerHTML = '';
+}
+
+function toggleFlow() {
+  animateFlow = !animateFlow;
+  if (animateFlow && exploded) exploded = false;
+  const btn = document.getElementById('btnFlow');
+  btn.className = animateFlow ? 'active-btn' : '';
+}
+
+function setView(type) {
+  if (type === 'top') { targetRotY = 0; targetRotX = Math.PI / 2 - 0.05; }
+  else if (type === 'front') { targetRotY = 0; targetRotX = 0; }
+  else if (type === 'iso') { targetRotY = -0.55; targetRotX = 0.42; }
+}
+
+function zoom(factor) {
+  zoomFactor = Math.min(2.5, Math.max(0.35, zoomFactor * factor));
+}
+
+// ── Mouse / Touch Events ──
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  lastMX = e.clientX;
+  lastMY = e.clientY;
+});
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastMX;
+  const dy = e.clientY - lastMY;
+  targetRotY += dx * 0.008;
+  targetRotX += dy * 0.006;
+  targetRotX = Math.max(-1.4, Math.min(1.4, targetRotX));
+  lastMX = e.clientX;
+  lastMY = e.clientY;
+});
+canvas.addEventListener('mouseup', () => isDragging = false);
+canvas.addEventListener('mouseleave', () => isDragging = false);
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoom(e.deltaY < 0 ? 1.08 : 0.93);
+}, { passive: false });
+
+canvas.addEventListener('click', e => {
+  if (Math.abs(e.clientX - lastMX) > 3 || Math.abs(e.clientY - lastMY) > 3) return;
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  let closest = -1, minDist = 40;
+  calloutScreenPos.forEach(({ sx, sy, i }) => {
+    const dist = Math.hypot(sx - mx, sy - my);
+    if (dist < minDist) { minDist = dist; closest = i; }
+  });
+  if (closest >= 0) selectComponent(closest);
+});
+
+// Touch
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  isDragging = true;
+  touchStartX = lastMX = t.clientX;
+  touchStartY = lastMY = t.clientY;
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (!isDragging) return;
+  const t = e.touches[0];
+  const dx = t.clientX - lastMX;
+  const dy = t.clientY - lastMY;
+  targetRotY += dx * 0.01;
+  targetRotX += dy * 0.008;
+  targetRotX = Math.max(-1.4, Math.min(1.4, targetRotX));
+  lastMX = t.clientX;
+  lastMY = t.clientY;
+}, { passive: false });
+canvas.addEventListener('touchend', () => isDragging = false);
+
+// Touch pinch zoom
+let lastPinchDist = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    lastPinchDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+  }
+});
+canvas.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    const dist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    zoom(dist / lastPinchDist);
+    lastPinchDist = dist;
+  }
+});
+
+// ── Button hold rotation ──
+function startHold(action) {
+  action();
+  holdInterval = setInterval(action, 40);
+}
+function stopHold() { clearInterval(holdInterval); }
+
+const btnActions = {
+  btnLeft:  () => targetRotY -= 0.04,
+  btnRight: () => targetRotY += 0.04,
+  btnUp:    () => { targetRotX -= 0.03; targetRotX = Math.max(-1.4, targetRotX); },
+  btnDown:  () => { targetRotX += 0.03; targetRotX = Math.min(1.4, targetRotX); },
+};
+['btnLeft','btnRight','btnUp','btnDown'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('mousedown', () => startHold(btnActions[id]));
+  el.addEventListener('mouseup', stopHold);
+  el.addEventListener('mouseleave', stopHold);
+  el.addEventListener('touchstart', e => { e.preventDefault(); startHold(btnActions[id]); });
+  el.addEventListener('touchend', stopHold);
+});
+
+// ── Canvas resize ──
+function resize() {
+  const area = canvas.parentElement;
+  canvas.width = area.clientWidth;
+  canvas.height = area.clientHeight - 46 - 24; // subtract toolbar + legend
+}
+
+// ── Animation loop ──
+let lastTime = 0;
+function loop(t) {
+  requestAnimationFrame(loop);
+  const dt = Math.min((t - lastTime) / 1000, 0.05);
+  lastTime = t;
+
+  // Smooth rotation lerp
+  rotY += (targetRotY - rotY) * 0.15;
+  rotX += (targetRotX - rotX) * 0.15;
+
+  if (animateFlow) flowT += dt;
+
+  render();
+}
+
+// ── Init ──
+resize();
+window.addEventListener('resize', () => { resize(); });
+buildSidebar();
+buildLegend();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

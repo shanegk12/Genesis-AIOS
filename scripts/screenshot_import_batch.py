@@ -36,7 +36,22 @@ SCREENSHOTS_ROOT = Path(__file__).parent.parent / "screenshots"
 OUTPUT_DIR       = Path(__file__).parent.parent / "screenshots_import_output"
 SCRIPT           = Path(__file__).parent / "screenshot_import.py"
 LIVE_URL         = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-PLATFORM_KEY     = "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
+def _get_platform_key() -> str:
+    """Load platform API key from .env — never hardcode in source."""
+    import os as _os
+    from pathlib import Path as _Path
+    k = _os.environ.get('PIPELINE_KEY') or _os.environ.get('PLATFORM_KEY', '')
+    if k:
+        return k
+    for _n in ['.env', '.env.local']:
+        _p = _Path(__file__).parent.parent / _n
+        if _p.exists():
+            for _line in _p.read_text(encoding='utf-8').splitlines():
+                _line = _line.strip()
+                if _line.startswith(('PIPELINE_KEY=', 'PLATFORM_KEY=')) and '=' in _line:
+                    return _line.split('=', 1)[1].strip().strip('""')
+    return ''
+PLATFORM_KEY = _get_platform_key()
 
 # ── Folder → lesson ID mapping ────────────────────────────────────────────────
 # Keys match the actual folder names in screenshots/Creationeering/ and screenshots/Mousetrap/
@@ -184,6 +199,8 @@ def main():
     parser.add_argument("--lesson",   help="Run for a single lesson ID only, e.g. C-007")
     parser.add_argument("--priority", choices=["high", "medium", "all"], default="all",
                         help="Filter by priority level (default: all)")
+    parser.add_argument("--course",   choices=["C", "M"],
+                        help="Filter to Creationeering (C) or Mousetrap (M) lessons only")
     args = parser.parse_args()
 
     if args.qc and not args.patch:
@@ -199,11 +216,14 @@ def main():
         if not lessons:
             print(f"Lesson {args.lesson} not found in LESSON_MAP")
             sys.exit(1)
-    elif args.priority != "all":
-        lessons = [e for e in lessons if e["priority"] == args.priority]
+    else:
+        if args.course:
+            lessons = [e for e in lessons if e["id"].startswith(args.course + "-")]
+        if args.priority != "all":
+            lessons = [e for e in lessons if e["priority"] == args.priority]
 
     print(f"\nBatch Screenshot Import")
-    print(f"Lessons: {len(lessons)} | Patch: {args.patch} | QC: {args.qc} | Priority: {args.priority}")
+    print(f"Lessons: {len(lessons)} | Patch: {args.patch} | QC: {args.qc} | Priority: {args.priority} | Course: {args.course or 'all'}")
     print(f"Output:  {OUTPUT_DIR}")
 
     if args.patch and not args.yes:

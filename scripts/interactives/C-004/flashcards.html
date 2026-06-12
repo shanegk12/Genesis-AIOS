@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Using Math and Science as Tools — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Using Math and Science as Tools</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeer", "definition": "Someone who uses skills in both business and engineering to create wonderful things."}, {"term": "Science", "definition": "An observational system used to gather knowledge through watching, experimenting (testing), and recording."}, {"term": "Reliable Evidence", "definition": "Information or results that are consistent and trustworthy, often built from organized observations and tests."}, {"term": "Hypothesis", "definition": "A testable if-then statement that provides an educated guess or proposed explanation for something occurring in nature."}, {"term": "Law (Scientific)", "definition": "A hypothesis that cannot be disproven and uses math to describe something that happens naturally."}, {"term": "Mathematical Tools", "definition": "The language used to explain how and why things occur in the world, assigning values to dimensions and predicting movement."}, {"term": "Newton's Laws", "definition": "Fundamental scientific laws that describe how objects move and interact with forces."}, {"term": "Statics", "definition": "A branch of mechanics that deals with forces on objects that are at rest or in equilibrium."}, {"term": "Geometry", "definition": "The branch of mathematics concerned with the properties and relations of points, lines, surfaces, solids, and higher dimensional analogs."}, {"term": "Algebra", "definition": "A branch of mathematics that uses letters and symbols to represent numbers and quantities in formulas and equations."}, {"term": "Observational System", "definition": "A method of gathering knowledge by carefully watching, testing, and recording what happens."}, {"term": "Dimensions", "definition": "Measurements like length, width, and height that describe the size and shape of an object."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

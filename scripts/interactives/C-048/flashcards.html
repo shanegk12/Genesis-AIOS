@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shipping, Transport, and Compliance — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Shipping, Transport, and Compliance</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Shipping", "definition": "The process of sending goods from one place to another, often over long distances, like sending a package across the country."}, {"term": "Transport", "definition": "The act of moving goods or people from one location to another, such as using a truck to move supplies."}, {"term": "Compliance", "definition": "Following all the rules, regulations, and laws set by official groups when shipping goods."}, {"term": "Logistics", "definition": "The detailed planning and organization of complex operations, like making sure all parts of a project arrive on time."}, {"term": "Consignment", "definition": "A group of goods that are being sent to or have been delivered to someone."}, {"term": "Freight", "definition": "Goods that are transported in large amounts by trucks, trains, ships, or airplanes."}, {"term": "Carrier", "definition": "A company or person whose job is to move goods or people for a payment."}, {"term": "Tariff", "definition": "A special tax or fee that must be paid on certain goods when they are brought into or sent out of a country."}, {"term": "Customs", "definition": "The government office that manages and collects taxes on goods coming into a country."}, {"term": "Documentation", "definition": "All the necessary paperwork and records needed for shipping, like forms that list what's inside a package."}, {"term": "OCV Method (for transport)", "definition": "A strategy for optimizing a transport route by considering Objectives (what you want to achieve), Constraints (limitations like budget), and Variables (choices like transport mode)."}, {"term": "Stewardship of Resources (in transport)", "definition": "Responsibly managing and taking care of the materials, energy, and money used in shipping, reflecting biblical principles."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

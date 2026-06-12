@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sequencing and Assembly Lines — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Sequencing and Assembly Lines</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Sequencing", "definition": "The specific order in which tasks or steps must be performed to achieve a desired outcome, like building a model airplane step-by-step."}, {"term": "Assembly Line", "definition": "A manufacturing process where a product moves from one workstation to the next, with parts added sequentially at each stop to build the final product."}, {"term": "Workflow", "definition": "The sequence of processes that a piece of work goes through from start to finish, like the steps to bake a cake."}, {"term": "Throughput", "definition": "The rate at which something can be processed or produced over a certain period of time, such as how many toys an assembly line can make in an hour."}, {"term": "Bottleneck", "definition": "A point in a process where work slows down or stops, limiting how much can be produced overall, like a slow printer holding up a whole office."}, {"term": "Optimization", "definition": "The process of making something as effective or functional as possible, often by finding the best balance between different factors to improve a system."}, {"term": "Importance of Sequencing", "definition": "Sequencing is important because the correct order of tasks directly impacts how efficient, high-quality, and successful a creation will be."}, {"term": "Assembly Phase", "definition": "The stage in Creationeering where plans begin to come to life, and designs are built into reality using specific sequences and processes."}, {"term": "Objective, Constraint, Variable (OCV) Method", "definition": "A method used to propose ways to make an assembly process better by considering what you want to achieve (objective), what limits you (constraint), and what you can change (variable)."}, {"term": "Multiscale Modeling", "definition": "An approach that connects what we see on a large scale (macro) to the tiny, often invisible causes and effects at a very small scale (micro)."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

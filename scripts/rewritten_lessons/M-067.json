@@ -1,0 +1,273 @@
+[
+  {
+    "id": "m067t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Salvage Value and Resource Recovery</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In your last lesson, you built out your Business Plan and pitched your mousetrap car to the world — explaining what makes it special and how it fits into the market. That was all about the beginning of your product's life. Today, we're jumping to the other end of that story.</p><p>This lesson is about <strong>Salvage Value and Resource Recovery</strong>, which falls under the Creationeering™ phase of <em>Death &amp; Recycling</em>. Great engineers don't just design for launch day — they design with the end in mind. What happens to your mousetrap car when it stops running? What are its parts worth? Where do its materials go? Every material you chose has a story beyond your current project, and it's your job as a designer to think about that.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define salvage value and explain its importance in product design.</li><li>Understand the principles of resource recovery and how they minimize waste.</li><li>Identify materials in your mousetrap car that can be salvaged or recovered.</li><li>Apply end-of-life considerations to improve your overall mousetrap car design.</li><li>Recognize that wise use and recovery of resources is an act of biblical stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Salvage Value",
+          "definition": "The estimated worth of a product's components or materials when it is no longer usable for its original purpose."
+        },
+        {
+          "term": "Resource Recovery",
+          "definition": "The process of collecting and processing materials from waste products so they can be reused or recycled."
+        },
+        {
+          "term": "End-of-Life Design",
+          "definition": "Planning for a product's disposal or reuse from the very beginning of its design process."
+        },
+        {
+          "term": "Recycling",
+          "definition": "Converting waste materials into new materials and objects through reprocessing."
+        },
+        {
+          "term": "Reuse",
+          "definition": "Using a product or its components again for the same or a different purpose without significant reprocessing."
+        },
+        {
+          "term": "Upcycling",
+          "definition": "Transforming discarded materials into products of higher value or quality than the original."
+        },
+        {
+          "term": "Circular Economy",
+          "definition": "An economic system aimed at eliminating waste through the continual recovery and reuse of resources."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God, the Master Potter</h2><p>Before we dig into the engineering side of things, consider this image from Jeremiah 18:1–6. The prophet watches a potter working at his wheel. The clay vessel gets spoiled — it doesn't come out right. So what does the potter do? He doesn't throw the clay away. He reworks it into something new.</p><p>That's a picture of how God operates. He doesn't waste. He takes what seems broken or finished and gives it new purpose and value. That's not just a comforting thought — it's actually a design principle. As someone made in God's image, you're built to do the same thing: take what's left over, what's worn out, what seems used up, and find the value still locked inside it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Jeremiah 18:3–4 (ESV)</strong> — \"So I went down to the potter's house, and there he was working at his wheel. And the vessel he was making of clay was spoiled in the potter's hand, and he reworked it into another vessel, as it seemed good to the potter to do.\"</p><p>God is a God of redemption and renewal — and your designs can reflect that same principle.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Salvage Value?</h2><p>Think about a car that's been in an accident and can't be driven anymore. Is it worthless? Not at all — the engine, tires, mirrors, and electronics might all be perfectly fine. Those parts still have value. That remaining value is called <strong>salvage value</strong>.</p><p>The same idea applies to your mousetrap car. When the spring finally loses tension and the car won't roll another inch, the wood frame, axles, wheels, and even the mousetrap mechanism itself still have worth. Smart engineers think about this <em>before</em> they build — not after. They ask: \"If this product stopped working tomorrow, what would it be worth in parts?\"</p><p>Designing with salvage value in mind often leads to better choices all around. You might choose higher-quality materials that hold their value longer, or you might fasten parts together in ways that make them easy to disassemble instead of gluing everything permanently shut.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A disassembled mousetrap car laid out on a flat surface with its individual components separated — wooden frame, axles, wheels, rubber bands, and mousetrap spring — labeled to show which parts can be salvaged or reused"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Resource Recovery: Nothing Goes to Waste</h2><p><strong>Resource recovery</strong> is the practice of pulling useful materials out of products that have reached the end of their life. Instead of sending everything to a landfill, engineers design products so materials can be separated, collected, and fed back into new products.</p><p>There are three main levels of recovery, and they're worth knowing:</p><ul><li><strong>Reuse</strong> — A part goes directly into another product or project with little or no processing. Your wooden axle holders could become part of a shelf. Your wheels could roll again on a different build.</li><li><strong>Recycling</strong> — The material is broken down and reformed into something new. Metal screws melt down into new metal stock. Plastic pieces get reprocessed into pellets for future manufacturing.</li><li><strong>Upcycling</strong> — The coolest option. You take a material and turn it into something of <em>higher</em> value than its original form. A worn mousetrap spring becomes a piece of kinetic wall art. Scrap wood becomes a custom picture frame.</li></ul><p>Each level keeps materials in use longer and reduces the demand for brand-new raw materials — which saves energy, money, and the natural resources God entrusted to us.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>End-of-Life Design: Planning Ahead</h2><p>Here's a mindset shift that separates good engineers from great ones: the best time to think about the end of a product's life is at the very beginning of its design.</p><p>This is called <strong>end-of-life design</strong>, and it changes small decisions in big ways. For example:</p><ul><li>Choosing <strong>screws over glue</strong> means parts can be removed cleanly when the product is done — easier to salvage, easier to recycle.</li><li>Selecting <strong>materials that are already recyclable</strong> (like untreated wood or standard steel) instead of composite materials that are difficult to separate.</li><li>Labeling components so future users or recyclers know exactly what each part is made of.</li><li>Designing <strong>modular sections</strong> — parts that can be swapped out or removed independently — so one broken section doesn't doom the whole product.</li></ul><p>As you look back at your mousetrap car design, ask yourself: did you make choices that make recovery easy or hard? There's no wrong answer right now — but these are exactly the kinds of questions professional engineers ask during every design review.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular diagram showing the stages of a product's life cycle: Design, Build, Use, End-of-Life, and Recovery — with arrows looping back from Recovery to Design to illustrate the concept of a circular economy"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Circular Economy and Your Mousetrap Car</h2><p>Traditional product thinking is a straight line: extract raw materials → build a product → use it → throw it away. That's called a linear economy. The problem is obvious — at the end of that line, everything piles up as waste.</p><p>A <strong>circular economy</strong> bends that line into a loop. Materials keep moving. A product ends its first life and feeds the beginning of another. Nothing is truly discarded — it's just transformed.</p><p>Your mousetrap car is a small but real example of this. The wood came from a tree. The metal in the mousetrap was mined and refined. The rubber in the tires or bands was processed from natural or synthetic sources. Every one of those materials took energy and resources to produce. Designing your car so those materials can loop back into the system — rather than end up in a trash can — is the circular economy in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Design Review Tip:</strong> Go back to your mousetrap car materials list. For each material, ask three questions: Can this be reused directly? Can it be recycled? Could it be upcycled into something more valuable? If you can answer yes to at least one, you've already started thinking like a circular engineer.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Is an Engineering Skill</h2><p>The word <strong>stewardship</strong> means being a responsible caretaker of something that belongs to someone else. As a person of faith, you understand that creation itself belongs to God — and He's asked us to care for it wisely. That's not just a spiritual idea. It shows up in engineering every day.</p><p>When you choose materials that can be recovered, when you design for disassembly, when you think about where your product ends up after it stops working — you're practicing stewardship. You're saying: \"I'm going to treat these resources as if they matter, because they do.\"</p><p>Just like the potter who doesn't discard spoiled clay, you are called to see the value in materials that others might overlook. That perspective — finding worth, finding purpose, refusing to waste — is both a biblical calling and an engineering advantage. Companies that design with these principles in mind save money, earn customer trust, and build products that last longer and perform better.</p><p>So as you finalize your mousetrap car project, carry this forward: the best engineers aren't just thinking about the finish line. They're thinking about what comes after — and designing so that every material has a chance to serve again.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Many student designers focus entirely on performance — how fast the car goes, how far it travels — and forget to consider materials at all. Don't fall into that trap. A well-engineered product accounts for the full life cycle, not just the moment of peak performance. Your design choices about materials are engineering decisions, not afterthoughts.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m067a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Examples of Circular Design",
+      "html": "<p>Curious how these ideas show up in professional engineering? Here are a few real-world examples:</p><ul><li><strong>Interface Inc.</strong> — A flooring company that takes back worn carpet tiles, recycles the materials, and uses them to make new tiles. Their products are designed so the fibers and backing can be cleanly separated.</li><li><strong>Caterpillar Remanufacturing</strong> — Heavy equipment parts like engines and hydraulic pumps are returned, cleaned, rebuilt to original specs, and resold at a fraction of the cost of new parts. Same performance, far less waste.</li><li><strong>Apple's Daisy Robot</strong> — Apple built a disassembly robot specifically to recover high-value materials like cobalt, aluminum, and rare earth elements from returned iPhones. The phone is designed with recovery in mind.</li></ul><p>Each of these companies started with the same question you're asking now: what happens to this product after it's done? That question, asked early enough, changes everything about how you design.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

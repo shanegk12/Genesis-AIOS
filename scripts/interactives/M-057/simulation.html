@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Car: End-of-Life Analysis</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 720px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 24px 14px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.3rem; color: #C9A84C; font-weight: 700; letter-spacing: .5px; }
+  header p { font-size: 0.85rem; color: #dce6f0; margin-top: 4px; }
+  .progress-bar-wrap {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 720px;
+    padding: 0 24px 14px;
+  }
+  .progress-bar-bg {
+    background: #0d2240;
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+  }
+  .progress-label { color: #C9A84C; font-size: 0.78rem; margin-bottom: 4px; font-weight: 600; }
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 720px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.13);
+    padding: 28px 24px 24px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+  }
+  .screen { display: none; flex-direction: column; gap: 16px; flex: 1; }
+  .screen.active { display: flex; }
+  /* Intro */
+  .intro-icon { font-size: 3rem; text-align: center; }
+  .intro-title { font-size: 1.25rem; font-weight: 700; color: #1B3A5C; text-align: center; }
+  .intro-desc { font-size: 0.92rem; line-height: 1.6; color: #334; text-align: center; }
+  /* Drag-drop */
+  .dd-instructions { font-size: 0.88rem; color: #555; background: #f0f4f8; border-radius: 8px; padding: 10px 14px; }
+  .zones-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .drop-zone {
+    flex: 1;
+    min-width: 140px;
+    max-width: 220px;
+    border: 2.5px dashed #1B3A5C;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 120px;
+    background: #f7f9fc;
+    position: relative;
+  }
+  .drop-zone.over { background: #e8f0fa; border-color: #C9A84C; }
+  .drop-zone .zone-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    background: #1B3A5C;
+    border-radius: 6px;
+    padding: 3px 8px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .zone-label.gold { background: #C9A84C; color: #1B3A5C; }
+  .zone-label.red { background: #c0392b; }
+  .zone-label.green { background: #27ae60; }
+  .zone-label.blue { background: #2980b9; }
+  .item-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 10px;
+    background: #eef2f7;
+    border-radius: 10px;
+    min-height: 60px;
+  }
+  .drag-item {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 7px 13px;
+    font-size: 0.82rem;
+    cursor: grab;
+    user-select: none;
+    border: 2px solid transparent;
+    transition: transform 0.1s, box-shadow 0.1s;
+    touch-action: none;
+  }
+  .drag-item:active { cursor: grabbing; transform: scale(1.06); box-shadow: 0 4px 12px rgba(27,58,92,.25); }
+  .drag-item.correct { background: #27ae60; border-color: #1e8449; }
+  .drag-item.incorrect { background: #c0392b; border-color: #922b21; }
+  .drag-item.locked { cursor: default; }
+  /* Scenario */
+  .scenario-box {
+    background: #f0f4f8;
+    border-left: 4px solid #C9A84C;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+  .scenario-q { font-size: 1rem; font-weight: 700; color: #1B3A5C; }
+  .choice-btn {
+    background: #fff;
+    border: 2.5px solid #1B3A5C;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: inherit;
+  }
+  .choice-btn:hover:not(:disabled) { background: #e8f0fa; border-color: #C9A84C; }
+  .choice-btn.chosen-correct { background: #d5f5e3; border-color: #27ae60; color: #1e6b3b; }
+  .choice-btn.chosen-incorrect { background: #fdecea; border-color: #c0392b; color: #7b1818; }
+  .choice-btn:disabled { cursor: default; }
+  .feedback-box {
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.good { background: #d5f5e3; color: #1e6b3b; border-left: 4px solid #27ae60; }
+  .feedback-box.bad { background: #fdecea; color: #7b1818; border-left: 4px solid #c0392b; }
+  /* Quiz */
+  .quiz-q { font-size: 1rem; font-weight: 700; color: #1B3A5C; line-height: 1.5; }
+  /* Steps sequence */
+  .step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-item {
+    background: #f0f4f8;
+    border: 2.5px solid #c8d6e5;
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: grab;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    transition: box-shadow 0.15s;
+  }
+  .step-item:active { box-shadow: 0 4px 12px rgba(27,58,92,.2); }
+  .step-item.dragging { opacity: 0.4; }
+  .step-item .step-num {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-item.correct-pos { border-color: #27ae60; background: #d5f5e3; }
+  .step-item.wrong-pos { border-color: #c0392b; background: #fdecea; }
+  /* Buttons */
+  .btn-primary {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: center;
+    transition: background 0.15s, transform 0.1s;
+    font-family: inherit;
+  }
+  .btn-primary:hover { background: #b8942e; transform: scale(1.03); }
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: auto; }
+  /* Score screen */
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(27,58,92,.2);
+  }
+  .score-msg { font-size: 1.1rem; font-weight: 700; text-align: center; color: #1B3A5C; }
+  .score-sub { font-size: 0.88rem; text-align: center; color: #555; line-height: 1.6; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .summary-item {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.83rem;
+    color: #1B3A5C;
+  }
+  .summary-item strong { display: block; color: #C9A84C; font-size: 0.78rem; text-transform: uppercase; margin-bottom: 3px; }
+  .tag-correct { color: #27ae60; font-weight: 700; }
+  .tag-wrong { color: #c0392b; font-weight: 700; }
+  .section-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    border-bottom: 2px solid #C9A84C;
+    padding-bottom: 4px;
+  }
+  @media (max-width: 500px) {
+    .card { padding: 18px 12px; }
+    .drop-zone { min-width: 120px; }
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>♻️ Mousetrap Car: End-of-Life Analysis</h1>
+  <p>Mousetrap Build · Product End-of-Life · Genesis K-12 Academy</p>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-label" id="progressLabel">Activity 1 of 4</div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="card">
+
+  <!-- SCREEN 0: Intro -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">🏁</div>
+    <div class="intro-title">What Happens After the Final Run?</div>
+    <div class="intro-desc">
+      Your mousetrap car crossed the finish line — now what?<br><br>
+      Responsible engineers don't just ask <em>"Will it work?"</em> They ask <em>"What happens when it's done?"</em><br><br>
+      Complete 4 quick activities to explore <strong>product end-of-life</strong>, <strong>recycling</strong>, and <strong>smart design choices</strong>.
+    </div>
+    <div class="btn-row"><button class="btn-primary" onclick="startActivity()">Start →</button></div>
+  </div>
+
+  <!-- SCREEN 1: Drag-Drop — Sort mousetrap car parts -->
+  <div class="screen" id="screen-dd">
+    <div class="section-title">Activity 1: Sort the Parts</div>
+    <div class="dd-instructions">🖱️ Drag each mousetrap car component into the correct end-of-life category. <strong>Tap and drag</strong> on mobile.</div>
+    <div class="zones-row" id="dropZones">
+      <div class="drop-zone" id="zone-recycle" data-zone="recycle"
+           ondragover="onDragOver(event)" ondrop="onDrop(event,'recycle')" ondragleave="onDragLeave(event)">
+        <div class="zone-label green">♻️ Recycle</div>
+      </div>
+      <div class="drop-zone" id="zone-reuse" data-zone="reuse"
+           ondragover="onDragOver(event)" ondrop="onDrop(event,'reuse')" ondragleave="onDragLeave(event)">
+        <div class="zone-label blue">🔁 Reuse</div>
+      </div>
+      <div class="drop-zone" id="zone-landfill" data-zone="landfill"
+           ondragover="onDragOver(event)" ondrop="onDrop(event,'landfill')" ondragleave="onDragLeave(event)">
+        <div class="zone-label red">🗑️ Landfill</div>
+      </div>
+    </div>
+    <div class="item-pool" id="itemPool"></div>
+    <div class="feedback-box" id="dd-feedback"></div>
+    <div class="btn-row">
+      <button class="btn-primary" id="dd-check-btn" onclick="checkDD()" style="display:none">Check Answers</button>
+      <button class="btn-primary" id="dd-next-btn" onclick="goToScreen(2)" style="display:none">Next →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Scenario Decision Tree -->
+  <div class="screen" id="screen-scenario">
+    <div class="section-title">Activity 2: Design Decision</div>
+    <div id="scenario-content"></div>
+    <div class="btn-row" id="scenario-btn-row"></div>
+  </div>
+
+  <!-- SCREEN 3: Quiz — Vocabulary & Concepts -->
+  <div class="screen" id="screen-quiz">
+    <div class="section-title">Activity 3: Concept Check</div>
+    <div id="quiz-content"></div>
+    <div class="btn-row" id="quiz-btn-row"></div>
+  </div>
+
+  <!-- SCREEN 4: Sequence — Life Cycle Steps -->
+  <div class="screen" id="screen-sequence">
+    <div class="section-title">Activity 4: Order the Life Cycle</div>
+    <div style="font-size:0.87rem;color:#555;background:#f0f4f8;border-radius:8px;padding:9px 12px;">
+      🔀 <strong>Drag to rearrange</strong> the stages of a product's life cycle into the correct order (1 = first, 5 = last).
+    </div>
+    <ul class="step-list" id="stepList"></ul>
+    <div class="feedback-box" id="seq-feedback"></div>
+    <div class="btn-row">
+      <button class="btn-primary" id="seq-check-btn" onclick="checkSequence()">Check Order</button>
+      <button class="btn-primary" id="seq-next-btn" onclick="goToScreen(5)" style="display:none">See Results →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: Score -->
+  <div class="screen" id="screen-score">
+    <div class="score-circle" id="finalScoreCircle">0/12</div>
+    <div class="score-msg" id="finalMsg"></div>
+    <div class="score-sub" id="finalSub"></div>
+    <div class="section-title" style="margin-top:8px;">Your Activity Summary</div>
+    <div class="summary-grid" id="summaryGrid"></div>
+    <div style="font-size:0.8rem;text-align:center;color:#888;margin-top:8px;">
+      "The earth is the Lord's, and everything in it." — Psalm 24:1 · Thoughtful design honors creation.
+    </div>
+    <div class="btn-row"><button class="btn-primary" onclick="restartAll()">Try Again</button></div>
+  </div>
+
+</div>
+
+<script>
+// ===================== DATA =====================
+
+const DD_ITEMS = [
+  { id: 'axle',     label: '🔩 Metal Axle',        correct: 'recycle',  explanation: 'Metal axles can be melted down and recycled into new metal products.' },
+  { id: 'wheel',    label: '⚙️ CD Wheel',           correct: 'reuse',    explanation: 'A CD wheel can be cleaned and reused in another project or device.' },
+  { id: 'string',   label: '🪢 Nylon String',       correct: 'recycle',  explanation: 'Nylon is a recyclable plastic polymer that can be processed at specialty facilities.' },
+  { id: 'trap',     label: '🪤 Spring Mechanism',   correct: 'reuse',    explanation: 'The mousetrap spring mechanism still works — it can be reused for another car or project.' },
+  { id: 'tape',     label: '📎 Used Tape',          correct: 'landfill', explanation: 'Used tape is difficult to recycle due to mixed materials (adhesive + film).' },
+  { id: 'frame',    label: '🪵 Balsa Wood Frame',   correct: 'recycle',  explanation: 'Wood can be composted or chipped for mulch — both are circular economy options.' },
+  { id: 'balloon',  label: '🎈 Rubber Balloon Tire',correct: 'landfill', explanation: 'Degraded rubber balloons are hard to recycle — a design challenge for engineers.' },
+  { id: 'cardboard',label: '📦 Cardboard Piece',    correct: 'recycle',  explanation: 'Cardboard is one of the most recycled materials in the world.' },
+];
+
+const SCENARIOS = [
+  {
+    context: "You are designing a new mousetrap car. Your teacher asks you to choose between two frame materials.",
+    question: "Which choice better supports end-of-life thinking?",
+    choices: [
+      { text: "A. Use hot-glue to fuse all parts together permanently.", correct: false,
+        feedback: "❌ Fusing parts makes disassembly impossible, so materials can't be separated for recycling. Engineers call this a design barrier to end-of-life." },
+      { text: "B. Use removable screws so parts can be taken apart later.", correct: true,
+        feedback: "✅ Designing for disassembly lets you separate materials at end-of-life for recycling or reuse — a key principle of Design for Environment (DfE)." },
+    ]
+  },
+  {
+    context: "After testing, your wood frame is worn out. Your metal axle is still in perfect condition.",
+    question: "What is the BEST end-of-life decision for the metal axle?",
+    choices: [
+      { text: "A. Throw it in the trash with the broken frame.", correct: false,
+        feedback: "❌ This sends recyclable metal to a landfill. Metal takes enormous energy to produce — throwing it away wastes those resources." },
+      { text: "B. Save it to reuse in your next project.", correct: true,
+        feedback: "✅ Reusing a functional component is the highest priority in the circular economy — it saves material, energy, and money!" },
+      { text: "C. Melt it down immediately even though it still works.", correct: false,
+        feedback: "❌ Recycling (melting) uses more energy than reuse. If a part still works, reuse it first — recycle only when it can no longer function." },
+    ]
+  },
+  {
+    context: "A company is deciding WHEN to plan for a product's end-of-life.",
+    question: "According to best engineering practice, when should end-of-life planning happen?",
+    choices: [
+      { text: "A. Only after the product stops working.", correct: false,
+        feedback: "❌ Waiting until failure is too late. By then material choices are locked in, and disassembly may be impossible." },
+      { text: "B. During the initial design phase — before anything is built.", correct: true,
+        feedback: "✅ Engineers must think about end-of-life DURING design. Material choices, joining methods, and labels all affect recyclability — before a single part is made." },
+    ]
+  }
+];
+
+const QUIZ_QUESTIONS = [
+  {
+    q: "What does 'product end-of-life' mean?",
+    choices: [
+      "A. When a product explodes during testing.",
+      "B. The final stage when a product is no longer used and disposal decisions must be made.",
+      "C. When the product is first sold to a customer.",
+      "D. The halfway point of a product's life."
+    ],
+    correct: 1,
+    explanation: "Product end-of-life is the FINAL stage in the lifecycle — when the product is done being used and engineers must decide: reuse, recycle, or dispose?"
+  },
+  {
+    q: "What is a 'Circular Economy'?",
+    choices: [
+      "A. An economy where money goes in circles.",
+      "B. A system that keeps making the same product over and over.",
+      "C. A system that eliminates waste by keeping resources in use through reuse and recycling.",
+      "D. A market where only round products are sold."
+    ],
+    correct: 2,
+    explanation: "A Circular Economy keeps materials in use as long as possible — reducing waste, saving energy, and protecting natural resources."
+  },
+  {
+    q: "A material's atomic-level structure affects which of these?",
+    choices: [
+      "A. Only the color of the material.",
+      "B. Its properties AND whether it can be recycled.",
+      "C. Only how expensive it is to buy.",
+      "D. Its weight but nothing else."
+    ],
+    correct: 1,
+    explanation: "How atoms are arranged determines strength, flexibility, conductivity — AND recyclability. Metals have structures that can be melted and reformed; mixed plastics often can't."
+  },
+  {
+    q: "What is a Life Cycle Assessment (LCA)?",
+    choices: [
+      "A. A grade on how well a product performed.",
+      "B. A test to see how long a product lasts in a landfill.",
+      "C. A process that evaluates a product's environmental impact from raw materials to final disposal.",
+      "D. A summary of customer reviews."
+    ],
+    correct: 2,
+    explanation: "An LCA measures environmental impact at EVERY stage — mining materials, manufacturing, use, and disposal — so engineers can find ways to reduce harm."
+  }
+];
+
+const LIFECYCLE_STEPS = [
+  { id: 1, text: "🌍 Raw Material Extraction — Mine, harvest, or collect natural resources" },
+  { id: 2, text: "🏭 Manufacturing — Process materials and assemble the product" },
+  { id: 3, text: "📦 Distribution — Package and ship the product to users" },
+  { id: 4, text: "🚗 Use Phase — Product is used (e.g., mousetrap car races)" },
+  { id: 5, text: "♻️ End-of-Life — Reuse, recycle, compost, or dispose" },
+];
+
+// ===================== STATE =====================
+let totalPoints = 0;
+let ddPoints = 0;
+let scenarioPoints = 0;
+let quizPoints = 0;
+let seqPoints = 0;
+
+let ddSubmitted = false;
+let currentScenario = 0;
+let scenarioTotal = 0;
+let currentQuizQ = 0;
+let quizAnswered = [];
+let seqSubmitted = false;
+let currentScreen = 0;
+
+let draggedItem = null;
+let touchStartX = 0, touchStartY = 0;
+let touchGhost = null;
+let draggedItemId = null;
+
+// Step sequence drag
+let dragSrcIndex = null;
+let stepOrder = [];
+
+// ===================== NAVIGATION =====================
+function updateProgress(screen) {
+  const labels = ["Intro","Activity 1 of 4 — Sort Parts","Activity 2 of 4 — Design Decision","Activity 3 of 4 — Concept Check","Activity 4 of 4 — Life Cycle Order","Results"];
+  const pct = [0, 20, 45, 65, 85, 100];
+  document.getElementById('progressLabel').textContent = labels[screen] || '';
+  document.getElementById('progressFill').style.width = pct[screen] + '%';
+}
+
+function goToScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const ids = ['screen-intro','screen-dd','screen-scenario','screen-quiz','screen-sequence','screen-score'];
+  document.getElementById(ids[n]).classList.add('active');
+  currentScreen = n;
+  updateProgress(n);
+  if (n === 2) renderScenario();
+  if (n === 3) renderQuiz();
+  if (n === 4) renderSequence();
+  if (n === 5) renderScore();
+}
+
+function startActivity() { buildDD(); goToScreen(1); }
+function restartAll() {
+  totalPoints=ddPoints=scenarioPoints=quizPoints=seqPoints=0;
+  ddSubmitted=seqSubmitted=false;
+  currentScenario=scenarioTotal=currentQuizQ=0;
+  quizAnswered=[];
+  dragSrcIndex=null;
+  stepOrder=[];
+  buildDD();
+  goToScreen(1);
+}
+
+// ===================== ACTIVITY 1: DRAG-DROP =====================
+function buildDD() {
+  const pool = document.getElementById('itemPool');
+  pool.innerHTML = '';
+  ['zone-recycle','zone-reuse','zone-landfill'].forEach(id => {
+    const z = document.getElementById(id);
+    // Remove all but the label
+    const label = z.querySelector('.zone-label');
+    z.innerHTML = '';
+    z.appendChild(label);
+  });
+  document.getElementById('dd-feedback').innerHTML = '';
+  document.getElementById('dd-feedback').className = 'feedback-box';
+  document.getElementById('dd-check-btn').style.display = 'none';
+  document.getElementById('dd-next-btn').style.display = 'none';
+  ddSubmitted = false;
+
+  const shuffled = [...DD_ITEMS].sort(() => Math.random() - 0.5);
+  shuffled.forEach(item => {
+    const el = createDragItem(item);
+    pool.appendChild(el);
+  });
+  updateDDCheckBtn();
+}
+
+function createDragItem(item) {
+  const el = document.createElement('div');
+  el.className = 'drag-item';
+  el.textContent = item.label;
+  el.dataset.id = item.id;
+  el.draggable = true;
+  el.addEventListener('dragstart', e => {
+    draggedItemId = item.id;
+    e.dataTransfer.setData('text/plain', item.id);
+  });
+  el.addEventListener('dragend', () => { draggedItemId = null; });
+  // Touch support
+  el.addEventListener('touchstart', touchStart, { passive: false });
+  el.addEventListener('touchmove', touchMove, { passive: false });
+  el.addEventListener('touchend', touchEnd, { passive: false });
+  return el;
+}
+
+function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('over'); }
+function onDragLeave(e) { e.currentTarget.classList.remove('over'); }
+function onDrop(e, zone) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('over');
+  if (ddSubmitted) return;
+  const id = e.dataTransfer.getData('text/plain');
+  moveItemToZone(id, zone, e.currentTarget);
+}
+
+function moveItemToZone(id, zoneName, zoneEl) {
+  // Find item wherever it is
+  let el = document.querySelector(`.drag-item[data-id="${id}"]`);
+  if (!el) return;
+  const existingZone = el.closest('.drop-zone');
+  if (existingZone) { /* already in a zone, move it */ }
+  zoneEl.appendChild(el);
+  updateDDCheckBtn();
+}
+
+function updateDDCheckBtn() {
+  if (ddSubmitted) return;
+  const allItems = document.querySelectorAll('.drag-item');
+  const allPlaced = [...allItems].every(el => el.closest('.drop-zone'));
+  document.getElementById('dd-check-btn').style.display = allPlaced ? 'inline-block' : 'none';
+}
+
+function checkDD() {
+  if (ddSubmitted) return;
+  ddSubmitted = true;
+  let correct = 0;
+  let feedbackLines = [];
+  DD_ITEMS.forEach(item => {
+    const el = document.querySelector(`.drag-item[data-id="${item.id}"]`);
+    const zone = el ? el.closest('.drop-zone') : null;
+    const placed = zone ? zone.dataset.zone : null;
+    if (placed === item.correct) {
+      el.classList.add('correct','locked');
+      correct++;
+    } else {
+      el.classList.add('incorrect','locked');
+      feedbackLines.push(`<strong>${item.label}:</strong> ${item.explanation}`);
+    }
+    el.draggable = false;
+    el.style.cursor = 'default';
+  });
+  ddPoints = correct;
+  const fb = document.getElementById('dd-feedback');
+  fb.className = 'feedback-box show ' + (correct >= 6 ? 'good' : 'bad');
+  if (correct === DD_ITEMS.length) {
+    fb.innerHTML = `🎉 Perfect! All ${correct} items sorted correctly!`;
+  } else {
+    fb.innerHTML = `✅ ${correct}/${DD_ITEMS.length} correct. Review the incorrect items below:<br><br>` + feedbackLines.map(l => `• ${l}`).join('<br>');
+  }
+  document.getElementById('dd-check-btn').style.display = 'none';
+  document.getElementById('dd-next-btn').style.display = 'inline-block';
+}
+
+// Touch drag for DD
+function touchStart(e) {
+  if (ddSubmitted) return;
+  const touch = e.touches[0];
+  draggedItem = e.currentTarget;
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+  draggedItemId = draggedItem.dataset.id;
+  // Create ghost
+  touchGhost = draggedItem.cloneNode(true);
+  touchGhost.style.position = 'fixed';
+  touchGhost.style.opacity = '0.7';
+  touchGhost.style.pointerEvents = 'none';
+  touchGhost.style.zIndex = '9999';
+  touchGhost.style.left = (touch.clientX - 40) + 'px';
+  touchGhost.style.top = (touch.clientY - 20) + 'px';
+  document.body.appendChild(touchGhost);
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchGhost) return;
+  const touch = e.touches[0];
+  touchGhost.style.left = (touch.clientX - 40) + 'px';
+  touchGhost.style.top = (touch.clientY - 20) + 'px';
+  e.preventDefault();
+}
+
+function touchEnd(e) {
+  if (!touchGhost) return;
+  const touch = e.changedTouches[0];
+  touchGhost.remove();
+  touchGhost = null;
+  // Find element under finger
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el) { draggedItem = null; draggedItemId = null; return; }
+  const zone = el.closest('.drop-zone');
+  if (zone && draggedItemId) {
+    moveItemToZone(draggedItemId, zone.dataset.zone, zone);
+  }
+  draggedItem = null;
+  draggedItemId = null;
+}
+
+// ===================== ACTIVITY 2: SCENARIO =====================
+function renderScenario() {
+  if (currentScenario >= SCENARIOS.length) {
+    goToScreen(3); return;
+  }
+  const s = SCENARIOS[currentScenario];
+  const content = document.getElementById('scenario-content');
+  const btnRow = document.getElementById('scenario-btn-row');
+  content.innerHTML = `
+    <div class="scenario-box">
+      <div style="font-size:0.85rem;color:#555;margin-bottom:6px;">📋 Scenario ${currentScenario+1} of ${SCENARIOS.length}</div>
+      <p>${s.context}</p>
+    </div>
+    <div class="scenario-q">${s.question}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;" id="choicesContainer">
+      ${s.choices.map((c,i) => `<button class="choice-btn" onclick="answerScenario(${i})">${c.text}</button>`).join('')}
+    </div>
+    <div class="feedback-box" id="scenario-feedback"></div>
+  `;
+  btnRow.innerHTML = '';
+}
+
+function answerScenario(idx) {
+  const s = SCENARIOS[currentScenario];
+  const choice = s.choices[idx];
+  const btns = document.querySelectorAll('#choicesContainer .choice-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[idx].classList.add(choice.correct ? 'chosen-correct' : 'chosen-incorrect');
+  if (choice.correct) {
+    s.choices.forEach((c,i) => { if (c.correct) btns[i].classList.add('chosen-correct'); });
+  }
+  const fb = document.getElementById('scenario-feedback');
+  fb.className = 'feedback-box show ' + (choice.correct ? 'good' : 'bad');
+  fb.innerHTML = choice.feedback;
+  if (choice.correct) scenarioTotal++;
+
+  const btnRow = document.getElementById('scenario-btn-row');
+  const isLast = currentScenario === SCENARIOS.length - 1;
+  btnRow.innerHTML = `<button class="btn-primary" onclick="${isLast ? 'finishScenarios()' : 'nextScenario()'}">${isLast ? 'Next Activity →' : 'Next Scenario →'}</button>`;
+}
+
+function nextScenario() {
+  currentScenario++;
+  renderScenario();
+}
+function finishScenarios() {
+  scenarioPoints = scenarioTotal;
+  goToScreen(3);
+}
+
+// ===================== ACTIVITY 3: QUIZ =====================
+function renderQuiz() {
+  if (currentQuizQ >= QUIZ_QUESTIONS.length) { finishQuiz(); return; }
+  const q = QUIZ_QUESTIONS[currentQuizQ];
+  const content = document.getElementById('quiz-content');
+  const btnRow = document.getElementById('quiz-btn-row');
+  content.innerHTML = `
+    <div style="font-size:0.85rem;color:#555;">Question ${currentQuizQ+1} of ${QUIZ_QUESTIONS.length}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;" id="quizChoices">
+      ${q.choices.map((c,i) => `<button class="choice-btn" onclick="answerQuiz(${i})">${c}</button>`).join('')}
+    </div>
+    <div class="feedback-box" id="quiz-feedback"></div>
+  `;
+  btnRow.innerHTML = '';
+}
+
+function answerQuiz(idx) {
+  const q = QUIZ_QUESTIONS[currentQuizQ];
+  const btns = document.querySelectorAll('#quizChoices .choice-btn');
+  btns.forEach(b => b.disabled = true);
+  const isCorrect = idx === q.correct;
+  btns[idx].classList.add(isCorrect ? 'chosen-correct' : 'chosen-incorrect');
+  btns[q.correct].classList.add('chosen-correct');
+  quizAnswered.push(isCorrect);
+
+  const fb = document.getElementById('quiz-feedback');
+  fb.className = 'feedback-box show ' + (isCorrect ? 'good' : 'bad');
+  fb.innerHTML = (isCorrect ? '✅ Correct! ' : '❌ Not quite. ') + q.explanation;
+
+  const btnRow = document.getElementById('quiz-btn-row');
+  const isLast = currentQuizQ === QUIZ_QUESTIONS.length - 1;
+  btnRow.innerHTML = `<button class="btn-primary" onclick="${isLast ? 'finishQuiz()' : 'nextQuizQ()'}">${isLast ? 'Next Activity →' : 'Next Question →'}</button>`;
+}
+
+function nextQuizQ() { currentQuizQ++; renderQuiz(); }
+function finishQuiz() {
+  quizPoints = quizAnswered.filter(Boolean).length;
+  goToScreen(4);
+}
+
+// ===================== ACTIVITY 4: SEQUENCE =====================
+function renderSequence() {
+  seqSubmitted = false;
+  stepOrder = [...LIFECYCLE_STEPS].sort(() => Math.random() - 0.5);
+  const list = document.getElementById('stepList');
+  list.innerHTML = '';
+  stepOrder.forEach((step, idx) => {
+    const li = document.createElement('li');
+    li.className = 'step-item';
+    li.draggable = true;
+    li.dataset.idx = idx;
+    li.innerHTML = `<div class="step-num">${idx+1}</div><span>${step.text}</span>`;
+    li.addEventListener('dragstart', seqDragStart);
+    li.addEventListener('dragover', seqDragOver);
+    li.addEventListener('drop', seqDrop);
+    li.addEventListener('dragend', seqDragEnd);
+    // Touch
+    li.addEventListener('touchstart', seqTouchStart, {passive:false});
+    li.addEventListener('touchmove', seqTouchMove, {passive:false});
+    li.addEventListener('touchend', seqTouchEnd, {passive:false});
+    list.appendChild(li);
+  });
+  document.getElementById('seq-feedback').innerHTML = '';
+  document.getElementById('seq-feedback').className = 'feedback-box';
+  document.getElementById('seq-check-btn').style.display = 'inline-block';
+  document.getElementById('seq-next-btn').style.display = 'none';
+}
+
+let seqDragSrc = null;
+let seqTouchEl = null, seqTouchGhost = null;
+
+function seqDragStart(e) {
+  seqDragSrc = this;
+  this.classList.add('dragging');
+}
+function seqDragEnd() {
+  this.classList.remove('dragging');
+  updateStepNumbers();
+}
+function seqDragOver(e) {
+  e.preventDefault();
+  const list = document.getElementById('stepList');
+  const items = [...list.querySelectorAll('.step-item')];
+  const draggingIdx = items.indexOf(seqDragSrc);
+  const targetIdx = items.indexOf(this);
+  if (draggingIdx < targetIdx) {
+    list.insertBefore(seqDragSrc, this.nextSibling);
+  } else {
+    list.insertBefore(seqDragSrc, this);
+  }
+}
+function seqDrop(e) { e.preventDefault(); }
+
+function seqTouchStart(e) {
+  if (seqSubmitted) return;
+  seqTouchEl = this;
+  const touch = e.touches[0];
+  seqTouchGhost = this.cloneNode(true);
+  seqTouchGhost.style.position = 'fixed';
+  seqTouchGhost.style.opacity = '0.7';
+  seqTouchGhost.style.pointerEvents = 'none';
+  seqTouchGhost.style.zIndex = '9999';
+  seqTouchGhost.style.width = this.offsetWidth + 'px';
+  seqTouchGhost.style.left = touch.clientX + 'px';
+  seqTouchGhost.style.top = (touch.clientY - 30) + 'px';
+  document.body.appendChild(seqTouchGhost);
+  e.preventDefault();
+}
+function seqTouchMove(e) {
+  if (!seqTouchGhost) return;
+  const touch = e.touches[0];
+  seqTouchGhost.style.left = touch.clientX + 'px';
+  seqTouchGhost.style.top = (touch.clientY - 30) + 'px';
+  e.preventDefault();
+}
+function seqTouchEnd(e) {
+  if (!seqTouchGhost) return;
+  seqTouchGhost.remove();
+  seqTouchGhost = null;
+  const touch = e.changedTouches[0];
+  const els = document.querySelectorAll('#stepList .step-item');
+  let target = null;
+  els.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (touch.clientY >= r.top && touch.clientY <= r.bottom) target = el;
+  });
+  if (target && target !== seqTouchEl) {
+    const list = document.getElementById('stepList');
+    const items = [...list.querySelectorAll('.step-item')];
+    const srcIdx = items.indexOf(seqTouchEl);
+    const tgtIdx = items.indexOf(target);
+    if (srcIdx < tgtIdx) list.insertBefore(seqTouchEl, target.nextSibling);
+    else list.insertBefore(seqTouchEl, target);
+    updateStepNumbers();
+  }
+  seqTouchEl = null;
+}
+
+function updateStepNumbers() {
+  const items = document.querySelectorAll('#stepList .step-item');
+  items.forEach((item, i) => {
+    item.querySelector('.step-num').textContent = i + 1;
+    item.dataset.idx = i;
+  });
+}
+
+function checkSequence() {
+  if (seqSubmitted) return;
+  seqSubmitted = true;
+  const items = [...document.querySelectorAll('#stepList .step-item')];
+  const correctOrder = LIFECYCLE_STEPS.map(s => s.text);
+  let correct = 0;
+  items.forEach((item, i) => {
+    const text = item.querySelector('span').textContent;
+    if (text === correctOrder[i]) {
+      item.classList.add('correct-pos');
+      correct++;
+    } else {
+      item.classList.add('wrong-pos');
+    }
+  });
+  seqPoints = correct;
+  const fb = document.getElementById('seq-feedback');
+  fb.className = 'feedback-box show ' + (correct >= 4 ? 'good' : 'bad');
+  if (correct === 5) {
+    fb.innerHTML = "🎉 Perfect! You correctly ordered all 5 stages of the product life cycle!";
+  } else {
+    fb.innerHTML = `✅ ${correct}/5 in the right position. The correct order is: <br>1. Raw Material Extraction → 2. Manufacturing → 3. Distribution → 4. Use Phase → 5. End-of-Life`;
+  }
+  document.getElementById('seq-check-btn').style.display = 'none';
+  document.getElementById('seq-next-btn').style.display = 'inline-block';
+  items.forEach(item => { item.draggable = false; item.style.cursor = 'default'; });
+}
+
+// ===================== SCORE SCREEN =====================
+function renderScore() {
+  const maxDD = DD_ITEMS.length;         // 8
+  const maxScenario = SCENARIOS.length;  // 3
+  const maxQuiz = QUIZ_QUESTIONS.length; // 4
+  const maxSeq = LIFECYCLE_STEPS.length; // 5
+  const total = ddPoints + scenarioPoints + quizPoints + seqPoints;
+  const maxTotal = maxDD + maxScenario + maxQuiz + maxSeq; // 20
+
+  document.getElementById('finalScoreCircle').textContent = `${total}/${maxTotal}`;
+
+  let msg, sub;
+  const pct = total / maxTotal;
+  if (pct >= 0.9) {
+    msg = "🏆 Outstanding Engineer!";
+    sub = "You demonstrated mastery of product end-of-life concepts. You're thinking like a responsible, forward-looking engineer!";
+  } else if (pct >= 0.75) {
+    msg = "⭐ Great Work!";
+    sub = "Strong understanding of recycling, circular economy, and lifecycle design. Review any missed items to sharpen your knowledge.";
+  } else if (pct >= 0.55) {
+    msg = "👍 Good Effort!";
+    sub = "You're grasping the key ideas. Revisit the lesson sections on end-of-life design and lifecycle stages to boost your score.";
+  } else {
+    msg = "📚 Keep Learning!";
+    sub = "End-of-life thinking takes practice. Re-read the lesson and try again — you've got this!";
+  }
+  document.getElementById('finalMsg').textContent = msg;
+  document.getElementById('finalSub').textContent = sub;
+
+  const grid = document.getElementById('summaryGrid');
+  grid.innerHTML = `
+    <div class="summary-item"><strong>Activity 1 — Sort Parts</strong>${ddPoints}/${maxDD} <span class="${ddPoints>=6?'tag-correct':'tag-wrong'}">${ddPoints>=6?'✅':'📖'}</span></div>
+    <div class="summary-item"><strong>Activity 2 — Design Decisions</strong>${scenarioPoints}/${maxScenario} <span class="${scenarioPoints>=2?'tag-correct':'tag-wrong'}">${scenarioPoints>=2?'✅':'📖'}</span></div>
+    <div class="summary-item"><strong>Activity 3 — Concept Quiz</strong>${quizPoints}/${maxQuiz} <span class="${quizPoints>=3?'tag-correct':'tag-wrong'}">${quizPoints>=3?'✅':'📖'}</span></div>
+    <div class="summary-item"><strong>Activity 4 — Life Cycle Order</strong>${seqPoints}/${maxSeq} <span class="${seqPoints>=4?'tag-correct':'tag-wrong'}">${seqPoints>=4?'✅':'📖'}</span></div>
+  `;
+}
+</script>
+</body>
+</html>

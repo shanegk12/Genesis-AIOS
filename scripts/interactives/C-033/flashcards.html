@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Procurement: Cost Analysis and Budgeting — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Procurement: Cost Analysis and Budgeting</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Procurement", "definition": "The process of acquiring the materials, services, or equipment needed for a project, making sure you get the right items at the best value."}, {"term": "Cost Analysis", "definition": "The process of examining and understanding all the expenses associated with a project to make informed decisions about spending."}, {"term": "Budgeting", "definition": "Creating a plan for how much money you have and how you will spend it on a project, ensuring you don't run out of funds."}, {"term": "Fixed Costs", "definition": "Expenses that remain the same regardless of how many items you produce or how much work you do, like rent for a workspace or the cost of basic tools."}, {"term": "Variable Costs", "definition": "Expenses that change depending on how much you produce or how much material you use, such as the cost of parts for each individual robot."}, {"term": "Stewardship", "definition": "The responsible overseeing and protection of something considered worth caring for and preserving, like wisely managing resources God has provided."}, {"term": "OCV Method", "definition": "A strategy used in Creationeering™ to optimize choices by considering the Objective (what you want), Constraints (what limits you), and Variables (what you can change)."}, {"term": "Direct Costs", "definition": "Expenses that are directly tied to producing a specific product or service, like the raw materials used to build a robot."}, {"term": "Indirect Costs", "definition": "Expenses that are not directly tied to a specific product but are necessary for the overall project or business, such as administrative salaries or utility bills for a workshop."}, {"term": "Value", "definition": "Getting the best combination of quality and price for materials or services, rather than just choosing the cheapest option."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

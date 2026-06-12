@@ -1,0 +1,265 @@
+[
+  {
+    "id": "m013t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build 2: Iterative Design – Mark 1</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>This is your Mark 1 phase — the first major testing sprint of your iterative design process. Your job is to use the <strong>One Factor At A Time (OFAT)</strong> method to isolate key variables on your prototype and collect the Ground Truth data that will drive your final Mark 2 design. Every test you run is a deliberate act of engineering analysis. You are not just building — you are learning what works, what doesn't, and <em>why</em>.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Apply the OFAT (One Factor At A Time) method to isolate variables in a physical prototype test.</li><li>Establish a control configuration and use it as a baseline for all comparative tests.</li><li>Execute specific component swaps (wheel size, wheel traction, axle diameter) with precision and intention.</li><li>Record test data meticulously in an Engineering Notebook across multiple trials.</li><li>Analyze results using technical vocabulary such as friction, torque, drag, and rotational inertia.</li><li>Use data from Mark 1 testing to make justified predictions for the Mark 2 design.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "OFAT (One Factor At A Time)",
+          "definition": "A testing method where only one variable is changed between experiments, so you can isolate exactly what caused any change in results."
+        },
+        {
+          "term": "Control Configuration",
+          "definition": "The standard, unchanged version of your prototype used as a reference point for all other tests — your baseline."
+        },
+        {
+          "term": "Baseline Data",
+          "definition": "The performance results from your control configuration, used to measure how much each variable change improves or hurts performance."
+        },
+        {
+          "term": "Rotational Inertia",
+          "definition": "The resistance of a spinning object (like a wheel) to changes in its rotation — heavier or larger wheels have more rotational inertia."
+        },
+        {
+          "term": "Bearing Friction",
+          "definition": "The friction that occurs at the point where an axle rotates inside its support — too much friction steals energy from forward motion."
+        },
+        {
+          "term": "Ground Truth",
+          "definition": "Real, measured data collected from actual tests — not guesses or predictions — that reveals how your design truly performs."
+        },
+        {
+          "term": "Iteration",
+          "definition": "One complete design-build-test cycle. Each iteration builds on what you learned from the previous one."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Test One Thing at a Time?</h2><p>Imagine you changed the wheels, the axle, <em>and</em> the wind angle all at once — and the car went twice as far. Great news, right? But which change actually helped? You wouldn't know. That's the problem OFAT solves.</p><p>Think of your prototype like a recipe. If you swap three ingredients at once and the dish tastes wrong, you have no idea which ingredient was the culprit. But if you change one ingredient per batch, every failed experiment becomes a clear finding. In engineering, a \"flaw\" you can trace back to a single cause is far more valuable than a success you can't explain.</p><p>This is also how God works through us in seasons of growth — one lesson at a time, building understanding step by step rather than overwhelming us all at once. Proverbs 4:7 reminds us: \"The beginning of wisdom is this: Get wisdom. Though it cost all you have, get understanding.\" Methodical testing <em>is</em> the pursuit of understanding.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 4:7</strong> — \"The beginning of wisdom is this: Get wisdom. Though it cost all you have, get understanding.\" Every test you run is an investment in understanding your design. Don't rush past the data — it's where the wisdom lives.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OFAT Testing Process</h2><p>Follow these five steps for every variable you test. Do not skip steps — the order matters.</p><h3>Step 1 — Establish Your Control</h3><p>Start with the standard Little Moe configuration exactly as built. Run <strong>3–5 trials</strong> and record every distance. Calculate the average. This is your <strong>Baseline Data</strong> — the number everything else gets compared against.</p><h3>Step 2 — Isolate One Variable</h3><p>Choose a single variable to test from the list below (for example: Wheel Size). Do not touch anything else on the car.</p><h3>Step 3 — Execute the Change Precisely</h3><p>Swap only the component you're testing. Precision matters here. If you're changing axles, make sure the new axle is perfectly aligned — even a slight tilt introduces axle binding, which adds friction and contaminates your data.</p><h3>Step 4 — Test and Document</h3><p>Run <strong>3–5 trials</strong> with only that one variable changed. Record every result in your Engineering Notebook. Don't average first — write down each individual trial, then calculate the average.</p><h3>Step 5 — Return to Control</h3><p>Before testing the next variable, <strong>revert the car back to the standard control configuration</strong>. This is non-negotiable. If you carry over a change from the previous test into the next one, you've broken the OFAT method and your data becomes unreliable.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Forgetting to return to the control configuration between tests is the #1 way students accidentally ruin their data. Before every new variable test, double-check that your car matches the original baseline setup exactly.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison diagram showing the Little Moe control configuration on the left and a modified test configuration (with labeled changed component) on the right, with arrows indicating the single variable that differs between them."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Variables to Test in Mark 1</h2><p>You will test each of the following three variables at their two settings. Each one targets a different engineering concept, so pay attention to <em>why</em> you're testing it — not just <em>what</em> changes.</p><h3>Variable 1 — Wind Angle</h3><p>Test at <strong>180°, 90°, and 45°</strong> relative to the car's direction of travel. Wind angle changes how much of the wind's force actually pushes the car forward versus sideways. This tests your understanding of force vectors — how a force applied at an angle splits into components that either help or waste energy.</p><h3>Variable 2 — Wheel Size (Large vs. Small)</h3><p>Swap from the standard wheels to the <strong>Thick DF 4.75\" wheels</strong>. Do <em>not</em> use the included lightweight wheels. You will also need to switch the axles and add the wooden dowel as necessary to secure the larger wheels properly. Larger wheels have greater rotational inertia, which means they take more energy to start spinning — but once they're rolling, they can cover more ground per revolution.</p><h3>Variable 3 — Wheel Traction (None vs. Rubber)</h3><p>Add <strong>balloons stretched over the large wheels</strong> to simulate rubber traction. This test is all about the propulsion subassembly: can your wheels actually grip the surface and convert rotational motion into forward movement? Wheels that spin without gripping are wasting every bit of energy your sail collects.</p><h3>Variable 4 — Axle Diameter (Brass Tube vs. Wooden Dowel)</h3><p>Swap the smooth brass tube axle for a <strong>wooden dowel axle</strong>, secured with extra 4\" zip ties on the chassis. The wooden dowel has a rougher surface than the brass tube, which increases bearing friction at every point where the axle contacts the chassis. This tests how axle material affects energy loss — the engineering concept of friction as an energy \"toll booth.\"</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram showing the four test components on the Little Moe car: wind angle indicator showing 180°, 90°, and 45° positions; the large Thick DF 4.75-inch wheel next to the small standard wheel; a wheel with a balloon stretched over it for rubber traction; and a wooden dowel axle next to a brass tube axle."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Engineering Notebook Tip:</strong> Create a separate data table for each variable test. Label each table with the variable name, the control average, the test average, and the difference between them. That difference — positive or negative — is your finding. Numbers without context are just noise; numbers compared to a baseline tell a story.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Reflection Questions</h2><p>After completing your Mark 1 tests, use these questions to analyze your data and plan your Mark 2 design. Write your answers in your Engineering Notebook using complete sentences and technical vocabulary.</p><ul><li>Which single variable — wind angle, axle diameter, wheel size, or wheel traction — produced the greatest change in performance? Why do you think that variable had the biggest impact? Use terms like <em>torque</em>, <em>friction</em>, or <em>drag</em> in your answer.</li><li>When you swapped the smooth brass tube axle for the rougher wooden dowel, where are the new \"toll booths\" where useful energy is lost? What material property of the wooden dowel causes this extra energy loss?</li><li>Based on your wind angle testing, how would you write a new <strong>Constraint</strong> for the Mark 2 design that accounts for air resistance at different angles?</li><li>The rubber traction test explores how rotational motion converts into linear (forward) motion. If the wheels slip, is the problem one of <em>torque</em> (turning force applied at the axle) or <em>propulsion</em> (transfer of that force to the ground)? Explain your reasoning.</li><li>Review your data for Wheel Size and Axle Diameter together. Which combination of those two variables do you predict will produce the maximum distance in Mark 2? What specific data point from your Mark 1 tests justifies that prediction?</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m013a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — Key Concepts Review",
+      "html": "<p><strong>What does OFAT stand for, and why does it matter?</strong><br/>One Factor At A Time. It matters because changing only one variable per test lets you trace any performance change directly to that one factor. Without it, your data can't tell you what actually caused the result.</p><p><strong>What is the purpose of returning to the control configuration between tests?</strong><br/>To ensure that each new test starts from the same baseline. If you carry a previous change into the next test, the results will reflect <em>two</em> changes, not one — which breaks the OFAT method.</p><p><strong>What engineering concept does the wooden dowel axle test investigate?</strong><br/>Bearing friction — the energy lost at the points where the axle contacts the chassis. The rougher surface of the wooden dowel increases friction compared to the smooth brass tube.</p><p><strong>Why do larger wheels have greater rotational inertia?</strong><br/>Larger wheels have more mass distributed farther from the center of rotation. That distribution makes them harder to start spinning, but also means each full rotation moves the car a greater distance.</p><p><strong>What is Ground Truth data?</strong><br/>Real, measured results collected from actual physical tests — not estimates or calculations. Ground Truth data tells you how your design actually performs in the real world.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

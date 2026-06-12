@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics in Engineering – Creationeering System Viewer | GK12</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0e2033;
+    color: #e8e8e8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    width: 42px; height: 42px;
+    background: #C9A84C;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C;
+    flex-shrink: 0;
+  }
+
+  header h1 {
+    font-size: 16px; font-weight: 700; color: #fff; line-height: 1.2;
+  }
+  header p { font-size: 11px; color: #C9A84C; }
+
+  .main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px;
+    background: #1B3A5C;
+    border-right: 2px solid #C9A84C44;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+
+  .sidebar-title {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 14px;
+  }
+
+  .component-item {
+    border-bottom: 1px solid #ffffff18;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .component-item:hover { background: #ffffff12; }
+  .component-item.active { background: #C9A84C22; border-left: 3px solid #C9A84C; }
+
+  .component-item .ci-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  .ci-dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .ci-name { font-size: 13px; font-weight: 700; color: #fff; }
+  .ci-desc { font-size: 11px; color: #b0c4de; line-height: 1.4; }
+  .ci-ethics { font-size: 10px; color: #C9A84C; margin-top: 4px; font-style: italic; }
+
+  .sidebar-section {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ffffff18;
+  }
+  .sidebar-section h3 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    color: #C9A84C; margin-bottom: 6px;
+  }
+  .sidebar-section p { font-size: 11px; color: #b0c4de; line-height: 1.5; }
+
+  /* CANVAS AREA */
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .toolbar {
+    background: #162d47;
+    border-bottom: 1px solid #C9A84C44;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    color: #C9A84C;
+    padding: 5px 13px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover { background: #C9A84C; color: #1B3A5C; }
+  .btn.active { background: #C9A84C; color: #1B3A5C; }
+
+  .btn-sep { width: 1px; height: 24px; background: #C9A84C44; margin: 0 4px; }
+
+  .hint-text {
+    font-size: 10px; color: #7a9cc0; margin-left: auto;
+  }
+
+  canvas {
+    flex: 1;
+    display: block;
+    cursor: grab;
+  }
+  canvas:active { cursor: grabbing; }
+
+  .legend-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: #1B3A5Ccc;
+    border: 1px solid #C9A84C55;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 10px;
+    color: #b0c4de;
+    backdrop-filter: blur(4px);
+  }
+  .legend-overlay b { color: #C9A84C; }
+
+  .nspe-badge {
+    position: absolute;
+    top: 60px;
+    right: 14px;
+    background: #1B3A5Ccc;
+    border: 1.5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 10px;
+    color: #e8e8e8;
+    max-width: 170px;
+    backdrop-filter: blur(4px);
+    line-height: 1.5;
+  }
+  .nspe-badge b { color: #C9A84C; display: block; margin-bottom: 4px; font-size: 11px; }
+  .nspe-badge ul { padding-left: 14px; }
+  .nspe-badge li { margin-bottom: 2px; }
+
+  /* tooltip */
+  .tooltip {
+    position: absolute;
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #fff;
+    pointer-events: none;
+    display: none;
+    max-width: 180px;
+    line-height: 1.4;
+    z-index: 100;
+  }
+  .tooltip b { color: #C9A84C; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK</div>
+  <div>
+    <h1>Creationeering – Engineering Ethics System Viewer</h1>
+    <p>Genesis K-12 Academy · Middle School Engineering · Interactive 3D Explorer</p>
+  </div>
+</header>
+
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-title">⚙ Components</div>
+
+    <div class="component-item active" data-id="0" onclick="selectComponent(0)">
+      <div class="ci-header">
+        <div class="ci-dot" style="background:#4A90D9"></div>
+        <span class="ci-name">Design Core</span>
+      </div>
+      <div class="ci-desc">The central planning unit where all engineering decisions originate. Represents the engineer's intentional design process.</div>
+      <div class="ci-ethics">⚖ NSPE: Engineers must hold public safety paramount in all design decisions.</div>
+    </div>
+
+    <div class="component-item" data-id="1" onclick="selectComponent(1)">
+      <div class="ci-header">
+        <div class="ci-dot" style="background:#E67E22"></div>
+        <span class="ci-name">Safety Layer</span>
+      </div>
+      <div class="ci-desc">Protective mechanisms that ensure hazardous materials and structural risks are contained and controlled.</div>
+      <div class="ci-ethics">⚖ Creationeering: Stewardship means protecting people and creation from harm.</div>
+    </div>
+
+    <div class="component-item" data-id="2" onclick="selectComponent(2)">
+      <div class="ci-header">
+        <div class="ci-dot" style="background:#27AE60"></div>
+        <span class="ci-name">Community Interface</span>
+      </div>
+      <div class="ci-desc">The point where engineering systems interact with users and the broader community. User experience lives here.</div>
+      <div class="ci-ethics">⚖ Salt &amp; Light: Engineers serve as light in their communities through ethical practice.</div>
+    </div>
+
+    <div class="component-item" data-id="3" onclick="selectComponent(3)">
+      <div class="ci-header">
+        <div class="ci-dot" style="background:#9B59B6"></div>
+        <span class="ci-name">Stewardship Ring</span>
+      </div>
+      <div class="ci-desc">Environmental and resource management layer. Ensures the design honors God's creation through responsible material use.</div>
+      <div class="ci-ethics">⚖ Dominion: First calling of mankind — to steward and care for creation.</div>
+    </div>
+
+    <div class="component-item" data-id="4" onclick="selectComponent(4)">
+      <div class="ci-header">
+        <div class="ci-dot" style="background:#C9A84C"></div>
+        <span class="ci-name">Ethics Framework</span>
+      </div>
+      <div class="ci-desc">The overarching NSPE Code of Ethics that governs all professional engineering decisions and behaviors.</div>
+      <div class="ci-ethics">⚖ Free Will: God designed choice into creation — engineers choose ethical paths.</div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>📖 Key Vocabulary</h3>
+      <p><b style="color:#C9A84C">Creationeering:</b> Engineering + ethical stewardship of God's creation.<br><br>
+         <b style="color:#C9A84C">NSPE Code:</b> Rulebook for professional engineering ethics.<br><br>
+         <b style="color:#C9A84C">Stewardship:</b> Duty to protect and manage creation.</p>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>🎯 Learning Goal</h3>
+      <p>Connect engineering decisions to Biblical principles of stewardship, safety, and being "salt and light" in your community.</p>
+    </div>
+  </div>
+
+  <!-- CANVAS AREA -->
+  <div class="canvas-area" id="canvasArea">
+    <div class="toolbar">
+      <button class="btn" onclick="rotateLeft()">◀ Rotate Left</button>
+      <button class="btn" onclick="rotateRight()">Rotate Right ▶</button>
+      <button class="btn" onclick="rotatePitch(-1)">Tilt Up ▲</button>
+      <button class="btn" onclick="rotatePitch(1)">Tilt Down ▼</button>
+      <div class="btn-sep"></div>
+      <button class="btn" id="explodeBtn" onclick="toggleExplode()">💥 Exploded View</button>
+      <button class="btn" id="labelBtn" onclick="toggleLabels()">🏷 Labels</button>
+      <button class="btn" onclick="resetView()">⟳ Reset</button>
+      <div class="btn-sep"></div>
+      <button class="btn" onclick="autoRotateToggle()" id="autoBtn">▶ Auto Rotate</button>
+      <span class="hint-text">Drag to rotate · Scroll to zoom</span>
+    </div>
+    <canvas id="mainCanvas"></canvas>
+
+    <div class="legend-overlay">
+      <b>Creationeering Ethics System</b><br>
+      5-Layer Engineering Ethics Model<br>
+      Click component to highlight · Drag to rotate
+    </div>
+
+    <div class="nspe-badge">
+      <b>NSPE Code of Ethics</b>
+      <ul>
+        <li>Hold public safety paramount</li>
+        <li>Perform only in area of competence</li>
+        <li>Issue public statements truthfully</li>
+        <li>Act as faithful agents</li>
+        <li>Avoid deceptive acts</li>
+        <li>Conduct honorably</li>
+      </ul>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// GENESIS K-12 – CREATIONEERING ETHICS 3D SYSTEM VIEWER
+// Isometric 3D with Canvas API – Zero external dependencies
+// ============================================================
+
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+const canvasArea = document.getElementById('canvasArea');
+
+// ── State ──────────────────────────────────────────────────
+let angleY = 0.55;   // yaw
+let angleX = 0.42;   // pitch
+let zoom = 1.0;
+let exploded = false;
+let showLabels = true;
+let autoRotate = false;
+let autoRotateId = null;
+let selectedComp = 0;
+let explodeT = 0;    // 0=normal, 1=exploded (animated)
+let explodeTarget = 0;
+let animId = null;
+
+// drag state
+let dragging = false;
+let lastMX = 0, lastMY = 0;
+
+// Colors
+const NAVY = '#1B3A5C';
+const GOLD  = '#C9A84C';
+
+const COMP_COLORS = [
+  { fill:'#4A90D9', stroke:'#2a5fa0', dark:'#1e4070', label:'Design Core',          icon:'⚙' },
+  { fill:'#E67E22', stroke:'#b35a0a', dark:'#7a3d05', label:'Safety Layer',         icon:'🛡' },
+  { fill:'#27AE60', stroke:'#1a7a42', dark:'#0e4a27', label:'Community Interface',  icon:'🤝' },
+  { fill:'#9B59B6', stroke:'#6c3483', dark:'#3d1a5c', label:'Stewardship Ring',     icon:'🌱' },
+  { fill:'#C9A84C', stroke:'#8a6a20', dark:'#5a4010', label:'Ethics Framework',     icon:'📜' },
+];
+
+// ── Geometry helpers ─────────────────────────────────────────
+function rotatePoint(x, y, z, ax, ay) {
+  // rotate around Y axis (yaw)
+  let x1 = x * Math.cos(ay) + z * Math.sin(ay);
+  let z1 = -x * Math.sin(ay) + z * Math.cos(ay);
+  // rotate around X axis (pitch)
+  let y1 = y * Math.cos(ax) - z1 * Math.sin(ax);
+  let z2 = y * Math.sin(ax) + z1 * Math.cos(ax);
+  return { x: x1, y: y1, z: z2 };
+}
+
+function project(x, y, z) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const focal = 900 * zoom;
+  const zOff = 6;
+  const scale = focal / (focal * 0.2 + z + zOff * 100);
+  return {
+    sx: cx + x * scale,
+    sy: cy + y * scale,
+    scale: scale,
+    z: z
+  };
+}
+
+// ── Component Definitions ─────────────────────────────────────
+// Each component: type, geometry params, ethical note
+// We'll build layered cylinders/boxes in 3D
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+// Build the 5-component ethics system:
+// Layer 0 (innermost): Design Core – small central box
+// Layer 1: Safety Layer – hex ring around it
+// Layer 2: Community Interface – wider ring
+// Layer 3: Stewardship Ring – tall outer ring
+// Layer 4: Ethics Framework – outer cap/arch
+
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Background gradient
+  const grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 50,
+                                         canvas.width/2, canvas.height/2, canvas.width*0.6);
+  grad.addColorStop(0, '#0e2033');
+  grad.addColorStop(1, '#07131f');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawGrid();
+
+  const t = explodeT;
+
+  // Explode offsets per component (in model space)
+  const offsets = [
+    { x: 0,   y: 0,    z: 0   },  // Design Core – stays
+    { x: 0,   y: lerp(0, -90, t), z: 0 },  // Safety Layer – up
+    { x: lerp(0, 90, t), y: 0, z: 0 },   // Community Interface – right
+    { x: lerp(0, -80, t), y: lerp(0, 50, t), z: 0 }, // Stewardship Ring – left+down
+    { x: 0,   y: lerp(0, 80, t), z: 0 },  // Ethics Framework – down
+  ];
+
+  // collect faces for painter's algo
+  let faces = [];
+
+  // === COMPONENT 0: Design Core (central box) ===
+  {
+    const off = offsets[0];
+    const w=48, h=52, d=48;
+    const bx=off.x, by=off.y, bz=off.z;
+    const c = COMP_COLORS[0];
+    const hi = selectedComp === 0;
+    faces = faces.concat(makeBox(bx-w/2,by-h/2,bz-d/2,w,h,d,c,0,hi));
+
+    // inner gear symbol (top face decoration)
+    faces.push({ type:'gear', cx:bx, cy:by-h/2, cz:bz, color:c.fill, comp:0, label:'Design Core', desc:'Central planning unit' });
+  }
+
+  // === COMPONENT 1: Safety Layer (flat ring / border box) ===
+  {
+    const off = offsets[1];
+    const c = COMP_COLORS[1];
+    const hi = selectedComp === 1;
+    // 4 side panels forming a ring around center
+    const iW=64, iD=64, oW=96, oD=96, h=24;
+    const by = off.y + 0;
+    // top slab
+    faces = faces.concat(makeBox(off.x-oW/2, by-h/2-28, off.z-oD/2, oW, h, oD, c, 1, hi, true, [off.x-iW/2,by-h/2-28+1,off.z-iD/2,iW,h-1,iD]));
+  }
+
+  // === COMPONENT 2: Community Interface (arc structure) ===
+  {
+    const off = offsets[2];
+    const c = COMP_COLORS[2];
+    const hi = selectedComp === 2;
+    // Tall pillars on sides
+    const pilW=18, pilH=90, pilD=18;
+    // Left pillar
+    faces = faces.concat(makeBox(off.x-85, off.y-pilH/2, off.z-9, pilW, pilH, pilD, c, 2, hi));
+    // Right pillar
+    faces = faces.concat(makeBox(off.x+67, off.y-pilH/2, off.z-9, pilW, pilH, pilD, c, 2, hi));
+    // Lintel (top beam)
+    faces = faces.concat(makeBox(off.x-85, off.y-pilH/2-14, off.z-9, 170, 14, pilD, c, 2, hi));
+    // Front panel
+    faces = faces.concat(makeBox(off.x-50, off.y+20, off.z+30, 100, 22, 10, c, 2, hi));
+  }
+
+  // === COMPONENT 3: Stewardship Ring (octagonal ring) ===
+  {
+    const off = offsets[3];
+    const c = COMP_COLORS[3];
+    const hi = selectedComp === 3;
+    // Ring segments (8 boxes arranged in circle)
+    for (let i=0; i<8; i++) {
+      const a = (i/8)*Math.PI*2;
+      const r = 110;
+      const sx = off.x + Math.cos(a)*r;
+      const sz = off.z + Math.sin(a)*r;
+      const bw=18, bh=30, bd=18;
+      faces = faces.concat(makeBox(sx-bw/2, off.y-bh/2+10, sz-bd/2, bw, bh, bd, c, 3, hi));
+    }
+    // Ring base
+    faces = faces.concat(makeBox(off.x-125, off.y+20, off.z-125, 250, 8, 250, c, 3, hi, false));
+  }
+
+  // === COMPONENT 4: Ethics Framework (outer dome columns + cap) ===
+  {
+    const off = offsets[4];
+    const c = COMP_COLORS[4];
+    const hi = selectedComp === 4;
+    // Large flat platform / table top
+    faces = faces.concat(makeBox(off.x-140, off.y+36, off.z-140, 280, 10, 280, c, 4, hi));
+    // 4 corner pillars
+    const pos = [[-130,-130],[130,-130],[-130,130],[130,130]];
+    for(const [px,pz] of pos){
+      faces = faces.concat(makeBox(off.x+px-8, off.y+36-70, off.z+pz-8, 16, 70, 16, c, 4, hi));
+    }
+  }
+
+  // Painter's sort
+  faces.sort((a,b)=>{
+    const az = (a.z0+a.z1+a.z2+(a.z3||a.z2))/( a.z3!==undefined?4:3);
+    const bz = (b.z0+b.z1+b.z2+(b.z3||b.z2))/(b.z3!==undefined?4:3);
+    return bz - az;
+  });
+
+  // Draw faces
+  for(const f of faces){
+    if(f.type === 'gear') { drawGearDecal(f); continue; }
+    drawFace(f);
+  }
+
+  // Labels
+  if(showLabels) drawLabels(offsets);
+
+  // connector lines in exploded view
+  if(explodeT > 0.1) drawConnectors(offsets);
+}
+
+function makeBox(x,y,z,w,h,d, col, compId, highlight, hollow=false, holeBox=null) {
+  // 6 faces of a box in world space
+  // Returns array of face objects
+  const faces = [];
+  const { fill, stroke, dark } = col;
+  const sel = highlight;
+
+  // Define 8 corners
+  const corners = [
+    [x,  y,  z  ], [x+w,y,  z  ], [x+w,y+h,z  ], [x,  y+h,z  ],
+    [x,  y,  z+d], [x+w,y,  z+d], [x+w,y+h,z+d], [x,  y+h,z+d]
+  ];
+
+  // faces: [indices, fillColor, isTop]
+  const rawFaces = [
+    { idx:[0,1,2,3], fc: dark,   isTop:false, name:'front_z' },  // front z=z
+    { idx:[5,4,7,6], fc: fill,   isTop:false, name:'back_z'  },  // back z=z+d
+    { idx:[0,4,5,1], fc: dark,   isTop:false, name:'bottom_y'},  // bottom y=y
+    { idx:[3,2,6,7], fc: fill,   isTop:true,  name:'top_y'   },  // top y=y+h
+    { idx:[0,3,7,4], fc: stroke, isTop:false, name:'left_x'  },  // left x=x
+    { idx:[1,5,6,2], fc: stroke, isTop:false, name:'right_x' },  // right x=x+w
+  ];
+
+  for(const rf of rawFaces){
+    const pts = rf.idx.map(i=>{
+      const [cx,cy,cz]=corners[i];
+      const r = rotatePoint(cx,cy,cz,angleX,angleY);
+      return project(r.x,r.y,r.z);
+    });
+    const zAvg = pts.reduce((s,p)=>s+p.z,0)/pts.length;
+    const fc = sel ? lighten(rf.fc, 40) : rf.fc;
+    faces.push({
+      type:'quad',
+      pts,
+      fill: fc,
+      stroke: sel ? '#fff' : '#00000055',
+      strokeW: sel ? 1.5 : 0.8,
+      z0:pts[0].z, z1:pts[1].z, z2:pts[2].z, z3:pts[3].z,
+      zAvg,
+      isTop: rf.isTop,
+      compId,
+    });
+  }
+  return faces;
+}
+
+function drawFace(f){
+  if(f.type!=='quad') return;
+  ctx.beginPath();
+  ctx.moveTo(f.pts[0].sx, f.pts[0].sy);
+  for(let i=1;i<f.pts.length;i++) ctx.lineTo(f.pts[i].sx, f.pts[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = f.fill;
+  ctx.fill();
+  ctx.strokeStyle = f.stroke;
+  ctx.lineWidth = f.strokeW;
+  ctx.stroke();
+}
+
+function drawGearDecal(f){
+  const r = rotatePoint(f.cx, f.cy, f.cz, angleX, angleY);
+  const p = project(r.x,r.y,r.z);
+  ctx.save();
+  ctx.translate(p.sx, p.sy);
+  const sc = p.scale * 0.04;
+  ctx.scale(sc,sc);
+  ctx.fillStyle = '#ffffff22';
+  ctx.font = 'bold 200px serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('⚙', 0, 0);
+  ctx.restore();
+}
+
+function drawGrid(){
+  const gridSize = 8;
+  const cellSize = 40;
+  const y0 = 55; // ground plane
+  ctx.save();
+  ctx.globalAlpha = 0.15;
+  for(let i=-gridSize;i<=gridSize;i++){
+    for(let j=-gridSize;j<=gridSize;j++){
+      const corners4 = [
+        [i*cellSize,     y0, j*cellSize    ],
+        [(i+1)*cellSize, y0, j*cellSize    ],
+        [(i+1)*cellSize, y0, (j+1)*cellSize],
+        [i*cellSize,     y0, (j+1)*cellSize],
+      ].map(([x,y,z])=>{ const r=rotatePoint(x,y,z,angleX,angleY); return project(r.x,r.y,r.z); });
+      ctx.beginPath();
+      ctx.moveTo(corners4[0].sx,corners4[0].sy);
+      corners4.forEach(p=>ctx.lineTo(p.sx,p.sy));
+      ctx.closePath();
+      ctx.strokeStyle = GOLD;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+function drawLabels(offsets){
+  const labelData = [
+    { off:offsets[0], wx:0,  wy:-55, wz:0,   comp:0 },
+    { off:offsets[1], wx:0,  wy:-58, wz:0,   comp:1 },
+    { off:offsets[2], wx:0,  wy:-68, wz:0,   comp:2 },
+    { off:offsets[3], wx:0,  wy:10,  wz:130, comp:3 },
+    { off:offsets[4], wx:0,  wy:28,  wz:150, comp:4 },
+  ];
+
+  for(const ld of labelData){
+    const c = COMP_COLORS[ld.comp];
+    const wx = ld.off.x + ld.wx;
+    const wy = ld.off.y + ld.wy;
+    const wz = ld.off.z + ld.wz;
+    const r = rotatePoint(wx,wy,wz,angleX,angleY);
+    const p = project(r.x,r.y,r.z);
+
+    // leader dot
+    const dotR = r; const dotP = project(dotR.x,dotR.y,dotR.z);
+
+    // connector world origin
+    const wOx = ld.off.x, wOy = ld.off.y - 10, wOz = ld.off.z;
+    const rO = rotatePoint(wOx,wOy,wOz,angleX,angleY);
+    const pO = project(rO.x,rO.y,rO.z);
+
+    // draw leader line
+    ctx.save();
+    ctx.strokeStyle = c.fill + 'aa';
+    ctx.lineWidth=1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.moveTo(pO.sx, pO.sy);
+    ctx.lineTo(p.sx, p.sy);
+    ctx.stroke();
+    ctx.restore();
+
+    // label box
+    const lbl = c.icon + ' ' + c.label;
+    const isSelected = selectedComp === ld.comp;
+    ctx.save();
+    ctx.font = `bold ${isSelected?12:11}px Segoe UI,Arial`;
+    const tw = ctx.measureText(lbl).width;
+    const bw=tw+16, bh=20;
+    const bx=p.sx - bw/2, by=p.sy - bh/2;
+    ctx.fillStyle = isSelected ? c.fill : NAVY+'dd';
+    roundRect(ctx,bx,by,bw,bh,4);
+    ctx.fill();
+    ctx.strokeStyle = c.fill;
+    ctx.lineWidth = isSelected?2:1;
+    roundRect(ctx,bx,by,bw,bh,4);
+    ctx.stroke();
+    ctx.fillStyle = isSelected ? '#fff' : c.fill;
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(lbl, p.sx, p.sy);
+    ctx.restore();
+  }
+}
+
+function drawConnectors(offsets){
+  // Draw dotted lines from center to each exploded component
+  const center={x:0,y:0,z:0};
+  const targets=[
+    {x:offsets[0].x,y:offsets[0].y-30,z:offsets[0].z},
+    {x:offsets[1].x,y:offsets[1].y,    z:offsets[1].z},
+    {x:offsets[2].x,y:offsets[2].y,    z:offsets[2].z},
+    {x:offsets[3].x,y:offsets[3].y,    z:offsets[3].z},
+    {x:offsets[4].x,y:offsets[4].y+20, z:offsets[4].z},
+  ];
+  for(let i=1;i<targets.length;i++){
+    const t=targets[i];
+    const r0=rotatePoint(0,0,0,angleX,angleY);
+    const p0=project(r0.x,r0.y,r0.z);
+    const r1=rotatePoint(t.x,t.y,t.z,angleX,angleY);
+    const p1=project(r1.x,r1.y,r1.z);
+    ctx.save();
+    ctx.setLineDash([4,6]);
+    ctx.strokeStyle = COMP_COLORS[i].fill+'88';
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(p0.sx,p0.sy);
+    ctx.lineTo(p1.sx,p1.sy);
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function lighten(hex, amount){
+  try{
+    hex=hex.replace('#','');
+    if(hex.length===3) hex=hex.split('').map(c=>c+c).join('');
+    let r=parseInt(hex.slice(0,2),16)+amount;
+    let g=parseInt(hex.slice(2,4),16)+amount;
+    let b=parseInt(hex.slice(4,6),16)+amount;
+    r=Math.min(255,r); g=Math.min(255,g); b=Math.min(255,b);
+    return `rgb(${r},${g},${b})`;
+  }catch(e){ return hex; }
+}
+
+// ── Animation loop ─────────────────────────────────────────
+let needsRender = true;
+
+function scheduleRender(){
+  if(!animId){
+    animId = requestAnimationFrame(renderLoop);
+  }
+}
+
+function renderLoop(){
+  animId = null;
+  // animate explode
+  const eDir = explodeTarget - explodeT;
+  if(Math.abs(eDir)>0.005){
+    explodeT += eDir*0.08;
+    needsRender=true;
+  } else {
+    explodeT = explodeTarget;
+  }
+
+  if(autoRotate){
+    angleY += 0.008;
+    needsRender=true;
+  }
+
+  if(needsRender){
+    drawScene();
+    needsRender=false;
+  }
+
+  scheduleRender();
+}
+
+// ── Controls ───────────────────────────────────────────────
+function rotateLeft()  { angleY -= 0.15; needsRender=true; }
+function rotateRight() { angleY += 0.15; needsRender=true; }
+function rotatePitch(d){ angleX += d*0.1; angleX=Math.max(-1.2,Math.min(1.2,angleX)); needsRender=true; }
+function resetView()   { angleY=0.55; angleX=0.42; zoom=1.0; needsRender=true; }
+
+function toggleExplode(){
+  exploded=!exploded;
+  explodeTarget=exploded?1:0;
+  const btn=document.getElementById('explodeBtn');
+  btn.classList.toggle('active',exploded);
+  needsRender=true;
+}
+
+function toggleLabels(){
+  showLabels=!showLabels;
+  const btn=document.getElementById('labelBtn');
+  btn.classList.toggle('active',showLabels);
+  needsRender=true;
+}
+
+function autoRotateToggle(){
+  autoRotate=!autoRotate;
+  document.getElementById('autoBtn').classList.toggle('active',autoRotate);
+}
+
+function selectComponent(id){
+  selectedComp=id;
+  document.querySelectorAll('.component-item').forEach((el,i)=>{
+    el.classList.toggle('active',i===id);
+  });
+  needsRender=true;
+}
+
+// ── Mouse / Touch ──────────────────────────────────────────
+canvas.addEventListener('mousedown',e=>{
+  dragging=true; lastMX=e.clientX; lastMY=e.clientY;
+  e.preventDefault();
+});
+window.addEventListener('mouseup',()=>{ dragging=false; });
+window.addEventListener('mousemove',e=>{
+  if(!dragging) return;
+  const dx=e.clientX-lastMX, dy=e.clientY-lastMY;
+  angleY += dx*0.006;
+  angleX += dy*0.006;
+  angleX=Math.max(-1.2,Math.min(1.2,angleX));
+  lastMX=e.clientX; lastMY=e.clientY;
+  needsRender=true;
+});
+
+canvas.addEventListener('wheel',e=>{
+  zoom *= e.deltaY<0?1.08:0.93;
+  zoom=Math.max(0.4,Math.min(2.5,zoom));
+  needsRender=true;
+  e.preventDefault();
+},{passive:false});
+
+// Touch
+let lastTX=0,lastTY=0,lastPinchDist=0;
+canvas.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  if(e.touches.length===1){dragging=true;lastTX=e.touches[0].clientX;lastTY=e.touches[0].clientY;}
+  if(e.touches.length===2){
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    lastPinchDist=Math.hypot(dx,dy);
+  }
+},{passive:false});
+canvas.addEventListener('touchend',e=>{ dragging=false; },{passive:false});
+canvas.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length===1 && dragging){
+    const dx=e.touches[0].clientX-lastTX, dy=e.touches[0].clientY-lastTY;
+    angleY+=dx*0.006; angleX+=dy*0.006;
+    angleX=Math.max(-1.2,Math.min(1.2,angleX));
+    lastTX=e.touches[0].clientX; lastTY=e.touches[0].clientY;
+    needsRender=true;
+  }
+  if(e.touches.length===2){
+    const dx=e.touches[0].clientX-e.touches[1].clientX;
+    const dy=e.touches[0].clientY-e.touches[1].clientY;
+    const dist=Math.hypot(dx,dy);
+    zoom*=(dist/lastPinchDist);
+    zoom=Math.max(0.4,Math.min(2.5,zoom));
+    lastPinchDist=dist;
+    needsRender=true;
+  }
+},{passive:false});
+
+// ── Resize ─────────────────────────────────────────────────
+function resize(){
+  const area=document.getElementById('canvasArea');
+  const toolbar=area.querySelector('.toolbar');
+  canvas.width=area.clientWidth;
+  canvas.height=area.clientHeight - toolbar.offsetHeight;
+  needsRender=true;
+}
+
+const ro=new ResizeObserver(resize);
+ro.observe(document.getElementById('canvasArea'));
+resize();
+
+// ── Kick off ───────────────────────────────────────────────
+scheduleRender();
+
+</script>
+</body>
+</html>

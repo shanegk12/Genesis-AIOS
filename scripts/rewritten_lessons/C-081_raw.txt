@@ -1,0 +1,311 @@
+```json
+[
+  {
+    "id": "c081t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Material Recovery and Salvage Value</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored the ethical side of End-of-Life (EOL) Responsibility — thinking carefully about how our designs impact people and the planet long after they leave our hands. Today, we're going deeper into the final phase of the Creationeering™ framework: <strong>Death &amp; Recycling</strong>. This phase asks a powerful question: what happens to products and materials after their designed life is over?</p><p>You'll explore how engineers recover valuable materials and find new purposes for them — transforming what looks like an ending into a fresh beginning. Along the way, you'll connect what you can see with your eyes (macro-level observations) to what's happening at the atomic level, and you'll use the OCV method to design smarter solutions for responsible material use.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define material recovery and salvage value within the Creationeering™ Death &amp; Recycling phase.</li><li>Explain why material recovery matters for sustainable engineering.</li><li>Identify macro-level signs of material degradation and connect them to atomic-level causes.</li><li>Apply the Objective, Constraint, Variable (OCV) method to a material recovery design problem.</li><li>Reflect on biblical principles of stewardship and renewal as they relate to extending the life of materials.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Material Recovery",
+          "definition": "The process of collecting and processing materials from discarded products so they can be reused or recycled."
+        },
+        {
+          "term": "Salvage Value",
+          "definition": "The estimated worth of a product or its components at the end of its useful life."
+        },
+        {
+          "term": "Recycling",
+          "definition": "Converting an already existing product or material into a new product."
+        },
+        {
+          "term": "Upcycling",
+          "definition": "Repurposing discarded materials into products of higher value or quality than the original."
+        },
+        {
+          "term": "Downcycling",
+          "definition": "Recycling a material into a product of lesser quality than the original."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations from large-scale systems to the behavior of materials at atomic and molecular levels."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or trade-off when multiple objectives and constraints are present."
+        },
+        {
+          "term": "Dominion Mandate",
+          "definition": "God's command for humanity to rule over, care for, and steward the Earth and its resources."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Potter's Wheel of Renewal</h2><p>Our journey into material recovery begins with a powerful image from the book of Jeremiah. The prophet visits a potter's house and watches the craftsman work at his wheel. The clay vessel he's shaping becomes spoiled — misformed, unusable. But the potter doesn't throw the clay away. He reworks it into something new, something better suited to his purpose.</p><p>That image captures something essential about how God views creation: nothing is wasted in His hands. As Creationeers, you're called to think the same way. When a product reaches the end of its first life, that's not necessarily the end of the story for its materials. With creativity and care, those materials can be reworked — just like clay on the wheel — into something useful again.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Jeremiah 18:3–4</strong> — <em>"So I went down to the potter's house, and there he was working at his wheel. And the vessel he was making of clay was spoiled in the potter's hand, and he reworked it into another vessel, as it seemed good to the potter to do."</em></p><p>The potter didn't discard the clay — he saw potential in it. That's exactly the mindset behind material recovery: seeing value where others see waste.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Material Recovery?</h2><p>Material recovery is exactly what it sounds like: recovering useful materials from products that have reached the end of their designed life. Instead of sending everything to a landfill, engineers look at a discarded product and ask, <em>what's still valuable here?</em></p><p>Think about an old laptop. The plastic casing might be cracked, the battery might be dead, and the processor might be outdated. But inside that laptop there's copper wiring, aluminum, maybe even small amounts of gold in the circuit board. A material recovery process extracts those valuable materials so they can be used again — saving energy, reducing waste, and cutting down on the need to mine new raw materials from the earth.</p><p>This connects directly to the <strong>Dominion Mandate</strong> — God's call for us to wisely care for the resources He's placed in our hands. Letting valuable materials pile up in landfills isn't good stewardship. Recovering and reusing them is.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing a disassembled laptop with labeled arrows pointing to recoverable materials: copper wiring, aluminum casing, gold circuit contacts, and lithium from the battery — illustrating material recovery from a single end-of-life product."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Salvage Value: What Is It Worth?</h2><p>Before engineers can recover materials, they need to know whether it's worth the effort. That's where <strong>salvage value</strong> comes in. Salvage value is the estimated worth of a product — or its individual parts and materials — at the end of its useful life.</p><p>Imagine you're designing a bicycle. You choose materials not just for how they'll perform when the bike is new, but also for how much value they'll retain years later when the bike is worn out. Steel can be melted down and reused. Aluminum is lightweight <em>and</em> highly recyclable. Carbon fiber? Much harder to recover. A smart Creationeer thinks about salvage value during the design phase — not just at the end.</p><p>This is why engineers often say that the best time to plan for a product's death is at its birth. The choices you make on day one determine how responsible — and how valuable — the end of life will be.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Recycling, Upcycling, and Downcycling</h2><p>Not all material recovery is equal. There are three main paths a material can take when a product reaches the end of its life:</p><ul><li><strong>Recycling</strong> — The material is processed and turned into a new product of similar quality. Melting aluminum cans into new aluminum sheets is a classic example.</li><li><strong>Upcycling</strong> — The discarded material is creatively transformed into something of <em>higher</em> value. Old wooden pallets becoming designer furniture is a good example. The material gains value instead of losing it.</li><li><strong>Downcycling</strong> — The material is reused, but the process degrades its quality. Plastic bottles recycled into fleece fabric is downcycling — the plastic can't easily be turned back into bottles again. It's still better than a landfill, but it's a one-way street.</li></ul><p>When you design a product, understanding which path its materials will likely take at end of life helps you make better choices from the start. Upcycling is always the goal; downcycling is still better than discarding.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side visual comparison of recycling, upcycling, and downcycling: recycling shows aluminum cans becoming new aluminum sheets; upcycling shows wooden pallets becoming furniture; downcycling shows plastic bottles becoming fleece fabric with a downward arrow indicating quality loss."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Macro to Micro: Why Materials Degrade</h2><p>When you look at a rusted car bumper or a crumbling concrete sidewalk, you're seeing a <strong>macro-level observation</strong> — something visible to the naked eye. But that rust and crumbling didn't appear out of nowhere. It started at the <strong>atomic level</strong>, where the bonds between atoms gradually broke down due to moisture, oxygen, stress, or temperature changes.</p><p>This is what <strong>multiscale modeling</strong> is all about: connecting what you can see with what's happening invisibly small. An engineer who only thinks about what a material looks like on the surface will miss the real story. Understanding atomic behavior helps you predict <em>when</em> a material will degrade, <em>how</em> to recover it most efficiently, and <em>which</em> materials are worth designing with in the first place.</p><h3>Common Signs of Material Degradation</h3><ul><li><strong>Corrosion</strong> — Rust on iron or steel; oxidation on copper turning it green.</li><li><strong>Cracking or fracturing</strong> — Stress fractures in concrete or brittle plastics.</li><li><strong>Delamination</strong> — Layers of composite materials separating over time.</li><li><strong>Discoloration or brittleness</strong> — UV exposure breaking down polymer chains in plastic.</li></ul><p>Each of these visible signs tells a story about what's happening at the molecular level — and each one affects whether the material can be recovered and how.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Material Recovery</h2><p>You've already used the <strong>OCV method</strong> — Objective, Constraint, Variable — to frame engineering design problems. Material recovery is no different. Whenever you're designing a system to recover materials, or designing a product with end-of-life recovery in mind, OCV gives you a structured way to think it through.</p><h3>Objective</h3><p>What are you trying to achieve? Your objective might be to maximize the amount of aluminum recovered from a discarded appliance, or to design a product casing that can be cleanly separated and recycled at end of life.</p><h3>Constraint</h3><p>What limits you? Constraints in material recovery might include budget (recovery processes cost money), technology (some materials are harder to separate than others), safety (some materials are hazardous to handle), or time.</p><h3>Variable</h3><p>What can you change or adjust? Variables might include which materials you choose during design, how you bond or fasten parts together (screws vs. glue — one is much easier to disassemble), or what recovery process you specify.</p><p>A product that's been designed with disassembly in mind — sometimes called <em>design for disassembly</em> — is far easier to recover materials from. That's an optimization decision made long before the product reaches the end of its life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Design for Disassembly:</strong> When you're choosing how to join parts in a design, ask yourself — how will this come apart later? Screws and bolts allow clean separation; adhesives and welding make material recovery much harder. Small choices early in the design process have a big impact at end of life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship as Engineering Practice</h2><p>Material recovery isn't just a technical challenge — it's a calling. The <strong>Dominion Mandate</strong> in Genesis 1:28 places responsibility on us to care for the Earth's resources. When we design products that end up as waste, we're not fulfilling that mandate. When we design for recovery, reuse, and renewal, we are.</p><p>Every material on Earth — every metal, every polymer, every fiber — came from somewhere in God's creation. Treating those materials as disposable after a single use ignores the care and provision that went into making them available to us. Treating them as recoverable, reusable resources honors that provision.</p><p>This is what separates a Creationeer from a regular engineer: the intentional integration of faith and responsibility into every phase of the design process — from the first sketch all the way to the last life of the material.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Misconception:</strong> Many people assume that recycling is always environmentally beneficial no matter what. In reality, some recycling processes consume significant energy or release pollutants. Always evaluate the full lifecycle cost of recovery — not just whether it technically counts as recycling.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Material recovery and salvage value are about more than economics — they're about seeing the full picture of what it means to create responsibly. Here's a quick summary of the key ideas from this lesson:</p><ul><li><strong>Material recovery</strong> is the process of extracting valuable materials from end-of-life products so they can be used again.</li><li><strong>Salvage value</strong> should be considered at the design stage, not just at the end of a product's life.</li><li><strong>Recycling, upcycling, and downcycling</strong> represent different outcomes for recovered materials — aim for upcycling when possible.</li><li><strong>Multiscale modeling</strong> connects visible material degradation to atomic-level causes, helping you predict and plan for recovery.</li><li>The <strong>OCV method</strong> helps you frame material recovery as an engineering optimization problem with clear objectives, constraints, and variables.</li><li>Biblical stewardship calls us to treat materials as gifts to be honored — not waste to be discarded.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "c081a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Material Recovery Industries",
+      "html": "<p>Material recovery is a massive global industry. Here are a few examples of how it shows up in the real world:</p><ul><li><strong>E-Waste Recycling:</strong> Companies like Umicore specialize in recovering precious metals — gold, silver, palladium — from circuit boards and electronic components. A single ton of circuit boards can contain more gold than a ton of gold ore from a mine.</li><li><strong>Automotive Recycling:</strong> About 80% of a modern car by weight is recyclable. Steel from car bodies is one of the most recycled materials on Earth.</li><li><strong>Construction Demolition Recycling:</strong> Concrete from demolished buildings can be crushed and used as aggregate in new construction — a form of downcycling that keeps millions of tons of material out of landfills each year.</li><li><strong>Textile Recovery:</strong> Companies are developing chemical processes to break down old cotton and polyester clothing back into raw fibers, enabling true recycling of textiles at scale.</li></ul><p>Each of these industries exists because someone asked the engineering question: <em>What can we do with this material instead of throwing it away?</em></p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  }
+]
+```

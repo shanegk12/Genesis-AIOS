@@ -1,0 +1,277 @@
+[
+  {
+    "id": "m053tx001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Final Function Verification</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the previous lesson, you ran variable confirmation tests — spinning axles, checking wheel grip, measuring lever arm length — and used the OCV method to tune each individual component. That was careful, precise work. Now you move into something bigger: the <strong>Sustainability phase</strong> of the Creationeering framework.</p><p>This lesson is about <strong>Final Function Verification</strong>. Instead of testing one part at a time, you will test your mousetrap car as a complete, unified system. Does it actually travel the distance you set out to achieve? Does it perform that way consistently, not just once? And once the project is done, what happens to the materials and components you built with?</p><p>That last question matters more than it might seem. Creationeering isn't just about building something that works — it's about building something that was worth building, in a way that honors the resources you were given.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain why Final Function Verification matters within the Sustainability phase of Creationeering.</li><li>Run comprehensive performance tests on your complete mousetrap car system.</li><li>Identify points of failure or areas for improvement in your car's long-term operation.</li><li>Apply Multiscale Modeling to connect big-picture car performance to small-scale material behavior.</li><li>Reflect on how the components of your design can be responsibly stewarded after the project ends.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053vc001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Final Function Verification",
+          "definition": "Testing a complete engineered system to confirm it consistently meets all its design objectives and performs as intended."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "The ability of an engineered system to operate in a way that preserves resources and considers long-term environmental and community impact."
+        },
+        {
+          "term": "Performance Metrics",
+          "definition": "Measurable criteria used to evaluate how well a system meets its objectives — such as distance traveled, speed, or consistency."
+        },
+        {
+          "term": "System Integration",
+          "definition": "Combining individual components and subsystems into a unified whole so they function together seamlessly."
+        },
+        {
+          "term": "Life Cycle",
+          "definition": "The full lifespan of a product — from design and creation, through use and maintenance, to eventual disposal or recycling."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that links observations at the large (macro) scale to their root causes at smaller (micro or atomic) scales."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "A desired goal for a design, such as maximizing distance or minimizing friction."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation that a design must satisfy, such as using only certain materials or staying within a set budget."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A changeable factor in a design that can be adjusted to influence the objective while staying within constraints."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053dv001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewarding What We Build</h2><p>The Creationeering framework is built on a conviction that what we make matters beyond the moment we make it. That's where the Sustainability phase comes in — and it connects directly to one of the oldest engineering mandates ever recorded.</p><p>In Genesis 1:28, God instructs humanity to be fruitful, multiply, replenish the earth, and exercise dominion over it. That word <em>replenish</em> is key. It implies that the earth has value worth restoring and protecting. Dominion isn't a license to consume without thought — it's a responsibility to manage wisely.</p><p>When you designed your mousetrap car, you made choices: which materials to use, how much string to wind, how long to cut your lever arm. Every one of those choices has a downstream effect. The Sustainability phase asks you to zoom out and see the whole picture — not just \"did my car work?\" but \"how did I use what I was given, and what comes next?\"</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053cb001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:28 (KJV):</strong> \"And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.\"</p><p>Dominion means responsible stewardship — not careless use. As a Creationeer, your designs are an extension of that calling.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053dv002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx005",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Parts to System: Why Full Testing Is Different</h2><p>Think about a bridge. An engineer can test each steel beam individually and confirm it meets strength requirements. But that doesn't guarantee the bridge is safe — because the way components interact under load can create entirely new failure points. The system behaves differently than the sum of its parts.</p><p>Your mousetrap car is the same way. You confirmed your axles spin freely. You confirmed your wheels have traction. You confirmed your lever arm is the right length. But do all of those things work together smoothly when the trap fires and the car accelerates across the floor? That's what Final Function Verification is designed to find out.</p><p>This is also where <strong>System Integration</strong> becomes visible. When everything is assembled and running, the interactions between components — friction between wheel and axle, string tension as it unwinds, the weight distribution of your chassis — all show up in your performance data. Problems that were invisible during variable testing often surface here.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A completed mousetrap car mid-run on a smooth floor surface, showing the full system in motion — wheels spinning, string unwinding from the axle, lever arm released"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Running Your Final Function Verification Tests</h2><p>Here's how to approach your full-system testing in a way that gives you useful, trustworthy data.</p><h3>Step 1 — Define Your Performance Metrics</h3><p>Before you run a single test, write down exactly what success looks like. Your performance metrics might include:</p><ul><li>Total distance traveled (in meters or feet)</li><li>Consistency across multiple runs (do you get similar results each time?)</li><li>Whether the car travels in a straight line</li><li>Whether any components loosen, slip, or break during operation</li></ul><p>These metrics connect directly back to the objectives and constraints you set at the start of the project. If your original objective was to travel at least 5 meters, that number belongs in your metrics now.</p><h3>Step 2 — Run Multiple Trials</h3><p>One run doesn't tell you much. Engineers never draw conclusions from a single data point — that's like judging a recipe after cooking it once with someone else's oven. Run your car at least three times, recording results each time. Look for patterns: Is the car consistently undershooting? Does it veer left on every run? Patterns point you toward causes.</p><h3>Step 3 — Document Everything</h3><p>Record your distances, observations, and anything unusual. If a wheel wobbles on run two but not run three, write it down. Small details during final testing often predict bigger failures later. Your documentation is part of the verification — not just the numbers, but what you observed.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053cb002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Three Runs Minimum:</strong> Record the distance for each run separately, then calculate the average. Your average performance across all trials is a much more honest picture of your design than your single best run.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Big Performance, Small Causes</h2><p>Here's one of the most powerful ideas in engineering: <strong>Multiscale Modeling</strong>. It means that what you see happening at the large scale — your car slowing down too quickly, for instance — has a cause at a much smaller scale that you can't directly observe.</p><p>Say your car is losing speed faster than expected. At the macro scale, you see it decelerating. But at the micro scale, the cause might be tiny irregularities in your axle surface creating friction. Or the wood grain of your chassis flexing slightly and absorbing energy. Or the string fibers rubbing against the chassis edge as they unwind.</p><p>You can't see those micro-scale events with your eyes during a normal run. But you can reason backward from your performance data to hypothesize what's happening at that smaller scale. Then you adjust — and test again.</p><p>This is exactly how professional engineers work. A rocket engineer studying an unexpected vibration in a fuel line is doing the same kind of reasoning: macro symptom, micro cause, targeted fix.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A two-panel diagram showing multiscale modeling: left panel shows a full mousetrap car (macro scale) with an arrow pointing to the right panel showing a close-up of an axle and wheel hub interface (micro scale) with friction highlighted"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053dv003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Thinking About the Life Cycle of Your Car</h2><p>Once your car crosses the finish line, the project doesn't really end — not from a Creationeering perspective. Every material you used has a <strong>life cycle</strong>: it came from somewhere, it served a purpose in your design, and now it will go somewhere next.</p><p>Ask yourself these questions as you close out the build:</p><ul><li><strong>What can be reused?</strong> Axles, wheels, springs, and structural pieces may be perfectly functional for a future project.</li><li><strong>What should be recycled?</strong> Wood scraps, metal components, and some plastics can be recycled rather than thrown away.</li><li><strong>What did you learn that reduces waste next time?</strong> If you cut three lever arms before getting the right one, that's information. Next time, you measure twice and cut once.</li></ul><p>This kind of thinking — taking responsibility for what happens to your materials — is part of what makes a Creationeer different from just a builder. Anyone can assemble parts. A Creationeer considers the full picture, from first sketch to final disposal.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053cb003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't Skip the Sustainability Reflection:</strong> It's easy to focus entirely on performance numbers and forget the stewardship side of this phase. Both matter. A car that travels 8 meters but leaves a trail of wasted materials and broken components isn't a fully successful design in the Creationeering framework.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053tx009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Connecting It All: What Final Verification Really Proves</h2><p>When your mousetrap car completes its final verification runs and meets its performance metrics, something real has been accomplished. You didn't just build a car. You followed a process — identified objectives, managed constraints, tested variables, integrated a system, and verified the result.</p><p>That is the engineering design process, lived out from beginning to end.</p><p>And when you stop to consider how those materials can be reused, and what you'd do differently to reduce waste next time, you're practicing stewardship — the same stewardship that Genesis points to when it calls us to replenish and care for the world we've been given.</p><p>Your mousetrap car is small. But the habits of mind you're building right now — testing rigorously, thinking at multiple scales, taking responsibility for what you create — those scale up to bridges, buildings, medical devices, and systems that affect millions of people. Start practicing them here.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m053ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: How NASA Uses Life Cycle Analysis",
+      "html": "<p>NASA engineers don't just design spacecraft to complete a mission — they plan for every phase of the vehicle's life from the start. This is called <strong>Life Cycle Analysis (LCA)</strong>, and it considers the environmental and resource cost of building, launching, operating, and eventually decommissioning a spacecraft.</p><p>For example, when designing a Mars rover, engineers must account for the materials used in manufacturing, the fuel burned during launch, and what happens to orbital debris after the mission ends. Some components are designed specifically to burn up harmlessly on reentry; others are built to last decades in case a future mission can reuse them.</p><p>Your mousetrap car is a much simpler system, but the same thinking applies. Every design decision has a downstream effect — on performance, on resources, and on what gets left behind. LCA is just a formal way of making sure engineers think about all of it before they build, not after.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

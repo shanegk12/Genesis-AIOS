@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCV System Viewer — Creationeering | Genesis K-12 Academy</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B3A5C;
+    --navy-light: #254d7a;
+    --navy-dark: #112438;
+    --gold: #C9A84C;
+    --gold-light: #e0bf6e;
+    --gold-dark: #a8872e;
+    --white: #f5f7fa;
+    --gray: #dde3ec;
+    --text: #1a2a3a;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e8edf4;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .header-text h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.3px; }
+  .header-text p { font-size: 11px; color: var(--gold-light); letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .main-layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    gap: 0;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 260px;
+    background: var(--navy);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sidebar-section h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .component-list { list-style: none; }
+  .component-list li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 4px;
+    border-left: 3px solid transparent;
+  }
+  .component-list li:hover { background: rgba(201,168,76,0.15); border-left-color: var(--gold-light); }
+  .component-list li.active { background: rgba(201,168,76,0.25); border-left-color: var(--gold); }
+
+  .comp-name { font-size: 13px; font-weight: 600; color: white; }
+  .comp-role {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: 3px;
+  }
+  .comp-desc { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.4; }
+
+  .role-obj { color: #6db3f2; }
+  .role-con { color: #f2a96d; }
+  .role-var { color: #7de8a0; }
+
+  .ocv-legend {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .ocv-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 11px; line-height: 1.4;
+  }
+  .ocv-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .dot-obj { background: #6db3f2; }
+  .dot-con { background: #f2a96d; }
+  .dot-var { background: #7de8a0; }
+
+  .controls-panel {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .controls-panel h2 {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gold);
+    margin-bottom: 10px; font-weight: 700;
+  }
+
+  .btn-group { display: flex; flex-direction: column; gap: 7px; }
+
+  .btn {
+    padding: 9px 14px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-align: center;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-primary.active-btn { background: var(--gold-dark); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.25);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .rotate-btns { display: flex; gap: 6px; }
+  .rotate-btns .btn { flex: 1; }
+
+  .angle-label {
+    font-size: 10px; color: rgba(255,255,255,0.5);
+    text-align: center; margin-top: 6px;
+  }
+
+  /* CANVAS AREA */
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #edf1f7;
+  }
+
+  .canvas-toolbar {
+    background: white;
+    border-bottom: 1px solid var(--gray);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .toolbar-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #6b7a8d;
+    font-weight: 600;
+  }
+
+  .view-tabs {
+    display: flex;
+    gap: 6px;
+  }
+  .view-tab {
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1.5px solid var(--gray);
+    background: white;
+    color: #6b7a8d;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .view-tab.active, .view-tab:hover {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+  }
+
+  .hint-text {
+    margin-left: auto;
+    font-size: 11px;
+    color: #8a9ab0;
+    font-style: italic;
+  }
+
+  .canvas-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  canvas#viewer {
+    display: block;
+    cursor: grab;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+    background: white;
+    max-width: 100%;
+    max-height: 100%;
+    touch-action: none;
+  }
+  canvas#viewer:active { cursor: grabbing; }
+
+  /* INFO PANEL */
+  .info-panel {
+    background: white;
+    border-top: 1px solid var(--gray);
+    padding: 12px 20px;
+    flex-shrink: 0;
+  }
+
+  .info-inner {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .info-tag {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-content h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .info-content p { font-size: 12px; color: #4a5a6a; line-height: 1.5; }
+
+  .problem-statement {
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    color: white;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 16px;
+  }
+  .problem-statement h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .problem-statement p {
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .ps-formula {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 10px;
+  }
+  .ps-token {
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .token-obj { background: rgba(109,179,242,0.3); color: #a8d4f7; }
+  .token-plus { color: rgba(255,255,255,0.4); padding: 2px 2px; }
+  .token-con { background: rgba(242,169,109,0.3); color: #f7c9a0; }
+  .token-var { background: rgba(125,232,160,0.3); color: #a8f0c2; }
+  .token-5w { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK</div>
+  <div class="header-text">
+    <h1>Genesis K-12 Academy — Creationeering</h1>
+    <p>Lesson: Objectives, Constraints &amp; Variables · Interactive OCV System Viewer</p>
+  </div>
+</header>
+
+<div class="main-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <h2>OCV Legend</h2>
+      <div class="ocv-legend">
+        <div class="ocv-item"><div class="ocv-dot dot-obj"></div><div><strong>Objective</strong> — What you want to accomplish</div></div>
+        <div class="ocv-item"><div class="ocv-dot dot-con"></div><div><strong>Constraint</strong> — A limit or rule you must work within</div></div>
+        <div class="ocv-item"><div class="ocv-dot dot-var"></div><div><strong>Variable</strong> — Something that can change &amp; affect outcome</div></div>
+      </div>
+    </div>
+
+    <div class="problem-statement">
+      <h3>Problem Statement</h3>
+      <p>The car engine fails to maintain safe operating temperature, causing component wear.</p>
+      <div class="ps-formula">
+        <span class="ps-token token-obj">Objective</span>
+        <span class="ps-token token-plus">+</span>
+        <span class="ps-token token-con">Constraints</span>
+        <span class="ps-token token-plus">+</span>
+        <span class="ps-token token-var">Variables</span>
+        <span class="ps-token token-plus">+</span>
+        <span class="ps-token token-5w">5W</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>System Components</h2>
+      <ul class="component-list" id="compList">
+        <li class="active" data-id="0" onclick="selectComponent(0)">
+          <div class="comp-role role-obj">■ Objective</div>
+          <div class="comp-name">Engine Block</div>
+          <div class="comp-desc">The core structure housing pistons & cylinders. Goal: maintain efficient combustion.</div>
+        </li>
+        <li data-id="1" onclick="selectComponent(1)">
+          <div class="comp-role role-con">■ Constraint</div>
+          <div class="comp-name">Oil Pan</div>
+          <div class="comp-desc">Holds engine oil. Constraint: oil level must stay within min/max marks.</div>
+        </li>
+        <li data-id="2" onclick="selectComponent(2)">
+          <div class="comp-role role-var">■ Variable</div>
+          <div class="comp-name">Oil Pump</div>
+          <div class="comp-desc">Circulates oil through engine. Variable: pump pressure changes with RPM.</div>
+        </li>
+        <li data-id="3" onclick="selectComponent(3)">
+          <div class="comp-role role-var">■ Variable</div>
+          <div class="comp-name">Coolant System</div>
+          <div class="comp-desc">Transfers heat away. Variable: coolant temp rises under heavy engine load.</div>
+        </li>
+        <li data-id="4" onclick="selectComponent(4)">
+          <div class="comp-role role-con">■ Constraint</div>
+          <div class="comp-name">Thermostat</div>
+          <div class="comp-desc">Regulates coolant flow. Constraint: must open at exact rated temperature.</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="controls-panel">
+      <h2>View Controls</h2>
+      <div class="btn-group">
+        <button class="btn btn-primary" id="explodeBtn" onclick="toggleExplode()">💥 Exploded View</button>
+        <button class="btn btn-outline" onclick="resetView()">↺ Reset View</button>
+        <div class="rotate-btns">
+          <button class="btn btn-outline" onmousedown="startRotate(-1)" onmouseup="stopRotate()" ontouchstart="startRotate(-1)" ontouchend="stopRotate()">◀ Rotate</button>
+          <button class="btn btn-outline" onmousedown="startRotate(1)" onmouseup="stopRotate()" ontouchstart="startRotate(1)" ontouchend="stopRotate()">Rotate ▶</button>
+        </div>
+        <div class="angle-label" id="angleLabel">Angle: 0°</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Highlight Mode</h2>
+      <div class="btn-group">
+        <button class="btn btn-outline" onclick="setHighlight('all')">Show All</button>
+        <button class="btn btn-outline" onclick="setHighlight('obj')">📌 Objectives Only</button>
+        <button class="btn btn-outline" onclick="setHighlight('con')">🔒 Constraints Only</button>
+        <button class="btn btn-outline" onclick="setHighlight('var')">🔄 Variables Only</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- CANVAS AREA -->
+  <div class="canvas-area">
+    <div class="canvas-toolbar">
+      <span class="toolbar-label">View:</span>
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="setViewMode('isometric', this)">Isometric 3D</button>
+        <button class="view-tab" onclick="setViewMode('front', this)">Front</button>
+        <button class="view-tab" onclick="setViewMode('top', this)">Top</button>
+        <button class="view-tab" onclick="setViewMode('side', this)">Side</button>
+      </div>
+      <span class="hint-text">🖱 Drag to rotate · Click component to learn more</span>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="viewer" width="760" height="520"></canvas>
+    </div>
+
+    <div class="info-panel">
+      <div class="info-inner" id="infoPanel">
+        <span class="info-tag" id="infoTag" style="background:#dde8f5;color:#1B3A5C;">Objective</span>
+        <div class="info-content">
+          <h3 id="infoName">Engine Block</h3>
+          <p id="infoDesc">The engine block is the heart of the system. The engineer's objective is to keep it running efficiently. Notice how all other components either support this goal (objectives), limit what we can do (constraints), or change based on conditions (variables).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let rotationY = -30;
+let rotationX = 20;
+let exploded = false;
+let explodeT = 0;
+let targetExplode = 0;
+let selectedComp = 0;
+let highlightMode = 'all';
+let viewMode = 'isometric';
+let isDragging = false;
+let lastX = 0, lastY = 0;
+let autoRotateDir = 0;
+let animFrame;
+let hoverComp = -1;
+
+// ─── CANVAS SETUP ────────────────────────────────────────────────────────────
+const canvas = document.getElementById('viewer');
+const ctx = canvas.getContext('2d');
+
+// Resize canvas to wrapper
+function resizeCanvas() {
+  const wrapper = canvas.parentElement;
+  const size = Math.min(wrapper.clientWidth - 40, wrapper.clientHeight - 10, 760);
+  const h = Math.min(size * 0.68, wrapper.clientHeight - 10);
+  canvas.width = Math.max(size, 300);
+  canvas.height = Math.max(h, 200);
+}
+
+// ─── COMPONENT DEFINITIONS ───────────────────────────────────────────────────
+const components = [
+  {
+    id: 0,
+    name: 'Engine Block',
+    role: 'obj',
+    roleLabel: 'Objective',
+    color: '#6db3f2',
+    darkColor: '#4a90d4',
+    topColor: '#8ec9f7',
+    desc: 'The engine block is the heart of the system. The engineer\'s objective is to keep it running efficiently. Notice how all other components either support this goal, limit what we can do, or change based on conditions.',
+    basePos: { x: 0, y: 0, z: 0 },
+    explodeDir: { x: 0, y: 0, z: 0 },
+    size: { w: 120, h: 80, d: 100 },
+  },
+  {
+    id: 1,
+    name: 'Oil Pan',
+    role: 'con',
+    roleLabel: 'Constraint',
+    color: '#f2a96d',
+    darkColor: '#d4803a',
+    topColor: '#f7c49a',
+    desc: 'The oil pan stores engine lubricant. It constrains the system: if oil drops below minimum, the engine cannot function safely. Engineers must design within this hard limit.',
+    basePos: { x: 0, y: -70, z: 0 },
+    explodeDir: { x: 0, y: -1.4, z: 0 },
+    size: { w: 110, h: 30, d: 90 },
+  },
+  {
+    id: 2,
+    name: 'Oil Pump',
+    role: 'var',
+    roleLabel: 'Variable',
+    color: '#7de8a0',
+    darkColor: '#4ab870',
+    topColor: '#a8f0c2',
+    desc: 'The oil pump is a key variable — its output pressure changes with engine RPM. Engineers must account for this range of values when designing the lubrication system.',
+    basePos: { x: 80, y: -10, z: 0 },
+    explodeDir: { x: 1.6, y: 0, z: 0.5 },
+    size: { w: 50, h: 50, d: 50 },
+  },
+  {
+    id: 3,
+    name: 'Coolant System',
+    role: 'var',
+    roleLabel: 'Variable',
+    color: '#b39ddb',
+    darkColor: '#7e57c2',
+    topColor: '#ce93d8',
+    desc: 'Coolant temperature is a critical variable. Under heavy load, it rises. Under light load, it drops. Engineers must design the cooling system to handle the entire range of expected temperatures.',
+    basePos: { x: -80, y: 0, z: 0 },
+    explodeDir: { x: -1.6, y: 0.3, z: -0.4 },
+    size: { w: 55, h: 70, d: 45 },
+  },
+  {
+    id: 4,
+    name: 'Thermostat',
+    role: 'con',
+    roleLabel: 'Constraint',
+    color: '#f06292',
+    darkColor: '#c2185b',
+    topColor: '#f48fb1',
+    desc: 'The thermostat constrains coolant flow — it only opens at a specific rated temperature. This is a hard constraint: the system must operate within this thermal boundary or fail.',
+    basePos: { x: -80, y: 50, z: 30 },
+    explodeDir: { x: -1.2, y: 1.0, z: 1.2 },
+    size: { w: 35, h: 35, d: 35 },
+  }
+];
+
+// ─── OCV INFO DATA ────────────────────────────────────────────────────────────
+const infoData = [
+  { tag: 'Objective', tagBg: '#dde8f5', tagColor: '#1B3A5C' },
+  { tag: 'Constraint', tagBg: '#fdebd0', tagColor: '#7d3c0a' },
+  { tag: 'Variable', tagBg: '#d5f5e3', tagColor: '#1a6b3c' },
+  { tag: 'Variable', tagBg: '#e8daef', tagColor: '#4a235a' },
+  { tag: 'Constraint', tagBg: '#fce4ec', tagColor: '#880e4f' },
+];
+
+// ─── ISOMETRIC PROJECTION ────────────────────────────────────────────────────
+function project3D(x3, y3, z3, rotY, rotX) {
+  // Rotate around Y axis
+  const ry = rotY * Math.PI / 180;
+  const rx = rotX * Math.PI / 180;
+  let x1 = x3 * Math.cos(ry) + z3 * Math.sin(ry);
+  let z1 = -x3 * Math.sin(ry) + z3 * Math.cos(ry);
+  let y1 = y3;
+  // Rotate around X axis
+  let y2 = y1 * Math.cos(rx) - z1 * Math.sin(rx);
+  let z2 = y1 * Math.sin(rx) + z1 * Math.cos(rx);
+  return { x: x1, y: y2 };
+}
+
+function getViewAngles() {
+  if (viewMode === 'front') return { ry: 0, rx: 0 };
+  if (viewMode === 'top') return { ry: 0, rx: 88 };
+  if (viewMode === 'side') return { ry: 90, rx: 5 };
+  return { ry: rotationY, rx: rotationX };
+}
+
+// ─── DRAWING ─────────────────────────────────────────────────────────────────
+function drawBox(cx, cy, w, h, d, color, darkColor, topColor, alpha, highlight, label, labelRole) {
+  const { ry, rx } = getViewAngles();
+  const hw = w / 2, hh = h / 2, hd = d / 2;
+
+  function pt(x, y, z) {
+    const p = project3D(x, y, z, ry, rx);
+    return { x: cx + p.x, y: cy - p.y };
+  }
+
+  ctx.globalAlpha = alpha;
+
+  // The 8 corners of the box
+  const corners = [
+    pt(-hw, -hh, -hd), pt(hw, -hh, -hd),
+    pt(hw,  hh, -hd), pt(-hw,  hh, -hd),
+    pt(-hw, -hh,  hd), pt(hw, -hh,  hd),
+    pt(hw,  hh,  hd), pt(-hw,  hh,  hd),
+  ];
+
+  const faces = [
+    { verts: [4,5,6,7], col: topColor,  normal: [0,1,0] },    // top
+    { verts: [0,1,5,4], col: color,     normal: [0,0,-1] },   // front
+    { verts: [1,2,6,5], col: darkColor, normal: [1,0,0] },    // right
+    { verts: [3,2,6,7], col: color,     normal: [0,0,1] },    // back
+    { verts: [0,3,7,4], col: darkColor, normal: [-1,0,0] },   // left
+    { verts: [0,1,2,3], col: darkColor, normal: [0,-1,0] },   // bottom
+  ];
+
+  // Cull back faces (simple z-sort based on view)
+  const visibleFaces = faces.filter(f => {
+    const fn = f.normal;
+    const n3 = project3D(fn[0], fn[1], fn[2], ry, rx);
+    return n3.y >= -0.1;
+  });
+
+  visibleFaces.forEach(face => {
+    ctx.beginPath();
+    const vs = face.verts.map(i => corners[i]);
+    ctx.moveTo(vs[0].x, vs[0].y);
+    vs.forEach(v => ctx.lineTo(v.x, v.y));
+    ctx.closePath();
+    ctx.fillStyle = face.col;
+    ctx.fill();
+    if (highlight) {
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2.5;
+    } else {
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+      ctx.lineWidth = 1;
+    }
+    ctx.stroke();
+  });
+
+  // Highlight glow
+  if (highlight) {
+    const topFace = faces[0];
+    const vs = topFace.verts.map(i => corners[i]);
+    ctx.beginPath();
+    ctx.moveTo(vs[0].x, vs[0].y);
+    vs.forEach(v => ctx.lineTo(v.x, v.y));
+    ctx.closePath();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  ctx.globalAlpha = 1;
+
+  // Label
+  if (label) {
+    const topVerts = faces[0].verts.map(i => corners[i]);
+    const avgX = topVerts.reduce((s,v)=>s+v.x,0)/4;
+    const avgY = topVerts.reduce((s,v)=>s+v.y,0)/4;
+
+    // Connector line
+    const lx = avgX + 30, ly = avgY - 30;
+    ctx.beginPath();
+    ctx.moveTo(avgX, avgY);
+    ctx.lineTo(lx, ly);
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Role dot
+    const roleColors = { obj: '#6db3f2', con: '#f2a96d', var: '#7de8a0' };
+    ctx.beginPath();
+    ctx.arc(avgX, avgY, 4, 0, Math.PI*2);
+    ctx.fillStyle = roleColors[labelRole] || '#fff';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Label pill
+    const txt = label;
+    ctx.font = 'bold 11px Segoe UI, Arial, sans-serif';
+    const tw = ctx.measureText(txt).width;
+    const pw = tw + 14, ph = 20;
+    const lbx = lx + 4, lby = ly - ph/2;
+
+    ctx.fillStyle = 'rgba(27,58,92,0.88)';
+    roundRect(ctx, lbx, lby, pw, ph, 5);
+    ctx.fill();
+
+    ctx.fillStyle = roleColors[labelRole] || '#fff';
+    ctx.fillText(txt, lbx + 7, lby + 13);
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+function render() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#f0f4fa');
+  bgGrad.addColorStop(1, '#e0e8f4');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid / ground plane dots
+  drawGrid(W, H);
+
+  // Title text
+  ctx.font = 'bold 13px Segoe UI, Arial';
+  ctx.fillStyle = '#8a9ab0';
+  ctx.fillText('OCV System Viewer — Car Engine', 14, 22);
+
+  if (viewMode === 'front') {
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#6b7a8d';
+    ctx.fillText('FRONT VIEW', 14, 42);
+  } else if (viewMode === 'top') {
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#6b7a8d';
+    ctx.fillText('TOP VIEW', 14, 42);
+  } else if (viewMode === 'side') {
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#6b7a8d';
+    ctx.fillText('SIDE VIEW', 14, 42);
+  } else {
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#6b7a8d';
+    const deg = ((rotationY % 360) + 360) % 360;
+    ctx.fillText(`Isometric · Rotation: ${Math.round(deg)}°`, 14, 42);
+  }
+
+  const cx = W * 0.52, cy = H * 0.54;
+
+  // Sort components by depth for painter's algorithm
+  const { ry, rx } = getViewAngles();
+  const sorted = components.map((comp, i) => {
+    const ep = explodeT;
+    const ex = comp.basePos.x + comp.explodeDir.x * 60 * ep;
+    const ey = comp.basePos.y + comp.explodeDir.y * 60 * ep;
+    const ez = comp.basePos.z + comp.explodeDir.z * 60 * ep;
+    const proj = project3D(ex, ey, ez, ry, rx);
+    return { comp, i, proj, ex, ey, ez };
+  }).sort((a, b) => b.proj.x - a.proj.x + (b.proj.y - a.proj.y) * 0.3);
+
+  sorted.forEach(({ comp, i, ex, ey, ez }) => {
+    const isSelected = i === selectedComp;
+    const isHover = i === hoverComp;
+    let alpha = 1;
+    if (highlightMode !== 'all') {
+      const map = { obj: 'obj', con: 'con', var: 'var' };
+      if (map[highlightMode] !== comp.role) alpha = 0.2;
+    }
+
+    const proj = project3D(ex, ey, ez, ry, rx);
+    const bx = cx + proj.x;
+    const by = cy - proj.y;
+
+    drawBox(
+      bx, by,
+      comp.size.w, comp.size.h, comp.size.d,
+      comp.color, comp.darkColor, comp.topColor,
+      alpha,
+      isSelected || isHover,
+      comp.name,
+      comp.role
+    );
+  });
+
+  // Exploded-view connectors (dashed lines)
+  if (explodeT > 0.01) {
+    sorted.forEach(({ comp, i, ex, ey, ez }) => {
+      if (ex === 0 && ey === 0 && ez === 0) return;
+      const p1 = project3D(ex, ey, ez, ry, rx);
+      const p2 = project3D(comp.basePos.x, comp.basePos.y, comp.basePos.z, ry, rx);
+      ctx.beginPath();
+      ctx.setLineDash([5, 4]);
+      ctx.moveTo(cx + p1.x, cy - p1.y);
+      ctx.lineTo(cx + p2.x, cy - p2.y);
+      ctx.strokeStyle = `rgba(100,120,150,${explodeT * 0.5})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+  }
+
+  // Legend
+  drawLegend(W, H);
+}
+
+function drawGrid(W, H) {
+  const spacing = 36;
+  const cx = W * 0.52, cy = H * 0.54;
+  ctx.strokeStyle = 'rgba(27,58,92,0.06)';
+  ctx.lineWidth = 1;
+  for (let x = -6; x <= 6; x++) {
+    for (let y = -5; y <= 5; y++) {
+      ctx.beginPath();
+      ctx.arc(cx + x * spacing, cy + y * spacing * 0.5, 1.2, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(27,58,92,0.08)';
+      ctx.fill();
+    }
+  }
+}
+
+function drawLegend(W, H) {
+  const items = [
+    { label: 'Objective', color: '#6db3f2' },
+    { label: 'Constraint', color: '#f2a96d' },
+    { label: 'Variable', color: '#7de8a0' },
+  ];
+  const sx = W - 130, sy = H - 80;
+  ctx.fillStyle = 'rgba(27,58,92,0.75)';
+  roundRect(ctx, sx - 10, sy - 10, 128, 68, 8);
+  ctx.fill();
+
+  ctx.font = 'bold 10px Segoe UI, Arial';
+  ctx.fillStyle = '#C9A84C';
+  ctx.fillText('OCV KEY', sx - 2, sy + 3);
+
+  items.forEach((item, i) => {
+    const iy = sy + 18 + i * 17;
+    ctx.beginPath();
+    ctx.arc(sx + 4, iy, 5, 0, Math.PI*2);
+    ctx.fillStyle = item.color;
+    ctx.fill();
+    ctx.font = '11px Segoe UI, Arial';
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.fillText(item.label, sx + 14, iy + 4);
+  });
+}
+
+// ─── ANIMATION LOOP ────────────────────────────────────────────────────────
+function animate() {
+  let dirty = false;
+
+  if (autoRotateDir !== 0 && viewMode === 'isometric') {
+    rotationY += autoRotateDir * 1.5;
+    document.getElementById('angleLabel').textContent =
+      `Angle: ${Math.round(((rotationY % 360) + 360) % 360)}°`;
+    dirty = true;
+  }
+
+  const tgt = targetExplode;
+  if (Math.abs(explodeT - tgt) > 0.004) {
+    explodeT += (tgt - explodeT) * 0.08;
+    dirty = true;
+  } else {
+    explodeT = tgt;
+  }
+
+  render();
+  animFrame = requestAnimationFrame(animate);
+}
+
+// ─── INTERACTION ─────────────────────────────────────────────────────────────
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  lastX = e.clientX; lastY = e.clientY;
+  autoRotateDir = 0;
+});
+canvas.addEventListener('mousemove', e => {
+  if (isDragging && viewMode === 'isometric') {
+    rotationY += (e.clientX - lastX) * 0.5;
+    rotationX -= (e.clientY - lastY) * 0.3;
+    rotationX = Math.max(-15, Math.min(75, rotationX));
+    lastX = e.clientX; lastY = e.clientY;
+    document.getElementById('angleLabel').textContent =
+      `Angle: ${Math.round(((rotationY % 360) + 360) % 360)}°`;
+  }
+  // Hover detection
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+  const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+  hoverComp = hitTest(mx, my);
+  canvas.style.cursor = hoverComp >= 0 ? 'pointer' : (isDragging ? 'grabbing' : 'grab');
+});
+canvas.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  // Click detection
+  if (Math.abs(e.clientX - lastX) < 3 && Math.abs(e.clientY - lastY) < 3) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const hit = hitTest(mx, my);
+    if (hit >= 0) selectComponent(hit);
+  }
+});
+canvas.addEventListener('mouseleave', () => { isDragging = false; hoverComp = -1; });
+
+// Touch
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  isDragging = true;
+  lastX = t.clientX; lastY = t.clientY;
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (!isDragging || viewMode !== 'isometric') return;
+  const t = e.touches[0];
+  rotationY += (t.clientX - lastX) * 0.6;
+  rotationX -= (t.clientY - lastY) * 0.35;
+  rotationX = Math.max(-15, Math.min(75, rotationX));
+  lastX = t.clientX; lastY = t.clientY;
+  document.getElementById('angleLabel').textContent =
+    `Angle: ${Math.round(((rotationY % 360) + 360) % 360)}°`;
+}, { passive: false });
+canvas.addEventListener('touchend', () => { isDragging = false; });
+
+// Hit test (simple bounding rect of projected center)
+function hitTest(mx, my) {
+  const W = canvas.width, H = canvas.height;
+  const cx = W * 0.52, cy = H * 0.54;
+  const { ry, rx } = getViewAngles();
+  let closest = -1, closestDist = 9999;
+
+  components.forEach((comp, i) => {
+    const ep = explodeT;
+    const ex = comp.basePos.x + comp.explodeDir.x * 60 * ep;
+    const ey = comp.basePos.y + comp.explodeDir.y * 60 * ep;
+    const ez = comp.basePos.z + comp.explodeDir.z * 60 * ep;
+    const proj = project3D(ex, ey, ez, ry, rx);
+    const bx = cx + proj.x, by = cy - proj.y;
+    const hw = comp.size.w * 0.6, hh = comp.size.h * 0.7;
+    if (mx >= bx - hw && mx <= bx + hw && my >= by - hh && my <= by + hh) {
+      const dist = Math.hypot(mx - bx, my - by);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    }
+  });
+  return closest;
+}
+
+// ─── UI FUNCTIONS ─────────────────────────────────────────────────────────────
+function selectComponent(id) {
+  selectedComp = id;
+  // Sidebar highlight
+  document.querySelectorAll('.component-list li').forEach((el, i) => {
+    el.classList.toggle('active', i === id);
+  });
+  // Info panel
+  const comp = components[id];
+  const info = infoData[id];
+  document.getElementById('infoTag').textContent = info.tag;
+  document.getElementById('infoTag').style.background = info.tagBg;
+  document.getElementById('infoTag').style.color = info.tagColor;
+  document.getElementById('infoName').textContent = comp.name;
+  document.getElementById('infoDesc').textContent = comp.desc;
+}
+
+function toggleExplode() {
+  exploded = !exploded;
+  targetExplode = exploded ? 1 : 0;
+  const btn = document.getElementById('explodeBtn');
+  btn.textContent = exploded ? '🔗 Assembled View' : '💥 Exploded View';
+  btn.classList.toggle('active-btn', exploded);
+}
+
+function resetView() {
+  rotationY = -30;
+  rotationX = 20;
+  autoRotateDir = 0;
+  viewMode = 'isometric';
+  document.querySelectorAll('.view-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+  document.getElementById('angleLabel').textContent = `Angle: ${Math.round(((rotationY % 360) + 360) % 360)}°`;
+}
+
+function startRotate(dir) { autoRotateDir = dir; }
+function stopRotate() { autoRotateDir = 0; }
+
+function setHighlight(mode) {
+  highlightMode = mode;
+}
+
+function setViewMode(mode, el) {
+  viewMode = mode;
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  if (mode !== 'isometric') autoRotateDir = 0;
+}
+
+// ─── RESIZE ──────────────────────────────────────────────────────────────────
+function onResize() {
+  resizeCanvas();
+}
+window.addEventListener('resize', onResize);
+resizeCanvas();
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+selectComponent(0);
+animate();
+</script>
+</body>
+</html>

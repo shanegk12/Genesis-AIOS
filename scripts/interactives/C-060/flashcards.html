@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feedback Loops and Process Involvement — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Feedback Loops and Process Involvement</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Feedback Loop", "definition": "A pathway where the output of a system is sent back as an input, helping the system check and adjust its own work."}, {"term": "Positive Feedback Loop", "definition": "A feedback loop that makes an initial change even stronger, pushing the system further in the same direction."}, {"term": "Negative Feedback Loop", "definition": "A feedback loop that works to reduce or stop an initial change, helping the system stay stable and return to its normal state."}, {"term": "Process Involvement", "definition": "When people actively participate in understanding, watching, and making a system or process better."}, {"term": "Optimization", "definition": "The process of making a system or design work as well as it possibly can, often by finding the best balance between different needs."}, {"term": "Objective (OCV)", "definition": "The specific goal or aim that a system or process is trying to achieve."}, {"term": "Constraint (OCV)", "definition": "A limitation or restriction that must be considered when designing or using a system."}, {"term": "Variable (OCV)", "definition": "A factor or characteristic within a system that can change or be adjusted."}, {"term": "Assembly Phase", "definition": "The phase in Creationeering™ where all the different parts are brought together to work as a complete system."}, {"term": "Human Factors", "definition": "Understanding how people interact with systems and how their choices, skills, and comfort affect a project."}, {"term": "Stewardship", "definition": "The responsible overseeing and protection of something considered worth caring for, like God's creation."}, {"term": "Self-Correction", "definition": "The ability of a system to fix its own problems or adjust itself to stay on track."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

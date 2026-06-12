@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems Thinking 3D Viewer — Creationeering | Genesis K-12</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B3A5C;
+    --navy-light: #254d7a;
+    --navy-dark: #122840;
+    --gold: #C9A84C;
+    --gold-light: #e0c06a;
+    --gold-dark: #a8832e;
+    --bg: #f0f4f8;
+    --white: #ffffff;
+    --gray: #e2e8f0;
+    --text: #1a2533;
+    --muted: #64748b;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .header-text h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.3px; }
+  .header-text p { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+
+  .header-badge {
+    margin-left: auto;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--white);
+    border-right: 2px solid var(--gray);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    padding: 14px;
+    border-bottom: 1px solid var(--gray);
+  }
+
+  .sidebar-section h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .component-item {
+    padding: 9px 10px;
+    border-radius: 7px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.18s;
+    background: var(--bg);
+  }
+
+  .component-item:hover { border-color: var(--gold); background: #faf6ed; }
+  .component-item.active { border-color: var(--navy); background: #eef3f9; }
+
+  .comp-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+
+  .comp-dot {
+    width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
+  }
+
+  .comp-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+  .comp-role { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .comp-desc { font-size: 11px; color: var(--muted); line-height: 1.45; }
+
+  .io-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 3px;
+    margin-top: 4px;
+  }
+  .io-input { background: #dbeafe; color: #1e40af; }
+  .io-process { background: #dcfce7; color: #166534; }
+  .io-output { background: #fef3c7; color: #92400e; }
+
+  .vocab-item {
+    margin-bottom: 8px;
+  }
+  .vocab-term { font-size: 11px; font-weight: 700; color: var(--navy); }
+  .vocab-def { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+  /* CANVAS AREA */
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .toolbar {
+    background: var(--white);
+    border-bottom: 2px solid var(--gray);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 2px;
+  }
+
+  .btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .btn-primary:hover { background: var(--navy-light); }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+  .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .btn.active-btn {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+
+  .divider { width: 1px; height: 24px; background: var(--gray); margin: 0 4px; }
+
+  .rotate-group { display: flex; gap: 4px; }
+
+  .canvas-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+  }
+
+  canvas#mainCanvas {
+    display: block;
+    cursor: grab;
+    touch-action: none;
+  }
+  canvas#mainCanvas:active { cursor: grabbing; }
+
+  .info-overlay {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(27,58,92,0.85);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    pointer-events: none;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+  }
+
+  .mode-indicator {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+  }
+
+  .tooltip-box {
+    position: absolute;
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    pointer-events: none;
+    max-width: 180px;
+    line-height: 1.45;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    display: none;
+  }
+  .tooltip-box::before {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 14px;
+    border: 6px solid transparent;
+    border-bottom: none;
+    border-top-color: var(--navy);
+  }
+  .tooltip-title { font-weight: 700; margin-bottom: 3px; color: var(--gold); }
+
+  /* STATUS BAR */
+  .status-bar {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.6);
+    padding: 4px 16px;
+    font-size: 10px;
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  .status-bar span b { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    .sidebar { width: 180px; }
+    .header-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK</div>
+  <div class="header-text">
+    <h1>Systems Thinking — 3D Interactive Viewer</h1>
+    <p>Creationeering · Genesis K-12 Academy · Intro to Systems Thinking</p>
+  </div>
+  <div class="header-badge">Interactive Lab</div>
+</header>
+
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>System Components</h3>
+      <div id="compList"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Vocabulary</h3>
+      <div class="vocab-item">
+        <div class="vocab-term">System</div>
+        <div class="vocab-def">A group of parts working together to perform a function.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Subsystem</div>
+        <div class="vocab-def">A smaller system inside a larger system.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Input</div>
+        <div class="vocab-def">What goes into a system (energy, material, information).</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Process</div>
+        <div class="vocab-def">A series of steps used to create or improve something.</div>
+      </div>
+      <div class="vocab-item">
+        <div class="vocab-term">Output</div>
+        <div class="vocab-def">What comes out of a system (motion, results, products).</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>System: Mousetrap Car</h3>
+      <div style="font-size:10px;color:var(--muted);line-height:1.5;">
+        A mousetrap car converts stored elastic energy into forward motion. It demonstrates how every system has inputs, processes, and outputs working together through coordinated subsystems.
+      </div>
+      <div style="margin-top:8px;font-size:10px;font-style:italic;color:var(--navy);line-height:1.5;">
+        "God has made everything beautiful in its time." — Eccl. 3:11
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CANVAS AREA -->
+  <div class="canvas-area">
+    <div class="toolbar">
+      <span class="toolbar-label">View</span>
+      <div class="rotate-group">
+        <button class="btn btn-outline btn-sm" id="btnRotLeft" title="Rotate Left">◀ Left</button>
+        <button class="btn btn-outline btn-sm" id="btnRotRight" title="Rotate Right">Right ▶</button>
+        <button class="btn btn-outline btn-sm" id="btnRotUp" title="Tilt Up">▲ Up</button>
+        <button class="btn btn-outline btn-sm" id="btnRotDown" title="Tilt Down">▼ Down</button>
+      </div>
+      <div class="divider"></div>
+      <button class="btn btn-primary btn-sm" id="btnReset">Reset View</button>
+      <div class="divider"></div>
+      <button class="btn btn-gold btn-sm" id="btnExplode">💥 Exploded View</button>
+      <div class="divider"></div>
+      <button class="btn btn-outline btn-sm" id="btnLabels">Labels: ON</button>
+      <button class="btn btn-outline btn-sm" id="btnFlow">Show Flow</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="mainCanvas"></canvas>
+      <div class="mode-indicator" id="modeIndicator">Normal View</div>
+      <div class="info-overlay">🖱 Drag to rotate · Click components to inspect · Use buttons above</div>
+      <div class="tooltip-box" id="tooltipBox">
+        <div class="tooltip-title" id="ttTitle"></div>
+        <div id="ttBody"></div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <span>Rotation: <b id="statRot">0°</b></span>
+      <span>Tilt: <b id="statTilt">30°</b></span>
+      <span>Mode: <b id="statMode">Normal</b></span>
+      <span>Selected: <b id="statSel">None</b></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//  MOUSETRAP CAR — 3D ISOMETRIC VIEWER
+//  Pure HTML5 Canvas with isometric projection math
+// ============================================================
+
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+
+// ── State ────────────────────────────────────────────────────
+let rotY = -30;          // horizontal rotation (degrees)
+let rotX = 30;           // vertical tilt (degrees)
+let exploded = false;
+let showLabels = true;
+let showFlow = false;
+let selectedComp = null;
+let animProgress = 0;    // 0=normal, 1=exploded
+let animDir = 0;         // -1 collapse, 0 idle, 1 explode
+let flowPhase = 0;
+
+// drag
+let isDragging = false;
+let lastX = 0, lastY = 0;
+
+// ── Color Palette ────────────────────────────────────────────
+const NAVY   = '#1B3A5C';
+const GOLD   = '#C9A84C';
+const WHITE  = '#FFFFFF';
+const GRAY   = '#CBD5E1';
+
+// ── Components Definition ────────────────────────────────────
+// Each component: id, name, role, color, description, tags, base3D pos, explode offset
+const components = [
+  {
+    id: 'chassis',
+    name: 'Chassis / Frame',
+    role: 'Subsystem',
+    color: '#2563eb',
+    colorLight: '#93c5fd',
+    desc: 'The structural base that connects all subsystems. Provides rigidity and shape.',
+    tags: ['process'],
+    base: { x:0, y:0, z:0 },
+    explodeOff: { x:0, y:0, z:0 },
+    shape: 'chassis'
+  },
+  {
+    id: 'trap',
+    name: 'Mousetrap (Spring)',
+    role: 'Input',
+    color: '#c2410c',
+    colorLight: '#fed7aa',
+    desc: 'Stores elastic potential energy. The primary INPUT — converts stored energy into motion.',
+    tags: ['input'],
+    base: { x:0, y:0, z:0 },
+    explodeOff: { x:0, y:2.5, z:0 },
+    shape: 'trap'
+  },
+  {
+    id: 'leverarm',
+    name: 'Lever Arm',
+    role: 'Process',
+    color: '#15803d',
+    colorLight: '#bbf7d0',
+    desc: 'Transfers spring force to the string. Acts as a mechanical advantage lever — a key PROCESS component.',
+    tags: ['process'],
+    base: { x:0, y:0, z:0 },
+    explodeOff: { x:2.2, y:1.5, z:0 },
+    shape: 'lever'
+  },
+  {
+    id: 'axle',
+    name: 'Rear Axle & String',
+    role: 'Process',
+    color: '#7c3aed',
+    colorLight: '#ddd6fe',
+    desc: 'String winds around axle. As lever releases, string unwinds, spinning the axle — PROCESS converting rotation.',
+    tags: ['process'],
+    base: { x:0, y:0, z:0 },
+    explodeOff: { x:0, y:0, z:-2.2 },
+    shape: 'axle'
+  },
+  {
+    id: 'wheels',
+    name: 'Wheels',
+    role: 'Output',
+    color: '#be185d',
+    colorLight: '#fbcfe8',
+    desc: 'Converts axle rotation into forward movement. The primary OUTPUT — forward motion of the car.',
+    tags: ['output'],
+    base: { x:0, y:0, z:0 },
+    explodeOff: { x:-2.5, y:0, z:0 },
+    shape: 'wheels'
+  }
+];
+
+// ── Sidebar Build ────────────────────────────────────────────
+function buildSidebar() {
+  const list = document.getElementById('compList');
+  list.innerHTML = '';
+  components.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'component-item';
+    div.id = 'ci_' + c.id;
+    const tagHTML = c.tags.map(t => `<span class="io-tag io-${t}">${t.toUpperCase()}</span>`).join('');
+    div.innerHTML = `
+      <div class="comp-header">
+        <div class="comp-dot" style="background:${c.color}"></div>
+        <div>
+          <div class="comp-name">${c.name}</div>
+          <div class="comp-role" style="color:${c.color}">${c.role}</div>
+        </div>
+      </div>
+      <div class="comp-desc">${c.desc}</div>
+      <div>${tagHTML}</div>`;
+    div.addEventListener('click', () => {
+      selectedComp = selectedComp === c.id ? null : c.id;
+      updateSidebarActive();
+      updateStatus();
+      draw();
+    });
+    list.appendChild(div);
+  });
+}
+
+function updateSidebarActive() {
+  components.forEach(c => {
+    const el = document.getElementById('ci_' + c.id);
+    if (el) el.classList.toggle('active', c.id === selectedComp);
+  });
+}
+
+// ── Resize Canvas ────────────────────────────────────────────
+function resizeCanvas() {
+  const wrapper = canvas.parentElement;
+  canvas.width = wrapper.clientWidth;
+  canvas.height = wrapper.clientHeight;
+  draw();
+}
+
+// ── 3D → 2D Isometric Projection ────────────────────────────
+function project(x3, y3, z3) {
+  // Rotate around Y axis (horizontal)
+  const rY = rotY * Math.PI / 180;
+  const rX = rotX * Math.PI / 180;
+  const scale = Math.min(canvas.width, canvas.height) * 0.09;
+
+  // Rotate Y
+  const x1 = x3 * Math.cos(rY) + z3 * Math.sin(rY);
+  const z1 = -x3 * Math.sin(rY) + z3 * Math.cos(rY);
+
+  // Rotate X (tilt)
+  const y1 = y3 * Math.cos(rX) - z1 * Math.sin(rX);
+  const z2 = y3 * Math.sin(rX) + z1 * Math.cos(rX);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2 + 10;
+
+  return {
+    sx: cx + x1 * scale,
+    sy: cy - y1 * scale,
+    depth: z2
+  };
+}
+
+// Lerp helper
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+// Get component effective position with explode animation
+function getCompPos(comp) {
+  const t = animProgress;
+  return {
+    x: lerp(0, comp.explodeOff.x, t),
+    y: lerp(0, comp.explodeOff.y, t),
+    z: lerp(0, comp.explodeOff.z, t)
+  };
+}
+
+// ── Drawing Helpers ──────────────────────────────────────────
+function drawBox(cx, cy, cz, w, h, d, faceColor, edgeColor, alpha, label, highlight) {
+  alpha = alpha || 1;
+
+  // 8 corners of box
+  const hw = w/2, hh = h/2, hd = d/2;
+  const pts = [
+    project(cx-hw, cy-hh, cz-hd),
+    project(cx+hw, cy-hh, cz-hd),
+    project(cx+hw, cy+hh, cz-hd),
+    project(cx-hw, cy+hh, cz-hd),
+    project(cx-hw, cy-hh, cz+hd),
+    project(cx+hw, cy-hh, cz+hd),
+    project(cx+hw, cy+hh, cz+hd),
+    project(cx-hw, cy+hh, cz+hd),
+  ];
+
+  // Determine face brightness from rotY for pseudo-lighting
+  const rY = rotY * Math.PI / 180;
+
+  function drawFace(indices, shade) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.moveTo(pts[indices[0]].sx, pts[indices[0]].sy);
+    for (let k = 1; k < indices.length; k++) {
+      ctx.lineTo(pts[indices[k]].sx, pts[indices[k]].sy);
+    }
+    ctx.closePath();
+
+    // Shade the face color
+    ctx.fillStyle = shadeColor(faceColor, shade);
+    ctx.fill();
+
+    ctx.strokeStyle = highlight ? '#FFD700' : edgeColor;
+    ctx.lineWidth = highlight ? 2.5 : 1.5;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // faces: bottom, top, front, back, left, right
+  drawFace([4,5,1,0], -0.15); // bottom
+  drawFace([3,2,6,7], 0.1);   // top
+  drawFace([0,1,5,4], -0.05); // front
+  drawFace([2,3,7,6], 0);     // back
+  drawFace([0,3,7,4], -0.12); // left
+  drawFace([1,2,6,5], 0.08);  // right
+}
+
+function shadeColor(hex, amount) {
+  // amount: -0.3 (darker) to +0.3 (lighter)
+  let r = parseInt(hex.slice(1,3), 16);
+  let g = parseInt(hex.slice(3,5), 16);
+  let b = parseInt(hex.slice(5,7), 16);
+  r = Math.min(255, Math.max(0, Math.round(r + r * amount)));
+  g = Math.min(255, Math.max(0, Math.round(g + g * amount)));
+  b = Math.min(255, Math.max(0, Math.round(b + b * amount)));
+  return `rgb(${r},${g},${b})`;
+}
+
+function drawCylinder(cx, cy, cz, rx, ry, rz, faceColor, edgeColor, alpha, segs) {
+  segs = segs || 20;
+  alpha = alpha || 1;
+
+  // Draw as a series of projected ellipses
+  const topPts = [];
+  const botPts = [];
+  for (let i = 0; i <= segs; i++) {
+    const a = (i / segs) * Math.PI * 2;
+    const px = cx + rx * Math.cos(a);
+    const pz = cz + rz * Math.sin(a);
+    topPts.push(project(px, cy + ry, pz));
+    botPts.push(project(px, cy - ry, pz));
+  }
+
+  ctx.save();
+  ctx.globalAlpha = alpha;
+
+  // Side quads
+  for (let i = 0; i < segs; i++) {
+    ctx.beginPath();
+    ctx.moveTo(botPts[i].sx, botPts[i].sy);
+    ctx.lineTo(botPts[i+1].sx, botPts[i+1].sy);
+    ctx.lineTo(topPts[i+1].sx, topPts[i+1].sy);
+    ctx.lineTo(topPts[i].sx, topPts[i].sy);
+    ctx.closePath();
+    const angle = (i / segs) * Math.PI * 2;
+    const shade = (Math.cos(angle + rotY * Math.PI/180) * 0.2);
+    ctx.fillStyle = shadeColor(faceColor, shade);
+    ctx.fill();
+    ctx.strokeStyle = edgeColor;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Top cap
+  ctx.beginPath();
+  ctx.moveTo(topPts[0].sx, topPts[0].sy);
+  for (let i = 1; i <= segs; i++) ctx.lineTo(topPts[i].sx, topPts[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = shadeColor(faceColor, 0.2);
+  ctx.fill();
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Bottom cap
+  ctx.beginPath();
+  ctx.moveTo(botPts[0].sx, botPts[0].sy);
+  for (let i = 1; i <= segs; i++) ctx.lineTo(botPts[i].sx, botPts[i].sy);
+  ctx.closePath();
+  ctx.fillStyle = shadeColor(faceColor, -0.2);
+  ctx.fill();
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function drawLine3D(x1,y1,z1, x2,y2,z2, color, width, dash, alpha) {
+  const p1 = project(x1,y1,z1);
+  const p2 = project(x2,y2,z2);
+  ctx.save();
+  ctx.globalAlpha = alpha || 1;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width || 1.5;
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath();
+  ctx.moveTo(p1.sx, p1.sy);
+  ctx.lineTo(p2.sx, p2.sy);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLabel(x3, y3, z3, text, color, subtext) {
+  if (!showLabels) return;
+  const p = project(x3, y3+0.1, z3);
+  const lx = p.sx;
+  const ly = p.sy - 10;
+
+  ctx.save();
+  // Leader line
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3,3]);
+  ctx.beginPath();
+  ctx.moveTo(lx, ly);
+  ctx.lineTo(lx + 16, ly - 16);
+  ctx.stroke();
+
+  const bx = lx + 18;
+  const by = ly - 28;
+
+  ctx.setLineDash([]);
+  ctx.fillStyle = color;
+  ctx.font = 'bold 11px Segoe UI, sans-serif';
+  const tw = ctx.measureText(text).width;
+  const bw = Math.max(tw + 16, (subtext ? ctx.measureText(subtext).width + 16 : 0));
+  const bh = subtext ? 30 : 18;
+
+  ctx.beginPath();
+  ctx.roundRect(bx - 4, by - 4, bw + 8, bh, 4);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 10px Segoe UI, sans-serif';
+  ctx.fillText(text, bx + bw/2 - ctx.measureText(text).width/2, by + 9);
+
+  if (subtext) {
+    ctx.font = '9px Segoe UI, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.fillText(subtext, bx + bw/2 - ctx.measureText(subtext).width/2, by + 22);
+  }
+
+  ctx.restore();
+}
+
+// ── Draw the Mousetrap Car System ────────────────────────────
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw grid
+  drawGrid();
+
+  const p = {};
+  components.forEach(c => { p[c.id] = getCompPos(c); });
+
+  // ── 1. Chassis ──
+  {
+    const c = p.chassis;
+    const isSelected = selectedComp === 'chassis';
+    // Main plank
+    drawBox(c.x, c.y - 0.1, c.z, 5.2, 0.18, 1.2,
+      '#2563eb', '#1e3a8a', 1, null, isSelected);
+    // Front crossbar
+    drawBox(c.x + 2.2, c.y - 0.1, c.z, 0.18, 0.18, 2.0,
+      '#3b82f6', '#1e3a8a', 1, null, isSelected);
+    // Rear crossbar
+    drawBox(c.x - 2.2, c.y - 0.1, c.z, 0.18, 0.18, 2.0,
+      '#3b82f6', '#1e3a8a', 1, null, isSelected);
+    if (showLabels) drawLabel(c.x, c.y + 0.1, c.z - 0.8, 'Chassis / Frame', '#1d4ed8', 'SUBSYSTEM');
+  }
+
+  // ── 2. Mousetrap Spring ──
+  {
+    const c = p.trap;
+    const isSelected = selectedComp === 'trap';
+    // Base plate
+    drawBox(c.x + 0.3, c.y + 0.08, c.z, 1.5, 0.1, 0.9,
+      '#c2410c', '#7c2d12', 1, null, isSelected);
+    // Spring coil (cylinder)
+    drawCylinder(c.x + 0.3, c.y + 0.28, c.z, 0.22, 0.2, 0.22,
+      '#ea580c', '#7c2d12', 1, 14);
+    // Snap bar
+    drawBox(c.x + 0.3, c.y + 0.55, c.z, 1.4, 0.06, 0.07,
+      '#9a3412', '#7c2d12', 1, null, isSelected);
+    if (showLabels) drawLabel(c.x + 0.3, c.y + 0.65, c.z + 0.55, 'Mousetrap (Spring)', '#b45309', 'INPUT');
+  }
+
+  // ── 3. Lever Arm ──
+  {
+    const c = p.leverarm;
+    const isSelected = selectedComp === 'leverarm';
+    // Arm
+    drawBox(c.x - 0.6, c.y + 0.38, c.z, 2.4, 0.08, 0.08,
+      '#15803d', '#14532d', 1, null, isSelected);
+    // String attachment dot
+    drawCylinder(c.x + 0.6, c.y + 0.4, c.z, 0.07, 0.14, 0.07,
+      '#16a34a', '#14532d', 1, 8);
+    if (showLabels) drawLabel(c.x - 0.3, c.y + 0.7, c.z + 0.2, 'Lever Arm', '#166534', 'PROCESS');
+  }
+
+  // ── 4. Rear Axle & String ──
+  {
+    const c = p.axle;
+    const isSelected = selectedComp === 'axle';
+    // Axle tube
+    drawCylinder(c.x, c.y + 0.12, c.z - 2.2, 0.08, 0.08, 1.6,
+      '#7c3aed', '#4c1d95', 1, 12);
+    // String (dashed line from lever to axle)
+    if (!exploded || animProgress < 0.5) {
+      const lp = p.leverarm;
+      const ap = p.axle;
+      const alpha = 1 - animProgress * 0.8;
+      drawLine3D(
+        lp.x + 0.6, lp.y + 0.5, lp.z,
+        ap.x, ap.y + 0.2, ap.z - 2.2,
+        '#a78bfa', 1.5, [4,3], alpha
+      );
+    }
+    if (showLabels) drawLabel(c.x + 0.5, c.y + 0.4, c.z - 2.2, 'Rear Axle', '#6d28d9', 'PROCESS');
+  }
+
+  // ── 5. Wheels (4 total) ──
+  {
+    const c = p.wheels;
+    const isSelected = selectedComp === 'wheels';
+    const wheel_r = 0.52;
+    // Rear wheels
+    drawCylinder(c.x + 2.2, c.y + 0.12, c.z - 1.9, 0.08, wheel_r, wheel_r,
+      '#be185d', '#831843', 1, 18);
+    drawCylinder(c.x + 2.2, c.y + 0.12, c.z + 1.9, 0.08, wheel_r, wheel_r,
+      '#be185d', '#831843', 1, 18);
+    // Front wheels (smaller)
+    drawCylinder(c.x - 2.2, c.y + 0.12, c.z - 1.55, 0.08, 0.40, 0.40,
+      '#db2777', '#831843', 1, 18);
+    drawCylinder(c.x - 2.2, c.y + 0.12, c.z + 1.55, 0.08, 0.40, 0.40,
+      '#db2777', '#831843', 1, 18);
+    // Front axle
+    drawCylinder(c.x - 2.2, c.y + 0.12, c.z, 0.06, 0.06, 1.6,
+      '#9d174d', '#831843', 1, 8);
+    if (showLabels) drawLabel(c.x + 2.3, c.y + 0.9, c.z + 2.0, 'Wheels', '#9d174d', 'OUTPUT');
+  }
+
+  // ── Flow Arrows ──
+  if (showFlow) drawFlowArrows(p);
+
+  // ── Selection Highlight ──
+  if (selectedComp) drawSelectionRing(selectedComp, p);
+}
+
+function drawGrid() {
+  const size = 7;
+  const step = 1;
+  ctx.save();
+  ctx.globalAlpha = 0.12;
+  for (let x = -size; x <= size; x += step) {
+    const p1 = project(x, -0.22, -size);
+    const p2 = project(x, -0.22, size);
+    ctx.strokeStyle = NAVY;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(p1.sx, p1.sy);
+    ctx.lineTo(p2.sx, p2.sy);
+    ctx.stroke();
+  }
+  for (let z = -size; z <= size; z += step) {
+    const p1 = project(-size, -0.22, z);
+    const p2 = project(size, -0.22, z);
+    ctx.strokeStyle = NAVY;
+    ctx.beginPath();
+    ctx.moveTo(p1.sx, p1.sy);
+    ctx.lineTo(p2.sx, p2.sy);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawFlowArrows(p) {
+  // Draw animated flow: INPUT → PROCESS → OUTPUT
+  const t = flowPhase;
+
+  // Arrow from trap to lever
+  drawAnimArrow(
+    p.trap.x + 0.3, p.trap.y + 0.5, p.trap.z,
+    p.leverarm.x, p.leverarm.y + 0.4, p.leverarm.z,
+    '#f97316', t, 0
+  );
+  // Arrow from lever to axle
+  drawAnimArrow(
+    p.leverarm.x + 0.6, p.leverarm.y + 0.4, p.leverarm.z,
+    p.axle.x, p.axle.y + 0.3, p.axle.z - 2.2,
+    '#a78bfa', t, 0.33
+  );
+  // Arrow from axle to wheels
+  drawAnimArrow(
+    p.axle.x + 2.2, p.axle.y + 0.12, p.axle.z - 1.9,
+    p.wheels.x + 2.2, p.wheels.y + 0.3, p.wheels.z - 1.9,
+    '#f472b6', t, 0.66
+  );
+
+  // Labels
+  drawFlowLabel('INPUT', '#f97316', p.trap.x + 0.3, p.trap.y + 1.1, p.trap.z);
+  drawFlowLabel('PROCESS', '#a78bfa', p.leverarm.x, p.leverarm.y + 1.0, p.leverarm.z);
+  drawFlowLabel('OUTPUT', '#f472b6', p.wheels.x, p.wheels.y + 1.0, p.wheels.z);
+}
+
+function drawAnimArrow(x1,y1,z1, x2,y2,z2, color, phase, offset) {
+  const p1 = project(x1,y1,z1);
+  const p2 = project(x2,y2,z2);
+
+  // Animated dash
+  const t = ((phase - offset + 1) % 1);
+  const px = p1.sx + (p2.sx - p1.sx) * t;
+  const py = p1.sy + (p2.sy - p1.sy) * t;
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.5;
+  ctx.setLineDash([6,5]);
+  ctx.beginPath();
+  ctx.moveTo(p1.sx, p1.sy);
+  ctx.lineTo(p2.sx, p2.sy);
+  ctx.stroke();
+
+  // Moving dot
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+  ctx.beginPath();
+  ctx.arc(px, py, 5, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawFlowLabel(text, color, x3, y3, z3) {
+  const p = project(x3, y3, z3);
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.font = 'bold 10px Segoe UI, sans-serif';
+  ctx.globalAlpha = 0.9;
+  const tw = ctx.measureText(text).width;
+  ctx.beginPath();
+  ctx.roundRect(p.sx - tw/2 - 6, p.sy - 9, tw + 12, 16, 4);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.fillText(text, p.sx - tw/2, p.sy + 2);
+  ctx.restore();
+}
+
+function drawSelectionRing(compId, p) {
+  const comp = components.find(c => c.id === compId);
+  if (!comp) return;
+  const pos = p[compId];
+
+  // Pulsing ring
+  const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.004);
+  const pt = project(pos.x, pos.y + 0.1, pos.z);
+
+  ctx.save();
+  ctx.globalAlpha = 0.3 + pulse * 0.2;
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 3;
+  ctx.setLineDash([6,3]);
+  ctx.beginPath();
+  ctx.arc(pt.sx, pt.sy, 60 + pulse * 8, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+// ── Main Draw Loop ───────────────────────────────────────────
+function draw() {
+  drawScene();
+  updateStatus();
+}
+
+function animate() {
+  let needRedraw = false;
+
+  // Explode animation
+  if (animDir !== 0) {
+    animProgress += animDir * 0.035;
+    animProgress = Math.max(0, Math.min(1, animProgress));
+    if (animProgress === 0 || animProgress === 1) animDir = 0;
+    needRedraw = true;
+  }
+
+  // Flow animation
+  if (showFlow) {
+    flowPhase = (flowPhase + 0.008) % 1;
+    needRedraw = true;
+  }
+
+  // Selected component pulse
+  if (selectedComp) needRedraw = true;
+
+  if (needRedraw) draw();
+
+  requestAnimationFrame(animate);
+}
+
+// ── Status Update ────────────────────────────────────────────
+function updateStatus() {
+  document.getElementById('statRot').textContent = Math.round(rotY) + '°';
+  document.getElementById('statTilt').textContent = Math.round(rotX) + '°';
+  document.getElementById('statMode').textContent = exploded ? 'Exploded' : (showFlow ? 'Flow' : 'Normal');
+  document.getElementById('statSel').textContent = selectedComp
+    ? components.find(c => c.id === selectedComp)?.name || 'None'
+    : 'None';
+}
+
+// ── Controls ─────────────────────────────────────────────────
+document.getElementById('btnRotLeft').addEventListener('click', () => { rotY -= 20; draw(); });
+document.getElementById('btnRotRight').addEventListener('click', () => { rotY += 20; draw(); });
+document.getElementById('btnRotUp').addEventListener('click', () => { rotX = Math.min(70, rotX + 10); draw(); });
+document.getElementById('btnRotDown').addEventListener('click', () => { rotX = Math.max(-10, rotX - 10); draw(); });
+document.getElementById('btnReset').addEventListener('click', () => {
+  rotY = -30; rotX = 30; draw();
+});
+
+document.getElementById('btnExplode').addEventListener('click', () => {
+  exploded = !exploded;
+  animDir = exploded ? 1 : -1;
+  const btn = document.getElementById('btnExplode');
+  btn.textContent = exploded ? '🔗 Collapse View' : '💥 Exploded View';
+  document.getElementById('modeIndicator').textContent = exploded ? 'Exploded View' : 'Normal View';
+  updateStatus();
+});
+
+document.getElementById('btnLabels').addEventListener('click', () => {
+  showLabels = !showLabels;
+  document.getElementById('btnLabels').textContent = `Labels: ${showLabels ? 'ON' : 'OFF'}`;
+  draw();
+});
+
+document.getElementById('btnFlow').addEventListener('click', () => {
+  showFlow = !showFlow;
+  document.getElementById('btnFlow').textContent = showFlow ? 'Hide Flow' : 'Show Flow';
+  document.getElementById('modeIndicator').textContent = showFlow ? 'Flow View' : (exploded ? 'Exploded View' : 'Normal View');
+  updateStatus();
+  if (!showFlow) draw();
+});
+
+// ── Mouse / Touch Drag ───────────────────────────────────────
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  rotY += dx * 0.4;
+  rotX = Math.max(-15, Math.min(75, rotX - dy * 0.3));
+  lastX = e.clientX;
+  lastY = e.clientY;
+  draw();
+});
+canvas.addEventListener('mouseup', () => { isDragging = false; });
+canvas.addEventListener('mouseleave', () => { isDragging = false; });
+
+// Touch
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  }
+}, {passive: true});
+canvas.addEventListener('touchmove', e => {
+  if (!isDragging || e.touches.length !== 1) return;
+  const dx = e.touches[0].clientX - lastX;
+  const dy = e.touches[0].clientY - lastY;
+  rotY += dx * 0.4;
+  rotX = Math.max(-15, Math.min(75, rotX - dy * 0.3));
+  lastX = e.touches[0].clientX;
+  lastY = e.touches[0].clientY;
+  draw();
+}, {passive: true});
+canvas.addEventListener('touchend', () => { isDragging = false; });
+
+// ── Click to Select ──────────────────────────────────────────
+canvas.addEventListener('click', e => {
+  // Simple pick by checking proximity to projected component positions
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  let closest = null;
+  let closestDist = 70;
+
+  components.forEach(c => {
+    const pos = getCompPos(c);
+    const pt = project(pos.x, pos.y + 0.3, pos.z);
+    const dist = Math.hypot(mx - pt.sx, my - pt.sy);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = c.id;
+    }
+  });
+
+  selectedComp = (closest && selectedComp !== closest) ? closest : null;
+  updateSidebarActive();
+  updateStatus();
+  draw();
+});
+
+// ── Init ─────────────────────────────────────────────────────
+buildSidebar();
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+animate();
+
+</script>
+</body>
+</html>

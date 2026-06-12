@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The 3 R's: Reduce, Reuse, Recycle — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>The 3 R's: Reduce, Reuse, Recycle</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeering™", "definition": "A framework that combines engineering and business practices with Biblical principles to create new technologies and businesses."}, {"term": "Sustainability", "definition": "Ensuring that engineering systems use resources wisely so they can continue to function and benefit future generations."}, {"term": "Reduce", "definition": "To use less of something, like materials or resources, when making or using a product. It's the most effective of the 3 R's because it prevents waste from being created."}, {"term": "Reuse", "definition": "To use an item again, either for its original purpose or for a new and different one, instead of throwing it away."}, {"term": "Recycle", "definition": "To take used materials and process them into new products, preventing waste and saving valuable resources."}, {"term": "Multiscale Modeling", "definition": "Connecting what we see at a large scale (like a pile of trash) to the tiny, atomic-level causes behind it."}, {"term": "OCV Method", "definition": "A design strategy where you identify the Objectives (what you want to achieve), Constraints (limitations), and Variables (things you can change) for a problem."}, {"term": "Dominion Mandate", "definition": "God's instruction to humans to care for and responsibly manage His creation."}, {"term": "3 R's", "definition": "A set of principles (Reduce, Reuse, Recycle) that help us be good stewards of creation by managing resources wisely."}, {"term": "Creationeering™ Sustainability Phase", "definition": "The part of Creationeering™ focused on ensuring engineered systems can last and thrive for future generations by using resources wisely."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

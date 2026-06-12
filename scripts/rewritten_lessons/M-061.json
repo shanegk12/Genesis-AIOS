@@ -1,0 +1,277 @@
+[
+  {
+    "id": "m061ttl01",
+    "type": "text",
+    "data": {
+      "html": "<h1>Total Cost and Lifecycle Improvement Plan</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061ovw02",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you explored how to make your mousetrap car designs last longer and perform more efficiently — conserving resources and reducing waste throughout its operational life. Now we're moving into the final Creationeering™ phase: <strong>Death &amp; Recycling</strong>.</p>\n<p>This lesson walks you through the complete lifecycle of your mousetrap car, from the moment it was built to its eventual retirement. You'll learn how to plan for end-of-life, calculate the <em>total</em> cost of your project — not just what you spent at the hardware store — and build an improvement plan that accounts for recycling, repurposing, or responsible disposal. Think beyond the race. Your design choices have an impact that outlasts the finish line.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061obj03",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p>\n<ul>\n<li>Define the complete lifecycle of a product, including its end-of-life phase.</li>\n<li>Calculate the total cost of a project, considering materials, labor, maintenance, and disposal.</li>\n<li>Identify end-of-life strategies for mousetrap car components — reuse, recycling, and repurposing.</li>\n<li>Apply the OCV (Objective, Constraint, Variable) method to make design decisions that optimize for end-of-life considerations.</li>\n<li>Reflect on their role as stewards of God's creation, applying biblical principles to responsible design and resource management.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061voc04",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Lifecycle",
+          "definition": "The complete series of stages a product goes through — from initial design and material sourcing to manufacturing, use, and eventual disposal or recycling."
+        },
+        {
+          "term": "Total Cost",
+          "definition": "The sum of all costs associated with a product throughout its entire lifecycle, including design, materials, manufacturing, maintenance, and end-of-life management."
+        },
+        {
+          "term": "End-of-Life",
+          "definition": "The stage in a product's lifecycle when it is no longer functional or desired for its original purpose and must be disposed of, recycled, or repurposed."
+        },
+        {
+          "term": "Recycling",
+          "definition": "The process of converting waste materials into new materials and objects."
+        },
+        {
+          "term": "Repurposing",
+          "definition": "Using an item for a purpose other than its original intended use, often without significant alteration."
+        },
+        {
+          "term": "Design for Disassembly (DfD)",
+          "definition": "A design approach that considers how easily a product can be taken apart at the end of its life to facilitate repair, reuse, or recycling of its components."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061div05",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061bib06",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ecclesiastes 3:1</strong> — \"To everything there is a season, and a time to every purpose under the heaven.\"</p>\n<p>Just as there is a time for building and a time for using, there is also a time for a product's life to conclude. As a Creationeer, your responsibility doesn't end when your car crosses the finish line. Honoring God's creation means thinking carefully about what happens to the materials you've used — even after your project is done.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061lfc07",
+    "type": "text",
+    "data": {
+      "html": "<h2>Every Product Has a Story — and an Ending</h2>\n<p>Think of your mousetrap car like a book. There's a beginning (the idea and design), a middle (building and racing), and an end (when the car wears out or is no longer needed). Engineers call this the <strong>lifecycle</strong>. Every single product ever made — from smartphones to spacecraft — follows this same arc.</p>\n<p>Most students focus entirely on the first half of that story: design it, build it, race it. But a thoughtful engineer asks, \"What happens to my creation after it's done being useful?\" That question matters more than you might think. The materials in your car came from somewhere. When your car is retired, those materials need to go somewhere. Where they end up is a design decision you can actually influence — if you plan ahead.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061img08",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A circular diagram showing the six stages of a product lifecycle: Design, Material Sourcing, Manufacturing, Use/Operation, Maintenance, and End-of-Life (Recycle/Dispose), with arrows connecting each stage in a loop."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061stg09",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Death &amp; Recycling Phase</h2>\n<p>The Death &amp; Recycling phase is the final stage an engineer must plan for. It asks: what do we do with the materials once a product has finished its designed performance? This isn't a morbid question — it's actually one of the most creative and impactful parts of engineering. Here are the three main strategies engineers use:</p>\n<ul>\n<li><strong>Reuse:</strong> The component still works and can be used again for the same purpose. Your mousetrap spring, for example, might have plenty of tension left and could power another vehicle or project.</li>\n<li><strong>Repurposing:</strong> The component no longer works as intended but can serve a completely different function. An axle rod could become part of a mobile sculpture; wooden pieces could become building material for another project.</li>\n<li><strong>Recycling:</strong> The material is broken down and processed into raw material for something new. Metal components, for instance, can be melted down and reformed. Plastics can be shredded and remolded.</li>\n</ul>\n<p>There's also a fourth outcome that engineers always try to avoid: <strong>landfill</strong>. When no plan exists for end-of-life, materials often end up in a dump. Good design anticipates this and works to prevent it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061dfd10",
+    "type": "text",
+    "data": {
+      "html": "<h2>Design for Disassembly</h2>\n<p>Here's where your engineering decisions really show their long-term value. <strong>Design for Disassembly (DfD)</strong> is a strategy where you build your product so it can be easily taken apart later. It's the opposite of gluing everything together permanently.</p>\n<p>Think about your mousetrap car. If you used hot glue on every joint, separating the wood from the metal from the plastic at end-of-life becomes nearly impossible. Different materials get recycled by different processes — you can't recycle them when they're fused together. But if you used screws, nuts, bolts, or friction-fit connections, you can disassemble the car in minutes and sort each material type for proper recycling or reuse.</p>\n<p>This is exactly why professional engineers specify fasteners and connection types in their technical drawings. The decision seems small during assembly — but it has a huge impact at end-of-life. Good engineering thinks ten steps ahead.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061div11",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061tco12",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Did Your Car Really Cost?</h2>\n<p>When someone asks \"how much did your mousetrap car cost to make?\" you might think of the price of wood, the mousetrap, and the fishing line. That's your <strong>initial cost</strong> — and it's only part of the picture.</p>\n<p><strong>Total cost</strong> includes every expense across the entire lifecycle. Engineers use a concept called <em>Total Cost of Ownership (TCO)</em> to capture the full financial picture. For your mousetrap car, that includes:</p>\n<ul>\n<li><strong>Design cost:</strong> The time you spent sketching, planning, and calculating. Time has value — professionals get paid for design hours.</li>\n<li><strong>Material cost:</strong> The raw cost of everything you purchased or used.</li>\n<li><strong>Manufacturing cost:</strong> The effort and tools needed to cut, assemble, and finish the car.</li>\n<li><strong>Maintenance cost:</strong> Any repairs, adjustments, or replacements made during the project's life.</li>\n<li><strong>End-of-life cost:</strong> The effort or expense involved in disassembling, recycling, or disposing of the car responsibly.</li>\n</ul>\n<p>When you add these together, you get the true total cost. A car that costs $3 to build but requires $5 in repairs and generates $2 in disposal effort actually cost $10 — not $3. Understanding this changes how you design from the very start.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061img13",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A stacked bar chart comparing two mousetrap car designs side by side — one with a low initial build cost but high maintenance and disposal costs, the other with a higher build cost but much lower total lifecycle cost, visually demonstrating Total Cost of Ownership."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061tip14",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Total Cost Shortcut:</strong> When calculating your mousetrap car's total cost, make a simple table with five rows — Design, Materials, Manufacturing, Maintenance, End-of-Life — and fill in a time or dollar estimate for each. Add them up. That final number is your true project cost, and it's the number a real engineer would report to a client.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061div15",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061ocv16",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying OCV to End-of-Life Decisions</h2>\n<p>You've used the <strong>OCV method</strong> — Objective, Constraint, Variable — throughout this project to make design decisions. Now let's apply it to end-of-life planning.</p>\n<ul>\n<li><strong>Objective:</strong> What outcome do you want for your car's components at end-of-life? (e.g., maximize the amount of material recycled, minimize waste sent to landfill, recover usable parts for another project)</li>\n<li><strong>Constraint:</strong> What limits your options? (e.g., available recycling facilities, materials that can't be separated because they were glued, components that are too worn to reuse)</li>\n<li><strong>Variable:</strong> What decisions can you adjust to better achieve your objective within those constraints? (e.g., which fasteners you used, which materials you selected, how you labeled or sorted components)</li>\n</ul>\n<p>By running your end-of-life plan through the OCV lens, you're making intentional decisions rather than just throwing the car in the trash when the project ends. That intentionality is the mark of a thoughtful engineer — and a thoughtful steward.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061imp17",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building Your Lifecycle Improvement Plan</h2>\n<p>Now it's time to put everything together into a <strong>Lifecycle Improvement Plan</strong> for your mousetrap car. This document captures what you built, what it truly cost, and how you'll handle its end-of-life responsibly. Here's how to structure it:</p>\n<h3>Step 1 — Component Inventory</h3>\n<p>List every component in your car: the mousetrap, wooden frame pieces, axles, wheels, string, any fasteners or adhesives. Note the material type for each (wood, metal, plastic, rubber, etc.).</p>\n<h3>Step 2 — Total Cost Calculation</h3>\n<p>Using the five-category method (Design, Materials, Manufacturing, Maintenance, End-of-Life), calculate your car's true total cost. Be honest about time spent — estimate hours if needed.</p>\n<h3>Step 3 — End-of-Life Strategy</h3>\n<p>For each component, assign one of the four outcomes: Reuse, Repurpose, Recycle, or (last resort) Dispose. Explain your reasoning for each choice. Which components can be salvaged? Which materials can go to your school's recycling bin? Is anything reusable in a future engineering project?</p>\n<h3>Step 4 — Design Reflection</h3>\n<p>Look back at your original design. What would you change — knowing what you now know about total cost and end-of-life — if you were starting over? This reflection is where real engineering growth happens. Professionals call this a <em>lessons learned</em> document, and it's one of the most valuable outputs of any engineering project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061war18",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Many students skip the Design Reflection step because the project feels \"over.\" Don't. The reflection is where you turn a completed assignment into real engineering skill. Every professional engineer files a lessons-learned report after a project closes — it's how they get better, and it's how you will too.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061ste19",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Action</h2>\n<p>Scripture calls us to be stewards — careful managers — of everything God has placed in our hands. That's not just a Sunday school idea. It's an engineering principle. When you calculate total cost, you're accounting for every resource invested. When you plan for recycling and repurposing, you're treating materials as the valuable gifts they are rather than throwing them away carelessly.</p>\n<p>The best engineers in the world think about the end from the very beginning. They design products that can be taken apart, materials that can be recovered, and systems that waste as little as possible. That's not just good economics — it's faithful stewardship of the world God made and entrusted to us.</p>\n<p>Your mousetrap car was a small project. But the habits you're building right now — thinking about lifecycle, total cost, and responsible end-of-life — are the habits that will shape every engineering decision you make for the rest of your life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m061acc20",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Lifecycle Engineering Examples",
+      "html": "<p>Curious how professional engineers handle lifecycle planning? Here are a few real-world examples:</p>\n<ul>\n<li><strong>Apple iPhone:</strong> Apple publishes a detailed environmental report for every product, breaking down carbon footprint by lifecycle stage — manufacturing, transportation, use, and end-of-life. They've built a robot named \"Daisy\" that disassembles returned iPhones to recover materials like cobalt, aluminum, and rare earth elements.</li>\n<li><strong>Wind Turbine Blades:</strong> One of the hardest end-of-life engineering challenges today is wind turbine blades. They're made of composite materials that are incredibly strong — but nearly impossible to recycle with current technology. Engineers are now designing new blade materials specifically to solve this problem before the next generation of turbines is even built.</li>\n<li><strong>NASA Spacecraft:</strong> NASA designs some satellites to re-enter Earth's atmosphere in a controlled way at end-of-life, burning up safely rather than becoming space debris. That deorbit plan is designed into the spacecraft before it ever launches.</li>\n</ul>\n<p>In every case, end-of-life wasn't an afterthought — it was part of the original engineering brief.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

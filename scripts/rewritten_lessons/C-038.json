@@ -1,0 +1,447 @@
+[
+  {
+    "id": "c038t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Resource Management and Loss Prevention</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In the last lesson, you learned how engineers spot hazards and plan safe operations before a project gets rolling. You saw that good planning protects people, tools, and the work itself. Today, we are going to build on that thinking by exploring Resource Management and Loss Prevention.</p>\n<p>Every project uses materials, time, energy, and effort. A wise engineer learns to use those resources well and to prevent waste, damage, or loss along the way. This lesson fits right into the Assembly phase of Creationeering — the phase where plans finally turn into real, working things. It is also the phase where mistakes can cost the most. A dropped part, a wasted board, or a rushed step can set a whole team back.</p>\n<p>Managing your resources is a way of honoring the gifts God has given you and respecting the people you work with. Engineers who think ahead, track their materials, and protect their work finish stronger and build trust with their teams.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define resource management and explain its importance in engineering projects.</li>\n<li>Identify common sources of resource loss and develop strategies for prevention.</li>\n<li>Apply the OCV method to optimize resource allocation in a design scenario.</li>\n<li>Analyze systems at multiple scales to understand the root causes of material loss.</li>\n<li>Connect the biblical call to stewardship with responsible resource management in engineering.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Resource Management",
+          "definition": "The efficient and effective deployment and control of an organization's resources — including materials, time, and energy."
+        },
+        {
+          "term": "Loss Prevention",
+          "definition": "Strategies and practices designed to minimize or eliminate waste, damage, or theft of resources."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "The ratio of useful work performed to the total energy expended — getting the most output from the least input."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of making something as effective or functional as possible, often by finding the best balance between competing factors."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An approach that connects phenomena observed at different size scales, from the large (macroscopic) all the way down to the atomic level."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or desired outcome of a project or system."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be considered during design or problem-solving."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor or quantity that can change or be changed within a system."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>\"The earth is the Lord's, and everything in it, the world, and all who live in it.\"</strong> — Psalm 24:1</p><p>Everything you work with — every plank of wood, every resistor, every minute on the clock — ultimately belongs to God. You are not the owner. You are the manager. And a good manager takes care of what has been entrusted to them.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Earth Is the Lord's</h2>\n<p>That verse from Psalm 24 is not just a poetic phrase — it is the foundation of everything you will learn today. If God owns it all, then wasting resources is more than just bad engineering. It is a failure of stewardship. And stewardship is one of the oldest callings God placed on human beings.</p>\n<p>Think about it this way: if a friend loaned you their best set of tools and you left them out in the rain, you would not just be careless — you would be disrespecting the trust your friend placed in you. Resource management works the same way. When you treat materials, time, and energy with care, you are honoring both the Creator who provided them and the people who are counting on your work.</p>\n<p>This is why engineers who take stewardship seriously tend to build better things. They are not just following a checklist. They are operating from a deeper sense of purpose.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A well-organized workshop with labeled material bins, tools on a pegboard, and a project inventory list — showing resource management in action."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Resource Management?</h2>\n<p>Resource management is the process of planning, organizing, and controlling the resources available to you so that your project succeeds without unnecessary waste. In engineering, resources come in several forms:</p>\n<ul>\n<li><strong>Materials</strong> — the physical components and raw supplies you use to build.</li>\n<li><strong>Time</strong> — the hours and minutes available to design, test, and assemble.</li>\n<li><strong>Energy</strong> — the effort, power, and fuel that drive your systems and your team.</li>\n<li><strong>Money</strong> — the budget that determines what you can realistically buy and do.</li>\n<li><strong>People</strong> — the skills and attention of every person on your team.</li>\n</ul>\n<p>All five are limited. That is what makes managing them so important. When one runs out, the whole project can stall. Great engineers learn to track each one carefully — not because they are afraid of running short, but because careful tracking is what lets them make confident, smart decisions.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>The Assembly Phase and Resources</strong></p><p>The Assembly phase is when your design comes to life — parts get cut, circuits get wired, and structures get built. It is also when resource loss tends to spike. Cutting too much material, losing small components, or spending too long on one task can throw off your entire timeline. Thinking about resource management before you reach Assembly is what separates a smooth build from a stressful scramble.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Where Resources Get Lost</h2>\n<p>Before you can prevent resource loss, you have to know where it comes from. Loss rarely shows up all at once. It tends to sneak in through small, repeated mistakes — the kind that seem minor in the moment but add up over a whole project.</p>\n<p>Here are some of the most common sources of resource loss in engineering:</p>\n<ul>\n<li><strong>Poor planning</strong> — Not knowing exactly how much material you need leads to over-ordering or running short at the worst time.</li>\n<li><strong>Measurement errors</strong> — Cutting a piece of wood too short, mixing the wrong ratio of materials, or wiring a component backwards all waste time and supplies.</li>\n<li><strong>Damage during handling</strong> — Dropping a fragile part, storing materials improperly, or moving too fast during assembly can destroy work that took hours to create.</li>\n<li><strong>Scope creep</strong> — Adding new features mid-build without updating your resource plan pulls materials and time away from what already matters.</li>\n<li><strong>Poor communication</strong> — When teammates do not share information clearly, the same task sometimes gets done twice — or not at all.</li>\n</ul>\n<p>Notice that most of these are about decisions, not accidents. That is actually good news. Decisions can be improved.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Watch out for \"just a little waste.\"</strong> It is easy to tell yourself that one extra cut or one wasted component does not matter. But in a real engineering project — or a real business — those small losses stack up fast. A small leak can sink a big ship. Track your materials from the very start, not after things go wrong.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Objectives, Constraints, and Variables</h2>\n<p>One of the most useful tools for managing resources is a framework called the OCV method. Engineers use it to think clearly about what they are trying to accomplish before they spend a single material or minute of time. OCV stands for:</p>\n<ul>\n<li><strong>Objective</strong> — What is the goal? What does success look like when the project is done?</li>\n<li><strong>Constraints</strong> — What are the limits? How much time, money, and material do you actually have?</li>\n<li><strong>Variables</strong> — What can you change? Which parts of your design are flexible enough to adjust if resources run low?</li>\n</ul>\n<p>Think of the OCV method like a GPS for your project. The objective is your destination. The constraints are the roads you are allowed to drive on. The variables are the different routes you could take to get there. When you map all three out before you start, you are far less likely to take a wrong turn that costs you time and materials.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV triangle — Objectives, Constraints, and Variables — with arrows connecting each element to a central design outcome."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Try it on a simple project first.</strong> Before your next build, take five minutes to write down your Objective, your Constraints, and two or three Variables you could adjust. You will be surprised how much clearer your plan becomes — and how much less you end up wasting.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Looking at the Whole Picture: Multiscale Modeling</h2>\n<p>Sometimes resource loss happens at a level you cannot see with just a quick look at your project. That is where multiscale modeling becomes a powerful thinking tool. Multiscale modeling means examining a system at multiple levels of detail — from the big picture all the way down to the smallest component — to find problems that might be invisible at just one scale.</p>\n<p>Imagine you are building a bridge out of craft sticks. At the large scale, the bridge looks solid and straight. But if you zoom in and examine how the sticks connect at the joints, you might notice tiny gaps where glue did not bond properly. Those small gaps can cause the whole structure to fail under load. The loss was happening at the small scale. You just had to look for it.</p>\n<p>Engineers apply this same thinking to resource management. Waste at the material level — a tiny crack, a weak seam, an inefficient circuit path — can cause enormous loss at the system level. Thinking across scales helps you catch those problems early, before they become expensive.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c004",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>From molecules to machines.</strong> Professional engineers use multiscale modeling to design everything from aircraft wings to medical implants. They might simulate how individual atoms bond in a material while simultaneously calculating how a full-sized structure will hold up under real-world stress. The principle is the same at any scale: small details matter, and they add up.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Loss Prevention Strategies</h2>\n<p>Now that you know where loss comes from and how to think about it, here are practical strategies you can use to prevent it during any project:</p>\n<h3>Plan Before You Build</h3>\n<p>Create a materials list before you purchase or gather anything. Estimate how much of each resource you need and add a small buffer — about 10 to 15 percent extra — for unexpected mistakes. This way you are prepared without being wasteful.</p>\n<h3>Measure Twice, Cut Once</h3>\n<p>This old carpenter's rule is timeless because it works. Double-checking your measurements before making any irreversible cut or action prevents the most common and costly form of material waste.</p>\n<h3>Store Materials Properly</h3>\n<p>Keep components organized, labeled, and protected from damage. A resistor knocked off a table, a piece of balsa wood left in a damp area, or a 3D-printed part stepped on by accident are all preventable losses.</p>\n<h3>Track Progress Against Your Plan</h3>\n<p>Check in regularly during Assembly to compare what you have used against what you budgeted. If you are burning through materials faster than expected, catch it early while you still have options.</p>\n<h3>Communicate Clearly with Your Team</h3>\n<p>Make sure everyone knows which tasks are assigned to whom and what the current resource status is. Clear communication prevents duplicate work, forgotten steps, and costly misunderstandings.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>\"Whoever can be trusted with very little can also be trusted with much.\"</strong> — Luke 16:10</p><p>Faithfulness with small resources is the training ground for bigger responsibilities. When you learn to manage a small project carefully, you are building the habits that will make you a trustworthy engineer, entrepreneur, and leader on far larger challenges down the road.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Efficiency and Optimization: Getting the Most from What You Have</h2>\n<p>Efficiency and optimization are two closely related ideas that sit at the heart of resource management. Efficiency asks: how much of the energy or material you put in actually becomes useful output? Optimization asks: what is the best possible arrangement or approach given everything you are working with?</p>\n<p>A car engine, for example, is never 100% efficient — some energy is always lost as heat. Engineers design engines to be as efficient as possible, minimizing that loss. The same thinking applies to your projects. No process is perfect, but thoughtful design can get you much closer to the best possible result.</p>\n<p>Optimization is about balance. You are always juggling objectives, constraints, and variables — and optimization is the art of finding the sweet spot where everything works together as well as it can. That might mean choosing a lighter material to save weight, redesigning a joint to use less glue, or restructuring your schedule so the most critical tasks happen first.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of an unoptimized design (with excess material and wasted space) versus an optimized design (clean, minimal, and efficient)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038c006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Optimization is not about perfection — it is about intentionality.</strong> You will rarely find one single \"best\" answer in engineering. Instead, you are looking for the best answer given your specific objectives and constraints. Write them down clearly and the right trade-offs will become much easier to see.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship as a Design Principle</h2>\n<p>At the end of the day, everything you have learned in this lesson connects back to one idea: stewardship. Stewardship is not just a religious concept. It is an engineering principle. The most sustainable, respected, and impactful engineers in history were people who understood that resources are precious and finite — and they designed with that truth in mind.</p>\n<p>Whether you are managing a box of craft supplies in a classroom or overseeing the construction of a full-scale structure, the same mindset applies. Plan carefully. Track honestly. Prevent waste intentionally. Communicate clearly. And remember that the resources in your hands are not just yours — they were given to you in trust, and what you do with them reflects your character.</p>\n<p>Careful stewardship is not just smart engineering. It is a quiet form of faithfulness.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Is Resource Management?",
+      "html": "<p>Resource management means planning, organizing, and controlling the <strong>materials, time, energy, money, and people</strong> available to your project so that it succeeds without unnecessary waste. It fits especially into the Assembly phase, when mistakes are most expensive. Good resource management is also an act of stewardship — honoring what God has entrusted to you.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Does OCV Stand For?",
+      "html": "<p><strong>O</strong> — Objective: the goal or desired outcome of your project.<br><strong>C</strong> — Constraints: the limitations on your time, budget, and materials.<br><strong>V</strong> — Variables: the factors you can adjust to find the best solution within your constraints.<br><br>Using the OCV method before you start a project helps you make better decisions and prevents costly resource loss later.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Is Multiscale Modeling?",
+      "html": "<p>Multiscale modeling is a way of examining a system at <strong>multiple levels of detail</strong> — from the large overall structure down to tiny individual components or even materials at the molecular level. It helps engineers find sources of waste or failure that are invisible when you only look at the big picture. Small problems at a low scale can cause massive failures at the system scale, so engineers think across all levels.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c038a004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Name Three Loss Prevention Strategies",
+      "html": "<p>Any three of the following count as strong answers:</p><ul><li>Plan before you build — create a materials list with a buffer.</li><li>Measure twice, cut once — double-check before any irreversible action.</li><li>Store materials properly — keep components organized, labeled, and protected.</li><li>Track progress against your plan — compare actual usage to your budget regularly.</li><li>Communicate clearly with your team — prevent duplicate work and missed steps.</li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

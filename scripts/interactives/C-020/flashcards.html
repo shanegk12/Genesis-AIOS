@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energy Conservation, Transfer and Loss — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Energy Conservation, Transfer and Loss</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Law of Conservation of Energy", "definition": "This fundamental law states that the total amount of energy in a closed system, like the universe, remains constant; energy cannot be created or destroyed, only transformed from one form to another."}, {"term": "Energy Transfer", "definition": "This is the process where energy moves from one place or object to another, making it useful for engineering systems."}, {"term": "Closed System", "definition": "An imaginary system, like a sealed jar, where no matter or energy can enter or leave, allowing us to perfectly observe the Law of Conservation of Energy."}, {"term": "Chemical Potential Energy", "definition": "This is the energy stored within the chemical bonds of substances, like in a battery, ready to be released."}, {"term": "Electrical Energy", "definition": "This is the energy associated with the movement of electric charges, which powers devices like lightbulbs."}, {"term": "Light Energy", "definition": "This is a form of electromagnetic radiation that our eyes can detect, often produced when other forms of energy are converted."}, {"term": "Thermal Energy (Heat)", "definition": "This is the energy associated with the random motion of atoms and molecules, often produced as a byproduct of energy transformations."}, {"term": "Analysis Phase (Creationeering™)", "definition": "In Creationeering™, this is the stage where engineers mathematically prove that energy inputs will equal energy outputs before building a prototype."}, {"term": "Hierarchical Multiscale Modeling (HM²)", "definition": "A method used to understand energy at different levels, from the tiny atomic scale to larger systems."}, {"term": "Objective-Constraint-Variable (OCV) Method", "definition": "A tool used to help engineers optimize energy efficiency when designing systems."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

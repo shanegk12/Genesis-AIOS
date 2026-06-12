@@ -1,0 +1,417 @@
+[
+  {
+    "id": "c032t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Procurement: Cost Analysis and Budgeting</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In the previous lesson, you explored Material Properties and Selection — learning how to choose the right materials based on strength, weight, conductivity, and other characteristics. Now that you know <em>what</em> materials you need, the next big question is: how do you actually get them? That's where <strong>Procurement</strong> comes in.</p>\n<p>Today you'll dive into a crucial part of Procurement: <strong>Cost Analysis and Budgeting</strong>. This isn't just about finding the cheapest option. It's about making wise, informed decisions that honor God's provision and ensure your projects are both effective and sustainable. You'll learn how to identify different types of costs, build a realistic budget, and optimize your spending to get the best value — all within the Creationeering™ framework of thoughtful design and responsible stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n  <li>Define procurement and explain its importance in the Creationeering™ process.</li>\n  <li>Differentiate between various types of costs, including fixed, variable, direct, and indirect costs.</li>\n  <li>Develop a basic budget for a hypothetical Creationeering project, accounting for different expenses.</li>\n  <li>Apply the OCV (Objective, Constraint, Variable) method to optimize material and supplier choices for cost-effectiveness.</li>\n  <li>Explain how sound budgeting and cost analysis reflect biblical principles of stewardship and wise resource management.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Procurement",
+          "definition": "The process of obtaining or buying goods and services. It includes sourcing, purchasing, and delivery."
+        },
+        {
+          "term": "Cost Analysis",
+          "definition": "The process of breaking down and evaluating the total cost of a project, product, or service."
+        },
+        {
+          "term": "Budget",
+          "definition": "A detailed plan that estimates future income and expenses over a specific period."
+        },
+        {
+          "term": "Fixed Cost",
+          "definition": "An expense that does not change, regardless of how much is produced or used (e.g., rent for a workshop)."
+        },
+        {
+          "term": "Variable Cost",
+          "definition": "An expense that changes in proportion to how much is produced or used (e.g., raw material costs)."
+        },
+        {
+          "term": "Direct Cost",
+          "definition": "An expense directly tied to the creation of a specific product or service (e.g., the cost of a specific part)."
+        },
+        {
+          "term": "Indirect Cost",
+          "definition": "An expense not directly tied to a specific product but necessary for overall operation (e.g., electricity for a workshop)."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome, often by balancing competing factors like cost, quality, and performance."
+        },
+        {
+          "term": "Supplier",
+          "definition": "A company or individual that provides goods or services to another company or individual."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The careful and responsible management of something entrusted to one's care, especially resources given by God."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Wisdom of Prudent Planning</h2>\n<p>Proverbs 21:20 says, <em>\"Precious treasure and oil are in a wise man's dwelling, but a foolish man devours it.\"</em> This isn't just advice about saving money — it's a picture of wise planning and responsible use of everything God provides. Time, talent, materials, money. All of it.</p>\n<p>When you start a Creationeering project, you're essentially managing resources. That management requires foresight. It requires a plan. Just as a skilled builder doesn't start laying bricks without first counting the cost, a skilled Creationeer doesn't start sourcing materials without first understanding the budget. This kind of careful planning isn't just a technical skill — it's a reflection of your understanding that all resources ultimately belong to God, and you've been entrusted to use them well.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 21:20 —</strong> \"Precious treasure and oil are in a wise man's dwelling, but a foolish man devours it.\" Every resource on your project — every dollar, every material, every hour — is a gift. Budgeting is how you honor that gift.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Procurement?</h2>\n<p>Procurement is simply the process of getting what you need to build your project. It covers everything from figuring out <em>what</em> to buy, to finding the right <strong>supplier</strong>, to actually making the purchase and receiving the goods. Think of it like being the manager of a kitchen before a big event — you don't just show up and start cooking. You plan the menu, figure out what ingredients you need, find the best store, compare prices, and make sure everything arrives on time.</p>\n<p>In engineering and business, procurement is a formal process. It involves research, negotiation, contracts, and careful record-keeping. Getting it right can be the difference between a project that stays on budget and one that runs out of funds halfway through.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple diagram showing the procurement process: Identify Needs → Find Suppliers → Compare Costs → Purchase → Receive Goods"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Types of Costs</h2>\n<p>Before you can build a budget, you need to understand what you're actually paying for. Not all costs work the same way. Some stay the same no matter what; others grow as your project grows. Engineers and entrepreneurs break costs into four main types.</p>\n<h3>Fixed vs. Variable Costs</h3>\n<p>A <strong>fixed cost</strong> stays the same regardless of how much you produce. Renting a workshop space costs the same whether you build one device or fifty. That's a fixed cost — it's predictable and doesn't shift with your output.</p>\n<p>A <strong>variable cost</strong> moves up or down depending on production. If you're building ten circuit boards, you need ten times as many resistors as if you were building one. The more you make, the more you spend on materials. That's a variable cost.</p>\n<h3>Direct vs. Indirect Costs</h3>\n<p>A <strong>direct cost</strong> is clearly tied to your specific project. The wire you buy for a specific circuit, the lumber for a specific bridge model — those are direct costs. You can point to your finished product and say, \"that material is in there.\"</p>\n<p>An <strong>indirect cost</strong> supports your work but isn't part of any single product. The electricity that powers your workshop, the internet subscription you use to research suppliers — those keep the whole operation running, but you can't attach them to one specific item. Engineers often call these <em>overhead</em> costs.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick memory trick:</strong> Think of fixed costs as the \"floor\" — they're always there underneath everything you do. Variable costs are the \"walls\" — they grow taller as your project gets bigger.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A four-quadrant chart illustrating the difference between Fixed, Variable, Direct, and Indirect costs with simple examples in each quadrant"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building a Budget</h2>\n<p>A <strong>budget</strong> is your financial blueprint. Just like an engineering drawing maps out the physical structure of your design, a budget maps out the financial structure. It answers one key question: <em>Do I have enough resources to make this happen?</em></p>\n<p>Creating a budget for a Creationeering project follows a clear process:</p>\n<ul>\n  <li><strong>List every expense</strong> — materials, tools, labor, shipping, and overhead.</li>\n  <li><strong>Categorize each cost</strong> — is it fixed or variable? Direct or indirect?</li>\n  <li><strong>Estimate quantities and prices</strong> — research actual supplier prices, not guesses.</li>\n  <li><strong>Add a contingency buffer</strong> — build in 10–15% extra for unexpected costs. Things always come up.</li>\n  <li><strong>Compare total cost to available funds</strong> — if your costs exceed your resources, you need to adjust your design or find alternative suppliers.</li>\n</ul>\n<p>A budget isn't a restriction — it's a tool that gives you freedom. When you know exactly where your money is going, you can make confident decisions instead of guessing and hoping for the best.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Only budgeting for the materials you <em>plan</em> to use. Real projects involve mistakes, rework, and shipping delays. Always include a contingency buffer — even professional engineers do this on every project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying OCV to Cost Optimization</h2>\n<p>You've already used the <strong>OCV method</strong> — Objective, Constraint, Variable — in design decisions. It works just as powerfully for procurement decisions. Here's how it applies to cost analysis:</p>\n<ul>\n  <li><strong>Objective:</strong> What are you trying to achieve? (e.g., build a working prototype for under $50)</li>\n  <li><strong>Constraint:</strong> What limits your choices? (e.g., must use materials available locally, must be delivered within one week)</li>\n  <li><strong>Variable:</strong> What can you adjust? (e.g., which supplier you choose, which material grade you select, how many units you order)</li>\n</ul>\n<p>By clearly defining your objective and constraints first, you can intelligently adjust the variables to find the best cost-effective solution. This is what <strong>optimization</strong> means in a real engineering context — not just \"go cheap,\" but find the best balance of cost, quality, and performance within your constraints.</p>\n<p>For example, ordering materials in bulk often reduces the cost per unit. But if you only need a small amount, buying in bulk might waste money. Your constraint (project size) shapes your variable (order quantity). That's OCV thinking in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b004",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>OCV in Procurement:</strong> Professional procurement teams use optimization frameworks just like OCV every day. In large companies, even a 1% reduction in material costs can save millions of dollars — which is why cost analysis is one of the most valued engineering skills in industry.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Choosing the Right Supplier</h2>\n<p>Price is only one part of the supplier decision. A supplier that charges less but delivers late — or sends defective materials — can end up costing you more in the long run. When evaluating suppliers, consider these factors:</p>\n<ul>\n  <li><strong>Price:</strong> Is the cost within your budget?</li>\n  <li><strong>Quality:</strong> Will the materials meet your design specifications?</li>\n  <li><strong>Reliability:</strong> Does the supplier deliver on time, consistently?</li>\n  <li><strong>Minimum order quantities:</strong> Do they require you to buy more than you need?</li>\n  <li><strong>Shipping costs and lead time:</strong> How much extra does delivery add, and how long will it take?</li>\n</ul>\n<p>Comparing suppliers across all these dimensions — not just price — is part of a thorough cost analysis. It's the difference between a decision that looks good on paper and one that actually works in practice.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b005",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Pro tip:</strong> When comparing suppliers, build a simple comparison table with each factor as a column. Seeing everything side-by-side makes the best choice much clearer — and gives you documentation to justify your decision.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship: The Heart Behind the Budget</h2>\n<p>It would be easy to treat budgeting as a purely technical task — just numbers in a spreadsheet. But for a Creationeer, it's more than that. Every resource you manage on a project — every dollar, every material, every hour — represents something God has entrusted to you. Stewardship means handling that trust with care and wisdom.</p>\n<p>Luke 16:10 reminds us: <em>\"Whoever can be trusted with very little can also be trusted with much.\"</em> Your ability to manage a small project budget faithfully is the same skill that will allow you to manage larger and more complex projects in the future. The habits you build now — careful planning, honest cost analysis, avoiding waste — are spiritual disciplines as much as they are engineering practices.</p>\n<p>A budget that honors God isn't just balanced. It's honest. It accounts for real costs rather than wishful thinking. It plans for the unexpected. And it leaves room to be generous — because good stewardship isn't just about holding tightly to resources, it's about using them purposefully for the greatest good.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032b006",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 16:10 —</strong> \"Whoever can be trusted with very little can also be trusted with much.\" The way you manage your project budget today is practice for the larger responsibilities God has ahead for you. Faithfulness in small things builds the foundation for big impact.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use the questions below to review what you've learned in this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is procurement, and why does it matter in a Creationeering project?",
+      "html": "<p>Procurement is the process of obtaining or buying the goods and services you need for a project — including sourcing, purchasing, and delivery. It matters because even the best design will fail if you can't get the right materials at the right cost and at the right time. Procurement bridges your design plans and the real world of materials and suppliers.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032a002",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a fixed cost and a variable cost? Give an example of each.",
+      "html": "<p>A <strong>fixed cost</strong> stays the same regardless of how much you produce — for example, monthly rent on a workshop space. A <strong>variable cost</strong> changes based on how much you produce — for example, the cost of wire or resistors, which increases every time you build an additional circuit board.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032a003",
+    "type": "accordion",
+    "data": {
+      "title": "How does the OCV method help with cost optimization?",
+      "html": "<p>OCV stands for Objective, Constraint, Variable. When applied to procurement, your <strong>Objective</strong> is the goal (e.g., build a prototype for under $50). Your <strong>Constraint</strong> is what limits your choices (e.g., materials must be locally available). Your <strong>Variable</strong> is what you can adjust (e.g., which supplier you use or what material grade you select). By clearly defining the objective and constraints, you can intelligently adjust the variables to find the most cost-effective solution — rather than just guessing or always picking the cheapest option.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032a004",
+    "type": "accordion",
+    "data": {
+      "title": "Why is stewardship important when building a project budget?",
+      "html": "<p>Stewardship means managing the resources God has entrusted to you with care and wisdom. A project budget isn't just about numbers — it's a reflection of how responsibly you handle what you've been given. Building an honest, realistic budget (including a contingency buffer), avoiding waste, and using resources purposefully are all ways of honoring God through your work as a Creationeer.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c032a005",
+    "type": "accordion",
+    "data": {
+      "title": "Besides price, what other factors should you consider when choosing a supplier?",
+      "html": "<p>When evaluating a supplier, consider: <strong>quality</strong> (will the materials meet your specs?), <strong>reliability</strong> (do they deliver on time?), <strong>minimum order quantities</strong> (do you have to buy more than you need?), and <strong>shipping costs and lead time</strong> (how much does delivery add to the total cost, and how long will it take?). A low price doesn't help if the materials arrive late or fail during your build.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

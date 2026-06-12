@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Ethics in Engineering – Creationeering Physics Sandbox</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f2035;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e8d0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    width: 100%;
+    max-width: 820px;
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 16px 8px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #a8c4e0;
+    margin-top: 2px;
+  }
+  #main-wrapper {
+    width: 100%;
+    max-width: 820px;
+    background: #1B3A5C;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  canvas {
+    display: block;
+    border-radius: 8px;
+    border: 2px solid #C9A84C;
+    background: #0a1929;
+    touch-action: none;
+    width: 100%;
+    cursor: crosshair;
+  }
+  #controls-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #0f2035;
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #2a5080;
+  }
+  .ctrl-group {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ctrl-group label {
+    font-size: 0.72rem;
+    color: #C9A84C;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ctrl-group .val-display {
+    font-size: 0.78rem;
+    color: #e0d0a0;
+    font-weight: 600;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #2a5080;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #fff;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #C9A84C;
+    cursor: pointer;
+    border: 2px solid #fff;
+  }
+  #readouts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #0f2035;
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid #2a5080;
+  }
+  .readout-box {
+    flex: 1 1 140px;
+    background: #1B3A5C;
+    border: 1px solid #C9A84C;
+    border-radius: 6px;
+    padding: 6px 10px;
+    text-align: center;
+  }
+  .readout-box .r-label {
+    font-size: 0.65rem;
+    color: #a8c4e0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .readout-box .r-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #C9A84C;
+    margin-top: 2px;
+  }
+  #btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  button {
+    flex: 1 1 120px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    border: 2px solid #C9A84C;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.15s, color 0.15s;
+    touch-action: manipulation;
+  }
+  button:hover, button:active { background: #C9A84C; color: #1B3A5C; }
+  button.active-btn { background: #C9A84C; color: #1B3A5C; }
+  #scenario-info {
+    font-size: 0.72rem;
+    color: #a8c4e0;
+    line-height: 1.5;
+    background: #0f2035;
+    border-radius: 8px;
+    padding: 8px 12px;
+    border-left: 3px solid #C9A84C;
+  }
+  #scenario-info strong { color: #C9A84C; }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚙️ Creationeering Physics Sandbox</h1>
+  <p>Genesis K-12 Academy · Ethics in Engineering · Stewardship of Forces &amp; Resources</p>
+</header>
+<div id="main-wrapper">
+  <canvas id="sim" height="360"></canvas>
+
+  <div id="btn-row">
+    <button id="btn-projectile" class="active-btn" onclick="setScenario('projectile')">🚀 Projectile</button>
+    <button id="btn-pendulum" onclick="setScenario('pendulum')">🔵 Pendulum</button>
+    <button id="btn-spring" onclick="setScenario('spring')">🌀 Spring</button>
+    <button id="btn-reset" onclick="resetSim()">↺ Reset</button>
+  </div>
+
+  <div id="controls-panel">
+    <div class="ctrl-group" id="ctrl1-group">
+      <label id="ctrl1-label">Launch Angle</label>
+      <input type="range" id="ctrl1" min="5" max="85" value="45">
+      <span class="val-display" id="ctrl1-val">45°</span>
+    </div>
+    <div class="ctrl-group" id="ctrl2-group">
+      <label id="ctrl2-label">Launch Speed</label>
+      <input type="range" id="ctrl2" min="5" max="40" value="20">
+      <span class="val-display" id="ctrl2-val">20 m/s</span>
+    </div>
+    <div class="ctrl-group" id="ctrl3-group">
+      <label id="ctrl3-label">Gravity</label>
+      <input type="range" id="ctrl3" min="1" max="20" value="10">
+      <span class="val-display" id="ctrl3-val">10 m/s²</span>
+    </div>
+  </div>
+
+  <div id="readouts">
+    <div class="readout-box"><div class="r-label" id="r1-label">Max Height</div><div class="r-value" id="r1-val">—</div></div>
+    <div class="readout-box"><div class="r-label" id="r2-label">Range</div><div class="r-value" id="r2-val">—</div></div>
+    <div class="readout-box"><div class="r-label" id="r3-label">Speed</div><div class="r-value" id="r3-val">—</div></div>
+    <div class="readout-box"><div class="r-label" id="r4-label">Time</div><div class="r-value" id="r4-val">—</div></div>
+  </div>
+
+  <div id="scenario-info">
+    <strong>Stewardship Insight:</strong> Every engineering decision has consequences—on people, communities, and God's creation. Observe how changing one variable ripples through the entire system. Ethical engineers consider all impacts before acting.
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// CANVAS SETUP
+// ─────────────────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('sim');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  const w = canvas.parentElement.clientWidth - 20;
+  canvas.width = w;
+  canvas.height = Math.min(360, Math.round(w * 0.45));
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GLOBAL STATE
+// ─────────────────────────────────────────────────────────────────────────────
+let scenario = 'projectile';
+let animId = null;
+let simTime = 0;
+let simRunning = false;
+
+// Shared params read from sliders
+function getP() {
+  return {
+    v1: parseFloat(document.getElementById('ctrl1').value),
+    v2: parseFloat(document.getElementById('ctrl2').value),
+    v3: parseFloat(document.getElementById('ctrl3').value),
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SLIDER EVENT LISTENERS
+// ─────────────────────────────────────────────────────────────────────────────
+['ctrl1','ctrl2','ctrl3'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    updateSliderLabels();
+    onParamChange();
+  });
+});
+
+function updateSliderLabels() {
+  const p = getP();
+  if (scenario === 'projectile') {
+    document.getElementById('ctrl1-val').textContent = p.v1 + '°';
+    document.getElementById('ctrl2-val').textContent = p.v2 + ' m/s';
+    document.getElementById('ctrl3-val').textContent = p.v3 + ' m/s²';
+  } else if (scenario === 'pendulum') {
+    document.getElementById('ctrl1-val').textContent = p.v1 + ' cm';
+    document.getElementById('ctrl2-val').textContent = p.v2 + '°';
+    document.getElementById('ctrl3-val').textContent = p.v3 + ' m/s²';
+  } else if (scenario === 'spring') {
+    document.getElementById('ctrl1-val').textContent = p.v1 + ' N/m';
+    document.getElementById('ctrl2-val').textContent = p.v2 + ' kg';
+    document.getElementById('ctrl3-val').textContent = p.v3 + ' cm';
+  }
+}
+
+function onParamChange() {
+  if (scenario === 'projectile') { proj_reset(); }
+  else if (scenario === 'pendulum') { pend_reset(); }
+  else if (scenario === 'spring') { spring_reset(); }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SCENARIO SWITCHING
+// ─────────────────────────────────────────────────────────────────────────────
+function setScenario(s) {
+  scenario = s;
+  cancelAnimationFrame(animId);
+  simRunning = false;
+  simTime = 0;
+  ['projectile','pendulum','spring'].forEach(n => {
+    document.getElementById('btn-' + n).classList.remove('active-btn');
+  });
+  document.getElementById('btn-' + s).classList.add('active-btn');
+
+  const c1 = document.getElementById('ctrl1');
+  const c2 = document.getElementById('ctrl2');
+  const c3 = document.getElementById('ctrl3');
+
+  if (s === 'projectile') {
+    document.getElementById('ctrl1-label').textContent = 'Launch Angle';
+    document.getElementById('ctrl2-label').textContent = 'Launch Speed';
+    document.getElementById('ctrl3-label').textContent = 'Gravity';
+    c1.min=5; c1.max=85; c1.value=45;
+    c2.min=5; c2.max=40; c2.value=20;
+    c3.min=1; c3.max=20; c3.value=10;
+    document.getElementById('r1-label').textContent='Max Height';
+    document.getElementById('r2-label').textContent='Range';
+    document.getElementById('r3-label').textContent='Speed';
+    document.getElementById('r4-label').textContent='Time';
+    document.getElementById('scenario-info').innerHTML =
+      '<strong>Projectile Motion:</strong> A launched object follows a parabolic arc. Ethical engineers calculate trajectories to ensure projectiles are safe and land within intended boundaries — protecting people and environments.';
+    updateSliderLabels();
+    proj_reset();
+  } else if (s === 'pendulum') {
+    document.getElementById('ctrl1-label').textContent = 'Length (cm)';
+    document.getElementById('ctrl2-label').textContent = 'Start Angle (°)';
+    document.getElementById('ctrl3-label').textContent = 'Gravity';
+    c1.min=10; c1.max=120; c1.value=60;
+    c2.min=5; c2.max=80; c2.value=30;
+    c3.min=1; c3.max=20; c3.value=10;
+    document.getElementById('r1-label').textContent='Period (s)';
+    document.getElementById('r2-label').textContent='Max Speed';
+    document.getElementById('r3-label').textContent='Angle';
+    document.getElementById('r4-label').textContent='Energy (J)';
+    document.getElementById('scenario-info').innerHTML =
+      '<strong>Pendulum:</strong> A swinging pendulum converts potential energy to kinetic energy and back. Ethical engineers harness energy cycles responsibly — avoiding waste and protecting God\'s resources through careful stewardship.';
+    updateSliderLabels();
+    pend_reset();
+  } else if (s === 'spring') {
+    document.getElementById('ctrl1-label').textContent = 'Spring k (N/m)';
+    document.getElementById('ctrl2-label').textContent = 'Mass (kg)';
+    document.getElementById('ctrl3-label').textContent = 'Compression (cm)';
+    c1.min=10; c1.max=200; c1.value=80;
+    c2.min=1; c2.max=20; c2.value=5;
+    c3.min=5; c3.max=50; c3.value=20;
+    document.getElementById('r1-label').textContent='Stored Energy (J)';
+    document.getElementById('r2-label').textContent='Max Velocity';
+    document.getElementById('r3-label').textContent='Position';
+    document.getElementById('r4-label').textContent='KE / PE';
+    document.getElementById('scenario-info').innerHTML =
+      '<strong>Spring Energy:</strong> A compressed spring stores potential energy. Ethical engineers design springs in products (like car safety systems) ensuring energy is released safely, protecting users and communities.';
+    updateSliderLabels();
+    spring_reset();
+  }
+}
+
+function resetSim() {
+  setScenario(scenario);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DRAWING HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+function drawBackground() {
+  const W = canvas.width, H = canvas.height;
+  // Sky gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, '#0a1929');
+  grad.addColorStop(1, '#0f2a1a');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+  // Stars (static seed)
+  ctx.fillStyle = 'rgba(255,255,200,0.4)';
+  const stars = [[40,20],[120,35],[200,15],[300,28],[450,10],[550,40],[650,18],[750,32],[100,60],[380,55]];
+  stars.forEach(([x,y]) => { ctx.fillRect(x % W, y, 1, 1); });
+}
+
+function drawGround(y) {
+  const W = canvas.width;
+  ctx.fillStyle = '#1a4020';
+  ctx.fillRect(0, y, W, canvas.height - y);
+  ctx.fillStyle = '#2a6030';
+  ctx.fillRect(0, y, W, 4);
+}
+
+function drawText(txt, x, y, size, color, align='left') {
+  ctx.font = `bold ${size}px Segoe UI, Arial`;
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.fillText(txt, x, y);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ════════════════════ PROJECTILE SCENARIO ════════════════════
+// ─────────────────────────────────────────────────────────────────────────────
+let proj = {};
+
+function proj_reset() {
+  cancelAnimationFrame(animId);
+  simTime = 0;
+  const p = getP();
+  const angleRad = p.v1 * Math.PI / 180;
+  proj = {
+    angle: angleRad,
+    speed: p.v2,
+    g: p.v3,
+    vx: p.v2 * Math.cos(angleRad),
+    vy: -p.v2 * Math.sin(angleRad), // canvas y-flipped
+    x: 0, y: 0,
+    trail: [],
+    landed: false,
+    maxH: 0,
+    range: 0,
+    flightTime: 0,
+    launched: false
+  };
+  setReadouts('—','—','—','—');
+  proj_draw();
+  // Auto launch after brief delay
+  setTimeout(() => proj_launch(), 400);
+}
+
+function proj_launch() {
+  if (scenario !== 'projectile') return;
+  const p = getP();
+  const angleRad = p.v1 * Math.PI / 180;
+  const speed = p.v2;
+  proj = {
+    angle: angleRad,
+    speed: speed,
+    g: p.v3,
+    vx: speed * Math.cos(angleRad),
+    vy: speed * Math.sin(angleRad),
+    x: 0, y: 0,
+    trail: [],
+    landed: false,
+    maxH: 0,
+    range: 0,
+    flightTime: 0,
+    launched: true
+  };
+  simTime = 0;
+  simRunning = true;
+  cancelAnimationFrame(animId);
+  proj_loop();
+}
+
+function proj_loop() {
+  if (scenario !== 'projectile') return;
+  simTime += 0.016;
+  const p = getP();
+  const g = p.v3;
+  const ang = p.v1 * Math.PI / 180;
+  const v0 = p.v2;
+  const t = simTime;
+  proj.x = v0 * Math.cos(ang) * t;
+  proj.y = v0 * Math.sin(ang) * t - 0.5 * g * t * t;
+  proj.curVx = v0 * Math.cos(ang);
+  proj.curVy = v0 * Math.sin(ang) - g * t;
+  const curSpeed = Math.sqrt(proj.curVx**2 + proj.curVy**2);
+
+  if (proj.y > proj.maxH) proj.maxH = proj.y;
+
+  if (simTime % 0.05 < 0.018) {
+    proj.trail.push({x: proj.x, y: proj.y});
+    if (proj.trail.length > 200) proj.trail.shift();
+  }
+
+  if (proj.y < 0 && simTime > 0.1) {
+    proj.landed = true;
+    proj.range = proj.x;
+    proj.flightTime = simTime;
+    proj_draw();
+    setReadouts(
+      proj.maxH.toFixed(1) + ' m',
+      proj.range.toFixed(1) + ' m',
+      curSpeed.toFixed(1) + ' m/s',
+      proj.flightTime.toFixed(2) + ' s'
+    );
+    return;
+  }
+
+  proj_draw();
+  setReadouts(
+    proj.maxH.toFixed(1) + ' m',
+    proj.x.toFixed(1) + ' m',
+    curSpeed.toFixed(1) + ' m/s',
+    simTime.toFixed(2) + ' s'
+  );
+  animId = requestAnimationFrame(proj_loop);
+}
+
+function proj_draw() {
+  const W = canvas.width, H = canvas.height;
+  drawBackground();
+  const gndY = H - 40;
+  drawGround(gndY);
+
+  const p = getP();
+  const ang = p.v1 * Math.PI / 180;
+  const v0 = p.v2;
+  const g = p.v3;
+  // Compute full theoretical range for scaling
+  const totalRange = (v0 * v0 * Math.sin(2 * ang)) / g || 1;
+  const maxH_theory = (v0 * Math.sin(ang)) ** 2 / (2 * g) || 1;
+
+  const marginL = 40, marginR = 20, marginTop = 20;
+  const plotW = W - marginL - marginR;
+  const plotH = gndY - marginTop;
+
+  function toScreen(mx, my) {
+    return {
+      sx: marginL + (mx / (totalRange * 1.05)) * plotW,
+      sy: gndY - (my / (maxH_theory * 1.2 + 0.1)) * plotH
+    };
+  }
+
+  // Draw trajectory ghost (analytical full arc)
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(201,168,76,0.2)';
+  ctx.lineWidth = 1;
+  const steps = 80;
+  for (let i = 0; i <= steps; i++) {
+    const tt = (i / steps) * (2 * v0 * Math.sin(ang) / g);
+    const fx = v0 * Math.cos(ang) * tt;
+    const fy = v0 * Math.sin(ang) * tt - 0.5 * g * tt * tt;
+    const sp = toScreen(fx, fy);
+    if (i === 0) ctx.moveTo(sp.sx, sp.sy); else ctx.lineTo(sp.sx, sp.sy);
+  }
+  ctx.stroke();
+
+  // Axis labels
+  ctx.font = '10px Arial';
+  ctx.fillStyle = '#6090b0';
+  ctx.textAlign = 'right';
+  ctx.fillText('Height', marginL - 4, marginTop + 10);
+  ctx.textAlign = 'center';
+  ctx.fillText('Range →', marginL + plotW / 2, gndY + 16);
+
+  // Launch arrow
+  const origin = toScreen(0, 0);
+  const arrowLen = 30;
+  ctx.beginPath();
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.moveTo(origin.sx, origin.sy);
+  ctx.lineTo(origin.sx + arrowLen * Math.cos(ang), origin.sy - arrowLen * Math.sin(ang));
+  ctx.stroke();
+
+  // Trail
+  if (proj.trail && proj.trail.length > 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(100,200,255,0.6)';
+    ctx.lineWidth = 2;
+    proj.trail.forEach((pt, i) => {
+      const sp = toScreen(pt.x, pt.y);
+      if (i === 0) ctx.moveTo(sp.sx, sp.sy); else ctx.lineTo(sp.sx, sp.sy);
+    });
+    ctx.stroke();
+  }
+
+  // Ball
+  if (proj.launched) {
+    const sp = toScreen(proj.x, Math.max(proj.y, 0));
+    ctx.beginPath();
+    ctx.arc(sp.sx, sp.sy, 8, 0, Math.PI * 2);
+    const ballGrad = ctx.createRadialGradient(sp.sx-2, sp.sy-2, 1, sp.sx, sp.sy, 8);
+    ballGrad.addColorStop(0, '#ffffff');
+    ballGrad.addColorStop(1, '#C9A84C');
+    ctx.fillStyle = ballGrad;
+    ctx.fill();
+    ctx.strokeStyle = '#1B3A5C';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Velocity vector
+    if (!proj.landed) {
+      const scale = 1.5;
+      ctx.beginPath();
+      ctx.strokeStyle = '#ff6060';
+      ctx.lineWidth = 1.5;
+      ctx.moveTo(sp.sx, sp.sy);
+      ctx.lineTo(sp.sx + proj.curVx * scale, sp.sy - proj.curVy * scale);
+      ctx.stroke();
+    }
+  }
+
+  // Title
+  drawText('Projectile Motion', W/2, 18, 12, '#C9A84C', 'center');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ════════════════════ PENDULUM SCENARIO ════════════════════
+// ─────────────────────────────────────────────────────────────────────────────
+let pend = {};
+
+function pend_reset() {
+  cancelAnimationFrame(animId);
+  const p = getP();
+  const L = p.v1 / 100; // metres
+  const theta0 = p.v2 * Math.PI / 180;
+  const g = p.v3;
+  pend = {
+    L, theta0, g,
+    theta: theta0,
+    omega: 0,
+    trail: [],
+    T: 2 * Math.PI * Math.sqrt(L / g),
+    elapsed: 0
+  };
+  simTime = 0;
+  setReadouts('—','—','—','—');
+  simRunning = true;
+  cancelAnimationFrame(animId);
+  pend_loop();
+}
+
+function pend_loop() {
+  if (scenario !== 'pendulum') return;
+  const dt = 0.016;
+  simTime += dt;
+  const p = getP();
+  pend.L = p.v1 / 100;
+  pend.theta0 = p.v2 * Math.PI / 180;
+  pend.g = p.v3;
+  pend.T = 2 * Math.PI * Math.sqrt(pend.L / pend.g);
+
+  // RK4 for pendulum ODE: θ'' = -(g/L)*sin(θ)
+  const f = (th, om) => -(pend.g / pend.L) * Math.sin(th);
+  const k1v = f(pend.theta, pend.omega);
+  const k1x = pend.omega;
+  const k2v = f(pend.theta + 0.5*dt*k1x, pend.omega + 0.5*dt*k1v);
+  const k2x = pend.omega + 0.5*dt*k1v;
+  const k3v = f(pend.theta + 0.5*dt*k2x, pend.omega + 0.5*dt*k2v);
+  const k3x = pend.omega + 0.5*dt*k2v;
+  const k4v = f(pend.theta + dt*k3x, pend.omega + dt*k3v);
+  const k4x = pend.omega + dt*k3v;
+  pend.theta += (dt/6)*(k1x + 2*k2x + 2*k3x + k4x);
+  pend.omega += (dt/6)*(k1v + 2*k2v + 2*k3v + k4v);
+
+  const v = Math.abs(pend.omega * pend.L);
+  const h = pend.L * (1 - Math.cos(pend.theta));
+  const PE = pend.g * 1 * h; // assume m=1
+  const KE = 0.5 * 1 * v * v;
+  const totalE = pend.g * pend.L * (1 - Math.cos(pend.theta0));
+
+  pend.trail.push({theta: pend.theta});
+  if (pend.trail.length > 120) pend.trail.shift();
+
+  setReadouts(
+    pend.T.toFixed(3) + ' s',
+    (pend.g * pend.L * (1 - Math.cos(pend.theta0))) > 0 ?
+      Math.sqrt(2 * pend.g * pend.L * (1 - Math.cos(pend.theta0))).toFixed(2) + ' m/s' : '0.00 m/s',
+    (pend.theta * 180 / Math.PI).toFixed(1) + '°',
+    totalE.toFixed(3) + ' J'
+  );
+
+  pend_draw();
+  animId = requestAnimationFrame(pend_loop);
+}
+
+function pend_draw() {
+  const W = canvas.width, H = canvas.height;
+  drawBackground();
+
+  const pivotX = W / 2;
+  const pivotY = H * 0.18;
+  const scale = Math.min(W, H) * 0.38;
+  const L = pend.L;
+  const Lpx = scale; // scale pendulum to fit nicely
+
+  // Ceiling bracket
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(pivotX - 30, pivotY - 10, 60, 12);
+  ctx.fillStyle = '#C9A84C';
+  ctx.fillRect(pivotX - 3, pivotY - 10, 6, 10);
+
+  // Trail
+  if (pend.trail.length > 2) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(100,180,255,0.3)';
+    ctx.lineWidth = 2;
+    pend.trail.forEach((pt, i) => {
+      const bx = pivotX + Lpx * Math.sin(pt.theta);
+      const by = pivotY + Lpx * Math.cos(pt.theta);
+      if (i === 0) ctx.moveTo(bx, by); else ctx.lineTo(bx, by);
+    });
+    ctx.stroke();
+  }
+
+  // Rod
+  const bx = pivotX + Lpx * Math.sin(pend.theta);
+  const by = pivotY + Lpx * Math.cos(pend.theta);
+  ctx.beginPath();
+  ctx.moveTo(pivotX, pivotY);
+  ctx.lineTo(bx, by);
+  ctx.strokeStyle = '#a0c0e0';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Pivot dot
+  ctx.beginPath();
+  ctx.arc(pivotX, pivotY, 5, 0, Math.PI*2);
+  ctx.fillStyle = '#C9A84C';
+  ctx.fill();
+
+  // Bob
+  const bobR = 14;
+  const bobGrad = ctx.createRadialGradient(bx-3, by-3, 2, bx, by, bobR);
+  bobGrad.addColorStop(0, '#ffffff');
+  bobGrad.addColorStop(0.4, '#C9A84C');
+  bobGrad.addColorStop(1, '#7a5010');
+  ctx.beginPath();
+  ctx.arc(bx, by, bobR, 0, Math.PI*2);
+  ctx.fillStyle = bobGrad;
+  ctx.fill();
+  ctx.strokeStyle = '#1B3A5C';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Velocity arc indicator
+  const speed = Math.abs(pend.omega * L);
+  const maxV = Math.sqrt(2 * pend.g * pend.L * (1 - Math.cos(pend.theta0))) || 1;
+  const frac = Math.min(speed / (maxV + 0.001), 1);
+  ctx.beginPath();
+  ctx.arc(bx, by, bobR + 6, 0, Math.PI * 2 * frac);
+  ctx.strokeStyle = `hsl(${200 + frac*120}, 80%, 60%)`;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Energy bars
+  const barX = 12, barY = H - 90, barW = 14, barMaxH = 70;
+  const h = pend.L * (1 - Math.cos(pend.theta));
+  const PE = pend.g * h;
+  const KE = 0.5 * pend.omega * pend.omega * pend.L * pend.L;
+  const totalE = pend.g * pend.L * (1 - Math.cos(pend.theta0)) + 0.001;
+  ctx.fillStyle = '#0f2035';
+  ctx.fillRect(barX - 2, barY - 2, 38, barMaxH + 20);
+  // PE bar
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(barX, barY, barW, barMaxH);
+  ctx.fillStyle = '#4488cc';
+  const peH = Math.min((PE / totalE) * barMaxH, barMaxH);
+  ctx.fillRect(barX, barY + barMaxH - peH, barW, peH);
+  drawText('PE', barX + barW/2, barY + barMaxH + 12, 9, '#a8c4e0', 'center');
+  // KE bar
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(barX + 20, barY, barW, barMaxH);
+  ctx.fillStyle = '#C9A84C';
+  const keH = Math.min((KE / totalE) * barMaxH, barMaxH);
+  ctx.fillRect(barX + 20, barY + barMaxH - keH, barW, keH);
+  drawText('KE', barX + 20 + barW/2, barY + barMaxH + 12, 9, '#C9A84C', 'center');
+
+  // Ground line
+  drawGround(H - 20);
+  drawText('Pendulum', W/2, 18, 12, '#C9A84C', 'center');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ════════════════════ SPRING SCENARIO ════════════════════
+// ─────────────────────────────────────────────────────────────────────────────
+let spr = {};
+
+function spring_reset() {
+  cancelAnimationFrame(animId);
+  const p = getP();
+  const k = p.v1;
+  const m = p.v2;
+  const x0 = p.v3 / 100; // metres
+  spr = {
+    k, m, x0,
+    x: -x0, // start compressed (negative = compressed)
+    v: 0,
+    naturalLen: 0.15,
+    trail: [],
+    elapsed: 0,
+    maxV: Math.sqrt(k / m) * x0
+  };
+  setReadouts('—','—','—','—');
+  simRunning = true;
+  cancelAnimationFrame(animId);
+  spring_loop();
+}
+
+function spring_loop() {
+  if (scenario !== 'spring') return;
+  const dt = 0.016;
+  simTime += dt;
+  const p = getP();
+  spr.k = p.v1;
+  spr.m = p.v2;
+  spr.x0 = p.v3 / 100;
+  spr.maxV = Math.sqrt(spr.k / spr.m) * spr.x0;
+
+  // SHM: a = -(k/m)*x
+  const a = -(spr.k / spr.m) * spr.x;
+  spr.v += a * dt;
+  spr.x += spr.v * dt;
+
+  // Clamp
+  if (Math.abs(spr.x) > spr.x0 * 1.02) {
+    spr.x = Math.sign(spr.x) * spr.x0 * 1.02;
+    spr.v *= -0.999;
+  }
+
+  const PE = 0.5 * spr.k * spr.x * spr.x;
+  const KE = 0.5 * spr.m * spr.v * spr.v;
+  const storedE = 0.5 * spr.k * spr.x0 * spr.x0;
+  const ratio = PE > 0.001 ? (KE / PE).toFixed(2) : (KE > 0.001 ? '∞' : '0');
+
+  setReadouts(
+    storedE.toFixed(3) + ' J',
+    spr.maxV.toFixed(2) + ' m/s',
+    (spr.x * 100).toFixed(1) + ' cm',
+    'KE/PE: ' + ratio
+  );
+
+  spring_draw();
+  animId = requestAnimationFrame(spring_loop);
+}
+
+function spring_draw() {
+  const W = canvas.width, H = canvas.height;
+  drawBackground();
+
+  const gndY = H - 30;
+  // Wall on left
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(0, H * 0.3, 22, H * 0.55);
+  // hatching
+  ctx.strokeStyle = '#1B3A5C';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, H * 0.3 + i * 12);
+    ctx.lineTo(22, H * 0.3 + i * 12 - 12);
+    ctx.stroke();
+  }
+
+  const wallX = 22;
+  const restX = W * 0.55; // equilibrium position of mass center
+  const scale = W * 0.25 / (spr.x0 + 0.01);
+  const massX = restX + spr.x * scale;
+  const massW = 36, massH = 36;
+  const massCY = H * 0.52;
+
+  // Spring coils between wall and mass
+  const springStartX = wallX;
+  const springEndX = massX - massW / 2;
+  const coils = 10;
+  const coilH = 12;
+  const springY = massCY;
+
+  // Colour based on compression/extension
+  const compressionFrac = -spr.x / spr.x0; // +1 = fully compressed, -1 = extended
+  const r = Math.round(100 + compressionFrac * 155);
+  const b = Math.round(100 - compressionFrac * 100);
+  ctx.strokeStyle = `rgb(${r}, 160, ${b})`;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  const segW = (springEndX - springStartX) / (coils * 2);
+  ctx.moveTo(springStartX, springY);
+  for (let i = 0; i < coils * 2; i++) {
+    const cx = springStartX + (i + 0.5) * segW;
+    const cy = springY + (i % 2 === 0 ? coilH : -coilH);
+    ctx.lineTo(cx, cy);
+  }
+  ctx.lineTo(springEndX, springY);
+  ctx.stroke();
+
+  // Mass block
+  const mgx = massX - massW / 2;
+  const mgy = massCY - massH / 2;
+  const mGrad = ctx.createLinearGradient(mgx, mgy, mgx + massW, mgy + massH);
+  mGrad.addColorStop(0, '#4488cc');
+  mGrad.addColorStop(1, '#1B3A5C');
+  ctx.fillStyle = mGrad;
+  ctx.beginPath();
+  ctx.roundRect(mgx, mgy, massW, massH, 4);
+  ctx.fill();
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  drawText('m', massX, massCY + 5, 14, '#ffffff', 'center');
+
+  // Equilibrium line
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = 'rgba(201,168,76,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(restX, H * 0.3);
+  ctx.lineTo(restX, gndY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  drawText('eq', restX + 4, H * 0.32, 10, 'rgba(201,168,76,0.5)', 'left');
+
+  // Ground
+  drawGround(gndY);
+
+  // Energy bars (right side)
+  const storedE = 0.5 * spr.k * spr.x0 * spr.x0 + 0.001;
+  const PE = 0.5 * spr.k * spr.x * spr.x;
+  const KE = 0.5 * spr.m * spr.v * spr.v;
+  const barX = W - 60, barY = H * 0.25, barW = 16, barMaxH = H * 0.45;
+
+  ctx.fillStyle = '#0f2035';
+  ctx.fillRect(barX - 4, barY - 4, 52, barMaxH + 20);
+
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(barX, barY, barW, barMaxH);
+  ctx.fillStyle = '#4488cc';
+  const peH = Math.min((PE / storedE) * barMaxH, barMaxH);
+  ctx.fillRect(barX, barY + barMaxH - peH, barW, peH);
+  drawText('PE', barX + barW/2, barY + barMaxH + 14, 10, '#a8c4e0', 'center');
+
+  ctx.fillStyle = '#2a5080';
+  ctx.fillRect(barX + 24, barY, barW, barMaxH);
+  ctx.fillStyle = '#C9A84C';
+  const keH = Math.min((KE / storedE) * barMaxH, barMaxH);
+  ctx.fillRect(barX + 24, barY + barMaxH - keH, barW, keH);
+  drawText('KE', barX + 24 + barW/2, barY + barMaxH + 14, 10, '#C9A84C', 'center');
+
+  drawText('Spring-Mass', W/2, 18, 12, '#C9A84C', 'center');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// READOUTS HELPER
+// ─────────────────────────────────────────────────────────────────────────────
+function setReadouts(r1, r2, r3, r4) {
+  document.getElementById('r1-val').textContent = r1;
+  document.getElementById('r2-val').textContent = r2;
+  document.getElementById('r3-val').textContent = r3;
+  document.getElementById('r4-val').textContent = r4;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TOUCH / CLICK TO RE-LAUNCH (PROJECTILE)
+// ─────────────────────────────────────────────────────────────────────────────
+canvas.addEventListener('pointerdown', () => {
+  if (scenario === 'projectile') {
+    proj_launch();
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
+setScenario('projectile');
+</script>
+</body>
+</html>

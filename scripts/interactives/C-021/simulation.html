@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFAT Lab — Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-badge {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    padding: 6px 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  header p {
+    font-size: 0.78rem;
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    height: 6px;
+    background: #d0dae6;
+  }
+
+  .progress-bar-fill {
+    height: 6px;
+    background: #C9A84C;
+    transition: width 0.5s ease;
+  }
+
+  main {
+    width: 100%;
+    max-width: 780px;
+    padding: 20px 16px 40px;
+    flex: 1;
+  }
+
+  /* ========= SCREEN STYLES ========= */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px 28px;
+    box-shadow: 0 2px 16px rgba(27,58,92,0.10);
+    text-align: center;
+  }
+
+  .intro-card .big-icon { font-size: 3.5rem; margin-bottom: 10px; }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; color: #3a5068; line-height: 1.6; margin-bottom: 16px; }
+
+  .rule-box {
+    background: #fff8e6;
+    border-left: 5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    margin: 16px 0;
+    line-height: 1.5;
+  }
+
+  .rule-box strong { color: #C9A84C; }
+
+  .btn {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+  }
+
+  .btn:hover { background: #274d7a; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn.gold { background: #C9A84C; color: #1B3A5C; }
+  .btn.gold:hover { background: #b8922f; }
+  .btn.outline { background: transparent; color: #1B3A5C; border: 2px solid #1B3A5C; }
+  .btn.outline:hover { background: #e8eef5; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* LAB SCREEN */
+  .lab-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .round-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .round-badge .tag {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .round-badge .step-label {
+    font-size: 0.88rem;
+    color: #5a7a99;
+    font-weight: 600;
+  }
+
+  .challenge-card {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+
+  .challenge-card h3 { font-size: 1rem; opacity: 0.7; margin-bottom: 4px; }
+  .challenge-card .goal-text { font-size: 1.1rem; font-weight: 700; }
+
+  /* Control panel */
+  .panel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+  }
+
+  .panel h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #e6ecf3;
+    padding-bottom: 8px;
+  }
+
+  .factors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 520px) {
+    .factors-grid { grid-template-columns: 1fr; }
+  }
+
+  .factor-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .factor-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .factor-icon { font-size: 1.1rem; }
+
+  .factor-controls {
+    display: flex;
+    gap: 6px;
+  }
+
+  .level-btn {
+    flex: 1;
+    padding: 8px 4px;
+    border: 2px solid #d0dae6;
+    background: #f7f9fc;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #3a5068;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+  }
+
+  .level-btn:hover { border-color: #1B3A5C; color: #1B3A5C; }
+
+  .level-btn.selected {
+    background: #1B3A5C;
+    color: #fff;
+    border-color: #1B3A5C;
+  }
+
+  .level-btn.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-style: dashed;
+  }
+
+  .lock-badge {
+    font-size: 0.65rem;
+    background: #e6ecf3;
+    color: #5a7a99;
+    border-radius: 10px;
+    padding: 1px 7px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+
+  /* Visualization */
+  .vis-panel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+  }
+
+  .vis-panel h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #e6ecf3;
+    padding-bottom: 8px;
+  }
+
+  .rocket-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .launch-area {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(180deg, #1B3A5C 0%, #2e6da4 60%, #7ec8e3 100%);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 28px;
+    background: #5a8a4a;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .rocket-obj {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.4rem;
+    transition: bottom 1s cubic-bezier(0.2, 0.8, 0.4, 1);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+
+  .distance-label {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+  }
+
+  .meter-bar-wrap {
+    width: 100%;
+    background: #e6ecf3;
+    border-radius: 8px;
+    height: 18px;
+    overflow: hidden;
+  }
+
+  .meter-bar {
+    height: 18px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #C9A84C, #e8c96a);
+    transition: width 0.9s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1B3A5C;
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    margin-top: 4px;
+  }
+
+  .result-value {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1B3A5C;
+  }
+
+  /* Data log */
+  .data-log {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+  }
+
+  .data-log h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e6ecf3;
+    padding-bottom: 8px;
+  }
+
+  .log-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  .log-table th {
+    background: #1B3A5C;
+    color: #C9A84C;
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .log-table th:first-child { border-radius: 6px 0 0 0; }
+  .log-table th:last-child { border-radius: 0 6px 0 0; }
+
+  .log-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e6ecf3;
+    color: #1B3A5C;
+    vertical-align: middle;
+  }
+
+  .log-table tr:nth-child(even) td { background: #f7f9fc; }
+
+  .changed-cell {
+    color: #C9A84C;
+    font-weight: 700;
+  }
+
+  .star-cell { font-size: 0.85rem; }
+
+  /* feedback toast */
+  .feedback-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.35s ease;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+
+  .feedback-toast.show { transform: translateX(-50%) translateY(0); }
+  .feedback-toast.good { background: #2e7d52; }
+  .feedback-toast.bad { background: #b84040; }
+
+  /* warning banner */
+  .ofat-warning {
+    background: #fff3cd;
+    border: 2px solid #C9A84C;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #7a5a00;
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ofat-warning.show { display: flex; }
+
+  /* SUMMARY */
+  .summary-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 16px rgba(27,58,92,0.10);
+    text-align: center;
+  }
+
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.25);
+  }
+
+  .score-circle .big-num {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .score-circle .label-sm {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  .summary-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: #1B3A5C; }
+  .summary-sub { font-size: 0.95rem; color: #3a5068; margin-bottom: 20px; line-height: 1.5; }
+
+  .breakdown {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: left;
+  }
+
+  .breakdown h4 { font-size: 0.9rem; font-weight: 700; color: #1B3A5C; margin-bottom: 10px; }
+
+  .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #e6ecf3;
+    font-size: 0.85rem;
+    color: #3a5068;
+  }
+
+  .breakdown-item:last-child { border-bottom: none; }
+  .breakdown-item .pts { font-weight: 700; color: #1B3A5C; }
+
+  .verdict-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    text-align: left;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .verdict-box.great { background: #e6f7ee; border-left: 4px solid #2e7d52; color: #1a4a2e; }
+  .verdict-box.good { background: #fff8e6; border-left: 4px solid #C9A84C; color: #5a3e00; }
+  .verdict-box.needs-work { background: #fdeaea; border-left: 4px solid #b84040; color: #5a1010; }
+
+  .faith-note {
+    background: #eef2f8;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #3a5068;
+    font-style: italic;
+    margin: 14px 0 0;
+    line-height: 1.5;
+  }
+
+  .faith-note strong { color: #1B3A5C; font-style: normal; }
+
+  /* QUIZ SCREEN */
+  .quiz-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+    margin-bottom: 16px;
+  }
+
+  .q-counter {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #C9A84C;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .q-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border: 2px solid #d0dae6;
+    background: #f7f9fc;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: #1B3A5C;
+    text-align: left;
+    transition: all 0.18s;
+    font-family: inherit;
+  }
+
+  .option-btn:hover:not(:disabled) { border-color: #1B3A5C; background: #eef2f8; }
+
+  .option-btn.correct { background: #e6f7ee; border-color: #2e7d52; color: #1a4a2e; }
+  .option-btn.wrong { background: #fdeaea; border-color: #b84040; color: #5a1010; }
+
+  .option-letter {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.18s;
+  }
+
+  .option-btn.correct .option-letter { background: #2e7d52; }
+  .option-btn.wrong .option-letter { background: #b84040; }
+
+  .q-feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .q-feedback.show { display: block; }
+  .q-feedback.correct { background: #e6f7ee; color: #1a4a2e; }
+  .q-feedback.wrong { background: #fdeaea; color: #5a1010; }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .nav-row .spacer { flex: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">GK12</div>
+  <div>
+    <h1>OFAT Lab — Design of Experiments</h1>
+    <p>Creationeering · Analysis &amp; Synthesis</p>
+  </div>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+</div>
+
+<main>
+
+  <!-- ========== SCREEN: INTRO ========== -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-card">
+      <div class="big-icon">🚀</div>
+      <h2>Welcome to the OFAT Launch Lab</h2>
+      <p>You are the lead engineer testing a small model rocket. Your goal: find the combination of factors that sends it the <strong>farthest distance</strong>.</p>
+      <p>To figure out what works, you must use the <strong>One-Factor-at-a-Time (OFAT)</strong> method — change only <em>one thing at a time</em> so your results actually mean something.</p>
+
+      <div class="rule-box">
+        <strong>🔑 The OFAT Rule:</strong> Change ONE factor. Run the test. Record the result. Then decide your next move. If you change multiple factors at once, you won't know which one made the difference!
+      </div>
+
+      <p style="font-size:0.88rem; color:#5a7a99; margin-top: 8px;">3 Lab Rounds + a Short Quiz · About 4 minutes</p>
+      <br>
+      <button class="btn gold" onclick="startLab()">Start Lab →</button>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN: LAB ========== -->
+  <div class="screen" id="screen-lab">
+    <div class="lab-wrap">
+
+      <div class="round-badge">
+        <div class="tag" id="roundTag">ROUND 1 of 3</div>
+        <div class="step-label" id="roundGoalLabel">Change exactly 1 factor from your baseline</div>
+      </div>
+
+      <div class="challenge-card">
+        <h3>📋 Mission Goal</h3>
+        <div class="goal-text" id="missionGoal">Find which setting makes the rocket travel farthest. Start with Round 1 — pick ONE factor to test.</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="panel">
+        <h3>⚙️ Rocket Factor Settings</h3>
+        <div class="ofat-warning" id="ofatWarning">
+          ⚠️ OFAT Violation! You changed more than one factor. A good engineer changes only ONE factor per test.
+        </div>
+        <div class="factors-grid" id="factorsGrid">
+          <!-- Injected by JS -->
+        </div>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn" id="launchBtn" onclick="runLaunch()">🚀 Launch Test!</button>
+          <span id="changeCount" style="font-size:0.82rem; color:#5a7a99; font-weight:600;"></span>
+        </div>
+      </div>
+
+      <!-- Visualization -->
+      <div class="vis-panel">
+        <h3>📡 Launch Visualization</h3>
+        <div class="rocket-stage">
+          <div class="launch-area" id="launchArea">
+            <div class="rocket-obj" id="rocketObj" style="bottom:28px;">🚀</div>
+            <div class="ground"></div>
+            <div class="distance-label" id="distLabel" style="display:none;"></div>
+          </div>
+          <div style="width:100%">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#5a7a99; margin-bottom:4px;">
+              <span>Distance</span>
+              <span>Max: 100 m</span>
+            </div>
+            <div class="meter-bar-wrap">
+              <div class="meter-bar" id="meterBar" style="width:0%;"></div>
+            </div>
+            <div class="result-row">
+              <span>Last Result:</span>
+              <span class="result-value" id="resultValue">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Log -->
+      <div class="data-log">
+        <h3>📓 Data Log</h3>
+        <table class="log-table" id="logTable">
+          <thead>
+            <tr>
+              <th>Run</th>
+              <th>Fin Size</th>
+              <th>Fuel Load</th>
+              <th>Nose Cone</th>
+              <th>Launch Angle</th>
+              <th>Dist (m)</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+
+      <div class="nav-row">
+        <span class="spacer"></span>
+        <button class="btn" id="nextRoundBtn" onclick="nextRound()" style="display:none;">Next Round →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== SCREEN: QUIZ ========== -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-card" id="quizCard">
+      <div class="q-counter" id="qCounter">QUESTION 1 of 4</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optionsList"></div>
+      <div class="q-feedback" id="qFeedback"></div>
+    </div>
+    <div class="nav-row">
+      <span class="spacer"></span>
+      <button class="btn" id="nextQBtn" onclick="nextQuestion()" style="display:none;">Next Question →</button>
+    </div>
+  </div>
+
+  <!-- ========== SCREEN: SUMMARY ========== -->
+  <div class="screen" id="screen-summary">
+    <div class="summary-card">
+      <div class="score-circle">
+        <div class="big-num" id="finalScore">0</div>
+        <div class="label-sm">TOTAL SCORE</div>
+      </div>
+      <div class="summary-title" id="summaryTitle">Lab Complete!</div>
+      <div class="summary-sub" id="summarySub">Here's how you did:</div>
+
+      <div class="breakdown">
+        <h4>Score Breakdown</h4>
+        <div class="breakdown-item"><span>Lab Runs (OFAT compliance)</span><span class="pts" id="bkLab">0 pts</span></div>
+        <div class="breakdown-item"><span>Quiz (4 questions)</span><span class="pts" id="bkQuiz">0 pts</span></div>
+        <div class="breakdown-item"><span>Best Distance Achieved</span><span class="pts" id="bkDist">—</span></div>
+      </div>
+
+      <div class="verdict-box" id="verdictBox"></div>
+
+      <div class="faith-note">
+        <strong>Proverbs 14:15 —</strong> "The simple believe anything, but the prudent give thought to their steps." Wise engineers test carefully and record honestly — just like you did today.
+      </div>
+
+      <div style="margin-top:20px;">
+        <button class="btn gold" onclick="restartAll()">Try Again 🔄</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Feedback Toast -->
+<div class="feedback-toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA MODEL
+// ============================================================
+
+const FACTORS = [
+  {
+    id: 'fin',
+    label: 'Fin Size',
+    icon: '🏷️',
+    levels: ['Small', 'Medium', 'Large'],
+    baseline: 1
+  },
+  {
+    id: 'fuel',
+    label: 'Fuel Load',
+    icon: '⛽',
+    levels: ['Low', 'Medium', 'High'],
+    baseline: 0
+  },
+  {
+    id: 'nose',
+    label: 'Nose Cone',
+    icon: '🔺',
+    levels: ['Blunt', 'Pointed', 'Ogive'],
+    baseline: 0
+  },
+  {
+    id: 'angle',
+    label: 'Launch Angle',
+    icon: '📐',
+    levels: ['45°', '60°', '75°'],
+    baseline: 1
+  }
+];
+
+// Distance model: base + factor contributions
+// Each factor level adds a certain amount — students discover this
+const DIST_MODEL = {
+  fin:   [12, 20, 15],    // Small, Medium, Large
+  fuel:  [10, 22, 30],    // Low, Medium, High
+  nose:  [8, 18, 25],     // Blunt, Pointed, Ogive
+  angle: [20, 28, 14]     // 45, 60, 75
+};
+
+const NOISE_RANGE = 3; // ±3m random noise
+
+// ============================================================
+// STATE
+// ============================================================
+
+let currentRound = 1;     // 1, 2, 3
+let selections = {};      // factor id -> level index
+let baseline = {};        // locked values after round 1
+let labRuns = [];         // array of run objects
+let lockedFactors = [];   // factor ids that are locked after round 1
+let roundLaunched = false;
+let ofatViolated = false;
+let ofatViolationCount = 0;
+let labScore = 0;
+let bestDist = 0;
+
+// Quiz state
+let quizQuestions = [];
+let currentQ = 0;
+let quizScore = 0;
+
+// ============================================================
+// QUIZ DATA
+// ============================================================
+
+const ALL_QUIZ_QUESTIONS = [
+  {
+    q: "What does OFAT stand for?",
+    options: ["Only Factors Are Tested", "One-Factor-at-a-Time", "Output Factors And Trials", "Overall Functional Analysis Test"],
+    correct: 1,
+    feedback: "OFAT = One-Factor-at-a-Time. You change only ONE variable per test while keeping all others constant."
+  },
+  {
+    q: "An engineer changes both fin size AND fuel load in the same test. What is the problem?",
+    options: [
+      "The rocket will explode.",
+      "She cannot tell WHICH change caused the result.",
+      "Both factors must always match.",
+      "She didn't write down the results."
+    ],
+    correct: 1,
+    feedback: "Exactly! If two things change at once, you can't know which one caused the result. That's why OFAT changes only ONE factor per run."
+  },
+  {
+    q: "In OFAT, what do we call the fixed setting you compare all other tests against?",
+    options: ["The variable", "The level", "The baseline", "The iteration"],
+    correct: 2,
+    feedback: "The baseline is your starting point — the set of settings that stays the same while you test one factor at a time."
+  },
+  {
+    q: "Which word best describes using test results to improve your design again and again?",
+    options: ["Procurement", "Iteration", "Synthesis", "Variable"],
+    correct: 1,
+    feedback: "Iteration means repeating the test-and-improve cycle. Each loop brings your design closer to the goal!"
+  },
+  {
+    q: "Which of these correctly applies the OFAT method?",
+    options: [
+      "Change fin size and fuel load to see which combo works best.",
+      "Change only the nose cone, keep everything else the same, then record results.",
+      "Guess the best settings and skip testing.",
+      "Change all four factors and pick the highest score."
+    ],
+    correct: 1,
+    feedback: "Correct! OFAT means changing exactly ONE factor, keeping all others constant, and carefully recording what happens."
+  },
+  {
+    q: "Why is recording data important in OFAT experiments?",
+    options: [
+      "It fills up the lab notebook.",
+      "So you can compare results and make smart decisions about what to change next.",
+      "Because the teacher requires it.",
+      "Data is not really needed if you remember the result."
+    ],
+    correct: 1,
+    feedback: "Data lets you compare runs fairly and decide your next move based on evidence — not guessing."
+  }
+];
+
+// ============================================================
+// UTILITY FUNCTIONS
+// ============================================================
+
+function calcDist(sel) {
+  let d = DIST_MODEL.fin[sel.fin]
+        + DIST_MODEL.fuel[sel.fuel]
+        + DIST_MODEL.nose[sel.nose]
+        + DIST_MODEL.angle[sel.angle];
+  d += (Math.random() * NOISE_RANGE * 2) - NOISE_RANGE;
+  return Math.round(Math.max(10, Math.min(100, d)));
+}
+
+function setProgress(pct) {
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function showToast(msg, type, duration) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'feedback-toast ' + (type || '') + ' show';
+  setTimeout(() => { t.className = 'feedback-toast'; }, duration || 2800);
+}
+
+// ============================================================
+// LAB INITIALIZATION
+// ============================================================
+
+function startLab() {
+  // Init selections to baseline
+  FACTORS.forEach(f => {
+    selections[f.id] = f.baseline;
+    baseline[f.id] = f.baseline;
+  });
+  lockedFactors = [];
+  labRuns = [];
+  currentRound = 1;
+  roundLaunched = false;
+  ofatViolated = false;
+  ofatViolationCount = 0;
+  labScore = 0;
+  bestDist = 0;
+
+  setProgress(10);
+  showScreen('lab');
+  renderRound();
+}
+
+function renderRound() {
+  roundLaunched = false;
+  document.getElementById('nextRoundBtn').style.display = 'none';
+  document.getElementById('ofatWarning').classList.remove('show');
+
+  // Update round badge
+  const roundNames = ['1 of 3', '2 of 3', '3 of 3'];
+  document.getElementById('roundTag').textContent = 'ROUND ' + roundNames[currentRound - 1];
+
+  const goalLabels = [
+    'Select your BASELINE settings, then launch.',
+    'Change exactly ONE factor from your best result, then launch.',
+    'Change exactly ONE more factor from your best result, then launch.'
+  ];
+  document.getElementById('roundGoalLabel').textContent = goalLabels[currentRound - 1];
+
+  const missionTexts = [
+    'Round 1: These are your baseline settings. You can adjust any factor, but for OFAT, try starting here and launching your first test.',
+    'Round 2: Based on Round 1, change exactly ONE factor and re-launch. Which factor do you want to explore?',
+    'Round 3: One final test! Change exactly ONE more factor and launch. Can you beat your best distance?'
+  ];
+  document.getElementById('missionGoal').textContent = missionTexts[currentRound - 1];
+
+  renderFactors();
+  updateChangeCount();
+}
+
+function renderFactors() {
+  const grid = document.getElementById('factorsGrid');
+  grid.innerHTML = '';
+
+  FACTORS.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'factor-row';
+
+    // Label
+    const lbl = document.createElement('div');
+    lbl.className = 'factor-label';
+    lbl.innerHTML = '<span class="factor-icon">' + f.icon + '</span>' + f.label;
+
+    // Lock badge for locked factors
+    if (lockedFactors.includes(f.id)) {
+      const lb = document.createElement('span');
+      lb.className = 'lock-badge';
+      lb.textContent = '🔒 HELD CONSTANT';
+      lbl.appendChild(lb);
+    }
+
+    row.appendChild(lbl);
+
+    // Level buttons
+    const btns = document.createElement('div');
+    btns.className = 'factor-controls';
+
+    f.levels.forEach((lvl, idx) => {
+      const b = document.createElement('button');
+      b.className = 'level-btn';
+      if (selections[f.id] === idx) b.classList.add('selected');
+
+      // Lock non-selected locked factors
+      if (lockedFactors.includes(f.id) && selections[f.id] !== idx) {
+        b.classList.add('locked');
+        b.disabled = true;
+      }
+
+      b.textContent = lvl;
+      b.dataset.factorId = f.id;
+      b.dataset.levelIdx = idx;
+      b.addEventListener('click', onFactorClick);
+      btns.appendChild(b);
+    });
+
+    row.appendChild(btns);
+    grid.appendChild(row);
+  });
+}
+
+function onFactorClick(e) {
+  if (roundLaunched) return;
+
+  const fid = e.target.dataset.factorId;
+  const idx = parseInt(e.target.dataset.levelIdx);
+
+  if (lockedFactors.includes(fid)) return;
+
+  selections[fid] = idx;
+  renderFactors();
+  updateChangeCount();
+  checkOFAT();
+}
+
+function updateChangeCount() {
+  const changed = countChangedFactors();
+  const el = document.getElementById('changeCount');
+
+  if (currentRound === 1) {
+    el.textContent = '';
+    return;
+  }
+
+  if (changed === 0) {
+    el.textContent = '0 factors changed (change 1 to test)';
+    el.style.color = '#5a7a99';
+  } else if (changed === 1) {
+    el.textContent = '✅ 1 factor changed — OFAT correct!';
+    el.style.color = '#2e7d52';
+  } else {
+    el.textContent = '⚠️ ' + changed + ' factors changed — OFAT violation!';
+    el.style.color = '#b84040';
+  }
+}
+
+function countChangedFactors() {
+  if (currentRound === 1) return 0;
+  let count = 0;
+  FACTORS.forEach(f => {
+    if (!lockedFactors.includes(f.id) && selections[f.id] !== baseline[f.id]) count++;
+  });
+  return count;
+}
+
+function checkOFAT() {
+  const changed = countChangedFactors();
+  const warning = document.getElementById('ofatWarning');
+  if (currentRound > 1 && changed > 1) {
+    warning.classList.add('show');
+  } else {
+    warning.classList.remove('show');
+  }
+}
+
+// ============================================================
+// LAUNCH
+// ============================================================
+
+function runLaunch() {
+  if (roundLaunched) return;
+
+  const changed = countChangedFactors();
+
+  // OFAT check for rounds 2+
+  if (currentRound > 1 && changed > 1) {
+    ofatViolationCount++;
+    showToast('⚠️ OFAT Violation! Change only ONE factor per test.', 'bad', 3000);
+    return;
+  }
+
+  if (currentRound > 1 && changed === 0) {
+    showToast('You need to change exactly 1 factor to run a new test!', '', 2500);
+    return;
+  }
+
+  roundLaunched = true;
+
+  // Score the run
+  const dist = calcDist(selections);
+  if (dist > bestDist) bestDist = dist;
+
+  // Determine which factor changed
+  let changedFactor = null;
+  if (currentRound > 1) {
+    FACTORS.forEach(f => {
+      if (!lockedFactors.includes(f.id) && selections[f.id] !== baseline[f.id]) {
+        changedFactor = f.id;
+      }
+    });
+  }
+
+  // Record run
+  const runData = {
+    round: currentRound,
+    sel: Object.assign({}, selections),
+    dist: dist,
+    changedFactor: changedFactor,
+    ofatOk: (currentRound === 1 || changed === 1)
+  };
+  labRuns.push(runData);
+
+  // Update baseline for next round
+  FACTORS.forEach(f => { baseline[f.id] = selections[f.id]; });
+
+  // Lock factors that were NOT changed (rounds 2+)
+  if (currentRound === 1) {
+    // No locks yet — lock all after baseline
+    lockedFactors = [];
+  } else if (currentRound >= 2) {
+    // Lock all except changed one
+    FACTORS.forEach(f => {
+      if (!lockedFactors.includes(f.id) && f.id !== changedFactor) {
+        lockedFactors.push(f.id);
+      }
+    });
+  }
+
+  // Animate rocket
+  animateLaunch(dist);
+
+  // Log
+  setTimeout(() => {
+    addLogRow(runData);
+    updateChangeCount();
+    renderFactors();
+    document.getElementById('nextRoundBtn').style.display = (currentRound < 3) ? 'inline-block' : 'none';
+
+    if (currentRound === 3) {
+      document.getElementById('nextRoundBtn').textContent = 'Proceed to Quiz →';
+      document.getElementById('nextRoundBtn').style.display = 'inline-block';
+      document.getElementById('nextRoundBtn').onclick = goToQuiz;
+    }
+
+    const msg = dist >= 70 ? '🔥 Great launch! ' + dist + ' m!'
+               : dist >= 50 ? '✅ Solid test — ' + dist + ' m recorded.'
+               : '📉 Only ' + dist + ' m. Try a different factor next time!';
+    showToast(msg, dist >= 70 ? 'good' : '', 2500);
+
+    setProgress(10 + (currentRound / 3) * 45);
+  }, 1200);
+}
+
+function animateLaunch(dist) {
+  const rocket = document.getElementById('rocketObj');
+  const meter = document.getElementById('meterBar');
+  const distLabel = document.getElementById('distLabel');
+  const resultVal = document.getElementById('resultValue');
+
+  // Rocket flies up then comes down
+  const peakPct = dist / 100;
+  const peakPx = 28 + Math.round(peakPct * 130);
+
+  rocket.style.transition = 'bottom 0.6s cubic-bezier(0.2,0.8,0.4,1)';
+  rocket.style.bottom = peakPx + 'px';
+
+  setTimeout(() => {
+    rocket.style.transition = 'bottom 0.4s ease-in';
+    rocket.style.bottom = '28px';
+  }, 700);
+
+  // Meter
+  meter.style.width = dist + '%';
+  meter.textContent = dist + 'm';
+
+  // Label
+  distLabel.style.display = 'block';
+  distLabel.textContent = dist + ' m';
+
+  resultVal.textContent = dist + ' m';
+}
+
+function addLogRow(run) {
+  const body = document.getElementById('logBody');
+  const tr = document.createElement('tr');
+
+  const fOrder = ['fin', 'fuel', 'nose', 'angle'];
+  const fMap = {};
+  FACTORS.forEach(f => fMap[f.id] = f);
+
+  let cells = '<td><strong>R' + run.round + '</strong></td>';
+  fOrder.forEach(fid => {
+    const f = fMap[fid];
+    const lvl = f.levels[run.sel[fid]];
+    const changed = run.changedFactor === fid;
+    cells += '<td class="' + (changed ? 'changed-cell' : '') + '">' + (changed ? '★ ' : '') + lvl + '</td>';
+  });
+  cells += '<td><strong>' + run.dist + '</strong></td>';
+
+  let note = '';
+  if (run.round === 1) note = 'Baseline';
+  else if (run.changedFactor) {
+    const fname = fMap[run.changedFactor].label;
+    note = '✅ Tested: ' + fname;
+  }
+  cells += '<td class="star-cell">' + note + '</td>';
+
+  tr.innerHTML = cells;
+  body.appendChild(tr);
+}
+
+function nextRound() {
+  currentRound++;
+  renderRound();
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+
+function goToQuiz() {
+  // Calculate lab score
+  let ls = 0;
+  labRuns.forEach((run, i) => {
+    if (i === 0) { ls += 10; } // baseline always ok
+    else if (run.ofatOk) { ls += 15; }
+  });
+  ls -= (ofatViolationCount * 5);
+  labScore = Math.max(0, ls);
+
+  // Shuffle and pick 4 questions
+  const shuffled = [...ALL_QUIZ_QUESTIONS].sort(() => Math.random() - 0.5);
+  quizQuestions = shuffled.slice(0, 4);
+  currentQ = 0;
+  quizScore = 0;
+
+  setProgress(60);
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[currentQ];
+  document.getElementById('qCounter').textContent = 'QUESTION ' + (currentQ + 1) + ' of ' + quizQuestions.length;
+  document.getElementById('qText').textContent = q.q;
+
+  const list = document.getElementById('optionsList');
+  list.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'option-btn';
+    b.innerHTML = '<span class="option-letter">' + String.fromCharCode(65 + i) + '</span>' + opt;
+    b.addEventListener('click', () => answerQ(i, b));
+    list.appendChild(b);
+  });
+
+  const fb = document.getElementById('qFeedback');
+  fb.className = 'q-feedback';
+  fb.textContent = '';
+  document.getElementById('nextQBtn').style.display = 'none';
+}
+
+function answerQ(idx, btnEl) {
+  const q = quizQuestions[currentQ];
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('qFeedback');
+  const nextBtn = document.getElementById('nextQBtn');
+
+  if (idx === q.correct) {
+    btnEl.classList.add('correct');
+    quizScore += 10;
+    fb.className = 'q-feedback correct show';
+    fb.textContent = '✅ ' + q.feedback;
+    showToast('✅ Correct! +10 pts', 'good', 1800);
+  } else {
+    btnEl.classList.add('wrong');
+    allBtns[q.correct].classList.add('correct');
+    fb.className = 'q-feedback wrong show';
+    fb.textContent = '❌ ' + q.feedback;
+    showToast('❌ Not quite — review the explanation!', 'bad', 2200);
+  }
+
+  const isLast = (currentQ === quizQuestions.length - 1);
+  nextBtn.textContent = isLast ? 'See My Results →' : 'Next Question →';
+  nextBtn.style.display = 'inline-block';
+  nextBtn.onclick = isLast ? showSummary : nextQuestion;
+
+  setProgress(60 + ((currentQ + 1) / quizQuestions.length) * 35);
+}
+
+function nextQuestion() {
+  currentQ++;
+  renderQuestion();
+}
+
+// ============================================================
+// SUMMARY
+// ============================================================
+
+function showSummary() {
+  const total = labScore + quizScore;
+
+  document.getElementById('finalScore').textContent = total;
+  document.getElementById('bkLab').textContent = labScore + ' pts';
+  document.getElementById('bkQuiz').textContent = quizScore + ' pts';
+  document.getElementById('bkDist').textContent = bestDist + ' m';
+
+  let title, sub, verdictClass, verdictText;
+
+  if (total >= 70) {
+    title = '🏆 Outstanding Engineer!';
+    sub = 'You nailed the OFAT method and the quiz. Your data log shows real scientific thinking!';
+    verdictClass = 'great';
+    verdictText = 'You carefully changed one factor at a time, recorded your results, and used data to make decisions. That is exactly what a professional engineer does. Keep it up!';
+  } else if (total >= 45) {
+    title = '🔬 Good Work!';
+    sub = 'You understand the OFAT basics. A few more practice runs will sharpen your skills.';
+    verdictClass = 'good';
+    verdictText = 'Remember: the power of OFAT is isolating one variable so your data is trustworthy. Review any questions you missed and think about why changing multiple factors at once creates confusion.';
+  } else {
+    title = '📚 Keep Practicing!';
+    sub = 'The OFAT concept takes practice. Review the lesson and try again!';
+    verdictClass = 'needs-work';
+    verdictText = 'The key idea: change ONE factor, test, record, then decide. If you change multiple factors, you cannot know which one caused the result. Re-read the lesson and try the lab again!';
+  }
+
+  document.getElementById('summaryTitle').textContent = title;
+  document.getElementById('summarySub').textContent = sub;
+  const vb = document.getElementById('verdictBox');
+  vb.className = 'verdict-box ' + verdictClass;
+  vb.textContent = verdictText;
+
+  setProgress(100);
+  showScreen('summary');
+}
+
+// ============================================================
+// RESTART
+// ============================================================
+
+function restartAll() {
+  // Reset all state
+  selections = {};
+  baseline = {};
+  lockedFactors = [];
+  labRuns = [];
+  currentRound = 1;
+  roundLaunched = false;
+  ofatViolated = false;
+  ofatViolationCount = 0;
+  labScore = 0;
+  bestDist = 0;
+  quizQuestions = [];
+  currentQ = 0;
+  quizScore = 0;
+
+  // Reset UI
+  document.getElementById('logBody').innerHTML = '';
+  document.getElementById('meterBar').style.width = '0%';
+  document.getElementById('meterBar').textContent = '';
+  document.getElementById('resultValue').textContent = '—';
+  document.getElementById('rocketObj').style.bottom = '28px';
+  document.getElementById('distLabel').style.display = 'none';
+
+  setProgress(0);
+  showScreen('intro');
+}
+</script>
+</body>
+</html>

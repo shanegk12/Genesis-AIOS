@@ -1,0 +1,360 @@
+[
+  {
+    "id": "m021t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Instrumentation and Data Types</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In this lesson, you will move from assembling your mousetrap vehicle to actually <em>measuring</em> how it performs. You will explore the field of instrumentation — the engineering discipline that creates digital tools to measure what our human senses cannot. You will get to know the specific sensors in your MSE Lab Kit, understand how physical signals become digital data, and master the fundamental data types that every programmer uses to make sense of that data. By the end, you will be equipped to speak the language of the physical world and evaluate your designs with real evidence.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain the critical role of instrumentation and sensors in mechanical engineering data collection.</li><li>Identify the specific sensors included in your MSE Lab Kit and describe the data they collect.</li><li>Define and apply fundamental computer programming data types — Integers, Floats, Booleans, and Strings — for data manipulation.</li><li>Understand the Input/Output (I/O) logic required to bridge physical sensors with digital microcontrollers.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Instrumentation",
+          "definition": "The engineering field focused on designing and using measurement tools and sensors to observe, record, and analyze physical phenomena."
+        },
+        {
+          "term": "Sensor",
+          "definition": "A device that detects a physical condition (like distance, pressure, or speed) and converts it into an electrical signal a computer can read."
+        },
+        {
+          "term": "Transduction",
+          "definition": "The process of converting energy from one form to another — for example, turning physical pressure into an electrical voltage."
+        },
+        {
+          "term": "Ground Truth",
+          "definition": "The actual, unfiltered, real-world data that reflects exactly how a system is behaving — not an estimate or guess."
+        },
+        {
+          "term": "Integer",
+          "definition": "A whole number data type with no decimal point (e.g., 3, 42, -7)."
+        },
+        {
+          "term": "Float",
+          "definition": "A data type that stores numbers with decimal points for greater precision (e.g., 3.14, 9.81)."
+        },
+        {
+          "term": "Boolean",
+          "definition": "A data type with only two possible values: TRUE or FALSE (1 or 0). Often used to represent on/off or detected/not detected states."
+        },
+        {
+          "term": "String",
+          "definition": "A data type that stores text characters — letters, numbers, or symbols — as a sequence (e.g., \"Speed: 2.3 m/s\")."
+        },
+        {
+          "term": "Input/Output (I/O)",
+          "definition": "The communication framework between a sensor (input) and a microcontroller or display (output). Sensors send data in; the microcontroller sends commands out."
+        },
+        {
+          "term": "Microcontroller",
+          "definition": "A small programmable computer chip — like the Arduino — that reads sensor inputs, runs logic, and controls outputs."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Guessing to Knowing</h2><p>You have built your mousetrap vehicle. It rolls across the floor. You watch it and think, <em>\"That looked fast.\"</em> But was it? How far did it actually travel? Did the wheels slip? Was the spring releasing its energy efficiently?</p><p>Without measurement, you are guessing. And guessing is not engineering.</p><p>This is the Seventh Pillar of Creationeering: <strong>Performance Evaluation</strong>. To evaluate performance honestly, you need data — real, measurable, repeatable evidence about how your machine behaves in the physical world. The tools that collect that evidence are called <strong>sensors</strong>, and the discipline of building and using them is called <strong>instrumentation</strong>.</p><p>Think of it this way: a doctor does not guess your temperature. They use a thermometer. A pilot does not guess altitude. They read an altimeter. As an engineer, you do not guess how your vehicle performs — you instrument it and measure.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>\"Let your 'Yes' be 'Yes,' and your 'No,' 'No.'\" — Matthew 5:37. In engineering, this principle shows up in data. We seek <em>Ground Truth</em> — the unfiltered reality of how a machine behaves — not numbers that make us feel good about our design. Honest data is how we honor the work God has given us to do.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Your Senses Are Not Enough</h2><p>In the beginning, God granted humanity five primary senses to perceive His creation: sight, hearing, touch, taste, and smell. Those biological sensors are remarkable — but they have limits.</p><p>You cannot see the exact microsecond a wheel begins to slip on the floor. You cannot feel the precise force a mousetrap spring exerts as it releases. You cannot hear the difference between 2.3 meters per second and 2.7 meters per second. For those measurements, you need engineered sensors that extend what your body can perceive.</p><p>That is exactly what instrumentation does. It gives you <strong>digital eyes and ears</strong> that are faster, more precise, and more consistent than any human sense.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Transduction: The Great Translation</h3><p>At the heart of every sensor is a process called <strong>transduction</strong> — converting energy from one form to another. A microphone converts sound waves (mechanical energy) into electrical voltage. A thermometer converts heat into a readable number. The sensors in your lab kit convert physical events — distance, rotation, pressure — into electrical signals that your Arduino microcontroller can read and process.</p><p>Every time a sensor fires, it is performing a translation. The physical world speaks in pressure and motion and heat. Your microcontroller speaks in voltage and binary code. The sensor is the interpreter standing in between.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing the transduction chain: a physical event (wheel spinning) → sensor (TCRT5000 infrared) → electrical signal → Arduino microcontroller → digital data output on a screen, with labeled arrows at each step."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Your MSE Lab Kit Sensors</h2><p>Your lab kit includes three primary sensors. Each one measures something different, and each one connects to your Arduino through the same basic Input/Output (I/O) logic: the sensor detects something in the physical world, sends an electrical signal to the Arduino, and the Arduino runs code to turn that signal into a meaningful number you can record and analyze.</p><p>Here is what each sensor does and why it matters for your mousetrap vehicle project:</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>HC-SR04 Ultrasonic Sensor — Distance</h3><p>This sensor works exactly like a bat navigating a dark cave. A bat cannot see with light, so it uses <em>echolocation</em> — it emits a sound pulse, waits for the echo to return, and its brain calculates distance from the time difference. The HC-SR04 does the same thing electronically. It fires a high-frequency sound wave (beyond human hearing), waits for the echo to bounce back from a wall or object, and uses the travel time to calculate distance in centimeters or inches.</p><p>For your vehicle, this sensor answers the question: <strong>How far did it travel?</strong> Place it at the starting line, and it will track your vehicle's distance in real time — no tape measure required.</p><ul><li><strong>Data collected:</strong> Distance (cm or inches)</li><li><strong>Engineering application:</strong> Measuring total travel distance and detecting obstacles</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t009",
+    "type": "text",
+    "data": {
+      "html": "<h3>TCRT5000 Infrared (IR) Sensor — Speed and RPM</h3><p>The TCRT5000 uses infrared light — light your eyes cannot see — to detect whether something is passing in front of it. When you attach a small strip of reflective tape to one of your vehicle's wheels, the sensor detects each time the tape passes by. By counting those pulses over time, your Arduino can calculate how fast the wheel is spinning in <strong>RPM (Revolutions Per Minute)</strong>, and from that, how fast your vehicle is moving.</p><p>This sensor answers: <strong>How fast is my vehicle going, and is it consistent?</strong> It turns every wheel rotation into a countable digital event.</p><ul><li><strong>Data collected:</strong> Pulse count → Speed / RPM</li><li><strong>Engineering application:</strong> Calculating vehicle velocity and detecting wheel slip</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t010",
+    "type": "text",
+    "data": {
+      "html": "<h3>Force-Sensitive Resistor (FSR) — Pressure and Force</h3><p>The FSR is a flat, flexible sensor that changes its electrical resistance when you press on it. The harder you press, the lower the resistance, and the higher the voltage signal your Arduino reads. By placing this sensor beneath the mousetrap spring's lever arm, you can map the <strong>torque curve</strong> of your trap — watching exactly how the force changes from the moment the spring releases to the moment it stops pulling.</p><p>This answers one of the most important questions in your design: <strong>How is the mousetrap spring actually delivering energy to my vehicle?</strong> That data directly informs whether your string length and axle diameter are optimized.</p><ul><li><strong>Data collected:</strong> Pressure / Force (mapped to voltage)</li><li><strong>Engineering application:</strong> Mapping spring torque delivery over time</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side labeled diagrams of the three MSE Lab Kit sensors: HC-SR04 ultrasonic sensor showing trigger and echo pins, TCRT5000 IR sensor with reflective tape on a wheel, and a Force-Sensitive Resistor (FSR) placed under a mousetrap lever arm."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Language of Data: Programming Data Types</h2><p>Once your sensors collect physical information and send it to your Arduino, the microcontroller needs to store and process it using code. To do that effectively, you need to understand <strong>data types</strong> — the categories that tell a computer program what kind of information it is working with.</p><p>Think of data types like different containers in a kitchen. You would not store soup in a paper bag or carry water in a colander. The right container matters. In the same way, using the wrong data type in code can cause errors, lost precision, or a program that simply will not run.</p><p>There are four fundamental data types you will use in your Arduino sensor programs:</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t012",
+    "type": "text",
+    "data": {
+      "html": "<h3>Integer (int)</h3><p>An integer is a whole number — no decimal, no fraction. Just a clean, complete number like 3, 42, or -7. In your sensor code, integers are great for counting things: the number of wheel rotations, the number of times a sensor has fired, or a simple distance rounded to the nearest centimeter.</p><p><strong>Example:</strong> <code>int rotationCount = 0;</code> — this variable starts at zero and adds 1 every time the IR sensor detects the reflective tape.</p><h3>Float</h3><p>A float (short for \"floating point\") stores numbers with decimal precision. When you need exactness — like 9.81 m/s² for gravity, or 23.7 cm for a distance measurement — you use a float. Most sensor calculations will use floats because the physical world rarely gives you perfectly round numbers.</p><p><strong>Example:</strong> <code>float distanceCm = 23.7;</code></p><h3>Boolean</h3><p>A Boolean has exactly two possible values: <strong>TRUE</strong> or <strong>FALSE</strong>. In electronics, these map directly to 1 (voltage present) and 0 (no voltage). Booleans are perfect for sensor states — is the object detected or not? Is the vehicle still moving or has it stopped?</p><p><strong>Example:</strong> <code>bool objectDetected = false;</code> — the program sets this to TRUE the moment the ultrasonic sensor reads a distance under 10 cm.</p><h3>String</h3><p>A String stores text — sequences of characters like letters, numbers, and symbols. You will use Strings primarily when you want to print readable labels alongside your data, like displaying \"Distance: 45.2 cm\" on a serial monitor instead of just the raw number.</p><p><strong>Example:</strong> <code>String label = \"Speed (m/s): \";</code></p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick rule of thumb for choosing data types:</strong> If you are counting whole events (rotations, pulses), use <code>int</code>. If you need decimal precision for a measurement or calculation, use <code>float</code>. If you are checking a yes/no condition, use <code>bool</code>. If you are printing a readable label, use <code>String</code>. Getting this right from the start will save you hours of debugging later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Connecting It All: Input/Output Logic</h2><p>Every sensor in your kit follows the same basic I/O architecture. Understanding this architecture means you can wire up and program almost any sensor, not just the ones in your kit.</p><ul><li><strong>Input:</strong> The sensor detects something in the physical world and generates an electrical signal. That signal travels along a wire to a specific pin on your Arduino.</li><li><strong>Processing:</strong> Your Arduino code reads the pin value, runs a calculation (like converting microseconds to centimeters for the HC-SR04), and stores the result in a variable using the correct data type.</li><li><strong>Output:</strong> The processed data is sent somewhere useful — printed to a serial monitor, displayed on an LCD screen, or used to trigger another action (like stopping a motor).</li></ul><p>This Input → Process → Output loop is the heartbeat of every data collection system ever built, from a simple mousetrap sensor to the flight computers on a Mars rover. Master it at this scale, and you understand the pattern at every scale.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often wire the HC-SR04 Trigger and Echo pins to the same Arduino pin number in their code as someone else's project they found online — but that project used different pin assignments. Always double-check that your <code>trigPin</code> and <code>echoPin</code> variables in your code match the actual physical pins your sensor wires are connected to on the Arduino board. A one-pin mismatch will give you zero readings or garbage data every time.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021t014",
+    "type": "text",
+    "data": {
+      "html": "<h2>Data as Stewardship</h2><p>There is a deeper reason why we pursue accurate data. Proverbs 11:1 says, \"The LORD detests dishonest scales, but accurate weights find favor with him.\" In ancient times, dishonest merchants would use faulty weights to cheat customers. The principle holds in engineering: when we measure honestly and record faithfully, we are practicing integrity in our craft.</p><p>Every time you resist the temptation to ignore a bad data run because it does not match what you hoped for — every time you re-test instead of cherry-picking results — you are acting as a faithful steward of the design process. Your sensors are tools for truth. Use them that way.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m021acc01",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is transduction, and why does it matter for sensors?</strong><br/>Transduction is the conversion of energy from one form to another. It matters because sensors must convert a physical phenomenon — like distance or pressure — into an electrical signal that a microcontroller can read and process.</p><p><strong>2. Which sensor in your lab kit works like a bat's echolocation, and what does it measure?</strong><br/>The HC-SR04 Ultrasonic Sensor. It fires a sound wave and measures the time for the echo to return, calculating distance in centimeters or inches.</p><p><strong>3. You are storing the number of wheel rotations in a variable. Should you use an int or a float? Why?</strong><br/>An int — because rotations are whole events. You cannot have 3.7 rotations. Integers are the right container for counting discrete occurrences.</p><p><strong>4. What is the difference between a Boolean and a String data type?</strong><br/>A Boolean stores only two values (TRUE or FALSE), used for yes/no conditions. A String stores text characters, used for labels and readable messages.</p><p><strong>5. Describe the Input → Process → Output loop using the TCRT5000 IR sensor as your example.</strong><br/>Input: the TCRT5000 detects the reflective tape on the wheel and sends a pulse to the Arduino pin. Process: the Arduino code counts the pulses over a set time interval and calculates RPM or velocity using a formula. Output: the calculated speed is printed to the serial monitor as a readable float value.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

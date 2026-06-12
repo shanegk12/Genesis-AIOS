@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis & Creationeering — GK12</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  header {
+    width: 100%;
+    max-width: 740px;
+    background: #1B3A5C;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .logo-circle {
+    width: 46px; height: 46px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  header h1 { color: #fff; font-size: 1.15rem; line-height: 1.3; }
+  header p  { color: #C9A84C; font-size: 0.78rem; margin-top: 2px; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-wrap {
+    width: 100%; max-width: 740px;
+    background: #d8e0ea;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    width: 100%; max-width: 740px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    box-shadow: 0 3px 14px rgba(27,58,92,0.10);
+    margin-bottom: 18px;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin-bottom: 10px;
+  }
+
+  /* ── PHASE SCREENS ── */
+  .phase { display: none; }
+  .phase.active { display: block; }
+
+  /* ── INTRO ── */
+  #intro-screen .big-emoji { font-size: 3.2rem; text-align: center; margin: 10px 0 14px; }
+  #intro-screen p { font-size: 0.97rem; line-height: 1.6; color: #2d4a6a; margin-bottom: 10px; }
+  #intro-screen ul { padding-left: 20px; font-size: 0.92rem; color: #2d4a6a; line-height: 1.8; margin-bottom: 18px; }
+
+  /* ── VOCAB MATCH ── */
+  #vocab-screen .instruction {
+    font-size: 0.9rem; color: #3a5a80; margin-bottom: 16px; line-height: 1.5;
+  }
+
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .term-box, .def-box {
+    border: 2px solid #d0d9e6;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, transform 0.12s;
+    user-select: none;
+    line-height: 1.4;
+  }
+
+  .term-box {
+    background: #eef3fb;
+    font-weight: 700;
+    color: #1B3A5C;
+    text-align: center;
+  }
+
+  .def-box {
+    background: #fff8ec;
+    color: #2d4a6a;
+  }
+
+  .term-box.selected { background: #1B3A5C; color: #fff; border-color: #1B3A5C; transform: scale(1.03); }
+  .def-box.selected  { background: #C9A84C; color: #fff; border-color: #C9A84C; transform: scale(1.03); }
+  .term-box.matched, .def-box.matched { background: #d4edda; border-color: #28a745; cursor: default; opacity: 0.85; }
+  .term-box.wrong, .def-box.wrong { background: #f8d7da; border-color: #dc3545; animation: shake 0.3s; }
+
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)}
+  }
+
+  .vocab-score-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 14px; font-size: 0.88rem; color: #3a5a80;
+  }
+
+  .pill {
+    background: #eef3fb; border-radius: 20px; padding: 4px 12px;
+    font-weight: 700; font-size: 0.85rem; color: #1B3A5C;
+  }
+  .pill.gold { background: #C9A84C; color: #fff; }
+
+  /* ── PRINT QUIZ ── */
+  .quiz-question { font-size: 1rem; font-weight: 600; color: #1B3A5C; margin-bottom: 14px; line-height: 1.4; }
+
+  .options-list { display: flex; flex-direction: column; gap: 9px; }
+
+  .option-btn {
+    background: #eef3fb;
+    border: 2px solid #d0d9e6;
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .option-btn:hover:not(:disabled) { background: #dbe6f7; border-color: #1B3A5C; }
+  .option-btn.correct  { background: #d4edda; border-color: #28a745; font-weight: 600; }
+  .option-btn.incorrect{ background: #f8d7da; border-color: #dc3545; }
+  .option-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.correct-fb { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+  .feedback-box.incorrect-fb { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  .q-counter { font-size: 0.8rem; color: #6b8ab5; }
+
+  /* ── SEQUENCE ── */
+  #sequence-screen p.instruction { font-size: 0.9rem; color: #3a5a80; margin-bottom: 14px; line-height: 1.5; }
+
+  .seq-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .seq-item {
+    background: #eef3fb;
+    border: 2px solid #d0d9e6;
+    border-radius: 10px;
+    padding: 11px 14px 11px 12px;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: grab;
+    transition: box-shadow 0.15s, background 0.15s;
+    position: relative;
+  }
+
+  .seq-item:active { cursor: grabbing; }
+  .seq-item.dragging { opacity: 0.45; box-shadow: 0 6px 18px rgba(27,58,92,0.18); }
+  .seq-item.drag-over { background: #dbe6f7; border-color: #1B3A5C; }
+
+  .seq-num {
+    width: 26px; height: 26px;
+    background: #C9A84C;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .drag-handle { font-size: 1.1rem; color: #aac; margin-right: 2px; cursor: grab; }
+
+  .seq-result { margin-top: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .seq-result.correct-fb { background: #d4edda; color: #155724; border-left: 4px solid #28a745; border-radius: 8px; padding: 10px 14px; }
+  .seq-result.incorrect-fb { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; border-radius: 8px; padding: 10px 14px; }
+
+  /* ── SCENARIO ── */
+  .scenario-text {
+    background: #eef3fb;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .scenario-question { font-size: 0.97rem; font-weight: 600; color: #1B3A5C; margin-bottom: 12px; }
+
+  .scenario-btn {
+    background: #eef3fb;
+    border: 2px solid #d0d9e6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.87rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 8px;
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1.4;
+  }
+
+  .scenario-btn:hover:not(:disabled) { background: #dbe6f7; border-color: #1B3A5C; }
+  .scenario-btn.chosen-correct { background: #d4edda; border-color: #28a745; font-weight: 600; }
+  .scenario-btn.chosen-wrong   { background: #f8d7da; border-color: #dc3545; }
+  .scenario-btn:disabled { cursor: default; }
+
+  /* ── FINAL SCREEN ── */
+  #final-screen { text-align: center; }
+  .final-badge {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1B3A5C 0%, #2d6ea0 100%);
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.8rem;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.25);
+  }
+
+  .final-score-big {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #C9A84C;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .final-label { font-size: 1rem; color: #3a5a80; margin-bottom: 16px; }
+
+  .final-breakdown {
+    background: #eef3fb;
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.87rem;
+    color: #1B3A5C;
+    margin-bottom: 18px;
+    line-height: 1.9;
+  }
+  .final-breakdown strong { color: #C9A84C; }
+
+  .final-message {
+    background: #fff8ec;
+    border: 2px solid #C9A84C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #3a5a80;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    background: #1B3A5C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 26px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #254e7e; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-gold {
+    background: #C9A84C;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 26px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s;
+    display: inline-block;
+  }
+  .btn-gold:hover { background: #b8923c; }
+
+  .btn-sm {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .card { padding: 18px 14px; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-circle">⚙️</div>
+  <div>
+    <h1>Genesis &amp; Creationeering</h1>
+    <p>GK12 Academy · Middle School Engineering</p>
+  </div>
+</header>
+
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 0 — INTRO
+═══════════════════════════════════════════════════ -->
+<div id="intro-screen" class="phase active card">
+  <div class="section-label">Welcome</div>
+  <h2>Explore Creationeering</h2>
+  <div class="big-emoji">🔨🌍✨</div>
+  <p>Engineering isn't just about building things — it's about following a <strong>structured process</strong> to solve problems and steward the world well.</p>
+  <p>In this activity you will:</p>
+  <ul>
+    <li>🔤 Match key vocabulary terms</li>
+    <li>📋 Answer questions about the <strong>PRINT</strong> acronym</li>
+    <li>🔢 Arrange the engineering process steps in order</li>
+    <li>🎯 Decide how to handle a <strong>nested problem</strong> scenario</li>
+  </ul>
+  <p>Four quick sections — about 3–4 minutes total. Let's go!</p>
+  <br>
+  <button class="btn-primary" onclick="startActivity()">Start Activity →</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 1 — VOCAB MATCHING
+═══════════════════════════════════════════════════ -->
+<div id="vocab-screen" class="phase card" style="display:none">
+  <div class="section-label">Section 1 of 4 — Vocabulary Match</div>
+  <h2>Match the Terms</h2>
+  <p class="instruction">Tap a <strong>term</strong> (left column) then tap its <strong>definition</strong> (right column). Match all five pairs to continue.</p>
+
+  <div class="vocab-grid" id="vocab-grid">
+    <!-- filled by JS -->
+  </div>
+
+  <div class="vocab-score-row">
+    <span>Matched:</span>
+    <span class="pill" id="match-count">0 / 5</span>
+    <span class="pill gold" id="vocab-pts" style="display:none">+<span id="vocab-score-val">0</span> pts</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 2 — PRINT QUIZ
+═══════════════════════════════════════════════════ -->
+<div id="quiz-screen" class="phase card" style="display:none">
+  <div class="section-label">Section 2 of 4 — PRINT Quiz</div>
+  <h2>The PRINT Acronym</h2>
+  <div id="quiz-body">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 3 — SEQUENCE
+═══════════════════════════════════════════════════ -->
+<div id="sequence-screen" class="phase card" style="display:none">
+  <div class="section-label">Section 3 of 4 — Process Order</div>
+  <h2>Arrange the Steps</h2>
+  <p class="instruction">Drag and drop these descriptions to put them in the correct order for using an engineering process. Place the <strong>first step at the top</strong>.</p>
+  <ul class="seq-list" id="seq-list">
+    <!-- filled by JS -->
+  </ul>
+  <div id="seq-result" class="seq-result" style="display:none"></div>
+  <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <button class="btn-primary btn-sm" id="seq-check-btn" onclick="checkSequence()">Check Order</button>
+    <button class="btn-primary btn-sm" id="seq-next-btn" onclick="goToPhase(4)" style="display:none">Next →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 4 — SCENARIO (Nested Problem)
+═══════════════════════════════════════════════════ -->
+<div id="scenario-screen" class="phase card" style="display:none">
+  <div class="section-label">Section 4 of 4 — Design Scenario</div>
+  <h2>Nested Problem Challenge</h2>
+  <div id="scenario-body">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PHASE 5 — FINAL SCORE
+═══════════════════════════════════════════════════ -->
+<div id="final-screen" class="phase card" style="display:none">
+  <div class="section-label">Activity Complete!</div>
+  <div class="final-badge" id="final-emoji">🏆</div>
+  <div class="final-score-big" id="final-score-display">0</div>
+  <div class="final-label" id="final-score-label">out of 100 points</div>
+  <div class="final-breakdown" id="final-breakdown"></div>
+  <div class="final-message" id="final-message"></div>
+  <button class="btn-gold" onclick="restartActivity()">Try Again 🔄</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════
+var scores = { vocab: 0, quiz: 0, sequence: 0, scenario: 0 };
+var currentPhase = 0;
+
+// ─── VOCAB DATA ───────────────────────────────────
+var vocabPairs = [
+  { term: "Process",            def: "A series of steps followed to reach a goal or solve a problem." },
+  { term: "Pattern Recognition",def: "Noticing repeated ideas, shapes, or events that help us understand how something works." },
+  { term: "Problem",            def: "A need, challenge, or obstacle that requires a solution." },
+  { term: "Solution",           def: "A design or plan that meets the need or solves the problem." },
+  { term: "Nested Problem",     def: "A problem which contains another problem; both must be solved to get the proper solution." }
+];
+
+var vocabState = {
+  selectedTerm: null,
+  selectedDef: null,
+  matched: [],
+  attempts: 0,
+  correct: 0
+};
+
+// ─── QUIZ DATA ────────────────────────────────────
+var quizQuestions = [
+  {
+    q: "In PRINT, the letter P stands for 'Predictable.' What does this mean for an engineering process?",
+    options: [
+      "The process can only be used once.",
+      "One step leads to the next easily.",
+      "The process uses the latest technology.",
+      "Engineers can skip steps they already know."
+    ],
+    correct: 1,
+    explain: "Predictable means each step flows naturally into the next — experienced engineers can move through the process smoothly because it's well-structured."
+  },
+  {
+    q: "Which PRINT letter means the process can be done more than once, with similar results each time?",
+    options: ["T — Testable","N — Novel","I — Improvable","R — Repeatable"],
+    correct: 3,
+    explain: "R stands for Repeatable — a good engineering process can be used multiple times and produce reliable results."
+  },
+  {
+    q: "A team wants to upgrade their design process to include 3D-printing tools that weren't available before. Which PRINT quality are they using?",
+    options: ["Testable","Improvable","Novel","Predictable"],
+    correct: 1,
+    explain: "Improvable means the process can be updated with new technology, steps, or equipment — exactly what this team is doing."
+  },
+  {
+    q: "N in PRINT stands for 'Novel.' Which sentence BEST describes a novel process?",
+    options: [
+      "It has been copied from an older, similar process.",
+      "It can be verified by running experiments.",
+      "It is unique and not already existing.",
+      "It is so simple that no steps are needed."
+    ],
+    correct: 2,
+    explain: "Novel means the process is one of a kind — it brings something new to the table rather than copying an existing approach."
+  },
+  {
+    q: "Why is the Testable quality important in an engineering process?",
+    options: [
+      "So engineers can skip steps they don't like.",
+      "So students never have to study the process.",
+      "So engineers can check each step to catch problems early.",
+      "So the process is only used once."
+    ],
+    correct: 2,
+    explain: "Testable means engineers can examine each step individually — catching errors early before they become bigger (nested!) problems."
+  }
+];
+
+var quizState = { current: 0, answered: false, correct: 0 };
+
+// ─── SEQUENCE DATA ────────────────────────────────
+var sequenceItems = [
+  { text: "🔍 Identify a need or challenge — recognize the problem that must be solved.",       order: 0 },
+  { text: "💡 Brainstorm and plan — develop possible solutions using pattern recognition.",      order: 1 },
+  { text: "🛠️ Build or create — construct the solution following your planned steps.",           order: 2 },
+  { text: "🧪 Test each step — verify the process is working as expected.",                     order: 3 },
+  { text: "🔄 Improve — update the process with new ideas, tools, or better steps.",            order: 4 }
+];
+
+var seqCurrentOrder = [];
+
+// ─── SCENARIO DATA ────────────────────────────────
+var scenarios = [
+  {
+    story: "Mia is designing a water filter for her school's engineering fair. She builds her filter, but when she tests it, the water still comes out cloudy. She realizes the filter holes are too large — but also that the frame holding the filter is cracking under water pressure.",
+    question: "This is a nested problem — Mia has TWO problems. What should she do?",
+    choices: [
+      { text: "Fix only the filter holes since that was the original plan.",                  correct: false, explain: "Fixing just one part won't work — the cracked frame will still fail. A nested problem means BOTH issues must be solved." },
+      { text: "Address both the filter holes AND the cracked frame to get a working solution.", correct: true,  explain: "Correct! A nested problem contains another problem inside it. Both must be solved to reach a proper solution." },
+      { text: "Give up and start a completely different project.",                             correct: false, explain: "Giving up skips the Improvable quality of a good process. Engineers update and fix — they don't quit when problems appear." },
+      { text: "Test the filter again without changing anything to see if the result changes.", correct: false, explain: "Testing without changing anything won't fix the design. Engineers use test results to guide real improvements." }
+    ]
+  },
+  {
+    story: "James is creating an app to help his class track homework. The app works, but his teacher points out that students are getting confused by the home screen — and also that the app crashes when two students log in at the same time.",
+    question: "James has a nested problem. What is the BEST next step?",
+    choices: [
+      { text: "Redesign the home screen and also fix the multi-user login bug.",               correct: true,  explain: "Both problems exist inside the same solution. Fixing only one would leave the other unresolved — nested problems require both to be addressed." },
+      { text: "Only fix the crash bug since the app technically works otherwise.",             correct: false, explain: "A confusing home screen is still a real problem. Ignoring it means the solution doesn't fully meet the need." },
+      { text: "Only redesign the home screen since it affects more students.",                 correct: false, explain: "The crash bug could affect everyone who uses the app together. Nested problems need complete solutions, not partial ones." },
+      { text: "Release the app as-is and collect feedback for a future version.",              correct: false, explain: "While improvement is part of PRINT, a known bug and a confusing interface should be fixed before release, not after." }
+    ]
+  }
+];
+
+var scenarioState = { current: 0, answered: false, correct: 0, total: scenarios.length };
+
+// ═══════════════════════════════════════════════════
+//  NAVIGATION & PROGRESS
+// ═══════════════════════════════════════════════════
+function startActivity() {
+  goToPhase(1);
+}
+
+function goToPhase(n) {
+  currentPhase = n;
+  var ids = ['intro-screen','vocab-screen','quiz-screen','sequence-screen','scenario-screen','final-screen'];
+  ids.forEach(function(id){ document.getElementById(id).style.display = 'none'; });
+  var phases = document.querySelectorAll('.phase');
+  phases.forEach(function(p){ p.classList.remove('active'); });
+
+  var target = [null,'vocab-screen','quiz-screen','sequence-screen','scenario-screen','final-screen'][n];
+  if(target){
+    document.getElementById(target).style.display = 'block';
+    document.getElementById(target).classList.add('active');
+  }
+
+  updateProgress(n);
+
+  if(n === 1) initVocab();
+  if(n === 2) initQuiz();
+  if(n === 3) initSequence();
+  if(n === 4) initScenario();
+  if(n === 5) showFinal();
+}
+
+function updateProgress(phase) {
+  var pct = [0, 10, 35, 62, 82, 100][phase] || 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ═══════════════════════════════════════════════════
+//  PHASE 1 — VOCAB
+// ═══════════════════════════════════════════════════
+function initVocab() {
+  vocabState = { selectedTerm: null, selectedDef: null, matched: [], attempts: 0, correct: 0 };
+
+  var terms = vocabPairs.map(function(p){ return p.term; });
+  var defs  = vocabPairs.map(function(p){ return p.def;  });
+
+  // shuffle defs
+  defs = shuffle(defs.slice());
+
+  var grid = document.getElementById('vocab-grid');
+  grid.innerHTML = '';
+
+  var leftCol = document.createElement('div');
+  leftCol.style.cssText = 'display:flex;flex-direction:column;gap:10px;';
+  var rightCol = document.createElement('div');
+  rightCol.style.cssText = 'display:flex;flex-direction:column;gap:10px;';
+
+  terms.forEach(function(t, i){
+    var box = document.createElement('div');
+    box.className = 'term-box';
+    box.textContent = t;
+    box.dataset.term = t;
+    box.addEventListener('click', function(){ selectTerm(t, box); });
+    leftCol.appendChild(box);
+  });
+
+  defs.forEach(function(d, i){
+    var box = document.createElement('div');
+    box.className = 'def-box';
+    box.textContent = d;
+    box.dataset.def = d;
+    box.addEventListener('click', function(){ selectDef(d, box); });
+    rightCol.appendChild(box);
+  });
+
+  grid.appendChild(leftCol);
+  grid.appendChild(rightCol);
+
+  document.getElementById('match-count').textContent = '0 / 5';
+  document.getElementById('vocab-pts').style.display = 'none';
+}
+
+function selectTerm(term, el) {
+  if(vocabState.matched.indexOf(term) !== -1) return;
+  // deselect previous
+  document.querySelectorAll('.term-box.selected').forEach(function(b){ b.classList.remove('selected'); });
+  vocabState.selectedTerm = term;
+  el.classList.add('selected');
+  tryMatch();
+}
+
+function selectDef(def, el) {
+  if(el.classList.contains('matched')) return;
+  document.querySelectorAll('.def-box.selected').forEach(function(b){ b.classList.remove('selected'); });
+  vocabState.selectedDef = def;
+  el.classList.add('selected');
+  tryMatch();
+}
+
+function tryMatch() {
+  if(!vocabState.selectedTerm || !vocabState.selectedDef) return;
+
+  var term = vocabState.selectedTerm;
+  var def  = vocabState.selectedDef;
+  vocabState.attempts++;
+
+  // Find correct def for term
+  var correctDef = vocabPairs.find(function(p){ return p.term === term; }).def;
+  var isCorrect = (def === correctDef);
+
+  var termEl = document.querySelector('.term-box[data-term="'+CSS.escape(term)+'"]');
+  var defEl  = document.querySelector('.def-box[data-def="'+CSS.escape(def)+'"]');
+
+  if(isCorrect) {
+    vocabState.matched.push(term);
+    vocabState.correct++;
+    if(termEl){ termEl.classList.remove('selected'); termEl.classList.add('matched'); }
+    if(defEl) { defEl.classList.remove('selected');  defEl.classList.add('matched'); }
+    var count = vocabState.matched.length;
+    document.getElementById('match-count').textContent = count + ' / 5';
+    if(count === 5) {
+      // calc score: 25pts base + up to 5 bonus for low attempts
+      var bonus = Math.max(0, 5 - (vocabState.attempts - 5));
+      scores.vocab = Math.min(25, 20 + bonus);
+      document.getElementById('vocab-pts').style.display = 'inline-block';
+      document.getElementById('vocab-score-val').textContent = scores.vocab;
+      setTimeout(function(){ goToPhase(2); }, 900);
+    }
+  } else {
+    if(termEl){ termEl.classList.add('wrong'); setTimeout(function(){ termEl.classList.remove('wrong','selected'); }, 500); }
+    if(defEl) { defEl.classList.add('wrong');  setTimeout(function(){ defEl.classList.remove('wrong','selected'); }, 500); }
+  }
+
+  vocabState.selectedTerm = null;
+  vocabState.selectedDef  = null;
+}
+
+// ═══════════════════════════════════════════════════
+//  PHASE 2 — QUIZ
+// ═══════════════════════════════════════════════════
+function initQuiz() {
+  quizState = { current: 0, answered: false, correct: 0 };
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var qi = quizState.current;
+  if(qi >= quizQuestions.length) {
+    scores.quiz = Math.round((quizState.correct / quizQuestions.length) * 30);
+    goToPhase(3);
+    return;
+  }
+  var q = quizQuestions[qi];
+  quizState.answered = false;
+
+  var html = '';
+  html += '<div class="quiz-question">' + escHtml(q.q) + '</div>';
+  html += '<div class="options-list">';
+  q.options.forEach(function(opt, idx){
+    html += '<button class="option-btn" id="opt_'+idx+'" onclick="answerQ('+idx+')">' + escHtml(opt) + '</button>';
+  });
+  html += '</div>';
+  html += '<div class="feedback-box" id="feedback"></div>';
+  html += '<div class="quiz-nav"><span class="q-counter">Question '+(qi+1)+' of '+quizQuestions.length+'</span>';
+  html += '<button class="btn-primary btn-sm" id="next-q-btn" onclick="nextQuestion()" style="display:none">Next →</button></div>';
+
+  document.getElementById('quiz-body').innerHTML = html;
+}
+
+function answerQ(idx) {
+  if(quizState.answered) return;
+  quizState.answered = true;
+  var q = quizQuestions[quizState.current];
+  var isCorrect = (idx === q.correct);
+
+  document.querySelectorAll('.option-btn').forEach(function(b){ b.disabled = true; });
+
+  var chosenBtn = document.getElementById('opt_'+idx);
+  var correctBtn = document.getElementById('opt_'+q.correct);
+
+  if(isCorrect) {
+    chosenBtn.classList.add('correct');
+    quizState.correct++;
+  } else {
+    chosenBtn.classList.add('incorrect');
+    correctBtn.classList.add('correct');
+  }
+
+  var fb = document.getElementById('feedback');
+  fb.className = 'feedback-box show ' + (isCorrect ? 'correct-fb' : 'incorrect-fb');
+  fb.textContent = (isCorrect ? '✅ Correct! ' : '❌ Not quite. ') + q.explain;
+
+  document.getElementById('next-q-btn').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  quizState.current++;
+  renderQuestion();
+}
+
+// ═══════════════════════════════════════════════════
+//  PHASE 3 — SEQUENCE
+// ═══════════════════════════════════════════════════
+function initSequence() {
+  // shuffle
+  seqCurrentOrder = shuffle(sequenceItems.slice().map(function(item, i){ return { text: item.text, order: item.order, id: i }; }));
+
+  renderSeqList();
+  document.getElementById('seq-result').style.display = 'none';
+  document.getElementById('seq-check-btn').style.display = 'inline-block';
+  document.getElementById('seq-next-btn').style.display = 'none';
+}
+
+function renderSeqList() {
+  var list = document.getElementById('seq-list');
+  list.innerHTML = '';
+
+  seqCurrentOrder.forEach(function(item, visualIdx) {
+    var li = document.createElement('li');
+    li.className = 'seq-item';
+    li.draggable = true;
+    li.dataset.idx = visualIdx;
+    li.innerHTML = '<span class="drag-handle">⠿</span><span class="seq-num">'+(visualIdx+1)+'</span><span>'+item.text+'</span>';
+
+    li.addEventListener('dragstart', dragStart);
+    li.addEventListener('dragover',  dragOver);
+    li.addEventListener('drop',      dragDrop);
+    li.addEventListener('dragend',   dragEnd);
+
+    // Touch support
+    li.addEventListener('touchstart', touchStart, {passive:true});
+    li.addEventListener('touchmove',  touchMove,  {passive:false});
+    li.addEventListener('touchend',   touchEnd);
+
+    list.appendChild(li);
+  });
+}
+
+var dragSrcIdx = null;
+
+function dragStart(e) {
+  dragSrcIdx = parseInt(this.dataset.idx);
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.querySelectorAll('.seq-item').forEach(function(el){ el.classList.remove('drag-over'); });
+  this.classList.add('drag-over');
+}
+
+function dragDrop(e) {
+  e.stopPropagation();
+  var targetIdx = parseInt(this.dataset.idx);
+  if(dragSrcIdx !== null && dragSrcIdx !== targetIdx) {
+    var temp = seqCurrentOrder[dragSrcIdx];
+    seqCurrentOrder[dragSrcIdx] = seqCurrentOrder[targetIdx];
+    seqCurrentOrder[targetIdx] = temp;
+    renderSeqList();
+    document.getElementById('seq-result').style.display = 'none';
+  }
+}
+
+function dragEnd() {
+  document.querySelectorAll('.seq-item').forEach(function(el){ el.classList.remove('dragging','drag-over'); });
+  dragSrcIdx = null;
+}
+
+// Touch drag
+var touchSrcIdx = null;
+var touchStartY = 0;
+var touchItem = null;
+var touchClone = null;
+
+function touchStart(e) {
+  touchSrcIdx = parseInt(this.dataset.idx);
+  touchStartY = e.touches[0].clientY;
+  touchItem = this;
+  this.classList.add('dragging');
+}
+
+function touchMove(e) {
+  e.preventDefault();
+  var y = e.touches[0].clientY;
+  var items = document.querySelectorAll('.seq-item');
+  var closest = null, closestDist = Infinity;
+  items.forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    var mid  = rect.top + rect.height/2;
+    var dist = Math.abs(y - mid);
+    if(dist < closestDist){ closestDist = dist; closest = el; }
+  });
+  items.forEach(function(el){ el.classList.remove('drag-over'); });
+  if(closest && closest !== touchItem) closest.classList.add('drag-over');
+}
+
+function touchEnd(e) {
+  var items = document.querySelectorAll('.seq-item');
+  var over  = document.querySelector('.seq-item.drag-over');
+  items.forEach(function(el){ el.classList.remove('dragging','drag-over'); });
+
+  if(over && touchSrcIdx !== null) {
+    var targetIdx = parseInt(over.dataset.idx);
+    if(touchSrcIdx !== targetIdx) {
+      var temp = seqCurrentOrder[touchSrcIdx];
+      seqCurrentOrder[touchSrcIdx] = seqCurrentOrder[targetIdx];
+      seqCurrentOrder[targetIdx] = temp;
+      renderSeqList();
+      document.getElementById('seq-result').style.display = 'none';
+    }
+  }
+  touchSrcIdx = null;
+  touchItem = null;
+}
+
+function checkSequence() {
+  var correct = true;
+  for(var i = 0; i < seqCurrentOrder.length; i++){
+    if(seqCurrentOrder[i].order !== i){ correct = false; break; }
+  }
+
+  var resEl = document.getElementById('seq-result');
+  resEl.style.display = 'block';
+
+  if(correct) {
+    scores.sequence = 25;
+    resEl.className = 'seq-result correct-fb';
+    resEl.textContent = '✅ Perfect order! You correctly arranged all five process steps — from identifying the problem all the way to improving the solution.';
+    document.getElementById('seq-check-btn').style.display = 'none';
+    document.getElementById('seq-next-btn').style.display = 'inline-block';
+    // Lock items
+    document.querySelectorAll('.seq-item').forEach(function(el){ el.draggable = false; el.style.cursor = 'default'; });
+  } else {
+    scores.sequence = Math.max(scores.sequence || 0, 0);
+    resEl.className = 'seq-result incorrect-fb';
+    resEl.textContent = '❌ Not quite — some steps are out of order. Think about what an engineer must do first: recognize the problem, then plan, build, test, and improve. Try rearranging!';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  PHASE 4 — SCENARIO
+// ═══════════════════════════════════════════════════
+function initScenario() {
+  scenarioState = { current: 0, answered: false, correct: 0, total: scenarios.length };
+  renderScenario();
+}
+
+function renderScenario() {
+  var si = scenarioState.current;
+  if(si >= scenarios.length) {
+    scores.scenario = Math.round((scenarioState.correct / scenarios.length) * 20);
+    goToPhase(5);
+    return;
+  }
+  var sc = scenarios[si];
+  scenarioState.answered = false;
+
+  var html = '<div class="scenario-text">'+escHtml(sc.story)+'</div>';
+  html += '<div class="scenario-question">'+escHtml(sc.question)+'</div>';
+  sc.choices.forEach(function(ch, idx){
+    html += '<button class="scenario-btn" id="sc_'+idx+'" onclick="answerScenario('+idx+')">'+escHtml(ch.text)+'</button>';
+  });
+  html += '<div class="feedback-box" id="sc-feedback"></div>';
+  html += '<div class="quiz-nav"><span class="q-counter">Scenario '+(si+1)+' of '+scenarios.length+'</span>';
+  html += '<button class="btn-primary btn-sm" id="sc-next-btn" onclick="nextScenario()" style="display:none">Next →</button></div>';
+
+  document.getElementById('scenario-body').innerHTML = html;
+}
+
+function answerScenario(idx) {
+  if(scenarioState.answered) return;
+  scenarioState.answered = true;
+  var sc = scenarios[scenarioState.current];
+  var ch = sc.choices[idx];
+
+  document.querySelectorAll('.scenario-btn').forEach(function(b){ b.disabled = true; });
+
+  var btn = document.getElementById('sc_'+idx);
+  btn.classList.add(ch.correct ? 'chosen-correct' : 'chosen-wrong');
+
+  if(ch.correct) {
+    scenarioState.correct++;
+    // also highlight correct if wrong was chosen
+  } else {
+    // highlight the correct one
+    sc.choices.forEach(function(c, i){
+      if(c.correct) document.getElementById('sc_'+i).classList.add('chosen-correct');
+    });
+  }
+
+  var fb = document.getElementById('sc-feedback');
+  fb.className = 'feedback-box show ' + (ch.correct ? 'correct-fb' : 'incorrect-fb');
+  fb.textContent = (ch.correct ? '✅ ' : '❌ ') + ch.explain;
+
+  document.getElementById('sc-next-btn').style.display = 'inline-block';
+  document.getElementById('sc-next-btn').textContent = (scenarioState.current+1 < scenarios.length) ? 'Next Scenario →' : 'See My Score →';
+}
+
+function nextScenario() {
+  scenarioState.current++;
+  renderScenario();
+}
+
+// ═══════════════════════════════════════════════════
+//  PHASE 5 — FINAL
+// ═══════════════════════════════════════════════════
+function showFinal() {
+  var total = scores.vocab + scores.quiz + scores.sequence + scores.scenario;
+
+  document.getElementById('final-score-display').textContent = total;
+
+  var emoji, label, msg;
+  if(total >= 90) {
+    emoji = '🏆'; label = 'Outstanding Creationeeer!';
+    msg = '"A master painter can walk up to a canvas and start painting almost instantly — because they have practiced the process." You have done the same. Keep building!';
+  } else if(total >= 70) {
+    emoji = '⭐'; label = 'Great Engineering Thinking!';
+    msg = 'You understand the core ideas well. Review any concepts you missed and remember: every process is Improvable — including yours!';
+  } else if(total >= 50) {
+    emoji = '🔧'; label = 'Good Effort — Keep Building!';
+    msg = 'Engineering takes practice. Revisit the PRINT acronym and vocabulary, then try again. Each attempt is part of the process!';
+  } else {
+    emoji = '📐'; label = 'Keep Practicing!';
+    msg = 'Every expert started as a beginner. Review the lesson material, especially the PRINT acronym and nested problems, then give it another go!';
+  }
+
+  document.getElementById('final-emoji').textContent = emoji;
+  document.getElementById('final-score-label').textContent = label;
+  document.getElementById('final-message').textContent = '💡 ' + msg;
+
+  var bd = '<strong>Vocabulary Match</strong> ' + scores.vocab + ' / 25 pts<br>' +
+           '<strong>PRINT Quiz</strong> ' + scores.quiz + ' / 30 pts<br>' +
+           '<strong>Process Sequence</strong> ' + scores.sequence + ' / 25 pts<br>' +
+           '<strong>Nested Problem Scenario</strong> ' + scores.scenario + ' / 20 pts<br>' +
+           '<hr style="border:none;border-top:1px solid #d0d9e6;margin:8px 0;">'+
+           '<strong>Total</strong> <strong style="color:#1B3A5C;font-size:1.05rem">' + total + ' / 100</strong>';
+  document.getElementById('final-breakdown').innerHTML = bd;
+}
+
+// ═══════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════
+function shuffle(arr) {
+  for(var i = arr.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i+1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function CSS_escape(str) {
+  return str.replace(/([^a-zA-Z0-9_-])/g, '\\$1');
+}
+// Override CSS.escape if needed
+if(typeof CSS === 'undefined' || !CSS.escape) {
+  window.CSS = { escape: CSS_escape };
+}
+
+function restartActivity() {
+  scores = { vocab: 0, quiz: 0, sequence: 0, scenario: 0 };
+  document.getElementById('final-screen').style.display = 'none';
+  document.getElementById('intro-screen').style.display = 'block';
+  document.getElementById('intro-screen').classList.add('active');
+  document.getElementById('progress-bar').style.width = '0%';
+  currentPhase = 0;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+[
+  {
+    "id": "m049a1b2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Test Protocol and Baselines</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049c3d4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Welcome back to the Mousetrap Build course! In the last lesson you set up your Arduino station and measured things like speed and distance as your car moved. Now you're stepping into the <strong>Performance phase</strong> of the Creationeering framework — and that starts with two critical ideas: <strong>test protocols</strong> and <strong>baselines</strong>.</p><p>Without a consistent way to test your car, you can't really know whether a design change made things better or worse. You might <em>think</em> your new wheel size helped, but if your test conditions changed too, the data doesn't tell you much. This lesson gives you the tools to test systematically — the same way professional engineers evaluate and refine their designs before anything ever ships to a customer.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049e5f6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Explain why a standardized test protocol is essential for evaluating engineering designs.</li><li>Define <strong>baseline</strong> in the context of engineering testing and describe its role in iterative design.</li><li>Develop a simple test protocol for their mousetrap-powered car, including key variables and measurement techniques.</li><li>Apply the <strong>Objective, Constraint, Variable (OCV)</strong> method to analyze their car's performance testing.</li><li>Approach data collection with diligence and integrity, recognizing that honest measurement is a form of good stewardship over time and resources.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049g7h8",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Performance",
+          "definition": "How well an engineered system or product fulfills its designed function and objectives."
+        },
+        {
+          "term": "Test Protocol",
+          "definition": "A detailed, step-by-step plan for conducting an experiment or evaluation to ensure consistency and reliability of results."
+        },
+        {
+          "term": "Baseline",
+          "definition": "An initial measurement or set of data used as a reference point for comparing future results after design changes."
+        },
+        {
+          "term": "Objective",
+          "definition": "The desired outcome or goal of a design or test — often something to be maximized or minimized."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction on a design or test, such as available materials, time, or environmental conditions."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor in a design or test that can be changed or controlled to observe its effect on the outcome."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "The approach of understanding how macro-level observations (like a car's speed) are influenced by micro-level causes (like material properties)."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "Designing and operating a system so that resources are preserved and the solution remains viable long-term."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049i9j0",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049k1l2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designed to Perform Well</h2><p>The Performance phase of Creationeering asks a simple but powerful question: <em>Does your design actually do what it was meant to do?</em> It's not enough to build something — you have to know whether it works, and how well.</p><p>God modeled this kind of intentional evaluation at the very beginning. After each stage of creation, He stepped back and assessed what He had made. Genesis 1:31 records that final review: <em>\"And God saw every thing that He had made, and, behold, it was very good.\"</em> That wasn't a casual glance. It was a thorough confirmation that everything performed exactly as designed — light, water, land, living creatures, and humanity all functioning together in harmony.</p><p>When you test your mousetrap car, you're doing something similar. You built it with a purpose. Now it's time to find out how well it fulfills that purpose — and what you can do to make it even better.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049bib1",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:31 (KJV)</strong> — \"And God saw every thing that He had made, and, behold, it was very good.\" God didn't just create — He evaluated. Good engineering follows the same pattern: build, test, and confirm it meets the goal.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049m3n4",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049o5p6",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Test Protocol?</h2><p>Imagine two students both test their mousetrap cars on the same day. One tests on a smooth gym floor; the other tests on a carpeted hallway. One releases the car by hand; the other uses a consistent trigger. One measures with a tape measure; the other uses footsteps. Their results will look completely different — even if their cars are identical.</p><p>That's the problem a <strong>test protocol</strong> solves. A test protocol is your rulebook for testing. It spells out <em>every</em> condition that could affect the outcome so that every test run is as close to identical as possible — except for the one thing you're actually trying to change.</p><p>Professional engineers write test protocols before they ever run a single test. Aerospace engineers testing a new wing design specify the exact wind tunnel speed, temperature, angle, and sensor placement. You're doing the same thing — just on a smaller scale. Your mousetrap car protocol should answer questions like:</p><ul><li>Where will you test? (Surface type, indoor vs. outdoor)</li><li>How will you release the car? (Same starting position every time)</li><li>How will you measure distance or speed? (Tape measure, Arduino sensor, stopwatch)</li><li>How many runs will you record? (More runs = more reliable data)</li><li>How will you handle a run that looks wrong? (Will you throw it out, or include it?)</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student measuring the distance traveled by a mousetrap car on a smooth indoor floor, with a tape measure laid flat and a notebook nearby for recording results"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049q7r8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Establishing Your Baseline</h2><p>Before you change anything about your car's design, you need to know where you're starting. That starting point is your <strong>baseline</strong>.</p><p>Think of it like a doctor taking your temperature when you're healthy. That normal reading — 98.6°F — becomes the reference point. If you get sick and spike a fever, the doctor compares your current temperature to that baseline to understand how far off you are. Without knowing the healthy number, a temperature reading on its own doesn't mean much.</p><p>Your baseline is the performance data for your car <em>before</em> you make any changes. Run your car several times under your standardized protocol and record the results. That data becomes the standard everything else gets measured against. If your modified car runs faster, the baseline proves it. If it runs slower, the baseline catches that too.</p><p>Skipping the baseline is one of the most common mistakes in student engineering projects — and it makes all the later data nearly useless for decision-making.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049warn",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip the baseline.</strong> It's tempting to start modifying your car right away — but if you don't record initial performance data first, you'll have nothing to compare your changes against. Always collect baseline runs <em>before</em> any design modifications.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049s9t0",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Objective, Constraint, Variable</h2><p>Every good engineering test is built around three questions. Together they form the <strong>OCV method</strong>.</p><h3>Objective — What are you trying to achieve?</h3><p>Your objective is the goal of the test. For a mousetrap car, your objective might be to maximize distance traveled, or to achieve the most consistent speed across multiple runs. Being specific matters. \"Go far\" is vague. \"Travel at least 5 meters in a straight line\" gives you something you can actually measure and evaluate.</p><h3>Constraint — What are you working within?</h3><p>Constraints are the limits you can't cross. You can only use materials already in your kit. Your car must stay within a lane. You have 30 minutes to complete your test runs. Constraints aren't obstacles — they're part of the design challenge. Real engineers always work within constraints: budget, weight limits, safety codes, deadlines.</p><h3>Variable — What are you changing?</h3><p>A variable is the one thing you're adjusting to see how it affects performance. Maybe you're testing wheel diameter — smaller wheels vs. larger wheels. Or you're testing axle friction by adding a drop of oil. The key rule: <strong>change only one variable at a time.</strong> If you change two things at once and your car improves, you won't know which change caused it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple diagram showing the OCV framework as three labeled boxes — Objective, Constraint, Variable — with arrows pointing toward a central 'Test Result' box"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049u1v2",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049w3x4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture: Multiscale Thinking</h2><p>Here's something experienced engineers think about that beginners often miss. When your mousetrap car doesn't perform as expected, the reason might not be obvious from just watching it roll. The answer might be hiding at a smaller scale.</p><p>This is called <strong>multiscale modeling</strong> — connecting what you can see (your car's speed and distance) to what you can't see (friction in the axle bearings, flex in the frame, energy lost to heat). A car that loses distance over time might be experiencing axle friction that increases as the spring uncoils. That's a micro-level cause creating a macro-level result.</p><p>You don't need a microscope to think this way. Ask yourself: <em>Where is energy being lost?</em> Follow that question down — from the whole car, to the wheel, to the axle, to the contact point. Good test data helps you find those answers systematically rather than guessing.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049y5z6",
+    "type": "text",
+    "data": {
+      "html": "<h2>Testing with Integrity</h2><p>There's one more dimension to testing that goes beyond technique. It's about character.</p><p>When you run a test and the result isn't what you hoped for, it can be tempting to dismiss it — \"that run doesn't count\" — or to record a number that looks better than what actually happened. Don't. Bad data is worse than no data. It leads you to make changes based on a lie, and you'll waste time chasing a problem that doesn't exist or missing one that does.</p><p>Honest data collection is a form of stewardship. God has given you time, materials, and a real engineering challenge. Treating that seriously — recording exactly what happened, even when it's disappointing — is how you honor those gifts and build the kind of trustworthy character that makes a great engineer. Proverbs 12:17 puts it plainly: <em>\"An honest witness tells the truth.\"</em> That applies in the lab just as much as anywhere else.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049tip1",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Record everything, even the bad runs.</strong> Note what went wrong and why — wheel slipped, car veered sideways, trap misfired. That information is still data. It tells you what variables you haven't controlled yet, and that's exactly the kind of insight that leads to smarter design changes.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049aa11",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building Your Test Protocol: A Quick Checklist</h2><p>Before your next test session, use this checklist to make sure your protocol is ready:</p><ul><li><strong>Location defined:</strong> You know exactly where you'll run each test (surface type, indoor/outdoor).</li><li><strong>Starting position marked:</strong> A consistent starting line is marked so every run begins the same way.</li><li><strong>Release method standardized:</strong> You'll release the car the same way every time.</li><li><strong>Measurement method chosen:</strong> Tape measure, Arduino sensor, or stopwatch — pick one and stick with it.</li><li><strong>Number of runs decided:</strong> Aim for at least three runs per configuration to catch outliers.</li><li><strong>Baseline recorded first:</strong> Your unmodified car's results are documented before any changes.</li><li><strong>One variable at a time:</strong> Each new test session changes only one thing from the previous setup.</li><li><strong>Data recorded honestly:</strong> Every run is written down, including ones that didn't go as planned.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m049acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: What Professional Test Engineers Do",
+      "html": "<p>In professional engineering environments, test protocols are formal documents reviewed and approved before any testing begins. They include sections like <strong>purpose</strong> (why the test is being run), <strong>scope</strong> (what is and isn't being tested), <strong>equipment list</strong>, <strong>safety precautions</strong>, <strong>step-by-step procedures</strong>, and <strong>acceptance criteria</strong> (the standard that determines if the design passes or fails).</p><p>Automotive engineers testing a new brake system, for example, must document every condition — road surface, car weight, tire pressure, ambient temperature, driver input — before the test is approved. This level of rigor protects people's lives and ensures results can be reproduced and trusted.</p><p>Your mousetrap car protocol doesn't need to be that complex, but practicing this kind of thinking now builds habits that translate directly to real engineering work later.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

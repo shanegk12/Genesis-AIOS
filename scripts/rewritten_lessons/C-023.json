@@ -1,0 +1,371 @@
+[
+  {
+    "id": "c023t0001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Modeling Reality: Physical vs. Computational</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In previous units, you established that engineering is the application of math and science to solve problems, and that every design decision must be filtered through the Objectives, Constraints, and Variables (OCV) Method. Today you dive into the core technical tools that allow engineers to test and prove their solutions before anything is ever built: Physical and Computational Models. A model is simply a working representation of reality. By using models, you can accurately predict how a design will perform, test its limits, and ensure you are designing with maximum efficiency and integrity. This lesson will show you how to combine the tangible truth of physical prototypes with the immense power of digital simulation to achieve unparalleled accuracy and precision in your creations.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Explain the difference between a physical model and a computational model.</li><li>Understand foundational aspects of both model types to predict performance.</li><li>Apply models to make optimal design decisions based on verifiable data.</li><li>Connect the concept of model validation to the biblical principle of truth and integrity.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023v0001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Physical Model",
+          "definition": "A tangible, real-world representation of a system, often built to scale for testing and measurement."
+        },
+        {
+          "term": "Computational Model",
+          "definition": "A digital or mathematical simulation used to predict performance without building a physical object."
+        },
+        {
+          "term": "Simulation",
+          "definition": "The process of running a computational model to observe how a system behaves over time or under different conditions."
+        },
+        {
+          "term": "Validation",
+          "definition": "The critical process of checking whether the results of a computational model match the results of a physical model — the real-world ground truth."
+        },
+        {
+          "term": "Finite Element Analysis (FEA)",
+          "definition": "A computational method used to predict stress and forces acting inside an object by breaking it into thousands of tiny pieces and analyzing each one."
+        },
+        {
+          "term": "Factor of Safety (FS)",
+          "definition": "A mathematical ratio that describes how much stronger a design is than it needs to be, providing a buffer against unexpected failure."
+        },
+        {
+          "term": "Ground Truth",
+          "definition": "Objective, verified data collected directly from a real-world physical system — the ultimate standard against which models are checked."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023d0001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Models: Tools for Wisdom and Truth</h2><p>Every idea an engineer has is just a hypothesis until it can be tested. In the past, testing meant building expensive, full-size prototypes and watching them fail — a process that wasted enormous amounts of time, money, and materials. Today, engineers use models as a technical tool to solve problems smarter and faster.</p><p>Think of it like a rough draft. A writer doesn't publish the very first sentence they type. They revise, check for errors, and test their ideas before committing. Models are your engineering rough draft — a way to check your thinking before the stakes get high.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023b0001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 3:19 —</strong> \"By wisdom the Lord laid the earth's foundations, by understanding he set the heavens in place.\" God didn't create at random — He designed with purpose, order, and knowledge. When you use models to test and verify your work, you are reflecting that same commitment to thoughtful, knowledgeable design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Central Tension: Every Design Has a Tradeoff</h2><p>A model helps you solve the most common challenge in engineering: the <strong>tradeoff</strong>. Every design requires a compromise between competing goals. Consider a bridge:</p><ul><li>You want it to be <strong>strong</strong> — that is your Objective.</li><li>But it also needs to be <strong>lightweight and affordable</strong> — those are your Constraints.</li></ul><p>If you make the support beams thicker, the bridge gets stronger — but the weight and cost increase. If you make the beams thinner, cost drops, but strength might fall below the safety requirement. There is no obviously perfect answer. Models give you the <em>data</em> needed to find the optimal solution to that tradeoff, removing guesswork and replacing it with evidence.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023c0001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>The Tradeoff Principle:</strong> In engineering, optimizing for one variable often pushes another in the wrong direction. Models let you explore dozens of combinations quickly — finding the design that best satisfies all your objectives and constraints at once.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023d0002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Two Types of Models, One Goal</h2><p>To ensure integrity in your results, engineers rely on two types of models that must constantly verify each other. Neither one is complete on its own.</p><h3>Physical Models</h3><p>A physical model is a real, tangible object you can hold, measure, and test. It might be a scale replica of a bridge, a prototype of a product casing, or even a simple foam mockup used to check dimensions. Physical models provide the definitive <strong>ground truth</strong> — data from the real world that cannot be argued with. When a physical test says something broke, it broke. There is no debate.</p><h3>Computational Models</h3><p>A computational model lives inside a computer. It uses mathematics and physics equations to simulate how a system will behave — without requiring you to build anything. This allows for <strong>rapid iteration</strong>: you can change a variable, re-run the simulation, and see results in seconds. Testing a hundred design variations physically might take months. Computationally, it might take an afternoon.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison: a physical prototype of a bridge truss on the left, and a color-coded FEA stress simulation of the same truss on the right"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023c0002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Never trust a computational model alone. A simulation is only as accurate as the assumptions built into it. If those assumptions are wrong, the results are wrong — even if the math looks perfect. Always validate with physical testing.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Validation: Where the Two Models Meet</h2><p>The most important moment in the modeling process is <strong>validation</strong> — when you compare what your computational model predicted to what your physical model actually measured. If the numbers match closely, your simulation is reliable. If they don't match, something in your assumptions needs to be corrected.</p><p>This loop — simulate, build, test, compare, refine — is the heartbeat of modern engineering. It is also a picture of intellectual honesty. A good engineer doesn't just hope their simulation is right. They check. They verify. They pursue the truth about how their design actually performs, even when the results are inconvenient.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023b0002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>John 8:32 —</strong> \"Then you will know the truth, and the truth will set you free.\" Validation in engineering is a pursuit of truth. When you honestly test your designs against reality — even when it means starting over — you are building with integrity, the same integrity God calls us to in every area of life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Factor of Safety: Building in a Margin</h2><p>One of the most practical outputs of the modeling process is the <strong>Factor of Safety (FS)</strong>. After your models tell you the maximum stress or load your design can handle, you don't design right up to that limit. You build in a buffer.</p><p>The formula is straightforward:</p><p><strong>Factor of Safety = Actual Strength ÷ Required Strength</strong></p><p>For example, if a shelf must hold 100 pounds and your design can actually hold 300 pounds, the Factor of Safety is 3.0. That buffer accounts for unexpected loads, material imperfections, and wear over time. A higher Factor of Safety means a safer, more trustworthy design — though it may also mean more material and higher cost. Finding the right balance is, once again, a tradeoff that your models help you solve.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram illustrating Factor of Safety: a bar chart comparing required strength versus actual design strength, with the safety margin highlighted"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023c0003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the FS Formula:</strong> Factor of Safety = Actual Strength ÷ Required Strength. A Factor of Safety of 1.0 means your design is exactly strong enough — and one small unexpected load could cause failure. Most real-world engineering applications require an FS of at least 1.5 to 3.0 depending on how critical the system is.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Finite Element Analysis: Seeing Inside Your Design</h2><p>One of the most powerful computational tools available to engineers is <strong>Finite Element Analysis (FEA)</strong>. The idea sounds complex, but the concept is simple. Imagine taking your design — say, a metal bracket — and slicing it into thousands of tiny puzzle pieces. FEA software analyzes the forces acting on each tiny piece and how those forces transfer to the neighboring pieces.</p><p>The result is usually displayed as a color map: red areas show where stress is highest, blue areas show where the design is barely loaded at all. This tells you exactly where your design might fail and where you might be wasting material by over-building. It is like having X-ray vision for your engineering design — and it is only possible because of computational modeling.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023img003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A color-coded Finite Element Analysis (FEA) stress map of a mechanical bracket, showing red high-stress zones near mounting points and blue low-stress zones in the center"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023d0003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023t0010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Physical and computational models are not competing tools — they are partners. The computational model helps you explore the design space quickly and cheaply. The physical model confirms that your simulation reflects reality. Validation connects the two, and the Factor of Safety ensures that your final design has enough margin to be trusted in the real world.</p><p>Together, these tools reflect a core engineering value: <em>don't guess when you can know</em>. Building without testing is like navigating without a map. Models are your map — and using them well is one of the clearest ways you can honor the responsibility God has given you to design with wisdom, care, and integrity.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023c0004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study Tip:</strong> When reviewing this lesson, try to draw the modeling loop from memory: Computational Model → Physical Model → Validation → Refine. Understanding that loop is the key to understanding everything in this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023d0004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023a0001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Is a Model?",
+      "html": "<p>A model is a working representation of reality used to predict, test, and verify how a design will perform. Engineers use models to resolve tradeoffs between competing objectives and constraints — without having to build the final product first.</p><p><strong>Ask yourself:</strong> Can you explain in your own words why a computational model alone is not enough to trust a design?</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023a0002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Physical vs. Computational Models",
+      "html": "<p><strong>Physical Model:</strong> Real, tangible, touchable. Provides ground truth. Slower and more expensive to test, but results are undeniable.</p><p><strong>Computational Model:</strong> Lives in a computer. Uses math and physics to simulate behavior. Fast and cheap to iterate, but must be validated against physical results.</p><p><strong>Ask yourself:</strong> What would happen if an engineer only used a computational model and skipped physical testing entirely?</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023a0003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Factor of Safety",
+      "html": "<p>Factor of Safety = Actual Strength ÷ Required Strength. A value greater than 1.0 means your design is stronger than the minimum requirement. The extra margin protects against unexpected loads, material variation, and wear over time.</p><p><strong>Practice problem:</strong> A hook must support 50 lbs. Your design can support 175 lbs. What is the Factor of Safety?</p><p><em>Answer: 175 ÷ 50 = 3.5</em></p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c023a0004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Validation and Integrity",
+      "html": "<p>Validation is the process of comparing your computational model's predictions to real-world physical test data. When they match, your simulation is trustworthy. When they don't, you revise your assumptions and try again. This honest pursuit of truth is an act of engineering integrity — and a reflection of the biblical call to pursue what is true and right.</p><p><strong>Ask yourself:</strong> Why is it important to keep testing even when your computational model looks correct?</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

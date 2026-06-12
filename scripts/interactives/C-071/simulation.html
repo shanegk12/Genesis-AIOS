@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 3 R's – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.3rem; letter-spacing: 1px; }
+  header p { font-size: 0.8rem; color: #C9A84C; margin-top: 2px; }
+
+  .screen { display: none; flex-direction: column; align-items: center; padding: 20px; }
+  .screen.active { display: flex; }
+
+  /* INTRO */
+  #intro-screen { justify-content: center; min-height: calc(100vh - 60px); }
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.12);
+    padding: 32px 28px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; color: #444; line-height: 1.6; margin-bottom: 16px; }
+  .r-badges { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 18px 0; }
+  .r-badge {
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 10px 22px;
+    letter-spacing: 1px;
+  }
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 10px;
+  }
+  .btn:hover { background: #b8943f; transform: scale(1.03); }
+  .btn:disabled { background: #ccc; cursor: default; transform: none; }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+  }
+  .btn-outline:hover { background: #e8edf3; }
+
+  /* SCENARIO GAME */
+  #game-screen { min-height: calc(100vh - 60px); max-width: 680px; margin: 0 auto; width: 100%; }
+  .progress-bar-wrap {
+    width: 100%;
+    background: #dde4ee;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .progress-bar { height: 10px; background: #C9A84C; border-radius: 20px; transition: width 0.4s; }
+  .scenario-counter { font-size: 0.8rem; color: #888; margin-bottom: 6px; align-self: flex-start; }
+
+  .scenario-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.12);
+    padding: 26px 22px;
+    width: 100%;
+    margin-bottom: 18px;
+  }
+  .scenario-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .scenario-title { font-size: 1.05rem; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; }
+  .scenario-desc { font-size: 0.92rem; color: #444; line-height: 1.6; margin-bottom: 18px; }
+  .scenario-question { font-size: 0.97rem; font-weight: 600; color: #1B3A5C; margin-bottom: 14px; }
+
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2px solid #c8d3e0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+    font-family: inherit;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fffdf4; }
+  .choice-btn.correct { border-color: #2e9c5e; background: #eafaf1; color: #1a5e37; }
+  .choice-btn.wrong { border-color: #c0392b; background: #fdf1f0; color: #7b1c14; }
+  .choice-btn.reveal { border-color: #2e9c5e; background: #eafaf1; color: #1a5e37; }
+  .choice-btn:disabled { cursor: default; }
+
+  .feedback-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-top: 14px;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.good { background: #eafaf1; border-left: 4px solid #2e9c5e; color: #1a5e37; }
+  .feedback-box.bad { background: #fdf1f0; border-left: 4px solid #c0392b; color: #7b1c14; }
+
+  .score-tray {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    margin-bottom: 12px;
+    align-self: flex-end;
+  }
+  .score-tray span { background: #1B3A5C; color: #C9A84C; border-radius: 6px; padding: 4px 12px; font-size: 1rem; }
+
+  .nav-row { display: flex; justify-content: flex-end; margin-top: 6px; }
+
+  /* RESULTS */
+  #result-screen { justify-content: center; min-height: calc(100vh - 60px); }
+  .result-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.12);
+    padding: 32px 28px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+  .result-emoji { font-size: 3.5rem; margin-bottom: 10px; }
+  .result-title { font-size: 1.4rem; font-weight: 700; color: #1B3A5C; margin-bottom: 8px; }
+  .result-score { font-size: 2.6rem; font-weight: 800; color: #C9A84C; margin: 10px 0; }
+  .result-sub { font-size: 0.92rem; color: #555; margin-bottom: 20px; line-height: 1.6; }
+  .result-breakdown {
+    text-align: left;
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+  }
+  .result-breakdown h4 { font-size: 0.95rem; margin-bottom: 10px; color: #1B3A5C; }
+  .bd-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #e0e6ef; }
+  .bd-row:last-child { border-bottom: none; }
+  .bd-label { font-weight: 600; }
+  .bd-val { color: #C9A84C; font-weight: 700; }
+  .verse-box {
+    background: #1B3A5C;
+    color: #f0e6c8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-style: italic;
+    font-size: 0.85rem;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .verse-ref { font-style: normal; font-weight: 700; color: #C9A84C; display: block; margin-top: 6px; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ The 3 R's: Reduce, Reuse, Recycle</h1>
+  <p>Creationeering™ — Sustainability Phase</p>
+</header>
+
+<!-- INTRO SCREEN -->
+<div id="intro-screen" class="screen active">
+  <div class="intro-card">
+    <h2>Sustainability in Action</h2>
+    <div class="r-badges">
+      <div class="r-badge">♻ REDUCE</div>
+      <div class="r-badge">🔄 REUSE</div>
+      <div class="r-badge">♻ RECYCLE</div>
+    </div>
+    <p>You'll work through <strong>8 real-world engineering scenarios</strong>. For each one, choose the best action a Creationeer would take — and learn how each R contributes to sustainable design.</p>
+    <p style="font-size:0.85rem;color:#888;">Tip: Each question has one best answer. Read carefully!</p>
+    <button class="btn" onclick="startGame()">Start Activity ➜</button>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game-screen" class="screen">
+  <div class="scenario-counter" id="scenario-counter">Scenario 1 of 8</div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+  </div>
+  <div class="score-tray">Score: <span id="score-display">0</span></div>
+
+  <div class="scenario-card" id="scenario-card">
+    <div class="scenario-tag" id="sc-tag">Scenario</div>
+    <div class="scenario-title" id="sc-title"></div>
+    <div class="scenario-desc" id="sc-desc"></div>
+    <div class="scenario-question" id="sc-question"></div>
+    <div class="choices" id="choices-container"></div>
+    <div class="feedback-box" id="feedback-box"></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn" id="next-btn" style="display:none;" onclick="nextScenario()">Next ➜</button>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" class="screen">
+  <div class="result-card">
+    <div class="result-emoji" id="result-emoji">🌟</div>
+    <div class="result-title" id="result-title">Great Work!</div>
+    <div class="result-score" id="result-score">0 / 8</div>
+    <div class="result-sub" id="result-sub"></div>
+    <div class="result-breakdown">
+      <h4>📊 Your R's Performance</h4>
+      <div class="bd-row"><span class="bd-label">♻ Reduce</span><span class="bd-val" id="bd-reduce">—</span></div>
+      <div class="bd-row"><span class="bd-label">🔄 Reuse</span><span class="bd-val" id="bd-reuse">—</span></div>
+      <div class="bd-row"><span class="bd-label">♻ Recycle</span><span class="bd-val" id="bd-recycle">—</span></div>
+      <div class="bd-row"><span class="bd-label">🎯 OCV Method</span><span class="bd-val" id="bd-ocv">—</span></div>
+    </div>
+    <div class="verse-box">
+      "The earth is the Lord's, and everything in it, the world, and all who live in it."
+      <span class="verse-ref">— Psalm 24:1 (NIV)</span>
+    </div>
+    <button class="btn" onclick="restartGame()" style="margin-top:18px;">Try Again 🔄</button>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const scenarios = [
+  {
+    tag: "Design Challenge",
+    category: "reduce",
+    title: "Too Much Packaging",
+    desc: "A Creationeer is designing a new toy. The current design uses a large plastic shell, three foam inserts, and two layers of cardboard — most of which goes straight to the trash when a customer opens it.",
+    question: "Which action BEST reflects the Creationeering principle of REDUCE?",
+    choices: [
+      { text: "Redesign the packaging to use only what is needed to safely ship the product.", correct: true },
+      { text: "Print 'Please Recycle' on all the packaging materials.", correct: false },
+      { text: "Donate old packaging to a school for art projects.", correct: false },
+      { text: "Ship products without any packaging at all.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Correct! REDUCE means lessening the amount of materials used in the first place. Redesigning packaging to use only what's necessary is the most direct way to reduce waste at the source.",
+      wrong: "❌ Not quite. While printing recycling labels or donating packaging are helpful, they don't tackle the root problem. REDUCE means using LESS material to begin with — that's the most powerful step."
+    }
+  },
+  {
+    tag: "Vocabulary",
+    category: "ocv",
+    title: "OCV Method",
+    desc: "A Creationeering team is tackling school lunch waste. They use the OCV Method to organize their thinking before jumping to solutions.",
+    question: "In the OCV Method, what does the 'C' stand for, and why does it matter in a sustainability design problem?",
+    choices: [
+      { text: "Costs — so the team knows how much money they have.", correct: false },
+      { text: "Constraints — limits like budget, materials, and rules that shape the design.", correct: true },
+      { text: "Creativity — the team needs creative ideas.", correct: false },
+      { text: "Calculations — the math needed for the project.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Exactly right! The OCV Method identifies Objectives, Constraints, and Variables. Constraints are real limits (rules, budgets, materials) that a Creationeer must design within — ignoring them leads to solutions that don't work in the real world.",
+      wrong: "❌ The 'C' stands for Constraints. Constraints are the limits (rules, budget, available materials) that shape every design decision. They help Creaotioneers build practical, real-world solutions."
+    }
+  },
+  {
+    tag: "Real-World Scenario",
+    category: "reuse",
+    title: "Old School Computers",
+    desc: "Genesis Academy is replacing its computer lab. The old computers still work but are slower than current needs. A student suggests sending them to a community center instead of throwing them away.",
+    question: "Which of the 3 R's does this student's idea BEST represent?",
+    choices: [
+      { text: "Recycle — the computers will be broken down and made into new parts.", correct: false },
+      { text: "Reduce — fewer resources will be used.", correct: false },
+      { text: "Reuse — the computers are used again for a new purpose.", correct: true },
+      { text: "None — computers cannot be part of the 3 R's.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Perfect! REUSE means using a product again, either for its original purpose or a new one. Sending working computers to a community center gives them a second life — that's Reuse in action!",
+      wrong: "❌ Sending working computers to a community center is REUSE — using a product again for a new purpose. Recycle would involve breaking them down to make new materials; this keeps them intact and working."
+    }
+  },
+  {
+    tag: "Sustainability Concept",
+    category: "reduce",
+    title: "Water at the Factory",
+    desc: "A manufacturing plant uses 10,000 gallons of water daily to cool its machines. An engineer discovers that a redesigned cooling loop could do the same job with 3,500 gallons per day.",
+    question: "How does this redesign support the Sustainability phase of Creationeering™?",
+    choices: [
+      { text: "It recycles the water so it can be sold later.", correct: false },
+      { text: "It reuses water by collecting rainwater outside.", correct: false },
+      { text: "It reduces resource use so the resource stays available for future use.", correct: true },
+      { text: "It doesn't — sustainability only applies to solid waste, not water.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ That's the heart of sustainability! The definition says: using resources in a way that allows them to remain available after the process is done. Using 65% less water means more water stays in the natural system for the future.",
+      wrong: "❌ Sustainability means using resources so they remain available for the future. The redesign uses far less water (REDUCE), directly keeping that resource available. Sustainability applies to ALL resources — water, energy, materials."
+    }
+  },
+  {
+    tag: "Sorting Challenge",
+    category: "recycle",
+    title: "Aluminum Can Drive",
+    desc: "Students collect hundreds of aluminum cans from a school event. Rather than throwing them in the trash, the cans are sent to a processing facility that melts them down and forms them into new aluminum sheets for manufacturing.",
+    question: "What BEST describes what is happening to these cans, and why is it valuable?",
+    choices: [
+      { text: "Reuse — the cans are being used for their original purpose again.", correct: false },
+      { text: "Recycle — used materials are processed into new products, preventing waste of useful resources.", correct: true },
+      { text: "Reduce — fewer cans will be made because of this program.", correct: false },
+      { text: "This is not part of the 3 R's because the original cans are destroyed.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Spot on! RECYCLE means processing used materials into new products, preventing waste of potentially useful resources. Melting cans into new aluminum sheets is a classic example — the material's value is recovered!",
+      wrong: "❌ This is RECYCLING. The definition says: processing used materials into new products, preventing waste of useful resources. The aluminum isn't reused as-is (that would be Reuse) — it's processed into something new."
+    }
+  },
+  {
+    tag: "OCV Design Problem",
+    category: "ocv",
+    title: "Lunch Tray Waste",
+    desc: "A Creationeering team wants to reduce lunch tray waste at their school. Their OBJECTIVE is to cut cafeteria trash by 50%. One VARIABLE they can change is whether to use disposable or reusable trays.",
+    question: "Which of the following would be a CONSTRAINT for this design problem?",
+    choices: [
+      { text: "The school's dishwasher is broken and cannot be repaired this year.", correct: true },
+      { text: "Students want less trash in the cafeteria.", correct: false },
+      { text: "The team could try compostable trays or reusable ones.", correct: false },
+      { text: "Trash amount can be measured weekly.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Great OCV thinking! A CONSTRAINT is a real limit that shapes your design. A broken dishwasher that can't be fixed this year is a hard constraint — the team must design around it, not through it.",
+      wrong: "❌ In the OCV Method, Constraints are the real limits a team must work within. Wanting less trash is an Objective. Having choices of tray types is a Variable. A constraint is a fixed limit — like a broken dishwasher that rules out reusable trays this year."
+    }
+  },
+  {
+    tag: "Cradle-to-Cradle",
+    category: "reuse",
+    title: "Next-Life Planning",
+    desc: "From the last lesson, Cradle-to-Cradle Design means planning a product's 'next life' from the very beginning. An engineer is designing a water bottle and considers that when the product is worn out, its parts could be cleaned, refilled, and resold as refurbished bottles.",
+    question: "Which of the 3 R's is MOST directly used in this Cradle-to-Cradle plan?",
+    choices: [
+      { text: "Reduce — the bottle uses less plastic than competitors.", correct: false },
+      { text: "Recycle — the plastic is melted to make new bottles.", correct: false },
+      { text: "Reuse — the product is used again rather than discarded.", correct: true },
+      { text: "None — Cradle-to-Cradle is a separate concept.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Exactly! Planning to refurbish and resell the bottle means using it again — that's REUSE. Cradle-to-Cradle design and the 3 R's work together: planning the next life of a product often means building in reuse from the start.",
+      wrong: "❌ The plan to clean and resell the bottles as refurbished products is REUSE — using a product again, either for its original purpose or a new one. Recycling would involve breaking the material down; this keeps the product intact."
+    }
+  },
+  {
+    tag: "Stewardship Reflection",
+    category: "reduce",
+    title: "The Creationeer's Choice",
+    desc: "A product engineer has two design options. Option A uses recycled materials but still creates significant waste. Option B is redesigned from scratch to need fewer materials total, produces minimal waste, and the small amount of waste it does create is recyclable.",
+    question: "Which option BEST reflects the full spirit of the 3 R's in the Sustainability phase?",
+    choices: [
+      { text: "Option A — using recycled materials is always the most sustainable choice.", correct: false },
+      { text: "Option B — reducing waste at the source while planning for recyclable by-products uses multiple R's together.", correct: true },
+      { text: "Both options are equal in sustainability.", correct: false },
+      { text: "Neither — a truly sustainable product creates zero materials.", correct: false }
+    ],
+    feedback: {
+      correct: "✅ Outstanding thinking! The 3 R's work best together. Option B REDUCES material use from the start (strongest R) AND plans for RECYCLING the remaining waste — that's the Sustainability phase in full action: resources stay available because less is used and what remains is recovered.",
+      wrong: "❌ Option B is stronger because it applies the 3 R's in order of impact. REDUCE comes first — use less to begin with. Then planning for recyclable waste adds a second layer. Using recycled materials (Option A) is good, but it doesn't address overuse at the source."
+    }
+  }
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentIdx = 0;
+let score = 0;
+let answered = false;
+let catScores = { reduce: { correct: 0, total: 0 }, reuse: { correct: 0, total: 0 }, recycle: { correct: 0, total: 0 }, ocv: { correct: 0, total: 0 } };
+
+// ─── FUNCTIONS ────────────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startGame() {
+  currentIdx = 0;
+  score = 0;
+  answered = false;
+  catScores = { reduce: { correct: 0, total: 0 }, reuse: { correct: 0, total: 0 }, recycle: { correct: 0, total: 0 }, ocv: { correct: 0, total: 0 } };
+  document.getElementById('score-display').textContent = '0';
+  showScreen('game-screen');
+  renderScenario();
+}
+
+function renderScenario() {
+  const s = scenarios[currentIdx];
+  answered = false;
+
+  // Count totals per category
+  catScores[s.category].total = (catScores[s.category].total || 0);
+  // We'll tally correctly when answered
+
+  document.getElementById('scenario-counter').textContent = `Scenario ${currentIdx + 1} of ${scenarios.length}`;
+  document.getElementById('progress-bar').style.width = `${(currentIdx / scenarios.length) * 100}%`;
+
+  document.getElementById('sc-tag').textContent = s.tag;
+  document.getElementById('sc-title').textContent = s.title;
+  document.getElementById('sc-desc').textContent = s.desc;
+  document.getElementById('sc-question').textContent = s.question;
+
+  const container = document.getElementById('choices-container');
+  container.innerHTML = '';
+  s.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => handleAnswer(c, i);
+    container.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedback-box');
+  fb.className = 'feedback-box';
+  fb.textContent = '';
+  document.getElementById('next-btn').style.display = 'none';
+}
+
+function handleAnswer(choice, idx) {
+  if (answered) return;
+  answered = true;
+
+  const s = scenarios[currentIdx];
+  const buttons = document.querySelectorAll('.choice-btn');
+  buttons.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback-box');
+
+  if (choice.correct) {
+    buttons[idx].classList.add('correct');
+    fb.className = 'feedback-box show good';
+    fb.textContent = s.feedback.correct;
+    score++;
+    catScores[s.category].correct = (catScores[s.category].correct || 0) + 1;
+    document.getElementById('score-display').textContent = score;
+  } else {
+    buttons[idx].classList.add('wrong');
+    // Reveal correct answer
+    s.choices.forEach((c, i) => {
+      if (c.correct) buttons[i].classList.add('reveal');
+    });
+    fb.className = 'feedback-box show bad';
+    fb.textContent = s.feedback.wrong;
+  }
+
+  // Track totals correctly
+  catScores[s.category].total = (catScores[s.category].total || 0) + 1;
+
+  document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+function nextScenario() {
+  currentIdx++;
+  if (currentIdx >= scenarios.length) {
+    showResults();
+  } else {
+    renderScenario();
+  }
+}
+
+function showResults() {
+  document.getElementById('progress-bar').style.width = '100%';
+  showScreen('result-screen');
+
+  const total = scenarios.length;
+  const pct = Math.round((score / total) * 100);
+
+  document.getElementById('result-score').textContent = `${score} / ${total}`;
+
+  let emoji, title, sub;
+  if (pct >= 88) {
+    emoji = '🏆'; title = 'Master Creationeer!';
+    sub = 'Outstanding! You have a strong grasp of how the 3 R\'s work in real engineering decisions. You\'re ready to apply the Sustainability phase in your own designs.';
+  } else if (pct >= 63) {
+    emoji = '⭐'; title = 'Solid Understanding!';
+    sub = 'Good work! You understand most of the 3 R\'s principles. Review the scenarios you missed and think about how Reduce, Reuse, and Recycle each play a unique role in sustainable design.';
+  } else {
+    emoji = '🌱'; title = 'Keep Growing!';
+    sub = 'Nice effort! The 3 R\'s take practice. Try the activity again and focus on what makes each R unique. Remember: Reduce comes first — use less to begin with!';
+  }
+
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-sub').textContent = sub;
+
+  // Breakdown
+  function fmt(cat) {
+    const c = catScores[cat].correct || 0;
+    const t = catScores[cat].total || 0;
+    if (t === 0) return '—';
+    return `${c}/${t}`;
+  }
+
+  // Recalculate totals from scenario list
+  const totals = { reduce: 0, reuse: 0, recycle: 0, ocv: 0 };
+  scenarios.forEach(s => totals[s.category]++);
+
+  function fmtFull(cat) {
+    const c = catScores[cat].correct || 0;
+    const t = totals[cat];
+    return `${c} / ${t}`;
+  }
+
+  document.getElementById('bd-reduce').textContent = fmtFull('reduce');
+  document.getElementById('bd-reuse').textContent = fmtFull('reuse');
+  document.getElementById('bd-recycle').textContent = fmtFull('recycle');
+  document.getElementById('bd-ocv').textContent = fmtFull('ocv');
+}
+
+function restartGame() {
+  startGame();
+}
+</script>
+</body>
+</html>

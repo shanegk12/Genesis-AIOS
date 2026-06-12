@@ -1,0 +1,329 @@
+```json
+[
+  {
+    "id": "m045tx001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Component Alignment and Quality</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In your last lesson, you built your mousetrap car's power system and axles — the foundation that transfers spring energy into motion. Now it's time to ask a harder question: are all those parts working <em>together</em> the way they should?</p><p>This lesson moves you into the Creationeering™ phase of <strong>Performance</strong>. You'll learn how component alignment and quality determine whether your car rolls straight and far — or wobbles, drags, and stalls. A wobbly wheel or a bent axle doesn't just look bad; it quietly steals energy from every single rotation. By the end of this lesson, you'll know how to find those problems and fix them.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain why component alignment matters for the overall performance of an engineered system.</li><li>Identify common quality issues in mousetrap car components, such as bent axles or rough wheel edges.</li><li>Apply practical techniques to improve the alignment and quality of your car's power system, axles, and wheels.</li><li>Analyze how component quality and alignment affect your car's speed and distance.</li><li>Connect careful craftsmanship in engineering to our responsibility to steward God's creation wisely and effectively.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045vc001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Alignment",
+          "definition": "The precise arrangement of components in a straight line or in proper relative position to each other."
+        },
+        {
+          "term": "Quality",
+          "definition": "The degree to which a component or system meets its design specifications and performs its intended function reliably."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that opposes motion between two surfaces that are in contact."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable variation from a specified dimension or value."
+        },
+        {
+          "term": "Performance",
+          "definition": "How well an engineered system achieves its intended objectives, often measured by criteria like speed, distance, or efficiency."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Analyzing a system by understanding how its behavior at a large (macro) scale is affected by its properties and interactions at smaller (micro to atomic) scales."
+        },
+        {
+          "term": "Objective",
+          "definition": "A desired outcome or goal that a design aims to achieve."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be satisfied by a design."
+        },
+        {
+          "term": "Variable",
+          "definition": "An adjustable factor or property in a design that can be changed to achieve an objective while meeting constraints."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045dv001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045bl001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:31 (KJV):</strong> \"And God saw every thing that He had made, and, behold, it was very good.\"</p><p>Not just good — <em>very</em> good. God's standard wasn't "close enough." Every component of creation, from the orbit of planets to the folding of a protein, was precisely arranged and perfectly suited for its purpose. That's the standard we're reaching for as engineers.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why \"Very Good\" Is an Engineering Standard</h2><p>Think about the human eye. It contains over 120 million photoreceptor cells, each precisely positioned so that light hits exactly the right spot. If even a small portion of those cells were misaligned, your vision would be blurry or distorted. The eye doesn't just <em>work</em> — it works with extraordinary precision because every part is in exactly the right place.</p><p>Your mousetrap car is a much simpler system, but the same principle applies. When every component is aligned correctly and meets a high standard of quality, the whole system performs better than the sum of its parts. When something is off — even slightly — the entire system pays the price in lost energy and reduced distance.</p><p>This is why stewardship matters in engineering. When you take care in building and refining your design, you're honoring both the materials you've been given and the creative ability God placed in you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045dv002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Alignment Really Means</h2><p><strong>Alignment</strong> means that your components are positioned correctly relative to each other. On a mousetrap car, that means:</p><ul><li>Your axles are parallel to each other and perpendicular to the car's frame.</li><li>Your wheels sit flush and centered on each axle — not tilted or offset.</li><li>Your string or lever arm pulls in the direction of travel, not at an angle.</li></ul><p>When alignment is off, your car doesn't just slow down — it can veer left or right, wobble, or even tip over. Think of it like a shopping cart with one bad wheel. That one misaligned wheel doesn't just make that corner drag; it fights the entire cart's forward motion the whole time.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045im001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram of a mousetrap car with properly aligned axles and wheels versus one with a visibly bent axle and tilted wheel, showing how misalignment causes the car to steer off course"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Friction — Your Car's Biggest Enemy</h2><p><strong>Friction</strong> is a force that pushes back against motion wherever two surfaces touch. In your car, friction shows up in several places:</p><ul><li><strong>Axle-to-frame friction:</strong> Where the axle spins inside its support bracket or straw.</li><li><strong>Wheel wobble:</strong> A wheel that isn't perfectly vertical scrubs against the ground on every rotation.</li><li><strong>String drag:</strong> If your drive string rubs against the frame or the spring arm as it unwinds, it loses energy to heat and resistance.</li></ul><p>The energy stored in your mousetrap spring is finite — there's only so much of it. Every bit lost to friction is a bit that never reaches your wheels as forward motion. Reducing friction through better alignment and smoother surfaces is one of the most powerful ways to increase your car's distance.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Quality: Meeting Your Design Specifications</h2><p><strong>Quality</strong> in engineering doesn't mean expensive or fancy. It means a component does exactly what it was designed to do, consistently and reliably. A high-quality axle is straight, smooth, and the right diameter. A high-quality wheel is round, balanced, and attached securely.</p><p>Every manufactured part has a <strong>tolerance</strong> — an acceptable range of variation from the ideal measurement. If your axle is supposed to be 5mm in diameter but comes out at 5.2mm, it might be within tolerance and work fine. But if it's bent at even a slight angle, it falls outside the tolerance for straightness, and your car will suffer for it.</p><p>When you inspect your components before assembly — and again after — you're doing exactly what quality engineers do. They don't assume a part is good. They verify it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045im002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Close-up photo of a student's hands checking a mousetrap car axle for straightness by rolling it across a flat surface, with a ruler nearby for reference"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Common Quality Issues to Look For</h2><p>Here are the most common problems that hurt performance — and what to do about them:</p><ul><li><strong>Bent axles:</strong> Roll the axle on a flat surface. If it wobbles or doesn't roll smoothly, it's bent. Replace it or carefully straighten it.</li><li><strong>Rough or uneven wheel edges:</strong> Sand the edges lightly with fine-grit sandpaper to remove burrs and bumps that create friction.</li><li><strong>Loose wheel fit:</strong> A wheel that slides along the axle wastes energy. Secure it with a small bead of glue or a properly sized axle cap.</li><li><strong>Uneven wheel spacing:</strong> Both wheels on an axle should sit at the same distance from the car body so they make equal contact with the ground.</li><li><strong>String misrouting:</strong> Your drive string should unwind smoothly without rubbing on the frame, spring, or any other component.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045cl001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>The Roll Test:</strong> Before mounting your axles, place each one on a flat surface and give it a gentle roll. A straight axle rolls in a perfectly straight line with no wobble. If yours drifts or bounces, fix it now — it's much harder to correct once it's on the car.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045dv003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Thinking at Multiple Scales</h2><p>Engineers use a concept called <strong>multiscale modeling</strong> to understand how small details affect big outcomes. You don't need a physics simulation to apply this idea — you just need to think carefully about what's happening at each level of your design.</p><p>At the <strong>large scale</strong>, you see your car rolling across the floor. At the <strong>small scale</strong>, you can see whether a wheel is perfectly vertical or slightly tilted. At an even smaller scale, there's a microscopic texture on your axle surface that creates friction inside the bearing. Each of those scales affects performance.</p><p>You can't fix what you can't see. Taking time to examine your car carefully — up close, from multiple angles — helps you catch small-scale problems before they become large-scale failures on race day.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Objectives, Constraints, and Variables in Your Build</h2><p>As you refine your car, it helps to think clearly about three things:</p><ul><li>Your <strong>objective</strong> — what you want to achieve (maximum distance, staying in a straight line, or both).</li><li>Your <strong>constraints</strong> — the rules you can't break (the car must be powered only by the mousetrap, must stay within a lane, etc.).</li><li>Your <strong>variables</strong> — the things you can adjust (wheel diameter, axle material, string length, bearing smoothness).</li></ul><p>Alignment and quality improvements are your most controllable variables. Unlike changing the spring or completely rebuilding the frame, these are refinements you can make carefully and methodically. Each small improvement is a data point that tells you something about how your system works.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Craftsmanship as Stewardship</h2><p>There's a deeper reason to care about quality beyond winning a race. In Genesis 1:28, God gives humanity the responsibility to manage and care for creation. That mandate extends to how we use the resources and abilities we've been given — including the materials in your build kit and the time you have to build.</p><p>Rushing through the alignment phase because it seems tedious is the opposite of stewardship. Taking the extra ten minutes to check each axle, straighten what's bent, and sand what's rough — that's what it looks like to work with integrity. The engineer who finishes fast but sloppy hasn't served the project well. The one who finishes carefully, knowing every component has been checked and optimized, has done something worth being proud of.</p><p>That's the \"very good\" standard. It's available to you, right now, on this mousetrap car.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045cl002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip the inspection step.</strong> The most common reason mousetrap cars underperform isn't a bad design — it's a small alignment problem that was never caught. Check your wheels for wobble, your axles for straightness, and your string path for friction points <em>before</em> your first test run, not after.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045tx012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It Into Practice</h2><p>As you work on your car today, use this checklist to guide your inspection and refinement:</p><ul><li>Are both axles straight? (Use the roll test.)</li><li>Are the wheels centered and perpendicular to the axle?</li><li>Do the wheels spin freely with minimal resistance?</li><li>Is the wheel spacing equal on both sides of the frame?</li><li>Does the drive string unwind without touching any part of the frame?</li><li>Are there any rough edges on your wheels or frame that could create unnecessary friction?</li></ul><p>Work through each point systematically. Engineering isn't just about building — it's about <em>refining</em>. The best engineers spend as much time improving a design as they do creating it in the first place.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045im003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Overhead diagram of a mousetrap car frame showing correct wheel alignment — axles parallel to each other, wheels perpendicular to the frame, and the drive string routed cleanly from the spring arm to the rear axle"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m045ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: How Surface Texture Affects Friction",
+      "html": "<p>At a microscopic level, even a surface that looks smooth has tiny peaks and valleys called <strong>asperities</strong>. When two surfaces press against each other, these microscopic bumps interlock and resist motion — that's friction at the atomic scale.</p><p>Engineers reduce this kind of friction in several ways: by polishing surfaces (reducing the height of the peaks), by using lubricants (which fill in the valleys so surfaces slide on a thin film of liquid rather than touching each other), or by choosing materials that are naturally slippery against each other.</p><p>For your mousetrap car, the practical takeaway is this: smoother axles inside smoother bearing surfaces means less friction, more energy transferred to the wheels, and more distance traveled. Even a small improvement at the micro scale adds up over hundreds of wheel rotations.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  }
+]
+```

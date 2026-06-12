@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Build: Organize Your Team</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header .logo {
+    width: 40px; height: 40px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 18px; line-height: 1.2; }
+  header p { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ===== INTRO SCREEN ===== */
+  #screen-intro {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  #screen-intro h2 {
+    font-size: 26px;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+  }
+  #screen-intro p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: #333;
+  }
+  .verse-box {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-style: italic;
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .verse-box span { color: #fff; font-style: normal; font-size: 12px; display: block; margin-top: 6px; }
+  .task-cards {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .task-card {
+    background: #fff;
+    border: 2px solid #C9A84C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #1B3A5C;
+    font-weight: 600;
+    width: 140px;
+    text-align: center;
+  }
+  .task-card .num { font-size: 22px; color: #C9A84C; font-weight: 900; }
+  .btn-primary {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: #b8943e; transform: scale(1.03); }
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin: 6px;
+  }
+  .btn-secondary:hover { background: #14304f; }
+
+  /* ===== PHASE INDICATOR ===== */
+  .phase-bar {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+  .phase-bar .phases { display: flex; gap: 8px; }
+  .phase-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    transition: background 0.3s;
+  }
+  .phase-dot.done { background: #C9A84C; color: #1B3A5C; }
+  .phase-dot.active { background: #fff; color: #1B3A5C; border: 2px solid #C9A84C; }
+
+  /* ===== PHASE 1: ORG CHART ===== */
+  #screen-phase1 {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  #screen-phase1 h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: #1B3A5C;
+  }
+  #screen-phase1 .subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 18px;
+  }
+
+  .org-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* Role slots */
+  .org-tier {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .role-slot {
+    background: #fff;
+    border: 2px dashed #aab;
+    border-radius: 10px;
+    min-width: 130px;
+    min-height: 64px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .role-slot.dragover {
+    border-color: #C9A84C;
+    background: #fff9ee;
+  }
+  .role-slot.filled {
+    border-color: #1B3A5C;
+    border-style: solid;
+    background: #eef2f8;
+    color: #1B3A5C;
+  }
+  .role-slot .slot-label {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+  }
+  .role-slot .slot-title {
+    font-weight: 700;
+    font-size: 12px;
+    color: #1B3A5C;
+  }
+  .connector {
+    width: 2px;
+    height: 18px;
+    background: #1B3A5C;
+  }
+  .connector-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .h-connector {
+    height: 2px;
+    background: #1B3A5C;
+    flex: 1;
+    max-width: 200px;
+    align-self: center;
+  }
+  .connector-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .connector-group .branches {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Drag pile */
+  .drag-pile {
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .drag-pile h3 {
+    font-size: 14px;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .drag-pile-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .drag-card {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.2s;
+    touch-action: none;
+  }
+  .drag-card:active { cursor: grabbing; transform: scale(1.06); }
+  .drag-card.dragging { opacity: 0.4; }
+  .drag-card.placed { display: none; }
+
+  /* inside a slot */
+  .slot-filled-card {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+  }
+  .slot-filled-card:hover { background: #14304f; }
+
+  /* feedback bar */
+  .feedback-bar {
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .feedback-bar.show { display: block; }
+  .feedback-bar.correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+  .feedback-bar.wrong { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+  .feedback-bar.info { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+
+  /* ===== PHASE 2: GANTT CHART ===== */
+  #screen-phase2 {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  #screen-phase2 h2 { font-size: 22px; margin-bottom: 6px; }
+  #screen-phase2 .subtitle { font-size: 14px; color: #555; margin-bottom: 18px; }
+
+  .gantt-instructions {
+    background: #fff;
+    border: 2px solid #C9A84C;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .task-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .task-chip {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .task-chip:active { transform: scale(1.06); }
+  .task-chip.dragging { opacity: 0.4; }
+  .task-chip.placed { display: none; }
+
+  .gantt-grid {
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .gantt-header {
+    display: grid;
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .gantt-row {
+    display: grid;
+    border-top: 1px solid #dde;
+    min-height: 52px;
+  }
+  .gantt-cell-name {
+    background: #f0f4fa;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1B3A5C;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid #1B3A5C;
+  }
+  .gantt-cell-header-name {
+    padding: 8px 10px;
+    border-right: 2px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center;
+  }
+  .gantt-cell-week {
+    padding: 6px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #dde;
+    min-height: 52px;
+    font-size: 12px;
+    color: #888;
+  }
+  .gantt-cell-week.drop-zone {
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .gantt-cell-week.drop-zone:hover { background: #fff9ee; }
+  .gantt-cell-week.dragover { background: #fff3cd; border: 2px dashed #C9A84C; }
+  .gantt-cell-week.filled {
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 4px;
+  }
+  .gantt-cell-week.filled:hover { background: #C9A84C; color: #1B3A5C; }
+  .gantt-cell-header-week {
+    padding: 8px 4px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    font-size: 12px;
+  }
+
+  /* phase 2 check */
+  #phase2-score { font-size: 15px; font-weight: 700; }
+
+  /* ===== PHASE 3: QUIZ ===== */
+  #screen-phase3 {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  #screen-phase3 h2 { font-size: 22px; margin-bottom: 6px; }
+  .quiz-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(27,58,92,0.08);
+  }
+  .quiz-q { font-size: 16px; font-weight: 700; color: #1B3A5C; margin-bottom: 16px; }
+  .quiz-q .q-num { color: #C9A84C; margin-right: 6px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-opt {
+    background: #f7f9fc;
+    border: 2px solid #ccd4df;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: left;
+    color: #1B3A5C;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: #1B3A5C; background: #eef2f8; }
+  .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+  .quiz-opt.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+  .quiz-opt:disabled { cursor: not-allowed; }
+  .quiz-feedback {
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: #d4edda; color: #155724; }
+  .quiz-feedback.wrong { background: #f8d7da; color: #721c24; }
+  .quiz-progress {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  /* ===== RESULTS ===== */
+  #screen-results {
+    max-width: 680px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  .result-badge {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 20px;
+  }
+  #screen-results h2 { font-size: 28px; color: #1B3A5C; margin-bottom: 10px; }
+  #screen-results .result-msg { font-size: 16px; color: #444; margin-bottom: 20px; line-height: 1.6; }
+  .score-grid {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .score-box {
+    background: #fff;
+    border: 2px solid #C9A84C;
+    border-radius: 12px;
+    padding: 14px 20px;
+    min-width: 130px;
+    text-align: center;
+  }
+  .score-box .sc-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+  .score-box .sc-val { font-size: 26px; font-weight: 900; color: #1B3A5C; }
+  .score-box .sc-max { font-size: 13px; color: #aaa; }
+  .result-verse {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-style: italic;
+    font-size: 14px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .result-verse span { color: #fff; font-style: normal; font-size: 12px; display: block; margin-top: 4px; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 { font-size: 15px; }
+    .drag-card { font-size: 12px; padding: 8px 11px; }
+    .task-chip { font-size: 12px; padding: 6px 11px; }
+    .gantt-grid { font-size: 11px; }
+    #screen-intro h2 { font-size: 20px; }
+    .score-box { min-width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK</div>
+  <div>
+    <h1>Mousetrap Build: Org Chart &amp; Gantt Chart</h1>
+    <p>Mousetrap Build · Genesis K-12 Academy</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <h2>🏗️ Organize Your Build Team!</h2>
+  <div class="verse-box">
+    "For God is not a God of disorder but of peace."
+    <span>— 1 Corinthians 14:33</span>
+  </div>
+  <p>A successful mousetrap project doesn't happen by accident — it takes <strong>order</strong>. You need to know <em>who</em> does what (Org Chart) and <em>when</em> tasks happen (Gantt Chart).</p>
+  <p>Complete <strong>3 challenges</strong> to earn your Project Manager badge!</p>
+  <div class="task-cards">
+    <div class="task-card"><div class="num">1</div>Build the<br>Org Chart</div>
+    <div class="task-card"><div class="num">2</div>Fill the<br>Gantt Chart</div>
+    <div class="task-card"><div class="num">3</div>Quick<br>Quiz</div>
+  </div>
+  <button class="btn-primary" onclick="startPhase(1)">Let's Start! →</button>
+</div>
+
+<!-- PHASE 1 -->
+<div id="screen-phase1" class="screen">
+  <div class="phase-bar">
+    <span>📋 Phase 1 of 3: Build the Org Chart</span>
+    <div class="phases">
+      <div class="phase-dot active" id="pd1">1</div>
+      <div class="phase-dot" id="pd2">2</div>
+      <div class="phase-dot" id="pd3">3</div>
+    </div>
+  </div>
+  <div style="padding:20px; max-width:900px; margin:0 auto;">
+    <h2>📊 Build Your Team's Org Chart</h2>
+    <p class="subtitle">Drag each team member's role into the correct box on the org chart. Every good team needs clear roles!</p>
+
+    <div class="drag-pile">
+      <h3>🎭 Team Roles — Drag these into the chart below:</h3>
+      <div class="drag-pile-items" id="role-pile">
+        <div class="drag-card" draggable="true" data-role="Project Manager" id="rc-pm">Project Manager</div>
+        <div class="drag-card" draggable="true" data-role="Lead Builder" id="rc-lb">Lead Builder</div>
+        <div class="drag-card" draggable="true" data-role="Parts Manager" id="rc-part">Parts Manager</div>
+        <div class="drag-card" draggable="true" data-role="Tester" id="rc-test">Tester</div>
+        <div class="drag-card" draggable="true" data-role="Recorder" id="rc-rec">Recorder</div>
+      </div>
+    </div>
+
+    <!-- ORG CHART SLOTS -->
+    <div class="org-layout" id="org-chart">
+      <!-- Tier 1: Top -->
+      <div class="org-tier">
+        <div class="role-slot" id="slot-pm" data-expects="Project Manager">
+          <span class="slot-label">Top of Chain</span>
+          <span style="font-size:11px;color:#bbb;">drop here</span>
+        </div>
+      </div>
+      <div class="connector"></div>
+      <!-- Tier 2: Middle row -->
+      <div class="org-tier">
+        <div class="role-slot" id="slot-lb" data-expects="Lead Builder">
+          <span class="slot-label">Builds the Trap</span>
+          <span style="font-size:11px;color:#bbb;">drop here</span>
+        </div>
+        <div class="role-slot" id="slot-part" data-expects="Parts Manager">
+          <span class="slot-label">Manages Supplies</span>
+          <span style="font-size:11px;color:#bbb;">drop here</span>
+        </div>
+        <div class="role-slot" id="slot-test" data-expects="Tester">
+          <span class="slot-label">Tests the Trap</span>
+          <span style="font-size:11px;color:#bbb;">drop here</span>
+        </div>
+        <div class="role-slot" id="slot-rec" data-expects="Recorder">
+          <span class="slot-label">Documents Work</span>
+          <span style="font-size:11px;color:#bbb;">drop here</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="p1-feedback" class="feedback-bar"></div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="btn-primary" id="p1-check-btn" onclick="checkPhase1()">Check My Org Chart ✓</button>
+      <button class="btn-secondary" onclick="resetPhase1()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div id="screen-phase2" class="screen">
+  <div class="phase-bar">
+    <span>📅 Phase 2 of 3: Fill the Gantt Chart</span>
+    <div class="phases">
+      <div class="phase-dot done" id="pd1b">✓</div>
+      <div class="phase-dot active" id="pd2b">2</div>
+      <div class="phase-dot" id="pd3b">3</div>
+    </div>
+  </div>
+  <div style="padding:20px; max-width:900px; margin:0 auto;">
+    <h2>📅 Build Your Production Gantt Chart</h2>
+    <p class="subtitle">A Gantt Chart shows WHEN each task happens. Drag each task into the correct week on the timeline.</p>
+
+    <div class="gantt-instructions">
+      <strong>Your 3-week mousetrap build schedule:</strong><br>
+      • <strong>Week 1:</strong> Planning tasks (design &amp; gather parts) — Order matters!<br>
+      • <strong>Week 2:</strong> Building tasks (assemble &amp; adjust) — Do these in the middle.<br>
+      • <strong>Week 3:</strong> Finishing tasks (test &amp; present) — Happens last.
+    </div>
+
+    <div class="task-pool" id="gantt-pile">
+      <div class="task-chip" draggable="true" data-task="Design Trap" data-correct="1" id="gc-d">Design Trap</div>
+      <div class="task-chip" draggable="true" data-task="Gather Parts" data-correct="1" id="gc-g">Gather Parts</div>
+      <div class="task-chip" draggable="true" data-task="Assemble Trap" data-correct="2" id="gc-a">Assemble Trap</div>
+      <div class="task-chip" draggable="true" data-task="Adjust &amp; Fix" data-correct="2" id="gc-f">Adjust &amp; Fix</div>
+      <div class="task-chip" draggable="true" data-task="Test Trap" data-correct="3" id="gc-t">Test Trap</div>
+      <div class="task-chip" draggable="true" data-task="Present Results" data-correct="3" id="gc-p">Present Results</div>
+    </div>
+
+    <div class="gantt-grid" id="gantt-grid">
+      <!-- Header -->
+      <div class="gantt-header" style="grid-template-columns: 160px 1fr 1fr 1fr;">
+        <div class="gantt-cell-header-name">Task</div>
+        <div class="gantt-cell-header-week">Week 1 📐</div>
+        <div class="gantt-cell-header-week">Week 2 🔨</div>
+        <div class="gantt-cell-header-week">Week 3 🧪</div>
+      </div>
+      <!-- Rows will be injected by JS -->
+    </div>
+
+    <div id="p2-feedback" class="feedback-bar"></div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+      <button class="btn-primary" id="p2-check-btn" onclick="checkPhase2()">Check My Gantt Chart ✓</button>
+      <button class="btn-secondary" onclick="resetPhase2()">Reset</button>
+      <span id="phase2-score"></span>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: QUIZ -->
+<div id="screen-phase3" class="screen">
+  <div class="phase-bar">
+    <span>🎯 Phase 3 of 3: Quick Quiz</span>
+    <div class="phases">
+      <div class="phase-dot done">✓</div>
+      <div class="phase-dot done">✓</div>
+      <div class="phase-dot active">3</div>
+    </div>
+  </div>
+  <div style="padding:20px;">
+    <h2>🎯 Quick Knowledge Check</h2>
+    <p class="subtitle" style="margin-bottom:16px;">Answer all 5 questions. You'll get instant feedback on each one!</p>
+    <div class="quiz-progress" id="quiz-progress">Question 1 of 5</div>
+    <div id="quiz-area"></div>
+    <button class="btn-primary" id="quiz-next-btn" style="display:none;" onclick="nextQuestion()">Next Question →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="screen-results" class="screen">
+  <div class="result-badge" id="result-badge">🏆</div>
+  <h2 id="result-title">Mission Complete!</h2>
+  <div class="result-msg" id="result-msg">Great work organizing your team!</div>
+  <div class="score-grid">
+    <div class="score-box">
+      <div class="sc-label">Org Chart</div>
+      <div class="sc-val" id="rs-org">—</div>
+      <div class="sc-max">/ 5 pts</div>
+    </div>
+    <div class="score-box">
+      <div class="sc-label">Gantt Chart</div>
+      <div class="sc-val" id="rs-gantt">—</div>
+      <div class="sc-max">/ 6 pts</div>
+    </div>
+    <div class="score-box">
+      <div class="sc-label">Quiz</div>
+      <div class="sc-val" id="rs-quiz">—</div>
+      <div class="sc-max">/ 5 pts</div>
+    </div>
+    <div class="score-box" style="border-color:#1B3A5C;">
+      <div class="sc-label">TOTAL</div>
+      <div class="sc-val" id="rs-total" style="color:#C9A84C;">—</div>
+      <div class="sc-max">/ 16 pts</div>
+    </div>
+  </div>
+  <div class="result-verse">
+    "For God is not a God of disorder but of peace."
+    <span>— 1 Corinthians 14:33 · Order brings success!</span>
+  </div>
+  <button class="btn-primary" onclick="restartAll()">🔄 Play Again</button>
+</div>
+
+<script>
+// ===================== STATE =====================
+var scores = { org: 0, gantt: 0, quiz: 0 };
+var phase1Done = false;
+var phase2Done = false;
+
+// Drag state
+var dragSrc = null;
+var dragType = null; // 'role' or 'task'
+var touchDragEl = null;
+var touchDragClone = null;
+
+// ===================== NAVIGATION =====================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startPhase(n) {
+  if (n === 1) { showScreen('screen-phase1'); initPhase1(); }
+  else if (n === 2) { showScreen('screen-phase2'); initPhase2(); }
+  else if (n === 3) { showScreen('screen-phase3'); initQuiz(); }
+  else if (n === 4) { showScreen('screen-results'); showResults(); }
+}
+
+// ===================== PHASE 1: ORG CHART =====================
+var orgSlotContents = {}; // slotId -> roleName
+
+function initPhase1() {
+  orgSlotContents = {};
+  // Reset slots
+  ['slot-pm','slot-lb','slot-part','slot-test','slot-rec'].forEach(function(sid) {
+    var s = document.getElementById(sid);
+    s.classList.remove('filled');
+    s.innerHTML = '<span class="slot-label">' + s.dataset.expects.replace('Project Manager','Top of Chain')
+      .replace('Lead Builder','Builds the Trap')
+      .replace('Parts Manager','Manages Supplies')
+      .replace('Tester','Tests the Trap')
+      .replace('Recorder','Documents Work') + '</span><span style="font-size:11px;color:#bbb;">drop here</span>';
+  });
+  // Slot labels
+  var labels = {
+    'slot-pm':'Top of Chain',
+    'slot-lb':'Builds the Trap',
+    'slot-part':'Manages Supplies',
+    'slot-test':'Tests the Trap',
+    'slot-rec':'Documents Work'
+  };
+  ['slot-pm','slot-lb','slot-part','slot-test','slot-rec'].forEach(function(sid) {
+    var s = document.getElementById(sid);
+    s.innerHTML = '<span class="slot-label">'+labels[sid]+'</span><span style="font-size:11px;color:#bbb;">drop here</span>';
+    s.classList.remove('filled');
+    setupSlotDrop(s);
+  });
+  // Reset cards
+  ['rc-pm','rc-lb','rc-part','rc-test','rc-rec'].forEach(function(cid) {
+    var c = document.getElementById(cid);
+    c.classList.remove('placed','dragging');
+    c.style.display = '';
+    setupCardDrag(c, 'role');
+  });
+  hideFeedback('p1-feedback');
+}
+
+function setupCardDrag(el, type) {
+  el.addEventListener('dragstart', function(e) {
+    dragSrc = el;
+    dragType = type;
+    setTimeout(function(){ el.classList.add('dragging'); }, 0);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', el.dataset.role || el.dataset.task);
+  });
+  el.addEventListener('dragend', function() {
+    el.classList.remove('dragging');
+  });
+  // Touch
+  el.addEventListener('touchstart', handleTouchStart, {passive:false});
+  el.addEventListener('touchmove', handleTouchMove, {passive:false});
+  el.addEventListener('touchend', handleTouchEnd, {passive:false});
+}
+
+function setupSlotDrop(slot) {
+  slot.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    slot.classList.add('dragover');
+  });
+  slot.addEventListener('dragleave', function() {
+    slot.classList.remove('dragover');
+  });
+  slot.addEventListener('drop', function(e) {
+    e.preventDefault();
+    slot.classList.remove('dragover');
+    if (dragSrc && dragType === 'role') {
+      placeRoleInSlot(slot, dragSrc);
+    }
+  });
+}
+
+function placeRoleInSlot(slot, card) {
+  var roleName = card.dataset.role;
+  var prevSlot = findSlotWithRole(roleName);
+  if (prevSlot && prevSlot !== slot) {
+    clearSlot(prevSlot);
+  }
+  // If slot already has something, return it to pile
+  if (orgSlotContents[slot.id]) {
+    var oldRole = orgSlotContents[slot.id];
+    var oldCard = findCardByRole(oldRole);
+    if (oldCard) { oldCard.classList.remove('placed'); oldCard.style.display = ''; }
+    delete orgSlotContents[slot.id];
+  }
+  orgSlotContents[slot.id] = roleName;
+  card.classList.add('placed');
+  card.style.display = 'none';
+  slot.classList.add('filled');
+  var labels = {
+    'slot-pm':'Top of Chain',
+    'slot-lb':'Builds the Trap',
+    'slot-part':'Manages Supplies',
+    'slot-test':'Tests the Trap',
+    'slot-rec':'Documents Work'
+  };
+  slot.innerHTML = '<span class="slot-filled-card" onclick="returnToPool(\''+slot.id+'\')" title="Click to return">'+roleName+'</span>'
+    + '<span class="slot-label" style="font-size:10px;color:#888;margin-top:3px;">'+labels[slot.id]+'</span>';
+}
+
+function findSlotWithRole(role) {
+  for (var k in orgSlotContents) {
+    if (orgSlotContents[k] === role) return document.getElementById(k);
+  }
+  return null;
+}
+
+function findCardByRole(role) {
+  var cards = document.querySelectorAll('.drag-card');
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].dataset.role === role) return cards[i];
+  }
+  return null;
+}
+
+function clearSlot(slot) {
+  if (orgSlotContents[slot.id]) {
+    delete orgSlotContents[slot.id];
+    var labels = {
+      'slot-pm':'Top of Chain',
+      'slot-lb':'Builds the Trap',
+      'slot-part':'Manages Supplies',
+      'slot-test':'Tests the Trap',
+      'slot-rec':'Documents Work'
+    };
+    slot.classList.remove('filled');
+    slot.innerHTML = '<span class="slot-label">'+labels[slot.id]+'</span><span style="font-size:11px;color:#bbb;">drop here</span>';
+    setupSlotDrop(slot);
+  }
+}
+
+function returnToPool(slotId) {
+  var role = orgSlotContents[slotId];
+  if (!role) return;
+  var card = findCardByRole(role);
+  if (card) { card.classList.remove('placed'); card.style.display = ''; }
+  delete orgSlotContents[slotId];
+  var slot = document.getElementById(slotId);
+  var labels = {
+    'slot-pm':'Top of Chain',
+    'slot-lb':'Builds the Trap',
+    'slot-part':'Manages Supplies',
+    'slot-test':'Tests the Trap',
+    'slot-rec':'Documents Work'
+  };
+  slot.classList.remove('filled');
+  slot.innerHTML = '<span class="slot-label">'+labels[slotId]+'</span><span style="font-size:11px;color:#bbb;">drop here</span>';
+  setupSlotDrop(slot);
+}
+
+function checkPhase1() {
+  var correct = {
+    'slot-pm':'Project Manager',
+    'slot-lb':'Lead Builder',
+    'slot-part':'Parts Manager',
+    'slot-test':'Tester',
+    'slot-rec':'Recorder'
+  };
+  var filled = Object.keys(orgSlotContents).length;
+  if (filled < 5) {
+    showFeedback('p1-feedback','info','⚠️ Place all 5 roles before checking! ('+(5-filled)+' left)');
+    return;
+  }
+  var pts = 0;
+  for (var slotId in correct) {
+    if (orgSlotContents[slotId] === correct[slotId]) pts++;
+  }
+  scores.org = pts;
+  if (pts === 5) {
+    showFeedback('p1-feedback','correct','🎉 Perfect! All 5 roles are in the right place. Your team has clear structure!');
+    phase1Done = true;
+    setTimeout(function(){ startPhase(2); }, 1800);
+  } else {
+    showFeedback('p1-feedback','wrong','❌ '+pts+'/5 correct. Hint: The Project Manager leads everyone. Try again!');
+  }
+}
+
+function resetPhase1() {
+  initPhase1();
+}
+
+// ===================== PHASE 2: GANTT CHART =====================
+var ganttCells = {}; // key: "rowTask-week" -> task name placed there
+var ganttTasks = [
+  { id:'gc-d', name:'Design Trap', correct:1 },
+  { id:'gc-g', name:'Gather Parts', correct:1 },
+  { id:'gc-a', name:'Assemble Trap', correct:2 },
+  { id:'gc-f', name:'Adjust & Fix', correct:2 },
+  { id:'gc-t', name:'Test Trap', correct:3 },
+  { id:'gc-p', name:'Present Results', correct:3 }
+];
+
+function initPhase2() {
+  ganttCells = {};
+  // Reset chips
+  ganttTasks.forEach(function(t) {
+    var c = document.getElementById(t.id);
+    c.classList.remove('placed','dragging');
+    c.style.display = '';
+    setupCardDrag(c, 'task');
+  });
+  buildGanttGrid();
+  hideFeedback('p2-feedback');
+  document.getElementById('phase2-score').textContent = '';
+}
+
+function buildGanttGrid() {
+  var grid = document.getElementById('gantt-grid');
+  // Keep header (first child)
+  var header = grid.querySelector('.gantt-header');
+  grid.innerHTML = '';
+  grid.appendChild(header);
+
+  // One row per task
+  ganttTasks.forEach(function(t) {
+    var row = document.createElement('div');
+    row.className = 'gantt-row';
+    row.style.gridTemplateColumns = '160px 1fr 1fr 1fr';
+
+    var nameCell = document.createElement('div');
+    nameCell.className = 'gantt-cell-name';
+    nameCell.textContent = t.name;
+    row.appendChild(nameCell);
+
+    for (var w = 1; w <= 3; w++) {
+      var cell = document.createElement('div');
+      cell.className = 'gantt-cell-week drop-zone';
+      cell.dataset.task = t.name;
+      cell.dataset.week = w;
+      var key = t.name + '-' + w;
+      if (ganttCells[key]) {
+        cell.classList.add('filled');
+        cell.textContent = '✓ Week ' + w;
+      } else {
+        cell.textContent = '';
+      }
+      setupGanttDrop(cell);
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+  });
+}
+
+function setupGanttDrop(cell) {
+  cell.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    if (dragType === 'task') cell.classList.add('dragover');
+  });
+  cell.addEventListener('dragleave', function() {
+    cell.classList.remove('dragover');
+  });
+  cell.addEventListener('drop', function(e) {
+    e.preventDefault();
+    cell.classList.remove('dragover');
+    if (dragSrc && dragType === 'task') {
+      placeTaskInCell(cell, dragSrc);
+    }
+  });
+  // Click on filled cell to remove
+  cell.addEventListener('click', function() {
+    if (cell.classList.contains('filled')) {
+      removeTaskFromCell(cell);
+    }
+  });
+}
+
+function placeTaskInCell(cell, chip) {
+  var taskName = chip.dataset.task;
+  var week = parseInt(cell.dataset.week);
+  var cellTaskName = cell.dataset.task;
+
+  // Remove chip from any previous cell in this row
+  for (var w = 1; w <= 3; w++) {
+    var key2 = cellTaskName + '-' + w;
+    if (ganttCells[key2] === taskName) {
+      delete ganttCells[key2];
+    }
+  }
+  // Also: if this chip was placed elsewhere (different row), remove it
+  for (var k in ganttCells) {
+    if (ganttCells[k] === taskName) delete ganttCells[k];
+  }
+
+  // If cell already has something, return it
+  var key = cellTaskName + '-' + week;
+  if (ganttCells[key] && ganttCells[key] !== taskName) {
+    var oldTask = ganttCells[key];
+    var oldChip = findChipByTask(oldTask);
+    if (oldChip) { oldChip.classList.remove('placed'); oldChip.style.display = ''; }
+    delete ganttCells[key];
+  }
+
+  // Only allow one task per row
+  for (var ww = 1; ww <= 3; ww++) {
+    var k2 = cellTaskName + '-' + ww;
+    if (ganttCells[k2]) {
+      var ot = ganttCells[k2];
+      var oc = findChipByTask(ot);
+      if (oc) { oc.classList.remove('placed'); oc.style.display = ''; }
+      delete ganttCells[k2];
+    }
+  }
+
+  ganttCells[key] = taskName;
+  chip.classList.add('placed');
+  chip.style.display = 'none';
+  buildGanttGrid();
+}
+
+function removeTaskFromCell(cell) {
+  var taskName = cell.dataset.task;
+  var week = parseInt(cell.dataset.week);
+  var key = taskName + '-' + week;
+  if (ganttCells[key]) {
+    var chip = findChipByTask(ganttCells[key]);
+    if (chip) { chip.classList.remove('placed'); chip.style.display = ''; }
+    delete ganttCells[key];
+    buildGanttGrid();
+  }
+}
+
+function findChipByTask(taskName) {
+  var chips = document.querySelectorAll('.task-chip');
+  for (var i = 0; i < chips.length; i++) {
+    if (chips[i].dataset.task === taskName) return chips[i];
+  }
+  return null;
+}
+
+function checkPhase2() {
+  var placed = Object.keys(ganttCells).length;
+  if (placed < 6) {
+    showFeedback('p2-feedback','info','⚠️ Place all 6 tasks before checking! ('+(6-placed)+' left)');
+    return;
+  }
+  var pts = 0;
+  ganttTasks.forEach(function(t) {
+    for (var w = 1; w <= 3; w++) {
+      var key = t.name + '-' + w;
+      if (ganttCells[key] === t.name && w === t.correct) pts++;
+    }
+  });
+  scores.gantt = pts;
+  if (pts === 6) {
+    showFeedback('p2-feedback','correct','🎉 Perfect Gantt Chart! Your project is perfectly scheduled.');
+    phase2Done = true;
+    document.getElementById('phase2-score').textContent = '6/6 ✓';
+    setTimeout(function(){ startPhase(3); }, 1800);
+  } else {
+    showFeedback('p2-feedback','wrong','❌ '+pts+'/6 correct. Remember: Plan→Build→Test order! Try rearranging.');
+    document.getElementById('phase2-score').textContent = pts+'/6';
+  }
+}
+
+function resetPhase2() {
+  initPhase2();
+}
+
+// ===================== TOUCH DRAG =====================
+function handleTouchStart(e) {
+  var el = e.currentTarget;
+  dragSrc = el;
+  dragType = el.classList.contains('drag-card') ? 'role' : 'task';
+  el.classList.add('dragging');
+
+  touchDragEl = el;
+  touchDragClone = el.cloneNode(true);
+  touchDragClone.style.position = 'fixed';
+  touchDragClone.style.zIndex = '9999';
+  touchDragClone.style.pointerEvents = 'none';
+  touchDragClone.style.opacity = '0.85';
+  touchDragClone.style.width = el.offsetWidth + 'px';
+  document.body.appendChild(touchDragClone);
+  var t = e.touches[0];
+  touchDragClone.style.left = (t.clientX - el.offsetWidth/2) + 'px';
+  touchDragClone.style.top = (t.clientY - el.offsetHeight/2) + 'px';
+  e.preventDefault();
+}
+
+function handleTouchMove(e) {
+  if (!touchDragClone) return;
+  var t = e.touches[0];
+  touchDragClone.style.left = (t.clientX - touchDragEl.offsetWidth/2) + 'px';
+  touchDragClone.style.top = (t.clientY - touchDragEl.offsetHeight/2) + 'px';
+  e.preventDefault();
+}
+
+function handleTouchEnd(e) {
+  if (!touchDragClone) return;
+  touchDragEl.classList.remove('dragging');
+  var t = e.changedTouches[0];
+  touchDragClone.remove();
+  touchDragClone = null;
+
+  var target = document.elementFromPoint(t.clientX, t.clientY);
+  if (!target) return;
+  // find slot or gantt cell
+  var slot = target.closest('.role-slot');
+  if (slot && dragType === 'role') {
+    placeRoleInSlot(slot, dragSrc);
+    return;
+  }
+  var gcell = target.closest('.gantt-cell-week.drop-zone');
+  if (gcell && dragType === 'task') {
+    placeTaskInCell(gcell, dragSrc);
+  }
+}
+
+// ===================== QUIZ =====================
+var quizQuestions = [
+  {
+    q: "What is the purpose of an Org Chart?",
+    opts: [
+      "To show when each task is scheduled",
+      "To show who is on the team and their roles",
+      "To list all the parts needed",
+      "To track the budget"
+    ],
+    answer: 1,
+    feedback: "Correct! An Org Chart shows team structure — who reports to whom and what each person's role is."
+  },
+  {
+    q: "What does a Gantt Chart help a project team do?",
+    opts: [
+      "Choose the best materials",
+      "Assign team roles",
+      "Schedule tasks across a timeline",
+      "Write a budget report"
+    ],
+    answer: 2,
+    feedback: "Right! A Gantt Chart is a visual schedule — it shows WHEN each task should happen."
+  },
+  {
+    q: "In a mousetrap build project, which role is at the TOP of the org chart?",
+    opts: [
+      "Tester",
+      "Recorder",
+      "Parts Manager",
+      "Project Manager"
+    ],
+    answer: 3,
+    feedback: "Yes! The Project Manager leads the team and is at the top of the org chart."
+  },
+  {
+    q: "Which of these tasks should happen in Week 1 (Planning phase)?",
+    opts: [
+      "Test the trap",
+      "Present results",
+      "Gather parts",
+      "Assemble the trap"
+    ],
+    answer: 2,
+    feedback: "Correct! Gathering parts is a planning task — it has to happen before you can build anything."
+  },
+  {
+    q: "Why is it important for a team to use an org chart AND a Gantt chart?",
+    opts: [
+      "They replace the need for a team leader",
+      "They create order — everyone knows their role AND when to do their work",
+      "They make the project take longer",
+      "They are only useful for big companies"
+    ],
+    answer: 1,
+    feedback: "Exactly! Together, these tools bring order to the team. As 1 Cor. 14:33 says — God values order, not chaos!"
+  }
+];
+
+var currentQ = 0;
+var quizAnswered = [];
+
+function initQuiz() {
+  currentQ = 0;
+  quizAnswered = [];
+  scores.quiz = 0;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var q = quizQuestions[currentQ];
+  document.getElementById('quiz-progress').textContent = 'Question ' + (currentQ+1) + ' of ' + quizQuestions.length;
+  var html = '<div class="quiz-card">'
+    + '<div class="quiz-q"><span class="q-num">Q' + (currentQ+1) + '.</span>' + q.q + '</div>'
+    + '<div class="quiz-options">';
+  q.opts.forEach(function(opt, i) {
+    html += '<button class="quiz-opt" id="qopt-'+i+'" onclick="selectAnswer('+i+')">' + opt + '</button>';
+  });
+  html += '</div>'
+    + '<div class="quiz-feedback" id="qfb"></div>'
+    + '</div>';
+  document.getElementById('quiz-area').innerHTML = html;
+  document.getElementById('quiz-next-btn').style.display = 'none';
+}
+
+function selectAnswer(idx) {
+  var q = quizQuestions[currentQ];
+  var opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){ o.disabled = true; });
+  var fb = document.getElementById('qfb');
+  if (idx === q.answer) {
+    opts[idx].classList.add('correct');
+    fb.className = 'quiz-feedback show correct';
+    fb.textContent = '✓ ' + q.feedback;
+    scores.quiz++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.answer].classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.textContent = '✗ Not quite. ' + q.feedback;
+  }
+  quizAnswered.push(idx);
+  if (currentQ < quizQuestions.length - 1) {
+    document.getElementById('quiz-next-btn').textContent = 'Next Question →';
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+  } else {
+    document.getElementById('quiz-next-btn').textContent = 'See My Results! 🏆';
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+  }
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= quizQuestions.length) {
+    startPhase(4);
+  } else {
+    renderQuestion();
+  }
+}
+
+// ===================== RESULTS =====================
+function showResults() {
+  var total = scores.org + scores.gantt + scores.quiz;
+  document.getElementById('rs-org').textContent = scores.org;
+  document.getElementById('rs-gantt').textContent = scores.gantt;
+  document.getElementById('rs-quiz').textContent = scores.quiz;
+  document.getElementById('rs-total').textContent = total;
+
+  var badge = '🏆';
+  var title = '';
+  var msg = '';
+  if (total >= 14) {
+    badge = '🏆';
+    title = 'Master Project Manager!';
+    msg = 'Outstanding! You understand team organization and project scheduling perfectly. Your mousetrap build will be a success!';
+  } else if (total >= 10) {
+    badge = '🎯';
+    title = 'Solid Project Planner!';
+    msg = 'Good work! You have a strong grasp of org charts and Gantt charts. Review any areas you missed and try again!';
+  } else {
+    badge = '📚';
+    title = 'Keep Practicing!';
+    msg = 'You\'re learning! Order and planning take practice. Review the org chart and Gantt chart concepts and play again!';
+  }
+  document.getElementById('result-badge').textContent = badge;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+}
+
+function restartAll() {
+  scores = { org: 0, gantt: 0, quiz: 0 };
+  phase1Done = false;
+  phase2Done = false;
+  showScreen('screen-intro');
+}
+
+// ===================== HELPERS =====================
+function showFeedback(id, type, msg) {
+  var el = document.getElementById(id);
+  el.className = 'feedback-bar show ' + type;
+  el.textContent = msg;
+}
+
+function hideFeedback(id) {
+  var el = document.getElementById(id);
+  el.className = 'feedback-bar';
+  el.textContent = '';
+}
+
+// ===================== INIT =====================
+// Pre-build gantt header clone structure for re-renders
+window.addEventListener('DOMContentLoaded', function() {
+  // Phase 1: setup drop zones
+  ['slot-pm','slot-lb','slot-part','slot-test','slot-rec'].forEach(function(sid) {
+    var s = document.getElementById(sid);
+    if (s) setupSlotDrop(s);
+  });
+});
+</script>
+</body>
+</html>

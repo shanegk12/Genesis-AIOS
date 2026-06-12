@@ -1,0 +1,305 @@
+[
+  {
+    "id": "m039t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Logistics: Supply Chain Map and Risk Analysis</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, you explored risks and contingencies — anticipating problems with your mousetrap car and planning for what you would do if they happened. Today, we go one layer deeper. This lesson is all about <strong>Supply Chain Map and Risk Analysis</strong>: understanding every step involved in getting your car's parts to you, and how a problem at any one of those steps could affect your final build.</p><p>This lesson connects to the <strong>Performance</strong> phase of Creationeering, where you evaluate how well your engineered system actually functions in real-world conditions. Just as God designed the universe with every component in its right place and purpose, you are learning to think carefully about where your materials come from — and what could go wrong before they even reach your hands.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define what a supply chain is and explain why it matters for engineering projects.</li><li>Create a basic supply chain map for the components of your mousetrap car.</li><li>Identify potential risks and vulnerabilities within your car's supply chain.</li><li>Develop strategies to reduce identified supply chain risks and protect your build's performance.</li><li>Connect responsible material sourcing to the biblical principle of stewardship.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Supply Chain",
+          "definition": "The full network of people, organizations, resources, and steps involved in creating a product — from raw materials all the way to the finished item in your hands."
+        },
+        {
+          "term": "Supplier",
+          "definition": "A person or company that provides materials or parts to someone building a product."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed planning and coordination of moving materials or products from one place to another."
+        },
+        {
+          "term": "Risk Analysis",
+          "definition": "The process of identifying and evaluating potential threats that could disrupt a project or supply chain."
+        },
+        {
+          "term": "Mitigation",
+          "definition": "Taking action to reduce how severe or damaging a risk can be — like having a backup plan or a spare part."
+        },
+        {
+          "term": "Performance",
+          "definition": "How well a product or system does its job in real-world conditions."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible and ethical management of resources — caring for what has been entrusted to you."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Perfect Provision — and What It Teaches Engineers</h2><p>Think about the universe for a moment. Every system God created works together — the water cycle feeds the soil, the soil grows the plants, the plants feed the animals, and so on. Nothing is random. Everything has a source, a path, and a purpose. Genesis 1:28 captures this well: <em>\"Be fruitful, and multiply, and replenish the earth, and subdue it.\"</em> God entrusted humanity with the responsibility to manage and care for what He made. That's the Dominion Mandate — and it applies directly to how you source and manage materials for your projects.</p><p>When you build your mousetrap car, you are working within a supply chain whether you realize it or not. That spring had to be manufactured somewhere. The wooden frame had to be cut from a piece of material that came from somewhere. The wheels, the string, the axles — each one has a story before it reached your workbench. Understanding that story is what supply chain thinking is all about.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:28</strong> — <em>\"Be fruitful, and multiply, and replenish the earth, and subdue it.\"</em> This Dominion Mandate reminds us that managing resources wisely — including the materials we use to build — is part of honoring God's creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Supply Chain?</h2><p>A <strong>supply chain</strong> is like a relay race. One runner passes the baton to the next, who passes it to the next, until it finally crosses the finish line. In a supply chain, the \"baton\" is your material or part — and every handoff is a step where something could go right or wrong.</p><p>For your mousetrap car, the supply chain might look simple. You go to a store, you buy the parts, you build the car. But zoom in, and you'll see there's much more happening behind the scenes:</p><ul><li>A manufacturer produced the mousetrap spring from steel wire.</li><li>A distributor packaged and shipped it to a hobby store or classroom supplier.</li><li>Your teacher or school ordered it and it was delivered to your classroom.</li><li>Now it's in your hands — ready to be assembled.</li></ul><p>Each of those steps is a link in the chain. And just like a real chain, if one link breaks, the whole thing fails.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple supply chain diagram showing the journey of a mousetrap car part from raw material supplier → manufacturer → distributor → school supplier → student workbench, with arrows connecting each step"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Mapping Your Supply Chain</h2><p>A <strong>supply chain map</strong> is a visual diagram that traces every step a component takes before it reaches you. Creating one forces you to think carefully about each part of your car — not just what it does, but where it came from and how it got to you.</p><p>Here's how to build one:</p><ul><li><strong>List every component</strong> in your mousetrap car. Include the spring, axles, wheels, frame, string, and any connectors.</li><li><strong>For each component, trace backwards:</strong> Who supplied it? Where did they get it? What raw materials was it made from?</li><li><strong>Draw it out</strong> as a flowchart or chain, with each step connected by an arrow showing the direction materials flow toward you.</li><li><strong>Label potential weak points</strong> — steps where a delay, quality problem, or shortage could occur.</li></ul><p>Even a basic map like this gives you a powerful advantage. You stop thinking of your build as just a project sitting on a table, and start seeing it as the end result of a whole system — one you can analyze and improve.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Identifying Supply Chain Risks</h2><p>Once your map is drawn, you can start asking the most important engineering question: <em>What could go wrong?</em> This is <strong>risk analysis</strong> — and it applies just as much to where your parts come from as it does to how they perform on race day.</p><p>Here are some common supply chain risks to look for:</p><ul><li><strong>Quality risk:</strong> A part arrives damaged, defective, or lower quality than expected. (A wheel that isn't perfectly round will wobble.)</li><li><strong>Availability risk:</strong> A part is out of stock or delayed. (What if the mousetrap springs don't arrive in time?)</li><li><strong>Substitution risk:</strong> You have to swap in a different part that doesn't perform the same way. (A heavier wheel changes your car's energy balance.)</li><li><strong>Single-source risk:</strong> You only have one supplier for a critical part. If they fail, you have no backup.</li></ul><p>Real-world engineers face these exact same challenges when building aircraft, medical devices, and consumer electronics. Supply chain failures have delayed product launches, grounded entire fleets of airplanes, and even affected public safety. Your mousetrap car is a small-scale model of a very real engineering challenge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A risk analysis chart showing four mousetrap car components (spring, wheels, axle, frame) with columns for 'Potential Risk,' 'Likelihood,' and 'Mitigation Strategy' — illustrating how to evaluate each part's supply chain vulnerability"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Mitigation Strategies: Your Backup Plan</h2><p>Identifying a risk is only half the job. The other half is deciding what you will do about it. That's where <strong>mitigation</strong> comes in. Mitigation doesn't mean eliminating every risk — that's often impossible. It means reducing how likely a risk is to happen, or reducing how bad the impact will be if it does.</p><p>For your mousetrap car project, consider these mitigation strategies:</p><ul><li><strong>Order extra parts:</strong> Having a spare wheel or an extra length of string means one broken piece won't stop your build.</li><li><strong>Test components early:</strong> Don't wait until race day to discover a wheel is warped. Test each part as soon as you receive it.</li><li><strong>Identify alternative suppliers:</strong> Know where else you could get a part if your first source falls through.</li><li><strong>Document your substitutions:</strong> If you swap a part, record what changed and how it might affect performance. This is called configuration management — and professional engineers do it constantly.</li></ul><p>Notice how each strategy involves preparation and awareness. A well-mitigated supply chain doesn't react to problems after they happen — it anticipates them in advance.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Build your supply chain map before you start assembling.</strong> The earlier you identify weak links in your parts sourcing, the more time you have to find solutions. Engineers call this <em>front-loading</em> — doing the hard thinking early so you're not scrambling later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Sourcing</h2><p>Here's a question worth sitting with: Does it matter <em>where</em> your materials come from, not just <em>what</em> they are?</p><p>As a Creationeer, you're called to be a good steward — not just of your finished design, but of every decision you make along the way. That includes how resources are gathered, how workers are treated in the factories that make your parts, and whether materials are produced sustainably. These aren't just business ethics questions. They're expressions of the Dominion Mandate — the responsibility God gave humanity to care for His creation with wisdom and integrity.</p><p>On a mousetrap car scale, this might mean choosing recycled materials where possible, not wasting parts you don't need, or thinking twice before throwing away a component that could be reused. Small choices, practiced consistently, build the habits of an engineer who honors both their craft and their Creator.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Supply Chain Thinking and Performance</h2><p>Remember the Performance phase of Creationeering? This is where your design meets the real world. And the real world includes every variable you didn't fully control — including the quality and reliability of every part you used.</p><p>A car that was perfectly designed but built with a warped wheel or a low-quality spring will underperform. The engineering work you do on your supply chain map is just as important as the engineering work you do on your chassis or axle alignment. Both contribute to race-day performance. Both deserve your careful attention.</p><p>The best engineers don't just build well — they source well, plan well, and recover well when things don't go as expected. That's the full picture of what it means to engineer with excellence.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't assume all parts are equal.</strong> Two wheels that look the same might have very different weights, diameters, or balance. Always measure and test your components — don't just trust that they match the specifications on the package.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Here's a quick summary of what you covered in this lesson:</p><ul><li>A <strong>supply chain</strong> traces every step a part takes before it reaches you — and each step is a potential risk point.</li><li>A <strong>supply chain map</strong> makes those steps visible, so you can analyze and plan for them.</li><li><strong>Risk analysis</strong> asks: what could go wrong at each step? Quality, availability, substitution, and single-source risks are all worth identifying.</li><li><strong>Mitigation strategies</strong> — like ordering extra parts, testing early, and knowing your alternatives — reduce the damage a risk can do to your project.</li><li>Good <strong>stewardship</strong> extends to how and where you source your materials, not just how you use them once they arrive.</li></ul><p>Your mousetrap car is a small system — but it lives inside a much larger one. Learning to see that bigger picture is what separates a good engineer from a great one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m039a001",
+    "type": "accordion",
+    "data": {
+      "title": "Real-World Connection: Supply Chain Failures in Engineering",
+      "html": "<p>In 2011, a massive earthquake and tsunami struck Japan, disrupting factories that produced critical automotive parts. Car manufacturers around the world — including plants in the United States — had to pause or reduce production because they couldn't get parts they needed. A single disruption thousands of miles away rippled through global supply chains for months.</p><p>In 2020 and 2021, a global semiconductor (computer chip) shortage caused delays in everything from new cars to gaming consoles to medical equipment. Companies that had mapped their supply chains and identified their single-source risks were better prepared to find alternatives. Those that hadn't were caught off guard.</p><p>These examples show that supply chain risk analysis isn't an academic exercise — it's one of the most critical skills in modern engineering and business. The habits you're building now with your mousetrap car are the same habits that protect real-world projects from real-world failures.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

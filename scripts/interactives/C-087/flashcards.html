@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Security and System Wipe — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Data Security and System Wipe</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Data Security", "definition": "Protecting digital information from anyone who shouldn't see, use, or change it. It's like putting a lock on your digital diary."}, {"term": "System Wipe", "definition": "A special process that completely and permanently removes all information from a device, making it impossible to get back. It's more than just deleting files."}, {"term": "Death & Recycling Phase", "definition": "The final stage in a product's life cycle where we think about how to safely turn off, reuse, repurpose, or dispose of a system or product."}, {"term": "Overwriting", "definition": "A method of securely erasing data by writing new, meaningless information over the old data multiple times. This makes the original data unreadable."}, {"term": "Degaussing", "definition": "Using a powerful magnet to scramble the information stored on a hard drive, making the data unrecoverable. This method works only for magnetic storage devices."}, {"term": "Encryption", "definition": "Changing information into a secret code so that only authorized people with the right key can read it. It's a way to protect data even if someone gets access to it."}, {"term": "Multiscale Modeling", "definition": "An engineering approach that connects what we see at a large scale (like a crack in a bridge) to what's happening at a tiny, atomic level (like bonds breaking)."}, {"term": "Why is data security important when disposing of old devices?", "definition": "It prevents your personal information, like photos or passwords, from falling into the wrong hands when you get rid of a computer or smartphone."}, {"term": "What's the difference between deleting and securely wiping data?", "definition": "Deleting data just hides it, making it seem gone but still recoverable. Securely wiping data permanently removes it, making it impossible to recover."}, {"term": "How does stewardship relate to data security?", "definition": "Biblical principles of stewardship mean we are responsible for protecting the digital information entrusted to us, even when disposing of devices."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

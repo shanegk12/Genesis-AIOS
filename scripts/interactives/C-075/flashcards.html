@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Waste Stream Management and Circular Economy — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Waste Stream Management and Circular Economy</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Waste Stream Management", "definition": "This is the process of collecting, moving, processing, recycling, or getting rid of waste materials in a responsible way."}, {"term": "Linear Economy", "definition": "This is a traditional way of making and using things where we 'take' raw materials, 'make' products, and then 'dispose' of them after use, creating a lot of waste."}, {"term": "Circular Economy", "definition": "This is a smarter way to use resources where we try to keep materials in use for as long as possible, getting the most value from them, and then reusing or recycling them instead of throwing them away."}, {"term": "Upcycling", "definition": "This is when you take old or unwanted items and turn them into something new that is even better or more valuable than before, like turning old jeans into a stylish bag."}, {"term": "Downcycling", "definition": "This is when you recycle materials but they become something of lower quality or less useful than the original item, like turning plastic bottles into park benches."}, {"term": "Cradle-to-Cradle", "definition": "This is a design idea where products and systems are made so that nothing is wasted, and all materials can be safely reused or recycled forever, just like in nature."}, {"term": "Creationeering™", "definition": "This is a framework that helps us understand how engineers and business leaders can manage materials throughout their entire life, from creation to reuse, reflecting God's wisdom."}, {"term": "Sustainability", "definition": "This is about meeting our own needs without compromising the ability of future generations to meet their own needs, ensuring a healthy planet for everyone."}, {"term": "Resource Efficiency", "definition": "This means using our resources wisely and effectively to get the most out of them while creating the least amount of waste possible."}, {"term": "Embodied Energy", "definition": "This is the total amount of energy used to create a product, from getting the raw materials to manufacturing it and transporting it."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

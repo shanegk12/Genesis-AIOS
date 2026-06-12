@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What is Logistics? — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>What is Logistics?</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "What is Logistics?", "definition": "Logistics is the detailed coordination of getting the right things to the right place at the right time, ensuring everything moves and arrives when needed."}, {"term": "Why is Logistics important in Creationeering™?", "definition": "Logistics is crucial for Creationeering™ because it ensures all the precisely designed parts and materials arrive exactly when and where they are needed to bring a creative vision to life."}, {"term": "What is a Supply Chain?", "definition": "A supply chain is the entire network of organizations, people, and activities involved in moving a product or service from the original supplier all the way to the customer."}, {"term": "What is Inventory?", "definition": "Inventory refers to the list or amount of raw materials, products being made, and finished goods that a company currently has on hand."}, {"term": "What is Warehousing?", "definition": "Warehousing is the act of storing goods in a building or facility, like a large storage hub, before they are sent out or used."}, {"term": "What is Transportation in Logistics?", "definition": "Transportation is the movement of goods or people from one location to another, using methods like trucks, trains, ships, or airplanes."}, {"term": "What is a Distribution Center?", "definition": "A distribution center is a special type of warehouse that quickly stores products for a short time before rapidly sending them out to stores or customers."}, {"term": "What is Optimization?", "definition": "Optimization is the process of finding the best possible solution or outcome for a problem, often by balancing different factors to get the most efficient result."}, {"term": "What is Throughput?", "definition": "Throughput is the rate at which something can be processed or produced, often referring to how much material moves through a system in a certain amount of time."}, {"term": "What is a Bottleneck?", "definition": "A bottleneck is a point in a system where things slow down or get congested, limiting the overall speed or capacity of the entire process."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

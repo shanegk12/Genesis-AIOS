@@ -1,0 +1,292 @@
+[
+  {
+    "id": "m041t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Assembly Blueprint and Safety Review</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Before any structure gets built, any machine gets assembled, or any product rolls off a production line, someone has to draw the plan. This lesson introduces you to assembly blueprints — the technical drawings that show how individual parts fit together into a finished whole. You will learn how to read and interpret assembly drawings, understand why safety review is a non-negotiable step in any engineering project, and discover how careful preparation before you build reflects the intentional, ordered design God modeled in creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p><ul><li>Define an assembly blueprint and explain its purpose in the engineering process.</li><li>Identify and describe the key components of an assembly drawing, including part callouts, bill of materials, and assembly views.</li><li>Distinguish between different types of assembly drawings and when each is used.</li><li>Explain why safety review is a critical step before any physical build begins.</li><li>Apply blueprint reading skills to a sample assembly drawing.</li><li>Connect the principles of careful planning and order to a biblical understanding of purposeful design.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Assembly Blueprint",
+          "definition": "A technical drawing that shows how multiple individual parts fit together to form a complete product or structure."
+        },
+        {
+          "term": "Bill of Materials (BOM)",
+          "definition": "A structured list included in an assembly drawing that identifies every part, its quantity, and relevant specifications."
+        },
+        {
+          "term": "Part Callout",
+          "definition": "A numbered label on an assembly drawing that points to a specific part and links it to its entry in the Bill of Materials."
+        },
+        {
+          "term": "Exploded View",
+          "definition": "A type of assembly drawing where parts are shown pulled apart along the assembly axis so you can see how each piece connects."
+        },
+        {
+          "term": "Section View",
+          "definition": "A drawing that shows the inside of an assembly by imagining a cut through the object, revealing internal components."
+        },
+        {
+          "term": "Safety Review",
+          "definition": "A structured check performed before building or operating a design to identify hazards, confirm materials are correct, and verify that procedures protect everyone involved."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The acceptable range of variation in a measurement — how much a dimension can be off and still work correctly."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Plans Come Before Parts</h2>\n<p>Think about the last time you tried to put together a piece of furniture without reading the instructions. Pieces ended up backward, hardware got lost, and the whole thing took three times longer than it should have. Now imagine doing that with a bridge or an airplane engine.</p>\n<p>Engineering projects can involve hundreds — sometimes thousands — of individual parts. Without a clear, shared plan, chaos takes over fast. That is exactly why assembly blueprints exist. An <strong>assembly blueprint</strong> is the master communication document for a build. It tells every person on the team — designers, fabricators, assemblers, quality inspectors — what goes where, in what order, and how everything connects.</p>\n<p>God did not create the universe randomly. Genesis 1 shows us a God who moved through creation with intention and sequence — light before life, water before land, structure before inhabitants. Engineers follow that same principle: establish the plan, then execute it. The blueprint is your plan.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:3–4</strong> — <em>\"By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures.\"</em> Engineering a structure — or anything else — begins with wisdom and understanding long before the first bolt is turned.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Anatomy of an Assembly Drawing</h2>\n<p>An assembly drawing is not just one picture — it is a package of information. Let's walk through its key components so you know exactly what you are looking at when you open one.</p>\n<h3>The Assembly View</h3>\n<p>This is the main drawing itself. It shows all the parts in their assembled position. You might see the object from the front, the side, or the top — or all three at once. The goal is to communicate the final shape and relationship of every part clearly and without confusion.</p>\n<h3>Part Callouts and Balloon Labels</h3>\n<p>Look at any professional assembly drawing and you will see numbered circles connected to parts by thin lines. These are called <strong>part callouts</strong> or balloon labels. Each number corresponds to an entry in the Bill of Materials. They are the drawing's index system — part 7 on the drawing matches part 7 on the list.</p>\n<h3>The Bill of Materials (BOM)</h3>\n<p>The <strong>Bill of Materials</strong> is a table, usually placed in the corner or on a separate sheet, that lists every single component in the assembly. For each part it typically tells you the part number, the part name, how many you need, what material it is made from, and any special notes. Think of it as the ingredient list for your build.</p>\n<h3>Title Block</h3>\n<p>Every engineering drawing has a title block — a standardized box in the corner that records the project name, drawing number, scale, date, the name of the person who drew it, and revision history. This is how teams track changes over time and make sure everyone is working from the same version.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled assembly drawing showing a simple mechanical component with balloon callout numbers pointing to individual parts, a Bill of Materials table in the lower right corner, and a title block — each element clearly annotated for student reference."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Types of Assembly Drawings</h2>\n<p>Not every project needs the same kind of drawing. Engineers have developed several specialized drawing types, each designed to communicate something specific.</p>\n<h3>Exploded View Drawings</h3>\n<p>An <strong>exploded view</strong> pulls all the parts apart along the lines where they connect, like freezing an assembly mid-build. The parts are still arranged in the correct order — they are just spaced out so you can see each one individually. You have probably seen these in instruction manuals for electronics or furniture. They are excellent for showing assembly sequence and making sure you do not miss a hidden fastener buried inside.</p>\n<h3>Section View Drawings</h3>\n<p>Sometimes you need to see what is happening <em>inside</em> an assembly. A <strong>section view</strong> imagines a flat plane cutting through the object and shows you the cross-section. Internal walls, hollow channels, nested components — things you cannot see from the outside — all become visible. Think of it like slicing a loaf of bread to see its texture inside rather than just its crust.</p>\n<h3>Detail Drawings Within an Assembly Set</h3>\n<p>Large assembly packages often include individual part detail drawings alongside the main assembly view. These zoom in on a single component, showing its exact dimensions, material, and tolerances. The assembly drawing tells you where it goes; the detail drawing tells you exactly what it is.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of an exploded view drawing and a section view drawing of the same simple assembly, with labels identifying which is which and arrows showing the cutting plane on the section view."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Reading a Blueprint: A Step-by-Step Approach</h2>\n<p>Looking at an assembly drawing for the first time can feel overwhelming. There is a lot of information on a single sheet. The key is having a system. Here is a reliable process you can use every time:</p>\n<ul>\n<li><strong>Step 1 — Read the title block first.</strong> Find out what you are looking at, who drew it, and which revision you have. Make sure you have the current version before you do anything else.</li>\n<li><strong>Step 2 — Review the Bill of Materials.</strong> Scan through the parts list to get a feel for what components are involved and how complex the assembly is.</li>\n<li><strong>Step 3 — Orient yourself with the main view.</strong> Identify the front, top, and side views if multiple are shown. Figure out the overall shape of the finished assembly.</li>\n<li><strong>Step 4 — Follow the callout numbers.</strong> Starting at callout 1, trace each balloon to its part, find it in the BOM, and mentally (or physically) locate that component. Build a picture in your mind of how the pieces connect.</li>\n<li><strong>Step 5 — Check dimensions and tolerances.</strong> Note any critical measurements. Pay attention to tolerances — they tell you how precise you need to be.</li>\n<li><strong>Step 6 — Look for special notes.</strong> Engineers often add assembly notes near the title block or in specific areas of the drawing. These might specify torque values, required adhesives, or alignment procedures.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Blueprint Reading Tip:</strong> When you first look at an assembly drawing, resist the urge to jump straight to the details. Always start with the big picture — title block, then BOM, then main view. Engineers call this \"zooming out before zooming in,\" and it saves enormous amounts of time and confusion.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Safety Review: The Step You Cannot Skip</h2>\n<p>You have the blueprint. You understand the parts. You are ready to build — right? Not yet. Before any physical assembly begins, a structured <strong>safety review</strong> has to happen. This is not a formality. It is one of the most important steps in the entire engineering process.</p>\n<p>A safety review is a deliberate, systematic check that asks: <em>Is this safe to build? Is this safe to operate? Have we protected everyone who will interact with this product?</em> It looks at materials — are any toxic, flammable, or reactive? It looks at the assembly process — are there pinch points, sharp edges, or heavy loads that could injure someone during construction? It looks at the finished product — what happens if it fails? Who could be hurt?</p>\n<h3>What a Safety Review Covers</h3>\n<ul>\n<li><strong>Material Safety:</strong> Confirm that every material listed in the BOM is appropriate for its intended use and that any hazardous materials have proper handling procedures in place.</li>\n<li><strong>Tool and Equipment Safety:</strong> Identify every tool needed for assembly and verify that operators are trained and that proper protective equipment (PPE) is available.</li>\n<li><strong>Process Hazards:</strong> Walk through the assembly sequence step by step and flag any moment where injury is possible — lifting heavy components, working at height, using heat or cutting tools.</li>\n<li><strong>Design Hazards:</strong> Look at the finished design critically. Are there sharp edges that need to be deburred? Exposed moving parts that need guards? Electrical components that need insulation?</li>\n<li><strong>Emergency Procedures:</strong> Know what to do if something goes wrong. Where is the first aid kit? Who to notify? What is the shutdown procedure?</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Many beginning engineers treat safety review as something you do <em>after</em> a problem shows up. Professional engineers do it <em>before</em> — proactively, before any physical work begins. A hazard identified on paper costs nothing to fix. A hazard discovered after someone is injured cannot be undone. Build the habit now.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Safety as Stewardship</h2>\n<p>In the Creationeering framework, stewardship means taking responsible care of everything God has entrusted to you — including the people around you. When you conduct a thorough safety review, you are not just following a rule. You are actively choosing to protect the dignity and wellbeing of other image-bearers.</p>\n<p>Proverbs 27:12 says, <em>\"The prudent see danger and take refuge, but the simple keep going and pay the penalty.\"</em> The prudent engineer looks ahead. They spot the hazard on the blueprint before it becomes a hazard on the build floor. That kind of foresight is both good engineering and good stewardship.</p>\n<p>Every time you review a design for safety, you are asking: <em>How does this affect the people who build it, use it, or live near it?</em> That question puts people first — and that is exactly where a Creationeer's priorities should be.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It Together: Blueprint + Safety = Ready to Build</h2>\n<p>Assembly blueprints and safety reviews are not separate tasks — they work together as a unified preparation phase. The blueprint tells you <em>what</em> to build and <em>how</em> the pieces connect. The safety review tells you <em>how to do it without harm</em>. Neither one is optional.</p>\n<p>Think of it this way: a pilot would never take off without both a flight plan and a pre-flight safety check. The flight plan tells them where to go. The safety check confirms the aircraft is ready to get there safely. Your blueprint is the flight plan. Your safety review is the pre-flight check. Together, they give you clearance to build.</p>\n<p>As you develop your engineering skills at Genesis K-12 Academy, getting comfortable with blueprints and safety reviews now will serve you in every project you ever take on — in class, in competition, and in your future career. These are not beginner skills you will eventually leave behind. Professional engineers do this on every single project, every single time.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m041a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the purpose of an assembly blueprint?</strong><br/>An assembly blueprint communicates how individual parts fit together into a finished product. It serves as the shared plan for every member of the engineering and build team.</p><p><strong>2. What information does a Bill of Materials contain?</strong><br/>A Bill of Materials lists every component in an assembly, including the part number, part name, quantity needed, material, and any special notes or specifications.</p><p><strong>3. How does an exploded view differ from a section view?</strong><br/>An exploded view pulls parts apart along the assembly axis so you can see each component and how it connects, while a section view imagines a cut through the object to reveal internal features you cannot see from the outside.</p><p><strong>4. What are the five areas a safety review should cover?</strong><br/>Material safety, tool and equipment safety, process hazards, design hazards, and emergency procedures.</p><p><strong>5. Why is safety review considered an act of stewardship?</strong><br/>Conducting a safety review means actively protecting the people who will build, use, or be near a product — treating them with the care and dignity they deserve as image-bearers of God, and exercising the responsibility entrusted to us as creators.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

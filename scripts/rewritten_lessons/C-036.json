@@ -1,0 +1,418 @@
+[
+  {
+    "id": "c036t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Fabrication</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson, you explored Technical Specifications — the detailed blueprints that tell you exactly what a component needs to do, how it should look, and what it should be made from. Think of those specs like a master chef's recipe: precise, intentional, and full of purpose.</p><p>Today, you move into the <strong>Assembly</strong> phase of Creationeering™, but with a spotlight on the critical step that comes <em>just before</em> assembly: <strong>Fabrication</strong>. Before you can put together a magnificent machine, someone has to <em>make</em> all the individual parts. This lesson dives into how raw materials are transformed into tangible objects — and how that process reflects the creative nature of a God who brought order from nothing.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define fabrication and explain its importance within the Creationeering™ Assembly phase.</li><li>Describe at least three different fabrication methods, with real-world examples for each.</li><li>Connect macro-level observations of fabricated parts to their atomic-level causes using Multiscale Modeling principles.</li><li>Apply the OCV (Objective, Constraint, Variable) method to optimize a fabrication process for a specific design challenge.</li><li>Reflect on the biblical principle of stewardship by considering how responsible fabrication practices honor God's creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Fabrication",
+          "definition": "The process of making or manufacturing components or products from raw materials using different techniques."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The Creationeering™ phase where individual fabricated parts are joined together to form a complete product or system, following the specified design."
+        },
+        {
+          "term": "Additive Manufacturing",
+          "definition": "A fabrication method where material is added layer by layer to create a three-dimensional object — commonly known as 3D printing."
+        },
+        {
+          "term": "Subtractive Manufacturing",
+          "definition": "A fabrication method where material is removed from a larger block or workpiece to achieve the desired shape and dimensions, such as machining or cutting."
+        },
+        {
+          "term": "Forming Manufacturing",
+          "definition": "A fabrication method where material is shaped without adding or removing significant material, often by applying force to bend, mold, or stretch it."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at large scales (macro) to the underlying mechanisms at very small scales (atomic or molecular)."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A structured engineering problem-solving approach that identifies the Objective (what you want to achieve), Constraints (what limits you), and Variables (what you can change) to optimize a design or process."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Fabrication?</h2><p>Fabrication is simply the act of <em>making things</em>. More precisely, it's the process of turning raw materials — metal, plastic, wood, composite fibers — into the specific components your design calls for. Every bolt, bracket, housing, and gear you've ever seen started as raw material that someone had to shape into its final form.</p><p>In the Creationeering™ framework, fabrication sits right between your Technical Specifications and the Assembly phase. Your specs tell you <em>what</em> to make. Fabrication is <em>how</em> you make it. And assembly is where all those finished pieces finally come together.</p><p>Here's a good way to picture it: imagine building a wooden bookshelf. The lumber yard gives you raw boards. Fabrication is everything you do with those boards — measuring, cutting, sanding, drilling — before you ever drive a single screw to join two pieces together. That joining step is assembly. Fabrication is everything before it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:7</strong> — \"Then the Lord God formed a man from the dust of the ground and breathed into his nostrils the breath of life.\" God didn't just speak humans into existence the way He spoke light into being — He <em>formed</em> us. He worked with material, shaping it with intention and care. Every time you fabricate a part, you're reflecting that same creative impulse: taking raw material and giving it purpose and form.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Three Major Fabrication Methods</h2><p>Engineers have developed dozens of ways to fabricate parts, but almost all of them fall into one of three categories: <strong>Additive</strong>, <strong>Subtractive</strong>, or <strong>Forming</strong>. Each one starts with material and ends with a shaped component — they just take very different routes to get there.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Additive Manufacturing — Building Up</h3><p>In additive manufacturing, you start with <em>nothing</em> and build your part up, layer by layer, until it's complete. The most familiar version of this is <strong>3D printing</strong>. A printer reads a digital model and deposits thin slices of material — plastic, metal, resin, even concrete — one on top of the other until the finished part appears.</p><p>Think of it like building a wall out of LEGO bricks. You don't cut the wall out of a solid block — you stack pieces together until you reach the shape you want. Additive manufacturing works the same way, just at a much finer scale.</p><p>This method is especially powerful when you need complex internal shapes, custom geometry, or low-volume prototypes. It can be slower and more expensive per part than other methods, but it wastes almost no material — because you only deposit exactly what you need.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A 3D printer depositing layers of plastic filament to build up a part from the base plate upward — a classic example of additive manufacturing."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>Subtractive Manufacturing — Carving Away</h3><p>Subtractive manufacturing is the opposite approach. You start with a solid block of material — called a <strong>workpiece</strong> — and remove everything that isn't your part. Cutting, drilling, milling, and turning on a lathe are all subtractive processes.</p><p>Michelangelo reportedly said that every block of stone contains a statue, and the sculptor's job is to remove the parts that aren't the statue. That's subtractive manufacturing in one sentence. You reveal the part hidden inside the raw material by carefully taking away what doesn't belong.</p><p>This method produces extremely precise, strong parts and works well with metals and dense plastics. The tradeoff is that it generates material waste — all those chips and shavings that get cut away — and it's harder to create hollow or very complex internal features.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Forming Manufacturing — Reshaping Without Removing</h3><p>Forming sits in an interesting middle ground. You don't add material, and you don't remove it — you simply <em>reshape</em> what's already there by applying force. Bending a sheet of steel, stamping a car door panel, forging a hammer head, or blow-molding a plastic bottle are all forming processes.</p><p>Imagine squeezing a lump of clay. The clay doesn't gain or lose any material — it just moves into a new shape under pressure. Metal forming works on the same principle, just with much harder materials and much more force. Forming is fast, efficient, and minimizes waste, making it ideal for high-volume manufacturing like car parts or aluminum cans.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick Memory Hook:</strong> Think of the three methods as <em>Build It Up</em> (Additive), <em>Carve It Down</em> (Subtractive), and <em>Shape It Over</em> (Forming). When you're trying to choose the right method for a design challenge, ask yourself: does my part need to grow from nothing, get revealed from a block, or get pushed into shape?</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of additive (3D printing), subtractive (CNC milling), and forming (metal stamping) fabrication methods."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing the Big Picture and the Tiny Details — Multiscale Modeling</h2><p>Here's something fascinating: the way a fabricated part <em>looks and behaves</em> on the outside is directly caused by what's happening at the <em>atomic level</em> on the inside. This connection between large-scale observations and small-scale causes is what engineers call <strong>Multiscale Modeling</strong>.</p><p>When a metal part bends or breaks, it's because atoms inside it shifted, bonds stretched, or tiny defects called <strong>dislocations</strong> moved through the crystal structure of the metal. When a 3D-printed part is weaker along one direction, it's because the bonds between printed layers aren't as strong as the bonds within a single layer.</p><p>You don't need a microscope to apply this thinking. The key habit is asking <em>why</em> — not just observing that a part cracked, but asking what happened at the microscopic level to allow that crack. That kind of deep thinking is what separates a great engineer from someone who just follows instructions.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Multiscale Thinking in Action:</strong> Suppose you 3D-print two identical-looking brackets. One was printed with the layers running horizontally, and one with layers running vertically. Under load, they might fail very differently — even though they look the same from the outside. The difference is entirely in the microscale structure of the material. This is why fabrication method and orientation <em>both</em> matter in engineering design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing Fabrication — The OCV Method</h2><p>Choosing a fabrication method isn't just about what <em>can</em> work — it's about what works <em>best</em> given your situation. That's where the <strong>OCV Method</strong> becomes your best tool.</p><p>OCV stands for <strong>Objective</strong>, <strong>Constraint</strong>, and <strong>Variable</strong>. Here's how to use it:</p><ul><li><strong>Objective:</strong> What are you trying to achieve? This is your goal — the measurable outcome you want. For fabrication, this might be \"minimize cost per part\" or \"maximize tensile strength.\"</li><li><strong>Constraint:</strong> What limits you? Constraints are the boundaries you cannot cross. Your budget, available machines, material availability, and delivery deadline are all constraints.</li><li><strong>Variable:</strong> What can you change? Variables are the factors within your control — the fabrication method you choose, the material you select, the layer thickness in 3D printing, the cutting speed in machining.</li></ul><p>By clearly identifying each of these three elements before you start fabricating, you set yourself up to make intentional, well-reasoned decisions — not just guesses.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Try It Now:</strong> Imagine your objective is to fabricate 500 identical plastic brackets as cheaply as possible. Your constraint is that you only have a 3D printer and a limited budget. Your variable is the print settings (layer height, infill density, print speed). How would you adjust those variables to hit your objective without violating your constraint? Write out your OCV before you answer — it will sharpen your thinking immediately.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Fabrication and Stewardship</h2><p>Every fabrication decision has real-world consequences — not just for your design, but for the world around you. Subtractive manufacturing generates material waste. Some forming processes require enormous energy. Certain 3D printing resins produce chemical byproducts that need careful disposal.</p><p>As a Creationeer, you are called to think about these consequences. Stewardship — the responsible management of God's creation — applies directly to how you choose to fabricate. Selecting a process that minimizes waste, choosing recyclable materials, or designing parts that can be disassembled and reused at end-of-life are all acts of stewardship in the engineering world.</p><p>This isn't just good ethics — it's also good engineering. Sustainable design often leads to lower costs, fewer regulatory headaches, and products that last longer. Caring for creation and building excellent products aren't in conflict; they point in the same direction.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:15</strong> — \"The Lord God took the man and put him in the Garden of Eden to work it and take care of it.\" We were placed here to be workers <em>and</em> caretakers. In your fabrication choices, both of those roles apply. Work excellently — and care for what God has entrusted to you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036c006",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Don't choose a fabrication method just because it's the one you're most familiar with. A 3D printer is a great tool — but it's not always the right tool. Always run your design through the OCV method first, and let your objective and constraints guide your method choice, not habit or convenience.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2><p>Use these questions to test what you've learned. Try answering each one in your own words before expanding.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is fabrication, and where does it fit in the Creationeering™ process?",
+      "html": "<p>Fabrication is the process of turning raw materials into finished components using techniques like 3D printing, machining, or forming. In Creationeering™, it sits between the Technical Specifications phase (which defines what to make) and the Assembly phase (where parts are joined together). You can't assemble something that hasn't been fabricated first.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036a002",
+    "type": "accordion",
+    "data": {
+      "title": "What is the key difference between additive and subtractive manufacturing?",
+      "html": "<p>Additive manufacturing builds a part up by adding material layer by layer (like 3D printing). Subtractive manufacturing starts with a solid block and removes material to reveal the final shape (like machining or cutting). One adds; the other takes away.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036a003",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling help an engineer understand why a part fails?",
+      "html": "<p>Multiscale Modeling connects what you can observe at the large scale (a crack, a deformation, a weak point) to what's happening at the atomic or microscopic level (dislocations in a crystal, weak bonds between printed layers). By thinking across both scales, an engineer can diagnose the <em>root cause</em> of a failure and redesign to prevent it — not just patch the symptom.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036a004",
+    "type": "accordion",
+    "data": {
+      "title": "Walk through an example of the OCV method applied to a fabrication decision.",
+      "html": "<p>Suppose you need to make a lightweight drone frame. Your <strong>Objective</strong> is to minimize weight while maintaining structural strength. Your <strong>Constraints</strong> are a $200 budget and access only to a 3D printer and basic hand tools. Your <strong>Variables</strong> include the material (PLA vs. carbon-fiber-infused filament), print orientation, and infill pattern. By laying these out clearly, you can systematically test which variables move you closest to your objective without breaking your constraints — instead of just guessing.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c036a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does stewardship connect to fabrication choices?",
+      "html": "<p>Every fabrication method has environmental and resource implications. Subtractive processes create material waste; some processes consume large amounts of energy or produce chemical byproducts. Choosing methods that minimize waste, using recyclable or sustainable materials, and designing parts for disassembly and reuse are all expressions of stewardship — caring responsibly for the creation God has entrusted to us. Good stewardship and good engineering reinforce each other.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  }
+]

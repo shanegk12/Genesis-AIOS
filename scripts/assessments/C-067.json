@@ -57,6 +57,90 @@
       },
       "answer": "B",
       "explanation": "The root cause is the fundamental reason for the failure; in this case, the gear wearing out is the underlying problem causing the arm to drop objects."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson's key vocabulary, what is 'fatigue' in the context of materials?",
+      "options": {
+        "A": "The gradual destruction of materials by chemical reactions.",
+        "B": "The weakening of a material caused by repeatedly applied loads.",
+        "C": "The internal force per unit area within a material.",
+        "D": "The ability of a material to stretch without breaking."
+      },
+      "answer": "B",
+      "explanation": "Fatigue is defined as the weakening of a material from repeated loads, leading to eventual failure."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson describes failure analysis as being like a detective investigating a puzzle. What is a primary action a Creationeer detective would take when performing failure analysis?",
+      "options": {
+        "A": "Quickly replacing the broken part without investigation.",
+        "B": "Guessing the problem based on past experiences.",
+        "C": "Gathering clues, examining broken parts, and asking questions to find the cause.",
+        "D": "Ignoring the failure and moving on to a new design."
+      },
+      "answer": "C",
+      "explanation": "Failure analysis involves gathering clues, examining broken parts, and asking questions to determine the cause, much like a detective."
+    },
+    {
+      "type": "comprehension",
+      "question": "In engineering, the term 'stress' has a specific meaning when applied to materials. What does 'stress' refer to?",
+      "options": {
+        "A": "The emotional pressure felt by the engineer.",
+        "B": "The amount of heat a material can withstand.",
+        "C": "An internal force per unit area within a material, often caused by external loads.",
+        "D": "The process of stretching a material until it breaks."
+      },
+      "answer": "C",
+      "explanation": "Stress is defined as an internal force per unit area within a material, often caused by external loads."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer is designing a critical life-support system for a space habitat. To ensure the system continues to function even if a main pump fails, they include a second, identical pump that automatically activates if the first one stops working. Which reliability engineering technique is the Creationeer using?",
+      "options": {
+        "A": "Fatigue testing.",
+        "B": "Corrosion prevention.",
+        "C": "Redundancy.",
+        "D": "Strain analysis."
+      },
+      "answer": "C",
+      "explanation": "Redundancy is the inclusion of extra components or systems that can take over if a primary component fails."
+    },
+    {
+      "type": "application",
+      "question": "A Junior Creationeer's metal outdoor sculpture begins to show signs of greenish-blue discoloration and pitting after being exposed to rain and humidity for several months. This weakens the sculpture's structure. What is the most likely cause of this failure?",
+      "options": {
+        "A": "Fatigue from repeated vibrations.",
+        "B": "Stress from too much weight.",
+        "C": "Corrosion due to chemical reactions with the environment.",
+        "D": "Strain from being stretched too far."
+      },
+      "answer": "C",
+      "explanation": "Corrosion is the gradual destruction of materials by chemical reactions with their environment, often seen as discoloration and pitting."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer designs a robotic arm that needs to lift a maximum of 5 kg. To make sure it is very safe and reliable, they build it with components that are strong enough to withstand a load of 25 kg before breaking. What reliability engineering principle is the Creationeer applying?",
+      "options": {
+        "A": "Multiscale modeling.",
+        "B": "Root cause analysis.",
+        "C": "Factor of Safety.",
+        "D": "Performance validation."
+      },
+      "answer": "C",
+      "explanation": "The Factor of Safety is a numerical value representing the ratio of a material's strength to the maximum stress it is expected to experience, ensuring it is much stronger than needed."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson highlights that God's creation is steadfast and reliable, inspiring Creationeers to build with integrity and foresight. How does building reliable inventions reflect good stewardship of the resources and talents God has given us?",
+      "options": {
+        "A": "It allows Creationeers to use up resources quickly to make new designs.",
+        "B": "It shows that Creationeers can create things that never fail, just like God.",
+        "C": "It ensures that our creations serve their intended purpose effectively, last longer, and minimize waste, honoring the effort and materials used.",
+        "D": "It means we don't have to spend time on maintenance or repairs."
+      },
+      "answer": "C",
+      "explanation": "Building reliable inventions demonstrates good stewardship by ensuring resources are used efficiently, creations are durable, and they fulfill their purpose over time."
     }
   ]
 }

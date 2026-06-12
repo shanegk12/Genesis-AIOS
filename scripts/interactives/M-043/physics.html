@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mousetrap Car Physics Sandbox – Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f2035;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e8e0d0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 3px solid #C9A84C;
+  }
+  header .logo {
+    width: 38px; height: 38px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 16px; color: #C9A84C; line-height: 1.2; }
+  header p { font-size: 11px; color: #aac4e0; }
+  #main-wrap {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #C9A84C44;
+    background: #0f2035;
+  }
+  canvas { display: block; width: 100%; }
+  #controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #162d47;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .ctrl-group {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .ctrl-group label {
+    font-size: 12px;
+    color: #C9A84C;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ctrl-group .desc {
+    font-size: 10px;
+    color: #8aadcc;
+    margin-top: -3px;
+  }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+    height: 6px;
+  }
+  .val-badge {
+    display: inline-block;
+    background: #1B3A5C;
+    border: 1px solid #C9A84C;
+    color: #C9A84C;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 5px;
+    min-width: 60px;
+    text-align: center;
+  }
+  #metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .metric-box {
+    flex: 1 1 130px;
+    background: #162d47;
+    border: 2px solid #C9A84C44;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .metric-box .m-label {
+    font-size: 10px;
+    color: #8aadcc;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .metric-box .m-value {
+    font-size: 22px;
+    font-weight: 800;
+    color: #C9A84C;
+    line-height: 1.2;
+  }
+  .metric-box .m-unit {
+    font-size: 10px;
+    color: #aac4e0;
+  }
+  #btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 9px 22px;
+    border-radius: 7px;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.15s;
+    touch-action: manipulation;
+  }
+  button:active { filter: brightness(0.85); }
+  #btn-launch {
+    background: #C9A84C;
+    color: #1B3A5C;
+    flex: 1 1 120px;
+  }
+  #btn-reset {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 2px solid #C9A84C;
+    flex: 1 1 100px;
+  }
+  #phase-label {
+    font-size: 11px;
+    color: #aac4e0;
+    text-align: center;
+    padding: 2px 0;
+    min-height: 18px;
+  }
+  .energy-bar-wrap {
+    flex: 1 1 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ebar-label { font-size: 10px; color: #8aadcc; text-transform: uppercase; letter-spacing: 0.5px; }
+  .ebar-outer {
+    background: #0f2035;
+    border-radius: 4px;
+    height: 14px;
+    overflow: hidden;
+    border: 1px solid #C9A84C33;
+  }
+  .ebar-inner {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.05s;
+  }
+  #ebar-pe .ebar-inner { background: #e05c2a; }
+  #ebar-ke .ebar-inner { background: #2ab5e0; }
+  #ebar-lost .ebar-inner { background: #5a5a7a; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">G</div>
+  <div>
+    <h1>Mousetrap Car Physics Sandbox</h1>
+    <p>Genesis K-12 Academy · Mousetrap Build · Body and Mousetrap</p>
+  </div>
+</header>
+<div id="main-wrap">
+  <div id="canvas-wrap">
+    <canvas id="simCanvas"></canvas>
+  </div>
+  <div id="phase-label" id="phaselbl">Set your parameters and press LAUNCH →</div>
+  <div id="metrics">
+    <div class="metric-box">
+      <div class="m-label">Distance</div>
+      <div class="m-value" id="m-dist">0.00</div>
+      <div class="m-unit">meters</div>
+    </div>
+    <div class="metric-box">
+      <div class="m-label">Speed</div>
+      <div class="m-value" id="m-speed">0.00</div>
+      <div class="m-unit">m/s</div>
+    </div>
+    <div class="metric-box">
+      <div class="m-label">Efficiency</div>
+      <div class="m-value" id="m-eff">0.0</div>
+      <div class="m-unit">%</div>
+    </div>
+    <div class="energy-bar-wrap">
+      <div class="ebar-label">Energy Transfer</div>
+      <div style="display:flex;align-items:center;gap:6px;" id="ebar-pe">
+        <span style="font-size:10px;color:#e05c2a;min-width:36px;">Spring</span>
+        <div class="ebar-outer" style="flex:1"><div class="ebar-inner" id="bar-pe" style="width:100%"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;" id="ebar-ke">
+        <span style="font-size:10px;color:#2ab5e0;min-width:36px;">Kinetic</span>
+        <div class="ebar-outer" style="flex:1"><div class="ebar-inner" id="bar-ke" style="width:0%"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;" id="ebar-lost">
+        <span style="font-size:10px;color:#8888aa;min-width:36px;">Lost</span>
+        <div class="ebar-outer" style="flex:1"><div class="ebar-inner" id="bar-lost" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div id="controls">
+    <div class="ctrl-group">
+      <label>Lever Arm Length</label>
+      <div class="desc">Longer arm = more string pull distance</div>
+      <input type="range" id="sl-lever" min="5" max="30" value="15" step="1">
+      <div><span class="val-badge" id="lv-lever">15 cm</span></div>
+    </div>
+    <div class="ctrl-group">
+      <label>Spring Tension</label>
+      <div class="desc">Energy stored in mousetrap spring</div>
+      <input type="range" id="sl-spring" min="1" max="10" value="5" step="1">
+      <div><span class="val-badge" id="lv-spring">5 / 10</span></div>
+    </div>
+    <div class="ctrl-group">
+      <label>Car Mass</label>
+      <div class="desc">Heavier car needs more force to accelerate</div>
+      <input type="range" id="sl-mass" min="50" max="400" value="150" step="10">
+      <div><span class="val-badge" id="lv-mass">150 g</span></div>
+    </div>
+    <div class="ctrl-group">
+      <label>Friction (Surface)</label>
+      <div class="desc">Rolling resistance on the track</div>
+      <input type="range" id="sl-friction" min="1" max="20" value="5" step="1">
+      <div><span class="val-badge" id="lv-friction">Low</span></div>
+    </div>
+    <div class="ctrl-group">
+      <label>Wheel Size</label>
+      <div class="desc">Larger wheels = more distance per rotation</div>
+      <input type="range" id="sl-wheel" min="1" max="5" value="3" step="1">
+      <div><span class="val-badge" id="lv-wheel">Medium</span></div>
+    </div>
+    <div class="ctrl-group">
+      <label>Aerodynamics</label>
+      <div class="desc">Streamlined body reduces air drag</div>
+      <input type="range" id="sl-aero" min="1" max="5" value="3" step="1">
+      <div><span class="val-badge" id="lv-aero">Average</span></div>
+    </div>
+  </div>
+  <div id="btn-row">
+    <button id="btn-launch">▶ LAUNCH</button>
+    <button id="btn-reset">↺ Reset</button>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ─── Canvas Setup ─────────────────────────────────────────────────────────────
+const canvas = document.getElementById('simCanvas');
+const ctx    = canvas.getContext('2d');
+const CWIDTH = 860, CHEIGHT = 280;
+canvas.width  = CWIDTH;
+canvas.height = CHEIGHT;
+
+// ─── Simulation State ─────────────────────────────────────────────────────────
+let state = 'idle'; // idle | springing | rolling | done
+let simTime = 0;
+let carX = 0;        // metres from start
+let carVel = 0;      // m/s
+let armAngle = 0;    // radians, 0=vertical(set), pi/2=released flat
+let springPhase = 0; // 0→1 during spring release
+
+// Physics params (derived from sliders each launch)
+let P = {};
+
+// Pixel per metre scaling
+let PPM = 1;
+
+// Trail
+let trail = [];
+
+// ─── Slider Elements ──────────────────────────────────────────────────────────
+const sliders = {
+  lever:   document.getElementById('sl-lever'),
+  spring:  document.getElementById('sl-spring'),
+  mass:    document.getElementById('sl-mass'),
+  friction:document.getElementById('sl-friction'),
+  wheel:   document.getElementById('sl-wheel'),
+  aero:    document.getElementById('sl-aero'),
+};
+const labels = {
+  lever:   document.getElementById('lv-lever'),
+  spring:  document.getElementById('lv-spring'),
+  mass:    document.getElementById('lv-mass'),
+  friction:document.getElementById('lv-friction'),
+  wheel:   document.getElementById('lv-wheel'),
+  aero:    document.getElementById('lv-aero'),
+};
+const metDist  = document.getElementById('m-dist');
+const metSpeed = document.getElementById('m-speed');
+const metEff   = document.getElementById('m-eff');
+const barPE    = document.getElementById('bar-pe');
+const barKE    = document.getElementById('bar-ke');
+const barLost  = document.getElementById('bar-lost');
+const phaseLbl = document.getElementById('phase-label');
+
+const wheelNames = ['','Tiny','Small','Medium','Large','Huge'];
+const aeroNames  = ['','Brick','Boxy','Average','Streamlined','Aerodynamic'];
+const frictionDesc = ['','Very Low','Low','Low-Med','Medium','Med-High','High','High','High','Very High','Very High',
+  'Max','Max','Max','Max','Max','Max','Max','Max','Max','Extreme'];
+
+function updateLabels(){
+  labels.lever.textContent   = sliders.lever.value + ' cm';
+  labels.spring.textContent  = sliders.spring.value + ' / 10';
+  labels.mass.textContent    = sliders.mass.value + ' g';
+  labels.friction.textContent= frictionDesc[+sliders.friction.value] || sliders.friction.value;
+  labels.wheel.textContent   = wheelNames[+sliders.wheel.value];
+  labels.aero.textContent    = aeroNames[+sliders.aero.value];
+}
+Object.values(sliders).forEach(s => s.addEventListener('input', ()=>{ updateLabels(); if(state==='idle') drawIdle(); }));
+updateLabels();
+
+// ─── Physics Derivation ───────────────────────────────────────────────────────
+function buildParams(){
+  const leverCm   = +sliders.lever.value;          // 5–30 cm
+  const springLvl = +sliders.spring.value;         // 1–10
+  const massG     = +sliders.mass.value;           // 50–400 g
+  const frLvl     = +sliders.friction.value;       // 1–20
+  const wheelLvl  = +sliders.wheel.value;          // 1–5
+  const aeroLvl   = +sliders.aero.value;           // 1–5
+
+  // Spring stores energy proportional to spring level × lever efficiency
+  // Lever arm: longer arm → more torque → more string wound → more distance pushed
+  // Energy in joules (scaled for the sim)
+  const leverEff = 0.5 + (leverCm - 5) / 50;       // 0.5 → 1.0
+  const springE  = springLvl * 0.04 * leverEff;     // J, up to ~0.4 J
+
+  const mass     = massG / 1000;                    // kg
+  const wheelR   = 0.02 + (wheelLvl - 1) * 0.012;  // 0.02–0.068 m radius
+  // Rolling friction coeff
+  const mu_r     = 0.002 + (frLvl - 1) * 0.003;    // 0.002–0.059
+  // Aero drag coeff (Cd * A proxy)
+  const CdA      = 0.08 - (aeroLvl - 1) * 0.013;   // 0.08–0.028
+  const rhoHalf  = 0.5 * 1.2;                       // 0.5 * air density
+
+  // Spring release time (faster for higher spring, shorter lever)
+  const releaseTime = 0.15 + (30 - leverCm) * 0.005 + (10 - springLvl) * 0.01;
+
+  return { springE, mass, mu_r, CdA, rhoHalf, wheelR, releaseTime, leverCm, springLvl, wheelLvl };
+}
+
+// ─── Launch ───────────────────────────────────────────────────────────────────
+let raf = null;
+let lastTs = null;
+let peInit = 0;
+
+function launch(){
+  if(state === 'springing' || state === 'rolling') return;
+  P = buildParams();
+  state      = 'springing';
+  simTime    = 0;
+  carX       = 0;
+  carVel     = 0;
+  armAngle   = Math.PI * 0.55;   // arm pulled back
+  springPhase= 0;
+  trail      = [];
+  peInit     = P.springE;
+  lastTs     = null;
+  phaseLbl.textContent = '⚡ Spring releasing – lever arm transferring energy to wheels…';
+  if(raf) cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(loop);
+}
+
+function resetSim(){
+  if(raf){ cancelAnimationFrame(raf); raf = null; }
+  state = 'idle';
+  carX  = 0; carVel = 0; armAngle = Math.PI*0.55; springPhase = 0; trail = [];
+  metDist.textContent  = '0.00';
+  metSpeed.textContent = '0.00';
+  metEff.textContent   = '0.0';
+  barPE.style.width   = '100%';
+  barKE.style.width   = '0%';
+  barLost.style.width = '0%';
+  phaseLbl.textContent = 'Set your parameters and press LAUNCH →';
+  drawIdle();
+}
+
+document.getElementById('btn-launch').addEventListener('click', launch);
+document.getElementById('btn-reset').addEventListener('click', resetSim);
+
+// ─── Game Loop ────────────────────────────────────────────────────────────────
+function loop(ts){
+  if(!lastTs) lastTs = ts;
+  let dt = Math.min((ts - lastTs) / 1000, 0.05);
+  lastTs = ts;
+  simTime += dt;
+
+  if(state === 'springing'){
+    // Spring phase: ramp up velocity using impulse model
+    springPhase = Math.min(simTime / P.releaseTime, 1);
+    // Smooth cubic ramp of energy → velocity
+    const frac  = 3*springPhase*springPhase - 2*springPhase*springPhase*springPhase;
+    const ke    = peInit * frac;
+    carVel      = Math.sqrt(2 * ke / P.mass);
+    armAngle    = Math.PI*0.55 * (1 - frac) - 0.05;
+
+    // Apply rolling resistance during spring phase
+    const fr = P.mu_r * P.mass * 9.81;
+    carX += carVel * dt - 0.5 * (fr/P.mass) * dt * dt;
+    if(carX < 0) carX = 0;
+
+    if(springPhase >= 1){
+      state = 'rolling';
+      phaseLbl.textContent = '🚗 Rolling… friction and drag slowing the car.';
+    }
+  } else if(state === 'rolling'){
+    // Forces: rolling friction + aerodynamic drag
+    const fr  = P.mu_r * P.mass * 9.81;
+    const fd  = P.rhoHalf * P.CdA * carVel * carVel;
+    const acc = -(fr + fd) / P.mass;
+    carVel   += acc * dt;
+    if(carVel <= 0){ carVel = 0; state = 'done'; phaseLbl.textContent = '🏁 Car stopped! Check your metrics above.'; }
+    carX += carVel * dt;
+  }
+
+  // KE remaining
+  const ke   = 0.5 * P.mass * carVel * carVel;
+  const lost = peInit - ke;
+  const peBar= (state==='springing') ? Math.max(0, 100*(1 - 3*springPhase*springPhase+2*springPhase*springPhase*springPhase)) : 0;
+  const keBar= Math.min(100, ke/peInit*100);
+  const lBar = Math.min(100, lost/peInit*100);
+  barPE.style.width   = peBar.toFixed(1) + '%';
+  barKE.style.width   = keBar.toFixed(1) + '%';
+  barLost.style.width = lBar.toFixed(1)  + '%';
+
+  metDist.textContent  = carX.toFixed(2);
+  metSpeed.textContent = carVel.toFixed(2);
+  // Efficiency = KE / initial PE * 100 (peak)
+  const effNow = (peInit > 0) ? Math.min(100, ke / peInit * 100).toFixed(1) : '0.0';
+  if(state === 'rolling' || state === 'done') metEff.textContent = effNow;
+
+  // Trail
+  trail.push(carX);
+  if(trail.length > 600) trail.shift();
+
+  draw();
+
+  if(state !== 'done'){
+    raf = requestAnimationFrame(loop);
+  }
+}
+
+// ─── Drawing ──────────────────────────────────────────────────────────────────
+const GROUND_Y   = CHEIGHT - 55;
+const CAR_W      = 80;
+const CAR_H      = 26;
+const TRAP_W     = 44;
+const TRAP_H     = 16;
+const CAR_START_PX = 80; // pixel start of car on canvas
+
+function worldToPx(xM){
+  // clamp view: once car goes far, scroll
+  return CAR_START_PX + xM * PPM;
+}
+
+function draw(){
+  // Determine scale from current distance
+  const maxRange = Math.max(4, carX * 1.25 + 1);
+  PPM = (CWIDTH - CAR_START_PX - 30) / maxRange;
+  ctx.clearRect(0,0,CWIDTH,CHEIGHT);
+  drawBg();
+  drawTrail();
+  drawTrack();
+  drawRuler();
+  drawCar();
+}
+
+function drawIdle(){
+  P = buildParams();
+  carX = 0; carVel = 0; armAngle = Math.PI * 0.55;
+  PPM = (CWIDTH - CAR_START_PX - 30) / 5;
+  ctx.clearRect(0,0,CWIDTH,CHEIGHT);
+  drawBg();
+  drawTrack();
+  drawRuler();
+  drawCar();
+}
+
+function drawBg(){
+  // Sky gradient
+  const grd = ctx.createLinearGradient(0,0,0,GROUND_Y);
+  grd.addColorStop(0,'#0a1826');
+  grd.addColorStop(1,'#1B3A5C');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0,0,CWIDTH,GROUND_Y);
+
+  // Grid lines subtle
+  ctx.strokeStyle = '#ffffff08';
+  ctx.lineWidth = 1;
+  for(let x=0;x<CWIDTH;x+=60){
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,GROUND_Y); ctx.stroke();
+  }
+}
+
+function drawTrack(){
+  // Ground fill
+  const grd = ctx.createLinearGradient(0,GROUND_Y,0,CHEIGHT);
+  grd.addColorStop(0,'#2a1a0a');
+  grd.addColorStop(1,'#1a0f05');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, GROUND_Y, CWIDTH, CHEIGHT - GROUND_Y);
+
+  // Track surface
+  ctx.fillStyle = '#3d3020';
+  ctx.fillRect(0, GROUND_Y, CWIDTH, 8);
+  ctx.fillStyle = '#C9A84C33';
+  ctx.fillRect(0, GROUND_Y, CWIDTH, 2);
+
+  // Start line
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth   = 2;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  ctx.moveTo(CAR_START_PX, GROUND_Y - 5);
+  ctx.lineTo(CAR_START_PX, GROUND_Y + 8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 9px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('START', CAR_START_PX, GROUND_Y + 20);
+}
+
+function drawRuler(){
+  // Draw metre markers
+  ctx.font = '9px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#8aadcc';
+  for(let m=0; m<=20; m++){
+    const px = CAR_START_PX + m * PPM;
+    if(px > CWIDTH - 10) break;
+    ctx.strokeStyle = '#ffffff22';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px, GROUND_Y - 2);
+    ctx.lineTo(px, GROUND_Y + 6);
+    ctx.stroke();
+    if(m > 0){
+      ctx.fillText(m+'m', px, GROUND_Y + 30);
+    }
+  }
+  // 0.5m sub-ticks
+  ctx.strokeStyle = '#ffffff11';
+  for(let m=0; m<=20; m+=0.5){
+    const px = CAR_START_PX + m * PPM;
+    if(px > CWIDTH - 5) break;
+    ctx.beginPath();
+    ctx.moveTo(px, GROUND_Y);
+    ctx.lineTo(px, GROUND_Y + 4);
+    ctx.stroke();
+  }
+}
+
+function drawTrail(){
+  if(trail.length < 2) return;
+  ctx.strokeStyle = '#C9A84C55';
+  ctx.lineWidth = 3;
+  ctx.setLineDash([3,5]);
+  ctx.beginPath();
+  ctx.moveTo(CAR_START_PX, GROUND_Y - 4);
+  const step = Math.max(1, Math.floor(trail.length/120));
+  for(let i=0;i<trail.length;i+=step){
+    const px = worldToPx(trail[i]);
+    ctx.lineTo(px, GROUND_Y - 4);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Distance indicator line
+  if(carX > 0.05){
+    const cpx = worldToPx(carX);
+    ctx.strokeStyle = '#2ab5e088';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2,3]);
+    ctx.beginPath();
+    ctx.moveTo(cpx, GROUND_Y - 50);
+    ctx.lineTo(cpx, GROUND_Y + 8);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function drawCar(){
+  const cpx  = worldToPx(carX);
+  const boty = GROUND_Y;      // bottom of wheels sits on ground
+  const wR   = P.wheelR ? Math.min(22, Math.max(10, P.wheelR * 280)) : 14;
+  const carTopY = boty - wR*2 - CAR_H;
+
+  // ── Wheels ──
+  const wheelPositions = [cpx - CAR_W*0.3, cpx + CAR_W*0.3];
+  wheelPositions.forEach(wx => {
+    // Rotation based on distance / circumference
+    const rot = (carX / (2*Math.PI * (P.wheelR||0.04))) * 2 * Math.PI;
+    // Wheel shadow
+    ctx.fillStyle = '#00000033';
+    ctx.beginPath();
+    ctx.ellipse(wx+3, boty - wR + 3, wR, wR, 0, 0, Math.PI*2);
+    ctx.fill();
+    // Wheel
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.lineWidth   = 3;
+    const wGrd = ctx.createRadialGradient(wx,boty-wR,1,wx,boty-wR,wR);
+    wGrd.addColorStop(0,'#5a5a7a');
+    wGrd.addColorStop(1,'#2a2a3e');
+    ctx.fillStyle = wGrd;
+    ctx.beginPath();
+    ctx.arc(wx, boty - wR, wR, 0, Math.PI*2);
+    ctx.fill(); ctx.stroke();
+    // Spokes
+    ctx.strokeStyle = '#C9A84C88';
+    ctx.lineWidth = 2;
+    for(let s=0;s<4;s++){
+      const a = rot + s * Math.PI/2;
+      ctx.beginPath();
+      ctx.moveTo(wx + Math.cos(a)*wR*0.3, boty - wR + Math.sin(a)*wR*0.3);
+      ctx.lineTo(wx + Math.cos(a)*wR*0.85, boty - wR + Math.sin(a)*wR*0.85);
+      ctx.stroke();
+    }
+    // Hub
+    ctx.fillStyle = '#C9A84C';
+    ctx.beginPath();
+    ctx.arc(wx, boty - wR, 3, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // ── Car Body ──
+  const bodyX = cpx - CAR_W/2;
+  const bodyY = boty - wR*2 - CAR_H + 4;
+  ctx.save();
+
+  // Aero body shape
+  const aeroLvl = P.CdA ? Math.round((0.08 - P.CdA) / 0.013 + 1) : 3;
+  const noseTaper = (aeroLvl - 1) * 6; // how pointed the front is
+
+  ctx.fillStyle = '#1B3A5C';
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(bodyX, bodyY + CAR_H);
+  ctx.lineTo(bodyX + noseTaper, bodyY);
+  ctx.lineTo(bodyX + CAR_W, bodyY);
+  ctx.lineTo(bodyX + CAR_W, bodyY + CAR_H);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+
+  // Body highlight
+  ctx.fillStyle = '#ffffff0a';
+  ctx.beginPath();
+  ctx.moveTo(bodyX + noseTaper, bodyY);
+  ctx.lineTo(bodyX + CAR_W, bodyY);
+  ctx.lineTo(bodyX + CAR_W, bodyY + 6);
+  ctx.lineTo(bodyX + noseTaper + 4, bodyY + 6);
+  ctx.closePath();
+  ctx.fill();
+
+  // GK12 gold stripe
+  ctx.fillStyle = '#C9A84C';
+  ctx.fillRect(bodyX + noseTaper, bodyY + CAR_H - 5, CAR_W - noseTaper, 3);
+
+  ctx.restore();
+
+  // ── Mousetrap on top ──
+  const trapX = cpx - TRAP_W/2 + 6;
+  const trapY = bodyY - TRAP_H;
+  ctx.fillStyle = '#8a7040';
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.rect(trapX, trapY, TRAP_W, TRAP_H);
+  ctx.fill(); ctx.stroke();
+  // Trap spring visual
+  ctx.strokeStyle = '#e08030';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(trapX + TRAP_W/2, trapY + TRAP_H, 5, Math.PI, 0);
+  ctx.stroke();
+
+  // ── Lever Arm ──
+  const pivotX = cpx + 6;
+  const pivotY = trapY + TRAP_H;
+  const curAngle = (state === 'springing' || state === 'idle') ? armAngle : -0.05;
+  const leverPx  = P.leverCm ? Math.min(50, P.leverCm * 1.4) : 28;
+  const armTipX  = pivotX + Math.sin(curAngle) * leverPx;
+  const armTipY  = pivotY - Math.cos(curAngle) * leverPx;
+
+  ctx.save();
+  // String from arm tip to rear axle
+  ctx.strokeStyle = '#ddcc8888';
+  ctx.lineWidth   = 1;
+  ctx.setLineDash([2,2]);
+  ctx.beginPath();
+  ctx.moveTo(armTipX, armTipY);
+  ctx.lineTo(cpx - CAR_W*0.3, boty - wR);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Lever arm rod
+  const leverColor = state === 'springing' ? '#e05c2a' : '#C9A84C';
+  ctx.strokeStyle = leverColor;
+  ctx.lineWidth   = 4;
+  ctx.lineCap     = 'round';
+  ctx.beginPath();
+  ctx.moveTo(pivotX, pivotY);
+  ctx.lineTo(armTipX, armTipY);
+  ctx.stroke();
+  // Pivot dot
+  ctx.fillStyle = '#C9A84C';
+  ctx.beginPath();
+  ctx.arc(pivotX, pivotY, 4, 0, Math.PI*2);
+  ctx.fill();
+  // Arm tip dot
+  ctx.fillStyle = leverColor;
+  ctx.beginPath();
+  ctx.arc(armTipX, armTipY, 3, 0, Math.PI*2);
+  ctx.fill();
+
+  // Lever length label (idle only)
+  if(state === 'idle'){
+    ctx.fillStyle = '#C9A84Cbb';
+    ctx.font = 'bold 9px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(P.leverCm + 'cm', (pivotX + armTipX)/2 - 8, (pivotY + armTipY)/2 - 6);
+  }
+
+  ctx.restore();
+
+  // ── Speed streaks if fast ──
+  if(carVel > 1.5){
+    const streakAlpha = Math.min(0.6, (carVel - 1.5) / 6);
+    ctx.strokeStyle = `rgba(42,181,224,${streakAlpha})`;
+    ctx.lineWidth = 1;
+    for(let s=0;s<5;s++){
+      const sy = boty - wR - 4 - s * 5;
+      const len = 10 + carVel * 4 + s * 3;
+      ctx.beginPath();
+      ctx.moveTo(cpx - CAR_W*0.4 - 5, sy);
+      ctx.lineTo(cpx - CAR_W*0.4 - 5 - len, sy);
+      ctx.stroke();
+    }
+  }
+
+  // ── Labels ──
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 10px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('GK12', cpx + 14, bodyY + CAR_H - 8);
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+drawIdle();
+
+})();
+</script>
+</body>
+</html>

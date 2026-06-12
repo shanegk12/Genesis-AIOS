@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Total Cost of Ownership — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Total Cost of Ownership</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Total Cost of Ownership (TCO)", "definition": "The sum of all costs, both direct and indirect, that you pay for a product or system over its entire lifespan, not just the purchase price."}, {"term": "Sustainability", "definition": "The ability of an engineered system to work well and provide benefits for a long time without using up too many resources or causing harm to the environment."}, {"term": "Life Cycle", "definition": "All the different stages a product goes through, from when it's first made, to being used, and finally to being thrown away or recycled."}, {"term": "Direct Costs", "definition": "Expenses that are clearly and directly linked to a product, such as the price you pay to buy it, or money spent on repairs and regular check-ups."}, {"term": "Indirect Costs", "definition": "Less obvious expenses related to a product, like the cost of electricity it uses, fees for throwing it away, or its impact on the environment."}, {"term": "Efficiency", "definition": "Doing a task or making something in the best way possible, using the least amount of wasted time, effort, or materials."}, {"term": "Optimization", "definition": "Finding the very best solution for a design problem, balancing different goals and limitations to get the most favorable outcome."}, {"term": "Creationeering™ Sustainability Phase", "definition": "The stage in Creationeering™ where we make sure our engineered systems can last and continue to provide benefits without harming resources or future generations."}, {"term": "Stewardship (Biblical Principle)", "definition": "The idea that we are responsible for taking care of God's creation and the resources He provides, using them wisely for today and for the future."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Assembly Viewer — Creationeering | Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f1e2e;
+    color: #e8e8e8;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  #header {
+    background: #1B3A5C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #C9A84C;
+    flex-shrink: 0;
+  }
+  #header h1 {
+    font-size: 1rem;
+    color: #C9A84C;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  #header p {
+    font-size: 0.7rem;
+    color: #a0b8d0;
+    margin-top: 2px;
+  }
+  #badge {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 220px;
+    background: #152b42;
+    border-right: 2px solid #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  #sidebar-title {
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #C9A84C44;
+  }
+  .comp-item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #1B3A5C;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .comp-item:hover { background: #1e3d5c; }
+  .comp-item.active { background: #1B3A5C; border-left: 3px solid #C9A84C; }
+  .comp-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #C9A84C;
+    margin-bottom: 2px;
+  }
+  .comp-type {
+    font-size: 0.62rem;
+    color: #7fa8c8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+  .comp-desc {
+    font-size: 0.68rem;
+    color: #9ab8cc;
+    line-height: 1.4;
+  }
+  #controls {
+    padding: 10px 12px;
+    border-top: 2px solid #1B3A5C;
+    background: #0f1e2e;
+  }
+  #controls p {
+    font-size: 0.65rem;
+    color: #C9A84C;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .btn-row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
+  button {
+    background: #1B3A5C;
+    color: #e8e8e8;
+    border: 1px solid #C9A84C44;
+    padding: 5px 8px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+  button:hover { background: #C9A84C; color: #1B3A5C; }
+  button.active-btn { background: #C9A84C; color: #1B3A5C; }
+  #canvas-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #0d1923;
+  }
+  canvas {
+    display: block;
+    cursor: grab;
+  }
+  canvas:active { cursor: grabbing; }
+  #info-panel {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1B3A5Ccc;
+    border: 1px solid #C9A84C66;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.68rem;
+    color: #a0c4e0;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+  }
+  #verse-bar {
+    background: #1B3A5C;
+    border-top: 2px solid #C9A84C44;
+    padding: 5px 16px;
+    font-size: 0.65rem;
+    color: #C9A84C;
+    text-align: center;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #0f1e2e; }
+  ::-webkit-scrollbar-thumb { background: #1B3A5C; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div id="header">
+  <div>
+    <h1>3D Assembly Viewer — Mousetrap Car System</h1>
+    <p>Visualization &amp; Sketching · Creationeering · Genesis K-12 Academy</p>
+  </div>
+  <div id="badge">GK12 · Isometric View</div>
+</div>
+<div id="main">
+  <div id="sidebar">
+    <div id="sidebar-title">Component List</div>
+    <div id="comp-list"></div>
+    <div id="controls">
+      <p>View Controls</p>
+      <div class="btn-row">
+        <button id="btnLeft">◀ Rotate L</button>
+        <button id="btnRight">Rotate R ▶</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnUp">▲ Tilt Up</button>
+        <button id="btnDown">Tilt Dn ▼</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnExplode">💥 Exploded View</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnReset">↺ Reset View</button>
+        <button id="btnLabels">Labels ON</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnAssembly">Assembly</button>
+        <button id="btnSub">Subassembly</button>
+      </div>
+    </div>
+  </div>
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div id="info-panel">Drag to rotate · Scroll to zoom · Click a component to highlight</div>
+  </div>
+</div>
+<div id="verse-bar">"Write the vision and make it plain..." — Habakkuk 2:2 · Technical sketching: the bridge between ideas and physical creation</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const wrap = document.getElementById('canvas-wrap');
+
+// ─── Resize ───────────────────────────────────────────────────────────────────
+function resize() {
+  canvas.width = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+  draw();
+}
+window.addEventListener('resize', resize);
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let rotY = -0.55, rotX = 0.42, zoom = 1.0;
+let exploded = false, labelsOn = true;
+let explodeT = 0, targetExplode = 0;
+let activeComp = null;
+let highlightComp = null;
+let subMode = false;
+let dragging = false, lastX = 0, lastY = 0;
+let animId = null;
+
+// ─── Colors ───────────────────────────────────────────────────────────────────
+const NAVY = '#1B3A5C';
+const GOLD = '#C9A84C';
+const LIGHT = '#e8f4ff';
+const GRID_COL = '#1a3050';
+
+// ─── Components ───────────────────────────────────────────────────────────────
+const components = [
+  {
+    id: 'chassis',
+    name: 'Chassis',
+    type: 'Assembly Frame',
+    desc: 'Main structural body of the car. Holds all subassemblies together. Represents the full system frame.',
+    color: '#2e6fa3',
+    stroke: '#5aaed8',
+    subassembly: false,
+    explodeDir: [0, 0, 0],
+    geometry: 'box',
+    pos: [0, 0, 0],
+    size: [3.0, 0.25, 1.4],
+  },
+  {
+    id: 'axle_rear',
+    name: 'Rear Axle',
+    type: 'Subassembly — Drive Train',
+    desc: 'Connects rear wheels; receives rotational force from the string. Core of the drive subassembly.',
+    color: '#a05a10',
+    stroke: '#e08030',
+    subassembly: true,
+    explodeDir: [0, -0.6, 0],
+    geometry: 'cylinder',
+    pos: [1.0, -0.28, 0],
+    size: [0.08, 0.08, 0.9],
+  },
+  {
+    id: 'wheel_rl',
+    name: 'Rear Wheel (L)',
+    type: 'Subassembly — Drive Train',
+    desc: 'Driven wheel; converts axle rotation to forward motion. Demonstrates rotational-to-linear energy transfer.',
+    color: '#333',
+    stroke: '#aaa',
+    subassembly: true,
+    explodeDir: [0.3, -0.4, -1.1],
+    geometry: 'wheel',
+    pos: [1.0, -0.28, -0.8],
+    size: [0.35, 0.35, 0.12],
+  },
+  {
+    id: 'wheel_rr',
+    name: 'Rear Wheel (R)',
+    type: 'Subassembly — Drive Train',
+    desc: 'Driven wheel; mirrors left side. Proportion and symmetry are key sketching concepts here.',
+    color: '#333',
+    stroke: '#aaa',
+    subassembly: true,
+    explodeDir: [0.3, -0.4, 1.1],
+    geometry: 'wheel',
+    pos: [1.0, -0.28, 0.8],
+    size: [0.35, 0.35, 0.12],
+  },
+  {
+    id: 'axle_front',
+    name: 'Front Axle',
+    type: 'Subassembly — Steering',
+    desc: 'Front axle supports the front wheels, keeping the car tracking straight. Part of the steering subassembly.',
+    color: '#a05a10',
+    stroke: '#e08030',
+    subassembly: true,
+    explodeDir: [0, -0.6, 0],
+    geometry: 'cylinder',
+    pos: [-1.0, -0.28, 0],
+    size: [0.08, 0.08, 0.9],
+  },
+  {
+    id: 'wheel_fl',
+    name: 'Front Wheel (L)',
+    type: 'Subassembly — Steering',
+    desc: 'Front guide wheel. Proportion relative to rear wheel shows scale in technical sketches.',
+    color: '#2a2a2a',
+    stroke: '#aaa',
+    subassembly: true,
+    explodeDir: [-0.3, -0.4, -1.1],
+    geometry: 'wheel',
+    pos: [-1.0, -0.28, -0.8],
+    size: [0.35, 0.35, 0.12],
+  },
+  {
+    id: 'wheel_fr',
+    name: 'Front Wheel (R)',
+    type: 'Subassembly — Steering',
+    desc: 'Front guide wheel (right side). Hidden lines in a sketch would show the axle through the wheel.',
+    color: '#2a2a2a',
+    stroke: '#aaa',
+    subassembly: true,
+    explodeDir: [-0.3, -0.4, 1.1],
+    geometry: 'wheel',
+    pos: [-1.0, -0.28, 0.8],
+    size: [0.35, 0.35, 0.12],
+  },
+  {
+    id: 'mousetrap',
+    name: 'Mousetrap (Power Source)',
+    type: 'Subassembly — Energy Storage',
+    desc: 'Spring mechanism stores elastic potential energy. The lever arm releases it. Input of the energy system.',
+    color: '#8B0000',
+    stroke: '#ff4444',
+    subassembly: true,
+    explodeDir: [0, 0.9, 0],
+    geometry: 'box',
+    pos: [0.2, 0.22, 0],
+    size: [0.9, 0.18, 0.55],
+  },
+  {
+    id: 'lever',
+    name: 'Lever Arm',
+    type: 'Subassembly — Energy Transfer',
+    desc: 'Long arm attached to the mousetrap; pulls the string as it snaps. Demonstrates mechanical advantage and lever principles.',
+    color: '#2d7a2d',
+    stroke: '#5ce05c',
+    subassembly: true,
+    explodeDir: [0, 1.4, 0.2],
+    geometry: 'lever',
+    pos: [0.2, 0.35, 0],
+    size: [1.5, 0.06, 0.06],
+  },
+  {
+    id: 'string',
+    name: 'Drive String',
+    type: 'Subassembly — Energy Transfer',
+    desc: 'Connects lever arm to rear axle. As the lever snaps, the string unwinds from the axle, driving the car forward.',
+    color: '#d4b800',
+    stroke: '#ffe840',
+    subassembly: true,
+    explodeDir: [0.6, 1.0, 0],
+    geometry: 'string',
+    pos: [0.6, 0.1, 0],
+    size: [0.8, 0.03, 0.03],
+  },
+];
+
+// ─── Sidebar Build ────────────────────────────────────────────────────────────
+const compList = document.getElementById('comp-list');
+components.forEach(c => {
+  const div = document.createElement('div');
+  div.className = 'comp-item';
+  div.id = 'ci_' + c.id;
+  div.innerHTML = `<div class="comp-name">${c.name}</div><div class="comp-type">${c.type}</div><div class="comp-desc">${c.desc}</div>`;
+  div.addEventListener('click', () => {
+    activeComp = (activeComp === c.id) ? null : c.id;
+    updateSidebar();
+    draw();
+  });
+  compList.appendChild(div);
+});
+
+function updateSidebar() {
+  components.forEach(c => {
+    const el = document.getElementById('ci_' + c.id);
+    el.classList.toggle('active', activeComp === c.id);
+  });
+}
+
+// ─── 3D Math ──────────────────────────────────────────────────────────────────
+function rotateXY(x, y, z, rx, ry) {
+  // rotate around Y axis
+  let x1 = x * Math.cos(ry) + z * Math.sin(ry);
+  let z1 = -x * Math.sin(ry) + z * Math.cos(ry);
+  // rotate around X axis
+  let y2 = y * Math.cos(rx) - z1 * Math.sin(rx);
+  let z2 = y * Math.sin(rx) + z1 * Math.cos(rx);
+  return [x1, y2, z2];
+}
+
+function project(x, y, z) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const scale = Math.min(canvas.width, canvas.height) * 0.18 * zoom;
+  const fov = 4.5;
+  const px = cx + (x / (z / fov + 1)) * scale;
+  const py = cy - (y / (z / fov + 1)) * scale;
+  return [px, py];
+}
+
+function projectVec(v) { return project(v[0], v[1], v[2]); }
+
+function transformPt(x, y, z) {
+  return rotateXY(x, y, z, rotX, rotY);
+}
+
+function pt(x, y, z) {
+  const r = transformPt(x, y, z);
+  return projectVec(r);
+}
+
+function ptDepth(x, y, z) {
+  return transformPt(x, y, z)[2];
+}
+
+// ─── Draw Helpers ─────────────────────────────────────────────────────────────
+function drawPoly(pts2d, fill, stroke, lw, alpha) {
+  if (!pts2d || pts2d.length < 2) return;
+  ctx.save();
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  ctx.beginPath();
+  ctx.moveTo(pts2d[0][0], pts2d[0][1]);
+  for (let i = 1; i < pts2d.length; i++) ctx.lineTo(pts2d[i][0], pts2d[i][1]);
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); }
+  ctx.restore();
+}
+
+function shade(hex, amt) {
+  const n = parseInt(hex.replace('#',''), 16);
+  const r = Math.min(255, Math.max(0, (n >> 16) + amt));
+  const g = Math.min(255, Math.max(0, ((n >> 8) & 0xff) + amt));
+  const b = Math.min(255, Math.max(0, (n & 0xff) + amt));
+  return `rgb(${r},${g},${b})`;
+}
+
+function hexToRgba(hex, a) {
+  const n = parseInt(hex.replace('#',''), 16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+
+// ─── Draw Box ─────────────────────────────────────────────────────────────────
+function drawBox(cx, cy, cz, w, h, d, col, scol, isActive, alpha) {
+  const hw = w/2, hh = h/2, hd = d/2;
+  const corners = [
+    [cx-hw, cy-hh, cz-hd],
+    [cx+hw, cy-hh, cz-hd],
+    [cx+hw, cy+hh, cz-hd],
+    [cx-hw, cy+hh, cz-hd],
+    [cx-hw, cy-hh, cz+hd],
+    [cx+hw, cy-hh, cz+hd],
+    [cx+hw, cy+hh, cz+hd],
+    [cx-hw, cy+hh, cz+hd],
+  ];
+  const p = corners.map(c => ({ pt: pt(...c), d: ptDepth(...c) }));
+  const faces = [
+    { verts: [0,1,2,3], normal: [0,0,-1], shade: -30 },
+    { verts: [4,5,6,7], normal: [0,0,1], shade: 10 },
+    { verts: [0,1,5,4], normal: [0,-1,0], shade: -50 },
+    { verts: [3,2,6,7], normal: [0,1,0], shade: 20 },
+    { verts: [0,3,7,4], normal: [-1,0,0], shade: -15 },
+    { verts: [1,2,6,5], normal: [1,0,0], shade: 30 },
+  ];
+  // sort by depth
+  faces.sort((a, b) => {
+    const da = a.verts.reduce((s,i) => s + p[i].d, 0) / 4;
+    const db = b.verts.reduce((s,i) => s + p[i].d, 0) / 4;
+    return db - da;
+  });
+  const lw = isActive ? 2.5 : 1.2;
+  const sc = isActive ? '#ffffff' : scol;
+  faces.forEach(f => {
+    const pts2d = f.verts.map(i => p[i].pt);
+    const fc = shade(col, f.shade);
+    drawPoly(pts2d, fc, sc, lw, alpha);
+  });
+}
+
+// ─── Draw Cylinder ────────────────────────────────────────────────────────────
+function drawCylinder(cx, cy, cz, r, len, col, scol, isActive, alpha) {
+  const segs = 12;
+  const hw = len / 2;
+  const lw = isActive ? 2.5 : 1.2;
+  const sc = isActive ? '#ffffff' : scol;
+
+  // Build quads for side
+  const side = [];
+  for (let i = 0; i < segs; i++) {
+    const a0 = (i / segs) * Math.PI * 2;
+    const a1 = ((i + 1) / segs) * Math.PI * 2;
+    const y0 = Math.cos(a0) * r, z0 = Math.sin(a0) * r;
+    const y1 = Math.cos(a1) * r, z1 = Math.sin(a1) * r;
+    const avgDepth = (ptDepth(cx - hw, cy + y0, cz + z0) +
+                      ptDepth(cx + hw, cy + y0, cz + z0) +
+                      ptDepth(cx + hw, cy + y1, cz + z1) +
+                      ptDepth(cx - hw, cy + y1, cz + z1)) / 4;
+    side.push({ i, depth: avgDepth, y0, z0, y1, z1 });
+  }
+  side.sort((a, b) => b.depth - a.depth);
+
+  side.forEach(s => {
+    const pts2d = [
+      pt(cx - hw, cy + s.y0, cz + s.z0),
+      pt(cx + hw, cy + s.y0, cz + s.z0),
+      pt(cx + hw, cy + s.y1, cz + s.z1),
+      pt(cx - hw, cy + s.y1, cz + s.z1),
+    ];
+    const brightness = Math.round((s.y0 + s.y1) * 20);
+    drawPoly(pts2d, shade(col, brightness), sc, lw, alpha);
+  });
+
+  // Caps
+  [cx - hw, cx + hw].forEach((xp, si) => {
+    const pts2d = [];
+    for (let i = 0; i < segs; i++) {
+      const a = (i / segs) * Math.PI * 2;
+      pts2d.push(pt(xp, cy + Math.cos(a) * r, cz + Math.sin(a) * r));
+    }
+    drawPoly(pts2d, shade(col, si === 0 ? -20 : 10), sc, lw, alpha);
+  });
+}
+
+// ─── Draw Wheel ───────────────────────────────────────────────────────────────
+function drawWheel(cx, cy, cz, r, thick, col, scol, isActive, alpha) {
+  drawCylinder(cx, cy, cz, r, thick, col, scol, isActive, alpha);
+  // Hub
+  drawCylinder(cx, cy, cz, r * 0.2, thick + 0.02, '#888', isActive ? '#fff' : '#bbb', isActive, alpha);
+  // Spokes
+  const nSpokes = 5;
+  ctx.save();
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  ctx.strokeStyle = isActive ? '#fff' : '#999';
+  ctx.lineWidth = isActive ? 2 : 1;
+  for (let i = 0; i < nSpokes; i++) {
+    const a = (i / nSpokes) * Math.PI * 2;
+    const spoke_pts = [
+      pt(cx, cy + Math.cos(a) * r * 0.18, cz + Math.sin(a) * r * 0.18),
+      pt(cx, cy + Math.cos(a) * r * 0.9, cz + Math.sin(a) * r * 0.9),
+    ];
+    ctx.beginPath();
+    ctx.moveTo(spoke_pts[0][0], spoke_pts[0][1]);
+    ctx.lineTo(spoke_pts[1][0], spoke_pts[1][1]);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ─── Draw Lever ───────────────────────────────────────────────────────────────
+function drawLever(cx, cy, cz, len, r, col, scol, isActive, alpha) {
+  drawCylinder(cx, cy, cz, r, len, col, scol, isActive, alpha);
+  // Tip ball
+  const segs = 8;
+  const tp = pt(cx + len / 2, cy, cz);
+  ctx.save();
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  const grad = ctx.createRadialGradient(tp[0] - 2, tp[1] - 2, 1, tp[0], tp[1], 6);
+  grad.addColorStop(0, '#a0ffa0');
+  grad.addColorStop(1, col);
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(tp[0], tp[1], 6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+// ─── Draw String ─────────────────────────────────────────────────────────────
+function drawString(x1, y1, z1, x2, y2, z2, col, isActive, alpha) {
+  const p1 = pt(x1, y1, z1);
+  const p2 = pt(x2, y2, z2);
+  ctx.save();
+  ctx.globalAlpha = alpha !== undefined ? alpha : 1;
+  ctx.strokeStyle = isActive ? '#fff' : col;
+  ctx.lineWidth = isActive ? 3 : 2;
+  ctx.setLineDash(isActive ? [] : [5, 3]);
+  ctx.beginPath();
+  ctx.moveTo(p1[0], p1[1]);
+  // slight curve
+  const mx = (p1[0] + p2[0]) / 2;
+  const my = (p1[1] + p2[1]) / 2 - 8;
+  ctx.quadraticCurveTo(mx, my, p2[0], p2[1]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ─── Labels ───────────────────────────────────────────────────────────────────
+function drawLabel(wx, wy, wz, text, isActive) {
+  const p2d = pt(wx, wy, wz);
+  const ox = 18, oy = -14;
+  const bx = p2d[0] + ox, by = p2d[1] + oy;
+  ctx.save();
+  // Leader line
+  ctx.strokeStyle = isActive ? '#ffffff' : '#C9A84C';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 2]);
+  ctx.beginPath();
+  ctx.moveTo(p2d[0], p2d[1]);
+  ctx.lineTo(bx, by);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // Dot
+  ctx.fillStyle = isActive ? '#ffffff' : '#C9A84C';
+  ctx.beginPath();
+  ctx.arc(p2d[0], p2d[1], 3, 0, Math.PI * 2);
+  ctx.fill();
+  // Text box
+  ctx.font = `bold ${isActive ? 11 : 10}px Segoe UI, Arial`;
+  const tw = ctx.measureText(text).width;
+  const pad = 4;
+  ctx.fillStyle = isActive ? '#ffffffee' : '#1B3A5Cdd';
+  ctx.beginPath();
+  ctx.roundRect(bx - pad, by - 11, tw + pad * 2, 15, 3);
+  ctx.fill();
+  ctx.strokeStyle = isActive ? '#C9A84C' : '#C9A84C88';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = isActive ? '#1B3A5C' : '#C9A84C';
+  ctx.fillText(text, bx, by);
+  ctx.restore();
+}
+
+// ─── Grid Floor ───────────────────────────────────────────────────────────────
+function drawGrid() {
+  const gsize = 4, step = 0.5;
+  ctx.save();
+  ctx.strokeStyle = GRID_COL;
+  ctx.lineWidth = 0.6;
+  ctx.globalAlpha = 0.5;
+  for (let x = -gsize; x <= gsize; x += step) {
+    const p1 = pt(x, -0.65, -gsize);
+    const p2 = pt(x, -0.65, gsize);
+    ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+  }
+  for (let z = -gsize; z <= gsize; z += step) {
+    const p1 = pt(-gsize, -0.65, z);
+    const p2 = pt(gsize, -0.65, z);
+    ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ─── Axes ─────────────────────────────────────────────────────────────────────
+function drawAxes() {
+  const orig = pt(0, -0.65, 0);
+  const axes = [
+    { end: pt(0.8, -0.65, 0), col: '#ff4444', label: 'X' },
+    { end: pt(0, 0.15, 0), col: '#44ff44', label: 'Y' },
+    { end: pt(0, -0.65, 0.8), col: '#4488ff', label: 'Z' },
+  ];
+  ctx.save();
+  axes.forEach(a => {
+    ctx.strokeStyle = a.col;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.6;
+    ctx.beginPath();
+    ctx.moveTo(orig[0], orig[1]);
+    ctx.lineTo(a.end[0], a.end[1]);
+    ctx.stroke();
+    ctx.font = 'bold 9px Arial';
+    ctx.fillStyle = a.col;
+    ctx.globalAlpha = 0.8;
+    ctx.fillText(a.label, a.end[0] + 3, a.end[1] - 2);
+  });
+  ctx.restore();
+}
+
+// ─── Title block ──────────────────────────────────────────────────────────────
+function drawTitleBlock() {
+  ctx.save();
+  const margin = 8;
+  ctx.fillStyle = '#1B3A5Ccc';
+  ctx.strokeStyle = '#C9A84C44';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(margin, margin, 200, 48, 4);
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = GOLD;
+  ctx.font = 'bold 11px Segoe UI, Arial';
+  ctx.fillText('MOUSETRAP CAR — ASSEMBLY VIEW', margin + 8, margin + 15);
+  ctx.fillStyle = '#a0b8cc';
+  ctx.font = '9px Segoe UI, Arial';
+  ctx.fillText('Scale: 1:10  |  Units: cm', margin + 8, margin + 28);
+  ctx.fillText('Creationeering · GK-12 · Lesson: Visualization', margin + 8, margin + 40);
+  ctx.restore();
+}
+
+// ─── Subassembly Highlight ────────────────────────────────────────────────────
+function drawSubInfo() {
+  if (!subMode) return;
+  ctx.save();
+  const x = canvas.width - 8, y = 8;
+  const w = 175, h = 56;
+  ctx.fillStyle = '#C9A84Ccc';
+  ctx.strokeStyle = NAVY;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect(x - w, y, w, h, 4);
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = NAVY;
+  ctx.font = 'bold 10px Segoe UI, Arial';
+  ctx.fillText('SUBASSEMBLY HIGHLIGHT MODE', x - w + 8, y + 14);
+  ctx.font = '9px Segoe UI, Arial';
+  ctx.fillText('Subassemblies shown BOLD', x - w + 8, y + 28);
+  ctx.fillText('Assembly frame shown FADED', x - w + 8, y + 40);
+  ctx.fillText('(Click sidebar items to select)', x - w + 8, y + 52);
+  ctx.restore();
+}
+
+// ─── Main Draw ────────────────────────────────────────────────────────────────
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Background gradient
+  const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  bg.addColorStop(0, '#0a151f');
+  bg.addColorStop(1, '#0f2030');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawGrid();
+  drawAxes();
+
+  // Collect render items sorted by depth
+  const renderItems = [];
+  components.forEach(c => {
+    const ef = explodeT;
+    const ex = c.explodeDir[0] * ef * 1.0;
+    const ey = c.explodeDir[1] * ef * 0.9;
+    const ez = c.explodeDir[2] * ef * 1.0;
+    const px = c.pos[0] + ex;
+    const py = c.pos[1] + ey;
+    const pz = c.pos[2] + ez;
+    const isActive = (activeComp === c.id);
+    const isSub = c.subassembly;
+    let alpha = 1;
+    if (subMode) alpha = isSub ? 1 : 0.15;
+    if (activeComp && !isActive) alpha = Math.min(alpha, 0.35);
+    const depth = ptDepth(px, py, pz);
+    renderItems.push({ c, px, py, pz, isActive, alpha, depth });
+  });
+  renderItems.sort((a, b) => b.depth - a.depth);
+
+  renderItems.forEach(({ c, px, py, pz, isActive, alpha }) => {
+    const [w, h, d] = c.size;
+    if (c.geometry === 'box') {
+      drawBox(px, py, pz, w, h, d, c.color, c.stroke, isActive, alpha);
+    } else if (c.geometry === 'cylinder') {
+      drawCylinder(px, py, pz, w, d, c.color, c.stroke, isActive, alpha);
+    } else if (c.geometry === 'wheel') {
+      drawWheel(px, py, pz, w, d, c.color, c.stroke, isActive, alpha);
+    } else if (c.geometry === 'lever') {
+      drawLever(px, py, pz, w, h, c.color, c.stroke, isActive, alpha);
+    } else if (c.geometry === 'string') {
+      // string from lever tip to rear axle
+      const ef = explodeT;
+      const leverComp = components.find(cc => cc.id === 'lever');
+      const axleComp = components.find(cc => cc.id === 'axle_rear');
+      const le = leverComp.explodeDir, ae = axleComp.explodeDir;
+      const lx = leverComp.pos[0] + le[0]*ef + leverComp.size[0]/2;
+      const ly = leverComp.pos[1] + le[1]*ef + 0.15;
+      const lz = leverComp.pos[2] + le[2]*ef;
+      const ax2 = axleComp.pos[0] + ae[0]*ef;
+      const ay2 = axleComp.pos[1] + ae[1]*ef;
+      const az2 = axleComp.pos[2] + ae[2]*ef;
+      drawString(lx, ly, lz, ax2, ay2, az2, c.color, isActive, alpha);
+    }
+  });
+
+  // Labels
+  if (labelsOn) {
+    renderItems.forEach(({ c, px, py, pz, isActive }) => {
+      if (c.id === 'string') return;
+      let lox = 0, loy = c.size[1] / 2 + 0.12, loz = 0;
+      if (c.geometry === 'wheel') { loy = c.size[0] + 0.08; }
+      if (c.geometry === 'cylinder') { loy = c.size[0] + 0.05; }
+      if (c.geometry === 'lever') { lox = c.size[0] / 2 + 0.1; loy = 0.12; }
+      drawLabel(px + lox, py + loy, pz + loz, c.name, isActive);
+    });
+  }
+
+  drawTitleBlock();
+  drawSubInfo();
+
+  // Exploded legend
+  if (exploded) {
+    ctx.save();
+    ctx.fillStyle = '#1B3A5Ccc';
+    ctx.strokeStyle = '#C9A84C66';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(8, canvas.height - 42, 165, 34, 4);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = GOLD;
+    ctx.font = 'bold 10px Segoe UI, Arial';
+    ctx.fillText('EXPLODED VIEW', 16, canvas.height - 26);
+    ctx.fillStyle = '#8ab0cc';
+    ctx.font = '9px Segoe UI, Arial';
+    ctx.fillText('Components separated to show assembly', 16, canvas.height - 14);
+    ctx.restore();
+  }
+}
+
+// ─── Animation ────────────────────────────────────────────────────────────────
+function animate() {
+  const speed = 0.06;
+  const diff = targetExplode - explodeT;
+  if (Math.abs(diff) > 0.005) {
+    explodeT += diff * speed;
+    draw();
+    animId = requestAnimationFrame(animate);
+  } else {
+    explodeT = targetExplode;
+    draw();
+    animId = null;
+  }
+}
+
+function triggerAnim() {
+  if (animId) cancelAnimationFrame(animId);
+  animate();
+}
+
+// ─── Controls ─────────────────────────────────────────────────────────────────
+document.getElementById('btnLeft').addEventListener('click', () => { rotY -= 0.25; draw(); });
+document.getElementById('btnRight').addEventListener('click', () => { rotY += 0.25; draw(); });
+document.getElementById('btnUp').addEventListener('click', () => { rotX = Math.max(-1.2, rotX - 0.15); draw(); });
+document.getElementById('btnDown').addEventListener('click', () => { rotX = Math.min(1.2, rotX + 0.15); draw(); });
+
+document.getElementById('btnExplode').addEventListener('click', function() {
+  exploded = !exploded;
+  targetExplode = exploded ? 1.0 : 0.0;
+  this.classList.toggle('active-btn', exploded);
+  this.textContent = exploded ? '🔧 Assembled View' : '💥 Exploded View';
+  triggerAnim();
+});
+
+document.getElementById('btnReset').addEventListener('click', () => {
+  rotY = -0.55; rotX = 0.42; zoom = 1.0;
+  exploded = false; targetExplode = 0;
+  explodeT = 0;
+  activeComp = null;
+  subMode = false;
+  updateSidebar();
+  document.getElementById('btnExplode').textContent = '💥 Exploded View';
+  document.getElementById('btnExplode').classList.remove('active-btn');
+  document.getElementById('btnLabels').textContent = 'Labels ON';
+  labelsOn = true;
+  document.getElementById('btnSub').classList.remove('active-btn');
+  document.getElementById('btnAssembly').classList.remove('active-btn');
+  draw();
+});
+
+document.getElementById('btnLabels').addEventListener('click', function() {
+  labelsOn = !labelsOn;
+  this.textContent = labelsOn ? 'Labels ON' : 'Labels OFF';
+  draw();
+});
+
+document.getElementById('btnAssembly').addEventListener('click', function() {
+  subMode = false;
+  activeComp = null;
+  updateSidebar();
+  this.classList.add('active-btn');
+  document.getElementById('btnSub').classList.remove('active-btn');
+  draw();
+});
+
+document.getElementById('btnSub').addEventListener('click', function() {
+  subMode = !subMode;
+  if (subMode) {
+    activeComp = null;
+    updateSidebar();
+    this.classList.add('active-btn');
+    document.getElementById('btnAssembly').classList.remove('active-btn');
+  } else {
+    this.classList.remove('active-btn');
+  }
+  draw();
+});
+
+// ─── Mouse Drag ───────────────────────────────────────────────────────────────
+canvas.addEventListener('mousedown', e => {
+  dragging = true; lastX = e.clientX; lastY = e.clientY;
+});
+window.addEventListener('mouseup', () => { dragging = false; });
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  rotY += dx * 0.008;
+  rotX += dy * 0.006;
+  rotX = Math.max(-1.4, Math.min(1.4, rotX));
+  lastX = e.clientX; lastY = e.clientY;
+  draw();
+});
+
+// ─── Touch ────────────────────────────────────────────────────────────────────
+let lastTX = 0, lastTY = 0;
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  lastTX = e.touches[0].clientX;
+  lastTY = e.touches[0].clientY;
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const dx = e.touches[0].clientX - lastTX;
+  const dy = e.touches[0].clientY - lastTY;
+  rotY += dx * 0.01;
+  rotX += dy * 0.008;
+  rotX = Math.max(-1.4, Math.min(1.4, rotX));
+  lastTX = e.touches[0].clientX;
+  lastTY = e.touches[0].clientY;
+  draw();
+}, { passive: false });
+
+// ─── Scroll Zoom ──────────────────────────────────────────────────────────────
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoom = Math.max(0.4, Math.min(2.5, zoom - e.deltaY * 0.001));
+  draw();
+}, { passive: false });
+
+// ─── Canvas Click (component pick) ───────────────────────────────────────────
+canvas.addEventListener('click', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  let closest = null, minDist = 30;
+  components.forEach(c => {
+    if (c.id === 'string') return;
+    const ef = explodeT;
+    const px = c.pos[0] + c.explodeDir[0] * ef;
+    const py = c.pos[1] + c.explodeDir[1] * ef;
+    const pz = c.pos[2] + c.explodeDir[2] * ef;
+    const p2d = pt(px, py, pz);
+    const dx = p2d[0] - mx, dy = p2d[1] - my;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < minDist) { minDist = dist; closest = c.id; }
+  });
+  if (closest) {
+    activeComp = (activeComp === closest) ? null : closest;
+    updateSidebar();
+    // scroll sidebar to component
+    const el = document.getElementById('ci_' + (activeComp || closest));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    draw();
+  }
+});
+
+// ─── polyfill roundRect ────────────────────────────────────────────────────
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    this.moveTo(x + r, y);
+    this.lineTo(x + w - r, y);
+    this.quadraticCurveTo(x + w, y, x + w, y + r);
+    this.lineTo(x + w, y + h - r);
+    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    this.lineTo(x + r, y + h);
+    this.quadraticCurveTo(x, y + h, x, y + h - r);
+    this.lineTo(x, y + r);
+    this.quadraticCurveTo(x, y, x + r, y);
+    return this;
+  };
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+resize();
+</script>
+</body>
+</html>

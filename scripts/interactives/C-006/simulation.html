@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems Thinking Explorer – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 24px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  header .course-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #C9A84C;
+    font-weight: 700;
+  }
+
+  header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .progress-bar-wrap {
+    background: #e0e7ef;
+    width: 100%;
+    max-width: 800px;
+    height: 8px;
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: #C9A84C;
+    transition: width 0.4s ease;
+  }
+
+  main {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 0 0 12px 12px;
+    padding: 28px 28px 24px;
+    box-shadow: 0 4px 24px rgba(27,58,92,0.10);
+    flex: 1;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-icon {
+    font-size: 56px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .intro-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1B3A5C;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .intro-subtitle {
+    font-size: 15px;
+    color: #4a6080;
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .vocab-card {
+    background: #f7f9fc;
+    border: 2px solid #d0daea;
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+
+  .vocab-card .term {
+    font-weight: 800;
+    font-size: 13px;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 3px;
+  }
+
+  .vocab-card .def {
+    font-size: 13px;
+    color: #1B3A5C;
+    line-height: 1.4;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    user-select: none;
+  }
+
+  .btn:hover { background: #b8943d; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-navy {
+    background: #1B3A5C;
+    color: #fff;
+  }
+
+  .btn-navy:hover { background: #14304e; }
+
+  .btn-sm {
+    font-size: 13px;
+    padding: 8px 18px;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  /* DRAG AND DROP ACTIVITY */
+  .activity-heading {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+
+  .activity-instruction {
+    font-size: 14px;
+    color: #4a6080;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .system-card {
+    border: 2px solid #C9A84C;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    background: #fffdf5;
+  }
+
+  .system-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1B3A5C;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .system-emoji { font-size: 22px; }
+
+  .drop-zones {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .drop-zone-wrap { display: flex; flex-direction: column; gap: 6px; }
+
+  .drop-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 4px 6px;
+    border-radius: 6px;
+  }
+
+  .drop-label.input-lbl  { background: #d0e9ff; color: #1a4a7a; }
+  .drop-label.process-lbl{ background: #e8d9f5; color: #5a2d82; }
+  .drop-label.output-lbl { background: #d4f0dc; color: #1a5c30; }
+
+  .drop-zone {
+    min-height: 56px;
+    border: 2px dashed #c0cdd8;
+    border-radius: 8px;
+    background: #f7f9fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    padding: 6px;
+  }
+
+  .drop-zone.drag-over {
+    border-color: #C9A84C;
+    background: #fffbee;
+  }
+
+  .drop-zone.correct {
+    border-color: #2e8b57;
+    background: #eafbf0;
+  }
+
+  .drop-zone.incorrect {
+    border-color: #c0392b;
+    background: #fdf0ef;
+  }
+
+  /* Tile bank */
+  .tile-bank {
+    background: #f0f4fa;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .tile-bank-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #7a8fa6;
+    margin-bottom: 10px;
+  }
+
+  .tiles-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 40px;
+  }
+
+  .tile {
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 13px;
+    border-radius: 8px;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .tile:hover { opacity: 0.85; transform: scale(1.04); }
+  .tile.dragging { opacity: 0.5; }
+  .tile.placed { opacity: 0.35; cursor: default; pointer-events: none; }
+
+  .tile-in-zone {
+    background: #1B3A5C;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  /* Feedback banner */
+  .feedback {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 12px;
+    display: none;
+  }
+
+  .feedback.show { display: block; }
+  .feedback.ok { background: #eafbf0; color: #1a5c30; border: 1.5px solid #2e8b57; }
+  .feedback.err { background: #fdf0ef; color: #c0392b; border: 1.5px solid #c0392b; }
+
+  /* QUIZ */
+  .question-counter {
+    font-size: 12px;
+    font-weight: 700;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .question-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0daea;
+    color: #1B3A5C;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    padding: 13px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    line-height: 1.4;
+  }
+
+  .choice-btn:hover:not(:disabled) {
+    border-color: #C9A84C;
+    background: #fffbee;
+  }
+
+  .choice-btn.correct-ans {
+    border-color: #2e8b57;
+    background: #eafbf0;
+    color: #1a5c30;
+  }
+
+  .choice-btn.wrong-ans {
+    border-color: #c0392b;
+    background: #fdf0ef;
+    color: #c0392b;
+  }
+
+  .choice-btn:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #eafbf0; color: #1a5c30; border: 1.5px solid #2e8b57; }
+  .quiz-feedback.err { background: #fdf0ef; color: #c0392b; border: 1.5px solid #c0392b; }
+
+  /* RESULTS */
+  .results-icon { font-size: 60px; text-align: center; margin-bottom: 10px; }
+
+  .results-score {
+    text-align: center;
+    font-size: 52px;
+    font-weight: 900;
+    color: #C9A84C;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .results-label {
+    text-align: center;
+    font-size: 14px;
+    color: #4a6080;
+    margin-bottom: 20px;
+  }
+
+  .results-message {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 8px;
+  }
+
+  .results-sub {
+    text-align: center;
+    font-size: 14px;
+    color: #4a6080;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 16px;
+  }
+
+  .score-breakdown {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+  }
+
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #1B3A5C;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e7ef;
+  }
+
+  .score-row:last-child { border-bottom: none; }
+  .score-row .pts { font-weight: 800; color: #C9A84C; }
+
+  .faith-note {
+    background: #f0f4fa;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #1B3A5C;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  /* step dots */
+  .step-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d0daea;
+    transition: background 0.3s;
+  }
+
+  .dot.done { background: #2e8b57; }
+  .dot.active { background: #C9A84C; }
+
+  @media (max-width: 540px) {
+    main { padding: 18px 14px 18px; }
+    .drop-zones { grid-template-columns: 1fr; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 18px; }
+    .results-score { font-size: 42px; }
+    .tile { font-size: 12px; padding: 7px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="course-label">Creationeering · Genesis K-12 Academy</span>
+  <h1>Intro to Systems Thinking</h1>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-bar" id="progressBar" style="width:0%"></div>
+</div>
+
+<main>
+
+  <!-- ===== SCREEN 0: INTRO ===== -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">⚙️</div>
+    <div class="intro-title">Systems Explorer</div>
+    <div class="intro-subtitle">
+      Everything around you is a system! In this activity you will sort system parts,
+      identify inputs and outputs, and answer questions about how systems work.
+    </div>
+
+    <div class="vocab-grid">
+      <div class="vocab-card">
+        <div class="term">System</div>
+        <div class="def">A group of parts working together to perform a function.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="term">Subsystem</div>
+        <div class="def">A smaller system inside a larger system.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="term">Input</div>
+        <div class="def">What goes <em>into</em> a system.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="term">Output</div>
+        <div class="def">What comes <em>out of</em> a system.</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="goTo('screen-drag1')">Start Activity →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 1: DRAG – BICYCLE ===== -->
+  <div class="screen" id="screen-drag1">
+    <div class="step-dots" id="dots1"></div>
+    <div class="activity-heading">Activity 1 of 3 — Drag & Sort</div>
+    <div class="activity-instruction">
+      A <strong>bicycle</strong> is a system. Drag each tile into the correct zone:
+      <strong>Input</strong>, <strong>Process</strong>, or <strong>Output</strong>.
+    </div>
+
+    <div class="tile-bank" id="bank1">
+      <div class="tile-bank-label">Tiles — drag to zones below</div>
+      <div class="tiles-wrap" id="tiles1"></div>
+    </div>
+
+    <div class="system-card">
+      <div class="system-title"><span class="system-emoji">🚲</span> Bicycle System</div>
+      <div class="drop-zones" id="zones1">
+        <div class="drop-zone-wrap">
+          <div class="drop-label input-lbl">Input</div>
+          <div class="drop-zone" id="dz1-input" data-zone="input" data-system="1" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label process-lbl">Process</div>
+          <div class="drop-zone" id="dz1-process" data-zone="process" data-system="1" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label output-lbl">Output</div>
+          <div class="drop-zone" id="dz1-output" data-zone="output" data-system="1" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback" id="fb1"></div>
+    <div class="btn-row">
+      <button class="btn btn-navy" onclick="checkDrag(1)">Check Answers ✓</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 2: DRAG – PLANT ===== -->
+  <div class="screen" id="screen-drag2">
+    <div class="step-dots" id="dots2"></div>
+    <div class="activity-heading">Activity 2 of 3 — Drag & Sort</div>
+    <div class="activity-instruction">
+      A <strong>plant</strong> is a system too! Drag each tile to the correct zone.
+    </div>
+
+    <div class="tile-bank" id="bank2">
+      <div class="tile-bank-label">Tiles — drag to zones below</div>
+      <div class="tiles-wrap" id="tiles2"></div>
+    </div>
+
+    <div class="system-card">
+      <div class="system-title"><span class="system-emoji">🌱</span> Plant System</div>
+      <div class="drop-zones" id="zones2">
+        <div class="drop-zone-wrap">
+          <div class="drop-label input-lbl">Input</div>
+          <div class="drop-zone" id="dz2-input" data-zone="input" data-system="2" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label process-lbl">Process</div>
+          <div class="drop-zone" id="dz2-process" data-zone="process" data-system="2" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label output-lbl">Output</div>
+          <div class="drop-zone" id="dz2-output" data-zone="output" data-system="2" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback" id="fb2"></div>
+    <div class="btn-row">
+      <button class="btn btn-navy" onclick="checkDrag(2)">Check Answers ✓</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3: DRAG – COMPUTER ===== -->
+  <div class="screen" id="screen-drag3">
+    <div class="step-dots" id="dots3"></div>
+    <div class="activity-heading">Activity 3 of 3 — Drag & Sort</div>
+    <div class="activity-instruction">
+      A <strong>computer</strong> is a complex system with many subsystems inside.
+      Sort the tiles correctly.
+    </div>
+
+    <div class="tile-bank" id="bank3">
+      <div class="tile-bank-label">Tiles — drag to zones below</div>
+      <div class="tiles-wrap" id="tiles3"></div>
+    </div>
+
+    <div class="system-card">
+      <div class="system-title"><span class="system-emoji">💻</span> Computer System</div>
+      <div class="drop-zones" id="zones3">
+        <div class="drop-zone-wrap">
+          <div class="drop-label input-lbl">Input</div>
+          <div class="drop-zone" id="dz3-input" data-zone="input" data-system="3" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label process-lbl">Process</div>
+          <div class="drop-zone" id="dz3-process" data-zone="process" data-system="3" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+        <div class="drop-zone-wrap">
+          <div class="drop-label output-lbl">Output</div>
+          <div class="drop-zone" id="dz3-output" data-zone="output" data-system="3" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback" id="fb3"></div>
+    <div class="btn-row">
+      <button class="btn btn-navy" onclick="checkDrag(3)">Check Answers ✓</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 4: QUIZ ===== -->
+  <div class="screen" id="screen-quiz">
+    <div class="question-counter" id="qCounter">Question 1 of 5</div>
+    <div class="question-text" id="qText"></div>
+    <div class="choices" id="qChoices"></div>
+    <div class="quiz-feedback" id="qFeedback"></div>
+    <div class="btn-row">
+      <button class="btn" id="nextQBtn" onclick="nextQuestion()" style="display:none">Next Question →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 5: RESULTS ===== -->
+  <div class="screen" id="screen-results">
+    <div class="results-icon" id="resultsIcon">🏆</div>
+    <div class="results-score" id="resultsScore">0</div>
+    <div class="results-label">out of 100 points</div>
+    <div class="results-message" id="resultsMessage"></div>
+    <div class="results-sub" id="resultsSub"></div>
+
+    <div class="score-breakdown" id="scoreBreakdown"></div>
+
+    <div class="faith-note">
+      ✝ Just as God designed creation with purposeful systems — from the water cycle to the human body — engineers use systems thinking to reflect that same order and intentionality in what they build.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="restartAll()">Try Again 🔄</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ===================== STATE =====================
+var currentScreen = 'screen-intro';
+var dragScores = [0, 0, 0]; // 0–20 each activity
+var quizScore = 0;
+var dragAttempts = [0, 0, 0];
+var dragCompleted = [false, false, false];
+
+var totalSteps = 9; // intro + 3 drag + quiz5 + results
+var stepIndex = 0;
+
+// ===================== DRAG DATA =====================
+var dragData = [
+  {
+    system: 1,
+    tiles: [
+      { id: 't1a', label: 'Pedaling', correct: 'input' },
+      { id: 't1b', label: 'Gears & chain turn', correct: 'process' },
+      { id: 't1c', label: 'Forward movement', correct: 'output' }
+    ]
+  },
+  {
+    system: 2,
+    tiles: [
+      { id: 't2a', label: 'Sunlight & water', correct: 'input' },
+      { id: 't2b', label: 'Photosynthesis', correct: 'process' },
+      { id: 't2c', label: 'Food (glucose)', correct: 'output' }
+    ]
+  },
+  {
+    system: 3,
+    tiles: [
+      { id: 't3a', label: 'Keyboard input', correct: 'input' },
+      { id: 't3b', label: 'CPU calculates', correct: 'process' },
+      { id: 't3c', label: 'Screen displays result', correct: 'output' }
+    ]
+  }
+];
+
+// Placement tracking: which tile is in which zone
+var placements = { 1: {}, 2: {}, 3: {} };
+// tile id → current zone or null
+var tileZone = {};
+
+// ===================== QUIZ DATA =====================
+var quizQuestions = [
+  {
+    q: 'What is a SYSTEM?',
+    choices: [
+      'A single part that does one job',
+      'A group of parts working together to perform a function',
+      'A list of steps used by a computer',
+      'The energy that powers a machine'
+    ],
+    correct: 1,
+    explanation: 'A system is a group of parts working together to perform a function — like wheels, gears, and a frame working together in a bicycle.'
+  },
+  {
+    q: 'A bicycle has gears, brakes, and wheels. Each of these can be called a ___.',
+    choices: [
+      'Output',
+      'Process',
+      'Subsystem',
+      'Input'
+    ],
+    correct: 2,
+    explanation: 'Gears, brakes, and wheels are each smaller systems (subsystems) inside the larger bicycle system.'
+  },
+  {
+    q: 'When a plant takes in sunlight and water, what role do sunlight and water play?',
+    choices: [
+      'Outputs — they come out of the plant',
+      'Processes — they describe steps inside the plant',
+      'Inputs — they go into the plant system',
+      'Subsystems — they are parts inside the plant'
+    ],
+    correct: 2,
+    explanation: 'Inputs are what go INTO a system. Sunlight and water go into the plant, making them inputs.'
+  },
+  {
+    q: 'A PROCESS in a system is best described as:',
+    choices: [
+      'The final result you can see or measure',
+      'The energy or materials that start the system',
+      'A series of steps that transform inputs into outputs',
+      'A smaller system inside a bigger system'
+    ],
+    correct: 2,
+    explanation: 'A process is the series of steps that move something from start to finish — transforming inputs into outputs.'
+  },
+  {
+    q: 'When a computer displays an answer on screen after you type a question, the displayed answer is the ___.',
+    choices: [
+      'Input',
+      'Subsystem',
+      'Process',
+      'Output'
+    ],
+    correct: 3,
+    explanation: 'Output is what comes OUT of a system. The displayed answer is the result — the output — of the computer system.'
+  }
+];
+
+var currentQuestion = 0;
+var quizAnswered = false;
+
+// ===================== INIT =====================
+window.onload = function () {
+  initDragActivity(1);
+  initDragActivity(2);
+  initDragActivity(3);
+  buildDots();
+  updateProgress();
+};
+
+function buildDots() {
+  // dots for drag screens
+  for (var s = 1; s <= 3; s++) {
+    var wrap = document.getElementById('dots' + s);
+    wrap.innerHTML = '';
+    for (var i = 1; i <= 3; i++) {
+      var d = document.createElement('div');
+      d.className = 'dot' + (i === s ? ' active' : (i < s ? ' done' : ''));
+      wrap.appendChild(d);
+    }
+  }
+}
+
+// ===================== NAVIGATION =====================
+function goTo(screenId) {
+  document.getElementById(currentScreen).classList.remove('active');
+  currentScreen = screenId;
+  document.getElementById(currentScreen).classList.add('active');
+  updateProgress();
+
+  if (screenId === 'screen-quiz') {
+    currentQuestion = 0;
+    quizScore = 0;
+    renderQuestion();
+  }
+
+  if (screenId === 'screen-results') {
+    showResults();
+  }
+
+  window.scrollTo(0, 0);
+}
+
+function updateProgress() {
+  var screens = ['screen-intro','screen-drag1','screen-drag2','screen-drag3','screen-quiz','screen-results'];
+  var idx = screens.indexOf(currentScreen);
+  var pct = (idx / (screens.length - 1)) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// ===================== DRAG INIT =====================
+function initDragActivity(sys) {
+  var data = dragData[sys - 1];
+  var bankEl = document.getElementById('tiles' + sys);
+  bankEl.innerHTML = '';
+
+  data.tiles.forEach(function (t) {
+    var el = document.createElement('div');
+    el.className = 'tile';
+    el.id = t.id;
+    el.textContent = t.label;
+    el.draggable = true;
+    el.addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('text/plain', t.id);
+      el.classList.add('dragging');
+    });
+    el.addEventListener('dragend', function () {
+      el.classList.remove('dragging');
+    });
+    // Touch support
+    addTouchDrag(el, t.id, sys);
+    bankEl.appendChild(el);
+    tileZone[t.id] = null;
+  });
+}
+
+// ===================== DROP ZONE EVENTS =====================
+function dzOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+
+function dzLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function dzDrop(e) {
+  e.preventDefault();
+  var zone = e.currentTarget;
+  zone.classList.remove('drag-over');
+  var tileId = e.dataTransfer.getData('text/plain');
+  placeTile(tileId, zone);
+}
+
+function placeTile(tileId, zone) {
+  var sys = parseInt(zone.dataset.system);
+  var zoneName = zone.dataset.zone;
+
+  // If zone already has a tile, return it to bank
+  var existing = zone.querySelector('.tile-in-zone');
+  if (existing) {
+    returnTileToBank(existing.dataset.tileId, sys);
+  }
+
+  // Remove tile from wherever it currently is
+  var oldZone = tileZone[tileId];
+  if (oldZone) {
+    var oldEl = document.querySelector('[data-zone="' + oldZone + '"][data-system="' + sys + '"]');
+    if (oldEl) oldEl.innerHTML = '';
+  }
+
+  // Remove from bank (mark placed)
+  var bankTile = document.getElementById(tileId);
+  if (bankTile) bankTile.classList.add('placed');
+
+  // Place in zone
+  zone.innerHTML = '';
+  var inZone = document.createElement('div');
+  inZone.className = 'tile-in-zone';
+  inZone.dataset.tileId = tileId;
+  inZone.textContent = tileIdLabel(tileId, sys);
+  inZone.addEventListener('click', function () {
+    returnTileToBank(tileId, sys);
+    zone.innerHTML = '';
+    tileZone[tileId] = null;
+  });
+  zone.appendChild(inZone);
+  tileZone[tileId] = zoneName;
+}
+
+function returnTileToBank(tileId, sys) {
+  var bankTile = document.getElementById(tileId);
+  if (bankTile) bankTile.classList.remove('placed');
+  tileZone[tileId] = null;
+}
+
+function tileIdLabel(tileId, sys) {
+  var data = dragData[sys - 1];
+  for (var i = 0; i < data.tiles.length; i++) {
+    if (data.tiles[i].id === tileId) return data.tiles[i].label;
+  }
+  return tileId;
+}
+
+// ===================== CHECK DRAG =====================
+function checkDrag(sys) {
+  dragAttempts[sys - 1]++;
+  var data = dragData[sys - 1];
+  var allCorrect = true;
+
+  data.tiles.forEach(function (t) {
+    var zone = document.querySelector('[data-zone="' + t.correct + '"][data-system="' + sys + '"]');
+    var inZone = zone ? zone.querySelector('.tile-in-zone') : null;
+
+    if (inZone && inZone.dataset.tileId === t.id) {
+      zone.classList.add('correct');
+      zone.classList.remove('incorrect');
+    } else {
+      zone.classList.add('incorrect');
+      zone.classList.remove('correct');
+      allCorrect = false;
+    }
+  });
+
+  var fb = document.getElementById('fb' + sys);
+
+  if (allCorrect && !dragCompleted[sys - 1]) {
+    dragCompleted[sys - 1] = true;
+    var pts = dragAttempts[sys - 1] === 1 ? 20 : 10;
+    dragScores[sys - 1] = pts;
+
+    fb.textContent = '✅ Correct! You earned ' + pts + ' points.' + (dragAttempts[sys - 1] === 1 ? ' Great work on the first try!' : '');
+    fb.className = 'feedback show ok';
+
+    setTimeout(function () {
+      if (sys < 3) {
+        goTo('screen-drag' + (sys + 1));
+      } else {
+        goTo('screen-quiz');
+      }
+    }, 1600);
+
+  } else if (allCorrect && dragCompleted[sys - 1]) {
+    fb.textContent = '✅ All correct!';
+    fb.className = 'feedback show ok';
+    setTimeout(function () {
+      if (sys < 3) goTo('screen-drag' + (sys + 1));
+      else goTo('screen-quiz');
+    }, 1200);
+  } else {
+    fb.textContent = '❌ Not quite. Red zones need a different tile. Try rearranging!';
+    fb.className = 'feedback show err';
+  }
+}
+
+// ===================== TOUCH DRAG (MOBILE) =====================
+function addTouchDrag(el, tileId, sys) {
+  var touchStartX, touchStartY;
+  var clone = null;
+
+  el.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    clone = el.cloneNode(true);
+    clone.style.position = 'fixed';
+    clone.style.opacity = '0.8';
+    clone.style.zIndex = '9999';
+    clone.style.pointerEvents = 'none';
+    clone.style.transform = 'scale(1.05)';
+    clone.style.left = (e.touches[0].clientX - 40) + 'px';
+    clone.style.top = (e.touches[0].clientY - 20) + 'px';
+    document.body.appendChild(clone);
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('touchmove', function (e) {
+    if (!clone) return;
+    clone.style.left = (e.touches[0].clientX - 40) + 'px';
+    clone.style.top = (e.touches[0].clientY - 20) + 'px';
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('touchend', function (e) {
+    if (clone) { document.body.removeChild(clone); clone = null; }
+    var touch = e.changedTouches[0];
+    var elem = document.elementFromPoint(touch.clientX, touch.clientY);
+    // find drop-zone ancestor
+    var zone = findZoneAncestor(elem);
+    if (zone && parseInt(zone.dataset.system) === sys) {
+      placeTile(tileId, zone);
+    }
+    e.preventDefault();
+  }, { passive: false });
+}
+
+function findZoneAncestor(el) {
+  while (el) {
+    if (el.classList && el.classList.contains('drop-zone')) return el;
+    el = el.parentElement;
+  }
+  return null;
+}
+
+// ===================== QUIZ =====================
+function renderQuestion() {
+  var q = quizQuestions[currentQuestion];
+  document.getElementById('qCounter').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + quizQuestions.length;
+  document.getElementById('qText').textContent = q.q;
+
+  var choicesEl = document.getElementById('qChoices');
+  choicesEl.innerHTML = '';
+  q.choices.forEach(function (c, i) {
+    var btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c;
+    btn.onclick = function () { answerQuestion(i); };
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById('qFeedback').className = 'quiz-feedback';
+  document.getElementById('nextQBtn').style.display = 'none';
+  quizAnswered = false;
+}
+
+function answerQuestion(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  var q = quizQuestions[currentQuestion];
+  var btns = document.querySelectorAll('#qChoices .choice-btn');
+  btns.forEach(function (b) { b.disabled = true; });
+
+  var fb = document.getElementById('qFeedback');
+
+  if (idx === q.correct) {
+    btns[idx].classList.add('correct-ans');
+    quizScore += 8;
+    fb.textContent = '✅ Correct! ' + q.explanation;
+    fb.className = 'quiz-feedback show ok';
+  } else {
+    btns[idx].classList.add('wrong-ans');
+    btns[q.correct].classList.add('correct-ans');
+    fb.textContent = '❌ Not quite. ' + q.explanation;
+    fb.className = 'quiz-feedback show err';
+  }
+
+  var nextBtn = document.getElementById('nextQBtn');
+  nextBtn.style.display = 'inline-block';
+  if (currentQuestion === quizQuestions.length - 1) {
+    nextBtn.textContent = 'See My Results 🏆';
+  } else {
+    nextBtn.textContent = 'Next Question →';
+  }
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion >= quizQuestions.length) {
+    goTo('screen-results');
+  } else {
+    renderQuestion();
+  }
+}
+
+// ===================== RESULTS =====================
+function showResults() {
+  var drag1 = dragScores[0];
+  var drag2 = dragScores[1];
+  var drag3 = dragScores[2];
+  var quiz = quizScore;
+  var total = drag1 + drag2 + drag3 + quiz;
+  total = Math.min(total, 100);
+
+  document.getElementById('resultsScore').textContent = total;
+
+  var icon, msg, sub;
+  if (total >= 85) {
+    icon = '🏆';
+    msg = 'Systems Master!';
+    sub = 'Excellent work! You clearly understand how inputs, outputs, and processes work together inside a system.';
+  } else if (total >= 65) {
+    icon = '⚙️';
+    msg = 'Solid Engineer!';
+    sub = 'Good job! You understand the basics of systems. Review any questions you missed and you\'ll be ready to go.';
+  } else {
+    icon = '🔧';
+    msg = 'Keep Building!';
+    sub = 'Nice effort! Review the key terms — system, subsystem, input, output, and process — and try again for a higher score.';
+  }
+
+  document.getElementById('resultsIcon').textContent = icon;
+  document.getElementById('resultsMessage').textContent = msg;
+  document.getElementById('resultsSub').textContent = sub;
+
+  var bd = document.getElementById('scoreBreakdown');
+  bd.innerHTML = [
+    '<div class="score-row"><span>🚲 Bicycle Sort ' + (dragAttempts[0] === 1 ? '(first try!)' : '') + '</span><span class="pts">' + drag1 + '/20</span></div>',
+    '<div class="score-row"><span>🌱 Plant Sort ' + (dragAttempts[1] === 1 ? '(first try!)' : '') + '</span><span class="pts">' + drag2 + '/20</span></div>',
+    '<div class="score-row"><span>💻 Computer Sort ' + (dragAttempts[2] === 1 ? '(first try!)' : '') + '</span><span class="pts">' + drag3 + '/20</span></div>',
+    '<div class="score-row"><span>📝 Vocabulary Quiz</span><span class="pts">' + quiz + '/40</span></div>',
+    '<div class="score-row" style="font-weight:800;font-size:15px;"><span>Total</span><span class="pts">' + total + '/100</span></div>'
+  ].join('');
+}
+
+// ===================== RESTART =====================
+function restartAll() {
+  dragScores = [0, 0, 0];
+  quizScore = 0;
+  dragAttempts = [0, 0, 0];
+  dragCompleted = [false, false, false];
+  tileZone = {};
+
+  // Reset drag zones
+  for (var s = 1; s <= 3; s++) {
+    ['input','process','output'].forEach(function (z) {
+      var zone = document.querySelector('[data-zone="' + z + '"][data-system="' + s + '"]');
+      if (zone) {
+        zone.innerHTML = '';
+        zone.classList.remove('correct','incorrect','drag-over');
+      }
+    });
+    var fb = document.getElementById('fb' + s);
+    if (fb) { fb.className = 'feedback'; fb.textContent = ''; }
+    initDragActivity(s);
+  }
+
+  goTo('screen-intro');
+}
+</script>
+</body>
+</html>

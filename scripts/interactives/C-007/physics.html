@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Projectile Physics Sandbox – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e2137;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e6c8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 18px 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-box {
+    background: #C9A84C;
+    border-radius: 6px;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C; flex-shrink: 0;
+  }
+  header h1 { font-size: 1rem; color: #C9A84C; font-weight: 700; line-height: 1.2; }
+  header p  { font-size: 0.72rem; color: #a8c4e0; margin-top: 2px; }
+
+  #main {
+    width: 100%; max-width: 900px;
+    background: #1B3A5C;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* OCV tags */
+  .ocv-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .ocv-tag {
+    font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+  .tag-obj  { background: #C9A84C; color: #1B3A5C; }
+  .tag-con  { background: #2e6da4; color: #fff; }
+  .tag-var  { background: #2ea47d; color: #fff; }
+
+  canvas {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #2e5480;
+    background: #0a1e33;
+    display: block;
+    touch-action: none;
+  }
+
+  /* Controls */
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 520px) {
+    .controls { grid-template-columns: 1fr; }
+  }
+  .ctrl-card {
+    background: #142f4e;
+    border: 1px solid #2e5480;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .ctrl-card label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; font-weight: 600; color: #C9A84C; margin-bottom: 6px;
+  }
+  .ctrl-card label span { color: #f0e6c8; font-weight: 700; font-size: 0.85rem; }
+  input[type=range] {
+    width: 100%; accent-color: #C9A84C; cursor: pointer; height: 6px;
+  }
+  .sub-hint { font-size: 0.64rem; color: #7aadd0; margin-top: 4px; }
+
+  /* Readouts */
+  .readouts {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  }
+  .readout {
+    background: #0e2137;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 18px;
+    text-align: center;
+    min-width: 130px;
+  }
+  .readout .val { font-size: 1.5rem; font-weight: 800; color: #C9A84C; line-height: 1; }
+  .readout .lbl { font-size: 0.68rem; color: #a8c4e0; margin-top: 3px; }
+
+  /* Buttons */
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  button {
+    border: none; border-radius: 6px; padding: 9px 22px;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    transition: filter 0.15s;
+  }
+  button:hover { filter: brightness(1.15); }
+  #btnLaunch { background: #C9A84C; color: #1B3A5C; }
+  #btnReset  { background: #2e5480; color: #f0e6c8; }
+  #btnTrails { background: #2ea47d; color: #fff; }
+
+  .legend {
+    font-size: 0.68rem; color: #7aadd0; text-align: center; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-box">G</div>
+  <div>
+    <h1>Projectile Physics Sandbox</h1>
+    <p>Creationeering · Objectives, Constraints &amp; Variables · Genesis K-12 Academy</p>
+  </div>
+</header>
+
+<div id="main">
+
+  <!-- OCV labels -->
+  <div class="ocv-row">
+    <span class="ocv-tag tag-obj">🎯 OBJECTIVE: Land on the target</span>
+    <span class="ocv-tag tag-con">🔒 CONSTRAINT: Fixed launch position &amp; gravity</span>
+    <span class="ocv-tag tag-var">🔄 VARIABLES: Angle &amp; Speed</span>
+  </div>
+
+  <!-- Canvas -->
+  <canvas id="c"></canvas>
+
+  <!-- Readouts -->
+  <div class="readouts">
+    <div class="readout">
+      <div class="val" id="rDist">0.0</div>
+      <div class="lbl">Distance (m)</div>
+    </div>
+    <div class="readout">
+      <div class="val" id="rHeight">0.0</div>
+      <div class="lbl">Max Height (m)</div>
+    </div>
+    <div class="readout">
+      <div class="val" id="rTime">0.0</div>
+      <div class="lbl">Flight Time (s)</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="ctrl-card">
+      <label>Launch Angle <span id="lblAngle">45°</span></label>
+      <input type="range" id="slAngle" min="5" max="85" value="45" step="1">
+      <div class="sub-hint">🔄 VARIABLE — affects arc shape &amp; distance</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Launch Speed <span id="lblSpeed">25 m/s</span></label>
+      <input type="range" id="slSpeed" min="5" max="50" value="25" step="1">
+      <div class="sub-hint">🔄 VARIABLE — affects range &amp; height</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Target Distance <span id="lblTarget">60 m</span></label>
+      <input type="range" id="slTarget" min="10" max="120" value="60" step="1">
+      <div class="sub-hint">🔒 CONSTRAINT — your engineering goal</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Air Resistance <span id="lblDrag">None</span></label>
+      <input type="range" id="slDrag" min="0" max="3" value="0" step="1">
+      <div class="sub-hint">🔄 VARIABLE — how environment changes outcome</div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-row">
+    <button id="btnLaunch">🚀 Launch</button>
+    <button id="btnTrails">👁 Trails: ON</button>
+    <button id="btnReset">↺ Reset</button>
+  </div>
+
+  <div class="legend">
+    Gravity = 9.8 m/s² (constant) &nbsp;|&nbsp; Adjust angle &amp; speed to hit the gold target &nbsp;|&nbsp;
+    Watch how variables change the outcome — just like in engineering!
+  </div>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ── DOM refs ──────────────────────────────────────────────────────────────────
+const canvas   = document.getElementById('c');
+const ctx      = canvas.getContext('2d');
+const slAngle  = document.getElementById('slAngle');
+const slSpeed  = document.getElementById('slSpeed');
+const slTarget = document.getElementById('slTarget');
+const slDrag   = document.getElementById('slDrag');
+const lblAngle  = document.getElementById('lblAngle');
+const lblSpeed  = document.getElementById('lblSpeed');
+const lblTarget = document.getElementById('lblTarget');
+const lblDrag   = document.getElementById('lblDrag');
+const rDist    = document.getElementById('rDist');
+const rHeight  = document.getElementById('rHeight');
+const rTime    = document.getElementById('rTime');
+const btnLaunch= document.getElementById('btnLaunch');
+const btnReset = document.getElementById('btnReset');
+const btnTrails= document.getElementById('btnTrails');
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const G = 9.8;
+const DRAG_LEVELS = [0, 0.02, 0.06, 0.14];
+const DRAG_LABELS = ['None','Low','Medium','High'];
+
+let showTrails = true;
+let animId = null;
+let simRunning = false;
+
+let simState = null;   // live projectile
+let trails   = [];     // array of completed paths [{pts, hit, targetX}]
+
+// camera / scale – metres → pixels
+let SCALE, ORIGIN_X, ORIGIN_Y;
+const WORLD_W = 130; // metres visible
+
+function resize(){
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const w = Math.min(rect.width - 24, 876);
+  const h = Math.round(w * 0.44);
+  canvas.width  = w;
+  canvas.height = h;
+  SCALE    = w / WORLD_W;
+  ORIGIN_X = w * 0.06;
+  ORIGIN_Y = h - Math.round(h * 0.14);
+}
+resize();
+window.addEventListener('resize', ()=>{ resize(); drawStatic(); });
+
+// ── Coordinate helpers ────────────────────────────────────────────────────────
+function wx(mx){ return ORIGIN_X + mx * SCALE; }
+function wy(my){ return ORIGIN_Y - my * SCALE; }
+
+// ── Simulation ────────────────────────────────────────────────────────────────
+function getParams(){
+  const angle  = parseFloat(slAngle.value);
+  const speed  = parseFloat(slSpeed.value);
+  const targetM= parseFloat(slTarget.value);
+  const drag   = DRAG_LEVELS[parseInt(slDrag.value)];
+  return { angle, speed, targetM, drag };
+}
+
+function startSim(){
+  if(simRunning) stopSim();
+  const {angle, speed, targetM, drag} = getParams();
+  const rad = angle * Math.PI / 180;
+  simState = {
+    x: 0, y: 0,
+    vx: speed * Math.cos(rad),
+    vy: speed * Math.sin(rad),
+    drag,
+    targetX: targetM,
+    pts: [],
+    maxY: 0,
+    landed: false,
+    hit: false,
+    t: 0
+  };
+  simRunning = true;
+  loop();
+}
+
+function stopSim(){ simRunning = false; }
+
+let lastTime = null;
+function loop(ts){
+  if(!simRunning){ lastTime = null; return; }
+  animId = requestAnimationFrame(loop);
+  if(!lastTime){ lastTime = ts; }
+  const raw = Math.min((ts - lastTime)/1000, 0.05);
+  lastTime = ts;
+
+  const substeps = 8;
+  const dt = raw / substeps;
+  const s  = simState;
+
+  for(let i=0;i<substeps && !s.landed;i++){
+    const speed_now = Math.sqrt(s.vx*s.vx + s.vy*s.vy);
+    s.vx -= s.drag * speed_now * s.vx * dt;
+    s.vy -= (G + s.drag * speed_now * s.vy) * dt;
+    s.x  += s.vx * dt;
+    s.y  += s.vy * dt;
+    s.t  += dt;
+    if(s.y > s.maxY) s.maxY = s.y;
+    s.pts.push({x: s.x, y: s.y});
+
+    if(s.y <= 0 && s.pts.length > 3){
+      s.y = 0;
+      s.landed = true;
+      const dx = Math.abs(s.x - s.targetX);
+      s.hit = dx < 4;
+      // save trail
+      trails.push({ pts: s.pts.slice(), hit: s.hit, targetX: s.targetX });
+      if(trails.length > 5) trails.shift();
+      // update readouts
+      rDist.textContent   = s.x.toFixed(1);
+      rHeight.textContent = s.maxY.toFixed(1);
+      rTime.textContent   = s.t.toFixed(2);
+      stopSim();
+    }
+  }
+
+  drawFrame(s);
+}
+
+// ── Drawing ───────────────────────────────────────────────────────────────────
+function drawFrame(s){
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  drawBackground(W,H);
+  drawGround(W,H);
+  drawTarget(s ? s.targetX : getParams().targetM);
+  if(showTrails) drawTrails();
+  drawLauncher();
+  if(s && !s.landed) drawLivePath(s);
+  if(s && s.landed)  drawLandingMarker(s);
+  drawAngleArc();
+}
+
+function drawStatic(){
+  drawFrame(null);
+}
+
+function drawBackground(W,H){
+  // sky gradient
+  const sky = ctx.createLinearGradient(0,0,0,ORIGIN_Y);
+  sky.addColorStop(0,'#060f1a');
+  sky.addColorStop(1,'#0d2540');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0,0,W,ORIGIN_Y);
+  // stars
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  const seed = 42;
+  for(let i=0;i<60;i++){
+    const sx = ((Math.sin(i*seed)*0.5+0.5)*W)|0;
+    const sy = ((Math.cos(i*seed+1)*0.5+0.5)*ORIGIN_Y*0.9)|0;
+    ctx.fillRect(sx,sy,1,1);
+  }
+  // below ground
+  const grd = ctx.createLinearGradient(0,ORIGIN_Y,0,H);
+  grd.addColorStop(0,'#1a3a1a');
+  grd.addColorStop(1,'#0d1f0d');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0,ORIGIN_Y,W,H-ORIGIN_Y);
+}
+
+function drawGround(W,H){
+  ctx.beginPath();
+  ctx.moveTo(0,ORIGIN_Y);
+  ctx.lineTo(W,ORIGIN_Y);
+  ctx.strokeStyle = '#3a7a3a';
+  ctx.lineWidth   = 2;
+  ctx.stroke();
+  // distance marks
+  ctx.fillStyle   = 'rgba(255,255,255,0.25)';
+  ctx.font        = `${Math.max(9,Math.round(SCALE*1.2))}px Arial`;
+  ctx.textAlign   = 'center';
+  for(let m=0; m<=WORLD_W; m+=10){
+    const px = wx(m);
+    if(px < 0 || px > W) continue;
+    ctx.fillRect(px-0.5, ORIGIN_Y, 1, 6);
+    ctx.fillText(m+'m', px, ORIGIN_Y+16);
+  }
+}
+
+function drawTarget(targetM){
+  const px = wx(targetM);
+  const py = ORIGIN_Y;
+  const r  = Math.max(10, 3.8*SCALE);
+
+  // glow
+  const glow = ctx.createRadialGradient(px,py,0,px,py,r*2.5);
+  glow.addColorStop(0,'rgba(201,168,76,0.35)');
+  glow.addColorStop(1,'rgba(201,168,76,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.ellipse(px,py,r*2.5,r*0.8,0,0,Math.PI*2);
+  ctx.fill();
+
+  // rings
+  [r, r*0.65, r*0.32].forEach((rr,i)=>{
+    ctx.beginPath();
+    ctx.ellipse(px,py,rr,rr*0.32,0,0,Math.PI*2);
+    ctx.strokeStyle = i===1 ? '#C9A84C' : '#fff';
+    ctx.lineWidth   = i===1 ? 2 : 1;
+    ctx.stroke();
+  });
+
+  // flag
+  ctx.beginPath();
+  ctx.moveTo(px, py);
+  ctx.lineTo(px, py - r*3);
+  ctx.strokeStyle = '#C9A84C';
+  ctx.lineWidth   = 1.5;
+  ctx.stroke();
+  ctx.fillStyle   = '#C9A84C';
+  ctx.beginPath();
+  ctx.moveTo(px, py-r*3);
+  ctx.lineTo(px+r*1.2, py-r*2.5);
+  ctx.lineTo(px, py-r*2);
+  ctx.fill();
+
+  // label
+  ctx.fillStyle   = '#C9A84C';
+  ctx.font        = `bold ${Math.max(9,Math.round(SCALE*1.1))}px Arial`;
+  ctx.textAlign   = 'center';
+  ctx.fillText('TARGET', px, py-r*3.5);
+}
+
+function drawLauncher(){
+  const ox = wx(0), oy = wy(0);
+  const angle = parseFloat(slAngle.value) * Math.PI/180;
+  const barLen = Math.max(22, 2.4*SCALE);
+
+  // base
+  ctx.beginPath();
+  ctx.arc(ox, oy, 10, Math.PI, Math.PI*2);
+  ctx.fillStyle = '#C9A84C';
+  ctx.fill();
+
+  ctx.fillStyle = '#8B6914';
+  ctx.fillRect(ox-14, oy, 28, 10);
+
+  // barrel
+  ctx.save();
+  ctx.translate(ox, oy);
+  ctx.rotate(-angle);
+  const grad = ctx.createLinearGradient(0,-4,barLen,-4);
+  grad.addColorStop(0,'#888');
+  grad.addColorStop(1,'#ccc');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,-5,barLen,10);
+  ctx.fillStyle='#555';
+  ctx.fillRect(barLen-4,-6,8,12);
+  ctx.restore();
+}
+
+function drawAngleArc(){
+  const ox = wx(0), oy = wy(0);
+  const angle = parseFloat(slAngle.value)*Math.PI/180;
+  const R = Math.max(30, 3*SCALE);
+  ctx.beginPath();
+  ctx.arc(ox,oy,-0.01,-angle,0);
+  ctx.strokeStyle='rgba(201,168,76,0.5)';
+  ctx.lineWidth=1.5;
+  ctx.setLineDash([3,3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  const mid = angle/2;
+  ctx.fillStyle='#C9A84C';
+  ctx.font=`bold ${Math.max(10,Math.round(SCALE*1.1))}px Arial`;
+  ctx.textAlign='left';
+  ctx.fillText(slAngle.value+'°', ox+R*Math.cos(mid)+4, oy - R*Math.sin(mid));
+}
+
+function drawTrails(){
+  trails.forEach((tr,ti)=>{
+    const alpha = 0.15 + ti*(0.12/Math.max(trails.length,1));
+    ctx.beginPath();
+    let started=false;
+    for(const p of tr.pts){
+      const px=wx(p.x), py=wy(p.y);
+      if(!started){ ctx.moveTo(px,py); started=true; } else ctx.lineTo(px,py);
+    }
+    ctx.strokeStyle = tr.hit
+      ? `rgba(46,164,125,${alpha})`
+      : `rgba(180,80,80,${alpha})`;
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+  });
+}
+
+function drawLivePath(s){
+  if(s.pts.length < 2) return;
+  ctx.beginPath();
+  let first=true;
+  for(const p of s.pts){
+    const px=wx(p.x), py=wy(p.y);
+    if(first){ ctx.moveTo(px,py); first=false; } else ctx.lineTo(px,py);
+  }
+  ctx.strokeStyle='#C9A84C';
+  ctx.lineWidth=2;
+  ctx.stroke();
+
+  // ball
+  const last = s.pts[s.pts.length-1];
+  const bx=wx(last.x), by=wy(last.y);
+  const grad = ctx.createRadialGradient(bx-2,by-2,1,bx,by,7);
+  grad.addColorStop(0,'#fff');
+  grad.addColorStop(0.4,'#C9A84C');
+  grad.addColorStop(1,'#7a5010');
+  ctx.beginPath();
+  ctx.arc(bx,by,7,0,Math.PI*2);
+  ctx.fillStyle=grad;
+  ctx.fill();
+}
+
+function drawLandingMarker(s){
+  // full arc faded
+  drawLivePath(s);
+
+  const px=wx(s.x), py=wy(0);
+  if(s.hit){
+    // explosion rings
+    for(let r=6;r<=22;r+=7){
+      ctx.beginPath();
+      ctx.arc(px,py,r,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(46,164,125,${0.9-r*0.03})`;
+      ctx.lineWidth=2;
+      ctx.stroke();
+    }
+    ctx.fillStyle='#2ea47d';
+    ctx.font=`bold ${Math.max(12,Math.round(SCALE*1.4))}px Arial`;
+    ctx.textAlign='center';
+    ctx.fillText('✓ HIT!', px, py-30);
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(px-10,py-10); ctx.lineTo(px+10,py+10);
+    ctx.moveTo(px+10,py-10); ctx.lineTo(px-10,py+10);
+    ctx.strokeStyle='#e05050';
+    ctx.lineWidth=3;
+    ctx.stroke();
+    const err=(s.x-s.targetX).toFixed(1);
+    const dir=parseFloat(err)>=0?'long':'short';
+    ctx.fillStyle='#e08080';
+    ctx.font=`bold ${Math.max(10,Math.round(SCALE*1.1))}px Arial`;
+    ctx.textAlign='center';
+    ctx.fillText(`${Math.abs(err)}m ${dir}`, px, py-18);
+  }
+}
+
+// ── Control listeners ─────────────────────────────────────────────────────────
+function updateLabels(){
+  lblAngle.textContent  = slAngle.value  + '°';
+  lblSpeed.textContent  = slSpeed.value  + ' m/s';
+  lblTarget.textContent = slTarget.value + ' m';
+  lblDrag.textContent   = DRAG_LABELS[parseInt(slDrag.value)];
+}
+
+[slAngle, slSpeed, slTarget, slDrag].forEach(sl=>{
+  sl.addEventListener('input', ()=>{
+    updateLabels();
+    stopSim();
+    simState = null;
+    drawStatic();
+  });
+});
+
+btnLaunch.addEventListener('click', ()=>{ startSim(); });
+
+btnReset.addEventListener('click', ()=>{
+  stopSim();
+  simState = null;
+  trails   = [];
+  slAngle.value  = 45;
+  slSpeed.value  = 25;
+  slTarget.value = 60;
+  slDrag.value   = 0;
+  updateLabels();
+  rDist.textContent = rHeight.textContent = rTime.textContent = '0.0';
+  drawStatic();
+});
+
+btnTrails.addEventListener('click', ()=>{
+  showTrails = !showTrails;
+  btnTrails.textContent = '👁 Trails: ' + (showTrails?'ON':'OFF');
+  drawStatic();
+});
+
+// ── Touch/click launch on canvas ──────────────────────────────────────────────
+canvas.addEventListener('click', e=>{
+  const r = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / r.width;
+  const cx = (e.clientX - r.left) * scaleX;
+  // convert click x to metres → set as target
+  const m = (cx - ORIGIN_X)/SCALE;
+  if(m>1 && m<WORLD_W-2){
+    slTarget.value = Math.round(Math.min(120,Math.max(10,m)));
+    updateLabels();
+    drawStatic();
+  }
+});
+
+// Touch drag on canvas (move target)
+let touching = false;
+canvas.addEventListener('touchstart', e=>{ e.preventDefault(); touching=true; }, {passive:false});
+canvas.addEventListener('touchend',   ()=>{ touching=false; });
+canvas.addEventListener('touchmove',  e=>{
+  e.preventDefault();
+  if(!touching) return;
+  const r  = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / r.width;
+  const cx = (e.touches[0].clientX - r.left)*scaleX;
+  const m  = (cx - ORIGIN_X)/SCALE;
+  if(m>1 && m<WORLD_W-2){
+    slTarget.value = Math.round(Math.min(120,Math.max(10,m)));
+    updateLabels();
+    if(!simRunning) drawStatic();
+  }
+}, {passive:false});
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+updateLabels();
+drawStatic();
+
+})();
+</script>
+</body>
+</html>

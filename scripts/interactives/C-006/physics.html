@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Systems Thinking – Physics Sandbox | Genesis K-12 Academy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e2238;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+  }
+  header {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 10px 10px 0 0;
+    padding: 12px 18px 8px;
+    border-bottom: 3px solid #C9A84C;
+  }
+  header h1 {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    letter-spacing: 0.5px;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #a8c4e0;
+    margin-top: 2px;
+  }
+  #main-wrap {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    background: #0a1a2e;
+    border-radius: 8px;
+    border: 2px solid #2e5a8a;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    touch-action: none;
+  }
+  #system-label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 0.68rem;
+    color: #C9A84C;
+    background: rgba(11,26,46,0.75);
+    padding: 2px 7px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  #readouts {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .readout-box {
+    flex: 1;
+    min-width: 130px;
+    background: #0e2238;
+    border: 1.5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .readout-box .label {
+    font-size: 0.65rem;
+    color: #a8c4e0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .readout-box .value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #C9A84C;
+    margin-top: 2px;
+  }
+  .readout-box .unit {
+    font-size: 0.62rem;
+    color: #7a9bbf;
+  }
+  #controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #0e2238;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ctrl-label {
+    font-size: 0.75rem;
+    color: #a8c4e0;
+    min-width: 130px;
+  }
+  .ctrl-label span {
+    font-size: 0.68rem;
+    color: #7a9bbf;
+    display: block;
+  }
+  input[type=range] {
+    flex: 1;
+    min-width: 100px;
+    accent-color: #C9A84C;
+    height: 6px;
+    cursor: pointer;
+  }
+  .ctrl-val {
+    font-size: 0.8rem;
+    color: #C9A84C;
+    min-width: 48px;
+    text-align: right;
+    font-weight: bold;
+  }
+  #btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  #btn-launch {
+    background: #C9A84C;
+    color: #1B3A5C;
+    flex: 2;
+  }
+  #btn-launch:hover { background: #e0bf6a; }
+  #btn-reset {
+    background: #2e5a8a;
+    color: #f0f0f0;
+    flex: 1;
+  }
+  #btn-reset:hover { background: #3d74ad; }
+  #concepts {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .concept-chip {
+    background: #132d4a;
+    border: 1px solid #2e5a8a;
+    border-radius: 20px;
+    padding: 4px 11px;
+    font-size: 0.65rem;
+    color: #a8c4e0;
+  }
+  .concept-chip strong {
+    color: #C9A84C;
+  }
+  #diagram-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: #0e2238;
+    border-radius: 8px;
+    padding: 8px 10px;
+    flex-wrap: wrap;
+  }
+  .diag-box {
+    background: #1B3A5C;
+    border: 1.5px solid #C9A84C;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.65rem;
+    text-align: center;
+    color: #f0f0f0;
+    min-width: 80px;
+  }
+  .diag-box .diag-title {
+    color: #C9A84C;
+    font-weight: bold;
+    font-size: 0.68rem;
+  }
+  .diag-arrow {
+    color: #C9A84C;
+    font-size: 1.2rem;
+    padding: 0 4px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚙️ Systems Thinking — Projectile Physics Sandbox</h1>
+  <p>Creationeering · Genesis K-12 Academy · Identify inputs, processes &amp; outputs in a real system</p>
+</header>
+<div id="main-wrap">
+
+  <!-- System Diagram -->
+  <div id="diagram-row">
+    <div class="diag-box"><div class="diag-title">INPUT</div>Angle, Speed<br>Mass</div>
+    <div class="diag-arrow">▶</div>
+    <div class="diag-box"><div class="diag-title">PROCESS</div>Launch &amp;<br>Gravity</div>
+    <div class="diag-arrow">▶</div>
+    <div class="diag-box"><div class="diag-title">OUTPUT</div>Range,<br>Max Height</div>
+  </div>
+
+  <!-- Canvas -->
+  <div id="canvas-wrap">
+    <canvas id="sim" height="340"></canvas>
+    <div id="system-label">SYSTEM: Projectile Launcher</div>
+  </div>
+
+  <!-- Readouts -->
+  <div id="readouts">
+    <div class="readout-box">
+      <div class="label">Range (Distance)</div>
+      <div class="value" id="readout-range">—</div>
+      <div class="unit">meters</div>
+    </div>
+    <div class="readout-box">
+      <div class="label">Max Height</div>
+      <div class="value" id="readout-height">—</div>
+      <div class="unit">meters</div>
+    </div>
+    <div class="readout-box">
+      <div class="label">Flight Time</div>
+      <div class="value" id="readout-time">—</div>
+      <div class="unit">seconds</div>
+    </div>
+    <div class="readout-box">
+      <div class="label">Current Speed</div>
+      <div class="value" id="readout-speed">—</div>
+      <div class="unit">m/s</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <div class="ctrl-row">
+      <div class="ctrl-label">Launch Angle <span>INPUT → affects arc shape</span></div>
+      <input type="range" id="sl-angle" min="5" max="85" value="45" step="1">
+      <div class="ctrl-val"><span id="val-angle">45</span>°</div>
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Launch Speed <span>INPUT → affects range &amp; height</span></div>
+      <input type="range" id="sl-speed" min="5" max="50" value="25" step="1">
+      <div class="ctrl-val"><span id="val-speed">25</span> m/s</div>
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Mass <span>INPUT → affects momentum</span></div>
+      <input type="range" id="sl-mass" min="1" max="20" value="5" step="1">
+      <div class="ctrl-val"><span id="val-mass">5</span> kg</div>
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Air Resistance <span>PROCESS variable</span></div>
+      <input type="range" id="sl-drag" min="0" max="50" value="0" step="1">
+      <div class="ctrl-val"><span id="val-drag">0</span>%</div>
+    </div>
+    <div id="btn-row">
+      <button id="btn-launch">🚀 LAUNCH</button>
+      <button id="btn-reset">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- Concept chips -->
+  <div id="concepts">
+    <div class="concept-chip"><strong>System:</strong> Projectile launcher &amp; flight path</div>
+    <div class="concept-chip"><strong>Subsystem:</strong> Launcher mechanism</div>
+    <div class="concept-chip"><strong>Input:</strong> Angle, speed, mass</div>
+    <div class="concept-chip"><strong>Process:</strong> Gravity &amp; drag</div>
+    <div class="concept-chip"><strong>Output:</strong> Range &amp; height</div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+const canvas = document.getElementById('sim');
+const ctx = canvas.getContext('2d');
+
+// ---- Resize canvas to match display size ----
+function resizeCanvas(){
+  const wrap = canvas.parentElement;
+  const w = wrap.clientWidth;
+  canvas.width = w;
+  canvas.height = Math.min(340, Math.round(w * 0.42));
+}
+resizeCanvas();
+window.addEventListener('resize', ()=>{ resizeCanvas(); drawScene(); });
+
+// ---- Sliders ----
+const slAngle = document.getElementById('sl-angle');
+const slSpeed = document.getElementById('sl-speed');
+const slMass  = document.getElementById('sl-mass');
+const slDrag  = document.getElementById('sl-drag');
+const valAngle = document.getElementById('val-angle');
+const valSpeed = document.getElementById('val-speed');
+const valMass  = document.getElementById('val-mass');
+const valDrag  = document.getElementById('val-drag');
+
+// ---- Readouts ----
+const rRange  = document.getElementById('readout-range');
+const rHeight = document.getElementById('readout-height');
+const rTime   = document.getElementById('readout-time');
+const rSpeed  = document.getElementById('readout-speed');
+
+// ---- State ----
+let state = 'idle'; // 'idle' | 'flying' | 'done'
+let proj = null;
+let trail = [];
+let maxH = 0;
+let landX = null;
+let flightTime = 0;
+let rafId = null;
+let lastTs = null;
+
+// Physics constants
+const G = 9.8; // m/s²
+
+// World-to-canvas mapping
+// We'll define a "world" coordinate system (meters) and map to canvas pixels
+// Origin = bottom-left cannon position
+
+function getParams(){
+  return {
+    angle: parseFloat(slAngle.value),
+    speed: parseFloat(slSpeed.value),
+    mass:  parseFloat(slMass.value),
+    drag:  parseFloat(slDrag.value) / 100
+  };
+}
+
+// ---- Trajectory preview (analytical, no drag) ----
+function analyticalPath(angle, speed, steps){
+  const rad = angle * Math.PI / 180;
+  const vx = speed * Math.cos(rad);
+  const vy = speed * Math.sin(rad);
+  const totalT = 2 * vy / G;
+  const pts = [];
+  for(let i = 0; i <= steps; i++){
+    const t = (i / steps) * totalT;
+    pts.push({ x: vx * t, y: vy * t - 0.5 * G * t * t });
+  }
+  return pts;
+}
+
+// Determine world bounds for current params
+function worldBounds(p){
+  const rad = p.angle * Math.PI / 180;
+  const vx = p.speed * Math.cos(rad);
+  const vy = p.speed * Math.sin(rad);
+  const maxRange = vx * 2 * vy / G;
+  const maxHeight = vy * vy / (2 * G);
+  return { maxRange: maxRange * 1.05, maxHeight: maxHeight * 1.15 };
+}
+
+// Convert world coords to canvas coords
+function toCanvas(wx, wy, bounds){
+  const cw = canvas.width;
+  const ch = canvas.height;
+  const pad = { left: 60, right: 20, top: 20, bottom: 45 };
+  const pw = cw - pad.left - pad.right;
+  const ph = ch - pad.top - pad.bottom;
+  const cx = pad.left + (wx / bounds.maxRange) * pw;
+  const cy = ch - pad.bottom - (wy / bounds.maxHeight) * ph;
+  return { x: cx, y: cy };
+}
+
+function getOriginCanvas(bounds){
+  return toCanvas(0, 0, bounds);
+}
+
+// ---- DRAW ----
+function drawScene(){
+  const cw = canvas.width;
+  const ch = canvas.height;
+  ctx.clearRect(0, 0, cw, ch);
+
+  const p = getParams();
+  const bounds = worldBounds(p);
+
+  // Sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, ch);
+  skyGrad.addColorStop(0, '#05111f');
+  skyGrad.addColorStop(1, '#0a2540');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, cw, ch);
+
+  // Grid lines
+  drawGrid(p, bounds);
+
+  // Ground
+  const origin = getOriginCanvas(bounds);
+  ctx.fillStyle = '#1e4d1e';
+  ctx.fillRect(0, origin.y, cw, ch - origin.y);
+  ctx.strokeStyle = '#2a7a2a';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, origin.y);
+  ctx.lineTo(cw, origin.y);
+  ctx.stroke();
+
+  // Trajectory preview (dashed) only when idle or done
+  if(state === 'idle' || state === 'done'){
+    const pts = analyticalPath(p.angle, p.speed, 80);
+    ctx.save();
+    ctx.setLineDash([6,5]);
+    ctx.strokeStyle = 'rgba(201,168,76,0.35)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    let first = true;
+    for(const pt of pts){
+      if(pt.y < 0 && pt.x > 0) break;
+      const cp = toCanvas(pt.x, Math.max(0, pt.y), bounds);
+      if(first){ ctx.moveTo(cp.x, cp.y); first = false; }
+      else ctx.lineTo(cp.x, cp.y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Actual trail
+  if(trail.length > 1){
+    ctx.save();
+    ctx.strokeStyle = '#C9A84C';
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = '#C9A84C';
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    for(let i = 0; i < trail.length; i++){
+      const cp = toCanvas(trail[i].x, trail[i].y, bounds);
+      if(i === 0) ctx.moveTo(cp.x, cp.y);
+      else ctx.lineTo(cp.x, cp.y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Land marker
+  if(state === 'done' && landX !== null){
+    const lp = toCanvas(landX, 0, bounds);
+    ctx.save();
+    ctx.strokeStyle = '#ff6b6b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(lp.x - 8, origin.y - 15);
+    ctx.lineTo(lp.x, origin.y);
+    ctx.lineTo(lp.x + 8, origin.y - 15);
+    ctx.stroke();
+    ctx.fillStyle = '#ff6b6b';
+    ctx.font = 'bold 0.6rem sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('LANDED', lp.x, origin.y - 20);
+    ctx.restore();
+  }
+
+  // Max height marker
+  if(state === 'done' || state === 'flying'){
+    if(maxH > 0){
+      const rad = p.angle * Math.PI / 180;
+      const vx = p.speed * Math.cos(rad);
+      const vy = p.speed * Math.sin(rad);
+      const tx = vx * (vy / G);
+      const mp = toCanvas(tx, maxH, bounds);
+      ctx.save();
+      ctx.strokeStyle = '#7ec8e3';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      ctx.moveTo(mp.x, mp.y);
+      ctx.lineTo(mp.x, origin.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#7ec8e3';
+      ctx.beginPath();
+      ctx.arc(mp.x, mp.y, 4, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Projectile ball
+  if(proj && (state === 'flying' || state === 'done')){
+    const ballPt = toCanvas(proj.x, proj.y, bounds);
+    const ballR = Math.max(6, Math.min(14, 4 + p.mass * 0.5));
+    // Shadow
+    ctx.save();
+    ctx.shadowColor = '#C9A84C';
+    ctx.shadowBlur = 20;
+    const grad = ctx.createRadialGradient(ballPt.x-2, ballPt.y-2, 1, ballPt.x, ballPt.y, ballR);
+    grad.addColorStop(0, '#fff5c0');
+    grad.addColorStop(0.5, '#C9A84C');
+    grad.addColorStop(1, '#7a5a10');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(ballPt.x, ballPt.y, ballR, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Cannon
+  drawCannon(p, bounds);
+
+  // Axes labels
+  drawAxes(bounds);
+
+  // Angle arc indicator
+  if(state === 'idle'){
+    drawAngleArc(p, bounds);
+  }
+}
+
+function drawGrid(p, bounds){
+  const cw = canvas.width;
+  const ch = canvas.height;
+  ctx.save();
+  ctx.strokeStyle = 'rgba(46,90,138,0.3)';
+  ctx.lineWidth = 1;
+  // Vertical lines every ~10m
+  const xStep = niceStep(bounds.maxRange / 5);
+  for(let x = 0; x <= bounds.maxRange; x += xStep){
+    const cp = toCanvas(x, 0, bounds);
+    ctx.beginPath();
+    ctx.moveTo(cp.x, 0);
+    ctx.lineTo(cp.x, ch);
+    ctx.stroke();
+  }
+  // Horizontal
+  const yStep = niceStep(bounds.maxHeight / 4);
+  for(let y = 0; y <= bounds.maxHeight; y += yStep){
+    const cp = toCanvas(0, y, bounds);
+    ctx.beginPath();
+    ctx.moveTo(0, cp.y);
+    ctx.lineTo(cw, cp.y);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function niceStep(v){
+  const mag = Math.pow(10, Math.floor(Math.log10(v)));
+  const f = v / mag;
+  if(f < 1.5) return mag;
+  if(f < 3.5) return 2 * mag;
+  if(f < 7.5) return 5 * mag;
+  return 10 * mag;
+}
+
+function drawAxes(bounds){
+  const ch = canvas.height;
+  ctx.save();
+  ctx.font = `${Math.max(9, Math.min(11, canvas.width/80))}px sans-serif`;
+  ctx.fillStyle = '#7a9bbf';
+  ctx.textAlign = 'center';
+
+  const xStep = niceStep(bounds.maxRange / 5);
+  for(let x = 0; x <= bounds.maxRange; x += xStep){
+    const cp = toCanvas(x, 0, bounds);
+    ctx.fillText(Math.round(x) + 'm', cp.x, ch - 5);
+  }
+  ctx.textAlign = 'right';
+  const yStep = niceStep(bounds.maxHeight / 4);
+  for(let y = yStep; y <= bounds.maxHeight; y += yStep){
+    const cp = toCanvas(0, y, bounds);
+    ctx.fillText(Math.round(y) + 'm', 56, cp.y + 4);
+  }
+  ctx.restore();
+}
+
+function drawCannon(p, bounds){
+  const origin = getOriginCanvas(bounds);
+  const rad = p.angle * Math.PI / 180;
+  const barrelLen = Math.max(22, Math.min(36, 24 + p.mass));
+  ctx.save();
+  ctx.translate(origin.x, origin.y - 10);
+
+  // Wheels
+  ctx.fillStyle = '#5a3a0a';
+  ctx.beginPath();
+  ctx.arc(-8, 10, 8, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(8, 10, 8, 0, Math.PI*2);
+  ctx.fill();
+  ctx.strokeStyle = '#8a6a2a';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(-8, 10, 8, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(8, 10, 8, 0, Math.PI*2); ctx.stroke();
+
+  // Body
+  ctx.fillStyle = '#3a3a3a';
+  ctx.fillRect(-14, -4, 28, 14);
+  ctx.strokeStyle = '#5a5a5a';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(-14, -4, 28, 14);
+
+  // Barrel
+  ctx.rotate(-rad);
+  ctx.fillStyle = '#4a4a4a';
+  ctx.beginPath();
+  ctx.roundRect(0, -5, barrelLen, 10, 3);
+  ctx.fill();
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(0, -5, barrelLen, 10);
+
+  ctx.restore();
+}
+
+function drawAngleArc(p, bounds){
+  const origin = getOriginCanvas(bounds);
+  const rad = p.angle * Math.PI / 180;
+  const arcR = 38;
+  ctx.save();
+  ctx.translate(origin.x, origin.y - 10);
+  ctx.strokeStyle = 'rgba(201,168,76,0.6)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(0, 0, arcR, -rad, 0);
+  ctx.stroke();
+
+  // Angle label
+  const midAng = -rad / 2;
+  const lx = (arcR + 12) * Math.cos(midAng);
+  const ly = (arcR + 12) * Math.sin(midAng);
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(p.angle + '°', lx + 5, ly + 4);
+  ctx.restore();
+}
+
+// ---- Physics sim (simple Euler with optional drag) ----
+function startSim(){
+  if(state === 'flying') return;
+  state = 'flying';
+  trail = [];
+  maxH = 0;
+  landX = null;
+  flightTime = 0;
+  lastTs = null;
+
+  const p = getParams();
+  const rad = p.angle * Math.PI / 180;
+  proj = {
+    x: 0, y: 0,
+    vx: p.speed * Math.cos(rad),
+    vy: p.speed * Math.sin(rad),
+    mass: p.mass
+  };
+
+  updateReadouts(p.speed, 0, 0, 0);
+  if(rafId) cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(step);
+}
+
+function step(ts){
+  if(!lastTs){ lastTs = ts; rafId = requestAnimationFrame(step); return; }
+  const dt = Math.min((ts - lastTs) / 1000, 0.03);
+  lastTs = ts;
+  const p = getParams();
+
+  // Drag coefficient (simplified)
+  const dragCoeff = p.drag * 0.4;
+
+  const speed = Math.sqrt(proj.vx*proj.vx + proj.vy*proj.vy);
+
+  // Acceleration
+  const ax = -dragCoeff * proj.vx;
+  const ay = -G - dragCoeff * proj.vy;
+
+  proj.vx += ax * dt;
+  proj.vy += ay * dt;
+  proj.x  += proj.vx * dt;
+  proj.y  += proj.vy * dt;
+
+  flightTime += dt;
+  if(proj.y > maxH) maxH = proj.y;
+
+  trail.push({ x: proj.x, y: Math.max(0, proj.y) });
+
+  const curSpeed = Math.sqrt(proj.vx*proj.vx + proj.vy*proj.vy);
+  updateReadouts(curSpeed, null, null, null);
+
+  drawScene();
+
+  if(proj.y <= 0 && flightTime > 0.05){
+    proj.y = 0;
+    landX = proj.x;
+    state = 'done';
+
+    // Analytical readouts
+    const rad2 = p.angle * Math.PI / 180;
+    const vx0 = p.speed * Math.cos(rad2);
+    const vy0 = p.speed * Math.sin(rad2);
+    const anaRange = (p.drag === 0) ? vx0 * 2 * vy0 / G : landX;
+    const anaH     = (p.drag === 0) ? vy0*vy0/(2*G) : maxH;
+    const anaT     = (p.drag === 0) ? 2*vy0/G : flightTime;
+
+    rRange.textContent  = anaRange.toFixed(1);
+    rHeight.textContent = anaH.toFixed(1);
+    rTime.textContent   = anaT.toFixed(2);
+    rSpeed.textContent  = '0.0';
+
+    drawScene();
+    return;
+  }
+
+  rafId = requestAnimationFrame(step);
+}
+
+function updateReadouts(spd, range, height, time){
+  if(spd !== null) rSpeed.textContent = spd.toFixed(1);
+  if(range !== null) rRange.textContent = range.toFixed(1);
+  if(height !== null) rHeight.textContent = height.toFixed(1);
+  if(time !== null) rTime.textContent = time.toFixed(2);
+}
+
+function resetSim(){
+  if(rafId) cancelAnimationFrame(rafId);
+  state = 'idle';
+  proj = null;
+  trail = [];
+  maxH = 0;
+  landX = null;
+  flightTime = 0;
+  lastTs = null;
+  rRange.textContent = '—';
+  rHeight.textContent = '—';
+  rTime.textContent = '—';
+  rSpeed.textContent = '—';
+  drawScene();
+}
+
+// ---- Slider listeners ----
+function bindSlider(sl, valEl, suffix){
+  sl.addEventListener('input', ()=>{
+    valEl.textContent = sl.value;
+    if(state === 'idle' || state === 'done'){
+      if(state === 'done') resetSim();
+      else drawScene();
+    }
+  });
+}
+bindSlider(slAngle, valAngle, '°');
+bindSlider(slSpeed, valSpeed, ' m/s');
+bindSlider(slMass,  valMass,  ' kg');
+bindSlider(slDrag,  valDrag,  '%');
+
+document.getElementById('btn-launch').addEventListener('click', startSim);
+document.getElementById('btn-reset').addEventListener('click', resetSim);
+
+// Touch support for buttons
+document.getElementById('btn-launch').addEventListener('touchend', function(e){ e.preventDefault(); startSim(); });
+document.getElementById('btn-reset').addEventListener('touchend', function(e){ e.preventDefault(); resetSim(); });
+
+// Initial draw
+drawScene();
+
+})();
+</script>
+</body>
+</html>

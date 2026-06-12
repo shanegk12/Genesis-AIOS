@@ -1,0 +1,357 @@
+[
+  {
+    "id": "c045t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Global Supply Management</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored the crucial role of Planning and Buffer Time in keeping projects running smoothly and efficiently. We learned how to anticipate challenges and build in wiggle room. Today, we're taking that foresight a step further as we dive into Global Supply Management — a core part of the Logistics phase in Creationeering™.</p><p>Global Supply Management is about understanding the journey of every component, from its raw form to its final destination in your hands. Think of it as conducting a global orchestra: every instrument, every musician, and every note must arrive at precisely the right moment to create a beautiful symphony. This lesson will equip you with the tools to manage those intricate networks, seeing how every piece — no matter how small — plays a vital role in the bigger picture.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define Global Supply Management and explain its importance in the Logistics phase of Creationeering™.</li><li>Identify the key components and challenges involved in managing a global supply chain.</li><li>Apply the OCV method to optimize a simple supply chain scenario.</li><li>Explain how multiscale modeling helps us understand supply chain disruptions from a macro to an atomic level.</li><li>Articulate the biblical principle of stewardship in resource management within a global context.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Global Supply Management",
+          "definition": "The process of planning, implementing, and controlling the flow of goods, services, and information from the point of origin to the point of consumption across international borders."
+        },
+        {
+          "term": "Logistics",
+          "definition": "The detailed organization and implementation of a complex operation, especially involving the movement of equipment, facilities, and personnel."
+        },
+        {
+          "term": "Supply Chain",
+          "definition": "The network of all individuals, organizations, resources, activities, and technology involved in the creation and sale of a product — from raw materials all the way to the end user."
+        },
+        {
+          "term": "Raw Materials",
+          "definition": "The basic materials from which a product is made."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome for a problem, given a set of constraints."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A scientific approach that links phenomena occurring at different scales — from the atomic to the macroscopic — to understand complex systems."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or desired outcome of a design or process."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be considered in a design or process."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor or quantity that can change or be changed in a design or process."
+        },
+        {
+          "term": "Buffer Stock",
+          "definition": "An amount of goods held in reserve to protect against unforeseen demands or disruptions in supply."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Grand Design for Supply</h2><p>From the very beginning, God demonstrated the ultimate model of Global Supply Management. He didn't just create the Earth — He engineered an intricate, interconnected system that provides for every living thing on it.</p><p>Consider the water cycle. Water evaporates from the oceans, travels through the atmosphere, falls as rain over land, and flows back to the sea. That is a global supply chain of fresh water, constantly moving and constantly refreshing. Every mountain range, every river valley, and every cloud is a node in God's perfectly designed logistics network. Nothing is wasted. Nothing arrives too late.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Psalm 111:5</strong> — \"He provides food for those who fear him; he remembers his covenant forever.\"</p><p>God's provision isn't random — it's systematic, intentional, and perfectly timed. When you manage a supply chain well, you're reflecting that same care for people and creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Global Supply Management?</h2><p>At its core, Global Supply Management is the art and science of getting the right materials, to the right place, at the right time — and doing it across international borders. Every product you use today passed through a supply chain to reach you. Your phone contains minerals mined in Africa, components manufactured in Asia, and software written in the United States. Coordinating all of that is no small feat.</p><p>As a Creationeer, you are responsible for thinking about where your materials come from, how they travel, and what happens if something in that chain breaks down. Good supply management means fewer delays, less waste, and a better product — all of which honor both your customer and your Creator.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing a global supply chain: raw materials → manufacturing → distribution centers → retailers → end user, with arrows connecting each stage across a world map."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Components of a Supply Chain</h2><p>A supply chain has several moving parts. Understanding each one helps you spot where problems can arise and where you can make improvements.</p><ul><li><strong>Suppliers</strong> — The people or companies that provide raw materials or parts.</li><li><strong>Manufacturers</strong> — Those who transform raw materials into finished products.</li><li><strong>Distributors</strong> — Organizations that move finished goods from factories to stores or customers.</li><li><strong>Retailers</strong> — The businesses or individuals who sell directly to the end user.</li><li><strong>End Users</strong> — The people who actually use the final product.</li></ul><p>Every one of these stages adds time and cost. Your job as a supply chain thinker is to keep each stage as efficient as possible without sacrificing quality or ethics.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Did You Know?</strong> A single commercial airplane has over 6 million individual parts, sourced from suppliers in more than 30 countries. Managing that supply chain requires years of planning before a single flight ever takes off.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Objectives, Constraints, and Variables</h2><p>One of the most powerful tools for optimizing a supply chain is the <strong>OCV method</strong>. It gives you a structured way to think through any logistics problem. Here's how it works:</p><ul><li><strong>Objective (O)</strong> — What is the goal? For example: deliver 500 units to a warehouse in three days at the lowest possible cost.</li><li><strong>Constraints (C)</strong> — What are the limitations you cannot change? For example: the supplier is overseas, customs clearance takes 48 hours, and your budget is fixed.</li><li><strong>Variables (V)</strong> — What factors can you adjust? For example: shipping method, order quantity, or the number of distribution centers you use.</li></ul><p>By clearly separating what you're trying to achieve, what you can't change, and what you can change, you give yourself a much cleaner path to a smart solution. It's the same logic an architect uses when designing a building: define the goal, acknowledge the limits, and then get creative within those limits.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Using OCV in Practice:</strong> Before jumping into solutions, always write out your Objective, Constraints, and Variables first. This prevents you from wasting time on ideas that won't actually work given your real-world limits.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Challenges in Global Supply Chains</h2><p>Managing a global supply chain isn't easy. The bigger and more spread out your network is, the more things can go wrong. Here are some of the most common challenges you'll encounter:</p><ul><li><strong>Distance and Time Zones</strong> — Coordinating with partners on the other side of the planet means dealing with delays in communication and very different working hours.</li><li><strong>Natural Disasters</strong> — Earthquakes, hurricanes, and floods can shut down factories or block transportation routes in an instant.</li><li><strong>Political and Economic Changes</strong> — Trade disputes, tariffs, and currency fluctuations can suddenly make a supplier much more expensive.</li><li><strong>Quality Control</strong> — The farther away your supplier is, the harder it is to inspect materials before they arrive.</li><li><strong>Demand Uncertainty</strong> — Predicting exactly how much product you'll need months in advance is genuinely difficult.</li></ul><p>This is where <strong>buffer stock</strong> becomes essential. Just as a wise builder sets aside extra materials before starting a project, a smart supply chain manager keeps a reserve of critical goods on hand so that one disruption doesn't bring everything to a halt.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045c004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Ordering only the exact amount you need with no buffer stock. If one shipment is delayed or damaged, your entire production line stops. Always plan for the unexpected.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: Seeing the Whole and the Parts</h2><p>Here's a concept that might surprise you: some of the most advanced supply chain thinking borrows ideas from physics and materials science. It's called <strong>multiscale modeling</strong>, and it means looking at a system at multiple levels of detail all at once.</p><p>Imagine you're investigating why a metal part keeps breaking during shipping. At the <em>macro scale</em>, you see that the part cracks under vibration in the truck. Zoom in to the <em>micro scale</em>, and you discover the packaging isn't absorbing enough shock. Zoom in even further to the <em>atomic scale</em>, and you might find the metal alloy has microscopic flaws that make it brittle.</p><p>Supply chain managers use this same layered thinking. A disruption at the global level (a port shutdown) creates ripple effects at the regional level (delayed trucks) and eventually at the local level (empty shelves in a store). Understanding all three levels at once lets you design systems that are truly resilient.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A multiscale diagram showing a global map at the top, zooming into a regional distribution network, then a single warehouse, then a product on a shelf — illustrating how disruptions cascade across scales."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and the Global Supply Chain</h2><p>Every decision you make in supply management has an impact beyond your warehouse. Where do your raw materials come from? Are the workers who mine or harvest them treated fairly? What happens to the packaging after the product is used? These aren't just ethical questions — they are stewardship questions.</p><p>God calls us to be faithful managers of the resources He has placed in our care. That includes the minerals in the ground, the forests that produce timber and paper, and the communities whose labor makes our supply chains possible. A Creationeer doesn't just ask \"What is the cheapest option?\" — they ask \"What is the wisest and most responsible option?\"</p><p>Ethical sourcing, reduced waste, and fair treatment of workers aren't obstacles to a good supply chain. They are marks of a supply chain built on the right foundation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 27:23</strong> — \"Be sure you know the condition of your flocks, give careful attention to your herds.\"</p><p>This proverb was written for farmers, but its principle applies perfectly to supply chains. Know where your resources come from, pay close attention to every stage of the process, and take responsibility for what happens along the way.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Global Supply Management is one of the most complex — and most rewarding — challenges in modern engineering and business. It requires you to think at multiple scales, balance competing priorities, plan for the unexpected, and act with integrity at every step.</p><p>As you continue in the Logistics phase of Creationeering™, remember that every supply chain you design touches real people and real communities. The care and precision you bring to that work is itself an act of worship — reflecting the God who designed a universe where every piece fits perfectly in its place.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What Is Global Supply Management?",
+      "html": "<p><strong>Question:</strong> In your own words, what is Global Supply Management and why does it matter in Creationeering™?</p><p><strong>Key Points to Include:</strong></p><ul><li>It involves planning and controlling the flow of goods and materials across international borders.</li><li>It is part of the Logistics phase of Creationeering™.</li><li>Getting it right means the right materials arrive at the right place at the right time.</li><li>It requires balancing objectives, constraints, and variables.</li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: The OCV Method",
+      "html": "<p><strong>Scenario:</strong> You need to deliver 200 custom T-shirts to a school event in five days. Your fabric supplier is in another country, shipping costs are fixed, and you can choose between air freight or sea freight.</p><p><strong>Apply the OCV Method:</strong></p><ul><li><strong>Objective:</strong> Deliver 200 T-shirts within five days.</li><li><strong>Constraints:</strong> Supplier is overseas; shipping budget is fixed; the event date cannot move.</li><li><strong>Variables:</strong> Shipping method (air vs. sea), order timing, quantity ordered.</li></ul><p><strong>Best Solution:</strong> Choose air freight despite higher cost, because sea freight would likely exceed the five-day window. Order slightly more than 200 as buffer stock in case some arrive damaged.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c045a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Stewardship in Supply Chains",
+      "html": "<p><strong>Question:</strong> How does the biblical principle of stewardship apply to Global Supply Management?</p><p><strong>Key Points to Include:</strong></p><ul><li>Stewardship means being a responsible manager of the resources God has entrusted to us.</li><li>In supply chains, this includes considering where raw materials come from and how workers are treated.</li><li>It also means reducing waste and making ethical sourcing decisions.</li><li>The cheapest option is not always the most responsible one.</li></ul>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

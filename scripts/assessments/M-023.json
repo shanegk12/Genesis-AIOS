@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-023",
+  "topic": "Build 4: Arduino - Distance Sensor Calibration",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "In Arduino programming, what is the purpose of a 'Library' like #include <HCSR04.h>?",
+      "options": {
+        "A": "To store physical tools for the Arduino.",
+        "B": "To provide pre-written instructions for complex tasks.",
+        "C": "To display messages on the OLED screen.",
+        "D": "To connect the Arduino to the internet."
+      },
+      "answer": "B",
+      "explanation": "A library acts as a 'subject matter expert' providing pre-written code for the Arduino to use instantly."
+    },
+    {
+      "type": "recall",
+      "question": "What is the correct formula for calculating Absolute Error as defined in the lesson?",
+      "options": {
+        "A": "Error = Measured Value + Ground Truth",
+        "B": "Error = |Measured Value - Ground Truth|",
+        "C": "Error = Ground Truth / Measured Value",
+        "D": "Error = (Measured Value - Ground Truth) * 100"
+      },
+      "answer": "B",
+      "explanation": "The lesson explicitly states the formula for Absolute Error as $Error = |Measured Value - Ground Truth|$."
+    },
+    {
+      "type": "recall",
+      "question": "According to the 5-Point Calibration Protocol, what is the very first step you should perform?",
+      "options": {
+        "A": "Place a target at 50 cm.",
+        "B": "Record the digital reading on the OLED screen.",
+        "C": "Zeroing the Frame: Align the sensor with the '0' mark on the tape measure.",
+        "D": "Adjust the code to subtract any error."
+      },
+      "answer": "C",
+      "explanation": "The first step listed in the protocol is 'Zeroing the Frame: Align the face of the HC-SR04 sensor exactly with the '0' mark on your physical tape measure'."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is calibrating your HC-SR04 ultrasonic sensor considered an act of 'Stewardship'?",
+      "options": {
+        "A": "It helps you save electricity by using the sensor less.",
+        "B": "It ensures your digital measurements align with physical reality, preventing 'dirty data.'",
+        "C": "It makes your Arduino code shorter and easier to read.",
+        "D": "It allows you to share your sensor with other students more easily."
+      },
+      "answer": "B",
+      "explanation": "Calibration is an act of Stewardship because it ensures data integrity and prevents 'bearing false witness' to the performance of a design by aligning digital readings with physical reality."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does the HC-SR04 ultrasonic sensor determine the distance to an object?",
+      "options": {
+        "A": "It uses a camera to take a picture and calculate distance.",
+        "B": "It measures the time it takes for an ultrasonic sound wave to travel to an object and bounce back.",
+        "C": "It uses a laser beam to detect the object's position.",
+        "D": "It estimates distance based on the object's color."
+      },
+      "answer": "B",
+      "explanation": "The sensor sends out an ultrasonic 'ping' and uses the pulseIn() function to measure the time it takes for the sound to return, then converts that time to distance using the speed of sound."
+    },
+    {
+      "type": "comprehension",
+      "question": "Using the 'Container Analogy,' why are Data Types important when writing Arduino code?",
+      "options": {
+        "A": "They make the code look more organized on the screen.",
+        "B": "They allow the Arduino to process information efficiently by assigning the correct 'container' for each piece of data.",
+        "C": "They prevent other users from changing your code.",
+        "D": "They automatically correct any errors in your sensor readings."
+      },
+      "answer": "B",
+      "explanation": "Data Types are like containers that organize information, ensuring the Arduino processes data correctly and preventing system failures, just as putting a wrench in a tiny screw pouch would fail."
+    },
+    {
+      "type": "application",
+      "question": "A Junior Creationeer calibrates their HC-SR04 sensor and finds it consistently reads 3 cm less than the actual physical distance. What adjustment should they make in their code?",
+      "options": {
+        "A": "Subtract 3 cm from the sensor's reading.",
+        "B": "Add 3 cm to the sensor's reading.",
+        "C": "Multiply the sensor's reading by 3.",
+        "D": "Divide the sensor's reading by 3."
+      },
+      "answer": "B",
+      "explanation": "If the sensor consistently reads 3 cm less than the true distance, adding 3 cm to its reading in the code will correct this offset."
+    },
+    {
+      "type": "application",
+      "question": "Your mousetrap car needs to stop within a 10 cm wide 'Quality Gate' at the end of the track. If it stops outside this lane, it fails. What engineering concept from the lesson does this scenario best represent?",
+      "options": {
+        "A": "Absolute Error",
+        "B": "Ground Truth",
+        "C": "Tolerance",
+        "D": "Accuracy"
+      },
+      "answer": "C",
+      "explanation": "Tolerance is defined as the 'allowable amount of variation' in a system, and the 10 cm wide lane represents the acceptable boundaries for the car's stopping position."
+    },
+    {
+      "type": "application",
+      "question": "During a test, your HC-SR04 sensor reads 152 cm, but when you measure with a tape measure, the actual distance is 150 cm. What is the Absolute Error for this measurement?",
+      "options": {
+        "A": "302 cm",
+        "B": "150 cm",
+        "C": "2 cm",
+        "D": "0 cm"
+      },
+      "answer": "C",
+      "explanation": "Absolute Error is calculated as the absolute difference between the measured value (152 cm) and the ground truth (150 cm), which is $|152 - 150| = 2$ cm."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that calibration is an 'act of Stewardship, ensuring that we are not bearing false witness to the performance of our design.' How does calibrating your sensor fulfill this biblical principle?",
+      "options": {
+        "A": "It makes your sensor look more impressive to others.",
+        "B": "It ensures the data you present about your design's performance is truthful and accurate.",
+        "C": "It allows you to hide any mistakes your design might have.",
+        "D": "It helps you finish the lesson faster."
+      },
+      "answer": "B",
+      "explanation": "Calibrating a sensor ensures that the digital data accurately reflects physical reality, thus presenting truthful information about a design's performance and upholding integrity."
+    },
+    {
+      "type": "synthesis",
+      "question": "By calculating the Error and Tolerance of your sensor, you can tell your investors 'exactly how reliable your data is.' How does this relate to 'Honest Marketing'?",
+      "options": {
+        "A": "It allows you to exaggerate your car's performance without being caught.",
+        "B": "It provides transparent and truthful information about your product's capabilities and limitations.",
+        "C": "It helps you convince investors that your car is perfect.",
+        "D": "It ensures you don't have to do any further testing."
+      },
+      "answer": "B",
+      "explanation": "Quantifying error and tolerance allows for 'Honest Marketing' by providing investors with integrity-filled, reliable data about a product's performance rather than 'lucky guesses'."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson uses the 'Refiner's Fire' analogy for Accuracy vs. Precision. If your sensor readings are precise but not accurate, what does this imply about your design and what might be needed?",
+      "options": {
+        "A": "Your sensor is perfect and needs no changes.",
+        "B": "Your readings are consistent but consistently wrong, requiring calibration to shift them closer to the true value.",
+        "C": "Your readings are random and cannot be trusted at all.",
+        "D": "Your sensor needs to be replaced immediately."
+      },
+      "answer": "B",
+      "explanation": "Precise but not accurate means the readings are consistently close to each other (precise) but far from the true value (not accurate), indicating a consistent offset that can be corrected through calibration."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BA: Business Plan Compilation + Pitch — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>BA: Business Plan Compilation + Pitch</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Business Plan", "definition": "A written document that describes a business, its product, target market, financial projections, and strategy. It helps guide decisions and attract investors."}, {"term": "One-Pager", "definition": "A condensed version of a business plan that fits all the most important information onto a single page. It helps you be clear and prioritize key details."}, {"term": "Pitch", "definition": "A short, structured presentation designed to convince an audience, like investors or customers, to take a specific action."}, {"term": "Competitive Advantage", "definition": "What makes your product or business better or different from other options available. It's why a customer would choose you over a competitor."}, {"term": "Sustainability Plan", "definition": "Your documented strategy for how your business will reduce its negative impact on the environment, including materials used and what happens to the product at the end of its life."}, {"term": "The Ask", "definition": "The specific action you want your audience to take at the end of your pitch, such as buying your product, investing money, or partnering with your business."}, {"term": "Problem Statement", "definition": "The first section of a business plan that clearly describes the problem your product solves, who experiences this problem, and why it's important to fix."}, {"term": "Target Market", "definition": "The specific group of customers you are trying to reach with your product. This includes details like their age, interests, and income."}, {"term": "Break-Even Point", "definition": "The number of units you need to sell to cover all your costs, meaning your business is neither making a profit nor losing money."}, {"term": "Solution (Your Product)", "definition": "The section of your business plan that describes your product in simple terms, explaining what it does, how it works, and what benefits the customer receives."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

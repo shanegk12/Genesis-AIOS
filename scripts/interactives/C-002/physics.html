@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Entrepreneurship Physics Sandbox – Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e2237;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0e6cc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    background: linear-gradient(135deg, #1B3A5C 0%, #14304f 100%);
+    border-bottom: 3px solid #C9A84C;
+    width: 100%;
+    max-width: 860px;
+    padding: 12px 18px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 1.15rem;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #aac4e0;
+    margin-top: 2px;
+  }
+  .subtitle {
+    font-size: 0.78rem;
+    color: #C9A84C;
+    font-style: italic;
+    margin-top: 3px;
+  }
+  #main-wrap {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 860px;
+    border-left: 2px solid #C9A84C;
+    border-right: 2px solid #C9A84C;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    background: #0a1a2e;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    touch-action: none;
+  }
+  .controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .ctrl-card {
+    background: #0e2237;
+    border: 1.5px solid #2a5080;
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex: 1 1 160px;
+    min-width: 140px;
+    max-width: 260px;
+  }
+  .ctrl-card label {
+    display: block;
+    font-size: 0.72rem;
+    color: #C9A84C;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ctrl-card .val-display {
+    font-size: 0.85rem;
+    color: #f0e6cc;
+    float: right;
+    font-weight: bold;
+  }
+  input[type=range] {
+    width: 100%;
+    margin-top: 4px;
+    accent-color: #C9A84C;
+    cursor: pointer;
+  }
+  .metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .metric-box {
+    background: #0a1a2e;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-align: center;
+    flex: 1 1 120px;
+    min-width: 110px;
+  }
+  .metric-box .metric-label {
+    font-size: 0.65rem;
+    color: #aac4e0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .metric-box .metric-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #C9A84C;
+    margin-top: 2px;
+  }
+  .metric-box .metric-unit {
+    font-size: 0.65rem;
+    color: #aac4e0;
+  }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  button {
+    background: linear-gradient(135deg, #C9A84C, #a8842e);
+    color: #0e2237;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: opacity 0.15s;
+    min-width: 100px;
+  }
+  button:active { opacity: 0.75; }
+  button.secondary {
+    background: linear-gradient(135deg, #1B3A5C, #14304f);
+    color: #C9A84C;
+    border: 1.5px solid #C9A84C;
+  }
+  .insight-box {
+    background: #0e2237;
+    border-left: 4px solid #C9A84C;
+    border-radius: 0 8px 8px 0;
+    padding: 8px 14px;
+    font-size: 0.72rem;
+    color: #aac4e0;
+    line-height: 1.5;
+  }
+  .insight-box strong { color: #C9A84C; }
+  footer {
+    background: #1B3A5C;
+    border-top: 3px solid #C9A84C;
+    width: 100%;
+    max-width: 860px;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.65rem;
+    color: #5a82a8;
+    border-radius: 0 0 10px 10px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚀 Entrepreneurship Physics Sandbox</h1>
+  <p>Genesis K-12 Academy · Creationeering™ Course</p>
+  <p class="subtitle">"Pray · Think · Create · Give God the Glory"</p>
+</header>
+
+<div id="main-wrap">
+
+  <!-- CANVAS -->
+  <div id="canvas-wrap">
+    <canvas id="sim" height="380"></canvas>
+  </div>
+
+  <!-- METRICS -->
+  <div class="metrics-row">
+    <div class="metric-box">
+      <div class="metric-label">Revenue (Height)</div>
+      <div class="metric-value" id="m-revenue">0</div>
+      <div class="metric-unit">units</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Risk Level</div>
+      <div class="metric-value" id="m-risk">0</div>
+      <div class="metric-unit">%</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Profit (Distance)</div>
+      <div class="metric-value" id="m-profit">0</div>
+      <div class="metric-unit">units</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Time Elapsed</div>
+      <div class="metric-value" id="m-time">0.0</div>
+      <div class="metric-unit">seconds</div>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls-row">
+    <div class="ctrl-card">
+      <label>Launch Angle (Vision) <span class="val-display" id="lbl-angle">45°</span></label>
+      <input type="range" id="sl-angle" min="10" max="80" value="45" step="1">
+    </div>
+    <div class="ctrl-card">
+      <label>Investment (Speed) <span class="val-display" id="lbl-speed">50</span></label>
+      <input type="range" id="sl-speed" min="10" max="100" value="50" step="1">
+    </div>
+    <div class="ctrl-card">
+      <label>Risk Factor (Gravity) <span class="val-display" id="lbl-grav">9.8</span></label>
+      <input type="range" id="sl-grav" min="1" max="20" value="9.8" step="0.1">
+    </div>
+    <div class="ctrl-card">
+      <label>Mitigation (Air Resist.) <span class="val-display" id="lbl-drag">0.00</span></label>
+      <input type="range" id="sl-drag" min="0" max="0.05" value="0" step="0.001">
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-row">
+    <button id="btn-launch">▶ Launch Venture</button>
+    <button class="secondary" id="btn-reset">↺ Reset</button>
+  </div>
+
+  <!-- INSIGHT -->
+  <div class="insight-box">
+    <strong>Entrepreneurship Connection:</strong>
+    The projectile represents a <strong>business venture</strong>. 
+    <strong>Launch Angle (Vision)</strong> is your business direction — too shallow or too steep and you fall short. 
+    <strong>Investment (Speed)</strong> is the capital you put in. 
+    <strong>Risk Factor (Gravity)</strong> pulls your venture down — high risk means a steeper fall. 
+    <strong>Mitigation (Air Resistance)</strong> represents research, insurance, and preparation that reduce losses. 
+    An entrepreneur <em>prays, thinks, then creates</em> — find the angle that maximizes profit (distance)!
+  </div>
+
+</div>
+
+<footer>Genesis K-12 Academy · Creationeering™ · "Trust in the Lord forever, for the Lord God is an everlasting rock" – Isaiah 26:3-4</footer>
+
+<script>
+(function(){
+"use strict";
+
+// ── Canvas setup ──────────────────────────────────────────────────────────────
+const canvas = document.getElementById('sim');
+const ctx    = canvas.getContext('2d');
+
+function resizeCanvas(){
+  const w = canvas.parentElement.clientWidth;
+  canvas.width  = w;
+  canvas.height = Math.min(380, Math.round(w * 0.48));
+}
+resizeCanvas();
+window.addEventListener('resize', ()=>{ resizeCanvas(); draw(); });
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let angle  = 45;   // degrees
+let speed  = 50;   // px/s scaled
+let grav   = 9.8;
+let drag   = 0.0;
+
+let running    = false;
+let launched   = false;
+let px = 0, py = 0;    // projectile world pos (metres)
+let vx = 0, vy = 0;
+let elapsed    = 0;
+let maxHeight  = 0;
+let landX      = 0;
+let trail      = [];   // [{x,y}]
+let animId     = null;
+let lastTime   = null;
+let landed     = false;
+let landFlash  = 0;
+let coinParticles = [];
+
+// Scale factors
+const SCALE  = ()=> canvas.height / 120;  // px per metre
+const GROUND = ()=> canvas.height - 36;
+const LAUNCHX= ()=> 60;
+
+// ── UI helpers ────────────────────────────────────────────────────────────────
+const slAngle = document.getElementById('sl-angle');
+const slSpeed = document.getElementById('sl-speed');
+const slGrav  = document.getElementById('sl-grav');
+const slDrag  = document.getElementById('sl-drag');
+
+function syncSliders(){
+  angle = +slAngle.value;
+  speed = +slSpeed.value;
+  grav  = +slGrav.value;
+  drag  = +slDrag.value;
+  document.getElementById('lbl-angle').textContent = angle + '°';
+  document.getElementById('lbl-speed').textContent = speed;
+  document.getElementById('lbl-grav').textContent  = grav.toFixed(1);
+  document.getElementById('lbl-drag').textContent  = drag.toFixed(3);
+}
+[slAngle,slSpeed,slGrav,slDrag].forEach(s=>{
+  s.addEventListener('input', ()=>{ syncSliders(); if(!running) draw(); });
+});
+syncSliders();
+
+// ── Metrics ───────────────────────────────────────────────────────────────────
+function updateMetrics(){
+  const heightPct = Math.min(100, Math.round((maxHeight / 80) * 100));
+  const riskPct   = Math.min(100, Math.round((grav / 20) * 100 * (1 - drag*10)));
+  const profit    = landed ? Math.round(landX * 0.8) : (running ? Math.round(px * 0.8) : 0);
+  document.getElementById('m-revenue').textContent = Math.round(maxHeight);
+  document.getElementById('m-risk').textContent    = riskPct;
+  document.getElementById('m-profit').textContent  = profit;
+  document.getElementById('m-time').textContent    = elapsed.toFixed(1);
+}
+
+// ── Drawing helpers ───────────────────────────────────────────────────────────
+const NAVY = '#1B3A5C';
+const GOLD = '#C9A84C';
+
+function worldToCanvas(wx, wy){
+  const s  = SCALE();
+  const gY = GROUND();
+  return { x: LAUNCHX() + wx * s, y: gY - wy * s };
+}
+
+function drawGround(){
+  const gY = GROUND();
+  const W  = canvas.width;
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0,0,0,gY);
+  sky.addColorStop(0,'#060f1c');
+  sky.addColorStop(1,'#0d2540');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0,0,W,gY);
+
+  // Ground
+  ctx.fillStyle = '#14304f';
+  ctx.fillRect(0,gY,W,canvas.height-gY);
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0,gY); ctx.lineTo(W,gY); ctx.stroke();
+
+  // Distance markers
+  const s = SCALE();
+  ctx.fillStyle = '#2a5080';
+  ctx.font = `${Math.max(9,Math.round(canvas.height*0.028))}px Arial`;
+  ctx.textAlign = 'center';
+  for(let d=10; d<=100; d+=10){
+    const cx = LAUNCHX() + d*s;
+    if(cx > W - 10) break;
+    ctx.strokeStyle = '#1e4570';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(cx, gY); ctx.lineTo(cx, gY-8); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#4a7aaa';
+    ctx.fillText(d, cx, gY+14);
+  }
+
+  // Launch platform
+  const lx = LAUNCHX();
+  ctx.fillStyle = GOLD;
+  ctx.fillRect(lx-18, gY-6, 36, 8);
+  ctx.fillRect(lx-6, gY-18, 12, 14);
+
+  // Stars
+  ctx.fillStyle = 'rgba(201,168,76,0.6)';
+  const stars = [[80,30],[200,15],[350,50],[500,20],[650,40],[750,10],[820,55]];
+  stars.forEach(([sx,sy])=>{
+    const scx = (sx/860)*W;
+    const scy = (sy/380)*gY;
+    if(scx<W && scy>0){
+      ctx.beginPath();
+      ctx.arc(scx, scy*0.4, 1.2, 0, Math.PI*2);
+      ctx.fill();
+    }
+  });
+}
+
+function drawAngleGuide(){
+  if(running || landed) return;
+  const rad = angle * Math.PI / 180;
+  const len = 70;
+  const lx  = LAUNCHX();
+  const gY  = GROUND();
+  ctx.save();
+  ctx.strokeStyle = 'rgba(201,168,76,0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5,4]);
+  ctx.beginPath();
+  ctx.moveTo(lx, gY-18);
+  ctx.lineTo(lx + Math.cos(rad)*len, gY-18 - Math.sin(rad)*len);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Arc
+  ctx.strokeStyle = 'rgba(201,168,76,0.3)';
+  ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.arc(lx, gY-18, 30, -Math.PI/2, -Math.PI/2 + rad, false);
+  ctx.stroke();
+
+  ctx.fillStyle = GOLD;
+  ctx.font = `bold ${Math.max(10,Math.round(canvas.height*0.032))}px Arial`;
+  ctx.textAlign = 'left';
+  ctx.fillText(angle+'°', lx+34, gY-24);
+  ctx.restore();
+}
+
+function drawTrail(){
+  if(trail.length < 2) return;
+  ctx.save();
+  for(let i=1;i<trail.length;i++){
+    const p0 = worldToCanvas(trail[i-1].x, trail[i-1].y);
+    const p1 = worldToCanvas(trail[i].x,   trail[i].y);
+    const t   = i/trail.length;
+    ctx.strokeStyle = `rgba(201,168,76,${t*0.7})`;
+    ctx.lineWidth   = 1.5 + t*1.5;
+    ctx.beginPath();
+    ctx.moveTo(p0.x, p0.y);
+    ctx.lineTo(p1.x, p1.y);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawProjectile(){
+  if(!launched) return;
+  const cp = worldToCanvas(px, py);
+  const r  = Math.max(8, Math.round(canvas.height * 0.035));
+
+  // Glow
+  const grd = ctx.createRadialGradient(cp.x,cp.y,0,cp.x,cp.y,r*2.5);
+  grd.addColorStop(0,'rgba(201,168,76,0.4)');
+  grd.addColorStop(1,'rgba(201,168,76,0)');
+  ctx.fillStyle = grd;
+  ctx.beginPath();
+  ctx.arc(cp.x, cp.y, r*2.5, 0, Math.PI*2);
+  ctx.fill();
+
+  // Body (rocket/coin)
+  ctx.save();
+  ctx.translate(cp.x, cp.y);
+  if(!landed){
+    const vel = Math.sqrt(vx*vx+vy*vy);
+    ctx.rotate(vel>0.1 ? Math.atan2(-vy,vx) : 0);
+  }
+  // Rocket body
+  ctx.fillStyle = GOLD;
+  ctx.beginPath();
+  ctx.ellipse(0,0, r*1.3, r*0.75, 0, 0, Math.PI*2);
+  ctx.fill();
+  // Nose
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.moveTo(r*1.3,0);
+  ctx.lineTo(r*0.5,-r*0.5);
+  ctx.lineTo(r*0.5,r*0.5);
+  ctx.closePath();
+  ctx.fill();
+  // Flames
+  if(running && !landed){
+    ctx.fillStyle = 'rgba(255,100,0,0.8)';
+    ctx.beginPath();
+    ctx.moveTo(-r*1.3,0);
+    ctx.lineTo(-r*2.0,-r*0.4);
+    ctx.lineTo(-r*1.7,0);
+    ctx.lineTo(-r*2.0,r*0.4);
+    ctx.closePath();
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Dollar label
+  ctx.fillStyle='#0e2237';
+  ctx.font=`bold ${r}px Arial`;
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('$', cp.x, cp.y);
+}
+
+function drawLandingMarker(){
+  if(!landed) return;
+  const cp = worldToCanvas(landX, 0);
+  const gY = GROUND();
+
+  // Flash
+  if(landFlash > 0){
+    ctx.save();
+    ctx.globalAlpha = landFlash;
+    ctx.fillStyle = GOLD;
+    ctx.beginPath();
+    ctx.arc(cp.x, gY, 40, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    landFlash -= 0.03;
+  }
+
+  // Flag
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cp.x, gY);
+  ctx.lineTo(cp.x, gY-32);
+  ctx.stroke();
+  ctx.fillStyle = GOLD;
+  ctx.beginPath();
+  ctx.moveTo(cp.x, gY-32);
+  ctx.lineTo(cp.x+16, gY-26);
+  ctx.lineTo(cp.x, gY-20);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle='#0e2237';
+  ctx.font='bold 8px Arial';
+  ctx.textAlign='left';
+  ctx.fillText('$', cp.x+4, gY-26);
+
+  // Distance label
+  const profit = Math.round(landX*0.8);
+  ctx.fillStyle = GOLD;
+  ctx.font = `bold ${Math.max(11,Math.round(canvas.height*0.034))}px Arial`;
+  ctx.textAlign = 'center';
+  ctx.fillText(`Profit: ${profit}`, cp.x, gY-42);
+}
+
+function drawCoinParticles(){
+  coinParticles = coinParticles.filter(p=>{
+    p.x += p.vx; p.y += p.vy; p.vy += 0.15; p.life -= 1;
+    const cp = worldToCanvas(p.x, p.y);
+    ctx.save();
+    ctx.globalAlpha = p.life/p.maxLife;
+    ctx.fillStyle = GOLD;
+    ctx.font = `bold ${p.size}px Arial`;
+    ctx.textAlign='center';
+    ctx.fillText('$', cp.x, cp.y);
+    ctx.restore();
+    return p.life > 0;
+  });
+}
+
+function drawHUD(){
+  const fs = Math.max(10, Math.round(canvas.height*0.032));
+  ctx.font = `${fs}px Arial`;
+  ctx.fillStyle = 'rgba(14,34,55,0.7)';
+  ctx.fillRect(4, 4, 200, fs*3+12);
+  ctx.fillStyle = GOLD;
+  ctx.textAlign = 'left';
+  ctx.fillText(`Angle: ${angle}°  |  Investment: ${speed}`, 10, fs+6);
+  ctx.fillStyle = '#aac4e0';
+  ctx.fillText(`Risk: ${grav.toFixed(1)}g  |  Mitigation: ${(drag*1000).toFixed(0)}‰`, 10, fs*2+8);
+  ctx.fillStyle = running ? '#7cfc00' : (landed ? GOLD : '#aac4e0');
+  ctx.fillText(running ? '● VENTURE IN PROGRESS' : (landed ? '★ VENTURE COMPLETE' : '● READY TO LAUNCH'), 10, fs*3+10);
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawGround();
+  drawAngleGuide();
+  drawTrail();
+  drawLandingMarker();
+  drawCoinParticles();
+  drawProjectile();
+  drawHUD();
+  updateMetrics();
+}
+
+// ── Physics loop ──────────────────────────────────────────────────────────────
+function launch(){
+  if(running) return;
+  const rad = angle * Math.PI / 180;
+  const s   = speed * 0.6; // world units/sec
+  px = 0; py = 0;
+  vx = Math.cos(rad) * s;
+  vy = Math.sin(rad) * s;
+  elapsed   = 0;
+  maxHeight = 0;
+  landX     = 0;
+  trail     = [];
+  landed    = false;
+  landFlash = 0;
+  coinParticles = [];
+  launched  = true;
+  running   = true;
+  lastTime  = null;
+  if(animId) cancelAnimationFrame(animId);
+  animId = requestAnimationFrame(step);
+}
+
+function step(ts){
+  if(!running){ draw(); return; }
+  if(lastTime===null) lastTime=ts;
+  let dt = Math.min((ts-lastTime)/1000, 0.05);
+  lastTime = ts;
+  elapsed += dt;
+
+  // Air resistance
+  const speed2 = Math.sqrt(vx*vx+vy*vy);
+  const drag2  = drag * speed2;
+  vx -= drag2 * vx * dt;
+  vy -= drag2 * vy * dt;
+  // Gravity
+  vy -= grav * dt;
+  // Position
+  px += vx * dt;
+  py += vy * dt;
+  if(py < 0){ py = 0; }
+  if(py > maxHeight) maxHeight = py;
+
+  trail.push({x:px, y:py});
+  if(trail.length > 300) trail.shift();
+
+  // Landed?
+  if(py <= 0 && elapsed > 0.2){
+    py = 0;
+    landX  = px;
+    landed = true;
+    running = false;
+    landFlash = 1.0;
+    // Coin burst
+    for(let i=0;i<12;i++){
+      const lp = worldToCanvas(px,0);
+      const ang = (Math.random()*Math.PI*2);
+      coinParticles.push({
+        x: px, y: 0,
+        vx: (Math.random()-0.5)*0.6,
+        vy: Math.random()*0.8+0.3,
+        life: 40+Math.random()*30,
+        maxLife:70,
+        size: 10+Math.random()*6
+      });
+    }
+  }
+
+  draw();
+  if(running) animId = requestAnimationFrame(step);
+  else draw();
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+document.getElementById('btn-launch').addEventListener('click', launch);
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  running   = false;
+  launched  = false;
+  landed    = false;
+  landFlash = 0;
+  px=0; py=0; vx=0; vy=0;
+  elapsed=0; maxHeight=0; landX=0;
+  trail=[];
+  coinParticles=[];
+  if(animId) cancelAnimationFrame(animId);
+  syncSliders();
+  draw();
+});
+
+// ── Touch/drag for angle on canvas ───────────────────────────────────────────
+canvas.addEventListener('touchstart', onTouchStart, {passive:false});
+canvas.addEventListener('touchmove',  onTouchMove,  {passive:false});
+canvas.addEventListener('mousedown',  onMouseDown);
+canvas.addEventListener('mousemove',  onMouseMove);
+
+let draggingAngle = false;
+function getCanvasPos(e){
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width  / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (e.clientX - rect.left)*scaleX,
+    y: (e.clientY - rect.top )*scaleY
+  };
+}
+function updateAngleFromCanvas(pos){
+  const lx = LAUNCHX();
+  const gY = GROUND() - 18;
+  const dx = pos.x - lx;
+  const dy = gY - pos.y;
+  if(dx > 0){
+    let a = Math.round(Math.atan2(dy,dx)*180/Math.PI);
+    a = Math.max(10, Math.min(80, a));
+    slAngle.value = a;
+    syncSliders();
+    if(!running) draw();
+  }
+}
+function onTouchStart(e){
+  e.preventDefault();
+  if(!running){ draggingAngle=true; updateAngleFromCanvas(getCanvasPos(e.touches[0])); }
+}
+function onTouchMove(e){
+  e.preventDefault();
+  if(draggingAngle && !running) updateAngleFromCanvas(getCanvasPos(e.touches[0]));
+}
+function onMouseDown(e){
+  if(!running){ draggingAngle=true; updateAngleFromCanvas(getCanvasPos(e)); }
+}
+function onMouseMove(e){
+  if(draggingAngle && !running) updateAngleFromCanvas(getCanvasPos(e));
+}
+document.addEventListener('mouseup',  ()=>{ draggingAngle=false; });
+document.addEventListener('touchend', ()=>{ draggingAngle=false; });
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+syncSliders();
+draw();
+
+})();
+</script>
+</body>
+</html>

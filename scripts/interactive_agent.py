@@ -146,7 +146,7 @@ def generate_flashcards_html(vocab, topic):
     if not vocab:
         return None
 
-    cards_js = json.dumps([{"term": t, "def": d} for t, d in vocab])
+    cards_js = json.dumps([{"term": esc(t), "def": esc(d)} for t, d in vocab])
 
     return f"""<!DOCTYPE html>
 <html lang="en">

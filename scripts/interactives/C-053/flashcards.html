@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quality Control During Assembly — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Quality Control During Assembly</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Quality Control", "definition": "The process of making sure that products or services meet all the required standards and expectations."}, {"term": "Assembly", "definition": "The step where individual parts or smaller sections are put together to build a complete product or system."}, {"term": "Defect", "definition": "A flaw or imperfection in a product that stops it from working correctly or meeting its intended purpose."}, {"term": "Tolerance", "definition": "The allowed amount of variation or difference in a part's size, shape, or other feature. It tells you how much a part can be off and still be acceptable."}, {"term": "Inspection", "definition": "The act of carefully checking a product, process, or service to see if it matches the required specifications."}, {"term": "Multiscale Modeling", "definition": "A way of studying things by looking at how they behave at different sizes, from very large (like a whole car) down to very tiny (like individual atoms)."}, {"term": "Optimization", "definition": "The process of finding the very best possible solution or outcome, given all the different conditions and limits."}, {"term": "Objective (OCV Method)", "definition": "In the OCV method, this is the clear and measurable goal you are trying to achieve with your design or process."}, {"term": "Why is Quality Control during Assembly important?", "definition": "It's crucial because even small mistakes when putting parts together can cause big problems later, affecting how well the product works and its safety."}, {"term": "What is the Creationeering™ framework phase for this lesson?", "definition": "This lesson falls within the Assembly phase of the Creationeering™ framework, where all the fabricated parts are brought together."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+[
+  {
+    "id": "m017t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Analysis Activity: Calculations and Efficiency</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In your last build session, you refined your mousetrap car through iterative design — making small, deliberate changes and watching how they affected performance. Now it's time to take that hands-on experience and pair it with the math and science that explain <em>why</em> those changes worked.</p><p>This lesson is all about calculations and efficiency. You'll learn how to use physics to predict your car's performance before you even push it across the floor, identify where your design is losing energy, and make smarter decisions during assembly. The goal isn't just to get your car moving — it's to make it move <em>well</em>. That kind of intentional, precise engineering is what separates a good design from a great one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain how basic physics calculations — force, distance, and speed — apply directly to your mousetrap car design.</li><li>Identify at least three sources of inefficiency in a mousetrap car and propose solutions to reduce them.</li><li>Apply the Objective, Constraint, Variable (OCV) method to a real design decision for your car.</li><li>Understand how small assembly errors can have a big impact on overall performance.</li><li>Connect the pursuit of efficiency in engineering to the biblical principle of stewardship — using resources wisely and purposefully.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Calculations",
+          "definition": "Mathematical operations used to determine values, quantities, or outcomes — like figuring out how fast your car will travel based on wheel size."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "The ratio of useful work output to total energy input. A more efficient car wastes less energy and travels farther."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that opposes motion between two surfaces in contact. Friction in your axles and wheels is one of the biggest energy thieves in a mousetrap car."
+        },
+        {
+          "term": "Torque",
+          "definition": "A twisting force that causes rotation. The mousetrap spring creates torque that drives your car's wheels."
+        },
+        {
+          "term": "Mechanical Advantage",
+          "definition": "The ratio of output force to input force. It tells you how much a machine multiplies the force you put into it."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The process of putting together individual components to create a complete, functional system."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A design framework that defines Objectives (what you want to achieve), Constraints (your limitations), and Variables (what you can change)."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at a large, visible scale (macro) to explanations happening at a very small scale — even down to the atomic level."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Order: A Blueprint for Precision</h2><p>Before we dive into the math, consider this: the universe itself is an engineering masterpiece. Genesis 1:1 tells us, <em>\"In the beginning, God created the heavens and the earth.\"</em> That act of creation wasn't random or chaotic — it was structured, purposeful, and executed with perfect precision. The atmosphere, the oceans, the ecosystems — all assembled in the right order, working together as one system.</p><p>That same principle applies to your mousetrap car. Every component has a purpose. Every connection affects performance. When you approach your assembly with care and intention — measuring accurately, reducing friction, balancing forces — you're reflecting a small piece of that same thoughtful, orderly design God modeled in creation. Striving for efficiency isn't just good engineering. It's good stewardship of the time, materials, and creative ability you've been given.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:1</strong> — \"In the beginning, God created the heavens and the earth.\" Creation was systematic, ordered, and purposeful. As you assemble your mousetrap car, let that same intentionality guide your hands and decisions.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Physics Behind Your Car</h2><p>Your mousetrap car is a physics experiment you built yourself. Every time you release the spring, you're setting off a chain of forces, conversions, and motions that can all be described with math. Understanding those calculations lets you stop guessing and start predicting.</p><h3>Force, Distance, and Speed</h3><p>Three calculations matter most for your car's performance:</p><ul><li><strong>Force</strong> is what gets your car moving. The mousetrap spring releases stored energy as a force applied to your drive string. A larger wheel radius increases the distance that force can push — which is directly related to torque.</li><li><strong>Distance</strong> traveled depends on how many times your wheels rotate and how large they are. A bigger wheel covers more ground per rotation, but it also requires more force to turn. It's a trade-off you have to balance.</li><li><strong>Speed</strong> is the distance your car travels divided by the time it takes. If you want a faster car, you need to either cover more distance per wheel rotation or reduce the forces slowing you down — primarily friction.</li></ul><p>These three values are connected. Changing one always affects the others. That's why calculations are so powerful: they let you see those connections before you start cutting and gluing.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram of a mousetrap car showing the spring arm, drive string, axle, and rear wheel — with arrows indicating the direction of torque, force, and motion"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Torque and Mechanical Advantage</h3><p>Torque is the twisting force your spring arm creates. Think of it like a wrench — the longer the handle, the more turning force you can apply with the same effort. That's mechanical advantage at work.</p><p>In your mousetrap car, you can increase mechanical advantage by extending the spring arm with a pencil or dowel. A longer arm means the string pulls the axle through a greater arc, transferring more rotational energy to the wheels. But there's a catch: a longer arm moves more slowly. You gain distance at the cost of initial speed. Neither is wrong — it depends on your objective.</p><p>This is exactly why engineers define their objectives before they start tweaking. Do you want maximum distance? Maximum speed? A balance of both? Your goal changes your design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Where Is Your Car Losing Energy?</h2><p>No machine is perfectly efficient — not even the most sophisticated ones built by professional engineers. Energy always leaks somewhere. Your job is to find those leaks and plug as many as you can.</p><p>Here are the three biggest sources of inefficiency in a mousetrap car:</p><ul><li><strong>Axle friction:</strong> If your axles are too tight in their supports, they grind against the frame and bleed away energy with every rotation. Smooth, well-aligned axles make a massive difference.</li><li><strong>Wheel wobble:</strong> Wheels that aren't perfectly perpendicular to the axle don't roll straight — they scrub sideways, wasting energy and causing your car to veer off course.</li><li><strong>String drag:</strong> If your drive string is too long or wraps unevenly, it can drag on the frame or tangle mid-run. A clean, tight wind on the axle ensures smooth energy release.</li></ul><p>There are smaller inefficiencies too — uneven weight distribution, loose connections, rough surfaces on the ground contact area. Each one on its own might seem minor, but together they can cut your car's performance in half. Efficiency is won in the details.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Many students focus only on the mousetrap spring and ignore axle friction. Even a perfectly tuned spring can't overcome poorly aligned, sticky axles. Check every axle for smooth, free rotation before your next test run.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Your Design</h2><p>When you're making decisions about your car — which wheel size to use, how long to make the spring arm, how tight to wind the string — it helps to have a structured way to think through the choice. That's what the OCV method is for.</p><ul><li><strong>Objective:</strong> What do you want this design decision to achieve? (e.g., \"I want my car to travel as far as possible on a single flat surface.\")</li><li><strong>Constraints:</strong> What are your limitations? (e.g., \"I only have CD-sized wheels and a standard mousetrap. I can't add extra weight.\")</li><li><strong>Variables:</strong> What can you actually change? (e.g., \"I can adjust the spring arm length, axle placement, and string winding technique.\")</li></ul><p>Writing out your OCV before you modify anything keeps you focused. It's easy to start tinkering and lose track of what you're actually trying to improve. Engineers call this \"scope creep\" — and it's a real productivity killer. Define your target first, then change one variable at a time and test. That's the scientific method and the engineering design process working together.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student worksheet showing the OCV method filled out for a mousetrap car — with Objective, Constraints, and Variables clearly listed in three columns"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Precision in Assembly: The Details Matter</h2><p>Calculations tell you what <em>should</em> happen. Assembly determines what <em>actually</em> happens. Even the best math in the world won't save a poorly built car.</p><p>Think about it this way: if your rear axle is just 2mm off-center, your wheels don't spin true. That small error introduces wobble, which increases friction, which reduces distance. A 2mm mistake might cost you a meter of travel. In a competition, that's the difference between first place and last.</p><p>Precision assembly means:</p><ul><li>Measuring and marking before cutting or gluing.</li><li>Checking that axles are level and perpendicular to the car body.</li><li>Ensuring wheels are firmly attached with no lateral play.</li><li>Testing each sub-system (axle spin, string wind, spring arm movement) before final assembly.</li></ul><p>This is the same mindset a surgeon uses, or an aerospace engineer building a rocket component. When the stakes are high, precision isn't optional — it's the job.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Before you assemble:</strong> Do a dry-fit first. Put all your pieces together without glue or tape to check alignment and fit. Fix any issues <em>before</em> they become permanent. This one habit will save you more time than any other trick in your toolkit.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Efficiency as Stewardship</h2><p>Here's a bigger idea worth sitting with: why does efficiency matter beyond winning a build challenge?</p><p>When you reduce waste in your design — less energy lost to friction, fewer materials used for the same result, a cleaner and more reliable assembly — you're being a good steward of what you've been given. That's a biblical concept. God designed creation to work with remarkable economy. Nothing is wasted. Every system serves a purpose. The water cycle, the carbon cycle, the food web — all of it runs with a kind of built-in efficiency that human engineers spend careers trying to imitate.</p><p>When you chase efficiency in your mousetrap car, you're practicing something much larger. You're learning to think carefully about resources, to minimize waste, and to design with purpose. Those habits will serve you no matter what you build next — whether it's a machine, a business, or a life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m017acc01",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is efficiency, and why does it matter for your mousetrap car?</strong><br>Efficiency is the ratio of useful work output to total energy input. In your car, it measures how much of the spring's stored energy actually moves the car forward versus how much is lost to friction, wobble, or other waste. A more efficient car travels farther on the same energy.</p><p><strong>2. Name three sources of energy loss in a mousetrap car.</strong><br>Axle friction, wheel wobble, and uneven string drag are the three biggest culprits. Each one bleeds away energy that should be moving your car forward.</p><p><strong>3. What does the OCV method stand for, and how do you use it?</strong><br>Objectives, Constraints, Variables. You write out what you want to achieve, what limits you're working within, and what you can actually change — before you start modifying anything. This keeps your testing focused and your results meaningful.</p><p><strong>4. How does mechanical advantage apply to the spring arm of your mousetrap car?</strong><br>A longer spring arm increases mechanical advantage, meaning the drive string pulls through a longer arc and transfers more rotational energy to the axle. However, this also slows the initial release. The right arm length depends on whether you're optimizing for distance or speed.</p><p><strong>5. How does pursuing efficiency in engineering connect to biblical stewardship?</strong><br>Efficiency means using resources — energy, materials, time — without unnecessary waste. That's exactly what stewardship calls us to do: manage what we've been given wisely and purposefully, the same way God designed creation to operate with remarkable economy and order.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

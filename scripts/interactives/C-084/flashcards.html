@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Life Extension and Maintenance Philosophy — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Life Extension and Maintenance Philosophy</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Death & Recycling Phase", "definition": "The final stage in Creationeering™ where we think about what happens to a product after its first use, like reusing it or turning it into something new."}, {"term": "Life Extension", "definition": "Making things last longer by designing them to be more durable or easier to fix, so they can be used for more years."}, {"term": "Recycling", "definition": "Taking old, used materials and turning them into brand new products, like making new paper from old paper."}, {"term": "Upcycling", "definition": "Turning old or discarded items into something new that is even better or more valuable than before, like making a cool bag from old jeans."}, {"term": "Downcycling", "definition": "Turning old materials into something new, but the new item is not as good or useful as the original, like turning plastic bottles into park benches."}, {"term": "Obsolescence", "definition": "When something becomes outdated or no longer needed, often because newer and better technology has come along."}, {"term": "Degradation", "definition": "The process where a material or product slowly wears out and loses its ability to work well over time, due to things like use or weather."}, {"term": "Multiscale Modeling", "definition": "A way to understand how tiny changes at the atomic level can cause big changes in how a material behaves, helping engineers design stronger products."}, {"term": "Stewardship (in engineering)", "definition": "Responsibly managing God's creation by designing products that last, can be reused, or recycled, showing care for resources."}, {"term": "Creationeering™ Framework", "definition": "A complete process for designing and building, which includes thinking about a product's entire life, from creation to its end-of-life."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-022",
+  "topic": "Measurement Quality and Instrument Validation",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the definition of Objective Data?",
+      "options": {
+        "A": "Facts that are influenced by personal feelings or opinions.",
+        "B": "Facts that are not influenced by personal feelings or opinions.",
+        "C": "Data that is collected only from old computer systems.",
+        "D": "Information that is always proven to be wrong."
+      },
+      "answer": "B",
+      "explanation": "Objective Data is defined in the lesson as facts that are not influenced by personal feelings or opinions."
+    },
+    {
+      "type": "recall",
+      "question": "Which term describes how consistent the results are when a measurement is repeated?",
+      "options": {
+        "A": "Accuracy",
+        "B": "Precision",
+        "C": "Validation",
+        "D": "Stewardship"
+      },
+      "answer": "B",
+      "explanation": "Precision is defined as how consistent the results are when a measurement is repeated."
+    },
+    {
+      "type": "recall",
+      "question": "What are 'significant digits' in a measurement or calculation?",
+      "options": {
+        "A": "Only the first digit that is not zero.",
+        "B": "All the unreliable digits in the measurement.",
+        "C": "All the reliable digits in a measurement or calculation.",
+        "D": "Digits that are always zero and can be ignored."
+      },
+      "answer": "C",
+      "explanation": "The lesson defines significant digits as all the reliable digits in a measurement or calculation."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is 'compounding error' a problem when doing long calculations by hand?",
+      "options": {
+        "A": "It makes calculations faster but less precise.",
+        "B": "Small rounding errors in early steps get amplified, leading to larger final errors.",
+        "C": "It only happens when using computers, not manual methods.",
+        "D": "It helps achieve perfect accuracy by simplifying numbers."
+      },
+      "answer": "B",
+      "explanation": "Compounding error occurs when small rounding errors made in initial steps of a calculation are amplified in subsequent steps, leading to a larger total error."
+    },
+    {
+      "type": "comprehension",
+      "question": "How do computers improve the precision of engineering calculations compared to manual methods?",
+      "options": {
+        "A": "They guess the numbers to speed up the process.",
+        "B": "They always round numbers up, which makes them more precise.",
+        "C": "They store and manipulate numbers with many significant digits, reducing rounding errors.",
+        "D": "They only use whole numbers, making calculations simpler."
+      },
+      "answer": "C",
+      "explanation": "Computers improve precision by using high-fidelity calculations and storing numbers with many significant digits, which minimizes rounding errors."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson states that 'Data is the bridge between science and math.' What does this mean?",
+      "options": {
+        "A": "Data is only used in scientific experiments, not in mathematical equations.",
+        "B": "Data is only used to explain mathematical concepts, not scientific observations.",
+        "C": "Data records observations gathered through science and provides the numerical input for mathematical equations.",
+        "D": "Data replaces the need for both science and math in engineering."
+      },
+      "answer": "C",
+      "explanation": "Data acts as the bridge by being the record of observations (science) and the numerical input that feeds equations (math)."
+    },
+    {
+      "type": "application",
+      "question": "A student measures the length of a desk five times. Their measurements are 1.50m, 1.51m, 1.49m, 1.50m, and 1.50m. The actual length of the desk is 1.75m. Based on these measurements, how would you describe the student's measurements?",
+      "options": {
+        "A": "High accuracy, low precision",
+        "B": "Low accuracy, high precision",
+        "C": "High accuracy, high precision",
+        "D": "Low accuracy, low precision"
+      },
+      "answer": "B",
+      "explanation": "The measurements are very close to each other (high precision) but are consistently far from the true value (low accuracy)."
+    },
+    {
+      "type": "application",
+      "question": "An engineer uses a computer program to simulate how a new airplane wing will perform in flight. Before building the actual wing, the engineer compares the simulation's predictions to results from a small-scale physical model in a wind tunnel. Which process from the lesson is the engineer performing?",
+      "options": {
+        "A": "Objective data collection",
+        "B": "Compounding error analysis",
+        "C": "Data Validation",
+        "D": "Significant digit calculation"
+      },
+      "answer": "C",
+      "explanation": "Data validation is the process of checking if a computer model's predictions match real-world results, which the engineer is doing by comparing the simulation to physical model tests."
+    },
+    {
+      "type": "application",
+      "question": "A scientist is conducting an experiment to see how different amounts of fertilizer affect plant growth. If the scientist accidentally mixes up the labels for two different fertilizers, what kind of problem will this create for their data?",
+      "options": {
+        "A": "The data will not be objective.",
+        "B": "The data will not be precise.",
+        "C": "The data will not be validated.",
+        "D": "The data will not be clean."
+      },
+      "answer": "D",
+      "explanation": "Mixing up labels introduces errors into the data collection process, making the information unreliable and not 'clean data,' which is defined as being free from errors."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that 'integrity demands that our work be based on verifiable truth, not assumptions.' How does an engineer taking shortcuts with data relate to the biblical principle of Stewardship?",
+      "options": {
+        "A": "It saves time and resources, which is good stewardship.",
+        "B": "It ensures perfect accuracy by simplifying the process.",
+        "C": "It is an ethical failure because it risks lives and wastes resources, failing in stewardship.",
+        "D": "It makes the design process more creative and innovative."
+      },
+      "answer": "C",
+      "explanation": "Taking shortcuts with data is a failure in stewardship because it can lead to unsafe designs, risking human lives and wasting valuable resources, which goes against the principle of managing resources responsibly."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does a computer's ability to perform 'simultaneous analysis' of millions of data points contribute to both the accuracy and precision of engineering designs?",
+      "options": {
+        "A": "It makes the calculations slower but more enjoyable for engineers.",
+        "B": "It allows for quick, broad estimations without needing detailed results.",
+        "C": "It enables thorough analysis of complex systems, leading to more reliable (accurate) and consistent (precise) outcomes.",
+        "D": "It completely replaces the need for any human input or decision-making."
+      },
+      "answer": "C",
+      "explanation": "Simultaneous analysis allows for a comprehensive evaluation of complex systems, which leads to more reliable (accurate) and consistent (precise) design outcomes."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson describes data as 'the language of truth' and connects it to the 'biblical principle of integrity.' What is the main reason for this connection in Creationeering?",
+      "options": {
+        "A": "Because data is always perfect and never contains errors.",
+        "B": "Because using data makes all engineering projects cheaper to build.",
+        "C": "Because integrity means being honest and trustworthy, and true, objective data ensures honest and reliable engineering.",
+        "D": "Because only people who follow biblical principles should use data in engineering."
+      },
+      "answer": "C",
+      "explanation": "The connection is made because integrity requires honesty and trustworthiness, and using true, objective data ensures that engineering work is honest, reliable, and verifiable, reflecting this principle."
+    }
+  ]
+}

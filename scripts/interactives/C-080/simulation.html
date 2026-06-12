@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOL Ethics: Product End-of-Life Decisions</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    background: #1B3A5C;
+    color: white;
+    width: 100%;
+    padding: 14px 20px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  header p {
+    font-size: 0.78rem;
+    color: #C9A84C;
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 780px;
+    padding: 18px 16px;
+    flex: 1;
+  }
+
+  /* INTRO SCREEN */
+  #intro-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 0;
+  }
+
+  .intro-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 3px 12px rgba(27,58,92,0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .intro-card h2 {
+    font-size: 1.4rem;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+  }
+
+  .intro-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 14px;
+  }
+
+  .scenario-preview {
+    background: #f7f9fc;
+    border-left: 4px solid #C9A84C;
+    border-radius: 6px;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.88rem;
+    color: #1B3A5C;
+    margin-bottom: 16px;
+  }
+
+  .scenario-preview strong { color: #C9A84C; }
+
+  /* BUTTONS */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .btn:hover { background: #b8943f; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: #1B3A5C;
+    color: white;
+  }
+
+  .btn-secondary:hover { background: #153050; }
+
+  .btn-sm {
+    padding: 8px 18px;
+    font-size: 0.88rem;
+  }
+
+  /* SCENARIO SCREEN */
+  #scenario-screen { display: none; }
+
+  .progress-bar-wrap {
+    background: #e0e7ef;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C9A84C, #e8c97a);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+  }
+
+  .scenario-counter {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: right;
+    margin-bottom: 6px;
+  }
+
+  .scenario-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 20px;
+    box-shadow: 0 3px 12px rgba(27,58,92,0.1);
+    margin-bottom: 16px;
+  }
+
+  .scenario-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: white;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .scenario-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+
+  .scenario-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 14px;
+  }
+
+  .scenario-context {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 14px;
+    border-left: 3px solid #C9A84C;
+  }
+
+  .decision-prompt {
+    font-size: 0.93rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 12px;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  @media(min-width: 500px) {
+    .options-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .option-btn {
+    background: white;
+    border: 2px solid #d0dae5;
+    border-radius: 10px;
+    padding: 14px 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .option-btn:hover {
+    border-color: #C9A84C;
+    background: #fffbf0;
+    transform: translateY(-2px);
+  }
+
+  .option-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .option-text strong {
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 2px;
+  }
+
+  .option-text span {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  /* FEEDBACK */
+  .feedback-overlay {
+    display: none;
+    background: white;
+    border-radius: 14px;
+    padding: 20px 20px;
+    box-shadow: 0 3px 16px rgba(27,58,92,0.15);
+    margin-bottom: 16px;
+    border-left: 5px solid #C9A84C;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .feedback-badge {
+    font-size: 1.6rem;
+  }
+
+  .feedback-title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .feedback-title.good { color: #2a7a2a; }
+  .feedback-title.okay { color: #b07800; }
+  .feedback-title.poor { color: #b84040; }
+
+  .feedback-body {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .feedback-points {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f4f8;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 12px;
+  }
+
+  .impact-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .impact-chip {
+    background: #f0f4f8;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    color: #1B3A5C;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .impact-chip.positive { background: #e8f5e8; color: #2a6a2a; }
+  .impact-chip.negative { background: #fce8e8; color: #8a2020; }
+  .impact-chip.neutral { background: #fff3cd; color: #7a5500; }
+
+  /* METRICS BAR */
+  .metrics-panel {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(27,58,92,0.08);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .metric-item {
+    text-align: center;
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .metric-bar-wrap {
+    background: #e0e7ef;
+    border-radius: 6px;
+    height: 8px;
+    margin: 4px 0;
+    overflow: hidden;
+  }
+
+  .metric-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+  }
+
+  .metric-bar-fill.env { background: #4caf7d; }
+  .metric-bar-fill.cost { background: #C9A84C; }
+  .metric-bar-fill.social { background: #5b8fd6; }
+
+  .metric-value {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1B3A5C;
+  }
+
+  /* RESULTS SCREEN */
+  #results-screen { display: none; }
+
+  .results-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 4px 18px rgba(27,58,92,0.12);
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .score-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(#C9A84C var(--pct), #e0e7ef var(--pct));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+
+  .score-ring-inner {
+    width: 82px;
+    height: 82px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1B3A5C;
+    line-height: 1;
+  }
+
+  .score-max {
+    font-size: 0.75rem;
+    color: #888;
+  }
+
+  .results-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 8px;
+  }
+
+  .results-subtitle {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .grade-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .grade-excellent { background: #e8f5e8; color: #2a7a2a; border: 2px solid #4caf7d; }
+  .grade-good { background: #fffbf0; color: #8a5500; border: 2px solid #C9A84C; }
+  .grade-fair { background: #fff3e0; color: #9a5400; border: 2px solid #ff9800; }
+  .grade-poor { background: #fce8e8; color: #8a2020; border: 2px solid #ef5350; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .summary-metric {
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+
+  .summary-metric-icon { font-size: 1.4rem; margin-bottom: 4px; }
+
+  .summary-metric-label {
+    font-size: 0.72rem;
+    color: #888;
+    margin-bottom: 2px;
+  }
+
+  .summary-metric-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1B3A5C;
+  }
+
+  .decisions-review {
+    text-align: left;
+    margin-bottom: 18px;
+  }
+
+  .decisions-review h3 {
+    font-size: 0.95rem;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .review-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 0.84rem;
+    background: #f7f9fc;
+  }
+
+  .review-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .review-dot.good { background: #4caf7d; }
+  .review-dot.okay { background: #C9A84C; }
+  .review-dot.poor { background: #ef5350; }
+
+  .review-scenario { font-weight: 600; color: #1B3A5C; flex: 1; }
+  .review-choice { color: #555; font-size: 0.8rem; }
+
+  .faith-note {
+    background: #f0f4f8;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.84rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+    border-left: 3px solid #C9A84C;
+    margin-bottom: 18px;
+  }
+
+  .faith-note strong { color: #1B3A5C; }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Selected option highlight */
+  .option-btn.selected {
+    border-color: #1B3A5C;
+    background: #e8f0f8;
+  }
+
+  .option-btn.correct {
+    border-color: #4caf7d;
+    background: #e8f5e8;
+  }
+
+  .option-btn.incorrect {
+    border-color: #ef5350;
+    background: #fce8e8;
+    opacity: 0.8;
+  }
+
+  .option-btn:disabled {
+    cursor: default;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ EOL Ethics: End-of-Life Decision Maker</h1>
+  <p>Creationeering™ — Death &amp; Recycling Module</p>
+</header>
+
+<div id="app">
+
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen">
+    <div class="intro-card">
+      <h2>🌍 You're the EOL Engineer</h2>
+      <p>Every product eventually reaches its <strong>End of Life (EOL)</strong> — the point where it's no longer useful in its original form. What happens next depends on the decisions engineers and businesses make.</p>
+      <div class="scenario-preview">
+        <strong>Your Mission:</strong> Work through 5 real-world product scenarios. For each one, choose the best end-of-life strategy. Your choices affect the <strong>environment</strong>, <strong>cost</strong>, and <strong>community</strong> — and reflect your role as a steward of God's creation.
+      </div>
+      <p>Apply the <strong>OCV method</strong> — think about your <em>Objectives</em>, <em>Constraints</em>, and <em>Values</em> before choosing!</p>
+      <button class="btn" onclick="startGame()">Start Mission →</button>
+    </div>
+  </div>
+
+  <!-- SCENARIO SCREEN -->
+  <div id="scenario-screen">
+    <div class="scenario-counter" id="scenario-counter">Scenario 1 of 5</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="metrics-panel" id="metrics-panel">
+      <div class="metric-item">
+        <div class="metric-label">🌱 Environment</div>
+        <div class="metric-bar-wrap">
+          <div class="metric-bar-fill env" id="env-bar" style="width:50%"></div>
+        </div>
+        <div class="metric-value" id="env-val">50</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">💰 Cost Savings</div>
+        <div class="metric-bar-wrap">
+          <div class="metric-bar-fill cost" id="cost-bar" style="width:50%"></div>
+        </div>
+        <div class="metric-value" id="cost-val">50</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">🤝 Community</div>
+        <div class="metric-bar-wrap">
+          <div class="metric-bar-fill social" id="social-bar" style="width:50%"></div>
+        </div>
+        <div class="metric-value" id="social-val">50</div>
+      </div>
+    </div>
+
+    <div class="scenario-card" id="scenario-card">
+      <div class="scenario-tag" id="scenario-tag">Electronics</div>
+      <div class="scenario-title" id="scenario-title">Loading...</div>
+      <div class="scenario-desc" id="scenario-desc"></div>
+      <div class="scenario-context" id="scenario-context"></div>
+      <div class="decision-prompt">🔧 What is the best EOL strategy?</div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+
+    <div class="feedback-overlay" id="feedback-overlay">
+      <div class="feedback-header">
+        <div class="feedback-badge" id="feedback-badge">✅</div>
+        <div class="feedback-title" id="feedback-title">Great Choice!</div>
+      </div>
+      <div class="feedback-body" id="feedback-body"></div>
+      <div class="feedback-points" id="feedback-points">+30 pts</div>
+      <div class="impact-row" id="impact-row"></div>
+      <button class="btn btn-sm" id="next-btn" onclick="nextScenario()">Next Scenario →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div id="results-screen">
+    <div class="results-card" id="results-card">
+      <div class="score-ring" id="score-ring">
+        <div class="score-ring-inner">
+          <div class="score-num" id="final-score">0</div>
+          <div class="score-max">/ 150 pts</div>
+        </div>
+      </div>
+      <div class="results-title" id="results-title">EOL Engineer Rating</div>
+      <div class="grade-badge" id="grade-badge">Loading...</div>
+      <div class="results-subtitle" id="results-subtitle"></div>
+
+      <div class="summary-grid" id="summary-grid">
+        <div class="summary-metric">
+          <div class="summary-metric-icon">🌱</div>
+          <div class="summary-metric-label">Environment</div>
+          <div class="summary-metric-val" id="final-env">--</div>
+        </div>
+        <div class="summary-metric">
+          <div class="summary-metric-icon">💰</div>
+          <div class="summary-metric-label">Cost Savings</div>
+          <div class="summary-metric-val" id="final-cost">--</div>
+        </div>
+        <div class="summary-metric">
+          <div class="summary-metric-icon">🤝</div>
+          <div class="summary-metric-label">Community</div>
+          <div class="summary-metric-val" id="final-social">--</div>
+        </div>
+      </div>
+
+      <div class="decisions-review" id="decisions-review">
+        <h3>📋 Your Decisions:</h3>
+      </div>
+
+      <div class="faith-note">
+        <strong>"Stewardship in Action:"</strong> Just as Ecclesiastes 1:4–7 describes God's cycles in nature — rivers returning to the sea, seasons renewing — engineers who practice responsible EOL design reflect that same pattern of renewal. Materials can return, be reprocessed, and serve again. That's not just good engineering — it's wise stewardship.
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="restartGame()">🔄 Try Again</button>
+        <button class="btn" onclick="showSummaryOnly()">📊 View Summary</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // === GAME DATA ===
+  const scenarios = [
+    {
+      id: 1,
+      tag: "📱 Electronics",
+      title: "Broken Smartphone Surplus",
+      desc: "A school district has 200 old smartphones that no longer function properly. The screens are cracked, batteries are degraded, and the software is outdated. They're taking up storage space.",
+      context: "⚠️ Key fact: These devices contain valuable metals (gold, copper, lithium) at the atomic level that can be recovered, as well as toxic materials like lead that must not enter landfills.",
+      options: [
+        {
+          icon: "🏭",
+          title: "E-Waste Recycling",
+          desc: "Send to certified e-waste recycler to recover metals and safely dispose of toxins.",
+          quality: "good",
+          pts: 30,
+          env: +20, cost: +10, social: +10,
+          feedback: "Excellent choice! Certified e-waste recycling recovers precious metals through atomic-level material separation, keeps toxic materials out of landfills, and models responsible stewardship. This is the gold-standard EOL strategy for electronics.",
+          impacts: [
+            { label: "Toxins safely handled", type: "positive" },
+            { label: "Metals recovered", type: "positive" },
+            { label: "Moderate cost", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🔧",
+          title: "Refurbish & Donate",
+          desc: "Repair working parts and donate functioning units to underserved students.",
+          quality: "good",
+          pts: 30,
+          env: +15, cost: +5, social: +25,
+          feedback: "Great choice! Refurbishing extends the product lifecycle — the opposite of premature EOL. Donating to underserved students shows that stewardship includes caring for people, not just the planet. This delays EOL and creates real community value.",
+          impacts: [
+            { label: "Extended product life", type: "positive" },
+            { label: "Community benefit", type: "positive" },
+            { label: "Repair labor costs", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🗑️",
+          title: "Throw in Dumpster",
+          desc: "Toss them in the regular trash — it's the fastest option.",
+          quality: "poor",
+          pts: 0,
+          env: -30, cost: -5, social: -20,
+          feedback: "Poor choice. Dumping electronics in regular trash releases toxic heavy metals (lead, cadmium) into soil and water at the atomic level, causing long-term environmental damage. This is illegal in many places and violates our stewardship responsibility.",
+          impacts: [
+            { label: "Toxic leaching", type: "negative" },
+            { label: "Valuable metals wasted", type: "negative" },
+            { label: "Possibly illegal", type: "negative" }
+          ]
+        },
+        {
+          icon: "📦",
+          title: "Warehouse & Ignore",
+          desc: "Store them indefinitely and make no decision now.",
+          quality: "okay",
+          pts: 5,
+          env: -5, cost: -10, social: -5,
+          feedback: "This avoids immediate harm but isn't a real EOL strategy. Delayed decisions cost money, take up space, and postpone needed action. Good engineers use the OCV method to make timely, deliberate decisions — not defer them indefinitely.",
+          impacts: [
+            { label: "No immediate harm", type: "neutral" },
+            { label: "Ongoing storage cost", type: "negative" },
+            { label: "Problem unresolved", type: "negative" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 2,
+      tag: "🧴 Plastics",
+      title: "Single-Use Plastic Packaging",
+      desc: "A food company packages its products in single-use plastic containers. As engineers redesign the product line, they must decide what EOL strategy to build into the new packaging design from the start.",
+      context: "⚠️ Key fact: Most plastics take 400–1000 years to degrade naturally. At the molecular level, plastic polymers resist breaking down — but some can be reprocessed into new materials if collected properly.",
+      options: [
+        {
+          icon: "♻️",
+          title: "Design for Recycling",
+          desc: "Use only one type of recyclable plastic and print clear recycling instructions on packaging.",
+          quality: "good",
+          pts: 30,
+          env: +20, cost: +5, social: +15,
+          feedback: "Smart engineering! Designing for recyclability is called 'Design for EOL' — building the recycling solution into the product before it's even made. Using a single polymer type makes atomic-level material recovery easier and cheaper. This is proactive stewardship.",
+          impacts: [
+            { label: "Easy material recovery", type: "positive" },
+            { label: "Reduced landfill waste", type: "positive" },
+            { label: "Small design cost increase", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🌿",
+          title: "Switch to Biodegradable",
+          desc: "Replace plastic entirely with compostable plant-based packaging.",
+          quality: "good",
+          pts: 25,
+          env: +25, cost: -10, social: +20,
+          feedback: "Excellent environmental thinking! Biodegradable materials return to natural cycles — just like the natural recycling God built into creation. The cost is higher short-term, but the long-term environmental benefit is significant. Trade-offs are real but this choice reflects strong stewardship values.",
+          impacts: [
+            { label: "Natural degradation cycle", type: "positive" },
+            { label: "Higher material cost", type: "negative" },
+            { label: "Public appeal boost", type: "positive" }
+          ]
+        },
+        {
+          icon: "🔁",
+          title: "Refillable Container Program",
+          desc: "Sell a durable container once; customers return it for refilling, extending the lifecycle.",
+          quality: "good",
+          pts: 28,
+          env: +22, cost: +8, social: +18,
+          feedback: "Creative and effective! Refill programs dramatically extend product lifespan, which delays EOL entirely. This reduces total material use and waste. The logistics require planning, but this is a great example of OCV thinking — balancing objectives, constraints, and values.",
+          impacts: [
+            { label: "Dramatically less waste", type: "positive" },
+            { label: "Customer habit change needed", type: "neutral" },
+            { label: "Long-term cost savings", type: "positive" }
+          ]
+        },
+        {
+          icon: "💸",
+          title: "Ignore EOL, Cut Costs",
+          desc: "Use the cheapest plastic available and leave recycling up to consumers with no guidance.",
+          quality: "poor",
+          pts: 0,
+          env: -25, cost: +5, social: -15,
+          feedback: "This ignores end-of-life responsibility entirely. Engineers who don't think about EOL during design create products that become long-term environmental problems. The small cost savings don't justify the harm — and increasingly, regulations and consumers are holding companies accountable.",
+          impacts: [
+            { label: "Low short-term cost", type: "neutral" },
+            { label: "High environmental damage", type: "negative" },
+            { label: "Regulatory and PR risk", type: "negative" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 3,
+      tag: "🚗 Transportation",
+      title: "Old School Bus Retirement",
+      desc: "A school district needs to retire its 15-year-old diesel school buses. They're too expensive to maintain and no longer meet safety standards. The district must decide what to do with the vehicles.",
+      context: "⚠️ Key fact: Steel, aluminum, copper wiring, and rubber in vehicles are highly recyclable. However, improperly drained fluids (oil, coolant, brake fluid) become toxic waste at the chemical level.",
+      options: [
+        {
+          icon: "🔩",
+          title: "Sell to Metal Recycler",
+          desc: "Drain fluids properly, then send buses to a certified auto recycler who salvages parts and shreds metal.",
+          quality: "good",
+          pts: 30,
+          env: +18, cost: +15, social: +8,
+          feedback: "Well done! Auto recyclers recover 80%+ of vehicle materials by weight. Proper fluid draining prevents toxic contamination at the chemical level. This generates revenue for the district and keeps materials in the production cycle — exactly what multiscale stewardship looks like.",
+          impacts: [
+            { label: "80%+ materials recovered", type: "positive" },
+            { label: "Revenue from scrap metal", type: "positive" },
+            { label: "Toxic fluids handled safely", type: "positive" }
+          ]
+        },
+        {
+          icon: "🎨",
+          title: "Upcycle as Community Space",
+          desc: "Convert retired buses into mobile classrooms, community resource centers, or garden spaces.",
+          quality: "good",
+          pts: 28,
+          env: +15, cost: +5, social: +30,
+          feedback: "Creative upcycling! Converting a product into something more valuable than scrap is called 'upcycling.' This extends the product life in a new form, builds community value, and avoids resource extraction for new buildings. Not always practical, but a great example of stewardship thinking.",
+          impacts: [
+            { label: "Extended product life", type: "positive" },
+            { label: "Strong community benefit", type: "positive" },
+            { label: "Conversion costs money", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🏜️",
+          title: "Abandon in Lot",
+          desc: "Park the buses in a back lot and just leave them — no cost to process now.",
+          quality: "poor",
+          pts: 0,
+          env: -20, cost: -15, social: -10,
+          feedback: "Abandonment is a deferred problem, not a solution. Over time, fluids leak into soil and groundwater, degrading at a chemical level to cause long-term contamination. The buses also take up valuable space and eventually cost more to remove. This fails every part of the OCV framework.",
+          impacts: [
+            { label: "Fluid contamination over time", type: "negative" },
+            { label: "Wasted recoverable materials", type: "negative" },
+            { label: "Future removal costs increase", type: "negative" }
+          ]
+        },
+        {
+          icon: "🏫",
+          title: "Sell to Another District",
+          desc: "Sell the buses to a smaller district that can still use them safely for a few more years.",
+          quality: "good",
+          pts: 22,
+          env: +10, cost: +20, social: +12,
+          feedback: "Practical thinking! Extending a product's useful life in a new context is called 'reuse' — one step better than recycling because it requires no reprocessing energy. If the buses still meet safety standards for the buyer, this delays EOL appropriately and generates revenue. Just verify safety compliance!",
+          impacts: [
+            { label: "Product life extended", type: "positive" },
+            { label: "Good revenue for district", type: "positive" },
+            { label: "Safety must be verified", type: "neutral" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 4,
+      tag: "🏗️ Construction",
+      title: "School Building Demolition",
+      desc: "An old school building needs to be torn down to make way for a new facility. The structure contains wood framing, concrete, brick, copper pipes, and glass. Some sections may have old lead paint.",
+      context: "⚠️ Key fact: Up to 90% of building materials can be recycled or reused. Concrete can be crushed and reused as road base. Lead paint must be carefully contained — lead atoms are toxic to developing brains even at microscopic concentrations.",
+      options: [
+        {
+          icon: "🧱",
+          title: "Selective Deconstruction",
+          desc: "Hire a deconstruction crew to carefully remove reusable materials before demolition — bricks, wood beams, copper pipes, fixtures.",
+          quality: "good",
+          pts: 30,
+          env: +22, cost: +8, social: +15,
+          feedback: "This is the professional choice! Selective deconstruction recovers high-value materials intact — far better than shredding them. Reclaimed wood and brick have character and quality that new materials can't match. The process takes longer but models the best EOL stewardship for buildings.",
+          impacts: [
+            { label: "High-value materials preserved", type: "positive" },
+            { label: "Reduces new resource extraction", type: "positive" },
+            { label: "More labor time required", type: "neutral" }
+          ]
+        },
+        {
+          icon: "♻️",
+          title: "Crush & Recycle Concrete",
+          desc: "Demolish and send concrete to be crushed and used as road base or new construction aggregate.",
+          quality: "okay",
+          pts: 18,
+          env: +12, cost: +10, social: +5,
+          feedback: "Decent approach — recycling concrete is much better than landfilling it. But crushing destroys potential for higher-value reuse of materials like brick and lumber. This is a good baseline but not the best possible outcome. A combined strategy would score higher.",
+          impacts: [
+            { label: "Concrete diverted from landfill", type: "positive" },
+            { label: "Some material value lost", type: "neutral" },
+            { label: "Lead paint risk must be managed", type: "neutral" }
+          ]
+        },
+        {
+          icon: "⚠️",
+          title: "Fast Demolition, Skip Safety",
+          desc: "Use the fastest demolition method to cut costs, ignoring the lead paint removal process.",
+          quality: "poor",
+          pts: 0,
+          env: -25, cost: +15, social: -30,
+          feedback: "Dangerous and illegal. Demolishing without lead paint abatement releases lead dust into the air and soil. Lead atoms are harmful at incredibly tiny concentrations — this is a real-world example of why multiscale thinking matters. Short-term cost savings cause long-term harm to people and place.",
+          impacts: [
+            { label: "Toxic lead dust released", type: "negative" },
+            { label: "Health risk to neighbors", type: "negative" },
+            { label: "Massive legal liability", type: "negative" }
+          ]
+        },
+        {
+          icon: "🎓",
+          title: "Donate Materials to Tech Programs",
+          desc: "Partner with trade schools to let students practice deconstruction and keep materials they salvage.",
+          quality: "good",
+          pts: 28,
+          env: +18, cost: +5, social: +28,
+          feedback: "Creative win-win! This extends the educational value of EOL decisions. Students learn real deconstruction skills, materials are reused, and the school invests in the community. This is OCV in action — meeting multiple objectives simultaneously while honoring your values.",
+          impacts: [
+            { label: "Educational community benefit", type: "positive" },
+            { label: "Materials recovered and reused", type: "positive" },
+            { label: "Requires coordination", type: "neutral" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 5,
+      tag: "🔋 Energy",
+      title: "Solar Panel End of Life",
+      desc: "A community solar installation is 25 years old — the panels still generate some power but at only 70% of original capacity. New, more efficient panels are available. The decision: what to do with the old panels?",
+      context: "⚠️ Key fact: Solar panels contain silicon, silver, and in some cases cadmium or lead — materials with significant recovery value. Panel recycling infrastructure is still developing, making this a genuinely complex EOL challenge.",
+      options: [
+        {
+          icon: "🔄",
+          title: "Resell to Developing Regions",
+          desc: "Sell 70%-capacity panels to communities in developing countries where they're still highly effective compared to no power.",
+          quality: "good",
+          pts: 28,
+          env: +15, cost: +18, social: +30,
+          feedback: "Thoughtful and impactful! A panel that's at 70% capacity in a wealthy community with grid access is a major upgrade for a community with no reliable electricity. This is global stewardship — the OCV method applied at a human scale. Both community and environment win.",
+          impacts: [
+            { label: "Life extension for panels", type: "positive" },
+            { label: "Major social benefit", type: "positive" },
+            { label: "Revenue from resale", type: "positive" }
+          ]
+        },
+        {
+          icon: "🏭",
+          title: "Send to Panel Recycler",
+          desc: "Use a specialized solar panel recycling facility to recover silicon, silver, and safely handle hazardous materials.",
+          quality: "good",
+          pts: 30,
+          env: +25, cost: +5, social: +8,
+          feedback: "Responsible choice for true end-of-life. Certified solar recyclers use multiscale processes to separate valuable materials — silicon crystals, silver contacts, aluminum frames — at the atomic and molecular level. This keeps toxic cadmium/lead out of landfills and recovers critical materials.",
+          impacts: [
+            { label: "Critical materials recovered", type: "positive" },
+            { label: "Toxic materials safely handled", type: "positive" },
+            { label: "Recycling cost involved", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🏡",
+          title: "Offer Free to Homeowners",
+          desc: "Give panels away free to local homeowners who want to add capacity to their own systems.",
+          quality: "okay",
+          pts: 20,
+          env: +12, cost: -5, social: +20,
+          feedback: "This keeps panels in use — good! But giving them away free means no revenue recovery, and without quality disclosure, homeowners may not realize what they're getting. With transparent communication about the 70% capacity, this is a solid community option that extends product life.",
+          impacts: [
+            { label: "Panels stay in service", type: "positive" },
+            { label: "No revenue recovery", type: "neutral" },
+            { label: "Transparency about capacity needed", type: "neutral" }
+          ]
+        },
+        {
+          icon: "🗑️",
+          title: "Landfill Disposal",
+          desc: "Dispose of old panels in a standard landfill — it's the simplest option.",
+          quality: "poor",
+          pts: 0,
+          env: -28, cost: +5, social: -15,
+          feedback: "Poor choice with lasting consequences. Solar panels in landfills can leach cadmium and lead into groundwater as they degrade over decades — a multiscale problem where molecular-level decomposition causes large-scale harm. Valuable materials like silicon and silver are permanently lost. This is the opposite of stewardship.",
+          impacts: [
+            { label: "Toxic leaching risk", type: "negative" },
+            { label: "Valuable materials wasted", type: "negative" },
+            { label: "Growing solar waste crisis", type: "negative" }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // === GAME STATE ===
+  let currentScenario = 0;
+  let totalScore = 0;
+  let envScore = 50;
+  let costScore = 50;
+  let socialScore = 50;
+  let playerChoices = [];
+  let answered = false;
+
+  function startGame() {
+    document.getElementById('intro-screen').style.display = 'none';
+    document.getElementById('scenario-screen').style.display = 'block';
+    currentScenario = 0;
+    totalScore = 0;
+    envScore = 50;
+    costScore = 50;
+    socialScore = 50;
+    playerChoices = [];
+    loadScenario();
+  }
+
+  function loadScenario() {
+    answered = false;
+    const s = scenarios[currentScenario];
+    document.getElementById('scenario-counter').textContent = `Scenario ${currentScenario + 1} of ${scenarios.length}`;
+    document.getElementById('progress-bar').style.width = `${(currentScenario / scenarios.length) * 100}%`;
+
+    document.getElementById('scenario-tag').textContent = s.tag;
+    document.getElementById('scenario-title').textContent = s.title;
+    document.getElementById('scenario-desc').textContent = s.desc;
+    document.getElementById('scenario-context').textContent = s.context;
+
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = '';
+    s.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `
+        <span class="option-icon">${opt.icon}</span>
+        <div class="option-text">
+          <strong>${opt.title}</strong>
+          <span>${opt.desc}</span>
+        </div>
+      `;
+      btn.onclick = () => chooseOption(idx);
+      grid.appendChild(btn);
+    });
+
+    document.getElementById('feedback-overlay').style.display = 'none';
+    document.getElementById('next-btn').textContent = currentScenario < scenarios.length - 1 ? 'Next Scenario →' : 'See Results →';
+  }
+
+  function chooseOption(idx) {
+    if (answered) return;
+    answered = true;
+
+    const s = scenarios[currentScenario];
+    const opt = s.options[idx];
+
+    // Disable all buttons and highlight selection
+    const btns = document.querySelectorAll('.option-btn');
+    btns.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === idx) {
+        btn.classList.add(opt.quality === 'good' ? 'correct' : opt.quality === 'poor' ? 'incorrect' : 'selected');
+      } else {
+        btn.style.opacity = '0.5';
+      }
+    });
+
+    // Update scores
+    totalScore += opt.pts;
+    envScore = Math.min(100, Math.max(0, envScore + opt.env));
+    costScore = Math.min(100, Math.max(0, costScore + opt.cost));
+    socialScore = Math.min(100, Math.max(0, socialScore + opt.social));
+
+    // Update metrics display
+    updateMetrics();
+
+    // Store choice
+    playerChoices.push({
+      scenario: s.title,
+      choice: opt.title,
+      quality: opt.quality,
+      pts: opt.pts
+    });
+
+    // Show feedback
+    const overlay = document.getElementById('feedback-overlay');
+    overlay.style.display = 'block';
+
+    const badge = opt.quality === 'good' ? '🌟' : opt.quality === 'okay' ? '👍' : '⚠️';
+    const titleText = opt.quality === 'good' ? 'Great EOL Choice!' : opt.quality === 'okay' ? 'Okay, But Could Be Better' : 'Poor EOL Decision';
+    const titleClass = opt.quality === 'good' ? 'good' : opt.quality === 'okay' ? 'okay' : 'poor';
+
+    document.getElementById('feedback-badge').textContent = badge;
+    document.getElementById('feedback-title').className = `feedback-title ${titleClass}`;
+    document.getElementById('feedback-title').textContent = titleText;
+    document.getElementById('feedback-body').textContent = opt.feedback;
+    document.getElementById('feedback-points').innerHTML = `⭐ +${opt.pts} pts (Running Total: ${totalScore})`;
+
+    // Impact chips
+    const impactRow = document.getElementById('impact-row');
+    impactRow.innerHTML = '';
+    opt.impacts.forEach(imp => {
+      const chip = document.createElement('div');
+      chip.className = `impact-chip ${imp.type}`;
+      const icon = imp.type === 'positive' ? '✓' : imp.type === 'negative' ? '✗' : '~';
+      chip.textContent = `${icon} ${imp.label}`;
+      impactRow.appendChild(chip);
+    });
+
+    // Set border based on quality
+    if (opt.quality === 'good') overlay.style.borderLeftColor = '#4caf7d';
+    else if (opt.quality === 'okay') overlay.style.borderLeftColor = '#C9A84C';
+    else overlay.style.borderLeftColor = '#ef5350';
+
+    overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function updateMetrics() {
+    document.getElementById('env-bar').style.width = `${envScore}%`;
+    document.getElementById('cost-bar').style.width = `${costScore}%`;
+    document.getElementById('social-bar').style.width = `${socialScore}%`;
+    document.getElementById('env-val').textContent = envScore;
+    document.getElementById('cost-val').textContent = costScore;
+    document.getElementById('social-val').textContent = socialScore;
+  }
+
+  function nextScenario() {
+    currentScenario++;
+    if (currentScenario >= scenarios.length) {
+      showResults();
+    } else {
+      loadScenario();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function showResults() {
+    document.getElementById('scenario-screen').style.display = 'none';
+    document.getElementById('results-screen').style.display = 'block';
+
+    // Score ring
+    const pct = Math.round((totalScore / 150) * 100);
+    const ring = document.getElementById('score-ring');
+    ring.style.setProperty('--pct', `${pct}%`);
+    document.getElementById('final-score').textContent = totalScore;
+
+    // Grade
+    let grade, gradeClass, title, subtitle;
+    if (totalScore >= 130) {
+      grade = '🏆 Master Steward Engineer';
+      gradeClass = 'grade-excellent';
+      title = 'Outstanding EOL Leadership!';
+      subtitle = 'You consistently chose strategies that balance environmental responsibility, cost efficiency, and community benefit. You think like a true Creationeering engineer — seeing products not just at their end, but as the beginning of new cycles.';
+    } else if (totalScore >= 100) {
+      grade = '⭐ Responsible EOL Designer';
+      gradeClass = 'grade-good';
+      title = 'Strong EOL Decision Making!';
+      subtitle = 'You made mostly responsible choices and clearly understand the principles of end-of-life responsibility. Review the scenarios where you scored lower to strengthen your stewardship thinking.';
+    } else if (totalScore >= 60) {
+      grade = '📚 Developing EOL Awareness';
+      gradeClass = 'grade-fair';
+      title = 'Good Start — Keep Learning!';
+      subtitle = 'You\'re developing your understanding of EOL responsibility. Several of your choices had unintended environmental or social consequences. Review the OCV method and consider how each decision affects all three pillars: environment, cost, and community.';
+    } else {
+      grade = '⚠️ EOL Strategy Needs Work';
+      gradeClass = 'grade-poor';
+      title = 'Time to Rethink EOL Strategy';
+      subtitle = 'Several choices in this simulation caused environmental harm or missed opportunities for good stewardship. Revisit the concepts of multiscale modeling, Design for EOL, and the OCV framework — then try again!';
+    }
+
+    document.getElementById('results-title').textContent = title;
+    document.getElementById('grade-badge').textContent = grade;
+    document.getElementById('grade-badge').className = `grade-badge ${gradeClass}`;
+    document.getElementById('results-subtitle').textContent = subtitle;
+
+    document.getElementById('final-env').textContent = envScore + '/100';
+    document.getElementById('final-cost').textContent = costScore + '/100';
+    document.getElementById('final-social').textContent = socialScore + '/100';
+
+    // Decisions review
+    const reviewDiv = document.getElementById('decisions-review');
+    reviewDiv.innerHTML = '<h3>📋 Your Decisions:</h3>';
+    playerChoices.forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      const dotClass = c.quality === 'good' ? 'good' : c.quality === 'okay' ? 'okay' : 'poor';
+      const ptsText = c.pts > 0 ? `+${c.pts} pts` : '0 pts';
+      item.innerHTML = `
+        <div class="review-dot ${dotClass}"></div>
+        <div class="review-scenario">${c.scenario}</div>
+        <div class="review-choice">${c.choice} — ${ptsText}</div>
+      `;
+      reviewDiv.appendChild(item);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function restartGame() {
+    document.getElementById('results-screen').style.display = 'none';
+    document.getElementById('scenario-screen').style.display = 'none';
+    document.getElementById('intro-screen').style.display = 'flex';
+    envScore = 50;
+    costScore = 50;
+    socialScore = 50;
+    updateMetrics();
+  }
+
+  function showSummaryOnly() {
+    document.getElementById('results-card').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Initialize intro
+  document.getElementById('intro-screen').style.display = 'flex';
+</script>
+
+</body>
+</html>

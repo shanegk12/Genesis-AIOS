@@ -57,6 +57,90 @@
       },
       "answer": "B",
       "explanation": "Analysis involves examining elements and understanding interactions, while synthesis is combining that knowledge to optimize and refine designs."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the best definition of a 'microcontroller' as described in the lesson?",
+      "options": {
+        "A": "A compact integrated circuit designed to govern a specific operation in an embedded system.",
+        "B": "A device that detects input from the physical environment.",
+        "C": "A program that tells a computer what to do.",
+        "D": "A component that controls or moves a mechanism or system."
+      },
+      "answer": "A",
+      "explanation": "A microcontroller is a small, self-contained computer designed for specific operations within an embedded system."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the primary role of 'programming' when working with the Arduino for your mousetrap car?",
+      "options": {
+        "A": "To write instructions for the Arduino to follow, telling it how to process data and control outputs.",
+        "B": "To physically connect sensors to the Arduino board.",
+        "C": "To generate electrical power for the Arduino and its components.",
+        "D": "To design the physical structure of the mousetrap car."
+      },
+      "answer": "A",
+      "explanation": "Programming is the process of writing code that gives the Arduino instructions to perform specific tasks."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson describes the Arduino as having 'inputs to receive information' and 'outputs to send commands.' Which of the following best represents an 'output' from the Arduino in your mousetrap car project?",
+      "options": {
+        "A": "Reading data from a speed sensor.",
+        "B": "Detecting an obstacle with a distance sensor.",
+        "C": "Sending a signal to a motor to adjust the car's direction.",
+        "D": "Measuring the rotations per second of a wheel."
+      },
+      "answer": "C",
+      "explanation": "An output from the Arduino is a command it sends to control another component, like a motor."
+    },
+    {
+      "type": "application",
+      "question": "Based on the definition provided, which of these components would be considered an 'actuator' if connected to your Arduino mousetrap car?",
+      "options": {
+        "A": "A light sensor that detects ambient brightness.",
+        "B": "A small motor that can steer the car.",
+        "C": "A button pressed by the user to start the car.",
+        "D": "A temperature sensor measuring the air around the car."
+      },
+      "answer": "B",
+      "explanation": "An actuator is a component that controls or moves a mechanism, such as a motor for steering."
+    },
+    {
+      "type": "application",
+      "question": "Which of the following scenarios best demonstrates 'Digital Measurement' in your mousetrap car project?",
+      "options": {
+        "A": "Using a ruler to manually measure the car's total length.",
+        "B": "Observing how far the car travels by eye.",
+        "C": "An Arduino reading precise numerical data from a speed sensor to calculate distance traveled.",
+        "D": "Drawing a diagram of your car's design."
+      },
+      "answer": "C",
+      "explanation": "Digital measurement involves electronic devices converting physical quantities into precise numerical data."
+    },
+    {
+      "type": "application",
+      "question": "When using the OCV method for a design decision about adding a braking system to your mousetrap car, which of the following would be considered an 'Objective'?",
+      "options": {
+        "A": "The braking system must fit within the car's existing frame.",
+        "B": "To stop the car accurately at a specific finish line.",
+        "C": "The type of material used for the brake pad.",
+        "D": "The total weight added by the braking system."
+      },
+      "answer": "B",
+      "explanation": "An objective is the specific goal or aim you want to achieve with your design decision."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson explains that the Arduino's ability to process information relies on 'atomic-level causes of electron flow through its microchips.' What does this connection between tiny components and the Arduino's overall intelligence best illustrate?",
+      "options": {
+        "A": "The importance of physical strength in car design.",
+        "B": "How complex macro-level functionality emerges from the precise arrangement of materials at the micro-level.",
+        "C": "The need for larger sensors to gather more data.",
+        "D": "That all electronic devices consume a lot of power."
+      },
+      "answer": "B",
+      "explanation": "This illustrates multiscale modeling, where the behavior of small components contributes to the larger system's function."
     }
   ]
 }

@@ -1,0 +1,391 @@
+[
+  {
+    "id": "m011t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Fundamentals of Design</h1><p><strong>Mousetrap Car Mark 1 — Design and Iteration</strong></p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>This lesson bridges the gap between engineering theory and physical reality. You've already studied the Creationeering™ framework — the OCV method, stewardship, and the laws of motion. Now you move from thinking like an engineer to building like one. Through the Mousetrap Car project, you'll experience the full iterative design cycle: prototyping, testing, analyzing data, and refining your design across three progressive builds. Along the way, you'll see how the same principles of order and intentional design that God wove into creation apply directly to the work on your lab bench.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p><ul><li>Explain the iterative design cycle and why repetition leads to better solutions.</li><li>Describe the purpose of each Mark (1, 2, and V3.0) in the mousetrap car project.</li><li>Apply the OFAT (One-Factor-at-a-Time) testing strategy to isolate variables.</li><li>Distinguish between form, function, and aesthetics in an engineering design.</li><li>Connect the principle of iterative refinement to Biblical examples of purposeful design.</li><li>Understand how computational modeling closes the gap between physical performance and theoretical perfection.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Iterative Design",
+          "definition": "A cycle of designing, testing, analyzing, and improving a solution — repeated until the best result is achieved."
+        },
+        {
+          "term": "Prototype",
+          "definition": "An early working model of a design used to test ideas before building the final version."
+        },
+        {
+          "term": "OFAT (One-Factor-at-a-Time)",
+          "definition": "A testing method where only one variable is changed at a time so you can clearly see its effect on the outcome."
+        },
+        {
+          "term": "Ground Truth",
+          "definition": "Real-world data collected through physical testing that becomes the reliable baseline for all future decisions."
+        },
+        {
+          "term": "Synthesis",
+          "definition": "Combining the best findings from multiple tests into one unified, optimized design."
+        },
+        {
+          "term": "CAD (Computer-Aided Design)",
+          "definition": "Software used to create precise digital models of a design before it is physically built."
+        },
+        {
+          "term": "Form Follows Function",
+          "definition": "A design principle stating that the shape of an object should be determined by what it needs to do."
+        },
+        {
+          "term": "Pareto Frontier",
+          "definition": "The theoretical boundary of the best possible performance — where no single improvement can be made without sacrificing something else."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Iterative Design Cycle</h2>\n<p>Great inventions don't appear fully formed. They emerge through a continuous, structured cycle of designing, testing, and improving. Think of it like sculpting — the first pass with the chisel reveals the rough shape, and each pass after that reveals something closer to the finished work.</p>\n<p>For your mousetrap car project, this cycle is organized into three distinct builds, each one building on the lessons of the last. You're not just assembling parts. You're managing a system — taking the stored potential energy in a mousetrap spring and converting it as efficiently as possible into forward motion. Each build gets you closer to mastering that system.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Scripture tells us that God completed His work in stages — light before life, land before plants, animals before humanity. Each stage was intentional and built on what came before. <em>\"God saw all that he had made, and it was very good\"</em> (Genesis 1:31). That final evaluation only made sense because each prior step had been examined and confirmed. Your iterative design cycle works the same way — test, confirm, then build forward.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Mark 1 — Analysis and Variable Isolation</h2>\n<p>Your first build is not about perfection. It's about learning. Mark 1 is your laboratory on wheels.</p>\n<p>You'll start with a pre-built prototype called <strong>Little Moe</strong>. This baseline car gives you real data before you've changed anything — that's your <em>Ground Truth</em>. From there, you'll define the OCV for the project: the objective (maximize distance), the constraints (time, materials, the mousetrap itself), and the variables you can manipulate.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>The OFAT Testing Strategy</h3>\n<p>Once your Mark 1 is built, you'll test it using the <strong>One-Factor-at-a-Time (OFAT)</strong> method. The idea is simple but powerful: change only one thing at a time. Swap the wheel size. Leave everything else the same. Record the result. Then reset and try a different wheel size.</p>\n<p>If you change three things at once and the car goes farther, you won't know which change made the difference. OFAT eliminates that confusion. It's the same principle a doctor uses when adjusting one medication at a time — isolate the cause so you can trust the result.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Good data starts with good habits.</strong> Before every test run, reset the mousetrap the same way, place the car at the same starting point, and record your measurement immediately. Consistency in your process means you can actually trust what your numbers are telling you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t007",
+    "type": "text",
+    "data": {
+      "html": "<h3>What You're Looking For</h3>\n<p>As you test, you're collecting <em>quantitative</em> results — actual numbers, not just impressions. Did the car travel 4.2 meters or 6.8 meters? Those numbers will directly shape your Mark 2 design. You're not guessing at improvements; you're calculating them.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing the OFAT method — one variable changes per test while all others stay constant"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Mark 2 — Synthesis and Performance Validation</h2>\n<p>Mark 2 is where your research becomes reality. Every OFAT test you ran on Mark 1 taught you something. Now you combine the best findings into a single, optimized build. That process of combining is called <strong>synthesis</strong> — taking separate pieces of knowledge and unifying them into something greater than the sum of its parts.</p>\n<p>This build demands precision. You'll polish axles to reduce friction, align wheels carefully, and consider how every component affects the energy transfer from spring to motion. Small details matter enormously here. A rough axle doesn't just slow the car down slightly — it bleeds away the very energy you're trying to deliver to the wheels.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t009",
+    "type": "text",
+    "data": {
+      "html": "<h3>Validating Your Design</h3>\n<p>After assembly, Mark 2 faces high-precision tests — including an <strong>Unpowered Roll Test</strong>, where you push the car gently without the spring and measure how freely it rolls. This isolates your friction losses before the mousetrap ever fires. Final distance runs are recorded by the Arduino sensor station, giving you objective, repeatable data.</p>\n<p>Validation isn't just a formality. It's the moment where your design either proves itself or reveals what still needs work. Either outcome is valuable.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip the roll test.</strong> Many students go straight to the full powered run and then wonder why their car underperforms. The Unpowered Roll Test tells you exactly how much energy your friction is stealing before the spring even engages. Fix friction first — then test with power.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>V3.0 — Computational Design and the Pareto Frontier</h2>\n<p>The third phase takes your project from the physical lab into the digital one. Using <strong>CAD software</strong> and simulation tools, you'll build a mathematical model of your mousetrap car — one that can be tested virtually, adjusted instantly, and pushed toward theoretical perfection.</p>\n<p>This is where you encounter the <strong>Pareto Frontier</strong>: the boundary of the best possible performance. At this frontier, you can't improve one aspect of the design without sacrificing something else. Make the wheels larger and you gain distance but lose acceleration. Make the lever arm longer and you gain torque but lose speed. Every design lives somewhere relative to that frontier, and the goal of V3.0 is to get as close to it as the mathematics allow.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t011",
+    "type": "text",
+    "data": {
+      "html": "<h3>Closing the Data Gap</h3>\n<p>There will always be a gap between your physical Mark 2 performance and what the computer model predicts. That gap is caused by real-world factors the model doesn't fully capture — slight imperfections in materials, measurement error, environmental conditions. Identifying and explaining that gap is itself an engineering skill. The V3.0 analysis phase exists to understand it, not erase it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c004",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p>CAD and simulation tools are used by professional engineers in every major industry — aerospace, automotive, civil, and biomedical. Learning to build and interpret a computational model at this stage puts you ahead of most people who won't encounter these tools until college.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "The three-phase iterative cycle: Mark 1 (Test), Mark 2 (Build), V3.0 (Model)"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Form, Function, and Aesthetics</h2>\n<p>Every engineering design balances three dimensions: what it does, what it looks like, and how those two relate to each other. You've heard the principle before — <strong>form follows function</strong>. The shape of a thing should be determined by what it needs to accomplish.</p>\n<p>This principle is visible throughout creation. A bird's wing isn't wide and flat by accident — its curved shape, called an airfoil, generates lift because that's exactly what a flying creature needs. The form serves the function perfectly. When God designed it, He didn't start with aesthetics and hope it would fly. The aerodynamics came first.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p>Consider Noah's Ark. Its dimensions — 300 cubits long, 50 cubits wide, 30 cubits high — weren't chosen for beauty. Naval architects have since modeled these proportions and confirmed they produce a hull with exceptional stability in rough seas. God gave Noah a design specification, and that specification was engineered to survive a global flood. Form followed function, and the function was survival. <em>(Genesis 6:15)</em></p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t013",
+    "type": "text",
+    "data": {
+      "html": "<h3>Applying Form and Function to Your Car</h3>\n<p>For your mousetrap car, the <strong>function</strong> is clear: convert the potential energy stored in the mousetrap spring into as much forward kinetic motion as possible. Every design decision — wheel diameter, axle material, lever arm length, body weight — either serves that function or works against it.</p>\n<p>Aesthetics still matter, but they come after function. A car that looks great but travels three meters is a less successful design than a simple one that travels twelve. Build for performance first. Then, if your materials and time allow, consider the finish.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011c006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Weight is your enemy.</strong> Every gram of extra material your mousetrap has to pull forward is energy it can't put into distance. Before you add any decorative element to your car, ask: does this serve the function? If not, leave it off until after your final performance run.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011t014",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>The mousetrap car project isn't just a fun build. It's a structured introduction to how real engineering works — from problem definition through testing, refinement, validation, and computational modeling. Each stage teaches you something the last one couldn't. That's the power of iteration.</p>\n<p>You're learning to think like a diagnostician: when something doesn't work, you don't just try something random. You isolate the variable, test the hypothesis, and let the data guide the next decision. That discipline — systematic, patient, evidence-driven — is what separates great engineers from people who just tinker.</p>\n<p>And throughout all of it, remember: the God who designed a universe precise enough to be modeled with mathematics calls you to bring that same care and intentionality to the work on your lab bench.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding — The Three Marks",
+      "html": "<p><strong>1. What is the primary purpose of the Mark 1 build?</strong><br/>To establish a baseline (Ground Truth) and run OFAT tests to identify which variables most affect performance.</p><p><strong>2. Why do we use OFAT testing instead of changing multiple variables at once?</strong><br/>Changing one factor at a time lets you clearly identify what caused a change in performance. Changing multiple things at once makes it impossible to know which change made the difference.</p><p><strong>3. What happens during Mark 2 that's different from Mark 1?</strong><br/>Mark 2 is the synthesis build — you combine the best findings from all your OFAT tests into a single optimized car and then validate it with precision performance tests.</p><p><strong>4. What is the Pareto Frontier?</strong><br/>The theoretical boundary of peak performance where improving one design factor means sacrificing another. It represents the mathematically ideal design.</p><p><strong>5. What does \"form follows function\" mean for your mousetrap car?</strong><br/>Every physical choice — wheel size, body weight, lever arm length — should be made in service of the car's function: maximizing the distance traveled from a single mousetrap spring release.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "m011a002",
+    "type": "accordion",
+    "data": {
+      "title": "Key Concept Review — Design Phases",
+      "html": "<p><strong>Mark 1 — Analysis and Variable Isolation</strong><br/>Purpose: Rapid learning. Establish Ground Truth with Little Moe, then run OFAT tests to discover which variables drive performance.</p><p><strong>Mark 2 — Synthesis and Performance Validation</strong><br/>Purpose: Optimized physical build. Combine best OFAT results, build with precision, and validate with Unpowered Roll Test and Arduino-recorded distance runs.</p><p><strong>V3.0 — Computational Design</strong><br/>Purpose: Mathematical modeling. Use CAD and simulation to reach the Pareto Frontier and close the data gap between physical and theoretical performance.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

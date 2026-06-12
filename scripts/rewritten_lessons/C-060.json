@@ -1,0 +1,448 @@
+[
+  {
+    "id": "c060t0001",
+    "type": "text",
+    "data": {
+      "html": "<h1>What is Performance?</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored Feedback Loops and Process Involvement — how systems constantly communicate and adjust, and how every part plays a role in the overall outcome. Now we're moving deeper into the Creationeering™ framework and entering a crucial phase: <strong>Performance</strong>.</p>\n<p>Performance is where all your hard work in Design, Analysis/Synthesis, Procurement, Logistics, and Assembly truly comes to life. It's the phase where you observe, measure, and evaluate how your created systems operate in the real world. Think of it as the moment of truth — where you find out if your design actually fulfills its purpose. In this lesson, you'll explore what performance means in a technical sense, how it connects to energy, and how you can use that knowledge to optimize systems for greater efficiency and effectiveness, all while remembering your role as a steward of God's creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define performance in an engineering context and explain its significance in the Creationeering™ process.</li>\n<li>Identify how energy transfer and transformation are fundamental to understanding a system's performance.</li>\n<li>Analyze a system's performance by connecting macro-level observations to their underlying atomic-level causes using Multiscale Modeling.</li>\n<li>Apply the OCV method (Objective, Constraint, Variable) to propose solutions for improving system performance.</li>\n<li>Propose methods for optimizing a system's performance, connecting these efforts to the biblical principle of wise stewardship of resources.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060v0001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Performance",
+          "definition": "The measure of how well a system or component fulfills its intended function, often quantified by output, efficiency, or reliability."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "The ratio of useful work output to the total energy input, indicating how much energy is converted into a desired form versus lost as waste."
+        },
+        {
+          "term": "Energy Transfer",
+          "definition": "The movement of energy from one object or system to another, such as heat moving from a hot object to a cold one."
+        },
+        {
+          "term": "Energy Transformation",
+          "definition": "The change of energy from one form to another — for example, chemical energy in fuel changing to kinetic energy in a moving vehicle."
+        },
+        {
+          "term": "System",
+          "definition": "A collection of interacting components that work together to achieve a common purpose."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of making a system or design as effective or functional as possible, often by finding the best balance between competing factors."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An approach that connects phenomena observed at a large scale (macro) to their underlying causes at smaller scales (micro, nano, atomic)."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or purpose that a design or system aims to achieve."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be considered during the design or operation of a system, such as cost, size, or material availability."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor or parameter within a system that can be changed or adjusted to influence its performance."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Creation That Performs With Purpose</h2>\n<p>Every star burns. Every river flows. Every cell in your body carries out thousands of chemical reactions every second. God's creation doesn't just exist — it <em>performs</em>. It executes its purpose with precision so consistent that scientists can build entire careers studying just one small corner of it.</p>\n<p>Romans 1:20 puts it this way: <em>\"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse.\"</em> Creation itself performs a vital function: it reveals who God is. That's a powerful idea. The universe was designed to work in a way that points back to its Designer.</p>\n<p>As a Creationeer, you follow that same principle. Your designs aren't just supposed to look good on paper — they need to work. They need to perform. And understanding performance deeply is how you make sure they do.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060b0001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 1:20</strong> — \"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made, so that people are without excuse.\" God's creation performs its purpose flawlessly. As engineers, we aim to design systems that fulfill their purpose just as intentionally.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Does Performance Actually Mean?</h2>\n<p>In everyday life, you might say a basketball player \"performed well\" or a car \"performs great on the highway.\" In engineering, performance has a more specific meaning. It's the measure of how well a system does what it was designed to do — and it can be quantified. That means you can put a number on it.</p>\n<p>Performance gets measured in different ways depending on what you're building. A bridge is measured by how much weight it can hold. A lightbulb is measured by how much light it produces per unit of energy. A water filter is measured by how much contamination it removes. The question is always the same: <strong>Is this system doing its job — and how well?</strong></p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Performance in the Creationeering™ Process</h3>\n<p>Performance is the phase that comes after Assembly. You've designed, analyzed, procured materials, handled logistics, and put everything together. Now it's time to run your system and see what happens. This is where real-world results either confirm or challenge your original design decisions.</p>\n<p>Think of it like a test launch. You've built the rocket — now you fire it up. What you observe tells you everything: Did it reach the target altitude? Did it burn fuel efficiently? Did any components fail under stress? Every answer feeds directly back into your next round of design improvements.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing the Creationeering™ process cycle with Performance highlighted as the evaluation phase following Assembly."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060c0001",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Performance is both an observation and a measurement.</strong> You're not just watching your system run — you're collecting data, comparing it to your original objectives, and deciding what to do next. Good engineers document everything they observe during the performance phase.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Energy: The Engine Behind Performance</h2>\n<p>Here's a fundamental truth about every system you will ever build: <strong>nothing works without energy.</strong> Every machine, every circuit, every structure that does something useful is either transferring or transforming energy in some way. Understanding how energy moves through your system is one of the most powerful tools you have for evaluating performance.</p>\n<h3>Energy Transfer vs. Energy Transformation</h3>\n<p><strong>Energy transfer</strong> is when energy moves from one place to another. When you hold a hot mug of cocoa, heat energy transfers from the mug into your hands. When a speaker plays music, electrical energy transfers into the movement of air molecules that reach your ears.</p>\n<p><strong>Energy transformation</strong> is when energy changes from one form to another. A car engine transforms chemical energy stored in gasoline into kinetic energy (movement). A solar panel transforms light energy into electrical energy. Your own muscles transform chemical energy from food into mechanical energy when you move.</p>\n<p>Both processes happen constantly in engineered systems — and both affect performance. Every time energy is transferred or transformed, some of it is lost, usually as heat. The less energy you waste in those conversions, the better your system performs.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Understanding Efficiency</h3>\n<p>Efficiency is the number that tells you how well your system converts input energy into useful output. The formula is straightforward:</p>\n<p><strong>Efficiency = (Useful Energy Output ÷ Total Energy Input) × 100%</strong></p>\n<p>A perfectly efficient system would have 100% efficiency — every bit of input energy becomes useful output. In practice, that never happens. Real-world systems always lose some energy to friction, heat, sound, or other forms of waste. A typical car engine, for example, converts only about 20–40% of fuel energy into actual movement. The rest is lost as heat.</p>\n<p>Improving efficiency is one of the main goals of performance optimization. It means getting more useful work out of the same amount of input — and wasting less in the process. That's wise stewardship of resources, which, as we'll see, connects directly to a biblical principle.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram illustrating energy input, useful energy output, and energy lost as waste (heat/friction) in a simple mechanical system."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060c0002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the formula:</strong> Efficiency = (Useful Output ÷ Total Input) × 100%. If a motor uses 200 joules of electrical energy and produces 150 joules of mechanical energy, its efficiency is (150 ÷ 200) × 100% = 75%. The other 25% was likely lost as heat.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Zooming In: Multiscale Modeling</h2>\n<p>When something goes wrong with a system's performance, the cause isn't always obvious just by looking at it. A bridge might sag slightly — but why? The answer might lie not in the overall structure, but in tiny cracks forming at the atomic level inside the steel. A battery might drain faster than expected — and the real reason might be microscopic chemical changes happening inside its cells.</p>\n<p>This is where <strong>Multiscale Modeling</strong> becomes a powerful tool. It's the practice of connecting what you can see at the large (macro) scale to what's happening at much smaller scales — micro, nano, or even atomic. Engineers use this approach to understand <em>why</em> a system performs the way it does, not just <em>that</em> it does.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0010",
+    "type": "text",
+    "data": {
+      "html": "<h3>From Big to Small — and Back Again</h3>\n<p>Imagine you're evaluating a running shoe. At the macro scale, you measure how much cushioning it provides and how quickly it returns energy to the runner's foot. But to truly optimize it, you zoom in. At the micro scale, you look at the foam structure. At the nano scale, you examine the polymer chains that make up that foam. What you find at the small scale tells you exactly which material changes will produce the best results at the large scale.</p>\n<p>God's creation works this way too. The beauty of a sunset is the macro-scale result of light scattering at the molecular level in Earth's atmosphere. The strength of a bone comes from the microscopic arrangement of collagen fibers and mineral crystals. Creation is layered with intentional design at every scale — and so should your engineering.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060c0003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Multiscale Modeling in practice:</strong> Engineers studying why a turbine blade cracks might examine the macro-scale stress distribution, then zoom into the microstructure of the metal alloy, then study atomic-level bonding weaknesses. Each level of analysis adds a piece to the performance puzzle.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0011",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: A Framework for Improvement</h2>\n<p>Once you've observed and measured your system's performance, the next step is figuring out how to make it better. The <strong>OCV method</strong> gives you a structured way to do that. OCV stands for <strong>Objective, Constraint, Variable</strong> — and it's a simple but powerful thinking tool.</p>\n<ul>\n<li><strong>Objective:</strong> What is your design supposed to achieve? Be specific. \"The motor should convert at least 80% of electrical input into mechanical output\" is a clear objective. \"The motor should work well\" is not.</li>\n<li><strong>Constraint:</strong> What limitations are you working within? Budget, size, weight, material availability, safety regulations — these are all constraints. They define the boundaries of what's possible.</li>\n<li><strong>Variable:</strong> What can you actually change to improve performance? This might be the material you use, the shape of a component, the speed of operation, or the order of assembly steps. Variables are your levers for optimization.</li>\n</ul>\n<p>By clearly identifying your objective, naming your constraints, and isolating your variables, you give yourself a focused path toward improvement. Instead of guessing, you engineer your way to a better solution.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060img003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "OCV diagram showing the relationship between Objective (goal), Constraint (limitations), and Variable (adjustable factors) in performance optimization."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060c0004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Changing too many variables at once. If you adjust three things simultaneously and performance improves, you won't know which change actually caused the improvement. Change one variable at a time and document your results carefully.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimization: Making Good Things Better</h2>\n<p>Optimization is the ongoing process of pushing your system closer to its ideal performance. It's not about chasing perfection — it's about making the best possible use of what you have, given your constraints. And that idea connects directly to a biblical principle: stewardship.</p>\n<p>In Matthew 25, Jesus tells the parable of the talents. Three servants are each given resources to manage. The ones who invest wisely and multiply what they were given are praised. The one who buries his talent and returns it unchanged is rebuked. The message is clear: we are called to use what God has given us — not waste it.</p>\n<p>When you optimize a system to reduce wasted energy, use fewer raw materials, or produce less pollution, you're being a wise steward of the resources God has placed in your care. Engineering performance and biblical stewardship aren't separate ideas — they point in exactly the same direction.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060b0002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Matthew 25:21</strong> — \"Well done, good and faithful servant! You have been faithful with a few things; I will put you in charge of many things.\" Optimizing your designs to reduce waste and maximize usefulness is a direct expression of faithful stewardship of the resources — materials, energy, time — that God has entrusted to you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0013",
+    "type": "text",
+    "data": {
+      "html": "<h3>Practical Optimization Strategies</h3>\n<p>So how do you actually optimize a system's performance? Here are several strategies engineers commonly use:</p>\n<ul>\n<li><strong>Reduce friction:</strong> Friction converts kinetic energy into heat — a waste product. Lubricants, smoother surfaces, and better-aligned components all reduce this loss.</li>\n<li><strong>Improve material selection:</strong> Choosing a material that's stronger, lighter, or more thermally efficient can dramatically improve a system's performance without changing its design.</li>\n<li><strong>Refine geometry:</strong> The shape of a component affects how forces move through it. Small changes in shape can reduce stress concentrations and extend a component's life.</li>\n<li><strong>Control operating conditions:</strong> Temperature, pressure, and speed all affect how a system performs. Keeping these within optimal ranges prevents degradation.</li>\n<li><strong>Iterate through testing:</strong> Build, test, measure, adjust, repeat. Optimization is rarely a one-shot process — it happens through repeated cycles of improvement.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060c0005",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> When reviewing performance concepts, try connecting each term to a real object you use every day. What's the \"system\"? What's its objective? What constraints does it operate under? What variables could be adjusted to improve it? This habit will sharpen your engineering thinking fast.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060t0014",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Performance is not a final destination — it's a continuous conversation between your design and the real world. You observe, you measure, you analyze at multiple scales, you apply the OCV method, and you optimize. Then you do it again. This cycle of improvement is how good designs become great ones.</p>\n<p>Remember: God designed a universe that performs with extraordinary precision. Every physical law, every biological process, every atomic interaction works together in a system of breathtaking efficiency. As a Creationeer, you are called to bring that same intentionality to what you build. Design with purpose. Measure carefully. Optimize wisely. And give God the glory for the ability to do it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060d0008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c060a0001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is Performance?",
+      "html": "<p><strong>1. What does the term \"performance\" mean in an engineering context?</strong><br/>Performance is the measure of how well a system or component fulfills its intended function. It is often quantified through output, efficiency, or reliability — not just a general impression that something \"works,\" but a specific, measurable evaluation.</p>\n<p><strong>2. What is the difference between energy transfer and energy transformation?</strong><br/>Energy transfer is when energy moves from one object or system to another (like heat moving from a warm surface to your hand). Energy transformation is when energy changes from one form to another (like chemical energy in a battery becoming electrical energy in a circuit).</p>\n<p><strong>3. How do you calculate efficiency, and why does it matter?</strong><br/>Efficiency = (Useful Energy Output ÷ Total Energy Input) × 100%. It matters because it tells you how much of your input energy is actually doing useful work versus being wasted. Higher efficiency means less waste — and less waste means better stewardship of resources.</p>\n<p><strong>4. What is Multiscale Modeling, and why would an engineer use it?</strong><br/>Multiscale Modeling connects observations at the large (macro) scale to their causes at smaller scales (micro, nano, atomic). An engineer uses it to understand <em>why</em> a system performs the way it does — not just <em>that</em> it performs a certain way — so they can target improvements at the right level.</p>\n<p><strong>5. Define each letter of the OCV method and explain how it guides optimization.</strong><br/><strong>O</strong> = Objective: the specific goal your system must achieve. <strong>C</strong> = Constraint: the limitations you must work within. <strong>V</strong> = Variable: the factors you can adjust to improve performance. Together, OCV gives you a clear, structured approach to improving a system without guessing or changing too many things at once.</p>\n<p><strong>6. How does optimizing a system's performance connect to biblical stewardship?</strong><br/>Optimization means making the best possible use of your resources — reducing waste, improving efficiency, and getting more useful output from what you've been given. This mirrors the biblical principle of stewardship: faithfully and wisely managing the resources God has entrusted to us, just as the servants in the Parable of the Talents were praised for multiplying what they received.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

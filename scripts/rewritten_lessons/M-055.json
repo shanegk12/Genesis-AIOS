@@ -1,0 +1,285 @@
+[
+  {
+    "id": "m055t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Optimization Tests</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, you focused on collecting performance data for your mousetrap car — measuring key metrics like distance, speed, and consistency. That data is your foundation. Now it's time to put it to work.</p><p>Today you dive into the <strong>Sustainability phase</strong> of Creationeering. This is where you take your existing car design and systematically improve it. Optimization means making your car as effective as possible within its design goals — better speed, greater distance, more consistent runs, and reliable performance over time. You'll use the data you already collected to make smart decisions about what to change and how to test those changes.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Understand the purpose of optimization in the engineering design process.</li><li>Learn how to systematically conduct optimization tests on a mousetrap car.</li><li>Apply the OCV (Objective, Constraint, Variable) method to make informed design decisions.</li><li>Recognize and evaluate trade-offs that occur during the optimization of an engineering system.</li><li>Connect optimization and sustainable design to the biblical principle of good stewardship of resources and talents.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Optimization",
+          "definition": "The process of making something as effective or functional as possible — finding the best possible solution for a given problem."
+        },
+        {
+          "term": "Sustainability (Creationeering)",
+          "definition": "In the Creationeering framework, this phase focuses on designing systems to last, adapt, and continue functioning over time, considering resource use and long-term viability."
+        },
+        {
+          "term": "Trade-off",
+          "definition": "A situation where you must give up one thing in order to gain another, often due to competing objectives or constraints in a design."
+        },
+        {
+          "term": "Iteration",
+          "definition": "The process of repeating a sequence of steps, often with slight modifications, to get closer to a desired outcome or solution."
+        },
+        {
+          "term": "Objective",
+          "definition": "The specific goal or target you are trying to achieve with your design or optimization effort."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be considered in your design — such as available materials, budget, or competition rules."
+        },
+        {
+          "term": "Variable",
+          "definition": "An element or characteristic of your design that can be changed or adjusted during testing to observe its effect on performance."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An approach that connects observations at a large, visible scale (macro-level) to the underlying causes and behaviors at a smaller, often invisible, scale (micro or atomic-level)."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:31 (NKJV)</strong> — \"Then God saw everything that He had made, and indeed it was very good.\"</p><p>From the very beginning, God designed His creation with purpose and care. Everything He made was perfectly suited for its role and built to endure. As you work to optimize your mousetrap car, you're reflecting that same drive toward excellence — using the intelligence and creativity God gave you to build something well-made and reliable.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Designing for Endurance</h2><p>God didn't build a universe that falls apart after a few uses. The physical laws He set in place — gravity, motion, friction — have operated consistently since the moment of creation. That kind of reliable, enduring design is the standard we aim for as engineers.</p><p>Your mousetrap car probably works right now. But does it work <em>consistently</em>? Does it perform the same way on the third run as it did on the first? Optimization is your way of moving from \"good enough\" to genuinely excellent — closing the gap between where your car is now and where it could be. This process honors God by making the most of the time, materials, and talents He's given you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A student adjusting the lever arm length on a mousetrap car at a workbench, with a ruler, notebook, and performance data sheet visible nearby"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Optimization?</h2><p>Optimization is about making your mousetrap car the absolute best it can be for its intended purpose. It's not enough for the car to simply move. A well-optimized design meets its goals reliably, efficiently, and repeatedly.</p><p>Think of optimization the way a chef refines a recipe. The first batch of cookies might be good, but after tasting, adjusting the sugar, changing the bake time, and trying again — the result is far better. Every adjustment is informed by the result before it. That's exactly how engineering optimization works: you observe, you adjust, you test again.</p><p>For your mousetrap car, optimization might look like:</p><ul><li>Lengthening the lever arm to increase the distance the string pulls</li><li>Adjusting wheel size to trade speed for distance (or vice versa)</li><li>Reducing friction at the axles for smoother, longer runs</li><li>Repositioning the string attachment point for more consistent launches</li></ul><p>Every one of these changes is a hypothesis. You're not guessing randomly — you're using your performance data to make a prediction, then testing it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Objective, Constraint, Variable</h2><p>Before you change anything on your car, you need a clear framework. The <strong>OCV Method</strong> keeps your testing organized and your reasoning sharp.</p><h3>Objective</h3><p>What are you trying to improve? Be specific. \"Make my car go farther\" is a start, but \"increase average run distance from 4.2 meters to at least 6 meters\" is an objective you can actually test against.</p><h3>Constraint</h3><p>What are the limits you must work within? Common constraints include the original mousetrap mechanism (you can't swap it out), the materials available to you, and any competition rules that govern legal modifications. Constraints are not obstacles — they're the boundaries that make the design challenge meaningful.</p><h3>Variable</h3><p>What single element will you change in this test? Changing one variable at a time is critical. If you adjust the wheel size <em>and</em> the lever arm in the same test, you won't know which change caused the result. One change, one test. That's how engineers isolate cause and effect.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055c001",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Only change one variable at a time.</strong> It's tempting to make several improvements at once, but if you do, you'll have no idea which change actually helped — or hurt — your performance. Test one thing, record the result, then move to the next change.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Trade-offs</h2><p>Here's a truth every engineer eventually learns: improving one thing often comes at a cost to something else. This is called a <strong>trade-off</strong>, and your mousetrap car is full of them.</p><p>For example:</p><ul><li><strong>Larger wheels</strong> — increase distance per rotation, but add weight and rotational inertia, which can slow your car down at the start.</li><li><strong>A longer lever arm</strong> — increases the mechanical advantage and pulls more string, but if it's too long it may not release cleanly or may drag on the ground.</li><li><strong>Lighter materials</strong> — reduce overall weight for better acceleration, but may sacrifice structural strength and durability over multiple runs.</li></ul><p>Recognizing trade-offs is a sign of mature engineering thinking. You're not looking for a perfect solution — you're looking for the <em>best</em> solution given your specific objectives and constraints. That requires judgment, not just calculation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing two mousetrap car configurations side by side — one with large wheels and a short lever arm labeled 'High Distance,' and one with small wheels and a long lever arm labeled 'High Speed' — with arrows indicating the trade-off between the two"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Running Your Optimization Tests</h2><p>Now it's time to actually run your tests. Follow this sequence for each optimization attempt:</p><ol><li><strong>Record your baseline.</strong> Before changing anything, write down your current average performance from the data you already collected. This is your starting point.</li><li><strong>State your OCV.</strong> Write out your Objective, your Constraint(s), and the single Variable you're testing.</li><li><strong>Make the change.</strong> Modify only the variable you identified.</li><li><strong>Run at least three trials.</strong> A single run isn't enough to know anything. Three trials give you a pattern. Five or more is even better.</li><li><strong>Record everything.</strong> Distance, speed, any observations about how the car behaved. Did it drift? Did it launch smoothly? Did it slow down early?</li><li><strong>Compare to your baseline.</strong> Did the change improve performance, hurt it, or make no difference?</li><li><strong>Decide and iterate.</strong> Keep the change if it helped. Revert it if it didn't. Then move to your next variable.</li></ol>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Connecting to Multiscale Thinking</h2><p>When you look at your mousetrap car during a run, you see the big picture — the wheels spinning, the car moving across the floor. But the <em>reasons</em> behind what you see are happening at a much smaller scale.</p><p>Friction at the axle, for instance, is caused by microscopic surface irregularities rubbing against each other. The energy stored in the mousetrap spring comes from the molecular properties of the steel. This connection between what you can see (the macro level) and what's happening beneath the surface (the micro level) is called <strong>multiscale modeling</strong> — and it's how professional engineers think about complex systems.</p><p>You may not be able to observe the micro level directly, but understanding that it exists helps you make better design decisions. When you lubricate an axle to reduce friction, you're working at the macro level to address something happening at the micro level. That kind of thinking separates good engineers from great ones.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Keep a running log.</strong> Every time you make a change, write it down along with the result — even if the change didn't help. Failed tests are not wasted effort; they're data. Knowing what <em>doesn't</em> work is just as valuable as knowing what does.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Optimization</h2><p>There's a deeper reason why optimization matters beyond performance scores and competition results. Every resource you use in this project — time, materials, energy — is something God has entrusted to you. Good stewardship means using those resources wisely and not wastefully.</p><p>An optimized design doesn't just perform better; it often uses materials more efficiently, lasts longer, and wastes less energy. When you take the time to refine your car thoughtfully rather than just rebuilding it from scratch or making random changes, you're practicing the kind of careful stewardship that honors God with your work.</p><p>Optimization is the engineering expression of doing your best with what you've been given. That's a principle worth carrying far beyond this classroom.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m055a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: How Professional Engineers Optimize Complex Systems",
+      "html": "<p>In professional engineering, optimization is rarely done by hand. Engineers use computer software to run hundreds or thousands of simulated tests, changing variables automatically and tracking results. This is called <strong>computational optimization</strong>.</p><p>For example, aerospace engineers optimizing a wing shape might test thousands of slight curve variations in a simulation before ever building a physical prototype. This saves enormous amounts of time and material.</p><p>The underlying math involves finding the minimum or maximum of a function — a topic you'll explore in depth when you study calculus. But the core idea is the same as what you're doing right now with your mousetrap car: define your goal, identify your constraints, change one variable, measure the result, and repeat until you reach the best outcome.</p><p>The tools get more powerful, but the engineering thinking stays the same.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

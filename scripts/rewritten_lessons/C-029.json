@@ -1,0 +1,421 @@
+[
+  {
+    "id": "c029t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Troubleshooting and Debugging Systems</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>This lesson introduces the Creationeering™ Troubleshooting Protocol — a structured 6-step method for diagnosing and fixing system failures in physical, mechanical, and electrical systems. You will use Dr. Horstemeyer's 8-step Creationeering framework as a diagnostic map to trace the root causes of failure, and you will step into one of engineering's most important roles: the technical diagnostician and steward.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p><ul><li>Learn a structured, step-by-step method for diagnosing and fixing system failures across physical, mechanical, and electrical systems.</li><li>Categorize system failures into Physical/Structural, Mechanical, and Electrical domains.</li><li>Utilize the 8-step Creationeering framework (Design through Death/Recycling) to trace the root cause of a system failure.</li><li>Apply the 6-Step Troubleshooting Protocol: Identify Symptom, Isolate Subsystem, Trace Creationeering Step, Develop Hypothesis, Implement Fix, and Verify and Document.</li><li>Connect the process of troubleshooting to the biblical principles of perseverance (Proverbs 24:16) and seeking truth (Romans 8:28).</li><li>Use professional technical vocabulary — such as Tolerance, Torque, Continuity, and Constraint — in engineering analysis and lab reports.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "System Failure",
+          "definition": "When a system or component can no longer perform its intended function within specified limits."
+        },
+        {
+          "term": "System",
+          "definition": "A group of parts working together to perform a function."
+        },
+        {
+          "term": "Subsystem",
+          "definition": "A smaller system nested inside a larger system."
+        },
+        {
+          "term": "Creationeering Troubleshooting Protocol",
+          "definition": "The structured 6-step method used for diagnosing and resolving system failures."
+        },
+        {
+          "term": "Physical/Structural Failure",
+          "definition": "Failure involving the main frame or material integrity — for example, cracks or material fatigue."
+        },
+        {
+          "term": "Mechanical Failure",
+          "definition": "Failure involving moving parts — for example, gear slip or high friction."
+        },
+        {
+          "term": "Electrical Failure",
+          "definition": "Failure involving energy or information flow — for example, broken circuits or faulty sensors."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable amount of variation in a measurement before a part is considered out of spec."
+        },
+        {
+          "term": "Torque",
+          "definition": "The rotational force applied by a motor or other mechanical component."
+        },
+        {
+          "term": "Continuity",
+          "definition": "A complete, unbroken path for electrical current to flow through a circuit."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction placed on a design that the solution must work within."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Steward's Mandate</h2>\n<p>You have already explored the foundational elements of design and how subsystems work together inside a larger system. Today, you are stepping into one of engineering's most critical roles: the diagnostician.</p>\n<p>There is a well-known quote in engineering: <em>\"Scientists study the world as it is, but engineers create the world that never has been.\"</em> That is true — but it is only half the story. As a Christian engineer, your work is also a form of stewardship. When you build a system — whether physical, mechanical, or electrical — you are following the Genesis mandate to rule and care for creation with wisdom. So the real question is: what happens when that system fails?</p>\n<p>Failure is not just a frustrating roadblock. In a fallen world, it is inevitable. But in engineering, failure is also your greatest teacher. Today you will learn exactly how to diagnose and fix system failures — not by guessing, but by using a structured protocol that traces problems back to their root cause.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 24:16</strong> — <em>\"For though the righteous fall seven times, they rise again.\"</em> Every great engineer has faced failure. The difference is not whether your design breaks — it is whether you get back up, find the root cause, and rebuild something better.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a System Failure?</h2>\n<p>Before you can fix a failure, you need to understand what failure actually means in engineering. A <strong>system failure</strong> occurs when a system or component can no longer perform its intended function within specified limits.</p>\n<p>Think about the model you have been building. If it is designed to move at a certain speed, support a certain weight, or light up at a specific time — and it stops doing those things — it has failed. But failure is not always dramatic. There are actually three types:</p>\n<ul><li><strong>Total failure</strong> — the system stops working completely.</li><li><strong>Partial failure</strong> — the system works, but not within its required specifications.</li><li><strong>Intermittent failure</strong> — the system works sometimes but not consistently, making it especially tricky to diagnose.</li></ul>\n<p>Identifying which type of failure you are dealing with is your very first diagnostic move.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p>Intermittent failures are often the hardest to catch because the system appears to work fine when you are testing it. Engineers use repeated tests and careful documentation to expose these hidden problems — patience is a real engineering skill.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Three Failure Domains</h2>\n<p>Not all failures look the same. Engineers organize failures into three domains, which helps narrow down where to look first.</p>\n<h3>Physical / Structural Failure</h3>\n<p>This type of failure involves the frame, body, or raw materials of a system. Think of a bridge with a cracked beam or a chassis that has bent under load. The structure itself can no longer hold things together. Common causes include material fatigue, overloading, or a poor joint connection.</p>\n<h3>Mechanical Failure</h3>\n<p>Mechanical failures happen in the moving parts — gears, motors, axles, linkages. If a gear slips, a motor stalls, or friction becomes so high that a joint seizes, you have a mechanical failure. These often show up as grinding sounds, unexpected slowdowns, or a complete stop in motion.</p>\n<h3>Electrical Failure</h3>\n<p>Electrical failures interrupt the flow of energy or information through a system. A broken wire, a faulty sensor, or a short circuit can all cause an otherwise well-built machine to go completely silent. Checking for <strong>continuity</strong> — a complete, unbroken path for current — is one of the first steps in diagnosing these failures.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing the three failure domains — Physical/Structural, Mechanical, and Electrical — with example failure points labeled on a simple machine model."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When you first notice a problem, resist the urge to start replacing parts randomly. Engineers call this \"shotgun debugging\" — and it wastes time and money. Instead, slow down, observe carefully, and identify which domain the failure belongs to before you touch anything.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The 6-Step Creationeering™ Troubleshooting Protocol</h2>\n<p>Now that you know how to categorize failures, it is time to learn the protocol — the systematic process that moves you from \"something is wrong\" to \"I know exactly what happened and how to fix it.\" Think of it like a doctor's visit. A good doctor does not just hand you medicine the moment you walk in. They ask questions, run tests, and build a hypothesis before prescribing a solution. Engineering diagnosis works the same way.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Step 1 — Identify the Symptom</h3>\n<p>What is the system doing (or not doing) that it should not be? Describe the symptom in precise technical language. \"It doesn't work\" is not an engineering observation. \"The drive motor runs but the wheels do not rotate\" is. Write it down exactly as you observe it.</p>\n<h3>Step 2 — Isolate the Subsystem</h3>\n<p>Which part of the system is most likely responsible? Test subsystems one at a time. Disconnect or bypass components methodically until you can point to the specific subsystem where the failure is occurring. This is exactly how computer programmers debug code — comment out sections until the error disappears, and you have found your culprit.</p>\n<h3>Step 3 — Trace the Creationeering Step</h3>\n<p>Use the 8-step Creationeering framework as your diagnostic map. Ask: at which step in the design-to-life cycle did this failure originate? Was the material chosen poorly during the <em>Design</em> phase? Was the part assembled incorrectly during <em>Manufacturing</em>? Did the system experience unexpected load during <em>Use</em>? Tracing the failure back to its origin in the framework reveals the true root cause.</p>\n<h3>Step 4 — Develop a Hypothesis</h3>\n<p>Based on your observations and your Creationeering trace, form a clear, testable hypothesis. A hypothesis is a structured prediction: <em>\"I believe the motor is stalling because the gear ratio creates more torque demand than the motor can supply at full load.\"</em> A good hypothesis points directly toward a fix.</p>\n<h3>Step 5 — Implement the Fix</h3>\n<p>Make one change at a time. This is critical. If you change three things at once and the system starts working, you will never know which change actually solved the problem. One variable, one test. Document every adjustment you make.</p>\n<h3>Step 6 — Verify and Document</h3>\n<p>Run the system through its full range of intended functions and confirm the failure is resolved. Then document everything — the symptom, your hypothesis, the fix, and the verification result. This documentation becomes a resource for future engineers and for your own growth as a diagnostician.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Flowchart of the 6-Step Creationeering Troubleshooting Protocol, showing arrows connecting each step from Identify Symptom through Verify and Document."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Skipping Step 6. Many students fix the immediate problem but never verify that the full system works correctly or write down what they did. Without documentation, the same failure can appear again — and next time, you will have no record of what solved it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Using the Creationeering Framework as a Diagnostic Map</h2>\n<p>The 8-step Creationeering framework — from Design all the way through Death and Recycling — is not just a production process. It is also one of the most powerful diagnostic tools you have. Every failure in a system has an origin point somewhere along that journey.</p>\n<p>Here is how to think about it: if a structural component cracks under normal load, the root cause might actually be a material specification error made back in the Design step — not a mistake during assembly. If an electrical connection keeps coming loose, the root cause might be a Manufacturing tolerance issue, not an Electrical failure at all. The Creationeering framework forces you to think upstream and ask <em>where did this problem really begin?</em></p>\n<p>This kind of thinking is what separates a technician who replaces broken parts from an engineer who actually solves problems.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Romans 8:28</strong> — <em>\"And we know that in all things God works for the good of those who love him.\"</em> In engineering, even a failure is working toward something good — because every failure teaches you something true about your system. Seeking truth in your design is an act of faithfulness to the Creator who built truth into the fabric of the universe.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Tolerance, Torque, and Constraint — Engineering the Details</h2>\n<p>Three vocabulary terms deserve a closer look because they come up constantly during troubleshooting.</p>\n<h3>Tolerance</h3>\n<p>No manufactured part is ever perfectly identical to its specification on paper. <strong>Tolerance</strong> is the allowable range of variation — the \"close enough\" window that still lets the part perform correctly. When a part falls outside its tolerance, two components that were designed to fit together may bind, slip, or fail entirely. During troubleshooting, always check whether a part is within tolerance before assuming something is fundamentally broken.</p>\n<h3>Torque</h3>\n<p>If your motor or actuator is struggling, the problem is often about <strong>torque</strong> — the rotational force the motor produces. A motor might spin freely with no load but stall completely when connected to a gear train under real-world resistance. Understanding how torque demand changes with load is essential for diagnosing mechanical failures in any driven system.</p>\n<h3>Constraint</h3>\n<p>Every design exists within <strong>constraints</strong> — budget, weight, size, material strength, power limits. Failures often happen when a design is pushed beyond the constraint boundaries it was built for. When you trace a failure, always ask: was this system asked to operate outside its constraints?</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029c006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p>When writing your engineering lab report after troubleshooting, always include the specific technical term that best describes the failure type and the root cause. Using words like <em>torque</em>, <em>continuity</em>, and <em>tolerance</em> — correctly and confidently — is what professional engineering communication looks like.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use the questions below to review what you have learned in this lesson.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is a system failure, and what are the three types?",
+      "html": "<p>A system failure occurs when a system or component can no longer perform its intended function within specified limits. The three types are: <strong>Total failure</strong> (the system stops completely), <strong>Partial failure</strong> (the system works but not within required specifications), and <strong>Intermittent failure</strong> (the system works sometimes but not consistently).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029a002",
+    "type": "accordion",
+    "data": {
+      "title": "What are the three failure domains, and how do you tell them apart?",
+      "html": "<p><strong>Physical/Structural failure</strong> involves the frame or material integrity — think cracks, bends, or broken joints. <strong>Mechanical failure</strong> involves moving parts — think gear slip, motor stall, or high friction. <strong>Electrical failure</strong> involves the flow of energy or information — think broken circuits, faulty sensors, or loss of continuity. You identify which domain applies by observing where the symptom appears in the system.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029a003",
+    "type": "accordion",
+    "data": {
+      "title": "List the 6 steps of the Creationeering Troubleshooting Protocol in order.",
+      "html": "<ol><li><strong>Identify the Symptom</strong> — describe what the system is doing or not doing in precise technical language.</li><li><strong>Isolate the Subsystem</strong> — test subsystems one at a time to locate the failure point.</li><li><strong>Trace the Creationeering Step</strong> — use the 8-step framework to find where in the design-to-life cycle the failure originated.</li><li><strong>Develop a Hypothesis</strong> — write a clear, testable prediction about the root cause.</li><li><strong>Implement the Fix</strong> — make one change at a time and document every adjustment.</li><li><strong>Verify and Document</strong> — confirm the fix works across all intended functions and record everything.</li></ol>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029a004",
+    "type": "accordion",
+    "data": {
+      "title": "Why is it important to change only one variable at a time when testing a fix?",
+      "html": "<p>If you change multiple things at once and the system starts working, you cannot know which change actually solved the problem. Changing one variable at a time keeps your test controlled and gives you a clear, reliable answer about what caused the failure — and what fixed it. This is a core principle of both scientific testing and engineering debugging.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c029a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does the biblical principle in Romans 8:28 connect to troubleshooting?",
+      "html": "<p>Romans 8:28 reminds us that God works all things — including failures — for good. In engineering, a failure is never wasted if you approach it as a truth-seeking exercise. Every broken component or failed test reveals something true about your system that you did not fully understand before. Troubleshooting with patience and honesty is an act of seeking truth, which reflects the character of the God who built order and truth into creation.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

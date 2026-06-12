@@ -1,0 +1,307 @@
+[
+  {
+    "id": "c081t0001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Material Recovery and Salvage Value</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored the ethical side of End-of-Life (EOL) Responsibility — thinking carefully about how our creations affect people and the planet long after they leave our hands. Today, we go one step further into the final phase of the Creationeering™ framework: <strong>Death &amp; Recycling</strong>.</p>\n<p>This phase is all about what happens to products and materials after their designed performance is over. Instead of seeing the end of a product's life as a dead end, you'll start to see it as a doorway. We'll explore how to recover valuable materials, calculate their salvage value, and find new purposes for them — reflecting God's wisdom in renewal and resourcefulness.</p>\n<p>Along the way, you'll connect what you can see and touch at the macro level to what's happening at the atomic level inside materials. You'll also apply the Objective, Constraint, Variable (OCV) method to optimize real material recovery decisions.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define material recovery and salvage value within the Creationeering™ Death &amp; Recycling phase.</li>\n<li>Explain why material recovery matters for sustainable engineering practice.</li>\n<li>Identify macro-level signs of material degradation and connect them to atomic-level causes.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to a material recovery design problem.</li>\n<li>Reflect on biblical principles of stewardship and renewal as they relate to extending the life of materials.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081v0001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Material Recovery",
+          "definition": "The process of collecting and processing materials from discarded products for reuse or recycling."
+        },
+        {
+          "term": "Salvage Value",
+          "definition": "The estimated worth of a product or its components at the end of its useful life."
+        },
+        {
+          "term": "Recycling",
+          "definition": "Converting an already existing product or material into a new product."
+        },
+        {
+          "term": "Upcycling",
+          "definition": "Repurposing discarded materials into products of higher value or quality."
+        },
+        {
+          "term": "Downcycling",
+          "definition": "Recycling a material into a product of lesser quality than the original."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations from large-scale systems to the behavior of materials at atomic and molecular levels."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or trade-off when multiple objectives and constraints are present."
+        },
+        {
+          "term": "Dominion Mandate",
+          "definition": "God's command for humanity to rule over, care for, and steward the Earth and its resources."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081d0001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081b0001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Jeremiah 18:3-4</strong> — <em>\"So I went down to the potter's house, and there he was working at his wheel. And the vessel he was making of clay was spoiled in the potter's hand, and he reworked it into another vessel, as it seemed good to the potter to do.\"</em></p><p>Just as the potter doesn't throw away spoiled clay, you are called to rework and renew the materials God has provided. That is the heart of material recovery.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Potter's Wheel of Renewal</h2>\n<p>Think about a potter sitting at a wheel. The clay spins under her hands, taking shape — and then something goes wrong. A bubble, a crack, an uneven wall. Does she throw the clay away? No. She collapses the vessel and starts again, using the same clay to make something even better.</p>\n<p>That image from Jeremiah 18 is more than a spiritual metaphor. It is an engineering principle. Resources are not meant to be used once and discarded. With the right process, knowledge, and creativity, materials that seem spent can be transformed into something valuable again. This is exactly what the <strong>Death &amp; Recycling</strong> phase of the Creationeering™ framework is designed to help you do.</p>\n<p>God built renewal into His creation from the very beginning — think of seasons, of seeds, of the water cycle. As engineers, we reflect that design when we recover and repurpose materials instead of sending them to a landfill.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081d0002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Material Recovery?</h2>\n<p>Material recovery is exactly what it sounds like: recovering something valuable from a product that has reached the end of its original use. Think of it as giving old things a new job.</p>\n<p>When a product can no longer perform the way it was designed to, two things might still have value inside it — the <strong>materials</strong> it is made of, and the <strong>components</strong> that still work. Material recovery means carefully extracting those valuable parts before anything goes to waste.</p>\n<p>Here is a simple way to picture it: imagine a broken bicycle. The frame might be bent beyond repair, but the chain, gears, tires, and handlebars could all be removed and reused. The aluminum in the frame can be melted down and reformed. Nothing truly has to disappear — it just changes form.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Three Paths for Recovered Materials</h3>\n<p>Once you have recovered a material or component, you have three main options for what to do with it:</p>\n<ul>\n<li><strong>Recycling</strong> — Breaking the material down and reforming it into a new product of similar quality. Melting aluminum cans into new aluminum sheets is a classic example.</li>\n<li><strong>Upcycling</strong> — Turning the recovered material into something of <em>higher</em> value than before. An old barn door becoming a designer dining table is upcycling. The material gained value through creativity.</li>\n<li><strong>Downcycling</strong> — Reusing the material in an application of <em>lower</em> quality. Plastic bottles becoming carpet fiber is downcycling. It is still better than landfill, but the material loses some of its original quality in the process.</li>\n</ul>\n<p>Each path has a place in responsible engineering. Your job as a Creationeer is to choose the path that best honors the resources God has provided — and that usually means reaching for the highest value recovery you can achieve.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081i0001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side diagram showing three recovery paths: recycling (aluminum can melted into new sheet), upcycling (wooden pallet transformed into a shelf), and downcycling (plastic bottle broken down into carpet fiber), with arrows indicating the flow of material value."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Salvage Value</h2>\n<p>Every product — even a broken or worn-out one — still has some economic worth. That worth is called its <strong>salvage value</strong>. Engineers and designers think about salvage value from the very beginning of a product's life, not just at the end.</p>\n<p>Salvage value is influenced by several factors:</p>\n<ul>\n<li><strong>Material type</strong> — Metals like copper, aluminum, and steel typically hold high salvage value because they can be melted and reused with little quality loss.</li>\n<li><strong>Condition</strong> — A component that still functions is worth more than one that is corroded or cracked.</li>\n<li><strong>Market demand</strong> — Some materials are worth more at certain times depending on supply and demand in the recycling market.</li>\n<li><strong>Ease of disassembly</strong> — If a product was designed so its parts can be easily separated, recovery costs drop and salvage value goes up.</li>\n</ul>\n<p>This is why engineers talk about <strong>design for disassembly</strong> — planning from the start so that a product can be taken apart cleanly at the end of its life. It is stewardship built right into the blueprint.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081d0003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Seeing Materials at Two Scales</h2>\n<p>Here is something that might surprise you: the way a material looks and behaves when you hold it in your hand is directly caused by what is happening at the atomic level — billions of times smaller than you can see.</p>\n<p>This connection between the large scale and the tiny scale is called <strong>multiscale modeling</strong>. Engineers use it to understand <em>why</em> materials degrade and <em>how</em> to recover them most effectively.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0009",
+    "type": "text",
+    "data": {
+      "html": "<h3>Macro-Level Observations</h3>\n<p>At the macro level — the scale you can see and touch — material degradation shows up in visible, measurable ways:</p>\n<ul>\n<li><strong>Rust and corrosion</strong> — Orange flaking on steel, green patina on copper.</li>\n<li><strong>Cracking and brittleness</strong> — Plastic that snaps instead of bending, concrete with visible fractures.</li>\n<li><strong>Discoloration</strong> — Yellowing of white plastic left in sunlight.</li>\n<li><strong>Warping</strong> — Wood that has absorbed moisture and bent out of shape.</li>\n</ul>\n<p>These are your clues as an engineer. Each observation tells a story about what the material has been through.</p>\n<h3>Atomic-Level Causes</h3>\n<p>Zoom in far enough and you find out why those things are happening:</p>\n<ul>\n<li><strong>Rust</strong> happens when iron atoms bond with oxygen atoms in the presence of water — a chemical reaction that breaks down the iron's crystal structure.</li>\n<li><strong>Brittleness in plastic</strong> occurs when UV light breaks the long polymer chains that give plastic its flexibility into shorter, weaker fragments.</li>\n<li><strong>Warping in wood</strong> is caused by water molecules pushing between the cellulose fibers, forcing them apart unevenly.</li>\n</ul>\n<p>Understanding the atomic cause helps you make a smarter recovery decision. Rusted steel can still be melted and purified — the iron atoms are still there. Degraded polymer chains, however, may only be suitable for downcycling because their molecular structure has changed permanently.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081i0002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A two-panel diagram: the left panel shows a macro-level photo of rusted steel with visible orange flaking; the right panel shows a zoomed-in atomic model illustrating iron atoms bonded with oxygen molecules, labeled to show how the atomic reaction causes the macro-level corrosion visible on the left."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Material Recovery</h2>\n<p>How do you make the best decision when there are so many variables in a material recovery situation? This is where the <strong>Objective, Constraint, Variable (OCV) method</strong> becomes your most useful engineering tool.</p>\n<p>Remember: optimization is not about finding a perfect answer — it is about finding the <em>best available</em> answer given the real limits you face. Just like a skilled steward managing a limited budget to do the most good, an engineer uses OCV to get the most value out of every recovery decision.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0011",
+    "type": "text",
+    "data": {
+      "html": "<h3>Breaking Down OCV for Material Recovery</h3>\n<ul>\n<li><strong>Objective</strong> — What are you trying to achieve? Examples: maximize the salvage value recovered, minimize waste sent to landfill, or reduce the energy cost of processing.</li>\n<li><strong>Constraints</strong> — What limits do you have to work within? Examples: available equipment, time, budget, local recycling infrastructure, or regulations on hazardous materials.</li>\n<li><strong>Variables</strong> — What can you adjust or choose? Examples: which components to disassemble first, which recovery path to use (recycle, upcycle, or downcycle), which processing method to apply.</li>\n</ul>\n<p>Here is a quick example. Suppose you are recovering materials from old smartphones:</p>\n<ul>\n<li><strong>Objective:</strong> Maximize the value of recovered materials.</li>\n<li><strong>Constraints:</strong> You have basic hand tools, a four-hour window, and can only process 50 phones.</li>\n<li><strong>Variables:</strong> You can choose which parts to target — the gold-plated circuit board contacts (high value, hard to extract), the lithium battery (moderate value, must be handled carefully), or the glass screen (low salvage value, easy to remove).</li>\n</ul>\n<p>Running through OCV helps you see that targeting the circuit board contacts first gives the best return within your constraints — a classic optimization decision.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081c0001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV shortcut:</strong> When you feel overwhelmed by a material recovery problem, write your Objective at the top of a page, list your Constraints below it, then list every Variable you can change. Draw a line to show which variables help you reach your objective within each constraint. The path with the most lines is usually your best starting point.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and the Dominion Mandate</h2>\n<p>Everything we have covered in this lesson — material recovery, salvage value, upcycling, multiscale analysis, OCV optimization — flows from a single biblical foundation: the <strong>Dominion Mandate</strong>.</p>\n<p>In Genesis 1:28, God gives humanity authority over creation. But authority is not the same as ownership. A steward manages what belongs to someone else — carefully, wisely, and with the owner's purposes in mind. The Earth and its resources belong to God. We are the stewards.</p>\n<p>That means landfilling recoverable materials is not just an engineering inefficiency. It is a stewardship failure. When you design a product with disassembly in mind, choose upcycling over landfill, or apply the OCV method to recover the highest value from a worn-out component, you are living out the Dominion Mandate in a very practical way.</p>\n<p>The potter does not waste the clay. Neither should you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081c0002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common misconception:</strong> Many students assume recycling is always the best option because it sounds the most responsible. But recycling can actually consume significant energy and water. Sometimes <em>reusing</em> a component without processing it at all — or upcycling it into something new — has a far smaller environmental cost. Always evaluate your full OCV before defaulting to one path.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c081t0013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Let's review the key ideas from this lesson:</p>\n<ul>\n<li><strong>Material recovery</strong> is the process of extracting usable materials or components from products that have reached the end of their original use.</li>\n<li><strong>Salvage value</strong> is the estimated worth of those recovered materials — and smart engineers design for it from day one.</li>\n<li><strong>Recycling, upcycling, and downcycling</strong> are the three main recovery paths, each with different outcomes for material quality and value.</li>\n<li><strong>Multiscale modeling</strong> connects what you observe at the macro level (rust, cracking, warping) to atomic-level causes, helping you make smarter recovery decisions.</li>\n<li>The <strong>OCV method</strong> helps you optimize those decisions by clearly defining your objective, working within your constraints, and adjusting your variables.</li>\n<li>All of this is grounded in the <strong>Dominion Mandate</strong> — your calling as a Creationeer to steward God's creation with wisdom and care.</li>\n</ul>\n<p>Every product that gets a second life instead of a landfill is a small act of worship — a reflection of the God who makes all things new.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

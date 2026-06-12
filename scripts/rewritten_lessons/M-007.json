@@ -1,0 +1,283 @@
+[
+  {
+    "id": "m007t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Digital Measurement</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In your last lesson, you built Little Moe — your first mousetrap car prototype. You made real decisions about materials, assembly, and design. Now the work shifts. This lesson moves you into the <strong>Analysis &amp; Synthesis</strong> phase of the Creationeering process, and it starts with something that might seem simple: measuring.</p>\n<p>Digital Measurement is about more than reading numbers off a screen. Precise measurements are the foundation for understanding <em>why</em> your car performs the way it does — and knowing exactly what to change to make it better. Every dimension you record, every angle you check, and every weight you log will feed directly into your design decisions as you optimize your car for distance, speed, or power.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p>\n<ul>\n<li>Define accuracy and precision in the context of digital measurement.</li>\n<li>Use digital measurement tools correctly to gather data from mousetrap car components.</li>\n<li>Record and interpret digital measurements for design analysis.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to refine a car's design based on measurement data.</li>\n<li>Recognize meticulous measurement as an act of good stewardship, reflecting God's order and attention to detail in creation.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Accuracy",
+          "definition": "How close a measurement is to the true or actual value of what is being measured."
+        },
+        {
+          "term": "Precision",
+          "definition": "How close repeated measurements are to each other, regardless of whether they are close to the true value."
+        },
+        {
+          "term": "Digital Caliper",
+          "definition": "A precise measuring instrument used to measure internal and external distances, depths, and steps, displaying results digitally."
+        },
+        {
+          "term": "Digital Protractor",
+          "definition": "A tool used to measure angles, providing a digital readout for greater precision than traditional protractors."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at a large (macro) scale to their underlying causes at smaller (micro) scales."
+        },
+        {
+          "term": "Objective",
+          "definition": "A desired outcome or goal for a design, such as maximizing distance or speed."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be met in a design, such as available materials, track size, or rules."
+        },
+        {
+          "term": "Variable",
+          "definition": "An aspect of the design that can be changed or adjusted to achieve the objectives within the given constraints."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Precise Design</h2>\n<p>Genesis 1:1 opens with one of the most powerful statements ever written: <em>\"In the beginning, God created the heaven and the earth.\"</em> That's not just a historical fact — it's a declaration about the kind of Creator God is. Nothing in His creation was thrown together. From the orbital paths of planets to the structure of a single cell, everything reflects intentional design and extraordinary detail.</p>\n<p>You are made in that image. When you pick up a caliper and carefully measure the axle diameter on your mousetrap car, you are doing something that echoes what God modeled for us — bringing order, precision, and purpose to the work in front of you. Measurement isn't just a technical step. It's an act of good stewardship over the materials and design God has placed in your hands.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:1 (KJV)</strong> — \"In the beginning, God created the heaven and the earth.\" God's creation was not accidental or approximate. It was designed with exactness. As you measure your car's components, bring that same intentionality to your work.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Accuracy vs. Precision — They Are Not the Same Thing</h2>\n<p>These two words get mixed up all the time, even by experienced engineers. Here's the clearest way to understand them: imagine you're throwing darts at a target.</p>\n<ul>\n<li><strong>Accurate but not precise:</strong> Your darts land all over the board, but they average out near the bullseye.</li>\n<li><strong>Precise but not accurate:</strong> All your darts cluster tightly together — but they're off to the side of the bullseye.</li>\n<li><strong>Accurate and precise:</strong> Your darts cluster tightly <em>and</em> they're right on the bullseye. That's the goal.</li>\n</ul>\n<p>In engineering, you want both. If you measure your wheel diameter five times and get 52 mm every single time, that's precise. But if the wheel is actually 48 mm wide, those measurements are not accurate — and your design calculations will be wrong. Reliable data requires both qualities working together.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Three dart board diagrams side by side showing: (1) scattered darts averaging near center (accurate, not precise), (2) tight cluster off-center (precise, not accurate), (3) tight cluster at the bullseye (both accurate and precise)"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Your Digital Measurement Tools</h2>\n<p>For this project you will use two primary digital tools. Learning to use them correctly is just as important as understanding what they measure.</p>\n<h3>The Digital Caliper</h3>\n<p>A digital caliper is one of the most useful instruments in any engineering lab. It can measure four things: outside dimensions (like wheel diameter), inside dimensions (like the inside of a tube), depth (like how deep a hole is), and step measurements. The jaws clamp gently around or inside your component, and a digital display gives you a reading — typically to the nearest 0.01 mm or 0.001 inch. Always zero the caliper before measuring, and apply consistent, gentle pressure each time.</p>\n<h3>The Digital Protractor</h3>\n<p>Angles matter just as much as lengths. The angle of your lever arm, the tilt of your axle mount, the slope of your launch ramp — these all affect how your car moves. A digital protractor removes the guesswork of reading a printed scale and gives you a clear numerical readout. Place it flat against the surface you're measuring, and let the display do the work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A digital caliper measuring the diameter of a small wooden wheel, with the digital display clearly visible showing a reading in millimeters"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Forgetting to zero your digital caliper before each use. If the display doesn't read 0.00 when the jaws are fully closed, press the zero button before you measure anything. Skipping this step can throw off every single reading you take.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Thinking: From the Big Picture to the Small Details</h2>\n<p>Here's a concept that separates good engineers from great ones: <strong>multiscale modeling</strong>. The idea is that what you observe at a large scale — say, your car veering left — is caused by something happening at a much smaller scale, like one axle being slightly thicker than the other, creating uneven friction.</p>\n<p>Your digital measurements are the bridge between those scales. When you measure a wheel, you are zooming in on one small component to understand its contribution to the whole car's behavior. A difference of just 2 mm in wheel diameter can change how far your car travels. That's why precision at the component level matters so much for performance at the full-car level.</p>\n<p>Think of it like a recipe. If one ingredient is slightly off, the whole dish tastes different. Engineering is the same way — small measurement errors compound into large performance problems.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Turning Measurements into Decisions</h2>\n<p>Measurements are only useful if they lead somewhere. That's where the <strong>Objective, Constraint, Variable (OCV)</strong> method comes in. It gives you a structured way to look at your data and decide what to change.</p>\n<ul>\n<li><strong>Objective:</strong> What do you want your car to do? Go farther? Go faster? Your objective defines success.</li>\n<li><strong>Constraint:</strong> What are you not allowed to change? Maybe the mousetrap size is fixed, or the track length is set, or you only have certain materials. These are your boundaries.</li>\n<li><strong>Variable:</strong> What <em>can</em> you change? Wheel diameter, axle position, lever arm length — these are your design levers. Your measurements tell you the current value of each variable, and your analysis tells you which ones to adjust.</li>\n</ul>\n<p>For example: if your <strong>objective</strong> is maximum distance, your <strong>constraint</strong> is the standard mousetrap size, and your measurements show the rear wheels are different diameters (a <strong>variable</strong>), then matching those wheel sizes becomes your next design move. Measurement without a framework is just data. OCV turns data into action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007c003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Engineering tip:</strong> When you measure a component, take the same measurement at least three times and record all three values. If they match, you have precise data. If they vary, find out why before moving on — inconsistency is always telling you something important about your tools, your technique, or your component.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Recording Your Measurements</h2>\n<p>A measurement that isn't written down doesn't exist in engineering. Your data table is your record of truth — it's what you refer back to when making design decisions, and it's what you present when explaining your results.</p>\n<p>When recording measurements, always include:</p>\n<ul>\n<li>The component you measured (e.g., \"rear left wheel\")</li>\n<li>The measurement type (e.g., diameter, axle length, lever angle)</li>\n<li>The value with its unit (e.g., 52.4 mm — never just \"52.4\")</li>\n<li>The tool used (e.g., digital caliper)</li>\n<li>Any notes about conditions or observations</li>\n</ul>\n<p>This level of documentation might feel like extra work right now, but it is exactly what professional engineers do. It also makes it much easier to spot patterns — like noticing that your front wheels are consistently smaller than your rear wheels, which could explain why your car doesn't travel in a straight line.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m007acc01",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the difference between accuracy and precision?</strong><br/>Accuracy is how close your measurement is to the true value. Precision is how consistent your repeated measurements are with each other. You need both for reliable engineering data.</p>\n<p><strong>2. What does a digital caliper measure that a ruler cannot?</strong><br/>A digital caliper can measure internal dimensions, depths, and steps in addition to external dimensions — all with much greater precision than a standard ruler.</p>\n<p><strong>3. In the OCV method, what is a variable?</strong><br/>A variable is any aspect of the design you are allowed to change in order to meet your objective within your constraints. Examples include wheel diameter, axle length, or lever arm angle.</p>\n<p><strong>4. Why is it important to take the same measurement three times?</strong><br/>Taking three readings checks for precision. If the values are consistent, your measurement is reliable. If they vary, something is wrong with your technique or the component itself — and that's worth investigating.</p>\n<p><strong>5. How does multiscale modeling connect to mousetrap car design?</strong><br/>Multiscale modeling means understanding that large-scale behavior (how far the car travels) is driven by small-scale details (exact wheel diameter, axle straightness). Precise measurements at the component level explain and predict performance at the full-car level.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

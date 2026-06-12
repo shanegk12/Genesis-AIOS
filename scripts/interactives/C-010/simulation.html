@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualization & Sketching – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; }
+  header p { font-size: 0.82rem; color: #C9A84C; margin-top: 2px; }
+
+  #app {
+    width: 100%;
+    max-width: 860px;
+    padding: 18px 16px 40px;
+  }
+
+  /* ---- PROGRESS BAR ---- */
+  #progress-bar-wrap {
+    background: #dde3eb;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    background: #C9A84C;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  #round-label {
+    font-size: 0.78rem;
+    color: #5a6e85;
+    text-align: right;
+    margin-top: 4px;
+    margin-bottom: 14px;
+  }
+
+  /* ---- CARD ---- */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.10);
+    padding: 24px 22px;
+    margin-bottom: 18px;
+  }
+
+  /* ---- QUESTION ---- */
+  #question-area h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1B3A5C;
+    line-height: 1.4;
+  }
+  #question-area .category-tag {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  #question-area .prompt {
+    font-size: 1.0rem;
+    color: #1B3A5C;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  #question-area .context-box {
+    background: #f0f4fa;
+    border-left: 4px solid #C9A84C;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    color: #2a4a6b;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  /* ---- DRAG & DROP ---- */
+  .dnd-container {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .dnd-bank, .dnd-zone-wrap {
+    flex: 1;
+    min-width: 200px;
+  }
+  .dnd-bank h3, .dnd-zone-wrap h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #5a6e85;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .drop-zone {
+    min-height: 56px;
+    border: 2px dashed #c4cdd8;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: flex-start;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .drop-zone.drag-over {
+    border-color: #C9A84C;
+    background: #fffbf0;
+  }
+  .drop-zone .zone-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .drag-item {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: opacity 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .drag-item:active { opacity: 0.75; transform: scale(0.97); }
+  .drag-item.dragging { opacity: 0.45; }
+  .drag-item.correct { background: #2a7a4f; }
+  .drag-item.incorrect { background: #b03030; }
+
+  /* ---- MULTIPLE CHOICE ---- */
+  .mc-options { display: flex; flex-direction: column; gap: 10px; }
+  .mc-option {
+    background: #f0f4fa;
+    border: 2px solid #c4cdd8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.93rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: #1B3A5C;
+    text-align: left;
+    line-height: 1.45;
+  }
+  .mc-option:hover:not([disabled]) { border-color: #1B3A5C; background: #e6ecf5; }
+  .mc-option.selected-correct { background: #d6f0e2; border-color: #2a7a4f; color: #1a4a30; }
+  .mc-option.selected-wrong { background: #fce8e8; border-color: #b03030; color: #6b1a1a; }
+  .mc-option.reveal-correct { background: #d6f0e2; border-color: #2a7a4f; }
+  .mc-option[disabled] { cursor: default; }
+
+  /* ---- LINE SKETCH VISUAL ---- */
+  .line-visual-wrap { overflow-x: auto; margin-bottom: 14px; }
+  .line-visual-wrap svg { display: block; margin: 0 auto; max-width: 100%; }
+
+  /* ---- SCALE SLIDER ---- */
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .slider-row label { font-size: 0.88rem; font-weight: 600; min-width: 70px; }
+  input[type=range] {
+    flex: 1;
+    min-width: 120px;
+    accent-color: #C9A84C;
+  }
+  .slider-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #C9A84C;
+    min-width: 50px;
+    text-align: left;
+  }
+  .scale-visual { text-align: center; margin-bottom: 14px; }
+  .scale-visual canvas { border: 1px solid #c4cdd8; border-radius: 8px; background: #fff; max-width: 100%; }
+
+  /* ---- SEQUENCE / BUILD ORDER ---- */
+  .seq-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .seq-item {
+    background: #f0f4fa;
+    border: 2px solid #c4cdd8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: grab;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.15s;
+  }
+  .seq-item:active { box-shadow: 0 4px 16px rgba(27,58,92,0.18); }
+  .seq-item.dragging { opacity: 0.45; }
+  .seq-num {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .seq-item.correct-pos { border-color: #2a7a4f; background: #d6f0e2; }
+  .seq-item.wrong-pos { border-color: #b03030; background: #fce8e8; }
+
+  /* ---- FEEDBACK ---- */
+  #feedback-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    display: none;
+  }
+  #feedback-box.correct { background: #d6f0e2; color: #1a4a30; border: 1.5px solid #2a7a4f; }
+  #feedback-box.incorrect { background: #fce8e8; color: #6b1a1a; border: 1.5px solid #b03030; }
+  #feedback-box.neutral { background: #fffbf0; color: #5a3a00; border: 1.5px solid #C9A84C; }
+
+  /* ---- BUTTONS ---- */
+  .btn {
+    display: inline-block;
+    padding: 11px 26px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: #C9A84C; color: #1B3A5C; }
+  .btn-primary:hover { background: #b8952e; }
+  .btn-secondary { background: #1B3A5C; color: #fff; }
+  .btn-secondary:hover { background: #14304d; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+  /* ---- SCORE SCREEN ---- */
+  #score-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 10px 40px;
+  }
+  #score-screen .big-score {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #C9A84C;
+    line-height: 1;
+    margin: 18px 0 6px;
+  }
+  #score-screen .score-label {
+    font-size: 1rem;
+    color: #5a6e85;
+    margin-bottom: 22px;
+  }
+  #score-screen .verdict {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 10px;
+  }
+  #score-screen .verse {
+    font-size: 0.85rem;
+    color: #5a6e85;
+    font-style: italic;
+    margin-bottom: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .summary-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.86rem; margin-bottom: 20px; }
+  .summary-table th { background: #1B3A5C; color: #C9A84C; padding: 8px 12px; }
+  .summary-table td { padding: 8px 12px; border-bottom: 1px solid #e0e5ec; color: #1B3A5C; }
+  .summary-table tr:nth-child(even) td { background: #f0f4fa; }
+  .tick { color: #2a7a4f; font-weight: 700; }
+  .cross { color: #b03030; font-weight: 700; }
+
+  /* ---- START SCREEN ---- */
+  #start-screen {
+    text-align: center;
+    padding: 20px 10px;
+  }
+  #start-screen h2 { font-size: 1.4rem; font-weight: 800; color: #1B3A5C; margin-bottom: 10px; }
+  #start-screen p { font-size: 0.92rem; color: #3a5470; margin-bottom: 6px; line-height: 1.55; max-width: 520px; margin-left: auto; margin-right: auto; }
+  #start-screen .pill-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0; }
+  #start-screen .pill {
+    background: #1B3A5C;
+    color: #C9A84C;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 540px) {
+    .dnd-container { flex-direction: column; }
+    #start-screen h2 { font-size: 1.15rem; }
+    #score-screen .big-score { font-size: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Visualization &amp; Sketching</h1>
+  <p>Creationeering · Genesis K-12 Academy</p>
+</header>
+
+<div id="app">
+  <!-- START SCREEN -->
+  <div id="start-screen" class="card">
+    <h2>Engineering Sketching Challenge</h2>
+    <p>Technical sketches are the language of engineers — they turn big ideas into buildable plans. Test your knowledge of line types, scale, assemblies, and more!</p>
+    <div class="pill-row">
+      <span class="pill">7 Questions</span>
+      <span class="pill">Multiple Formats</span>
+      <span class="pill">~4 Minutes</span>
+    </div>
+    <p style="color:#888;font-size:0.8rem;margin-bottom:20px;">"Write the vision and make it plain." — Habakkuk 2:2</p>
+    <button class="btn btn-primary" onclick="startGame()">Start Activity ▶</button>
+  </div>
+
+  <!-- GAME AREA -->
+  <div id="game-area" style="display:none;">
+    <div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+    <div id="round-label">Question 1 of 7</div>
+    <div id="question-area" class="card"></div>
+    <div id="feedback-box"></div>
+    <div class="btn-row" id="action-row"></div>
+  </div>
+
+  <!-- SCORE SCREEN -->
+  <div id="score-screen" class="card"></div>
+</div>
+
+<script>
+/* =====================================================================
+   DATA
+===================================================================== */
+const QUESTIONS = [
+  // Q1 — Drag & Drop: Assembly vs Subassembly
+  {
+    type: "dragdrop",
+    category: "Assemblies & Subassemblies",
+    prompt: "Sort each part below into either ASSEMBLY (the complete system) or SUBASSEMBLY (a smaller, functional system within the whole).",
+    context: "Remember: An Assembly is the big-picture product. A Subassembly is a functional unit that lives inside it.",
+    zones: ["Assembly", "Subassembly"],
+    items: [
+      { label: "Complete bicycle", zone: "Assembly" },
+      { label: "Braking system", zone: "Subassembly" },
+      { label: "Full drone", zone: "Assembly" },
+      { label: "Motor mount", zone: "Subassembly" },
+      { label: "Gear train", zone: "Subassembly" },
+    ],
+    feedback: {
+      correct: "✅ Perfect! The complete product is the Assembly; functional sub-units that make it up are Subassemblies.",
+      incorrect: "Not quite. The full product (bike, drone) is the Assembly. The pieces that do specific jobs inside it (braking system, gear train) are Subassemblies."
+    }
+  },
+
+  // Q2 — Multiple Choice: Purpose of Technical Sketching
+  {
+    type: "mc",
+    category: "Technical Sketching",
+    prompt: "Which statement BEST describes why engineers use technical sketching?",
+    options: [
+      { text: "To make artwork that looks impressive in a portfolio.", correct: false },
+      { text: "To communicate exactly how something should be built, how it works, and how it fits into a larger system.", correct: true },
+      { text: "To replace computer-aided design software entirely.", correct: false },
+      { text: "To show artistic creativity without precise measurements.", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Exactly! Technical sketching is a specialized language used to communicate precise engineering information.",
+      incorrect: "Not quite. Technical sketching is a precise communication tool — it tells builders exactly how to make something."
+    }
+  },
+
+  // Q3 — Scale Slider interactive
+  {
+    type: "scale",
+    category: "Scale & Proportion",
+    prompt: "A real car is 500 cm long. Use the scale ratio slider to find the correct sketch length.",
+    scaleFactor: 500, // real size in cm
+    targetRatio: 10,  // correct answer: 1:10 → 50 cm
+    question: "At a scale of 1:10, what is the correct sketch length for a 500 cm car?",
+    correctAnswer: 50,
+    feedback: {
+      correct: "✅ Great! 500 ÷ 10 = 50 cm. Scale 1:10 means 1 unit on paper = 10 units in real life.",
+      incorrect: "Remember: scale 1:10 means divide the real measurement by 10. So 500 ÷ 10 = 50 cm on paper."
+    }
+  },
+
+  // Q4 — Drag & Drop: Line Types
+  {
+    type: "dragdrop",
+    category: "Engineering Line Types",
+    prompt: "Match each description to the correct engineering line type.",
+    context: "Engineers use specific line types so every sketch is read the same way worldwide.",
+    zones: ["Object Line", "Hidden Line", "Center Line", "Dimension Line", "Extension Line"],
+    items: [
+      { label: "Shows edges you can actually see", zone: "Object Line" },
+      { label: "Shows edges hidden behind surfaces", zone: "Hidden Line" },
+      { label: "Marks the center or axis of a shape", zone: "Center Line" },
+      { label: "Carries the measurement number", zone: "Dimension Line" },
+      { label: "Extends from the object to the dimension line", zone: "Extension Line" },
+    ],
+    feedback: {
+      correct: "✅ Excellent line-type knowledge! Using the right line type makes sketches readable by any engineer.",
+      incorrect: "Review the line types: Object = visible edges, Hidden = dashed for hidden edges, Center = axis, Dimension = carries the number, Extension = reaches from object to dimension."
+    }
+  },
+
+  // Q5 — Line Type Visual SVG quiz
+  {
+    type: "line-visual",
+    category: "Line Hierarchy",
+    prompt: "Look at the sketch below. Which line type is indicated by the ARROW?",
+    svgArrow: "hidden", // dashed line
+    options: [
+      { text: "Object Line — solid, thick, shows visible edges", correct: false },
+      { text: "Hidden Line — dashed, shows edges behind surfaces", correct: true },
+      { text: "Center Line — alternating long-short dashes, marks axes", correct: false },
+      { text: "Extension Line — thin solid, extends from object", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Correct! The dashed line is a Hidden Line — it represents edges that exist but can't be seen from this viewpoint.",
+      incorrect: "That line is dashed — that's the Hidden Line style. It shows edges that are behind surfaces in the current view."
+    }
+  },
+
+  // Q6 — Sequence / Build-order
+  {
+    type: "sequence",
+    category: "Sketching Process",
+    prompt: "Put the following engineering sketching steps in the correct ORDER (drag to rearrange).",
+    steps: [
+      "Identify what you need to sketch (assembly or subassembly)",
+      "Lightly sketch overall proportions and bounding box",
+      "Add object lines for all visible edges",
+      "Add hidden lines for edges behind surfaces",
+      "Add center lines, dimension lines, and annotations",
+    ],
+    feedback: {
+      correct: "✅ Perfect sequence! Good sketching always starts with the big picture, then adds detail layer by layer.",
+      incorrect: "Not quite. Engineers start by identifying the subject, rough out proportions first, then build detail (object → hidden → center/dimensions) systematically."
+    }
+  },
+
+  // Q7 — MC: Faith & Documentation
+  {
+    type: "mc",
+    category: "Documentation & Stewardship",
+    prompt: "The lesson connects technical sketching to Habakkuk 2:2. Which principle does this BEST reflect?",
+    options: [
+      { text: "Sketches are sacred religious documents.", correct: false },
+      { text: "Writing things down clearly is an act of stewardship — it saves time, money, and communicates the vision to others.", correct: true },
+      { text: "Only prophets should document engineering plans.", correct: false },
+      { text: "Technical sketches should include Bible verses as annotations.", correct: false },
+    ],
+    feedback: {
+      correct: "✅ Right! Clear documentation is stewardship — it preserves vision, prevents waste, and serves others who need to understand your design.",
+      incorrect: "The connection is about stewardship: just as Habakkuk was told to 'write the vision and make it plain,' engineers write their ideas clearly so nothing is lost and others can act on them."
+    }
+  },
+];
+
+/* =====================================================================
+   STATE
+===================================================================== */
+let currentQ = 0;
+let score = 0;
+let answered = false;
+let results = []; // {q, correct}
+let dragData = {}; // for drag-drop
+let seqData = [];  // for sequence
+let scaleAnswer = 10; // default slider value (ratio)
+let scaleSubmitted = false;
+
+/* =====================================================================
+   INIT
+===================================================================== */
+function startGame() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('game-area').style.display = 'block';
+  currentQ = 0; score = 0; answered = false; results = [];
+  renderQuestion();
+}
+
+function updateProgress() {
+  const pct = (currentQ / QUESTIONS.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('round-label').textContent = `Question ${currentQ + 1} of ${QUESTIONS.length}`;
+}
+
+function renderQuestion() {
+  answered = false;
+  updateProgress();
+  const q = QUESTIONS[currentQ];
+  const area = document.getElementById('question-area');
+  const fb = document.getElementById('feedback-box');
+  fb.style.display = 'none';
+  fb.className = '';
+
+  let html = `<span class="category-tag">${q.category}</span>`;
+  html += `<div class="prompt">${q.prompt}</div>`;
+  if (q.context) html += `<div class="context-box">${q.context}</div>`;
+
+  if (q.type === 'dragdrop') {
+    html += renderDragDrop(q);
+  } else if (q.type === 'mc') {
+    html += renderMC(q);
+  } else if (q.type === 'scale') {
+    html += renderScale(q);
+  } else if (q.type === 'line-visual') {
+    html += renderLineVisual(q);
+  } else if (q.type === 'sequence') {
+    html += renderSequence(q);
+  }
+
+  area.innerHTML = html;
+  renderActionRow();
+
+  if (q.type === 'dragdrop') initDragDrop(q);
+  if (q.type === 'sequence') initSequence(q);
+  if (q.type === 'scale') initScale(q);
+}
+
+/* =====================================================================
+   RENDER HELPERS
+===================================================================== */
+function renderMC(q) {
+  let html = '<div class="mc-options">';
+  q.options.forEach((opt, i) => {
+    html += `<button class="mc-option" onclick="selectMC(${i})" id="mc-opt-${i}">${opt.text}</button>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderDragDrop(q) {
+  dragData = {};
+  q.zones.forEach(z => { dragData[z] = []; });
+
+  let html = '<div class="dnd-container">';
+  // Bank
+  html += '<div class="dnd-bank"><h3>📦 Items</h3><div id="dnd-bank" class="drop-zone">';
+  q.items.forEach((item, i) => {
+    html += `<div class="drag-item" id="di-${i}" draggable="true" data-idx="${i}">${item.label}</div>`;
+  });
+  html += '</div></div>';
+
+  // Zones
+  html += '<div class="dnd-zone-wrap"><h3>📂 Categories</h3>';
+  q.zones.forEach(z => {
+    const zid = zoneId(z);
+    html += `<div class="drop-zone" id="zone-${zid}" data-zone="${z}">
+      <span class="zone-label">${z}</span>
+    </div>`;
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function zoneId(name) {
+  return name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-]/g, '');
+}
+
+function renderScale(q) {
+  scaleAnswer = 10;
+  scaleSubmitted = false;
+  let html = `<div class="context-box">Real object size: <strong>${q.scaleFactor} cm</strong>. Adjust the scale ratio below to find the correct sketch length.</div>`;
+  html += `<div class="slider-row">
+    <label>Scale 1:</label>
+    <input type="range" id="scale-slider" min="1" max="20" value="10" step="1" oninput="updateScale(this.value)">
+    <span class="slider-value" id="scale-display">1 : 10</span>
+  </div>`;
+  html += `<div class="scale-visual"><canvas id="scale-canvas" width="520" height="140"></canvas></div>`;
+  html += `<div style="text-align:center;font-size:0.92rem;color:#1B3A5C;">
+    Sketch length = <strong id="sketch-len">50</strong> cm &nbsp;|&nbsp; Real length = ${q.scaleFactor} cm
+  </div>`;
+  return html;
+}
+
+function renderLineVisual(q) {
+  // Draw an SVG with a box, an arrow pointing to a hidden (dashed) line
+  let svg = `<svg width="440" height="160" viewBox="0 0 440 160" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+    <!-- outer box (object line) -->
+    <rect x="60" y="30" width="200" height="100" fill="none" stroke="#1B3A5C" stroke-width="3"/>
+    <!-- hidden line inside (dashed) -->
+    <line x1="60" y1="80" x2="260" y2="80" stroke="#1B3A5C" stroke-width="2" stroke-dasharray="10,5"/>
+    <!-- center line -->
+    <line x1="160" y1="20" x2="160" y2="140" stroke="#1B3A5C" stroke-width="1.5" stroke-dasharray="18,4,4,4"/>
+    <!-- Arrow pointing to dashed line -->
+    <line x1="310" y1="80" x2="272" y2="80" stroke="#C9A84C" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+    <text x="318" y="75" font-size="13" fill="#C9A84C" font-weight="bold">← THIS</text>
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#C9A84C"/>
+      </marker>
+    </defs>
+    <!-- Legend hints -->
+    <text x="60" y="152" font-size="10" fill="#888">Solid thick = Object Line</text>
+    <text x="230" y="152" font-size="10" fill="#888">Long-short = Center Line</text>
+  </svg>`;
+
+  let html = `<div class="line-visual-wrap">${svg}</div>`;
+  html += '<div class="mc-options">';
+  q.options.forEach((opt, i) => {
+    html += `<button class="mc-option" onclick="selectMC(${i})" id="mc-opt-${i}">${opt.text}</button>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderSequence(q) {
+  // seqData holds current order (indices)
+  seqData = q.steps.map((_, i) => i);
+  shuffleArray(seqData);
+  return `<ul class="seq-list" id="seq-list">${buildSeqItems(q)}</ul>
+  <p style="font-size:0.78rem;color:#888;margin-top:6px;">Drag items up and down to reorder them.</p>`;
+}
+
+function buildSeqItems(q) {
+  return seqData.map((idx, pos) => {
+    return `<li class="seq-item" data-idx="${idx}" draggable="true">
+      <span class="seq-num">${pos + 1}</span>
+      <span>${q.steps[idx]}</span>
+    </li>`;
+  }).join('');
+}
+
+/* =====================================================================
+   ACTION ROW
+===================================================================== */
+function renderActionRow() {
+  const q = QUESTIONS[currentQ];
+  const row = document.getElementById('action-row');
+  if (q.type === 'dragdrop' || q.type === 'sequence' || q.type === 'scale') {
+    row.innerHTML = `<button class="btn btn-primary" onclick="submitAnswer()" id="submit-btn">Check Answer ✓</button>`;
+  } else {
+    row.innerHTML = ''; // MC questions submit on click
+  }
+}
+
+function showNextBtn() {
+  const row = document.getElementById('action-row');
+  const isLast = currentQ === QUESTIONS.length - 1;
+  row.innerHTML = `<button class="btn btn-secondary" onclick="nextQuestion()">${isLast ? 'See Results →' : 'Next Question →'}</button>`;
+}
+
+/* =====================================================================
+   DRAG & DROP LOGIC
+===================================================================== */
+let draggedItemId = null;
+let touchStartPos = null;
+
+function initDragDrop(q) {
+  setTimeout(() => {
+    // Desktop drag events
+    document.querySelectorAll('.drag-item').forEach(el => {
+      el.addEventListener('dragstart', e => {
+        draggedItemId = el.id;
+        el.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      el.addEventListener('dragend', () => el.classList.remove('dragging'));
+    });
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        if (!draggedItemId) return;
+        const el = document.getElementById(draggedItemId);
+        if (el) zone.appendChild(el);
+        draggedItemId = null;
+      });
+    });
+
+    // Touch events
+    document.querySelectorAll('.drag-item').forEach(el => {
+      el.addEventListener('touchstart', e => {
+        draggedItemId = el.id;
+        touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        el.classList.add('dragging');
+      }, { passive: true });
+      el.addEventListener('touchend', e => {
+        el.classList.remove('dragging');
+        const touch = e.changedTouches[0];
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+        const zone = target ? target.closest('.drop-zone') : null;
+        if (zone && draggedItemId) {
+          const dragged = document.getElementById(draggedItemId);
+          if (dragged) zone.appendChild(dragged);
+        }
+        draggedItemId = null;
+      });
+    });
+  }, 50);
+}
+
+function submitDragDrop(q) {
+  // Read current placements
+  const placements = {};
+  q.items.forEach((item, i) => {
+    const el = document.getElementById(`di-${i}`);
+    if (!el) return;
+    const parent = el.parentElement;
+    if (!parent) return;
+    placements[i] = parent.dataset.zone || null;
+  });
+
+  let allCorrect = true;
+  q.items.forEach((item, i) => {
+    const el = document.getElementById(`di-${i}`);
+    if (!el) return;
+    if (placements[i] === item.zone) {
+      el.classList.add('correct');
+    } else {
+      el.classList.add('incorrect');
+      allCorrect = false;
+    }
+    el.removeAttribute('draggable');
+    el.style.cursor = 'default';
+  });
+  return allCorrect;
+}
+
+/* =====================================================================
+   SEQUENCE LOGIC
+===================================================================== */
+let seqDragging = null;
+let seqDragOverIdx = null;
+
+function initSequence(q) {
+  setTimeout(() => {
+    const list = document.getElementById('seq-list');
+    if (!list) return;
+
+    list.querySelectorAll('.seq-item').forEach((el, pos) => {
+      // Desktop
+      el.addEventListener('dragstart', e => {
+        seqDragging = pos;
+        el.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      el.addEventListener('dragend', () => el.classList.remove('dragging'));
+      el.addEventListener('dragover', e => {
+        e.preventDefault();
+        seqDragOverIdx = pos;
+      });
+      el.addEventListener('drop', e => {
+        e.preventDefault();
+        if (seqDragging === null || seqDragging === seqDragOverIdx) return;
+        const moved = seqData.splice(seqDragging, 1)[0];
+        seqData.splice(seqDragOverIdx, 0, moved);
+        list.innerHTML = buildSeqItems(q);
+        initSequence(q);
+        seqDragging = null;
+      });
+
+      // Touch
+      let touchStartY = 0;
+      el.addEventListener('touchstart', e => {
+        seqDragging = pos;
+        touchStartY = e.touches[0].clientY;
+        el.classList.add('dragging');
+      }, { passive: true });
+      el.addEventListener('touchmove', e => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+        const over = target ? target.closest('.seq-item') : null;
+        if (over) {
+          const items = [...list.querySelectorAll('.seq-item')];
+          seqDragOverIdx = items.indexOf(over);
+        }
+      }, { passive: false });
+      el.addEventListener('touchend', () => {
+        el.classList.remove('dragging');
+        if (seqDragging !== null && seqDragOverIdx !== null && seqDragging !== seqDragOverIdx) {
+          const moved = seqData.splice(seqDragging, 1)[0];
+          seqData.splice(seqDragOverIdx, 0, moved);
+          list.innerHTML = buildSeqItems(q);
+          initSequence(q);
+        }
+        seqDragging = null;
+        seqDragOverIdx = null;
+      });
+    });
+  }, 50);
+}
+
+function submitSequence(q) {
+  let correct = true;
+  seqData.forEach((idx, pos) => {
+    if (idx !== pos) correct = false;
+  });
+  // Color items
+  const items = document.querySelectorAll('.seq-item');
+  seqData.forEach((idx, pos) => {
+    if (items[pos]) {
+      items[pos].classList.add(idx === pos ? 'correct-pos' : 'wrong-pos');
+    }
+  });
+  return correct;
+}
+
+/* =====================================================================
+   SCALE LOGIC
+===================================================================== */
+function initScale(q) {
+  setTimeout(() => updateScale(10), 50);
+}
+
+function updateScale(val) {
+  scaleAnswer = parseInt(val);
+  const q = QUESTIONS[currentQ];
+  if (!q || q.type !== 'scale') return;
+  const sketchLen = Math.round(q.scaleFactor / scaleAnswer);
+  const display = document.getElementById('scale-display');
+  const lenEl = document.getElementById('sketch-len');
+  if (display) display.textContent = `1 : ${scaleAnswer}`;
+  if (lenEl) lenEl.textContent = sketchLen;
+  drawScaleCanvas(q, scaleAnswer, sketchLen);
+}
+
+function drawScaleCanvas(q, ratio, sketchLen) {
+  const canvas = document.getElementById('scale-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Real car bar
+  const maxBar = W - 100;
+  const realBarW = maxBar;
+  ctx.fillStyle = '#1B3A5C';
+  ctx.fillRect(50, 28, realBarW, 22);
+  ctx.fillStyle = '#fff';
+  ctx.font = '12px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(`Real: ${q.scaleFactor} cm`, 50 + realBarW / 2, 44);
+
+  // Sketch bar
+  const sketchBarW = Math.max(6, Math.round((sketchLen / q.scaleFactor) * maxBar));
+  const color = sketchLen === q.correctAnswer ? '#2a7a4f' : '#C9A84C';
+  ctx.fillStyle = color;
+  ctx.fillRect(50, 72, sketchBarW, 22);
+  ctx.fillStyle = '#fff';
+  ctx.font = '12px Arial';
+  ctx.textAlign = 'left';
+  ctx.fillText(`Sketch: ${sketchLen} cm`, 50 + sketchBarW + 6, 88);
+
+  // Labels
+  ctx.fillStyle = '#5a6e85';
+  ctx.font = '11px Arial';
+  ctx.textAlign = 'left';
+  ctx.fillText('Real size:', 0, 44);
+  ctx.fillText('Sketch size:', 0, 88);
+
+  // Correct indicator
+  if (sketchLen === q.correctAnswer) {
+    ctx.fillStyle = '#2a7a4f';
+    ctx.font = 'bold 13px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('✓ Correct ratio!', W / 2, 130);
+  } else {
+    ctx.fillStyle = '#888';
+    ctx.font = '11px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Hint: try 500 ÷ ratio = ${q.correctAnswer}`, W / 2, 130);
+  }
+}
+
+function submitScale(q) {
+  const sketchLen = Math.round(q.scaleFactor / scaleAnswer);
+  return sketchLen === q.correctAnswer;
+}
+
+/* =====================================================================
+   ANSWER HANDLING
+===================================================================== */
+function selectMC(idx) {
+  if (answered) return;
+  answered = true;
+  const q = QUESTIONS[currentQ];
+  const isCorrect = q.options[idx].correct;
+
+  document.querySelectorAll('.mc-option').forEach((btn, i) => {
+    btn.setAttribute('disabled', true);
+    if (q.options[i].correct) btn.classList.add('reveal-correct');
+    if (i === idx && !isCorrect) btn.classList.add('selected-wrong');
+    if (i === idx && isCorrect) btn.classList.add('selected-correct');
+  });
+
+  if (isCorrect) score++;
+  results.push({ prompt: q.prompt.substring(0, 60) + '...', correct: isCorrect });
+  showFeedback(isCorrect, q.feedback);
+  showNextBtn();
+}
+
+function submitAnswer() {
+  if (answered) return;
+  const q = QUESTIONS[currentQ];
+  let isCorrect = false;
+
+  if (q.type === 'dragdrop') isCorrect = submitDragDrop(q);
+  else if (q.type === 'sequence') isCorrect = submitSequence(q);
+  else if (q.type === 'scale') isCorrect = submitScale(q);
+
+  answered = true;
+  if (isCorrect) score++;
+  results.push({ prompt: q.prompt.substring(0, 60) + '...', correct: isCorrect });
+  showFeedback(isCorrect, q.feedback);
+  document.getElementById('submit-btn') && (document.getElementById('submit-btn').disabled = true);
+  showNextBtn();
+}
+
+function showFeedback(correct, fbObj) {
+  const fb = document.getElementById('feedback-box');
+  fb.className = correct ? 'correct' : 'incorrect';
+  fb.textContent = correct ? fbObj.correct : fbObj.incorrect;
+  fb.style.display = 'block';
+  fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= QUESTIONS.length) {
+    showScore();
+  } else {
+    renderQuestion();
+    window.scrollTo(0, 0);
+  }
+}
+
+/* =====================================================================
+   SCORE SCREEN
+===================================================================== */
+function showScore() {
+  document.getElementById('game-area').style.display = 'none';
+  const screen = document.getElementById('score-screen');
+  screen.style.display = 'block';
+
+  const total = QUESTIONS.length;
+  const pct = Math.round((score / total) * 100);
+  let verdict, emoji;
+  if (pct >= 86) { verdict = "Outstanding Engineer!"; emoji = "🏆"; }
+  else if (pct >= 71) { verdict = "Solid Understanding!"; emoji = "⭐"; }
+  else if (pct >= 57) { verdict = "Good Effort — Keep Sketching!"; emoji = "📐"; }
+  else { verdict = "Keep Practicing!"; emoji = "✏️"; }
+
+  let tableRows = results.map((r, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${r.prompt}</td>
+      <td class="${r.correct ? 'tick' : 'cross'}">${r.correct ? '✓' : '✗'}</td>
+    </tr>`).join('');
+
+  screen.innerHTML = `
+    <div style="font-size:2.8rem;">${emoji}</div>
+    <div class="big-score">${score}/${total}</div>
+    <div class="score-label">${pct}% Correct</div>
+    <div class="verdict">${verdict}</div>
+    <div class="verse">"Write the vision and make it plain upon tablets, so he may run who reads it." — Habakkuk 2:2</div>
+    <table class="summary-table">
+      <thead><tr><th>#</th><th>Question</th><th>Result</th></tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    <button class="btn btn-primary" onclick="restartGame()">Try Again ↺</button>
+  `;
+  screen.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartGame() {
+  document.getElementById('score-screen').style.display = 'none';
+  currentQ = 0; score = 0; answered = false; results = [];
+  document.getElementById('game-area').style.display = 'block';
+  renderQuestion();
+  window.scrollTo(0, 0);
+}
+
+/* =====================================================================
+   UTILITY
+===================================================================== */
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+</script>
+</body>
+</html>

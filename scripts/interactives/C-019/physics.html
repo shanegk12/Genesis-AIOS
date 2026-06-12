@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Energy Conservation Sandbox — Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f2236;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e8e8e8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    width: 100%;
+    max-width: 860px;
+    background: #1B3A5C;
+    border-bottom: 3px solid #C9A84C;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 18px 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header .logo {
+    width: 38px; height: 38px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: #1B3A5C;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 1.05rem; color: #C9A84C; line-height: 1.2; }
+  header p  { font-size: 0.72rem; color: #a0bcd4; }
+
+  #main-wrap {
+    width: 100%; max-width: 860px;
+    background: #1B3A5C;
+    border-radius: 0 0 10px 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #canvas-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #2e5a8a;
+    background: #0d1e30;
+    touch-action: none;
+  }
+  canvas { display: block; width: 100%; }
+
+  /* Energy bar row */
+  #energy-bars {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .ebar-wrap {
+    flex: 1; min-width: 120px;
+    background: #0f2236;
+    border-radius: 6px;
+    padding: 7px 10px;
+    border: 1px solid #2e5a8a;
+  }
+  .ebar-label {
+    font-size: 0.68rem;
+    color: #a0bcd4;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ebar-track {
+    height: 16px;
+    background: #1a3350;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ebar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.05s;
+    width: 0%;
+  }
+  .ebar-val {
+    font-size: 0.75rem;
+    color: #e8e8e8;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  #pe-fill  { background: linear-gradient(90deg,#C9A84C,#e8c96a); }
+  #ke-fill  { background: linear-gradient(90deg,#3ab0e0,#5dd4ff); }
+  #te-fill  { background: linear-gradient(90deg,#4caf7d,#7ee6ab); }
+  #loss-fill{ background: linear-gradient(90deg,#e05050,#ff8080); }
+
+  /* Controls */
+  #controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .ctrl-card {
+    flex: 1; min-width: 160px;
+    background: #0f2236;
+    border: 1px solid #2e5a8a;
+    border-radius: 8px;
+    padding: 9px 12px;
+  }
+  .ctrl-card label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #C9A84C;
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .ctrl-card label span { color: #e8e8e8; font-weight: 400; }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+    height: 22px;
+  }
+  .ctrl-desc {
+    font-size: 0.62rem;
+    color: #7090b0;
+    margin-top: 3px;
+  }
+
+  /* Buttons */
+  #btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  button {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: filter 0.15s, transform 0.1s;
+  }
+  button:active { transform: scale(0.96); }
+  #btn-drop  { background: #C9A84C; color: #1B3A5C; }
+  #btn-reset { background: #1B3A5C; color: #C9A84C; border: 2px solid #C9A84C; }
+  #btn-pause { background: #2e5a8a; color: #e8e8e8; }
+  button:hover { filter: brightness(1.12); }
+
+  /* Readout */
+  #readout {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .rcard {
+    flex: 1; min-width: 140px;
+    background: #0f2236;
+    border: 1px solid #2e5a8a;
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .rcard-label { font-size: 0.65rem; color: #a0bcd4; text-transform: uppercase; letter-spacing: 0.05em; }
+  .rcard-val   { font-size: 1.15rem; color: #C9A84C; font-weight: 800; margin-top: 2px; }
+
+  /* OCV note */
+  #ocv-note {
+    background: #0f2236;
+    border-left: 3px solid #C9A84C;
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    color: #a0bcd4;
+    line-height: 1.5;
+  }
+  #ocv-note strong { color: #C9A84C; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK</div>
+  <div>
+    <h1>Energy Conservation Sandbox</h1>
+    <p>Creationeering™ · Analysis Phase · PE ↔ KE Transfer</p>
+  </div>
+</header>
+
+<div id="main-wrap">
+
+  <div id="canvas-wrap">
+    <canvas id="sim" height="340"></canvas>
+  </div>
+
+  <!-- Energy Bars -->
+  <div id="energy-bars">
+    <div class="ebar-wrap">
+      <div class="ebar-label">Potential Energy (PE)</div>
+      <div class="ebar-track"><div class="ebar-fill" id="pe-fill"></div></div>
+      <div class="ebar-val" id="pe-val">0.00 J</div>
+    </div>
+    <div class="ebar-wrap">
+      <div class="ebar-label">Kinetic Energy (KE)</div>
+      <div class="ebar-track"><div class="ebar-fill" id="ke-fill"></div></div>
+      <div class="ebar-val" id="ke-val">0.00 J</div>
+    </div>
+    <div class="ebar-wrap">
+      <div class="ebar-label">Mechanical Total</div>
+      <div class="ebar-track"><div class="ebar-fill" id="te-fill"></div></div>
+      <div class="ebar-val" id="te-val">0.00 J</div>
+    </div>
+    <div class="ebar-wrap">
+      <div class="ebar-label">Lost to Heat/Sound</div>
+      <div class="ebar-track"><div class="ebar-fill" id="loss-fill"></div></div>
+      <div class="ebar-val" id="loss-val">0.00 J</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <div class="ctrl-card">
+      <label>Release Height <span id="h-disp">5.0 m</span></label>
+      <input type="range" id="sl-height" min="1" max="10" step="0.1" value="5">
+      <div class="ctrl-desc">Eg = m·g·h — sets initial PE</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Ball Mass <span id="m-disp">2.0 kg</span></label>
+      <input type="range" id="sl-mass" min="0.5" max="5" step="0.1" value="2">
+      <div class="ctrl-desc">Affects both PE and KE</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Air Resistance <span id="d-disp">Low</span></label>
+      <input type="range" id="sl-drag" min="0" max="3" step="1" value="0">
+      <div class="ctrl-desc">Energy "lost" to heat/sound</div>
+    </div>
+    <div class="ctrl-card">
+      <label>Bounce (COR) <span id="e-disp">0.80</span></label>
+      <input type="range" id="sl-cor" min="0" max="1" step="0.05" value="0.8">
+      <div class="ctrl-desc">Coefficient of restitution</div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div id="btn-row">
+    <button id="btn-drop">▶ Drop Ball</button>
+    <button id="btn-pause">⏸ Pause</button>
+    <button id="btn-reset">↺ Reset</button>
+  </div>
+
+  <!-- Key Readouts -->
+  <div id="readout">
+    <div class="rcard">
+      <div class="rcard-label">Current Velocity</div>
+      <div class="rcard-val" id="r-vel">0.00 m/s</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-label">Current Height</div>
+      <div class="rcard-val" id="r-h">— m</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-label">Mechanical Efficiency</div>
+      <div class="rcard-val" id="r-eff">100.0 %</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-label">Bounces</div>
+      <div class="rcard-val" id="r-bounces">0</div>
+    </div>
+  </div>
+
+  <div id="ocv-note">
+    <strong>OCV Analysis:</strong>
+    <strong>Objective</strong> — maximize mechanical efficiency.
+    <strong>Constraint</strong> — air resistance &amp; COR limit energy retention.
+    <strong>Variable</strong> — adjust mass, height, drag, and bounce to observe E<sub>g</sub> = m·g·h → ½mv² trade-off.
+    <em>"The earth is the Lord's, and everything in it." — Ps 24:1 · Steward energy well.</em>
+  </div>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---- Canvas setup ---- */
+const canvas = document.getElementById('sim');
+const ctx    = canvas.getContext('2d');
+
+function resizeCanvas(){
+  const wrap = document.getElementById('canvas-wrap');
+  canvas.width  = wrap.clientWidth;
+  canvas.height = 340;
+}
+resizeCanvas();
+window.addEventListener('resize', ()=>{ resizeCanvas(); if(!running) draw(); });
+
+/* ---- Constants & state ---- */
+const G = 9.81;
+const SCALE = 30; // px per meter
+
+/* Simulation state */
+let state = {
+  dropped: false,
+  paused:  false,
+  ball: { x:0, y:0, vy:0, r:0 },
+  initialPE: 0,
+  totalLost: 0,
+  bounces: 0,
+  trail: [],
+  t: 0
+};
+
+/* Sliders */
+const slHeight = document.getElementById('sl-height');
+const slMass   = document.getElementById('sl-mass');
+const slDrag   = document.getElementById('sl-drag');
+const slCor    = document.getElementById('sl-cor');
+
+const dragLabels = ['None (0)','Low','Medium','High'];
+const dragCoeffs = [0, 0.3, 0.9, 2.2];
+
+function getParams(){
+  return {
+    h:    parseFloat(slHeight.value),
+    m:    parseFloat(slMass.value),
+    drag: dragCoeffs[parseInt(slDrag.value)],
+    cor:  parseFloat(slCor.value)
+  };
+}
+
+/* ---- UI label updates ---- */
+function updateLabels(){
+  const p = getParams();
+  document.getElementById('h-disp').textContent = p.h.toFixed(1)+' m';
+  document.getElementById('m-disp').textContent = p.m.toFixed(1)+' kg';
+  document.getElementById('d-disp').textContent = dragLabels[parseInt(slDrag.value)];
+  document.getElementById('e-disp').textContent = p.cor.toFixed(2);
+}
+slHeight.addEventListener('input', ()=>{ updateLabels(); if(!state.dropped) initBall(); });
+slMass.addEventListener('input',   ()=>{ updateLabels(); if(!state.dropped) initBall(); });
+slDrag.addEventListener('input',   updateLabels);
+slCor.addEventListener('input',    updateLabels);
+updateLabels();
+
+/* ---- Ground position in canvas coords ---- */
+function groundY(){ return canvas.height - 36; }
+function ballRadius(m){ return Math.max(12, Math.min(24, 10 + m*3)); }
+
+/* ---- Init ball at top ---- */
+function initBall(){
+  const p  = getParams();
+  const r  = ballRadius(p.m);
+  const gy = groundY();
+  const startY = gy - p.h * SCALE - r;
+  state.ball = {
+    x:  canvas.width * 0.5,
+    y:  startY,
+    vy: 0,
+    r:  r
+  };
+  state.dropped   = false;
+  state.paused    = false;
+  state.totalLost = 0;
+  state.bounces   = 0;
+  state.trail     = [];
+  state.initialPE = p.m * G * p.h;
+  updateReadouts();
+  draw();
+}
+
+/* ---- Physics step ---- */
+let last = null;
+let running = false;
+let animId  = null;
+
+function physicsStep(dt){
+  if(dt > 0.05) dt = 0.05;
+  const p   = getParams();
+  const gy  = groundY();
+  const ball = state.ball;
+
+  // Gravity
+  ball.vy += G * dt;
+
+  // Air drag  F = 0.5 * Cd * rho * A * v²  simplified to dragK * v²
+  // We fold area, rho, 0.5 into one coefficient
+  const dragK = p.drag * 0.004 * (ball.r / 14);
+  const dragAcc = dragK * ball.vy * Math.abs(ball.vy) / p.m;
+  ball.vy -= dragAcc * dt;
+
+  ball.y += ball.vy * dt * SCALE;
+
+  // Trail
+  state.trail.push({x: ball.x, y: ball.y});
+  if(state.trail.length > 120) state.trail.shift();
+
+  // Ground collision
+  const floorY = gy - ball.r;
+  if(ball.y >= floorY){
+    ball.y  = floorY;
+    const vBefore = ball.vy;
+    ball.vy = -ball.vy * p.cor;
+    // Energy lost in bounce
+    const keBefore = 0.5 * p.m * Math.pow(vBefore / SCALE * SCALE, 2);
+    const keAfter  = 0.5 * p.m * Math.pow(ball.vy, 2);
+    // convert px/s to m/s for energy (vy is in px/s... let's be consistent)
+    state.bounces++;
+    if(Math.abs(ball.vy) < 0.5){ ball.vy = 0; }
+  }
+}
+
+/* ---- Height in meters from ground ---- */
+function currentHeightM(){
+  const p  = getParams();
+  const gy = groundY();
+  const ball = state.ball;
+  const px = gy - ball.r - ball.y;
+  return Math.max(0, px / SCALE);
+}
+function currentVelMS(){
+  // vy is in px/s, convert to m/s
+  return Math.abs(state.ball.vy) / SCALE;
+}
+
+/* ---- Energy calculations ---- */
+function calcEnergy(){
+  const p   = getParams();
+  const h   = currentHeightM();
+  const v   = currentVelMS();
+  const pe  = p.m * G * h;
+  const ke  = 0.5 * p.m * v * v;
+  const te  = pe + ke;
+  const loss= Math.max(0, state.initialPE - te);
+  return {pe, ke, te, loss};
+}
+
+/* ---- Update UI readouts ---- */
+function updateReadouts(){
+  const e   = calcEnergy();
+  const max = Math.max(state.initialPE, 0.001);
+  const pct = v => Math.min(100, (v / max)*100).toFixed(1);
+
+  document.getElementById('pe-fill').style.width = pct(e.pe)+'%';
+  document.getElementById('ke-fill').style.width = pct(e.ke)+'%';
+  document.getElementById('te-fill').style.width = pct(e.te)+'%';
+  document.getElementById('loss-fill').style.width = pct(e.loss)+'%';
+
+  document.getElementById('pe-val').textContent  = e.pe.toFixed(2)+' J';
+  document.getElementById('ke-val').textContent  = e.ke.toFixed(2)+' J';
+  document.getElementById('te-val').textContent  = e.te.toFixed(2)+' J';
+  document.getElementById('loss-val').textContent= e.loss.toFixed(2)+' J';
+
+  document.getElementById('r-vel').textContent  = currentVelMS().toFixed(2)+' m/s';
+  document.getElementById('r-h').textContent    = currentHeightM().toFixed(2)+' m';
+  const eff = state.initialPE > 0 ? ((e.te / state.initialPE)*100) : 100;
+  document.getElementById('r-eff').textContent  = Math.min(100,Math.max(0,eff)).toFixed(1)+' %';
+  document.getElementById('r-bounces').textContent = state.bounces;
+}
+
+/* ---- Draw ---- */
+function draw(){
+  const W = canvas.width, H = canvas.height;
+  const gy = groundY();
+  const p  = getParams();
+  const ball = state.ball;
+
+  // Background
+  ctx.fillStyle = '#0d1e30';
+  ctx.fillRect(0,0,W,H);
+
+  // Height ruler on left
+  drawRuler(p.h);
+
+  // Ground
+  ctx.fillStyle = '#1B3A5C';
+  ctx.fillRect(0, gy, W, H - gy);
+  ctx.fillStyle = '#C9A84C';
+  ctx.fillRect(0, gy, W, 3);
+  // Ground label
+  ctx.fillStyle = '#7090b0';
+  ctx.font = '11px Segoe UI';
+  ctx.fillText('Ground (h = 0)', 8, gy+16);
+
+  // Initial position indicator (dashed line)
+  const initY = gy - p.h * SCALE - ball.r;
+  ctx.setLineDash([4,4]);
+  ctx.strokeStyle = 'rgba(201,168,76,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(40, initY + ball.r);
+  ctx.lineTo(W - 40, initY + ball.r);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Trail
+  if(state.trail.length > 1){
+    for(let i=1; i<state.trail.length; i++){
+      const alpha = (i/state.trail.length)*0.5;
+      ctx.beginPath();
+      ctx.arc(state.trail[i].x, state.trail[i].y, Math.max(1, ball.r*0.18), 0, Math.PI*2);
+      ctx.fillStyle = `rgba(58,176,224,${alpha})`;
+      ctx.fill();
+    }
+  }
+
+  // Shadow on ground
+  const shadowAlpha = Math.max(0, 0.4 * (1 - currentHeightM()/p.h));
+  const shadowW     = ball.r * 2.2 * (1 - currentHeightM()/(p.h+0.001) * 0.5);
+  ctx.beginPath();
+  ctx.ellipse(ball.x, gy+2, Math.max(4,shadowW), 5, 0, 0, Math.PI*2);
+  ctx.fillStyle = `rgba(0,0,0,${shadowAlpha})`;
+  ctx.fill();
+
+  // Ball
+  const grd = ctx.createRadialGradient(
+    ball.x - ball.r*0.3, ball.y - ball.r*0.3, ball.r*0.1,
+    ball.x, ball.y, ball.r
+  );
+  grd.addColorStop(0,'#7dd4f0');
+  grd.addColorStop(0.5,'#3ab0e0');
+  grd.addColorStop(1,'#1B3A5C');
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
+  ctx.fillStyle = grd;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Velocity arrow
+  if(Math.abs(ball.vy) > 0.5 && state.dropped){
+    const arrowLen = Math.min(50, Math.abs(ball.vy) * 0.5);
+    const arrowDir = ball.vy > 0 ? 1 : -1;
+    drawArrow(ball.x, ball.y, ball.x, ball.y + arrowDir*arrowLen, '#4caf7d', '  v');
+  }
+
+  // Energy annotation above ball
+  if(state.dropped){
+    const e = calcEnergy();
+    ctx.font = 'bold 11px Segoe UI';
+    ctx.fillStyle = '#C9A84C';
+    ctx.fillText('PE='+e.pe.toFixed(1)+'J', ball.x+ball.r+6, ball.y-6);
+    ctx.fillStyle = '#3ab0e0';
+    ctx.fillText('KE='+e.ke.toFixed(1)+'J', ball.x+ball.r+6, ball.y+10);
+  }
+
+  // Not-dropped instruction
+  if(!state.dropped){
+    ctx.font = 'bold 13px Segoe UI';
+    ctx.fillStyle = 'rgba(201,168,76,0.85)';
+    ctx.textAlign = 'center';
+    ctx.fillText('▶ Press "Drop Ball" to start', W/2, gy - 12);
+    ctx.textAlign = 'left';
+  }
+
+  // Top label
+  ctx.font = 'bold 11px Segoe UI';
+  ctx.fillStyle = 'rgba(201,168,76,0.7)';
+  ctx.textAlign = 'right';
+  ctx.fillText('h = '+p.h.toFixed(1)+' m', W-8, initY+ball.r - 4);
+  ctx.textAlign = 'left';
+}
+
+function drawRuler(maxH){
+  const gy = groundY();
+  const W  = canvas.width;
+  ctx.strokeStyle = 'rgba(46,90,138,0.6)';
+  ctx.lineWidth = 1;
+  ctx.font = '9px Segoe UI';
+  ctx.fillStyle = '#5a7a9a';
+
+  for(let h=0; h<=maxH+0.5; h+=1){
+    const y = gy - h*SCALE;
+    if(y < 10) break;
+    ctx.setLineDash([2,3]);
+    ctx.beginPath();
+    ctx.moveTo(30, y);
+    ctx.lineTo(W - 10, y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillText(h+'m', 2, y+4);
+  }
+}
+
+function drawArrow(x1,y1,x2,y2,color,label){
+  const dx = x2-x1, dy = y2-y1;
+  const len = Math.sqrt(dx*dx+dy*dy);
+  if(len < 4) return;
+  const ux = dx/len, uy = dy/len;
+  ctx.strokeStyle = color;
+  ctx.fillStyle   = color;
+  ctx.lineWidth   = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(x1,y1); ctx.lineTo(x2,y2);
+  ctx.stroke();
+  // arrowhead
+  const ax = x2-ux*8, ay = y2-uy*8;
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(ax - uy*5, ay + ux*5);
+  ctx.lineTo(ax + uy*5, ay - ux*5);
+  ctx.closePath(); ctx.fill();
+  if(label){
+    ctx.font = 'bold 10px Segoe UI';
+    ctx.fillText(label, x2+4, y2);
+  }
+}
+
+/* ---- Game loop ---- */
+function loop(ts){
+  if(!running) return;
+  if(last !== null && !state.paused){
+    const dt = Math.min((ts - last)/1000, 0.05);
+    physicsStep(dt);
+    updateReadouts();
+
+    // Stop if resting on ground
+    if(state.ball.y >= groundY() - state.ball.r - 0.5 && Math.abs(state.ball.vy) < 0.3){
+      state.ball.vy = 0;
+      state.ball.y  = groundY() - state.ball.r;
+      running = false;
+      updateReadouts();
+    }
+  }
+  last = ts;
+  draw();
+  if(running) animId = requestAnimationFrame(loop);
+}
+
+/* ---- Button handlers ---- */
+document.getElementById('btn-drop').addEventListener('click', ()=>{
+  if(animId) cancelAnimationFrame(animId);
+  const p = getParams();
+  const gy = groundY();
+  const r  = ballRadius(p.m);
+  state.ball.x    = canvas.width * 0.5;
+  state.ball.y    = gy - p.h*SCALE - r;
+  state.ball.vy   = 0;
+  state.ball.r    = r;
+  state.dropped   = true;
+  state.paused    = false;
+  state.totalLost = 0;
+  state.bounces   = 0;
+  state.trail     = [];
+  state.initialPE = p.m * G * p.h;
+  running = true;
+  last = null;
+  animId = requestAnimationFrame(loop);
+});
+
+document.getElementById('btn-pause').addEventListener('click', ()=>{
+  if(!state.dropped) return;
+  state.paused = !state.paused;
+  document.getElementById('btn-pause').textContent = state.paused ? '▶ Resume' : '⏸ Pause';
+  if(!state.paused && !running){
+    running = true; last = null;
+    animId = requestAnimationFrame(loop);
+  }
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  if(animId) cancelAnimationFrame(animId);
+  running = false;
+  document.getElementById('btn-pause').textContent = '⏸ Pause';
+  initBall();
+});
+
+/* ---- Touch / drag to set height (on canvas) ---- */
+let dragging = false;
+function canvasPointerDown(e){
+  dragging = true;
+  canvasPointerMove(e);
+}
+function canvasPointerMove(e){
+  if(!dragging || state.dropped) return;
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const scaleY = canvas.height / rect.height;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  const cy = (clientY - rect.top) * scaleY;
+  const gy = groundY();
+  const p  = getParams();
+  const r  = ballRadius(p.m);
+  const newH = Math.max(0.5, Math.min(10, (gy - r - cy) / SCALE));
+  slHeight.value = newH.toFixed(1);
+  updateLabels();
+  initBall();
+}
+function canvasPointerUp(){ dragging = false; }
+canvas.addEventListener('mousedown',  canvasPointerDown);
+canvas.addEventListener('mousemove',  canvasPointerMove);
+canvas.addEventListener('mouseup',    canvasPointerUp);
+canvas.addEventListener('touchstart', canvasPointerDown, {passive:false});
+canvas.addEventListener('touchmove',  canvasPointerMove, {passive:false});
+canvas.addEventListener('touchend',   canvasPointerUp);
+
+/* ---- Init ---- */
+initBall();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+[
+  {
+    "id": "m038t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Risks and Contingencies</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson, you explored External Supply Chains — how materials and components for your mousetrap car come from various sources and why managing those relationships matters. You learned that even the most innovative design depends on a steady, reliable flow of parts.</p><p>Now, as you move into the Performance phase of Creationeering, it is time to ask a harder question: what happens when things do <em>not</em> go as planned? That is exactly what this lesson is about. Today you will dig into Risks and Contingencies — the art of anticipating problems before they happen and having a backup plan ready when they do.</p><p>You will learn how to spot potential failure points in your mousetrap car, think through what could go wrong during construction or testing, and build strategies that make your design more robust. A car that runs well once is good. A car that runs well consistently — that is great engineering.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define common engineering risks and identify potential failure points in a mousetrap car design.</li><li>Explain the importance of contingency planning in engineering projects.</li><li>Apply the OCV method (Objectives, Constraints, Variables) to analyze potential risks in your mousetrap car.</li><li>Propose iterative design adjustments to mitigate identified risks and improve car performance.</li><li>Recognize that diligent planning and preparation for unforeseen challenges reflects responsible stewardship of resources and talents, honoring God's design for order.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Risk",
+          "definition": "A potential problem or event that could negatively affect a project's objectives."
+        },
+        {
+          "term": "Contingency",
+          "definition": "A plan or action designed to address a possible future event or circumstance."
+        },
+        {
+          "term": "Failure Point",
+          "definition": "A specific part or aspect of a system that is most likely to break down or malfunction."
+        },
+        {
+          "term": "Reliability",
+          "definition": "The probability that a system or component will perform its required functions under stated conditions for a specified period of time."
+        },
+        {
+          "term": "Iteration",
+          "definition": "The process of repeating a design or testing cycle to refine and improve a product."
+        },
+        {
+          "term": "Mitigation",
+          "definition": "Actions taken to reduce the severity or likelihood of a negative event."
+        },
+        {
+          "term": "Performance Phase",
+          "definition": "The Creationeering stage where an engineered system operates and fulfills its designed function."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at a large scale (like a car breaking) to causes at a very small scale (like atoms in a material)."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Planning for the Journey</h2><p>Proverbs 21:5 says, <em>\"The plans of the diligent lead surely to abundance, but everyone who is hasty comes only to poverty.\"</em> That is not just wisdom for business decisions — it is a blueprint for engineering.</p><p>Think about how God designed the natural world. He did not just create systems that work once. He built in resilience: seasons that cycle, ecosystems that self-correct, materials that flex under stress instead of snapping. That kind of foresight — designing for the long haul — is exactly what engineers mean when they talk about reliability and contingency planning.</p><p>When you build your mousetrap car, you are not just assembling parts. You are making decisions that will determine how the car behaves under real conditions — on a real floor, with real friction, with real string that might slip. The wise builder, as Jesus described in Matthew 7, tests the foundation before the storm arrives. In engineering, that testing happens through careful risk analysis and iterative design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 21:5</strong> — \"The plans of the diligent lead surely to abundance, but everyone who is hasty comes only to poverty.\" Rushing through a build without thinking about what could go wrong is the engineering version of being hasty. Slow down, plan ahead, and your work will show it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Risks in the Performance Phase</h2><p>A risk is any potential problem that could get in the way of your project's goal. In the Performance phase — when your mousetrap car actually runs — risks become very real, very fast. The spring snaps too hard. The axle wobbles. The string unwinds unevenly. These are not random bad luck events. They are predictable failure points that you can identify and plan for ahead of time.</p><p>Engineers think about risks in two dimensions: <strong>likelihood</strong> (how probable is it that this problem occurs?) and <strong>impact</strong> (how bad would it be if it did?). A risk that is both likely and high-impact gets your attention first. A risk that is unlikely and low-impact can go on the back burner.</p><h3>Common Mousetrap Car Risks</h3><ul><li><strong>Mechanical failure</strong> — the spring arm breaks or the string detaches mid-run.</li><li><strong>Friction issues</strong> — wheels drag on the axle or the body scrapes the floor.</li><li><strong>Energy transfer problems</strong> — the spring releases too fast and the rear wheels spin out instead of gripping.</li><li><strong>Structural weakness</strong> — the frame cracks under the force of the snapping trap.</li><li><strong>Alignment drift</strong> — the car veers off course because the axles are not perfectly parallel.</li></ul><p>Each of these risks has a root cause you can trace, and once you know the cause, you can engineer a fix.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing a mousetrap car with labeled failure points: spring arm connection, axle-wheel joint, string attachment point, and frame cross-members — each highlighted with a risk severity color code (red, yellow, green)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Risk Analysis</h2><p>You have used the OCV method — Objectives, Constraints, Variables — to design your car. It turns out it is just as powerful for analyzing risks. Here is how to connect the two:</p><h3>Objectives</h3><p>Your objective might be \"travel the farthest distance in a straight line.\" Any risk that threatens distance or straightness is a high-priority risk. Start your risk list there.</p><h3>Constraints</h3><p>Constraints are your non-negotiables — rules you cannot change, like the size of the mousetrap or the materials you are allowed to use. Risks that push you close to a constraint boundary deserve attention. If your design only barely fits the size limit, any slight warping of the frame becomes a real threat.</p><h3>Variables</h3><p>Variables are the design choices that are yours to make: wheel diameter, axle length, string type, frame material. Each variable is a potential risk lever. Changing a variable can reduce one risk while introducing another. That tension — balancing trade-offs — is the heart of iterative engineering design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Contingency Planning: Your Engineering Backup Plan</h2><p>A contingency is a pre-planned response to a risk that has occurred or is likely to occur. Think of it like a spare tire in your trunk — you hope you never need it, but having it means a flat tire does not end your trip.</p><p>In engineering, contingency planning usually means one of three things:</p><ul><li><strong>Redundancy</strong> — adding a backup component that takes over if the primary one fails. A secondary string anchor, for example, so that if one knot slips, the string stays connected.</li><li><strong>Design adjustment</strong> — changing a variable before the problem occurs. If testing shows the rear wheels spin out, you might switch to larger diameter wheels to improve traction.</li><li><strong>Repair protocol</strong> — knowing in advance exactly how you will fix a specific failure if it happens. Having pre-cut replacement axles ready saves you critical time during competition.</li></ul><p>Good contingency planning does not mean you expect to fail. It means you respect the complexity of your system enough to prepare for surprises.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Build a Risk Log.</strong> Before your next test run, write down your top three predicted failure points. For each one, note the likelihood (low / medium / high), the impact if it happens, and your contingency response. Reviewing this log after each test run is one of the fastest ways to improve your design.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Iteration: How Engineers Get Better Over Time</h2><p>No design is perfect on the first try. Iteration — the process of testing, observing, adjusting, and testing again — is how engineers move from a rough prototype to a polished product. Every professional engineering team uses it, from aerospace to biomedical devices to the cars on the road today.</p><p>For your mousetrap car, each test run is data. A car that veers left tells you the axles are misaligned or the wheels have uneven friction. A car that stops short tells you energy is being lost to friction somewhere in the drivetrain. A car that travels far but wobbles tells you there is a stability issue with the frame or wheel placement.</p><p>The key is to change <em>one variable at a time</em>. If you change three things between runs, you cannot know which change caused the improvement — or the new problem. Disciplined, single-variable iteration is what turns test results into real knowledge.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Zooming In: Multiscale Modeling</h2><p>Here is a concept that might change how you look at a broken axle. When something fails in your car, the visible crack or snap is just the end of a story that started at a much smaller scale. <strong>Multiscale modeling</strong> is the engineering practice of connecting what you can see — a wheel that cracks — to what is happening at the material level, where tiny stress concentrations in the structure have been building up with each run.</p><p>You do not need an electron microscope to think this way. Ask yourself: why did the material fail at <em>that specific spot</em>? Was there a scratch that created a weak point? Was the axle hole drilled at a slight angle, creating uneven pressure? Was the wood grain running the wrong direction for that load?</p><p>This kind of thinking — zooming from the big picture down to the root cause — is exactly how professional engineers approach failure analysis. And it leads to better, more targeted design fixes than just \"make it thicker.\"</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A two-panel illustration: the left panel shows a mousetrap car axle that has snapped, viewed from normal scale; the right panel zooms into a magnified cross-section of the wood material showing stress fracture lines originating from a small surface scratch — illustrating multiscale modeling."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and the Reliability Standard</h2><p>Reliability is not just a technical goal — it is a stewardship responsibility. When you invest time, materials, and creativity into a project, building something that performs consistently is how you honor that investment. Wasting materials on a design you never tested is the opposite of stewardship. So is rushing a build and hoping for the best on competition day.</p><p>God calls us to work with excellence. Colossians 3:23 reminds us: <em>\"Whatever you do, work at it with all your heart, as working for the Lord.\"</em> In the context of your mousetrap car, that means not skipping the risk analysis, not ignoring a wobble you noticed in the last test run, and not leaving contingencies to chance. Excellence in engineering is built one careful, deliberate decision at a time.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Do not confuse mitigation with elimination.</strong> Mitigating a risk means reducing its likelihood or impact — it does not mean the risk disappears. Always keep your contingency plan active even after you have made a design fix. A risk you thought you solved can return in a different form if the root cause was not fully addressed.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Here is a simple workflow you can follow as you prepare for your next mousetrap car test run:</p><ul><li><strong>Step 1 — Identify risks:</strong> List every part of your car and ask \"what could go wrong here?\"</li><li><strong>Step 2 — Rank by likelihood and impact:</strong> Focus first on risks that are both probable and consequential.</li><li><strong>Step 3 — Apply OCV:</strong> Check which risks threaten your objectives, bump up against your constraints, or are caused by a specific variable you can adjust.</li><li><strong>Step 4 — Design mitigations:</strong> Change one variable at a time to address your top risks.</li><li><strong>Step 5 — Build contingencies:</strong> Decide in advance how you will respond if a specific failure occurs during the run.</li><li><strong>Step 6 — Test and iterate:</strong> Run the car, observe carefully, log what happened, and repeat the cycle.</li></ul><p>This process is not a one-time checklist — it is a loop. Each iteration gives you better information, which leads to better decisions, which leads to a more reliable car.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m038a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the difference between a risk and a contingency?</strong><br/>A risk is a potential problem that could negatively affect your project. A contingency is the plan you have ready to respond if that problem actually occurs.</p><p><strong>2. Why should you change only one variable at a time during iteration?</strong><br/>If you change multiple variables at once, you cannot know which change caused the improvement or introduced a new problem. Single-variable changes give you clear, usable information.</p><p><strong>3. How does the OCV method help with risk analysis?</strong><br/>Objectives tell you which risks matter most (anything that threatens your goal). Constraints show you where you have no room for error. Variables are the design choices you can adjust to reduce risk.</p><p><strong>4. What does multiscale modeling mean, and why does it matter for your car?</strong><br/>Multiscale modeling means connecting a visible failure (like a cracked axle) to its root cause at the material or structural level (like a stress concentration from a surface scratch). It helps you fix the real problem instead of just masking the symptom.</p><p><strong>5. How does reliability connect to biblical stewardship?</strong><br/>Building something reliable means honoring the time, materials, and talent you have been given. Rushing or skipping risk analysis wastes those resources. Working with diligence and care is a way of working \"as for the Lord\" (Colossians 3:23).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

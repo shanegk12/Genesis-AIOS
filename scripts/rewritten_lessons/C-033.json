@@ -1,0 +1,467 @@
+[
+  {
+    "id": "c033t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Standardization vs. Custom Fabrication</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you explored Cost Analysis and Budgeting — learning how to manage resources wisely and keep projects within financial limits. That foundation carries right into where we are now: the <strong>Procurement</strong> phase, the stage where you actually acquire the materials, components, and services needed to bring your designs to life.</p>\n<p>Today you'll dig into one of the most important decisions you'll face during procurement: should you use a <strong>standardized</strong> part, or should you <strong>custom fabricate</strong> something unique? This choice affects your project's cost, timeline, quality, and overall success. Knowing when to grab something off the shelf versus when to build from scratch is what separates a good designer from a great one. By the end of this lesson, you'll have the tools to make that call — wisely and with purpose.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Define and differentiate between standardized components and custom-fabricated components.</li>\n<li>Identify the key advantages and disadvantages of each approach in an engineering project.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to evaluate procurement decisions.</li>\n<li>Connect macro-level procurement choices to atomic-level material properties and manufacturing processes.</li>\n<li>Make informed decisions that reflect wise biblical stewardship of resources and time.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Procurement",
+          "definition": "The process of acquiring goods, services, or works from an external source, typically involving careful planning and selection."
+        },
+        {
+          "term": "Standardization",
+          "definition": "The process of implementing and developing technical standards based on consensus, resulting in uniform, interchangeable components."
+        },
+        {
+          "term": "Custom Fabrication",
+          "definition": "The process of designing and manufacturing a component specifically for a unique application or customer need."
+        },
+        {
+          "term": "Component",
+          "definition": "A part or element of a larger whole, especially a part of a machine or system."
+        },
+        {
+          "term": "Assembly",
+          "definition": "A group of parts that fit together to form a self-contained unit within a larger machine or system."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The permissible limit or limits of variation in a physical dimension or property of a manufactured item."
+        },
+        {
+          "term": "Lead Time",
+          "definition": "The amount of time that passes between the start and completion of a process, such as ordering a part and receiving it."
+        },
+        {
+          "term": "Economies of Scale",
+          "definition": "The cost advantages a manufacturer gains by producing in large quantities — the more you make, the cheaper each unit becomes."
+        },
+        {
+          "term": "Quality Control",
+          "definition": "The process of ensuring that products or services meet specific standards of quality before they are used or delivered."
+        },
+        {
+          "term": "Interoperability",
+          "definition": "The ability of different systems or components to work together effectively and seamlessly."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Wisdom of Design Choices</h2>\n<p>Before the first blueprint was drawn or the first bolt was tightened, wisdom was already at work. Proverbs 8 describes wisdom as being present at the very moment God laid out the foundations of the earth — delighting in His work, rejoicing in the order and structure He put in place. That same principle applies to engineering. Every great design starts not with tools or materials, but with <em>wisdom</em> — the wisdom to know what kind of solution the problem actually needs.</p>\n<p>When you face a procurement decision, you're not just picking parts. You're exercising judgment. You're asking: What does this design truly require? What honors the resources I've been given? What will serve the people this project is meant to help? Those are not just engineering questions — they're questions of stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 8:22-23 (NIV):</strong> \"The Lord brought me forth as the first of his works, before his ancient deeds of old. I was formed long ages ago, at the very beginning, when the world came to be.\"</p><p>Wisdom was built into creation from the start. As you make design and procurement decisions, you're tapping into that same gift — the ability to think carefully, plan ahead, and choose well.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Standardization?</h2>\n<p>A <strong>standardized component</strong> is a part that has been manufactured to a widely accepted set of specifications. Think of a bolt from a hardware store — it's made to precise, universal dimensions so it fits millions of different applications. You don't design it. You don't manufacture it. You simply select it, order it, and use it.</p>\n<p>Standardization didn't happen by accident. Engineers, manufacturers, and governments worked together over decades to agree on common sizes, shapes, materials, and performance requirements. The result? Parts that are predictable, tested, interchangeable, and usually very affordable.</p>\n<h3>Why Standardization Works</h3>\n<p>Because standardized parts are made in massive quantities, manufacturers can spread their costs across millions of units. That's <strong>economies of scale</strong> in action — the same reason a factory-made pencil costs pennies while a hand-carved one might cost ten dollars. High volume drives down the cost per unit, and those savings get passed on to you.</p>\n<p>Standard parts also come with another powerful advantage: they've already been tested. A certified bolt rated for a specific load has been proven through rigorous quality control. You're not guessing — you have data.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A variety of standardized fasteners — bolts, nuts, and screws — arranged by size, illustrating how uniform dimensions allow parts to be interchangeable across countless applications."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick check:</strong> If a part already exists, is widely available, meets your specs, and fits your budget — use it. Standardized parts save time, money, and testing effort. Save your custom fabrication budget for the problems that truly need a unique solution.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Advantages and Disadvantages of Standardization</h2>\n<h3>The Advantages</h3>\n<ul>\n<li><strong>Lower cost:</strong> Mass production drives prices down significantly.</li>\n<li><strong>Short lead time:</strong> Parts are often in stock and can ship immediately.</li>\n<li><strong>Proven reliability:</strong> Standardized parts have been tested and certified.</li>\n<li><strong>Easy replacement:</strong> If a part fails, finding a replacement is simple.</li>\n<li><strong>Interoperability:</strong> Standard parts fit with other standard parts — your design can work with existing systems.</li>\n</ul>\n<h3>The Disadvantages</h3>\n<ul>\n<li><strong>Limited design freedom:</strong> You must design around what's available, not what's theoretically ideal.</li>\n<li><strong>Performance ceiling:</strong> Standard parts are built for typical use cases — they may not perform optimally in extreme or specialized conditions.</li>\n<li><strong>One-size-fits-most:</strong> A standard part might meet 80% of your requirements but not the specific 20% that matters most to your design.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Custom Fabrication?</h2>\n<p><strong>Custom fabrication</strong> means you design and build a component from scratch — precisely engineered for your specific application. Nothing pre-made will do. You need it a particular size, shape, material, or configuration that simply doesn't exist in any catalog.</p>\n<p>Think of it like tailoring a suit versus buying one off the rack. A tailored suit fits perfectly because it was made for your exact measurements. An off-the-rack suit might be close, but it will never fit quite as well. Custom fabrication gives you that same precision — but it comes at a cost.</p>\n<h3>When Custom Fabrication Makes Sense</h3>\n<p>Custom parts shine when your design has a truly unique requirement. Maybe your bracket needs to fit into a space with dimensions that no standard part covers. Maybe the load conditions are extreme enough that standard-rated components would fail. Maybe your product's performance depends on a shape that only a custom mold can produce. In those cases, the extra cost and time of custom fabrication is not waste — it's a necessary investment.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A machinist operating a CNC milling machine to fabricate a custom metal component, showing the precision and setup time involved in custom manufacturing."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Advantages and Disadvantages of Custom Fabrication</h2>\n<h3>The Advantages</h3>\n<ul>\n<li><strong>Perfect fit:</strong> The part is designed exactly for your application — tolerances, geometry, and material are all optimized.</li>\n<li><strong>Performance optimization:</strong> You can push performance beyond what standard parts allow.</li>\n<li><strong>Competitive differentiation:</strong> A custom component can be a feature that sets your product apart in the marketplace.</li>\n<li><strong>No design compromises:</strong> You're not forced to adapt your design around what's available.</li>\n</ul>\n<h3>The Disadvantages</h3>\n<ul>\n<li><strong>Higher cost:</strong> Without economies of scale, each unit costs significantly more to produce.</li>\n<li><strong>Longer lead time:</strong> Design, prototyping, tooling, and production take time — often weeks or months.</li>\n<li><strong>Higher risk:</strong> A custom part hasn't been proven yet. It needs its own testing and quality control process.</li>\n<li><strong>Replacement challenges:</strong> If a custom part fails in the field, getting a replacement made takes time and money.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Watch out for \"custom by default.\"</strong> One of the most common and costly mistakes in engineering is fabricating a custom part when a standard one would work just fine. Before you commit to custom fabrication, always search for a standard solution first. Custom should be the answer to a genuine need — not a first instinct.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Using the OCV Method to Decide</h2>\n<p>So how do you actually make this decision in practice? You use the <strong>Objective, Constraint, Variable (OCV)</strong> method — a structured thinking tool that keeps your decisions grounded in what your design actually needs.</p>\n<h3>O — Objective</h3>\n<p>What does this component need to <em>do</em>? Define the function clearly. A bracket must hold 50 lbs. A housing must protect electronics from moisture. A shaft must transmit torque at a specific RPM. The objective is the job the part must perform.</p>\n<h3>C — Constraints</h3>\n<p>What limits are non-negotiable? Constraints might include maximum size, budget per unit, lead time deadline, material requirements, or safety certifications. If a standard part meets all your constraints, you have a strong case for standardization. If it fails even one critical constraint, custom fabrication may be necessary.</p>\n<h3>V — Variables</h3>\n<p>What can you adjust? Variables are the factors you have flexibility on. Maybe the exact shape isn't critical, but the material is. Maybe the color doesn't matter, but the thread pitch does. Identifying your variables helps you see where you have room to use a standard solution and where you truly don't.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033c003",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>OCV in action:</strong> Suppose you need a gear for a low-speed motor in a school project. Objective: transmit rotational force at under 100 RPM. Constraints: must fit a 6mm shaft, budget under $5, available within one week. Variables: material, number of teeth (within a range), color. Running through OCV quickly reveals that dozens of standard gears likely meet every requirement — no custom fabrication needed.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Macro to Micro: How Material Properties Connect</h2>\n<p>Here's something easy to overlook: whether you choose a standard part or fabricate a custom one, the decision ultimately reaches all the way down to the <em>atomic level</em>. The material a part is made from determines how it behaves under load, heat, vibration, and corrosion. Those properties are baked into the material's molecular structure.</p>\n<p>When you select a standardized bolt, the manufacturer has already accounted for this — they chose the steel grade, heat treatment, and surface finish to match the part's rated performance. When you custom fabricate, you take on that responsibility yourself. You must specify the material, define the acceptable tolerances, and ensure your manufacturing process doesn't introduce weaknesses.</p>\n<p>Think of it like baking. A boxed cake mix (standard) has already balanced the flour, sugar, and leavening for you — the chemistry is done. Baking from scratch (custom) gives you full control, but if you get the ratios wrong, the cake collapses. Same principle applies in engineering: more control means more responsibility.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and the Procurement Decision</h2>\n<p>Every procurement decision is also a stewardship decision. The resources you're working with — money, time, materials, people's effort — are entrusted to you. Choosing custom fabrication when a standard part would work perfectly isn't clever engineering. It's waste. And wasting resources that could serve the project — or the people the project is designed to help — falls short of the standard God calls us to.</p>\n<p>On the other hand, cutting corners by forcing a mismatched standard part into a critical application where it will fail isn't stewardship either. It's short-term thinking that creates bigger problems later. True stewardship means making the <em>right</em> choice for the right reasons — not the cheapest choice, and not the most impressive choice, but the wisest one.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 16:10 (NIV):</strong> \"Whoever can be trusted with very little can also be trusted with much.\"</p><p>Your procurement decisions — even on small student projects — are practice for the bigger decisions ahead. Handle every choice with care and integrity, whether it's selecting a $0.50 bolt or specifying a custom-machined part for a critical system.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Side-by-Side Comparison</h2>\n<p>Here's a quick summary of how standardization and custom fabrication compare across the key factors you'll consider in procurement decisions:</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A side-by-side comparison table showing Standardization vs. Custom Fabrication across cost, lead time, performance fit, risk, and replaceability."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> When reviewing for a quiz or test, try to think of a real-world example for each advantage and disadvantage. Connecting abstract concepts to concrete examples — like a car's standard lug nuts versus a custom race car brake caliper — makes them much easier to remember.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Question 1",
+      "html": "<p><strong>Q: What is the main reason standardized parts are typically less expensive than custom-fabricated parts?</strong></p><p>Standardized parts are produced in very large quantities, which means manufacturing costs are spread across millions of units. This is called <strong>economies of scale</strong>. The more units produced, the lower the cost per unit — making standard parts far more affordable than a one-off custom component that requires its own design, tooling, and production setup.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033a002",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Question 2",
+      "html": "<p><strong>Q: A student is building a robot arm and needs a motor shaft connector. She finds a standard aluminum coupling that fits her motor shaft perfectly and handles her required torque. Should she use the standard part or fabricate a custom one? Explain your reasoning.</strong></p><p>She should use the standard part. It already meets her objective (connect the shaft), satisfies her constraints (correct shaft size, handles required torque), and using a standard component saves time and money. Custom fabrication would add cost and lead time without providing any additional benefit. This is a clear case where standardization is the wise, stewardship-minded choice.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033a003",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Question 3",
+      "html": "<p><strong>Q: What is \"lead time\" and why does it matter in procurement?</strong></p><p><strong>Lead time</strong> is the amount of time between when you initiate an order or process and when it's completed — for example, the time between placing an order for a part and actually receiving it. Lead time matters in procurement because it affects your project schedule. If a custom-fabricated part takes six weeks to produce but your project deadline is in four weeks, that choice could delay your entire project. Understanding lead time helps you plan procurement early and avoid costly delays.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033a004",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Question 4",
+      "html": "<p><strong>Q: How does the OCV method help you make procurement decisions?</strong></p><p>The OCV method gives you a structured way to evaluate any component decision. First, you define your <strong>Objective</strong> — what the part must do. Then you list your <strong>Constraints</strong> — the non-negotiable limits like budget, size, or deadline. Finally, you identify your <strong>Variables</strong> — the factors you have flexibility on. Running a potential part through OCV quickly reveals whether a standard solution can meet your needs or whether custom fabrication is truly required. It keeps your decision-making focused on function and need rather than preference or assumption.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c033a005",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: Question 5",
+      "html": "<p><strong>Q: How does the choice between standardization and custom fabrication connect to biblical stewardship?</strong></p><p>Every procurement decision involves resources — money, time, materials, and effort — that have been entrusted to you. Choosing custom fabrication when a standard part would work perfectly wastes resources that could serve the project better elsewhere. Forcing a mismatched standard part into a critical role to save money is short-term thinking that creates bigger failures later. Biblical stewardship means making the <em>wisest</em> choice, not simply the cheapest or the most impressive one. It means honoring the resources and the people your design is meant to serve.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

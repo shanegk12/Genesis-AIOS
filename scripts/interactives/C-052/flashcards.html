@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fabrication Methods and Integrity — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Fabrication Methods and Integrity</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Fabrication", "definition": "The process of making or manufacturing individual parts or products from raw materials."}, {"term": "Integrity (in engineering)", "definition": "The quality of a part being strong, reliable, and free from defects, ensuring it works as intended."}, {"term": "Machining", "definition": "A fabrication method where tools cut away material from a block to create a specific shape."}, {"term": "Additive Manufacturing", "definition": "Also known as 3D printing, this method builds objects layer by layer by adding material."}, {"term": "Multiscale Modeling", "definition": "An engineering approach that links large-scale observations of a part's behavior to tiny, atomic-level explanations."}, {"term": "Objective (OCV)", "definition": "The desired outcome or goal you are trying to achieve in an engineering challenge."}, {"term": "Constraint (OCV)", "definition": "A limitation or restriction that must be followed when solving an engineering problem, like a budget or material availability."}, {"term": "Variable (OCV)", "definition": "A factor or characteristic that can be changed or adjusted during an engineering design or process."}, {"term": "Why is integrity important in fabricated parts?", "definition": "Ensuring integrity means parts are strong and reliable, which is crucial for the entire system to function correctly and safely."}, {"term": "How does fabrication connect to assembly?", "definition": "The quality of fabricated parts directly affects how well they fit together during assembly and how the final system performs."}, {"term": "Biblical Stewardship (in fabrication)", "definition": "Making sure fabricated components have integrity reflects good stewardship by wisely using resources and creating reliable designs."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

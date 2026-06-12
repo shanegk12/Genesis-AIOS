@@ -1,0 +1,317 @@
+[
+  {
+    "id": "c067t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Failure Analysis and Reliability Engineering</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored Performance Validation — testing designs to confirm they meet their goals. You ran experiments, collected data, and verified your creations worked as planned. But here's the real question: what happens when things <em>don't</em> work? What if your design fails or breaks?</p><p>This lesson is all about understanding why things fail and how to make designs more reliable. We'll dive into Failure Analysis and Reliability Engineering — a critical part of the Performance phase of Creationeering. You'll learn how to investigate failures, discover how to prevent them in the future, and use the tools of science and engineering to build better, stronger, and more dependable creations. This is how we honor God with our ingenuity.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Define failure analysis and explain its importance in engineering.</li><li>Identify common causes of failure in engineered systems.</li><li>Understand the concept of reliability and how it is measured.</li><li>Apply the OCV method to improve the reliability of a simple design.</li><li>Connect failure analysis and reliability engineering to the biblical call for faithful stewardship of creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Failure",
+          "definition": "The inability of a system or component to perform its intended function under specified conditions."
+        },
+        {
+          "term": "Reliability",
+          "definition": "The probability that a system or component will perform its intended function for a specified period under specified conditions without failure."
+        },
+        {
+          "term": "Failure Analysis",
+          "definition": "The process of collecting and analyzing data to determine the cause of a failure."
+        },
+        {
+          "term": "Root Cause",
+          "definition": "The fundamental reason for a failure, which, if removed, would prevent the failure from recurring."
+        },
+        {
+          "term": "Stress",
+          "definition": "An internal force per unit area within a material, often caused by external loads."
+        },
+        {
+          "term": "Strain",
+          "definition": "The deformation or change in shape of a material due to stress."
+        },
+        {
+          "term": "Fatigue",
+          "definition": "The weakening of a material caused by repeatedly applied loads, leading to eventual failure."
+        },
+        {
+          "term": "Corrosion",
+          "definition": "The gradual destruction of materials by chemical reactions with their environment."
+        },
+        {
+          "term": "Redundancy",
+          "definition": "The inclusion of extra components or systems that can take over if a primary component fails."
+        },
+        {
+          "term": "Factor of Safety",
+          "definition": "A numerical value representing the ratio of a material's strength to the maximum stress it is expected to experience."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Psalm 119:90</strong> — \"Your faithfulness endures through all generations; you established the earth, and it stands fast.\"</p><p>God's creation is the ultimate example of reliability. The sun rises every morning. The seasons change on schedule. These aren't accidents — they're the result of a design built with perfect consistency and purpose. As you learn to analyze failures and build more dependable systems, you're chasing that same standard: creations that serve their purpose faithfully, just as God's creation serves His.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Failure, and Why Does It Happen?</h2><p>A failure happens when something stops working the way it's supposed to. Think about a bike chain snapping while you're riding. The bike's job is to take you places. The broken chain stops it from doing that — that's a failure. In engineering, we don't just say \"it broke\" and move on. We want to know <em>exactly</em> why it broke. We want to understand the <strong>mechanism of failure</strong> — the specific way it stopped working. That understanding is what lets us fix the problem and prevent it from happening again.</p><p>Imagine a bridge built from LEGOs, designed to hold one toy car. Stack too many cars on it, or connect the pieces loosely, and the bridge collapses. The collapse is the failure — but the real questions are: Was the design too weak? Were the connections poor? Did the load exceed what the structure could handle? Answering those questions is exactly what failure analysis is all about.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple LEGO bridge under increasing load — showing the structure intact with one car, bending under several cars, and collapsed under too many, illustrating progressive failure from overloading."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t005",
+    "type": "text",
+    "data": {
+      "html": "<h3>Common Causes of Failure</h3><p>Failures rarely happen for just one reason. Engineers have identified several common culprits that show up again and again across all types of designs:</p><ul><li><strong>Overload</strong> — Applying more force or stress than the design was built to handle. Like piling too many books on a shelf until it cracks.</li><li><strong>Fatigue</strong> — Repeated stress over time slowly weakens a material, even if each individual load seems small. A paperclip bent back and forth enough times will eventually snap.</li><li><strong>Corrosion</strong> — Chemical reactions with the environment (like water and oxygen causing rust) eat away at materials gradually. Left unchecked, a rusty bolt can become a serious structural risk.</li><li><strong>Manufacturing Defects</strong> — Tiny flaws introduced during production — air bubbles in a weld, uneven material thickness — can become failure points under stress.</li><li><strong>Design Flaws</strong> — Sometimes the original plan itself has a weakness. Poor geometry, wrong material choice, or underestimating the loads a structure will face can all lead to failure.</li><li><strong>Human Error</strong> — Incorrect assembly, improper use, or skipped maintenance steps can cause even a well-designed system to fail.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Finding the Root Cause</h3><p>When a failure happens, it's tempting to fix the most obvious symptom and move on. But a good engineer digs deeper to find the <strong>root cause</strong> — the fundamental reason the failure happened. Remove the root cause, and you prevent the failure from ever coming back. Leave it untouched, and you're just patching the surface.</p><p>A helpful tool for this is the <strong>\"5 Whys\" technique</strong>. You simply ask \"Why?\" five times in a row, following the chain of causes deeper with each answer. For example:</p><ul><li><em>The bridge collapsed.</em> Why? — The support beam broke.</li><li><em>The support beam broke.</em> Why? — It had a crack in it.</li><li><em>It had a crack.</em> Why? — The material was fatigued from repeated loading.</li><li><em>It was fatigued.</em> Why? — The design didn't account for repeated use over time.</li><li><em>The design didn't account for it.</em> Why? — The engineer only tested it once, not under repeated conditions.</li></ul><p>Now you've found the real problem: insufficient testing for repeated loads. That's a root cause you can actually fix.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Reliability</h2><p>Reliability is all about consistency. A reliable design does its job correctly — not just once, but every single time it's needed, over its entire expected lifespan. Engineers actually express reliability as a probability. A component with 99% reliability will successfully complete its function 99 out of every 100 times it operates under the expected conditions.</p><p>That number matters more than you might think. Imagine an airplane with 1,000 components, each individually 99% reliable. If even one failure causes a crash, the combined probability of all components working perfectly at the same time drops dramatically. This is why aerospace engineers push for components far above 99% — sometimes 99.999% or higher. High reliability requires obsessive attention to every part of the system.</p><h3>Stress, Strain, and the Factor of Safety</h3><p>Two key concepts in reliability are <strong>stress</strong> and <strong>strain</strong>. Stress is the internal force a material experiences when a load is applied — like the tension in a rope when you pull both ends. Strain is how the material actually deforms in response to that stress — the rope stretching slightly.</p><p>To make sure designs don't fail, engineers build in a <strong>factor of safety</strong>. If a beam can hold 10,000 pounds before breaking, and your design only needs it to hold 2,000 pounds, your factor of safety is 5. That cushion protects against unexpected loads, material imperfections, and the wear that comes with time.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram showing stress and strain in a metal rod under tension — arrows indicating applied force, internal stress distribution, and the elongation (strain) of the rod compared to its original length."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Redundancy: A Built-In Backup Plan</h3><p>One powerful strategy for improving reliability is <strong>redundancy</strong> — adding backup systems that take over if a primary component fails. You see this everywhere once you start looking. Airplanes have multiple engines. Hospitals have backup generators. Your body has two kidneys, even though one can do the job alone.</p><p>Redundancy doesn't mean the original design was bad. It means the engineer thought ahead about failure possibilities and built in protection. It's the engineering equivalent of \"hope for the best, plan for the worst.\" God built incredible redundancy into living systems too — it's a principle woven into creation itself.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Observe, Characterize, Verify</h2><p>When you encounter a failure — or want to prevent one — engineers use a structured approach to work through it. One practical framework is the <strong>OCV Method</strong>:</p><ul><li><strong>Observe</strong> — Gather all the facts about the failure. What broke? When did it break? What were the conditions? What does the broken part look like? Don't assume anything yet. Just collect evidence like a detective at a scene.</li><li><strong>Characterize</strong> — Analyze the evidence to describe the failure in detail. What type of failure is it — fatigue, overload, corrosion? Where exactly did it start? What does the fracture surface look like? This is where you identify the root cause.</li><li><strong>Verify</strong> — Test your hypothesis. If you believe fatigue caused the failure, reproduce the conditions and see if the same failure occurs. Then redesign, apply your fix, and test again to confirm the problem is solved.</li></ul><p>This method keeps your analysis organized and scientific. It prevents you from jumping to conclusions and making fixes that don't actually address the real problem.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Applying OCV to Your Own Designs:</strong> Next time something in your project doesn't work as expected, resist the urge to immediately tear it apart and rebuild. Instead, pause and run through OCV. <em>Observe</em> what happened, <em>characterize</em> why it happened, then <em>verify</em> your fix actually solves the problem. This habit will save you hours of trial-and-error rebuilding.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Failure Analysis as Faithful Stewardship</h2><p>Here's something worth sitting with: taking failure seriously is an act of stewardship. When you build something — a bridge, a device, a system — people may depend on it. They trust that it will work. They trust that you designed it carefully. Analyzing failures, building in safety factors, and testing for reliability is how you honor that trust.</p><p>Proverbs 14:23 says, \"All hard work brings a profit.\" Failure analysis is hard, careful, sometimes tedious work. It means going back over your design with fresh eyes and asking uncomfortable questions. But that work pays off — in designs that last, in creations that serve, and in the satisfaction of knowing you built something worthy of the people who will use it. That's what it means to create with integrity.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake — Fixing Symptoms Instead of Root Causes:</strong> If your design keeps failing in the same way after you've already repaired it once, you probably fixed the symptom, not the root cause. A cracked weld that keeps re-cracking isn't a welding problem — it's likely a stress concentration or overload problem in the design itself. Always ask <em>why</em> the symptom appeared before deciding how to fix it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Failure Case Studies",
+      "html": "<p>Some of the most important advances in engineering came directly from studying catastrophic failures. Here are two examples worth knowing:</p><p><strong>The Tacoma Narrows Bridge (1940)</strong> — This suspension bridge in Washington State collapsed just four months after opening, caught on film as it twisted and buckled in moderate winds. The cause? Resonance — the wind's frequency matched the bridge's natural vibration frequency, causing oscillations that grew until the structure tore apart. Engineers now design bridges specifically to avoid resonant frequencies. Every long-span bridge built today carries lessons from Tacoma Narrows.</p><p><strong>The Space Shuttle Challenger (1986)</strong> — The shuttle broke apart 73 seconds after launch due to the failure of an O-ring seal in one of the solid rocket boosters. The O-ring became brittle in cold temperatures. Engineers had raised concerns before launch, but the warnings were not acted upon. This tragedy reshaped how NASA manages engineering risk and the culture around speaking up about safety concerns. It's a powerful reminder that reliability engineering is not just technical — it's also about communication and courage.</p><p>Both failures share a common thread: the root cause was understood <em>after</em> the fact, and in both cases, earlier attention to warning signs could have prevented disaster. Failure analysis saves lives.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c067t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Summary</h2><p>Failure analysis and reliability engineering are not about expecting the worst — they're about building the best. When you understand why things fail, you gain the knowledge to design things that don't. Here's what to take away from this lesson:</p><ul><li><strong>Failure</strong> is when a system or component can no longer perform its intended function.</li><li><strong>Root cause analysis</strong> — especially the 5 Whys technique — helps you find the real source of a problem, not just its symptoms.</li><li><strong>Common failure modes</strong> include overload, fatigue, corrosion, manufacturing defects, design flaws, and human error.</li><li><strong>Reliability</strong> is the probability a system performs correctly over time — and it's improved through careful design, proper factors of safety, and redundancy.</li><li>The <strong>OCV Method</strong> (Observe, Characterize, Verify) gives you a structured way to investigate and fix failures.</li><li>Building reliable designs is an act of <strong>faithful stewardship</strong> — honoring the people who depend on your work and the Creator who gave you the ability to build.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

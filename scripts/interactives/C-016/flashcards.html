@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alternatives and Patents — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Alternatives and Patents</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "SCAMPER", "definition": "A systematic method using an acronym (Substitute, Combine, Adapt, Modify, Put to another use, Eliminate, Reverse) to generate different variations of an idea."}, {"term": "Morphological Analysis (Morph Model)", "definition": "A design method that breaks a product into its functional parts and then systematically combines different forms for each part to create new ideas."}, {"term": "Requirements", "definition": "The non-negotiable criteria or 'musts' that a design absolutely has to meet to be considered successful."}, {"term": "Constraints", "definition": "The limitations or boundaries, like budget, time, or materials, that restrict what can be done in a design."}, {"term": "Engineering Decision Matrix", "definition": "A table used to score and compare different design alternatives against weighted criteria, helping engineers make data-driven choices."}, {"term": "Intellectual Property (IP)", "definition": "Creations that come from the mind, such as inventions, literary works, or artistic designs, which can be protected by law."}, {"term": "Patent", "definition": "A legal protection granted by the government that gives an inventor exclusive rights to make, use, or sell their invention for a certain period."}, {"term": "Criteria for a Patent", "definition": "To qualify for a patent, an invention must be Novel (new), Useful (functional), and Non-Obvious (not easily thought of by someone skilled in the field)."}, {"term": "Stewardship", "definition": "A biblical principle that encourages us to responsibly develop, protect, and care for the gifts, talents, and innovations God has entrusted to us."}, {"term": "Alternative", "definition": "A distinct and workable solution or option for solving a design problem."}, {"term": "Why evaluate alternatives?", "definition": "Evaluating alternatives helps engineers choose the 'best' solution when they have multiple good ideas but limited resources like budget, time, or materials."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

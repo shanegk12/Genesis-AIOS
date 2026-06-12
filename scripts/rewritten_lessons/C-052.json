@@ -1,0 +1,440 @@
+[
+  {
+    "id": "c052t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Quality Control During Assembly</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Last time, we explored Fabrication Methods and Integrity — how raw materials are shaped into individual components and why the strength of each piece matters. Now we take the next crucial step: <strong>Quality Control During Assembly</strong>. This lesson lives squarely in the Assembly phase of the Creationeering™ framework, the moment when all those carefully fabricated parts finally come together into a complete, working system.</p><p>You will discover why checking for quality <em>during</em> assembly is just as important as the original design. Even the smallest mistake when joining parts can cause big problems down the line. We will explore smart strategies and tools that engineers use to catch those problems early — and connect it all to a biblical call toward excellence and diligent stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Explain the fundamental importance of quality control during the assembly phase of Creationeering™.</li><li>Identify common types of assembly defects and their potential causes at both macroscopic and atomic levels.</li><li>Describe various tools and techniques used for inspecting and verifying the quality of assembled components.</li><li>Apply the Objective, Constraint, Variable (OCV) method to optimize a quality control process in an assembly scenario.</li><li>Connect the principles of quality control in engineering to the biblical call for diligent and excellent stewardship of our resources and gifts.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Quality Control",
+          "definition": "The process of ensuring that products or services meet specified standards and requirements."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The process of combining individual components or sub-assemblies to create a complete product or system."
+        },
+        {
+          "term": "Defect",
+          "definition": "A flaw or imperfection in a product or component that prevents it from meeting its specified requirements or performing its intended function."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The permissible range of variation in a dimension or characteristic of a part or assembly — how much deviation is still acceptable."
+        },
+        {
+          "term": "Inspection",
+          "definition": "The act of examining a product, process, or service to determine whether it meets specified requirements."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A scientific approach that connects observations at different size levels, from the large (macro) down to the very small (atomic or molecular)."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome under a given set of conditions and constraints."
+        },
+        {
+          "term": "Objective",
+          "definition": "In the OCV method, the specific, measurable goal you are trying to achieve."
+        },
+        {
+          "term": "Constraint",
+          "definition": "In the OCV method, the limitations or restrictions that must be respected when pursuing your objective."
+        },
+        {
+          "term": "Variable",
+          "definition": "In the OCV method, the factors or parameters that can be changed or adjusted to influence the outcome."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Perfect Order: The Blueprint for Quality</h2><p>Our exploration of quality control starts with a profound truth. Colossians 1:16-17 tells us, <em>\"For by Him all things were created, in heaven and on earth, visible and invisible… And He is before all things, and in Him all things hold together.\"</em> Think about that phrase — <strong>all things hold together</strong>. God did not just design the universe and walk away. He assembled it with absolute precision, and it continues to function without a single defect in His original design.</p><p>Every galaxy, every cell, every atom follows consistent rules that make the whole system work. That is the standard we are aiming for as engineers and as image-bearers of a Creator who never cuts corners. Quality control is not just a technical requirement — it is an act of stewardship.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 1:16-17</strong> — \"For by Him all things were created, in heaven and on earth, visible and invisible… And He is before all things, and in Him all things hold together.\" God's creation is the ultimate example of zero-defect assembly. As you build and inspect your own designs, reflect on the care He modeled for us.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Quality Control During Assembly Matters</h2><p>Imagine you spent weeks designing and fabricating every individual part of a bridge. Each beam is perfect. Each bolt is the right size. But during assembly, one beam is installed at a slightly wrong angle, and two bolts are under-tightened. The bridge might look fine — until it carries its first heavy load.</p><p>This is exactly why quality control during assembly is its own critical discipline. It is not enough to verify parts before assembly; you must also verify <em>how</em> those parts come together. Assembly introduces new variables: alignment, fastening force, adhesive application, weld quality, and more. Each of these is a potential source of defects.</p><p>Quality control acts like a filter at every step of the assembly process. The earlier you catch a defect, the cheaper and easier it is to fix. A problem caught at the factory costs a fraction of what the same problem costs after a product reaches a customer — or worse, after it fails in the field.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>The Cost of Late Defects:</strong> Studies in manufacturing engineering consistently show that fixing a defect after a product ships can cost 10 to 100 times more than catching it during assembly. Catching problems early is not just good engineering — it is good stewardship of time, money, and materials.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Common Assembly Defects</h2><p>Defects in assembled products can show up at two very different scales. Understanding both helps you become a more complete engineer.</p><h3>Macroscopic Defects</h3><p>These are defects you can see with your eyes or detect with basic tools. Common examples include:</p><ul><li><strong>Misalignment</strong> — parts that are not lined up correctly, causing stress or preventing proper function.</li><li><strong>Loose fasteners</strong> — bolts or screws that were not tightened to the correct torque (rotational force).</li><li><strong>Wrong components</strong> — installing a part that looks similar but has different specifications.</li><li><strong>Gaps or overlaps</strong> — joints that did not seat flush, leaving weak points or interference.</li><li><strong>Surface damage</strong> — scratches, dents, or contamination introduced during the assembly process.</li></ul><h3>Microscopic and Atomic-Level Defects</h3><p>Some defects are invisible to the naked eye but just as dangerous. This is where <strong>multiscale modeling</strong> becomes a powerful engineering tool — it lets us connect what we see at the large scale to what is happening at the microscopic or even atomic level.</p><ul><li><strong>Micro-cracks</strong> — tiny fractures in a weld or adhesive joint that can grow under repeated stress.</li><li><strong>Void formation</strong> — small air pockets trapped inside a bond or casting that weaken the structure.</li><li><strong>Residual stress</strong> — internal forces locked into a material during joining processes like welding, which can cause unexpected failure later.</li><li><strong>Grain boundary weaknesses</strong> — at the atomic level, metals are made of tiny crystals called grains; improper heat during welding can weaken the boundaries between them.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052img001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram comparing macroscopic assembly defects (misalignment, loose fasteners) to microscopic defects (micro-cracks, voids) within a welded joint cross-section"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't ignore what you can't see.</strong> Microscopic defects are some of the most dangerous because they are easy to overlook during a basic visual inspection. Engineers use specialized tools — like ultrasonic scanners and X-ray imaging — specifically to detect defects that are invisible on the surface. Never assume that \"looking good\" means \"being good.\"</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Tolerances: Defining \"Good Enough\" with Precision</h2><p>Here is a concept that surprises many new engineers: perfect is not always the goal. What matters is whether a part or assembly falls within its <strong>tolerance</strong> — the acceptable range of variation.</p><p>Think of it like baking. A recipe might call for one cup of flour, but the bread will still turn out well if you use 0.95 or 1.05 cups. That small range is your tolerance. But if you use two cups, you are out of tolerance — and the bread fails.</p><p>In engineering, tolerances are defined during the design phase and printed directly on engineering drawings. During assembly, inspectors measure key dimensions and check whether each one falls within its specified tolerance. A part that measures slightly outside its tolerance is called a <strong>nonconforming part</strong>, and it must either be reworked or replaced before assembly continues.</p><p>Tight tolerances (very small acceptable ranges) are used for critical components — like the parts inside a jet engine. Looser tolerances are acceptable for non-critical components where small variations have little impact on performance.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Reading Tolerances:</strong> On an engineering drawing, you might see a dimension written as <strong>25.0 ± 0.5 mm</strong>. This means the acceptable range is 24.5 mm to 25.5 mm. Any measurement within that range passes inspection. Practice reading tolerances this way — it is a skill every engineer uses daily.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Inspection Tools and Techniques</h2><p>Engineers have developed a wide range of tools to inspect assemblies at every stage of production. Choosing the right tool for the right situation is itself an engineering decision.</p><h3>Visual and Dimensional Inspection</h3><ul><li><strong>Calipers and micrometers</strong> — precision measuring tools that can detect dimensional variations down to fractions of a millimeter.</li><li><strong>Go/No-Go gauges</strong> — simple tools that check whether a feature (like a hole or a shaft) is within tolerance. If the \"go\" side fits and the \"no-go\" side does not, the part passes.</li><li><strong>Coordinate Measuring Machines (CMM)</strong> — computer-controlled devices that map the exact 3D geometry of a part and compare it to the design specifications automatically.</li></ul><h3>Non-Destructive Testing (NDT)</h3><p>Sometimes you need to look inside a part or joint without cutting it open. Non-Destructive Testing (NDT) methods let you do exactly that:</p><ul><li><strong>Ultrasonic testing</strong> — sends sound waves through a material; cracks or voids reflect the waves back differently, revealing hidden defects.</li><li><strong>X-ray and CT scanning</strong> — produces images of the internal structure of a part, similar to a medical X-ray.</li><li><strong>Dye penetrant inspection</strong> — a colored dye is applied to a surface; it seeps into surface cracks and glows under UV light, making tiny cracks visible.</li><li><strong>Magnetic particle inspection</strong> — used on ferromagnetic metals; magnetic particles cluster around surface and near-surface cracks when a magnetic field is applied.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052img002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of common inspection tools: digital calipers, a Go/No-Go gauge, and an ultrasonic testing probe being applied to a metal weld"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c005",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Non-Destructive Testing in Real Life:</strong> NDT is used to inspect aircraft wings, bridge welds, pipeline joints, and even the pressure vessels in nuclear power plants — anywhere a hidden defect could cause catastrophic failure. These techniques save lives by revealing problems before they become disasters.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Quality Control</h2><p>You have already learned that the <strong>Objective, Constraint, Variable (OCV)</strong> method is one of the core thinking tools in Creationeering™. It is just as powerful when applied to quality control as it is in initial design. Here is how it works in an assembly context.</p><h3>Setting Your Objective</h3><p>Your objective is the specific, measurable quality goal you are trying to achieve. Be precise. \"Make a good product\" is not an objective — \"ensure all weld joints pass ultrasonic inspection with zero detected voids larger than 0.5 mm\" is an objective.</p><h3>Identifying Your Constraints</h3><p>Constraints are the real-world limitations you have to work within. In a quality control scenario, constraints might include:</p><ul><li>Available inspection equipment and its detection limits.</li><li>Time allotted per unit for inspection on the assembly line.</li><li>Budget for rework or replacement of nonconforming parts.</li><li>Tolerance specifications defined on the engineering drawing.</li></ul><h3>Choosing Your Variables</h3><p>Variables are what you can actually change and adjust to improve quality. Examples include:</p><ul><li>The frequency and location of inspection checkpoints along the assembly line.</li><li>The inspection method chosen (visual vs. ultrasonic vs. CMM).</li><li>The training level and experience of assembly technicians.</li><li>The torque setting used when tightening fasteners.</li></ul><p>By systematically working through Objective, Constraint, and Variable, you move from a vague desire for \"quality\" to a concrete, optimized quality control plan. That is engineering thinking in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in Practice:</strong> When you apply OCV to a quality control problem, write each element down before you start. A clear objective keeps your team focused. Named constraints prevent you from chasing impossible solutions. Identified variables tell you exactly where to spend your effort. This three-step habit separates good engineers from great ones.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Quality Control as a Spiritual Discipline</h2><p>Proverbs 14:23 says, <em>\"In all toil there is profit, but mere talk tends only to poverty.\"</em> Quality control is the engineering equivalent of that proverb. It is not glamorous. Inspecting welds, checking torque values, and measuring dimensions can feel tedious compared to the excitement of designing something new. But diligent work — the kind that checks and double-checks — is what separates a product that lasts from one that fails.</p><p>Colossians 3:23 echoes this: <em>\"Whatever you do, work heartily, as for the Lord and not for men.\"</em> When you apply quality control with genuine care, you are not just meeting a manufacturing standard. You are honoring God with the work of your hands. Every inspection you perform, every defect you catch before it harms someone — that is stewardship in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052c007",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Colossians 3:23</strong> — \"Whatever you do, work heartily, as for the Lord and not for men.\" Quality control is not just a technical process — it is an expression of character. Doing thorough, careful work, even when no one is watching, reflects the same integrity God calls us to in every area of life.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2><p>Review the key concepts from this lesson using the questions below.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052a001",
+    "type": "accordion",
+    "data": {
+      "title": "Why is quality control specifically during assembly so important — isn't it enough to check parts before assembly?",
+      "html": "<p>No — and this is one of the most important insights in this lesson. Even if every individual part is perfect, the process of joining those parts together introduces new variables: alignment, fastening force, adhesive coverage, weld quality, and more. Assembly creates new opportunities for defects that did not exist in the individual parts. Quality control during assembly catches these joining-related problems before they become expensive or dangerous failures.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052a002",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a macroscopic defect and a microscopic defect? Give one example of each.",
+      "html": "<p>A <strong>macroscopic defect</strong> is one you can detect with your eyes or basic measuring tools — for example, a misaligned bolt hole or a gap in a joint that should be flush. A <strong>microscopic defect</strong> is too small to see with the naked eye but can still cause failure — for example, a micro-crack inside a weld or a void (air pocket) trapped in an adhesive bond. Microscopic defects often require Non-Destructive Testing (NDT) methods like ultrasonic scanning to detect.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052a003",
+    "type": "accordion",
+    "data": {
+      "title": "A drawing specifies a shaft diameter of 40.0 ± 0.2 mm. A shaft measures 40.25 mm. Does it pass inspection?",
+      "html": "<p>No — it does not pass. The tolerance specifies an acceptable range of 39.8 mm to 40.2 mm. A measurement of 40.25 mm is 0.05 mm above the upper tolerance limit, making this a <strong>nonconforming part</strong>. It must be reworked to bring it within tolerance or replaced before assembly can proceed.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052a004",
+    "type": "accordion",
+    "data": {
+      "title": "How would you apply the OCV method to design a quality control plan for inspecting welded joints on a steel frame?",
+      "html": "<p><strong>Objective:</strong> Ensure all welded joints are free of voids or cracks larger than 1 mm, as measured by ultrasonic testing, before the frame advances to the next assembly stage.</p><p><strong>Constraints:</strong> Each joint must be inspected in under 3 minutes to keep pace with the production line; only portable ultrasonic equipment is available; the inspection budget allows for rework on up to 5% of joints.</p><p><strong>Variables:</strong> The probe frequency setting on the ultrasonic tester; the number of inspection points per joint; the training level of the inspector; whether a dye penetrant pre-check is added for surface cracks. Adjusting these variables allows you to optimize the process within the given constraints while achieving the stated objective.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c052a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does the concept of quality control connect to the biblical principle of stewardship?",
+      "html": "<p>Stewardship means responsibly managing the resources, gifts, and opportunities God has entrusted to us. Quality control is stewardship applied to engineering: it protects the materials, time, and labor invested in a product from being wasted on a defective outcome. More importantly, it protects the people who will use that product. Catching a defect before it causes harm honors the dignity of the people we serve and reflects the call in Colossians 3:23 to work heartily — as if working for God, not just for a grade or a paycheck.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  }
+]

@@ -2,595 +2,1105 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mousetrap Assembly Blueprint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assembly Blueprint & Safety Review</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background: #f7f9fc;
-    color: #1e3a5f;
-    padding: 20px;
+    color: #1B3A5C;
     min-height: 100vh;
   }
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #ffffff;
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.25rem; font-weight: 700; }
+  header p { font-size: 0.8rem; color: #C9A84C; margin-top: 2px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* WELCOME */
+  #welcome-screen {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(30,58,95,0.15);
+    padding: 36px 32px;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  #welcome-screen h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 12px; }
+  #welcome-screen p { font-size: 0.95rem; color: #444; line-height: 1.6; margin-bottom: 20px; }
+  .badge-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .badge {
+    background: #f0f4fa;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    text-align: center;
+  }
+  .badge span { display: block; font-size: 1.3rem; margin-bottom: 4px; }
+
+  /* BUTTONS */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #b8922e; }
+  .btn:active { transform: scale(0.97); }
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #fff;
+  }
+  .btn-secondary:hover { background: #142d47; }
+  .btn-sm {
+    padding: 8px 18px;
+    font-size: 0.88rem;
+  }
+
+  /* ACTIVITY WRAPPER */
+  #activity-screen {
+    max-width: 780px;
+    margin: 24px auto;
+    padding: 0 12px;
+  }
+  .progress-bar-wrap {
+    background: #dce5ef;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 20px;
     overflow: hidden;
   }
-  header {
-    background: #1e3a5f;
-    color: #ffffff;
-    padding: 18px 24px;
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .phase-label {
+    font-size: 0.78rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .phase-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+  .phase-sub {
+    font-size: 0.88rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* DRAG & DROP */
+  .dnd-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
     flex-wrap: wrap;
   }
-  header h1 { font-size: 1.3em; }
-  .badge {
-    background: #c9a227;
-    color: #1e3a5f;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9em;
+  .dnd-left {
+    flex: 1;
+    min-width: 220px;
   }
-  .stage { padding: 24px; }
-  .progress-bar {
-    height: 8px;
-    background: #f7f9fc;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    overflow: hidden;
+  .dnd-right {
+    flex: 1;
+    min-width: 220px;
   }
-  .progress-fill {
-    height: 100%;
-    background: #c9a227;
-    transition: width 0.4s;
-  }
-  .step-title {
-    font-size: 1.1em;
-    color: #1e3a5f;
-    margin-bottom: 6px;
-    font-weight: 600;
-  }
-  .step-prompt {
-    color: #555;
-    margin-bottom: 18px;
-    font-size: 0.95em;
-  }
-  .workspace {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  @media (max-width: 650px) {
-    .workspace { grid-template-columns: 1fr; }
-  }
-  .panel {
-    background: #f7f9fc;
-    border: 2px solid #e0e6ee;
-    border-radius: 10px;
-    padding: 14px;
-    min-height: 220px;
-  }
-  .panel h3 {
-    font-size: 0.95em;
-    color: #1e3a5f;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #c9a227;
-  }
-  .draggable {
-    background: #ffffff;
-    border: 2px solid #1e3a5f;
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    cursor: grab;
-    font-size: 0.9em;
-    transition: all 0.2s;
-    user-select: none;
-  }
-  .draggable:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-  .draggable.dragging { opacity: 0.5; }
-  .drop-slot {
-    background: #ffffff;
-    border: 2px dashed #b0b8c5;
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    min-height: 44px;
+  .term-cards {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
-    font-size: 0.9em;
   }
-  .drop-slot.over { border-color: #c9a227; background: #fffbe8; }
-  .slot-num {
-    background: #1e3a5f;
+  .term-card {
+    background: #1B3A5C;
     color: #fff;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.2s, box-shadow 0.2s;
+    touch-action: none;
+  }
+  .term-card.dragging { opacity: 0.4; }
+  .term-card.placed { opacity: 0.35; cursor: default; pointer-events: none; }
+
+  .drop-zone {
+    border: 2px dashed #C9A84C;
+    border-radius: 8px;
+    min-height: 58px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #fff;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .drop-zone.over { background: #fff7e6; }
+  .drop-zone.correct { border-color: #2e8b57; background: #edfbf2; }
+  .drop-zone.incorrect { border-color: #c0392b; background: #fdecea; }
+  .drop-zone-label {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .drop-zone-def {
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    line-height: 1.4;
+  }
+  .dropped-term {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.85em;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .remove-btn {
+    background: none;
+    border: none;
+    color: #C9A84C;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 4px;
+    font-weight: 700;
+  }
+
+  /* SEQUENCE */
+  .seq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .seq-item {
+    background: #fff;
+    border: 2px solid #dce5ef;
+    border-radius: 8px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    font-size: 0.92rem;
+    color: #1B3A5C;
+    font-weight: 500;
+  }
+  .seq-item:hover { box-shadow: 0 2px 10px rgba(27,58,92,0.12); }
+  .seq-item.dragging-seq { opacity: 0.4; }
+  .seq-item.correct-seq { border-color: #2e8b57; background: #edfbf2; }
+  .seq-item.incorrect-seq { border-color: #c0392b; background: #fdecea; }
+  .seq-handle {
+    color: #C9A84C;
+    font-size: 1.2rem;
     flex-shrink: 0;
   }
-  .slot-content {
-    flex: 1;
-    color: #1e3a5f;
-  }
-  .slot-content.correct { color: #1a7a3a; font-weight: 600; }
-  .slot-content.wrong { color: #c0392b; font-weight: 600; }
-  button {
-    background: #c9a227;
-    color: #1e3a5f;
-    border: none;
-    padding: 12px 28px;
-    font-size: 1em;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  button:hover { background: #b8901c; transform: translateY(-2px); }
-  button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-  .controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .feedback {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    font-size: 0.95em;
-    display: none;
-  }
-  .feedback.show { display: block; }
-  .feedback.good { background: #e8f5ea; border-left: 4px solid #1a7a3a; color: #145a28; }
-  .feedback.bad { background: #fdecea; border-left: 4px solid #c0392b; color: #8b2820; }
-  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-  .quiz-option {
-    background: #fff;
-    border: 2px solid #e0e6ee;
-    border-radius: 8px;
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.95em;
-  }
-  .quiz-option:hover { border-color: #c9a227; background: #fffbe8; }
-  .quiz-option.selected { border-color: #1e3a5f; background: #e8eef5; }
-  .quiz-option.correct { border-color: #1a7a3a; background: #e8f5ea; }
-  .quiz-option.wrong { border-color: #c0392b; background: #fdecea; }
-  .final {
-    text-align: center;
-    padding: 30px 20px;
-  }
-  .final h2 { color: #1e3a5f; margin-bottom: 12px; }
-  .score-circle {
-    width: 130px;
-    height: 130px;
-    margin: 20px auto;
+  .seq-num {
+    background: #1B3A5C;
+    color: #fff;
     border-radius: 50%;
-    background: #c9a227;
-    color: #1e3a5f;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2em;
-    font-weight: bold;
-    box-shadow: 0 6px 20px rgba(201,162,39,0.4);
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
   }
-  .final p { margin: 10px 0; color: #444; line-height: 1.5; }
-  .hazard-img {
+
+  /* QUIZ */
+  .quiz-card {
     background: #fff;
-    border: 2px solid #1e3a5f;
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.08);
+  }
+  .quiz-q {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1B3A5C;
     margin-bottom: 16px;
-    font-size: 1.1em;
+    line-height: 1.5;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quiz-opt {
+    background: #f0f4fa;
+    border: 2px solid #dce5ef;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    cursor: pointer;
+    text-align: left;
+    color: #1B3A5C;
+    transition: border-color 0.2s, background 0.2s;
+    font-weight: 500;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: #C9A84C; background: #fff7e6; }
+  .quiz-opt.correct-ans { border-color: #2e8b57; background: #edfbf2; color: #1a5c35; }
+  .quiz-opt.wrong-ans { border-color: #c0392b; background: #fdecea; color: #7b1a1a; }
+  .quiz-opt:disabled { cursor: default; }
+  .feedback-msg {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback-msg.show { display: block; }
+  .feedback-msg.correct-fb { background: #edfbf2; color: #1a5c35; border-left: 4px solid #2e8b57; }
+  .feedback-msg.wrong-fb { background: #fdecea; color: #7b1a1a; border-left: 4px solid #c0392b; }
+
+  /* BLUEPRINT VIEWER */
+  .blueprint-box {
+    background: #1B3A5C;
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .blueprint-svg {
+    width: 100%;
+    max-width: 520px;
+    display: block;
+    margin: 0 auto;
+  }
+  .bp-questions { display: flex; flex-direction: column; gap: 10px; }
+  .bp-q-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .bp-q-text { flex: 1; font-size: 0.88rem; color: #1B3A5C; font-weight: 500; }
+  .bp-q-ans {
+    border: 2px solid #dce5ef;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    background: #f7f9fc;
+    cursor: pointer;
+    font-weight: 600;
+    min-width: 80px;
+    text-align: center;
+  }
+  .bp-q-ans.sel { border-color: #C9A84C; background: #fff7e6; }
+  .bp-q-ans.correct-bp { border-color: #2e8b57; background: #edfbf2; color: #1a5c35; }
+  .bp-q-ans.wrong-bp { border-color: #c0392b; background: #fdecea; color: #7b1a1a; }
+
+  /* ACTION ROW */
+  .action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  /* RESULTS */
+  #result-screen {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 20px rgba(27,58,92,0.1);
+    text-align: center;
+  }
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .score-circle .score-pts { font-size: 0.75rem; color: #fff; font-weight: 600; }
+  #result-screen h2 { font-size: 1.35rem; color: #1B3A5C; margin-bottom: 8px; }
+  #result-screen p { font-size: 0.92rem; color: #444; margin-bottom: 16px; line-height: 1.6; }
+  .summary-list { text-align: left; margin-bottom: 20px; }
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.88rem;
+    color: #333;
+  }
+  .s-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .verse-box {
+    background: #f0f4fa;
+    border-left: 4px solid #C9A84C;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #1B3A5C;
+    font-style: italic;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  @media (max-width: 500px) {
+    .dnd-container { flex-direction: column; }
+    #welcome-screen, #result-screen { padding: 24px 16px; }
+    .phase-title { font-size: 1.05rem; }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>🪤 Mousetrap Assembly Blueprint Review</h1>
-    <div class="badge" id="stepBadge">Step 1 of 3</div>
-  </header>
-  <div class="stage">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:33%"></div></div>
-    <div id="content"></div>
+
+<header>
+  <h1>Assembly Blueprint &amp; Safety Review</h1>
+  <p>Mousetrap Build — Genesis K-12 Academy</p>
+</header>
+
+<!-- WELCOME -->
+<div id="welcome-screen" class="screen active">
+  <h2>Blueprint Challenge 🔧</h2>
+  <p>Test your knowledge of assembly blueprints and safety review through three interactive challenges. Read carefully — you'll match terms, sequence steps, and read a real blueprint!</p>
+  <div class="badge-row">
+    <div class="badge"><span>📌</span>Match Terms</div>
+    <div class="badge"><span>🔢</span>Order Steps</div>
+    <div class="badge"><span>📐</span>Read Blueprint</div>
+    <div class="badge"><span>❓</span>Quick Quiz</div>
   </div>
+  <p style="font-size:0.82rem;color:#888;margin-bottom:20px;">~4 minutes to complete</p>
+  <button class="btn" onclick="startActivity()">Start Challenge →</button>
+</div>
+
+<!-- ACTIVITY -->
+<div id="activity-screen" class="screen">
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+  <div id="phase-container"></div>
+</div>
+
+<!-- RESULTS -->
+<div id="result-screen" class="screen">
+  <div class="score-circle">
+    <span id="final-score">0</span>
+    <span class="score-pts">/ 100 pts</span>
+  </div>
+  <h2 id="result-title">Great Work!</h2>
+  <p id="result-msg"></p>
+  <div class="summary-list" id="summary-list"></div>
+  <div class="verse-box">"By wisdom a house is built, and through understanding it is established; through knowledge its rooms are filled with rare and beautiful treasures." — Proverbs 24:3–4</div>
+  <button class="btn" onclick="restart()">Try Again</button>
 </div>
 
 <script>
-const state = { step: 0, score: 0, maxScore: 0 };
+// ─────────── STATE ───────────
+let totalPoints = 0;
+let phaseScores = [];
+let currentPhase = 0;
 
-// STEP 1: Order the assembly steps
-const assemblySteps = [
-  { id: 'a', text: 'Read the blueprint and gather all parts', order: 1 },
-  { id: 'b', text: 'Mount the base board on a flat surface', order: 2 },
-  { id: 'c', text: 'Attach the spring mechanism to the base', order: 3 },
-  { id: 'd', text: 'Install the trigger and catch arm', order: 4 },
-  { id: 'e', text: 'Test the trap carefully with a pencil', order: 5 }
+const PHASES = ['match','sequence','blueprint','quiz'];
+const PHASE_POINTS = [25, 25, 25, 25];
+
+// ─────────── PHASE 1: MATCH TERMS ───────────
+const matchData = [
+  { term: "Assembly Blueprint", def: "A technical drawing showing how multiple individual parts fit together to form a complete product.", id: "ab" },
+  { term: "Bill of Materials", def: "A structured list identifying every part, its quantity, and relevant specifications.", id: "bom" },
+  { term: "Part Callout", def: "A numbered label on a drawing that points to a specific part and links it to the BOM.", id: "pc" },
+  { term: "Exploded View", def: "Parts are shown pulled apart so you can see how each piece connects along the assembly axis.", id: "ev" },
+  { term: "Section View", def: "Shows the inside of an assembly by imagining a cut through the object to reveal internal components.", id: "sv" },
 ];
 
-// STEP 2: Match parts to labels (blueprint reading)
-const matchPairs = [
-  { part: 'Base Plate', desc: 'Flat wooden platform that holds all components' },
-  { part: 'Spring', desc: 'Stores energy to power the snap arm' },
-  { part: 'Catch Bar', desc: 'Holds the loaded arm under tension' },
-  { part: 'Trigger Pedal', desc: 'Releases the catch when bait is touched' }
+let dropState = {}; // defId -> termId
+let draggedTerm = null;
+let touchDragEl = null;
+let touchClone = null;
+
+function buildMatchPhase() {
+  dropState = {};
+  const shuffledTerms = [...matchData].sort(() => Math.random()-0.5);
+  const shuffledDefs = [...matchData].sort(() => Math.random()-0.5);
+
+  let html = `
+    <div class="phase-label">Phase 1 of 4 — Match Terms</div>
+    <div class="phase-title">Match Each Term to Its Definition</div>
+    <div class="phase-sub">Drag a term from the left and drop it onto the correct definition on the right.</div>
+    <div class="dnd-container">
+      <div class="dnd-left">
+        <div class="term-cards" id="term-cards">`;
+  shuffledTerms.forEach(t => {
+    html += `<div class="term-card" id="tc-${t.id}" draggable="true" data-id="${t.id}">${t.term}</div>`;
+  });
+  html += `</div></div>
+      <div class="dnd-right">
+        <div id="drop-zones">`;
+  shuffledDefs.forEach(d => {
+    html += `<div class="drop-zone" id="dz-${d.id}" data-id="${d.id}">
+      <div class="drop-zone-label">Drop term here</div>
+      <div class="drop-zone-def">${d.def}</div>
+    </div>`;
+  });
+  html += `</div></div></div>
+    <div class="action-row">
+      <button class="btn btn-sm" id="check-match-btn" onclick="checkMatch()">Check Answers</button>
+    </div>`;
+  return html;
+}
+
+function initMatchEvents() {
+  document.querySelectorAll('.term-card').forEach(card => {
+    card.addEventListener('dragstart', e => {
+      draggedTerm = card.dataset.id;
+      card.classList.add('dragging');
+    });
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+    });
+    // Touch
+    card.addEventListener('touchstart', touchStart, {passive:false});
+    card.addEventListener('touchmove', touchMove, {passive:false});
+    card.addEventListener('touchend', touchEnd, {passive:false});
+  });
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('over');
+      placeTermInZone(zone.dataset.id, draggedTerm);
+    });
+  });
+}
+
+function touchStart(e) {
+  const card = e.currentTarget;
+  if (card.classList.contains('placed')) return;
+  draggedTerm = card.dataset.id;
+  touchDragEl = card;
+  const touch = e.touches[0];
+  touchClone = card.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.opacity = '0.85';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.zIndex = '9999';
+  touchClone.style.width = card.offsetWidth + 'px';
+  touchClone.style.left = (touch.clientX - card.offsetWidth/2) + 'px';
+  touchClone.style.top = (touch.clientY - 20) + 'px';
+  document.body.appendChild(touchClone);
+  card.classList.add('dragging');
+  e.preventDefault();
+}
+function touchMove(e) {
+  if (!touchClone) return;
+  const touch = e.touches[0];
+  touchClone.style.left = (touch.clientX - touchClone.offsetWidth/2) + 'px';
+  touchClone.style.top = (touch.clientY - 20) + 'px';
+  e.preventDefault();
+}
+function touchEnd(e) {
+  if (!touchClone) return;
+  const touch = e.changedTouches[0];
+  if (touchDragEl) touchDragEl.classList.remove('dragging');
+  touchClone.remove(); touchClone = null;
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (el) {
+    const zone = el.closest('.drop-zone');
+    if (zone) { placeTermInZone(zone.dataset.id, draggedTerm); }
+  }
+  e.preventDefault();
+}
+
+function placeTermInZone(defId, termId) {
+  // Remove any previous placement of this term
+  Object.keys(dropState).forEach(k => { if (dropState[k] === termId) delete dropState[k]; });
+  // If zone already has a term, return it
+  if (dropState[defId]) {
+    const old = dropState[defId];
+    const oldCard = document.getElementById('tc-'+old);
+    if (oldCard) oldCard.classList.remove('placed');
+  }
+  dropState[defId] = termId;
+  const card = document.getElementById('tc-'+termId);
+  if (card) card.classList.add('placed');
+  renderDropZones();
+}
+
+function renderDropZones() {
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    const defId = zone.dataset.id;
+    const placed = dropState[defId];
+    // Remove old dropped-term
+    const old = zone.querySelector('.dropped-term');
+    if (old) old.remove();
+    if (placed) {
+      const termObj = matchData.find(t => t.id === placed);
+      const div = document.createElement('div');
+      div.className = 'dropped-term';
+      div.innerHTML = `${termObj.term}<button class="remove-btn" onclick="removeTerm('${defId}')">✕</button>`;
+      zone.appendChild(div);
+    }
+  });
+}
+
+function removeTerm(defId) {
+  const termId = dropState[defId];
+  if (termId) {
+    const card = document.getElementById('tc-'+termId);
+    if (card) card.classList.remove('placed');
+  }
+  delete dropState[defId];
+  renderDropZones();
+}
+
+function checkMatch() {
+  let correct = 0;
+  matchData.forEach(item => {
+    const zone = document.getElementById('dz-'+item.id);
+    if (!zone) return;
+    const placed = dropState[item.id];
+    zone.classList.remove('correct','incorrect');
+    if (placed === item.id) {
+      zone.classList.add('correct'); correct++;
+    } else if (placed) {
+      zone.classList.add('incorrect');
+    }
+  });
+  const pts = Math.round((correct / matchData.length) * PHASE_POINTS[0]);
+  phaseScores[0] = { label: 'Term Matching', points: pts, max: PHASE_POINTS[0], correct, total: matchData.length };
+  document.getElementById('check-match-btn').disabled = true;
+  document.getElementById('check-match-btn').textContent = `✓ ${correct}/${matchData.length} Correct — ${pts} pts`;
+  setTimeout(() => nextPhase(), 1800);
+}
+
+// ─────────── PHASE 2: SEQUENCE ───────────
+const seqSteps = [
+  { id: 1, text: "Identify the title block — find the project name, date, and revision number.", correctPos: 0 },
+  { id: 2, text: "Locate the Bill of Materials (BOM) and list all parts and quantities.", correctPos: 1 },
+  { id: 3, text: "Read the part callouts to match numbered labels to BOM entries.", correctPos: 2 },
+  { id: 4, text: "Study the exploded view to understand how each part connects.", correctPos: 3 },
+  { id: 5, text: "Complete a safety review to identify any hazards before building.", correctPos: 4 },
+  { id: 6, text: "Begin the physical assembly following the blueprint step by step.", correctPos: 5 },
 ];
 
-// STEP 3: Safety quiz
+let seqOrder = [];
+let seqDragIdx = null;
+let seqTouchIdx = null;
+let seqTouchClone = null;
+
+function buildSequencePhase() {
+  seqOrder = [...seqSteps].sort(() => Math.random()-0.5);
+  let html = `
+    <div class="phase-label">Phase 2 of 4 — Order Steps</div>
+    <div class="phase-title">Put the Blueprint Steps in Order</div>
+    <div class="phase-sub">Drag the steps to arrange them in the correct order — from first to last.</div>
+    <div class="seq-list" id="seq-list">`;
+  seqOrder.forEach((s, i) => {
+    html += `<div class="seq-item" id="si-${s.id}" draggable="true" data-idx="${i}">
+      <span class="seq-handle">☰</span>
+      <span class="seq-num">${i+1}</span>
+      <span>${s.text}</span>
+    </div>`;
+  });
+  html += `</div>
+    <div class="action-row">
+      <button class="btn btn-sm" id="check-seq-btn" onclick="checkSeq()">Check Order</button>
+    </div>`;
+  return html;
+}
+
+function initSeqEvents() {
+  const list = document.getElementById('seq-list');
+  let overIdx = null;
+
+  list.querySelectorAll('.seq-item').forEach((item, i) => {
+    item.addEventListener('dragstart', () => { seqDragIdx = i; item.classList.add('dragging-seq'); });
+    item.addEventListener('dragend', () => { item.classList.remove('dragging-seq'); updateSeqNumbers(); });
+    item.addEventListener('dragover', e => { e.preventDefault(); overIdx = i; });
+    item.addEventListener('drop', () => {
+      if (seqDragIdx === null || seqDragIdx === overIdx) return;
+      const dragged = seqOrder.splice(seqDragIdx, 1)[0];
+      seqOrder.splice(overIdx, 0, dragged);
+      reRenderSeq();
+    });
+    // Touch
+    item.addEventListener('touchstart', seqTouchStart, {passive:false});
+    item.addEventListener('touchmove', seqTouchMove, {passive:false});
+    item.addEventListener('touchend', seqTouchEnd, {passive:false});
+  });
+}
+
+function seqTouchStart(e) {
+  const item = e.currentTarget;
+  seqTouchIdx = parseInt(item.dataset.idx);
+  item.classList.add('dragging-seq');
+  const touch = e.touches[0];
+  seqTouchClone = item.cloneNode(true);
+  seqTouchClone.style.position = 'fixed';
+  seqTouchClone.style.opacity = '0.85';
+  seqTouchClone.style.pointerEvents = 'none';
+  seqTouchClone.style.zIndex = '9999';
+  seqTouchClone.style.width = item.offsetWidth + 'px';
+  seqTouchClone.style.left = touch.clientX - item.offsetWidth/2 + 'px';
+  seqTouchClone.style.top = touch.clientY - 20 + 'px';
+  document.body.appendChild(seqTouchClone);
+  e.preventDefault();
+}
+function seqTouchMove(e) {
+  if (!seqTouchClone) return;
+  const touch = e.touches[0];
+  seqTouchClone.style.left = touch.clientX - seqTouchClone.offsetWidth/2 + 'px';
+  seqTouchClone.style.top = touch.clientY - 20 + 'px';
+  e.preventDefault();
+}
+function seqTouchEnd(e) {
+  if (!seqTouchClone) return;
+  seqTouchClone.remove(); seqTouchClone = null;
+  const touch = e.changedTouches[0];
+  const items = document.querySelectorAll('.seq-item');
+  let targetIdx = null;
+  items.forEach((it, i) => {
+    const r = it.getBoundingClientRect();
+    if (touch.clientY >= r.top && touch.clientY <= r.bottom) targetIdx = i;
+  });
+  items.forEach(it => it.classList.remove('dragging-seq'));
+  if (targetIdx !== null && targetIdx !== seqTouchIdx) {
+    const dragged = seqOrder.splice(seqTouchIdx, 1)[0];
+    seqOrder.splice(targetIdx, 0, dragged);
+    reRenderSeq();
+  }
+  e.preventDefault();
+}
+
+function reRenderSeq() {
+  const list = document.getElementById('seq-list');
+  list.innerHTML = '';
+  seqOrder.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'seq-item';
+    div.id = 'si-' + s.id;
+    div.draggable = true;
+    div.dataset.idx = i;
+    div.innerHTML = `<span class="seq-handle">☰</span><span class="seq-num">${i+1}</span><span>${s.text}</span>`;
+    list.appendChild(div);
+  });
+  initSeqEvents();
+}
+
+function updateSeqNumbers() {
+  const items = document.querySelectorAll('.seq-item');
+  items.forEach((it, i) => { const n = it.querySelector('.seq-num'); if(n) n.textContent = i+1; });
+}
+
+function checkSeq() {
+  let correct = 0;
+  seqOrder.forEach((s, i) => {
+    const el = document.getElementById('si-'+s.id);
+    el.classList.remove('correct-seq','incorrect-seq');
+    if (s.correctPos === i) { el.classList.add('correct-seq'); correct++; }
+    else el.classList.add('incorrect-seq');
+  });
+  const pts = Math.round((correct / seqSteps.length) * PHASE_POINTS[1]);
+  phaseScores[1] = { label: 'Step Sequencing', points: pts, max: PHASE_POINTS[1], correct, total: seqSteps.length };
+  document.getElementById('check-seq-btn').disabled = true;
+  document.getElementById('check-seq-btn').textContent = `✓ ${correct}/${seqSteps.length} Correct — ${pts} pts`;
+  setTimeout(() => nextPhase(), 1800);
+}
+
+// ─────────── PHASE 3: BLUEPRINT VIEWER ───────────
+const bpQuestions = [
+  { question: "The circle with a number that points to a part is called a:", options: ["Section View","Part Callout","Title Block","Revision Cloud"], answer: 1 },
+  { question: "Which drawing type shows parts pulled apart so assembly order is clear?", options: ["Section View","Orthographic View","Exploded View","Schematic"], answer: 2 },
+  { question: "What does BOM stand for?", options: ["Blueprint Order Manual","Bill of Materials","Build Operation Method","Base of Model"], answer: 1 },
+  { question: "A section view helps engineers see:", options: ["The outside color of parts","Internal components hidden inside","How heavy a part is","The part's manufacturing date"], answer: 1 },
+];
+
+let bpAnswers = {};
+let bpChecked = false;
+
+function buildBlueprintPhase() {
+  bpAnswers = {};
+  bpChecked = false;
+  let html = `
+    <div class="phase-label">Phase 3 of 4 — Read the Blueprint</div>
+    <div class="phase-title">Blueprint Identification Challenge</div>
+    <div class="phase-sub">Study the sample assembly blueprint below, then answer the questions.</div>
+    <div class="blueprint-box">
+      ${buildBlueprintSVG()}
+    </div>
+    <div class="bp-questions" id="bp-questions">`;
+  bpQuestions.forEach((q, qi) => {
+    html += `<div class="quiz-card" style="margin-bottom:10px;">
+      <div class="quiz-q">${qi+1}. ${q.question}</div>
+      <div class="quiz-options">`;
+    q.options.forEach((opt, oi) => {
+      html += `<button class="quiz-opt" id="bpq-${qi}-${oi}" onclick="selectBpOpt(${qi},${oi})">${opt}</button>`;
+    });
+    html += `<div class="feedback-msg" id="bpfb-${qi}"></div>
+      </div></div>`;
+  });
+  html += `</div>
+    <div class="action-row">
+      <button class="btn btn-sm" id="check-bp-btn" onclick="checkBp()">Check Answers</button>
+    </div>`;
+  return html;
+}
+
+function buildBlueprintSVG() {
+  return `<svg class="blueprint-svg" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blueprint background -->
+  <rect width="500" height="280" fill="#1a3560" rx="8"/>
+  <!-- Grid lines -->
+  ${Array.from({length:14},(_,i)=>`<line x1="${i*36}" y1="0" x2="${i*36}" y2="280" stroke="#2a4a80" stroke-width="0.5"/>`).join('')}
+  ${Array.from({length:8},(_,i)=>`<line x1="0" y1="${i*36}" x2="500" y2="${i*36}" stroke="#2a4a80" stroke-width="0.5"/>`).join('')}
+  
+  <!-- Title Block -->
+  <rect x="320" y="200" width="170" height="72" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <line x1="320" y1="220" x2="490" y2="220" stroke="#C9A84C" stroke-width="1"/>
+  <line x1="320" y1="240" x2="490" y2="240" stroke="#C9A84C" stroke-width="1"/>
+  <line x1="320" y1="260" x2="490" y2="260" stroke="#C9A84C" stroke-width="1"/>
+  <text x="405" y="214" fill="#C9A84C" font-size="7" text-anchor="middle" font-family="Arial" font-weight="bold">TITLE BLOCK</text>
+  <text x="330" y="233" fill="#a0c0ff" font-size="7" font-family="Arial">Project: Mousetrap Car</text>
+  <text x="330" y="253" fill="#a0c0ff" font-size="7" font-family="Arial">Rev: A  Date: 2024</text>
+  <text x="330" y="270" fill="#a0c0ff" font-size="7" font-family="Arial">Scale: 1:1  Sheet 1 of 1</text>
+
+  <!-- BOM Table -->
+  <rect x="10" y="200" width="300" height="72" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="155" y="213" fill="#C9A84C" font-size="7.5" text-anchor="middle" font-family="Arial" font-weight="bold">BILL OF MATERIALS</text>
+  <line x1="10" y1="217" x2="310" y2="217" stroke="#C9A84C" stroke-width="1"/>
+  <line x1="50" y1="200" x2="50" y2="272" stroke="#C9A84C" stroke-width="0.8"/>
+  <line x1="180" y1="200" x2="180" y2="272" stroke="#C9A84C" stroke-width="0.8"/>
+  <line x1="240" y1="200" x2="240" y2="272" stroke="#C9A84C" stroke-width="0.8"/>
+  <text x="30" y="228" fill="#C9A84C" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="bold">ITEM</text>
+  <text x="115" y="228" fill="#C9A84C" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="bold">PART NAME</text>
+  <text x="210" y="228" fill="#C9A84C" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="bold">QTY</text>
+  <text x="275" y="228" fill="#C9A84C" font-size="6.5" text-anchor="middle" font-family="Arial" font-weight="bold">MATERIAL</text>
+  <line x1="10" y1="231" x2="310" y2="231" stroke="#C9A84C" stroke-width="0.5"/>
+  <line x1="10" y1="244" x2="310" y2="244" stroke="#C9A84C" stroke-width="0.5"/>
+  <line x1="10" y1="257" x2="310" y2="257" stroke="#C9A84C" stroke-width="0.5"/>
+  <!-- BOM rows -->
+  <text x="30" y="241" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">1</text>
+  <text x="115" y="241" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Mousetrap Base</text>
+  <text x="210" y="241" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">1</text>
+  <text x="275" y="241" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Wood</text>
+  <text x="30" y="254" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">2</text>
+  <text x="115" y="254" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Rear Axle</text>
+  <text x="210" y="254" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">1</text>
+  <text x="275" y="254" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Steel Rod</text>
+  <text x="30" y="267" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">3</text>
+  <text x="115" y="267" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Drive Wheel</text>
+  <text x="210" y="267" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">2</text>
+  <text x="275" y="267" fill="#a0c0ff" font-size="6.5" text-anchor="middle" font-family="Arial">Plastic</text>
+
+  <!-- Exploded view label -->
+  <text x="20" y="30" fill="#C9A84C" font-size="9" font-family="Arial" font-weight="bold">EXPLODED VIEW</text>
+  <line x1="20" y1="33" x2="200" y2="33" stroke="#C9A84C" stroke-width="0.8"/>
+
+  <!-- Base plate -->
+  <rect x="60" y="120" width="160" height="35" fill="none" stroke="#a0c0ff" stroke-width="1.5"/>
+  <text x="140" y="141" fill="#a0c0ff" font-size="8" text-anchor="middle" font-family="Arial">BASE PLATE</text>
+  <!-- Axle -->
+  <line x1="60" y1="85" x2="220" y2="85" stroke="#a0c0ff" stroke-width="3"/>
+  <text x="240" y="88" fill="#a0c0ff" font-size="8" font-family="Arial">AXLE</text>
+  <!-- Wheels -->
+  <ellipse cx="75" cy="55" rx="18" ry="18" fill="none" stroke="#a0c0ff" stroke-width="1.5"/>
+  <ellipse cx="205" cy="55" rx="18" ry="18" fill="none" stroke="#a0c0ff" stroke-width="1.5"/>
+  <text x="140" y="58" fill="#a0c0ff" font-size="8" text-anchor="middle" font-family="Arial">WHEELS</text>
+  <!-- Assembly lines -->
+  <line x1="75" y1="73" x2="75" y2="85" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="205" y1="73" x2="205" y2="85" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="140" y1="99" x2="140" y2="120" stroke="#C9A84C" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Part Callout 1 -->
+  <circle cx="70" cy="148" r="9" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="70" y="152" fill="#C9A84C" font-size="8" text-anchor="middle" font-family="Arial" font-weight="bold">1</text>
+  <line x1="79" y1="145" x2="100" y2="138" stroke="#C9A84C" stroke-width="1"/>
+  
+  <!-- Part Callout 2 -->
+  <circle cx="258" cy="85" r="9" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="258" y="89" fill="#C9A84C" font-size="8" text-anchor="middle" font-family="Arial" font-weight="bold">2</text>
+  <line x1="249" y1="85" x2="230" y2="85" stroke="#C9A84C" stroke-width="1"/>
+
+  <!-- Part Callout 3 -->
+  <circle cx="75" cy="35" r="9" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="75" y="39" fill="#C9A84C" font-size="8" text-anchor="middle" font-family="Arial" font-weight="bold">3</text>
+  <line x1="75" y1="44" x2="75" y2="37" stroke="#C9A84C" stroke-width="1"/>
+
+  <!-- Section view indicator -->
+  <line x1="300" y1="40" x2="300" y2="185" stroke="#ff9f43" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="300" y="35" fill="#ff9f43" font-size="8" text-anchor="middle" font-family="Arial" font-weight="bold">A-A</text>
+  <!-- Section arrows -->
+  <polygon points="295,45 305,45 300,55" fill="#ff9f43"/>
+  <polygon points="295,175 305,175 300,165" fill="#ff9f43"/>
+  <!-- Section label -->
+  <text x="315" y="115" fill="#ff9f43" font-size="7.5" font-family="Arial" font-weight="bold">SECTION</text>
+  <text x="315" y="126" fill="#ff9f43" font-size="7.5" font-family="Arial" font-weight="bold">VIEW A-A</text>
+  <!-- Section view box -->
+  <rect x="320" y="40" width="80" height="100" fill="none" stroke="#ff9f43" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="360" y1="40" x2="360" y2="140" stroke="#ff9f43" stroke-width="1" stroke-dasharray="2,2"/>
+  <rect x="330" y="70" width="60" height="40" fill="none" stroke="#a0c0ff" stroke-width="1"/>
+  <line x1="330" y1="90" x2="390" y2="90" stroke="#a0c0ff" stroke-width="1"/>
+  <text x="360" y="85" fill="#a0c0ff" font-size="6" text-anchor="middle" font-family="Arial">INTERNAL</text>
+  <text x="360" y="97" fill="#a0c0ff" font-size="6" text-anchor="middle" font-family="Arial">CHANNEL</text>
+</svg>`;
+}
+
+function selectBpOpt(qi, oi) {
+  if (bpChecked) return;
+  bpAnswers[qi] = oi;
+  bpQuestions[qi].options.forEach((_, i) => {
+    const btn = document.getElementById(`bpq-${qi}-${i}`);
+    if (btn) { btn.classList.remove('correct-ans','wrong-ans'); if(i===oi) btn.style.borderColor='#C9A84C'; else btn.style.borderColor=''; }
+  });
+  const sel = document.getElementById(`bpq-${qi}-${oi}`);
+  if (sel) sel.style.borderColor = '#C9A84C';
+}
+
+function checkBp() {
+  bpChecked = true;
+  let correct = 0;
+  bpQuestions.forEach((q, qi) => {
+    q.options.forEach((_, oi) => {
+      const btn = document.getElementById(`bpq-${qi}-${oi}`);
+      btn.disabled = true;
+      btn.style.borderColor = '';
+      if (oi === q.answer) btn.classList.add('correct-ans');
+      if (bpAnswers[qi] === oi && oi !== q.answer) btn.classList.add('wrong-ans');
+    });
+    const fb = document.getElementById(`bpfb-${qi}`);
+    if (bpAnswers[qi] === q.answer) {
+      correct++;
+      fb.textContent = '✓ Correct!';
+      fb.className = 'feedback-msg show correct-fb';
+    } else {
+      fb.textContent = `✗ The correct answer is: ${q.options[q.answer]}`;
+      fb.className = 'feedback-msg show wrong-fb';
+    }
+  });
+  const pts = Math.round((correct / bpQuestions.length) * PHASE_POINTS[2]);
+  phaseScores[2] = { label: 'Blueprint Reading', points: pts, max: PHASE_POINTS[2], correct, total: bpQuestions.length };
+  document.getElementById('check-bp-btn').disabled = true;
+  document.getElementById('check-bp-btn').textContent = `✓ ${correct}/${bpQuestions.length} Correct — ${pts} pts`;
+  setTimeout(() => nextPhase(), 2000);
+}
+
+// ─────────── PHASE 4: SAFETY QUIZ ───────────
 const safetyQuestions = [
   {
-    q: 'Before assembling the mousetrap, what is the FIRST safety step?',
-    options: [
-      'Load the spring as fast as possible',
-      'Put on safety glasses and clear your work area',
-      'Test the trigger with your finger',
-      'Skip the blueprint and start building'
-    ],
-    correct: 1,
-    explain: 'A clear workspace and eye protection prevent injuries from snapping springs and flying parts.'
+    q: "Why must a safety review happen BEFORE the physical build begins?",
+    opts: ["To make the project look professional","To identify and address potential hazards before anyone is at risk","To slow down the engineering process","To save money on materials"],
+    ans: 1,
+    fb: "Safety review identifies hazards before anyone is put at risk — prevention is always better than reaction."
   },
   {
-    q: 'When loading the spring, you should always:',
-    options: [
-      'Keep fingers behind the snap arm path',
-      'Hold the bait pedal with your thumb',
-      'Place your hand under the arm',
-      'Look closely at the trigger from above'
-    ],
-    correct: 0,
-    explain: 'Keeping fingers out of the snap path is the #1 rule. A loaded spring can release suddenly.'
+    q: "A student notices the blueprint shows a spring-loaded mechanism. What should happen during safety review?",
+    opts: ["Ignore it — springs are not dangerous","Note that pinch or snap hazards exist and plan protective steps","Skip the review and build quickly","Remove the spring from the design entirely"],
+    ans: 1,
+    fb: "Spring-loaded parts can snap or pinch. A safety review flags this so builders can plan carefully."
   },
   {
-    q: 'Why does the blueprint show exploded views and part numbers?',
-    options: [
-      'To make the drawing look fancy',
-      'To hide the design from competitors',
-      'So every builder assembles parts in the same correct order',
-      'Because blueprints must be colorful'
-    ],
-    correct: 2,
-    explain: 'Assembly drawings communicate exact order and orientation so any builder produces the same reliable product.'
-  }
+    q: "Which of the following is NOT part of reading an assembly blueprint?",
+    opts: ["Checking the Bill of Materials","Identifying part callout numbers","Choosing the paint color for the finished product","Studying the exploded view"],
+    ans: 2,
+    fb: "Paint color is not part of an engineering assembly blueprint. Blueprints focus on structure, parts, and assembly."
+  },
+  {
+    q: "What does the Proverbs 24:3–4 passage suggest about engineering and building?",
+    opts: ["Building fast is more important than building carefully","Wisdom, understanding, and knowledge are foundational to good work","Only professionals can design things","Tools are more important than plans"],
+    ans: 1,
+    fb: "The verse connects wisdom and understanding to the quality of what gets built — careful preparation matters."
+  },
 ];
 
-const content = document.getElementById('content');
-const stepBadge = document.getElementById('stepBadge');
-const progressFill = document.getElementById('progressFill');
+let safetyIdx = 0;
+let safetyAnswers = [];
+let safetyAnswered = false;
+
+function buildSafetyPhase() {
+  safetyIdx = 0;
+  safetyAnswers = [];
+  return renderSafetyQuestion();
+}
+
+function renderSafetyQuestion() {
+  safetyAnswered = false;
+  const q = safetyQuestions[safetyIdx];
+  let html = `
+    <div class="phase-label">Phase 4 of 4 — Safety Quiz</div>
+    <div class="phase-title">Safety &amp; Comprehension Check</div>
+    <div class="phase-sub">Question ${safetyIdx+1} of ${safetyQuestions.length}</div>
+    <div class="quiz-card">
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-options">`;
+  q.opts.forEach((opt, oi) => {
+    html += `<button class="quiz-opt" id="sq-${oi}" onclick="answerSafety(${oi})">${opt}</button>`;
+  });
+  html += `<div class="feedback-msg" id="sq-fb"></div>
+      </div>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-sm btn-secondary" id="next-safety-btn" onclick="nextSafety()" style="display:none">
+        ${safetyIdx < safetyQuestions.length-1 ? 'Next Question →' : 'See Results →'}
+      </button>
+    </div>`;
+  return html;
+}
+
+function answerSafety(chosen) {
+  if (safetyAnswered) return;
+  safetyAnswered = true;
+  const q = safetyQuestions[safetyIdx];
+  const correct = chosen === q.ans;
+  safetyAnswers.push({ correct, chosen });
+  q.opts.forEach((_, oi) => {
+    const btn = document.getElementById('sq-'+oi);
+    btn.disabled = true;
+    if (oi === q.ans) btn.classList.add('correct-ans');
+    if (oi === chosen && !correct) btn.classList.add('wrong-ans');
+  });
+  const fb = document.getElementById('sq-fb');
+  fb.textContent = (correct ? '✓ Correct! ' : '✗ Not quite. ') + q.fb;
+  fb.className = 'feedback-msg show ' + (correct ? 'correct-fb' : 'wrong-fb');
+  document.getElementById('next-safety-btn').style.display = 'inline-block';
+}
+
+function nextSafety() {
+  safetyIdx++;
+  if (safetyIdx < safetyQuestions.length) {
+    document.getElementById('phase-container').innerHTML = renderSafetyQuestion();
+    updateProgress();
+  } else {
+    const correct = safetyAnswers.filter(a => a.correct).length;
+    const pts = Math.round((correct / safetyQuestions.length) * PHASE_POINTS[3]);
+    phaseScores[3] = { label: 'Safety Quiz', points: pts, max: PHASE_POINTS[3], correct, total: safetyQuestions.length };
+    showResults();
+  }
+}
+
+// ─────────── PHASE CONTROLLER ───────────
+function startActivity() {
+  showScreen('activity-screen');
+  currentPhase = 0;
+  totalPoints = 0;
+  phaseScores = [];
+  loadPhase(0);
+}
+
+function loadPhase(idx) {
+  let html = '';
+  if (idx === 0) html = buildMatchPhase();
+  else if (idx === 1) html = buildSequencePhase();
+  else if (idx === 2) html = buildBlueprintPhase();
+  else if (idx === 3) html = buildSafetyPhase();
+  document.getElementById('phase-container').innerHTML = html;
+  updateProgress();
+  if (idx === 0) initMatchEvents();
+  else if (idx === 1) initSeqEvents();
+}
+
+function nextPhase() {
+  currentPhase++;
+  if (currentPhase < PHASES.length) {
+    loadPhase(currentPhase);
+  } else {
+    showResults();
+  }
+}
 
 function updateProgress() {
-  stepBadge.textContent = `Step ${Math.min(state.step+1, 4)} of 4`;
-  progressFill.style.width = ((state.step+1) / 4 * 100) + '%';
-}
-
-function renderStep1() {
-  state.maxScore += 5;
-  const shuffled = [...assemblySteps].sort(() => Math.random() - 0.5);
-  content.innerHTML = `
-    <div class="step-title">📋 Order the Assembly Steps</div>
-    <div class="step-prompt">Drag each step from the left into the correct order on the right. A good blueprint follows a clear sequence!</div>
-    <div id="fb1" class="feedback"></div>
-    <div class="workspace">
-      <div class="panel">
-        <h3>Available Steps</h3>
-        <div id="pool"></div>
-      </div>
-      <div class="panel">
-        <h3>Correct Build Order</h3>
-        <div id="slots"></div>
-      </div>
-    </div>
-    <div class="controls">
-      <div style="font-size:0.85em;color:#666;">Drag to reorder. Drop into numbered slots.</div>
-      <button id="check1" disabled>Check Order</button>
-    </div>
-  `;
-  const pool = document.getElementById('pool');
-  shuffled.forEach(s => {
-    const d = document.createElement('div');
-    d.className = 'draggable';
-    d.draggable = true;
-    d.dataset.id = s.id;
-    d.dataset.order = s.order;
-    d.textContent = s.text;
-    pool.appendChild(d);
-  });
-  const slots = document.getElementById('slots');
-  for (let i = 1; i <= 5; i++) {
-    const slot = document.createElement('div');
-    slot.className = 'drop-slot';
-    slot.dataset.position = i;
-    slot.innerHTML = `<div class="slot-num">${i}</div><div class="slot-content">Drop step here...</div>`;
-    slots.appendChild(slot);
+  const totalSteps = PHASES.length;
+  let pct = 0;
+  if (currentPhase < 3) {
+    pct = (currentPhase / totalSteps) * 100;
+  } else {
+    // Inside safety quiz
+    pct = ((3 + safetyIdx / safetyQuestions.length) / totalSteps) * 100;
   }
-  setupDragDrop();
+  document.getElementById('progress-fill').style.width = pct + '%';
 }
 
-function setupDragDrop() {
-  let dragged = null;
-  document.querySelectorAll('.draggable').forEach(el => {
-    el.addEventListener('dragstart', e => {
-      dragged = el;
-      el.classList.add('dragging');
-    });
-    el.addEventListener('dragend', () => {
-      el.classList.remove('dragging');
-      checkReady1();
-    });
-  });
-  document.querySelectorAll('.drop-slot').forEach(slot => {
-    slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('over'); });
-    slot.addEventListener('dragleave', () => slot.classList.remove('over'));
-    slot.addEventListener('drop', e => {
-      e.preventDefault();
-      slot.classList.remove('over');
-      if (!dragged) return;
-      const existing = slot.querySelector('.draggable');
-      const parent = dragged.parentElement;
-      if (existing) {
-        parent.appendChild(existing);
-      }
-      const content = slot.querySelector('.slot-content');
-      if (content) content.remove();
-      slot.appendChild(dragged);
-      dragged.classList.remove('dragging');
-      checkReady1();
-    });
-  });
-  // pool also acceptss drops
-  document.getElementById('pool').addEventListener('dragover', e => e.preventDefault());
-  document.getElementById('pool').addEventListener('drop', e => {
-    e.preventDefault();
-    if (dragged && dragged.parentElement.classList.contains('drop-slot')) {
-      const oldSlot = dragged.parentElement;
-      document.getElementById('pool').appendChild(dragged);
-      const c = document.createElement('div');
-      c.className = 'slot-content';
-      c.textContent = 'Drop step here...';
-      oldSlot.appendChild(c);
-    }
-  });
-  document.getElementById('check1').onclick = check1;
+// ─────────── RESULTS ───────────
+function showResults() {
+  totalPoints = phaseScores.reduce((s, p) => s + (p ? p.points : 0), 0);
+  document.getElementById('final-score').textContent = totalPoints;
+  let title, msg;
+  if (totalPoints >= 90) { title = "Outstanding! 🏆"; msg = "You're ready to read any blueprint that comes your way! Your understanding of assembly drawings, sequencing, and safety review is excellent."; }
+  else if (totalPoints >= 70) { title = "Great Work! 🎉"; msg = "Solid performance across all four challenges! Review any terms you missed and you'll be fully prepared for the mousetrap build."; }
+  else if (totalPoints >= 50) { title = "Good Effort! 👍"; msg = "You've got the foundation — keep reviewing the blueprint vocabulary and safety steps to build your confidence before the build."; }
+  else { title = "Keep Practicing! 💪"; msg = "Blueprint reading takes practice! Review the definitions and try again — every engineer starts somewhere."; }
+
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+
+  const summaryEl = document.getElementById('summary-list');
+  summaryEl.innerHTML = phaseScores.map(p => {
+    if (!p) return '';
+    const icon = p.points >= p.max * 0.7 ? '✅' : '⚠️';
+    return `<div class="summary-item"><span class="s-icon">${icon}</span><span style="flex:1">${p.label}</span><span style="font-weight:700;color:#1B3A5C">${p.points}/${p.max} pts</span><span style="color:#888;font-size:0.8rem;margin-left:8px">(${p.correct}/${p.total})</span></div>`;
+  }).join('');
+
+  showScreen('result-screen');
+  document.getElementById('progress-fill').style.width = '100%';
 }
 
-function checkReady1() {
-  const slots = document.querySelectorAll('.drop-slot');
-  let filled = 0;
-  slots.forEach(s => { if (s.querySelector('.draggable')) filled++; });
-  document.getElementById('check1').disabled = filled !== 5;
+function restart() {
+  currentPhase = 0;
+  totalPoints = 0;
+  phaseScores = [];
+  safetyIdx = 0;
+  safetyAnswers = [];
+  showScreen('welcome-screen');
 }
 
-function check1() {
-  const slots = document.querySelectorAll('.drop-slot');
-  let correct = 0;
-  slots.forEach(s => {
-    const pos = parseInt(s.dataset.position);
-    const item = s.querySelector('.draggable');
-    if (item && parseInt(item.dataset.order) === pos) {
-      correct++;
-      item.style.borderColor = '#1a7a3a';
-      item.style.background = '#e8f5ea';
-    } else if (item) {
-      item.style.borderColor = '#c0392b';
-      item.style.background = '#fdecea';
-    }
-  });
-  state.score += correct;
-  const fb = document.getElementById('fb1');
-  fb.className = 'feedback show ' + (correct === 5 ? 'good' : 'bad');
-  fb.innerHTML = correct === 5
-    ? `✅ Perfect! All 5 steps in order. Blueprints exist so every builder follows the same sequence.`
-    : `You got ${correct}/5 correct. Remember: gather → mount base → attach spring → install trigger → test carefully.`;
-  document.getElementById('check1').disabled = true;
-  setTimeout(() => {
-    const btn = document.createElement('button');
-    btn.textContent = 'Next →';
-    btn.onclick = next;
-    document.querySelector('.controls').appendChild(btn);
-  }, 800);
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
-
-function renderStep2() {
-  state.maxScore += 4;
-  content.innerHTML = `
-    <div class="step-title">🔍 Match Parts to Blueprint Labels</div>
-    <div class="step-prompt">A good assembly drawing labels every part. Drag each part name onto its correct description.</div>
-    <div id="fb2" class="feedback"></div>
-    <div class="workspace">
-      <div class="panel">
-        <h3>Part Names</h3>
-        <div id="pool2"></div>
-      </div>
-      <div class="panel">
-        <h3>Descriptions</h3>
-        <div id="slots2"></div>
-      </div>
-    </div>
-    <div class="controls">
-      <div style="font-size:0.85em;color:#666;">Match all 4 parts.</div>
-      <button id="check2" disabled>Check Matches</button>
-    </div>
-  `;
-  const pool = document.getElementById('pool2');
-  const shuffled = [...matchPairs].sort(() => Math.random() - 0.5);
-  shuffled.forEach(p => {
-    const d = document.createElement('div');
-    d.className = 'draggable';
-    d.draggable = true;
-    d.dataset.part = p.part;
-    d.textContent = p.part;
-    pool.appendChild(d);
-  });
-  const slots = document.getElementById('slots2');
-  const shuffledDesc = [...matchPairs].sort(() => Math.random() - 0.5);
-  shuffledDesc.forEach((p, i) => {
-    const slot = document.createElement('div');
-    slot.className = 'drop-slot';
-    slot.dataset.answer = p.part;
-    slot.innerHTML = `<div class="slot-num">${i+1}</div><div class="slot-content" style="flex:1;font-size:0.88em;">${p.desc}</div><div class="drop-target" style="min-width:110px;min-height:30px;border:1px dashed #ccc;border-radius:6px;padding:4px;font-size:0.85em;text-align:center;color:#999;">drop here</div>`;
-    slots.appendChild(slot);
-  });
-  setupDragDrop2();
-}
-
-function setupDragDrop2() {
-  let dragged = null;
-  function refresh() {
-    document.querySelectorAll('#pool2 .draggable, #slots2 .draggable').forEach(el => {
-      el.draggable = true;
-      el.ondragstart = e => { dragged = el; el.classList.add('dragging'); };
-      el.ondragend = () => { el.classList.remove('dragging'); checkReady2(); };
-    });
-  }
-  refresh();
-  document.querySelectorAll('#slots2 .drop-target').forEach(target => {
-    target.ondragover = e => { e.preventDefault(); target.style.borderColor = '#c9a227'; };
-    target.ondragleave = () => { target.style.borderColor = '#ccc'; };
-    target.ondrop = e => {
-      e.preventDefault();
-      target.style.borderColor = '#ccc';
-      if (!dragged) return;
-      const existing = target.querySelector('.draggable');
-      if (existing) document.getElementById('pool2').appendChild(existing);
-      target.textContent = '';
-      target.appendChild(dragged);
-      refresh();
-      checkReady2();
-    };
-  });
-  document.getElementById('pool2').ondragover = e => e.preventDefault();
-  document.getElementById('pool2').ondrop = e => {
-    e.preventDefault();
-    if (dragged && dragged.parentElement.classList.contains('drop-target')) {
-      const oldTarget = dragged.parentElement;
-      document.getElementById('pool2').appendChild(dragged);
-      oldTarget.textContent = 'drop here';
-    }
-  };
-  document.getElementById('check2').onclick = check2;
-}
-
-function checkReady2() {
-  const targets = document.querySelectorAll('#slots2 .drop-target');
-  let filled = 0;
-  targets.forEach(t => { if (t.querySelector('.draggable')) filled++; });
-  document.getElementById('check2').disabled = filled !== 4;
-}
-
-function check2() {
-  const slots = document.querySelectorAll('#slots2 .drop-slot');
-  let correct = 0;
-  slots.forEach(s => {
-    const answer = s.dataset.answer;
-    const item = s.querySelector('.draggable');
-    if (item && item.dataset.part === answer) {
-      correct++;
-      item.style.borderColor = '#1a7a3a';
-      item.style.background = '#e8f5ea';
-    } else if (item) {
-      item.style.borderColor = '#c0392b';
-      item.style.background = '#fdecea';
-    }
-  });
-  state.score += correct;
-  const fb = document.getElementById('fb2');
-  fb.className = 'feedback show ' + (correct === 4 ? 'good' : 'bad');
-  fb.innerHTML = correct === 4
-    ? `✅ Excellent! You read the blueprint like a pro. Every part has a name and a job.`
-    : `${correct}/4 matched. Take a moment to study how each named part connects to its function.`;
-  document.getElementById('check2').disabled = true;
-  setTimeout(() => {
-    const btn = document.createElement('button');
-    btn.textContent = 'Next →';
-    btn.onclick = next;
-    document.querySelector('.controls').appendChild(btn);
-  }, 800);
-}
-
-function renderStep3() {
-  state.maxScore += 3;
-  state.quizIndex = 0;
-  state.quizCorrect = 0;
-  renderQuizQuestion();
-}
-
-function renderQuizQuestion() {
-  const q = safetyQuestions[state.quizIndex];
-  content.innerHTML = `
-    <div class="step-title">⚠️ Safety Review Quiz (${state.quizIndex+1}/3)</div>
-    <div class="step-prompt">${q.q}</div>
-    <div id="fb3" class="feedback"></div>
-    <div class="quiz-options" id="qopts"></div>
-    <div class="controls">
-      <div></div>
-      <button id="qnext" disabled>Submit</button>
-    </div>
-  `;
-  const opts = document.getElementById('qopts');
-  q.options.forEach((opt, i) => {
-    const d = document.createElement('div');
-    d.className = 'quiz-option';
-    d.textContent = opt;
-    d.onclick = () => {
-      document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-      d.classList.add('selected');
-      d.dataset.selected = 'true';
-      document.getElementById('qnext').disabled = false;
-      state.selected = i;
-    };
-    opts.appendChild(d);
-  });
-  document.getElementById('qnext').onclick = submitQuiz;
-}
-
-function submitQuiz() {
-  const q = safetyQuestions[state.quizIndex];
-  const opts = document.querySelectorAll('.quiz-option');
-  opts.forEach((o, i) => {
-    o.onclick = null;
-    if (i === q.correct) o.classList.add('correct');
-    else if (i === state.selected) o.classList.add('wrong');
-  });
-  const isCorrect = state.selected === q.correct;
-  if (isCorrect) state.quizCorrect++;
-  const fb = document.getElementById('fb3');
-  fb.className = 'feedback show ' + (isCorrect ? 'good' : 'bad');
-  fb.innerHTML = (isCorrect ? '✅ Correct! ' : '❌ Not quite. ') + q.explain;
-  const btn = document.getElementById('qnext');
-  btn.textContent = state.quizIndex < safetyQuestions.length - 1 ? 'Next Question →' : 'See Final Score →';
-  btn.disabled = false;
-  btn.onclick = () => {
-    state.quizIndex++;
-    if (state.quizIndex < safetyQuestions.length) {
-      renderQuizQuestion();
-    } else {
-      state.score += state.quizCorrect;
-      next();
-    }
-  };
-}
-
-function renderFinal() {
-  const pct = Math.round(state.score / state.maxScore * 100);
-  let msg = '';
-  if (pct >= 90) msg = 'Outstanding! You are blueprint-ready and safety-smart. Time to build!';
+</script>
+</body>
+</html>

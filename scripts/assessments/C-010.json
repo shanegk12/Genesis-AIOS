@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-010",
+  "topic": "Visualization and Sketching",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of technical sketching in engineering?",
+      "options": {
+        "A": "To create beautiful artwork for display.",
+        "B": "To communicate exactly how something should be built, how it works, and how it fits into a larger system.",
+        "C": "To write stories about inventions.",
+        "D": "To practice drawing skills without a specific goal."
+      },
+      "answer": "B",
+      "explanation": "Technical sketching is a specialized language used to communicate precise instructions for building, function, and system integration."
+    },
+    {
+      "type": "recall",
+      "question": "In Systems Thinking, what does an 'Assembly' represent?",
+      "options": {
+        "A": "A single, small component of a system.",
+        "B": "The complete system being designed, like an entire bike.",
+        "C": "A drawing tool used for sketching.",
+        "D": "A meeting where engineers discuss ideas."
+      },
+      "answer": "B",
+      "explanation": "An Assembly refers to the big picture or the complete system that is being designed."
+    },
+    {
+      "type": "recall",
+      "question": "Which type of engineering line is used to show important internal features that cannot be seen from the current viewpoint?",
+      "options": {
+        "A": "Object Lines",
+        "B": "Center Lines",
+        "C": "Hidden Lines",
+        "D": "Dimension Lines"
+      },
+      "answer": "C",
+      "explanation": "Hidden Lines are thin, dashed lines specifically used to represent internal features that are not visible from the current view."
+    },
+    {
+      "type": "comprehension",
+      "question": "How do technical sketches help engineers save resources during the design process?",
+      "options": {
+        "A": "They allow engineers to buy more expensive materials.",
+        "B": "They make it easier to find design flaws on paper before buying materials or building.",
+        "C": "They reduce the need for any physical prototypes.",
+        "D": "They speed up the manufacturing process directly."
+      },
+      "answer": "B",
+      "explanation": "Technical sketches save resources by allowing engineers to identify and correct design flaws on paper, which is much cheaper than discovering them after materials have been purchased."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why might an engineer choose to sketch the entire Assembly of a drone before focusing on a specific motor Subassembly?",
+      "options": {
+        "A": "To avoid drawing the motor twice.",
+        "B": "To ensure the motor Subassembly fits and functions correctly within the larger system.",
+        "C": "To make the drawing look more complete.",
+        "D": "To practice drawing complex shapes first."
+      },
+      "answer": "B",
+      "explanation": "Sketching the Assembly first helps ensure that all Subassemblies, like a motor, are designed to fit and work efficiently within the overall system."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the main reason for using Line Hierarchy in technical sketching?",
+      "options": {
+        "A": "To make sketches look more artistic.",
+        "B": "To help the viewer's eye identify the shape of the object first.",
+        "C": "To indicate the material an object is made from.",
+        "D": "To show how many parts are in an assembly."
+      },
+      "answer": "B",
+      "explanation": "Line Hierarchy uses different line weights and styles to guide the viewer's eye, making the most significant features (like object edges) stand out first."
+    },
+    {
+      "type": "application",
+      "question": "An engineer needs to draw a very large airplane wing on a standard piece of paper. Which foundational technique would the engineer use to accurately represent the wing's size on paper?",
+      "options": {
+        "A": "Annotations",
+        "B": "Proportion",
+        "C": "Scale",
+        "D": "Object Lines"
+      },
+      "answer": "C",
+      "explanation": "Scale is the ratio used to accurately represent large or small objects on paper, making it suitable for drawing a large airplane wing."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeer has sketched a new robotic arm and wants to specify that a certain part should be made of '6061 Aluminum' and have a specific length. What technique should the Creationeer use to add this detailed information to the sketch?",
+      "options": {
+        "A": "Hidden Lines",
+        "B": "Center Lines",
+        "C": "Annotations",
+        "D": "Viewpoints"
+      },
+      "answer": "C",
+      "explanation": "Annotations are labels used in an engineering sketch to explain materials, dimensions, or specific functions."
+    },
+    {
+      "type": "application",
+      "question": "You are sketching a simple wooden block. Which type of line would you use to draw the visible, outer edges of the block?",
+      "options": {
+        "A": "Hidden Lines",
+        "B": "Object Lines",
+        "C": "Center Lines",
+        "D": "Dimension Lines"
+      },
+      "answer": "B",
+      "explanation": "Object Lines are thick, dark, solid lines that represent the actual, visible edges of the object."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects clear technical documentation to the Biblical principle of 'writing the vision' from Habakkuk 2:2. How does this connection relate to a Creationeer's work?",
+      "options": {
+        "A": "It means engineers should only draw things that are beautiful.",
+        "B": "It emphasizes that clear sketches help others understand and build upon a shared vision, reflecting good stewardship.",
+        "C": "It suggests that engineers should only work on projects mentioned in the Bible.",
+        "D": "It implies that only written words, not drawings, are important for communication."
+      },
+      "answer": "B",
+      "explanation": "'Writing the vision' in a technical context means clearly documenting ideas through sketches so that others can understand, follow, and contribute to the design, reflecting good stewardship of resources and ideas."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does the practice of breaking down a complex system into Assemblies and Subassemblies, combined with technical sketching, help 'save resources'?",
+      "options": {
+        "A": "It allows engineers to use more expensive materials.",
+        "B": "It ensures that each part is optimized and fits correctly, preventing costly redesigns or material waste.",
+        "C": "It reduces the number of engineers needed for a project.",
+        "D": "It makes the sketching process faster, but not necessarily cheaper."
+      },
+      "answer": "B",
+      "explanation": "By meticulously designing and sketching Assemblies and Subassemblies, engineers can optimize each component and ensure proper fit, thereby preventing expensive mistakes and wasted materials during production."
+    },
+    {
+      "type": "synthesis",
+      "question": "Technical sketching is described as a 'specialized language.' How do 'viewpoints' and 'proportion' contribute to making this language clear and effective?",
+      "options": {
+        "A": "They make the sketches look more like traditional art.",
+        "B": "They add unnecessary complexity to the drawing process.",
+        "C": "They ensure the sketch accurately communicates depth, space, and realistic relationships between parts.",
+        "D": "They are only used for very simple objects, not complex systems."
+      },
+      "answer": "C",
+      "explanation": "Viewpoints provide depth and space, while proportion ensures realistic relative sizes, both crucial for communicating an object's form and function accurately within the specialized language of technical sketching."
+    }
+  ]
+}

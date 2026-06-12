@@ -1,0 +1,275 @@
+```json
+[
+  {
+    "id": "m058tx001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Sustainable Materials</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, you explored Product End-of-Life Analysis — thinking carefully about what happens to products after they've served their purpose. Now we're taking that thinking a step further. This lesson focuses on <strong>Sustainable Materials</strong> within the Creationeering™ phase of Death &amp; Recycling.</p><p>Every component of your mousetrap car, from the chassis to the wheels, has an origin and an end. The materials you choose during design and construction ripple outward, affecting the entire lifecycle of your project and the resources God has entrusted to us. By the end of this lesson, you'll be equipped to make thoughtful material decisions that help your car perform well <em>and</em> respect the world around you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define sustainable materials and explain their importance in engineering design.</li><li>Identify at least three different end-of-life options for materials used in their mousetrap cars.</li><li>Apply criteria for recyclability and reusability when selecting components for their mousetrap car.</li><li>Explain how macro-level material choices connect to atomic-level properties and environmental impact through multiscale modeling.</li><li>Articulate how responsible material selection aligns with biblical principles of stewardship — tending and keeping the creation God has entrusted to us.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058vc001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Sustainable Materials",
+          "definition": "Materials that can be produced, used, and disposed of without harming the environment or depleting natural resources for future generations."
+        },
+        {
+          "term": "Recycling",
+          "definition": "The process of converting waste materials into new materials and objects."
+        },
+        {
+          "term": "Reuse",
+          "definition": "Using an item again for its original purpose or a different purpose without significant alteration."
+        },
+        {
+          "term": "Upcycling",
+          "definition": "Transforming discarded items or waste materials into products of higher quality or value than the original."
+        },
+        {
+          "term": "Downcycling",
+          "definition": "Recycling a material in a way that results in a new product of lower quality or functionality than the original."
+        },
+        {
+          "term": "Linear Economy",
+          "definition": "A traditional economic model where products are made from raw materials, used, and then disposed of as waste."
+        },
+        {
+          "term": "Circular Economy",
+          "definition": "An economic model designed to minimize waste by keeping products and materials in use for as long as possible."
+        },
+        {
+          "term": "Biodegradable",
+          "definition": "A material capable of being broken down by bacteria or other living organisms, returning naturally to the environment."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058dv001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Tending and Keeping God's Creation</h2><p>Our work as engineers starts with a foundational idea from the very beginning of Scripture. Genesis 2:15 tells us: <em>"The Lord God took the man and put him in the Garden of Eden to work it and take care of it."</em> That word <em>take care of it</em> isn't just about watering plants. It describes a calling to cultivate, manage, and preserve everything God has made.</p><p>Think of it like this — God is the master architect who designed the most complex, interconnected system in existence. He handed us the blueprints and said, <em>look after this.</em> That's not a small task. Every engineering decision you make, including the materials you choose, is part of how you respond to that calling.</p><p>When you pick up a piece of balsa wood or a plastic axle for your mousetrap car, you're holding something that came from the earth God made. What you do with it when you're done — whether it gets tossed in a landfill or returned to useful life — reflects how seriously you take that responsibility.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058cl001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:15 (NIV):</strong> "The Lord God took the man and put him in the Garden of Eden to work it and take care of it." This verse is the foundation of biblical stewardship — our responsibility to tend and keep the world God entrusted to us, including the materials we use to build and create.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058dv002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx005",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Lifecycle of Materials — Beyond the Finish Line</h2><p>It's easy to focus entirely on race day when you're building your mousetrap car. Will it go fast? Will it go far? Those are great questions. But a complete engineering mindset asks one more: <em>what happens after?</em></p><p>Every material has a lifecycle — a story that starts long before it reaches your workbench and continues long after your project is complete. Raw resources are extracted from the earth, processed into usable materials, shaped into products, used for their purpose, and then... where do they go? In a <strong>linear economy</strong>, the answer is usually a landfill. Materials flow in one direction: make, use, discard. That's a lot of waste, and it burns through the earth's resources fast.</p><p>A <strong>circular economy</strong> works like a loop instead of a line. Materials are kept in use as long as possible through recycling, reusing, or redesigning. Think of it like the nutrient cycle in nature — nothing truly goes to waste because every output becomes an input for something else. God built that kind of elegant efficiency into creation from the start. Engineers are learning to follow His lead.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058im001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram comparing a linear economy (extract → produce → use → discard) with a circular economy (produce → use → recycle/reuse → reproduce), using arrows to show the flow of materials in each model."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx006",
+    "type": "text",
+    "data": {
+      "html": "<h2>End-of-Life Options for Materials</h2><p>When an engineer thinks about a material, one of the most important questions is: <em>how does this material's story end?</em> There are several possible endings, and some are much better than others.</p><h3>Recycling</h3><p>Recycling breaks a material down and reforms it into something new. Aluminum is one of the best examples — it can be melted down and reformed almost indefinitely without losing quality. Paper, glass, and many plastics can also be recycled, though the process isn't always perfect. Recycling keeps materials out of landfills and reduces the need to extract new raw resources from the earth.</p><h3>Upcycling vs. Downcycling</h3><p>Not all recycling is equal. <strong>Upcycling</strong> takes a material and turns it into something of <em>higher</em> value — like turning old wooden pallets into furniture. <strong>Downcycling</strong> happens when recycling reduces a material's quality — like when high-grade plastic gets processed into lower-grade plastic that can only be used once more before it's truly waste. When you can, aim for upcycling. It's better stewardship.</p><h3>Reuse</h3><p>Sometimes the most sustainable choice is the simplest one — use it again. Reuse skips the energy-intensive recycling process entirely. If a component from your mousetrap car can be cleaned up and used in your next project, that's excellent engineering and excellent stewardship at the same time.</p><h3>Biodegradation</h3><p>Some materials, particularly natural ones like wood, cotton, or paper, are <strong>biodegradable</strong>. Given time and the right conditions, microorganisms break them down and return their elements to the soil. This is nature's own recycling system — the one God designed long before humans thought to imitate it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058im002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A labeled diagram showing four end-of-life pathways for a material — recycling, upcycling, reuse, and biodegradation — each illustrated with a simple icon and a short example material (aluminum can, wood pallet, glass bottle, paper)."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058dv003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying Sustainable Thinking to Your Mousetrap Car</h2><p>Here's where this gets practical. Your mousetrap car uses real materials — wood, metal, plastic, rubber, string. Each of those materials has a different sustainability profile. When you're selecting components, ask yourself three questions:</p><ul><li><strong>Where did this come from?</strong> Natural materials like wood are often more renewable than petroleum-based plastics.</li><li><strong>How long will it last?</strong> A durable material that can survive multiple projects is better than a single-use one.</li><li><strong>What happens when I'm done with it?</strong> Can it be recycled, reused, or will it head straight to a landfill?</li></ul><p>This kind of thinking is called <strong>multiscale modeling</strong> when engineers do it formally — they consider how choices at the macro level (the whole car) connect to the atomic level (the molecular structure of the material) and the environmental level (how that material interacts with the wider world). You're doing a simplified version of that same reasoning every time you pick a material thoughtfully.</p><p>Small decisions add up. Choosing a recyclable axle material over a non-recyclable one might seem minor. But multiply that decision across thousands of engineers making thousands of products, and the impact becomes enormous. That's the power of good stewardship at scale.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058cl002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Design Tip:</strong> As you choose materials for your mousetrap car, make a quick list of each component and note its end-of-life option — recyclable, reusable, or biodegradable. If a material has no good end-of-life path, ask whether there's a sustainable alternative that would still meet your performance requirements. This is exactly how professional engineers evaluate material choices.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sustainability as a Design Criterion</h2><p>In professional engineering, sustainability isn't an afterthought — it's a design criterion, just like strength, weight, or cost. When a bridge engineer selects steel, they're thinking about how that steel was produced, how long it will last, and how it can be recovered and recycled when the bridge eventually comes down decades from now.</p><p>You can apply the same mindset right now. Treat sustainability as one of your design constraints alongside speed and distance. Ask: does this material choice help my car perform <em>and</em> honor God's creation? Often, the answer can be yes to both. Lighter, stronger natural materials like wood laminate can outperform heavier synthetic options while also being more biodegradable. Good stewardship and good engineering often point in the same direction.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058cl003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Students often assume that if a material is labeled \"recyclable,\" it will automatically be recycled. In reality, recyclability depends on local facilities, proper sorting, and whether the material is contaminated. A recyclable material that ends up in the wrong bin still goes to the landfill. True sustainable design accounts for the real-world systems available, not just theoretical possibilities.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058tx009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Sustainable materials aren't just an environmental buzzword — they're a core part of responsible engineering and faithful stewardship. As you move forward with your mousetrap car project, you now have a framework for thinking beyond the race. Consider where your materials come from, how long they'll serve you, and where they'll go when you're done.</p><p>God designed a world of remarkable efficiency and beauty, where resources cycle and nothing is wasted. As Creationeers, we get to participate in that design philosophy — building things that perform well, last well, and end well. That's engineering that honors both the task and the Creator who made the materials possible in the first place.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  },
+  {
+    "id": "m058ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Multiscale Modeling and Material Properties",
+      "html": "<p>Professional engineers use a technique called <strong>multiscale modeling</strong> to understand how material choices at one scale affect behavior at another. Here's how the scales connect:</p><ul><li><strong>Atomic scale:</strong> The molecular structure of a material determines its strength, flexibility, and how it will break down over time. Wood fibers bonded together at the molecular level give it both strength and biodegradability. Synthetic polymers (plastics) have long carbon chains that are extremely stable — which is why they persist in the environment for hundreds of years.</li><li><strong>Macro scale:</strong> At the level you can see and touch, material properties translate into performance. A wooden chassis flexes slightly under load; an aluminum one is stiffer. These properties are direct results of what's happening at the atomic level.</li><li><strong>Environmental scale:</strong> Zoom out further and you see how a material interacts with the broader world — whether it leaches chemicals into soil, whether it can be broken down by microorganisms, or whether it releases greenhouse gases during production.</li></ul><p>When you're selecting materials for your mousetrap car, you're intuitively navigating all three scales. Understanding the connection helps you make choices that are good at every level.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite"
+    }
+  }
+]
+```

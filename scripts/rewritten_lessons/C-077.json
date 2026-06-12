@@ -1,0 +1,293 @@
+[
+  {
+    "id": "c077t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Innovation for Resource-Limited Environments</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored how systems are upgraded while still working with older parts — backward compatibility in action. Today, we step into the <strong>Sustainability</strong> phase of Creationeering™. This phase is all about making sure your engineered systems can keep running for a long time, especially when resources are scarce.</p>\n<p>You will dive into the heart of sustainable design, learning how smart engineering helps us do more with less — just as God designed the natural world to be remarkably efficient and self-sustaining. That means thinking creatively about materials, conserving energy, and building solutions that leave the world better than you found it, for generations to come.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p>\n<ul>\n<li>Define sustainability within the Creationeering™ framework.</li>\n<li>Identify examples of resource-limited environments in both nature and engineered systems.</li>\n<li>Understand the concept of energy path analysis and its importance in design.</li>\n<li>Apply the Objective, Constraint, Variable (OCV) method to optimize a design for resource scarcity.</li>\n<li>Connect the principles of sustainable engineering to biblical stewardship and the Dominion Mandate.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Sustainability",
+          "definition": "The ability of an engineered system to operate using resources in a way that does not harm the environment or deplete materials for future generations."
+        },
+        {
+          "term": "Resource-Limited",
+          "definition": "An environment or situation where essential materials, energy, or other necessities are scarce or difficult to obtain."
+        },
+        {
+          "term": "Energy Path",
+          "definition": "The complete route that energy takes through a system, from its source to its final use or dissipation."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution to a problem, given a set of objectives and constraints."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be satisfied for a design to be feasible."
+        },
+        {
+          "term": "Variable",
+          "definition": "A parameter in a design that can be changed or adjusted by the designer."
+        },
+        {
+          "term": "Objective",
+          "definition": "A goal or aim that a design is intended to achieve, often expressed as something to maximize or minimize."
+        },
+        {
+          "term": "Dominion Mandate",
+          "definition": "The biblical command given to humanity to rule over, care for, and steward God's creation."
+        },
+        {
+          "term": "Innovation",
+          "definition": "The creation of new ideas, methods, or products."
+        },
+        {
+          "term": "Biomimicry",
+          "definition": "An approach to innovation that seeks sustainable solutions to human challenges by emulating nature's time-tested patterns and strategies."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Does Sustainability Really Mean?</h2>\n<p>You have probably heard the word \"sustainable\" before — maybe in a science class or on a product label. But what does it actually mean for an engineer?</p>\n<p>In the Creationeering™ framework, <strong>sustainability</strong> means designing systems that can keep working over time without using up more resources than the world can replenish. Think of it like a bank account. If you spend more than you earn every single month, eventually you run out. A sustainable design is one that stays in balance — it draws on resources responsibly so that future engineers (and future generations) still have something to work with.</p>\n<p>This is not just good engineering. It is also deeply biblical. From the very beginning, God gave humanity a clear assignment in Genesis 2:15 — to tend and keep the earth. That word \"keep\" means to guard, preserve, and protect. Sustainability is that command put into action through engineering.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 2:15 —</strong> \"The Lord God took the man and put him in the Garden of Eden to work it and take care of it.\"</p><p>That phrase \"take care of it\" is the Dominion Mandate in its most practical form. Every sustainable design you create is a way of honoring that original assignment.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Resource-Limited Environments</h2>\n<p>A <strong>resource-limited environment</strong> is any situation where the things you need to build or run a system — materials, energy, water, space — are hard to get or in short supply. These environments show up everywhere, and they push engineers to be their most creative.</p>\n<h3>Examples in the Real World</h3>\n<ul>\n<li><strong>Remote villages</strong> without reliable electricity or clean water — engineers design solar-powered water pumps that run without a grid connection.</li>\n<li><strong>Space stations</strong> — every gram of material and every watt of power is precious, so systems are built to recycle air, water, and waste continuously.</li>\n<li><strong>Disaster relief zones</strong> — after a hurricane or earthquake, supply chains break down. Engineers need solutions that work with whatever is available locally.</li>\n<li><strong>Desert ecosystems</strong> — plants like the Namib Desert beetle collect water from fog using tiny bumps on their shell. No river needed.</li>\n</ul>\n<p>Notice that last example. Nature has already been solving resource-limited problems for thousands of years. That is exactly why <strong>biomimicry</strong> — copying strategies from the natural world — is one of the most powerful tools in a sustainable engineer's toolkit.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison: the microscopic bumps on a Namib Desert beetle's back (left) next to a biomimicry-inspired fog-collection mesh used in water harvesting systems (right), illustrating how engineers copy natural designs to solve resource scarcity."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Tracing the Energy Path</h2>\n<p>Before you can make a design more efficient, you need to understand where the energy is actually going. That is what <strong>energy path analysis</strong> is all about.</p>\n<p>Imagine you are tracing a drop of water through a city's plumbing system — from the reservoir, through the pipes, out of the faucet, down the drain, and into treatment. Every stop along the way matters. Energy works the same way. It enters a system from a source, flows through different components, does useful work, and eventually leaves as heat, sound, or waste.</p>\n<p>Here is the key insight: every time energy changes form or passes through a component, some of it is lost. That lost energy is waste. In a resource-limited environment, waste is something you simply cannot afford. So engineers map the energy path carefully, asking at every step: <em>Can we capture what is being lost here? Can we reduce how much escapes?</em></p>\n<h3>How to Analyze an Energy Path</h3>\n<ul>\n<li><strong>Step 1 — Identify the source:</strong> Where does the energy come from? (Sun, battery, fuel, wind?)</li>\n<li><strong>Step 2 — Map the flow:</strong> Trace every component the energy passes through.</li>\n<li><strong>Step 3 — Find the losses:</strong> At each component, ask what useful energy leaves the system as waste (heat, vibration, noise).</li>\n<li><strong>Step 4 — Calculate efficiency:</strong> Useful energy out divided by total energy in, expressed as a percentage.</li>\n<li><strong>Step 5 — Target improvements:</strong> Focus your design changes on the steps with the biggest losses.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick efficiency check:</strong> Efficiency (%) = (Useful Energy Output ÷ Total Energy Input) × 100. If a solar panel receives 100 watts of sunlight and produces 20 watts of electricity, its efficiency is 20%. Knowing this number tells you exactly how much room there is to improve.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The OCV Method: Designing Under Constraints</h2>\n<p>So how do you actually make decisions when you are designing for a resource-limited environment? Engineers use a structured thinking tool called the <strong>OCV method</strong> — Objective, Constraint, Variable.</p>\n<p>Think of it like planning a road trip with a tight budget. Your <em>objective</em> is to reach your destination. Your <em>constraints</em> are how much money you have and how long you can drive each day. The <em>variables</em> are the choices you get to make — which route to take, where to stop, what kind of car to use. The OCV method gives your creative thinking a clear structure so you are not just guessing.</p>\n<h3>Breaking Down OCV</h3>\n<ul>\n<li><strong>Objective —</strong> What is the design trying to accomplish? Be specific. \"Provide clean drinking water to 50 families\" is a stronger objective than \"help people get water.\" Objectives are often things you want to maximize (output, lifespan) or minimize (cost, waste).</li>\n<li><strong>Constraint —</strong> What are the non-negotiable limits? These might be a budget, a material restriction, a weight limit, or a safety requirement. Constraints are the walls of the room you are designing inside. You cannot ignore them.</li>\n<li><strong>Variable —</strong> What can you change? These are your creative levers — the dimensions, materials, configurations, and processes you are free to adjust. Good engineers identify as many variables as possible before committing to a solution.</li>\n</ul>\n<h3>Applying OCV to Resource Scarcity</h3>\n<p>When resources are limited, your constraints become stricter and your objectives sharper. That pressure actually makes you a better engineer. Instead of defaulting to the most expensive solution, you are forced to be genuinely innovative — to find the elegant answer, not just the obvious one. Scripture reminds us in Proverbs 3:13 that wisdom is worth more than silver or gold. In engineering, that wisdom often shows up in the clever solution that nobody else thought of because they were not willing to think deeply enough.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing the OCV method as three interlocking circles labeled Objective, Constraint, and Variable, with a small design example (a low-cost water filter) in the center where all three overlap — illustrating how the best solution satisfies all three at once."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning from Creation: Biomimicry in Action</h2>\n<p>God's creation has had billions of years to test, refine, and optimize solutions to resource-limited problems. That is not an accident — it is a design library, and it is open to any engineer willing to look.</p>\n<p><strong>Biomimicry</strong> is the practice of copying those natural strategies to solve human engineering challenges. Some of the most impactful sustainable designs in history came from studying the natural world carefully.</p>\n<ul>\n<li><strong>Termite mounds</strong> in Africa maintain a nearly constant interior temperature despite brutal outside heat — with no air conditioning. Engineers copied this passive ventilation strategy to design energy-efficient buildings in Zimbabwe.</li>\n<li><strong>Spider silk</strong> is stronger than steel at a fraction of the weight. Researchers are developing synthetic versions for lightweight, durable materials that require far fewer resources to produce.</li>\n<li><strong>Mangrove roots</strong> filter saltwater naturally. Biomimicry-inspired desalination systems replicate this process to provide fresh water in coastal regions without massive energy costs.</li>\n</ul>\n<p>When you study nature as an engineer, you are not just observing biology. You are reading the design notes of the greatest Engineer who ever existed.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship and the Dominion Mandate</h2>\n<p>Everything we have covered today — energy path analysis, the OCV method, biomimicry — connects back to a single idea that runs through the entire Bible: <strong>we are stewards, not owners.</strong></p>\n<p>The Dominion Mandate in Genesis 1:28 gives humanity authority over creation. But authority without responsibility is just power. God immediately paired that authority with the call to \"tend and keep\" the garden. That pairing is still in effect today. Every resource you use in a design came from somewhere. Every waste product has to go somewhere. A Creationeer who understands the Dominion Mandate takes that chain of responsibility seriously.</p>\n<p>This does not mean you can never build anything big or use significant resources. It means you count the cost. You think about the full energy path. You ask whether there is a more elegant, less wasteful solution. You design for the long haul, not just the quick win. That kind of engineering is both technically excellent and spiritually faithful.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often confuse constraints with objectives. Remember — a constraint is a hard limit you cannot cross (\"the system must cost under $50\"). An objective is a goal you are trying to reach as well as possible (\"minimize total cost\"). Both matter, but they work differently in your design process.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Real-World Case Study — The LifeStraw",
+      "html": "<p>The LifeStraw is one of the most celebrated innovations in sustainable engineering. Designed to provide safe drinking water in resource-limited environments, it filters out 99.9999% of bacteria and 99.9% of protozoa using nothing but hollow-fiber membrane technology — no electricity, no replacement parts, no clean water source required.</p>\n<p>Let's run an OCV analysis on it:</p>\n<ul>\n<li><strong>Objective:</strong> Provide safe drinking water to one person for one year in an area with no clean water infrastructure.</li>\n<li><strong>Constraints:</strong> No electricity available. Must be portable (one person can carry it). Must cost under $5 USD to manufacture at scale.</li>\n<li><strong>Variables:</strong> Filter material, pore size, housing shape, flow rate, and membrane configuration.</li>\n</ul>\n<p>The result? A device the size of a large marker that has saved millions of lives. The energy path is purely mechanical — the user's lungs provide the pressure. Waste output is essentially zero. It is a masterclass in designing under constraints.</p>\n<p>As you work on your own designs, ask yourself: what is my version of the LifeStraw? What is the simplest, most resourceful answer to the problem in front of me?</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c077t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Summary</h2>\n<p>Here is what you covered today:</p>\n<ul>\n<li><strong>Sustainability</strong> means designing systems that use resources responsibly so future generations can still meet their needs.</li>\n<li><strong>Resource-limited environments</strong> — from remote villages to space stations — demand the most creative engineering solutions.</li>\n<li><strong>Energy path analysis</strong> helps you trace where energy flows and identify where waste is happening so you can target improvements.</li>\n<li>The <strong>OCV method</strong> (Objective, Constraint, Variable) gives you a structured way to optimize any design, especially when resources are tight.</li>\n<li><strong>Biomimicry</strong> taps into God's creation as a design library — nature has already solved many of the problems engineers face today.</li>\n<li>All of this connects to the <strong>Dominion Mandate</strong> — the biblical call to exercise responsible authority over creation as faithful stewards.</li>\n</ul>\n<p>In the next lesson, you will take these concepts further as you begin applying sustainable design thinking to your own Creationeering™ projects. Start noticing the world around you — every efficient system you see is a lesson waiting to be learned.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

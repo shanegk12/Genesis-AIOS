@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Performance Validation — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Performance Validation</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Performance Validation", "definition": "The process of testing a system to confirm that it meets its intended functional requirements and specifications."}, {"term": "Functional Requirements", "definition": "Specific actions or behaviors a system must perform to fulfill its purpose. These are the 'what' your design needs to do."}, {"term": "Specifications", "definition": "Detailed criteria that define how well a system must perform its functions. These are the 'how well' your design needs to do it, often with measurable targets."}, {"term": "Creationeering™ Framework", "definition": "Genesis K-12 Academy's engineering process that guides students through designing, building, and testing, always seeking to honor God through diligent effort."}, {"term": "Performance Phase", "definition": "The stage in the Creationeering™ framework where designs are tested in the real world to see if they meet their goals, including Performance Validation."}, {"term": "Why is Performance Validation important?", "definition": "It ensures that a design actually works as intended, protects users, and helps engineers build with excellence and truth, honoring God with their work."}, {"term": "What is the main question asked during Performance Validation?", "definition": "The main question is: 'Does it really work?' This means checking if the design keeps the promises made in its requirements and specifications."}, {"term": "What does 'Multiscale Modeling' help us understand?", "definition": "Multiscale Modeling helps us understand a system's performance at various levels, from small parts to the entire system."}, {"term": "What is the OCV method?", "definition": "The OCV method is used to optimize a system's performance based on the results gathered during validation testing."}, {"term": "How does Performance Validation connect to biblical principles?", "definition": "It connects to our biblical call for responsible stewardship of resources and talents, ensuring our work is trustworthy and excellent, just as Scripture calls us to let our 'yes be yes'."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

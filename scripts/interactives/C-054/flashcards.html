@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading and Interpreting Blueprints — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Reading and Interpreting Blueprints</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Blueprint", "definition": "A super-detailed recipe or treasure map for building something, showing its size, shape, materials, and how parts fit together."}, {"term": "Title Block", "definition": "A key component of a blueprint that contains important information about the drawing, like the project name, designer, date, and scale."}, {"term": "Different Views (on a blueprint)", "definition": "Multiple flat drawings of an object (like front, top, and side views) aligned to show its three-dimensional shape."}, {"term": "Dimensioning", "definition": "The process of adding numbers and lines to a blueprint to show the exact measurements and sizes of an object's features."}, {"term": "Line Types", "definition": "Different kinds of lines (like solid, dashed, or thin) used on a blueprint to represent various features, such as visible edges, hidden lines, or center lines."}, {"term": "Symbols (on a blueprint)", "definition": "Small pictures or icons used on technical drawings to represent specific components, materials, or instructions in a standardized way."}, {"term": "Scale", "definition": "The ratio on a blueprint that tells you how much smaller or larger the drawing is compared to the actual real-world size of the object."}, {"term": "Multiscale Modeling", "definition": "Connecting the big picture information on a blueprint to the tiny details of the materials, like how the design affects the properties of individual atoms."}, {"term": "Orthographic Projection", "definition": "A method of showing a 3D object in 2D by drawing multiple flat views (front, top, side) that are lined up with each other."}, {"term": "Isometric Drawing", "definition": "A 3D drawing of an object where all three main directions (length, width, height) are shown equally, making it look realistic."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

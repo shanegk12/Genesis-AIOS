@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entrepreneurship — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Entrepreneurship</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Entrepreneur", "definition": "A person who starts and manages a business, often taking financial risks for the chance of big rewards."}, {"term": "Entrepreneurship", "definition": "The process of starting and running a business, which includes facing financial uncertainty and aiming for success."}, {"term": "Creationeering™", "definition": "The responsible management of resources, focusing on God's perspective of money, economics, and caring for the community."}, {"term": "Pray, Think, Create, and Give God the Glory", "definition": "The God-centered model for starting and managing a business, leading to peace and guidance."}, {"term": "Intellectual Property", "definition": "Creations of the mind, like inventions, symbols, or logos, that are legally protected."}, {"term": "Mitigation", "definition": "The process of making a risk less severe or reducing its negative effects through research or other actions."}, {"term": "Stewardship", "definition": "The responsible management of resources, focusing on God's perspective of money, economics, and caring for the community."}, {"term": "Human Resources", "definition": "The department in a business responsible for hiring, training, and looking after the well-being of employees."}, {"term": "Leadership Qualities for Entrepreneurs", "definition": "Qualities like being willing to take risks, having a vision, being confident, and inspiring a team to achieve success."}, {"term": "Isaiah 26:3–4 (ESV®)", "definition": "A Bible verse that teaches us that God keeps those who trust in Him in perfect peace, because He is an everlasting rock."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

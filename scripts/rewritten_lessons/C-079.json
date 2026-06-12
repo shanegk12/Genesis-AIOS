@@ -1,0 +1,273 @@
+[
+  {
+    "id": "c079a1b2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Total Cost of Ownership</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079b2c3",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Last time, you explored durability — how long something lasts and keeps working well. Today, you're building on that idea by diving into Total Cost of Ownership, or TCO. This concept helps you think about <em>all</em> the expenses related to a product, not just the purchase price, across its entire lifespan.</p><p>In the Creationeering™ framework, TCO fits right into the Sustainability phase. That phase is all about making sure engineered systems keep functioning and providing benefits over time — without draining resources or causing harm. Understanding TCO helps you make wise decisions about what you create, so your designs honor God's creation and serve people well.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079c3d4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define Total Cost of Ownership and explain its importance in engineering design.</li><li>Identify the different categories of costs that contribute to TCO.</li><li>Understand how decisions made during the Design phase impact TCO in later Creationeering™ phases.</li><li>Apply the OCV method (Objective, Constraint, Variable) to optimize for lower TCO in a design problem.</li><li>Connect TCO to biblical principles of stewardship and responsible resource management.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079d4e5",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Total Cost of Ownership (TCO)",
+          "definition": "The sum of all costs — both direct and indirect — incurred over the entire life of a product or system."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "The ability of an engineered system to keep functioning and providing benefits over a long period without compromising future generations."
+        },
+        {
+          "term": "Life Cycle",
+          "definition": "All the stages a product goes through, from creation to disposal or recycling."
+        },
+        {
+          "term": "Direct Costs",
+          "definition": "Expenses directly tied to a product, such as purchase price, maintenance, and repairs."
+        },
+        {
+          "term": "Indirect Costs",
+          "definition": "Less obvious expenses, such as energy consumption, disposal fees, and environmental impact."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "Performing a task with the least amount of wasted time, effort, or resources."
+        },
+        {
+          "term": "Optimization",
+          "definition": "Finding the best possible trade-off between competing objectives and constraints in a design."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at a large scale (macro-level) to their underlying causes at a smaller scale (atomic-level)."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079e5f6",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079f6g7",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>\"The earth is the Lord's, and everything in it, the world, and all who live in it.\"</strong> — Psalm 24:1</p><p>Everything we have comes from God. As engineers, you are called to be good stewards of His creation and the resources He provides — not just for today, but for future generations. Total Cost of Ownership is one of the key engineering tools that helps you do exactly that.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079g7h8",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Total Cost of Ownership?</h2><p>Total Cost of Ownership — TCO — is like reading the <em>full</em> price tag of something, not just the number on the store shelf. Think about buying a video game console. The sticker price is one thing, but then you need games, maybe extra controllers, and electricity every time you play. If it breaks, you pay for repairs. Eventually, you might even pay to dispose of it properly. TCO accounts for every one of those costs, from the moment you get something until you're completely done with it.</p><p>Here's a bigger example. Imagine a school bus. The direct costs are easy to spot: the purchase price, daily fuel, oil changes, and new tires. But indirect costs are hiding in the background. What about the bus driver's training? The insurance policy? If the bus breaks down regularly, that costs extra time and might mean renting a replacement. And when the bus finally reaches the end of its life, there's a cost to recycle its metal and dispose of its parts safely. TCO adds all of this together — giving you the real picture of what something costs over its entire life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079h8i9",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A split diagram comparing the visible 'sticker price' of a school bus versus a full TCO breakdown showing fuel, maintenance, insurance, driver training, and end-of-life recycling costs layered beneath the surface like an iceberg."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079i9j0",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Two Categories of Cost</h2><p>Every cost in a product's life falls into one of two buckets: <strong>direct costs</strong> or <strong>indirect costs</strong>. Knowing the difference is the first step toward calculating a solid TCO.</p><h3>Direct Costs</h3><p>Direct costs are the ones you can easily point to. They show up on invoices and receipts. For an engineered product, these typically include:</p><ul><li><strong>Purchase price</strong> — what you pay upfront to acquire it</li><li><strong>Installation</strong> — setting it up and getting it running</li><li><strong>Maintenance and repairs</strong> — keeping it working over time</li><li><strong>Replacement parts</strong> — swapping out worn components</li></ul><h3>Indirect Costs</h3><p>Indirect costs are trickier. They don't show up on a single receipt, but they are absolutely real. Ignoring them is one of the most common mistakes engineers and business owners make. Indirect costs often include:</p><ul><li><strong>Energy consumption</strong> — electricity or fuel used over months and years</li><li><strong>Downtime costs</strong> — lost productivity when a system isn't working</li><li><strong>Environmental impact fees</strong> — costs tied to pollution or waste</li><li><strong>Disposal and recycling</strong> — responsibly ending the product's life</li><li><strong>Training</strong> — teaching people how to use or maintain the system</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079j0k1",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Choosing the option with the lowest sticker price and assuming it's the best deal. A cheaper product that breaks down often, uses more energy, or is expensive to dispose of can cost far more in the long run than a pricier product built to last. Always calculate TCO before deciding.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079k1l2",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079l2m3",
+    "type": "text",
+    "data": {
+      "html": "<h2>TCO and the Product Life Cycle</h2><p>Every engineered product moves through a <strong>life cycle</strong> — a series of stages from the moment it's imagined to the moment it's retired. Understanding where costs appear in that cycle is essential for good design.</p><ul><li><strong>Design &amp; Development</strong> — Engineering time, prototyping, and testing all cost money. But decisions made here shape every cost that follows.</li><li><strong>Manufacturing</strong> — Materials, labor, and production equipment.</li><li><strong>Operation</strong> — Day-to-day energy use, consumables, and staffing.</li><li><strong>Maintenance</strong> — Scheduled upkeep and unexpected repairs.</li><li><strong>End of Life</strong> — Disposal, recycling, or repurposing costs.</li></ul><p>Here's the key insight: the Design phase is where you have the <em>most control</em> over TCO, but the costs from that phase often show up much later. A small, smart decision during design — like choosing a more durable material or a more energy-efficient motor — can save enormous costs over the entire life of the product. That's why engineers invest so much time getting the design right before anything is ever built.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079m3n4",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A horizontal timeline diagram showing the five stages of a product life cycle — Design, Manufacturing, Operation, Maintenance, and End of Life — with cost impact arrows showing that early design decisions have the greatest influence on total cost."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079n4o5",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Minimize TCO</h2><p>You've already learned the OCV method — Objective, Constraint, Variable — as a structured way to approach engineering problems. It's a perfect tool for optimizing TCO. Here's how to apply it:</p><h3>Objective</h3><p>Define what you are trying to achieve. For TCO, a common objective is: <em>Minimize the total cost of the system over its expected lifespan.</em> You might also have a secondary objective, like minimizing environmental impact.</p><h3>Constraint</h3><p>Constraints are the limits you cannot go beyond. Examples for a TCO problem might include:</p><ul><li>The upfront purchase price cannot exceed a set budget.</li><li>The product must last at least a certain number of years.</li><li>The system must meet specific performance or safety standards.</li></ul><h3>Variable</h3><p>Variables are the design choices you can change to reach your objective within your constraints. These might include:</p><ul><li>Choice of materials (more durable vs. less expensive)</li><li>Energy source (solar vs. grid electricity)</li><li>Maintenance schedule (more frequent, lower-cost service vs. less frequent, higher-cost repair)</li></ul><p>By working through OCV, you move from guessing to engineering. You're making deliberate, informed trade-offs — exactly the kind of wise stewardship that honors the resources God has given us.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079o5p6",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> When solving a TCO problem, start by listing every cost you can think of — then ask yourself, \"What costs am I probably forgetting?\" Indirect costs are easy to overlook. Check for energy use, downtime, training, and end-of-life disposal before you finalize your numbers.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079p6q7",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079q7r8",
+    "type": "text",
+    "data": {
+      "html": "<h2>TCO in the Creationeering™ Framework</h2><p>In the Creationeering™ process, TCO lives in the <strong>Sustainability phase</strong> — but it connects back to every phase before it. The decisions you make when you first define a problem, sketch a design, and choose materials all ripple forward into operating costs, maintenance schedules, and end-of-life expenses years down the road.</p><p>This is what makes engineering so much bigger than just building something that works. A great Creationeer asks not only <em>\"Does it work?\"</em> but also <em>\"Is it responsible? Can it keep working without harming people or the planet? Is it worth the full cost it will require?\"</em> These questions reflect the character of a faithful steward — someone who manages resources thoughtfully, not carelessly.</p><p>God designed creation with remarkable efficiency. Ecosystems recycle nutrients, energy flows through food chains with purpose, and nothing goes to waste by design. When you apply TCO thinking to your engineering, you're drawing from that same principle — building systems that work well, last long, and leave as small a footprint as possible on the world He made.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079r8s9",
+    "type": "accordion",
+    "data": {
+      "title": "Digging Deeper: Multiscale Modeling and TCO",
+      "html": "<p>Engineers sometimes use a technique called <strong>multiscale modeling</strong> to understand how a product will age and what it will cost to maintain. The idea is to connect what you can observe at the large scale — like cracks forming in a bridge — to what's happening at the microscopic or even atomic level, like metal fatigue in individual crystal grains.</p><p>Why does this matter for TCO? Because if you can predict <em>exactly</em> when and why a component will fail, you can schedule maintenance precisely instead of guessing. That reduces surprise repair costs, minimizes downtime, and helps you design replacement parts that last longer. Multiscale modeling is an advanced tool, but the principle behind it is straightforward: the more precisely you understand your system, the better you can manage its costs across its entire life cycle.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c079s9t0",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Takeaways</h2><ul><li><strong>TCO is the full picture.</strong> It includes every cost from purchase to disposal — direct and indirect.</li><li><strong>Early decisions matter most.</strong> Choices made during the Design phase have the greatest impact on total lifetime cost.</li><li><strong>Use OCV to optimize.</strong> Define your objective, identify your constraints, and adjust your variables to find the best solution.</li><li><strong>Sustainability and stewardship go hand in hand.</strong> Designing for low TCO means being responsible with time, money, materials, and the environment — honoring both the people your product serves and the Creator who provided the resources.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

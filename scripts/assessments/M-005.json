@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-005",
+  "topic": "Prototypes",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is a prototype?",
+      "options": {
+        "A": "The final, perfect version of a product.",
+        "B": "A low-fidelity version of a product used for testing.",
+        "C": "A computer simulation that replaces physical builds.",
+        "D": "A random sketch made without any specific purpose."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines a prototype as a 'low-fidelity' version of a product, like an artist's sketch, used for checking designs."
+    },
+    {
+      "type": "recall",
+      "question": "What is the primary purpose of building the Lil Moe Prototype Car?",
+      "options": {
+        "A": "To win the mousetrap car championship.",
+        "B": "To establish an initial performance baseline and build assembly confidence.",
+        "C": "To experiment with many different new parts at once.",
+        "D": "To validate a complex computer model."
+      },
+      "answer": "B",
+      "explanation": "The lesson states Lil Moe's goal is to build confidence in basic assembly and establish an initial performance baseline."
+    },
+    {
+      "type": "recall",
+      "question": "What is the fundamental rule of the One-Factor-At-A-Time (OFAT) method?",
+      "options": {
+        "A": "Change as many variables as possible simultaneously.",
+        "B": "Change only one variable while keeping everything else the same.",
+        "C": "Test only one prototype car throughout the entire project.",
+        "D": "Always use brand new parts for every test."
+      },
+      "answer": "B",
+      "explanation": "The lesson clearly states the rule of OFAT is to 'Change only one variable, while keeping everything else exactly the same'."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson states that engineers 'build to fail.' What is the main reason for this approach?",
+      "options": {
+        "A": "To intentionally create broken products.",
+        "B": "To learn quickly from mistakes and identify design flaws early.",
+        "C": "To avoid having to build a final product.",
+        "D": "To waste materials and time."
+      },
+      "answer": "B",
+      "explanation": "Prototyping allows engineers to identify design flaws and validate assumptions early, learning faster from inexpensive failures."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the context of prototyping, what does a 'Data Gap' signify?",
+      "options": {
+        "A": "The prototype performed exactly as expected.",
+        "B": "There was no data collected during the test.",
+        "C": "The mathematical calculations do not match the real-world performance.",
+        "D": "The prototype was built using too much data."
+      },
+      "answer": "C",
+      "explanation": "A 'Data Gap' occurs when calculations (math) do not align with the reality observed from the prototype's performance."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is using the One-Factor-At-A-Time (OFAT) method crucial for effective iterative design?",
+      "options": {
+        "A": "It guarantees the car will win the competition.",
+        "B": "It allows engineers to precisely identify which specific change caused an improvement or problem.",
+        "C": "It makes the prototyping process much faster by skipping steps.",
+        "D": "It requires building only one prototype for all tests."
+      },
+      "answer": "B",
+      "explanation": "OFAT is crucial because it isolates the effect of each change, allowing engineers to understand cause and effect precisely."
+    },
+    {
+      "type": "application",
+      "question": "A company is developing a new type of durable backpack for students. Before mass production, they create several simple, rough versions to test how well the zippers hold up and if the straps are comfortable under heavy loads. This is an example of using prototypes to:",
+      "options": {
+        "A": "Increase the overall cost of the project.",
+        "B": "Minimize the risk of producing a faulty or unpopular final product.",
+        "C": "Delay the final release of the product indefinitely.",
+        "D": "Confuse potential customers with unfinished designs."
+      },
+      "answer": "B",
+      "explanation": "By testing rough versions early, the company identifies potential problems and reduces the risk of costly failures in the final product."
+    },
+    {
+      "type": "application",
+      "question": "A baker wants to improve their chocolate chip cookie recipe. They decide to bake one batch using a different type of flour, keeping all other ingredients and baking conditions the same. Then, for the next batch, they change only the amount of sugar. Which method from the lesson are they applying?",
+      "options": {
+        "A": "The Lil Moe baseline foundation.",
+        "B": "The Unpowered Roll Test.",
+        "C": "The One-Factor-At-A-Time (OFAT) method.",
+        "D": "The V3.0 Computational Design."
+      },
+      "answer": "C",
+      "explanation": "The baker is changing only one ingredient (factor) at a time to understand its specific effect, which is the definition of the OFAT method."
+    },
+    {
+      "type": "application",
+      "question": "A software company releases a new app. After users report bugs and suggest new features, the company releases several updates over time to fix issues and add improvements. This continuous process of improving the app based on feedback is an example of what concept from the lesson?",
+      "options": {
+        "A": "Final validation.",
+        "B": "Establishing an initial performance baseline.",
+        "C": "Iterative design.",
+        "D": "Computational modeling."
+      },
+      "answer": "C",
+      "explanation": "Iterative design is the repetitive process of testing, refining, and improving a product based on feedback and results."
+    },
+    {
+      "type": "synthesis",
+      "question": "How do the distinct purposes of the Lil Moe and Mark 1 prototypes contribute to the overall Creationeering lifecycle?",
+      "options": {
+        "A": "Lil Moe is built to win the championship, and Mark 1 is then discarded.",
+        "B": "Lil Moe establishes a foundational performance baseline, which Mark 1 then uses for systematic experimental analysis.",
+        "C": "Mark 1 is built first for precision, and Lil Moe is a simpler version for practice.",
+        "D": "Both cars are built simultaneously by different teams to compare designs."
+      },
+      "answer": "B",
+      "explanation": "Lil Moe provides the initial data and confidence, which is then used as a starting point for the experimental, variable-changing analysis of the Mark 1."
+    },
+    {
+      "type": "synthesis",
+      "question": "The Mark 2 prototype focuses on meticulous physical assembly to collect 'Ground Truth' data. How is this data essential for the V3.0 Computational Design?",
+      "options": {
+        "A": "The Mark 2 data is ignored because the V3.0 is purely theoretical.",
+        "B": "The V3.0 Computational Design replaces the need for any physical Mark 2 testing.",
+        "C": "The 'Ground Truth' data from Mark 2 is used to refine and validate the computer model in V3.0, closing the 'Data Gap.'",
+        "D": "The Mark 2 is a theoretical model, and V3.0 is the final physical build."
+      },
+      "answer": "C",
+      "explanation": "The Mark 2 provides real-world performance data ('Ground Truth') that is crucial for validating and refining the mathematical predictions of the V3.0 Computational Design."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson compares the refining of an engineering design through testing to the refining of silver and gold mentioned in Proverbs 17:3. What biblical principle does this comparison emphasize for Creationeers?",
+      "options": {
+        "A": "That we should avoid making any mistakes in our designs.",
+        "B": "That our first attempt at building something must always be perfect.",
+        "C": "That diligent effort, testing, and learning from imperfections help us improve and purify our designs, reflecting God's refining process.",
+        "D": "That only expensive and precious materials are worthy of being used in engineering."
+      },
+      "answer": "C",
+      "explanation": "The comparison highlights that just as impurities are removed from metals through refining, testing helps remove inefficiencies from designs, reflecting a pursuit of excellence and stewardship."
+    }
+  ]
+}

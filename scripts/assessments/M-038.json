@@ -57,6 +57,78 @@
       },
       "answer": "B",
       "explanation": "The Performance Phase focuses on whether the car does what it was designed to do, and early risk identification ensures the car's 'in-service life performance' is consistent and reliable."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the context of your mousetrap car, which of the following best describes a 'failure point'?",
+      "options": {
+        "A": "A specific part or aspect of the car most likely to break down or malfunction.",
+        "B": "The finish line where the car completes its run.",
+        "C": "A successful design element that makes the car go faster.",
+        "D": "The total distance your car is designed to travel."
+      },
+      "answer": "A",
+      "explanation": "A failure point is a specific part of a system that is most likely to break or malfunction, impacting the project's objectives."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the main purpose of developing a 'contingency' plan for your mousetrap car project?",
+      "options": {
+        "A": "To identify all potential risks before starting the build.",
+        "B": "To have a backup plan or action ready if a primary solution fails.",
+        "C": "To make the car's design more complex and challenging.",
+        "D": "To ensure the car always wins the competition."
+      },
+      "answer": "B",
+      "explanation": "A contingency is a plan or action designed to address a possible future event or circumstance, acting as a backup."
+    },
+    {
+      "type": "comprehension",
+      "question": "When the lesson discusses 'Multiscale Modeling' in relation to a wheel detaching from a mousetrap car, what does it help Junior Creationeers understand?",
+      "options": {
+        "A": "How to build the car faster by using larger parts.",
+        "B": "The connection between a large-scale problem (wheel detaching) and its small-scale causes (weak chemical bonds in glue).",
+        "C": "The total weight of the car and its impact on speed.",
+        "D": "How to measure the car's performance over different distances."
+      },
+      "answer": "B",
+      "explanation": "Multiscale modeling connects observations at a large scale, like a car breaking, to causes at a very small scale, like atoms in a material."
+    },
+    {
+      "type": "application",
+      "question": "You are designing your mousetrap car and are told it must use *only* the standard mousetrap provided in the kit and travel a minimum of 3 meters. Which of these is an example of a **Constraint** in your OCV analysis?",
+      "options": {
+        "A": "The car traveling exactly 5 meters.",
+        "B": "The type of wheels you choose to use.",
+        "C": "Using only the standard mousetrap from the kit.",
+        "D": "The speed at which the car travels."
+      },
+      "answer": "C",
+      "explanation": "A constraint is a limitation or restriction that must be followed, such as using only specific materials."
+    },
+    {
+      "type": "application",
+      "question": "Your mousetrap car successfully travels 5 meters in a straight line during one test, but during the next two tests, it veers sharply to the left. To improve the car's **reliability**, what is the most appropriate next step?",
+      "options": {
+        "A": "Declare the car finished because it worked once.",
+        "B": "Analyze the design for potential causes of veering and make iterative adjustments.",
+        "C": "Only test the car on a different surface.",
+        "D": "Remove the wheels to reduce weight."
+      },
+      "answer": "B",
+      "explanation": "Reliability is the probability a system performs its function consistently, and improving it often involves iterative design adjustments based on testing."
+    },
+    {
+      "type": "application",
+      "question": "During the **Performance Phase** of your mousetrap car project, you observe that the string repeatedly slips off the axle, causing the car to stop prematurely. Which of the following would be an example of an **iterative design adjustment** to mitigate this risk?",
+      "options": {
+        "A": "Changing the objective to a shorter distance.",
+        "B": "Blaming the kit materials for being faulty.",
+        "C": "Adding a small groove or guide to the axle to keep the string in place.",
+        "D": "Stopping all further testing of the car."
+      },
+      "answer": "C",
+      "explanation": "Iteration involves repeating a design cycle to refine and improve a product, and adding a groove is a design adjustment to fix a recurring problem."
     }
   ]
 }

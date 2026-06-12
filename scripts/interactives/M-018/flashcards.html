@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Dynamics of Stored Energy — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>The Dynamics of Stored Energy</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Energy (Creationeering™)", "definition": "In Creationeering™, energy is seen as a gift to be managed with precision, wisdom, and stewardship, not a random force of nature."}, {"term": "Energy (Engineering Definition)", "definition": "In engineering, energy is defined as the capacity to do work or produce heat."}, {"term": "Mousetrap Vehicle Energy System", "definition": "The mousetrap vehicle functions as an energy system, tracing energy from storage in a spring to kinetic motion."}, {"term": "Atomic Level Energy Storage", "definition": "When the mousetrap spring is pulled back, energy is stored by stretching the bonds between steel atoms, which 'desire' to return to a lower-energy state."}, {"term": "The Spring (Mousetrap Vehicle)", "definition": "The mousetrap spring is the device used to store the initial energy for the vehicle's propulsion."}, {"term": "Potential Energy", "definition": "Potential energy is stored energy based on an object's position or state."}, {"term": "Elastic Potential Energy", "definition": "Elastic potential energy is energy stored when a force deforms an elastic object, like stretching a spring."}, {"term": "Joule (J)", "definition": "The Joule is the standard unit of energy in the SI (International System of Units) system."}, {"term": "Energy Transfer", "definition": "Energy transfer is the process where energy moves or changes through a system, often as a series of 'hand-offs' between different parts."}, {"term": "Spring to Lever Arm Transfer", "definition": "During this energy transfer, the stored potential energy in the spring is converted into torque (rotational force) as the spring releases."}, {"term": "Lever Arm to Transmission (String) Transfer", "definition": "In this transfer, the arc motion of the lever arm creates a linear pull force on the string."}, {"term": "Efficiency in Creationeering™", "definition": "Efficiency in Creationeering™ is not just about winning a race; it's a technical act of worship, reflecting stewardship of God's physical laws."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

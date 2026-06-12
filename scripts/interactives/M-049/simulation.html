@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Protocol & Baselines – Mousetrap Build</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+  }
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.2rem; font-weight: 700; }
+  header p { font-size: 0.82rem; color: #C9A84C; margin-top: 2px; }
+
+  .screen { display: none; padding: 18px; max-width: 720px; margin: 0 auto; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 10px rgba(27,58,92,0.1);
+    text-align: center;
+    margin-top: 16px;
+  }
+  .intro-card h2 { font-size: 1.4rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p { font-size: 0.95rem; line-height: 1.6; color: #333; margin-bottom: 18px; }
+  .intro-card .tag-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 22px; }
+  .tag { background: #1B3A5C; color: #C9A84C; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+
+  /* BUTTONS */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #b8943d; transform: scale(1.02); }
+  .btn:disabled { background: #ccc; color: #888; cursor: not-allowed; transform: none; }
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: #15304d; }
+
+  /* SIMULATION SCREEN */
+  .sim-header {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sim-header .phase { font-size: 0.78rem; color: #C9A84C; font-weight: 700; text-transform: uppercase; }
+  .sim-header .step-ind { font-size: 0.85rem; color: #fff; }
+
+  .scenario-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(27,58,92,0.09);
+    margin-bottom: 14px;
+  }
+  .scenario-box h3 { font-size: 1rem; color: #1B3A5C; margin-bottom: 8px; font-weight: 700; }
+  .scenario-box p { font-size: 0.92rem; line-height: 1.55; color: #333; }
+
+  /* SECTION TYPES */
+  .section-type { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; text-transform: uppercase; }
+  .type-protocol { background: #e8f0fb; color: #1B3A5C; }
+  .type-baseline { background: #fff8e1; color: #7a5c00; }
+  .type-ocv { background: #e8f7ef; color: #1a5c3a; }
+  .type-integrity { background: #fce8f3; color: #7a1a4a; }
+
+  /* DECISION OPTIONS */
+  .options-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+  .option-btn {
+    background: #f7f9fc;
+    border: 2px solid #1B3A5C;
+    border-radius: 8px;
+    padding: 13px 16px;
+    font-size: 0.9rem;
+    color: #1B3A5C;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .option-btn:hover { background: #e8f0fb; border-color: #C9A84C; }
+  .option-btn.correct { background: #e8f7ef; border-color: #2a9d5c; color: #1a5c3a; }
+  .option-btn.wrong { background: #fde8e8; border-color: #c0392b; color: #7a1a1a; }
+  .option-btn:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.good { background: #e8f7ef; border-left: 4px solid #2a9d5c; color: #1a5c3a; }
+  .feedback-box.bad { background: #fde8e8; border-left: 4px solid #c0392b; color: #7a1a1a; }
+
+  /* NAV ROW */
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  .score-pill { background: #1B3A5C; color: #C9A84C; border-radius: 20px; padding: 5px 16px; font-size: 0.85rem; font-weight: 700; }
+
+  /* SORTING ACTIVITY */
+  .sort-instruction { font-size: 0.88rem; color: #555; margin-bottom: 12px; }
+  .sort-container { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sort-bin {
+    flex: 1; min-width: 180px;
+    background: #fff;
+    border: 2px dashed #1B3A5C;
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 120px;
+  }
+  .sort-bin h4 { font-size: 0.85rem; color: #1B3A5C; font-weight: 700; margin-bottom: 8px; text-align: center; background: #e8f0fb; padding: 5px; border-radius: 6px; }
+  .draggable-items { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .drag-item {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    cursor: grab;
+    user-select: none;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.1s;
+    touch-action: none;
+  }
+  .drag-item:active { transform: scale(1.05); opacity: 0.85; }
+  .drag-item.placed { opacity: 0.5; cursor: default; }
+  .bin-items { min-height: 60px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .bin-item {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap { background: #dde3ec; border-radius: 20px; height: 8px; margin-bottom: 14px; }
+  .progress-bar-fill { background: #C9A84C; height: 8px; border-radius: 20px; transition: width 0.4s; }
+
+  /* RESULTS */
+  .results-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px 24px;
+    box-shadow: 0 2px 12px rgba(27,58,92,0.12);
+    text-align: center;
+    margin-top: 16px;
+  }
+  .results-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 6px; }
+  .score-circle {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 18px auto;
+    box-shadow: 0 3px 10px rgba(27,58,92,0.25);
+  }
+  .score-circle .big { font-size: 2.1rem; font-weight: 900; line-height: 1; }
+  .score-circle .small { font-size: 0.75rem; color: #fff; margin-top: 2px; }
+  .result-message { font-size: 1rem; color: #333; margin-bottom: 18px; line-height: 1.6; }
+  .review-list { text-align: left; margin: 16px 0; }
+  .review-item { border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; font-size: 0.85rem; line-height: 1.5; }
+  .review-item.correct { background: #e8f7ef; border-left: 4px solid #2a9d5c; }
+  .review-item.wrong { background: #fde8e8; border-left: 4px solid #c0392b; }
+  .review-item strong { display: block; margin-bottom: 2px; }
+
+  /* OCV BUILDER */
+  .ocv-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .ocv-box {
+    flex: 1; min-width: 130px;
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .ocv-box h5 { font-size: 0.8rem; font-weight: 700; color: #C9A84C; background: #1B3A5C; padding: 4px; border-radius: 4px; margin-bottom: 6px; }
+  .ocv-box .drop-zone { min-height: 44px; background: #f7f9fc; border-radius: 5px; border: 1px dashed #aaa; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; color: #888; padding: 4px; }
+  .ocv-box .drop-zone.filled { background: #e8f0fb; border-color: #1B3A5C; color: #1B3A5C; font-weight: 600; font-size: 0.8rem; }
+
+  @media (max-width: 500px) {
+    .sort-container { flex-direction: column; }
+    .ocv-row { flex-direction: column; }
+    header h1 { font-size: 1rem; }
+    .btn { padding: 11px 20px; font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🖱️ Mousetrap Build — Test Protocol & Baselines</h1>
+  <p>Genesis K-12 Academy · Middle School Engineering</p>
+</header>
+
+<!-- SCREEN 1: INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-card">
+    <h2>Ready to Test Like an Engineer?</h2>
+    <p>Before you can improve your mousetrap car, you need a way to <strong>test it consistently</strong>. This activity walks you through three challenges covering <em>test protocols</em>, <em>baselines</em>, and the <em>OCV method</em>.</p>
+    <div class="tag-row">
+      <span class="tag">📋 Test Protocols</span>
+      <span class="tag">📏 Baselines</span>
+      <span class="tag">🔬 OCV Method</span>
+      <span class="tag">✅ Data Integrity</span>
+    </div>
+    <p style="font-size:0.85rem; color:#666; margin-bottom:20px;">3 challenges · ~4 minutes · Earn points for each correct answer</p>
+    <button class="btn" onclick="startActivity()">Start Activity →</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: SCENARIO (decision-tree style) -->
+<div class="screen" id="screen-sim">
+  <div class="sim-header">
+    <div>
+      <div class="phase">Performance Phase</div>
+      <div style="font-size:0.95rem; font-weight:700; color:#fff;" id="sim-title">Challenge 1</div>
+    </div>
+    <div class="step-ind" id="step-indicator">1 / 7</div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+  </div>
+  <div class="scenario-box" id="scenario-box">
+    <!-- dynamic content -->
+  </div>
+  <div id="options-area"></div>
+  <div class="feedback-box" id="feedback-box"></div>
+  <div class="nav-row">
+    <div class="score-pill">Score: <span id="live-score">0</span></div>
+    <button class="btn" id="next-btn" onclick="nextStep()" disabled>Next →</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: SORTING ACTIVITY -->
+<div class="screen" id="screen-sort">
+  <div class="sim-header">
+    <div>
+      <div class="phase">Challenge 2 of 3</div>
+      <div style="font-size:0.95rem; font-weight:700; color:#fff;">Classify the Variables</div>
+    </div>
+    <div class="step-ind">Drag &amp; Drop</div>
+  </div>
+  <div class="scenario-box">
+    <span class="section-type type-ocv">OCV Method</span>
+    <h3>Sort These Testing Items</h3>
+    <p>Drag each item below into the correct category: <strong>Objective</strong>, <strong>Constraint</strong>, or <strong>Variable</strong>.</p>
+  </div>
+  <p class="sort-instruction">Tap or click an item, then tap a bin to place it. Tap a placed item to remove it.</p>
+  <div class="draggable-items" id="drag-pool"></div>
+  <div class="sort-container">
+    <div class="sort-bin" id="bin-objective">
+      <h4>🎯 Objective</h4>
+      <div class="bin-items" id="bin-items-objective"></div>
+    </div>
+    <div class="sort-bin" id="bin-constraint">
+      <h4>🚧 Constraint</h4>
+      <div class="bin-items" id="bin-items-constraint"></div>
+    </div>
+    <div class="sort-bin" id="bin-variable">
+      <h4>🔄 Variable</h4>
+      <div class="bin-items" id="bin-items-variable"></div>
+    </div>
+  </div>
+  <div class="feedback-box" id="sort-feedback"></div>
+  <div class="nav-row" style="margin-top:16px;">
+    <div class="score-pill">Score: <span id="sort-score-display">0</span></div>
+    <button class="btn" id="sort-check-btn" onclick="checkSort()">Check Answers ✓</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: RESULTS -->
+<div class="screen" id="screen-results">
+  <div class="results-card">
+    <h2>Activity Complete! 🎉</h2>
+    <div class="score-circle">
+      <div class="big" id="final-score-num">0</div>
+      <div class="small">out of <span id="final-score-max">0</span></div>
+    </div>
+    <div class="result-message" id="result-message"></div>
+    <div class="review-list" id="review-list"></div>
+    <button class="btn" onclick="restartActivity()">Try Again 🔄</button>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const steps = [
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Test Protocols",
+    type: "protocol",
+    labelClass: "type-protocol",
+    labelText: "Test Protocol",
+    question: "Your team runs Test 1 on a warm gym floor, then Test 2 outside on cold pavement. The car went farther on Test 2. What should you conclude?",
+    options: [
+      { text: "The design improved between tests — the car is definitely getting faster.", correct: false, feedback: "Not quite. Because the surface AND temperature changed between tests, you can't know if the design caused the difference. This is exactly why a consistent test protocol matters!" },
+      { text: "You can't draw a reliable conclusion because the test conditions changed.", correct: true, feedback: "✅ Exactly! When test conditions change between runs, the data doesn't isolate what caused the difference. A good test protocol keeps conditions the same so your results are trustworthy." },
+      { text: "The outside surface is always better, so that explains everything.", correct: false, feedback: "Careful — that might be a factor, but without a controlled protocol you can't separate surface effects from design effects. Consistent conditions are key." }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Test Protocols",
+    type: "protocol",
+    labelClass: "type-protocol",
+    labelText: "Test Protocol",
+    question: "Which of the following is the BEST example of a standardized test protocol step for your mousetrap car?",
+    options: [
+      { text: "Release the car whenever you feel ready and see how far it goes.", correct: false, feedback: "This introduces variation every time. Who releases it, how they hold it, and when they let go all affect results. Protocols eliminate that guesswork." },
+      { text: "Always release the car from the same start line, on the same surface, with the mousetrap wound the same number of turns.", correct: true, feedback: "✅ Perfect! Standardizing the start position, surface, and spring tension means any change in distance is more likely caused by a design change — not a different setup." },
+      { text: "Try different floors each test so you get more data variety.", correct: false, feedback: "More variety in conditions actually makes your data harder to interpret, not easier. Controlled conditions give you reliable comparisons." }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Baselines",
+    type: "baseline",
+    labelClass: "type-baseline",
+    labelText: "Baseline",
+    question: "You run your mousetrap car 3 times before making any changes and record an average distance of 4.2 meters. What is this called, and why does it matter?",
+    options: [
+      { text: "A guess — it's just your first try and doesn't mean much yet.", correct: false, feedback: "First measurements are very meaningful! They give you your starting point. Without them, you have nothing to compare future results to." },
+      { text: "A baseline — it gives you a reference point to compare all future test results against.", correct: true, feedback: "✅ Right! Your baseline is your 'before' snapshot. Every future test run gets compared to this number so you know if a design change actually helped, hurt, or did nothing." },
+      { text: "A constraint — it limits how far your car can ever travel.", correct: false, feedback: "A constraint is a limitation like material or time. A baseline is a reference measurement, not a limitation. Two different concepts!" }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Baselines",
+    type: "baseline",
+    labelClass: "type-baseline",
+    labelText: "Baseline",
+    question: "After recording your baseline (4.2 m average), you add larger rear wheels. Now your car averages 5.1 m. What can you say?",
+    options: [
+      { text: "Nothing — the results are random and don't mean anything.", correct: false, feedback: "You actually have something useful here! Because you have a baseline and kept conditions consistent, you CAN make a comparison." },
+      { text: "The larger wheels may have improved distance, but you should run more trials to be sure.", correct: true, feedback: "✅ Great engineering thinking! The baseline comparison suggests improvement, but more trials increase confidence. Real engineers always check for repeatability." },
+      { text: "Larger wheels always improve distance — this is a universal rule now.", correct: false, feedback: "One test doesn't make a universal rule. It's one data point with one car design. Other factors (weight, friction, axle size) still matter." }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Data Integrity",
+    type: "integrity",
+    labelClass: "type-integrity",
+    labelText: "Data Integrity",
+    question: "Your car traveled only 2.1 m on one trial — much less than your baseline. You think the mousetrap didn't release properly. What should you do?",
+    options: [
+      { text: "Delete that result — it's clearly an error and will mess up your average.", correct: false, feedback: "Deleting data you don't like is a form of dishonesty in science and engineering. Note it, understand why it happened, then make an informed decision about whether to include or flag it." },
+      { text: "Record the result, note that the mousetrap may not have released fully, and repeat the trial.", correct: true, feedback: "✅ This is honest measurement and good stewardship of your data! You document what happened, explain the anomaly, and gather more information before drawing conclusions." },
+      { text: "Round it up to match your baseline so your data looks cleaner.", correct: false, feedback: "Changing your data to match expected results is scientific dishonesty. Real engineers trust their instruments and their honest measurements — even inconvenient ones." }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Test Protocols",
+    type: "protocol",
+    labelClass: "type-protocol",
+    labelText: "Test Protocol",
+    question: "Which variables should stay THE SAME in every test run if you're testing the effect of wheel size?",
+    options: [
+      { text: "Only the wheel size should stay the same — change everything else to get more variety.", correct: false, feedback: "You have it backwards! When testing wheel size, wheel size is what you CHANGE. Everything else (surface, release, spring tension) stays constant so you can isolate the wheel effect." },
+      { text: "Surface, release method, spring tension, and axle placement — keep these constant while changing wheel size.", correct: true, feedback: "✅ Correct! These are your controlled variables. Changing only wheel size while holding everything else constant lets you trust that wheel size caused any difference you observe." },
+      { text: "Nothing needs to stay the same — just average enough trials and it evens out.", correct: false, feedback: "Averaging can reduce random error, but it won't fix systematic differences in test conditions. A solid protocol needs controlled variables, not just lots of trials." }
+    ]
+  },
+  {
+    challenge: "Challenge 1 of 3",
+    title: "Review: Key Terms",
+    type: "protocol",
+    labelClass: "type-protocol",
+    labelText: "Quick Check",
+    question: "Match the correct definition: \"An initial measurement used as a reference point for comparing future results after design changes.\"",
+    options: [
+      { text: "Test Protocol", correct: false, feedback: "A test protocol is the step-by-step plan for HOW you test — not the measurement itself. Try again!" },
+      { text: "Baseline", correct: true, feedback: "✅ Correct! A baseline is that first measurement snapshot — your 'before' data that makes all your 'after' comparisons meaningful." },
+      { text: "Constraint", correct: false, feedback: "A constraint is a limitation on your design or test, like available materials or time. The baseline is the reference measurement." }
+    ]
+  }
+];
+
+// Sort activity data
+const sortItems = [
+  { id: "s1", text: "Travel as far as possible", correct: "objective" },
+  { id: "s2", text: "Only 1 mousetrap allowed", correct: "constraint" },
+  { id: "s3", text: "Wheel diameter", correct: "variable" },
+  { id: "s4", text: "Minimize time to finish", correct: "objective" },
+  { id: "s5", text: "Must fit in a 12\" box", correct: "constraint" },
+  { id: "s6", text: "Axle length", correct: "variable" },
+  { id: "s7", text: "String length on arm", correct: "variable" },
+  { id: "s8", text: "Test on same floor surface", correct: "constraint" },
+];
+
+// ===================== STATE =====================
+let currentStep = 0;
+let score = 0;
+let sortScore = 0;
+let answered = false;
+let userAnswers = [];
+let selectedDragItem = null;
+let binPlacements = {}; // id -> bin name
+const POINTS_PER_Q = 10;
+const SORT_MAX = 40;
+const QUIZ_MAX = steps.length * POINTS_PER_Q;
+
+// ===================== INIT =====================
+function startActivity() {
+  currentStep = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+  showScreen('screen-sim');
+  renderStep();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ===================== QUIZ LOGIC =====================
+function renderStep() {
+  const step = steps[currentStep];
+  answered = false;
+
+  // Header
+  document.getElementById('sim-title').textContent = step.title;
+  document.getElementById('step-indicator').textContent = (currentStep + 1) + ' / ' + steps.length;
+
+  // Progress
+  const pct = (currentStep / steps.length) * 100;
+  document.getElementById('prog-bar').style.width = pct + '%';
+
+  // Score
+  document.getElementById('live-score').textContent = score;
+
+  // Scenario box
+  const box = document.getElementById('scenario-box');
+  box.innerHTML = `
+    <span class="section-type ${step.labelClass}">${step.labelText}</span>
+    <h3>${step.question}</h3>
+  `;
+
+  // Options
+  const area = document.getElementById('options-area');
+  area.innerHTML = '<div class="options-grid" id="opts-grid"></div>';
+  const grid = document.getElementById('opts-grid');
+  step.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectAnswer(i);
+    grid.appendChild(btn);
+  });
+
+  // Feedback
+  const fb = document.getElementById('feedback-box');
+  fb.className = 'feedback-box';
+  fb.textContent = '';
+
+  // Next button
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = true;
+  if (currentStep === steps.length - 1) {
+    nextBtn.textContent = 'Finish Quiz →';
+  } else {
+    nextBtn.textContent = 'Next →';
+  }
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+
+  const step = steps[currentStep];
+  const opt = step.options[idx];
+  const btns = document.querySelectorAll('.option-btn');
+
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (step.options[i].correct) btn.classList.add('correct');
+    if (i === idx && !opt.correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback-box');
+  fb.textContent = opt.feedback;
+  fb.className = 'feedback-box show ' + (opt.correct ? 'good' : 'bad');
+
+  if (opt.correct) score += POINTS_PER_Q;
+  document.getElementById('live-score').textContent = score;
+
+  userAnswers.push({ question: step.question, correct: opt.correct, yourAnswer: opt.text, correctAnswer: step.options.find(o => o.correct).text });
+
+  document.getElementById('next-btn').disabled = false;
+}
+
+function nextStep() {
+  if (!answered) return;
+  currentStep++;
+  if (currentStep < steps.length) {
+    renderStep();
+  } else {
+    // Go to sort activity
+    initSort();
+    showScreen('screen-sort');
+  }
+}
+
+// ===================== SORT ACTIVITY =====================
+function initSort() {
+  binPlacements = {};
+  selectedDragItem = null;
+
+  const pool = document.getElementById('drag-pool');
+  pool.innerHTML = '';
+  ['bin-items-objective','bin-items-constraint','bin-items-variable'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
+
+  // Shuffle items
+  const shuffled = [...sortItems].sort(() => Math.random() - 0.5);
+  shuffled.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'drag-item';
+    el.id = 'drag-' + item.id;
+    el.textContent = item.text;
+    el.dataset.itemId = item.id;
+    el.onclick = () => selectDragItem(item.id);
+    pool.appendChild(el);
+  });
+
+  // Bin click listeners
+  ['objective','constraint','variable'].forEach(binName => {
+    const bin = document.getElementById('bin-' + binName);
+    bin.onclick = (e) => {
+      if (selectedDragItem) {
+        placeItemInBin(selectedDragItem, binName);
+      }
+    };
+  });
+
+  document.getElementById('sort-score-display').textContent = score;
+  document.getElementById('sort-feedback').className = 'feedback-box';
+  document.getElementById('sort-check-btn').disabled = false;
+  document.getElementById('sort-check-btn').textContent = 'Check Answers ✓';
+}
+
+function selectDragItem(itemId) {
+  // If already placed, deselect previous
+  if (selectedDragItem) {
+    const prevEl = document.getElementById('drag-' + selectedDragItem);
+    if (prevEl) prevEl.style.outline = '';
+  }
+  // If clicking same item, deselect
+  if (selectedDragItem === itemId) {
+    selectedDragItem = null;
+    return;
+  }
+  selectedDragItem = itemId;
+  const el = document.getElementById('drag-' + itemId);
+  if (el) el.style.outline = '3px solid #C9A84C';
+}
+
+function placeItemInBin(itemId, binName) {
+  // Check if already placed somewhere
+  if (binPlacements[itemId]) {
+    // Remove from old bin
+    const oldBinEl = document.querySelector(`#bin-items-${binPlacements[itemId]} [data-item-id="${itemId}"]`);
+    if (oldBinEl) oldBinEl.remove();
+  }
+
+  binPlacements[itemId] = binName;
+  selectedDragItem = null;
+
+  const origEl = document.getElementById('drag-' + itemId);
+  if (origEl) {
+    origEl.style.outline = '';
+    origEl.classList.add('placed');
+    origEl.style.opacity = '0.4';
+    origEl.onclick = () => returnToPool(itemId); // allow removing by clicking placed item in pool
+  }
+
+  // Add to bin
+  const binItemsEl = document.getElementById('bin-items-' + binName);
+  const itemData = sortItems.find(s => s.id === itemId);
+
+  const binEl = document.createElement('div');
+  binEl.className = 'bin-item';
+  binEl.dataset.itemId = itemId;
+  binEl.textContent = itemData.text;
+  binEl.onclick = (e) => {
+    e.stopPropagation();
+    returnToPool(itemId);
+  };
+  binItemsEl.appendChild(binEl);
+}
+
+function returnToPool(itemId) {
+  if (binPlacements[itemId]) {
+    const binEl = document.querySelector(`#bin-items-${binPlacements[itemId]} [data-item-id="${itemId}"]`);
+    if (binEl) binEl.remove();
+    delete binPlacements[itemId];
+  }
+
+  const origEl = document.getElementById('drag-' + itemId);
+  if (origEl) {
+    origEl.style.outline = '';
+    origEl.classList.remove('placed');
+    origEl.style.opacity = '';
+    origEl.onclick = () => selectDragItem(itemId);
+  }
+  if (selectedDragItem === itemId) selectedDragItem = null;
+}
+
+function checkSort() {
+  // Make sure all items placed
+  const placedCount = Object.keys(binPlacements).length;
+  if (placedCount < sortItems.length) {
+    const fb = document.getElementById('sort-feedback');
+    fb.textContent = `Please sort all ${sortItems.length} items before checking. You've placed ${placedCount} so far.`;
+    fb.className = 'feedback-box show bad';
+    return;
+  }
+
+  sortScore = 0;
+  let results = [];
+  sortItems.forEach(item => {
+    const placed = binPlacements[item.id] || '';
+    const correct = placed === item.correct;
+    if (correct) sortScore += 5;
+    results.push({ text: item.text, correct, placed, expected: item.correct });
+  });
+
+  score += sortScore;
+  document.getElementById('sort-score-display').textContent = score;
+  document.getElementById('sort-check-btn').disabled = true;
+
+  const fb = document.getElementById('sort-feedback');
+  const wrongCount = results.filter(r => !r.correct).length;
+  const rightCount = results.filter(r => r.correct).length;
+
+  if (wrongCount === 0) {
+    fb.textContent = `🎉 Perfect! All ${sortItems.length} items sorted correctly! You earned ${sortScore} points.`;
+    fb.className = 'feedback-box show good';
+  } else {
+    const wrongItems = results.filter(r => !r.correct).map(r => `"${r.text}" belongs in ${capitalize(r.expected)}`).join('; ');
+    fb.textContent = `You got ${rightCount} out of ${sortItems.length} correct (+${sortScore} pts). Corrections: ${wrongItems}.`;
+    fb.className = 'feedback-box show bad';
+  }
+
+  setTimeout(() => showResults(), 2800);
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ===================== RESULTS =====================
+function showResults() {
+  const maxScore = QUIZ_MAX + SORT_MAX;
+  document.getElementById('final-score-num').textContent = score;
+  document.getElementById('final-score-max').textContent = maxScore;
+
+  let msg = '';
+  const pct = score / maxScore;
+  if (pct >= 0.9) {
+    msg = "Outstanding! 🌟 You understand test protocols, baselines, and the OCV method like a real engineer. Your data is trustworthy!";
+  } else if (pct >= 0.7) {
+    msg = "Great work! 👏 You've got a solid grasp of testing fundamentals. Review any missed questions and you'll be set to build and test your car with confidence.";
+  } else if (pct >= 0.5) {
+    msg = "Good effort! 💪 You're getting there. Re-read the lesson sections on test protocols and baselines, then try again.";
+  } else {
+    msg = "Keep going! 🔄 Engineering testing takes practice. Review the lesson and give it another try — you'll improve!";
+  }
+
+  document.getElementById('result-message').textContent = msg;
+
+  // Review list
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = '<h3 style="margin-bottom:10px;font-size:0.95rem;">Quiz Review:</h3>';
+  userAnswers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (a.correct ? 'correct' : 'wrong');
+    div.innerHTML = `<strong>Q${i+1}: ${a.question.substring(0,60)}…</strong>Your answer: ${a.yourAnswer.substring(0,50)}${a.correct ? ' ✅' : ' ❌ — Correct: ' + a.correctAnswer.substring(0,50)}`;
+    reviewList.appendChild(div);
+  });
+
+  showScreen('screen-results');
+}
+
+function restartActivity() {
+  startActivity();
+}
+
+// Auto-start on load
+window.onload = function() {
+  showScreen('screen-intro');
+};
+</script>
+</body>
+</html>

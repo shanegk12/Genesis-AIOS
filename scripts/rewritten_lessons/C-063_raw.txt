@@ -1,0 +1,379 @@
+```json
+[
+  {
+    "id": "c063t1ab",
+    "type": "text",
+    "data": {
+      "html": "<h1>Data-Defined Performance</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t2cd",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we explored the world of Continuous Improvement — how even the most amazing inventions can be refined and made better. Today, we build on that foundation by diving deep into the <strong>Performance</strong> phase of Creationeering™. This phase is all about understanding how well your creations are actually doing and using real data to make informed decisions.</p>\n<p>Think of data as a powerful flashlight. It illuminates the strengths and weaknesses of your design so you're never guessing in the dark. You will learn to measure, analyze, and interpret performance metrics — and in doing so, build things that don't just work, but work <em>exceptionally well</em>, efficiently, and in line with God's design for order and purpose in creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t3ef",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>After this lesson, you will be able to:</p>\n<ul>\n  <li>Define data-defined performance within the Creationeering™ framework.</li>\n  <li>Identify key performance indicators (KPIs) for various engineering systems.</li>\n  <li>Explain the role of Multiscale Modeling in understanding system performance.</li>\n  <li>Apply the OCV method to optimize a system's performance based on data.</li>\n  <li>Connect the pursuit of optimal performance to our biblical call for responsible stewardship of resources and talents.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063vc4gh",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Data-Defined Performance",
+          "definition": "Measuring and evaluating how well a system or product works using objective, factual information rather than guesses."
+        },
+        {
+          "term": "Key Performance Indicator (KPI)",
+          "definition": "A measurable value that shows how effectively a system or organization is achieving its key goals."
+        },
+        {
+          "term": "Efficiency",
+          "definition": "The ratio of useful work performed to the total energy expended — how much you get out versus how much you put in."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of finding the best possible solution or outcome given a specific set of constraints."
+        },
+        {
+          "term": "Throughput",
+          "definition": "The rate at which a system processes or produces something — how much output it delivers over time."
+        },
+        {
+          "term": "Reliability",
+          "definition": "The probability that a system or component will perform its intended function without failure over a specified period."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "A scientific approach that connects observations at large scales to their underlying causes at smaller, often atomic, scales."
+        },
+        {
+          "term": "Objective (OCV)",
+          "definition": "The desired goal or outcome you are trying to achieve in a design or optimization problem."
+        },
+        {
+          "term": "Constraint (OCV)",
+          "definition": "A limitation or restriction that your design must work within — such as cost, size, or weight."
+        },
+        {
+          "term": "Variable (OCV)",
+          "definition": "A factor or characteristic that can be changed or adjusted to improve a design or system's performance."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv5ij",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063bl6kl",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ecclesiastes 3:11</strong> — <em>"He has made everything beautiful in its time. He has also set eternity in the human heart; yet no one can fathom what God has done from beginning to end."</em></p>\n<p>Everything God made performs perfectly according to His design and purpose. From the precise orbit of planets to the molecular machinery inside a single cell, there is an inherent, breathtaking performance built into creation. As you design and build, you are reflecting that same divine instinct for order — striving not just for function, but for excellence.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t7mn",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Wisdom of Order</h2>\n<p>God didn't create the universe randomly. There is structure, rhythm, and purpose in everything — the seasons cycle predictably, the heart beats consistently, a bird's wing generates lift with astonishing efficiency. That's performance by design.</p>\n<p>As Creationeers, we are called to understand and reflect that same intentionality. When we pursue high-performing designs, we are honoring the gifts of intellect and creativity God has entrusted to us. Good stewardship isn't just about taking care of what we have — it's about developing it to its fullest potential. That starts with <em>knowing</em> how something is performing. And knowing requires data.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv8op",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t9qr",
+    "type": "text",
+    "data": {
+      "html": "<h2>What is Data-Defined Performance?</h2>\n<p>Data-defined performance means you don't just guess whether something is working well — you <em>measure</em> it. You collect numbers, facts, and observations to see exactly how your creation is doing. Think of it like a report card for your design. Instead of saying "it runs pretty fast," you say "it reached 10 meters per second." That precision makes all the difference.</p>\n<p>This kind of objective measurement is powerful. It tells you where your design excels and where it falls short. It removes opinion from the equation and replaces it with truth. A bridge engineer doesn't say "I think this structure feels strong enough." They calculate the load-bearing capacity with real numbers. That's data-defined performance in action.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063imgab",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A dashboard displaying real-time performance metrics and data visualizations for an engineering system"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t10st",
+    "type": "text",
+    "data": {
+      "html": "<h2>Key Performance Indicators (KPIs)</h2>\n<p>Once you decide to measure performance, the next question is: <em>what</em> do you measure? That's where <strong>Key Performance Indicators</strong>, or KPIs, come in. A KPI is a specific, measurable value that tells you how well your system is achieving its goals.</p>\n<p>Different systems have different KPIs. Here are some examples:</p>\n<ul>\n  <li><strong>A water purification system</strong> — KPI: liters of clean water produced per hour (throughput)</li>\n  <li><strong>A solar panel</strong> — KPI: percentage of sunlight converted to electricity (efficiency)</li>\n  <li><strong>A bridge</strong> — KPI: maximum load before structural failure (reliability)</li>\n  <li><strong>A delivery robot</strong> — KPI: number of successful deliveries per day without errors (reliability + throughput)</li>\n</ul>\n<p>Choosing the right KPIs is just as important as measuring them. If you track the wrong things, you might think your design is doing great when it actually has a serious flaw hiding somewhere else.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063tip1uv",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Choosing KPIs:</strong> When selecting what to measure, ask yourself — "What does success actually look like for this system?" A good KPI is specific, measurable, and directly tied to your design's purpose. If your goal is speed, measure speed. If your goal is safety, measure failure rates. Start with the purpose, then pick your metrics.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv11wx",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t12yz",
+    "type": "text",
+    "data": {
+      "html": "<h2>Zooming In and Out: Multiscale Modeling</h2>\n<p>Here's a fascinating idea — performance doesn't just happen at the scale you can see. What happens at the microscopic or even atomic level directly affects how a system performs at the large scale. That's the core idea behind <strong>Multiscale Modeling</strong>.</p>\n<p>Imagine a metal beam in a building. At the large scale, you can measure how much it bends under a load. But <em>why</em> it bends that way depends on the arrangement of metal atoms at the microscopic scale. Multiscale modeling connects those two levels of understanding — from the tiny to the large — so engineers can predict and improve performance more accurately.</p>\n<p>Think of it like this: a doctor doesn't just look at whether a patient seems healthy. They run blood tests, check cell counts, and examine organ function at multiple scales. Great engineering does the same thing — it investigates performance at every level.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063imgbc",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing multiscale modeling — connecting atomic/microscale structure to large-scale system behavior"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063info1de",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Why Multiscale Modeling Matters:</strong> Many engineering failures happen because a design looked fine at the large scale but had a hidden weakness at the microscopic level. By modeling performance across multiple scales, engineers can catch problems before they become disasters — saving lives, resources, and time.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv13fg",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t14hi",
+    "type": "text",
+    "data": {
+      "html": "<h2>Optimizing with the OCV Method</h2>\n<p>Now that you can measure performance and understand it at multiple scales, the next step is to <em>improve</em> it. That's optimization — finding the best possible outcome within your real-world constraints. The <strong>OCV method</strong> gives you a clear framework to do exactly that.</p>\n<p>OCV stands for <strong>Objective, Constraint, Variable</strong>. These three elements define every optimization problem you will ever face as an engineer:</p>\n<ul>\n  <li><strong>Objective:</strong> What do you want to achieve? This is your goal — maximize speed, minimize cost, increase efficiency.</li>\n  <li><strong>Constraint:</strong> What limits do you have to work within? Budget, size, weight, safety requirements — these are your boundaries.</li>\n  <li><strong>Variable:</strong> What can you actually change? These are the knobs you can turn — material choice, shape, size, motor power.</li>\n</ul>\n<p>By clearly defining all three, you can make systematic, data-driven decisions instead of randomly trying things and hoping for the best. It's the difference between a scientist and a guesser.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t15jk",
+    "type": "text",
+    "data": {
+      "html": "<h3>OCV in Practice: A Real Example</h3>\n<p>Imagine you are designing a small electric vehicle for a school competition. Here's how OCV breaks it down:</p>\n<ul>\n  <li><strong>Objective:</strong> Complete the race course in the shortest time possible.</li>\n  <li><strong>Constraints:</strong> The vehicle must weigh less than 5 kg, cost under $50 to build, and use only one standard motor.</li>\n  <li><strong>Variables:</strong> Wheel size, gear ratio, vehicle body shape (aerodynamics), battery placement.</li>\n</ul>\n<p>With those three things clearly defined, you can now test each variable, collect data on lap times, and use that data to make smart improvements. That's data-defined performance working in real life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063warn1lm",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake — Changing Too Many Variables at Once:</strong> When optimizing, only change <em>one variable at a time</em>. If you change the wheel size AND the gear ratio at the same time and your speed improves, you won't know which change caused the improvement. Isolate your variables to get clean, trustworthy data.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv16no",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063t17pq",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship Through Performance</h2>\n<p>Why does all of this matter beyond just building cool things? Because every resource you use — materials, energy, time, money — is something God has entrusted to you. Using those resources <em>efficiently</em> and <em>responsibly</em> is an act of stewardship.</p>\n<p>An engine that wastes 60% of its fuel as heat isn't just inefficient — it's wasteful of the resources God placed in creation. A poorly designed water pump that breaks down every month isn't just unreliable — it fails the people depending on clean water. Data-defined performance gives you the tools to be a better steward. When you know your system's KPIs, model it at multiple scales, and optimize it using OCV, you are honoring God by doing your best with what He has given you.</p>\n<p>Colossians 3:23 puts it simply: <em>"Whatever you do, work at it with all your heart, as working for the Lord."</em> In engineering, working with all your heart means working with all your data.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063dv18rs",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063acc1tu",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: What is Data-Defined Performance?",
+      "html": "<p><strong>Q: Why is it better to say "the motor reached 450 RPM" than "the motor runs fast"?</strong></p>\n<p>Because a specific, measurable number is objective — it doesn't depend on opinion. It lets you compare results, track improvement over time, and communicate clearly with other engineers. "Fast" means something different to everyone; 450 RPM means the same thing to everyone.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063acc2vw",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: KPIs",
+      "html": "<p><strong>Q: A team is designing a solar-powered water pump for a rural community. List two KPIs they should track and explain why each one matters.</strong></p>\n<p><strong>KPI 1 — Liters of water pumped per hour (Throughput):</strong> This tells the team whether the pump can actually meet the daily water needs of the community. If throughput is too low, the community won't have enough water.</p>\n<p><strong>KPI 2 — Percentage of available solar energy converted to pump work (Efficiency):</strong> This tells the team how well the system uses the energy it receives. A low efficiency means the pump wastes energy and may fail on cloudy days when solar input is reduced.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063acc3xy",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding: The OCV Method",
+      "html": "<p><strong>Q: A student wants to make their paper airplane fly as far as possible. Identify the Objective, one Constraint, and two Variables for this optimization problem.</strong></p>\n<p><strong>Objective:</strong> Maximize the distance the paper airplane travels.</p>\n<p><strong>Constraint (example):</strong> Must be made from a single standard sheet of 8.5 x 11 paper with no tape or scissors.</p>\n<p><strong>Variable 1:</strong> The fold angle of the wings — a steeper or shallower angle changes the lift generated.</p>\n<p><strong>Variable 2:</strong> The nose shape — a sharper nose reduces air resistance and may increase distance.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c063tip2za",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study Tip — Connect the Concepts:</strong> As you review this lesson, try drawing a simple diagram that connects all four main ideas: Data-Defined Performance → KPIs → Multiscale Modeling → OCV Optimization. Seeing how they flow together will help you remember how each piece supports the others. Performance starts with measurement, measurement gives you KPIs, modeling helps you understand why, and OCV helps you improve.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]
+```

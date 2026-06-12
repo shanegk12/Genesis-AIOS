@@ -1,0 +1,340 @@
+[
+  {
+    "id": "m027t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Material Preparation</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you completed your Bill of Materials — a detailed list of every part and component needed for your mousetrap car. You identified the <em>what</em>. Today, we shift focus to the <em>how</em> and <em>where</em> of getting those materials and preparing them for use. This crucial step in the Creationeering process is called <strong>Procurement</strong>, and it's where your plans start to become a physical reality.</p>\n<p>It's not enough to simply list materials. You need to acquire them and get them ready. Whether you're cutting wood for the chassis, drilling holes for axles, or smoothing the edges of your wheels, proper material preparation directly impacts your car's performance, durability, and overall success. Thoughtful procurement and preparation — guided by biblical principles of stewardship — lay the groundwork for an excellent design.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n  <li>Define procurement within the Creationeering framework and explain its importance in engineering projects.</li>\n  <li>Identify various sources for acquiring materials for your mousetrap car.</li>\n  <li>Explain how material properties influence selection decisions for different car components.</li>\n  <li>Describe essential material preparation techniques applicable to your mousetrap car.</li>\n  <li>Apply principles of responsible stewardship in sourcing and preparing materials, recognizing that all resources ultimately belong to God.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Procurement",
+          "definition": "The process of obtaining and making materials, along with getting the equipment needed to make a component, subsystem, or system."
+        },
+        {
+          "term": "Material Properties",
+          "definition": "Characteristics of a material — such as strength, weight, hardness, flexibility, or friction — that determine how it behaves."
+        },
+        {
+          "term": "Objective",
+          "definition": "A desired outcome or goal for your design."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be satisfied in your design, such as budget, available tools, or material availability."
+        },
+        {
+          "term": "Variable",
+          "definition": "A parameter or aspect of your design that can be controlled or changed by the designer to achieve an objective within constraints."
+        },
+        {
+          "term": "Stewardship",
+          "definition": "The responsible overseeing and protection of something considered worth caring for and preserving."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable range of variation in a dimension or property of a manufactured part."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at a large (macro) level to their underlying causes at smaller (micro or atomic) levels."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God the Master Craftsman</h2>\n<p>In the book of Exodus, God gives Moses incredibly detailed instructions for building the Tabernacle — a portable sanctuary for worship. He didn't just hand Moses a vague concept. He specified exact materials: gold, silver, bronze, fine linen, acacia wood, olive oil, and precious stones. Each item had a purpose. Each material was chosen with intention.</p>\n<p>This is a powerful picture of procurement in action. God, the ultimate designer, didn't separate the design phase from the material-gathering phase. They were part of the same act of purposeful creation. Obtaining the right materials <em>is</em> part of bringing a design to life — not an afterthought.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027c001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 25:3–7 (NIV)</strong> — \"These are the offerings you are to receive from them: gold, silver and bronze; blue, purple and scarlet yarn and fine linen; goat hair; ram skins dyed red and another type of durable leather; acacia wood; olive oil for the light; spices for the anointing oil and for the fragrant incense; and onyx stones and other gems to be mounted on the ephod and breastpiece.\"</p><p>Every material listed had a specific property that made it right for its role. That's engineering thinking — even in ancient scripture.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Procurement?</h2>\n<p>Procurement is the process of obtaining and making materials, along with getting the equipment needed to build your component, subsystem, or system. Think of it like the supply chain behind any great project. A carpenter doesn't just draw blueprints — they also visit the lumber yard, select the right wood, and prepare it before a single nail goes in.</p>\n<p>For your mousetrap car, procurement means answering questions like:</p>\n<ul>\n  <li>Where will I get each material on my Bill of Materials?</li>\n  <li>Do I already have it, or do I need to buy, borrow, or repurpose something?</li>\n  <li>What tools do I need to prepare it?</li>\n  <li>Is this the <em>right</em> material for the job — or just the convenient one?</li>\n</ul>\n<p>Good engineers ask all of these questions before they start building. Rushing past procurement is one of the most common reasons projects stall or fail midway through construction.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Where to Source Your Materials</h3>\n<p>Materials for your mousetrap car can come from several places. Here are the most common sources you'll work with:</p>\n<ul>\n  <li><strong>Hardware stores</strong> — Great for wood, screws, wire, and basic fasteners.</li>\n  <li><strong>Craft or hobby stores</strong> — Good for balsa wood, foam board, wheels, and axle materials.</li>\n  <li><strong>Recycled or repurposed items</strong> — CDs, bottle caps, cardboard tubes, and wooden skewers are all fair game.</li>\n  <li><strong>Your school's supply stock</strong> — Check what's already available before spending money.</li>\n  <li><strong>Online retailers</strong> — Useful for specialty items, but watch your timeline and budget constraints.</li>\n</ul>\n<p>Always match your source to your constraints. If your budget is tight, repurposed materials may be your best option. If precision matters most, a hardware store cut-to-order may serve you better.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A flat-lay of common mousetrap car materials including wooden dowels, balsa wood strips, plastic bottle caps, rubber bands, wire, and a mousetrap spring mechanism arranged neatly on a workbench"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Material Properties</h2>\n<p>Not all materials are created equal — and that's a good thing. Different materials behave differently under stress, motion, and friction. Choosing the right material for each part of your mousetrap car means understanding its <strong>material properties</strong>.</p>\n<p>Here are the key properties you should consider:</p>\n<ul>\n  <li><strong>Strength</strong> — Can it handle the forces applied to it without breaking? Your chassis needs to be strong enough to hold everything together.</li>\n  <li><strong>Weight (Mass)</strong> — Lighter cars generally travel farther. Every gram matters when your only power source is a tiny spring.</li>\n  <li><strong>Hardness</strong> — Hard materials resist scratching and deformation. Axle materials should be hard enough to spin smoothly without bending.</li>\n  <li><strong>Flexibility</strong> — Some parts benefit from a little give. A slightly flexible chassis can absorb small shocks without cracking.</li>\n  <li><strong>Friction</strong> — High friction between the drive wheel and the ground helps your car grip and accelerate. Low friction on axles reduces energy loss.</li>\n</ul>\n<p>Notice that the same property — friction — is desirable in one place and undesirable in another. That's the nuance of real engineering. You're always balancing trade-offs.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t008",
+    "type": "text",
+    "data": {
+      "html": "<h3>Objectives, Constraints, and Variables</h3>\n<p>Every material decision you make connects back to your design's objectives, constraints, and variables. Your <strong>objective</strong> is what you're trying to achieve — maybe maximum distance, or a specific target zone. Your <strong>constraints</strong> are the boundaries you must work within — your budget, available tools, and the rules of your project. Your <strong>variables</strong> are the choices you can actually control — which material to use, how thick to cut it, or how to shape it.</p>\n<p>When you pick a material, you're really asking: <em>Does this choice help me meet my objective while staying within my constraints?</em> If the answer is yes, it's a strong candidate. If it pushes you outside your budget or requires tools you don't have, you need to reconsider.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple diagram showing three labeled circles — Objective, Constraint, and Variable — connected by arrows, illustrating how engineering decisions are shaped by all three factors simultaneously"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Preparing Your Materials</h2>\n<p>Once you've sourced your materials, the next step is preparation. Raw materials rarely arrive in exactly the right shape, size, or finish for your design. Preparation is the bridge between what you bought and what you need.</p>\n<p>Here are the most common preparation techniques you'll use for your mousetrap car:</p>\n<ul>\n  <li><strong>Cutting</strong> — Trimming wood, cardboard, or wire to the correct length. Always measure twice and cut once. That's not just a cliché — it saves material and time.</li>\n  <li><strong>Drilling</strong> — Creating clean, centered holes for axles is critical. An off-center hole causes wobble, which wastes energy and slows your car.</li>\n  <li><strong>Sanding and Smoothing</strong> — Rough edges increase friction and can cause axles to bind. Smooth contact surfaces improve performance.</li>\n  <li><strong>Shaping</strong> — Bending wire, scoring cardboard, or carving wood to fit your design's geometry.</li>\n  <li><strong>Fastening Preparation</strong> — Pre-drilling pilot holes prevents wood from splitting. Scoring surfaces before gluing improves adhesion.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t010",
+    "type": "text",
+    "data": {
+      "html": "<h3>Working Within Tolerance</h3>\n<p>In engineering, <strong>tolerance</strong> refers to the allowable range of variation in a measurement. No cut is ever perfectly exact. No hole is ever perfectly centered. The question is whether your imprecision falls within an acceptable range — or whether it's large enough to cause a real problem.</p>\n<p>For your mousetrap car, think about axle holes. If the hole is 0.5 mm too small, your axle won't spin freely. If it's 3 mm too large, the axle will wobble and your wheel alignment will suffer. Understanding tolerance helps you decide when \"good enough\" actually is good enough — and when you need to redo a step.</p>\n<p>Professional engineers specify tolerances on every dimension of a manufactured part. Even at your scale, thinking about tolerance will make you a more precise and effective builder.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027c002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Measure twice, cut once.</strong> Before any cut or drill, double-check your measurement against your design drawing. Mark your cut line with a pencil. Then verify it one more time. This single habit eliminates most material waste and saves you from having to re-source parts mid-project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Procurement</h2>\n<p>Here's a question worth sitting with: Why does it matter <em>how</em> you acquire and use materials?</p>\n<p>In the Creationeering framework, stewardship isn't just a nice idea — it's a design principle. Everything you work with, from the wood in your chassis to the spring in your mousetrap, is a resource that came from the earth God created. Using materials wisely — avoiding waste, repurposing when possible, and choosing responsibly — is a direct expression of caring for creation.</p>\n<p>Stewardship also has practical engineering benefits. Engineers who waste materials drive up project costs. Engineers who repurpose cleverly often find lighter, more creative solutions. Being a good steward makes you a better engineer and a more faithful creator.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip preparation to save time.</strong> It's tempting to rush past cutting, sanding, or drilling precision work when you're eager to start assembling. But poorly prepared parts compound problems — a rough axle hole leads to wobble, which leads to drag, which leads to a car that underperforms. Taking an extra five minutes in preparation can save you an hour of troubleshooting later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Procurement and material preparation might feel like the \"boring\" steps between design and building. But they're anything but. Every great structure, vehicle, or device ever built started with someone carefully sourcing and preparing the right materials. The craftsmen who built Solomon's Temple didn't just show up with random supplies. The engineers who designed the first automobiles didn't grab whatever metal was lying around.</p>\n<p>Your mousetrap car deserves the same intentionality. Review your Bill of Materials. Identify your sources. Evaluate each material against its required properties. Prepare each piece with precision. And as you work, remember that the care you bring to this process reflects the care God brings to all of His creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m027a001",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is procurement, and why does it matter in engineering?</strong><br/>Procurement is the process of obtaining materials and equipment needed to build a component, subsystem, or system. It matters because having the wrong material — or no material at all — can stop a project entirely. Good procurement ensures your build phase goes smoothly.</p>\n<p><strong>Q: Name two material properties important for mousetrap car design and explain why.</strong><br/>Answers will vary, but strong responses include: <em>weight</em> (lighter cars travel farther on limited spring energy) and <em>friction</em> (high friction at the drive wheel improves grip; low friction at axles reduces energy loss).</p>\n<p><strong>Q: What is tolerance, and why should you think about it when preparing parts?</strong><br/>Tolerance is the allowable range of variation in a measurement. When preparing parts, working within tolerance means your components will fit together correctly and function as designed. Parts outside tolerance cause problems like wobble, binding, or misalignment.</p>\n<p><strong>Q: How does the biblical concept of stewardship apply to material procurement?</strong><br/>Stewardship means caring responsibly for what God has provided. In procurement, this means avoiding waste, choosing materials thoughtfully, and repurposing when possible — honoring both the Creator and the resources He made.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

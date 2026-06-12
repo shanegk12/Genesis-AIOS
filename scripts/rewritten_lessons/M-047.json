@@ -1,0 +1,277 @@
+[
+  {
+    "id": "m047t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Braking System and Test</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>You have spent weeks engineering your mousetrap car to go fast and travel far. Now comes a critical question every real engineer faces: how do you make it stop? This lesson focuses on designing, building, and testing a braking system for your mousetrap car. You will explore how friction converts kinetic energy into heat, examine different types of simple braking mechanisms, and use the OCV (Objective, Constraint, Variable) framework to guide your design choices. Along the way, you will discover how the responsibility to control the forces we create connects directly to God's call to wise stewardship over His creation.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will:</p><ul><li>Explain why a braking system is essential for a fully engineered mousetrap car.</li><li>Describe how friction converts kinetic energy into thermal energy at the molecular level.</li><li>Identify and compare at least two types of simple braking systems suitable for a mousetrap car.</li><li>Apply the OCV framework to select and test brake pad materials.</li><li>Connect the engineering principle of controlled stopping to the biblical Dominion Mandate.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Kinetic Energy",
+          "definition": "The energy an object has because it is moving. A heavier or faster-moving car has more kinetic energy."
+        },
+        {
+          "term": "Friction",
+          "definition": "A force that resists motion when two surfaces rub against each other, often producing heat as a result."
+        },
+        {
+          "term": "Thermal Energy",
+          "definition": "Energy in the form of heat, produced when friction causes atoms and molecules to vibrate faster."
+        },
+        {
+          "term": "Braking System",
+          "definition": "A mechanism designed to slow or stop a moving vehicle by applying friction to a wheel or surface."
+        },
+        {
+          "term": "OCV Framework",
+          "definition": "A design tool that identifies the Objective (goal), Constraints (limits), and Variables (factors you can change) for an engineering problem."
+        },
+        {
+          "term": "Dominion Mandate",
+          "definition": "God's command in Genesis 1:28 for humanity to responsibly manage and care for the Earth and its resources."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:28 (KJV):</strong> \"And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.\"</p><p>God's very first instructions to humanity included the word <em>subdue</em> — to bring order and wise control to the world around us. Engineering is one of the most powerful ways we live that out. When you design a braking system, you are not just solving a physics problem; you are practicing the kind of careful, responsible stewardship God has always called His people to.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Order and Control: God's Design Principle</h2><p>From the very beginning, God created an orderly universe — seasons that follow one another, gravity that behaves consistently, atoms that bond in predictable ways. He did not design a chaotic world and walk away. He built in systems of order, balance, and control. Then He invited us to continue that work.</p><p>The Dominion Mandate is not a license to do whatever we want with creation. It is a calling to manage wisely. Think about it this way: a powerful engine with no steering wheel or brakes is not a triumph of engineering — it is a hazard. The ability to <em>control</em> what you have built is just as important as the power itself. That principle shows up in every great engineering discipline, and it shows up right here in your mousetrap car project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why Stopping Matters</h2><p>You have put a lot of work into making your mousetrap car move. But here is a question that separates a good design from a great one: where does it stop?</p><p>A real car's braking system is not an afterthought — it is one of the most safety-critical components on the vehicle. The same logic applies to your build. Without a braking mechanism, your car travels until it runs out of energy or collides with something. That might be fine for a distance challenge, but what about a precision challenge where you need to land exactly on a target? Unpredictable stopping means unpredictable results.</p><p>A braking system gives you control over the distance your car travels. It lets you convert the car's kinetic energy — the energy it has because it is moving — into another form of energy so the car slows down and stops. That other form of energy is almost always heat, generated by friction between surfaces.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing a mousetrap car in motion with an arrow indicating kinetic energy, and a brake pad pressing against a rear wheel with wavy lines indicating heat generated by friction"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Actually Happening When You Brake?</h2><p>Here is something cool to think about. When your car slows down, you can observe it at two completely different scales at the same time.</p><p>At the <strong>macro scale</strong> — the level you can see — your car decelerates. It loses speed and eventually stops. That is straightforward.</p><p>But zoom in to the <strong>micro scale</strong> — the level of atoms and molecules — and something fascinating is happening. When your brake pad rubs against a wheel or the ground, the surface atoms of both materials are colliding and dragging against each other at high speed. Those collisions transfer energy into the vibration of those atoms, and increased atomic vibration is exactly what heat <em>is</em>. The surface of your brake pad warms up because billions of tiny atomic collisions are happening every second.</p><p>So the macroscopic event you observe — the car slowing down — is the direct result of energy being redistributed at the atomic level. Big physics and tiny physics, telling the same story at the same time. Engineers who understand both scales build better, more efficient braking systems.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Types of Braking Systems for Your Mousetrap Car</h2><p>There are several simple braking mechanisms you can build and test. Each one works by creating friction against a moving part of the car — usually a wheel or the ground beneath it. Here are the most practical options for your build:</p><h3>Friction Pad Brake</h3><p>Attach a small piece of material — rubber, felt, foam, or sponge — to a lever arm. When the lever is triggered, the pad presses down against one of the car's wheels, creating friction that slows the wheel's rotation. You can trigger the lever using a string tied to a fixed point on the track, so the brake engages automatically when the car reaches a set distance.</p><h3>Ground Drag Brake</h3><p>Instead of pressing against a wheel, this design drags a material along the ground. A small weighted flap or a strip of rough material can be mounted at the rear of the car. As it drags, it creates friction between itself and the ground surface, gradually bleeding off the car's kinetic energy.</p><h3>String-Stop Brake</h3><p>A length of string or fishing line is attached to the car and anchored at a fixed point on the track. When the car reaches the end of the string's length, the tension pulls back on the car's drive axle or frame, bringing it to a stop. The stopping point is easily adjustable by changing the string length — precise and simple.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagrams of three mousetrap car braking methods: a friction pad pressing on a rear wheel, a ground drag strip at the car's rear, and a string-stop line running from the car to an anchor point"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Framework to Your Brake Design</h2><p>Before you start building, run your braking system through the OCV framework. This keeps your design intentional rather than accidental.</p><ul><li><strong>Objective:</strong> Stop your mousetrap car accurately at a specific target distance.</li><li><strong>Constraint:</strong> The braking system must not permanently damage your car's wheels, axles, or chassis. It also should not add so much weight that it slows the car before you want it to stop.</li><li><strong>Variable:</strong> The material you choose for your brake pad or drag surface. Try felt, rubber, sandpaper, or foam and compare how quickly each material brings the car to a stop. Record your results — which material gave the most consistent stopping distance? Which caused the least wear on your wheels?</li></ul><p>Testing multiple materials is not guessing. It is the scientific method applied to engineering design. This is exactly how professional automotive engineers develop brake pad compounds — they test, measure, compare, and refine.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Test one variable at a time.</strong> When comparing brake materials, keep everything else identical — same launch tension, same surface, same car weight. If you change two things at once, you will not know which one caused the difference in stopping distance. Controlled testing is what turns observations into real data.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building and Testing Your Braking System</h2><p>Once you have chosen your braking mechanism and your test material, it is time to build and run your tests. Follow these steps:</p><ol><li><strong>Design your brake mount.</strong> Decide where on your car the braking mechanism will attach. It should not interfere with the drive axle or the mousetrap arm during the car's run.</li><li><strong>Build a prototype.</strong> Attach your chosen brake pad, drag strip, or string-stop system. Keep it lightweight and secure.</li><li><strong>Mark a target.</strong> Place a piece of tape on the floor as your stopping target. Start with a distance your car has been reaching consistently in previous tests.</li><li><strong>Run three trials per material.</strong> Launch the car the same way each time. Measure how far past (or short of) the target the car stops. Record every result.</li><li><strong>Adjust and re-test.</strong> If the car consistently overshoots, increase brake friction. If it stops too early, reduce it. Small adjustments, one at a time.</li><li><strong>Compare your data.</strong> Which material produced the most consistent stopping distance? Which had the least variance between trials?</li></ol>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Do not mount the brake too close to the drive axle.</strong> If the brake engages while the mousetrap spring is still releasing energy, you will create competing forces — the spring pushing forward and the brake pulling back — which can stress your axle mounts and produce wildly inconsistent results. Make sure your brake only engages once the drive cycle is complete.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>A Fully Engineered System</h2><p>Adding a braking system is what takes your mousetrap car from a moving object to a truly engineered vehicle. Power without control is not engineering — it is just releasing energy. The ability to start, run, and <em>stop</em> on purpose is the mark of a complete, well-designed system.</p><p>Think about the most impressive machines in the world: spacecraft re-entering Earth's atmosphere, high-speed trains pulling into a station, surgical robots making precise incisions. Every single one of them has highly sophisticated stopping and control mechanisms. The engineers who designed those systems understood that control is not optional — it is the point.</p><p>Your mousetrap car is a small-scale version of that same challenge. And every test you run, every material you swap out, every measurement you record is genuine engineering work. You are not just building a toy. You are practicing the discipline of responsible, intentional design — the kind of stewardship God had in mind from the very beginning.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m047a001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Regenerative Braking",
+      "html": "<p>In real-world engineering, braking does not always mean wasting energy as heat. <strong>Regenerative braking</strong> is a technology used in electric vehicles and hybrid cars that captures the kinetic energy of a slowing vehicle and converts it back into electrical energy, which is stored in a battery for later use.</p><p>Instead of friction pads turning motion into heat, regenerative braking uses the car's electric motor in reverse — as a generator. The wheels' rotation spins the generator, which produces electricity. The resistance from the generator is what slows the car down.</p><p>This is a beautiful example of energy stewardship: instead of discarding the energy you put into accelerating the car, you recover and reuse it. Tesla, Toyota, and virtually every modern electric vehicle uses this system. As a Creationeer, it is worth asking: where else in your designs could energy that is usually wasted be captured and reused instead?</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

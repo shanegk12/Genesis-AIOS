@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement Simulator – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  header {
+    background: #1B3A5C;
+    color: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 24px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  header .course-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #C9A84C;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  #progress-bar-wrap {
+    background: #1B3A5C;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 24px 14px;
+  }
+  .progress-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  #main-card {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 24px rgba(27,58,92,0.10);
+    padding: 28px 28px 32px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* SCREEN MANAGEMENT */
+  .screen { display: none; flex-direction: column; gap: 18px; flex: 1; }
+  .screen.active { display: flex; }
+
+  /* INTRO */
+  .intro-icon { font-size: 3rem; text-align: center; }
+  .intro-title { font-size: 1.5rem; font-weight: 800; color: #1B3A5C; text-align: center; }
+  .intro-sub { color: #456; font-size: 0.97rem; text-align: center; line-height: 1.6; }
+  .scenario-box {
+    background: #f0f4f9;
+    border-left: 4px solid #C9A84C;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 0.93rem;
+    line-height: 1.65;
+    color: #1B3A5C;
+  }
+  .scenario-box strong { color: #C9A84C; }
+
+  /* BUTTONS */
+  .btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: #1B3A5C; color: #fff; }
+  .btn-primary:hover { background: #254d7a; }
+  .btn-gold { background: #C9A84C; color: #fff; }
+  .btn-gold:hover { background: #b8963e; }
+  .btn-outline { background: transparent; color: #1B3A5C; border: 2px solid #1B3A5C; }
+  .btn-outline:hover { background: #f0f4f9; }
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: auto; padding-top: 16px; }
+
+  /* STEP SEQUENCE */
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f4f9;
+  }
+  .step-badge {
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-weight: 800;
+    font-size: 0.85rem;
+    border-radius: 50px;
+    padding: 4px 14px;
+    white-space: nowrap;
+  }
+  .step-title { font-size: 1.1rem; font-weight: 700; color: #1B3A5C; }
+  .step-desc { font-size: 0.95rem; color: #334; line-height: 1.65; }
+
+  /* DECISION / CHOICE */
+  .choice-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .choice-btn {
+    background: #f7f9fc;
+    border: 2px solid #d0dae8;
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.93rem;
+    color: #1B3A5C;
+    line-height: 1.5;
+    transition: border-color 0.18s, background 0.18s;
+    font-family: inherit;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fdf8ee; }
+  .choice-btn.correct { border-color: #2d9c5a; background: #eaf7ef; color: #1a6638; }
+  .choice-btn.wrong { border-color: #c0392b; background: #fdf0ee; color: #7d1a12; }
+  .choice-btn.neutral-reveal { border-color: #2d9c5a; background: #eaf7ef; color: #1a6638; }
+  .choice-btn:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback-box {
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .feedback-box.visible { display: block; }
+  .feedback-box.good { background: #eaf7ef; border: 1.5px solid #2d9c5a; color: #155227; }
+  .feedback-box.bad { background: #fdf0ee; border: 1.5px solid #c0392b; color: #7d1a12; }
+  .feedback-box.info { background: #f0f4f9; border: 1.5px solid #1B3A5C; color: #1B3A5C; }
+
+  /* OCV TABLE */
+  .ocv-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .ocv-table th {
+    background: #1B3A5C;
+    color: #C9A84C;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+  .ocv-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0e8f0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .ocv-table tr:nth-child(even) td { background: #f7f9fc; }
+  .ocv-label { font-weight: 700; color: #1B3A5C; }
+  .ocv-gold { color: #8a6a1f; font-weight: 600; }
+
+  /* SUPPLIER COMPARE */
+  .supplier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .supplier-card {
+    border: 2px solid #d0dae8;
+    border-radius: 10px;
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    background: #f7f9fc;
+  }
+  .supplier-card:hover:not(.locked) { border-color: #C9A84C; box-shadow: 0 2px 12px rgba(201,168,76,0.2); }
+  .supplier-card.selected { border-color: #1B3A5C; box-shadow: 0 0 0 3px rgba(27,58,92,0.15); background: #e8eef5; }
+  .supplier-card.locked { cursor: default; }
+  .supplier-name { font-weight: 700; font-size: 1rem; color: #1B3A5C; margin-bottom: 8px; }
+  .supplier-stat { font-size: 0.85rem; color: #456; margin-bottom: 4px; }
+  .supplier-stat span { font-weight: 700; color: #1B3A5C; }
+  .supplier-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+  .tag-budget { background: #e8f5e9; color: #2d7a45; }
+  .tag-quality { background: #e3f0fb; color: #1a5a8a; }
+  .tag-fast { background: #fff8e1; color: #8a6a1f; }
+  .tag-risk { background: #fdf0ee; color: #8a2a1f; }
+
+  /* SCORE SCREEN */
+  .score-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 6px solid #C9A84C;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+  }
+  .score-num { font-size: 2.2rem; font-weight: 900; color: #1B3A5C; }
+  .score-den { font-size: 0.9rem; color: #789; }
+  .score-title { font-size: 1.3rem; font-weight: 800; text-align: center; color: #1B3A5C; }
+  .score-message { font-size: 0.95rem; text-align: center; color: #456; line-height: 1.65; }
+  .summary-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .summary-list li {
+    background: #f7f9fc;
+    border-left: 4px solid #1B3A5C;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .summary-list li.good-item { border-left-color: #2d9c5a; }
+  .summary-list li.bad-item { border-left-color: #c0392b; }
+
+  /* VOCAB BADGE */
+  .vocab-badge {
+    display: inline-block;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin-right: 4px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 540px) {
+    #main-card { padding: 20px 16px 24px; }
+    header { padding: 16px 16px 12px; }
+    .supplier-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="course-tag">Creationeering™ — Procurement</div>
+  <h1>🏗️ Build It Right: Procurement Sim</h1>
+</header>
+<div id="progress-bar-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 0 of 7</div>
+</div>
+<div id="main-card">
+
+  <!-- SCREEN 0: INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">🔩</div>
+    <div class="intro-title">Your Mission</div>
+    <div class="intro-sub">You're the Procurement Lead for <strong>GK12 Robotics Team</strong>.<br>Your team needs parts to build a robot — you must make smart decisions to get the right things at the right time for the right cost.</div>
+    <div class="scenario-box">
+      <strong>The Scenario:</strong> Your robotics competition is in <strong>3 weeks</strong>. You need motors, a chassis frame, and sensors. Budget is tight, quality matters, and the clock is ticking. Every decision you make will affect your project's success.<br><br>
+      You'll work through the <strong>Procurement Cycle</strong> step by step.
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="startSim()">Start Simulation →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: IDENTIFY NEEDS -->
+  <div class="screen" id="screen-1">
+    <div class="step-header">
+      <span class="step-badge">Step 1 of 6</span>
+      <span class="step-title">Identify Your Needs</span>
+    </div>
+    <div class="step-desc">
+      The first step in any procurement cycle is knowing <em>exactly</em> what you need before spending a single dollar. Your team made a parts list — but one item description is too vague to order. Which item needs a better description?
+    </div>
+    <div class="choice-grid" id="choices-1"></div>
+    <div class="feedback-box" id="feedback-1"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="next-1" style="display:none" onclick="goTo(2)">Next Step →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: OCV METHOD -->
+  <div class="screen" id="screen-2">
+    <div class="step-header">
+      <span class="step-badge">Step 2 of 6</span>
+      <span class="step-title">Apply the OCV Method</span>
+    </div>
+    <div class="step-desc">
+      Before choosing a supplier, use the <strong>OCV Method</strong> to organize your thinking. Match each statement below to <strong>Objective, Constraint, or Variable</strong>.
+    </div>
+    <div id="ocv-activity"></div>
+    <div class="feedback-box" id="feedback-2"></div>
+    <div class="btn-row">
+      <button class="btn btn-gold" id="check-2" onclick="checkOCV()">Check Answers</button>
+      <button class="btn btn-primary" id="next-2" style="display:none" onclick="goTo(3)">Next Step →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: QUOTATIONS -->
+  <div class="screen" id="screen-3">
+    <div class="step-header">
+      <span class="step-badge">Step 3 of 6</span>
+      <span class="step-title">Review Quotations</span>
+    </div>
+    <div class="step-desc">
+      You requested <span class="vocab-badge">QUOTATIONS</span> from three suppliers for your drive motors. Each gave you a formal price statement. Based on your OCV analysis (best motors under $120, delivered in 2 weeks or less), which supplier should you choose?
+    </div>
+    <div class="supplier-grid" id="supplier-grid"></div>
+    <div class="feedback-box" id="feedback-3"></div>
+    <div class="btn-row">
+      <button class="btn btn-gold" id="check-3" style="display:none" onclick="checkSupplier()">Select This Supplier</button>
+      <button class="btn btn-primary" id="next-3" style="display:none" onclick="goTo(4)">Next Step →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: PURCHASE ORDER -->
+  <div class="screen" id="screen-4">
+    <div class="step-header">
+      <span class="step-badge">Step 4 of 6</span>
+      <span class="step-title">Issue a Purchase Order</span>
+    </div>
+    <div class="step-desc">
+      After choosing a supplier, you issue a <span class="vocab-badge">PURCHASE ORDER</span> — a legal document that confirms what you're buying, how much, and when. Your team drafted the purchase order below. Spot the critical missing field!
+    </div>
+    <div id="po-activity"></div>
+    <div class="feedback-box" id="feedback-4"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="next-4" style="display:none" onclick="goTo(5)">Next Step →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: QUALITY CHECK -->
+  <div class="screen" id="screen-5">
+    <div class="step-header">
+      <span class="step-badge">Step 5 of 6</span>
+      <span class="step-title">Receive & Inspect Goods</span>
+    </div>
+    <div class="step-desc">
+      Your parts arrived! But before you use them, you must inspect them. Three things were delivered. Decide what to do with each one.
+    </div>
+    <div id="inspect-activity"></div>
+    <div class="feedback-box" id="feedback-5"></div>
+    <div class="btn-row">
+      <button class="btn btn-gold" id="check-5" onclick="checkInspect()">Submit Inspection</button>
+      <button class="btn btn-primary" id="next-5" style="display:none" onclick="goTo(6)">Next Step →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 6: STEWARDSHIP -->
+  <div class="screen" id="screen-6">
+    <div class="step-header">
+      <span class="step-badge">Step 6 of 6</span>
+      <span class="step-title">Wise Stewardship Decision</span>
+    </div>
+    <div class="step-desc">
+      You have <strong>$45 left</strong> in your budget after all purchases. A teammate suggests three different ways to use the leftover funds. Which choice best reflects <strong>wise stewardship</strong> — getting maximum value while keeping the project on track?
+    </div>
+    <div class="choice-grid" id="choices-6"></div>
+    <div class="feedback-box" id="feedback-6"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="next-6" style="display:none" onclick="showScore()">See My Results →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN SCORE -->
+  <div class="screen" id="screen-score">
+    <div class="score-title" id="score-title">Procurement Complete!</div>
+    <div class="score-circle">
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-den">/ 6 pts</div>
+    </div>
+    <div class="score-message" id="score-message"></div>
+    <ul class="summary-list" id="summary-list"></ul>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="restartSim()">Try Again</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let score = 0;
+let currentStep = 0;
+const totalSteps = 7; // intro + 6 steps
+const results = [];
+let selectedSupplier = null;
+let ocvAnswers = {};
+let inspectAnswers = {};
+
+// ─── PROGRESS ─────────────────────────────────────────────────────────────────
+function updateProgress(step) {
+  const pct = Math.round((step / 6) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = (step === 0)
+    ? 'Ready to begin'
+    : 'Step ' + step + ' of 6';
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function startSim() {
+  showScreen(1);
+  updateProgress(1);
+  buildStep1();
+}
+
+function goTo(n) {
+  showScreen(n);
+  updateProgress(n);
+  const builders = { 2: buildStep2, 3: buildStep3, 4: buildStep4, 5: buildStep5, 6: buildStep6 };
+  if (builders[n]) builders[n]();
+}
+
+// ─── STEP 1: IDENTIFY NEEDS ───────────────────────────────────────────────────
+const step1Choices = [
+  { text: "4× DC Gear Motors, 12V, 150 RPM, 6mm shaft — for drive wheels", correct: false, explain: "This description is specific and complete. It includes voltage, speed, and shaft size — perfect for ordering!" },
+  { text: "Aluminum Chassis Frame, 30cm × 20cm, with pre-drilled mounting holes", correct: false, explain: "This is specific enough — material, dimensions, and features are all clear." },
+  { text: "Some sensors for detecting stuff", correct: true, explain: "Correct! 'Some sensors for detecting stuff' is way too vague. A supplier needs to know: What type? (ultrasonic, IR, color?) What range? How many? Vague specs lead to wrong orders!" },
+  { text: "2× LiPo Battery Pack, 7.4V 2200mAh, with JST connector", correct: false, explain: "Very specific — chemistry, voltage, capacity, and connector type are all listed." }
+];
+
+function buildStep1() {
+  const grid = document.getElementById('choices-1');
+  grid.innerHTML = '';
+  step1Choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => answerStep1(i, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function answerStep1(i, btn) {
+  const choice = step1Choices[i];
+  document.querySelectorAll('#choices-1 .choice-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback-1');
+  fb.classList.add('visible');
+  if (choice.correct) {
+    btn.classList.add('correct');
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '✅ <strong>Great catch!</strong> ' + choice.explain;
+    score++; results.push({ step: 1, label: 'Identify Needs', correct: true });
+  } else {
+    btn.classList.add('wrong');
+    // show correct
+    document.querySelectorAll('#choices-1 .choice-btn').forEach((b, idx) => {
+      if (step1Choices[idx].correct) b.classList.add('neutral-reveal');
+    });
+    fb.className = 'feedback-box visible bad';
+    fb.innerHTML = '❌ <strong>Not quite.</strong> ' + choice.explain + ' The vague one is: <em>"Some sensors for detecting stuff."</em>';
+    results.push({ step: 1, label: 'Identify Needs', correct: false });
+  }
+  document.getElementById('next-1').style.display = 'inline-block';
+}
+
+// ─── STEP 2: OCV METHOD ───────────────────────────────────────────────────────
+const ocvItems = [
+  { id: 'ocv1', text: 'Build a working robot that can complete the obstacle course.', answer: 'O' },
+  { id: 'ocv2', text: 'Total budget cannot exceed $300.', answer: 'C' },
+  { id: 'ocv3', text: 'Brand of motors used (as long as specs are met).', answer: 'V' },
+  { id: 'ocv4', text: 'All parts must arrive within 2 weeks.', answer: 'C' },
+  { id: 'ocv5', text: 'Win the regional competition.', answer: 'O' },
+];
+const ocvLabels = { O: 'Objective', C: 'Constraint', V: 'Variable' };
+
+function buildStep2() {
+  const container = document.getElementById('ocv-activity');
+  container.innerHTML = '';
+  let html = '<div style="overflow-x:auto"><table class="ocv-table"><thead><tr><th>Statement</th><th style="min-width:160px">OCV Category</th></tr></thead><tbody>';
+  ocvItems.forEach(item => {
+    html += `<tr>
+      <td>${item.text}</td>
+      <td>
+        <select id="sel-${item.id}" style="width:100%;padding:6px;border:1.5px solid #d0dae8;border-radius:6px;font-size:0.9rem;color:#1B3A5C;font-family:inherit">
+          <option value="">-- Select --</option>
+          <option value="O">Objective</option>
+          <option value="C">Constraint</option>
+          <option value="V">Variable</option>
+        </select>
+      </td>
+    </tr>`;
+  });
+  html += '</tbody></table></div>';
+  container.innerHTML = html;
+  ocvAnswers = {};
+}
+
+function checkOCV() {
+  let correct = 0;
+  let allAnswered = true;
+  ocvItems.forEach(item => {
+    const sel = document.getElementById('sel-' + item.id);
+    const val = sel.value;
+    if (!val) { allAnswered = false; return; }
+    ocvAnswers[item.id] = val;
+    sel.disabled = true;
+    if (val === item.answer) {
+      sel.style.border = '2px solid #2d9c5a';
+      sel.style.background = '#eaf7ef';
+      correct++;
+    } else {
+      sel.style.border = '2px solid #c0392b';
+      sel.style.background = '#fdf0ee';
+      // show correct
+      const opt = document.createElement('option');
+      opt.value = item.answer;
+      opt.textContent = '✓ ' + ocvLabels[item.answer];
+      opt.style.color = '#2d9c5a';
+      sel.appendChild(opt);
+      sel.value = item.answer;
+    }
+  });
+  if (!allAnswered) {
+    const fb = document.getElementById('feedback-2');
+    fb.className = 'feedback-box visible info';
+    fb.innerHTML = 'ℹ️ Please select a category for every statement before checking.';
+    return;
+  }
+  document.getElementById('check-2').style.display = 'none';
+  const fb = document.getElementById('feedback-2');
+  fb.classList.add('visible');
+  if (correct === 5) {
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '✅ <strong>Perfect!</strong> All 5 OCV categories correct! Objectives are the goals, Constraints are limits you can\'t change, and Variables are flexible factors.';
+    score++; results.push({ step: 2, label: 'OCV Method', correct: true });
+  } else if (correct >= 3) {
+    fb.className = 'feedback-box visible info';
+    fb.innerHTML = `ℹ️ <strong>${correct}/5 correct.</strong> Good effort! Remember: <em>Objectives</em> = your goals, <em>Constraints</em> = fixed limits (budget, time), <em>Variables</em> = flexible factors you can adjust.`;
+    results.push({ step: 2, label: 'OCV Method', correct: false });
+  } else {
+    fb.className = 'feedback-box visible bad';
+    fb.innerHTML = `❌ <strong>${correct}/5 correct.</strong> Review: <em>Objective</em> = what you want to achieve, <em>Constraint</em> = a fixed limit you can't change, <em>Variable</em> = something flexible you can adjust.`;
+    results.push({ step: 2, label: 'OCV Method', correct: false });
+  }
+  document.getElementById('next-2').style.display = 'inline-block';
+}
+
+// ─── STEP 3: QUOTATIONS ───────────────────────────────────────────────────────
+const suppliers = [
+  {
+    id: 'A', name: 'RoboPartsPlus', price: '$109', delivery: '1.5 weeks',
+    quality: '⭐⭐⭐⭐ (4/5)', tags: ['tag-budget', 'Fits Budget', 'tag-quality', 'Good Quality'],
+    correct: true,
+    note: 'Best choice! Under $120 budget AND delivers within 2 weeks with solid quality ratings.'
+  },
+  {
+    id: 'B', name: 'TechDirect Co.', price: '$89', delivery: '3.5 weeks',
+    quality: '⭐⭐⭐ (3/5)', tags: ['tag-budget', 'Cheapest', 'tag-risk', 'Too Slow'],
+    correct: false,
+    note: 'Cheapest price, but delivery is 3.5 weeks — past your 2-week deadline. This breaks your Constraint!'
+  },
+  {
+    id: 'C', name: 'PremiumBot Inc.', price: '$185', delivery: '1 week',
+    quality: '⭐⭐⭐⭐⭐ (5/5)', tags: ['tag-quality', 'Top Quality', 'tag-risk', 'Over Budget'],
+    correct: false,
+    note: 'Fastest and highest quality, but $185 is way over your $120 budget. Breaks your Constraint!'
+  }
+];
+
+function buildStep3() {
+  const grid = document.getElementById('supplier-grid');
+  grid.innerHTML = '';
+  selectedSupplier = null;
+  document.getElementById('check-3').style.display = 'none';
+  suppliers.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'supplier-card';
+    card.id = 'sup-' + s.id;
+    card.innerHTML = `
+      <div class="supplier-name">📦 ${s.name}</div>
+      <div class="supplier-stat">💰 Price: <span>${s.price}</span></div>
+      <div class="supplier-stat">🚚 Delivery: <span>${s.delivery}</span></div>
+      <div class="supplier-stat">🔧 Quality: <span>${s.quality}</span></div>
+      <div>
+        <span class="supplier-tag ${s.tags[0]}">${s.tags[1]}</span>
+        <span class="supplier-tag ${s.tags[2]}">${s.tags[3]}</span>
+      </div>`;
+    card.onclick = () => selectSupplier(s.id, card);
+    grid.appendChild(card);
+  });
+}
+
+function selectSupplier(id, card) {
+  if (card.classList.contains('locked')) return;
+  document.querySelectorAll('.supplier-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  selectedSupplier = id;
+  document.getElementById('check-3').style.display = 'inline-block';
+}
+
+function checkSupplier() {
+  if (!selectedSupplier) return;
+  document.querySelectorAll('.supplier-card').forEach(c => c.classList.add('locked'));
+  document.getElementById('check-3').style.display = 'none';
+  const sup = suppliers.find(s => s.id === selectedSupplier);
+  const fb = document.getElementById('feedback-3');
+  fb.classList.add('visible');
+  if (sup.correct) {
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '✅ <strong>Excellent choice!</strong> ' + sup.note;
+    score++; results.push({ step: 3, label: 'Choose Supplier', correct: true });
+  } else {
+    fb.className = 'feedback-box visible bad';
+    fb.innerHTML = '❌ <strong>Not the best pick.</strong> ' + sup.note + '<br><br>✅ <strong>Best choice was RoboPartsPlus</strong> — under budget AND on time.';
+    results.push({ step: 3, label: 'Choose Supplier', correct: false });
+  }
+  document.getElementById('next-3').style.display = 'inline-block';
+}
+
+// ─── STEP 4: PURCHASE ORDER ───────────────────────────────────────────────────
+const poFields = [
+  { label: 'Supplier Name', value: 'RoboPartsPlus', ok: true },
+  { label: 'Item Description', value: '4× DC Gear Motor, 12V, 150 RPM', ok: true },
+  { label: 'Quantity', value: '4 units', ok: true },
+  { label: 'Unit Price', value: '$27.25 each', ok: true },
+  { label: 'Delivery Date Required', value: '<span style="color:#c0392b;font-weight:700">⚠️ MISSING — not filled in!</span>', ok: false, key: true },
+  { label: 'Buyer Signature', value: 'J. Student, GK12 Robotics', ok: true },
+];
+
+const poChoices = [
+  { text: 'Add the required delivery date (within 2 weeks)', correct: true, explain: 'Correct! A Purchase Order must include the required delivery date so the supplier knows your deadline. Without it, they might ship whenever they want!' },
+  { text: 'Remove the buyer signature — it\'s just a school project', correct: false, explain: 'No! The buyer signature makes the Purchase Order official. Always include it — even for school projects, it\'s good professional practice.' },
+  { text: 'Change the description to just "motors" to keep it simple', correct: false, explain: 'That makes it worse! Vague descriptions on a Purchase Order can result in receiving the wrong parts entirely.' }
+];
+
+function buildStep4() {
+  const container = document.getElementById('po-activity');
+  let html = '<div style="overflow-x:auto;margin-bottom:14px"><table class="ocv-table"><thead><tr><th>PO Field</th><th>Value</th></tr></thead><tbody>';
+  poFields.forEach(f => {
+    html += `<tr><td class="ocv-label">${f.label}</td><td>${f.value}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  html += '<p style="font-size:0.9rem;color:#456;margin-bottom:10px"><strong>What should you do to fix this Purchase Order?</strong></p>';
+  html += '<div class="choice-grid" id="po-choices">';
+  poChoices.forEach((c, i) => {
+    html += `<button class="choice-btn" onclick="answerPO(${i}, this)">${c.text}</button>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function answerPO(i, btn) {
+  const choice = poChoices[i];
+  document.querySelectorAll('#po-choices .choice-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback-4');
+  fb.classList.add('visible');
+  if (choice.correct) {
+    btn.classList.add('correct');
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '✅ <strong>Right!</strong> ' + choice.explain;
+    score++; results.push({ step: 4, label: 'Purchase Order', correct: true });
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#po-choices .choice-btn').forEach((b, idx) => {
+      if (poChoices[idx].correct) b.classList.add('neutral-reveal');
+    });
+    fb.className = 'feedback-box visible bad';
+    fb.innerHTML = '❌ ' + choice.explain;
+    results.push({ step: 4, label: 'Purchase Order', correct: false });
+  }
+  document.getElementById('next-4').style.display = 'inline-block';
+}
+
+// ─── STEP 5: RECEIVE & INSPECT ────────────────────────────────────────────────
+const deliveryItems = [
+  {
+    id: 'item1',
+    name: '4× DC Gear Motors',
+    detail: 'All 4 arrived. Tested — 3 work perfectly. 1 makes a grinding noise and doesn\'t spin smoothly.',
+    options: ['Accept All 4', 'Accept 3, Return 1 faulty motor', 'Reject All — order again'],
+    correct: 1,
+    explain: '✅ Correct! Accept the 3 working motors, return the 1 faulty one. You need parts quickly — no need to reject everything. Report the defect and request a replacement for the one bad unit.'
+  },
+  {
+    id: 'item2',
+    name: 'Aluminum Chassis Frame',
+    detail: 'Arrived on time. Dimensions match. Perfect condition with no damage.',
+    options: ['Accept', 'Reject — inspect more', 'Send back for upgrade'],
+    correct: 0,
+    explain: '✅ Accept it! The frame matches your specs, is on time, and in perfect condition. This is exactly what good procurement looks like.'
+  },
+  {
+    id: 'item3',
+    name: 'Ultrasonic Sensors (×3)',
+    detail: 'Wrong item received! You ordered ultrasonic sensors but received infrared (IR) sensors instead.',
+    options: ['Accept — they\'re both sensors', 'Return and reorder correct sensors', 'Keep and redesign robot around IR'],
+    correct: 1,
+    explain: '✅ Return them! You ordered a specific item and received the wrong thing. A good procurement officer always ensures what arrives matches what was ordered on the Purchase Order.'
+  }
+];
+
+function buildStep5() {
+  const container = document.getElementById('inspect-activity');
+  container.innerHTML = '';
+  inspectAnswers = {};
+  deliveryItems.forEach(item => {
+    const div = document.createElement('div');
+    div.style.cssText = 'background:#f7f9fc;border:1.5px solid #d0dae8;border-radius:10px;padding:14px 16px;margin-bottom:12px';
+    let optHtml = item.options.map((opt, i) =>
+      `<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:6px;font-size:0.9rem">
+        <input type="radio" name="${item.id}" value="${i}" style="accent-color:#1B3A5C"> ${opt}
+      </label>`
+    ).join('');
+    div.innerHTML = `
+      <div style="font-weight:700;color:#1B3A5C;margin-bottom:6px">📦 ${item.name}</div>
+      <div style="font-size:0.88rem;color:#456;margin-bottom:10px;line-height:1.5">${item.detail}</div>
+      ${optHtml}`;
+    container.appendChild(div);
+  });
+}
+
+function checkInspect() {
+  let allAnswered = true;
+  let correct = 0;
+  deliveryItems.forEach(item => {
+    const radios = document.querySelectorAll(`input[name="${item.id}"]`);
+    let chosen = -1;
+    radios.forEach(r => { if (r.checked) chosen = parseInt(r.value); });
+    if (chosen === -1) { allAnswered = false; return; }
+    radios.forEach(r => r.disabled = true);
+    inspectAnswers[item.id] = chosen;
+    if (chosen === item.correct) correct++;
+  });
+
+  if (!allAnswered) {
+    const fb = document.getElementById('feedback-5');
+    fb.className = 'feedback-box visible info';
+    fb.innerHTML = 'ℹ️ Please make a decision for all 3 items before submitting.';
+    return;
+  }
+
+  document.getElementById('check-5').style.display = 'none';
+  const fb = document.getElementById('feedback-5');
+  fb.classList.add('visible');
+
+  let feedbackHtml = '';
+  deliveryItems.forEach(item => {
+    const chosen = inspectAnswers[item.id];
+    const isCorrect = chosen === item.correct;
+    feedbackHtml += `<div style="margin-bottom:8px"><strong>${isCorrect ? '✅' : '❌'} ${item.name}:</strong> ${item.explain}</div>`;
+  });
+
+  if (correct === 3) {
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '<strong>Perfect inspection!</strong><br>' + feedbackHtml;
+    score++; results.push({ step: 5, label: 'Receive & Inspect', correct: true });
+  } else {
+    fb.className = 'feedback-box visible info';
+    fb.innerHTML = `<strong>${correct}/3 correct.</strong><br>` + feedbackHtml;
+    results.push({ step: 5, label: 'Receive & Inspect', correct: false });
+  }
+  document.getElementById('next-5').style.display = 'inline-block';
+}
+
+// ─── STEP 6: STEWARDSHIP ──────────────────────────────────────────────────────
+const stewardChoices = [
+  {
+    text: '💡 Set aside $30 as a contingency reserve for unexpected repairs, and use $15 toward extra fasteners.',
+    correct: true,
+    explain: 'Excellent stewardship! Planning ahead with a contingency reserve shows wisdom — unexpected problems almost always come up in engineering. Using the rest for practical supplies maximizes value.'
+  },
+  {
+    text: '🎮 Spend the full $45 on extra decorations and LED lights to make the robot look cool.',
+    correct: false,
+    explain: 'Tempting, but this isn\'t wise stewardship. Looks don\'t help the robot function. Good procurement prioritizes the project\'s core objectives first.'
+  },
+  {
+    text: '🏦 Return all $45 to the school supply fund unused.',
+    correct: false,
+    explain: 'While returning funds isn\'t bad, you still have a need — a contingency reserve for possible repairs. Wise stewardship means using resources well, not just saving them away unused when there\'s a real project need.'
+  }
+];
+
+function buildStep6() {
+  const grid = document.getElementById('choices-6');
+  grid.innerHTML = '';
+  stewardChoices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => answerStep6(i, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function answerStep6(i, btn) {
+  const choice = stewardChoices[i];
+  document.querySelectorAll('#choices-6 .choice-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback-6');
+  fb.classList.add('visible');
+  if (choice.correct) {
+    btn.classList.add('correct');
+    fb.className = 'feedback-box visible good';
+    fb.innerHTML = '✅ <strong>Wise Creationeer!</strong> ' + choice.explain;
+    score++; results.push({ step: 6, label: 'Wise Stewardship', correct: true });
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#choices-6 .choice-btn').forEach((b, idx) => {
+      if (stewardChoices[idx].correct) b.classList.add('neutral-reveal');
+    });
+    fb.className = 'feedback-box visible bad';
+    fb.innerHTML = '❌ ' + choice.explain;
+    results.push({ step: 6, label: 'Wise Stewardship', correct: false });
+  }
+  document.getElementById('next-6').style.display = 'inline-block';
+}
+
+// ─── SCORE SCREEN ─────────────────────────────────────────────────────────────
+function showScore() {
+  showScreen('score');
+  updateProgress(7);
+  document.getElementById('progressLabel').textContent = 'Complete!';
+  document.getElementById('scoreNum').textContent = score;
+
+  let title, message;
+  if (score === 6) {
+    title = '🏆 Master Procurement Officer!';
+    message = 'Outstanding! You nailed every step of the procurement cycle — from identifying needs to wise stewardship. Your GK12 Robotics team is in great hands!';
+  } else if (score >= 4) {
+    title = '⭐ Skilled Procurement Lead!';
+    message = 'Strong work! You understand the core procurement process. Review any missed steps and you\'ll be a procurement pro in no time.';
+  } else if (score >= 2) {
+    title = '🔧 Procurement Apprentice';
+    message = 'You\'re learning the ropes! Procurement requires careful attention to quality, cost, and timing. Review the missed steps and try again.';
+  } else {
+    title = '📚 Keep Learning!';
+    message = 'Procurement is a detailed process — review the lesson on the Procurement Cycle, OCV method, and Purchase Orders, then try again!';
+  }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-message').textContent = message;
+
+  const stepNames = {
+    1: 'Step 1: Identify Needs',
+    2: 'Step 2: OCV Method',
+    3: 'Step 3: Choose Supplier (Quotation)',
+    4: 'Step 4: Purchase Order',
+    5: 'Step 5: Receive & Inspect',
+    6: 'Step 6: Wise Stewardship'
+  };
+
+  const list = document.getElementById('summary-list');
+  list.innerHTML = '';
+  for (let i = 1; i <= 6; i++) {
+    const r = results.find(x => x.step === i);
+    const li = document.createElement('li');
+    li.className = r && r.correct ? 'good-item' : 'bad-item';
+    li.textContent = (r && r.correct ? '✅ ' : '❌ ') + stepNames[i];
+    list.appendChild(li);
+  }
+}
+
+// ─── RESTART ──────────────────────────────────────────────────────────────────
+function restartSim() {
+  score = 0;
+  results.length = 0;
+  selectedSupplier = null;
+  ocvAnswers = {};
+  inspectAnswers = {};
+
+  // reset feedback boxes
+  document.querySelectorAll('.feedback-box').forEach(f => {
+    f.className = 'feedback-box';
+    f.innerHTML = '';
+  });
+  // reset next buttons
+  ['next-1','next-2','next-3','next-4','next-5','next-6'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  document.getElementById('check-2').style.display = 'inline-block';
+  document.getElementById('check-3').style.display = 'none';
+  document.getElementById('check-5').style.display = 'inline-block';
+
+  showScreen('intro');
+  updateProgress(0);
+}
+</script>
+</body>
+</html>

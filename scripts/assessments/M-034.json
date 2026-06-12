@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-034",
+  "topic": "Critical Paths and Calculating Time",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the Critical Path in a project?",
+      "options": {
+        "A": "The shortest sequence of tasks that can be skipped.",
+        "B": "The longest sequence of tasks that must be completed on time for the entire project to be finished on schedule.",
+        "C": "Any task that takes more than 24 hours to complete.",
+        "D": "A list of tasks that can be done by different people simultaneously."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines the Critical Path as the longest sequence of tasks that must be completed on time for the entire project to be finished on schedule."
+    },
+    {
+      "type": "recall",
+      "question": "What does 'Float' (or 'Slack') refer to in project management?",
+      "options": {
+        "A": "The extra materials needed for a task.",
+        "B": "The amount of time a task can be delayed without delaying the overall project completion date.",
+        "C": "The total time estimated for the entire project.",
+        "D": "The time spent waiting for other team members to finish their work."
+      },
+      "answer": "B",
+      "explanation": "Float (or Slack) is defined as the amount of time a task can be delayed without delaying the overall project completion date."
+    },
+    {
+      "type": "recall",
+      "question": "In the Creationeering framework, what step is 'Logistics' and what is its primary purpose?",
+      "options": {
+        "A": "The first step, focusing on designing the product.",
+        "B": "The second step, analyzing existing solutions.",
+        "C": "The fourth step, synchronizing materials, people, and processes to bring the product into existence.",
+        "D": "The final step, testing the completed product."
+      },
+      "answer": "C",
+      "explanation": "The lesson states Logistics is the fourth step in the engineering process, focused on synchronizing all elements to bring the designed product into existence."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is identifying the critical path essential for a successful engineering project like building a mousetrap car?",
+      "options": {
+        "A": "It helps you find tasks that can be skipped to save time.",
+        "B": "It highlights the tasks that, if delayed, will delay the entire project, allowing for better time management.",
+        "C": "It ensures that all team members have an equal amount of work.",
+        "D": "It determines the total cost of the project materials."
+      },
+      "answer": "B",
+      "explanation": "Identifying the critical path is essential because delays in these specific tasks will directly delay the entire project, making them crucial for on-time completion."
+    },
+    {
+      "type": "comprehension",
+      "question": "How do task dependencies influence the order in which you complete tasks for your mousetrap car?",
+      "options": {
+        "A": "They allow you to complete any task in any order you prefer.",
+        "B": "They require certain tasks (predecessors) to be finished before other tasks (successors) can begin.",
+        "C": "They only apply to tasks that take a long time to complete.",
+        "D": "They suggest which tasks can be done by different people at the same time."
+      },
+      "answer": "B",
+      "explanation": "Task dependencies establish a required sequence where a successor task cannot start until its predecessor task is completed."
+    },
+    {
+      "type": "comprehension",
+      "question": "If 'attaching the axles' is a predecessor task to 'mounting the wheels' for your mousetrap car, what does this mean?",
+      "options": {
+        "A": "You can mount the wheels before attaching the axles if you are careful.",
+        "B": "Mounting the wheels can only begin after the axles have been attached.",
+        "C": "Attaching the axles and mounting the wheels can happen at the same time.",
+        "D": "Mounting the wheels is less important than attaching the axles."
+      },
+      "answer": "B",
+      "explanation": "A predecessor task must be completed before its successor task, meaning mounting the wheels cannot begin until the axles are attached."
+    },
+    {
+      "type": "application",
+      "question": "You are building your mousetrap car. The task 'waiting for paint to dry on the chassis' takes 24 hours and must be completed before 'attaching the mousetrap.' If this 24-hour drying time is part of the critical path, what does that imply?",
+      "options": {
+        "A": "You can attach the mousetrap immediately after painting without issues.",
+        "B": "The 24-hour drying time cannot be shortened without potentially delaying the entire car's completion or causing problems.",
+        "C": "This task has a lot of float, so you can delay it if needed.",
+        "D": "You should ask someone else to paint the chassis to save time."
+      },
+      "answer": "B",
+      "explanation": "If a task is on the critical path, any delay in that task, such as the 24-hour drying time, will directly delay the entire project's completion."
+    },
+    {
+      "type": "application",
+      "question": "In your mousetrap car project, you realize that 'decorating the car body' can be done at any point after the chassis is built and before the final race, without affecting when the wheels or mousetrap are attached. What does this suggest about 'decorating the car body'?",
+      "options": {
+        "A": "It is a critical path task.",
+        "B": "It is a predecessor task.",
+        "C": "It likely has float (or slack).",
+        "D": "It must be completed before any other task."
+      },
+      "answer": "C",
+      "explanation": "If a task can be delayed without affecting the overall project completion, it means that task has float or slack."
+    },
+    {
+      "type": "application",
+      "question": "You have three tasks for your mousetrap car: Task A (Cut Chassis, 1 hour), Task B (Attach Axles, 30 min), Task C (Mount Wheels, 15 min). Task B cannot start until Task A is done. Task C cannot start until Task B is done. What is the minimum total time to complete these three tasks sequentially?",
+      "options": {
+        "A": "1 hour 45 minutes",
+        "B": "1 hour 30 minutes",
+        "C": "2 hours 0 minutes",
+        "D": "45 minutes"
+      },
+      "answer": "A",
+      "explanation": "Since the tasks must be completed sequentially due to dependencies, the total time is the sum of their individual durations: 1 hour + 30 minutes + 15 minutes = 1 hour 45 minutes."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does carefully identifying and managing the critical path in your mousetrap car project relate to the biblical principle of stewardship?",
+      "options": {
+        "A": "It shows that God only cares about the final outcome, not the process.",
+        "B": "It demonstrates responsible management of the time and resources God has given us, ensuring we complete our tasks wisely.",
+        "C": "It allows us to rush through tasks to finish quickly, regardless of quality.",
+        "D": "It means we should rely solely on others to complete difficult tasks for us."
+      },
+      "answer": "B",
+      "explanation": "Managing the critical path responsibly reflects good stewardship by ensuring efficient use of time and resources to achieve a goal, aligning with God's call to manage our talents wisely."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson uses the construction of the Tabernacle as an example of meticulous planning and logistics. What does this biblical example primarily teach us about God's approach to projects?",
+      "options": {
+        "A": "God prefers simple projects that require little planning.",
+        "B": "God provides incredibly detailed instructions and foresight for complex projects, ensuring all parts come together harmoniously.",
+        "C": "God expects us to figure out all the details ourselves without any guidance.",
+        "D": "God's projects often experience delays due to unforeseen circumstances."
+      },
+      "answer": "B",
+      "explanation": "The Tabernacle example highlights God's meticulous planning and detailed instructions, demonstrating His logistical wisdom in ensuring a complex project's harmonious completion."
+    },
+    {
+      "type": "synthesis",
+      "question": "Understanding 'float' in individual tasks helps manage project delays at a 'macro-level.' How might a 'micro-level' issue, as described in Multiscale Modeling, relate to a task's float?",
+      "options": {
+        "A": "A micro-level issue, like a broken tool, would only affect tasks with no float.",
+        "B": "A micro-level issue could consume a task's float, preventing it from delaying the overall project if caught early.",
+        "C": "Micro-level issues are always part of the critical path, so float is irrelevant.",
+        "D": "Float is only for macro-level planning and has no connection to micro-level problems."
+      },
+      "answer": "B",
+      "explanation": "A micro-level issue, such as a tool breaking, could use up the available float for a task, preventing it from impacting the overall project schedule if the delay is within the float's duration."
+    }
+  ]
+}

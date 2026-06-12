@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Activity: Break Even Analysis — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Business Activity: Break Even Analysis</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Break-Even Point", "definition": "The number of units a business must sell so that its total revenue exactly equals its total costs, meaning no profit and no loss."}, {"term": "Fixed Costs", "definition": "Costs that remain the same no matter how many products you make, like rent for a workshop or the cost of special equipment."}, {"term": "Variable Costs", "definition": "Costs that change depending on how many products you make, such as the materials for each item or the cost of packaging."}, {"term": "Revenue", "definition": "The total amount of money a business brings in from selling its products. It's calculated by multiplying the selling price by the number of units sold."}, {"term": "Contribution Margin", "definition": "The amount of money from each sale that helps cover the fixed costs. It's calculated by subtracting the variable cost per unit from the selling price."}, {"term": "Break-Even Formula (Units)", "definition": "To find the break-even point in units, you divide the total Fixed Costs by the Contribution Margin (Price minus Variable Cost per Unit)."}, {"term": "Why Break-Even Analysis Matters", "definition": "It helps a business know the minimum number of sales needed to cover all expenses before they start making a profit, which is important before launching a product."}, {"term": "Profit Margin", "definition": "The difference between the selling price of a product and the total cost to produce it. A higher profit margin means more money earned per sale."}, {"term": "Example of Fixed Cost", "definition": "Buying a special tool like a mousetrap press jig or paying for a booth at a science fair are examples of fixed costs."}, {"term": "Example of Variable Cost", "definition": "The cost of a mousetrap, balsa wood, or wheels for each individual mousetrap car are examples of variable costs."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

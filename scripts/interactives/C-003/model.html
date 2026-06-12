@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis & Creationeering — 3D Engineering Process Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0d1f35;
+    color: #e8e8e8;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #header {
+    background: #1B3A5C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #C9A84C;
+    flex-shrink: 0;
+  }
+  #header h1 {
+    font-size: 16px;
+    color: #C9A84C;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  #header p {
+    font-size: 11px;
+    color: #aac4e0;
+    margin-top: 2px;
+  }
+  #header-logo {
+    font-size: 22px;
+    color: #C9A84C;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 240px;
+    background: #1B3A5C;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #2a5080;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  #sidebar h2 {
+    font-size: 12px;
+    color: #C9A84C;
+    padding: 12px 14px 6px;
+    border-bottom: 1px solid #2a5080;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .comp-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e3a5c;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .comp-item:hover, .comp-item.active {
+    background: #243f6a;
+  }
+  .comp-item.active {
+    border-left: 3px solid #C9A84C;
+  }
+  .comp-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #C9A84C;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .comp-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .comp-desc {
+    font-size: 10px;
+    color: #9bb8d4;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  #vocab-section {
+    padding: 10px 14px;
+    border-top: 2px solid #C9A84C;
+    margin-top: auto;
+  }
+  #vocab-section h3 {
+    font-size: 11px;
+    color: #C9A84C;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .vocab-item {
+    font-size: 10px;
+    color: #9bb8d4;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .vocab-item strong { color: #e0c97a; }
+  #canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #controls {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: #152c47;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 1px solid #2a5080;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .ctrl-btn {
+    padding: 6px 14px;
+    background: #1B3A5C;
+    color: #C9A84C;
+    border: 1px solid #C9A84C;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .ctrl-btn:hover {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  .ctrl-btn.active {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  #canvas-wrapper {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #mainCanvas {
+    cursor: grab;
+    display: block;
+  }
+  #mainCanvas:active { cursor: grabbing; }
+  #tooltip {
+    position: absolute;
+    background: rgba(27, 58, 92, 0.97);
+    border: 1px solid #C9A84C;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: #e8e8e8;
+    pointer-events: none;
+    display: none;
+    max-width: 180px;
+    z-index: 10;
+    line-height: 1.5;
+  }
+  #tooltip strong { color: #C9A84C; display: block; margin-bottom: 3px; }
+  #info-bar {
+    background: #152c47;
+    padding: 5px 16px;
+    font-size: 10px;
+    color: #5a8ab0;
+    border-top: 1px solid #2a5080;
+    width: 100%;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  #print-badge {
+    display: flex;
+    gap: 4px;
+    padding: 6px 10px;
+    background: #0d1f35;
+    border-radius: 6px;
+    margin: 0 4px;
+  }
+  .print-letter {
+    width: 22px;
+    height: 22px;
+    background: #1B3A5C;
+    border: 1px solid #C9A84C;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    color: #C9A84C;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .print-letter:hover, .print-letter.lit {
+    background: #C9A84C;
+    color: #1B3A5C;
+  }
+  #print-tooltip {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1B3A5C;
+    border: 1px solid #C9A84C;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: #e8e8e8;
+    z-index: 20;
+    pointer-events: none;
+    display: none;
+    white-space: nowrap;
+  }
+  #print-tooltip strong { color: #C9A84C; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <h1>Genesis &amp; Creationeering — Engineering Process Viewer</h1>
+    <p>Creationeering | Genesis K-12 Academy | Middle School Engineering</p>
+  </div>
+  <div id="header-logo">GK12</div>
+</div>
+
+<div id="main">
+  <div id="sidebar">
+    <h2>Components</h2>
+    <div id="comp-list"></div>
+    <div id="vocab-section">
+      <h3>Key Vocab</h3>
+      <div class="vocab-item"><strong>Process:</strong> Steps followed to reach a goal.</div>
+      <div class="vocab-item"><strong>Pattern Recognition:</strong> Noticing repeated ideas or behaviors.</div>
+      <div class="vocab-item"><strong>Nested Problem:</strong> A problem within a problem.</div>
+      <div class="vocab-item"><strong>Solution:</strong> A design that solves the problem.</div>
+    </div>
+  </div>
+
+  <div id="canvas-area">
+    <div id="controls">
+      <button class="ctrl-btn" id="btn-left">◀ Rotate Left</button>
+      <button class="ctrl-btn" id="btn-right">Rotate Right ▶</button>
+      <button class="ctrl-btn" id="btn-up">▲ Tilt Up</button>
+      <button class="ctrl-btn" id="btn-down">▼ Tilt Down</button>
+      <button class="ctrl-btn" id="btn-explode">💥 Exploded View</button>
+      <button class="ctrl-btn" id="btn-reset">↺ Reset</button>
+      <button class="ctrl-btn" id="btn-labels">🏷 Labels</button>
+      <div id="print-badge">
+        <div class="print-letter" id="pl-P" data-key="P" title="Predictable">P</div>
+        <div class="print-letter" id="pl-R" data-key="R" title="Repeatable">R</div>
+        <div class="print-letter" id="pl-I" data-key="I" title="Improvable">I</div>
+        <div class="print-letter" id="pl-N" data-key="N" title="Novel">N</div>
+        <div class="print-letter" id="pl-T" data-key="T" title="Testable">T</div>
+      </div>
+    </div>
+    <div id="print-tooltip"></div>
+    <div id="canvas-wrapper">
+      <canvas id="mainCanvas"></canvas>
+      <div id="tooltip"></div>
+    </div>
+    <div id="info-bar">Drag to rotate • Click a component to highlight • Hover labels for details • PRINT letters show process properties</div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ─── PRINT DATA ────────────────────────────────────────────────────────────────
+const PRINT = {
+  P: { label: "Predictable", desc: "One step leads to the next easily. Engineers can follow the process without guessing what comes next." },
+  R: { label: "Repeatable", desc: "The process can be done multiple times, reliably producing the same type of result each time." },
+  I: { label: "Improvable", desc: "Can be updated with new technology, better steps, or improved equipment over time." },
+  N: { label: "Novel", desc: "The process is one of a kind and not already existing — it creates something new." },
+  T: { label: "Testable", desc: "Engineers can easily test each step in the process to verify it works correctly." }
+};
+
+// ─── COMPONENT DATA ────────────────────────────────────────────────────────────
+const components = [
+  {
+    id: "input",
+    name: "Input / Problem",
+    color: "#3a7bd5",
+    darkColor: "#1a4a9a",
+    topColor: "#5a9bf5",
+    desc: "The starting point — a need, challenge, or obstacle requiring a solution. Pattern recognition helps identify the true problem.",
+    printLink: "P",
+    baseX: -3, baseY: 0, baseZ: 0,
+    w: 2.2, h: 1.2, d: 2.2,
+    explodeOffset: { x: -3.5, y: 0, z: 0 },
+    icon: "⚡"
+  },
+  {
+    id: "process",
+    name: "Engineering Process",
+    color: "#C9A84C",
+    darkColor: "#8a6a20",
+    topColor: "#e8c870",
+    desc: "A structured series of steps (PRINT) followed to transform a problem into a solution. Mastery makes each step faster.",
+    printLink: "R",
+    baseX: 0, baseY: 0, baseZ: 0,
+    w: 2.6, h: 1.8, d: 2.6,
+    explodeOffset: { x: 0, y: 1.5, z: 0 },
+    icon: "⚙️"
+  },
+  {
+    id: "output",
+    name: "Output / Solution",
+    color: "#2ecc71",
+    darkColor: "#1a7a42",
+    topColor: "#50ec91",
+    desc: "A design or plan that meets the need. The output solves the original problem but may reveal nested problems requiring further engineering.",
+    printLink: "T",
+    baseX: 3, baseY: 0, baseZ: 0,
+    w: 2.2, h: 1.2, d: 2.2,
+    explodeOffset: { x: 3.5, y: 0, z: 0 },
+    icon: "✅"
+  },
+  {
+    id: "nested",
+    name: "Nested Problem",
+    color: "#e74c3c",
+    darkColor: "#8a1a10",
+    topColor: "#ff7060",
+    desc: "A problem that arises within a solution — both the original and the nested problem must be solved for a complete answer.",
+    printLink: "N",
+    baseX: 3, baseY: 0, baseZ: -2.8,
+    w: 1.8, h: 0.9, d: 1.8,
+    explodeOffset: { x: 4.5, y: -1.5, z: -3.5 },
+    icon: "🔁"
+  },
+  {
+    id: "stewardship",
+    name: "Stewardship Layer",
+    color: "#9b59b6",
+    darkColor: "#5a1a7a",
+    topColor: "#c07ed8",
+    desc: "Engineers act as stewards of God's creation. Every solution must consider its impact on people, society, and the natural world.",
+    printLink: "I",
+    baseX: 0, baseY: 1.8, baseZ: 0,
+    w: 2.6, h: 0.5, d: 2.6,
+    explodeOffset: { x: 0, y: 4, z: 0 },
+    icon: "🌿"
+  }
+];
+
+// ─── CANVAS SETUP ─────────────────────────────────────────────────────────────
+const canvas = document.getElementById("mainCanvas");
+const ctx = canvas.getContext("2d");
+const wrapper = document.getElementById("canvas-wrapper");
+
+function resize() {
+  canvas.width = wrapper.clientWidth;
+  canvas.height = wrapper.clientHeight;
+  draw();
+}
+window.addEventListener("resize", resize);
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let rotY = 0.45;
+let rotX = 0.55;
+let exploded = false;
+let showLabels = true;
+let selectedId = null;
+let animating = false;
+let explodeT = 0;
+let explodeDir = 1;
+let autoRotate = false;
+
+// ─── PROJECTION ───────────────────────────────────────────────────────────────
+function project(x, y, z, cx, cy, scale) {
+  // Rotate around Y
+  const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  const x1 = x * cosY + z * sinY;
+  const z1 = -x * sinY + z * cosY;
+  // Rotate around X
+  const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+  const y2 = y * cosX - z1 * sinX;
+  const z2 = y * sinX + z1 * cosX;
+  return {
+    sx: cx + x1 * scale,
+    sy: cy - y2 * scale,
+    depth: z2
+  };
+}
+
+function lerpComp(comp, t) {
+  const eo = comp.explodeOffset;
+  return {
+    x: comp.baseX + (eo.x - comp.baseX) * t,
+    y: comp.baseY + (eo.y - comp.baseY) * t,
+    z: comp.baseZ + (eo.z - comp.baseZ) * t
+  };
+}
+
+// ─── DRAW BOX ─────────────────────────────────────────────────────────────────
+function drawBox(comp, cx, cy, scale, t) {
+  const pos = lerpComp(comp, t);
+  const px = pos.x, py = pos.y, pz = pos.z;
+  const hw = comp.w / 2, hh = comp.h / 2, hd = comp.d / 2;
+
+  const isSelected = selectedId === comp.id;
+  const alpha = selectedId && !isSelected ? 0.45 : 1.0;
+
+  // 8 corners
+  const corners = [
+    project(px - hw, py - hh, pz - hd, cx, cy, scale),
+    project(px + hw, py - hh, pz - hd, cx, cy, scale),
+    project(px + hw, py + hh, pz - hd, cx, cy, scale),
+    project(px - hw, py + hh, pz - hd, cx, cy, scale),
+    project(px - hw, py - hh, pz + hd, cx, cy, scale),
+    project(px + hw, py - hh, pz + hd, cx, cy, scale),
+    project(px + hw, py + hh, pz + hd, cx, cy, scale),
+    project(px - hw, py + hh, pz + hd, cx, cy, scale),
+  ];
+
+  const avgDepth = corners.reduce((s, c) => s + c.depth, 0) / 8;
+
+  function face(indices, fillColor, strokeColor) {
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.moveTo(corners[indices[0]].sx, corners[indices[0]].sy);
+    for (let i = 1; i < indices.length; i++) {
+      ctx.lineTo(corners[indices[i]].sx, corners[indices[i]].sy);
+    }
+    ctx.closePath();
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.strokeStyle = isSelected ? "#ffffff" : strokeColor;
+    ctx.lineWidth = isSelected ? 2.5 : 1.2;
+    ctx.stroke();
+  }
+
+  // Determine visible faces based on camera
+  const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  const cosX = Math.cos(rotX);
+
+  // Bottom
+  face([0,1,5,4], comp.darkColor, "#000");
+  // Back faces
+  if (sinY > 0) face([0,3,7,4], comp.darkColor + "cc", "#000");
+  else face([1,2,6,5], comp.color, "#000");
+  if (cosX > 0) face([0,1,2,3], comp.darkColor + "88", "#000");
+  // Visible sides
+  if (sinY <= 0) face([0,3,7,4], comp.darkColor + "bb", "#000");
+  else face([1,2,6,5], comp.color, "#000");
+  // Top
+  face([3,2,6,7], comp.topColor, "#000");
+  // Front faces
+  if (cosX <= 0) face([4,5,6,7], comp.color + "cc", "#000");
+  else face([4,5,6,7], comp.color + "ee", "#000");
+
+  ctx.globalAlpha = 1.0;
+
+  // Selection glow
+  if (isSelected) {
+    ctx.save();
+    ctx.globalAlpha = 0.15;
+    ctx.beginPath();
+    ctx.moveTo(corners[0].sx, corners[0].sy);
+    [1,5,4].forEach(i => ctx.lineTo(corners[i].sx, corners[i].sy));
+    [3,7,6,2].forEach(i => ctx.lineTo(corners[i].sx, corners[i].sy));
+    ctx.closePath();
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+  }
+
+  return { corners, avgDepth, pos };
+}
+
+// ─── DRAW ARROW ───────────────────────────────────────────────────────────────
+function drawArrow3D(from, to, cx, cy, scale, label) {
+  const p1 = project(from.x, from.y, from.z, cx, cy, scale);
+  const p2 = project(to.x, to.y, to.z, cx, cy, scale);
+  ctx.save();
+  ctx.strokeStyle = "#C9A84C";
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6, 3]);
+  ctx.globalAlpha = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(p1.sx, p1.sy);
+  ctx.lineTo(p2.sx, p2.sy);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // Arrowhead
+  const angle = Math.atan2(p2.sy - p1.sy, p2.sx - p1.sx);
+  ctx.fillStyle = "#C9A84C";
+  ctx.beginPath();
+  ctx.moveTo(p2.sx, p2.sy);
+  ctx.lineTo(p2.sx - 10 * Math.cos(angle - 0.4), p2.sy - 10 * Math.sin(angle - 0.4));
+  ctx.lineTo(p2.sx - 10 * Math.cos(angle + 0.4), p2.sy - 10 * Math.sin(angle + 0.4));
+  ctx.closePath();
+  ctx.fill();
+  // Label
+  if (label) {
+    const mx = (p1.sx + p2.sx) / 2;
+    const my = (p1.sy + p2.sy) / 2;
+    ctx.globalAlpha = 1;
+    ctx.font = "bold 10px Segoe UI, Arial";
+    ctx.fillStyle = "#C9A84C";
+    ctx.textAlign = "center";
+    ctx.fillText(label, mx, my - 6);
+  }
+  ctx.restore();
+}
+
+// ─── LABEL CALLOUT ────────────────────────────────────────────────────────────
+function drawLabel(text, icon, x, y, accent) {
+  ctx.save();
+  const pad = 6, fh = 11;
+  ctx.font = `bold ${fh}px Segoe UI, Arial`;
+  const tw = ctx.measureText(icon + " " + text).width + pad * 2;
+  const th = fh + pad * 2;
+  // Leader line
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 1.2;
+  ctx.setLineDash([3, 2]);
+  ctx.beginPath();
+  ctx.moveTo(x - 24, y);
+  ctx.lineTo(x - 4, y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  // Box
+  ctx.fillStyle = "rgba(13, 31, 53, 0.92)";
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 1.2;
+  const rx = x - 24 - tw;
+  const ry = y - th / 2;
+  ctx.beginPath();
+  ctx.roundRect(rx, ry, tw, th, 3);
+  ctx.fill();
+  ctx.stroke();
+  // Text
+  ctx.fillStyle = "#ffffff";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText(icon + " " + text, rx + pad, y);
+  ctx.restore();
+}
+
+// ─── DRAW GRID FLOOR ─────────────────────────────────────────────────────────
+function drawFloor(cx, cy, scale) {
+  ctx.save();
+  ctx.strokeStyle = "rgba(201, 168, 76, 0.12)";
+  ctx.lineWidth = 1;
+  const step = 1, range = 6;
+  for (let i = -range; i <= range; i += step) {
+    const a = project(i, -0.7, -range, cx, cy, scale);
+    const b = project(i, -0.7, range, cx, cy, scale);
+    const c = project(-range, -0.7, i, cx, cy, scale);
+    const d = project(range, -0.7, i, cx, cy, scale);
+    ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(c.sx, c.sy); ctx.lineTo(d.sx, d.sy); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ─── LABEL POSITIONS (screen) ─────────────────────────────────────────────────
+let labelHitAreas = [];
+
+function drawLabels(comps, cx, cy, scale, t) {
+  labelHitAreas = [];
+  if (!showLabels) return;
+  comps.forEach(comp => {
+    const pos = lerpComp(comp, t);
+    const topCenter = project(pos.x, pos.y + comp.h / 2, pos.z, cx, cy, scale);
+    const lx = topCenter.sx + 30;
+    const ly = topCenter.sy - 10;
+    drawLabel(comp.name, comp.icon, lx, ly, comp.color);
+    // Dot
+    ctx.save();
+    ctx.fillStyle = comp.color;
+    ctx.beginPath();
+    ctx.arc(topCenter.sx, topCenter.sy, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+    ctx.restore();
+    labelHitAreas.push({ id: comp.id, x: lx - 100, y: ly - 12, w: 120, h: 24 });
+  });
+}
+
+// ─── MAIN DRAW ────────────────────────────────────────────────────────────────
+let renderList = [];
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const scale = Math.min(W, H) / 10;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  const bg = ctx.createRadialGradient(cx, cy, 10, cx, cy, Math.max(W, H) * 0.7);
+  bg.addColorStop(0, "#14273d");
+  bg.addColorStop(1, "#0a1520");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawFloor(cx, cy, scale);
+
+  const t = explodeT;
+
+  // Draw arrows (between boxes at base positions, lerped)
+  if (t < 0.3) {
+    const inputPos = lerpComp(components[0], t);
+    const procPos = lerpComp(components[1], t);
+    const outputPos = lerpComp(components[2], t);
+    const nestedPos = lerpComp(components[3], t);
+    ctx.globalAlpha = 1 - t * 3;
+    drawArrow3D(
+      { x: inputPos.x + components[0].w / 2, y: inputPos.y, z: inputPos.z },
+      { x: procPos.x - components[1].w / 2, y: procPos.y, z: procPos.z },
+      cx, cy, scale, "PRINT"
+    );
+    drawArrow3D(
+      { x: procPos.x + components[1].w / 2, y: procPos.y, z: procPos.z },
+      { x: outputPos.x - components[2].w / 2, y: outputPos.y, z: outputPos.z },
+      cx, cy, scale, "Solution"
+    );
+    drawArrow3D(
+      { x: outputPos.x, y: outputPos.y, z: outputPos.z - components[2].d / 2 },
+      { x: nestedPos.x, y: nestedPos.y, z: nestedPos.z + components[3].d / 2 },
+      cx, cy, scale, "Nested?"
+    );
+    ctx.globalAlpha = 1;
+  }
+
+  // Sort by depth
+  const boxData = components.map(comp => {
+    const pos = lerpComp(comp, t);
+    const center = project(pos.x, pos.y, pos.z, cx, cy, scale);
+    return { comp, depth: center.depth };
+  });
+  boxData.sort((a, b) => a.depth - b.depth);
+
+  renderList = [];
+  boxData.forEach(({ comp }) => {
+    const res = drawBox(comp, cx, cy, scale, t);
+    renderList.push({ comp, corners: res.corners, pos: res.pos });
+  });
+
+  drawLabels(boxData.map(d => d.comp), cx, cy, scale, t);
+
+  // Title
+  ctx.save();
+  ctx.font = "bold 13px Segoe UI, Arial";
+  ctx.fillStyle = "#C9A84C";
+  ctx.textAlign = "center";
+  ctx.globalAlpha = 0.7;
+  ctx.fillText("Engineering Process Flow — Input → Process → Output", cx, 22);
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
+let rafId = null;
+
+function animate() {
+  let needsRaf = false;
+
+  if (animating) {
+    explodeT += 0.025 * explodeDir;
+    if (explodeT >= 1) { explodeT = 1; animating = false; }
+    if (explodeT <= 0) { explodeT = 0; animating = false; }
+    needsRaf = true;
+  }
+
+  if (autoRotateActive) {
+    rotY += 0.008;
+    needsRaf = true;
+  }
+
+  draw();
+
+  if (needsRaf) rafId = requestAnimationFrame(animate);
+  else rafId = null;
+}
+
+function startAnim() {
+  if (!rafId) rafId = requestAnimationFrame(animate);
+}
+
+let autoRotateActive = false;
+
+// ─── BUTTON CONTROLS ─────────────────────────────────────────────────────────
+const ROT_STEP = 0.15;
+const TILT_STEP = 0.12;
+
+document.getElementById("btn-left").addEventListener("click", () => { rotY -= ROT_STEP; draw(); });
+document.getElementById("btn-right").addEventListener("click", () => { rotY += ROT_STEP; draw(); });
+document.getElementById("btn-up").addEventListener("click", () => { rotX = Math.max(0.1, rotX - TILT_STEP); draw(); });
+document.getElementById("btn-down").addEventListener("click", () => { rotX = Math.min(1.4, rotX + TILT_STEP); draw(); });
+
+document.getElementById("btn-reset").addEventListener("click", () => {
+  rotY = 0.45; rotX = 0.55;
+  selectedId = null;
+  exploded = false;
+  explodeDir = -1;
+  animating = true;
+  startAnim();
+  updateSidebar();
+  document.getElementById("btn-explode").classList.remove("active");
+});
+
+document.getElementById("btn-explode").addEventListener("click", () => {
+  exploded = !exploded;
+  explodeDir = exploded ? 1 : -1;
+  animating = true;
+  startAnim();
+  const btn = document.getElementById("btn-explode");
+  btn.classList.toggle("active", exploded);
+  btn.textContent = exploded ? "🔧 Collapse View" : "💥 Exploded View";
+});
+
+document.getElementById("btn-labels").addEventListener("click", () => {
+  showLabels = !showLabels;
+  const btn = document.getElementById("btn-labels");
+  btn.classList.toggle("active", showLabels);
+  draw();
+});
+
+// ─── PRINT BADGE ─────────────────────────────────────────────────────────────
+const printTooltip = document.getElementById("print-tooltip");
+document.querySelectorAll(".print-letter").forEach(el => {
+  el.addEventListener("mouseenter", function() {
+    const key = this.dataset.key;
+    const info = PRINT[key];
+    printTooltip.innerHTML = `<strong>${key} — ${info.label}:</strong> ${info.desc}`;
+    printTooltip.style.display = "block";
+    this.classList.add("lit");
+  });
+  el.addEventListener("mouseleave", function() {
+    printTooltip.style.display = "none";
+    this.classList.remove("lit");
+  });
+  el.addEventListener("click", function() {
+    const key = this.dataset.key;
+    // Highlight component linked to this PRINT property
+    const linked = components.find(c => c.printLink === key);
+    if (linked) {
+      selectedId = selectedId === linked.id ? null : linked.id;
+      updateSidebar();
+      draw();
+    }
+  });
+});
+
+// ─── SIDEBAR ─────────────────────────────────────────────────────────────────
+function buildSidebar() {
+  const list = document.getElementById("comp-list");
+  list.innerHTML = "";
+  components.forEach(comp => {
+    const div = document.createElement("div");
+    div.className = "comp-item";
+    div.id = "sidebar-" + comp.id;
+    div.innerHTML = `
+      <div class="comp-name">
+        <span class="comp-dot" style="background:${comp.color}"></span>
+        ${comp.icon} ${comp.name}
+      </div>
+      <div class="comp-desc">${comp.desc}</div>
+    `;
+    div.addEventListener("click", () => {
+      selectedId = selectedId === comp.id ? null : comp.id;
+      updateSidebar();
+      draw();
+    });
+    list.appendChild(div);
+  });
+}
+
+function updateSidebar() {
+  components.forEach(comp => {
+    const el = document.getElementById("sidebar-" + comp.id);
+    if (el) el.classList.toggle("active", selectedId === comp.id);
+  });
+}
+
+buildSidebar();
+
+// ─── MOUSE / TOUCH ROTATION ───────────────────────────────────────────────────
+let dragging = false;
+let lastX = 0, lastY = 0;
+
+canvas.addEventListener("mousedown", e => {
+  dragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+window.addEventListener("mouseup", () => dragging = false);
+window.addEventListener("mousemove", e => {
+  if (!dragging) return;
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  rotY += dx * 0.012;
+  rotX = Math.max(0.1, Math.min(1.4, rotX + dy * 0.010));
+  lastX = e.clientX;
+  lastY = e.clientY;
+  draw();
+});
+
+// Touch
+canvas.addEventListener("touchstart", e => {
+  if (e.touches.length === 1) {
+    dragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  }
+}, { passive: true });
+window.addEventListener("touchend", () => dragging = false);
+window.addEventListener("touchmove", e => {
+  if (!dragging || e.touches.length !== 1) return;
+  const dx = e.touches[0].clientX - lastX;
+  const dy = e.touches[0].clientY - lastY;
+  rotY += dx * 0.012;
+  rotX = Math.max(0.1, Math.min(1.4, rotX + dy * 0.010));
+  lastX = e.touches[0].clientX;
+  lastY = e.touches[0].clientY;
+  draw();
+}, { passive: true });
+
+// ─── TOOLTIP ON HOVER ─────────────────────────────────────────────────────────
+const tooltip = document.getElementById("tooltip");
+
+canvas.addEventListener("mousemove", e => {
+  if (dragging) { tooltip.style.display = "none"; return; }
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  // Check label hit areas
+  let found = null;
+  labelHitAreas.forEach(la => {
+    if (mx >= la.x && mx <= la.x + la.w && my >= la.y && my <= la.y + la.h) {
+      found = la.id;
+    }
+  });
+
+  // Check box hit (project center, radius check)
+  if (!found) {
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2;
+    const scale = Math.min(W, H) / 10;
+    let minDist = Infinity;
+    let closest = null;
+    renderList.forEach(({ comp }) => {
+      const pos = lerpComp(comp, explodeT);
+      const p = project(pos.x, pos.y, pos.z, cx, cy, scale);
+      const d = Math.hypot(p.sx - mx, p.sy - my);
+      const approxR = (comp.w + comp.h) * scale * 0.4;
+      if (d < approxR && d < minDist) {
+        minDist = d;
+        closest = comp.id;
+      }
+    });
+    if (closest) found = closest;
+  }
+
+  if (found) {
+    const comp = components.find(c => c.id === found);
+    if (comp) {
+      tooltip.style.display = "block";
+      tooltip.style.left = (e.clientX - canvas.getBoundingClientRect().left + 14) + "px";
+      tooltip.style.top = (e.clientY - canvas.getBoundingClientRect().top - 10) + "px";
+      tooltip.innerHTML = `<strong>${comp.icon} ${comp.name}</strong>${comp.desc}<br><br><span style="color:#C9A84C;font-size:10px;">PRINT: <strong>${comp.printLink}</strong> — ${PRINT[comp.printLink].label}</span>`;
+    }
+  } else {
+    tooltip.style.display = "none";
+  }
+});
+canvas.addEventListener("mouseleave", () => { tooltip.style.display = "none"; });
+
+// Click to select
+canvas.addEventListener("click", e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const scale = Math.min(W, H) / 10;
+
+  let minDist = Infinity;
+  let closest = null;
+  renderList.forEach(({ comp }) => {
+    const pos = lerpComp(comp, explodeT);
+    const p = project(pos.x, pos.y, pos.z, cx, cy, scale);
+    const d = Math.hypot(p.sx - mx, p.sy - my);
+    const approxR = (comp.w + comp.h) * scale * 0.45;
+    if (d < approxR && d < minDist) {
+      minDist = d;
+      closest = comp.id;
+    }
+  });
+
+  selectedId = closest === selectedId ? null : closest;
+  updateSidebar();
+  draw();
+});
+
+// ─── ROTATE BUTTONS HOLD ─────────────────────────────────────────────────────
+function holdRotate(id, fn) {
+  let interval = null;
+  const el = document.getElementById(id);
+  el.addEventListener("mousedown", () => {
+    fn();
+    interval = setInterval(fn, 60);
+  });
+  el.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    fn();
+    interval = setInterval(fn, 60);
+  }, { passive: false });
+  const stop = () => { if (interval) clearInterval(interval); interval = null; };
+  el.addEventListener("mouseup", stop);
+  el.addEventListener("mouseleave", stop);
+  el.addEventListener("touchend", stop);
+}
+
+holdRotate("btn-left", () => { rotY -= 0.04; draw(); });
+holdRotate("btn-right", () => { rotY += 0.04; draw(); });
+holdRotate("btn-up", () => { rotX = Math.max(0.1, rotX - 0.03); draw(); });
+holdRotate("btn-down", () => { rotX = Math.min(1.4, rotX + 0.03); draw(); });
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+resize();
+
+})();
+</script>
+</body>
+</html>

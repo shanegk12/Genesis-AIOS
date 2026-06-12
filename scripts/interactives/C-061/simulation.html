@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experimental Design Lab – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  header .logo {
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  header h1 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  header .subtitle {
+    font-size: 0.78rem;
+    color: #C9A84C;
+    font-weight: 400;
+  }
+
+  .progress-bar-wrap {
+    width: 100%;
+    background: #dde4ed;
+    height: 7px;
+  }
+
+  .progress-bar-fill {
+    height: 7px;
+    background: #C9A84C;
+    transition: width 0.5s ease;
+  }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 760px;
+    padding: 20px 16px 40px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .screen.active { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== INTRO ===== */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 3px 18px rgba(27,58,92,0.10);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .intro-card h2 { font-size: 1.5rem; color: #1B3A5C; margin-bottom: 10px; }
+  .intro-card p  { font-size: 0.98rem; color: #3a5a7a; line-height: 1.6; margin-bottom: 18px; }
+
+  .scenario-box {
+    background: #f0f4fa;
+    border-left: 5px solid #C9A84C;
+    border-radius: 8px;
+    padding: 16px 18px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .scenario-box h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #C9A84C; margin-bottom: 6px; }
+  .scenario-box p  { font-size: 0.95rem; color: #1B3A5C; line-height: 1.55; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 6px;
+  }
+
+  .btn:hover { background: #b8922e; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-secondary {
+    background: #1B3A5C;
+    color: #fff;
+  }
+
+  .btn-secondary:hover { background: #14304e; }
+
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* ===== STEP INDICATOR ===== */
+  .step-indicator {
+    font-size: 0.82rem;
+    color: #C9A84C;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ===== DRAG & DROP — SORT VARIABLES ===== */
+  .sort-screen h2 { font-size: 1.25rem; color: #1B3A5C; margin-bottom: 6px; text-align: center; }
+  .sort-screen .instruction { font-size: 0.92rem; color: #3a5a7a; text-align: center; margin-bottom: 20px; }
+
+  .sort-workspace {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .sort-zone {
+    flex: 1;
+    min-width: 155px;
+    max-width: 210px;
+    background: #fff;
+    border: 2.5px dashed #1B3A5C;
+    border-radius: 12px;
+    padding: 14px 10px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .sort-zone.drag-over { border-color: #C9A84C; background: #fdf7e8; }
+
+  .sort-zone .zone-label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1B3A5C;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .sort-zone .zone-label span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #7a96b0;
+    margin-top: 2px;
+  }
+
+  .card-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(27,58,92,0.08);
+    margin-bottom: 10px;
+  }
+
+  .card-pool .pool-label {
+    width: 100%;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7a96b0;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .var-card {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    text-align: center;
+    line-height: 1.3;
+    touch-action: none;
+  }
+
+  .var-card:hover { transform: scale(1.04); box-shadow: 0 4px 14px rgba(27,58,92,0.25); }
+  .var-card.dragging { opacity: 0.45; transform: scale(0.97); }
+  .var-card.dropped-correct { background: #2a7a4b; border: 2px solid #1f6038; }
+  .var-card.dropped-wrong   { background: #b84040; border: 2px solid #922f2f; }
+
+  /* ===== SEQUENCE BUILD ===== */
+  .seq-screen h2 { font-size: 1.25rem; color: #1B3A5C; margin-bottom: 6px; text-align: center; }
+  .seq-screen .instruction { font-size: 0.92rem; color: #3a5a7a; text-align: center; margin-bottom: 18px; }
+
+  .seq-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 14px;
+  }
+
+  .seq-slot {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .seq-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #C9A84C;
+    color: #1B3A5C;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .seq-drop {
+    flex: 1;
+    min-height: 50px;
+    background: #fff;
+    border: 2.5px dashed #aabcd0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 0.88rem;
+    color: #aabcd0;
+    font-style: italic;
+  }
+
+  .seq-drop.drag-over { border-color: #C9A84C; background: #fdf7e8; }
+  .seq-drop.filled    { border-color: #1B3A5C; color: #1B3A5C; font-style: normal; font-weight: 600; }
+  .seq-drop.correct-slot { border-color: #2a7a4b; background: #e8f8ee; color: #2a7a4b; }
+  .seq-drop.wrong-slot   { border-color: #b84040; background: #fdf0f0; color: #b84040; }
+
+  .step-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(27,58,92,0.08);
+    margin-bottom: 10px;
+  }
+
+  .step-card {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    text-align: center;
+    line-height: 1.3;
+    max-width: 200px;
+    touch-action: none;
+  }
+
+  .step-card:hover { transform: scale(1.04); box-shadow: 0 4px 14px rgba(27,58,92,0.25); }
+  .step-card.dragging { opacity: 0.45; }
+  .step-card.used { opacity: 0.2; pointer-events: none; }
+
+  /* ===== OCV ACTIVITY ===== */
+  .ocv-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 3px 18px rgba(27,58,92,0.10);
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .ocv-card h3 { font-size: 1.1rem; color: #1B3A5C; margin-bottom: 6px; }
+  .ocv-card .scenario-text { font-size: 0.93rem; color: #3a5a7a; line-height: 1.6; margin-bottom: 18px; }
+
+  .ocv-section { margin-bottom: 18px; }
+  .ocv-section label { display: block; font-size: 0.85rem; font-weight: 700; color: #C9A84C; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .ocv-section .ocv-hint { font-size: 0.78rem; color: #7a96b0; margin-bottom: 6px; }
+
+  .ocv-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ocv-option {
+    border: 2px solid #dde4ed;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    font-weight: 600;
+  }
+
+  .ocv-option:hover { border-color: #C9A84C; background: #fdf7e8; }
+  .ocv-option.selected { border-color: #1B3A5C; background: #1B3A5C; color: #fff; }
+  .ocv-option.correct-pick { border-color: #2a7a4b; background: #e8f8ee; color: #2a7a4b; }
+  .ocv-option.wrong-pick   { border-color: #b84040; background: #fdf0f0; color: #b84040; }
+
+  .feedback-msg {
+    font-size: 0.88rem;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .feedback-msg.show { display: block; }
+  .feedback-msg.correct { background: #e8f8ee; color: #2a7a4b; border: 1.5px solid #2a7a4b; }
+  .feedback-msg.wrong   { background: #fdf0f0; color: #b84040; border: 1.5px solid #b84040; }
+  .feedback-msg.info    { background: #f0f4fa; color: #1B3A5C; border: 1.5px solid #aabcd0; }
+
+  /* ===== SCORE SCREEN ===== */
+  .score-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    box-shadow: 0 4px 24px rgba(27,58,92,0.12);
+    text-align: center;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .score-card .big-score {
+    font-size: 3.8rem;
+    font-weight: 900;
+    color: #1B3A5C;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .score-card .score-label {
+    font-size: 1rem;
+    color: #C9A84C;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+  }
+
+  .score-card .score-msg {
+    font-size: 1rem;
+    color: #3a5a7a;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .score-breakdown {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .score-item {
+    background: #f0f4fa;
+    border-radius: 10px;
+    padding: 12px 16px;
+    min-width: 110px;
+    text-align: center;
+  }
+
+  .score-item .si-label { font-size: 0.75rem; color: #7a96b0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .score-item .si-val   { font-size: 1.4rem; font-weight: 800; color: #1B3A5C; }
+
+  .faith-note {
+    background: #f0f4fa;
+    border-left: 4px solid #C9A84C;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    color: #3a5a7a;
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* ===== QUIZ question ===== */
+  .quiz-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 3px 18px rgba(27,58,92,0.10);
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .quiz-card .q-text {
+    font-size: 1.03rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-opt-btn {
+    background: #f0f4fa;
+    border: 2px solid #dde4ed;
+    border-radius: 9px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    color: #1B3A5C;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .quiz-opt-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fdf7e8; }
+  .quiz-opt-btn.correct-ans { border-color: #2a7a4b; background: #e8f8ee; color: #2a7a4b; }
+  .quiz-opt-btn.wrong-ans   { border-color: #b84040; background: #fdf0f0; color: #b84040; }
+  .quiz-opt-btn:disabled { cursor: default; }
+
+  /* Mobile tweaks */
+  @media (max-width: 520px) {
+    .sort-zone { min-width: 130px; }
+    .intro-card, .quiz-card, .ocv-card, .score-card { padding: 20px 14px; }
+    header h1 { font-size: 0.9rem; }
+    .big-score { font-size: 2.8rem !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK12</div>
+  <div>
+    <div class="subtitle">Creationeering™ | Performance Phase</div>
+    <h1>Experimental Design Lab</h1>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+</div>
+
+<!-- ========== SCREEN 0: INTRO ========== -->
+<div class="screen active" id="screen-0">
+  <div class="intro-card" style="margin-top:24px;">
+    <h2>🔬 Welcome to the Experimental Design Lab</h2>
+    <p>You've been asked to help a Creationeering™ team test their designs. To do that, you need to understand the basics of <strong>experimental design</strong> and <strong>testing protocols</strong>.</p>
+    <div class="scenario-box">
+      <h3>Your Mission</h3>
+      <p>Complete <strong>3 challenges</strong> that will test your ability to sort variables, sequence testing steps, and apply the <strong>OCV method</strong> to a real experiment. A quiz round wraps things up!</p>
+    </div>
+    <p style="font-size:0.85rem;color:#7a96b0;margin-bottom:20px;">Estimated time: 3–5 minutes</p>
+    <button class="btn" onclick="goTo(1)">Start the Lab →</button>
+  </div>
+</div>
+
+<!-- ========== SCREEN 1: SORT VARIABLES ========== -->
+<div class="screen" id="screen-1">
+  <div class="step-indicator">Challenge 1 of 4 — Sort the Variables</div>
+  <h2 class="sort-screen" style="font-size:1.2rem;color:#1B3A5C;margin-bottom:6px;text-align:center;">🧪 A team is testing a paper bridge design.<br>Sort each factor into the correct category.</h2>
+  <p class="sort-screen" style="font-size:0.9rem;color:#3a5a7a;text-align:center;margin-bottom:14px;">Drag each card into the correct zone. You can drag them back to re-sort.</p>
+
+  <div class="card-pool" id="varPool">
+    <div class="pool-label">Factors to Sort</div>
+  </div>
+
+  <div class="sort-workspace" id="sortWorkspace">
+    <div class="sort-zone" id="zone-ind" data-zone="independent" ondragover="allowDrop(event)" ondrop="dropCard(event,'zone-ind')">
+      <div class="zone-label">Independent Variable<span>The one factor you intentionally change</span></div>
+    </div>
+    <div class="sort-zone" id="zone-dep" data-zone="dependent" ondragover="allowDrop(event)" ondrop="dropCard(event,'zone-dep')">
+      <div class="zone-label">Dependent Variable<span>What you measure to see the effect</span></div>
+    </div>
+    <div class="sort-zone" id="zone-con" data-zone="controlled" ondragover="allowDrop(event)" ondrop="dropCard(event,'zone-con')">
+      <div class="zone-label">Controlled Variable<span>Kept the same every test</span></div>
+    </div>
+  </div>
+
+  <div id="sortFeedback" class="feedback-msg info" style="max-width:600px;width:100%;"></div>
+  <button class="btn" id="checkSortBtn" onclick="checkSort()" style="margin-top:14px;">Check My Sort</button>
+</div>
+
+<!-- ========== SCREEN 2: SEQUENCE ========== -->
+<div class="screen" id="screen-2">
+  <div class="step-indicator">Challenge 2 of 4 — Order the Steps</div>
+  <h2 style="font-size:1.2rem;color:#1B3A5C;margin-bottom:6px;text-align:center;">📋 Testing Protocol Steps</h2>
+  <p style="font-size:0.9rem;color:#3a5a7a;text-align:center;margin-bottom:18px;">Drag the steps into the correct order for a well-structured testing protocol.</p>
+
+  <div class="step-pool" id="stepPool">
+  </div>
+
+  <div class="seq-workspace" id="seqWorkspace">
+  </div>
+
+  <div id="seqFeedback" class="feedback-msg info" style="max-width:600px;width:100%;"></div>
+  <button class="btn" id="checkSeqBtn" onclick="checkSeq()" style="margin-top:14px;">Check My Order</button>
+</div>
+
+<!-- ========== SCREEN 3: OCV + QUIZ ========== -->
+<div class="screen" id="screen-3">
+  <div class="step-indicator">Challenge 3 of 4 — OCV Method</div>
+  <div class="ocv-card">
+    <h3>🎯 Apply the OCV Method</h3>
+    <p class="scenario-text">A team is testing whether the <strong>thickness of a rubber band</strong> affects the <strong>distance a catapult launches a ball</strong>. They run the test 5 times, keeping everything else the same.</p>
+
+    <div class="ocv-section">
+      <label>O — Objective</label>
+      <div class="ocv-hint">What is the team trying to find out?</div>
+      <div class="ocv-options" id="ocv-O"></div>
+      <div class="feedback-msg" id="fb-O"></div>
+    </div>
+
+    <div class="ocv-section">
+      <label>C — Constraints</label>
+      <div class="ocv-hint">What limits or rules must the team follow?</div>
+      <div class="ocv-options" id="ocv-C"></div>
+      <div class="feedback-msg" id="fb-C"></div>
+    </div>
+
+    <div class="ocv-section">
+      <label>V — Variables</label>
+      <div class="ocv-hint">Which factor is the independent variable being changed?</div>
+      <div class="ocv-options" id="ocv-V"></div>
+      <div class="feedback-msg" id="fb-V"></div>
+    </div>
+
+    <button class="btn" id="checkOCVBtn" onclick="checkOCV()" style="margin-top:6px;">Check Answers</button>
+  </div>
+</div>
+
+<!-- ========== SCREEN 4: QUIZ ========== -->
+<div class="screen" id="screen-4">
+  <div class="step-indicator">Challenge 4 of 4 — Quick-Fire Quiz</div>
+  <div class="quiz-card" id="quizCard">
+    <div class="q-text" id="qText"></div>
+    <div class="quiz-options" id="qOptions"></div>
+    <div class="feedback-msg" id="qFeedback"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+      <button class="btn" id="qNextBtn" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+  </div>
+  <div style="font-size:0.82rem;color:#7a96b0;margin-top:10px;" id="qCounter"></div>
+</div>
+
+<!-- ========== SCREEN 5: SCORE ========== -->
+<div class="screen" id="screen-5">
+  <div class="score-card" style="margin-top:20px;">
+    <div class="big-score" id="finalScore">0</div>
+    <div class="score-label">points earned</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <div class="score-breakdown" id="scoreBreakdown"></div>
+    <div class="faith-note">
+      <strong>Stewardship in Action:</strong> Just as God designed the universe with order and purpose, a well-structured experiment honors the resources and time you've been given — leading to better, more reliable results.
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="restartAll()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  STATE
+// ============================================================
+var totalScore = 0;
+var scores = { sort: 0, seq: 0, ocv: 0, quiz: 0 };
+var currentScreen = 0;
+
+function setProgress(pct) {
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function goTo(n) {
+  document.getElementById('screen-' + currentScreen).classList.remove('active');
+  currentScreen = n;
+  document.getElementById('screen-' + n).classList.add('active');
+  setProgress(Math.round((n / 5) * 100));
+  window.scrollTo(0, 0);
+}
+
+// ============================================================
+//  SCREEN 1 — SORT VARIABLES
+// ============================================================
+var varCards = [
+  { id: 'vc1', text: 'Number of paper layers in bridge', correct: 'independent' },
+  { id: 'vc2', text: 'Weight the bridge holds before breaking', correct: 'dependent' },
+  { id: 'vc3', text: 'Type of paper used', correct: 'controlled' },
+  { id: 'vc4', text: 'Length of bridge span', correct: 'controlled' },
+  { id: 'vc5', text: 'How the weight is measured', correct: 'controlled' },
+  { id: 'vc6', text: 'Amount of deflection (sag) in bridge', correct: 'dependent' }
+];
+
+var dragSrcId = null;
+var touchDragCardId = null;
+var touchClone = null;
+
+function buildSort() {
+  var pool = document.getElementById('varPool');
+  // keep label
+  varCards.forEach(function(v) {
+    var card = document.createElement('div');
+    card.className = 'var-card';
+    card.id = v.id;
+    card.textContent = v.text;
+    card.draggable = true;
+    card.setAttribute('data-card', v.id);
+
+    // Desktop drag
+    card.addEventListener('dragstart', function(e) {
+      dragSrcId = v.id;
+      card.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', v.id);
+    });
+    card.addEventListener('dragend', function() {
+      card.classList.remove('dragging');
+    });
+
+    // Touch drag
+    card.addEventListener('touchstart', touchStart, { passive: false });
+    card.addEventListener('touchmove', touchMove, { passive: false });
+    card.addEventListener('touchend', touchEnd, { passive: false });
+
+    pool.appendChild(card);
+  });
+
+  // zones dragover/dragleave
+  ['zone-ind','zone-dep','zone-con','pool-drop'].forEach(function(zid) {
+    var z = document.getElementById(zid);
+    if (!z) return;
+    z.addEventListener('dragover', function(e) { e.preventDefault(); z.classList.add('drag-over'); });
+    z.addEventListener('dragleave', function() { z.classList.remove('drag-over'); });
+  });
+
+  // pool as drop target to return
+  pool.id = 'pool-drop';
+  pool.ondragover = allowDrop;
+  pool.ondrop = function(e) { dropCard(e, 'pool-drop'); };
+}
+
+function allowDrop(e) { e.preventDefault(); }
+
+function dropCard(e, zoneId) {
+  e.preventDefault();
+  var cardId = e.dataTransfer ? e.dataTransfer.getData('text/plain') : dragSrcId;
+  if (!cardId) return;
+  var card = document.getElementById(cardId);
+  if (!card) return;
+  var target = document.getElementById(zoneId);
+  if (!target) return;
+  target.classList.remove('drag-over');
+  // remove correct/wrong classes
+  card.classList.remove('dropped-correct','dropped-wrong');
+  target.appendChild(card);
+}
+
+// Touch helpers
+function touchStart(e) {
+  var card = e.currentTarget;
+  touchDragCardId = card.id;
+  var rect = card.getBoundingClientRect();
+  touchClone = card.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.width = rect.width + 'px';
+  touchClone.style.opacity = '0.85';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.zIndex = '9999';
+  touchClone.style.left = rect.left + 'px';
+  touchClone.style.top = rect.top + 'px';
+  document.body.appendChild(touchClone);
+  card.classList.add('dragging');
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchClone) return;
+  var t = e.touches[0];
+  touchClone.style.left = (t.clientX - 40) + 'px';
+  touchClone.style.top  = (t.clientY - 25) + 'px';
+  e.preventDefault();
+}
+
+function touchEnd(e) {
+  if (!touchClone) return;
+  var t = e.changedTouches[0];
+  document.body.removeChild(touchClone);
+  touchClone = null;
+  var card = document.getElementById(touchDragCardId);
+  if (card) card.classList.remove('dragging');
+
+  // Find target zone
+  var zones = ['zone-ind','zone-dep','zone-con','pool-drop'];
+  var placed = false;
+  zones.forEach(function(zid) {
+    var z = document.getElementById(zid);
+    if (!z || placed) return;
+    var rect = z.getBoundingClientRect();
+    if (t.clientX >= rect.left && t.clientX <= rect.right && t.clientY >= rect.top && t.clientY <= rect.bottom) {
+      card.classList.remove('dropped-correct','dropped-wrong');
+      z.appendChild(card);
+      placed = true;
+    }
+  });
+  touchDragCardId = null;
+  e.preventDefault();
+}
+
+function checkSort() {
+  var correct = 0;
+  varCards.forEach(function(v) {
+    var card = document.getElementById(v.id);
+    if (!card) return;
+    var parent = card.parentElement;
+    card.classList.remove('dropped-correct','dropped-wrong');
+    if (parent && parent.getAttribute('data-zone') === v.correct) {
+      card.classList.add('dropped-correct');
+      correct++;
+    } else if (parent && parent.id !== 'pool-drop') {
+      card.classList.add('dropped-wrong');
+    }
+  });
+
+  scores.sort = Math.round((correct / varCards.length) * 30);
+  var fb = document.getElementById('sortFeedback');
+  fb.className = 'feedback-msg show ' + (correct === varCards.length ? 'correct' : correct >= 4 ? 'info' : 'wrong');
+  fb.textContent = correct + ' of ' + varCards.length + ' correct. ' +
+    (correct === varCards.length ? '🎉 Perfect! All variables sorted correctly.' :
+     correct >= 4 ? 'Nice work! Check any red cards — they\'re in the wrong zone.' :
+     'Keep going! Move misplaced cards to the right zones.');
+
+  if (correct === varCards.length) {
+    setTimeout(function() { goTo(2); buildSeq(); }, 1200);
+  }
+}
+
+// ============================================================
+//  SCREEN 2 — SEQUENCE STEPS
+// ============================================================
+var steps = [
+  { id: 'st1', text: 'Define your question and objective', order: 1 },
+  { id: 'st2', text: 'Identify independent, dependent, and controlled variables', order: 2 },
+  { id: 'st3', text: 'Write a detailed, step-by-step testing protocol', order: 3 },
+  { id: 'st4', text: 'Run the experiment and record all data', order: 4 },
+  { id: 'st5', text: 'Analyze results and compare to objectives', order: 5 }
+];
+
+var seqSlotData = {}; // slotNum -> stepId
+var stepSlotMap = {}; // stepId -> slotNum
+
+function buildSeq() {
+  seqSlotData = {};
+  stepSlotMap = {};
+
+  var pool = document.getElementById('stepPool');
+  pool.innerHTML = '<div style="width:100%;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a96b0;margin-bottom:4px;text-align:center;">Steps to Order</div>';
+
+  var shuffled = steps.slice().sort(function() { return Math.random() - 0.5; });
+  shuffled.forEach(function(s) {
+    var card = document.createElement('div');
+    card.className = 'step-card';
+    card.id = s.id;
+    card.textContent = s.text;
+    card.draggable = true;
+    card.setAttribute('data-step', s.id);
+    card.addEventListener('dragstart', function(e) {
+      dragSrcId = s.id;
+      card.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', s.id);
+    });
+    card.addEventListener('dragend', function() { card.classList.remove('dragging'); });
+    card.addEventListener('touchstart', seqTouchStart, { passive: false });
+    card.addEventListener('touchmove', touchMove, { passive: false });
+    card.addEventListener('touchend', seqTouchEnd, { passive: false });
+    pool.appendChild(card);
+  });
+
+  var workspace = document.getElementById('seqWorkspace');
+  workspace.innerHTML = '';
+  for (var i = 1; i <= 5; i++) {
+    (function(num) {
+      var slot = document.createElement('div');
+      slot.className = 'seq-slot';
+
+      var numBadge = document.createElement('div');
+      numBadge.className = 'seq-num';
+      numBadge.textContent = num;
+
+      var drop = document.createElement('div');
+      drop.className = 'seq-drop';
+      drop.id = 'seq-slot-' + num;
+      drop.textContent = 'Drop step here…';
+      drop.setAttribute('data-slot', num);
+
+      drop.addEventListener('dragover', function(e) { e.preventDefault(); drop.classList.add('drag-over'); });
+      drop.addEventListener('dragleave', function() { drop.classList.remove('drag-over'); });
+      drop.addEventListener('drop', function(e) {
+        e.preventDefault();
+        drop.classList.remove('drag-over');
+        var cardId = e.dataTransfer.getData('text/plain') || dragSrcId;
+        placeStepInSlot(cardId, num);
+      });
+
+      slot.appendChild(numBadge);
+      slot.appendChild(drop);
+      workspace.appendChild(slot);
+    })(i);
+  }
+}
+
+function seqTouchStart(e) {
+  var card = e.currentTarget;
+  touchDragCardId = card.id;
+  var rect = card.getBoundingClientRect();
+  touchClone = card.cloneNode(true);
+  touchClone.style.position = 'fixed';
+  touchClone.style.width = rect.width + 'px';
+  touchClone.style.opacity = '0.85';
+  touchClone.style.pointerEvents = 'none';
+  touchClone.style.zIndex = '9999';
+  touchClone.style.left = rect.left + 'px';
+  touchClone.style.top  = rect.top + 'px';
+  document.body.appendChild(touchClone);
+  e.preventDefault();
+}
+
+function seqTouchEnd(e) {
+  if (!touchClone) return;
+  var t = e.changedTouches[0];
+  document.body.removeChild(touchClone);
+  touchClone = null;
+
+  var placed = false;
+  for (var i = 1; i <= 5; i++) {
+    var z = document.getElementById('seq-slot-' + i);
+    if (!z) continue;
+    var rect = z.getBoundingClientRect();
+    if (t.clientX >= rect.left && t.clientX <= rect.right && t.clientY >= rect.top && t.clientY <= rect.bottom) {
+      placeStepInSlot(touchDragCardId, i);
+      placed = true;
+      break;
+    }
+  }
+  if (!placed) {
+    // Return to pool — remove from any slot
+    returnStepToPool(touchDragCardId);
+  }
+  touchDragCardId = null;
+  e.preventDefault();
+}
+
+function placeStepInSlot(cardId, slotNum) {
+  if (!cardId) return;
+
+  // If slot already has a step, return that step to pool
+  if (seqSlotData[slotNum]) {
+    returnStepToPool(seqSlotData[slotNum]);
+  }
+
+  // If card is in another slot, clear that slot
+  if (stepSlotMap[cardId]) {
+    var oldSlot = stepSlotMap[cardId];
+    delete seqSlotData[oldSlot];
+    var oldDrop = document.getElementById('seq-slot-' + oldSlot);
+    if (oldDrop) {
+      oldDrop.textContent = 'Drop step here…';
+      oldDrop.className = 'seq-drop';
+    }
+  }
+
+  // Find card
+  var card = document.getElementById(cardId);
+  if (!card) return;
+
+  // Place
+  seqSlotData[slotNum] = cardId;
+  stepSlotMap[cardId] = slotNum;
+
+  var drop = document.getElementById('seq-slot-' + slotNum);
+  drop.textContent = card.textContent;
+  drop.className = 'seq-drop filled';
+  card.classList.add('used');
+}
+
+function returnStepToPool(cardId) {
+  if (!cardId) return;
+  if (stepSlotMap[cardId]) {
+    var oldSlot = stepSlotMap[cardId];
+    delete seqSlotData[oldSlot];
+    delete stepSlotMap[cardId];
+    var oldDrop = document.getElementById('seq-slot-' + oldSlot);
+    if (oldDrop) {
+      oldDrop.textContent = 'Drop step here…';
+      oldDrop.className = 'seq-drop';
+    }
+  }
+  var card = document.getElementById(cardId);
+  if (card) card.classList.remove('used');
+}
+
+function checkSeq() {
+  var correct = 0;
+  for (var slot = 1; slot <= 5; slot++) {
+    var cardId = seqSlotData[slot];
+    var drop = document.getElementById('seq-slot-' + slot);
+    if (!drop) continue;
+    drop.classList.remove('correct-slot','wrong-slot');
+    if (!cardId) { continue; }
+    // find correct order
+    var stepObj = steps.find(function(s) { return s.id === cardId; });
+    if (stepObj && stepObj.order === slot) {
+      drop.classList.add('correct-slot');
+      correct++;
+    } else {
+      drop.classList.add('wrong-slot');
+    }
+  }
+
+  scores.seq = Math.round((correct / 5) * 25);
+  var fb = document.getElementById('seqFeedback');
+  fb.className = 'feedback-msg show ' + (correct === 5 ? 'correct' : correct >= 3 ? 'info' : 'wrong');
+  fb.textContent = correct + ' of 5 steps in the right place. ' +
+    (correct === 5 ? '🎉 Excellent protocol!' :
+     correct >= 3 ? 'Good effort — check the red slots and try rearranging.' :
+     'Think about what comes first: defining the problem, then variables, then the protocol...');
+
+  if (correct === 5) {
+    setTimeout(function() { goTo(3); buildOCV(); }, 1200);
+  }
+}
+
+// ============================================================
+//  SCREEN 3 — OCV
+// ============================================================
+var ocvData = {
+  O: {
+    options: [
+      { text: 'To find out how rubber band thickness affects launch distance', correct: true },
+      { text: 'To make the catapult look better', correct: false },
+      { text: 'To test as many variables as possible at once', correct: false }
+    ],
+    feedback: {
+      correct: '✅ Correct! The objective is the specific question the experiment is designed to answer.',
+      wrong: '❌ Not quite. The objective should state exactly what the team is trying to find out — focus on the relationship between rubber band thickness and launch distance.'
+    }
+  },
+  C: {
+    options: [
+      { text: 'Always use the same ball and launch angle', correct: true },
+      { text: 'Change the launch angle each test for variety', correct: false },
+      { text: 'Use a different ball each time to see what happens', correct: false }
+    ],
+    feedback: {
+      correct: '✅ Right! Constraints keep controlled variables the same so results are reliable.',
+      wrong: '❌ Changing the ball or angle would introduce extra variables — that makes it impossible to know what really caused the change in distance.'
+    }
+  },
+  V: {
+    options: [
+      { text: 'The thickness of the rubber band', correct: true },
+      { text: 'The distance the ball travels', correct: false },
+      { text: 'The number of test runs', correct: false }
+    ],
+    feedback: {
+      correct: '✅ Yes! The independent variable is the one factor intentionally changed — rubber band thickness.',
+      wrong: '❌ Remember: the independent variable is what you deliberately change. Distance is what you measure (dependent), and test runs are just repetitions.'
+    }
+  }
+};
+
+var ocvSelected = { O: null, C: null, V: null };
+var ocvChecked = false;
+
+function buildOCV() {
+  ocvSelected = { O: null, C: null, V: null };
+  ocvChecked = false;
+  ['O','C','V'].forEach(function(key) {
+    var container = document.getElementById('ocv-' + key);
+    container.innerHTML = '';
+    var shuffled = ocvData[key].options.slice().sort(function() { return Math.random() - 0.5; });
+    shuffled.forEach(function(opt) {
+      var btn = document.createElement('div');
+      btn.className = 'ocv-option';
+      btn.textContent = opt.text;
+      btn.onclick = function() {
+        if (ocvChecked) return;
+        container.querySelectorAll('.ocv-option').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        ocvSelected[key] = opt.correct;
+      };
+      container.appendChild(btn);
+    });
+    document.getElementById('fb-' + key).className = 'feedback-msg';
+    document.getElementById('fb-' + key).textContent = '';
+  });
+  document.getElementById('checkOCVBtn').disabled = false;
+}
+
+function checkOCV() {
+  if (ocvChecked) return;
+  var allAnswered = ocvSelected.O !== null && ocvSelected.C !== null && ocvSelected.V !== null;
+  if (!allAnswered) {
+    alert('Please select an answer for each section (O, C, and V) before checking!');
+    return;
+  }
+  ocvChecked = true;
+  var correct = 0;
+  ['O','C','V'].forEach(function(key) {
+    var container = document.getElementById('ocv-' + key);
+    var fb = document.getElementById('fb-' + key);
+    var isCorrect = ocvSelected[key];
+    // highlight selected
+    container.querySelectorAll('.ocv-option').forEach(function(btn) {
+      if (btn.classList.contains('selected')) {
+        btn.classList.add(isCorrect ? 'correct-pick' : 'wrong-pick');
+      }
+      // show correct answer
+      if (!isCorrect && ocvData[key].options.find(function(o){ return o.correct && btn.textContent === o.text; })) {
+        btn.classList.add('correct-pick');
+      }
+    });
+    fb.textContent = ocvData[key].feedback[isCorrect ? 'correct' : 'wrong'];
+    fb.className = 'feedback-msg show ' + (isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) correct++;
+  });
+  scores.ocv = Math.round((correct / 3) * 25);
+  document.getElementById('checkOCVBtn').disabled = true;
+  setTimeout(function() { goTo(4); startQuiz(); }, 2000);
+}
+
+// ============================================================
+//  SCREEN 4 — QUIZ
+// ============================================================
+var quizData = [
+  {
+    q: 'What is the main purpose of a testing protocol?',
+    options: [
+      'To make experiments look complicated',
+      'To ensure tests are carried out consistently and accurately',
+      'To list every possible outcome of an experiment',
+      'To replace the need for data collection'
+    ],
+    correct: 1,
+    explanation: 'A testing protocol provides detailed, step-by-step instructions to ensure every test is run the same way — which makes results reliable.'
+  },
+  {
+    q: 'In an experiment, the independent variable is…',
+    options: [
+      'The result you measure at the end',
+      'A factor you keep the same throughout',
+      'The factor you intentionally change',
+      'The equipment used in the test'
+    ],
+    correct: 2,
+    explanation: 'The independent variable is the one factor you deliberately change to see its effect on the outcome.'
+  },
+  {
+    q: 'Why do engineers repeat experiments multiple times?',
+    options: [
+      'To use up more materials',
+      'Because they forgot to record data the first time',
+      'To reduce the effect of random errors and get more reliable data',
+      'To change the independent variable each time'
+    ],
+    correct: 2,
+    explanation: 'Repeating experiments helps engineers spot patterns and reduces the chance that one unusual result throws off the whole study.'
+  },
+  {
+    q: 'Which of these is a dependent variable in a bridge-testing experiment where you change the number of paper layers?',
+    options: [
+      'The type of tape used',
+      'The number of paper layers',
+      'The maximum weight the bridge holds',
+      'The width of the bridge'
+    ],
+    correct: 2,
+    explanation: 'The dependent variable is what you measure — in this case, the weight the bridge can hold before it fails.'
+  }
+];
+
+var qIndex = 0;
+var quizScore = 0;
+var qAnswered = false;
+
+function startQuiz() {
+  qIndex = 0;
+  quizScore = 0;
+  qAnswered = false;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (qIndex >= quizData.length) {
+    scores.quiz = Math.round((quizScore / quizData.length) * 20);
+    showFinalScore();
+    return;
+  }
+  qAnswered = false;
+  var q = quizData[qIndex];
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('qCounter').textContent = 'Question ' + (qIndex + 1) + ' of ' + quizData.length;
+  var optContainer = document.getElementById('qOptions');
+  optContainer.innerHTML = '';
+  q.options.forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'quiz-opt-btn';
+    btn.textContent = opt;
+    btn.onclick = function() { answerQ(i); };
+    optContainer.appendChild(btn);
+  });
+  document.getElementById('qFeedback').className = 'feedback-msg';
+  document.getElementById('qFeedback').textContent = '';
+  document.getElementById('qNextBtn').disabled = true;
+}
+
+function answerQ(i) {
+  if (qAnswered) return;
+  qAnswered = true;
+  var q = quizData[qIndex];
+  var buttons = document.querySelectorAll('.quiz-opt-btn');
+  buttons.forEach(function(b, idx) {
+    b.disabled = true;
+    if (idx === q.correct) b.classList.add('correct-ans');
+    else if (idx === i && i !== q.correct) b.classList.add('wrong-ans');
+  });
+  var fb = document.getElementById('qFeedback');
+  var correct = i === q.correct;
+  if (correct) quizScore++;
+  fb.textContent = (correct ? '✅ ' : '❌ ') + q.explanation;
+  fb.className = 'feedback-msg show ' + (correct ? 'correct' : 'wrong');
+  document.getElementById('qNextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  qIndex++;
+  renderQuestion();
+}
+
+// ============================================================
+//  SCREEN 5 — FINAL SCORE
+// ============================================================
+function showFinalScore() {
+  goTo(5);
+  totalScore = scores.sort + scores.seq + scores.ocv + scores.quiz;
+  var max = 100;
+  document.getElementById('finalScore').textContent = totalScore;
+
+  var msg;
+  if (totalScore >= 90) msg = "Outstanding! You've mastered the fundamentals of experimental design. Your tests will be precise, reliable, and purposeful.";
+  else if (totalScore >= 70) msg = "Great work! You have a solid grasp of experimental design. Review any areas you missed to sharpen your skills.";
+  else if (totalScore >= 50) msg = "Good effort! You're building a foundation in experimental design. Keep practicing the key concepts.";
+  else msg = "Keep going! Experimental design takes practice. Review the lesson, then try again — you'll improve!";
+
+  document.getElementById('scoreMsg').textContent = msg;
+
+  var bd = document.getElementById('scoreBreakdown');
+  bd.innerHTML = '';
+  var items = [
+    { label: 'Variable Sort', val: scores.sort, max: 30 },
+    { label: 'Protocol Order', val: scores.seq,  max: 25 },
+    { label: 'OCV Method',    val: scores.ocv,  max: 25 },
+    { label: 'Quiz',          val: scores.quiz, max: 20 }
+  ];
+  items.forEach(function(it) {
+    var div = document.createElement('div');
+    div.className = 'score-item';
+    div.innerHTML = '<div class="si-label">' + it.label + '</div><div class="si-val">' + it.val + '<span style="font-size:0.7em;color:#7a96b0;">/' + it.max + '</span></div>';
+    bd.appendChild(div);
+  });
+}
+
+// ============================================================
+//  RESTART
+// ============================================================
+function restartAll() {
+  scores = { sort: 0, seq: 0, ocv: 0, quiz: 0 };
+  totalScore = 0;
+
+  // Reset sort screen
+  var pool = document.getElementById('varPool');
+  pool.innerHTML = '<div class="pool-label">Factors to Sort</div>';
+  ['zone-ind','zone-dep','zone-con'].forEach(function(zid) {
+    var z = document.getElementById(zid);
+    // remove all var-cards
+    z.querySelectorAll('.var-card').forEach(function(c) { c.remove(); });
+  });
+  document.getElementById('sortFeedback').className = 'feedback-msg info';
+  document.getElementById('sortFeedback').textContent = '';
+  document.getElementById('checkSortBtn').disabled = false;
+
+  buildSort();
+
+  // Reset feedback
+  document.getElementById('seqFeedback').className = 'feedback-msg info';
+  document.getElementById('seqFeedback').textContent = '';
+
+  goTo(1);
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+buildSort();
+
+// Skip-to-next on sort/seq if already 100%
+// Allow manually passing even if not all correct by double-clicking check:
+var sortClickCount = 0;
+var seqClickCount  = 0;
+
+document.getElementById('checkSortBtn').addEventListener('click', function() {
+  sortClickCount++;
+  if (sortClickCount >= 2 && scores.sort < 30) {
+    // Let them proceed after 2 attempts
+    setTimeout(function() { goTo(2); buildSeq(); }, 600);
+  }
+});
+
+document.getElementById('checkSeqBtn').addEventListener('click', function() {
+  seqClickCount++;
+  if (seqClickCount >= 2 && scores.seq < 25) {
+    setTimeout(function() { goTo(3); buildOCV(); }, 600);
+  }
+});
+</script>
+</body>
+</html>

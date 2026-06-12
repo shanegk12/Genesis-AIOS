@@ -1,0 +1,103 @@
+{
+  "lesson_id": "C-076",
+  "topic": "System Upgrades and Backward Compatibility",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the term for the ability of new software or hardware to work with older versions of software or hardware?",
+      "options": {
+        "A": "System Upgrade",
+        "B": "Backward Compatibility",
+        "C": "Interoperability",
+        "D": "Optimization"
+      },
+      "answer": "B",
+      "explanation": "Backward compatibility is defined as the ability of new software or hardware to work with older versions."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the primary purpose of a 'System Upgrade'?",
+      "options": {
+        "A": "To completely replace an old system with a new one",
+        "B": "To enhance performance, add new features, or fix problems",
+        "C": "To make different systems communicate with each other",
+        "D": "To design independent parts for easy replacement"
+      },
+      "answer": "B",
+      "explanation": "A system upgrade is defined as a change or improvement made to a system to enhance its performance, add new features, or fix problems."
+    },
+    {
+      "type": "recall",
+      "question": "What does 'Modularity' mean in the context of system design?",
+      "options": {
+        "A": "The ability of different systems to work together seamlessly",
+        "B": "Designing a system with independent parts that can be easily replaced or upgraded",
+        "C": "The process of finding the best possible solution under constraints",
+        "D": "Permanent software programmed into read-only memory"
+      },
+      "answer": "B",
+      "explanation": "Modularity is defined as designing a system with independent parts (modules) that can be easily replaced or upgraded without affecting the entire system."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why is designing for system upgrades important for a product's 'Sustainability'?",
+      "options": {
+        "A": "It allows the product to be completely redesigned every few years",
+        "B": "It ensures the product can continue functioning and serving its purpose over a long period",
+        "C": "It makes the product cheaper to produce initially",
+        "D": "It prevents any future changes or improvements from being made"
+      },
+      "answer": "B",
+      "explanation": "Upgrades keep systems fresh and useful for longer, ensuring a product's ability to continue functioning and serving its purpose over a long period, which is the definition of sustainability."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson uses the analogy of upgrading kitchen appliances or adding solar panels to a house. What does this analogy primarily illustrate about system upgrades?",
+      "options": {
+        "A": "That all upgrades require tearing down the entire structure",
+        "B": "That the main structure of a system should be designed to accommodate future improvements",
+        "C": "That houses are more complex than most technological systems",
+        "D": "That older systems are always better than newer ones"
+      },
+      "answer": "B",
+      "explanation": "The house analogy explains that the main structure is designed to accommodate changes like new appliances without needing to be torn down, illustrating how original designs should consider future improvements."
+    },
+    {
+      "type": "comprehension",
+      "question": "When older software struggles to run on a newer operating system, the lesson explains this issue at an 'atomic level.' What is the fundamental cause at this level?",
+      "options": {
+        "A": "The older software is simply too slow for modern processors",
+        "B": "The new operating system's kernel handles low-level interactions differently, making the older software's machine code incompatible",
+        "C": "The user forgot to install the necessary drivers for the old software",
+        "D": "The older software was designed to be intentionally incompatible with newer systems"
+      },
+      "answer": "B",
+      "explanation": "The lesson states that at the atomic level, the issue can be linked to changes in how the new operating system's kernel handles low-level interactions, making the older software's machine code unable to execute correctly."
+    },
+    {
+      "type": "application",
+      "question": "A company releases a new version of its popular video game console. Users are excited to find that all their old game discs from the previous console still work perfectly on the new one. Which concept from the lesson does this scenario best demonstrate?",
+      "options": {
+        "A": "System Upgrade",
+        "B": "Modularity",
+        "C": "Backward Compatibility",
+        "D": "Optimization"
+      },
+      "answer": "C",
+      "explanation": "The ability of the new console (hardware) to work with old game discs (older software/media) is a direct example of backward compatibility."
+    },
+    {
+      "type": "application",
+      "question": "A student is designing a robot for a science fair. They decide to build the robot's arm, body, and wheels as separate, interchangeable units, so if one part breaks or needs improvement, they can swap it out without rebuilding the whole robot. Which design principle are they applying?",
+      "options": {
+        "A": "Interoperability",
+        "B": "Modularity",
+        "C": "Firmware",
+        "D": "Optimization"
+      },
+      "answer": "B",
+      "explanation": "Designing a system with independent parts that can be easily replaced or upgraded without affecting the entire system is the definition of modularity."
+    }
+  ]
+}

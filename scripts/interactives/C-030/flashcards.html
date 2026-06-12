@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Troubleshooting and Debugging Systems — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Troubleshooting and Debugging Systems</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Creationeering™ Troubleshooting Protocol", "definition": "A structured 6-step method for diagnosing and fixing system failures in physical, mechanical, and electrical systems."}, {"term": "System Failure", "definition": "When a system or component can no longer perform its intended function within specified limits."}, {"term": "System", "definition": "A group of parts working together to perform a function."}, {"term": "Engineer's Role in Troubleshooting", "definition": "To act as a technical diagnostician and steward, finding the root cause of system failures and restoring function."}, {"term": "Creationeering Framework", "definition": "An 8-step diagnostic map (Design through Death/Recycling) used to trace the root causes of system failures."}, {"term": "6-Step Troubleshooting Protocol", "definition": "Identify Symptom, Isolate Subsystem, Trace Creationeering Step, Develop Hypothesis, Implement Fix, Verify and Document."}, {"term": "Stewardship in Engineering", "definition": "Applying wisdom to rule and care for creation, including the systems we build, reflecting the Genesis mandate."}, {"term": "Purpose of Failure in Engineering", "definition": "Failure is an inevitable part of the human experience and serves as a valuable teacher for engineers."}, {"term": "Biblical Principles in Troubleshooting", "definition": "Perseverance (Proverbs 24:16) and seeking truth (Romans 8:28) are connected to the troubleshooting process."}, {"term": "Tolerance", "definition": "The allowable amount of variation in a measurement or property of a component."}, {"term": "Torque", "definition": "A twisting force that tends to cause rotation, often used in tightening fasteners."}, {"term": "Continuity", "definition": "The presence of a complete path for electrical current to flow, indicating a working circuit."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

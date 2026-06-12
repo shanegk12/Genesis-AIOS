@@ -1,0 +1,528 @@
+[
+  {
+    "id": "c053t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Reading and Interpreting Blueprints</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, you focused on Quality Control During Assembly — checking your work constantly, making sure every part fits perfectly, and ensuring your finished creation meets all required standards. That attention to detail is crucial for any successful project.</p>\n<p>Today, we stay firmly within the Assembly phase of the Creationeering™ framework, but we zoom out to the very beginning of the process. Before you can assemble anything, you need to know exactly what to build. This is where blueprints come in. Think of blueprints as the secret language of builders and engineers — detailed instructions that guide every single step of construction. Mastering this language will unlock your ability to create with precision and purpose, just as our Creator designed the universe with perfect specifications.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>By the end of this lesson, you will be able to:</p>\n<ul>\n<li>Identify the key components of an engineering blueprint, including the title block, different views, and dimensioning.</li>\n<li>Explain the purpose of various line types and symbols commonly found on technical drawings.</li>\n<li>Interpret scale and understand how it relates to the real-world size of an object.</li>\n<li>Connect macro-level blueprint information to the atomic-level properties of materials through Multiscale Modeling.</li>\n<li>Apply blueprint interpretation principles to ensure accurate assembly, reflecting good stewardship of resources and design intent.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Blueprint",
+          "definition": "A detailed technical drawing or plan used for construction or manufacturing. Traditionally white lines on a blue background, but today the term refers to any technical drawing."
+        },
+        {
+          "term": "Technical Drawing",
+          "definition": "A drawing that conveys information about how an object is to be built or manufactured, using a universal language of lines, symbols, and dimensions."
+        },
+        {
+          "term": "Orthographic Projection",
+          "definition": "A method of representing a 3D object in 2D by showing multiple aligned views — typically front, top, and side."
+        },
+        {
+          "term": "Scale",
+          "definition": "The ratio of an object's size in a drawing to its actual size. For example, 1:10 means the drawing is one-tenth the size of the real object."
+        },
+        {
+          "term": "Dimension",
+          "definition": "A measurement of length, width, height, or angle shown on a technical drawing to define the size and location of features."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable amount of variation in a dimension — defining the maximum and minimum acceptable size for a part to function correctly."
+        },
+        {
+          "term": "Annotation",
+          "definition": "Additional text, notes, or symbols added to a technical drawing to provide further information or clarify design intent."
+        },
+        {
+          "term": "Title Block",
+          "definition": "A section on a technical drawing that provides essential information such as the drawing name, number, scale, date, and designer."
+        },
+        {
+          "term": "Section View",
+          "definition": "A view on a technical drawing that shows what an object looks like if cut along an imaginary plane, revealing internal features."
+        },
+        {
+          "term": "Isometric View",
+          "definition": "A 3D representation of an object where all three axes — length, width, and height — are equally foreshortened to give a realistic perspective."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Grand Architect's Plan</h2>\n<p>Our journey into blueprints begins with a profound truth from Scripture. In Exodus 25:9, God instructs Moses: <em>\"According to all that I show you, that is, the pattern of the tabernacle and the pattern of all its furnishings, just so you shall make it.\"</em> God didn't just tell Moses to \"build a tent.\" He provided specific dimensions, materials, and arrangements — a divine blueprint — so that every detail would reflect His holy presence and purpose.</p>\n<p>That's exactly what a good blueprint does. It removes guesswork. It communicates intent so clearly that any skilled builder can look at the drawing and produce exactly what the designer had in mind. When you learn to read blueprints, you are learning to receive a designer's vision and faithfully bring it to life.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 25:9</strong> — \"According to all that I show you, that is, the pattern of the tabernacle and the pattern of all its furnishings, just so you shall make it.\" God's detailed instructions for the Tabernacle remind us that precision and intentional design honor the Creator. When you read a blueprint carefully and build faithfully to its specifications, you are reflecting that same commitment to excellence.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is a Blueprint?</h2>\n<p>The word \"blueprint\" comes from an old printing process that produced white lines on a blue background. Today, technical drawings are printed in many colors and formats — but engineers still call them blueprints. Whatever they look like, their job is the same: to communicate the complete design of an object so it can be built accurately, every single time.</p>\n<p>A blueprint is not just a pretty picture of what something will look like. It is a precise, information-packed document that tells a builder:</p>\n<ul>\n<li>What shape each part is</li>\n<li>How big each feature must be</li>\n<li>What material to use</li>\n<li>How tightly each measurement must be followed</li>\n<li>How different parts connect to each other</li>\n</ul>\n<p>Think of it like a recipe. A recipe doesn't just say \"make a cake\" — it gives exact measurements, temperatures, and steps. A blueprint does the same thing for physical objects.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A sample engineering blueprint showing title block, orthographic views, dimensions, and annotations"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Title Block: Your Starting Point</h2>\n<p>Every blueprint has a title block — usually found in the lower-right corner of the drawing. Before you look at anything else on a blueprint, check the title block first. It gives you the essential context you need to understand everything else on the page.</p>\n<p>A standard title block includes:</p>\n<ul>\n<li><strong>Drawing Name and Number</strong> — identifies what this blueprint describes</li>\n<li><strong>Scale</strong> — tells you how drawing measurements relate to real-world size</li>\n<li><strong>Designer/Engineer Name</strong> — who created the drawing</li>\n<li><strong>Date</strong> — when it was drawn or last revised</li>\n<li><strong>Revision History</strong> — tracks any changes made to the design over time</li>\n<li><strong>Material Specifications</strong> — sometimes lists the materials to be used</li>\n</ul>\n<p>Skipping the title block is like skipping the label on a medicine bottle. The information there is critical — it could be the difference between building the right part and building the wrong one entirely.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Always read the title block first.</strong> Check the scale, the drawing name, and the revision number before interpreting any dimensions. An outdated revision could mean you are building from old information — a costly mistake in any real project.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Views: Seeing All Sides</h2>\n<p>Real objects are three-dimensional — they have length, width, and height. But a flat piece of paper is only two-dimensional. So how do engineers communicate a 3D object on a 2D page? They use multiple views.</p>\n<h3>Orthographic Projection</h3>\n<p>Orthographic projection is the standard method used in engineering drawings. Imagine you could look at an object from directly in front, directly above, and directly from the right side — all at the same time. Each of those views is drawn separately and arranged on the page in a specific pattern so they align with each other perfectly.</p>\n<p>The three standard views are:</p>\n<ul>\n<li><strong>Front View</strong> — what you see looking straight at the object</li>\n<li><strong>Top View</strong> — what you see looking straight down from above</li>\n<li><strong>Right Side View</strong> — what you see looking from the right</li>\n</ul>\n<p>Reading these three views together lets you mentally reconstruct the full 3D shape of the object — like solving a puzzle.</p>\n<h3>Section View</h3>\n<p>Sometimes an object has complex internal features that are hidden from the outside. A section view solves this problem by imagining the object sliced open along a cutting plane, then showing you the inside. Hidden chambers, hollow spaces, and internal channels all become visible in a section view.</p>\n<h3>Isometric View</h3>\n<p>An isometric view gives you a realistic-looking 3D picture of the object — useful for understanding the overall shape at a glance. Unlike orthographic views, isometric views are not used for taking measurements. They are visual aids, not measurement tools.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing orthographic projection — front, top, and right-side views of the same 3D object arranged on a drawing sheet"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053c002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Remember:</strong> Orthographic views are for measuring. Isometric views are for visualizing. Never try to take a dimension directly from an isometric view — the angles are distorted and the measurements will not be accurate.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Dimensions, Tolerances, and Annotations</h2>\n<h3>Dimensions</h3>\n<p>Dimensions are the numbers on a blueprint that tell you how big something is. They are shown using dimension lines — thin lines with arrows at each end pointing to the feature being measured — and a number in the middle indicating the measurement. Dimensions can describe lengths, widths, heights, diameters, radii, and angles.</p>\n<p>Every single dimension on a blueprint matters. Miss one, and your part might not fit. Get one wrong, and the entire assembly could fail. This is why engineering drawings use a universal system of dimensioning — so that anyone, anywhere in the world, can read the same drawing and produce the same part.</p>\n<h3>Tolerances</h3>\n<p>Here is where things get really interesting. Almost nothing in manufacturing is perfectly exact. Machines have small variations. Materials expand and contract with temperature. A tolerance is the engineer's way of saying, \"This measurement doesn't have to be perfect — but it must be within this range.\"</p>\n<p>For example, a dimension might read <strong>50 ± 0.5 mm</strong>. That means the feature must be between 49.5 mm and 50.5 mm. Anything outside that range and the part fails quality control. Tolerances connect directly to what you learned in your Quality Control lesson — they are the standard you are checking against.</p>\n<h3>Annotations</h3>\n<p>Annotations are the notes and symbols scattered across a blueprint. They might specify a surface finish, call out a special manufacturing process, or give assembly instructions. Never ignore annotations — they often carry information that cannot be shown with lines and numbers alone.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053c003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common Mistake:</strong> Students often read only the dimension number and ignore the tolerance. Always check both. A part that is the right size but outside its tolerance will fail inspection — no matter how carefully you built it.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Scale</h2>\n<p>Very few objects are drawn at their actual size. A blueprint of an airplane would need to be enormous. A blueprint of a microchip would be invisible. That's why engineers use scale.</p>\n<p>Scale is a ratio that tells you the relationship between the drawing and the real object. Here are the most common types:</p>\n<ul>\n<li><strong>Full Scale (1:1)</strong> — the drawing is the same size as the real object</li>\n<li><strong>Reduced Scale (e.g., 1:10)</strong> — the drawing is smaller than the real object. A 1:10 scale means 1 unit on the drawing equals 10 units in real life.</li>\n<li><strong>Enlarged Scale (e.g., 10:1)</strong> — the drawing is larger than the real object. Used for very small parts like electronic components.</li>\n</ul>\n<p>Always use the dimensions written on the drawing — not a ruler held up to the page. The printed scale can shift slightly depending on how the drawing was printed, making ruler measurements unreliable. Trust the numbers, not the size of the lines.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053c004",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Quick Scale Check:</strong> If a blueprint says scale 1:5 and you measure a feature on the page as 20 mm, the real-world size is 20 × 5 = 100 mm. Multiply the drawing measurement by the second number in the ratio to get the actual size.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Line Types and What They Mean</h2>\n<p>On a blueprint, not all lines are equal. Different line types carry different meanings, and learning them is like learning the alphabet of technical drawing. Here are the most important ones:</p>\n<ul>\n<li><strong>Visible Lines (thick, solid)</strong> — show the edges of the object that you can see from that view</li>\n<li><strong>Hidden Lines (thin, dashed)</strong> — show edges or features that exist but are hidden behind other surfaces in that view</li>\n<li><strong>Center Lines (thin, alternating long-short dashes)</strong> — mark the center of circles, arcs, and symmetric features</li>\n<li><strong>Dimension Lines (thin, solid with arrows)</strong> — show what is being measured</li>\n<li><strong>Extension Lines (thin, solid)</strong> — extend from the object to the dimension line</li>\n<li><strong>Section Lines (thin, angled hatching)</strong> — fill in areas that have been \"cut\" in a section view</li>\n<li><strong>Cutting Plane Lines (thick, dashed with arrows)</strong> — show where a section view cut is made</li>\n</ul>\n<p>Misreading a hidden line as a visible line is one of the most common blueprint reading errors. Pay attention to line weight and style — they are not decorative choices. Every line type was standardized for a reason.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053i003",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Reference chart showing the standard line types used in engineering drawings — visible, hidden, center, dimension, extension, section, and cutting plane lines"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>From Blueprint to Assembly: Multiscale Modeling</h2>\n<p>Here is a concept that connects your blueprint knowledge to a much bigger picture. A blueprint operates at what engineers call the <strong>macro scale</strong> — the scale you can see and measure with your hands and eyes. But the materials you build with exist at a much smaller scale: the <strong>atomic and molecular scale</strong>.</p>\n<p><strong>Multiscale Modeling</strong> is the engineering practice of understanding how properties at the atomic level — like the crystal structure of a metal or the bond strength of a polymer — affect the behavior of a finished part at the macro level. In other words, what happens to tiny invisible atoms determines whether your large visible structure holds together under stress.</p>\n<p>When a blueprint specifies a material, it is making a multiscale decision. The designer chose that material because its atomic-level properties — hardness, ductility, thermal conductivity — match the demands of the design. Reading a blueprint well means understanding not just the shape of the part, but <em>why</em> the specified material was chosen for that shape and that purpose.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053c005",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>Multiscale Thinking in Action:</strong> When a blueprint calls for a steel bolt rated to a specific strength, an engineer has already calculated that the atomic grain structure of that steel grade can handle the load. The number on the blueprint is the visible result of invisible science happening at the material level.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d008",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Blueprints as Stewardship</h2>\n<p>Reading blueprints accurately is not just a technical skill — it is an act of stewardship. When you build according to the blueprint, you honor the designer's intent. You avoid wasting materials. You ensure the finished product is safe and effective for whoever will use it.</p>\n<p>Ignoring or misreading a blueprint wastes resources — time, materials, money, and effort. These are gifts entrusted to you. Poor stewardship of those resources is not just a technical failure; it is a failure of responsibility. God calls us to be faithful in the things He has placed in our care, and that includes building well from accurate information.</p>\n<p>This is why engineers take blueprint reading seriously. And this is why you should too.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053b002",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 16:10</strong> — \"Whoever can be trusted with very little can also be trusted with much.\" Following a blueprint precisely — even when no one is watching and even on the smallest detail — is exactly this kind of faithfulness. Build with integrity at every scale.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053d009",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053t013",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use these questions to review what you have learned. Think through each one carefully before checking the answer.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the first thing you should read on any blueprint, and why?",
+      "html": "<p>The <strong>title block</strong> — usually found in the lower-right corner. It tells you the drawing name, scale, designer, date, and revision history. This context is essential before interpreting any other part of the drawing.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a002",
+    "type": "accordion",
+    "data": {
+      "title": "A blueprint shows a scale of 1:20. If a wall measures 15 cm on the drawing, how long is the real wall?",
+      "html": "<p>Multiply the drawing measurement by the scale factor: 15 cm × 20 = <strong>300 cm (or 3 meters)</strong>. Always use the written dimensions on the drawing rather than measuring the printed lines directly.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a003",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a hidden line and a visible line on a blueprint?",
+      "html": "<p>A <strong>visible line</strong> is thick and solid — it shows an edge you can see from that view. A <strong>hidden line</strong> is thin and dashed — it shows an edge or feature that exists but is hidden behind another surface in that particular view. Confusing the two can lead to building a part with the wrong shape.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a004",
+    "type": "accordion",
+    "data": {
+      "title": "A dimension reads 75 ± 1.5 mm. What is the acceptable range for this feature?",
+      "html": "<p>The feature must measure between <strong>73.5 mm and 76.5 mm</strong>. Anything outside that range falls outside tolerance and does not meet the design specification — it would fail quality control.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a005",
+    "type": "accordion",
+    "data": {
+      "title": "How does Multiscale Modeling connect to reading a blueprint?",
+      "html": "<p>A blueprint specifies materials at the macro level — what you can see and measure. But material choices are based on atomic-level properties like crystal structure, bond strength, and hardness. Multiscale Modeling is the practice of connecting these two scales. When a blueprint calls for a specific material, it reflects an understanding of how invisible atomic properties affect visible structural performance.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c053a006",
+    "type": "accordion",
+    "data": {
+      "title": "How does reading a blueprint connect to the biblical concept of stewardship?",
+      "html": "<p>Following a blueprint accurately honors the designer's intent and avoids wasting materials, time, and money — all resources entrusted to us. Ignoring or misreading a blueprint is a failure of responsibility. God calls us to be faithful in small things, and that includes building precisely from accurate information.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

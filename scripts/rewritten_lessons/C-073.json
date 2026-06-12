@@ -1,0 +1,317 @@
+[
+  {
+    "id": "c073t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Material Toxicity and Hazard Minimization</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In our last lesson, we explored how engineers measure and reduce the environmental footprint of their designs through carbon accounting. We learned that every product and process leaves a mark on God's creation, and it's our responsibility to be wise stewards of what He has made. Today, we're building on that foundation by diving into <strong>Material Toxicity and Hazard Minimization</strong> — a critical part of the Creationeering™ Sustainability phase.</p><p>You'll learn how engineers identify and reduce harmful substances in their designs, protecting the health of both people and the planet. Along the way, we'll connect these engineering principles to our biblical mandate for dominion and stewardship, recognizing that minimizing toxicity is an act of genuine care for God's creation and for our fellow humans.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>By the end of this lesson, you will be able to:</p><ul><li>Identify common types of material toxicity and hazards in engineered products.</li><li>Explain the importance of hazard minimization within the Creationeering™ Sustainability phase.</li><li>Apply the Objective, Constraint, Variable (OCV) method to a material selection problem for hazard minimization.</li><li>Connect macro-level observations of material toxicity to their atomic-level causes.</li><li>Articulate the biblical basis for minimizing material toxicity as an act of stewardship over God's creation.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Toxicity",
+          "definition": "The degree to which a substance can harm an organism."
+        },
+        {
+          "term": "Hazard",
+          "definition": "A source of potential harm or adverse health effect on a person or ecosystem."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "The ability of an engineering system to employ resources to remain after the process and product are completed, without compromising the environment or depleting materials for future generations."
+        },
+        {
+          "term": "Exposure",
+          "definition": "The contact of an organism with a chemical or physical agent."
+        },
+        {
+          "term": "Risk",
+          "definition": "The probability of a hazard occurring and the severity of its consequences."
+        },
+        {
+          "term": "Lifecycle Assessment",
+          "definition": "A method to evaluate the environmental impacts of a product from raw material extraction to disposal."
+        },
+        {
+          "term": "Bioaccumulation",
+          "definition": "The buildup of substances, such as pesticides or other chemicals, in an organism over time."
+        },
+        {
+          "term": "Green Chemistry",
+          "definition": "The design of chemical products and processes that reduce or eliminate the use and generation of hazardous substances."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "Connecting observations at large scales (macro) to their underlying causes at small scales (atomic)."
+        },
+        {
+          "term": "Dominion Mandate",
+          "definition": "God's command to humanity to rule over, care for, and steward His creation responsibly."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Careful Design</h2><p>Our journey into material toxicity begins with a foundational truth from Scripture. Genesis 1:31 tells us, <em>\"God saw everything that He had made, and indeed it was very good.\"</em> Think about what that means for a moment. God's original creation was perfect — free from harm, free from toxicity, designed with inherent goodness built into every layer of it.</p><p>That's our engineering target. When you design a product, you're aiming at the same goal: something that is genuinely good for the people who use it and for the world it exists in. We live in a fallen world where harmful substances exist and decay is real, but that doesn't let engineers off the hook. If anything, it raises the stakes. Identifying and minimizing hazards in our designs is how we push back against that decay and honor both God and the people He loves.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:31</strong> — \"God saw everything that He had made, and indeed it was very good.\"</p><p>This verse is more than a history lesson — it's a design standard. Every time you choose a safer material or eliminate a hazardous chemical from your design, you're working toward that same \"very good\" that God built into creation.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>Understanding Toxicity and Hazards</h2><p>Imagine you're building a treehouse. You want it to be safe for everyone who climbs in. You wouldn't use lumber coated in a paint that releases harmful fumes, or nails treated with a chemical that burns skin on contact. That instinct — choosing materials that won't hurt people — is exactly what material toxicity thinking looks like in real engineering.</p><p><strong>Toxicity</strong> is the degree to which a substance can harm a living organism. A <strong>hazard</strong> is anything with the potential to cause that harm. Not every hazardous material is equally dangerous, though. The actual <strong>risk</strong> depends on two things working together: how toxic the substance is, and how much <strong>exposure</strong> someone actually has to it.</p><p>Think of it like electricity. Electricity is hazardous — it can seriously hurt you. But the risk of getting shocked while using a properly insulated lamp is very low, because good design controls your exposure. Engineers use the same logic with toxic materials: reduce the hazard, reduce the exposure, and you reduce the risk.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t006",
+    "type": "text",
+    "data": {
+      "html": "<h3>Types of Material Hazards</h3><p>Material hazards show up in several different forms. Understanding the categories helps you know what to look for in your own designs:</p><ul><li><strong>Chemical hazards</strong> — substances that are toxic, flammable, corrosive, or reactive. Examples include lead in old paint, mercury in certain batteries, and solvents in industrial adhesives.</li><li><strong>Physical hazards</strong> — materials that cause harm through their physical properties, like sharp edges, extreme temperatures, or radiation.</li><li><strong>Biological hazards</strong> — materials that promote the growth of harmful bacteria or mold, or that come from biological sources and trigger allergic reactions.</li><li><strong>Environmental hazards</strong> — substances that don't break down easily in nature, accumulating in soil, water, and living organisms through a process called <strong>bioaccumulation</strong>.</li></ul><p>Bioaccumulation is especially important to understand. When a toxic chemical enters an ecosystem, it doesn't just disappear. It gets absorbed by small organisms, which get eaten by larger ones, and the chemical concentration builds up at every step of the food chain. What starts as a trace amount in river water can become a dangerous concentration in a fish — and then in the person who eats that fish.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073i001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A diagram showing bioaccumulation in a food chain: trace chemical in water absorbed by algae, then small fish, then large fish, then human — with concentration levels increasing at each step."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Lifecycle of a Hazard</h2><p>Here's something that surprises a lot of engineers when they first encounter it: a material can be perfectly safe during normal use but extremely hazardous during manufacturing or disposal. That's why engineers use a <strong>Lifecycle Assessment (LCA)</strong> — a method that evaluates environmental and health impacts at every stage of a product's life.</p><p>The lifecycle of a product moves through five key stages:</p><ul><li><strong>Raw material extraction</strong> — mining, drilling, or harvesting the base materials.</li><li><strong>Manufacturing</strong> — processing and assembling those materials into a product.</li><li><strong>Distribution</strong> — transporting the product to where it's sold or used.</li><li><strong>Use</strong> — the period when a person or system is actively using the product.</li><li><strong>End of life</strong> — disposal, recycling, or breakdown of the product after it's no longer useful.</li></ul><p>Hazards can appear at any of these stages. Lead solder used inside electronics might not harm someone who holds the finished phone, but it becomes a serious problem when that phone is improperly disposed of in a landfill and the lead leaches into groundwater. A good engineer thinks about all five stages, not just the part the customer sees.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>From the Big Picture to the Atomic Level</h2><p>One of the most powerful tools engineers use is <strong>multiscale modeling</strong> — connecting what you can see with the naked eye (macro scale) to what's happening at the molecular or atomic level (micro scale). This matters a lot in toxicity analysis.</p><p>When you see rust forming on a steel bridge, that's a macro-level observation. But the cause is happening at the atomic level: iron atoms are reacting with oxygen and water molecules. The same principle applies to toxic materials. When someone develops a respiratory illness from inhaling tiny fibers of asbestos, the macro-level outcome (lung disease) is driven by micro-level events — those microscopic fibers physically damaging cells at the molecular level.</p><p>Understanding this connection helps engineers design better solutions. Instead of just treating symptoms at the macro level, they can target the root cause at the atomic level — choosing substitute materials whose atomic structure makes them chemically stable and non-reactive with human tissue.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Green Chemistry: Designing Out the Hazard</h2><p><strong>Green Chemistry</strong> is the engineering discipline focused on designing chemical products and processes that reduce or eliminate hazardous substances from the start. Rather than figuring out how to safely handle a toxic chemical after you've already decided to use it, green chemistry asks: <em>can we design the product so we never need that chemical at all?</em></p><p>This is a much smarter approach. It's like the difference between building a house with a faulty foundation and then spending years patching cracks, versus building it correctly from day one. Prevention is almost always cheaper, safer, and more effective than remediation.</p><p>Green chemistry operates on several guiding principles, including:</p><ul><li>Design products to break down into harmless substances after use.</li><li>Use renewable feedstocks (raw materials that can be replenished) instead of non-renewable ones.</li><li>Minimize the creation of waste and byproducts at every step of the process.</li><li>Choose safer solvents and reaction conditions whenever possible.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073i002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side comparison of a conventional chemical manufacturing process generating hazardous waste versus a green chemistry process producing harmless byproducts, with labeled inputs and outputs."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying OCV to Material Selection</h2><p>Remember the <strong>Objective, Constraint, Variable (OCV)</strong> method from earlier in the course? It's one of your most useful tools when making material selection decisions for hazard minimization. Here's how it maps onto this problem:</p><ul><li><strong>Objective</strong> — What are you trying to achieve? For hazard minimization, a common objective is: <em>minimize the toxicity risk to users and the environment across the full product lifecycle.</em></li><li><strong>Constraint</strong> — What limits your choices? Constraints might include budget, required mechanical properties (like strength or flexibility), regulatory requirements, or manufacturing capabilities.</li><li><strong>Variable</strong> — What can you change to meet the objective within the constraints? Here, the variable is your material choice — which specific material or chemical will you select?</li></ul><p>For example, suppose you're designing a children's toy. Your objective is to minimize chemical hazard exposure for young children. A constraint is that the toy must be brightly colored and durable. Your variable is the type of paint or dye used. Using OCV, you'd systematically compare paint options, ruling out those containing lead or cadmium (high toxicity) and identifying water-based, non-toxic alternatives that still meet your durability and color constraints.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073c001",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>OCV in action:</strong> When you're evaluating materials, always ask the three questions in order. Start with your objective (what does safe look like here?), then identify your constraints (what can't you change?), and only then explore your variables (what material choices do you actually have?). Jumping straight to variables without a clear objective leads to guesswork.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t011",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship in Action</h2><p>The Dominion Mandate in Genesis gives humanity authority over creation — but authority always comes with responsibility. Proverbs 12:10 reinforces this: <em>\"A righteous man cares for the needs of his animal.\"</em> If God expects us to care for individual animals, how much more does He expect us to care for entire ecosystems and the people who depend on them?</p><p>Minimizing material toxicity is one of the most direct ways an engineer exercises that stewardship. Every time you choose a safer substitute material, eliminate a hazardous byproduct, or design a product that breaks down harmlessly at end of life, you are actively caring for the creation God entrusted to you. That's not just good engineering — it's faithful living.</p><p>The Creationeering™ framework's Sustainability phase exists precisely to formalize this responsibility. It ensures that your designs don't just work well today, but that they don't leave a harmful legacy for the people and ecosystems that come after you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073c002",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common misconception:</strong> Many students assume that if a material is legal to use, it must be safe. That's not always true. Regulatory standards vary by country and often lag behind scientific research. Engineers are responsible for going beyond minimum legal compliance and actively seeking out the safest options available — not just the cheapest ones that pass inspection.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073t012",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2><p>Material toxicity and hazard minimization might sound like a highly technical, specialized topic — and in some ways it is. But the core idea is simple: the materials you choose affect real people and real ecosystems, and a thoughtful engineer takes that seriously from the very first design decision.</p><p>Here's a quick summary of what you've covered in this lesson:</p><ul><li>Toxicity and hazards exist in many forms — chemical, physical, biological, and environmental.</li><li>Risk is a combination of how hazardous a substance is and how much exposure occurs.</li><li>Bioaccumulation means that even small amounts of toxic substances can build up to dangerous levels in ecosystems.</li><li>Lifecycle Assessment helps engineers identify hazards at every stage of a product's life, not just during use.</li><li>Multiscale modeling connects what we observe at the large scale to root causes at the atomic level.</li><li>Green chemistry aims to design out hazards before they're ever introduced into a product.</li><li>The OCV method gives you a structured way to make safer material choices within real-world constraints.</li><li>Hazard minimization is an expression of biblical stewardship — caring for God's creation and the people in it.</li></ul>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c073a001",
+    "type": "accordion",
+    "data": {
+      "title": "Dig Deeper: Real-World Examples of Hazard Minimization",
+      "html": "<p>Want to see how these principles play out in actual engineering history? Here are a few cases worth knowing:</p><ul><li><strong>Lead in gasoline:</strong> For decades, lead was added to gasoline to improve engine performance. Engineers and public health researchers eventually connected this to widespread lead poisoning in children — a textbook case of a hazard that was well-understood scientifically but ignored for economic reasons. It was phased out in the US by 1996. Today, lead-free alternatives are standard.</li><li><strong>CFCs and the ozone layer:</strong> Chlorofluorocarbons (CFCs) were used in refrigerants and aerosol sprays because they were chemically stable and seemed harmless. It turned out that stability was a problem — CFCs don't break down in the lower atmosphere, and when they reach the stratosphere, they destroy ozone molecules. The Montreal Protocol (1987) phased them out globally and is considered one of the most successful environmental engineering policy achievements in history.</li><li><strong>BPA in plastics:</strong> Bisphenol A (BPA) was widely used in plastic bottles and food container linings. Research showed it could mimic estrogen and disrupt hormone systems, especially in developing children. This triggered a massive industry shift toward BPA-free materials — a real-world example of lifecycle assessment and green chemistry working together to eliminate a hazard.</li></ul><p>Each of these cases shows the same pattern: a material that seemed fine turned out to have hidden hazards revealed over time. The lesson for engineers? Invest in thorough lifecycle assessment and toxicity analysis upfront — it's far less costly than fixing a global problem after the fact.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

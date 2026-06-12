@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Stress & Strain Sandbox — Creationeering</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B3A5C;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  header {
+    text-align: center;
+    padding: 10px 0 6px;
+    width: 100%;
+  }
+  header h1 {
+    font-size: 1.25rem;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  header p {
+    font-size: 0.72rem;
+    color: #a0b8d0;
+    margin-top: 2px;
+  }
+  #main {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
+  }
+  #canvasWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 auto;
+  }
+  canvas {
+    background: #0d2035;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    display: block;
+    touch-action: none;
+    width: 100%;
+    max-width: 560px;
+  }
+  #panel {
+    background: #162d47;
+    border: 1.5px solid #C9A84C55;
+    border-radius: 10px;
+    padding: 14px 14px 10px;
+    min-width: 200px;
+    max-width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .section-label {
+    font-size: 0.65rem;
+    color: #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid #C9A84C44;
+    padding-bottom: 4px;
+    margin-bottom: 2px;
+  }
+  .ctrl-group { display: flex; flex-direction: column; gap: 10px; }
+  .ctrl { display: flex; flex-direction: column; gap: 3px; }
+  .ctrl label {
+    font-size: 0.72rem;
+    color: #a0c8e8;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ctrl label span { color: #C9A84C; font-weight: bold; }
+  input[type=range] {
+    width: 100%;
+    accent-color: #C9A84C;
+    cursor: pointer;
+    height: 18px;
+  }
+  .stress-type-btns { display: flex; gap: 5px; flex-wrap: wrap; }
+  .type-btn {
+    flex: 1 1 auto;
+    padding: 5px 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    border: 1.5px solid #C9A84C88;
+    background: #1B3A5C;
+    color: #a0c8e8;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    touch-action: manipulation;
+  }
+  .type-btn.active {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-color: #C9A84C;
+  }
+  .readouts { display: flex; flex-direction: column; gap: 7px; }
+  .readout-box {
+    background: #0d2035;
+    border: 1px solid #C9A84C55;
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .readout-title { font-size: 0.6rem; color: #7a9aba; text-transform: uppercase; letter-spacing: 1px; }
+  .readout-val { font-size: 1.1rem; font-weight: bold; color: #C9A84C; }
+  .readout-unit { font-size: 0.6rem; color: #7a9aba; }
+  .status-box {
+    background: #0d2035;
+    border-radius: 6px;
+    padding: 6px 10px;
+    border: 1px solid #C9A84C55;
+    font-size: 0.68rem;
+    color: #a0c8e8;
+    line-height: 1.4;
+  }
+  .status-box b { color: #C9A84C; }
+  #resetBtn {
+    width: 100%;
+    padding: 9px;
+    background: #1B3A5C;
+    border: 2px solid #C9A84C;
+    color: #C9A84C;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 7px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.15s, color 0.15s;
+    touch-action: manipulation;
+  }
+  #resetBtn:hover { background: #C9A84C; color: #1B3A5C; }
+  #quote {
+    font-size: 0.62rem;
+    color: #5a7a9a;
+    text-align: center;
+    font-style: italic;
+    margin-top: 4px;
+    padding: 0 8px;
+    line-height: 1.5;
+  }
+  @media (max-width: 620px) {
+    #main { flex-direction: column; align-items: center; }
+    #panel { max-width: 100%; width: 100%; min-width: unset; flex-direction: row; flex-wrap: wrap; }
+    #panel > * { flex: 1 1 160px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Stress &amp; Strain Physics Sandbox</h1>
+  <p>Creationeering · Genesis K-12 Academy · Apply force, observe deformation, analyze failure</p>
+</header>
+<div id="main">
+  <div id="canvasWrap">
+    <canvas id="c" width="560" height="420"></canvas>
+    <div id="quote">"By wisdom a house is built, and through understanding it is established." — Proverbs 24:3</div>
+  </div>
+  <div id="panel">
+    <div>
+      <div class="section-label">Stress Type</div>
+      <div class="stress-type-btns" style="margin-top:6px;">
+        <button class="type-btn active" id="btnTensile" onclick="setType('tensile')">Tensile</button>
+        <button class="type-btn" id="btnCompressive" onclick="setType('compressive')">Compressive</button>
+        <button class="type-btn" id="btnShear" onclick="setType('shear')">Shear</button>
+      </div>
+    </div>
+    <div class="ctrl-group">
+      <div class="section-label">Controls</div>
+      <div class="ctrl">
+        <label>Applied Force (F) <span id="forceVal">0</span> N</label>
+        <input type="range" id="forceSlider" min="0" max="1000" value="0" step="1">
+      </div>
+      <div class="ctrl">
+        <label>Cross-Section Area (A) <span id="areaVal">50</span> mm²</label>
+        <input type="range" id="areaSlider" min="5" max="200" value="50" step="1">
+      </div>
+      <div class="ctrl">
+        <label>Material <span id="matVal">Steel</span></label>
+        <input type="range" id="matSlider" min="0" max="3" value="0" step="1">
+      </div>
+    </div>
+    <div class="readouts">
+      <div class="section-label">Measurements</div>
+      <div class="readout-box">
+        <div class="readout-title">Stress σ = F/A</div>
+        <div class="readout-val" id="stressOut">0.00</div>
+        <div class="readout-unit">MPa</div>
+      </div>
+      <div class="readout-box">
+        <div class="readout-title">Strain ε = ΔL/L₀</div>
+        <div class="readout-val" id="strainOut">0.000000</div>
+        <div class="readout-unit">mm/mm (unitless)</div>
+      </div>
+    </div>
+    <div class="status-box" id="statusBox">
+      Status: <b>No Load</b><br>Region: Elastic
+    </div>
+    <button id="resetBtn" onclick="resetAll()">↺ Reset</button>
+  </div>
+</div>
+
+<script>
+// ─── Material definitions ───────────────────────────────────────────────────
+const MATERIALS = [
+  { name: 'Steel',    E: 200000, yieldMPa: 250,  utsMPa: 400,  color: '#8ab0cc', fracColor: '#ff4444' },
+  { name: 'Aluminum', E: 69000,  yieldMPa: 95,   utsMPa: 145,  color: '#c0c080', fracColor: '#ff4444' },
+  { name: 'Rubber',   E: 100,    yieldMPa: 5,    utsMPa: 12,   color: '#a06030', fracColor: '#ff4444' },
+  { name: 'Concrete', E: 30000,  yieldMPa: 20,   utsMPa: 28,   color: '#aaaaaa', fracColor: '#ff4444' }
+];
+
+// ─── State ──────────────────────────────────────────────────────────────────
+let stressType = 'tensile';
+let force = 0;
+let area = 50;
+let matIdx = 0;
+let fractured = false;
+let animT = 0;
+let lastRaf = null;
+
+// ─── Canvas ─────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  const wrap = document.getElementById('canvasWrap');
+  const w = Math.min(wrap.clientWidth, 560);
+  canvas.style.width = w + 'px';
+  canvas.style.height = Math.round(w * 420 / 560) + 'px';
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ─── Controls ───────────────────────────────────────────────────────────────
+const forceSlider = document.getElementById('forceSlider');
+const areaSlider  = document.getElementById('areaSlider');
+const matSlider   = document.getElementById('matSlider');
+
+forceSlider.addEventListener('input', () => {
+  if (fractured) return;
+  force = +forceSlider.value;
+  document.getElementById('forceVal').textContent = force;
+  update();
+});
+areaSlider.addEventListener('input', () => {
+  if (fractured) return;
+  area = +areaSlider.value;
+  document.getElementById('areaVal').textContent = area;
+  update();
+});
+matSlider.addEventListener('input', () => {
+  matIdx = +matSlider.value;
+  document.getElementById('matVal').textContent = MATERIALS[matIdx].name;
+  if (fractured) { fractured = false; }
+  update();
+});
+
+function setType(t) {
+  stressType = t;
+  ['Tensile','Compressive','Shear'].forEach(s => {
+    document.getElementById('btn'+s).classList.toggle('active', t === s.toLowerCase());
+  });
+  if (fractured) { fractured = false; }
+  update();
+}
+
+function resetAll() {
+  force = 0; area = 50; matIdx = 0; fractured = false; stressType = 'tensile';
+  forceSlider.value = 0; areaSlider.value = 50; matSlider.value = 0;
+  document.getElementById('forceVal').textContent = '0';
+  document.getElementById('areaVal').textContent = '50';
+  document.getElementById('matVal').textContent = 'Steel';
+  setType('tensile');
+  update();
+}
+
+// ─── Physics calc ───────────────────────────────────────────────────────────
+function calcPhysics() {
+  const mat = MATERIALS[matIdx];
+  const stressMPa = force / area; // F(N) / A(mm²) = MPa
+  const strain = stressMPa / mat.E;
+  const yieldRatio = stressMPa / mat.yieldMPa;
+  const utsRatio   = stressMPa / mat.utsMPa;
+
+  let region = 'No Load';
+  let statusColor = '#a0c8e8';
+  if (stressMPa === 0) { region = 'No Load'; }
+  else if (utsRatio >= 1.0) { region = '⚠ FRACTURE'; statusColor = '#ff4444'; fractured = true; }
+  else if (yieldRatio >= 1.0) { region = 'Plastic (Permanent Damage)'; statusColor = '#ff8844'; }
+  else if (yieldRatio >= 0.85) { region = 'Near Yield Point!'; statusColor = '#ffcc44'; }
+  else { region = 'Elastic (Safe)'; statusColor = '#44cc88'; }
+
+  return { stressMPa, strain, region, statusColor, yieldRatio, utsRatio, mat };
+}
+
+// ─── Update readouts ────────────────────────────────────────────────────────
+function update() {
+  const p = calcPhysics();
+  document.getElementById('stressOut').textContent = p.stressMPa.toFixed(2);
+  document.getElementById('strainOut').textContent = p.strain.toFixed(6);
+  const sb = document.getElementById('statusBox');
+  sb.innerHTML = `Status: <b style="color:${p.statusColor}">${fractured ? '⚠ FRACTURED' : (p.stressMPa===0?'No Load':'Under Load')}</b><br>Region: <span style="color:${p.statusColor}">${p.region}</span>`;
+}
+
+// ─── Easing ─────────────────────────────────────────────────────────────────
+function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+// ─── Drawing helpers ─────────────────────────────────────────────────────────
+function drawRoundRect(x,y,w,h,r,fill,stroke,sw) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw||1;ctx.stroke();}
+}
+
+function drawArrow(x1,y1,x2,y2,color,label,flip) {
+  const hw=8, hl=14;
+  ctx.save();
+  ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  const ang=Math.atan2(y2-y1,x2-x1);
+  ctx.save(); ctx.translate(x2,y2); ctx.rotate(ang);
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-hl,-hw/2); ctx.lineTo(-hl,hw/2); ctx.closePath(); ctx.fill();
+  ctx.restore();
+  if(label){
+    ctx.font='bold 11px Segoe UI, Arial';
+    ctx.fillStyle=color;
+    const mx=(x1+x2)/2, my=(y1+y2)/2;
+    ctx.fillText(label, mx+(flip?-40:12), my+4);
+  }
+  ctx.restore();
+}
+
+// ─── Stress-Strain Curve ────────────────────────────────────────────────────
+function drawCurve(p, cx, cy, cw, ch) {
+  const mat = p.mat;
+  const pad = {l:34,r:10,t:18,b:28};
+  const gx=cx+pad.l, gy=cy+pad.t, gw=cw-pad.l-pad.r, gh=ch-pad.t-pad.b;
+
+  // background
+  drawRoundRect(cx,cy,cw,ch,6,'#0d2035','#C9A84C33',1);
+
+  // title
+  ctx.font='bold 10px Segoe UI,Arial'; ctx.fillStyle='#C9A84C';
+  ctx.fillText('Stress-Strain Curve',cx+4,cy+13);
+
+  // axes
+  ctx.strokeStyle='#3a5a7a'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(gx,gy); ctx.lineTo(gx,gy+gh); ctx.lineTo(gx+gw,gy+gh); ctx.stroke();
+  ctx.fillStyle='#5a8aaa'; ctx.font='9px Arial';
+  ctx.fillText('ε →',gx+gw-14,gy+gh+16);
+  ctx.save(); ctx.translate(gx-24,gy+gh/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('σ →',0,0); ctx.restore();
+
+  // curve path
+  const pts=[];
+  const eAtYield = mat.yieldMPa/mat.E;
+  const eAtUTS   = eAtYield*6;
+  const eMax     = eAtUTS*1.18;
+  const sigMax   = mat.utsMPa;
+
+  for(let i=0;i<=120;i++){
+    const t=i/120;
+    const e=t*eMax;
+    let s;
+    if(e<=eAtYield){ s=mat.E*e; }
+    else {
+      const tr=(e-eAtYield)/(eAtUTS-eAtYield);
+      const tr2=Math.min(tr,1);
+      s=mat.yieldMPa+(mat.utsMPa-mat.yieldMPa)*Math.sin(tr2*Math.PI/2);
+      if(e>eAtUTS){ s=mat.utsMPa*(1-((e-eAtUTS)/(eMax-eAtUTS))*0.18); }
+    }
+    pts.push({ e, s });
+  }
+
+  const toX=e=>(gx + (e/eMax)*gw);
+  const toY=s=>(gy+gh - (s/sigMax)*gh);
+
+  // shade elastic region
+  ctx.beginPath();
+  const yPx=toX(eAtYield);
+  ctx.rect(gx,gy,yPx-gx,gh);
+  ctx.fillStyle='rgba(68,204,136,0.06)'; ctx.fill();
+
+  // plastic region shade
+  ctx.beginPath();
+  ctx.rect(yPx,gy,gx+gw-yPx,gh);
+  ctx.fillStyle='rgba(255,136,68,0.05)'; ctx.fill();
+
+  // draw curve
+  ctx.beginPath();
+  ctx.moveTo(toX(pts[0].e), toY(pts[0].s));
+  for(let i=1;i<pts.length;i++) ctx.lineTo(toX(pts[i].e),toY(pts[i].s));
+  ctx.strokeStyle='#C9A84C'; ctx.lineWidth=2; ctx.stroke();
+
+  // yield line
+  ctx.setLineDash([3,3]);
+  ctx.strokeStyle='#ffcc44'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(toX(eAtYield),gy); ctx.lineTo(toX(eAtYield),gy+gh); ctx.stroke();
+  ctx.fillStyle='#ffcc44'; ctx.font='8px Arial'; ctx.fillText('Yield',toX(eAtYield)+1,gy+9);
+  ctx.setLineDash([]);
+
+  // UTS line
+  ctx.setLineDash([3,3]);
+  ctx.strokeStyle='#ff6644'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(toX(eAtUTS),gy); ctx.lineTo(toX(eAtUTS),gy+gh); ctx.stroke();
+  ctx.fillStyle='#ff6644'; ctx.font='8px Arial'; ctx.fillText('UTS',toX(eAtUTS)+1,gy+9);
+  ctx.setLineDash([]);
+
+  // current point
+  const curE = p.strain;
+  const curS = p.stressMPa;
+  const dotX = Math.min(toX(curE), gx+gw-4);
+  const dotY = Math.max(toY(curS), gy+2);
+
+  if(curS>0){
+    const dotColor = p.utsRatio>=1?'#ff4444': p.yieldRatio>=1?'#ff8844':'#44ee88';
+    ctx.beginPath(); ctx.arc(dotX,dotY,5,0,Math.PI*2);
+    ctx.fillStyle=dotColor; ctx.fill();
+    ctx.beginPath(); ctx.arc(dotX,dotY,5,0,Math.PI*2);
+    ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.stroke();
+
+    // pulse ring animation
+    const pulse = (Math.sin(animT*4)+1)/2;
+    ctx.beginPath(); ctx.arc(dotX,dotY,7+pulse*5,0,Math.PI*2);
+    ctx.strokeStyle=dotColor+'99'; ctx.lineWidth=1; ctx.stroke();
+  }
+}
+
+// ─── Main render ─────────────────────────────────────────────────────────────
+function draw(ts) {
+  animT = (ts||0)*0.001;
+  const W=560, H=420;
+  ctx.clearRect(0,0,W,H);
+
+  const p = calcPhysics();
+  const mat = p.mat;
+
+  // ── Top section: specimen visual ──────────────────────────────────────────
+  const specCX=280, specCY=160;
+  const barW0=220, barH0=60;
+
+  // Compute deformation
+  let defScale=0;
+  if(!fractured) defScale = Math.min(p.yieldRatio, 1.0)*0.45 + (p.utsRatio>=1?0.1:0);
+  const shakeX = fractured ? (Math.sin(animT*30)*(1-Math.min((animT%1),0.5)*2)*4) : 0;
+
+  let barW=barW0, barH=barH0;
+  if(stressType==='tensile')    { barW=barW0*(1+defScale*0.55); barH=barH0*(1-defScale*0.25); }
+  if(stressType==='compressive'){ barW=barW0*(1-defScale*0.38); barH=barH0*(1+defScale*0.35); }
+  if(stressType==='shear')      { barW=barW0; barH=barH0; }
+
+  const bx=specCX-barW/2+shakeX, by=specCY-barH/2;
+
+  // Stress color gradient
+  const safeRatio = Math.min(p.utsRatio, 1);
+  const r=Math.round(26+safeRatio*(220-26));
+  const g=Math.round(148+safeRatio*(30-148));
+  const b2=Math.round(180+safeRatio*(30-180));
+  const specColor=`rgb(${r},${g},${b2})`;
+
+  // Draw specimen
+  if(stressType==='shear'){
+    // Two halves with offset
+    const shearOffset=defScale*28;
+    const hh=barH/2;
+    // top half
+    drawRoundRect(bx,by,barW,hh,4,specColor,'#C9A84C',2);
+    // bottom half shifted
+    drawRoundRect(bx+shearOffset,by+hh,barW,hh,4,specColor,'#C9A84C',2);
+    // shear crack line
+    if(p.yieldRatio>0.5){
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(bx+barW*0.1,by+hh); ctx.lineTo(bx+barW*0.9+shearOffset,by+hh);
+      ctx.strokeStyle=p.utsRatio>=1?'#ff4444':'#ffcc44';
+      ctx.lineWidth=p.utsRatio>=1?3:1.5; ctx.setLineDash([4,3]); ctx.stroke();
+      ctx.setLineDash([]); ctx.restore();
+    }
+  } else {
+    drawRoundRect(bx,by,barW,barH,6,specColor,'#C9A84C',2);
+    // internal stress lines
+    if(p.stressMPa>0 && !fractured){
+      const numLines=Math.max(2,Math.round(barW/28));
+      ctx.save(); ctx.globalAlpha=0.15+safeRatio*0.25;
+      ctx.strokeStyle='#ffffff'; ctx.lineWidth=1;
+      for(let i=1;i<numLines;i++){
+        const lx=bx+(barW/numLines)*i;
+        ctx.beginPath(); ctx.moveTo(lx,by+4); ctx.lineTo(lx,by+barH-4); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    // fracture crack
+    if(fractured){
+      const cx2=bx+barW/2;
+      ctx.save(); ctx.strokeStyle='#ff2222'; ctx.lineWidth=3;
+      ctx.beginPath();
+      ctx.moveTo(cx2,by-8);
+      ctx.lineTo(cx2+6,by+barH/3);
+      ctx.lineTo(cx2-5,by+barH*0.6);
+      ctx.lineTo(cx2+4,by+barH+8);
+      ctx.stroke(); ctx.restore();
+    }
+  }
+
+  // Dimension label
+  ctx.fillStyle='#7aabcc'; ctx.font='10px Arial';
+  ctx.fillText(`A = ${area} mm²`,bx,by+barH+16);
+  ctx.fillText(`σ = ${p.stressMPa.toFixed(1)} MPa`,bx+barW-85,by+barH+16);
+
+  // ── Force arrows ──────────────────────────────────────────────────────────
+  if(force>0 && !fractured){
+    const alen = 30+Math.min(force/1000,1)*55;
+    if(stressType==='tensile'){
+      drawArrow(bx-10,specCY,bx-10-alen,specCY,'#44aaff','F',true);
+      drawArrow(bx+barW+10,specCY,bx+barW+10+alen,specCY,'#44aaff','F',false);
+    } else if(stressType==='compressive'){
+      drawArrow(bx-10-alen,specCY,bx-10,specCY,'#ff6644','F',true);
+      drawArrow(bx+barW+10+alen,specCY,bx+barW+10,specCY,'#ff6644','F',false);
+    } else {
+      drawArrow(specCX,by-10,specCX+alen,by-10,'#cc44ff','F',false);
+      drawArrow(specCX,by+barH+10,specCX-alen,by+barH+10,'#cc44ff','F',false);
+    }
+  }
+
+  // ── Material badge ─────────────────────────────────────────────────────────
+  ctx.fillStyle='#C9A84C'; ctx.font='bold 12px Segoe UI,Arial';
+  ctx.fillText(mat.name,specCX-20,by-20);
+  ctx.fillStyle='#7aabcc'; ctx.font='10px Arial';
+  ctx.fillText(`E = ${mat.E>=1000?(mat.E/1000).toFixed(0)+' GPa':mat.E+' MPa'}  |  Yield: ${mat.yieldMPa} MPa  |  UTS: ${mat.utsMPa} MPa`,bx,by-8);
+
+  // ── Stress-Strain Curve ────────────────────────────────────────────────────
+  drawCurve(p, 10, 270, 340, 140);
+
+  // ── Mini info panel on canvas ──────────────────────────────────────────────
+  const ipx=358, ipy=270, ipw=192, iph=140;
+  drawRoundRect(ipx,ipy,ipw,iph,6,'#0d2035','#C9A84C33',1);
+  ctx.fillStyle='#C9A84C'; ctx.font='bold 10px Segoe UI,Arial';
+  ctx.fillText('Type: '+stressType.charAt(0).toUpperCase()+stressType.slice(1),ipx+8,ipy+16);
+  ctx.fillStyle='#7aabcc'; ctx.font='10px Arial';
+  const lines=[
+    `F = ${force} N`,
+    `A = ${area} mm²`,
+    `σ = ${p.stressMPa.toFixed(2)} MPa`,
+    `ε = ${p.strain.toFixed(6)}`,
+    `Yield: ${p.yieldRatio.toFixed(3)} × σ_y`,
+    p.utsRatio>=1?'★ FRACTURE':'UTS ratio: '+(p.utsRatio*100).toFixed(1)+'%'
+  ];
+  lines.forEach((l,i)=>{
+    const col=i===5&&p.utsRatio>=1?'#ff4444':i===4&&p.yieldRatio>=1?'#ff8844':'#7aabcc';
+    ctx.fillStyle=col;
+    ctx.fillText(l,ipx+8,ipy+32+i*17);
+  });
+
+  // ── Progress bar for stress level ─────────────────────────────────────────
+  const pbx=ipx+8, pby=ipy+iph-18, pbw=ipw-16, pbh=10;
+  drawRoundRect(pbx,pby,pbw,pbh,3,'#1B3A5C','#333',0);
+  const fillW=Math.min(p.utsRatio,1)*pbw;
+  const fillC=p.utsRatio>=1?'#ff4444':p.yieldRatio>=1?'#ff8844':p.yieldRatio>=0.85?'#ffcc44':'#44cc88';
+  if(fillW>0) drawRoundRect(pbx,pby,fillW,pbh,3,fillC,null,0);
+  ctx.fillStyle='#ffffff88'; ctx.font='8px Arial';
+  ctx.fillText('Safety',pbx+pbw/2-14,pby+pbh-1);
+
+  lastRaf = requestAnimationFrame(draw);
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+update();
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

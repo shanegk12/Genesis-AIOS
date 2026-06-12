@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What is Performance? — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>What is Performance?</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Performance", "definition": "The measure of how well a system or component does what it's supposed to do, often seen in its output, efficiency, or how reliable it is."}, {"term": "Efficiency", "definition": "How much useful work a system produces compared to the total energy put into it, showing how much energy is used well versus wasted."}, {"term": "Energy Transfer", "definition": "When energy moves from one object or system to another, like heat moving from something hot to something cold."}, {"term": "Energy Transformation", "definition": "When energy changes from one form into another, such as the chemical energy in fuel becoming the motion energy of a car."}, {"term": "Optimization", "definition": "The process of making a system or design work as well as it possibly can, often by finding the best balance between different needs."}, {"term": "Multiscale Modeling", "definition": "A way to understand why things happen at a large scale (like a car moving) by looking at what's happening at tiny scales (like atoms)."}, {"term": "Objective", "definition": "The specific goal or purpose that a design or system is trying to achieve."}, {"term": "Constraint", "definition": "A limitation or restriction that must be thought about when designing or operating a system, such as how much it costs or how big it can be."}, {"term": "Creationeering™ Framework", "definition": "A complete process for designing and building systems, from initial ideas to seeing how well they perform in the real world."}, {"term": "Feedback Loops", "definition": "Systems that constantly communicate and adjust based on information received, helping them to maintain or improve their performance."}, {"term": "Stewardship", "definition": "The idea of carefully managing and taking care of resources, like God's creation, to use them wisely and effectively."}, {"term": "OCV Method", "definition": "A method used to propose solutions for improving system performance by identifying the Objective, Constraints, and Variables involved."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

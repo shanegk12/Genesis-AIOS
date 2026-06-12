@@ -1,0 +1,151 @@
+{
+  "lesson_id": "C-021",
+  "topic": "Design of Experiments (One Factor at A Time_",
+  "doc": "creationeering",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the One-Factor-at-a-Time (OFAT) method in experimental design?",
+      "options": {
+        "A": "Changing all variables at once to see what happens.",
+        "B": "An experimental method where only one variable is changed while all others are kept constant.",
+        "C": "A mathematical approach to test multiple factors simultaneously.",
+        "D": "The process of repeating a design until it works perfectly."
+      },
+      "answer": "B",
+      "explanation": "OFAT is defined as an experimental method where only one variable is changed while all others are kept constant to observe its specific effect."
+    },
+    {
+      "type": "recall",
+      "question": "In the context of the engineering process, what does 'Iteration' mean?",
+      "options": {
+        "A": "The final step where a product is released to the public.",
+        "B": "A limitation or restriction on the design.",
+        "C": "The repetitive process of refining a product or process to bring it closer to a desired goal.",
+        "D": "The initial brainstorming phase where ideas are generated."
+      },
+      "answer": "C",
+      "explanation": "Iteration is defined as the repetitive process of refining a product or process to bring it closer to a desired goal or target."
+    },
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is a 'Factor' in an experiment?",
+      "options": {
+        "A": "The final outcome or result of a test.",
+        "B": "An element that cannot be changed during an experiment.",
+        "C": "An independent variable in an experiment whose state can be controlled by the engineer.",
+        "D": "A specific value or setting assigned to a variable."
+      },
+      "answer": "C",
+      "explanation": "A factor is defined as an independent variable in an experiment whose state can be controlled by the engineer."
+    },
+    {
+      "type": "comprehension",
+      "question": "When conducting an OFAT test, why is it crucial to 'Hold All Others Constant'?",
+      "options": {
+        "A": "To save time and materials during the experiment.",
+        "B": "To ensure the experiment is easy to repeat by others.",
+        "C": "To clearly identify the specific effect of the one variable being changed.",
+        "D": "To make the experiment more complex and challenging."
+      },
+      "answer": "C",
+      "explanation": "Holding all other factors constant allows the engineer to isolate and understand the specific impact of the single factor being tested."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson states that changing multiple variables at once creates 'noise.' What does 'noise' refer to in this context?",
+      "options": {
+        "A": "Actual sound produced by the experiment.",
+        "B": "Unwanted data that makes it hard to understand which change caused an effect.",
+        "C": "A positive outcome that improves the design.",
+        "D": "The background information needed before starting an experiment."
+      },
+      "answer": "B",
+      "explanation": "'Noise' in an experiment refers to confounding variables or changes that obscure the true cause-and-effect relationship of a specific factor."
+    },
+    {
+      "type": "comprehension",
+      "question": "What is the primary limitation of the One-Factor-at-a-Time (OFAT) method that Design of Experiments (DoE) aims to overcome?",
+      "options": {
+        "A": "OFAT is too expensive to conduct.",
+        "B": "OFAT is too complicated for middle school engineers.",
+        "C": "OFAT cannot identify how different factors might influence each other (interactions).",
+        "D": "OFAT takes too long to get results."
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly states that OFAT's major weakness is that it cannot see Interactions, which is when the effect of one factor depends on the level of another."
+    },
+    {
+      "type": "application",
+      "question": "A Creationeering team is trying to make their robot car go faster. They first try increasing the motor voltage while keeping the wheel size and car weight the same. After testing, they then try different wheel sizes, keeping the motor voltage and car weight constant. What experimental method are they using?",
+      "options": {
+        "A": "Design of Experiments (DoE)",
+        "B": "Iteration Cycle",
+        "C": "One-Factor-at-a-Time (OFAT)",
+        "D": "Establishing a Baseline"
+      },
+      "answer": "C",
+      "explanation": "The team is changing only one variable (motor voltage, then wheel size) at a time while keeping others constant, which is the definition of the OFAT method."
+    },
+    {
+      "type": "application",
+      "question": "A student designs a bridge that collapses under a 5kg weight. They then strengthen the support beams, re-test the bridge, and find it now holds 7kg. They then decide to try a different material for the deck to see if it can hold even more. This continuous process of improving the design based on test results is an example of what?",
+      "options": {
+        "A": "Identifying Factors",
+        "B": "The Iteration Cycle",
+        "C": "Establishing a Baseline",
+        "D": "Design of Experiments (DoE)"
+      },
+      "answer": "B",
+      "explanation": "The student is repeatedly testing, analyzing, and refining their design to improve its performance, which is the core concept of the Iteration Cycle."
+    },
+    {
+      "type": "application",
+      "question": "You are trying to improve the launch distance of a catapult you built. You record how far your current design launches a projectile (20 feet). Then, you decide to change the length of the arm, but you make sure to use the same type of elastic band and the same projectile. What step of the OFAT method did you perform by launching your current design and recording 20 feet?",
+      "options": {
+        "A": "Select ONE Factor",
+        "B": "Hold All Others Constant",
+        "C": "Establish a Baseline",
+        "D": "Compare"
+      },
+      "answer": "C",
+      "explanation": "Testing the current design and recording its initial performance (20 feet) before making any changes is the definition of establishing a baseline."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson states that the engineering process is a 'reflection of a deeper, purposeful cycle of creation and refinement.' How does applying the OFAT method and the Iteration Cycle align with a Creationeer's responsibility for biblical stewardship?",
+      "options": {
+        "A": "It shows that engineers are superior to others in problem-solving.",
+        "B": "It ensures that designs are always perfect on the first try, saving resources.",
+        "C": "It encourages careful, systematic improvement, making wise use of God-given materials and time.",
+        "D": "It proves that humans can create things better than God."
+      },
+      "answer": "C",
+      "explanation": "Systematic improvement through OFAT and iteration demonstrates responsible and wise use of resources and time, reflecting good stewardship of God's creation."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson uses the analogy of a sculptor who first establishes a rough shape and then refines details with smaller tools. What does this analogy best highlight about the engineering process?",
+      "options": {
+        "A": "Engineers must be good at art and design.",
+        "B": "The importance of starting with a perfect plan before building anything.",
+        "C": "Engineering is a continuous process of refinement, moving from general ideas to specific improvements.",
+        "D": "That engineers should only work with natural materials like stone."
+      },
+      "answer": "C",
+      "explanation": "The sculptor analogy illustrates that engineering is not a one-time build but a continuous, iterative process of refining a design from a prototype to a polished product."
+    },
+    {
+      "type": "synthesis",
+      "question": "Understanding 'interactions' between factors, as introduced with Design of Experiments (DoE), is important for Creationeers because it helps them to:",
+      "options": {
+        "A": "Avoid using any complex materials in their designs.",
+        "B": "Recognize that the effect of one design choice might change depending on another, leading to more optimized and robust solutions.",
+        "C": "Only focus on one factor at a time, simplifying their experiments.",
+        "D": "Prove that their initial design ideas were always correct."
+      },
+      "answer": "B",
+      "explanation": "Recognizing interactions allows engineers to understand how factors combine to affect an outcome, leading to more comprehensive and effective design improvements."
+    }
+  ]
+}

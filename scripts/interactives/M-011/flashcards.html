@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundamentals of Design — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Fundamentals of Design</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Design Phase", "definition": "The stage in engineering where you move from thinking about a problem to actively creating a solution, often starting with a problem statement and OCV."}, {"term": "Problem Statement", "definition": "A clear description of the challenge or issue that an engineering design aims to solve."}, {"term": "OCV Method", "definition": "A framework used in the design phase to define the Objectives, Constraints, and Variables of a project."}, {"term": "Prototype", "definition": "An initial model or version of a design, created through sketching, computer models, or physical components, to test and refine an idea."}, {"term": "Mathematical Validation", "definition": "Using math to prove that an ideal design works without needing to build many physical prototypes, often done with computer models."}, {"term": "Rapid Iteration", "definition": "Quickly cycling through different versions of a design using computer models to find the best solution before building anything physical."}, {"term": "Trade-offs", "definition": "Conflicting parts of a design where improving one aspect might negatively affect another, requiring careful optimization."}, {"term": "Form Follows Function", "definition": "An engineering principle where the shape or structure of an object is determined by its intended purpose or how it will work."}, {"term": "Aesthetics in Creationeering", "definition": "Reflects God's order and the orderly nature of His creation, encouraging engineers to be disciplined and value organization in their designs."}, {"term": "Optimization", "definition": "The process of making a design or system as effective or functional as possible, often by making changes and improvements based on testing."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

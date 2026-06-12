@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowchart Builder – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.3rem; letter-spacing: .5px; }
+  header p { font-size: .85rem; color: #C9A84C; margin-top: 3px; }
+
+  #app {
+    width: 100%;
+    max-width: 900px;
+    padding: 16px;
+    flex: 1;
+  }
+
+  /* ========== SCREEN SYSTEM ========== */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ========== INTRO SCREEN ========== */
+  #introScreen {
+    text-align: center;
+    padding: 30px 16px;
+  }
+  #introScreen h2 { font-size: 1.6rem; color: #1B3A5C; margin-bottom: 12px; }
+  #introScreen p { font-size: 1rem; line-height: 1.6; max-width: 620px; margin: 0 auto 20px; }
+  .symbol-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0 28px;
+  }
+  .legend-item {
+    background: #fff;
+    border: 2px solid #1B3A5C;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .85rem;
+    max-width: 200px;
+    text-align: left;
+  }
+  .legend-shape { flex-shrink: 0; }
+
+  /* ========== GAME SCREEN ========== */
+  #gameScreen h2 {
+    font-size: 1.15rem;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+  }
+  .progress-bar-wrap {
+    background: #dce4ee;
+    border-radius: 20px;
+    height: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: #C9A84C;
+    height: 100%;
+    border-radius: 20px;
+    transition: width .4s;
+  }
+  .level-label {
+    font-size: .8rem;
+    color: #5a7a9a;
+    margin-bottom: 10px;
+  }
+
+  /* Scenario box */
+  .scenario-box {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: .95rem;
+    line-height: 1.5;
+  }
+  .scenario-box strong { color: #C9A84C; }
+
+  /* Drop zone row */
+  .drop-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  /* ---- ACTIVITY TYPE 1: Symbol Match ---- */
+  .symbol-drop-zone {
+    width: 130px;
+    min-height: 80px;
+    border: 2.5px dashed #C9A84C;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: .78rem;
+    color: #5a7a9a;
+    padding: 6px;
+    transition: background .2s;
+    position: relative;
+  }
+  .symbol-drop-zone.over { background: #eef3fa; }
+  .symbol-drop-zone .zone-label {
+    font-size: .72rem;
+    color: #888;
+    margin-top: 4px;
+  }
+  .symbol-drop-zone .dropped-tag {
+    font-size: .82rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-top: 4px;
+  }
+
+  .drag-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+    min-height: 50px;
+    background: #e8eef5;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .drag-chip {
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: .85rem;
+    cursor: grab;
+    user-select: none;
+    transition: opacity .2s, transform .15s;
+    touch-action: none;
+  }
+  .drag-chip:active { transform: scale(1.07); }
+  .drag-chip.dragging { opacity: .4; }
+
+  /* ---- ACTIVITY TYPE 2: Sequence Sort ---- */
+  .sequence-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .seq-step {
+    background: #fff;
+    border: 2px solid #C9A84C;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: .9rem;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    touch-action: none;
+  }
+  .seq-step .step-num {
+    background: #C9A84C;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .85rem;
+    flex-shrink: 0;
+  }
+  .seq-step.dragging-seq { opacity: .4; }
+  .seq-step.drag-over-seq { border-color: #1B3A5C; background: #eef3fa; }
+
+  /* ---- ACTIVITY TYPE 3: Input/Process/Output Classification ---- */
+  .ipo-zones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .ipo-zone {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+    min-height: 120px;
+    border: 2.5px dashed #1B3A5C;
+    border-radius: 10px;
+    background: #fff;
+    padding: 8px;
+    text-align: center;
+  }
+  .ipo-zone h4 {
+    font-size: .85rem;
+    color: #1B3A5C;
+    margin-bottom: 6px;
+    background: #1B3A5C;
+    color: #fff;
+    border-radius: 6px;
+    padding: 4px 0;
+  }
+  .ipo-zone.over { background: #eef3fa; }
+  .dropped-chip {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border-radius: 16px;
+    padding: 4px 10px;
+    font-size: .78rem;
+    font-weight: 700;
+    margin: 3px auto;
+    display: inline-block;
+  }
+
+  /* Buttons */
+  .btn {
+    background: #C9A84C;
+    color: #1B3A5C;
+    border: none;
+    border-radius: 24px;
+    padding: 11px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    display: inline-block;
+  }
+  .btn:hover { background: #b8922f; }
+  .btn:active { transform: scale(.97); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #1B3A5C;
+    color: #1B3A5C;
+    margin-right: 10px;
+  }
+  .btn-outline:hover { background: #1B3A5C; color: #fff; }
+
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  /* Feedback */
+  .feedback-box {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: .9rem;
+    margin-bottom: 10px;
+    display: none;
+    line-height: 1.5;
+  }
+  .feedback-box.correct { background: #d4edda; border: 2px solid #28a745; color: #155724; display: block; }
+  .feedback-box.incorrect { background: #f8d7da; border: 2px solid #dc3545; color: #721c24; display: block; }
+
+  /* ========== SUMMARY SCREEN ========== */
+  #summaryScreen {
+    text-align: center;
+    padding: 20px 16px;
+  }
+  #summaryScreen h2 { font-size: 1.6rem; margin-bottom: 10px; }
+  .score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1B3A5C;
+    color: #C9A84C;
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 18px auto;
+    box-shadow: 0 4px 18px rgba(27,58,92,.25);
+  }
+  .score-msg { font-size: 1.1rem; color: #1B3A5C; margin-bottom: 14px; }
+  .summary-list {
+    text-align: left;
+    max-width: 540px;
+    margin: 0 auto 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    border: 2px solid #dce4ee;
+  }
+  .summary-list h4 { color: #1B3A5C; margin-bottom: 8px; font-size: 1rem; }
+  .summary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: .88rem;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .summary-item .icon { flex-shrink: 0; font-size: 1rem; }
+  .faith-note {
+    font-size: .82rem;
+    color: #5a7a9a;
+    font-style: italic;
+    max-width: 540px;
+    margin: 0 auto 20px;
+    padding: 10px;
+    border-left: 3px solid #C9A84C;
+    background: #fff;
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+  }
+
+  /* SVG shapes for legend */
+  svg.shape { overflow: visible; }
+
+  @media (max-width: 500px) {
+    header h1 { font-size: 1.1rem; }
+    .ipo-zones { flex-direction: column; align-items: center; }
+    .ipo-zone { max-width: 100%; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Flowchart Builder Challenge</h1>
+  <p>Creationeering – Genesis K-12 Academy</p>
+</header>
+
+<div id="app">
+
+  <!-- ===== INTRO SCREEN ===== -->
+  <div id="introScreen" class="screen active">
+    <h2>🗂️ Process Mapping Activity</h2>
+    <p>Engineers use flowcharts to map out processes step by step. Review the five flowchart symbols below, then complete three challenges to prove your skills!</p>
+
+    <div class="symbol-legend">
+      <div class="legend-item">
+        <svg class="shape" width="44" height="32">
+          <ellipse cx="22" cy="16" rx="21" ry="14" fill="#C9A84C" stroke="#1B3A5C" stroke-width="2"/>
+        </svg>
+        <div><strong>Oval</strong><br>Start / End</div>
+      </div>
+      <div class="legend-item">
+        <svg class="shape" width="44" height="32">
+          <rect x="2" y="4" width="40" height="24" rx="3" fill="#1B3A5C" stroke="#C9A84C" stroke-width="2"/>
+        </svg>
+        <div><strong>Rectangle</strong><br>Process Step</div>
+      </div>
+      <div class="legend-item">
+        <svg class="shape" width="44" height="36">
+          <polygon points="22,2 42,18 22,34 2,18" fill="#4a90d9" stroke="#1B3A5C" stroke-width="2"/>
+        </svg>
+        <div><strong>Diamond</strong><br>Decision</div>
+      </div>
+      <div class="legend-item">
+        <svg class="shape" width="48" height="32">
+          <polygon points="6,4 42,4 48,16 42,28 6,28 0,16" fill="#6dbe6d" stroke="#1B3A5C" stroke-width="2"/>
+        </svg>
+        <div><strong>Hexagon</strong><br>Input / Output</div>
+      </div>
+      <div class="legend-item">
+        <svg class="shape" width="28" height="28">
+          <circle cx="14" cy="14" r="12" fill="#e87f3a" stroke="#1B3A5C" stroke-width="2"/>
+          <text x="14" y="19" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">A</text>
+        </svg>
+        <div><strong>Circle</strong><br>Connector</div>
+      </div>
+    </div>
+
+    <p style="font-size:.9rem; max-width:620px; margin:0 auto 24px;">Three challenges await: <strong>Match symbols to their names</strong>, <strong>Put process steps in order</strong>, and <strong>Sort items into Input / Process / Output</strong>.</p>
+    <button class="btn" onclick="startGame()">Start Challenges →</button>
+  </div>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <div id="gameScreen" class="screen">
+    <div class="level-label" id="levelLabel">Challenge 1 of 3</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <h2 id="challengeTitle"></h2>
+    <div class="scenario-box" id="scenarioBox"></div>
+    <div id="activityArea"></div>
+    <div class="feedback-box" id="feedbackBox"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" id="resetBtn" onclick="resetChallenge()">↺ Reset</button>
+      <button class="btn" id="checkBtn" onclick="checkAnswer()">Check Answer</button>
+    </div>
+  </div>
+
+  <!-- ===== SUMMARY SCREEN ===== -->
+  <div id="summaryScreen" class="screen">
+    <h2>🎉 Activity Complete!</h2>
+    <div class="score-circle" id="scoreCircle">0/3</div>
+    <p class="score-msg" id="scoreMsg"></p>
+    <div class="summary-list" id="summaryList"></div>
+    <p class="faith-note">💡 "God is not a God of disorder but of peace." (1 Cor. 14:33) — Engineers reflect the Creator's love of order every time they map a clear process.</p>
+    <button class="btn" onclick="restartGame()">Play Again</button>
+  </div>
+
+</div>
+
+<script>
+// =====================================================
+// DATA
+// =====================================================
+
+const CHALLENGES = [
+  {
+    id: "symbol-match",
+    title: "Challenge 1: Symbol Match",
+    scenario: "Drag each <strong>flowchart symbol name</strong> to the correct shape below. Each symbol has a specific job in a flowchart!",
+    type: "symbol-match"
+  },
+  {
+    id: "sequence-sort",
+    title: "Challenge 2: Put the Steps in Order",
+    scenario: "An engineer is mapping the process of <strong>sending an email</strong>. Drag the steps to arrange them in the correct flowchart order (1 = first, 5 = last).",
+    type: "sequence-sort"
+  },
+  {
+    id: "ipo-classify",
+    title: "Challenge 3: Input, Process, or Output?",
+    scenario: "An engineer is designing a <strong>juice-making machine</strong>. Drag each item into the correct category: <strong>Input</strong>, <strong>Process</strong>, or <strong>Output</strong>.",
+    type: "ipo-classify"
+  }
+];
+
+// Challenge 1 data
+const SYMBOL_MATCH_DATA = [
+  { id: "oval",    svgCode: '<ellipse cx="38" cy="28" rx="35" ry="22" fill="#C9A84C" stroke="#1B3A5C" stroke-width="2.5"/>',               w:76, h:56, label:"Start / End",   answer:"oval"    },
+  { id: "rect",    svgCode: '<rect x="2" y="8" width="72" height="40" rx="4" fill="#1B3A5C" stroke="#C9A84C" stroke-width="2.5"/>',        w:76, h:56, label:"Process Step", answer:"rect"    },
+  { id: "diamond", svgCode: '<polygon points="38,4 72,28 38,52 4,28" fill="#4a90d9" stroke="#1B3A5C" stroke-width="2.5"/>',               w:76, h:56, label:"Decision",     answer:"diamond" },
+  { id: "hexagon", svgCode: '<polygon points="10,8 66,8 76,28 66,48 10,48 0,28" fill="#6dbe6d" stroke="#1B3A5C" stroke-width="2.5"/>',    w:76, h:56, label:"Input/Output", answer:"hexagon" },
+  { id: "circle",  svgCode: '<circle cx="28" cy="28" r="22" fill="#e87f3a" stroke="#1B3A5C" stroke-width="2.5"/><text x="28" y="34" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff">A</text>', w:56, h:56, label:"Connector",    answer:"circle"  }
+];
+
+const SYMBOL_NAMES = ["Start / End","Process Step","Decision","Input/Output","Connector"];
+
+// Challenge 2 data
+const SEQUENCE_DATA = [
+  { id: "s1", text: "Open your email app",             correct: 1 },
+  { id: "s2", text: "Type your message",               correct: 3 },
+  { id: "s3", text: "Click the Compose button",        correct: 2 },
+  { id: "s4", text: "Click Send",                      correct: 4 },
+  { id: "s5", text: "Email arrives in recipient inbox",correct: 5 }
+];
+
+// Challenge 3 data
+const IPO_DATA = [
+  { id: "i1", text: "Fresh oranges",    category: "Input"   },
+  { id: "i2", text: "Water",            category: "Input"   },
+  { id: "i3", text: "Squeeze the fruit",category: "Process" },
+  { id: "i4", text: "Filter the juice", category: "Process" },
+  { id: "i5", text: "Glass of juice",   category: "Output"  },
+  { id: "i6", text: "Juice bottle",     category: "Output"  }
+];
+
+// =====================================================
+// STATE
+// =====================================================
+let currentChallenge = 0;
+let scores = [null, null, null]; // true/false per challenge
+let dragSrc = null;
+let dragSrcSeq = null;
+
+// For symbol-match
+let dropState = {}; // zoneId -> chipLabel
+
+// For ipo-classify
+let ipoState = {}; // zoneId -> [chipIds]
+
+// For sequence
+let seqOrder = []; // current order of step ids
+
+// =====================================================
+// NAVIGATION
+// =====================================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startGame() {
+  currentChallenge = 0;
+  scores = [null, null, null];
+  showScreen('gameScreen');
+  loadChallenge(currentChallenge);
+}
+
+function restartGame() {
+  showScreen('introScreen');
+}
+
+function loadChallenge(idx) {
+  const ch = CHALLENGES[idx];
+  document.getElementById('levelLabel').textContent = `Challenge ${idx+1} of ${CHALLENGES.length}`;
+  document.getElementById('progressFill').style.width = `${(idx / CHALLENGES.length) * 100}%`;
+  document.getElementById('challengeTitle').textContent = ch.title;
+  document.getElementById('scenarioBox').innerHTML = ch.scenario;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+  fb.textContent = '';
+
+  document.getElementById('checkBtn').disabled = false;
+  document.getElementById('resetBtn').disabled = false;
+
+  if (ch.type === 'symbol-match')   buildSymbolMatch();
+  if (ch.type === 'sequence-sort')  buildSequenceSort();
+  if (ch.type === 'ipo-classify')   buildIPOClassify();
+}
+
+// =====================================================
+// CHALLENGE 1: SYMBOL MATCH
+// =====================================================
+function buildSymbolMatch() {
+  dropState = {};
+  SYMBOL_MATCH_DATA.forEach(s => { dropState[s.id] = null; });
+
+  let html = '<div class="drop-row">';
+  SYMBOL_MATCH_DATA.forEach(sym => {
+    html += `
+      <div class="symbol-drop-zone" id="zone_${sym.id}" data-zone="${sym.id}"
+           ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,this,'symbol')">
+        <svg width="${sym.w}" height="${sym.h}" viewBox="0 0 ${sym.w} ${sym.h}" overflow="visible">${sym.svgCode}</svg>
+        <div class="zone-label" id="zonelabel_${sym.id}">Drop name here</div>
+      </div>`;
+  });
+  html += '</div>';
+
+  // Shuffle names
+  let names = [...SYMBOL_NAMES].sort(() => Math.random() - .5);
+  html += '<div class="drag-bank" id="symbolBank">';
+  names.forEach(n => {
+    const safeId = n.replace(/[^a-z0-9]/gi,'_');
+    html += `<div class="drag-chip" id="chip_${safeId}" draggable="true"
+              data-chip="${n}"
+              ondragstart="chipDragStart(event,this)"
+              ondragend="chipDragEnd(event,this)">${n}</div>`;
+  });
+  html += '</div>';
+
+  document.getElementById('activityArea').innerHTML = html;
+  addTouchDragSupport('.drag-chip', 'symbol');
+}
+
+function chipDragStart(e, el) {
+  dragSrc = el;
+  el.classList.add('dragging');
+  e.dataTransfer.setData('text/plain', el.dataset.chip);
+  e.dataTransfer.effectAllowed = 'move';
+}
+function chipDragEnd(e, el) {
+  el.classList.remove('dragging');
+}
+
+function dzOver(e, el) {
+  e.preventDefault();
+  el.classList.add('over');
+}
+function dzLeave(el) {
+  el.classList.remove('over');
+}
+
+function dzDrop(e, el, type) {
+  e.preventDefault();
+  el.classList.remove('over');
+  if (type === 'symbol') {
+    const chip = e.dataTransfer.getData('text/plain');
+    const zoneId = el.dataset.zone;
+
+    // If zone already has a chip, return it to bank
+    if (dropState[zoneId]) {
+      returnChipToBank(dropState[zoneId]);
+    }
+    // Remove chip from any other zone it might be in
+    Object.keys(dropState).forEach(k => {
+      if (dropState[k] === chip) { dropState[k] = null; updateZoneLabel(k); }
+    });
+
+    dropState[zoneId] = chip;
+    updateZoneLabel(zoneId);
+
+    // Hide chip from bank
+    const safeId = chip.replace(/[^a-z0-9]/gi,'_');
+    const chipEl = document.getElementById(`chip_${safeId}`);
+    if (chipEl) chipEl.style.display = 'none';
+  }
+}
+
+function returnChipToBank(chipLabel) {
+  const safeId = chipLabel.replace(/[^a-z0-9]/gi,'_');
+  const chipEl = document.getElementById(`chip_${safeId}`);
+  if (chipEl) chipEl.style.display = '';
+}
+
+function updateZoneLabel(zoneId) {
+  const lbl = document.getElementById(`zonelabel_${zoneId}`);
+  if (!lbl) return;
+  if (dropState[zoneId]) {
+    lbl.innerHTML = `<span class="dropped-tag">${dropState[zoneId]}</span>`;
+  } else {
+    lbl.textContent = 'Drop name here';
+  }
+}
+
+function checkSymbolMatch() {
+  let correct = 0;
+  SYMBOL_MATCH_DATA.forEach(sym => {
+    if (dropState[sym.id] === sym.label) correct++;
+  });
+  const allFilled = Object.values(dropState).every(v => v !== null);
+  if (!allFilled) {
+    showFeedback('incorrect', '⚠️ Please drag a name into every shape before checking!');
+    return null;
+  }
+  return correct === SYMBOL_MATCH_DATA.length;
+}
+
+// =====================================================
+// CHALLENGE 2: SEQUENCE SORT
+// =====================================================
+function buildSequenceSort() {
+  seqOrder = [...SEQUENCE_DATA].sort(() => Math.random() - .5).map(s => s.id);
+  renderSeq();
+}
+
+function renderSeq() {
+  let html = '<div class="sequence-container" id="seqContainer">';
+  seqOrder.forEach((id, idx) => {
+    const step = SEQUENCE_DATA.find(s => s.id === id);
+    html += `
+      <div class="seq-step" id="seqstep_${id}" data-seqid="${id}" draggable="true"
+           ondragstart="seqDragStart(event,this)" ondragend="seqDragEnd(event,this)"
+           ondragover="seqDragOver(event,this)" ondragleave="seqDragLeave(this)" ondrop="seqDrop(event,this)">
+        <div class="step-num">${idx+1}</div>
+        <span>${step.text}</span>
+      </div>`;
+  });
+  html += '</div>';
+  document.getElementById('activityArea').innerHTML = html;
+  addTouchDragSupport('.seq-step', 'sequence');
+}
+
+function seqDragStart(e, el) {
+  dragSrcSeq = el.dataset.seqid;
+  el.classList.add('dragging-seq');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function seqDragEnd(e, el) { el.classList.remove('dragging-seq'); }
+function seqDragOver(e, el) { e.preventDefault(); el.classList.add('drag-over-seq'); }
+function seqDragLeave(el) { el.classList.remove('drag-over-seq'); }
+function seqDrop(e, el) {
+  e.preventDefault();
+  el.classList.remove('drag-over-seq');
+  const targetId = el.dataset.seqid;
+  if (!dragSrcSeq || dragSrcSeq === targetId) return;
+  const fromIdx = seqOrder.indexOf(dragSrcSeq);
+  const toIdx   = seqOrder.indexOf(targetId);
+  seqOrder.splice(fromIdx, 1);
+  seqOrder.splice(toIdx, 0, dragSrcSeq);
+  renderSeq();
+}
+
+function checkSequenceSort() {
+  const correct = seqOrder.every((id, idx) => {
+    const step = SEQUENCE_DATA.find(s => s.id === id);
+    return step.correct === idx + 1;
+  });
+  return correct;
+}
+
+// =====================================================
+// CHALLENGE 3: IPO CLASSIFY
+// =====================================================
+function buildIPOClassify() {
+  ipoState = { Input: [], Process: [], Output: [] };
+
+  let html = '<div class="ipo-zones">';
+  ['Input','Process','Output'].forEach(cat => {
+    html += `
+      <div class="ipo-zone" id="ipozone_${cat}" data-ipozone="${cat}"
+           ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="ipoDrop(event,this)">
+        <h4>${cat}</h4>
+        <div id="ipochildren_${cat}"></div>
+      </div>`;
+  });
+  html += '</div>';
+
+  let items = [...IPO_DATA].sort(() => Math.random() - .5);
+  html += '<div class="drag-bank" id="ipoBank">';
+  items.forEach(item => {
+    html += `<div class="drag-chip" id="ipochip_${item.id}" draggable="true"
+              data-chip="${item.id}" data-label="${item.text}"
+              ondragstart="ipoChipStart(event,this)"
+              ondragend="chipDragEnd(event,this)">${item.text}</div>`;
+  });
+  html += '</div>';
+
+  document.getElementById('activityArea').innerHTML = html;
+  addTouchDragSupport('.drag-chip', 'ipo');
+}
+
+function ipoChipStart(e, el) {
+  dragSrc = el;
+  el.classList.add('dragging');
+  e.dataTransfer.setData('text/plain', el.dataset.chip + '|' + el.dataset.label);
+}
+
+function ipoDrop(e, el) {
+  e.preventDefault();
+  el.classList.remove('over');
+  const data = e.dataTransfer.getData('text/plain');
+  const [chipId, chipLabel] = data.split('|');
+  const zone = el.dataset.ipozone;
+
+  // Remove from any current zone
+  ['Input','Process','Output'].forEach(cat => {
+    ipoState[cat] = ipoState[cat].filter(id => id !== chipId);
+    refreshIPOZone(cat);
+  });
+
+  ipoState[zone].push(chipId);
+  refreshIPOZone(zone);
+
+  // Hide from bank
+  const chipEl = document.getElementById(`ipochip_${chipId}`);
+  if (chipEl) chipEl.style.display = 'none';
+}
+
+function refreshIPOZone(cat) {
+  const container = document.getElementById(`ipochildren_${cat}`);
+  if (!container) return;
+  container.innerHTML = '';
+  ipoState[cat].forEach(id => {
+    const item = IPO_DATA.find(i => i.id === id);
+    if (item) {
+      const span = document.createElement('div');
+      span.className = 'dropped-chip';
+      span.textContent = item.text;
+      span.style.cursor = 'pointer';
+      span.title = 'Click to return to bank';
+      span.onclick = () => returnIPOChip(id, cat);
+      container.appendChild(span);
+    }
+  });
+}
+
+function returnIPOChip(chipId, fromCat) {
+  ipoState[fromCat] = ipoState[fromCat].filter(id => id !== chipId);
+  refreshIPOZone(fromCat);
+  const chipEl = document.getElementById(`ipochip_${chipId}`);
+  if (chipEl) chipEl.style.display = '';
+}
+
+function checkIPOClassify() {
+  const totalPlaced = Object.values(ipoState).flat().length;
+  if (totalPlaced < IPO_DATA.length) {
+    showFeedback('incorrect', '⚠️ Please sort all items before checking!');
+    return null;
+  }
+  let correct = 0;
+  IPO_DATA.forEach(item => {
+    if (ipoState[item.category].includes(item.id)) correct++;
+  });
+  return correct === IPO_DATA.length;
+}
+
+// =====================================================
+// CHECK ANSWER (unified)
+// =====================================================
+function checkAnswer() {
+  const ch = CHALLENGES[currentChallenge];
+  let result = null;
+
+  if (ch.type === 'symbol-match')   result = checkSymbolMatch();
+  if (ch.type === 'sequence-sort')  result = checkSequenceSort();
+  if (ch.type === 'ipo-classify')   result = checkIPOClassify();
+
+  if (result === null) return; // validation message shown inside
+
+  scores[currentChallenge] = result;
+
+  if (result) {
+    const msgs = [
+      "✅ Perfect! You matched all five flowchart symbols correctly!",
+      "✅ Great job! That's the correct order for the email process.",
+      "✅ Excellent! You correctly sorted all Inputs, Processes, and Outputs!"
+    ];
+    showFeedback('correct', msgs[currentChallenge]);
+  } else {
+    const hints = [
+      "❌ Some symbols are in the wrong spot. Remember: Diamonds are Decisions, Ovals are Start/End, and Rectangles are Process Steps.",
+      "❌ The order isn't quite right. Think: what must happen BEFORE you can do the next step?",
+      "❌ Some items are in the wrong category. Inputs go INTO the system, Processes are the work done, and Outputs are what comes out."
+    ];
+    showFeedback('incorrect', hints[currentChallenge]);
+  }
+
+  document.getElementById('checkBtn').disabled = true;
+
+  // Auto-advance after 2.5s
+  setTimeout(() => {
+    currentChallenge++;
+    if (currentChallenge < CHALLENGES.length) {
+      loadChallenge(currentChallenge);
+    } else {
+      showSummary();
+    }
+  }, 2600);
+}
+
+function showFeedback(type, msg) {
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box ' + type;
+  fb.innerHTML = msg;
+}
+
+// =====================================================
+// RESET
+// =====================================================
+function resetChallenge() {
+  const ch = CHALLENGES[currentChallenge];
+  document.getElementById('feedbackBox').className = 'feedback-box';
+  document.getElementById('checkBtn').disabled = false;
+  if (ch.type === 'symbol-match')  buildSymbolMatch();
+  if (ch.type === 'sequence-sort') buildSequenceSort();
+  if (ch.type === 'ipo-classify')  buildIPOClassify();
+}
+
+// =====================================================
+// SUMMARY
+// =====================================================
+function showSummary() {
+  document.getElementById('progressFill').style.width = '100%';
+  showScreen('summaryScreen');
+
+  const correctCount = scores.filter(s => s === true).length;
+  document.getElementById('scoreCircle').textContent = `${correctCount}/3`;
+
+  const msgs = [
+    "Keep studying the symbols and try again — you've got this!",
+    "Good effort! Review the symbol definitions and give it another shot.",
+    "Well done! You have a solid understanding of process mapping!",
+    "Outstanding! You're thinking like a true engineer! 🏆"
+  ];
+  document.getElementById('scoreMsg').textContent = msgs[correctCount];
+
+  const list = document.getElementById('summaryList');
+  const details = [
+    { title: "Symbol Match",  correct: scores[0], detail: "Ovals = Start/End · Rectangles = Process · Diamonds = Decision · Hexagons = Input/Output · Circles = Connector" },
+    { title: "Sequence Sort", correct: scores[1], detail: "Good flowcharts follow a logical order so anyone can follow the process without confusion." },
+    { title: "IPO Classify",  correct: scores[2], detail: "Inputs enter the system → Processes transform them → Outputs leave the system." }
+  ];
+  list.innerHTML = '<h4>📋 What You Practiced:</h4>' + details.map(d => `
+    <div class="summary-item">
+      <span class="icon">${d.correct ? '✅' : '❌'}</span>
+      <div><strong>${d.title}:</strong> ${d.detail}</div>
+    </div>`).join('');
+}
+
+// =====================================================
+// TOUCH DRAG SUPPORT (mobile/iPad)
+// =====================================================
+function addTouchDragSupport(selector, mode) {
+  const els = document.querySelectorAll(selector);
+  els.forEach(el => {
+    el.addEventListener('touchstart', touchStart, { passive: false });
+    el.addEventListener('touchmove',  touchMove,  { passive: false });
+    el.addEventListener('touchend',   touchEnd,   { passive: false });
+  });
+}
+
+let touchDragging = null;
+let touchClone = null;
+let touchOffX = 0, touchOffY = 0;
+
+function touchStart(e) {
+  const el = e.currentTarget;
+  touchDragging = el;
+  const touch = e.touches[0];
+  const rect = el.getBoundingClientRect();
+  touchOffX = touch.clientX - rect.left;
+  touchOffY = touch.clientY - rect.top;
+
+  touchClone = el.cloneNode(true);
+  touchClone.style.cssText = `position:fixed;z-index:9999;pointer-events:none;opacity:0.85;width:${rect.width}px;`;
+  touchClone.style.left = (touch.clientX - touchOffX) + 'px';
+  touchClone.style.top  = (touch.clientY - touchOffY) + 'px';
+  document.body.appendChild(touchClone);
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchClone) return;
+  const touch = e.touches[0];
+  touchClone.style.left = (touch.clientX - touchOffX) + 'px';
+  touchClone.style.top  = (touch.clientY - touchOffY) + 'px';
+  e.preventDefault();
+}
+
+function touchEnd(e) {
+  if (!touchDragging || !touchClone) return;
+  const touch = e.changedTouches[0];
+  touchClone.remove();
+  touchClone = null;
+
+  const el = touchDragging;
+  touchDragging = null;
+
+  // Find element under the touch point
+  const target = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!target) return;
+
+  // Symbol match
+  const symbolZone = target.closest('[data-zone]');
+  if (symbolZone && el.dataset.chip) {
+    const zoneId = symbolZone.dataset.zone;
+    if (dropState[zoneId] !== undefined) {
+      if (dropState[zoneId]) returnChipToBank(dropState[zoneId]);
+      Object.keys(dropState).forEach(k => {
+        if (dropState[k] === el.dataset.chip) { dropState[k] = null; updateZoneLabel(k); }
+      });
+      dropState[zoneId] = el.dataset.chip;
+      updateZoneLabel(zoneId);
+      const safeId = el.dataset.chip.replace(/[^a-z0-9]/gi,'_');
+      const chipEl = document.getElementById(`chip_${safeId}`);
+      if (chipEl) chipEl.style.display = 'none';
+    }
+  }
+
+  // IPO classify
+  const ipoZone = target.closest('[data-ipozone]');
+  if (ipoZone && el.dataset.chip && el.dataset.label) {
+    const zone = ipoZone.dataset.ipozone;
+    const chipId = el.dataset.chip;
+    ['Input','Process','Output'].forEach(cat => {
+      if (ipoState[cat]) {
+        ipoState[cat] = ipoState[cat].filter(id => id !== chipId);
+        refreshIPOZone(cat);
+      }
+    });
+    if (ipoState[zone] !== undefined) {
+      ipoState[zone].push(chipId);
+      refreshIPOZone(zone);
+      const chipEl = document.getElementById(`ipochip_${chipId}`);
+      if (chipEl) chipEl.style.display = 'none';
+    }
+  }
+
+  // Sequence sort
+  const seqTarget = target.closest('[data-seqid]');
+  if (seqTarget && el.dataset.seqid) {
+    const targetId = seqTarget.dataset.seqid;
+    const fromId   = el.dataset.seqid;
+    if (fromId && fromId !== targetId) {
+      const fromIdx = seqOrder.indexOf(fromId);
+      const toIdx   = seqOrder.indexOf(targetId);
+      if (fromIdx !== -1 && toIdx !== -1) {
+        seqOrder.splice(fromIdx, 1);
+        seqOrder.splice(toIdx, 0, fromId);
+        renderSeq();
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>

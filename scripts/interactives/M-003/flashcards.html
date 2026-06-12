@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build Kit Overview — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Build Kit Overview</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Mousetrap Car Kit", "definition": "A kit used in the Creationeering course to build a mousetrap-powered car, helping students learn hands-on engineering concepts."}, {"term": "Energy Transformation Engine", "definition": "The mousetrap in the kit, which stores potential energy in its spring and converts it into kinetic energy (motion) when released."}, {"term": "Potential Energy", "definition": "Stored energy, like the energy held in the mousetrap's spring before it is released."}, {"term": "Kinetic Energy", "definition": "The energy of motion, which is what the mousetrap's spring transforms into when it moves the car."}, {"term": "Balsa Wood Frame Rails", "definition": "The structural skeleton of the mousetrap car, which must be aligned perfectly to prevent friction and drifting."}, {"term": "Chassis", "definition": "Another name for the frame or structural skeleton of the vehicle, which needs to be square and aligned for good performance."}, {"term": "Lever Arm and Kevlar String", "definition": "These components act as the car's transmission, transferring energy from the mousetrap to the axle to make the car move."}, {"term": "Transmission", "definition": "The system that transfers power from the engine (mousetrap) to the drive wheels."}, {"term": "Brass Axles", "definition": "Parts chosen for their strength and low friction properties, helping the car lose less energy as it moves."}, {"term": "Resistive Forces", "definition": "Forces like friction that work against the motion of the car, which engineers try to reduce."}, {"term": "Wheels and Balloons", "definition": "The final parts that convert energy into motion, where their size and traction affect the car's distance and efficiency."}, {"term": "OCV Framework", "definition": "A framework that stands for Objectives, Constraints, and Variables, used to understand the engineering significance of the kit components."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

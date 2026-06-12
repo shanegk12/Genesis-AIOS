@@ -1,0 +1,273 @@
+[
+  {
+    "id": "m054tx001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Performance Data</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>Last lesson was a big one — your mousetrap cars achieved final function verification. You designed, built, and tested your vehicles to confirm they could move under their own mousetrap power. That was a critical milestone. Now it is time to dig deeper and ask a harder question: not just <em>does it move?</em> but <em>how well does it move?</em></p><p>Today you will focus on two connected ideas: <strong>Performance Data</strong> and the Creationeering phase of <strong>Sustainability</strong>. Collecting performance data will help you measure exactly how good your car is at its job — speed, distance, consistency — and point you toward smart improvements before competition. Thinking about sustainability will push you to consider how your design uses resources wisely and whether it can be improved, adapted, or even recycled in the future. Both ideas come back to the same core question: are you being a wise steward of the design in your hands?</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define performance data and explain why it matters in the engineering design process.</li><li>Identify and measure key performance metrics for their mousetrap cars, including distance, speed, and consistency.</li><li>Analyze collected performance data to find areas for design improvement and optimization.</li><li>Apply the Creationeering concept of Sustainability to evaluate material choices and lifecycle considerations in their mousetrap car design.</li><li>Connect responsible data collection and thoughtful stewardship of design resources to biblical principles of wise dominion.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054vc001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Performance Data",
+          "definition": "Quantitative information collected to assess how well a system, product, or process operates against specific criteria."
+        },
+        {
+          "term": "Sustainability",
+          "definition": "The ability of a system or product to continue functioning effectively over a long period, often involving the wise use of resources and consideration of environmental impact."
+        },
+        {
+          "term": "Metric",
+          "definition": "A standard of measurement used to quantify performance or characteristics."
+        },
+        {
+          "term": "Data Analysis",
+          "definition": "The process of examining, cleaning, transforming, and modeling data to extract useful information, draw conclusions, and support decision-making."
+        },
+        {
+          "term": "Iteration",
+          "definition": "A single cycle of a design-build-test-analyze loop, aimed at refining a solution through repeated improvement."
+        },
+        {
+          "term": "Optimization",
+          "definition": "The process of making a design or system as effective, efficient, or functional as possible for a given set of objectives and constraints."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at a larger scale (macro) to their underlying causes at smaller scales (micro or atomic)."
+        },
+        {
+          "term": "OCV Method",
+          "definition": "A structured design framework that identifies the Objectives (what you want to achieve), Constraints (limitations or requirements), and Variables (elements you can change) of a design problem."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054dv001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx004",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewarding Your Design: Performance and Longevity</h2><p>In Genesis 1:28, God commanded humanity to \"Be fruitful and multiply; fill the earth and subdue it; have dominion over the fish of the sea, over the birds of the air, and over every living thing that moves on the earth.\" This is the Dominion Mandate — and it is not a license to exploit. It is a call to manage and steward God's creation wisely and responsibly.</p><p>Think about how God designed the universe: with incredible order, function, and long-term sustainability. Stars burn according to precise physical laws. Ecosystems recycle nutrients without waste. Every system reflects a Designer who thought not just about what something does, but how well it does it, and how long it will last. As a Creationeer, you are called to reflect that same character in your own designs. That means thinking beyond whether your mousetrap car moves — it means asking how efficiently it moves, how wisely it uses its materials, and how it could be improved or repurposed when its first purpose is complete.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054cb001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Genesis 1:28 —</strong> \"Be fruitful and multiply; fill the earth and subdue it; have dominion over the fish of the sea, over the birds of the air, and over every living thing that moves on the earth.\" Dominion means stewardship — managing well, not using carelessly. Your mousetrap car is a small design, but the habits of a wise engineer start here.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054dv002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is Performance Data — and Why Does It Matter?</h2><p>Imagine a basketball coach who watches every game but never writes anything down. After a losing season, she has a feeling the team struggled — but she cannot say exactly where or why. Now imagine a coach who tracked every shot, every turnover, every minute of play. She knows precisely which plays broke down and which players need extra practice. The second coach can actually fix the problem. That is what performance data does for an engineer.</p><p>Performance data is quantitative information — numbers you measure — that tells you how well your design is actually doing its job. Feelings and hunches are a starting point, but data is what lets you make confident, specific improvements. In engineering, you cannot optimize what you cannot measure.</p><p>For your mousetrap car, the most important performance metrics are:</p><ul><li><strong>Distance:</strong> How far does the car travel on a single snap of the trap?</li><li><strong>Speed:</strong> How quickly does it cover that distance?</li><li><strong>Consistency:</strong> Does it perform the same way run after run, or does it vary wildly?</li></ul><p>Each of these tells you something different about your design. A car that goes far but inconsistently might have a traction problem. A car that is fast but short-ranged might be losing energy through friction. The data points you toward the answer.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054im001",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A data table showing multiple mousetrap car test runs with columns for run number, distance traveled (in centimeters), time elapsed (in seconds), and calculated speed — illustrating how repeated measurements reveal performance patterns."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx006",
+    "type": "text",
+    "data": {
+      "html": "<h2>How to Collect Good Data</h2><p>Collecting data sounds simple — just measure the car and write it down. But sloppy data collection leads to sloppy conclusions. Here are the principles that separate useful data from noise:</p><h3>Run Multiple Trials</h3><p>One run tells you very little. Three to five runs on the same course, under the same conditions, give you a pattern you can trust. If your car travels 4.2 m, 4.1 m, and 4.3 m, you can be confident it is a 4.2-meter car. If it travels 2 m, then 5 m, then 3.5 m, you know something is inconsistent — and that is valuable information too.</p><h3>Control Your Variables</h3><p>This is where the OCV Method connects to data collection. Your <strong>Objective</strong> is what you are measuring (distance, speed). Your <strong>Constraints</strong> are the fixed conditions (same floor surface, same release method). Your <strong>Variables</strong> are what you change intentionally between experiments — one at a time. Change one thing at a time. If you adjust the axle length and the string length simultaneously, you will not know which change caused any difference in performance.</p><h3>Measure Precisely</h3><p>Use a measuring tape, not your eyes. Use a stopwatch, not your instincts. Record every decimal place your tools allow. Remember the difference between accuracy (how close your measurement is to the true value) and precision (how consistent your measurements are). You want both.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Analyzing Your Data: Finding the Story in the Numbers</h2><p>Once you have collected your performance data, the next step is data analysis — examining your numbers to find patterns, draw conclusions, and decide what to do next. Data analysis is not just arithmetic. It is detective work.</p><h3>Calculate Averages</h3><p>Add up your distance values across all runs and divide by the number of runs. This average is a better description of your car's true performance than any single run. It smooths out random variation and gives you a reliable baseline.</p><h3>Look for Patterns</h3><p>Does the car perform worse after sitting for a few minutes — suggesting the spring loses tension? Does it veer to one side consistently — suggesting wheel alignment is off? Does it slow down significantly in the second half of its run — suggesting friction is dominating? Each pattern is a clue pointing toward a specific design adjustment.</p><h3>Connect Data to Design Decisions</h3><p>Data analysis feeds directly into iteration and optimization. When your data reveals that your car consistently loses momentum before reaching full distance, you have evidence — not just a guess — that friction or energy transfer is your limiting factor. Now you can make a targeted change, run another set of trials, and compare. This is how engineers turn test results into better designs, one cycle at a time.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054cb002",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>One change at a time.</strong> When you want to improve your car based on your data, resist the urge to fix everything at once. Change one variable — wheel diameter, string length, lever arm — run your trials, then compare to your baseline. This is how you know what actually worked.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054dv003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Sustainability: Designing for the Long Haul</h2><p>Performance is about how well your car does its job today. Sustainability is about thinking further — how long will this design last, how wisely does it use materials, and what happens to it when its racing days are over?</p><p>God designed creation with extraordinary sustainability built in. Trees fall, decompose, and nourish the soil for future growth. Water cycles from ocean to cloud to rain and back again. Nothing is wasted. As engineers made in God's image, we are called to bring that same thoughtfulness to our designs.</p><h3>Material Choices</h3><p>Look at your mousetrap car. What is it made of? Wood, plastic, metal, rubber, string? Some of these materials are recyclable. Some are not. Some were chosen for performance — but could a slightly different material choice achieve the same performance with less waste? Thinking through material choices is part of being a responsible engineer, even at the mousetrap scale.</p><h3>Lifecycle Thinking</h3><p>Lifecycle thinking asks: what happens to this design at every stage — during manufacturing, during use, and at the end of its life? For your car, you might ask: Can the mousetrap be reset and reused? Can the wood be repurposed? Can any parts be salvaged for your next design? These are not just environmental questions — they are stewardship questions. Wise engineers think ahead.</p><h3>Multiscale Modeling and Sustainability</h3><p>Multiscale modeling is an engineering approach that connects what you see at a large scale (your car traveling down the hallway) to what is happening at a smaller scale (friction between axle and frame, energy stored in the spring at the molecular level). When you apply this thinking to sustainability, you start asking not just \"does my design work?\" but \"what is happening inside my materials over time?\" Does repeated stress weaken the spring? Does the axle wear down the frame bearing over many runs? These questions help you design for durability, not just initial performance.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054im002",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple lifecycle diagram showing a mousetrap car moving through four stages — Design, Build, Use/Test, and End-of-Life — with arrows connecting each stage and labels noting material choices, energy use, and repurposing options at each phase."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054tx009",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together: The Performance-Sustainability Loop</h2><p>Performance data and sustainability are not separate ideas — they reinforce each other. A car that is optimized for performance uses its stored energy efficiently, which means less wasted force, less wear on components, and a longer useful life. A car designed with sustainable materials and thoughtful construction tends to be more consistent and durable under repeated testing.</p><p>This is the engineering loop you are living inside right now:</p><ul><li><strong>Design</strong> with objectives, constraints, and variables clearly defined (OCV Method).</li><li><strong>Build</strong> with material choices made intentionally.</li><li><strong>Test</strong> with multiple trials and precise measurement.</li><li><strong>Analyze</strong> your performance data for patterns and root causes.</li><li><strong>Iterate</strong> — make one targeted change based on your analysis.</li><li><strong>Repeat</strong> — and consider the sustainability of every choice along the way.</li></ul><p>Every loop through this cycle makes you a more capable and more responsible engineer. And every responsible engineering choice you make is a small reflection of the ordered, purposeful creativity of the God in whose image you are made.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054cb003",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Don't skip the baseline.</strong> Before making any design changes, run at least three trials and record your baseline performance. Without a baseline, you have nothing to compare your improvements against — and you won't know if your changes actually helped.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m054ac001",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Multiscale Modeling in Real Engineering",
+      "html": "<p>Professional engineers use multiscale modeling to design everything from aircraft wings to medical implants. At the macro scale, they measure how a whole structure performs under load. At the micro scale, they simulate how individual material grains or fibers deform and fail. At the atomic scale, computational chemists model how bonds stretch and break.</p><p>Why does this matter for your mousetrap car? Because the same principle applies, just at a simpler level. When your car's performance data shows it slowing down faster than expected over multiple runs, the answer might not be visible to the eye — it might be microscopic wear on your axle, or a tiny increase in the gap between axle and frame that raises friction. Thinking across scales — from the car's overall run to the small mechanical interaction at the axle — helps you ask better diagnostic questions and design more durable solutions.</p><p>This is also why sustainability matters at the material level: even small inefficiencies in how materials interact can compound over many cycles, reducing performance and shortening the life of your design.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Human Factors in Production Systems — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Human Factors in Production Systems</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Human Factors", "definition": "The study of how people interact with systems, tools, and environments to make them safer, more efficient, and comfortable for us to use."}, {"term": "Ergonomics", "definition": "The science of designing and arranging things so they fit the people who use them well, preventing discomfort or injury."}, {"term": "Cognitive Load", "definition": "The amount of mental effort your brain is using at one time. Too much cognitive load can make it harder to think clearly and lead to mistakes."}, {"term": "Automation", "definition": "Using technology to do tasks with very little help from humans. This can make systems more efficient but also changes how people interact with them."}, {"term": "Error Prevention", "definition": "Strategies and designs that aim to stop mistakes from happening in the first place, making systems more reliable and safe."}, {"term": "Human-Machine Interface (HMI)", "definition": "The place where a human and a machine or system connect and interact. Examples include control panels, touchscreens, and joysticks."}, {"term": "Situational Awareness", "definition": "Knowing what is happening around you right now and understanding what it might mean for the future, which is crucial for making good decisions."}, {"term": "Optimization", "definition": "The process of finding the very best possible solution or design for a problem, considering all the rules and limitations."}, {"term": "Genesis 1:26-28 (Human's Role)", "definition": "This Bible verse teaches us that God created humans in His image and gave us the responsibility to rule over and care for the earth, including designing and building things."}, {"term": "Assembly Phase (Creationeering™)", "definition": "The stage in the Creationeering™ framework where designs are brought to life. This is where understanding human factors becomes very important."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+[
+  {
+    "id": "c021h1blk",
+    "type": "text",
+    "data": {
+      "html": "<h1>Design of Experiments (One Factor at a Time)</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021ovrvw",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>You have already explored the Design phase — where ideas take shape — and the Procurement phase — where you gather the materials to bring those ideas to life. Now you arrive at one of the most exciting stages in the engineering process: <strong>Analysis and Synthesis</strong>. This is where theory meets the test. You do not just build and hope; you build, test, analyze, and improve. This lesson equips you with a powerful method for doing exactly that — the <strong>One-Factor-at-a-Time (OFAT)</strong> approach — so your designs get sharper, smarter, and stronger with every iteration.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021objct",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p><ul><li>Learn the One-Factor-at-a-Time (OFAT) method to design clear, actionable experiments.</li><li>Understand and apply the Iteration Cycle to improve designs based on real data.</li><li>Identify the usefulness and the limitations of Design of Experiments (DoE) within an engineering workflow.</li><li>Connect the practice of testing and refining to the biblical principle of pursuing excellence in all we do.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021vocbl",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Variable",
+          "definition": "An element, feature, or factor that can change or be changed during an experiment."
+        },
+        {
+          "term": "Factor",
+          "definition": "An independent variable in an experiment whose value the engineer controls."
+        },
+        {
+          "term": "Level",
+          "definition": "A specific value or setting assigned to a factor — for example, \"5 cm\" vs. \"10 cm\" or \"high\" vs. \"low.\""
+        },
+        {
+          "term": "One-Factor-at-a-Time (OFAT)",
+          "definition": "An experimental method where only one variable is changed while all others are held constant, so you can clearly see its effect."
+        },
+        {
+          "term": "Iteration",
+          "definition": "The repetitive process of testing and refining a product or process to bring it closer to a desired goal."
+        },
+        {
+          "term": "Design of Experiments (DoE)",
+          "definition": "A systematic, mathematical approach to testing that evaluates multiple factors and their interactions at the same time."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation on a design — such as budget, available materials, or physical laws — that shapes what solutions are possible."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div01",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021analy",
+    "type": "text",
+    "data": {
+      "html": "<h2>Analysis and Synthesis: Where Theory Meets the Test</h2>\n<p>Think about what happens when a bridge builder finishes the design on paper. The math looks right. The drawings look clean. But until that bridge is actually loaded and tested, no one truly knows how it will perform. That gap — between what you think will happen and what actually happens — is exactly what Analysis and Synthesis closes.</p>\n<p>In this phase of the engineering process, you gather real data from real tests and use it to make your design better. It is not a sign of failure when your first test result is not perfect. It is the system working exactly as it should. God built a universe full of patterns and laws that reward careful observation. Good engineers pay attention to those patterns.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021bib01",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Proverbs 14:15</strong> — <em>\"The simple believe anything, but the prudent give thought to their steps.\"</em></p><p>A wise engineer does not guess and move on. Testing your assumptions, recording what actually happens, and thinking carefully before your next step — that is prudence in action. Designing experiments is one of the most practical ways to give thought to your steps.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div02",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021ofatx",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Logic of the Experiment: The OFAT Method</h2>\n<p>Imagine you are trying to bake the perfect loaf of bread. Your first attempt comes out too dense. Frustrated, you decide to fix it — so you change the amount of yeast, the oven temperature, and the type of flour all at once. The next loaf comes out perfectly. But here is the problem: <em>which change actually fixed it?</em> You have no way of knowing. You might have wasted expensive ingredients on changes that made zero difference.</p>\n<p>Engineering works the same way. When you change multiple things at once and something improves, you get a better result but zero understanding of <em>why</em>. Understanding why is what turns a lucky fix into a repeatable, reliable design. That is what the <strong>One-Factor-at-a-Time (OFAT)</strong> method gives you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021imgof",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing two experiments side by side: one where multiple variables change at once (messy/unclear results) and one where only a single factor changes while others stay constant (clear, readable result)."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021whyof",
+    "type": "text",
+    "data": {
+      "html": "<h2>Why OFAT Works</h2>\n<p>When a system — like an Arduino-powered robot or a load-bearing bridge — fails or underperforms, changing multiple variables at once creates <em>noise</em>. You end up with a pile of data you cannot read. OFAT cuts through that noise and gives you <em>clarity</em>. Here is why it is the go-to method for troubleshooting:</p>\n<ul>\n<li><strong>Simplicity:</strong> You know exactly which lever you pulled. There is no guessing about what caused the change.</li>\n<li><strong>Directional Data:</strong> Each test tells you clearly whether a specific change — like increasing a beam's thickness or adjusting a motor's voltage — made performance better or worse.</li>\n<li><strong>Cost-Effective:</strong> You stop wasting materials by changing only what is necessary, not everything at once.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021tipof",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Remember the rule:</strong> Change ONE thing. Test. Record. Then decide your next move. Resist the urge to tweak multiple factors at once — even when you are excited to fix everything quickly. Patience here saves materials and time later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div03",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021steps",
+    "type": "text",
+    "data": {
+      "html": "<h2>How to Conduct an OFAT Test</h2>\n<p>Follow these six steps every time you run an OFAT experiment in your Creationeering projects:</p>\n<ol>\n<li><strong>Establish a Baseline:</strong> Test your current design and carefully record the results. (Example: \"The bridge held 5 kg before collapsing.\")</li>\n<li><strong>Identify Your Factors:</strong> List everything you <em>could</em> change — material type, thickness, connection method, length, and so on.</li>\n<li><strong>Select ONE Factor:</strong> Choose the one factor you believe has the most impact on your result.</li>\n<li><strong>Hold All Others Constant:</strong> This is the hardest step. If you are testing beam thickness, the material, adhesive, and load-testing method must stay exactly the same as your baseline.</li>\n<li><strong>Test and Record:</strong> Run the test with your new factor level. Write down everything — not just the final result but any observations along the way.</li>\n<li><strong>Compare:</strong> Did performance improve, stay the same, or get worse? Either answer is valuable information that guides your next decision.</li>\n</ol>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021imgst",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A step-by-step flowchart of the OFAT process: Baseline → Identify Factors → Select One → Hold Others Constant → Test & Record → Compare → Repeat."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021wrnof",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Forgetting to record your baseline before you start changing things. Without a clear starting point, you have nothing to compare your results against. Always document your design's performance <em>before</em> you make any changes.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div04",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021iter1",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Art of Iteration: Getting Better Every Round</h2>\n<p>Here is something important to understand: no design is perfect on the first try. Not a spacecraft, not a smartphone, and not your Creationeering project. What separates a good engineer from a frustrated one is the willingness to iterate — to test, learn, and try again.</p>\n<p><strong>Iteration</strong> is the repetitive cycle of refining a design based on what your tests reveal. Think of it like a sculptor chipping away at a block of marble. Each pass of the chisel removes what does not belong and brings the final form into sharper focus. Your experiments are the chisel. Every test result tells you what to chip away next.</p>\n<p>One OFAT test gives you one data point. A series of OFAT tests — each one building on the last — gives you a map. That map shows you exactly which factors matter most and in which direction to push them.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021bib02",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Zechariah 13:9</strong> — <em>\"I will refine them like silver and test them like gold.\"</em></p><p>God uses testing to purify and strengthen. In the same way, the iteration cycle does not mean your design is broken — it means it is being refined. Every test is an opportunity to make your work more excellent, more purposeful, and more worthy of the gifts God has given you.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div05",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021doe01",
+    "type": "text",
+    "data": {
+      "html": "<h2>Beyond OFAT: A Glimpse at Design of Experiments (DoE)</h2>\n<p>OFAT is powerful, but it has a limitation. It tests one factor at a time — which means if two factors <em>interact</em> with each other, you might miss it. For example, maybe a certain type of glue only works better at a specific temperature. Testing glue type alone, then temperature alone, would never reveal that combination.</p>\n<p>That is where <strong>Design of Experiments (DoE)</strong> comes in. DoE is a more advanced, mathematical approach that tests multiple factors at the same time and can detect those interactions. Engineers on large-scale projects — designing aircraft components, medical devices, or manufacturing lines — rely on DoE to get answers faster and more completely than OFAT alone can provide.</p>\n<p>For now, OFAT is your primary tool. Think of DoE as the next level — something you will grow into as your engineering skills advance. Even professional engineers start with the simple, clear logic of changing one thing at a time before scaling up to more complex testing frameworks.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021infdo",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>OFAT vs. DoE — Know the difference:</strong></p><ul><li><strong>OFAT</strong> changes one factor at a time. It is simple, clear, and great for troubleshooting and early-stage testing.</li><li><strong>DoE</strong> tests multiple factors simultaneously using a mathematical design. It is faster for complex systems but requires more planning and analysis.</li></ul><p>Most engineering projects use both — OFAT to identify key factors, then DoE to optimize the best combinations.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021div06",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021chkun",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>1. What is the main purpose of the OFAT method?</strong><br/>To isolate the effect of a single variable by holding all other factors constant, so you can clearly see what caused any change in your results.</p><p><strong>2. What is a \"baseline\" and why is it important?</strong><br/>A baseline is the recorded performance of your design before any changes are made. Without it, you have nothing to compare your test results against.</p><p><strong>3. Why does changing multiple variables at once make it harder to improve a design?</strong><br/>Because you cannot tell which change caused the result. You might waste materials on changes that did nothing — or miss the one change that actually mattered.</p><p><strong>4. What is iteration, and why is it a normal part of engineering?</strong><br/>Iteration is the cycle of testing, learning, and refining your design. It is normal because no design is perfect on the first attempt — each test reveals something new that makes the next version better.</p><p><strong>5. How does OFAT differ from Design of Experiments (DoE)?</strong><br/>OFAT changes one factor at a time and is best for simple, clear troubleshooting. DoE tests multiple factors simultaneously and can detect interactions between them, making it more powerful — but also more complex.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c021close",
+    "type": "text",
+    "data": {
+      "html": "<h2>Keep Testing, Keep Growing</h2>\n<p>Every great engineer — and every great craftsperson throughout history — has learned that the first attempt is just the beginning. The OFAT method gives you a disciplined, honest way to listen to what your design is telling you. Change one thing. Pay attention. Record what you find. Then do it again.</p>\n<p>That kind of careful, patient work is not just good engineering practice — it reflects something deeper. It reflects the belief that the world God created runs on real, discoverable principles, and that we honor Him when we take the time to understand them well. Keep testing. Keep refining. Keep building toward excellence.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

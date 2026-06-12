@@ -1,0 +1,289 @@
+[
+  {
+    "id": "c086t1a2",
+    "type": "text",
+    "data": {
+      "html": "<h1>Data Security and System Wipe</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t2b3",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>In our last lesson, we covered Decommissioning Procedures and System Shutdown — the careful, systematic process of shutting down a system at the end of its useful life. We explored how to prepare a system for reuse, repurposing, or responsible disposal as part of the Death &amp; Recycling phase of Creationeering.</p>\n<p>Today we're going deeper into that same phase by focusing on <strong>Data Security and System Wipe</strong>. Think about your own phone or laptop. When it's time to get rid of it, you wouldn't want your personal photos, passwords, or messages ending up in a stranger's hands. That's exactly what this lesson is about: making sure sensitive information is completely and permanently removed from a system before it's recycled or passed on. You'll learn why data security matters, why simply pressing \"delete\" isn't enough, and what engineers actually do to make sure information is truly gone.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t3c4",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will:</p>\n<ul>\n<li>Define data security and explain why it matters during the Death &amp; Recycling phase.</li>\n<li>Explain the difference between simply deleting data and securely wiping a system.</li>\n<li>Identify several methods engineers use to securely wipe data from different types of storage devices.</li>\n<li>Understand the multiscale modeling connection between visible data deletion and what happens at the atomic level.</li>\n<li>Apply biblical principles of stewardship to the responsible disposal and security of digital information.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086v4d5",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Data Security",
+          "definition": "Protecting digital information from unauthorized access, use, disclosure, disruption, modification, or destruction."
+        },
+        {
+          "term": "System Wipe",
+          "definition": "A process that completely and irreversibly removes all data from a storage device, making it unrecoverable."
+        },
+        {
+          "term": "Deletion",
+          "definition": "The process of removing a file or data, often leaving it recoverable until new data overwrites it."
+        },
+        {
+          "term": "Overwriting",
+          "definition": "Replacing existing data on a storage device with new, meaningless data to prevent recovery."
+        },
+        {
+          "term": "Degaussing",
+          "definition": "Using a strong magnetic field to disrupt and randomize the magnetic domains on a hard drive, effectively erasing data."
+        },
+        {
+          "term": "Encryption",
+          "definition": "The process of converting information or data into a code to prevent unauthorized access."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that links observations at one scale (like a visible file deletion) to causes at a much smaller scale (like changes in magnetic or atomic structure)."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be considered in an engineering design."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor or quantity that can change or be adjusted in an engineering design."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086dv1e",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t5f6",
+    "type": "text",
+    "data": {
+      "html": "<h2>A Clean Slate</h2>\n<p>Everything we build eventually reaches the end of its useful life. That's not a failure — it's part of the design. The book of Ecclesiastes captures this beautifully: <em>\"For everything there is a season, and a time for every matter under heaven: a time to be born, and a time to die; a time to plant, and a time to pluck up what is planted\"</em> (Ecclesiastes 3:1–2).</p>\n<p>In Creationeering, this wisdom applies to both physical systems and the data living inside them. When a device reaches the end of its life, responsibly handling the information it contains is just as important as responsibly handling the hardware. Giving a system a true \"clean slate\" — completely clearing it of sensitive data — is an act of stewardship. It protects people, honors trust, and reflects the careful, purposeful way God designed the world to work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086cb1g",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Ecclesiastes 3:1–2</strong> — \"For everything there is a season, and a time for every matter under heaven: a time to be born, and a time to die; a time to plant, and a time to pluck up what is planted.\" Just as creation follows a lifecycle, so do our engineered systems — and we are called to steward every phase of that lifecycle well.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086dv2h",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t6i7",
+    "type": "text",
+    "data": {
+      "html": "<h2>Delete Doesn't Mean Gone</h2>\n<p>Here's something that surprises a lot of people: when you press \"delete\" on a file, the file isn't actually erased. Think of it like a library. Deleting a book is like moving it off the main shelf and placing it in the back room — the catalog no longer lists it, but the book is still physically there. Anyone with the right access (or the right tools) can walk back there and find it.</p>\n<p>On a computer, deleting a file simply removes the pointer that tells the operating system where that file lives. The actual data sits on the storage device until something new is written over that same spot. That could take days, weeks, or never happen at all. Specialized recovery software can locate and restore those \"deleted\" files surprisingly easily.</p>\n<p>That's why engineers responsible for end-of-life systems can't just hit delete and call it done. A true <strong>system wipe</strong> is required — a deliberate, thorough process that makes data unrecoverable, not just invisible.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Side-by-side diagram comparing file deletion (pointer removed but data remains on disk) versus a full system wipe (data blocks overwritten with random data), illustrating why deletion alone is not secure."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t7j8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Methods for Securely Wiping Data</h2>\n<p>Engineers have developed several proven methods for making data truly unrecoverable. The right method depends on the type of storage device and how sensitive the data is.</p>\n<h3>Overwriting</h3>\n<p><strong>Overwriting</strong> is one of the most common software-based methods. It works by writing new, meaningless data — often just strings of zeros and ones — over every single storage location on the device. Do this enough times (some standards require multiple passes), and the original data becomes impossible to recover. It's like scribbling over every word in a notebook so completely that the original words can't be read, even under a magnifying glass.</p>\n<h3>Degaussing</h3>\n<p><strong>Degaussing</strong> takes a different approach. Traditional hard drives store data using tiny magnetic regions called magnetic domains. A degausser blasts the drive with an extremely powerful magnetic field, scrambling those domains completely. The drive can no longer be read — or often even used again. This method is fast and effective for magnetic storage, but it doesn't work on solid-state drives (SSDs) or flash drives, which store data differently.</p>\n<h3>Physical Destruction</h3>\n<p>For the highest-security situations, the most reliable method is simply destroying the hardware. Shredding a hard drive, crushing it, or incinerating it guarantees that no data can ever be recovered. It's the engineering equivalent of burning a classified document — once it's gone, it's truly gone.</p>\n<h3>Encryption Before Wiping</h3>\n<p><strong>Encryption</strong> adds an extra layer of protection. If data is encrypted — converted into a coded format that requires a special key to read — then even if someone recovers fragments of it during a wipe, those fragments are completely unreadable. Many organizations encrypt data throughout a system's entire life, not just at the end, so that disposal becomes far less risky.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Diagram showing four data destruction methods — overwriting, degaussing, physical destruction, and encryption — with icons representing each method and the type of storage device each applies to."
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086dv3k",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t8l9",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: From Files to Atoms</h2>\n<p>Here's where engineering thinking gets really interesting. <strong>Multiscale modeling</strong> is an approach engineers use to connect what they can observe at a large, visible scale to what's actually happening at a much smaller scale — sometimes all the way down to atoms and molecules.</p>\n<p>Data security is a perfect example of this. At the macro scale, you see a file disappear from your screen when you click delete. But at the micro scale — on the physical surface of a hard drive — tiny magnetic regions are just being relabeled, not erased. The actual magnetic orientation of those regions stays intact. A degausser works at that micro scale, physically randomizing the magnetic domains. A file shredder works at the visible scale, overwriting logical file structures. Physical destruction works at the macro scale, but also destroys the micro-scale structures along with it.</p>\n<p>Understanding both scales helps engineers choose the right tool for the job. A method that looks effective at the surface level might leave data perfectly intact at a deeper level — and that's a serious security risk.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086cbt2",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Think in layers.</strong> When evaluating any data wipe method, ask yourself: does this method remove the data at every scale? Visible deletion at the software level is not enough if the physical storage medium still holds the original information. True security requires addressing the problem at the right scale.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t9m0",
+    "type": "text",
+    "data": {
+      "html": "<h2>Stewardship of Digital Information</h2>\n<p>Data security isn't just a technical responsibility — it's a moral one. When someone trusts you with their information, whether it's a customer's payment details, a patient's medical records, or a friend's private messages, you are a steward of that trust. Mishandling data at the end of a system's life isn't just a technical failure. It's a failure of integrity.</p>\n<p>Proverbs 11:3 says, <em>\"The integrity of the upright guides them.\"</em> As engineers and creators, integrity means doing the right thing even when no one is watching — including during the unsexy, behind-the-scenes work of properly wiping a system before disposal. The world doesn't see that step. But it matters enormously to the people whose data was on that device.</p>\n<p>When you design systems, build that responsibility in from the start. Think about how data will be handled not just during use, but at the very end of the product's life. That kind of forward thinking — planning for the Death &amp; Recycling phase before the system is even built — is what separates good engineers from great ones.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086cbt3",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Many people assume that a factory reset on a phone or computer wipes all data securely. In many cases, a factory reset only removes the pointers to data — the actual files may still be recoverable. For sensitive data, always verify that your device's reset process performs a full overwrite, or use dedicated wiping software.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086dv4n",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086t10p",
+    "type": "text",
+    "data": {
+      "html": "<h2>Putting It All Together</h2>\n<p>Data security and system wiping are essential parts of the Death &amp; Recycling phase. Here's a quick summary of what you've learned:</p>\n<ul>\n<li><strong>Deleting a file is not the same as erasing it.</strong> The data remains on the storage medium until overwritten or physically destroyed.</li>\n<li><strong>System wipe methods include:</strong> overwriting, degaussing, physical destruction, and encryption — each suited to different devices and security levels.</li>\n<li><strong>Multiscale modeling</strong> reminds us to think beyond the surface — what looks erased at the software level may still exist at the physical, magnetic, or atomic level.</li>\n<li><strong>Stewardship of data</strong> is a responsibility that extends through a product's entire lifecycle, right up to its final disposal.</li>\n</ul>\n<p>As you continue building and designing systems, remember that your responsibility to the people who use those systems doesn't end when the product is retired. It ends when you've handled every phase — including the last one — with integrity and care.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "c086acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Going Deeper: Data Security Standards and Certifications",
+      "html": "<p>If you're curious about how organizations formally handle data security at end-of-life, there are internationally recognized standards that define exactly how wiping must be done. Here are a few worth knowing about:</p>\n<ul>\n<li><strong>NIST SP 800-88</strong> — Published by the U.S. National Institute of Standards and Technology, this is one of the most widely used guidelines for media sanitization. It defines three levels: Clear (software overwrite), Purge (degaussing or cryptographic erase), and Destroy (physical destruction).</li>\n<li><strong>DoD 5220.22-M</strong> — A U.S. Department of Defense standard that historically required multiple overwrite passes with specific data patterns. Many commercial wiping tools reference this standard.</li>\n<li><strong>ISO/IEC 27001</strong> — An international standard for information security management systems. Organizations that are certified under this standard must have documented procedures for secure data disposal.</li>\n</ul>\n<p>Engineers working in fields like healthcare, finance, government, or defense are often required to follow these standards by law. Knowing they exist — and why — helps you understand that data security is taken very seriously at every level of the engineering world.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

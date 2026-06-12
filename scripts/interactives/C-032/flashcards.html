@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Material Properties and Selection — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Material Properties and Selection</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Material Properties", "definition": "The specific characteristics or traits that describe how a material behaves under different conditions, like its strength or how well it conducts electricity."}, {"term": "Material Selection", "definition": "The process of choosing the best material for a specific engineering project based on its properties, cost, and how easy it is to get."}, {"term": "Strength", "definition": "A material's ability to handle outside forces without breaking or changing its shape permanently."}, {"term": "Stiffness", "definition": "How much a material resists bending or stretching when a force is applied to it."}, {"term": "Durability", "definition": "A material's ability to resist wearing out, getting tired, or decaying over time, so it stays useful and whole."}, {"term": "Multiscale Modeling", "definition": "Understanding how the tiny atomic and molecular structure of materials affects their larger, observable properties."}, {"term": "Objective, Constraint, Variable (OCV) Method", "definition": "A structured way to make decisions about material selection by considering what you want to achieve, what limits you have, and what you can change."}, {"term": "Stewardship", "definition": "The biblical principle of responsibly managing and caring for God's creation, including the materials we select for our designs."}, {"term": "Procurement Phase", "definition": "The stage in Creationeering™ where we thoughtfully acquire the right resources and materials needed for our designs."}, {"term": "Creationeering™", "definition": "The process of designing and building innovative solutions, always with an eye toward God's provision and wise stewardship."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

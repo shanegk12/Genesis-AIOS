@@ -1,0 +1,151 @@
+{
+  "lesson_id": "M-021",
+  "topic": "Instrumentation and Data Types",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "According to the lesson, what is the primary purpose of instrumentation in engineering?",
+      "options": {
+        "A": "To make designs look visually appealing.",
+        "B": "To create 'digital eyes and ears' to measure what humans cannot perceive.",
+        "C": "To physically assemble mousetrap vehicles.",
+        "D": "To write computer programs for microcontrollers."
+      },
+      "answer": "B",
+      "explanation": "The lesson defines instrumentation as the field of engineering that creates 'digital eyes and ears' to measure what we cannot perceive."
+    },
+    {
+      "type": "recall",
+      "question": "What is the process of transduction in a sensor?",
+      "options": {
+        "A": "Storing digital information in a computer's memory.",
+        "B": "Converting an electrical signal back into a physical phenomenon.",
+        "C": "Translating a physical phenomenon into an electrical signal.",
+        "D": "Calculating distance using time and speed of sound."
+      },
+      "answer": "C",
+      "explanation": "The lesson states that transduction is the conversion of energy from one form to another, specifically taking a physical phenomenon and turning it into an electrical signal."
+    },
+    {
+      "type": "recall",
+      "question": "Which physical property does the HC-SR04 Ultrasonic Sensor primarily measure?",
+      "options": {
+        "A": "The amount of light reflected from a surface.",
+        "B": "The force applied to a spring.",
+        "C": "The distance to an object using sound waves.",
+        "D": "The temperature of the vehicle's engine."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains that the HC-SR04 Ultrasonic Sensor uses sound waves to measure the time it takes for sound to bounce off a wall and return, allowing for distance calculation."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does the IR Reflectance Sensor help calculate the RPM (Rotations Per Minute) of your mousetrap vehicle's axle?",
+      "options": {
+        "A": "It measures the total distance the vehicle travels and divides by time.",
+        "B": "It detects how much infrared light reflects back from a marker on the axle, counting rotations.",
+        "C": "It senses the pressure applied to the axle as it spins.",
+        "D": "It uses sound waves to determine how fast the axle is moving."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that the IR Reflectance Sensor counts every time the axle completes a rotation by detecting reflected infrared light from a marker."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why do engineers rely on instrumentation and sensors when humans already have five senses?",
+      "options": {
+        "A": "Because human senses are too slow to react to anything.",
+        "B": "To replace human engineers entirely with machines.",
+        "C": "Because human senses are often insufficient to perceive precise measurements needed for engineering problems.",
+        "D": "To make engineering tasks more complicated than they need to be."
+      },
+      "answer": "C",
+      "explanation": "The lesson explains that biological senses are often insufficient for precise measurements, such as exact microsecond slip or precise Newton-meter of torque, which instrumentation can provide."
+    },
+    {
+      "type": "comprehension",
+      "question": "In the context of Input/Output (I/O) Logic, what happens during the 'Process' stage after a sensor provides an 'Input'?",
+      "options": {
+        "A": "The system takes an immediate physical action without any calculation.",
+        "B": "The sensor collects more raw data from the environment.",
+        "C": "The microcontroller uses math or logic to interpret the input and decide what it means.",
+        "D": "The data is permanently stored without any further use."
+      },
+      "answer": "C",
+      "explanation": "The lesson defines 'Process' as the Arduino using math (Algebra) to decide what the input means, which then leads to an output."
+    },
+    {
+      "type": "application",
+      "question": "You want to measure how much force is being applied to the mousetrap spring at different points in its pull-back. Which sensor from your lab kit would be most appropriate for this task?",
+      "options": {
+        "A": "The HC-SR04 Ultrasonic Sensor.",
+        "B": "The IR Reflectance Sensor.",
+        "C": "The Force-Sensitive Resistor (FSR).",
+        "D": "A temperature sensor."
+      },
+      "answer": "C",
+      "explanation": "The lesson describes the FSR as a 'touch' sensor that measures how hard you press on it, making it ideal for mapping potential energy in a spring."
+    },
+    {
+      "type": "application",
+      "question": "Your mousetrap vehicle needs to automatically stop before hitting a wall. Which sensor would you use to detect the wall's presence and distance, allowing the vehicle to brake in time?",
+      "options": {
+        "A": "The IR Reflectance Sensor, to count wheel rotations.",
+        "B": "The Force-Sensitive Resistor, to measure the impact force.",
+        "C": "The HC-SR04 Ultrasonic Sensor, to measure distance.",
+        "D": "A light sensor, to detect changes in brightness."
+      },
+      "answer": "C",
+      "explanation": "The lesson states the HC-SR04 Ultrasonic Sensor measures distance to objects using sound waves, which is perfect for detecting a wall and calculating when to stop."
+    },
+    {
+      "type": "application",
+      "question": "You suspect your mousetrap vehicle is losing a lot of energy due to friction in its axles, making it slower. Which sensor would provide data to help you analyze this problem and potentially improve efficiency?",
+      "options": {
+        "A": "The HC-SR04 Ultrasonic Sensor, to measure total travel distance.",
+        "B": "The Force-Sensitive Resistor, to check spring tension.",
+        "C": "The IR Reflectance Sensor, to measure RPM and identify energy loss points.",
+        "D": "A microphone, to listen for squeaking axles."
+      },
+      "answer": "C",
+      "explanation": "The lesson states the IR Reflectance Sensor provides RPM data, which is essential for 'Analysis & Synthesis, helping us understand where energy is being 'lost' to friction.'"
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson mentions seeking 'Integrity' in design and aiming for 'Ground Truth.' How do these two concepts relate when using sensors?",
+      "options": {
+        "A": "Integrity means making the design look good, while Ground Truth is about making it work fast.",
+        "B": "Seeking Ground Truth through sensor data ensures Integrity by revealing the actual, unfiltered performance of the machine.",
+        "C": "Integrity is about building with strong materials, and Ground Truth is about the cost of those materials.",
+        "D": "They are unrelated; Integrity is a moral concept, and Ground Truth is a scientific one."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that seeking Integrity means not looking for 'pretty' numbers but for the Ground Truth—the actual, unfiltered reality of how the machine behaves."
+    },
+    {
+      "type": "synthesis",
+      "question": "How does collecting accurate data with sensors contribute to the 'Stewardship of the Joule' in Creationeering?",
+      "options": {
+        "A": "It helps engineers use more energy by making bigger vehicles.",
+        "B": "It allows engineers to identify and reduce energy loss, thus increasing mechanical efficiency.",
+        "C": "It ensures that all parts of the vehicle are made from expensive, high-quality materials.",
+        "D": "It provides data that is only useful for theoretical calculations, not practical improvements."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that 'Stewardship of the Joule' involves seeking efficiency, and sensor data helps identify where energy is being lost, allowing for improvements."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson uses the analogy of a bat using echolocation to navigate a dark cave. Which lab kit sensor functions most similarly to a bat's echolocation, and why?",
+      "options": {
+        "A": "The FSR, because it 'feels' pressure like a bat feels air currents.",
+        "B": "The IR Reflectance Sensor, because it 'sees' invisible light like a bat 'sees' with sound.",
+        "C": "The HC-SR04 Ultrasonic Sensor, because it emits sound and measures the echo to determine distance.",
+        "D": "All sensors, because they all help the vehicle 'see' its environment in some way."
+      },
+      "answer": "C",
+      "explanation": "The lesson explicitly states that the HC-SR04 Ultrasonic Sensor functions exactly like a bat's ears, emitting sound (input) and processing the echo (data) to determine distance."
+    }
+  ]
+}

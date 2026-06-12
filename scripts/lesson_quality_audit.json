@@ -1,0 +1,1448 @@
+{
+  "summary": {
+    "broken": 10,
+    "degraded": 16,
+    "ok": 133,
+    "total": 159,
+    "fetch_failures": 0
+  },
+  "broken": [
+    {
+      "id": "C-004",
+      "title": "Using Math and Science as Tools",
+      "status": "BROKEN",
+      "reason": "Text block starts mid-sentence (starts lowercase: 'where d is distance, is the difference in x coordi'); Raw label fragment (label fragment: 'Lesson Overview')",
+      "blockCount": 36,
+      "textBlocks": 14,
+      "avgTextLen": 429
+    },
+    {
+      "id": "C-017",
+      "title": "Novelty and Innovation in Engineering",
+      "status": "BROKEN",
+      "reason": "Raw label fragment (label fragment: 'Lesson Overview\\nLarge')",
+      "blockCount": 34,
+      "textBlocks": 16,
+      "avgTextLen": 406
+    },
+    {
+      "id": "C-027",
+      "title": "Managing Resistive Sources",
+      "status": "BROKEN",
+      "reason": "Raw label fragment (label fragment: 'Lesson Overview')",
+      "blockCount": 25,
+      "textBlocks": 12,
+      "avgTextLen": 343
+    },
+    {
+      "id": "C-047",
+      "title": "Inventory and Warehouse Management",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 1\\nWhat is Inventory?'); Possible vocab items split into individual text blocks (4+ tiny non-sentence text blocks (e.g. 'Part 1\\nWhat is Inventory?'))",
+      "blockCount": 22,
+      "textBlocks": 18,
+      "avgTextLen": 406
+    },
+    {
+      "id": "C-057",
+      "title": "Verification, Validation, and Testing",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 2\\nVerification – Building it Right')",
+      "blockCount": 36,
+      "textBlocks": 32,
+      "avgTextLen": 221
+    },
+    {
+      "id": "C-058",
+      "title": "Configuration Management and Baselines",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 1\\nWhat is Configuration Management?'); Possible vocab items split into individual text blocks (4+ tiny non-sentence text blocks (e.g. 'Part 1\\nWhat is Configuration Management?'))",
+      "blockCount": 22,
+      "textBlocks": 18,
+      "avgTextLen": 436
+    },
+    {
+      "id": "C-060",
+      "title": "Feedback Loops and Process Involvement",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 1\\nUnderstanding Feedback Loops'); Possible vocab items split into individual text blocks (4+ tiny non-sentence text blocks (e.g. 'Part 1\\nUnderstanding Feedback Loops'))",
+      "blockCount": 19,
+      "textBlocks": 16,
+      "avgTextLen": 328
+    },
+    {
+      "id": "C-062",
+      "title": "Experimental Design and Testing Protocols",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 2\\nIdentifying Variables – The Heart of Your E')",
+      "blockCount": 28,
+      "textBlocks": 24,
+      "avgTextLen": 306
+    },
+    {
+      "id": "C-067",
+      "title": "Performance Validation",
+      "status": "BROKEN",
+      "reason": "4+ consecutive text blocks under 80 chars (run starts with: 'Part 1\\nWhat is Performance Validation?'); Possible vocab items split into individual text blocks (4+ tiny non-sentence text blocks (e.g. 'Part 1\\nWhat is Performance Validation?'))",
+      "blockCount": 15,
+      "textBlocks": 11,
+      "avgTextLen": 495
+    },
+    {
+      "id": "M-010",
+      "title": "Business Activity: Company Identit",
+      "status": "BROKEN",
+      "reason": "Raw label fragment (label fragment: 'Part 4: Success Metrics\\nHow will you know your company has s')",
+      "blockCount": 9,
+      "textBlocks": 5,
+      "avgTextLen": 349
+    }
+  ],
+  "degraded": [
+    {
+      "id": "C-011",
+      "title": "Understanding Design",
+      "status": "DEGRADED",
+      "reason": "Only 2 total blocks — too thin",
+      "blockCount": 2,
+      "textBlocks": 0,
+      "avgTextLen": 0
+    },
+    {
+      "id": "C-021",
+      "title": "The Importance of Data in Engineering",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'Learning Objectives\\nStudents will:\\n\\nLearn that objective, verifiable data is ess'",
+      "blockCount": 18,
+      "textBlocks": 11,
+      "avgTextLen": 534
+    },
+    {
+      "id": "C-023",
+      "title": "Measurement Quality and Instrument Validation",
+      "status": "DEGRADED",
+      "reason": "Only 3 total blocks — too thin",
+      "blockCount": 3,
+      "textBlocks": 1,
+      "avgTextLen": 17746
+    },
+    {
+      "id": "C-040",
+      "title": "Precision Measurement and Tolerances",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'The Beginning\\nThe God of Order and Detail\\nPart 1: Why Precision Matters\\nPlain: l'",
+      "blockCount": 12,
+      "textBlocks": 8,
+      "avgTextLen": 800
+    },
+    {
+      "id": "C-044",
+      "title": "Risk Assessment",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'The Beginning\\nThe Prudence of Foresight\\nPart 1: What is Risk?\\nPlain: language ex'",
+      "blockCount": 26,
+      "textBlocks": 23,
+      "avgTextLen": 331
+    },
+    {
+      "id": "C-046",
+      "title": "Global Supply Management",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'Part 3\\nChallenges in Global Supply Management\\nObjective: Deliver the maximum qua'",
+      "blockCount": 13,
+      "textBlocks": 9,
+      "avgTextLen": 584
+    },
+    {
+      "id": "C-051",
+      "title": "What is Assembly?",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: \"The Beginning\\nGod's Masterful Assembly\\nPart 1: What is Assembly?\"",
+      "blockCount": 15,
+      "textBlocks": 12,
+      "avgTextLen": 591
+    },
+    {
+      "id": "C-055",
+      "title": "Sequencing and Assembly Lines",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'Genesis K-12 Academy\\nMiddle School Creationeering Course\\nLesson: Sequencing and '",
+      "blockCount": 13,
+      "textBlocks": 9,
+      "avgTextLen": 2415
+    },
+    {
+      "id": "C-061",
+      "title": "What is Performance?",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'Plain\\nlanguage explanation\\nObjective: Maintain the car precisely in the center o'",
+      "blockCount": 25,
+      "textBlocks": 21,
+      "avgTextLen": 342
+    },
+    {
+      "id": "C-063",
+      "title": "Continuous Improvement",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'The Beginning\\nA Spirit of Excellence\\nPart 1: What is Continuous Improvement?\\nPla'",
+      "blockCount": 16,
+      "textBlocks": 13,
+      "avgTextLen": 750
+    },
+    {
+      "id": "C-068",
+      "title": "Failure Analysis and Reliability Engineering",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: '3. Manufacturing defect\\nA tiny crack was in the metal when it was made, and it g'",
+      "blockCount": 22,
+      "textBlocks": 17,
+      "avgTextLen": 542
+    },
+    {
+      "id": "C-069",
+      "title": "Product Certification and Regulatory Compliance",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'The Beginning\\nOrder in Creation\\nPart 1: What is Product Certification?'",
+      "blockCount": 31,
+      "textBlocks": 24,
+      "avgTextLen": 907
+    },
+    {
+      "id": "C-081",
+      "title": "The Ethics of End-of-Life (EOL) Responsibility",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'The Beginning\\nA Cycle of Renewal\\nPart 1: What Happens When Things \"Die\"?\\nPlain: '",
+      "blockCount": 17,
+      "textBlocks": 14,
+      "avgTextLen": 492
+    },
+    {
+      "id": "M-013",
+      "title": "Build 2: Iterative Design - Mark 1",
+      "status": "DEGRADED",
+      "reason": "Only 3 total blocks — too thin",
+      "blockCount": 3,
+      "textBlocks": 1,
+      "avgTextLen": 3181
+    },
+    {
+      "id": "M-032",
+      "title": "Procurement Activity: Bill of Materials",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: \"The Beginning\\nGod's Order in Assembly\\nPart 1: What is a Bill of Materials?\"",
+      "blockCount": 14,
+      "textBlocks": 8,
+      "avgTextLen": 887
+    },
+    {
+      "id": "M-043",
+      "title": "Build: Body and Mousetrap",
+      "status": "DEGRADED",
+      "reason": "Text block has multiple headers/topics crammed: 'Here is your lesson plan for Genesis K-12 Academy’s Middle School Mousetrap Buil'",
+      "blockCount": 15,
+      "textBlocks": 8,
+      "avgTextLen": 1540
+    }
+  ],
+  "ok": [
+    {
+      "id": "C-001",
+      "title": "What is Creationeering",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 31,
+      "textBlocks": 12,
+      "avgTextLen": 600
+    },
+    {
+      "id": "C-002",
+      "title": "Entrepreneurship",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 33,
+      "textBlocks": 12,
+      "avgTextLen": 472
+    },
+    {
+      "id": "C-003",
+      "title": "Genesis and Creationeering",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 28,
+      "textBlocks": 13,
+      "avgTextLen": 581
+    },
+    {
+      "id": "C-005",
+      "title": "Units, Conversions, and Measurement",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 38,
+      "textBlocks": 16,
+      "avgTextLen": 486
+    },
+    {
+      "id": "C-006",
+      "title": "Intro to Systems Thinking",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 31,
+      "textBlocks": 14,
+      "avgTextLen": 586
+    },
+    {
+      "id": "C-007",
+      "title": "Objectives, Constraints, and Variables",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 75,
+      "textBlocks": 32,
+      "avgTextLen": 525
+    },
+    {
+      "id": "C-008",
+      "title": "Ethics in Engineering",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 63,
+      "textBlocks": 25,
+      "avgTextLen": 514
+    },
+    {
+      "id": "C-009",
+      "title": "Understanding Process Mapping and Flowcharts",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 46,
+      "textBlocks": 20,
+      "avgTextLen": 431
+    },
+    {
+      "id": "C-010",
+      "title": "Visualization and Sketching",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 59,
+      "textBlocks": 22,
+      "avgTextLen": 389
+    },
+    {
+      "id": "C-012",
+      "title": "Design: Forces and Influences",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 51,
+      "textBlocks": 16,
+      "avgTextLen": 583
+    },
+    {
+      "id": "C-013",
+      "title": "Design: Historical Case Studies",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 45,
+      "textBlocks": 25,
+      "avgTextLen": 332
+    },
+    {
+      "id": "C-014",
+      "title": "Form, Function, and Aesthetic",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 26,
+      "textBlocks": 13,
+      "avgTextLen": 548
+    },
+    {
+      "id": "C-015",
+      "title": "Design Iteration and Communication",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 37,
+      "textBlocks": 14,
+      "avgTextLen": 546
+    },
+    {
+      "id": "C-016",
+      "title": "Alternatives and Patents",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 35,
+      "textBlocks": 17,
+      "avgTextLen": 441
+    },
+    {
+      "id": "C-018",
+      "title": "Concept Generation",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 34,
+      "textBlocks": 12,
+      "avgTextLen": 533
+    },
+    {
+      "id": "C-019",
+      "title": "Fundamentals of Motion and Work",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 42,
+      "textBlocks": 24,
+      "avgTextLen": 625
+    },
+    {
+      "id": "C-020",
+      "title": "Energy Conservation, Transfer and Loss",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 4,
+      "avgTextLen": 434
+    },
+    {
+      "id": "C-022",
+      "title": "Design of Experiments (One Factor at A Time_",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 29,
+      "textBlocks": 19,
+      "avgTextLen": 230
+    },
+    {
+      "id": "C-024",
+      "title": "Modeling Reality: Physical vs. Computational",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 4,
+      "textBlocks": 1,
+      "avgTextLen": 14945
+    },
+    {
+      "id": "C-025",
+      "title": "Statistical Analysis",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 8,
+      "avgTextLen": 593
+    },
+    {
+      "id": "C-026",
+      "title": "What is Synthesis?",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 17,
+      "textBlocks": 14,
+      "avgTextLen": 1575
+    },
+    {
+      "id": "C-028",
+      "title": "Stress and Strain",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 8,
+      "avgTextLen": 1501
+    },
+    {
+      "id": "C-029",
+      "title": "Protecting Your Business",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 7,
+      "avgTextLen": 1171
+    },
+    {
+      "id": "C-030",
+      "title": "Troubleshooting and Debugging Systems",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 23,
+      "textBlocks": 11,
+      "avgTextLen": 469
+    },
+    {
+      "id": "C-031",
+      "title": "What is Procurement?",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 21,
+      "textBlocks": 14,
+      "avgTextLen": 893
+    },
+    {
+      "id": "C-032",
+      "title": "Material Properties and Selection",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 31,
+      "textBlocks": 27,
+      "avgTextLen": 935
+    },
+    {
+      "id": "C-033",
+      "title": "Procurement: Cost Analysis and Budgeting",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 7,
+      "textBlocks": 4,
+      "avgTextLen": 1276
+    },
+    {
+      "id": "C-034",
+      "title": "Standardization vs. Custom Fabrication",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 59,
+      "textBlocks": 56,
+      "avgTextLen": 414
+    },
+    {
+      "id": "C-035",
+      "title": "Quality Assurance and Material Inspection",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 27,
+      "textBlocks": 16,
+      "avgTextLen": 1752
+    },
+    {
+      "id": "C-036",
+      "title": "Technical Specifications",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 7,
+      "avgTextLen": 2199
+    },
+    {
+      "id": "C-037",
+      "title": "Fabrication",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 27,
+      "textBlocks": 24,
+      "avgTextLen": 874
+    },
+    {
+      "id": "C-038",
+      "title": "Hazards and Operations",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 6,
+      "avgTextLen": 815
+    },
+    {
+      "id": "C-039",
+      "title": "Resource Management and Loss Prevention",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 10,
+      "textBlocks": 5,
+      "avgTextLen": 1055
+    },
+    {
+      "id": "C-041",
+      "title": "What is Logistics?",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 9,
+      "avgTextLen": 648
+    },
+    {
+      "id": "C-042",
+      "title": "Timeline Development and Milestones",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 10,
+      "textBlocks": 4,
+      "avgTextLen": 1072
+    },
+    {
+      "id": "C-043",
+      "title": "Critical Path Method (CPM)",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 24,
+      "textBlocks": 20,
+      "avgTextLen": 803
+    },
+    {
+      "id": "C-045",
+      "title": "Planning and Buffer Time",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 6,
+      "avgTextLen": 895
+    },
+    {
+      "id": "C-048",
+      "title": "Shipping, Transport, and Compliance",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 10,
+      "textBlocks": 7,
+      "avgTextLen": 954
+    },
+    {
+      "id": "C-049",
+      "title": "Reverse Logistics and End-of-Life Flow",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 4,
+      "avgTextLen": 1538
+    },
+    {
+      "id": "C-050",
+      "title": "Just-In-Time vs. Just-In-Case",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 4,
+      "avgTextLen": 1411
+    },
+    {
+      "id": "C-052",
+      "title": "Fabrication Methods and Integrity",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 8,
+      "avgTextLen": 1722
+    },
+    {
+      "id": "C-053",
+      "title": "Quality Control During Assembly",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 17,
+      "textBlocks": 12,
+      "avgTextLen": 1635
+    },
+    {
+      "id": "C-054",
+      "title": "Reading and Interpreting Blueprints",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 27,
+      "textBlocks": 17,
+      "avgTextLen": 912
+    },
+    {
+      "id": "C-056",
+      "title": "Systems Integration and Interoperability",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 6,
+      "avgTextLen": 1932
+    },
+    {
+      "id": "C-059",
+      "title": "Human Factors in Production Systems",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 4,
+      "avgTextLen": 1057
+    },
+    {
+      "id": "C-064",
+      "title": "Data-Defined Performance",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 9,
+      "avgTextLen": 640
+    },
+    {
+      "id": "C-065",
+      "title": "Optimization Techniques and Trade-Offs",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 3,
+      "avgTextLen": 924
+    },
+    {
+      "id": "C-066",
+      "title": "Functional Requirements and Specifications",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 11,
+      "avgTextLen": 913
+    },
+    {
+      "id": "C-070",
+      "title": "Customer Acceptance and Final Delivery",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 20,
+      "textBlocks": 15,
+      "avgTextLen": 2108
+    },
+    {
+      "id": "C-071",
+      "title": "Cradle-to-Cradle Design Philosophy",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 20,
+      "textBlocks": 15,
+      "avgTextLen": 724
+    },
+    {
+      "id": "C-072",
+      "title": "The 3 R's: Reduce, Reuse, Recycle",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 23,
+      "textBlocks": 19,
+      "avgTextLen": 907
+    },
+    {
+      "id": "C-073",
+      "title": "Environmental Footprint and Carbon Accounting",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 751
+    },
+    {
+      "id": "C-074",
+      "title": "Material Toxicity and hazard Minimization",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 26,
+      "textBlocks": 16,
+      "avgTextLen": 2049
+    },
+    {
+      "id": "C-075",
+      "title": "Waste Stream Management and Circular Economy",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 21,
+      "textBlocks": 16,
+      "avgTextLen": 1884
+    },
+    {
+      "id": "C-076",
+      "title": "Design for Disassembly and Recycling",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 22,
+      "textBlocks": 18,
+      "avgTextLen": 925
+    },
+    {
+      "id": "C-077",
+      "title": "System Upgrades and Backward Compatibility",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 8,
+      "avgTextLen": 860
+    },
+    {
+      "id": "C-078",
+      "title": "Innovation for Resource-Limited Environments",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 13,
+      "avgTextLen": 1017
+    },
+    {
+      "id": "C-079",
+      "title": "Durability",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 7,
+      "avgTextLen": 1849
+    },
+    {
+      "id": "C-080",
+      "title": "Total Cost of Ownership",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 1387
+    },
+    {
+      "id": "C-082",
+      "title": "Material Recovery and Salvage Value",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 22,
+      "textBlocks": 17,
+      "avgTextLen": 786
+    },
+    {
+      "id": "C-083",
+      "title": "Hazardous Waste and Safe Disposal Protocol",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 9,
+      "avgTextLen": 949
+    },
+    {
+      "id": "C-084",
+      "title": "Life Extension and Maintenance Philosophy",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 8,
+      "avgTextLen": 1667
+    },
+    {
+      "id": "C-085",
+      "title": "Legislation and Global E-Waste Policy",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 7,
+      "avgTextLen": 1931
+    },
+    {
+      "id": "C-086",
+      "title": "Decommissioning Procedures and System Shutdown",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 20,
+      "textBlocks": 16,
+      "avgTextLen": 470
+    },
+    {
+      "id": "C-087",
+      "title": "Data Security and System Wipe",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 10,
+      "textBlocks": 3,
+      "avgTextLen": 630
+    },
+    {
+      "id": "C-088",
+      "title": "Recycling Logistics and Infrastructure",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 11,
+      "avgTextLen": 1131
+    },
+    {
+      "id": "C-089",
+      "title": "The Engineer's Role in Product Afterlife",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 11,
+      "avgTextLen": 1369
+    },
+    {
+      "id": "M-001",
+      "title": "Syllabus and Instructional Guide",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 132
+    },
+    {
+      "id": "M-002",
+      "title": "Course Introduction",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 42,
+      "textBlocks": 18,
+      "avgTextLen": 178
+    },
+    {
+      "id": "M-003",
+      "title": "Build Kit Overview",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 24,
+      "textBlocks": 19,
+      "avgTextLen": 160
+    },
+    {
+      "id": "M-004",
+      "title": "Objectives, Constraints, and Variables",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 29,
+      "textBlocks": 19,
+      "avgTextLen": 222
+    },
+    {
+      "id": "M-005",
+      "title": "Prototypes",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 23,
+      "textBlocks": 11,
+      "avgTextLen": 272
+    },
+    {
+      "id": "M-006",
+      "title": "Build 1: Little Moe Prototype Car",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 110,
+      "textBlocks": 47,
+      "avgTextLen": 175
+    },
+    {
+      "id": "M-007",
+      "title": "Digital Measurement",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 7,
+      "avgTextLen": 761
+    },
+    {
+      "id": "M-008",
+      "title": "The Arduino",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 12,
+      "avgTextLen": 528
+    },
+    {
+      "id": "M-009",
+      "title": "Business Plan",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 7,
+      "textBlocks": 1,
+      "avgTextLen": 383
+    },
+    {
+      "id": "M-011",
+      "title": "Fundamentals of Design",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 27,
+      "textBlocks": 12,
+      "avgTextLen": 354
+    },
+    {
+      "id": "M-012",
+      "title": "Communicating Designs and Testing",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 35,
+      "textBlocks": 12,
+      "avgTextLen": 495
+    },
+    {
+      "id": "M-014",
+      "title": "Power Transmission Mechanisms",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 55,
+      "textBlocks": 29,
+      "avgTextLen": 314
+    },
+    {
+      "id": "M-015",
+      "title": "Energy Flow, Loss, and Efficiency]",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 4,
+      "avgTextLen": 832
+    },
+    {
+      "id": "M-016",
+      "title": "Build 2: Iterative Design - Mark21",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 5,
+      "avgTextLen": 570
+    },
+    {
+      "id": "M-017",
+      "title": "Analysis Activity: Calculations and Efficiency",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 7,
+      "avgTextLen": 1776
+    },
+    {
+      "id": "M-018",
+      "title": "The Dynamics of Stored Energy",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 54,
+      "textBlocks": 34,
+      "avgTextLen": 175
+    },
+    {
+      "id": "M-019",
+      "title": "Modeling Resistive Forces",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 27,
+      "textBlocks": 17,
+      "avgTextLen": 347
+    },
+    {
+      "id": "M-020",
+      "title": "Build 3: CAD Analysis of Design Parameters",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 6,
+      "avgTextLen": 1463
+    },
+    {
+      "id": "M-021",
+      "title": "Instrumentation and Data Types",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 28,
+      "textBlocks": 18,
+      "avgTextLen": 289
+    },
+    {
+      "id": "M-022",
+      "title": "The Engineering Report Structure",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 22,
+      "textBlocks": 4,
+      "avgTextLen": 603
+    },
+    {
+      "id": "M-023",
+      "title": "Build 4: Arduino - Distance Sensor Calibration",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 19,
+      "textBlocks": 11,
+      "avgTextLen": 469
+    },
+    {
+      "id": "M-024",
+      "title": "Analysis Gate Review",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 22,
+      "textBlocks": 15,
+      "avgTextLen": 264
+    },
+    {
+      "id": "M-025",
+      "title": "Engineering Notebook: Entry 5",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 7,
+      "avgTextLen": 825
+    },
+    {
+      "id": "M-026",
+      "title": "Lesson: Bill of Materials",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 10,
+      "avgTextLen": 1898
+    },
+    {
+      "id": "M-027",
+      "title": "Lesson: Material Preparation",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 8,
+      "avgTextLen": 1294
+    },
+    {
+      "id": "M-028",
+      "title": "Build: Inventory Checks and Verifications",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 11,
+      "avgTextLen": 627
+    },
+    {
+      "id": "M-029",
+      "title": "Lesson: Precision Finishing and Tolerance",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 6,
+      "avgTextLen": 717
+    },
+    {
+      "id": "M-030",
+      "title": "Lesson: Sourcing Alternatives and Costing",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 8,
+      "avgTextLen": 914
+    },
+    {
+      "id": "M-031",
+      "title": "Build: Material Processing",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 7,
+      "avgTextLen": 1068
+    },
+    {
+      "id": "M-033",
+      "title": "Lesson: Project Phases and Dependencies",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 1187
+    },
+    {
+      "id": "M-034",
+      "title": "Lesson: Critical Paths and Calculating Time",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 4,
+      "avgTextLen": 1118
+    },
+    {
+      "id": "M-035",
+      "title": "Business Activity: Break Even Analysis",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 6,
+      "avgTextLen": 327
+    },
+    {
+      "id": "M-036",
+      "title": "BA: Patents, IP + Engineer Liability",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 17,
+      "textBlocks": 9,
+      "avgTextLen": 1325
+    },
+    {
+      "id": "M-037",
+      "title": "Lesson: External Supply Chains",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 6,
+      "avgTextLen": 906
+    },
+    {
+      "id": "M-038",
+      "title": "Lesson: Risks and Contingencies",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 1150
+    },
+    {
+      "id": "M-039",
+      "title": "Logistics: Supply Chain Map and Risk Analysis",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 8,
+      "avgTextLen": 1675
+    },
+    {
+      "id": "M-040",
+      "title": "BA: Customer Persona + Marketing Standards",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 9,
+      "avgTextLen": 1254
+    },
+    {
+      "id": "M-041",
+      "title": "Lesson: Assembly Blueprint and Safety Review",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 4,
+      "textBlocks": 1,
+      "avgTextLen": 518
+    },
+    {
+      "id": "M-042",
+      "title": "Lesson: Frame, Axle, and Wheel Integration",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 6,
+      "avgTextLen": 643
+    },
+    {
+      "id": "M-044",
+      "title": "Build: Power System and Axles",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 10,
+      "avgTextLen": 1299
+    },
+    {
+      "id": "M-045",
+      "title": "Lesson: Component Alignment and Quality",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 9,
+      "textBlocks": 0,
+      "avgTextLen": 0
+    },
+    {
+      "id": "M-046",
+      "title": "Lesson: Post-Build Systems",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 6,
+      "avgTextLen": 815
+    },
+    {
+      "id": "M-047",
+      "title": "Build: Braking System and Test",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 6,
+      "avgTextLen": 1719
+    },
+    {
+      "id": "M-048",
+      "title": "Build: Arduino Station and Test",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 11,
+      "avgTextLen": 1256
+    },
+    {
+      "id": "M-049",
+      "title": "Lesson: Test Protocol and Baselines",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 10,
+      "avgTextLen": 1310
+    },
+    {
+      "id": "M-050",
+      "title": "Lesson: Variables and Optimization Cycle",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 7,
+      "avgTextLen": 1260
+    },
+    {
+      "id": "M-051",
+      "title": "Performance Activity: Baselines and Predictions",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 9,
+      "avgTextLen": 1605
+    },
+    {
+      "id": "M-052",
+      "title": "Build: Variable Confirmation Tests",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 5,
+      "avgTextLen": 1172
+    },
+    {
+      "id": "M-053",
+      "title": "Lesson: Final Function Verification",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 15,
+      "textBlocks": 10,
+      "avgTextLen": 1650
+    },
+    {
+      "id": "M-054",
+      "title": "Lesson: Performance Data",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 20,
+      "textBlocks": 10,
+      "avgTextLen": 1235
+    },
+    {
+      "id": "M-055",
+      "title": "Build: Optimization Tests",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 4,
+      "textBlocks": 1,
+      "avgTextLen": 14587
+    },
+    {
+      "id": "M-056",
+      "title": "Performance Activity: Final Runs and Data",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 7,
+      "avgTextLen": 1585
+    },
+    {
+      "id": "M-057",
+      "title": "Lesson: Product End-of-Life Analysis",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 6,
+      "avgTextLen": 690
+    },
+    {
+      "id": "M-058",
+      "title": "Lesson: Sustainable Materials",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 17,
+      "textBlocks": 8,
+      "avgTextLen": 766
+    },
+    {
+      "id": "M-059",
+      "title": "BA: Product Sheet + 2-Minute Pitch Practice",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 18,
+      "textBlocks": 10,
+      "avgTextLen": 1221
+    },
+    {
+      "id": "M-060",
+      "title": "Lesson: V2.0 Design in Sustainability",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 16,
+      "textBlocks": 6,
+      "avgTextLen": 524
+    },
+    {
+      "id": "M-061",
+      "title": "Lesson: Total Cost and Lifecycle Improvement Plan",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 8,
+      "textBlocks": 1,
+      "avgTextLen": 4183
+    },
+    {
+      "id": "M-062",
+      "title": "Sustainability Activity: Future Designs",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 5,
+      "avgTextLen": 909
+    },
+    {
+      "id": "M-063",
+      "title": "BA: Org Chart + Production Gantt Chart",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 9,
+      "avgTextLen": 1239
+    },
+    {
+      "id": "M-064",
+      "title": "Lesson: Classifying End of Life",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 9,
+      "avgTextLen": 1569
+    },
+    {
+      "id": "M-065",
+      "title": "Lesson: Principles of E-Waste and Safe Disposal",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 11,
+      "textBlocks": 7,
+      "avgTextLen": 2189
+    },
+    {
+      "id": "M-066",
+      "title": "BA: Business Plan Compilation + Pitch",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 21,
+      "textBlocks": 11,
+      "avgTextLen": 309
+    },
+    {
+      "id": "M-067",
+      "title": "Lesson: Salvage Value and Resource Recovery",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 12,
+      "textBlocks": 6,
+      "avgTextLen": 849
+    },
+    {
+      "id": "M-068",
+      "title": "Lesson: Closing a Project",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 14,
+      "textBlocks": 7,
+      "avgTextLen": 849
+    },
+    {
+      "id": "M-069",
+      "title": "Death and Recycling: End of Life Classification",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 20,
+      "textBlocks": 10,
+      "avgTextLen": 493
+    },
+    {
+      "id": "M-070",
+      "title": "Final Activity: Parent Pitch Night",
+      "status": "OK",
+      "reason": "",
+      "blockCount": 13,
+      "textBlocks": 8,
+      "avgTextLen": 1241
+    }
+  ],
+  "rootCause": "4+ consecutive text blocks under 80 chars — seen in 6/159 lessons. Root cause: the markdown-to-block importer split on every newline character instead of joining soft-wrapped lines into a single paragraph before emitting a text block. This produced sentence fragments, mid-sentence splits, and artificially tiny heading/label blocks throughout every imported lesson.",
+  "recommendedFix": "THREE-TRACK FIX PLAN:\n1. PARSER FIX (prevent recurrence): Fix the Drive→block importer to join consecutive soft-wrapped lines before creating a text block. Only split on blank lines (true paragraph boundaries) or explicit heading markers.\n2. BULK AI REWRITE (fastest for 150 broken lessons): Run a Gemini 2.5 Flash agent that re-fetches each lesson's raw Drive source, re-parses it with the fixed logic, and PATCHes the Firestore doc via /api/admin/lessons/{id}. Set contentSource lock so the pipeline does not overwrite fixes. Estimated: 1-2 hours of agent time.\n3. DEGRADED STUBS (3 lessons — C-011, C-023, M-013): Manually review in admin editor — these appear to be nearly-empty stubs (1-3 blocks) that may need a full redraft or deletion if they are placeholders."
+}

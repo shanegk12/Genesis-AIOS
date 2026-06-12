@@ -57,6 +57,90 @@
       },
       "answer": "C",
       "explanation": "Degaussing is a method that uses a powerful magnetic field to scramble the magnetic patterns on a hard drive, thereby destroying the data at a fundamental level."
+    },
+    {
+      "type": "comprehension",
+      "question": "According to the lesson, what is the main purpose of a 'System Wipe'?",
+      "options": {
+        "A": "To completely and irreversibly remove all data from a storage device.",
+        "B": "To temporarily hide files so they can't be easily found.",
+        "C": "To make a computer run faster by clearing temporary files.",
+        "D": "To convert data into a secret code for protection."
+      },
+      "answer": "A",
+      "explanation": "A system wipe is defined as a process that completely and irreversibly removes all data from a storage device, making it unrecoverable."
+    },
+    {
+      "type": "comprehension",
+      "question": "What method involves replacing existing data on a storage device with new, meaningless data to prevent the original information from being recovered?",
+      "options": {
+        "A": "Deletion",
+        "B": "Overwriting",
+        "C": "Encryption",
+        "D": "Degaussing"
+      },
+      "answer": "B",
+      "explanation": "Overwriting is defined as replacing existing data on a storage device with new, meaningless data to prevent recovery."
+    },
+    {
+      "type": "comprehension",
+      "question": "The lesson introduces 'multiscale modeling' in the context of data. Which statement best describes how this concept applies to understanding data on a hard drive?",
+      "options": {
+        "A": "It links the visible disappearance of files (macro-level) to changes in atomic-level magnetic charges.",
+        "B": "It describes how data is stored on multiple different types of storage devices at once.",
+        "C": "It explains how a computer can run many programs simultaneously.",
+        "D": "It refers to the process of backing up data to several different locations."
+      },
+      "answer": "A",
+      "explanation": "Multiscale modeling connects macro-level observations, like files disappearing from view, to smaller-scale causes, such as the atomic-level magnetic charges on a hard drive."
+    },
+    {
+      "type": "application",
+      "question": "The lesson uses a library analogy to explain what happens when you simply 'delete' a file. Which scenario best matches this analogy?",
+      "options": {
+        "A": "A librarian shreds a book and burns the pieces, making it impossible to read.",
+        "B": "A librarian moves a book from the main shelf to a 'deleted' section, where it can still be found.",
+        "C": "A librarian replaces an old book with a brand new one in the exact same spot.",
+        "D": "A librarian locks a book in a safe, requiring a special key to access it."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that simply 'deleting' a book is like taking it off the shelf and putting it in a special 'deleted' section, where it's still in the library and can be found."
+    },
+    {
+      "type": "application",
+      "question": "Before disposing of an old company laptop, an engineer decides to encrypt all the sensitive project files still on it. Why might they choose this step as part of data security?",
+      "options": {
+        "A": "Encryption makes the laptop run faster by compressing files.",
+        "B": "Encryption converts data into a code, making it unreadable to unauthorized users even if recovered.",
+        "C": "Encryption physically destroys the hard drive, preventing any data recovery.",
+        "D": "Encryption automatically uploads all files to a cloud storage service."
+      },
+      "answer": "B",
+      "explanation": "Encryption is the process of converting information into a code to prevent unauthorized access, making data unreadable even if it's recovered."
+    },
+    {
+      "type": "application",
+      "question": "An engineering team is designing a process for securely disposing of old servers. Their goal is to ensure that no sensitive data ever leaves their facility. This goal represents an engineering:",
+      "options": {
+        "A": "Variable",
+        "B": "Constraint",
+        "C": "Objective",
+        "D": "Solution"
+      },
+      "answer": "C",
+      "explanation": "An objective is defined as a desired outcome or goal in an engineering problem, which in this case is preventing sensitive data from leaving the facility."
+    },
+    {
+      "type": "synthesis",
+      "question": "The lesson connects the idea of a 'clean slate' from Ecclesiastes to the Death & Recycling phase. How does performing a secure system wipe align with giving a system a 'clean slate'?",
+      "options": {
+        "A": "It ensures the system can be easily updated with new software.",
+        "B": "It prepares the system for a fresh start by completely ending its previous data-holding life.",
+        "C": "It allows the system to be reused by multiple different users without any security concerns.",
+        "D": "It makes the system physically look brand new again."
+      },
+      "answer": "B",
+      "explanation": "A system wipe aligns with a 'clean slate' by securely and completely ending the system's previous 'life' of holding data, preparing it for its next phase."
     }
   ]
 }

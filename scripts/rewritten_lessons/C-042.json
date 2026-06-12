@@ -1,0 +1,429 @@
+[
+  {
+    "id": "c042t001",
+    "type": "text",
+    "data": {
+      "html": "<h1>Critical Path Method (CPM)</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t002",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2>\n<p>Last time, you explored the world of Timeline Development and Milestones — mapping out the big picture for your projects and identifying key checkpoints along the way. Today, we're diving deeper into the Logistics phase of Creationeering with one of the most powerful planning tools an engineer has: the Critical Path Method, or CPM.</p>\n<p>CPM helps you do more than just see your milestones. It helps you find the most efficient route through your project — the sequence of tasks that absolutely must stay on schedule for everything else to fall into place. Think of it like planning a road trip where some routes are essential highways and others are optional scenic detours. CPM finds the fastest, most necessary highway. That kind of intentional, ordered planning is exactly what good stewardship of time and resources looks like.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t003",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2>\n<p>Students will be able to:</p>\n<ul>\n<li>Identify the core components of a project network diagram, including tasks, dependencies, and durations.</li>\n<li>Construct a basic project network diagram for a simple Creationeering project.</li>\n<li>Determine the critical path within a project network diagram by calculating task durations and identifying bottlenecks.</li>\n<li>Explain how understanding the critical path allows for more efficient resource allocation and project management.</li>\n<li>Connect the principles of critical path analysis to the biblical concept of diligent stewardship of time and resources for God's glory.</li>\n</ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042v001",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Task",
+          "definition": "A specific activity that needs to be completed as part of a project."
+        },
+        {
+          "term": "Duration",
+          "definition": "The estimated amount of time it will take to complete a task."
+        },
+        {
+          "term": "Dependency",
+          "definition": "A relationship between two tasks where one task cannot start until another is finished."
+        },
+        {
+          "term": "Predecessor Task",
+          "definition": "A task that must be completed before another task can begin."
+        },
+        {
+          "term": "Successor Task",
+          "definition": "A task that can only begin after its predecessor task is completed."
+        },
+        {
+          "term": "Project Network Diagram",
+          "definition": "A visual representation of all tasks, their dependencies, and durations in a project."
+        },
+        {
+          "term": "Critical Path",
+          "definition": "The longest sequence of tasks in a project network diagram, which determines the shortest possible project completion time."
+        },
+        {
+          "term": "Slack (or Float)",
+          "definition": "The amount of time a task can be delayed without delaying the entire project."
+        },
+        {
+          "term": "Resource Allocation",
+          "definition": "The process of assigning and managing available resources — like time, materials, or people — to project tasks."
+        },
+        {
+          "term": "Bottleneck",
+          "definition": "A point in the project where the flow of work is slowed down or stopped, often caused by a critical task that isn't finished yet."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d001",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t004",
+    "type": "text",
+    "data": {
+      "html": "<h2>God's Perfect Plan — A Divine Critical Path</h2>\n<p>Before we dig into the mechanics of CPM, consider this: God's work in creation was not random. Light came before land. Land came before vegetation. Vegetation came before animals. Each step was a necessary predecessor for the next, building on the foundation that came before it. There was a precise, intentional sequence — a critical path — that led to the world we inhabit today.</p>\n<p>That is exactly what the Critical Path Method captures. Just as God's creation followed an ordered plan where every element arrived at exactly the right time, your projects need that same intentional structure. CPM is your engineering tool for building that order into your work.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b001",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Jeremiah 29:11 —</strong> \"For I know the plans I have for you,\" declares the Lord, \"plans to prosper you and not to harm you, plans to give you hope and a future.\" God's plans are intentional and ordered. As you design your project's critical path, you're reflecting that same quality — careful, purposeful planning that doesn't leave things to chance.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d002",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t005",
+    "type": "text",
+    "data": {
+      "html": "<h2>What Is the Critical Path Method?</h2>\n<p>The Critical Path Method is a step-by-step project planning technique that helps you identify which tasks are most important to finishing your project on time. Here's the core idea: in almost every project, some tasks <em>must</em> be done in a specific order, and some tasks can happen at the same time as others. CPM maps all of that out so you can see exactly where your time is going.</p>\n<p>The <strong>critical path</strong> is the longest chain of dependent tasks from the start to the finish of your project. It tells you two things: the minimum amount of time your project will take, and which tasks you absolutely cannot afford to delay. Any task on the critical path has zero slack — fall behind on one of those, and your entire project finish date moves.</p>\n<p>Tasks <em>not</em> on the critical path have some slack, meaning you have a little breathing room. Understanding this helps you make smart decisions about where to focus your energy and resources.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042img01",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "A simple project network diagram showing tasks as labeled nodes connected by arrows, with the critical path highlighted in a distinct color."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b002",
+    "type": "callout",
+    "data": {
+      "variant": "info",
+      "html": "<p><strong>CPM in the real world:</strong> Engineers and project managers use CPM to plan everything from constructing skyscrapers to launching software. NASA used critical path analysis to coordinate the thousands of tasks required to put astronauts on the Moon. Every major engineering project — including yours — benefits from this kind of structured thinking.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d003",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t006",
+    "type": "text",
+    "data": {
+      "html": "<h2>Building a Project Network Diagram</h2>\n<p>A <strong>project network diagram</strong> is your visual map. It shows every task in your project, how long each task takes (its duration), and how the tasks depend on each other. Here's how you build one step by step.</p>\n<h3>Step 1 — List Your Tasks</h3>\n<p>Start by writing down every task that needs to happen. Don't worry about order yet. Just get everything on the table. For a Creationeering project, this might include things like: sketch your design, gather materials, build a prototype, test the prototype, and present your solution.</p>\n<h3>Step 2 — Identify Dependencies</h3>\n<p>For each task, ask: \"What has to be finished before I can start this?\" That earlier task is your <strong>predecessor</strong>. The task that follows is the <strong>successor</strong>. You can't test a prototype before you build it. You can't build it before you gather materials. Those are your dependencies.</p>\n<h3>Step 3 — Assign Durations</h3>\n<p>Estimate how long each task will take. Be realistic — this is where many project plans go wrong. It's better to slightly overestimate than to promise something you can't deliver.</p>\n<h3>Step 4 — Draw the Diagram</h3>\n<p>Represent each task as a box or circle (called a node). Draw arrows from each predecessor to its successor. The arrows show the flow of work. When you're done, you'll have a map of your entire project from start to finish.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b003",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Drawing tip:</strong> Start your diagram on paper first — just boxes and arrows. Don't worry about making it look perfect. Getting the logic right (which task comes before which) is far more important than the appearance. You can always clean it up later.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042img02",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Step-by-step example of building a project network diagram: a task list on the left transforming into a completed network diagram with durations labeled on each node."
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d004",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t007",
+    "type": "text",
+    "data": {
+      "html": "<h2>Finding the Critical Path</h2>\n<p>Once your network diagram is drawn, finding the critical path is a matter of adding up durations. Here's the process:</p>\n<ul>\n<li>Trace every possible path from the project's start node to its finish node.</li>\n<li>Add up the durations of all tasks along each path.</li>\n<li>The path with the <strong>longest total duration</strong> is your critical path.</li>\n</ul>\n<p>That total duration is also the minimum time your project can be completed in — you cannot finish faster than your critical path allows, no matter how quickly you finish the other tasks.</p>\n<h3>Understanding Slack</h3>\n<p>Tasks that are <em>not</em> on the critical path have slack. Slack is the buffer of extra time those tasks can absorb without pushing back your finish date. If a non-critical task has three days of slack, you could start it three days late and still finish the project on time. Tasks on the critical path have <strong>zero slack</strong> — they are your bottlenecks, and they demand your closest attention.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b004",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Students often assume the critical path is the path with the most tasks. It's not — it's the path with the greatest total <em>duration</em>. A path with five short tasks could be shorter than a path with three long ones. Always add up the durations, not the number of steps.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d005",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t008",
+    "type": "text",
+    "data": {
+      "html": "<h2>Resource Allocation and Smart Planning</h2>\n<p>Knowing your critical path changes how you manage resources. Resources — your time, your team members, your materials, your budget — are limited. Good stewardship means deploying them where they matter most.</p>\n<p>When you know which tasks are on the critical path, you can make smart choices: assign your most skilled team members to those tasks, prioritize getting materials for them first, and monitor their progress more closely. Tasks with significant slack can afford to wait a little, which gives you flexibility when unexpected problems arise.</p>\n<p>This is exactly the kind of wisdom that separates a project that finishes on time from one that spirals into delay. It's not just an engineering skill — it's a discipline of being a responsible manager of the gifts, time, and resources God has entrusted to you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b005",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Luke 14:28 —</strong> \"Suppose one of you wants to build a tower. Won't you first sit down and estimate the cost to see if you have enough money to complete it?\" Jesus used the image of a builder planning carefully before starting. That's CPM in a nutshell — knowing what's required before you commit, so you can finish what you start with excellence.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d006",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t009",
+    "type": "text",
+    "data": {
+      "html": "<h2>CPM in Your Creationeering Project</h2>\n<p>As you move through the Logistics phase of Creationeering, CPM becomes one of your most practical tools. When you're designing and building a solution to a real problem, there are always many moving parts. Applying CPM means you:</p>\n<ul>\n<li>Break your project down into clear, manageable tasks.</li>\n<li>Map out which tasks depend on each other before you start building.</li>\n<li>Calculate durations honestly — not optimistically.</li>\n<li>Identify your critical path so you know exactly where to focus your energy.</li>\n<li>Use slack wisely, building in margin for the unexpected.</li>\n</ul>\n<p>This structured approach doesn't slow you down — it actually speeds you up, because you're never caught off guard by a task you forgot to plan for. That's the power of working with a clear picture of the whole project in front of you.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042b006",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Study tip:</strong> When reviewing CPM for a quiz or test, practice tracing every path through a sample network diagram and writing down each path's total duration. The more times you do this by hand, the more naturally you'll spot the critical path. It becomes second nature quickly.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042d007",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042t010",
+    "type": "text",
+    "data": {
+      "html": "<h2>Check Your Understanding</h2>\n<p>Use the questions below to review what you've learned. Try answering each one before opening it.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042a001",
+    "type": "accordion",
+    "data": {
+      "title": "What is the Critical Path Method, and what does it help you find?",
+      "html": "<p>The Critical Path Method (CPM) is a project planning technique that maps out all of a project's tasks, their durations, and their dependencies. It helps you identify the <strong>critical path</strong> — the longest sequence of dependent tasks — which tells you the minimum time needed to complete the project and which tasks cannot be delayed without pushing back the finish date.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042a002",
+    "type": "accordion",
+    "data": {
+      "title": "What is the difference between a predecessor task and a successor task?",
+      "html": "<p>A <strong>predecessor task</strong> is a task that must be completed before another task can begin. A <strong>successor task</strong> is the task that follows — it can only start once its predecessor is done. For example, you must gather materials (predecessor) before you can build a prototype (successor).</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042a003",
+    "type": "accordion",
+    "data": {
+      "title": "What does it mean for a task to have \"slack,\" and what does zero slack tell you?",
+      "html": "<p><strong>Slack</strong> (also called float) is the amount of time a task can be delayed without delaying the overall project finish date. A task with zero slack is on the critical path — it has no buffer, and any delay to it will push back the entire project. Tasks with slack offer flexibility and are not on the critical path.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042a004",
+    "type": "accordion",
+    "data": {
+      "title": "How does CPM connect to the biblical idea of stewardship?",
+      "html": "<p>Good stewardship means managing the resources God has entrusted to you — including time, materials, and talent — wisely and intentionally. CPM helps you do exactly that by showing you where to focus your most important resources (the critical path) and where you have flexibility (tasks with slack). Just as God's creation followed a purposeful, ordered sequence, CPM brings that same intentionality to your engineering projects.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  },
+  {
+    "id": "c042a005",
+    "type": "accordion",
+    "data": {
+      "title": "A project has three paths with durations of 12 days, 18 days, and 15 days. Which is the critical path and why?",
+      "html": "<p>The path with a duration of <strong>18 days</strong> is the critical path. The critical path is always the <em>longest</em> path through the project network, because it determines the minimum time the project can be completed. The project cannot finish before 18 days no matter how quickly the other paths are completed.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending"
+    }
+  }
+]

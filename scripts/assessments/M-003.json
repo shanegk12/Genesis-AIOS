@@ -1,0 +1,103 @@
+{
+  "lesson_id": "M-003",
+  "topic": "Build Kit Overview",
+  "doc": "mousetrap",
+  "questions": [
+    {
+      "type": "recall",
+      "question": "What is the primary engineering significance of the Victor Mousetrap in the build kit?",
+      "options": {
+        "A": "It provides structural support for the vehicle's frame.",
+        "B": "It serves as the system's 'Energy Transformation Engine'.",
+        "C": "It measures the distance the car travels.",
+        "D": "It connects the wheels to the chassis."
+      },
+      "answer": "B",
+      "explanation": "The lesson states the mousetrap serves as the system's 'Energy Transformation Engine,' storing potential energy and transforming it into kinetic energy."
+    },
+    {
+      "type": "recall",
+      "question": "Why is Kevlar string specified for the transmission instead of nylon or cotton?",
+      "options": {
+        "A": "It is easier to tie knots with than other materials.",
+        "B": "It minimizes stretch and hook wear, ensuring more energy delivery.",
+        "C": "It is more colorful, making the car visually appealing.",
+        "D": "It is significantly less expensive to include in the kit."
+      },
+      "answer": "B",
+      "explanation": "The lesson highlights that Kevlar string minimizes stretch and hook wear, ensuring more energy is delivered directly to the drive axle."
+    },
+    {
+      "type": "recall",
+      "question": "What is the main purpose of the HC-SR04 Ultrasonic Sensor in the Telemetry Lab?",
+      "options": {
+        "A": "To provide structural support for the chassis.",
+        "B": "To generate power for the mousetrap car.",
+        "C": "To provide quantitative distance measurements.",
+        "D": "To connect the lever arm to the drive axle."
+      },
+      "answer": "C",
+      "explanation": "The lesson states the HC-SR04 provides quantitative distance measurements with a range of 2cm-400cm and 3mm accuracy."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does a 'racked' or twisted chassis affect the performance of the mousetrap car?",
+      "options": {
+        "A": "It makes the car go faster due to less air resistance.",
+        "B": "It increases friction or causes the car to drift during travel.",
+        "C": "It allows for a longer power stroke from the mousetrap.",
+        "D": "It improves the car's ability to turn corners smoothly."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that if the frame is 'racked' or twisted, the car will suffer from increased friction or drift during travel."
+    },
+    {
+      "type": "comprehension",
+      "question": "Why do students need to use traction treads (rubber bands) on the CD wheels, even though smooth CD wheels have low inertia?",
+      "options": {
+        "A": "To make the car look more aesthetically pleasing.",
+        "B": "To prevent the wheels from slipping at launch and improve traction.",
+        "C": "To increase the overall weight of the car for stability.",
+        "D": "To make the car easier to steer in a straight line."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that smooth CD wheels often slip at launch, and traction treads are essential variables to balance launch traction against coasting efficiency."
+    },
+    {
+      "type": "comprehension",
+      "question": "How does adjusting the length of the lever arm impact the mousetrap car's performance?",
+      "options": {
+        "A": "It changes the type of wheels the car can use.",
+        "B": "It determines the torque applied to the axle and the duration of the power stroke.",
+        "C": "It directly affects the accuracy of the ultrasonic sensor.",
+        "D": "It reduces the overall weight of the chassis."
+      },
+      "answer": "B",
+      "explanation": "The lesson explains that the length of the lever arm determines the torque applied to the axle and the duration of the power stroke."
+    },
+    {
+      "type": "application",
+      "question": "A student notices their mousetrap car is slowing down quickly, and the axles feel rough when spun. Based on the lesson, what would be the most effective way for the student to improve their car's performance in this situation?",
+      "options": {
+        "A": "Add more weight to the chassis to increase momentum.",
+        "B": "Use micro ball bearings instead of standard bushings to reduce friction.",
+        "C": "Shorten the lever arm to increase the power stroke duration.",
+        "D": "Replace the CD wheels with smaller ones to reduce inertia."
+      },
+      "answer": "B",
+      "explanation": "The lesson states that using micro ball bearings can reduce axle friction by approximately 50% compared to standard bushings, directly addressing rough axles and energy loss."
+    },
+    {
+      "type": "application",
+      "question": "A team is building a mousetrap car for a competition where straight-line travel is crucial. To ensure their car travels as straight as possible, which step from the lesson should the team pay closest attention to during the build?",
+      "options": {
+        "A": "Painting the chassis a bright color for visibility.",
+        "B": "Ensuring the chassis is perfectly aligned and 'square' before gluing.",
+        "C": "Using the heaviest possible mousetrap for maximum power.",
+        "D": "Attaching the ultrasonic sensor to the very front of the car."
+      },
+      "answer": "B",
+      "explanation": "The lesson emphasizes that if the chassis is 'racked' or twisted, or axle holes do not align, the car will suffer from drift, making perfect alignment crucial for straight travel."
+    }
+  ]
+}

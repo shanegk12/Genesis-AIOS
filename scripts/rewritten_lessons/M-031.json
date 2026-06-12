@@ -1,0 +1,297 @@
+[
+  {
+    "id": "m031ttl1",
+    "type": "text",
+    "data": {
+      "html": "<h1>Build: Material Processing</h1>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031ovw2",
+    "type": "text",
+    "data": {
+      "html": "<h2>Lesson Overview</h2><p>In the last lesson you learned how to source and cost materials for your mousetrap car — choosing wisely, like a good steward of what you've been given. Now it's time to move from selecting materials to actually shaping and combining them. This lesson dives into <strong>material processing</strong>, a critical step inside the Assembly phase of Creationeering.</p><p>You'll explore how raw materials get transformed and prepared before a single bolt is tightened or a wheel is attached. From cutting and bending to joining and finishing, the decisions you make during material processing directly affect how strong, efficient, and accurate your final car will be. Understanding these techniques will help you build with confidence — and with the kind of careful craftsmanship that honors the work you've put in.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031obj3",
+    "type": "text",
+    "data": {
+      "html": "<h2>Learning Objectives</h2><p>Students will be able to:</p><ul><li>Define material processing and explain its role within the Assembly phase of Creationeering.</li><li>Describe at least three common material processing techniques applicable to a mousetrap car project.</li><li>Explain the concept of multiscale modeling and how it connects visible material properties to their atomic-level causes.</li><li>Apply the Objective, Constraint, Variable (OCV) method to material processing decisions.</li><li>Reflect on biblical principles of careful craftsmanship and stewardship as they relate to material processing and assembly.</li></ul>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031voc4",
+    "type": "vocab",
+    "data": {
+      "items": [
+        {
+          "term": "Material Processing",
+          "definition": "The act of transforming raw materials into useful components through physical, chemical, or mechanical means."
+        },
+        {
+          "term": "Assembly",
+          "definition": "The process of putting individual components together to form a subsystem, then combining subsystems into a complete system."
+        },
+        {
+          "term": "Multiscale Modeling",
+          "definition": "An engineering approach that connects observations at a large scale (like a car wheel) to explanations at a very small scale (like the atoms in the wheel's material)."
+        },
+        {
+          "term": "Objective",
+          "definition": "A specific goal or desired outcome for a design or process."
+        },
+        {
+          "term": "Constraint",
+          "definition": "A limitation or restriction that must be satisfied during the design or manufacturing process."
+        },
+        {
+          "term": "Variable",
+          "definition": "A factor or parameter in a design that can be changed or adjusted to meet objectives within given constraints."
+        },
+        {
+          "term": "Tolerance",
+          "definition": "The allowable range of variation in a dimension, property, or process."
+        },
+        {
+          "term": "Workmanship",
+          "definition": "The skill and care with which something is made or done."
+        }
+      ],
+      "columns": 2
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031div1",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031bib5",
+    "type": "callout",
+    "data": {
+      "variant": "biblical",
+      "html": "<p><strong>Exodus 35:30-35</strong> — \"Then Moses said to the Israelites, 'See, the Lord has chosen Bezalel... and he has filled him with the Spirit of God, with wisdom, with understanding, with knowledge and with all kinds of skills — to make artistic designs... and to engage in all kinds of craftsmanship.'\"</p><p>God didn't just hand Bezalel raw materials and say good luck. He filled him with skill, intelligence, and knowledge — then equipped him with specific craftsmanship abilities to work with gold, silver, bronze, and wood. The Tabernacle wasn't thrown together; it was built with precision and purpose. Your mousetrap car deserves that same intention.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt6",
+    "type": "text",
+    "data": {
+      "html": "<h2>The Master Craftsman's Blueprint</h2><p>Throughout the Creationeering framework, God is the Ultimate Creationeer — not just a designer who sketches ideas on paper, but a hands-on builder who works with intention at every scale. The construction of the Tabernacle in Exodus is one of the most detailed engineering projects described in Scripture. God specified the materials, the dimensions, the joinery, and the finish. Nothing was left to chance.</p><p>That same principle applies to you right now. You're not just cutting wood and gluing axles together — you're applying craft. Every cut you make, every joint you form, every surface you smooth is a small act of stewardship over the materials and time you've been given. Bezalel and Oholiab were entrusted with building something sacred. Your mousetrap car is your opportunity to practice that same standard of care.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031div2",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt7",
+    "type": "text",
+    "data": {
+      "html": "<h2>Shaping and Cutting Your Materials</h2><p>Material processing almost always starts with shaping — getting raw stock down to the exact size and form your design requires. Think of it like a sculptor working a block of marble. The final form is already planned; the work is removing everything that doesn't belong.</p><p>For your mousetrap car, shaping and cutting might look like:</p><ul><li>Cutting a wooden dowel to a specific axle length</li><li>Trimming a foam or plastic panel for the chassis body</li>  <li>Sanding wheel edges so they roll smoothly without wobble</li><li>Scoring and snapping thin acrylic or balsa to exact widths</li></ul><p>Precision here is everything. A chassis piece that's even a few millimeters too long can throw off wheel alignment. A slightly uneven axle can create friction that robs your car of distance. This is why engineers specify <strong>tolerances</strong> — that allowable range of variation — on every dimension. Small errors compound. Get it right at the cutting stage, and every step after becomes easier.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031img1",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Close-up of a student's hands measuring and marking a wooden dowel with a ruler and pencil before cutting, showing tools like a hand saw and sandpaper on a workbench alongside mousetrap car components"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt8",
+    "type": "text",
+    "data": {
+      "html": "<h2>Joining and Fastening</h2><p>Once your pieces are shaped, you need to connect them. Joining is how separate components become a unified structure — and there are more ways to do it than you might think.</p><h3>Permanent Joints</h3><p>These are connections you don't plan to take apart. Gluing, welding, and riveting all fall into this category. For your mousetrap car, wood glue or a hot glue gun creates a permanent bond between chassis pieces. The upside: strong and lightweight. The downside: if something breaks or needs adjustment, you're often starting over on that section.</p><h3>Temporary (Mechanical) Joints</h3><p>Screws, bolts, and snap-fit connections are temporary — they can be undone and reassembled. For a mousetrap car, this might mean using small screws to attach a component you think you'll need to adjust. Axle hooks and string loops are also mechanical connections that allow tuning.</p><h3>Choosing the Right Joint</h3><p>The right joining method depends on your <strong>objectives</strong> and <strong>constraints</strong>. Ask yourself: Does this joint need to handle high stress? Will I need to adjust this part later? How much does the fastener weigh? These are the same questions a professional engineer asks before choosing a joining method on a real vehicle.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031tip1",
+    "type": "callout",
+    "data": {
+      "variant": "tip",
+      "html": "<p><strong>Test before you commit.</strong> Before permanently gluing or bonding any two pieces, do a dry fit — hold them together without adhesive and check that everything lines up correctly. It takes 30 extra seconds and can save you from having to rebuild an entire section of your car.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt9",
+    "type": "text",
+    "data": {
+      "html": "<h2>Surface Treatment and Finishing</h2><p>After shaping and joining, many components benefit from surface treatment — preparing or modifying the outer layer of a material to improve its performance. This step is easy to skip, but skipping it often shows up later as poor performance.</p><p>Here's what surface treatment might look like on your mousetrap car:</p><ul><li><strong>Sanding:</strong> Smoothing rough wood edges reduces friction where axles pass through frame holes. Even a quick pass with fine-grit sandpaper makes a noticeable difference in how freely your axle spins.</li><li><strong>Lubricating:</strong> Applying a small amount of lubricant (like petroleum jelly or a drop of machine oil) at bearing points reduces friction and helps energy transfer from the mousetrap spring all the way to the wheels.</li><li><strong>Sealing:</strong> Coating wood with a light layer of glue or sealant can prevent warping, especially if your car will be used in humid conditions.</li></ul><p>Think of surface treatment the way you'd think about finishing a piece of furniture. The joints might be solid and the shape perfect — but the surface finish is what separates a rough prototype from a polished, well-engineered product.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031div3",
+    "type": "divider",
+    "data": {
+      "style": "solid"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt10",
+    "type": "text",
+    "data": {
+      "html": "<h2>Multiscale Modeling: From Atoms to Axles</h2><p>Here's a concept that professional engineers use that might surprise you: the reason a material behaves the way it does — why wood is stiff but can split along the grain, why metal bends before it breaks, why rubber grips the floor — all comes down to what's happening at the <em>atomic</em> level.</p><p><strong>Multiscale modeling</strong> is the engineering practice of connecting what you see at the large scale (your wheel, your axle, your chassis) to what's happening at the microscopic and atomic scale inside the material. You don't need an electron microscope to use this idea. You just need to ask: <em>why does this material behave this way, and how does that behavior serve my design?</em></p><h3>A Simple Example</h3><p>Wood is strong along its grain because the cellulose fibers run in one direction — like a bundle of straws. It's weaker across the grain because those fibers can separate. Knowing this, you'd always orient your wooden chassis pieces so the grain runs along the direction of the greatest stress. That's multiscale thinking in action.</p><p>When you choose between materials, or decide how to orient a piece before cutting, you're applying this concept — even if you've never called it that before.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031img2",
+    "type": "image",
+    "data": {
+      "src": "",
+      "width": "100%",
+      "caption": "Split-view diagram showing a wooden mousetrap car chassis on the left and a magnified illustration of wood grain fiber structure on the right, with arrows indicating the direction of greatest strength along the grain"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt11",
+    "type": "text",
+    "data": {
+      "html": "<h2>Applying the OCV Method to Material Processing</h2><p>Every material processing decision you make should be guided by the <strong>Objective, Constraint, Variable (OCV)</strong> method. This is a structured way of thinking through your choices so you're not just guessing — you're engineering.</p><ul><li><strong>Objective:</strong> What are you trying to achieve? (e.g., minimize axle friction, maximize chassis rigidity, reduce total weight)</li><li><strong>Constraint:</strong> What limits what you can do? (e.g., available tools, material budget, required dimensions, time)</li><li><strong>Variable:</strong> What can you change or adjust to meet your objective within those constraints? (e.g., type of lubricant, wood thickness, joint type, sanding grit)</li></ul><p>Here's how this plays out in practice. Suppose your objective is to minimize friction at the axle bearing points. Your constraint is that you can only use materials available in the classroom kit. Your variable might be the type and amount of lubricant you apply, or whether you sand the bearing holes to a smoother finish. The OCV framework keeps your decision-making focused and justifiable — which is exactly what an engineer needs to be able to explain their choices.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031wrn1",
+    "type": "callout",
+    "data": {
+      "variant": "warning",
+      "html": "<p><strong>Common mistake:</strong> Rushing through material processing to get to assembly faster. Cuts that are slightly off, joints that aren't fully set, and surfaces left rough will all show up as performance problems during your car's test run. Slow down during processing — it saves time overall.</p>"
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031txt12",
+    "type": "text",
+    "data": {
+      "html": "<h2>Workmanship as Stewardship</h2><p>There's a word in your vocabulary list worth spending a moment on: <strong>workmanship</strong>. It's not just about making something look nice. Workmanship is the standard of care and skill you bring to every step of the process.</p><p>Bezalel didn't rush the Tabernacle. He applied gold carefully, cut wood precisely, and assembled components with intention. That wasn't perfectionism for its own sake — it was stewardship. The materials he used, the time he had, the skills God gave him — all of it was put to full use in service of something greater than himself.</p><p>Your mousetrap car is a smaller-scale version of that same challenge. The wood, string, wheels, and spring you've been given are resources. How carefully you shape them, how cleanly you join them, how thoughtfully you finish them — that's your workmanship. And workmanship, at its core, is a form of gratitude for the abilities and materials you've received.</p>"
+    },
+    "meta": {
+      "spacing": "sm",
+      "blockWidth": "wide",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  },
+  {
+    "id": "m031acc1",
+    "type": "accordion",
+    "data": {
+      "title": "Check Your Understanding",
+      "html": "<p><strong>Q: What is the difference between a permanent joint and a temporary joint? Give one example of each for a mousetrap car.</strong><br/>A: A permanent joint (like wood glue) cannot be easily undone. A temporary joint (like a screw or bolt) can be removed and reattached. On a mousetrap car, gluing the chassis pieces together is permanent; using a small screw to attach an adjustable component is temporary.</p><p><strong>Q: Why does multiscale modeling matter when choosing how to cut a piece of wood?</strong><br/>A: Because wood is stronger along its grain than across it — a property caused by the alignment of cellulose fibers at the microscopic level. Orienting your cut so stress runs along the grain makes the piece less likely to split or fail.</p><p><strong>Q: Write an OCV statement for the following scenario: You want your axle to spin as freely as possible, but you only have materials from the classroom kit.</strong><br/>A: Objective — minimize axle friction. Constraint — only classroom-provided materials available. Variable — sanding smoothness of bearing holes and type/amount of lubricant applied.</p><p><strong>Q: How does the story of Bezalel connect to what you're doing in material processing?</strong><br/>A: Bezalel was filled with skill and knowledge to work carefully with materials for God's purpose. In the same way, you're called to apply skill and care to your material processing — treating your tools, materials, and time as resources to be stewarded well.</p>",
+      "openByDefault": false
+    },
+    "meta": {
+      "spacing": "md",
+      "qcStatus": "pending",
+      "qcNote": "doc-rewrite 2026-05-29"
+    }
+  }
+]

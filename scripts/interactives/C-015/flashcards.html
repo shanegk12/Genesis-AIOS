@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design Iteration and Communication — Flashcards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;padding:20px;color:#222}
+h1{text-align:center;color:#1B2A5C;font-size:1.1rem;margin-bottom:16px}
+.deck{max-width:600px;margin:0 auto}
+.card-wrap{perspective:900px;margin-bottom:14px}
+.card{position:relative;height:130px;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.flipped{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;padding:18px;text-align:center;backface-visibility:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.front{background:#1B2A5C;color:#fff;font-weight:600;font-size:.95rem}
+.back{background:#fff;color:#1B2A5C;transform:rotateY(180deg);font-size:.88rem;line-height:1.5}
+.hint{text-align:center;color:#888;font-size:.75rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>Design Iteration and Communication</h1>
+<p class="hint">Tap a card to flip it</p>
+<div class="deck" id="deck"></div>
+<script>
+const cards = [{"term": "Design Iteration", "definition": "The repetitive cycle of designing, testing, analyzing, and refining a solution. It's like an engineer's 'do-over' to make things better."}, {"term": "Why is iteration important?", "definition": "Iteration is crucial because it helps engineers discover problems and improve designs before building the final product, ensuring it works correctly the first time."}, {"term": "Prototype", "definition": "A simple version of a chosen solution, which can be a physical model, a sketch, or a computer simulation, used to visualize an idea."}, {"term": "Rapid Iteration", "definition": "A Creationeering method that uses mathematical models and computer simulations to quickly test many variables, reducing the need for physical prototypes."}, {"term": "Computer-Aided Design (CAD)", "definition": "Software used by engineers to create and modify designs on a computer, often used in Rapid Iteration to represent design elements."}, {"term": "Documentation", "definition": "The detailed record-keeping of assumptions, equations, simulation results, and the reasons behind every change made to a design."}, {"term": "Creationeering's Rapid Iteration vs. Traditional Iteration", "definition": "Rapid Iteration uses computers and math to test thousands of variables quickly, while traditional iteration often relies more on building and testing physical prototypes."}, {"term": "Role of mathematical and computer models in Rapid Iteration", "definition": "These models allow engineers to test many different ideas and variables virtually, saving time and resources compared to building physical versions."}, {"term": "Technical Communication", "definition": "The clear and effective sharing of information about a design, including explaining ideas, being open to feedback, and asking targeted questions."}, {"term": "Importance of meticulous documentation", "definition": "Meticulous documentation is essential for tracking all design changes, understanding why they were made, and sharing information with others on the team."}];
+const deck = document.getElementById('deck');
+cards.forEach(c => {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+  wrap.innerHTML = `<div class="card"><div class="front">${c.term}</div><div class="back">${c.definition}</div></div>`;
+  wrap.querySelector('.card').addEventListener('click', e => e.currentTarget.classList.toggle('flipped'));
+  deck.appendChild(wrap);
+});
+</script>
+</body>
+</html>

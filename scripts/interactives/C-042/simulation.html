@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Critical Path Method – Creationeering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    color: #1B3A5C;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    background: #1B3A5C;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  header .logo {
+    width: 44px; height: 44px;
+    background: #C9A84C;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #1B3A5C; flex-shrink: 0;
+  }
+  header h1 { font-size: clamp(14px, 3vw, 20px); font-weight: 700; }
+  header p  { font-size: clamp(11px, 2vw, 13px); opacity: .8; margin-top: 2px; }
+
+  #app {
+    width: 100%; max-width: 860px;
+    padding: 18px 14px 40px;
+    flex: 1;
+  }
+
+  /* ── SCREENS ─────────────────────────────────── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── INTRO ───────────────────────────────────── */
+  .intro-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.10);
+    text-align: center;
+  }
+  .intro-card h2 { font-size: clamp(20px,4vw,28px); color: #1B3A5C; margin-bottom: 12px; }
+  .intro-card p  { font-size: 15px; line-height: 1.6; color: #334; margin-bottom: 10px; }
+  .intro-card .steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr));
+    gap: 14px; margin: 22px 0;
+  }
+  .step-box {
+    background: #f0f4fa; border-radius: 10px; padding: 14px 10px;
+    border-left: 4px solid #C9A84C;
+  }
+  .step-box .num { font-size: 22px; font-weight: 900; color: #C9A84C; }
+  .step-box p { font-size: 13px; color: #1B3A5C; margin-top: 4px; }
+
+  /* ── BUTTONS ─────────────────────────────────── */
+  .btn {
+    display: inline-block; cursor: pointer;
+    background: #C9A84C; color: #1B3A5C;
+    border: none; border-radius: 8px;
+    font-size: 15px; font-weight: 700;
+    padding: 12px 28px; margin-top: 10px;
+    transition: background .2s, transform .1s;
+  }
+  .btn:hover  { background: #b8973d; }
+  .btn:active { transform: scale(.97); }
+  .btn.outline {
+    background: transparent; border: 2px solid #1B3A5C; color: #1B3A5C;
+  }
+  .btn.outline:hover { background: #e8edf5; }
+  .btn.navy {
+    background: #1B3A5C; color: #fff;
+  }
+  .btn.navy:hover { background: #14304f; }
+
+  /* ── SCENARIO HEADER ─────────────────────────── */
+  .scenario-header {
+    background: #1B3A5C; color: #fff;
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 16px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .scenario-header .icon { font-size: 32px; flex-shrink: 0; }
+  .scenario-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .scenario-header p  { font-size: 13px; opacity: .85; line-height: 1.5; }
+
+  .progress-bar-wrap {
+    background: #dde5f0; border-radius: 20px; height: 8px; margin-bottom: 18px; overflow: hidden;
+  }
+  .progress-bar { height: 100%; background: #C9A84C; border-radius: 20px; transition: width .4s; }
+
+  /* ── NETWORK DIAGRAM ─────────────────────────── */
+  #diagram-area {
+    background: #fff; border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.10);
+    padding: 18px 14px; margin-bottom: 18px;
+    overflow-x: auto;
+  }
+  #diagram-area h3 { font-size: 14px; color: #1B3A5C; margin-bottom: 12px; font-weight: 700; }
+
+  svg#networkSvg {
+    display: block; margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .node-box rect { stroke-width: 2; rx: 8; }
+  .node-box text { font-family: 'Segoe UI', Arial, sans-serif; }
+
+  /* ── TASK TABLE ──────────────────────────────── */
+  .task-table-wrap {
+    background: #fff; border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.10);
+    padding: 16px 14px; margin-bottom: 18px;
+    overflow-x: auto;
+  }
+  .task-table-wrap h3 { font-size: 14px; color: #1B3A5C; margin-bottom: 10px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: #1B3A5C; color: #fff;
+    padding: 8px 10px; text-align: left;
+  }
+  td { padding: 7px 10px; border-bottom: 1px solid #e5eaf2; }
+  tr:hover td { background: #f0f5ff; }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+  }
+  .badge-none { background:#e5eaf2; color:#555; }
+
+  /* ── QUESTION PANEL ──────────────────────────── */
+  .question-panel {
+    background: #fff; border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(27,58,92,.10);
+    padding: 22px 20px; margin-bottom: 18px;
+  }
+  .question-panel .q-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: #C9A84C; margin-bottom: 6px;
+  }
+  .question-panel .q-text {
+    font-size: 15px; font-weight: 600; color: #1B3A5C; margin-bottom: 16px; line-height: 1.45;
+  }
+
+  /* choice buttons */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f0f4fa; border: 2px solid #c5d0e0;
+    border-radius: 9px; padding: 11px 14px;
+    text-align: left; cursor: pointer; font-size: 14px; color: #1B3A5C;
+    font-family: inherit; font-weight: 500;
+    transition: border-color .15s, background .15s;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: #C9A84C; background: #fdf6e3; }
+  .choice-btn.correct   { border-color: #2e9e5b; background: #eafaf2; color: #1a6b3c; }
+  .choice-btn.incorrect { border-color: #c0392b; background: #fdf0ef; color: #8b1e1e; }
+  .choice-btn:disabled  { cursor: default; }
+
+  /* drag-path */
+  .drag-area {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    min-height: 54px; background: #f0f4fa;
+    border: 2px dashed #c5d0e0; border-radius: 10px;
+    padding: 10px; margin-bottom: 12px;
+    align-items: center;
+  }
+  .drag-area.highlight { border-color: #C9A84C; background: #fdf6e3; }
+
+  .path-chip {
+    background: #1B3A5C; color: #fff;
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 13px; font-weight: 700;
+    cursor: grab; user-select: none;
+    transition: transform .1s;
+  }
+  .path-chip:active { cursor: grabbing; transform: scale(1.05); }
+  .path-chip.in-drop { background: #C9A84C; color: #1B3A5C; }
+
+  /* feedback */
+  .feedback {
+    display: none; border-radius: 9px; padding: 12px 14px;
+    font-size: 14px; line-height: 1.5; margin-top: 12px;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct-fb   { background: #eafaf2; border-left: 4px solid #2e9e5b; color: #1a5c38; }
+  .feedback.incorrect-fb { background: #fdf0ef; border-left: 4px solid #c0392b; color: #7a1a1a; }
+
+  /* nav row */
+  .nav-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 14px; gap: 10px; flex-wrap: wrap;
+  }
+  .score-badge {
+    font-size: 13px; font-weight: 700; color: #1B3A5C;
+    background: #e8edf5; border-radius: 20px; padding: 6px 14px;
+  }
+
+  /* ── RESULTS ─────────────────────────────────── */
+  .result-card {
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(27,58,92,.12);
+    padding: 36px 28px; text-align: center;
+  }
+  .result-card .trophy { font-size: 64px; margin-bottom: 10px; }
+  .result-card h2 { font-size: clamp(22px,4vw,30px); color: #1B3A5C; }
+  .result-card .score-big {
+    font-size: clamp(40px,8vw,60px); font-weight: 900;
+    color: #C9A84C; margin: 10px 0;
+  }
+  .result-card p { font-size: 15px; line-height: 1.6; color: #334; margin: 6px 0; }
+  .result-card .breakdown {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+    gap: 12px; margin: 22px 0;
+  }
+  .breakdown-item {
+    background: #f0f4fa; border-radius: 10px; padding: 14px 10px;
+  }
+  .breakdown-item .val { font-size: 22px; font-weight: 900; color: #1B3A5C; }
+  .breakdown-item .lbl { font-size: 12px; color: #557; margin-top: 4px; }
+  .faith-note {
+    background: #fdf6e3; border-left: 4px solid #C9A84C;
+    border-radius: 8px; padding: 12px 14px; margin-top: 18px;
+    font-size: 13px; color: #4a3a10; text-align: left; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">GK</div>
+  <div>
+    <h1>Critical Path Method (CPM)</h1>
+    <p>Creationeering · Logistics Planning</p>
+  </div>
+</header>
+
+<div id="app">
+
+  <!-- INTRO SCREEN -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-card">
+      <div style="font-size:52px;margin-bottom:10px;">🗺️</div>
+      <h2>Find the Critical Path!</h2>
+      <p>In this activity you'll study a real engineering project network, then answer questions to find the <strong>critical path</strong> — the sequence of tasks that determines how long the whole project takes.</p>
+      <div class="steps">
+        <div class="step-box"><div class="num">1</div><p>Read the task table &amp; network diagram</p></div>
+        <div class="step-box"><div class="num">2</div><p>Answer questions about tasks, dependencies &amp; durations</p></div>
+        <div class="step-box"><div class="num">3</div><p>Identify the critical path &amp; earn your score</p></div>
+      </div>
+      <p style="font-size:13px;color:#557;margin-bottom:0">⏱ About 3–5 minutes &nbsp;|&nbsp; 8 questions</p>
+      <br>
+      <button class="btn" onclick="startGame()">Start Activity →</button>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div class="screen" id="screen-game">
+    <div class="scenario-header">
+      <div class="icon">🏗️</div>
+      <div>
+        <h3>Project: Design &amp; Build a School Garden</h3>
+        <p>Your engineering team is planning a school garden. Each task below must be completed in order. Use the network diagram and task table to answer each question.</p>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+
+    <!-- DIAGRAM -->
+    <div id="diagram-area">
+      <h3>📊 Project Network Diagram</h3>
+      <svg id="networkSvg" viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" style="min-width:460px;height:auto;">
+        <!-- arrows will be drawn by JS -->
+      </svg>
+    </div>
+
+    <!-- TASK TABLE -->
+    <div class="task-table-wrap">
+      <h3>📋 Task List</h3>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Task Name</th><th>Duration</th><th>Predecessor(s)</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- QUESTION -->
+    <div class="question-panel" id="questionPanel">
+      <div class="q-label" id="qLabel">Question 1 of 8</div>
+      <div class="q-text"  id="qText"></div>
+      <div id="qBody"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="nav-row">
+        <div class="score-badge" id="scoreBadge">Score: 0 / 0</div>
+        <button class="btn navy" id="nextBtn" style="display:none" onclick="nextQuestion()">Next Question →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div class="screen" id="screen-results">
+    <div class="result-card" id="resultCard"></div>
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════════ */
+const TASKS = [
+  { id:'A', name:'Survey &amp; Site Planning',  dur:2, pred:[]          },
+  { id:'B', name:'Design the Garden Layout',   dur:3, pred:['A']        },
+  { id:'C', name:'Order Supplies &amp; Seeds',   dur:4, pred:['A']        },
+  { id:'D', name:'Prepare the Soil',            dur:3, pred:['B']        },
+  { id:'E', name:'Build Raised Beds',           dur:5, pred:['B','C']    },
+  { id:'F', name:'Install Irrigation System',  dur:4, pred:['D','E']    },
+  { id:'G', name:'Plant Seeds &amp; Seedlings',   dur:2, pred:['F']        },
+  { id:'H', name:'Add Labels &amp; Signage',       dur:1, pred:['G']        },
+];
+
+/* Node layout [x, y] in SVG viewBox 760×280 */
+const NODE_POS = {
+  A:[ 55,130], B:[175, 65], C:[175,195],
+  D:[295, 65], E:[295,195], F:[415,130],
+  G:[535,130], H:[665,130],
+};
+
+/* Critical path: A→B→E→F→G→H  total=2+3+5+4+2+1=17 */
+const CRITICAL_PATH = ['A','B','E','F','G','H'];
+const CRITICAL_SET  = new Set(CRITICAL_PATH);
+
+/* Early Start / Early Finish (forward pass) */
+const ES={A:0,B:2,C:2,D:5,E:6,F:11,G:15,H:17};
+const EF={A:2,B:5,C:6,D:8,E:11,F:15,G:17,H:18};
+const LS={A:0,B:2,C:3,D:5,E:6,F:11,G:15,H:17};
+const LF={A:2,B:5,C:7,D:8,E:11,F:15,G:17,H:18};
+const FLOAT={A:0,B:0,C:1,D:0,E:0,F:0,G:0,H:0};
+
+/* ═══════════════════════════════════════════════════════
+   QUESTIONS  (8 questions)
+═══════════════════════════════════════════════════════ */
+const QUESTIONS = [
+  /* Q1 — vocabulary */
+  {
+    type:'mc',
+    text:'Task C (Order Supplies &amp; Seeds) cannot begin until Task A (Survey &amp; Site Planning) is finished. What is Task A called in relation to Task C?',
+    choices:['Successor Task','Predecessor Task','Milestone','Duration'],
+    correct: 1,
+    feedback: '✅ Correct! A <strong>Predecessor Task</strong> must be completed before the next task can begin. Task A must finish before Task C can start.'
+  },
+  /* Q2 — dependency */
+  {
+    type:'mc',
+    text:'Task E (Build Raised Beds) has two predecessors. Which tasks must BOTH be finished before Task E can start?',
+    choices:['A and C','B and C','D and F','A and B'],
+    correct: 1,
+    feedback: '✅ Right! Task E depends on Tasks B and C. Both must be complete before construction can begin.'
+  },
+  /* Q3 — duration calculation */
+  {
+    type:'mc',
+    text:'If you follow the path A → B → D → F → G → H, what is the total duration of that path in days?',
+    choices:['14 days','15 days','16 days','17 days'],
+    correct: 1,
+    feedback: '✅ Correct! A(2)+B(3)+D(3)+F(4)+G(2)+H(1) = <strong>15 days</strong>.'
+  },
+  /* Q4 — critical path duration */
+  {
+    type:'mc',
+    text:'The critical path is the <em>longest</em> path through the project. What is the total duration of path A → B → E → F → G → H?',
+    choices:['15 days','16 days','17 days','18 days'],
+    correct: 2,
+    feedback: '✅ Yes! A(2)+B(3)+E(5)+F(4)+G(2)+H(1) = <strong>17 days</strong>. This is the longest path — the critical path!'
+  },
+  /* Q5 — identifying critical path (drag) */
+  {
+    type:'drag',
+    text:'Drag the tasks below into the drop zone to build the <strong>Critical Path</strong> in the correct order (left to right).',
+    correctOrder: ['A','B','E','F','G','H'],
+    allChips: ['A','B','C','D','E','F','G','H'],
+    feedback: '✅ Perfect! The critical path is <strong>A → B → E → F → G → H</strong> (17 days). These tasks have zero float and must stay on schedule.'
+  },
+  /* Q6 — float concept */
+  {
+    type:'mc',
+    text:'Task C (Order Supplies) takes 4 days but has a float of 1 day. What does this mean for your project?',
+    choices:[
+      'Task C is on the critical path',
+      'Task C can be delayed by 1 day without delaying the project',
+      'Task C must finish 1 day early',
+      'Task C takes 1 extra day compared to other tasks'
+    ],
+    correct: 1,
+    feedback: '✅ Correct! Float (sometimes called slack) means a task can slip by that number of days without pushing back the project finish date. Tasks on the critical path have <strong>zero float</strong>.'
+  },
+  /* Q7 — what happens scenario */
+  {
+    type:'mc',
+    text:'Your team runs into a problem and Task E (Build Raised Beds) is delayed by 3 days. How does this affect the project?',
+    choices:[
+      'No effect — Task E has plenty of float',
+      'The whole project is delayed by 3 days',
+      'Only Task D is delayed',
+      'Task F can start early to make up for it'
+    ],
+    correct: 1,
+    feedback: '✅ Right! Task E is on the critical path and has <strong>zero float</strong>. Any delay to it delays the entire project finish date by the same amount.'
+  },
+  /* Q8 — resource allocation */
+  {
+    type:'mc',
+    text:'Your team has extra volunteers for one day. Which task should you prioritize to make sure the project stays on time?',
+    choices:[
+      'Task C — ordering supplies can always take longer',
+      'Task D — soil preparation looks complicated',
+      'Task E — it is on the critical path and has the longest duration',
+      'Task H — finishing signage early looks impressive'
+    ],
+    correct: 2,
+    feedback: '✅ Excellent thinking! Good resource stewardship means focusing extra help on <strong>critical path tasks</strong> — especially the longest ones like Task E. That\'s how engineers keep projects on schedule.'
+  },
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let currentQ  = 0;
+let score     = 0;
+let answered  = 0;
+let qAnswered = false;
+
+/* drag state */
+let dragChip  = null;
+let dropZone  = null;
+let poolZone  = null;
+let droppedOrder = [];
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════ */
+function startGame(){
+  showScreen('screen-game');
+  buildDiagram();
+  buildTable();
+  loadQuestion(0);
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUILD DIAGRAM
+═══════════════════════════════════════════════════════ */
+function buildDiagram(){
+  const svg = document.getElementById('networkSvg');
+  svg.innerHTML='';
+
+  /* Arrow marker */
+  const defs = svgEl('defs');
+  const marker = svgEl('marker');
+  marker.setAttribute('id','arrow');
+  marker.setAttribute('markerWidth','10');
+  marker.setAttribute('markerHeight','7');
+  marker.setAttribute('refX','9');
+  marker.setAttribute('refY','3.5');
+  marker.setAttribute('orient','auto');
+  const poly = svgEl('polygon');
+  poly.setAttribute('points','0 0, 10 3.5, 0 7');
+  poly.setAttribute('fill','#1B3A5C');
+  marker.appendChild(poly);
+  defs.appendChild(marker);
+  svg.appendChild(defs);
+
+  const arrowCP = svgEl('marker');
+  arrowCP.setAttribute('id','arrowCP');
+  arrowCP.setAttribute('markerWidth','10');
+  arrowCP.setAttribute('markerHeight','7');
+  arrowCP.setAttribute('refX','9');
+  arrowCP.setAttribute('refY','3.5');
+  arrowCP.setAttribute('orient','auto');
+  const poly2 = svgEl('polygon');
+  poly2.setAttribute('points','0 0, 10 3.5, 0 7');
+  poly2.setAttribute('fill','#C9A84C');
+  arrowCP.appendChild(poly2);
+  defs.appendChild(arrowCP);
+
+  /* Draw edges */
+  TASKS.forEach(t=>{
+    t.pred.forEach(pId=>{
+      const [x1,y1]=NODE_POS[pId];
+      const [x2,y2]=NODE_POS[t.id];
+      const isCP = CRITICAL_SET.has(pId) && CRITICAL_SET.has(t.id);
+      drawEdge(svg, x1+38, y1, x2-38, y2, isCP);
+    });
+  });
+
+  /* Draw nodes */
+  TASKS.forEach(t=>{
+    const [cx,cy]=NODE_POS[t.id];
+    const isCP = CRITICAL_SET.has(t.id);
+    drawNode(svg, cx, cy, t.id, t.dur, isCP);
+  });
+}
+
+function drawEdge(svg,x1,y1,x2,y2,isCP){
+  const line=svgEl('line');
+  line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+  line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+  line.setAttribute('stroke', isCP?'#C9A84C':'#8fa5c0');
+  line.setAttribute('stroke-width', isCP?'3':'2');
+  line.setAttribute('marker-end', isCP?'url(#arrowCP)':'url(#arrow)');
+  svg.appendChild(line);
+}
+
+function drawNode(svg,cx,cy,id,dur,isCP){
+  const g=svgEl('g');
+  g.setAttribute('class','node-box');
+
+  const W=76,H=52;
+  const rect=svgEl('rect');
+  rect.setAttribute('x',cx-W/2); rect.setAttribute('y',cy-H/2);
+  rect.setAttribute('width',W);  rect.setAttribute('height',H);
+  rect.setAttribute('rx','8');
+  rect.setAttribute('fill', isCP?'#1B3A5C':'#e8edf5');
+  rect.setAttribute('stroke', isCP?'#C9A84C':'#8fa5c0');
+  rect.setAttribute('stroke-width','2');
+  g.appendChild(rect);
+
+  const tId=svgEl('text');
+  tId.setAttribute('x',cx); tId.setAttribute('y',cy-7);
+  tId.setAttribute('text-anchor','middle');
+  tId.setAttribute('font-size','16');
+  tId.setAttribute('font-weight','700');
+  tId.setAttribute('fill', isCP?'#C9A84C':'#1B3A5C');
+  tId.textContent=id;
+  g.appendChild(tId);
+
+  const tDur=svgEl('text');
+  tDur.setAttribute('x',cx); tDur.setAttribute('y',cy+11);
+  tDur.setAttribute('text-anchor','middle');
+  tDur.setAttribute('font-size','11');
+  tDur.setAttribute('fill', isCP?'#ccc':'#557');
+  tDur.textContent=dur+' day'+(dur>1?'s':'');
+  g.appendChild(tDur);
+
+  svg.appendChild(g);
+}
+
+function svgEl(tag){
+  return document.createElementNS('http://www.w3.org/2000/svg',tag);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BUILD TABLE
+═══════════════════════════════════════════════════════ */
+function buildTable(){
+  const tbody = document.getElementById('taskTableBody');
+  tbody.innerHTML='';
+  TASKS.forEach(t=>{
+    const isCP = CRITICAL_SET.has(t.id);
+    const predStr = t.pred.length ? t.pred.join(', ') : '<span class="badge badge-none">None</span>';
+    tbody.innerHTML+=`
+      <tr>
+        <td><strong style="color:${isCP?'#C9A84C':'#1B3A5C'}">${t.id}</strong>${isCP?' ⭐':''}</td>
+        <td>${t.name}</td>
+        <td>${t.dur} day${t.dur>1?'s':''}</td>
+        <td>${predStr}</td>
+      </tr>`;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   QUESTION LOADER
+═══════════════════════════════════════════════════════ */
+function loadQuestion(idx){
+  qAnswered = false;
+  const q = QUESTIONS[idx];
+  const total = QUESTIONS.length;
+  const pct = Math.round((idx/total)*100);
+
+  document.getElementById('progressBar').style.width = pct+'%';
+  document.getElementById('qLabel').textContent = `Question ${idx+1} of ${total}`;
+  document.getElementById('qText').innerHTML = q.text;
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('feedback').innerHTML='';
+  document.getElementById('nextBtn').style.display='none';
+  updateScore();
+
+  const body = document.getElementById('qBody');
+  body.innerHTML='';
+
+  if(q.type==='mc'){
+    const div=document.createElement('div');
+    div.className='choices';
+    q.choices.forEach((c,i)=>{
+      const btn=document.createElement('button');
+      btn.className='choice-btn';
+      btn.innerHTML=c;
+      btn.onclick=()=>answerMC(i,q,div);
+      div.appendChild(btn);
+    });
+    body.appendChild(div);
+
+  } else if(q.type==='drag'){
+    buildDragQuestion(body, q);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   MC ANSWER
+═══════════════════════════════════════════════════════ */
+function answerMC(idx, q, container){
+  if(qAnswered) return;
+  qAnswered=true;
+  answered++;
+
+  const btns=[...container.querySelectorAll('.choice-btn')];
+  btns.forEach(b=>b.disabled=true);
+  const isCorrect=(idx===q.correct);
+  btns[idx].classList.add(isCorrect?'correct':'incorrect');
+  if(!isCorrect) btns[q.correct].classList.add('correct');
+
+  if(isCorrect) score++;
+  showFeedback(isCorrect, q.feedback);
+  updateScore();
+  showNext();
+}
+
+/* ═══════════════════════════════════════════════════════
+   DRAG QUESTION
+═══════════════════════════════════════════════════════ */
+function buildDragQuestion(body, q){
+  droppedOrder=[];
+
+  const lbl1=document.createElement('p');
+  lbl1.style.cssText='font-size:12px;font-weight:700;color:#557;margin-bottom:6px;';
+  lbl1.textContent='Drop Zone (build the path here):';
+  body.appendChild(lbl1);
+
+  dropZone=document.createElement('div');
+  dropZone.className='drag-area';
+  dropZone.id='dropZone';
+  body.appendChild(dropZone);
+
+  const lbl2=document.createElement('p');
+  lbl2.style.cssText='font-size:12px;font-weight:700;color:#557;margin-bottom:6px;margin-top:10px;';
+  lbl2.textContent='Available Tasks (drag from here):';
+  body.appendChild(lbl2);
+
+  poolZone=document.createElement('div');
+  poolZone.className='drag-area';
+  poolZone.id='poolZone';
+
+  /* shuffle chips */
+  const shuffled=[...q.allChips].sort(()=>Math.random()-.5);
+  shuffled.forEach(id=>{
+    const chip=makeChip(id);
+    poolZone.appendChild(chip);
+  });
+  body.appendChild(poolZone);
+
+  /* check button */
+  const checkBtn=document.createElement('button');
+  checkBtn.className='btn';
+  checkBtn.textContent='Check My Path ✓';
+  checkBtn.style.marginTop='12px';
+  checkBtn.onclick=()=>checkDrag(q,checkBtn);
+  body.appendChild(checkBtn);
+
+  /* drag events on zones */
+  [dropZone, poolZone].forEach(zone=>{
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('highlight');});
+    zone.addEventListener('dragleave',()=>zone.classList.remove('highlight'));
+    zone.addEventListener('drop',e=>{
+      e.preventDefault();
+      zone.classList.remove('highlight');
+      if(dragChip && dragChip.parentNode!==zone){
+        zone.appendChild(dragChip);
+      }
+      dragChip=null;
+    });
+  });
+
+  /* touch support */
+  enableTouchDrag(poolZone, dropZone);
+}
+
+function makeChip(id){
+  const chip=document.createElement('div');
+  chip.className='path-chip';
+  chip.textContent=id;
+  chip.setAttribute('draggable','true');
+  chip.dataset.id=id;
+  chip.addEventListener('dragstart',()=>{ dragChip=chip; });
+  chip.addEventListener('dragend', ()=>{ dragChip=null; });
+  return chip;
+}
+
+function checkDrag(q, btn){
+  if(qAnswered) return;
+
+  const dropped=[...document.getElementById('dropZone').querySelectorAll('.path-chip')];
+  droppedOrder=dropped.map(c=>c.dataset.id);
+
+  const isCorrect = JSON.stringify(droppedOrder)===JSON.stringify(q.correctOrder);
+  qAnswered=true;
+  answered++;
+  if(isCorrect) score++;
+  btn.disabled=true;
+
+  /* colour the chips */
+  dropped.forEach((c,i)=>{
+    c.style.background = (q.correctOrder[i]===c.dataset.id) ? '#2e9e5b' : '#c0392b';
+  });
+
+  showFeedback(isCorrect, q.feedback +
+    (isCorrect ? '' : `<br>The correct order is: <strong>${q.correctOrder.join(' → ')}</strong>`));
+  updateScore();
+  showNext();
+}
+
+/* ── simple touch drag ── */
+function enableTouchDrag(pool, drop){
+  let touchingChip=null, clone=null;
+  function getZone(x,y){
+    const dr=drop.getBoundingClientRect();
+    const pr=pool.getBoundingClientRect();
+    if(x>=dr.left&&x<=dr.right&&y>=dr.top&&y<=dr.bottom) return drop;
+    if(x>=pr.left&&x<=pr.right&&y>=pr.top&&y<=pr.bottom) return pool;
+    return null;
+  }
+  document.addEventListener('touchstart',e=>{
+    const el=e.target.closest('.path-chip');
+    if(!el) return;
+    touchingChip=el;
+    clone=el.cloneNode(true);
+    clone.style.cssText='position:fixed;pointer-events:none;opacity:.8;z-index:999;transform:scale(1.05);';
+    document.body.appendChild(clone);
+  },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    if(!touchingChip) return;
+    const t=e.touches[0];
+    clone.style.left=(t.clientX-30)+'px';
+    clone.style.top =(t.clientY-20)+'px';
+  },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(!touchingChip) return;
+    const t=e.changedTouches[0];
+    const zone=getZone(t.clientX,t.clientY);
+    if(zone && zone!==touchingChip.parentNode) zone.appendChild(touchingChip);
+    if(clone) clone.remove();
+    touchingChip=null; clone=null;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════ */
+function showFeedback(correct, html){
+  const fb=document.getElementById('feedback');
+  fb.className='feedback show '+(correct?'correct-fb':'incorrect-fb');
+  fb.innerHTML=(correct?'':'❌ Not quite. ')+html;
+}
+
+function showNext(){
+  document.getElementById('nextBtn').style.display='inline-block';
+  const isLast=(currentQ===QUESTIONS.length-1);
+  const btn=document.getElementById('nextBtn');
+  btn.textContent = isLast ? 'See Results 🎉' : 'Next Question →';
+}
+
+function updateScore(){
+  document.getElementById('scoreBadge').textContent=`Score: ${score} / ${answered}`;
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ>=QUESTIONS.length){
+    showResults();
+  } else {
+    loadQuestion(currentQ);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════════════════ */
+function showResults(){
+  showScreen('screen-results');
+  const pct=Math.round((score/QUESTIONS.length)*100);
+  let trophy='🥇', title='Critical Path Expert!', msg='Outstanding work! You demonstrated a strong command of CPM concepts.';
+  if(pct<50){ trophy='🌱'; title='Keep Growing!'; msg='CPM takes practice. Review the task table and diagram, then try again!'; }
+  else if(pct<75){ trophy='🥈'; title='Solid Effort!'; msg='Good progress! Review float and critical path identification to sharpen your skills.'; }
+
+  const card=document.getElementById('resultCard');
+  card.innerHTML=`
+    <div class="trophy">${trophy}</div>
+    <h2>${title}</h2>
+    <div class="score-big">${pct}%</div>
+    <p>${msg}</p>
+    <div class="breakdown">
+      <div class="breakdown-item"><div class="val">${score}</div><div class="lbl">Correct Answers</div></div>
+      <div class="breakdown-item"><div class="val">${QUESTIONS.length-score}</div><div class="lbl">Missed</div></div>
+      <div class="breakdown-item"><div class="val">17</div><div class="lbl">Critical Path (days)</div></div>
+      <div class="breakdown-item"><div class="val">A→B→E→F→G→H</div><div class="lbl">Critical Path</div></div>
+    </div>
+    <div class="faith-note">
+      📖 <em>"For I know the plans I have for you," declares the Lord, "plans to prosper you…"</em> — Jeremiah 29:11<br>
+      Just as God orders His plans with purpose, CPM reminds us that wise stewardship means putting the right tasks in the right order — for His glory.
+    </div>
+    <div style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn" onclick="restartGame()">Try Again 🔄</button>
+    </div>
+  `;
+}
+
+function restartGame(){
+  currentQ=0; score=0; answered=0; qAnswered=false;
+  showScreen('screen-game');
+  loadQuestion(0);
+  document.getElementById('progressBar').style.width='0%';
+}
+</script>
+</body>
+</html>
