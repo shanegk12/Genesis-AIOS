@@ -141,6 +141,87 @@
       },
       "answer": "A",
       "explanation": "Verification checks if the product meets specifications, Validation checks if it meets user needs/purpose, and Testing systematically evaluates it to find defects and confirm functionality."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When Creationeers are working on a new project, which of these actions are part of **verification** or **validation**?",
+      "options": {
+        "A": "Checking if the product's features match the original design blueprints.",
+        "B": "Adjusting the product's color to make it more appealing to users.",
+        "C": "Having users try the product to see if it solves their intended problem.",
+        "D": "Deciding on the budget for the project's materials."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Verification checks if the product is built according to specifications ('Are we building it right?'), while validation checks if it meets user needs and purpose ('Are we building the right product?').",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Your team is designing a new portable speaker. You want it to play music for at least 12 hours on a single charge and cost no more than $30 to produce. You are experimenting with different battery sizes to achieve this. Which statements correctly identify elements of this design process?",
+      "options": {
+        "A": "The different battery sizes you are trying are a constraint.",
+        "B": "The goal of playing music for 12 hours is an objective.",
+        "C": "The $30 production cost limit is a variable.",
+        "D": "The $30 production cost limit is a constraint."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "An objective is the desired goal (12 hours of music), a constraint is a limitation that must be met (max $30 cost), and a variable is something you can change (battery size).",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Rigorous testing is essential in Creationeering to identify hidden ___ and ensure the system is ___ and safe under real-world conditions.",
+      "blanks": [
+        {
+          "accepted": [
+            "defects",
+            "flaws",
+            "problems"
+          ]
+        },
+        {
+          "accepted": [
+            "reliable",
+            "functional"
+          ]
+        }
+      ],
+      "explanation": "Rigorous testing helps find hidden problems and ensures the product works consistently and safely over time.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps in a logical order for developing and evaluating a new Creationeering product.",
+      "items": [
+        "Design the product based on objectives and constraints.",
+        "Verify the product against design specifications.",
+        "Validate the product by checking if it meets user needs.",
+        "Perform rigorous testing to ensure reliability and safety."
+      ],
+      "explanation": "The process typically starts with designing, then checks if it's built right (verification), then if it's the right product (validation), and finally thorough testing for real-world performance.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

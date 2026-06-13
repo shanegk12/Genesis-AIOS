@@ -129,6 +129,85 @@
       },
       "answer": "A",
       "explanation": "Life extension strategies focus on increasing a product's useful lifespan, such as designing for easy repair and component replacement."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key aims of Creationeering™ when considering a product's lifecycle?",
+      "options": {
+        "A": "Designing products that can be easily repaired.",
+        "B": "Ensuring products are always discarded after their initial use.",
+        "C": "Transforming materials into new products of higher value.",
+        "D": "Focusing only on the initial manufacturing cost."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Creationeering™ aims to extend product usefulness through repair (Life Extension) and to transform materials into higher value products (Upcycling), rather than simply discarding them or focusing only on initial costs.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When using the Objective, Constraint, Variable (OCV) method for product design, which of these would be considered an 'Objective'?",
+      "options": {
+        "A": "The backpack should be comfortable for students to wear.",
+        "B": "The budget for materials per backpack is limited to $8.",
+        "C": "To minimize food spoilage and maximize the container's lifespan.",
+        "D": "The bottle must be leak-proof."
+      },
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "Objectives are the desired outcomes or goals for a product, such as comfort, minimizing spoilage, maximizing lifespan, and being leak-proof, while a budget is a constraint.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A smartphone that no longer runs new apps is an example of ___, while a plastic toy losing its color in the sun is an example of ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "obsolescence"
+          ]
+        },
+        {
+          "accepted": [
+            "degradation"
+          ]
+        }
+      ],
+      "explanation": "Obsolescence occurs when a product becomes outdated or no longer useful due to technological changes, while degradation is the loss of material properties due to environmental factors.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps, inspired by Creationeering™ philosophy, in a logical order.",
+      "items": [
+        "Observe natural cycles of renewal.",
+        "Understand a product's full lifecycle.",
+        "Identify ways to extend product usefulness.",
+        "Design products for renewal or repurposing."
+      ],
+      "explanation": "Creationeering™ starts by observing nature's cycles, then understanding a product's entire life, identifying ways to extend its use, and finally designing products with renewal and repurposing in mind.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

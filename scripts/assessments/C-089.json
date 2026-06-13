@@ -141,6 +141,84 @@
       },
       "answer": "C",
       "explanation": "Just as tidying a workspace involves organizing tools for future use, formal system closure and documentation organize knowledge and insights to enable continuous learning and innovation."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of these are important reasons for Junior Creationeers to perform Formal System Closure and Documentation?",
+      "options": {
+        "A": "To quickly get rid of all project plans and notes.",
+        "B": "To prevent other teams from using similar ideas.",
+        "C": "To capture lessons learned from what worked and what failed.",
+        "D": "To understand how early design choices affect a product's recycling or renewal."
+      },
+      "answers": [
+        "C",
+        "D"
+      ],
+      "explanation": "Formal System Closure and Documentation helps capture knowledge and insights, including what worked and failed, and how initial design choices impact a product's end-of-life for better future designs.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When documenting a project during formal system closure, which types of information are most valuable for helping future Creationeers avoid mistakes and create better designs?",
+      "options": {
+        "A": "A list of all team members and their favorite snacks.",
+        "B": "Specific details about why a certain design choice led to a problem.",
+        "C": "The exact time every team meeting started and ended.",
+        "D": "Observations about which materials were easy to work with and why."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Detailed notes on what worked well, what failed, and why provide crucial lessons learned for future innovation and problem-solving.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A Life Cycle Assessment (LCA) helps Creationeers understand a product's environmental impacts from raw material extraction all the way through its ___ or ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "disposal"
+          ]
+        },
+        {
+          "accepted": [
+            "recycling"
+          ]
+        }
+      ],
+      "explanation": "A Life Cycle Assessment (LCA) evaluates environmental impacts across a product's entire journey, from getting raw materials to its final disposal or recycling.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these stages of a product's journey, as discussed in the lesson, in the correct order.",
+      "items": [
+        "Initial Design Choices",
+        "Product Manufacturing and Use",
+        "Product Afterlife (Recycling/Disposal)",
+        "Formal System Closure and Documentation"
+      ],
+      "explanation": "The product's journey starts with design, moves through manufacturing and use, then enters its afterlife, and finally, formal system closure captures lessons from the entire cycle.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

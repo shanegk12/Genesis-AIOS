@@ -57,6 +57,80 @@
       },
       "answer": "C",
       "explanation": "Multiscale modeling involves understanding a system from large-scale observations (truck routes) down to the smallest parts (atomic structure of materials)."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key processes involved in Recycling Logistics and Infrastructure?",
+      "options": {
+        "A": "Designing products that never need recycling.",
+        "B": "Collecting discarded materials from homes and businesses.",
+        "C": "Separating different types of collected materials.",
+        "D": "Incinerating non-recyclable waste for energy."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Recycling Logistics and Infrastructure focuses on the complex network and processes of collecting, sorting (separating), and moving materials for transformation into new items.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Multiscale modeling helps understand recycling systems by examining different levels of detail. Which examples illustrate this approach?",
+      "options": {
+        "A": "Comparing the total amount of waste produced by two different cities.",
+        "B": "Analyzing the chemical composition of a plastic bottle.",
+        "C": "Focusing only on the design of new, more efficient recycling bins.",
+        "D": "Studying the specific routes collection trucks follow."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Multiscale modeling involves understanding a system from large-scale observations, like truck routes, down to the smallest parts, such as the chemical composition of materials.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The primary function of a Material Recovery Facility (MRF) is to ___ different types of collected materials, such as plastics from paper, using machines and manual labor.",
+      "blanks": [
+        {
+          "accepted": [
+            "separate",
+            "sort"
+          ]
+        }
+      ],
+      "explanation": "A Material Recovery Facility (MRF) is where collected recyclables are sorted and separated into different material types before further processing.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Place the following steps of the recycling process in the correct order as described in Recycling Logistics and Infrastructure.",
+      "items": [
+        "Collecting materials",
+        "Sorting materials",
+        "Moving materials",
+        "Transforming materials into new items"
+      ],
+      "explanation": "Recycling Logistics and Infrastructure describes the sequence of processes from materials being collected, then sorted, then moved, and finally transformed into new items.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

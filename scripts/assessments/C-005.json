@@ -146,6 +146,85 @@
       },
       "answer": "B",
       "explanation": "The precise biblical measurements for the Tabernacle illustrate God's value for exactness and consistency, mirroring the engineering principles of accuracy and precision."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "In engineering, why are standardized units and conversion factors considered essential?",
+      "options": {
+        "A": "They enable clear communication among engineers from different countries.",
+        "B": "They allow measurements to be accurately changed between various unit systems.",
+        "C": "They ensure that calculations are performed with compatible quantities, preventing errors.",
+        "D": "They reduce the total number of measurements needed for any project."
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Standardized units ensure clear communication, conversion factors allow switching between unit systems, and correct units ensure calculations are valid, all crucial for avoiding errors and effective collaboration.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of these situations describes measurements that are precise but NOT accurate?",
+      "options": {
+        "A": "A scale consistently reads 5 pounds heavier than the actual weight of an object.",
+        "B": "A ruler is used to measure a 10 cm line, and the results are 9.9 cm, 10.0 cm, and 10.1 cm.",
+        "C": "An engineer measures a bridge section three times, getting 20.0m, 20.1m, and 19.9m, but the actual length is 25.0m.",
+        "D": "A stopwatch gives random times like 10s, 15s, and 7s for the same 10-second event."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Precise measurements are consistent (close to each other), while accurate measurements are close to the true value. In options A and C, the measurements are consistently off from the true value.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The lesson states that the consistency and exactness required in measurement reflect God's character of ___ and ___ in creation.",
+      "blanks": [
+        {
+          "accepted": [
+            "order"
+          ]
+        },
+        {
+          "accepted": [
+            "peace"
+          ]
+        }
+      ],
+      "explanation": "The lesson explicitly connects the consistency and exactness of measurements to God's character of order and peace.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the steps for using dimensional analysis to convert a measurement into a different unit in the correct order.",
+      "items": [
+        "Identify the starting measurement and the desired final unit.",
+        "Select the appropriate conversion factors.",
+        "Set up the calculation so that unwanted units cancel out.",
+        "Perform the multiplication or division to get the final answer."
+      ],
+      "explanation": "This sequence follows the logical steps of applying dimensional analysis, from identifying the problem to performing the calculation.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

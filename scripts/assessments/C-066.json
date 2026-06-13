@@ -141,6 +141,87 @@
       },
       "answer": "B",
       "explanation": "Performance Validation provides concrete evidence that a design fulfills its stated promises, demonstrating trustworthiness and excellence."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Why is Performance Validation an important step in Creationeering™? (Select all that apply.)",
+      "options": {
+        "A": "To ensure the design meets its specific goals and requirements.",
+        "B": "To protect the people who will use the system.",
+        "C": "To define the initial functional requirements.",
+        "D": "To brainstorm entirely new design ideas."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Performance Validation ensures that a design works as intended and meets its specifications, which is crucial for the safety and effectiveness of the final product.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When optimizing a design using the OCV (Objective, Constraints, Variables) method, which of these elements are directly involved? (Select all that apply.)",
+      "options": {
+        "A": "Identifying the specific goal you want to achieve or improve.",
+        "B": "Considering the limitations or restrictions that must be followed.",
+        "C": "Adjusting the changeable factors to reach your goal.",
+        "D": "Drawing detailed blueprints for the system's construction."
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "The OCV method involves setting an Objective (goal), understanding Constraints (limitations), and manipulating Variables (changeable factors) to optimize a design.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The functional requirement describes ___ a system must accomplish, and the specification defines ___ it must do it.",
+      "blanks": [
+        {
+          "accepted": [
+            "what"
+          ]
+        },
+        {
+          "accepted": [
+            "how well",
+            "how efficiently",
+            "how effectively"
+          ]
+        }
+      ],
+      "explanation": "Functional requirements state what a system needs to do, while specifications provide measurable details on how well those functions must be performed.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for validating a new design in the correct order.",
+      "items": [
+        "Define what the system must accomplish (functional requirements)",
+        "Set measurable targets for performance (specifications)",
+        "Test the design using computer models (simulated validation)",
+        "Test the design with a physical prototype (real-world testing)"
+      ],
+      "explanation": "Before validating a design, you first define its functions and specifications. Then, you can use simulated validation before moving to physical testing.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

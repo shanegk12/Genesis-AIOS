@@ -141,6 +141,85 @@
       },
       "answer": "C",
       "explanation": "Building reliable inventions demonstrates good stewardship by ensuring resources are used efficiently, creations are durable, and they fulfill their purpose over time."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When a Junior Creationeer performs failure analysis, which of these actions are part of their main goal?",
+      "options": {
+        "A": "To understand the fundamental reason why something broke.",
+        "B": "To immediately replace all broken parts with new ones.",
+        "C": "To gather clues and examine the broken invention carefully.",
+        "D": "To prove that the original design was completely wrong."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Failure analysis aims to understand the root cause of a failure (A) by gathering clues and examining parts (C), not just replacing parts or proving fault.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Creationeer wants to make their new invention highly reliable. Which of these strategies would help achieve high reliability?",
+      "options": {
+        "A": "Using materials that are known to corrode quickly.",
+        "B": "Adding a backup system that automatically takes over if the main system fails.",
+        "C": "Designing components to be exactly strong enough for their maximum expected load.",
+        "D": "Building parts much stronger than the forces they are expected to experience."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "High reliability is achieved through techniques like redundancy (B) and applying a Factor of Safety (D), which means making parts much stronger than needed.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the context of materials, ___ is the weakening of a material caused by repeatedly applied ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "fatigue"
+          ]
+        },
+        {
+          "accepted": [
+            "loads",
+            "forces"
+          ]
+        }
+      ],
+      "explanation": "Fatigue is the weakening of a material due to repeated stress or loads, as defined in the lesson's key vocabulary.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps of a Junior Creationeer's failure analysis process in the correct order.",
+      "items": [
+        "An invention shows signs of failure or breaks down.",
+        "Gather clues and examine the broken parts like a detective.",
+        "Identify the fundamental reason (root cause) for the failure.",
+        "Improve the design to prevent the failure from happening again."
+      ],
+      "explanation": "Failure analysis begins when something fails, then involves investigation to find the root cause, and finally uses that knowledge to improve the design.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

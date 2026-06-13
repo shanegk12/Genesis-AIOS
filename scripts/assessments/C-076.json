@@ -98,6 +98,86 @@
       },
       "answer": "B",
       "explanation": "Designing a system with independent parts that can be easily replaced or upgraded without affecting the entire system is the definition of modularity."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Select all the primary reasons for performing a 'System Upgrade'.",
+      "options": {
+        "A": "To enhance the system's performance.",
+        "B": "To completely replace the old system with a brand new one.",
+        "C": "To add new features or capabilities.",
+        "D": "To enable different systems to communicate with each other."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "A system upgrade is defined as a change or improvement made to a system to enhance its performance, add new features, or fix problems.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When designing a new product, which of the following practices contribute to its long-term 'Sustainability'? (Select all that apply)",
+      "options": {
+        "A": "Making the initial production cost as low as possible.",
+        "B": "Designing the system with independent parts that can be easily replaced.",
+        "C": "Ensuring the main structure can accommodate future improvements.",
+        "D": "Allowing new versions of the product to work with older accessories or data."
+      },
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "Modularity (B) allows easy replacement, designing for upgrades (C) accommodates future improvements, and backward compatibility (D) extends usefulness, all contributing to a product's sustainability by ensuring it can function and serve its purpose over a long period.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "When older software struggles to run on a newer operating system, it's often because the new operating system's ___ handles low-level interactions differently, making the older software's ___ incompatible.",
+      "blanks": [
+        {
+          "accepted": [
+            "kernel"
+          ]
+        },
+        {
+          "accepted": [
+            "machine code",
+            "code"
+          ]
+        }
+      ],
+      "explanation": "The lesson explains that at the atomic level, the new operating system's kernel can handle low-level interactions differently, leading to incompatibility with older software's machine code.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Imagine a company wants to create a tech product that remains useful and relevant for many years. Put these design and maintenance principles in the order they would typically be considered or applied to achieve this goal.",
+      "items": [
+        "Design the system with independent, easily replaceable parts.",
+        "Ensure the product's main structure can accommodate future enhancements.",
+        "Release updates to fix problems or add new capabilities.",
+        "Enable the product to continue functioning and serving its purpose over a long period."
+      ],
+      "explanation": "A sustainable product (4) is achieved by designing it with modularity (1) and for future upgrades (2), which then allows for actual system upgrades (3) to be implemented over time.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

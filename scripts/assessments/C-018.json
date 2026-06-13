@@ -146,6 +146,87 @@
       },
       "answer": "C",
       "explanation": "HM² is defined as predicting the performance of a large system by analyzing its smallest component parts, which directly contributes to optimizing the overall efficiency."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following conditions describe when 'Work' is done on an object, or when an object's motion changes?",
+      "options": {
+        "A": "A force moves an object over a distance in the direction of the force.",
+        "B": "An unbalanced force acts upon the object.",
+        "C": "The object is at rest and no net external force acts upon it.",
+        "D": "A moving object has a net external force of zero acting on it."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Work is defined as the transfer of energy when a force moves an object over a distance in the direction of the force. An unbalanced force causes an object to change its state of motion, while balanced forces or no net force result in an object remaining at rest or continuing constant motion.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "As a Creationeer, what are key goals and benefits of applying principles like Optimization and Hierarchical Multiscale Modeling (HM²) in design?",
+      "options": {
+        "A": "To make a system or design as effective or functional as possible within defined constraints.",
+        "B": "To predict the performance of a large system by analyzing its smallest component parts.",
+        "C": "To ensure resources are used wisely and the system performs optimally, reflecting good stewardship.",
+        "D": "To intentionally make the design more complex and challenging for the user."
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Optimization aims to make a system as effective as possible within constraints. HM² helps predict large system performance by analyzing small components. Both contribute to achieving high Mechanical Efficiency and minimal waste, which are acts of good Stewardship, ensuring wise resource use and optimal performance.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A force that ___ motion, such as the force applied by bicycle brakes, is called a ___ force.",
+      "blanks": [
+        {
+          "accepted": [
+            "opposes",
+            "resists"
+          ]
+        },
+        {
+          "accepted": [
+            "frictional",
+            "friction"
+          ]
+        }
+      ],
+      "explanation": "Frictional force is described as the force opposing motion, which is what brakes apply to slow down a bicycle.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these Creationeering design considerations in a logical order, from foundational understanding to ethical outcome.",
+      "items": [
+        "Recognizing the Creator's ordered universe through physical laws",
+        "Analyzing component parts to predict system performance using HM²",
+        "Optimizing the design to be as effective and functional as possible",
+        "Achieving high Mechanical Efficiency as an act of Stewardship"
+      ],
+      "explanation": "The lesson suggests that understanding the ordered physical laws (Creator's design) informs the use of tools like HM² for analysis, which leads to Optimization for effectiveness, ultimately culminating in Stewardship through efficient design.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

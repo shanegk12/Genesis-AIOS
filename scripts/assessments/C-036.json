@@ -141,6 +141,86 @@
       },
       "answer": "C",
       "explanation": "Optimization involves finding the best solution by balancing objectives like speed, cost, and material properties, which injection molding achieves for this scenario."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of these actions are key aspects of the Fabrication phase in Creationeering?",
+      "options": {
+        "A": "Creating distinct, functional parts from raw elements.",
+        "B": "Ensuring the parts are within an acceptable range of variation.",
+        "C": "Combining all the finished parts into a complete product.",
+        "D": "Deciding the best solution for a design challenge."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Fabrication involves making individual parts from raw materials, similar to how God created distinct parts, and 'Tolerance' ensures these parts are made within an acceptable range of variation so they can fit and function correctly.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of the following manufacturing methods involve shaping a material without significantly adding or removing material?",
+      "options": {
+        "A": "Carving a block of wood into a statue.",
+        "B": "Bending a metal sheet to form a bracket.",
+        "C": "Using a 3D printer to create a model.",
+        "D": "Molding hot plastic into a specific shape."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Forming manufacturing shapes materials by applying force like bending or molding, without significant material removal (Subtractive) or addition (Additive).",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "When using the OCV method, a specific budget limit for materials is considered a ___, while the type of material you choose is a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "constraint",
+            "limitation"
+          ]
+        },
+        {
+          "accepted": [
+            "variable",
+            "option"
+          ]
+        }
+      ],
+      "explanation": "A constraint is a limitation that must be considered, such as a budget, whereas a variable is something that can be changed or adjusted, like the material choice.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Place these steps of a Creationeering project in the correct logical sequence.",
+      "items": [
+        "Define project objectives and constraints.",
+        "Make individual parts from raw materials.",
+        "Join the individual parts together.",
+        "Analyze and improve the final product."
+      ],
+      "explanation": "A typical Creationeering process starts with defining the project's goals and limits, then fabricating the individual parts, followed by assembling them, and finally evaluating and optimizing the complete product.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

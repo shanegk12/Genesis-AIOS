@@ -81,6 +81,85 @@
       },
       "answer": "A",
       "explanation": "Understanding material degradation allows engineers to select appropriate methods and tools to dismantle and process materials, preserving their quality and integrity for effective recycling and reuse."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following practices are key to achieving the goals of transformation and renewal in the Creationeering™ framework? (Select all that apply)",
+      "options": {
+        "A": "Focusing on a circular economy to reuse resources.",
+        "B": "Discarding old systems quickly to make room for new ones.",
+        "C": "Using multiscale modeling to preserve material integrity.",
+        "D": "Sending all decommissioned materials directly to landfills."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "A circular economy aims to reuse resources and eliminate waste, while multiscale modeling helps preserve material integrity, both aligning with the transformation and renewal goals of Creationeering™.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When planning the initial 'System Shutdown' phase of decommissioning a large system, which of these would be considered important 'Constraints'? (Select all that apply)",
+      "options": {
+        "A": "Deciding the final new purpose for the recycled materials.",
+        "B": "Ensuring all safety protocols for workers are strictly followed.",
+        "C": "The overall goal of transforming old materials into new ones.",
+        "D": "Adhering to environmental protection laws during the process."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Constraints are limitations or rules that must be followed, and worker safety and environmental protection laws are explicit examples of such constraints during decommissioning.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the process of taking a system out of service, ___ is the first, orderly step that is part of the larger ___ process.",
+      "blanks": [
+        {
+          "accepted": [
+            "System shutdown",
+            "system shutdown"
+          ]
+        },
+        {
+          "accepted": [
+            "decommissioning"
+          ]
+        }
+      ],
+      "explanation": "The lesson states that system shutdown is the initial, orderly step within the broader decommissioning process.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps, related to decommissioning and material reuse, in the correct order.",
+      "items": [
+        "Perform an orderly system shutdown.",
+        "Use multiscale modeling to understand material integrity.",
+        "Assess material degradation to select proper tools.",
+        "Transform materials for new purpose in a circular economy."
+      ],
+      "explanation": "The process begins with an orderly shutdown, followed by detailed analysis of materials using multiscale modeling and assessing degradation to preserve integrity, ultimately leading to the transformation and reuse of materials in a circular economy.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

@@ -122,6 +122,79 @@
       },
       "answer": "B",
       "explanation": "Validation connects to biblical truth and integrity by demonstrating the importance of verifying theoretical predictions (computational models) against objective, real-world evidence (Ground Truth)."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe the role or characteristics of engineering models?",
+      "options": {
+        "A": "They are working representations of reality used to predict performance.",
+        "B": "They eliminate the need for any compromises or tradeoffs in design.",
+        "C": "They provide objective data to help engineers balance conflicting design goals.",
+        "D": "They are always full-size products ready for market."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Based on the lesson, models are working representations of reality that predict performance and provide objective data to manage design tradeoffs.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Why do engineers often use both physical and computational models together in their design process?",
+      "options": {
+        "A": "Computational models are always more accurate than physical models, making physical models unnecessary.",
+        "B": "Physical models generate objective Ground Truth data from real-world systems.",
+        "C": "Computational models are primarily for aesthetic checks, while physical models handle all performance testing.",
+        "D": "Ground Truth data from physical models is essential for validating the results of computational models."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Physical models provide Ground Truth data from the real world, which is then used to validate and ensure the accuracy of computational models.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ is an instrument used to measure internal forces like stretching and squeezing (tension and compression) within a material.",
+      "blanks": [
+        {
+          "accepted": [
+            "strain gauge"
+          ]
+        }
+      ],
+      "explanation": "Strain gauges are specifically used to measure internal forces such as tension and compression within materials.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for validating a computational model using a physical model in the correct order.",
+      "items": [
+        "Develop a computational model to make predictions.",
+        "Construct a physical model of the design.",
+        "Conduct destructive testing on the physical model to gather Ground Truth data.",
+        "Compare computational model results with Ground Truth data for validation."
+      ],
+      "explanation": "The process involves first creating a computational model, then building a physical model to generate real-world Ground Truth data through testing, and finally using that data to validate the computational model's predictions.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

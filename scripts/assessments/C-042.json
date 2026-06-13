@@ -146,6 +146,85 @@
       },
       "answer": "C",
       "explanation": "CPM helps ensure that time and resources are used wisely and efficiently by identifying the most effective path to project completion, reflecting good stewardship."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of these statements accurately describe the Critical Path in a project?",
+      "options": {
+        "A": "It represents the shortest possible time to complete the project.",
+        "B": "It is the sequence of tasks with the most slack.",
+        "C": "It is the longest sequence of tasks in the project.",
+        "D": "Delaying a task on this path will not affect the project's end date."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "The Critical Path is the longest sequence of tasks in a project, and it determines the shortest possible project completion time.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "In a project, which of the following are examples of a 'task' or a 'dependency'?",
+      "options": {
+        "A": "The estimated 5 hours to build a robot.",
+        "B": "Attaching the robot's arm to its body.",
+        "C": "Having to 'sculpt the body' before you can 'paint the details' of a clay model.",
+        "D": "The total time needed for the entire project."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A task is a specific activity like attaching a robot's arm, and a dependency is when one task, like painting details, cannot start until another, like sculpting the body, is finished.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "'Slack' refers to the amount of time a task can be ___ without delaying the ___ project.",
+      "blanks": [
+        {
+          "accepted": [
+            "delayed"
+          ]
+        },
+        {
+          "accepted": [
+            "entire",
+            "overall"
+          ]
+        }
+      ],
+      "explanation": "Slack is the amount of time a task can be delayed without causing a delay to the overall project completion time.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for planning a project using CPM in the correct order.",
+      "items": [
+        "Identify all specific tasks needed for the project.",
+        "Determine which tasks depend on others being finished first.",
+        "Estimate how long each task will take to complete.",
+        "Find the longest sequence of tasks that sets the project's shortest time."
+      ],
+      "explanation": "To effectively use CPM, you first identify tasks, then their dependencies, estimate durations, and finally determine the Critical Path to manage the project.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

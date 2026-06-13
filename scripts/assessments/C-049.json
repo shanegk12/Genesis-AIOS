@@ -146,6 +146,84 @@
       },
       "answer": "B",
       "explanation": "Multiscale Modeling is an engineering approach that connects observations at a large scale (macro) to their underlying causes and behaviors at a very small scale (atomic or sub-atomic)."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key characteristics of a Just-In-Time (JIT) inventory strategy?",
+      "options": {
+        "A": "Keeping a large buffer stock of materials for emergencies.",
+        "B": "Delivering materials precisely when they are needed for production.",
+        "C": "Minimizing the amount of materials kept in storage.",
+        "D": "Preparing for future famines by storing extra resources."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A Just-In-Time (JIT) strategy focuses on delivering materials exactly when needed (B) and therefore minimizes storage costs and the amount of materials kept in inventory (C). Options A and D describe a Just-In-Case (JIC) strategy.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "In which situations would a Creationeer most likely choose a Just-In-Case (JIC) strategy for their project?",
+      "options": {
+        "A": "When materials are always readily available and delivery is consistently on time.",
+        "B": "When there is a risk of unexpected delays in material delivery due to external factors.",
+        "C": "When the project requires custom parts that must arrive precisely at the moment of assembly.",
+        "D": "When it is crucial to have extra materials on hand to prevent project stoppages due to unforeseen shortages."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "A Just-In-Case (JIC) strategy is chosen to safeguard against unforeseen problems. This includes situations with potential delays in delivery (B) or when ensuring material availability is critical to avoid project stoppages (D). Options A and C describe scenarios better suited for a Just-In-Time (JIT) strategy.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Logistics primarily involves the ___ and storage of materials, and extra materials kept for unforeseen shortages are known as ___ stock.",
+      "blanks": [
+        {
+          "accepted": [
+            "movement"
+          ]
+        },
+        {
+          "accepted": [
+            "buffer"
+          ]
+        }
+      ],
+      "explanation": "Logistics is defined as the detailed organization involving the movement and storage of materials. Extra materials kept in storage to safeguard against unforeseen shortages or demands are called buffer stock.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the steps of Joseph's Just-In-Case (JIC) strategy, as described in Genesis 41, in the correct order.",
+      "items": [
+        "Experience years of abundant harvest.",
+        "Collect and store a portion of the grain.",
+        "Anticipate future years of famine.",
+        "Use stored grain to manage scarcity."
+      ],
+      "explanation": "Joseph's JIC strategy involved first experiencing plentiful years, then wisely storing grain during that time, anticipating future famine, and finally using the stored grain to prevent suffering during the lean years.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

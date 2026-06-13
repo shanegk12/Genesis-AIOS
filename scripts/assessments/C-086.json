@@ -141,6 +141,86 @@
       },
       "answer": "B",
       "explanation": "A system wipe aligns with a 'clean slate' by securely and completely ending the system's previous 'life' of holding data, preparing it for its next phase."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are potential risks if sensitive data is NOT securely wiped from a device before disposal?",
+      "options": {
+        "A": "The data could be recovered by unauthorized individuals.",
+        "B": "The device will become physically heavier.",
+        "C": "You could become a victim of identity theft or fraud.",
+        "D": "The operating system will automatically create a backup in the cloud."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "The lesson states that if sensitive data isn't securely wiped, it could be recovered by unauthorized individuals, leading to identity theft or fraud.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of these methods ensure that data on a storage device is truly unrecoverable or unreadable by unauthorized users?",
+      "options": {
+        "A": "Simply deleting the files.",
+        "B": "Overwriting the data with new, meaningless data.",
+        "C": "Moving files to the Recycle Bin.",
+        "D": "Degaussing the hard drive."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Overwriting replaces existing data to prevent recovery, and degaussing uses a powerful magnetic field to destroy data at a fundamental level, both making data unrecoverable.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "When you simply 'delete' a file, the operating system usually only marks the storage space as ___, but the actual data ___ until it is overwritten.",
+      "blanks": [
+        {
+          "accepted": [
+            "available",
+            "empty"
+          ]
+        },
+        {
+          "accepted": [
+            "remains",
+            "stays"
+          ]
+        }
+      ],
+      "explanation": "The lesson explains that deleting a file marks the space as available, but the data itself remains until new information overwrites it.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "An engineer is preparing an old company laptop for disposal. Put these data security steps in the most logical order.",
+      "items": [
+        "Identify sensitive project files on the laptop.",
+        "Encrypt the sensitive project files.",
+        "Perform a system wipe to remove all data.",
+        "Dispose of the laptop for recycling."
+      ],
+      "explanation": "Before disposal, sensitive data should first be identified, then protected (like by encryption), then completely removed (system wipe), and finally the device can be safely disposed of.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

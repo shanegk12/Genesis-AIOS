@@ -141,6 +141,85 @@
       },
       "answer": "C",
       "explanation": "Multiscale modeling connects macro-level observations like high repair costs to underlying atomic-level causes, such as weak material bonds causing frequent part failures."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "What does understanding Total Cost of Ownership (TCO) help Creationeers achieve?",
+      "options": {
+        "A": "Making wise, long-term decisions about resource use.",
+        "B": "Only calculating the initial purchase price of a product.",
+        "C": "Considering all expenses from a product's beginning to its end.",
+        "D": "Deciding the best marketing strategy for a new product."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "TCO helps Creationeers make wise, long-term decisions by considering all expenses throughout a product's entire life cycle, not just the initial purchase.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of the following are examples of *direct costs* when calculating the Total Cost of Ownership for a new school bus?",
+      "options": {
+        "A": "The cost of the bus driver's training.",
+        "B": "The initial price paid to buy the bus.",
+        "C": "The insurance policy for the bus.",
+        "D": "The fuel used to drive the bus every day."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Direct costs are expenses explicitly tied to the product's acquisition and operation, such as the purchase price and fuel, unlike indirect costs like training or insurance.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The lesson states that Total Cost of Ownership (TCO) fits into the ___ phase of Creationeering™ and includes three main categories: Initial, Operating, and ___ costs.",
+      "blanks": [
+        {
+          "accepted": [
+            "Sustainability"
+          ]
+        },
+        {
+          "accepted": [
+            "End-of-Life",
+            "End of Life"
+          ]
+        }
+      ],
+      "explanation": "TCO is part of the Sustainability phase of Creationeering and is broken down into Initial, Operating, and End-of-Life costs.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these statements about Total Cost of Ownership (TCO) in the correct order, from earliest consideration to its impact.",
+      "items": [
+        "Considering TCO during the design phase.",
+        "Making early decisions about materials and structure.",
+        "Impacting future costs like repairs and energy use.",
+        "Affecting the product's entire life cycle expenses."
+      ],
+      "explanation": "TCO is considered early in the design phase, where decisions about materials and structure are made, which then impact future costs and ultimately the product's entire life cycle expenses.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

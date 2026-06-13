@@ -146,6 +146,87 @@
       },
       "answer": "C",
       "explanation": "Viewpoints provide depth and space, while proportion ensures realistic relative sizes, both crucial for communicating an object's form and function accurately within the specialized language of technical sketching."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key benefits of using technical sketches in engineering design?",
+      "options": {
+        "A": "They help identify and correct design flaws early in the process.",
+        "B": "They are primarily used to create beautiful artistic representations.",
+        "C": "They clearly communicate how parts fit and function within a larger system.",
+        "D": "They completely eliminate the need for any physical prototypes."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Technical sketches are crucial for finding design flaws on paper before costly building and for communicating precise instructions on how parts integrate into a system.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Creationeer is sketching a new robotic arm. Which actions would help them clearly communicate the design using standard technical sketching techniques?",
+      "options": {
+        "A": "Using thick, dashed lines for all visible outer edges.",
+        "B": "Adding annotations to specify the material and exact dimensions of parts.",
+        "C": "Drawing all internal, unseen features with thick, solid object lines.",
+        "D": "Using thin, dashed lines to show internal parts that are hidden from view."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Annotations provide detailed information like materials and dimensions, while hidden lines are specifically used to show internal features not visible from the current viewpoint.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In Systems Thinking, the complete product being designed, such as an entire drone, is called an ___, while a smaller part of it, like a motor, is known as a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "Assembly",
+            "complete system"
+          ]
+        },
+        {
+          "accepted": [
+            "Subassembly",
+            "component",
+            "part"
+          ]
+        }
+      ],
+      "explanation": "An Assembly refers to the entire system, and a Subassembly is a smaller, integrated part of that larger system.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "An engineer is designing a complex new device. Put these steps in the most logical order for an efficient design process.",
+      "items": [
+        "Sketch the overall Assembly of the device.",
+        "Design and sketch individual Subassemblies.",
+        "Identify and correct design flaws on paper.",
+        "Proceed with material purchase and building."
+      ],
+      "explanation": "Starting with the Assembly ensures all parts fit, then designing Subassemblies, which allows for early flaw detection on paper, saving resources before physical construction.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

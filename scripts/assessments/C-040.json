@@ -146,6 +146,87 @@
       },
       "answer": "B",
       "explanation": "Precision measurement ensures that parts are the correct size and quality, which is crucial for logistics to avoid delays, rework, and waste caused by ill-fitting or defective components."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key aspects of effective logistics?",
+      "options": {
+        "A": "Ensuring raw materials and finished goods are properly managed.",
+        "B": "Designing new products and services for customers.",
+        "C": "Coordinating the timely movement of items to their correct destination.",
+        "D": "Focusing solely on the financial budget of a company."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Effective logistics involves managing inventory (raw materials, work-in-progress, finished goods) and coordinating the precise movement of items to ensure they arrive at the right place at the right time.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Based on the lesson, which of the following can lead to problems or delays in a logistical system?",
+      "options": {
+        "A": "A continuous and smooth flow of materials.",
+        "B": "A bottleneck occurring at a critical point.",
+        "C": "Using precision measurement for all components.",
+        "D": "Very small, even atomic-level, issues within components."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "A bottleneck creates congestion that limits flow and causes delays, while even tiny issues, like atomic defects, can lead to significant logistical problems according to multiscale modeling.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ is a specialized type of warehouse that stores products for a relatively short time for ___ distribution.",
+      "blanks": [
+        {
+          "accepted": [
+            "Distribution Center",
+            "DC"
+          ]
+        },
+        {
+          "accepted": [
+            "quick",
+            "rapid",
+            "fast"
+          ]
+        }
+      ],
+      "explanation": "Distribution centers are designed for the quick movement and distribution of products, unlike general warehouses that hold goods for longer periods.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following stages of a product's journey through a supply chain in the correct order.",
+      "items": [
+        "Sourcing raw materials",
+        "Manufacturing the product",
+        "Shipping to a retail store",
+        "Selling to the customer"
+      ],
+      "explanation": "A supply chain begins with sourcing raw materials, moves through manufacturing, then distribution to stores, and finally ends with the product being sold to the customer.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

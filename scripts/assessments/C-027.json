@@ -98,6 +98,84 @@
       },
       "answer": "C",
       "explanation": "Increasing the cross-sectional area (A) in the denominator of the stress formula (σ = F/A) will decrease the overall stress on the material."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When an external force is applied to a material, which of the following are likely to occur? (Select all that apply)",
+      "options": {
+        "A": "The material develops internal resistance.",
+        "B": "The material's size changes relative to its original size.",
+        "C": "The material immediately breaks.",
+        "D": "The material experiences a decrease in internal pressure."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "An external force causes a material to develop internal resistance (stress) and to deform (strain), which is a change in size relative to its original size. It does not immediately break or decrease internal pressure.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Junior Creationeer is designing a bridge support. To minimize the risk of failure due to excessive internal stress, what design strategies should they consider? (Select all that apply)",
+      "options": {
+        "A": "Designing components with a smaller cross-sectional area.",
+        "B": "Utilizing Hierarchical Multiscale Modeling (HM²) to predict structural integrity.",
+        "C": "Aiming for the material to reach its yield point as quickly as possible.",
+        "D": "Increasing the cross-sectional area of load-bearing parts."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Hierarchical Multiscale Modeling (HM²) helps predict structural integrity, and increasing the cross-sectional area reduces stress (σ = F/A), both of which minimize failure risk. Decreasing area increases stress, and reaching the yield point quickly means permanent deformation.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the context of material science, ___ is the cause (internal pressure), and ___ is the effect (deformation) of an external force.",
+      "blanks": [
+        {
+          "accepted": [
+            "Stress"
+          ]
+        },
+        {
+          "accepted": [
+            "Strain"
+          ]
+        }
+      ],
+      "explanation": "The lesson explicitly states that Stress is the cause (internal pressure) and Strain is the effect (deformation) when a material is subjected to an external force.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "comprehension",
+      "question": "Place the following events in the typical sequence they occur when a material is subjected to an increasing external force.",
+      "items": [
+        "An external force is applied to the material.",
+        "The material develops internal resistance (Stress).",
+        "The material deforms relative to its original size (Strain).",
+        "The material begins to permanently deform (Yield Point)."
+      ],
+      "explanation": "An external force first causes internal resistance (stress), which leads to deformation (strain). If the force continues to increase, the material will eventually reach its yield point and permanently deform.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

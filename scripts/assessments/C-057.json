@@ -141,6 +141,85 @@
       },
       "answer": "B",
       "explanation": "Configuration Management reflects stewardship by promoting careful, orderly, and accountable management of all aspects of a project, honoring the gifts and responsibilities given to us."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key reasons why Configuration Management is important in a Creationeering project? (Select all that apply.)",
+      "options": {
+        "A": "To make sure the project is finished as quickly as possible.",
+        "B": "To keep track of all parts, plans, and changes.",
+        "C": "To ensure everyone on the team always uses the correct and latest versions.",
+        "D": "To only focus on the final testing phase of the project."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Configuration Management's main purpose is to maintain order by tracking all project elements and changes, ensuring the team works with up-to-date and accurate information.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "In a Creationeering project, which of these would most likely be considered a Configuration Item (CI) that needs careful management? (Select all that apply.)",
+      "options": {
+        "A": "The specific type of motor chosen for a robot arm.",
+        "B": "A temporary sketch on a napkin that hasn't been approved.",
+        "C": "The official blueprint document showing how all parts fit together.",
+        "D": "The color of the paint used on the workshop walls."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "A Configuration Item is any component or document that is a crucial part of the system and needs to be managed and tracked throughout the project.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ is a formally agreed-upon snapshot of a project's design at a specific point in time, and any changes to it must go through a process called ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "baseline"
+          ]
+        },
+        {
+          "accepted": [
+            "Change Control",
+            "change control"
+          ]
+        }
+      ],
+      "explanation": "A baseline provides a stable reference point for a project, and Change Control is the organized process for managing any modifications to that reference.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps, which are part of the 'Change Control' process, in the correct order.",
+      "items": [
+        "Evaluate the requested change",
+        "Approve the change",
+        "Track the change's progress",
+        "Implement the change"
+      ],
+      "explanation": "Change Control follows a structured sequence to ensure changes are made responsibly: first understanding the change, then deciding if it should happen, monitoring its progress, and finally putting it into effect.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

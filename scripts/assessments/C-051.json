@@ -122,6 +122,85 @@
       },
       "answer": "C",
       "explanation": "Good stewardship involves using resources wisely and creating quality products that honor God's design, which aligns with ensuring integrity and minimizing waste."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key reasons why ensuring the integrity of fabricated parts is crucial for an assembled system?",
+      "options": {
+        "A": "It helps the system function as intended.",
+        "B": "It makes the parts easier to paint and decorate.",
+        "C": "It prevents premature failure of the system.",
+        "D": "It reduces the overall weight of the final product."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Ensuring integrity means parts are sound and reliable, which is vital for the entire system to function correctly and avoid premature failure.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Based on the lesson, which statements about fabrication methods and their impact are true?",
+      "options": {
+        "A": "Machining is primarily used for joining two separate metal parts together.",
+        "B": "Casting is an efficient method for mass-producing complex-shaped components.",
+        "C": "Welding involves pouring molten material into a mold to create a desired shape.",
+        "D": "Understanding fabrication methods helps predict how well parts will fit and perform during assembly."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Casting is efficient for mass production of complex shapes, and knowing how parts are made is crucial for successful assembly and performance.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Multiscale modeling helps explain macro-level observations of breakage by connecting them to ___ issues like trapped gases or ___ shrinkage.",
+      "blanks": [
+        {
+          "accepted": [
+            "atomic-level",
+            "micro-level"
+          ]
+        },
+        {
+          "accepted": [
+            "uneven"
+          ]
+        }
+      ],
+      "explanation": "Multiscale modeling links large-scale problems to tiny, underlying issues within the material, such as those caused by trapped gases or uneven shrinkage.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in a logical order for creating a reliable product in an engineering context.",
+      "items": [
+        "Defining constraints for the product (e.g., payload capacity)",
+        "Fabricating individual components from raw materials",
+        "Ensuring the integrity of fabricated parts",
+        "Assembling the final system"
+      ],
+      "explanation": "A logical engineering process involves first setting design limits, then making the parts, checking their quality, and finally putting them together to form a system.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

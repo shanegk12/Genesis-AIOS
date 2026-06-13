@@ -146,6 +146,84 @@
       },
       "answer": "B",
       "explanation": "The Creationeering framework views resistance not as a mistake but as a boundary condition within God's designed system, requiring engineers to be wise stewards of energy."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following methods are effective for minimizing unwanted resistive forces in mechanical systems or vehicles? (Select all that apply)",
+      "options": {
+        "A": "Applying lubrication to moving parts.",
+        "B": "Making surfaces rough to increase grip.",
+        "C": "Streamlining the design of a vehicle.",
+        "D": "Increasing the weight of an object."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Lubrication creates a fluid layer to reduce friction, and streamlining reduces air drag by creating smoother airflow. Both minimize unwanted resistance.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "In which of these situations would an engineer be strategically harnessing or benefiting from a resistive force? (Select all that apply)",
+      "options": {
+        "A": "Designing a system to intentionally waste as much energy as possible as heat.",
+        "B": "Using a car's brakes to bring it to a safe stop.",
+        "C": "Trying to make an object move faster by increasing its air resistance.",
+        "D": "Relying on a car's tires to grip the road for forward motion."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Braking is a strategic use of resistive forces for safety and function, and traction (tire grip) is a necessary application of friction for motion.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Lubrication works by creating a ___ layer between surfaces, which helps to reduce ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "fluid"
+          ]
+        },
+        {
+          "accepted": [
+            "friction"
+          ]
+        }
+      ],
+      "explanation": "Lubrication creates a fluid layer between surfaces, replacing solid-to-solid contact with fluid-to-solid contact, which has lower friction.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for streamlining a vehicle to minimize air drag in the correct order.",
+      "items": [
+        "Design a sleek, smooth shape for the vehicle.",
+        "Reduce the amount of air the vehicle has to push.",
+        "Create smoother airflow around the vehicle.",
+        "Lower the overall drag coefficient."
+      ],
+      "explanation": "Streamlining involves designing a sleek shape to reduce the air displaced and create smoother airflow, which ultimately lowers the drag coefficient.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

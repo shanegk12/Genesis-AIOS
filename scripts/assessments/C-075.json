@@ -129,6 +129,85 @@
       },
       "answer": "A",
       "explanation": "Mechanical fasteners create reversible connections at the macro level, preserving the atomic integrity of materials for easier separation and recycling."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are primary goals of designing products for disassembly and recycling?",
+      "options": {
+        "A": "To make products last longer before they break down.",
+        "B": "To reduce the amount of waste sent to landfills.",
+        "C": "To allow materials to be easily recovered and reused.",
+        "D": "To make products cheaper to manufacture initially."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "DfD and DfR aim to reduce waste by making it easier to recover and reuse materials from products at the end of their life.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which design choices would make a product *easier* to disassemble and recycle at the end of its life?",
+      "options": {
+        "A": "Using strong, permanent glue to join different materials.",
+        "B": "Attaching parts with standardized screws.",
+        "C": "Mixing many different types of plastics in one component.",
+        "D": "Designing parts that snap together without special tools."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Standardized screws and snap-fit components allow for easy, non-destructive separation of parts, which is key for disassembly and recycling.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Design for Disassembly and Design for Recycling primarily help reduce the ___ by allowing materials to be ___ and reused.",
+      "blanks": [
+        {
+          "accepted": [
+            "waste stream"
+          ]
+        },
+        {
+          "accepted": [
+            "recovered",
+            "recycled"
+          ]
+        }
+      ],
+      "explanation": "DfD and DfR reduce waste by making it possible to recover materials and use them again instead of throwing them away.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps in the correct order for a product designed with Design for Disassembly and Recycling in mind.",
+      "items": [
+        "The product reaches the end of its useful life.",
+        "The product is easily taken apart into its components.",
+        "Materials are separated and recovered.",
+        "Recovered materials are used to make new products."
+      ],
+      "explanation": "DfD and DfR ensure that when a product is no longer useful, its parts can be easily separated, materials recovered, and then reused to create new items.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

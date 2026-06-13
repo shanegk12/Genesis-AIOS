@@ -141,6 +141,86 @@
       },
       "answer": "A",
       "explanation": "Certification and compliance build trust and confidence, enabling responsible innovation that benefits society and aligns with the broader goal of serving humanity and creation."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are primary reasons engineers seek Product Certification and Regulatory Compliance for their creations? (Select all that apply)",
+      "options": {
+        "A": "To prove their products are safe and effective for users.",
+        "B": "To make their products more expensive and exclusive.",
+        "C": "To ensure their products meet necessary quality standards.",
+        "D": "To keep their engineering secrets safe from competitors."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Product Certification and Regulatory Compliance primarily aim to ensure products are safe, effective, and meet established quality standards for the public good.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A company is developing a new type of bicycle helmet. Which of these reasons explain why they would seek Product Certification and Regulatory Compliance for it? (Select all that apply)",
+      "options": {
+        "A": "To ensure the helmet meets safety standards and protects riders effectively.",
+        "B": "To make the helmet the most expensive one on the market.",
+        "C": "To gain public trust by having an independent group verify its quality.",
+        "D": "To avoid following any rules and innovate faster."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Certification and compliance ensure products are safe, effective, and meet standards, while independent verification builds public trust in the product's safety and quality.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Product Certification is a process where an ___ third party verifies that a product meets specific ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "independent"
+          ]
+        },
+        {
+          "accepted": [
+            "standards",
+            "requirements",
+            "rules"
+          ]
+        }
+      ],
+      "explanation": "Product Certification relies on an independent third party to objectively verify that a product adheres to established standards.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "A Junior Creationeer has designed a new product. Put the following steps related to its certification and public release in the correct order.",
+      "items": [
+        "The product is designed and created.",
+        "The product is checked against specific standards.",
+        "An independent third party certifies the product.",
+        "The product is approved for public use."
+      ],
+      "explanation": "Products are first designed, then checked against standards, certified by an independent party, and finally approved for public use.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

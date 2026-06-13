@@ -146,6 +146,84 @@
       },
       "answer": "B",
       "explanation": "The OCV method is a structured problem-solving approach that helps in making optimized decisions, aligning with wise stewardship of resources by preventing waste and ensuring needs are met efficiently."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "According to the lesson, which of the following are positive outcomes of effective inventory management?",
+      "options": {
+        "A": "Products are always available for customers when needed.",
+        "B": "Increased storage costs due to having too many items.",
+        "C": "Supplies are available even if there are unexpected delays.",
+        "D": "Waste of resources from expired or unused goods is common."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Effective inventory management helps prevent stockouts, ensuring products are available, and acts as a buffer to provide supplies despite delays.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of these approaches help a business manage inventory wisely and prevent waste?",
+      "options": {
+        "A": "Ignoring the costs of storing goods.",
+        "B": "Using the OCV method to make structured decisions.",
+        "C": "Having 'overstock' of perishable items.",
+        "D": "Applying the principle of wise stewardship of resources."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "The OCV method provides a structured way to make wise decisions about resources, and wise stewardship directly encourages preventing waste, especially from overstock.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Inventory and Warehouse Management primarily falls within the ___ phase of Creationeering and is necessary because inventory acts as a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "Logistics"
+          ]
+        },
+        {
+          "accepted": [
+            "buffer"
+          ]
+        }
+      ],
+      "explanation": "The lesson states that Inventory and Warehouse Management is part of the Logistics phase and that inventory acts as a buffer to ensure supplies.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "A business discovers a stockout. Put these steps in the order a Creationeer might use Multiscale Modeling to understand the issue.",
+      "items": [
+        "Observe the macro-level problem, like empty shelves.",
+        "Investigate for atomic-level causes, such as material defects.",
+        "Connect the empty shelves problem to the material defect cause.",
+        "Plan how to prevent future stockouts based on this connection."
+      ],
+      "explanation": "Multiscale Modeling involves identifying the large-scale problem, finding the small-scale causes, linking them, and then using that understanding to solve the problem.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

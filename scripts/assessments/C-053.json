@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "The lesson highlights that technical drawings use a 'universal language' to 'communicate exactly how to make a product,' ensuring that 'what is imagined in the mind of the designer is faithfully assembled.'"
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe modern blueprints and their purpose?",
+      "options": {
+        "A": "They are exclusively characterized by white lines on a blue background.",
+        "B": "They serve as a universal language for clear and consistent communication in construction.",
+        "C": "They are detailed technical drawings used for construction or manufacturing.",
+        "D": "Their primary goal is to make projects more challenging for builders."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Modern blueprints are detailed technical drawings that act as a universal language to ensure clear communication and prevent mistakes, and are not exclusively blue and white.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Creationeer is building a complex machine. Which pieces of information from a blueprint are essential for ensuring a component is manufactured to the correct size and can fit properly with other parts?",
+      "options": {
+        "A": "The designer's name and the date of the drawing.",
+        "B": "The dimensions indicating the exact length, width, and angles.",
+        "C": "The historical background of the design.",
+        "D": "The tolerance specifying the allowable variation in size."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Dimensions provide the exact measurements for a part, while tolerance specifies the acceptable range of variation, both crucial for ensuring a component is manufactured correctly and fits with other parts.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ view on a technical drawing helps reveal internal features of an object, while ___ projection is a method of representing a three-dimensional object in two dimensions by showing multiple aligned views.",
+      "blanks": [
+        {
+          "accepted": [
+            "section",
+            "Section"
+          ]
+        },
+        {
+          "accepted": [
+            "orthographic",
+            "Orthographic"
+          ]
+        }
+      ],
+      "explanation": "A section view shows what an object looks like if cut, revealing internal features, and orthographic projection uses multiple aligned 2D views to represent a 3D object.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in the correct order a Creationeer would follow when interpreting a blueprint for construction.",
+      "items": [
+        "Locate the drawing name, scale, and designer in the title block.",
+        "Examine orthographic views to understand the 3D object from multiple angles.",
+        "Use dimensions and scale to determine the precise size of each part.",
+        "Check tolerance specifications to ensure parts are manufactured within acceptable variation."
+      ],
+      "explanation": "When interpreting a blueprint, a Creationeer first identifies basic drawing information, then understands the object's overall shape, followed by precise measurements, and finally ensures quality control with tolerance.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

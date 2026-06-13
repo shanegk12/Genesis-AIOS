@@ -146,6 +146,87 @@
       },
       "answer": "B",
       "explanation": "The analogy highlights that the successful outcome (a successful play) depends on the perfect working together of all subsystems, directly illustrating how integration and interoperability lead to a unified and powerful creation."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are essential characteristics for a system to function effectively and seamlessly?",
+      "options": {
+        "A": "Its components interact and depend on each other.",
+        "B": "It can exchange information effectively with other systems.",
+        "C": "It uses established protocols for communication.",
+        "D": "Its parts operate completely independently."
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "A system is defined as 'a set of interacting or interdependent components forming an integrated whole,' and effective function relies on interoperability (the ability to exchange information) and protocols (rules for communication).",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Creationeer is building a new automated garden watering system. Which actions demonstrate good systems integration and interoperability practices?",
+      "options": {
+        "A": "Designing the water pump to operate completely independently of the moisture sensor.",
+        "B": "Ensuring the moisture sensor can send data to the control unit, which then activates the water pump.",
+        "C": "Making sure the system is only compatible with very specific, expensive brand-name hoses.",
+        "D": "Connecting the water reservoir (a subsystem) to the main control unit so it can supply water when needed."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Option B shows interoperability (systems working together and exchanging information) and integration (components combined to work as one), while option D describes integrating a subsystem into the main system for unified function.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A system is defined as a set of ___ or ___ components forming an integrated whole.",
+      "blanks": [
+        {
+          "accepted": [
+            "interacting",
+            "interdependent"
+          ]
+        },
+        {
+          "accepted": [
+            "interdependent",
+            "interacting"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines a system as 'A set of interacting or interdependent components forming an integrated whole.'",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for building a functional integrated system in a logical order.",
+      "items": [
+        "Identify individual components needed",
+        "Combine components into a unified system (Integration)",
+        "Establish rules for communication (Protocols)",
+        "Ensure components work together and exchange information (Interoperability)"
+      ],
+      "explanation": "Building a system typically involves first identifying parts, then combining them (integration), setting communication rules (protocols), and finally ensuring they can effectively work together and exchange information (interoperability).",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

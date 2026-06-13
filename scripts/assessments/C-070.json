@@ -141,6 +141,88 @@
       },
       "answer": "C",
       "explanation": "Embracing Cradle-to-Cradle and stewardship means prioritizing materials that can either safely decompose into the biosphere or be continuously recycled in technical cycles, ensuring nothing becomes waste."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are core principles of the Cradle-to-Cradle design philosophy? (Select all that apply.)",
+      "options": {
+        "A": "Designing products to have a finite life cycle, ending in disposal.",
+        "B": "Ensuring all materials can be continuously cycled as valuable nutrients.",
+        "C": "Reflecting God's natural systems where everything is reused and repurposed.",
+        "D": "Primarily focusing on reducing the initial manufacturing cost of products."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Cradle-to-Cradle design aims to eliminate waste by continuously cycling materials as nutrients (B), mirroring God's natural systems of reuse (C), unlike the linear 'Cradle-to-Grave' model.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of these are examples of materials designed to be 'nutrients' in a Cradle-to-Cradle system? (Select all that apply.)",
+      "options": {
+        "A": "A plastic container made from mixed plastics that are difficult to separate and recycle.",
+        "B": "A metal alloy used in a smartphone casing that can be melted down and reformed into new casings.",
+        "C": "A compostable food wrapper made from plant-based materials that safely breaks down in soil.",
+        "D": "A textile fiber that loses quality each time it is recycled, eventually becoming unusable."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Technical nutrients (B) are continuously recycled in industrial cycles without losing quality, while biological nutrients (C) safely return to the biosphere and decompose.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the OCV method, a desired outcome or goal for a design is called an ___, while a limitation or restriction that must be met is a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "Objective",
+            "goal",
+            "outcome"
+          ]
+        },
+        {
+          "accepted": [
+            "Constraint",
+            "limitation",
+            "restriction"
+          ]
+        }
+      ],
+      "explanation": "An 'Objective' is the desired outcome or goal of a design, and a 'Constraint' is a limitation or restriction that must be met during the design process.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following stages of a material in a Cradle-to-Cradle technical nutrient cycle in the correct order.",
+      "items": [
+        "Material is designed for continuous recycling.",
+        "Product containing the material is used by consumers.",
+        "Material is collected after product use.",
+        "Material is recycled into a new product."
+      ],
+      "explanation": "In a Cradle-to-Cradle technical nutrient cycle, materials are first designed for continuous reuse, then used in products, collected after use, and finally recycled into new products, completing the cycle.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

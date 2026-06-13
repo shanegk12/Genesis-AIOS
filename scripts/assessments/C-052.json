@@ -146,6 +146,80 @@
       },
       "answer": "C",
       "explanation": "The lesson explains that even with perfect ingredients (fabrication), mistakes can occur during mixing and baking (assembly), leading to defects in the final product."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Why is quality control during the assembly phase crucial for Creationeering™ projects?",
+      "options": {
+        "A": "Small mistakes made while joining parts can cause major issues later.",
+        "B": "It is the simplest part of the Creationeering™ process.",
+        "C": "It ensures that all individual components connect and work together as intended.",
+        "D": "It is only needed for very large or complicated systems."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Quality control during assembly is crucial because even small errors in joining parts can lead to significant problems, and it ensures that all components properly connect and function as a whole system.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of the following activities are typically part of 'Quality Control During Assembly' in Creationeering™?",
+      "options": {
+        "A": "Identifying and correcting defects in assembled parts.",
+        "B": "Examining components and processes to ensure they meet requirements.",
+        "C": "Deciding on the initial design specifications for new components.",
+        "D": "Using Multiscale Modeling to understand how small issues affect the whole system."
+      },
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "explanation": "Quality control during assembly involves identifying flaws (defects), performing inspections to check conformity, and using tools like Multiscale Modeling to understand how issues at different scales impact the product.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The permissible range of variation in a dimension or characteristic of a part or assembly is known as its ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "tolerance"
+          ]
+        }
+      ],
+      "explanation": "This question tests the direct recall of the definition of 'tolerance' as presented in the lesson.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps related to quality control during assembly in a logical order.",
+      "items": [
+        "Combine individual components into a system.",
+        "Examine the assembled product for conformity.",
+        "Identify any flaws or imperfections.",
+        "Adjust factors to improve the assembly process."
+      ],
+      "explanation": "This sequence logically follows the process of assembling a product, inspecting it for quality, identifying any issues found, and then making adjustments to improve the process.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

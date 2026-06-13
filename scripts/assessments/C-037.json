@@ -110,6 +110,84 @@
       },
       "answer": "C",
       "explanation": "Ergonomics is the study of how people interact with their work environment to improve comfort and efficiency, directly addressing issues like poor posture and discomfort."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are considered potential hazards or safety concerns in a workshop environment, according to the lesson?",
+      "options": {
+        "A": "Following step-by-step instructions for assembly.",
+        "B": "Working for many hours without taking a break.",
+        "C": "Keeping tools organized and the workbench clear.",
+        "D": "Using a workstation that causes discomfort like neck or back pain."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "The lesson identifies fatigue from working too long without a break as a potential hazard, and poor ergonomics leading to discomfort like neck or back pain as a safety concern.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "According to the lesson, how does Multiscale Modeling help Creationeers address issues during assembly?",
+      "options": {
+        "A": "By providing a larger blueprint of the entire project.",
+        "B": "By explaining that macro-level problems often have causes at the atomic level.",
+        "C": "By connecting observations at one level to their underlying causes at a smaller level.",
+        "D": "By predicting the exact color of the finished product."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Multiscale Modeling is defined as observing a phenomenon at one level and understanding its cause at a smaller level, helping to connect macro-level problems to micro-level causes.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "___ is the responsible overseeing and protection of something considered worth caring for, while a ___ is defined as a potential source of harm or danger.",
+      "blanks": [
+        {
+          "accepted": [
+            "Stewardship"
+          ]
+        },
+        {
+          "accepted": [
+            "hazard"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines Stewardship as responsible overseeing and protection, and a hazard as a potential source of harm or danger.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "A Creationeer observes that a part isn't fitting correctly during assembly. Put the steps in the correct order for how Multiscale Modeling helps understand this problem.",
+      "items": [
+        "Observe the macro-level problem, such as a part not fitting.",
+        "Recognize that macro-level problems can have causes at a smaller level.",
+        "Investigate potential micro-level causes, like atomic changes in material.",
+        "Understand the connection between the macro-problem and its micro-level cause."
+      ],
+      "explanation": "Multiscale Modeling helps by connecting macro-level observations, like a part not fitting, to their micro-level causes, such as atomic changes in material dimensions, to understand the problem.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

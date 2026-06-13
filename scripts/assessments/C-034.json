@@ -81,6 +81,87 @@
       },
       "answer": "B",
       "explanation": "Tolerance defines the acceptable limits within which a material's properties or dimensions can vary and still be considered good quality."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe Quality Assurance (QA) or Material Inspection?",
+      "options": {
+        "A": "Quality Assurance is a systematic process designed to prevent defects.",
+        "B": "Material Inspection is primarily focused on fixing defects after they are found.",
+        "C": "Both QA and Material Inspection are important practices during the Procurement Phase.",
+        "D": "A defect is an acceptable variation within a material's tolerance."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Quality Assurance systematically prevents defects, and both QA and Material Inspection are crucial in the Procurement Phase for acquiring materials.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When a Creationeer is ensuring the quality of materials for a project, which of these actions or considerations are important?",
+      "options": {
+        "A": "Using Destructive Testing for critical parts that need to be used in the final product.",
+        "B": "Identifying any characteristics that do not meet the specified requirements as defects.",
+        "C": "Understanding the acceptable range of variation for a material's dimensions or properties.",
+        "D": "Only inspecting materials for projects exposed to extreme weather conditions."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "It's important to identify defects (characteristics not meeting requirements) and understand tolerance (acceptable variation) when inspecting materials. Nondestructive Testing (NDT) is used for critical parts that need to be used, not Destructive Testing.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Quality Assurance focuses on ___ defects, while Material Inspection focuses on ___ existing defects.",
+      "blanks": [
+        {
+          "accepted": [
+            "preventing",
+            "avoiding"
+          ]
+        },
+        {
+          "accepted": [
+            "finding",
+            "identifying",
+            "discovering"
+          ]
+        }
+      ],
+      "explanation": "Quality Assurance aims to prevent defects from occurring, whereas Material Inspection aims to find defects that already exist.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "A Creationeer is preparing to build a new project. Put the following steps related to material quality in the correct order.",
+      "items": [
+        "Define project requirements and constraints.",
+        "Acquire necessary materials in the Procurement Phase.",
+        "Implement Quality Assurance processes to prevent defects.",
+        "Perform Material Inspection to find existing defects and verify against tolerances."
+      ],
+      "explanation": "Before acquiring materials, a Creationeer defines requirements. Then, during procurement, QA processes prevent defects, and material inspection finds any existing ones, ensuring quality.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

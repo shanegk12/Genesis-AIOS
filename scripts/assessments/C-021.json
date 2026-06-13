@@ -146,6 +146,79 @@
       },
       "answer": "B",
       "explanation": "Recognizing interactions allows engineers to understand how factors combine to affect an outcome, leading to more comprehensive and effective design improvements."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When using the One-Factor-at-a-Time (OFAT) method in an experiment, which of the following are true? (Select all that apply)",
+      "options": {
+        "A": "You change only one variable at a time.",
+        "B": "You try to find out how different factors influence each other.",
+        "C": "You keep all other variables constant.",
+        "D": "You purposefully create 'noise' to make the experiment more challenging."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "The OFAT method involves changing only one variable while keeping all others constant to observe its specific effect, and it cannot identify how factors influence each other.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Creationeering team is testing a new rocket design. They want to know if changing the fin shape makes the rocket fly farther. Which of the following actions would help them get clear results? (Select all that apply)",
+      "options": {
+        "A": "Changing both the fin shape and the rocket's weight at the same time.",
+        "B": "Keeping the rocket's weight and engine type the same for all tests.",
+        "C": "Making sure the launch angle is different for each test.",
+        "D": "Only changing the fin shape between different launches."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "To get clear results using the OFAT method, you must change only one factor (fin shape) while keeping all other factors (weight, engine type, launch angle) constant to avoid 'noise' and identify the specific effect.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "When an engineer changes multiple variables at once in an experiment, it can create ___, which is unwanted data that makes it hard to understand which change caused an effect.",
+      "blanks": [
+        {
+          "accepted": [
+            "noise"
+          ]
+        }
+      ],
+      "explanation": "Changing multiple variables at once creates 'noise,' which makes it difficult to determine the specific cause of an observed effect.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "A Creationeering team is using the One-Factor-at-a-Time (OFAT) method to improve their robot. Put these steps of an OFAT experiment in the correct order.",
+      "items": [
+        "Establish a Baseline",
+        "Select ONE Factor to change",
+        "Hold All Other Factors Constant",
+        "Compare the new result to the baseline"
+      ],
+      "explanation": "The OFAT method typically begins by establishing a baseline, then selecting one factor to change, ensuring all other factors remain constant, and finally comparing the new results to the baseline.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

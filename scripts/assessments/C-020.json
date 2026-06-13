@@ -146,6 +146,84 @@
       },
       "answer": "C",
       "explanation": "High-fidelity and clean data are essential for accurate modeling, which in turn enables the creation of reliable and safe designs, fulfilling the engineer's stewardship responsibility to protect lives and resources."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are benefits of engineers using objective, verifiable data in their designs? (Select all that apply)",
+      "options": {
+        "A": "It helps ensure designs are safe for people to use.",
+        "B": "It makes the design process faster by avoiding experiments.",
+        "C": "It helps engineers manage resources responsibly and protect lives.",
+        "D": "It allows engineers to base decisions on personal feelings."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Objective, verifiable data is crucial for making decisions that keep people safe and ensure designs work (A), and it is a form of stewardship, which involves responsible management of resources and protecting lives (C).",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "According to the lesson, which of these actions demonstrate good stewardship in engineering? (Select all that apply)",
+      "options": {
+        "A": "Making design choices based on a 'hunch' about what might work.",
+        "B": "Ensuring data gathered at the atomic level is extremely accurate to prevent dangerous designs.",
+        "C": "Focusing only on making a design look visually appealing.",
+        "D": "Conducting experiments and tests multiple times to ensure consistent results."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Stewardship involves the responsible management of resources and safety. Ensuring accurate data at all levels (B) and conducting multiple tests for consistency (D) both contribute to reliable and safe designs, fulfilling stewardship responsibilities.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "Information based on personal feelings or opinions is known as ___ information, while facts that are not influenced by personal feelings are called ___ data.",
+      "blanks": [
+        {
+          "accepted": [
+            "subjective"
+          ]
+        },
+        {
+          "accepted": [
+            "objective"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines subjective information as being based on personal feelings, and objective data as facts not influenced by personal feelings or opinions.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps, which contribute to a reliable and safe engineering design, in the correct logical order.",
+      "items": [
+        "Gather extremely accurate data at all levels, including atomic.",
+        "Conduct experiments and tests multiple times to ensure consistent results.",
+        "Use objective, verifiable data to make design decisions.",
+        "Validate computer models by checking them against real-world results."
+      ],
+      "explanation": "First, accurate data is gathered (Q6, Q12). Then, experiments are repeated for consistency (Q5). This data informs objective design decisions (Q4). Finally, models are validated against real-world performance (Q3).",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

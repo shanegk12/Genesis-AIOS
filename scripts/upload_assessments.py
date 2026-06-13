@@ -75,6 +75,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--save",    action="store_true", help="Actually upload (default: dry-run)")
     parser.add_argument("--lesson",  help="Single lesson ID")
+    parser.add_argument("--doc",     choices=["creationeering", "mousetrap"],
+                        help="Only upload one course's banks (C- / M-)")
     parser.add_argument("--expand",  action="store_true",
                         help="Run expand-bank before uploading (requires Gemini key)")
     parser.add_argument("--dry-run", action="store_true")
@@ -92,7 +94,8 @@ def main():
     if args.lesson:
         files = [ASSESSMENTS_DIR / f"{args.lesson}.json"]
     else:
-        files = sorted(ASSESSMENTS_DIR.glob("*.json"))
+        prefix = {"creationeering": "C-", "mousetrap": "M-"}.get(args.doc, "")
+        files = sorted(ASSESSMENTS_DIR.glob(f"{prefix}*.json"))
 
     if not files:
         print("No assessment files found in scripts/assessments/")

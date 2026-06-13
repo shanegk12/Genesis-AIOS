@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "Cost analysis and budgeting are crucial for evaluating the financial implications and making informed decisions when choosing between standardized and custom-fabricated components during procurement."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are benefits of using standardized components in a Creationeering project?",
+      "options": {
+        "A": "They ensure different systems or components can work together effectively.",
+        "B": "They allow for unique designs that fit highly specific, custom needs.",
+        "C": "They often lead to lower cost per unit as production increases.",
+        "D": "They typically require a longer lead time for delivery."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Standardized components offer interoperability, meaning they work well with other parts (A), and benefit from economies of scale, reducing cost per unit with higher output (C).",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When would a Creationeer most appropriately choose custom fabrication for a component?",
+      "options": {
+        "A": "When a common part, like a screw, is needed for a simple attachment.",
+        "B": "When a uniquely shaped sensor requires a bracket that doesn't exist as a standard part.",
+        "C": "When the primary goal is to achieve the lowest possible cost per unit through mass production.",
+        "D": "When a component must meet precise, one-of-a-kind specifications for a unique application."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Custom fabrication is ideal when a unique application requires a precise fit and no standard part works (B), or when a component needs to be designed to specific, unique requirements (D).",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The amount of time that passes between initiating an order and receiving a part is known as ___, while the permissible limit of variation in a measurement is called ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "Lead Time",
+            "lead time"
+          ]
+        },
+        {
+          "accepted": [
+            "Tolerance",
+            "tolerance"
+          ]
+        }
+      ],
+      "explanation": "Lead Time is the duration from order to receipt, and Tolerance is the allowed variation in a measurement.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in the correct order for making informed decisions about acquiring parts in a Creationeering project.",
+      "items": [
+        "Design the component or product.",
+        "Perform cost analysis and budgeting.",
+        "Make procurement decisions (standard vs. custom).",
+        "Acquire materials and components."
+      ],
+      "explanation": "First, the component is designed, then costs are analyzed and budgeted, which informs the decision between standard and custom parts, and finally, the chosen materials are acquired through procurement.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

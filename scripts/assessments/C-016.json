@@ -122,6 +122,84 @@
       },
       "answer": "A",
       "explanation": "Prior art is crucial for identifying what has already been done, allowing engineers to ensure their idea is sufficiently novel to qualify for patent protection."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe an 'Invention'?",
+      "options": {
+        "A": "It is the creation of a product for the very first time.",
+        "B": "It is an improvement made to an existing product or service.",
+        "C": "It is the introduction of a process for the first time.",
+        "D": "It is a small upgrade to an existing idea."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "An invention is defined as 'The creation of a product or introduction of a process for the first time,' making options A and C correct.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "An engineer wants to develop a new, patentable device. Which of these are crucial reasons for them to thoroughly research 'Prior Art'?",
+      "options": {
+        "A": "To find existing designs that they can copy directly for their new device.",
+        "B": "To avoid wasting time and money on something that has already been invented.",
+        "C": "To determine the market price for their new product before it's built.",
+        "D": "To prove their new device is different enough from existing solutions to qualify for a patent."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Searching prior art helps engineers avoid duplicating existing work, saving resources, and is essential for demonstrating that their idea is novel enough to secure a patent.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "An ___ is the creation of something new for the first time, while an ___ is an improvement made to an existing product or service.",
+      "blanks": [
+        {
+          "accepted": [
+            "invention"
+          ]
+        },
+        {
+          "accepted": [
+            "innovation"
+          ]
+        }
+      ],
+      "explanation": "The lesson distinguishes an invention as creating something new and an innovation as improving an existing idea.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in the correct order an engineer would typically follow to develop and protect a truly new product.",
+      "items": [
+        "Search for 'Prior Art' in their field.",
+        "Develop an idea that is 'Novel' (different enough from existing solutions).",
+        "Apply for a 'Patent' for their new invention.",
+        "Use the patent to prevent others from making, using, or selling the invention."
+      ],
+      "explanation": "Engineers first research prior art, then develop a novel idea based on that research, apply for a patent to protect it, and finally, the patent grants them the right to exclude others.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

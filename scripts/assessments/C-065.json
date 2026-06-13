@@ -141,6 +141,84 @@
       },
       "answer": "C",
       "explanation": "Clearly defined functional requirements lead to purposeful and efficient designs, preventing wasted materials, time, and effort."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are examples of *functional requirements* for a new smart backpack?",
+      "options": {
+        "A": "The backpack must connect to a smartphone app.",
+        "B": "The backpack must have a main compartment that can hold at least 10 liters of volume.",
+        "C": "The backpack must have straps that adjust in under 2 seconds.",
+        "D": "The backpack must have a built-in light that turns on."
+      },
+      "answers": [
+        "A",
+        "D"
+      ],
+      "explanation": "Functional requirements describe what a system must do, focusing on specific actions or behaviors. Connecting to an app and turning on a light are actions the backpack performs. Holding 10 liters is a specification of capacity, and adjusting straps in under 2 seconds describes how well it performs (non-functional).",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A team is designing a new robot to help clean classrooms. Which of the following would be considered *constraints* in their design?",
+      "options": {
+        "A": "The robot must be able to pick up small pieces of paper.",
+        "B": "The robot must be able to navigate around classroom furniture.",
+        "C": "The robot's total cost cannot exceed $500.",
+        "D": "The robot must be able to fit under desks that are 28 inches high."
+      },
+      "answers": [
+        "C",
+        "D"
+      ],
+      "explanation": "Constraints are limitations or restrictions that must be considered in the design process, such as a budget limit (cost) or a physical size requirement (fitting under desks). Picking up paper and navigating furniture are functional requirements, describing what the robot must do.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ provides exact, measurable criteria for success, while ___ is the process of checking if a system meets these criteria.",
+      "blanks": [
+        {
+          "accepted": [
+            "specification"
+          ]
+        },
+        {
+          "accepted": [
+            "verification"
+          ]
+        }
+      ],
+      "explanation": "A specification gives detailed, measurable targets for a design. Verification is the process of testing to see if the design actually meets those targets.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps, related to defining a system, in the correct order.",
+      "items": [
+        "Identify the system's purpose or what it must do.",
+        "Create measurable details for success.",
+        "Consider limitations and restrictions.",
+        "Check if the design meets the measurable details."
+      ],
+      "explanation": "First, you define the objective or functional requirements (purpose). Then, you create specific, measurable specifications. Next, you identify any constraints or limitations. Finally, you perform verification to check if the design meets the specifications.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

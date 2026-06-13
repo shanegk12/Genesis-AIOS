@@ -141,6 +141,86 @@
       },
       "answer": "B",
       "explanation": "Responsible stewardship involves wisely managing resources, which aligns with optimization's goal of achieving the best possible outcome with minimal waste and maximum usefulness."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are key elements a Creationeer must identify when setting up an optimization challenge?",
+      "options": {
+        "A": "The specific goal they want to achieve.",
+        "B": "The limitations or restrictions they must follow.",
+        "C": "The final color of the product.",
+        "D": "The overall market demand for the product."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Optimization challenges begin by defining the specific goal (Objective) and any limitations (Constraints) that must be met.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A team is designing a new playground slide. If they decide to make the slide very fast and exciting, what potential trade-offs might they need to consider?",
+      "options": {
+        "A": "The slide might become more colorful.",
+        "B": "It might require stronger materials, increasing cost.",
+        "C": "It might be easier to assemble.",
+        "D": "It might need more safety features, potentially reducing speed or increasing complexity."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Making a slide faster and more exciting often involves trade-offs like increased material costs for strength or the need for additional safety features.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ occurs when improving one aspect of a design means you must ___ or give up another.",
+      "blanks": [
+        {
+          "accepted": [
+            "trade-off"
+          ]
+        },
+        {
+          "accepted": [
+            "lessen",
+            "reduce",
+            "sacrifice"
+          ]
+        }
+      ],
+      "explanation": "This defines a trade-off, where gaining one benefit often means losing another.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps for beginning an optimization process in the correct order.",
+      "items": [
+        "Define the main goal of the design.",
+        "Identify the limitations that must be met.",
+        "List the factors that can be adjusted.",
+        "Assess how well different solutions meet the goal."
+      ],
+      "explanation": "A logical optimization process starts with defining the goal (Objective), then identifying limits (Constraints), then what can be changed (Variables), and finally evaluating the results.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

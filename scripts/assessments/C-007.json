@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "The lesson defines constraints as 'limits or rules you must work within,' which directly aligns with the idea of 'setting boundaries'."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe a key component of the OCV method?",
+      "options": {
+        "A": "An objective is what you want to accomplish.",
+        "B": "A variable is a limit or rule you must work within.",
+        "C": "Constraints guide engineers toward realistic and effective solutions.",
+        "D": "Optimization is the very first step an engineer takes in the OCV method."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "An objective is defined as what you want to accomplish, and constraints are described as guiding engineers toward realistic solutions.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When planning a school event, which of these would be considered an objective or a variable?",
+      "options": {
+        "A": "The event must cost less than $500.",
+        "B": "The goal of raising $1000 for new books.",
+        "C": "The event must be held before the end of the school year.",
+        "D": "The type of event chosen (e.g., talent show, silent auction)."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "An objective is the goal you want to accomplish, like raising money, and a variable is a changeable factor that affects the outcome, such as the type of event.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The very first step an engineer takes in the OCV method is to ___, which is crucial to avoid fixing the ___ issue.",
+      "blanks": [
+        {
+          "accepted": [
+            "define the problem",
+            "identify the problem"
+          ]
+        },
+        {
+          "accepted": [
+            "wrong",
+            "incorrect"
+          ]
+        }
+      ],
+      "explanation": "The lesson states that defining the problem is the first step to ensure the root cause is addressed and the wrong issue isn't fixed.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these general steps of the OCV method, including its purpose, in the correct order.",
+      "items": [
+        "Define the problem or objective.",
+        "Identify limits or rules for the solution.",
+        "Consider factors that can change and affect the outcome.",
+        "Work to make the best use of resources."
+      ],
+      "explanation": "The OCV method begins with defining the problem/objective, then identifying constraints (limits), followed by considering variables (changeable factors), and finally optimizing the solution.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

@@ -141,6 +141,79 @@
       },
       "answer": "B",
       "explanation": "Data provides objective measurements that pinpoint specific strengths and weaknesses, enabling targeted refinement and optimization for continuous improvement."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are true about using \"data-defined performance\" in Creationeering? (Select all that apply)",
+      "options": {
+        "A": "It relies on personal feelings and opinions to evaluate a design.",
+        "B": "It involves collecting objective numbers and facts to measure how well something works.",
+        "C": "It helps identify specific areas where a creation can be improved.",
+        "D": "Its main goal is to make creations look good, regardless of function."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Data-defined performance uses objective measurements (numbers and facts) to evaluate how well a creation works and helps identify specific areas for improvement, rather than relying on opinions or focusing only on looks.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "You are designing a new type of backpack for students. Which of the following would be considered either an 'Objective' or a 'Constraint' in the OCV method? (Select all that apply)",
+      "options": {
+        "A": "Testing different types of fabric for the backpack.",
+        "B": "Ensuring the backpack can comfortably carry at least 15 pounds of books.",
+        "C": "Limiting the design to only use waterproof zippers.",
+        "D": "Measuring how many backpacks can be produced in a day."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "An Objective is the desired goal (like carrying 15 pounds comfortably), and a Constraint is a limitation (like using only waterproof zippers). Testing different fabrics is a Variable, and measuring production is Throughput.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The process of finding the best possible solution or outcome under a given set of limitations is called ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "optimization"
+          ]
+        }
+      ],
+      "explanation": "Optimization is the term used to describe finding the best possible solution or outcome while working within specific limitations or rules.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps in a logical order for improving a creation using data-defined performance.",
+      "items": [
+        "Define the Objectives, Constraints, and Variables (OCV) for the creation.",
+        "Collect objective data to measure the creation's performance.",
+        "Analyze the data to identify specific areas for improvement.",
+        "Redesign or refine the creation based on the identified areas."
+      ],
+      "explanation": "To improve a creation using data, you first define what you want to achieve and your limits (OCV), then measure how it's performing with data, analyze that data to find problems, and finally redesign or refine it based on what you learned.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

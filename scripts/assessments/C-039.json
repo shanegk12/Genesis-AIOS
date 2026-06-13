@@ -146,6 +146,87 @@
       },
       "answer": "B",
       "explanation": "The lesson states that God's example inspires Creationeers to strive for excellence and meticulous design, ensuring parts fit together perfectly to honor the Creator."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Why are precision measurements and understanding tolerances crucial in Creationeering?",
+      "options": {
+        "A": "To ensure multiple measurements of a part are close to each other.",
+        "B": "To allow for any amount of variation in a part's dimension.",
+        "C": "To prevent creations from failing or not working as intended due to ill-fitting parts.",
+        "D": "To make assembly much faster by ignoring small differences."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Precision ensures measurements are consistent, and understanding tolerances prevents parts from failing by ensuring they fit correctly, reflecting God's design for excellence.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of the following statements accurately describe measuring tools or types of fits in Creationeering?",
+      "options": {
+        "A": "A micrometer is best used for measuring the internal diameter of a large pipe.",
+        "B": "Calipers are suitable for precisely measuring both the outside and inside of an object.",
+        "C": "An Interference Fit is designed to always have a small gap between mating parts.",
+        "D": "A Clearance Fit means parts can be assembled without force because there's always a gap."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Calipers measure both external and internal distances with high precision, and a Clearance Fit is characterized by a gap allowing assembly without force.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "According to Multiscale Modeling, even ___ differences, like misaligned atoms on a gear, can lead to ___ problems, such as grinding and preventing smooth movement.",
+      "blanks": [
+        {
+          "accepted": [
+            "atomic",
+            "atomic-level"
+          ]
+        },
+        {
+          "accepted": [
+            "macro",
+            "macro-level",
+            "larger-scale"
+          ]
+        }
+      ],
+      "explanation": "The lesson explains that small, atomic-level differences can have significant macro-level impacts on a creation's function.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "When using the OCV method in Creationeering, put these steps in the correct order.",
+      "items": [
+        "Define the Objective",
+        "Identify the Constraint",
+        "Determine the Variable",
+        "Control the Variable"
+      ],
+      "explanation": "The OCV method involves first defining the Objective, then identifying the Constraint, next determining the Variable, and finally controlling that Variable to achieve the desired outcome.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

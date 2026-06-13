@@ -141,6 +141,80 @@
       },
       "answer": "C",
       "explanation": "By carefully acquiring the right materials and components from the start, many common problems that would require troubleshooting later can be avoided."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following activities are considered part of the procurement process?",
+      "options": {
+        "A": "Identifying what materials are needed for a project.",
+        "B": "Fixing a broken circuit board after it has been installed in a system.",
+        "C": "Comparing prices from different suppliers for a specific component.",
+        "D": "Designing the initial blueprints and plans for a new invention."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Procurement involves identifying needs and comparing suppliers to acquire resources, not fixing existing systems or initial design.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A Junior Creationeer needs to buy a new motor for their robot. Which of these actions demonstrate wise procurement practices?",
+      "options": {
+        "A": "Choosing the supplier with the fastest delivery, even if the motor is poor quality.",
+        "B": "Checking if there are suitable motors already in the workshop inventory.",
+        "C": "Only considering the cheapest motor available, regardless of its reliability.",
+        "D": "Comparing different suppliers based on their motor quality, cost, and delivery time."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Wise procurement involves checking existing resources to avoid unnecessary purchases and balancing factors like quality, cost, and delivery when choosing a supplier.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the procurement process, a ___ is a formal document used to request goods or services from a supplier at agreed prices.",
+      "blanks": [
+        {
+          "accepted": [
+            "Purchase Order",
+            "PO"
+          ]
+        }
+      ],
+      "explanation": "A Purchase Order is a key document that formalizes a request for goods or services from a supplier at specific terms.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these typical steps of the procurement process in the correct order.",
+      "items": [
+        "Identifying what materials are needed",
+        "Finding potential suppliers",
+        "Placing an order with a chosen supplier",
+        "Receiving and checking the quality of delivered goods"
+      ],
+      "explanation": "The procurement cycle starts with knowing what you need, then finding where to get it, making the purchase, and finally accepting the delivery.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

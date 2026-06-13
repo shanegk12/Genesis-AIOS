@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "Following a structured protocol allows engineers to efficiently diagnose and repair systems, restoring their intended function and demonstrating responsible care and stewardship over the resources and creations entrusted to them."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "When a system experiences a 'System Failure,' which of the following statements are true?",
+      "options": {
+        "A": "It performs its function perfectly.",
+        "B": "It can no longer perform its intended function.",
+        "C": "It operates outside of its specified limits.",
+        "D": "It is always completely destroyed."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A system failure is defined as when a system or component can no longer perform its intended function within specified limits.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A robot's arm is stuck and won't move, even though the motor is running. Also, the LED indicator light on the robot is not turning on when it should. Which types of system failures are most likely occurring?",
+      "options": {
+        "A": "Physical/Structural Failure",
+        "B": "Mechanical Failure",
+        "C": "Electrical Failure",
+        "D": "Chemical Failure"
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "A stuck arm with a running motor points to an issue with moving parts (mechanical), while an LED not turning on indicates a problem with the flow of energy or information (electrical).",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The Creationeering Troubleshooting Protocol has ___ steps, and its very first step is to specifically ___ the symptom.",
+      "blanks": [
+        {
+          "accepted": [
+            "six",
+            "6"
+          ]
+        },
+        {
+          "accepted": [
+            "identify",
+            "describe"
+          ]
+        }
+      ],
+      "explanation": "The lesson states the Creationeering Troubleshooting Protocol has 6 steps, and its first step is to specifically identify the symptom.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these troubleshooting actions in the correct order.",
+      "items": [
+        "Identify the specific symptom.",
+        "Trace the root cause of the failure.",
+        "Implement a solution to the problem.",
+        "Restore the system's intended function."
+      ],
+      "explanation": "Effective troubleshooting begins by identifying the symptom, then diagnosing the root cause using frameworks like the 8-step Creationeering framework, followed by implementing a fix, and finally restoring the system's functionality as a demonstration of good stewardship.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

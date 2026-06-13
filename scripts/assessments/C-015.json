@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "The lesson connects Proverbs 15:22 to the idea that discussing different options with others leads to better designs and helps engineers see beyond their initial ideas."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are necessary criteria for an invention to qualify for a Patent?",
+      "options": {
+        "A": "It must be aesthetically pleasing.",
+        "B": "It must be useful.",
+        "C": "It must be non-obvious.",
+        "D": "It must be novel (new)."
+      },
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "The lesson states that an invention must be Useful, Non-Obvious, and Novel to qualify for a Patent, not necessarily Aesthetic.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "A team is designing a new playground slide. They decide it must be safe for children aged 5-12 and must be made from weather-resistant materials. They also know they have a budget of $5000 and only 3 months to complete the design and build. In this scenario, which of the following are examples of **constraints** for the playground slide design?",
+      "options": {
+        "A": "The slide must be safe for children aged 5-12.",
+        "B": "The design and build must be completed within 3 months.",
+        "C": "The slide must be made from weather-resistant materials.",
+        "D": "The total cost must be less than $5000."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Constraints are 'limits' or boundaries like budget or time, while requirements are non-negotiable 'musts' a design needs to meet.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The Engineering Decision Matrix is primarily used in the ___ phase to ___ down and select the best solution from many alternatives.",
+      "blanks": [
+        {
+          "accepted": [
+            "convergent"
+          ]
+        },
+        {
+          "accepted": [
+            "narrow",
+            "filter"
+          ]
+        }
+      ],
+      "explanation": "The Decision Matrix is a tool for the convergent phase, helping to evaluate and select the most effective solution from the alternatives generated.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps of the engineering design process in the correct order.",
+      "items": [
+        "Generate a wide range of alternatives.",
+        "Define criteria and constraints for evaluation.",
+        "Score alternatives using an Engineering Decision Matrix.",
+        "Select the most effective solution."
+      ],
+      "explanation": "The design process moves from generating many ideas (divergent phase) to defining how they will be judged, then systematically evaluating them with tools like a Decision Matrix, and finally selecting the best solution (convergent phase).",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

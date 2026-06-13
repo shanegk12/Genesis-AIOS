@@ -146,6 +146,86 @@
       },
       "answer": "C",
       "explanation": "The lesson explains that engineers 'spend much of their time calculating how to balance forces to keep structures perfectly still,' which involves counteracting forces like gravity with normal force to achieve a net force of zero."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following statements accurately describe fundamental characteristics of forces as discussed in the lesson?",
+      "options": {
+        "A": "Forces are measured in units called Newtons.",
+        "B": "A force is fundamentally a push or a pull on an object.",
+        "C": "The Normal Force always acts parallel to the surface of contact.",
+        "D": "Forces only affect objects that are already in motion."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "The lesson states that a force is a push or pull and that forces are measured in Newtons. It also clarifies that Normal Force acts perpendicular, not parallel, to a surface, and forces can act on stationary objects.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Based on the F=ma principle discussed in the lesson, which design choices would help an engineer achieve a desired acceleration?",
+      "options": {
+        "A": "Making an object heavier to increase its acceleration with a fixed force.",
+        "B": "Using a more powerful motor to generate greater force for an object with increased mass.",
+        "C": "Adding more features to a drone, thereby increasing its mass, to make it accelerate faster.",
+        "D": "Decreasing the overall mass of a rocket by using lighter materials to achieve greater acceleration with the same engine force."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "The lesson explains that to increase acceleration with a fixed force, mass must decrease (like rockets and drones using lighter materials). Conversely, if mass increases, a greater force is needed to achieve the same acceleration (like Scooter Y needing a more powerful motor).",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "When forces acting on an object are ___, meaning they are equal in magnitude and opposite in direction, the ___ force on the object is zero, and it will not move.",
+      "blanks": [
+        {
+          "accepted": [
+            "balanced",
+            "equal"
+          ]
+        },
+        {
+          "accepted": [
+            "net",
+            "total"
+          ]
+        }
+      ],
+      "explanation": "The lesson explains that when forces are balanced, they cancel each other out, resulting in a net force of zero, which means the object will remain stationary.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "An engineer is designing a new bridge. Put the following steps in the correct order for ensuring the bridge's stability against the force of gravity.",
+      "items": [
+        "Identify gravity as the primary continuous downward force.",
+        "Calculate the total downward force of gravity on the bridge's components.",
+        "Design the bridge's supports to provide an upward Normal Force.",
+        "Ensure the upward Normal Force can effectively counteract the downward pull of gravity."
+      ],
+      "explanation": "The lesson highlights that engineers must first identify gravity as the primary challenge, then calculate its effect, and finally design supports to provide an adequate Normal Force to counteract it, ensuring stability.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

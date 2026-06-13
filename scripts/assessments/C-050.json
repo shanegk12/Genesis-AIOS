@@ -146,6 +146,86 @@
       },
       "answer": "B",
       "explanation": "The lesson states that Logistics is about efficient movement and preparation, and Assembly is 'the next exciting phase' where 'all those carefully designed and procured components finally come together.'"
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following concepts are crucial for ensuring parts fit and function correctly during the assembly process? (Select all that apply.)",
+      "options": {
+        "A": "Tolerance",
+        "B": "Interface",
+        "C": "Multiscale modeling",
+        "D": "Market trends"
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Tolerance ensures parts fit despite slight variations, the interface is critical for how parts meet and interact, and multiscale modeling helps analyze how parts function together across different scales.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "An engineer is troubleshooting a newly assembled robotic arm that is not moving smoothly. Applying the principles of assembly and multiscale modeling, what might they investigate? (Select all that apply.)",
+      "options": {
+        "A": "The color scheme of the robotic arm's exterior.",
+        "B": "The allowable variation (tolerance) in the gears that connect the arm segments.",
+        "C": "The marketing strategy for selling the robotic arm.",
+        "D": "The microscopic structure of the metal at a joint that is experiencing friction."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Multiscale modeling involves connecting macro-level observations (not moving smoothly) to microscopic causes (metal structure at a joint), and tolerance is crucial for parts to fit and work harmoniously, like gears in a robotic arm.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In Creationeering™, the process of assembly involves putting individual ___ together to make a ___, and then combining these into a complete system.",
+      "blanks": [
+        {
+          "accepted": [
+            "components",
+            "parts"
+          ]
+        },
+        {
+          "accepted": [
+            "subsystem"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines Assembly as 'The process of putting components together to make a subsystem and putting subsystems together to make a system.'",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these stages of building a complex product in the correct hierarchical order, from smallest to largest functional unit leading to its purpose.",
+      "items": [
+        "Individual components",
+        "Forming a subsystem from components",
+        "Forming a system from subsystems",
+        "Achieving overall system function"
+      ],
+      "explanation": "Assembly progresses from individual components, which are combined to form subsystems, which are then integrated to create a complete system, ultimately achieving its specific function.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

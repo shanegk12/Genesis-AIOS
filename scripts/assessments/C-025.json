@@ -141,6 +141,85 @@
       },
       "answer": "A",
       "explanation": "Synthesis involves combining new ideas and designs for different parts to create a unified, improved solution."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following actions are examples of synthesis in Creationeering™? (Select all that apply.)",
+      "options": {
+        "A": "Breaking down a complex system to understand how its individual parts work.",
+        "B": "Combining different ideas and components to form a new, unified whole.",
+        "C": "Putting together separate elements to create something new and unified, like baking a cake from ingredients.",
+        "D": "Counting the number of different types of parts in a machine."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Synthesis is the process of bringing separate elements together to create something new and unified, often leading to new insights or solutions, as seen in combining ideas or ingredients.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When a Junior Creationeer uses the Objective, Constraint, Variable (OCV) method to design a new product, what are they doing? (Select all that apply.)",
+      "options": {
+        "A": "Only analyzing the existing product to find its weaknesses.",
+        "B": "Defining the specific goal or target the new product must achieve.",
+        "C": "Identifying limitations or rules that the design must follow, such as a budget.",
+        "D": "Adjusting changeable factors to find the best possible solution for their goal."
+      },
+      "answers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "explanation": "The OCV method involves defining the goal (Objective), limitations (Constraint), and adjustable factors (Variable) to guide the design process and find the best solution through optimization.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "In the Creationeering™ process, ___ involves breaking down information, while ___ builds new understanding from those parts.",
+      "blanks": [
+        {
+          "accepted": [
+            "analysis"
+          ]
+        },
+        {
+          "accepted": [
+            "synthesis"
+          ]
+        }
+      ],
+      "explanation": "Analysis breaks down complex systems into parts, and synthesis combines those parts to form a new whole or understanding.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these actions in the correct order a Creationeer might follow when moving from understanding a problem to creating a new solution.",
+      "items": [
+        "Break down a complex system into its individual parts.",
+        "Understand the function of each individual component.",
+        "Combine the components to create a new, unified whole.",
+        "Observe new characteristics that appear in the complete system."
+      ],
+      "explanation": "The process typically starts with analysis (breaking down and understanding parts), followed by synthesis (combining them), which can then lead to emergent properties in the new whole.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

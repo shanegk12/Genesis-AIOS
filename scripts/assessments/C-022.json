@@ -146,6 +146,86 @@
       },
       "answer": "C",
       "explanation": "The connection is made because integrity requires honesty and trustworthiness, and using true, objective data ensures that engineering work is honest, reliable, and verifiable, reflecting this principle."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following characteristics contribute to high-quality, trustworthy data in engineering?",
+      "options": {
+        "A": "Being objective (not influenced by personal feelings).",
+        "B": "Having many compounding errors.",
+        "C": "Being clean (free from errors like mixed labels).",
+        "D": "Being validated against real-world results."
+      },
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "Objective data is free from personal bias, clean data is error-free, and validated data is checked against real-world results, all contributing to trustworthiness.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "How do computers enhance the quality of measurements and calculations in engineering?",
+      "options": {
+        "A": "By always rounding numbers up to simplify them.",
+        "B": "By storing and using many significant digits.",
+        "C": "By introducing more compounding errors.",
+        "D": "By performing simultaneous analysis of vast amounts of data."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Computers improve precision by using many significant digits and enhance both accuracy and precision through simultaneous analysis of complex data, reducing errors.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The lesson states that ___ is the bridge between science and ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "data"
+          ]
+        },
+        {
+          "accepted": [
+            "math",
+            "mathematics"
+          ]
+        }
+      ],
+      "explanation": "Data records observations from science and provides numerical input for mathematical equations, thus bridging the two fields.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the steps of how compounding error develops in the correct order.",
+      "items": [
+        "Small rounding errors occur.",
+        "In early steps of a long calculation.",
+        "These errors get amplified.",
+        "Leading to larger final errors."
+      ],
+      "explanation": "Compounding error begins with small rounding errors in initial calculation steps, which then accumulate and become amplified, resulting in a significantly larger error in the final result.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

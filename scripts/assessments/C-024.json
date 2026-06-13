@@ -146,6 +146,84 @@
       },
       "answer": "B",
       "explanation": "Using objective data to validate designs ensures that materials and time are not wasted on unreliable solutions, demonstrating good stewardship of resources."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "According to the lesson, which of the following are key activities involved in the science of statistics for engineering?",
+      "options": {
+        "A": "Collecting numerical data.",
+        "B": "Analyzing numerical data.",
+        "C": "Guessing outcomes based on intuition.",
+        "D": "Building prototypes without testing."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "The lesson defines statistics as the science of collecting, analyzing, and interpreting numerical data for informed decisions, not guessing or avoiding testing.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "An engineer conducts multiple trials for a new design. Based on the lesson, what are the main reasons for doing this and analyzing the results?",
+      "options": {
+        "A": "To identify the Variation in the system's performance.",
+        "B": "To prove the solution is reliable and consistent over time.",
+        "C": "To make the design process more complicated.",
+        "D": "To ensure every trial produces the exact same result."
+      },
+      "answers": [
+        "A",
+        "B"
+      ],
+      "explanation": "Multiple trials help engineers identify Variation and prove their solutions are reliable and consistent, especially because the world is stochastic, not deterministic.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The lesson describes our world as ___, meaning there will always be some uncertainty and variation, unlike a ___ world where every trial would be the same.",
+      "blanks": [
+        {
+          "accepted": [
+            "stochastic"
+          ]
+        },
+        {
+          "accepted": [
+            "deterministic"
+          ]
+        }
+      ],
+      "explanation": "The lesson explains that a 'stochastic' world means there is always some uncertainty and variation, contrasting it with a 'deterministic' world where outcomes are perfectly predictable.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in the correct order to calculate the Mean (average) of a set of engineering trial results.",
+      "items": [
+        "Collect all numerical results from trials.",
+        "Add all the results together.",
+        "Count the total number of trials.",
+        "Divide the sum by the total number of trials."
+      ],
+      "explanation": "The Mean is calculated by first summing all the individual results and then dividing that sum by the total number of trials conducted.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

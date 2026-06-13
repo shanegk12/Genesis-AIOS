@@ -146,6 +146,87 @@
       },
       "answer": "B",
       "explanation": "Using careful planning and improvement processes to create beneficial solutions aligns with the idea of responsible stewardship over creation and serving others."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following are essential components for any system to function?",
+      "options": {
+        "A": "Inputs",
+        "B": "Subsystems",
+        "C": "Processes",
+        "D": "Outputs"
+      },
+      "answers": [
+        "A",
+        "C",
+        "D"
+      ],
+      "explanation": "Inputs, processes, and outputs are fundamental to how any system operates, showing what enters, what is transformed, and what exits.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Why is it helpful for engineers to identify subsystems within a complex machine?",
+      "options": {
+        "A": "It makes the entire system bigger and harder to manage.",
+        "B": "It allows them to focus on specific functions of smaller parts.",
+        "C": "It helps simplify the overall design for better understanding.",
+        "D": "It eliminates the need for inputs and outputs in those smaller parts."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Identifying subsystems helps engineers understand complex systems better by allowing them to focus on individual functions and simplify the overall design.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A ___ is defined as a group of parts working together to perform a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "system"
+          ]
+        },
+        {
+          "accepted": [
+            "function",
+            "purpose",
+            "task"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines a system as a group of parts working together to perform a function.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these general steps an engineer might take to improve a system in the correct order.",
+      "items": [
+        "Identify the problem or desired improvement.",
+        "Design a solution or new system.",
+        "Test the designed solution.",
+        "Analyze results and make improvements."
+      ],
+      "explanation": "Engineers typically follow a sequence of identifying a need, designing, testing, and then improving based on results.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

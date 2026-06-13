@@ -146,6 +146,87 @@
       },
       "answer": "B",
       "explanation": "Just as every piece in creation is vital, every component in a supply chain is interconnected, meaning issues with even small parts can have a cascading effect on the entire system and final product."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Which of the following activities are core components of Global Supply Management? (Select all that apply)",
+      "options": {
+        "A": "Planning the movement of goods across international borders.",
+        "B": "Tracking when ordered items are expected to arrive.",
+        "C": "Orchestrating transportation schedules for resources.",
+        "D": "Only selling products to local customers."
+      },
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "explanation": "Global Supply Management involves planning, implementing, and controlling the flow of goods internationally, which includes tracking items and orchestrating transportation, as described by its definition and the 'master conductor' analogy.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "When a global supply chain faces unexpected problems or disruptions, which strategies are used to help manage these challenges? (Select all that apply)",
+      "options": {
+        "A": "Ignoring changes in raw material prices.",
+        "B": "Keeping buffer stock to cover unforeseen demands.",
+        "C": "Using multiscale modeling to understand impacts across different levels.",
+        "D": "Having an unlimited budget for all supplies."
+      },
+      "answers": [
+        "B",
+        "C"
+      ],
+      "explanation": "Buffer stock is specifically used to protect against unforeseen demands or disruptions, and multiscale modeling helps understand how problems at various levels impact the supply chain.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "A limitation on a project, such as a maximum budget, is known as a ___, while a factor that can change, like the fluctuating price of raw materials, is called a ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "constraint",
+            "limitation"
+          ]
+        },
+        {
+          "accepted": [
+            "variable",
+            "factor"
+          ]
+        }
+      ],
+      "explanation": "The lesson defines a 'constraint' as a limitation or restriction and a 'variable' as a factor that can change in a design or process.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put the following steps, which are part of a global supply chain, in the correct logical order.",
+      "items": [
+        "Identifying the needed raw materials.",
+        "Planning how goods will move internationally.",
+        "Tracking the arrival of components.",
+        "Ensuring products reach their final destination."
+      ],
+      "explanation": "A supply chain typically begins with sourcing raw materials, followed by planning their movement, then tracking their journey, and finally ensuring delivery to consumption, as outlined in the definition of Global Supply Management.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }

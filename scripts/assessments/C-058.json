@@ -146,6 +146,85 @@
       },
       "answer": "B",
       "explanation": "Recognizing the natural tendency for error, Error Prevention strategies are designed to stop mistakes from happening in the first place, improving safety and efficiency."
+    },
+    {
+      "kind": "multi",
+      "type": "comprehension",
+      "question": "Applying good Human Factors principles in a production system primarily aims to achieve which of the following? (Select all that apply)",
+      "options": {
+        "A": "Increase worker comfort and well-being.",
+        "B": "Make machines operate faster than humans.",
+        "C": "Reduce the number of errors made by people.",
+        "D": "Eliminate the need for human workers entirely."
+      },
+      "answers": [
+        "A",
+        "C"
+      ],
+      "explanation": "Good Human Factors design focuses on making systems safer, more comfortable, and more efficient for people, which directly includes reducing errors and improving comfort.",
+      "answer": ""
+    },
+    {
+      "kind": "multi",
+      "type": "application",
+      "question": "Which of these scenarios are examples of poor Human Factors design leading to challenges for the user? (Select all that apply)",
+      "options": {
+        "A": "A well-organized toolbox where all tools are clearly labeled and easy to reach.",
+        "B": "A computer program with confusing menus and tiny, unreadable text.",
+        "C": "A chair designed with adjustable height and back support for different body types.",
+        "D": "Assembly instructions that are overly complex, use jargon, and require constant flipping between pages."
+      },
+      "answers": [
+        "B",
+        "D"
+      ],
+      "explanation": "Confusing interfaces (HMI) and complex instructions (Cognitive Load) increase mental effort and make systems hard to use, which are direct consequences of poor Human Factors design.",
+      "answer": ""
+    },
+    {
+      "kind": "fill",
+      "type": "recall",
+      "question": "The science of designing and arranging things people use so that they fit the people who use them well is called ___, and the total amount of mental effort being used in working memory is known as ___.",
+      "blanks": [
+        {
+          "accepted": [
+            "ergonomics"
+          ]
+        },
+        {
+          "accepted": [
+            "Cognitive Load",
+            "mental effort"
+          ]
+        }
+      ],
+      "explanation": "Ergonomics focuses on fitting designs to people for comfort and ease of use, while Cognitive Load measures the mental effort that, when too high, can cause mistakes.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
+    },
+    {
+      "kind": "order",
+      "type": "application",
+      "question": "Put these steps in the correct order for how the Multiscale Modeling framework helps address human factors issues.",
+      "items": [
+        "Observe a macro-level problem, like frequent assembly errors.",
+        "Trace the problem down to deeper human-related causes.",
+        "Identify specific causes, such as poor tool ergonomics or high cognitive load.",
+        "Design solutions based on the identified human factors causes."
+      ],
+      "explanation": "Multiscale Modeling helps by starting with an observed problem and then systematically investigating to find the underlying human-related causes to inform effective solutions.",
+      "options": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "answer": ""
     }
   ]
 }
