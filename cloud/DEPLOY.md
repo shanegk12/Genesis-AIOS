@@ -29,7 +29,7 @@ gcloud run deploy bez-24-7 \
   --min-instances 1 --max-instances 1 \
   --no-cpu-throttling \
   --no-allow-unauthenticated \
-  --memory 1Gi \
+  --memory 2Gi \
   --set-secrets SLACK_BOT_TOKEN=bez-slack-bot:latest,SLACK_APP_TOKEN=bez-slack-app:latest,ANTHROPIC_API_KEY=bez-anthropic:latest,GITHUB_TOKEN=bez-github:latest
 ```
 - `--min-instances 1 --no-cpu-throttling` keeps the container warm so the WebSocket persists (Socket Mode needs a long-lived process). `--max-instances 1` ensures exactly ONE socket connection (Slack load-balances across connections — multiple instances would split/drop events).
