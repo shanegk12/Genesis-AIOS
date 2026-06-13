@@ -42,6 +42,22 @@ app = App(token=bez.SLACK_TOKEN, signing_secret="not-used-in-socket-mode")
 BOT_ID = bez.slack("auth.test", {}).get("user_id")
 _seen = set()
 
+ONLINE_MARKER = "Bez is online"
+
+
+def _recently_announced(channel, within_seconds=600):
+    """True if Bez already posted an 'online' message in this channel within the
+    window. A crash-loop or rapid redeploy boots repeatedly; without this guard
+    each boot floods #aios with 'online' posts (and the noise hides real replies).
+    Caps announcements to ~1 per window regardless of restart frequency."""
+    import time
+    out = bez.slack("conversations.history", {"channel": channel, "limit": 10})
+    now = time.time()
+    for m in out.get("messages", []):
+        if ONLINE_MARKER in (m.get("text") or "") and now - float(m.get("ts", 0)) < within_seconds:
+            return True
+    return False
+
 
 def _handle(event):
     if event.get("bot_id") or event.get("subtype"):
@@ -85,5 +101,8 @@ if __name__ == "__main__":
     _start_health_server()
     ch = bez.resolve_channel(bez.CHANNEL_NAME)
     print(f"Bez (Socket Mode) connecting · bot {BOT_ID} · channel {bez.CHANNEL_NAME} · model {bez.MODEL} · cwd {bez.CWD}", flush=True)
-    bez.post(ch, "🤖 Bez is online 24/7 (real-time Socket Mode) — message me here. Say 'BEZ STOP' to halt a task.")
+    if _recently_announced(ch):
+        print("skipping 'online' post (announced recently — likely a restart)", flush=True)
+    else:
+        bez.post(ch, f"🤖 {ONLINE_MARKER} 24/7 (real-time Socket Mode) — message me here. Say 'BEZ STOP' to halt a task.")
     SocketModeHandler(app, APP_TOKEN).start()
