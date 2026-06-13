@@ -56,18 +56,19 @@ def _handle(event):
     if not text:
         return
     ch = event.get("channel")
+    thread_root = event.get("thread_ts") or ts  # conversation = one Slack thread
     if text.upper() == "BEZ STOP":
-        bez.post(ch, "🛑 Stopped.", ts)
+        bez.post(ch, "🛑 Stopped.", thread_root)
         return
     print(f"[msg] {event.get('user')}: {text[:120]}", flush=True)
-    threading.Thread(target=_run, args=(text, ch, ts), daemon=True).start()
+    threading.Thread(target=_run, args=(text, ch, thread_root), daemon=True).start()
 
 
-def _run(text, ch, ts):
+def _run(text, ch, thread_root):
     try:
-        bez.run_agent(text, ch, ts)
+        bez.run_agent(text, ch, thread_root, thread_key=thread_root)
     except Exception as e:
-        bez.post(ch, f"⚠️ error: {e}", ts)
+        bez.post(ch, f"⚠️ error: {e}", thread_root)
 
 
 @app.event("message")

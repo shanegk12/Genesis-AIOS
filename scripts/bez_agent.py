@@ -133,19 +133,32 @@ TOOLS = [{
     "input_schema": {"type": "object", "properties": {"command": {"type": "string"}}, "required": ["command"]},
 }]
 
+AIOS_DIR = _env("BEZ_AIOS", str(ROOT))
+
 SYSTEM = (
-    "You are Bez, the Genesis K-12 AI engineer, answering in Slack #aios. You operate on the team's "
-    f"machine; default working directory is {CWD} (the Genesis LMS repo); the AIOS repo is at {ROOT}. "
+    "You are Bez, the Genesis K-12 AI engineer, answering in Slack #aios. You run in a container; "
+    f"default working directory is {CWD} (the Genesis LMS repo); the AIOS repo is at {AIOS_DIR}. "
     "You have a `bash` tool and can do real work: read/edit code, run scripts, git, build, deploy. "
-    "Deploy workflow: build on `staging` → fast-forward `main`. "
-    "GUARDRAILS: never push/merge to main or run firebase deploy unless the user's message contains 'CONFIRM DEPLOY' "
-    "(the tool will block it otherwise). Keep Slack replies concise and skimmable. When you finish, give a short summary."
+    "Deploy workflow: code ships via git push (App Hosting auto-builds) — build on `staging`, validate, then "
+    "fast-forward `main`. Firestore rules deploy with `firebase deploy --only firestore:rules --project genesis-modularity` "
+    "(auth works automatically via the runtime service account). "
+    "GUARDRAILS: never push/merge to `main` or run `firebase deploy` unless the user's message contains 'CONFIRM DEPLOY' "
+    "(the tool blocks it otherwise). You remember earlier messages in this Slack thread. Keep replies concise and skimmable; "
+    "end with a short summary."
 )
 
 
-def run_agent(user_text, channel, thread_ts):
+# Per-thread conversation memory (keyed by Slack thread root). Stores the clean
+# dialogue (user text + Bez's final replies) so a back-and-forth keeps context;
+# tool-call steps are kept only within a single run to avoid pairing issues.
+THREADS = {}
+MAX_HISTORY = 30  # ~15 exchanges per thread
+
+
+def run_agent(user_text, channel, thread_ts, thread_key=None):
     confirm = "CONFIRM DEPLOY" in user_text
-    messages = [{"role": "user", "content": user_text}]
+    history = list(THREADS.get(thread_key, [])) if thread_key is not None else []
+    messages = history + [{"role": "user", "content": user_text}]
     for _ in range(18):  # iteration cap
         resp = client.messages.create(model=MODEL, max_tokens=2048, system=SYSTEM, tools=TOOLS, messages=messages)
         if resp.stop_reason == "tool_use":
@@ -158,8 +171,10 @@ def run_agent(user_text, channel, thread_ts):
             messages.append({"role": "user", "content": results})
             continue
         # final text
-        text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text").strip()
-        post(channel, text or "(done)", thread_ts)
+        text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text").strip() or "(done)"
+        post(channel, text, thread_ts)
+        if thread_key is not None:
+            THREADS[thread_key] = (history + [{"role": "user", "content": user_text}, {"role": "assistant", "content": text}])[-MAX_HISTORY:]
         return
     post(channel, "Stopped — hit the step limit. Ask me to continue if needed.", thread_ts)
 
