@@ -19,8 +19,9 @@ git config --global --add safe.directory '*'
 # Push uses the token transparently.
 git config --global url."${AUTH}/".insteadOf "https://github.com/"
 
-# Install platform deps so Bez can build/typecheck before deploying.
-(cd /app/repos/GK12-Platform && npm install --no-audit --no-fund || true)
+# Install platform deps in the background so the health server / socket come up
+# immediately (Cloud Run needs the port bound fast). Bez can also run this on demand.
+(cd /app/repos/GK12-Platform && npm install --no-audit --no-fund >/tmp/npm.log 2>&1 || true) &
 
 cd /app
 exec python scripts/bez_socket.py
