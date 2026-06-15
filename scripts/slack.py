@@ -9,6 +9,7 @@ Usage:
   python scripts/slack.py read [#channel] [limit]        # recent messages (default #aios, 15)
   python scripts/slack.py post "<text>" [#channel]        # post a message (default #aios)
   python scripts/slack.py reply <thread_ts> "<text>" [#channel]   # reply in a thread
+  python scripts/slack.py dm <email> "<text>"             # direct-message a user by email
 """
 
 import json, os, sys, urllib.request, urllib.parse, urllib.error
@@ -111,6 +112,14 @@ def cmd_reply(thread_ts, text, channel=DEFAULT_CHANNEL):
     print(f"replied in {channel} thread {thread_ts} (ts={r['ts']})")
 
 
+def cmd_dm(email, text):
+    """DM a user by email. Resolves email -> user ID, then posts to that user (Slack
+    opens/uses the bot↔user DM). Needs the users:read.email scope on the bot token."""
+    uid = call("users.lookupByEmail", {"email": email})["user"]["id"]
+    r = call("chat.postMessage", {"channel": uid, "text": text}, post=True)
+    print(f"DM'd {email} ({uid}) (ts={r['ts']})")
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -128,6 +137,9 @@ def main():
     elif cmd == "reply":
         if len(a) < 3: print('usage: reply <thread_ts> "<text>" [#channel]'); sys.exit(1)
         cmd_reply(a[1], a[2], a[3] if len(a) > 3 else DEFAULT_CHANNEL)
+    elif cmd == "dm":
+        if len(a) < 3: print('usage: dm <email> "<text>"'); sys.exit(1)
+        cmd_dm(a[1], a[2])
     else:
         print(f"unknown command: {cmd}\n{__doc__}"); sys.exit(1)
 

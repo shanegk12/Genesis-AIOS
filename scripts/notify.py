@@ -9,8 +9,10 @@ Auth strategy:
 
 Usage:
   python notify.py "message"          # run summary
-  python notify.py --morning          # morning briefing (start of run)
   python notify.py --failure "text"   # crash report
+
+The morning briefing moved out of email — see scripts/morning_briefing.py
+(8 AM ET per-person Slack DMs).
 """
 
 import base64, email.mime.multipart, email.mime.text
@@ -210,17 +212,6 @@ def notify(summary_line: str):
     send_email(f"GK12 Pipeline — {summary_line}", html)
 
 
-def notify_morning(pending_count: int, batch_size: int):
-    stats = _load_stats()
-    html  = _build_html(
-        headline = "Morning Briefing",
-        body_html= (f"<p>Pipeline starting now. Processing up to <strong>{batch_size}</strong> of "
-                    f"<strong>{pending_count}</strong> pending lessons.</p>"),
-        stats    = stats,
-    )
-    send_email("GK12 Morning Briefing — Pipeline Starting", html)
-
-
 def notify_failure(error_text: str):
     stats = _load_stats()
     body  = f'<div class="crash"><strong>Pipeline crashed:</strong><pre>{error_text[:3000]}</pre></div>'
@@ -236,11 +227,7 @@ def notify_failure(error_text: str):
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if "--morning" in args:
-        stats = _load_stats()
-        pending = stats["pending"] if stats else 0
-        notify_morning(pending, 20)
-    elif "--failure" in args:
+    if "--failure" in args:
         idx = args.index("--failure")
         msg = args[idx + 1] if idx + 1 < len(args) else "Unknown error"
         notify_failure(msg)

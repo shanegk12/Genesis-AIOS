@@ -187,7 +187,8 @@ def dispatch():
     parent = client.queue_path(PROJECT_ID, LOCATION, QUEUE_NAME)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
 
-    pm_agent.notify_morning(len(queue), batch)
+    # (Retired) The old morning-email briefing was sent here. Replaced by the
+    # standalone 8 AM ET Slack briefing — scripts/morning_briefing.py.
 
     queued = []
     failed = []

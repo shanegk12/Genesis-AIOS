@@ -20,6 +20,20 @@ Keep it terse. Future-you will thank present-you for capturing the *why*, not ju
 
 ---
 
+## 2026-06-15 — Morning briefing: email pipeline retired, replaced by per-person Slack DMs
+
+**Decision:** Killed the old 8 AM "morning briefing" email (`notify.py --morning`, fired as a side-effect of the lesson pipeline, Shane-only, never ran on a real schedule). Replaced with `scripts/morning_briefing.py`: reads open tasks from the platform PM board (Firestore `pm_issues`, via REST), buckets by assignee (overdue / this week / in progress / queued), and has Claude (claude-sonnet-4-6) write a short DM in Shane's voice to each of Cade (QC), Shane (project progress + items), and Ethan (business). Delivery via `slack.py dm <email>`. To feed it automatically: sync route now auto-assigns QC-source tasks to Cade, and moving a task to In Review auto-assigns it to Shane.
+
+**Why:** The old briefing was vestigial (tied to a winding-down content pipeline), email-only, and one-recipient. The team needs role-specific morning context, and the platform now holds the dates/tasks to source it. Hybrid (deterministic data + Claude voice) keeps it reliable and in-voice.
+
+**Alternatives considered:** Pure deterministic template (no voice); pure Claude agent doing everything; platform cron route using Gemini instead of a separate Python job. Direct Firestore gRPC client (hangs off-GCP — switched to REST).
+
+**Open blockers (manual, Shane):** (1) Slack bot needs `users:read.email` + `im:write` scopes added + app reinstall before DMs work. (2) Deploy target: Cloud Run job + Cloud Scheduler (8 AM ET, SA reads Firestore cleanly) — needs deploy. Local ADC is reauth-expired so it can't run from this machine.
+
+**Owner:** Shane.
+
+---
+
 ## 2026-05-14 — Google Docs tab creation: working method established
 
 **Decision:** Use `gws docs documents batchUpdate` with `addDocumentTab` requests, invoked via Bash (not Python subprocess) with JSON body passed through shell variable from a temp file.
