@@ -44,6 +44,21 @@ Match the register in `references/voice.md`. Warm but professional. Faith-presen
 
 The **custom platform** (Firebase App Hosting `genesis-modularity`, Firestore, Stripe, Resend, GA4, Gemini/Genkit, Bez the AI assistant) is the center of gravity; deploy = push `staging` → ff `main`. Gmail + Google Calendar are connected via Claude MCP connectors; Google Drive/Docs via the Python pipeline scripts. **Slack** is being linked for two-way chat (setup in progress). QuickBooks planned for bookkeeping at launch. No task tracker yet. LearnWorlds is **retired**. Full registry — including the deploy workflow and Slack setup steps — in `connections.md`.
 
+## Memory hygiene (team convention)
+
+Your file-based memory is **per-user and per-machine** — it is NOT in this repo and does
+not sync between Shane's and Ethan's clones. Each person's AIOS keeps clean memory the same way:
+
+- Prefer **durable facts** (architecture, decisions + why, ongoing constraints, how-tos) over
+  **dated status snapshots** (counts, progress, "pending/blocker", a single session's changelog).
+  Transient status belongs in the PM board or `decisions/log.md`, not memory.
+- If a snapshot genuinely has cross-session value, mark its first body line
+  `> SNAPSHOT (YYYY-MM-DD) — delete once shipped/superseded.`
+- **Update memory in place** when work ships; don't stack a new dated file beside the old one.
+- Keep `MEMORY.md` honest: one index line per memory file; remove lines for deleted files.
+- Run a staleness sweep during `/audit` (Step 6 proposes deletions/updates — approval-gated) or
+  when starting fresh platform work. Verify any file/function/flag citation against the repo first.
+
 ## How you work with me
 
 - Be direct, concise, and clear. No fluff.
