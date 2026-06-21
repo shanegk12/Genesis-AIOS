@@ -24,7 +24,7 @@ import argparse, json, os, re, sys, urllib.request, urllib.error
 MANIFEST_PATH    = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 INTERACTIVES_DIR = os.path.join(os.path.dirname(__file__), "interactives")
 
-CLAUDE_MODEL = "claude-opus-4-7"
+CLAUDE_MODEL = "claude-sonnet-4-6"
 CLAUDE_URL   = "https://api.anthropic.com/v1/messages"
 
 NAVY = "#1e3a5f"

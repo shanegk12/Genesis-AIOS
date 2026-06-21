@@ -15,7 +15,7 @@ import argparse, json, os, re, sys, urllib.request, urllib.error
 
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 
-GEMINI_MODEL = "gemini-2.5-pro"
+GEMINI_MODEL = "gemini-2.5-flash"
 GEMINI_URL   = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 
 REQUIRED_SECTIONS_CREATIONEERING = [

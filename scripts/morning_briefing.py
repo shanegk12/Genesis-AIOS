@@ -36,7 +36,7 @@ if hasattr(sys.stdout, "reconfigure"):
 PROJECT_ID = "genesis-modularity"
 COLLECTION = "pm_issues"
 BOARD_BASE = "https://gk12academy.com/admin/pm"
-MODEL = "claude-sonnet-4-6"
+MODEL = "claude-haiku-4-5-20251001"
 CLOSED = {"done", "canceled"}
 
 # Who gets a briefing, and how it's framed.
