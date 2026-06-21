@@ -40,7 +40,7 @@ def _env(key, default=None):
 
 SLACK_TOKEN = _env("SLACK_BOT_TOKEN")
 ANTHROPIC_KEY = _env("ANTHROPIC_API_KEY")
-MODEL = _env("BEZ_MODEL", "claude-sonnet-4-6")
+MODEL = _env("BEZ_MODEL", "claude-haiku-4-5-20251001")
 CWD = _env("BEZ_CWD", "D:/GK12-Platform")
 POLL = int(_env("BEZ_POLL_SECS", "5"))
 CHANNEL_NAME = _env("BEZ_CHANNEL", "#aios")
@@ -160,7 +160,7 @@ def run_agent(user_text, channel, thread_ts, thread_key=None):
     history = list(THREADS.get(thread_key, [])) if thread_key is not None else []
     messages = history + [{"role": "user", "content": user_text}]
     for _ in range(18):  # iteration cap
-        resp = client.messages.create(model=MODEL, max_tokens=2048, system=SYSTEM, tools=TOOLS, messages=messages)
+        resp = client.messages.create(model=MODEL, max_tokens=1024, system=SYSTEM, tools=TOOLS, messages=messages)
         if resp.stop_reason == "tool_use":
             messages.append({"role": "assistant", "content": resp.content})
             results = []
