@@ -1,6 +1,19 @@
 # Genesis Education Platform — Monthly Costs & Optimization Playbook
 
-> Living doc. Last updated 2026-06-11. Platform = D:\GK12-Platform (Next.js + Firebase App Hosting + Firestore + Cloud Storage + Gemini). Update as usage and architecture change.
+> Living doc. Last updated 2026-06-21. Platform = D:\GK12-Platform (Next.js + Firebase App Hosting + Firestore + Cloud Storage + Gemini). Update as usage and architecture change.
+
+## Decisions made 2026-06-21 (pre-launch efficiency pass)
+
+- **AI tutor gated as "Coming Soon"** — `TUTOR_ENABLED = false` in `src/lib/features.ts`. Eliminates tutor API cost at launch. Re-enable when self-sustaining. Stepping stone: Gemini Flash Lite (~$1–5/mo at 500 students).
+- **AIOS model downgrades:** qc_agent.py gemini-2.5-pro → flash; interactive_agent.py claude-opus-4-7 → sonnet; morning_briefing.py sonnet → haiku.
+- **Bez default model:** claude-sonnet → claude-haiku-4-5 (10x cheaper per interaction). Override via `BEZ_MODEL` env var.
+- **Custom model for tutor:** deferred. Self-hosting a GPU costs $250–400/mo minimum vs. $8–10/mo API at 500 students. Break-even is ~5,000+ students.
+- **Anthropic Batch API:** skip for now (volume too low — saves <$0.10 at current scale). Revisit post-launch for bulk QC runs.
+- **Prompt caching on Bez:** worth checking if system prompt is 4K+ tokens. One `cache_control` field = potential 10x savings on repeated turns.
+- **Cloud CDN (standalone):** DON'T add. Firebase App Hosting CDN already handles this for free.
+- **Firebase App Check:** add before launch (free, ~2 hrs — protects Firestore/Storage from abuse).
+- **Cache-Control headers on Storage uploads:** highest-leverage storage win. Set `public, max-age=31536000, immutable` in `uploadLessonImageSecure` and any other upload helpers.
+- **Bez Cloud Run billing mode:** running `--no-cpu-throttling` (always-allocated CPU). This is the main real cost today (~$15–25/mo for 1vCPU/2Gi). Consider switching to CPU-throttled if Bez is mostly idle; Socket Mode listening doesn't require always-on CPU.
 
 ## TL;DR
 - **Pre-launch today:** ~**$3–5/month** (basically Secret Manager + domain + a little storage). The platform runs inside Google's free tiers.

@@ -314,3 +314,41 @@ gcloud auth application-default login --client-id-file="D:\AIOS\oauth-client.jso
 **Owner:** Shane / AIOS
 
 ---
+
+## 2026-06-21 — Feature scope reduction: AI tutor + blog as "coming soon" for launch; defer custom model
+
+**Decision:** Mark AI Study Assistant (in-lesson tutor, parent tutor history/toggle) as "Coming Soon" for the August 2026 launch via a single `TUTOR_ENABLED = false` flag in `src/lib/features.ts`. Blog is already admin-only with no public route. Defer building a custom/fine-tuned model for the tutor until post-launch at meaningful scale.
+
+**Why:** Pre-revenue with no sales yet — every recurring API cost (Gemini per-token for tutor, Anthropic for Bez/QC) needs to be self-sustaining before it's a launch feature. Lean rollout reduces ongoing cost exposure and simplifies the product story at launch. Custom model research (June 2026) showed self-hosting a GPU costs $250–400/mo minimum vs. ~$8–10/mo for Gemini Flash at 500 students — not economically rational until 5,000+ students. Blog requires a public reader route that doesn't exist yet anyway.
+
+**Re-enable path:** Flip `TUTOR_ENABLED = true` in `src/lib/features.ts` — one line, instant. Per-student `tutorEnabled` Firestore preferences are preserved so parents retain per-child control when it re-enables. For the model: switch to Gemini Flash Lite when activating (same SDK, ~$1–5/mo at 500 students, 5-min migration). Custom fine-tuning only if monthly tutor cost exceeds ~$200 (implies 10,000+ active students).
+
+**Also shipped same session:** model downgrades in AIOS scripts (qc_agent pro→flash, interactive_agent opus→sonnet, morning_briefing sonnet→haiku) — saves ~$15–30 pre-launch + $2.85/mo ongoing.
+
+**Owner:** Shane
+
+---
+
+## 2026-06-21 — Bookkeeping: lean in-platform finance, defer accounting SaaS
+
+**Decision:** Don't buy QuickBooks (or any paid accounting SaaS) yet. Build bookkeeping into the GK12 platform: revenue read live from Stripe + a small admin-entered expense ledger in Firestore, surfaced at `/admin/finance` (P&L cards, revenue detail, expense CRUD) with a monthly-close cron that snapshots the P&L and posts a Gemini-voiced summary to Slack. Defer a formal double-entry ledger (Wave free, or QBO) until an accountant or tax filing actually requires it; at that point export from the platform or connect Stripe→Wave directly.
+
+**Why:** Pre-revenue with a single Stripe revenue stream — a paid QBO seat is premature spend, and most of the value (net income, fees, runway, monthly close) comes from data the platform already has. Keeps with the platform-first / lean ethos. Reuses existing secrets (STRIPE_SECRET_KEY, SLACK_BOT_TOKEN, CRON_SECRET) — no new infra except a monthly Cloud Scheduler job (still TODO).
+
+**Alternatives considered:** QuickBooks Online now (overkill pre-revenue, ~$35–90/mo); Wave free immediately (still external, and the AIOS automation layer is the real leverage); AIOS Python scripts instead of platform routes (Shane chose platform admin route + cron).
+
+**Owner:** Shane / AIOS
+
+---
+
+## 2026-06-16 — Workbook: cross-lab data references + formula calculator + LaTeX steps
+
+**Decision:** Add three linked workbook capabilities for the middle-school course, built on one primitive: addressable student data via human-named reference keys. (1) Named keys on workbook inputs (`refKey` on short-answer, per-column keys on data tables) — keys, not random `block.id`, are the reference so they survive re-authoring and frozen content versions. (2) A `wb-calculator` block: variables bound to keys + block-level constants, a free-form formula run through a safe (no-eval) shunting-yard parser, result written back as its own addressable field. (3) Worked calculation steps rendered in LaTeX via the existing KaTeX renderer (symbolic → values substituted → result), built from the same parsed AST so steps always match the number. Cross-lab references (a `wb-prev-data` display block + cross-lesson calculator inputs) come in Slice 2. Sidebar/multi-window deferred. Full plan: `D:\GK12-Platform\docs\workbook-calculator-plan.md`.
+
+**Why:** The build course needs students to reuse baseline data from prior labs and compute on it (density, average speed, etc.); the workbook already stores every answer at an addressable `(lessonId, fieldId)`, so this is mostly a reference layer + a safe evaluator on top. Named keys (vs raw block ids) chosen for version stability. Free-form formula (vs fixed-operation dropdown) for flexibility, made safe with a dependency-free parser. Slice 1 (same-page) ships value with zero cross-lesson plumbing; Slice 2 adds the headline cross-lab flow.
+
+**Alternatives considered:** Reference raw `block.id` (breaks on re-author/versioning); fixed operation dropdown (less flexible); mathjs/expr-eval dependency (heavier, against the no-eval ethos); sidebar TOC + multi-window as the data-reuse mechanism (only enables manual retyping, not structured reuse — deferred).
+
+**Owner:** Shane
+
+---
