@@ -162,17 +162,36 @@ Cadence        {bar}  {n}/25  {label}
 
 ## Suggested next: {single most leveraged action}
 
+## Memory hygiene
+{N} memory files scanned. {"All current." OR a short list:}
+- `{file}` → {delete | update | re-index} — {one-line reason}
+{If any: end with} → Apply these memory fixes? (approval-gated)
+
 ---
 Structural gaps only. To explore CAPABILITY gaps (what your AIOS could DO that it can't yet), run /level-up after this audit.
 ```
 
 ### Step 5: Offer to save the report
 
-After printing, ask: "Save this audit to `audits/audit-{date}.md` so you can track score over time?" If yes, write it (creating `audits/` folder if needed). This is the only writable side effect.
+After printing, ask: "Save this audit to `audits/audit-{date}.md` so you can track score over time?" If yes, write it (creating `audits/` folder if needed). This is the only writable side effect that needs no further approval.
+
+### Step 6: Memory hygiene pass
+
+Memory rot is a Context gap that doesn't show in the score, so check it every audit. Keep this CHEAP — don't read every memory file in full. See `feedback_memory_hygiene` for the convention.
+
+1. List the memory dir (`~/.claude/projects/<id>/memory/*.md`) and read `MEMORY.md`.
+2. Flag likely-stale entries using cheap signals — no need to open every file:
+   - A body that opens with `> SNAPSHOT (YYYY-MM-DD) …` whose date is well past.
+   - Filenames or titles that are dated logs (`*_YYYY_MM_DD`, "as of …", "state", "pending", "next session").
+   - Index lines describing work that has since shipped.
+   - Index/disk mismatches: a `.md` (other than MEMORY.md) with no index line, or an index line whose file is gone.
+3. For each flagged item, VERIFY before asserting — check the claim against current code/git (file/function/flag still exists? work shipped?). Only flag what you can ground.
+4. Report a short **Memory hygiene** block in the audit output (see template): N files scanned, the stale candidates, and the proposed action per file (delete / update / re-index).
+5. **Mutations are approval-gated.** Do NOT delete or rewrite memory files as part of the audit. Offer: "Want me to apply these memory fixes?" and act only on a yes. (The audit's own report write in Step 5 is the only unprompted write.)
 
 ## Notes
 
-- **Read-only by default.** Never modify CLAUDE.md, memory, skills, or any project files. Only optional write is the audit report.
+- **Read-only by default.** Never modify CLAUDE.md, memory, skills, or any project files. The only unprompted write is the audit report (Step 5). The Step 6 memory-hygiene fixes are proposed in the report and applied ONLY on explicit approval.
 - **Be flexible about file names.** Don't penalize for using non-canonical names if intent is captured.
 - **Be honest, not generous.** A 95/100 is a flex. Most setups land 40-70.
 - **Don't suggest skills that don't exist.** Point at what's actually available.
