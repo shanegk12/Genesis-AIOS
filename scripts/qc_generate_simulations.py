@@ -2,7 +2,7 @@
 qc_generate_simulations.py
 
 Generates a proper interactive simulation or game (simulation.html) for every
-lesson using Claude claude-sonnet-4-6. Unlike the existing concept.html placeholder files
+lesson using Claude claude-sonnet-5. Unlike the existing concept.html placeholder files
 (which are static text overviews), simulation.html is a fully interactive
 HTML5 experience — drag-and-drop, sliders, step-through simulations, scored
 quizzes, or decision trees — built specifically around the lesson's content.
@@ -35,7 +35,7 @@ INTERACTIVES_DIR = Path(__file__).parent / "interactives"
 MANIFEST_PATH    = Path(__file__).parent / "lessons_manifest.json"
 LOG_PATH         = Path(__file__).parent / "simulation_gen_log.json"
 
-CLAUDE_MODEL = "claude-sonnet-4-6"
+CLAUDE_MODEL = "claude-sonnet-5"
 CLAUDE_URL   = "https://api.anthropic.com/v1/messages"
 NAVY = "#1B3A5C"
 GOLD = "#C9A84C"

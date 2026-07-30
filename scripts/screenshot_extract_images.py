@@ -53,7 +53,7 @@ def _get_platform_key() -> str:
     return ''
 PLATFORM_KEY = _get_platform_key()
 ANTHROPIC_KEY    = os.environ.get("ANTHROPIC_API_KEY", "")
-CLAUDE_MODEL     = "claude-sonnet-4-6"
+CLAUDE_MODEL     = "claude-sonnet-5"
 
 # Minimum crop size — skip tiny regions (icons, bullets, decorative elements)
 MIN_WIDTH_PX  = 80
@@ -165,7 +165,7 @@ def detect_images_in_screenshot(img_path: Path) -> list[dict]:
 
     payload = json.dumps({
         "model": CLAUDE_MODEL,
-        "max_tokens": 4096,
+        "max_tokens": 6144,
         "messages": [{
             "role": "user",
             "content": [

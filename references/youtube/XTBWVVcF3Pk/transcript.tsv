@@ -1,0 +1,346 @@
+0.00	Since we all got access to Fable 5, I've
+1.88	spent a few thousand dollars in usage
+3.44	credits just playing around with it,
+4.88	understanding how it works, and
+5.88	understanding more importantly how we as
+7.96	people can get the most out of a model
+9.48	this powerful. And I think one of the
+10.72	most important takeaways I've had is
+12.12	that yes, Fable 5 is an incredible
+13.84	model, don't get me wrong, but the model
+16.60	isn't really the moat. So, think about
+18.88	it like this. You've got a beginner with
+20.32	AI, and you've got someone like Andre
+21.96	Karpathy, for example. If you give the
+23.92	beginner Fable 5, and you give Karpathy
+26.52	Sonnet 3.7,
+28.40	Karpathy will build something better
+30.20	than the beginner, even though the
+31.40	beginner's model is exponentially
+33.48	better. And that's because of the fact
+35.28	that it's way more important the way you
+36.68	instruct it and the systems you build
+38.24	and the loops you build around the
+39.68	model. Here's another example I want you
+40.96	to think about. I've obviously tested
+42.48	Fable 5 a ton. I've also tested Opus a
+44.48	ton and Sonnet a ton. One of my favorite
+46.16	things to do lately is to use the
+47.68	dynamic workflows that Claude Code lets
+49.20	us, you know, spin up. And I've done a
+50.92	ton of dynamic workflows where I said,
+52.12	"Hey Fable, design a workflow, and then
+54.28	all of your little sub-agents, have
+56.08	those be Fable as well." And then I
+57.80	would do the exact same tests with Fable
+59.80	orchestrating a bunch of Opus
+61.04	sub-agents, and Fable orchestrating a
+62.52	bunch of Sonnet agents. And what I found
+64.20	is that when I run those dynamic
+65.28	workflows, the results are about the
+67.08	same, even though the Fable runs costed
+69.56	me exponentially more. So, anyways, the
+71.60	point I'm trying to make, you can't keep
+73.04	the model's intelligence, but you can
+74.64	keep its process. So, today what I want
+76.52	to talk about is basically, really
+77.68	quickly, how can you turn a model like
+79.28	Opus into something that feels more like
+80.88	Fable? And the first thing is that you
+82.32	have to think of this model more like a
+83.88	teacher rather than a workhorse. When we
+86.24	all got access to Fable, I think we were
+87.64	basically just pushing it to its limits.
+89.32	And Anthropic even put out some stuff
+90.52	about like seeing how it's really good
+92.76	at like long tasks, you know, working
+95.44	towards a goal, planning it out,
+96.68	executing it, and then verifying it. And
+98.36	it is really good at that, but the whole
+100.12	idea of model routing is basically
+102.44	finding that balance, you know? This
+104.28	task takes this much intelligence, so
+106.52	why would you need a model that has this
+107.96	much intelligence and cost you this much
+109.88	for something that you could, you know,
+111.08	grab a much smaller, cheaper model, and
+113.24	you could get the task done at the same
+114.68	level of quality. And that is the whole
+116.48	name of the game, and that's going to be
+117.64	a very important skill to master as we
+119.52	head into, you know, the next years of
+121.48	AI. So, rather than having Fable, you
+123.84	know, plan everything out and do
+125.08	everything, we're trying to extract the
+127.04	way that Fable thinks, and then let
+128.88	other smaller models think it like that
+131.12	and execute like that. I've had Fable go
+133.16	through my setups and make improvements
+134.72	and go through my skills and improve
+136.04	them, and I realized that I was just
+137.56	treating Fable like kind of like a
+139.28	co-founder or more like an officer at my
+141.28	company rather than just an employee.
+143.08	Kind of like a senior engineer that is
+144.72	about and it's trying to package up
+146.68	everything that it knows to hand over to
+148.52	the new cohort of junior engineers
+150.40	that's going to come over or come in and
+152.32	take its place. So, one thing that
+153.92	happened recently was the system prompts
+156.00	got leaked from Cloud Fable 5. So, I
+158.16	read through this whole thing, I had
+159.56	Fable 5 read through this whole thing,
+161.04	and we picked out some important things
+162.80	that we noticed from this prompt itself.
+165.36	Partial recognition from training does
+166.84	not mean current knowledge, meaning just
+168.56	because something's in your memory, you
+169.72	should probably verify it. Very
+171.44	similarly over here, a prompt implying a
+173.24	file is present doesn't mean one is. So,
+174.92	it's told to check that things actually
+176.44	exist. So, basically, making sure at
+178.68	every step of the way that what it's
+180.20	doing and what it's done is accurate.
+182.32	Address even an ambiguous query before
+184.40	asking for clarification. So, answer
+186.12	first, then ask. One question max.
+188.48	Acknowledge what went wrong, stay on
+189.96	problem, maintain self-respect. One for
+192.52	signal facts, three to five for medium
+194.12	tasks, five to 10 for deeper research
+195.92	comparison. So, basically talking about
+197.48	effort. So, yes, we have the discussion
+199.00	around what model is right for the task,
+200.48	but we also have the discussion around
+202.04	what effort level is right for the task.
+203.92	And something that I like to look at is
+205.96	this example, which was on the release
+208.16	blog for Cloud Fable 5 and Mythos 5. So,
+211.08	this compares Fable 5 and Opus 4.8 as
+213.88	well as GPT 5.5 when it comes to the
+216.32	score on the Y axis, the cost on the X
+219.04	axis, and then we see
+221.04	each of these models, and we see
+222.12	different effort levels. So, if you're
+224.08	one of those people that has just turned
+225.24	on Fable 5 and you're just using it on
+226.72	the default effort level, or same with
+228.28	Opus, and you never play with those,
+230.08	then definitely start playing around cuz
+231.60	it gets a little interesting. Like here
+233.04	you'll notice that Fable 5 on low is
+235.48	pretty similar to Opus 4.8 on high. Now,
+238.64	Fable 5 is a little bit more expensive
+239.96	and a little bit higher quality, as you
+241.96	can see here, but they're kind of
+243.60	similar. But that doesn't always mean
+245.32	that higher effort is actually better.
+247.80	I've had a lot of times where with Fable
+249.40	I'm just basically using it on high,
+250.84	because when I use X higher max, or even
+252.76	on Opus, when I use X higher max, it
+254.92	starts to go way longer, get way more
+256.80	expensive, and then it overthinks, and
+258.68	it, you know, second-guesses itself, and
+260.68	then it ends up producing something
+261.76	worse than if I just would have gone
+263.20	with Opus 4.8 on high, or Fable on high.
+265.72	Anyways, after reading through the
+267.00	system prompts and after playing with
+268.16	the models for so long, there are two
+269.56	things that I want you guys to do. This
+271.08	first one is to basically take the way
+272.64	that you have been playing with Fable,
+274.28	and the the hardness, or, you know,
+276.12	whatever you want to call it, however
+277.64	you've been using it, and turn that into
+279.52	something that Opus can do, and that
+280.96	Sonic can do. So basically we're
+282.36	extracting the Fable method. Now, one
+284.40	thing that I would encourage you to do
+285.44	is, if you've ever gotten a deliverable
+287.16	from Fable that you just loved, and you
+288.68	couldn't really explain what you loved
+289.80	about it, have Fable analyze it, or have
+292.32	Opus analyze it. And if you can look
+294.24	back at the session, that's even better.
+295.60	What did you think about to get here?
+297.08	How did you get here? What did you do to
+298.44	prove that it worked? How were you able
+299.84	to get an output that was just so good?
+301.84	And then extract that information, and
+303.48	turn that into a skill. So I basically
+305.24	have this skill now called Fable mode.
+307.36	And whenever I want Opus to use Fable
+309.40	mode, or if I want, you know, if we got
+311.00	a really hard problem in front of us, I
+312.60	tried using Opus 4.8 with Fable mode,
+314.80	and it feels really good. It just feels
+316.52	like the model has been elevated a
+317.88	little bit, because it has this, you
+319.88	know, Fable prompt kind of injected into
+322.24	it. And it works on these five gates.
+323.96	So, scoping, evidence, attacking,
+327.48	verifying, and then reporting. And this
+329.52	is almost like the way you set your, you
+331.24	know, {slash} goal prompts, and you use
+332.68	dynamic workflows, and you basically set
+334.16	these loops, but we're doing this as a
+335.68	skill file as well. Now, one really
+337.44	important thing about scoping, and and
+338.88	what people call, you know, like
+339.80	planning, is there's a big difference
+342.12	between just planning something out, as
+343.88	far as like, "Hey, here are all the
+344.84	steps, plan that out, and go do it." And
+347.20	then there's also the idea of playing
+349.40	devil's advocate and thinking about,
+350.64	okay, what about everything that could
+352.04	possibly go wrong? What if we explore
+353.92	all of the unknowns in this plan? And
+355.76	that is something that Fable does a
+357.20	really good job at, which is why if I
+359.16	have Fable spin up a dynamic workflow to
+361.00	help me achieve some end goal, and then
+362.80	once it's planned out every single
+363.96	possible step, and it thinks about every
+365.88	single thing that could go wrong, and
+367.64	then designs a dynamic workflow in a way
+369.32	where Sonnet can go do all the execution
+371.44	and just report back to Fable and keep
+373.16	sending everything back to Fable, then
+375.12	Fable can keep designing more steps in
+376.52	that process. And that is why when I do
+379.08	dynamic workflows with Fable and Sonnet,
+380.88	it's pretty similar to results when I do
+383.12	dynamic workflows with Fable and Fable.
+385.08	And to me that was a big like lightbulb
+386.48	moment. Like, why is this just as good
+389.32	and it's significantly cheaper? So, you
+390.96	can just start by saying something like
+392.08	this. Write a complete installable skill
+394.16	file that makes Opus 4.8 operate with
+396.08	your judgment, your planning,
+397.48	verification, and reasoning habits, and
+399.16	activate it on something like Fable
+400.40	mode. So, for example, right here you
+402.00	can see this is my Fable mode skill,
+403.40	which I'll attach in my free skill
+405.28	community completely for free. The link
+406.68	for that is down in the description.
+407.80	Just join this and then go to the
+409.04	classroom and click on all YouTube
+410.28	resources and you can find everything
+411.92	that I've ever dropped on YouTube for
+413.00	free. So, that's where you'll find the
+414.36	Fable mode skill, but you can also just
+415.68	build this yourself. And you can see
+416.92	here that this walks through Fable's
+418.64	working discipline, so that any model
+420.48	can run it, which means you could even
+422.08	have GPT 5.5 run this if you want, or
+424.32	even open source models run this if you
+425.64	want. Anyways, it basically goes through
+427.12	those five gates. So, scoping before you
+428.96	work and then, you know, we get into
+430.24	details, evidence before reasoning,
+432.36	reasoning adversarially, verifying
+434.76	before or declaring done, and then
+437.00	calibrating. You've also got a few
+438.24	standing habits and a few things to look
+439.84	at, which like I said, you guys can
+441.48	inspect this file if you want to, but
+443.44	this being given to Opus 4.8 makes Opus
+446.44	feel, like I said, a little bit
+448.04	elevated. So, that has been a really
+449.80	helpful strategy. And then something
+451.16	that bolts right onto that really well
+452.76	is just, once again, the idea of model
+454.56	routing and figuring out how Fable or
+457.24	how some smart model can route to the
+459.44	small ones when needed. And something
+461.16	that I've been doing lately is been
+462.44	giving my Claude basically a table of
+465.32	different models that are in the toolkit
+467.76	and when to use them. So you could also
+469.20	have a delegate to Codex or you could
+470.48	have a delegate to open source models.
+472.16	And this like I said is something that's
+473.40	going to be very very big when companies
+475.76	are starting to think about the unit
+476.88	economics and you know, small teams and
+479.00	you yourself maybe you have an AI budget
+480.76	per month. This is the type of stuff
+482.16	that's going to separate people that are
+483.32	getting you know, a ton more for a ton
+485.88	less. So a good way to split this up is
+487.56	basically saying, okay, here are the
+488.72	different models in our toolkit. Here's
+491.08	how much they cost, you know, a higher
+492.68	number meaning a better cost score, you
+494.80	know, cheaper. And then we have
+496.20	intelligence and taste. And if you want
+497.52	to throw in some other categories that
+498.64	are based on your workflow, feel free.
+500.76	But intelligence is kind of like how
+502.80	smart you feel like they are, how much
+503.92	they understand you, how good they are
+505.36	at maybe reviewing code and things like
+507.16	that. And then on the taste side, this
+509.04	is what I think more of like the, you
+510.72	know, creativity, the thinking out of
+512.76	the box, UI/UX design, things like that.
+515.56	And so this can really help when you're
+516.84	designing these agent teams or you're
+518.28	delegating to sub agents and you're
+519.44	spinning up dynamic workflows because
+521.48	sometimes your dynamic workflows can
+522.68	utilize a bunch of different Sonnet ones
+524.08	and Haiku ones and then even Opus ones
+526.28	as well. So here's an example of an
+527.88	actual test that I had run where I used
+530.00	Opus as the orchestrator and I used Opus
+532.00	with this prompt from earlier that we
+533.48	talked about. Oh, where is it? Sort of
+535.08	like the the Fable mode prompt and it
+537.24	used a bunch of different Sonnet workers
+539.44	and Opus workers and Haiku workers. And
+541.80	those were three different tests. And
+543.04	the one where the Opus orchestrator
+544.28	delegated to all the Haiku scouts, it
+546.16	was this much cheaper, you know, about
+548.00	three times cheaper and the result was
+550.48	the exact same. So similar to my example
+552.28	with the Fable ones, that is something
+554.00	to be thinking about big time. So I know
+555.72	this one was quick and I wanted to make
+556.96	it quick, but I've just been seeing a
+558.24	ton of comments and a ton of people in
+559.52	the communities asking about, you know,
+561.36	kind of freaking out about the fact that
+562.68	Fable is going to be taken away. It is
+564.56	going to come back to subscriptions,
+565.76	that's what Anthropic says at least. We
+567.28	don't know when, but it will be back.
+569.36	But all of this, you know, government
+570.48	getting involved and models being taken
+571.96	away stuff, really has me thinking about
+573.96	the fact that, you You we don't own
+576.48	anything. We don't own these models. So,
+578.20	what we can own is our processes, our
+580.40	systems, our methodologies, the way that
+581.92	we think about using these models. And
+583.68	also, we can own hardware, and we can
+585.56	own local models. So, I'm definitely
+586.76	going to be digging into a lot more of
+588.04	this type of stuff. So, let me know what
+589.76	you guys want to see around these
+590.52	topics. But, anyways, if you learned
+592.16	something new or you enjoyed the video,
+593.36	please give it a like. Helps me out a
+594.28	ton. And as always, I appreciate you
+595.76	guys making it to the end of the video,
+597.16	and I'll see you on the next one.
+598.72	Thanks, everyone.

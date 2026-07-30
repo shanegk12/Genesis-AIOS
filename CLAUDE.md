@@ -8,6 +8,10 @@ Read `references/3ms-framework.md` once. It's how Shane thinks about AI work. Mi
 
 > *The Three Ms of AI™ is a trademark of Nate Herk. © 2026 Nate Herk.*
 
+## Model routing
+
+Read `references/model-routing.md` before wiring any AI call into a script, an admin route, or an agent. It sets the provider split (Claude for dev/admin tooling, Gemini for student-facing and all image generation), the per-job model table with current pricing, and the orchestrator-plus-cheap-workers pattern.
+
 ## Your skills
 
 - `/onboard` — already run if you're seeing this filled in. Re-run any time to refresh from an edited `aios-intake.md`.

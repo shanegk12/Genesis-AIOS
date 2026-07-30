@@ -2,7 +2,7 @@
 Genesis K-12 Revision Agent
 
 Reads a QC-flagged lesson from Google Docs, rewrites the flagged section(s)
-using Claude (claude-opus-4-7), and writes the corrected full draft back to
+using Claude (claude-opus-5), and writes the corrected full draft back to
 the Google Doc tab.
 
 Standalone only — NOT wired into the automatic pipeline. Run after reviewing
@@ -31,7 +31,7 @@ from googleapiclient.discovery import build
 
 MANIFEST_PATH = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 
-CLAUDE_MODEL = "claude-opus-4-7"
+CLAUDE_MODEL = "claude-opus-5"
 CLAUDE_URL   = "https://api.anthropic.com/v1/messages"
 
 DOC_IDS = {
@@ -194,7 +194,7 @@ def find_section(draft, section_name):
 def call_claude(api_key, prompt):
     payload = json.dumps({
         "model":      CLAUDE_MODEL,
-        "max_tokens": 4096,
+        "max_tokens": 6144,
         "messages":   [{"role": "user", "content": prompt}],
     }).encode("utf-8")
 

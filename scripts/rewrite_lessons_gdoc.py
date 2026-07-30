@@ -42,7 +42,7 @@ MANIFEST_PATH = Path(__file__).parent / "lessons_manifest.json"
 LOG_PATH      = Path(__file__).parent / "rewrite_gdoc_log.json"
 OUTPUT_DIR    = Path(__file__).parent / "rewritten_lessons"
 
-CLAUDE_MODEL = "claude-sonnet-4-6"
+CLAUDE_MODEL = "claude-sonnet-5"
 CLAUDE_URL   = "https://api.anthropic.com/v1/messages"
 
 # Lessons NOT to rewrite — human-checked or screenshot-imported
@@ -339,7 +339,7 @@ callout: Use SPARINGLY — max 3 per lesson. Only when content genuinely stands 
       "tip" = actionable study tip or engineering insight
       "info" = important context students must not miss
       "warning" = common mistake or misconception
-      "biblical" = direct scripture quote or faith reflection
+      "biblical" = a specific scripture passage that genuinely fits this lesson's topic — let the engineering concept lead the search (craftsmanship, wisdom, order, strength, light, creation design, precision). Do not default to stewardship.
 
 vocab: Exactly ONE per lesson, placed after the intro section.
        Only include terms actually used and defined in the lesson.
@@ -377,7 +377,7 @@ Voice and tone rules:
 Block structure rules (match the examples exactly):
 - text blocks: h2 for major sections, h3 for sub-sections, <p> for paragraphs, <ul>/<li> for lists
 - callout blocks: "tip" for study tips / actionable insights, "info" for important context,
-  "biblical" for scripture or faith reflection, "warning" for common mistakes
+  "biblical" for a specific scripture passage that genuinely connects to this lesson's topic (not a generic stewardship reference — let the engineering concept lead the search), "warning" for common mistakes
 - vocab block: one per lesson, placed after the intro section
 - image blocks: place where a diagram or photo would help; leave src empty
 - accordion: only for genuinely optional/supplementary content — max 1–2 per lesson
@@ -420,7 +420,7 @@ callout: Use for:
       "tip" = helpful hints for completing the activity
       "info" = important context or definitions the student needs
       "warning" = common mistakes to avoid
-      "biblical" = scripture or stewardship connection
+      "biblical" = a specific scripture passage that genuinely connects to this activity's topic — research what the Bible says about the concept at hand, not a generic stewardship reference. Let the topic lead: craftsmanship, order, wisdom, precision, materials, teamwork, planning, creation design — find the passage that actually fits.
       Max 3 per activity.
 
 accordion-grid: PRIMARY block for tables with role/responsibility pairs, comparison charts,
@@ -445,7 +445,7 @@ Activity conversion rules:
 - Tables with roles/columns → accordion-grid blocks (each row = one item)
 - Fill-in-the-blank fields → text blocks with [Student fills in: description] placeholders
 - Objectives → callout block with variant "info" at the top
-- Faith or stewardship connections → callout block with variant "biblical"
+- Faith connections → callout block with variant "biblical". Find a specific scripture that genuinely addresses this lesson's concept — do NOT default to stewardship. Let the topic lead the scripture search (craftsmanship, wisdom, order in creation, precision, strength, light, planning, teamwork).
 - Keep instructions clear and step-by-step — students act on these during class
 - Grade 6-8 reading level; brief definitions for any business/engineering terms used
 
@@ -490,7 +490,7 @@ These are the QC-approved first unit lessons — match their style, tone, block 
 ---
 
 Now rewrite the lesson below using the SAME block structure, tone, and voice as the reference lessons above.
-The reference lessons are the gold standard — mirror how they open sections, weave in faith, integrate analogies, and vary block types.
+The reference lessons are the gold standard for block structure, heading style, reading level, and analogy technique. Mirror those. However, do NOT mirror their specific faith connections — find biblical passages that authentically fit this lesson's topic, not whatever the reference lessons use. Stewardship is not the default faith angle; let the engineering concept lead the scripture search. Similarly, do not replicate any OCV or Multiscale Modeling sections unless this lesson's content genuinely warrants them.
 
 LESSON ID: {lesson_id}
 LESSON TITLE: {title}
@@ -505,7 +505,7 @@ Return ONLY valid JSON — a bare array [...]. No explanation, no markdown."""
 def call_claude(system: str, user: str, api_key: str) -> str | None:
     payload = json.dumps({
         "model":      CLAUDE_MODEL,
-        "max_tokens": 8192,
+        "max_tokens": 12288,
         "system":     system,
         "messages":   [{"role": "user", "content": user}],
     }).encode("utf-8")

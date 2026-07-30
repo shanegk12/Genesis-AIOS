@@ -40,7 +40,7 @@ def _get_platform_key() -> str:
     return ''
 PLATFORM_KEY = _get_platform_key()
 SCREENSHOTS_ROOT = Path(__file__).parent.parent / "screenshots"
-CLAUDE_MODEL     = "claude-sonnet-4-6"
+CLAUDE_MODEL     = "claude-sonnet-5"
 BATCH_SIZE       = 4   # screenshots per Vision call (keep small — screenshots are large)
 
 LESSON_MAP = [
@@ -137,7 +137,7 @@ def detect_batch(screenshots: list[tuple[Path, str, str]], api_key: str) -> list
 
     payload = json.dumps({
         "model": CLAUDE_MODEL,
-        "max_tokens": 4096,
+        "max_tokens": 6144,
         "messages": [{"role": "user", "content": content}],
     }).encode()
 

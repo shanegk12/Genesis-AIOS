@@ -47,7 +47,7 @@ def _get_platform_key() -> str:
     return ''
 PLATFORM_KEY = _get_platform_key()
 ANTHROPIC_KEY    = os.environ.get("ANTHROPIC_API_KEY", "")
-CLAUDE_MODEL     = "claude-sonnet-4-6"
+CLAUDE_MODEL     = "claude-sonnet-5"
 
 BLOCK_SCHEMA_PROMPT = """
 You are converting a LearnWorlds lesson into structured content blocks for the Genesis K-12 Academy learning platform.

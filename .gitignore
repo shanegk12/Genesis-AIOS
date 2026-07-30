@@ -7,6 +7,9 @@ node_modules/
 .claude/settings.local.json
 audits/
 output/images/
+output/videos/
+video-studio/public/C-*/
+video-studio/public/brand/
 download.txt
 gk12-sa-key.json
 drive-token.json
@@ -28,8 +31,10 @@ _vision_raw_*.txt
 .agents/
 scripts/_drive_folders_cache.json
 
-# Local Claude config
-.claude/
+# Local Claude config. Skills are shared with the team; settings are per-machine.
+.claude/*
+!.claude/skills/
+.claude/skills/**/*.local.*
 
 # Slack MCP config (contains bot token)
 .mcp.json

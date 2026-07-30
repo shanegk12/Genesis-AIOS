@@ -5,7 +5,7 @@ Generates 4 self-contained HTML interactives per lesson:
   1. flashcards.html — flip-card vocab deck (term → definition)
   2. accordion.html  — collapsible Part sections for lesson navigation
   3. ocv.html        — Objective / Constraint / Variable tab widget
-  4. concept.html    — Claude API (claude-opus-4-7) custom JS activity
+  4. concept.html    — Claude API (claude-sonnet-5) custom JS activity
 
 All outputs are fully self-contained HTML (no external dependencies).
 Saved to: scripts/interactives/[lesson-id]/
@@ -24,7 +24,7 @@ import argparse, json, os, re, sys, urllib.request, urllib.error
 MANIFEST_PATH    = os.path.join(os.path.dirname(__file__), "lessons_manifest.json")
 INTERACTIVES_DIR = os.path.join(os.path.dirname(__file__), "interactives")
 
-CLAUDE_MODEL = "claude-sonnet-4-6"
+CLAUDE_MODEL = "claude-sonnet-5"
 CLAUDE_URL   = "https://api.anthropic.com/v1/messages"
 
 NAVY = "#1e3a5f"
@@ -426,7 +426,7 @@ def call_claude_for_interactive(api_key, topic, phase, doc, excerpt):
 
     payload = json.dumps({
         "model":      CLAUDE_MODEL,
-        "max_tokens": 8192,
+        "max_tokens": 12288,
         "messages":   [{"role": "user", "content": prompt}],
     }).encode("utf-8")
 
