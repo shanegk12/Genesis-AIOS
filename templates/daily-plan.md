@@ -1,7 +1,7 @@
 # Daily plan template
 
 Copy to `context/shane/daily-plans/YYYY-MM-DD.md` and fill in. The SessionStart
-hook (`scripts/aios_drift_check.py`) checks for today's file and flags it if missing.
+hook (`scripts/aios_hooks.py`) checks for today's file and flags it if missing.
 
 Keep it short. A plan that takes ten minutes to write is a plan that lapses.
 
