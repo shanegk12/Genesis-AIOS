@@ -1,3 +1,8 @@
+---
+name: requeue
+description: "Use when lessons have failed in the GK12 content pipeline and need another run, or when Shane says requeue, retry the pipeline, rerun failed lessons, or /requeue. Re-queues failed pipeline lessons and schedules a one-time Cloud Run retry."
+---
+
 # /requeue
 
 Re-queues failed pipeline lessons and schedules a one-time Cloud Run retry.

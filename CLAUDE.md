@@ -29,16 +29,29 @@ Read `references/model-routing.md` before wiring any AI call into a script, an a
 ## Where things live
 
 - `context/` — about you, your business, your priorities (filled by `/onboard`)
-- `references/` — frameworks, voice samples, API guides as you connect tools
+- `references/` — frameworks, voice samples, API guides, model routing, pulled transcripts
 - `connections.md` — registry of every system your AIOS can reach
 - `decisions/log.md` — append-only record of decisions and why
-- `archives/` — old stuff. Don't delete. Move here.
+- `scripts/` — the content and QC pipelines. `scripts/video_pipeline/` is the **generation** side (Manim, slides, plan_videos) and is live. The **footage-editing** side lives in its own repo at `D:\GK12-Video-Pipeline` and is shared with Ethan. They are complements, not duplicates.
+- `interactives/`, `output/`, `video-studio/` — generated artifacts. Not knowledge; don't read them for facts.
+- `reports/` — one-off deliverables (investor docs and similar). Ad-hoc, not a feed.
+- `audits/` — `/audit` and `/os-audit` reports. **Gitignored**, so these are local-only and do not reach Ethan or Cade.
+- `archives/` — old stuff. Don't delete. Move here. Includes the retired morning-briefing system.
+- `cloud/` — **live infrastructure.** Deploy config (Dockerfile, cloudbuild, entrypoint) for **24/7 Bez** on Cloud Run, the Slack agent in `#aios`. Not the retired morning briefing; those files already moved to `archives/`. Do not archive this.
+- `screenshots/` — **live.** Screenshots of systems being built, used for analysis. The `Creationeering/` and `Mousetrap/` subfolders are finished LearnWorlds-import material, but the folder itself is still in use. **Do not move it:** three scripts default to paths under it (`screenshot_import.py`, `screenshot_extract_images.py`, `rewrite_lessons_gdoc.py`), and a move fails silently as "zero work found" rather than erroring.
+- `templates/` — reusable shapes (daily plan, decision entry). Copy, don't edit in place.
+
+Memory is **not in this repo**. It lives per-project at `C:\Users\Shane\.claude\projects\<dir-slug>\memory\` (this project is `d--AIOS`), indexed by a `MEMORY.md` in that folder.
+
+**Precedence when two sources disagree:** `decisions/log.md` wins on why a choice was made. `connections.md` wins on what a system is and how to reach it. `references/` wins on how to do a thing. This file wins on standing rules. Memory is a cache of all four and loses to any of them — verify a memory against the repo before acting on it.
 
 See `EXPANSIONS.md` for what to add as you grow.
 
 ## Knowledge base
 
-Shane is COO of Genesis K-12 Academy, a faith-based homeschool engineering curriculum company. He writes curriculum, builds labs, and runs day-to-day operations. The company offers 18-week Creationeering and Build (Mousetrap) courses for homeschool families (clusters, single families, church groups). Pre-revenue, angel-funded, launching at a Tennessee event in **August 2026**. Genesis now runs its **own custom LMS** — *Genesis Education Solutions* (`D:\GK12-Platform`, Next.js + Firebase, live at gk12academy.com) — which **superseded LearnWorlds**. The critical path to launch is now content (finishing the Mousetrap course), not platform. This quarter: finish the MS course, launch, begin sales, start the second project. See `context/` for full detail.
+Shane is COO of Genesis K-12 Academy, a faith-based homeschool engineering curriculum company. He writes curriculum, builds labs, and runs day-to-day operations. The company offers 18-week Creationeering and Build (Mousetrap) courses for homeschool families (clusters, single families, church groups). Pre-revenue, angel-funded, launching at a Tennessee event in **August 2026**. Genesis now runs its **own custom LMS** — *Genesis Education Solutions* (`D:\GK12-Platform`, Next.js + Firebase, live at gk12academy.com) — which **superseded LearnWorlds**.
+
+**Current priorities are not stated here on purpose.** They change faster than this file gets edited, and a stale critical path in an always-loaded file gets repeated back to Shane as fact. Read `context/` for what is live, and `decisions/log.md` for the most recent calls. As of 2026-07-30 the text content is finished and video content is what remains, but check rather than quoting that.
 
 ## Voice
 
@@ -46,7 +59,11 @@ Match the register in `references/voice.md`. Warm but professional. Faith-presen
 
 ## Connections
 
-The **custom platform** (Firebase App Hosting `genesis-modularity`, Firestore, Stripe, Resend, GA4, Gemini/Genkit, Bez the AI assistant) is the center of gravity; deploy = push `staging` → ff `main`. Gmail + Google Calendar are connected via Claude MCP connectors; Google Drive/Docs via the Python pipeline scripts. **Slack** is being linked for two-way chat (setup in progress). QuickBooks planned for bookkeeping at launch. No task tracker yet. LearnWorlds is **retired**. Full registry — including the deploy workflow and Slack setup steps — in `connections.md`.
+The **custom platform** (Firebase App Hosting `genesis-modularity`, Firestore, Stripe, Resend, GA4, Gemini/Genkit, Bez the AI assistant) is the center of gravity; deploy = push `staging` → ff `main`. Gmail + Google Calendar are connected via Claude MCP connectors; Google Drive/Docs via the Python pipeline scripts. LearnWorlds is **retired**.
+
+**Per-tool status is not listed here** (which integrations are wired, in progress, or planned). Those statuses go stale in an always-loaded file and then get stated as fact. `connections.md` is the source of truth for the registry, the deploy workflow, and the setup steps for anything still being connected.
+
+Model choice for any AI call is in `references/model-routing.md`.
 
 ## Memory hygiene (team convention)
 

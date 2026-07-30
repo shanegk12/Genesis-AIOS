@@ -1,3 +1,8 @@
+---
+name: new-block
+description: Use when adding a new block type to the GK12 Platform lesson editor, or when Shane says "new block type", "add a block", or "/new-block". Full checklist across types, editor, renderer, settings, and the QC route, in order. Missing a step causes runtime errors or silent failures.
+---
+
 # /new-block
 
 Add a new block type to the GK12 Platform lesson editor. Follow every step in order — missing one causes runtime errors or silent failures.

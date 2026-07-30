@@ -1,3 +1,8 @@
+---
+name: add-api-route
+description: Use when adding a new admin API route to the GK12 Platform, or when Shane says "add an api route", "new admin route", or "/add-api-route". Covers the required auth pattern (verifyAdminReq), error isolation, Storage download-token URLs, Firestore rules, and Gemini config gotchas. Every admin route shares one structure; missing a piece causes auth failures, silent Firestore errors, or build breaks.
+---
+
 # /add-api-route
 
 Add a new admin API route to the GK12 Platform. Every admin route has the same required structure — missing pieces cause auth failures, silent Firestore errors, or build breaks.

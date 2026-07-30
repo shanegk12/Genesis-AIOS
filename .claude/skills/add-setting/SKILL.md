@@ -1,3 +1,8 @@
+---
+name: add-setting
+description: Use when adding a new section to the GK12 Platform admin settings page at /admin/settings, or when Shane says "add a setting", "new settings section", or "/add-setting". Covers all four touch points (component, SECTIONS registration, Firestore rules, loading state). Miss one and the section either never shows or hangs loading forever.
+---
+
 # /add-setting
 
 Add a new section to the GK12 Platform admin settings page (`/admin/settings`). Involves four touch points — miss one and the section either never shows or hangs loading.

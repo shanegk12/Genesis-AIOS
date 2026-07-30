@@ -17,6 +17,13 @@ admin_key.tmp
 resend_placeholder.tmp
 
 # Auth tokens and OAuth secrets
+# Catch-all patterns first: any new token/key/credential file is ignored by
+# default, so a stray `git add -A` can never commit one. Named files below are
+# kept for clarity.
+*token*.json
+*-key.json
+*credential*.json
+*.json.bak
 oauth-client.json
 fs-token.json
 
@@ -34,6 +41,7 @@ scripts/_drive_folders_cache.json
 # Local Claude config. Skills are shared with the team; settings are per-machine.
 .claude/*
 !.claude/skills/
+!.claude/agents/
 .claude/skills/**/*.local.*
 
 # Slack MCP config (contains bot token)

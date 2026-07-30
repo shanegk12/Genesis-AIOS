@@ -1,3 +1,8 @@
+---
+name: add-secret
+description: "Use when adding or rotating an environment secret on the GK12 Platform App Hosting backends (prod and staging), or when Shane says add a secret, new env var, or /add-secret. Avoids the failures that keep recurring - a BOM in the secret file, the wrong service account, and build-time versus runtime availability. Follow it exactly."
+---
+
 # /add-secret
 
 Add a new environment secret to the GK12 Platform App Hosting backends. Gets burned repeatedly if done wrong — follow exactly.

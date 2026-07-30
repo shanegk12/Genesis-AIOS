@@ -1,3 +1,8 @@
+---
+name: deploy
+description: Use when shipping a change to production on the GK12 Platform, or when Shane says "deploy", "ship it", "push to prod", or "/deploy". Enforces the staging-then-main workflow with the validation checklist between them. Never push straight to main without a staging validation.
+---
+
 # /deploy
 
 Ship a change from the local branch to production on the GK12 Platform. Always goes staging → main. Never push directly to main without a staging validation.
