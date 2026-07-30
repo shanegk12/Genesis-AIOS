@@ -1,0 +1,16 @@
+# Deps for the /firecrawl local scraper. Kept OUT of the repo-root
+# requirements.txt on purpose: that file is COPYed into the Cloud Run pipeline
+# image, and shipping a browser engine to a container that never opens a page
+# is a slower build and a bigger image for nothing.
+#
+#   pip install -r .claude/skills/firecrawl/requirements.txt
+#   python -m playwright install chromium
+#
+# Chromium is ~150 MB and is NOT installed by pip -- the second command is
+# required, and `shot` / `styles` fail without it.
+
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+trafilatura>=2.0.0
+markdownify>=0.13.0
+playwright>=1.45.0

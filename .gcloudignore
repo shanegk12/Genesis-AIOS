@@ -1,0 +1,43 @@
+# What `gcloud builds submit` uploads. Cloud Build does NOT read .dockerignore --
+# that one only governs what the Docker daemon sees once the source has already
+# been shipped. Without this file the whole ~966 MB repo went up on every deploy,
+# because .gitignore does not cover video-studio/ (627M) or output/ (168M).
+#
+# Deliberately a blocklist. .gcloudignore uses gitignore semantics, where a file
+# inside an excluded directory cannot be re-included -- so the `*` + `!keep-this`
+# allowlist used in .dockerignore would silently drop scripts/ and break the
+# build. Safer to name the heavy things.
+
+.git/
+.gcloudignore
+
+# Secrets and credentials must never reach a build log. Note the .bak variants:
+# `*token*.json` does NOT match `drive-token.json.bak`, and that file is real and
+# present in this repo -- it was verified as uploading before these lines existed.
+.env
+.env*
+*token*
+*-key.json
+*credential*
+oauth-client.json
+*.json.bak
+*.bak
+
+# Generated assets and local working files. None are COPYed by either Dockerfile.
+video-studio/
+output/
+screenshots/
+screenshots_import_output/
+interactives/
+references/
+archives/
+reports/
+audits/
+context/
+decisions/
+templates/
+.claude/
+node_modules/
+__pycache__/
+*.pyc
+*.log

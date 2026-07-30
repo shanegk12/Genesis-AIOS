@@ -20,6 +20,30 @@ Keep it terse. Future-you will thank present-you for capturing the *why*, not ju
 
 ---
 
+## 2026-07-30 - Web scraping stays local; Docker adopted for Cloud Run, not for Firecrawl
+
+**Decision:** Built `/firecrawl` as a **local** Python scraper (`.claude/skills/firecrawl/fetch.py`) rather than using the Firecrawl cloud API or its MCP server. Five verbs: `scrape` / `map` / `crawl` for text, `shot` / `styles` for design work. Output is markdown and PNGs in `references/web/<host>/`, which is gitignored. Three triggers route work to it: the skill description, a `UserPromptSubmit` hook (URL + intent to keep the content), and a `PostToolUse` hook on `WebFetch` that fires when a response comes back under 600 chars or carrying a JS-shell marker.
+
+Separately: installed Docker Desktop, but **for the Cloud Run images, not for Firecrawl.**
+
+**Why:** Shane ruled out the API and MCP — local and free. That left self-hosted Firecrawl, and researching it killed the idea on its merits: **Fire-engine is closed source and cannot be self-hosted at all.** It is the proprietary anti-bot and proxy layer, cloud-only, and it is the entire reason the paid product beats a local scraper. Self-hosted Firecrawl falls back to fetch + Playwright, which is precisely what `fetch.py` already does — so ~7 GB of containers and a reboot would have bought the same extraction plus a service to babysit. Docker earns its place for a different job: `cloud/Dockerfile` (Bez 24/7) and `./Dockerfile` (pipeline worker) had never once been built locally, so every change to them was a blind push through Cloud Build.
+
+**What building it locally then exposed** (the argument for having done it at all):
+- No `.dockerignore` existed; the build context was 966 MB for five small files.
+- Cloud Build reads `.gcloudignore`, **not** `.dockerignore` — a distinction I got wrong mid-session and corrected. No `.gcloudignore` existed, and `.gitignore` does not cover `video-studio/` (627M) or `output/` (168M), so every `gcloud builds submit` uploaded ~1 GB. Now 8.7 MB.
+- **`drive-token.json.bak` would have uploaded to Cloud Build.** A Drive OAuth token into build logs. Found only by checking `gcloud meta list-files-for-upload` rather than trusting the ignore pattern — `*token*.json` does not match a `.bak` suffix.
+- The pipeline worker boots and serves `/health` 200 inside its image. First time that was ever verified.
+
+**Known limits, stated so nobody rediscovers them:** no proxy rotation and no anti-bot, so Cloudflare-protected sites fail by returning a challenge page that reads like content. No authenticated pages. YouTube still goes to `/youtube-transcript`. The `--backend auto` flag probes `localhost:3002`, so if a self-hosted Firecrawl is ever stood up it is picked up with no code change — see `.claude/skills/firecrawl/SELFHOST.md`.
+
+**What would change my mind:** a site we actually need starts blocking us. At that point the answer is the paid cloud tier or a proxy service, not self-hosting — self-hosting does not solve it.
+
+**Alternatives considered:** Firecrawl cloud API (rejected: ruled out, and ~$16/mo). Firecrawl MCP server (rejected: ruled out). Self-hosted Firecrawl in Docker (rejected: no Fire-engine, identical extraction, 7 GB). Keeping scraper deps in the root `requirements.txt` (rejected after discovering that file is COPYed into the Cloud Run pipeline image — Playwright would have shipped to a container that never opens a page; deps now live in `.claude/skills/firecrawl/requirements.txt`).
+
+**Deferred:** `scripts/pipeline_worker.py:676` runs Flask's dev server in production on Cloud Run with `--cpu=4 --concurrency=20`. The container log warns about it directly. A gunicorn swap is one line but touches a live service and wants its own staging validation.
+
+**Owner:** Shane
+
 ## 2026-07-30 - Global operator skills: proveit, verify, roast, session-handoff
 
 **Decision:** Installed four skills in the **global** directory `C:\Users\Shane\.claude\skills\`, so they load in every project (AIOS, GK12-Platform, PrivateChef) rather than only this repo. They are operator method, not GK12 work.

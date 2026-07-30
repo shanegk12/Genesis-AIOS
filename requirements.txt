@@ -3,3 +3,8 @@ google-api-python-client>=2.100.0
 anthropic>=0.100.0
 flask>=3.0.0
 google-cloud-tasks>=2.16.0
+
+# NOTE: this file is COPYed into the Cloud Run pipeline image (see ./Dockerfile).
+# Anything added here ships to production. Local-only tooling belongs in its own
+# requirements file -- the /firecrawl scraper's deps live in
+# .claude/skills/firecrawl/requirements.txt for exactly that reason.

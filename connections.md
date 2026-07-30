@@ -25,6 +25,17 @@ Registry of every system your AIOS can reach. `/audit` checks this file for doma
 | 17 | **Team chat** | **Slack** (workspace `gk12academy`, bot `@genesis_aios`, channel `#aios`) | **`scripts/slack.py`** (Slack Web API; read/post/reply) | `SLACK_BOT_TOKEN` in `.env` (team `T0BB3BCQTBJ`) | 2026-06-12 |
 | 18 | Bookkeeping | QuickBooks (planned) | not yet connected | — | — |
 | 19 | Task tracking | None yet | not yet connected | — | — |
+| 20 | **Web research / scraping** | **Local scraper** (`.claude/skills/firecrawl/fetch.py`) | requests → Playwright fallback → trafilatura; `scrape` / `map` / `crawl` → `references/web/<host>/` | **none — no key, no account** | 2026-07-30 |
+
+## Web scraping — CONNECTED (2026-07-30, local only)
+- **What:** `/firecrawl` skill. Firecrawl-shaped verbs (`scrape`, `map`, `crawl`) implemented locally in Python. Output is markdown in `references/web/<host>/`, which is **gitignored** — it does not reach Ethan or Cade.
+- **Why local:** the cloud API and the MCP server were both ruled out. Self-hosted Firecrawl deliberately ships without Fire-engine, so its scraping reduces to fetch + Playwright — the same thing this does, minus 7 GB and a reboot.
+- **Verbs:** `scrape` / `map` / `crawl` (text) and `shot` / `styles` (design — screenshots at 3 viewports; palette, fonts, type scale, buttons).
+- **Deps:** `.claude/skills/firecrawl/requirements.txt` — kept **out** of the root `requirements.txt` because that file is COPYed into the Cloud Run pipeline image. Chromium via `python -m playwright install chromium`.
+- **Three triggers:** the skill description; a `UserPromptSubmit` hook (URL + pull-it-down intent); a `PostToolUse` hook on `WebFetch` (thin or JS-shell response → re-pull locally). Logic lives in `scripts/aios_hooks.py` (committed); the wiring lives in `.claude/settings.json`, which is **gitignored and per-machine** — see SKILL.md for the snippet to paste on a second machine.
+- **Politeness:** robots.txt honoured by default, sequential with a 0.5s delay.
+- **Upgrade path:** `.claude/skills/firecrawl/SELFHOST.md` — Docker Compose Firecrawl on `localhost:3002` for container isolation. `--backend auto` picks it up with no code change. Needs WSL2 + Docker Desktop, neither installed as of 2026-07-30.
+- **Known limits:** no proxy rotation, no anti-bot. Cloudflare-protected sites fail by returning a challenge page that looks like content. No authenticated pages. YouTube goes to `/youtube-transcript` instead.
 
 ## Platform deploy workflow
 Build on `staging` branch → validate → fast-forward `main` (prod). App Hosting auto-builds on push. Firestore rules are **shared** prod+staging (`firebase deploy --only firestore:rules`). App Hosting secrets: `firebase apphosting:secrets:grantaccess` on **both** backends. Prod URL `genesis-lms--genesis-modularity.us-central1.hosted.app`; staging `genesis-lms-staging--…`. Note: App Hosting builds occasionally fail on transient `npm ECONNRESET` — just re-trigger (empty commit).

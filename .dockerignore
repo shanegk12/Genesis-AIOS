@@ -1,0 +1,20 @@
+# Allowlist, not a blocklist. The repo is ~1 GB (video-studio 627M, output 168M,
+# screenshots 145M) and the two Dockerfiles between them COPY five small files.
+# Without this, every `gcloud builds submit` uploaded the whole gigabyte to build
+# a ~200 MB image, on every deploy.
+#
+# Blocklisting was the wrong shape here: a new generated-asset folder would
+# silently rejoin the context. Ignore everything, then re-admit exactly what is
+# COPYed. IF YOU ADD A `COPY` TO EITHER DOCKERFILE, ADD IT HERE TOO -- the build
+# will fail with "file not found" pointing straight back at this file.
+
+*
+
+# ./Dockerfile -- the pipeline image
+!requirements.txt
+!startup.sh
+
+# ./cloud/Dockerfile -- 24/7 Bez on Cloud Run
+!scripts/bez_agent.py
+!scripts/bez_socket.py
+!cloud/entrypoint.sh

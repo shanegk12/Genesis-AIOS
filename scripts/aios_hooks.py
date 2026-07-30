@@ -15,6 +15,11 @@ Four modes, wired in .claude/settings.json:
   --mode wrote        : on PostToolUse for Write|Edit, tally files touched this
                         session. Cheap; no output.
 
+  --mode webfetch     : on PostToolUse for WebFetch, catch the silent failure --
+                        a JS shell that returns a nav bar and a cookie notice --
+                        and route to the local scraper instead of letting a
+                        near-empty page get summarised as if it were the content.
+
   --mode stop         : once past LONG_SESSION_HOURS, remind to run
                         /session-handoff. Separately, if files were written and
                         nothing was verified, nudge toward /verify. Each fires
@@ -58,6 +63,34 @@ BUILD_INTENT = re.compile(
     r")\b",
     re.IGNORECASE,
 )
+
+
+# A bare URL plus an intent to actually read it. "Look at this bug report <url>"
+# must not match -- WebFetch is right for one page you want summarised. This is
+# for pulling text down to keep: docs, references, a whole site.
+URL_RE = re.compile(r"https?://[^\s<>()\[\]{}\"']+", re.IGNORECASE)
+SCRAPE_VERB = re.compile(
+    r"\b(scrape|crawl|spider|mirror|"
+    r"(pull|grab|save|download|archive|index|ingest)\s+(down\s+|all\s+|the\s+|these\s+|this\s+)*"
+    r"(docs?|documentation|pages?|site|website|content|reference)"
+    r"|(read|study|go through|work through)\s+(the\s+|these\s+|all\s+(the\s+)?)"
+    r"(docs?|documentation)"
+    r"|(whole|entire|all of the|every page of the?)\s+(docs?|site|website|documentation))\b",
+    re.IGNORECASE,
+)
+# These have their own tool. Nudging toward the scraper here would be wrong.
+OWNED_ELSEWHERE = re.compile(r"(youtube\.com|youtu\.be)", re.IGNORECASE)
+
+# WebFetch came back with a page, but not a page's worth of words.
+THIN_FETCH_CHARS = 600
+JS_SHELL = re.compile(
+    r"(enable\s+JavaScript|requires\s+JavaScript|JavaScript\s+is\s+(required|disabled)"
+    r"|you\s+need\s+to\s+enable\s+JavaScript|please\s+enable\s+cookies"
+    r"|checking\s+your\s+browser|just\s+a\s+moment)",
+    re.IGNORECASE,
+)
+
+SCRAPER = ".claude/skills/firecrawl/fetch.py"
 
 
 def _state_path(sid: str) -> Path:
@@ -156,25 +189,100 @@ def mode_sessionstart() -> dict:
     }
 
 
+def _scrape_nudge(text: str) -> str:
+    """Shane wants page text kept, not one page summarised. Route to the scraper."""
+    if OWNED_ELSEWHERE.search(text):
+        return ""
+    urls = URL_RE.findall(text)
+    if not (urls and SCRAPE_VERB.search(text)):
+        return ""
+    return (
+        "Scrape intent detected: a URL plus an intent to pull the content down, not just "
+        f"glance at one page. WebFetch summarises a single page through a small model and "
+        "loses the source text; it also returns almost nothing on a JS-rendered site. Use "
+        "the local scraper instead:\n"
+        f"  python {SCRAPER} scrape <url>\n"
+        f"  python {SCRAPER} map <url> --search <term>\n"
+        f"  python {SCRAPER} crawl <url> --limit 25 --include <regex>\n"
+        "It writes markdown to references/web/<host>/ and prints the file to read. Run `map` "
+        "first on anything bigger than one page, so the crawl budget is spent on the right "
+        "URLs. Read `.claude/skills/firecrawl/SKILL.md` before the first run of a session."
+    )
+
+
 def mode_prompt(payload: dict) -> dict:
     text = str(payload.get("prompt") or "")
-    if not text or not BUILD_INTENT.search(text):
+    if not text:
+        return {"suppressOutput": True}
+
+    blocks: list[str] = []
+
+    if BUILD_INTENT.search(text):
+        blocks.append(
+            "Build intent detected in Shane's message. Before building, run the /proveit "
+            "discipline:\n"
+            "- State the concept as one claim that could turn out false.\n"
+            "- Name the load-bearing assumption, the one that changes everything if wrong.\n"
+            "- Prove it with the cheapest probe, or give the rebuttal and say how a different "
+            "approach would work better.\n"
+            "- Then ask whether to keep going.\n"
+            "This is a quick reply, not /roast. No council, no subagents. Proof first, build "
+            "second, rather than a build followed by an explanation of why it works. If the "
+            "task is genuinely trivial, skip it and say so in one line."
+        )
+
+    nudge = _scrape_nudge(text)
+    if nudge:
+        blocks.append(nudge)
+
+    if not blocks:
         return {"suppressOutput": True}
     return {
         "suppressOutput": True,
         "hookSpecificOutput": {
             "hookEventName": "UserPromptSubmit",
+            "additionalContext": "\n\n".join(blocks),
+        },
+    }
+
+
+def mode_webfetch(payload: dict) -> dict:
+    """WebFetch 'succeeded' but the page had no content in it.
+
+    This is the failure that costs the most, because it does not look like one:
+    a JS shell returns a nav bar and a cookie banner, the summariser dutifully
+    summarises that, and the answer gets reported as if the page had been read.
+    """
+    url = str((payload.get("tool_input") or {}).get("url") or "")
+    resp = payload.get("tool_response")
+    if isinstance(resp, dict):
+        body = " ".join(str(v) for v in resp.values())
+    elif isinstance(resp, list):
+        body = " ".join(str(v) for v in resp)
+    else:
+        body = str(resp or "")
+
+    if not url or OWNED_ELSEWHERE.search(url):
+        return {"suppressOutput": True}
+
+    thin = len(body.strip()) < THIN_FETCH_CHARS
+    shell = bool(JS_SHELL.search(body))
+    if not (thin or shell):
+        return {"suppressOutput": True}
+
+    why = ("the page looks like a JS shell or a bot check" if shell
+           else f"only {len(body.strip())} characters came back")
+    return {
+        "suppressOutput": True,
+        "hookSpecificOutput": {
+            "hookEventName": "PostToolUse",
             "additionalContext": (
-                "Build intent detected in Shane's message. Before building, run the /proveit "
-                "discipline:\n"
-                "- State the concept as one claim that could turn out false.\n"
-                "- Name the load-bearing assumption, the one that changes everything if wrong.\n"
-                "- Prove it with the cheapest probe, or give the rebuttal and say how a different "
-                "approach would work better.\n"
-                "- Then ask whether to keep going.\n"
-                "This is a quick reply, not /roast. No council, no subagents. Proof first, build "
-                "second, rather than a build followed by an explanation of why it works. If the "
-                "task is genuinely trivial, skip it and say so in one line."
+                f"That WebFetch on {url} returned nearly nothing -- {why}. Do not answer from "
+                "it and do not describe it as read. Re-pull it locally, which renders the page "
+                "in a real browser when the static HTML is thin:\n"
+                f"  python {SCRAPER} scrape {url}\n"
+                "Then read the file it writes. If that also comes back short, say the page "
+                "could not be read rather than inferring what it probably said."
             ),
         },
     }
@@ -221,7 +329,8 @@ def mode_stop(payload: dict) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", choices=["sessionstart", "prompt", "wrote", "stop"], required=True)
+    ap.add_argument("--mode", required=True,
+                    choices=["sessionstart", "prompt", "wrote", "stop", "webfetch"])
     args = ap.parse_args()
 
     payload = {}
@@ -239,6 +348,7 @@ def main() -> int:
             "prompt": lambda: mode_prompt(payload),
             "wrote": lambda: mode_wrote(payload),
             "stop": lambda: mode_stop(payload),
+            "webfetch": lambda: mode_webfetch(payload),
         }[args.mode]()
     except Exception:
         result = {"suppressOutput": True}
