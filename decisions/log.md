@@ -548,3 +548,41 @@ gcloud auth application-default login --client-id-file="D:\AIOS\oauth-client.jso
 **Alternatives considered:** Higgsfield Long Video Generator (credit economics fail); Synthesia/invideo avatar+template tools (untested — moot once Higgsfield pricing killed the category for us).
 
 **Owner:** Shane (ElevenLabs account + per-video approvals); AIOS runs the pipeline.
+
+## 2026-07-30 - Pipeline worker moved from Flask dev server to gunicorn
+
+**Decision:** `startup.sh` now execs gunicorn instead of `python scripts/pipeline_worker.py`. Config is `--workers 1 --threads 24 --timeout 3600 --graceful-timeout 60 --chdir /repo --pythonpath /repo/scripts pipeline_worker:app`. Root `entrypoint.sh` deleted as dead. Closes the item deferred in the firecrawl entry above.
+
+**Why:** Werkzeug's dev server is single-process, has no request timeouts, no worker supervision, and prints a warning telling you not to run it in production. It was serving a service with `--concurrency=20`.
+
+**Why the flags are not tuning knobs:**
+- `--workers 1` is required for correctness. `_manifest_lock` is a `threading.Lock`, which a second process ignores, and every request mutates one local git clone at `/repo`. Two processes race the manifest and the worktree. Concurrency comes from threads instead. This is the same reason cloudbuild pins `--max-instances=1`.
+- `--timeout 3600` because gunicorn's 30s default SIGKILLs the whole worker, not the one slow request, and `/process` runs a multi-minute lesson pipeline. At the default it would have killed every in-flight lesson on any single slow one. 3600 lets Cloud Run's own `--timeout=3600` be what gives up first.
+
+**Alternatives considered:** gevent/eventlet workers (rejected: the pipeline shells out via subprocess and does blocking file I/O, monkey-patching buys nothing here). Multiple workers with a file lock or Redis (rejected: solves a problem we do not have at `--max-instances=1`, and the real fix is moving manifest state off local disk).
+
+**Surfaced but NOT fixed:** the manifest lives on the instance's local disk between requests and is only pushed at `/finalize`, so `--min-instances=1` is load-bearing for correctness rather than latency, and costs roughly $50/month. Moving the manifest to Firestore or GCS would let this scale to zero.
+
+**Fixed in the same session — hardcoded platform API key.** The literal key was in **13 files**, not just the `pipeline_worker.py` docstring where it was first spotted, and per `ARCHITECTURE.md:79` it is the same value as `ADMIN_API_KEY`, which gates ~20 admin routes on the live platform including `/api/admin/enroll`, `/api/admin/lessons`, and `/api/admin/migrate`. All 13 now read from env or `.env` using the inline `_get_platform_key()` block already present in ~40 other scripts. The block was kept inline rather than factored into a shared import: four of these files are invoked as subprocesses by `/process` inside the container, and an inline block cannot fail on a sys.path difference. `scripts/rotate_platform_key.py` was added to rotate the value across both Secret Manager projects and `.env` without printing it.
+
+**Why rotation is a separate step:** the code fix ships by pushing `main`, because the container clones the repo at boot. The gunicorn fix ships by rebuilding the image, because `startup.sh` is baked in. Rotating the secret before both are deployed breaks the pipeline, since the scripts that call the platform would still carry the old literal.
+
+**Owner:** Shane
+
+## 2026-07-30 - Retire the Cloud Run pipeline worker; rotate the platform admin key
+
+**Decision:** Tear down the `gk12-pipeline-worker` Cloud Run service, its Cloud Scheduler job, and its Cloud Tasks queue. **Bez is the only always-on GCP service Genesis runs.** Rotated `ADMIN_API_KEY` in the process.
+
+**Why retire it:** the manifest reads 155 done / 4 failed of 159, and the most recent lesson completed **2026-05-19**. It then stayed live ~72 days at roughly $50/month (`--min-instances=1 --cpu=4 --memory=4Gi`), waking daily to find nothing pending. That is ~$120 for no output. The remaining course work is video, which this pipeline does not touch. Shane's challenge was the right one: nothing about generating lessons requires a container. The scripts are Python hitting HTTP APIs and run fine on a laptop; the cloud only ever bought unattended overnight batching, which mattered for 159 lessons and does not matter for occasional edits.
+
+**Consequence for the same session's gunicorn work:** it is correct and committed, but will not be deployed. Building an image to improve a service being deleted is not worth a build. `startup.sh`, the Dockerfile, and `cloudbuild.yaml` stay in git, so a redeploy is one `gcloud builds submit` if a batch is ever needed again.
+
+**What kept its value:** the hardcoded-key fix. That key is the platform's `ADMIN_API_KEY`, used by local scripts against ~20 live admin routes, so it mattered independently of any container.
+
+**Rotation, done:** new value written to Secret Manager `ADMIN_API_KEY` in `genesis-modularity` and to `D:\AIOS\.env`. Verified byte-for-byte: 43 bytes both sides, no BOM, no trailing newline, exact match, differs from the leaked value. `apphosting.yaml` declares the secret unpinned at RUNTIME, so instances pick up `latest` as they cycle — a redeploy is what makes it consistent. The old `PIPELINE_KEY` secret in `genesis-aios` is orphaned by the teardown and should be deleted, not rotated.
+
+**Gotcha worth keeping:** `subprocess` cannot launch `gcloud` by bare name on Windows because it is a `.cmd` shim. Resolve it with `shutil.which("gcloud")`.
+
+**Alternatives considered:** `--min-instances=0` instead of deletion (rejected: the manifest lives on the instance's local disk between requests, so scale-to-zero leaves a half-working service; deletion is honest and reversible from git). Scrubbing the key from git history (rejected: rewrites every commit since `5ed0421`, and rotation already makes the exposed string worthless in a private repo).
+
+**Owner:** Shane

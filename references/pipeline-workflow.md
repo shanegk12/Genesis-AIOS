@@ -6,10 +6,16 @@
 
 ## Architecture Overview
 
+> **Stale as of 2026-07-30.** This diagram describes the retired Cloud Run *Job*
+> batch design and its `entrypoint.sh`, which has been deleted. What runs today is
+> the Cloud Run *service* `gk12-pipeline-worker`: `startup.sh` → gunicorn →
+> `scripts/pipeline_worker.py`, with `/dispatch` fanning lessons out through Cloud
+> Tasks to `/process` one at a time. The per-lesson steps below are still accurate.
+
 ```
 Cloud Scheduler (8:05am CDT daily)
-  └─> Cloud Run Job: gk12-lesson-pipeline
-        └─> entrypoint.sh
+  └─> Cloud Run Job: gk12-lesson-pipeline   [RETIRED]
+        └─> entrypoint.sh                    [deleted 2026-07-30]
               ├─ git clone Genesis-AIOS (fresh each run)
               └─ pm_agent.py --course both --batch 20 --type all
                                --generate-images --generate-interactives
