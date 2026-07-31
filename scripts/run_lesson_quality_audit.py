@@ -14,7 +14,26 @@ import urllib.error
 MANIFEST_PATH = r"D:\AIOS\scripts\lessons_manifest.json"
 OUTPUT_PATH   = r"D:\AIOS\scripts\lesson_quality_audit.json"
 BASE_URL      = "https://genesis-lms--genesis-modularity.us-central1.hosted.app"
-AUTH_HEADER   = "Bearer xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI"
+def _get_platform_key() -> str:
+    """Load platform API key from env or .env - never hardcode in source."""
+    import os as _os
+    from pathlib import Path as _Path
+    k = (_os.environ.get('PIPELINE_KEY')
+         or _os.environ.get('PLATFORM_KEY')
+         or _os.environ.get('ADMIN_API_KEY', ''))
+    if k:
+        return k
+    for _n in ['.env', '.env.local']:
+        _p = _Path(__file__).parent.parent / _n
+        if _p.exists():
+            for _line in _p.read_text(encoding='utf-8').splitlines():
+                _line = _line.strip()
+                if _line.startswith(('PIPELINE_KEY=', 'PLATFORM_KEY=', 'ADMIN_API_KEY=')):
+                    return _line.split('=', 1)[1].strip().strip('"\'')
+    return ''
+
+
+AUTH_HEADER   = f"Bearer {_get_platform_key()}"
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 

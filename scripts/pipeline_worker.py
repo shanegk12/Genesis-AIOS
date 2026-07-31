@@ -29,8 +29,10 @@ Setup (run once after first deploy):
     --message-body='{"course":"both","batch":20,"lesson_type":"all"}' \
     --project=genesis-aios
 
-  # Add PIPELINE_KEY and WORKER_URL secrets to the Cloud Run service
-  echo -n "xVR-qEcAJrJD-w7V88cHIqT31A8qdedEqhW5MRGsfUI" | \
+  # Add PIPELINE_KEY and WORKER_URL secrets to the Cloud Run service.
+  # Generate the value, do NOT paste a real key back into this file:
+  #   python -c "import secrets; print(secrets.token_urlsafe(32))"
+  echo -n "<PIPELINE_KEY>" | \
     gcloud secrets create PIPELINE_KEY --data-file=- --project=genesis-aios
   echo -n "https://<SERVICE_URL>" | \
     gcloud secrets create WORKER_URL --data-file=- --project=genesis-aios
@@ -186,9 +188,6 @@ def dispatch():
     client = tasks_v2.CloudTasksClient()
     parent = client.queue_path(PROJECT_ID, LOCATION, QUEUE_NAME)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-
-    # (Retired) The old morning-email briefing was sent here. Replaced by the
-    # standalone 8 AM ET Slack briefing — scripts/morning_briefing.py.
 
     queued = []
     failed = []
