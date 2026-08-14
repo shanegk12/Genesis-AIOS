@@ -58,7 +58,7 @@ COURSE CONTEXT:
 - Optimization: use this term (not "Pareto Frontier") when discussing trade-offs.
 
 DO NOT use markdown formatting (no **, *, #, >, or - bullets). Write in plain prose with clear paragraph breaks.
-DO NOT reference the mousetrap car.
+DO NOT reference the mousetrap car."""
 
 MOUSETRAP_PROMPT_TEMPLATE = """You are writing a lesson for Genesis K-12 Academy's Middle School Mousetrap Build course, delivered via LearnWorlds. The audience is middle schoolers in homeschool settings (clusters, single families, church groups). Students are designing and building a mousetrap-powered car across an 18-week project course. Write approximately 2,500 words.
 
